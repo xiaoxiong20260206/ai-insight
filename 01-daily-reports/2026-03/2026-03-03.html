@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 日报 - 2026年3月3日</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231A7F37'/><circle cx='16' cy='14' r='6' fill='none' stroke='white' stroke-width='2'/><path d='M12 12h8M16 10v4M10 22c0-3.3 2.7-6 6-6s6 2.7 6 6' fill='none' stroke='white' stroke-width='2' stroke-linecap='round'/></svg>">
+    <style>
+        :root {
+            --color-success:#1A7F37;--color-success-light:#2DA44E;--color-danger:#CF222E;--color-danger-light:#FF7B72;--color-warning:#BF8700;--color-info:#0969DA;--color-info-light:#54AEFF;--color-purple:#7C3AED;--color-text-primary:#1F2328;--color-text-secondary:#4D5561;--color-text-muted:#656D76;--color-border:#D0D7DE;--color-border-light:#E8ECF0;--color-bg:#F6F8FA;--color-bg-card:#FFFFFF;--color-bg-table-header:#F3F5F7;--gradient-success:linear-gradient(135deg,#1A7F37 0%,#2DA44E 100%);--shadow-card:0 2px 8px rgba(31,35,40,.06),0 1px 2px rgba(31,35,40,.04);--radius-sm:6px;--radius-md:10px;--radius-lg:14px;--radius-full:999px;--font-family:-apple-system,"system-ui","Segoe UI","Noto Sans SC",Helvetica,Arial,sans-serif;--transition-normal:200ms cubic-bezier(.4,0,.2,1);--content-max-width:980px;
+        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:var(--font-family);background:var(--color-bg);color:var(--color-text-primary);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+        .container{max-width:var(--content-max-width);margin:0 auto;padding:24px 20px}
+        .header{background:var(--gradient-success);color:#fff;border-radius:var(--radius-lg);padding:28px 32px;margin-bottom:20px}
+        .header-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.2);padding:4px 12px;border-radius:var(--radius-full);font-size:12px;font-weight:600;letter-spacing:.5px;margin-bottom:12px}
+        .header-title{font-size:26px;font-weight:800;letter-spacing:-.5px;margin-bottom:6px}
+        .header-date{font-size:14px;opacity:.85}
+        .overview{background:var(--color-bg-card);border:1px solid var(--color-border-light);border-radius:var(--radius-lg);padding:24px;margin-bottom:20px;box-shadow:var(--shadow-card)}
+        .overview-title{font-size:18px;font-weight:800;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+        .overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+        .overview-item{padding:14px 16px;border-radius:var(--radius-md);border:1px solid var(--color-border-light);background:var(--color-bg)}
+        .overview-item-header{display:flex;align-items:center;gap:6px;margin-bottom:6px}
+        .overview-item-icon{font-size:16px}
+        .overview-item-label{font-size:13px;font-weight:700;color:var(--color-success-light);letter-spacing:.3px}
+        .overview-headline{font-size:15px;font-weight:700;color:var(--color-text-primary);margin-bottom:6px;line-height:1.4}
+        .overview-item-text{font-size:13px;color:var(--color-text-secondary);line-height:1.6}
+        .tab-nav{display:flex;gap:4px;margin-bottom:20px;background:var(--color-bg-card);border:1px solid var(--color-border-light);border-radius:var(--radius-md);padding:4px;box-shadow:var(--shadow-card)}
+        .tab-btn{flex:1;padding:10px 8px;border:none;background:transparent;cursor:pointer;font-size:14px;font-weight:600;color:var(--color-text-muted);border-radius:var(--radius-sm);transition:var(--transition-normal);font-family:var(--font-family)}
+        .tab-btn:hover{color:var(--color-text-primary);background:var(--color-bg)}
+        .tab-btn[aria-selected="true"]{background:var(--gradient-success);color:#fff}
+        .tab-panel{display:none}.tab-panel.active{display:block}
+        .section-card{background:var(--color-bg-card);border:1px solid var(--color-border-light);border-radius:var(--radius-lg);padding:24px;margin-bottom:16px;box-shadow:var(--shadow-card)}
+        .section-header{font-size:16px;font-weight:700;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--color-border-light);display:flex;align-items:center;gap:8px}
+        .section-header .num{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--gradient-success);color:#fff;font-size:12px;font-weight:700}
+        .sub-header{font-size:14px;font-weight:700;color:var(--color-text-muted);margin:14px 0 10px;padding-left:4px;letter-spacing:.5px}
+        .sub-header:first-child{margin-top:0}
+        .news-item{padding:10px 0;border-bottom:1px solid var(--color-border-light)}
+        .news-item:last-child{border-bottom:none}
+        .news-tag{display:inline-block;padding:2px 8px;border-radius:var(--radius-full);font-size:11px;font-weight:600}
+        .tag-hot{background:#FEF2F2;color:var(--color-danger)}
+        .tag-new{background:#EFFDF5;color:var(--color-success)}
+        .tag-opinion{background:#F5F3FF;color:var(--color-purple)}
+        .tag-data{background:#FFF8E1;color:var(--color-warning)}
+        .tag-funding{background:#E0F2FE;color:#0284C7}
+        .tag-benchmark{background:#FDF2F8;color:#BE185D}
+        .tag-today{background:#FEF2F2;color:var(--color-danger);font-weight:700}
+        .news-title{font-size:15px;font-weight:600;margin:4px 0 3px}
+        .news-title a{color:var(--color-text-primary);text-decoration:none}
+        .news-title a:hover{color:var(--color-success)}
+        .news-source{font-size:12px;color:var(--color-text-muted)}
+        .news-summary{font-size:14px;color:var(--color-text-secondary);margin-top:4px;line-height:1.6}
+        .expert-quote{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--color-border-light)}
+        .expert-quote:last-child{border-bottom:none}
+        .expert-avatar{flex-shrink:0;width:40px;height:40px;border-radius:50%;background:var(--gradient-success);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700}
+        .expert-avatar.purple{background:linear-gradient(135deg,#7C3AED,#9F67FF)}
+        .expert-avatar.blue{background:linear-gradient(135deg,#0969DA,#54AEFF)}
+        .expert-avatar.orange{background:linear-gradient(135deg,#BF8700,#E3A008)}
+        .expert-avatar.red{background:linear-gradient(135deg,#CF222E,#FF7B72)}
+        .expert-content{flex:1}
+        .expert-name{font-size:14px;font-weight:600;margin-bottom:4px}
+        .expert-name span{font-weight:400;color:var(--color-text-muted);font-size:12px}
+        .expert-text{font-size:14px;color:var(--color-text-secondary);line-height:1.7;font-style:italic;padding:8px 12px;background:var(--color-bg-table-header);border-radius:var(--radius-md);border-left:3px solid var(--color-purple);margin:6px 0}
+        .expert-source{font-size:12px;color:var(--color-text-muted);margin-top:4px}
+        .expert-source a{color:var(--color-info);text-decoration:none}
+        .insight-text{font-size:14px;color:var(--color-text-secondary);line-height:1.75}
+        .insight-text strong{color:var(--color-text-primary)}
+        .insight-advice{margin-top:12px;padding:10px 14px;background:#EFFDF5;border-radius:var(--radius-md);border-left:3px solid var(--color-success);font-size:13px;line-height:1.7}
+        .insight-warning{margin-top:10px;padding:10px 14px;background:#FFF8E1;border-radius:var(--radius-md);border-left:3px solid var(--color-warning);font-size:13px;line-height:1.7}
+        .footer{text-align:center;padding:24px;font-size:12px;color:var(--color-text-muted);border-top:1px solid var(--color-border-light);margin-top:24px}
+        @media(max-width:768px){.overview-grid{grid-template-columns:1fr}.tab-btn{font-size:12px;padding:8px 4px}}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-badge">📡 DAILY AI INTELLIGENCE REPORT v2.1</div>
+            <div class="header-title">AI 日报</div>
+            <div class="header-date">2026年3月3日 星期二 | ⏰ 每日10点更新 | 均衡覆盖 OpenAI / Anthropic / Google / DeepSeek / Cursor · 无跨域重复</div>
+        </div>
+
+        <div class="overview">
+            <div class="overview-title">📋 全文概览</div>
+            <div class="overview-grid">
+                <div class="overview-item">
+                    <div class="overview-item-header"><span class="overview-item-icon">🧠</span><span class="overview-item-label">大模型</span></div>
+                    <div class="overview-headline">安全合规成为模型竞争新壁垒。</div>
+                    <div class="overview-item-text">OpenAI 与国防部达成部署协议，Anthropic 公开质疑安全红线。Gemini 3.1 Pro 刷新基准记录，DeepSeek 拒绝向 NVIDIA 展示 V4 模型。</div>
+                </div>
+                <div class="overview-item">
+                    <div class="overview-item-header"><span class="overview-item-icon">⌨️</span><span class="overview-item-label">AI Coding</span></div>
+                    <div class="overview-headline">AI 从"写代码"进入"自主测试+自动修复"。</div>
+                    <div class="overview-item-text">Cursor Cloud Agents 能自己运行软件测试改动，Bugbot Autofix 自动修复 PR。Codex CLI 0.107 支持多 Agent 分叉。Latent Space 宣告"Code Review 之死"。</div>
+                </div>
+                <div class="overview-item">
+                    <div class="overview-item-header"><span class="overview-item-icon">📱</span><span class="overview-item-label">AI 应用</span></div>
+                    <div class="overview-headline">Claude 品质逆袭，登顶 App Store。</div>
+                    <div class="overview-item-text">Claude 首次超越 ChatGPT 登顶美国 App Store。ChatGPT 新增 Projects 知识库。OpenAI 估值达 $7300 亿。</div>
+                </div>
+                <div class="overview-item">
+                    <div class="overview-item-header"><span class="overview-item-icon">🔄</span><span class="overview-item-label">企业AI转型</span></div>
+                    <div class="overview-headline">"全员部署"时代来临，组织适配是成败关键。</div>
+                    <div class="overview-item-text">Dropbox 用 Cursor 重构 AI 原生基础设施。Deloitte 报告显示多数企业仍在 AI 潜能"未释放边缘"。国内出现"AI 替换员工暴雷"。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-nav" role="tablist">
+            <button class="tab-btn" role="tab" aria-selected="true" data-tab="tab-foundation">🧠 大模型</button>
+            <button class="tab-btn" role="tab" aria-selected="false" data-tab="tab-coding">⌨️ AI Coding</button>
+            <button class="tab-btn" role="tab" aria-selected="false" data-tab="tab-apps">📱 AI 应用</button>
+            <button class="tab-btn" role="tab" aria-selected="false" data-tab="tab-transform">🔄 企业AI转型</button>
+        </div>
+
+        <!-- Tab 1: 大模型 -->
+        <div id="tab-foundation" class="tab-panel active">
+            <div class="section-card">
+                <div class="section-header"><span class="num">1</span> 最近动态</div>
+                <div class="sub-header">🌏 海外</div>
+                <div class="news-item"><span class="news-tag tag-hot">HOT</span><div class="news-title"><a href="https://openai.com/index/our-agreement-with-the-department-of-war/" target="_blank">OpenAI 与美国国防部达成 AI 分类部署协议</a></div><div class="news-source">OpenAI · 2026-03-01（3/2更新）</div><div class="news-summary">三条红线：禁止大规模监控、禁止自主武器、禁止高风险自动决策。声称比 Anthropic 协议有更多安全护栏。3/2 增加明确禁止国内监控条款。</div></div>
+                <div class="news-item"><span class="news-tag tag-new">NEW</span><div class="news-title"><a href="https://techcrunch.com/2026/02/19/googles-new-gemini-pro-model-has-record-benchmark-scores-again/" target="_blank">Gemini 3.1 Pro Preview 发布，刷新基准记录</a></div><div class="news-source">Google · 2026-02-19</div><div class="news-summary">多项专业任务基准新纪录。3 Pro Preview 将于 3/9 停服，需迁移至 3.1。</div></div>
+                <div class="news-item"><span class="news-tag tag-benchmark">BENCH</span><div class="news-title"><a href="https://www.swebench.com/" target="_blank">Claude 4.5 Opus 登顶 SWE-bench：76.80%</a></div><div class="news-source">SWE-bench · 2026-02-17</div><div class="news-summary">Claude 4.5 Opus（高推理）76.80% 解决率、$0.75/任务。Gemini 3 Flash 紧随其后。</div></div>
+                <div class="news-item"><span class="news-tag tag-hot">HOT</span><div class="news-title"><a href="https://techcrunch.com/2026/03/02/anthropics-claude-reports-widespread-outage/" target="_blank">Claude 遭遇大规模服务中断</a></div><div class="news-source">TechCrunch · 2026-03-02</div><div class="news-summary">Claude 在 3/2 大面积中断，正值登顶 App Store 之际，服务稳定性成为焦点。</div></div>
+                <div class="sub-header">🇨🇳 国内</div>
+                <div class="news-item"><span class="news-tag tag-hot">HOT</span><div class="news-title"><a href="https://www.reuters.com/world/china/deepseek-withholds-latest-ai-model-us-chipmakers-including-nvidia-sources-say-2026-02-25/" target="_blank">DeepSeek 拒绝向美国芯片厂商展示 V4 模型</a></div><div class="news-source">Reuters · 2026-02-25</div><div class="news-summary">打破行业惯例，未向 NVIDIA 等提供 V4 模型。中国头部 AI 减少对美国算力生态依赖。</div></div>
+                <div class="news-item"><span class="news-tag tag-new">NEW</span><div class="news-title"><a href="https://www.huawei.com/cn/news/2026/3/mwc-superpod-ai" target="_blank">华为 MWC 发布 Atlas 算力底座</a></div><div class="news-source">华为 · 2026-03-02</div><div class="news-summary">新一代 Atlas 算力底座 + 智算运维方案，全球非美系芯片全栈 AI 算力选择。</div></div>
+                <div class="news-item"><span class="news-tag tag-data">DATA</span><div class="news-title"><a href="https://vip.stock.finance.sina.com.cn/" target="_blank">中国 AI 模型 API 调用量首超美国</a></div><div class="news-source">中国银河证券 · 2026-03-02</div><div class="news-summary">数字经济双周报显示中国 AI 模型应用量首超美国。</div></div>
+            </div>
+            <div class="section-card">
+                <div class="section-header"><span class="num">2</span> 热门观点</div>
+                <div class="expert-quote"><div class="expert-avatar red">DA</div><div class="expert-content"><div class="expert-name">Dario Amodei <span>Anthropic · CEO</span></div><div class="expert-text">"We believe these red lines [on autonomous weapons and mass surveillance] would not be upheld in the contracts we had seen from the Department of War."</div><div class="expert-source">来源: <a href="https://www.anthropic.com/news/statement-department-of-war" target="_blank">Anthropic 声明</a> · 2026-02-27</div></div></div>
+                <div class="expert-quote"><div class="expert-avatar orange">FC</div><div class="expert-content"><div class="expert-name">François Chollet <span>ARC-AGI 创始人</span></div><div class="expert-text">ARC Prize 排行榜持续提醒：当前最强 AI 系统在真正推理任务上仍有巨大差距。Benchmark 分数 ≠ 真正的智能进步。</div><div class="expert-source">来源: <a href="https://arcprize.org/leaderboard" target="_blank">ARC Prize Leaderboard</a></div></div></div>
+            </div>
+            <div class="section-card">
+                <div class="section-header"><span class="num">3</span> 趋势洞察</div>
+                <div class="insight-text">大模型竞争从"谁更大"转向<strong>"谁更值得信任"</strong>。OpenAI 与 Anthropic 在军事 AI 上的公开分歧，标志着安全合规不再是"加分项"而是"准入门槛"——直接影响政府和大型企业采购决策。DeepSeek 拒绝向 NVIDIA 展示模型，体现中美 AI 脱钩已深入技术合作日常。</div>
+                <div class="insight-advice"><strong>💡 本周可以做：</strong>如果你在做 ToB/ToG 项目，检查你的模型供应商是否有公开的安全治理文档和合规声明。这将越来越频繁地出现在采购评估中。</div>
+                <div class="insight-warning"><strong>⚠️ 值得警惕：</strong>SWE-bench 76.80% 看似惊人，但 Chollet 持续提醒 Benchmark ≠ 通用推理。选模型不要只看排行榜，要在自己业务场景跑 Pilot。</div>
+            </div>
+        </div>
+
+        <!-- Tab 2: AI Coding -->
+        <div id="tab-coding" class="tab-panel">
+            <div class="section-card">
+                <div class="section-header"><span class="num">1</span> 最近动态</div>
+                <div class="sub-header">🌏 海外</div>
+                <div class="news-item"><span class="news-tag tag-hot">HOT</span><div class="news-title"><a href="https://cursor.com/changelog/02-24-26" target="_blank">Cursor: Cloud Agents + Computer Use</a></div><div class="news-source">Cursor · 2026-02-24</div><div class="news-summary">Cloud Agents 能自己运行生成的软件、测试修改效果、演示功能——AI 从"写代码"进入"自主验证"阶段。</div></div>
+                <div class="news-item"><span class="news-tag tag-hot">HOT</span><div class="news-title"><a href="https://cursor.com/changelog" target="_blank">Cursor: Bugbot Autofix 自动修复 PR</a></div><div class="news-source">Cursor · 2026-02-26</div><div class="news-summary">Bugbot 自动修复 Pull Request 中发现的问题。独立云端机器运行，自主测试修复方案。</div></div>
+                <div class="news-item"><span class="news-tag tag-new">NEW</span><div class="news-title"><a href="https://developers.openai.com/codex/changelog/" target="_blank">Codex CLI 0.107.0：线程分叉多 Agent</a></div><div class="news-source">OpenAI · 2026-03-02</div><div class="news-summary">对话线程分叉为子 Agent 并行工作，自定义工具可返回多模态输出。多 Agent 编排能力增强。</div></div>
+                <div class="news-item"><span class="news-tag tag-today">TODAY</span><div class="news-title"><a href="https://latent.space/p/reviews-dead" target="_blank">Latent Space: "How to Kill the Code Review"</a></div><div class="news-source">Ankit Jain / Latent Space · 2026-03-03</div><div class="news-summary">"代码审查将死于 2026"，提出 Spec-driven Development：审查规格而非代码。</div></div>
+                <div class="news-item"><span class="news-tag tag-new">NEW</span><div class="news-title"><a href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes" target="_blank">ChatGPT 新增交互式代码块</a></div><div class="news-source">OpenAI · 2026-02-19</div><div class="news-summary">ChatGPT 内直接编写、编辑和预览代码，支持分屏和迷你应用预览。</div></div>
+                <div class="sub-header">🇨🇳 / 🛠️ 实践</div>
+                <div class="news-item"><span class="news-tag tag-new">NEW</span><div class="news-title"><a href="https://medium.com/@heeki/using-spec-driven-development-with-claude-code-4a1ebe5d9f29" target="_blank">Spec-driven Development 实操：Claude Code 工作流</a></div><div class="news-source">Heeki Park · 2026-03-01</div><div class="news-summary">从定义 specs 到生成代码再到自动化测试的完整流程实操。</div></div>
+            </div>
+            <div class="section-card">
+                <div class="section-header"><span class="num">2</span> 热门观点</div>
+                <div class="expert-quote"><div class="expert-avatar purple">AJ</div><div class="expert-content"><div class="expert-name">Ankit Jain <span>Aviator CEO · Latent Space</span></div><div class="expert-text">"Human-written code died in 2025. Code reviews will die in 2026. Specs become the source of truth. Code becomes an artifact."</div><div class="expert-source">来源: <a href="https://latent.space/p/reviews-dead" target="_blank">Latent Space</a> · 2026-03-03</div></div></div>
+                <div class="expert-quote"><div class="expert-avatar">SW</div><div class="expert-content"><div class="expert-name">Simon Willison <span>Django 联合创始人</span></div><div class="expert-text">Claude Import Memory 本质是一段精心构造的 prompt——最好的产品设计可以极其简单。</div><div class="expert-source">来源: <a href="https://simonwillison.net/2026/Mar/1/claude-import-memory/" target="_blank">simonwillison.net</a> · 2026-03-01</div></div></div>
+            </div>
+            <div class="section-card">
+                <div class="section-header"><span class="num">3</span> 趋势洞察</div>
+                <div class="insight-text">AI 编程工具竞争焦点从"生成代码"转向<strong>"自主测试 + 自动修复"</strong>。Cursor 的 Cloud Agents with Computer Use 能自己运行软件并验证——AI 不只写代码，还能检验正确性。Bugbot Autofix 实现"发现 Bug → 自动修复 → 自动测试"闭环。Codex 的多 Agent 分叉和 ChatGPT 的交互式代码块，各家都在向<strong>端到端自动化</strong>冲刺。</div>
+                <div class="insight-advice"><strong>💡 本周可以做：</strong>如果你用 Cursor，打开 Bugbot Autofix 试跑一个 PR——评估修复质量能否降低 Code Review 负担。同时读 Heeki Park 的 Spec-driven + Claude Code 实操文章，在一个小项目上试跑。</div>
+                <div class="insight-warning"><strong>⚠️ 值得警惕：</strong>"Code Review 已死"的前提是你能写清楚 Spec。复杂系统、遗留代码、安全关键场景，人工审查短期不可替代。不要裁掉 Code Reviewer，而是让他们转型为 Spec Writer。</div>
+            </div>
+        </div>
+
+        <!-- Tab 3: AI 应用 -->
+        <div id="tab-apps" class="tab-panel">
+            <div class="section-card">
+                <div class="section-header"><span class="num">1</span> 最近动态</div>
+                <div class="sub-header">🌏 海外</div>
+                <div class="news-item"><span class="news-tag tag-today">TODAY</span><div class="news-title"><a href="https://mashable.com/article/claude-overtakes-chatgpt-in-apple-app-store" target="_blank">Claude 超越 ChatGPT 登顶 App Store 第一名</a></div><div class="news-source">Mashable · 2026-03-03</div><div class="news-summary">Claude 首次登顶 App Store 免费总榜第一，产品品质可以逆袭流量和先发优势。</div></div>
+                <div class="news-item"><span class="news-tag tag-new">NEW</span><div class="news-title"><a href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes" target="_blank">ChatGPT Projects 新增多源知识库</a></div><div class="news-source">OpenAI · 2026-02-25</div><div class="news-summary">从 Slack、Google Drive 直接添加数据源，保存对话为可复用知识。从"聊天"进化为"知识平台"。</div></div>
+                <div class="news-item"><span class="news-tag tag-funding">FUND</span><div class="news-title"><a href="https://openai.com/zh-Hans-CN/index/scaling-ai-for-everyone/" target="_blank">OpenAI 融资估值达 $7300 亿</a></div><div class="news-source">OpenAI · 2026-02-28</div><div class="news-summary">全球估值最高的 AI 公司。商业化压力持续增大。</div></div>
+                <div class="sub-header">🇨🇳 国内</div>
+                <div class="news-item"><span class="news-tag tag-funding">FUND</span><div class="news-title"><a href="https://www.thecapital.com.cn/" target="_blank">银河通用获 25 亿元融资</a></div><div class="news-source">融中财经 · 2026-03-02</div><div class="news-summary">完成 25 亿元融资，聚焦 AI + 具身智能方向。</div></div>
+                <div class="news-item"><span class="news-tag tag-data">DATA</span><div class="news-title"><a href="https://www.rmzxw.com.cn/c/2026-02-06/3866847.shtml" target="_blank">2026 AI 企业百强评测报告</a></div><div class="news-source">人民政协网 · 2026-02-27</div><div class="news-summary">首份系统性 AI 企业综合评测，从技术、商业、生态三个维度排名。</div></div>
+            </div>
+            <div class="section-card">
+                <div class="section-header"><span class="num">2</span> 热门观点</div>
+                <div class="expert-quote"><div class="expert-avatar">SW</div><div class="expert-content"><div class="expert-name">Simon Willison <span>Django 联合创始人</span></div><div class="expert-text">"Claude taking #1 in the App Store is remarkable. Anthropic shipped a genuinely better product experience — Memory, Artifacts, Projects — and users noticed."</div><div class="expert-source">来源: <a href="https://simonwillison.net/2026/Mar/3/claude-app-store/" target="_blank">simonwillison.net</a> · 2026-03-03</div></div></div>
+            </div>
+            <div class="section-card">
+                <div class="section-header"><span class="num">3</span> 趋势洞察</div>
+                <div class="insight-text">消费级 AI 出现<strong>"品质逆袭"</strong>标志性事件——Claude 登顶 App Store 证明用户会选更好的产品，即使 ChatGPT 有先发优势。OpenAI $7300 亿估值的压力下，Projects 知识库正把 ChatGPT 从"聊天"重新定位为"工作台"——这对垂直 SaaS 是一个竞争信号。</div>
+                <div class="insight-advice"><strong>💡 本周可以做：</strong>试用 ChatGPT Projects 的多源知识库功能，评估它能否替代你目前的信息整合工具（如 Notion AI）。如果可以，这可能省一个订阅费。</div>
+                <div class="insight-warning"><strong>⚠️ 值得警惕：</strong>Claude 登顶可能是短暂的（3/2 刚大面积宕机），但趋势是真实的：AI 应用竞争从"谁先上线"转向"谁体验更好"。仅靠 API 包壳的 AI 应用生存空间持续被挤压。</div>
+            </div>
+        </div>
+
+        <!-- Tab 4: 企业AI转型 -->
+        <div id="tab-transform" class="tab-panel">
+            <div class="section-card">
+                <div class="section-header"><span class="num">1</span> 最近动态</div>
+                <div class="sub-header">🌏 海外</div>
+                <div class="news-item"><span class="news-tag tag-hot">HOT</span><div class="news-title"><a href="https://cursor.com/cn/blog/dropbox" target="_blank">Dropbox 用 Cursor 重构 AI 原生基础设施</a></div><div class="news-source">Cursor Blog · 2026-01-26（高影响力案例）</div><div class="news-summary">为 55 万文件建索引。工程负责人发现"很多同事还没用过 AI 编程工具"——推动全员采用的关键是消除摩擦点。</div></div>
+                <div class="news-item"><span class="news-tag tag-data">DATA</span><div class="news-title"><a href="https://www.faros.ai/blog/enterprise-ai-coding-assistant-adoption-scaling-guide" target="_blank">Faros AI: 如何度量 Claude Code 的开发者 ROI</a></div><div class="news-source">Faros AI · 2026-01-29</div><div class="news-summary">企业 AI 编程助手扩展指南：追踪使用率、代码采纳率和效率影响的具体度量框架。</div></div>
+                <div class="news-item"><span class="news-tag tag-opinion">VIEW</span><div class="news-title"><a href="https://www.nytimes.com/2026/02/18/opinion/ai-software.html" target="_blank">NYT: "AI 颠覆已真正到来"</a></div><div class="news-source">New York Times · 2026-02-18</div><div class="news-summary">AI 对软件行业的颠覆不是渐进提效而是范式转变。组织需重新思考研发流程和人才结构。</div></div>
+                <div class="sub-header">🇨🇳 国内</div>
+                <div class="news-item"><span class="news-tag tag-hot">HOT</span><div class="news-title"><a href="https://www.thecapital.com.cn/" target="_blank">"第一批用 AI 替换员工的老板，暴雷了"</a></div><div class="news-source">融中财经 · 2026-03-01</div><div class="news-summary">国内已出现盲目用 AI 替换人力导致业务崩溃的案例。AI ≠ 简单裁员。</div></div>
+                <div class="news-item"><span class="news-tag tag-new">NEW</span><div class="news-title"><a href="https://event.idc.com/event/idc-cio-summit-shenzhen/" target="_blank">IDC CIO 峰会："迈向代理式 AI 的新纪元"</a></div><div class="news-source">IDC · 2026-03 预告</div><div class="news-summary">1000+ 位 CIO 讨论 Agentic AI 企业落地。深圳、上海两地举办。</div></div>
+                <div class="news-item"><span class="news-tag tag-data">预告</span><div class="news-title"><a href="https://www.nvidia.cn/gtc-global/" target="_blank">NVIDIA GTC 2026（3/16-19）</a></div><div class="news-source">NVIDIA · 预告</div><div class="news-summary">Jensen Huang 聚焦 AI Agent 和基础设施，企业投资方向风向标。</div></div>
+            </div>
+            <div class="section-card">
+                <div class="section-header"><span class="num">2</span> 热门观点</div>
+                <div class="expert-quote"><div class="expert-avatar orange">AK</div><div class="expert-content"><div class="expert-name">Andrej Karpathy <span>前 OpenAI 联合创始人</span></div><div class="expert-text">"I cannot simplify this any further. If you understand these 200 lines, you understand the core idea behind GPT."<br>200 行 Python 实现 GPT——企业"理解 AI 原理"的成本正在归零。</div><div class="expert-source">来源: <a href="https://karpathy.github.io/2026/02/12/microgpt/" target="_blank">karpathy.github.io</a> · 2026-02-12</div></div></div>
+            </div>
+            <div class="section-card">
+                <div class="section-header"><span class="num">3</span> 趋势洞察</div>
+                <div class="insight-text">Dropbox 案例揭示企业 AI 转型核心矛盾：<strong>技术已就绪，但"很多同事还没用过"</strong>。Deloitte 2026 年对 3200+ 企业的调研也印证——多数企业投入了 AI 预算却站在"未释放潜能的边缘"。国内"暴雷"案例共同指向一个结论：<strong>成功的关键不是选什么工具，而是"组织适配"——流程变革、技能升级、质量保障缺一不可。</strong></div>
+                <div class="insight-advice"><strong>💡 本周可以做：</strong>参考 Dropbox——先调查团队中"还没用过 AI 编程工具"的人占多少比例。如果超过 30%，下一步不是买更好的工具，而是解决采用障碍（培训、使用规范、配额分配）。然后参考 Faros AI 的度量框架建立 ROI 追踪。</div>
+                <div class="insight-warning"><strong>⚠️ 值得警惕：</strong>"用 AI 替换员工 = 降本"是最危险的心智模型。Deloitte 数据显示成功案例几乎都是"增强人"而非"替换人"。GTC（3/16）和 IDC CIO 峰会值得关注。</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>AI 日报 v2.1 · 2026年3月3日 · ⏰ 每日10点自动更新 · 仅供内部参考</p>
+            <p style="margin-top:6px">覆盖: OpenAI / Anthropic / Google / DeepSeek / Cursor / 华为 · 来源: Reuters, TechCrunch, Mashable, Latent Space, Faros AI, NYT, 融中财经, SWE-bench, ARC Prize</p>
+            <p style="margin-top:4px">追踪: Dario Amodei, Ankit Jain, Simon Willison, Andrej Karpathy, François Chollet · 无跨域重复 · 14 天时效</p>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.setAttribute('aria-selected','false'));
+                document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+                btn.setAttribute('aria-selected','true');
+                document.getElementById(btn.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

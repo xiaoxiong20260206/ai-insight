@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Insight | AI行业持续洞察平台</title>
+    
+    <!-- Favicon - AI/智能技术类 -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231A7F37'/><circle cx='16' cy='14' r='6' fill='none' stroke='white' stroke-width='2'/><path d='M12 12h8M16 10v4M10 22c0-3.3 2.7-6 6-6s6 2.7 6 6' fill='none' stroke='white' stroke-width='2' stroke-linecap='round'/><circle cx='10' cy='8' r='1.5' fill='white'/><circle cx='22' cy='8' r='1.5' fill='white'/><line x1='11' y1='9' x2='13' y2='11' stroke='white' stroke-width='1.5'/><line x1='21' y1='9' x2='19' y2='11' stroke='white' stroke-width='1.5'/></svg>">
+    
+    <style>
+        /* ============ CSS 变量定义 ============ */
+        :root {
+            --color-success: #1A7F37;
+            --color-success-light: #2DA44E;
+            --color-success-dark: #116329;
+            --color-danger: #CF222E;
+            --color-warning: #BF8700;
+            --color-info: #0969DA;
+            --color-purple: #7C3AED;
+            
+            --color-text-primary: #1F2328;
+            --color-text-secondary: #4D5561;
+            --color-text-muted: #656D76;
+            --color-border: #D0D7DE;
+            --color-border-light: #E8ECF0;
+            --color-bg: #F6F8FA;
+            --color-bg-card: #FFFFFF;
+            --color-bg-table-header: #F3F5F7;
+            
+            --gradient-success: linear-gradient(135deg, #1A7F37 0%, #2DA44E 100%);
+            --gradient-badge: linear-gradient(135deg, #E6F7ED 0%, #E1F0F8 100%);
+            --gradient-hero: linear-gradient(135deg, rgba(26, 127, 55, 0.06) 0%, rgba(9, 105, 218, 0.04) 100%);
+            
+            --shadow-sm: 0 1px 3px rgba(31, 35, 40, 0.06), 0 1px 2px rgba(31, 35, 40, 0.04);
+            --shadow-card: 0 2px 8px rgba(31, 35, 40, 0.06), 0 1px 2px rgba(31, 35, 40, 0.04);
+            --shadow-md: 0 4px 12px rgba(31, 35, 40, 0.08), 0 2px 4px rgba(31, 35, 40, 0.04);
+            --shadow-hover: 0 6px 16px rgba(26, 127, 55, 0.15), 0 2px 6px rgba(26, 127, 55, 0.1);
+            
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --spacing-2xl: 40px;
+            
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 14px;
+            --radius-xl: 18px;
+            --radius-full: 999px;
+            
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+            
+            --content-max-width: 1100px;
+        }
+        
+        /* ============ 基础样式 ============ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, "system-ui", "Segoe UI", "Noto Sans SC", Helvetica, Arial, sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text-primary);
+            line-height: 1.6;
+            font-size: 15px;
+        }
+        
+        a {
+            color: var(--color-info);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+        
+        a:hover {
+            color: var(--color-success);
+        }
+        
+        .container {
+            max-width: var(--content-max-width);
+            margin: 0 auto;
+            padding: var(--spacing-xl) var(--spacing-lg) 60px;
+        }
+        
+        /* ============ Header ============ */
+        .header {
+            text-align: center;
+            padding: var(--spacing-2xl) 0;
+            margin-bottom: var(--spacing-xl);
+            background: var(--gradient-hero);
+            border-radius: var(--radius-xl);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-success);
+        }
+        
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-xs) 14px;
+            background: var(--gradient-badge);
+            color: var(--color-info);
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            margin-bottom: var(--spacing-md);
+            border: 1px solid rgba(9, 105, 218, 0.15);
+        }
+        
+        .header-title {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1.3;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, var(--color-text-primary), var(--color-success-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header-subtitle {
+            font-size: 16px;
+            color: var(--color-text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        
+        /* ============ Stats Grid ============ */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        @media (max-width: 900px) {
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .stat-card {
+            background: var(--color-bg-card);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--color-border-light);
+            padding: var(--spacing-lg);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-success);
+            opacity: 0;
+            transition: var(--transition-normal);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--color-success);
+        }
+        
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+        
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--spacing-xs);
+            letter-spacing: -0.02em;
+        }
+        
+        .stat-value.green { color: var(--color-success); }
+        .stat-value.blue { color: var(--color-info); }
+        .stat-value.purple { color: var(--color-purple); }
+        .stat-value.orange { color: var(--color-warning); }
+        
+        .stat-label {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* ============ Tab Navigation ============ */
+        .tab-nav {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 4px;
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 6px;
+            margin-bottom: var(--spacing-lg);
+            box-shadow: var(--shadow-card);
+            position: sticky;
+            top: 12px;
+            z-index: 100;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: transparent;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+        }
+        
+        .tab-btn:hover {
+            background: var(--color-bg-table-header);
+            color: var(--color-text-secondary);
+        }
+        
+        .tab-btn.active {
+            background: var(--gradient-success);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(26, 127, 55, 0.25);
+        }
+        
+        .tab-btn-icon {
+            font-size: 18px;
+        }
+        
+        .tab-panel {
+            display: none;
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        .tab-panel.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* ============ Section Card ============ */
+        .section {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            box-shadow: var(--shadow-card);
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 1px solid var(--color-border-light);
+        }
+        
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-success);
+            color: #fff;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+            box-shadow: 0 2px 4px rgba(26, 127, 55, 0.25);
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            letter-spacing: -0.01em;
+        }
+        
+        .section-desc {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin-top: 4px;
+        }
+        
+        /* ============ Content Grid ============ */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-md);
+        }
+        
+        @media (max-width: 900px) {
+            .content-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .content-card {
+            background: var(--color-bg-table-header);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
+            transition: all var(--transition-normal);
+            display: block;
+            position: relative;
+        }
+        
+        .content-card:hover {
+            border-color: var(--color-success);
+            background: rgba(26, 127, 55, 0.03);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .content-card-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .content-card-icon {
+            font-size: 20px;
+        }
+        
+        .content-card-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            flex: 1;
+        }
+        
+        .content-card-tag {
+            display: inline-flex;
+            padding: 2px 8px;
+            border-radius: var(--radius-full);
+            font-size: 11px;
+            font-weight: 500;
+        }
+        
+        .content-card-tag.green {
+            background: rgba(26, 127, 55, 0.12);
+            color: var(--color-success);
+        }
+        
+        .content-card-tag.blue {
+            background: rgba(9, 105, 218, 0.12);
+            color: var(--color-info);
+        }
+        
+        .content-card-tag.orange {
+            background: rgba(191, 135, 0, 0.12);
+            color: var(--color-warning);
+        }
+        
+        .content-card-desc {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+        }
+        
+        .content-card-meta {
+            margin-top: var(--spacing-sm);
+            font-size: 12px;
+            color: var(--color-text-muted);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        /* ============ List Style ============ */
+        .content-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+        
+        .list-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-md);
+            background: var(--color-bg-table-header);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-md);
+            transition: all var(--transition-fast);
+        }
+        
+        .list-item:hover {
+            border-color: var(--color-success);
+            background: rgba(26, 127, 55, 0.03);
+        }
+        
+        .list-item-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        
+        .list-item-content {
+            flex: 1;
+        }
+        
+        .list-item-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+        }
+        
+        .list-item-desc {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
+        
+        .list-item-arrow {
+            color: var(--color-success);
+            font-size: 18px;
+            opacity: 0;
+            transition: opacity var(--transition-fast);
+        }
+        
+        .list-item:hover .list-item-arrow {
+            opacity: 1;
+        }
+        
+        /* ============ Category Section ============ */
+        .category-section {
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .category-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .category-title::before {
+            content: '';
+            width: 4px;
+            height: 18px;
+            background: var(--gradient-success);
+            border-radius: 2px;
+        }
+        
+        /* ============ Tracking Table ============ */
+        .tracking-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        .tracking-table th,
+        .tracking-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border-light);
+        }
+        
+        .tracking-table th {
+            background: var(--color-bg-table-header);
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            font-size: 12px;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+        
+        .tracking-table tbody tr:hover td {
+            background: rgba(26, 127, 55, 0.03);
+        }
+        
+        .tracking-table .tier-badge {
+            display: inline-flex;
+            padding: 2px 8px;
+            border-radius: var(--radius-full);
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .tier-badge.l1 {
+            background: rgba(26, 127, 55, 0.12);
+            color: var(--color-success);
+        }
+        
+        .tier-badge.l2 {
+            background: rgba(9, 105, 218, 0.12);
+            color: var(--color-info);
+        }
+        
+        .tier-badge.l3 {
+            background: rgba(191, 135, 0, 0.12);
+            color: var(--color-warning);
+        }
+        
+        /* ============ Footer ============ */
+        .footer {
+            text-align: center;
+            padding: var(--spacing-xl) 0;
+            margin-top: var(--spacing-xl);
+            border-top: 1px solid var(--color-border-light);
+            color: var(--color-text-muted);
+            font-size: 13px;
+        }
+        
+        .footer a {
+            color: var(--color-success);
+        }
+        
+        /* ============ Mobile Responsive ============ */
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 24px;
+            }
+            
+            .tab-btn {
+                padding: 10px 12px;
+                font-size: 13px;
+            }
+            
+            .tab-btn-text {
+                display: none;
+            }
+            
+            .section {
+                padding: var(--spacing-md);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-badge">
+                <span>🔬</span>
+                <span>AI-Insight 持续洞察平台</span>
+            </div>
+            <h1 class="header-title">AI行业深度追踪与洞察</h1>
+            <p class="header-subtitle">
+                系统化追踪AI行业动态，沉淀深度调研洞察，建立持续学习与输出体系
+            </p>
+        </header>
+        
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value green">60+</div>
+                <div class="stat-label">追踪人物</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value blue">70+</div>
+                <div class="stat-label">追踪公司</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value purple">80+</div>
+                <div class="stat-label">信息源</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value orange">8</div>
+                <div class="stat-label">深度调研</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value green">每日</div>
+                <div class="stat-label">AI日报</div>
+            </div>
+        </div>
+        
+        <!-- Tab Navigation -->
+        <nav class="tab-nav" role="navigation">
+            <button class="tab-btn active" data-tab="daily">
+                <span class="tab-btn-icon">📰</span>
+                <span class="tab-btn-text">AI日报</span>
+            </button>
+            <button class="tab-btn" data-tab="research">
+                <span class="tab-btn-icon">🔬</span>
+                <span class="tab-btn-text">深度调研</span>
+            </button>
+            <button class="tab-btn" data-tab="tracking">
+                <span class="tab-btn-icon">🎯</span>
+                <span class="tab-btn-text">追踪体系</span>
+            </button>
+            <button class="tab-btn" data-tab="knowledge">
+                <span class="tab-btn-icon">📚</span>
+                <span class="tab-btn-text">知识库</span>
+            </button>
+        </nav>
+        
+        <!-- Tab Panels -->
+        
+        <!-- 1. AI日报 -->
+        <article id="daily" class="tab-panel active">
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-icon">📰</div>
+                    <div>
+                        <h2 class="section-title">AI 日报</h2>
+                        <p class="section-desc">每日AI行业动态汇总，覆盖大模型、AI Coding、AI应用、企业AI四大领域</p>
+                    </div>
+                </div>
+                
+                <div class="content-list">
+                    <a href="01-daily-reports/2026-03/2026-03-03.html" class="list-item">
+                        <span class="list-item-icon">📅</span>
+                        <div class="list-item-content">
+                            <div class="list-item-title">2026年3月3日 AI日报</div>
+                            <div class="list-item-desc">Claude 3.7 Sonnet发布、DeepSeek R1更新、Cursor 0.50版本...</div>
+                        </div>
+                        <span class="list-item-arrow">→</span>
+                    </a>
+                </div>
+                
+                <div style="margin-top: var(--spacing-lg); text-align: center;">
+                    <a href="01-daily-reports/" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--color-bg-table-header); border: 1px solid var(--color-border); border-radius: var(--radius-md); font-size: 14px; font-weight: 500; color: var(--color-text-secondary);">
+                        查看全部日报 →
+                    </a>
+                </div>
+            </section>
+        </article>
+        
+        <!-- 2. 深度调研 -->
+        <article id="research" class="tab-panel">
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-icon">🔬</div>
+                    <div>
+                        <h2 class="section-title">深度调研</h2>
+                        <p class="section-desc">AI行业深度分析、公司调研、专题研究</p>
+                    </div>
+                </div>
+                
+                <!-- 趋势洞察 -->
+                <div class="category-section">
+                    <h3 class="category-title">趋势洞察</h3>
+                    <div class="content-grid">
+                        <a href="02-deep-research/trends/从AI大神的深度分享看2026年AI的下半场.md" class="content-card">
+                            <div class="content-card-header">
+                                <span class="content-card-icon">📈</span>
+                                <span class="content-card-title">AI大神深度分享解读</span>
+                                <span class="content-card-tag green">趋势</span>
+                            </div>
+                            <div class="content-card-desc">9位AI领域思想领袖的核心观点提炼与趋势预判</div>
+                        </a>
+                        <a href="02-deep-research/trends/Barry_Zhang_Anthropic_思想体系总结.md" class="content-card">
+                            <div class="content-card-header">
+                                <span class="content-card-icon">🧠</span>
+                                <span class="content-card-title">Barry Zhang思想体系</span>
+                                <span class="content-card-tag blue">人物</span>
+                            </div>
+                            <div class="content-card-desc">Anthropic Applied AI负责人的Agent设计哲学</div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 公司调研 -->
+                <div class="category-section">
+                    <h3 class="category-title">公司调研</h3>
+                    <div class="content-grid">
+                        <a href="02-deep-research/companies/bytedance-ai-guide/" class="content-card">
+                            <div class="content-card-header">
+                                <span class="content-card-icon">🏢</span>
+                                <span class="content-card-title">字节AI开挂指南</span>
+                                <span class="content-card-tag orange">公司</span>
+                            </div>
+                            <div class="content-card-desc">字节跳动AI能力全景解析，5大专题深度剖析</div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 专题调研 -->
+                <div class="category-section">
+                    <h3 class="category-title">专题调研</h3>
+                    <div class="content-grid">
+                        <a href="02-deep-research/topics/ai-agent-guide/" class="content-card">
+                            <div class="content-card-header">
+                                <span class="content-card-icon">🤖</span>
+                                <span class="content-card-title">AI Agent落地指南</span>
+                                <span class="content-card-tag green">专题</span>
+                            </div>
+                            <div class="content-card-desc">面向产品经理的AI Agent团队落地完整指南，4章节</div>
+                        </a>
+                        <a href="02-deep-research/topics/ai-studio/" class="content-card">
+                            <div class="content-card-header">
+                                <span class="content-card-icon">⚙️</span>
+                                <span class="content-card-title">企业AI工程师产品体系</span>
+                                <span class="content-card-tag green">专题</span>
+                            </div>
+                            <div class="content-card-desc">从场景分析到产品设计到架构设计的完整方法论</div>
+                        </a>
+                        <a href="02-deep-research/topics/ai-tools-analysis/" class="content-card">
+                            <div class="content-card-header">
+                                <span class="content-card-icon">🛠️</span>
+                                <span class="content-card-title">AI工具场景分析</span>
+                                <span class="content-card-tag blue">分析</span>
+                            </div>
+                            <div class="content-card-desc">AI工程师48个工作任务+9种Agent映射分析</div>
+                        </a>
+                        <a href="02-deep-research/topics/ai-financial/" class="content-card">
+                            <div class="content-card-header">
+                                <span class="content-card-icon">💹</span>
+                                <span class="content-card-title">AI金融应用调研</span>
+                                <span class="content-card-tag orange">调研</span>
+                            </div>
+                            <div class="content-card-desc">幻方量化调研、金融数字人产品架构设计</div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </article>
+        
+        <!-- 3. 追踪体系 -->
+        <article id="tracking" class="tab-panel">
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-icon">🎯</div>
+                    <div>
+                        <h2 class="section-title">追踪体系</h2>
+                        <p class="section-desc">AI行业人物、公司、信息源的系统化追踪清单</p>
+                    </div>
+                </div>
+                
+                <!-- 人物追踪 -->
+                <div class="category-section">
+                    <h3 class="category-title">人物追踪 (60+)</h3>
+                    <div class="table-wrap" style="overflow-x: auto;">
+                        <table class="tracking-table">
+                            <thead>
+                                <tr>
+                                    <th>层级</th>
+                                    <th>定位</th>
+                                    <th>代表人物</th>
+                                    <th>追踪频率</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="tier-badge l1">L1</span></td>
+                                    <td>实践者/构建者</td>
+                                    <td>Barry Zhang, Andrej Karpathy, Ilya Sutskever, 姚顺雨...</td>
+                                    <td>每日</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tier-badge l2">L2</span></td>
+                                    <td>深度观察者</td>
+                                    <td>Simon Willison, Gergely Orosz, Swyx, 宝玉, 李沐...</td>
+                                    <td>每日</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tier-badge l3">L3</span></td>
+                                    <td>战略决策者</td>
+                                    <td>Sam Altman, Dario Amodei, Jensen Huang...</td>
+                                    <td>每周</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style="margin-top: var(--spacing-md);">
+                        <a href="03-tracking-registry/people/index.md" style="font-size: 13px; color: var(--color-success);">查看完整人物清单 →</a>
+                    </div>
+                </div>
+                
+                <!-- 公司追踪 -->
+                <div class="category-section">
+                    <h3 class="category-title">公司追踪 (70+)</h3>
+                    <div class="table-wrap" style="overflow-x: auto;">
+                        <table class="tracking-table">
+                            <thead>
+                                <tr>
+                                    <th>分类</th>
+                                    <th>说明</th>
+                                    <th>代表公司</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="tier-badge l1">模型实验室</span></td>
+                                    <td>基础模型研发</td>
+                                    <td>OpenAI, Anthropic, DeepMind, Meta, SSI, DeepSeek...</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tier-badge l2">AI Coding</span></td>
+                                    <td>编程工具</td>
+                                    <td>Cursor, Cognition, GitHub Copilot, Replit...</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tier-badge l2">AI 应用</span></td>
+                                    <td>产品应用</td>
+                                    <td>Perplexity, Midjourney, Runway, Notion AI...</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tier-badge l3">基础设施</span></td>
+                                    <td>工具链/芯片</td>
+                                    <td>Hugging Face, LangChain, Scale AI, Groq, NVIDIA...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style="margin-top: var(--spacing-md);">
+                        <a href="03-tracking-registry/companies/index.md" style="font-size: 13px; color: var(--color-success);">查看完整公司清单 →</a>
+                    </div>
+                </div>
+                
+                <!-- 信息源 -->
+                <div class="category-section">
+                    <h3 class="category-title">信息源 (80+)</h3>
+                    <div class="content-grid">
+                        <div class="content-card" style="cursor: default;">
+                            <div class="content-card-header">
+                                <span class="content-card-icon">📝</span>
+                                <span class="content-card-title">官方博客</span>
+                            </div>
+                            <div class="content-card-desc">OpenAI, Anthropic, Cursor等20+公司官方博客</div>
+                        </div>
+                        <div class="content-card" style="cursor: default;">
+                            <div class="content-card-header">
+                                <span class="content-card-icon">📧</span>
+                                <span class="content-card-title">Newsletter</span>
+                            </div>
+                            <div class="content-card-desc">Simon Willison, Pragmatic Engineer等10+订阅源</div>
+                        </div>
+                        <div class="content-card" style="cursor: default;">
+                            <div class="content-card-header">
+                                <span class="content-card-icon">🎙️</span>
+                                <span class="content-card-title">播客</span>
+                            </div>
+                            <div class="content-card-desc">Latent Space, 硅谷101等10+中英文播客</div>
+                        </div>
+                        <div class="content-card" style="cursor: default;">
+                            <div class="content-card-header">
+                                <span class="content-card-icon">🎬</span>
+                                <span class="content-card-title">YouTube</span>
+                            </div>
+                            <div class="content-card-desc">Yannic Kilcher, 李沐等6个重要频道</div>
+                        </div>
+                        <div class="content-card" style="cursor: default;">
+                            <div class="content-card-header">
+                                <span class="content-card-icon">📚</span>
+                                <span class="content-card-title">学术源</span>
+                            </div>
+                            <div class="content-card-desc">ArXiv, Papers With Code, LMSYS排行榜</div>
+                        </div>
+                        <div class="content-card" style="cursor: default;">
+                            <div class="content-card-header">
+                                <span class="content-card-icon">💬</span>
+                                <span class="content-card-title">社区</span>
+                            </div>
+                            <div class="content-card-desc">GitHub Trending, Hacker News, Reddit</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: var(--spacing-md);">
+                        <a href="03-tracking-registry/sources/index.md" style="font-size: 13px; color: var(--color-success);">查看完整信息源清单 →</a>
+                    </div>
+                </div>
+            </section>
+        </article>
+        
+        <!-- 4. 知识库 -->
+        <article id="knowledge" class="tab-panel">
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-icon">📚</div>
+                    <div>
+                        <h2 class="section-title">知识库</h2>
+                        <p class="section-desc">概念学习、最佳实践、洞察沉淀</p>
+                    </div>
+                </div>
+                
+                <div class="content-grid">
+                    <a href="04-knowledge-base/concepts/financial/" class="content-card">
+                        <div class="content-card-header">
+                            <span class="content-card-icon">💰</span>
+                            <span class="content-card-title">金融概念学习</span>
+                            <span class="content-card-tag orange">概念</span>
+                        </div>
+                        <div class="content-card-desc">AI金融领域的核心概念和知识框架</div>
+                    </a>
+                </div>
+                
+                <div style="margin-top: var(--spacing-xl); padding: var(--spacing-lg); background: var(--color-bg-table-header); border-radius: var(--radius-md); text-align: center;">
+                    <p style="color: var(--color-text-muted); font-size: 14px;">
+                        📝 更多知识内容持续积累中...
+                    </p>
+                </div>
+            </section>
+        </article>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <p>
+                AI-Insight 持续洞察平台 · 由 <a href="https://github.com/xiaoxiong20260206" target="_blank">林克</a> 维护
+            </p>
+            <p style="margin-top: 8px;">
+                <a href="https://github.com/xiaoxiong20260206/ai-insight" target="_blank">GitHub</a> ·
+                <a href="README.md">项目说明</a> ·
+                <a href="CHANGELOG.md">更新日志</a>
+            </p>
+        </footer>
+    </div>
+    
+    <script>
+        // Tab切换功能
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // 移除所有active
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+                
+                // 添加active
+                btn.classList.add('active');
+                document.getElementById(btn.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

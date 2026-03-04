@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>私募量化数字员工产品架构 | AI Digital Worker Architecture</title>
+    <style>
+        /* ==================== CSS 变量定义 ==================== */
+        :root {
+            /* 主色调 */
+            --color-success: #1A7F37;
+            --color-success-light: #2DA44E;
+            --color-danger: #CF222E;
+            --color-danger-light: #FF7B72;
+            --color-warning: #BF8700;
+            --color-warning-dark: #9A6700;
+            --color-info: #0969DA;
+            --color-info-light: #54AEFF;
+            
+            /* 中性色 */
+            --color-text-primary: #24292F;
+            --color-text-secondary: #57606A;
+            --color-text-muted: #8B949E;
+            --color-border: #D0D7DE;
+            --color-border-light: #EAEEF2;
+            --color-bg: #FAFBFC;
+            --color-bg-card: #FFFFFF;
+            --color-bg-table-header: #F6F8FA;
+            
+            /* 渐变色 */
+            --gradient-success: linear-gradient(135deg, #1A7F37 0%, #2DA44E 100%);
+            --gradient-badge: linear-gradient(135deg, #DDF4FF 0%, #D4F8E8 100%);
+            --gradient-blue-text: linear-gradient(90deg, #0969DA, #54AEFF);
+            
+            /* 阴影 */
+            --shadow-card: rgba(31, 35, 40, 0.04) 0px 1px 3px 0px, rgba(31, 35, 40, 0.04) 0px 3px 8px 0px;
+            --shadow-card-light: rgba(31, 35, 40, 0.04) 0px 1px 0px 0px;
+            
+            /* 间距 */
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            
+            /* 圆角 */
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-full: 20px;
+            
+            /* 字体 */
+            --font-family: -apple-system, "system-ui", "Segoe UI", "Noto Sans SC", Helvetica, Arial, sans-serif;
+        }
+        
+        /* ==================== 基础重置 ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-family);
+            font-size: 15px;
+            line-height: 1.5;
+            color: var(--color-text-secondary);
+            background-color: var(--color-bg);
+        }
+        
+        /* ==================== 容器布局 ==================== */
+        .container {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: var(--spacing-lg) var(--spacing-md) 48px;
+        }
+        
+        /* ==================== 头部区域 ==================== */
+        .header {
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .badge {
+            display: inline-block;
+            background: var(--gradient-badge);
+            color: var(--color-info);
+            padding: var(--spacing-xs) 12px;
+            border-radius: var(--radius-full);
+            font-size: 11px;
+            font-weight: 500;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .main-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            line-height: 1.25;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .subtitle {
+            font-size: 15px;
+            color: var(--color-text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* ==================== 导航目录 ==================== */
+        .toc {
+            background: var(--color-bg-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card);
+            margin-bottom: var(--spacing-lg);
+            overflow: hidden;
+        }
+        
+        .toc-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-md) 20px;
+            color: var(--color-text-primary);
+            text-decoration: none;
+            border-bottom: 1px solid var(--color-border-light);
+            transition: background 0.15s;
+        }
+        
+        .toc-item:last-child {
+            border-bottom: none;
+        }
+        
+        .toc-item:hover {
+            background: var(--color-bg);
+        }
+        
+        /* ==================== 章节编号 ==================== */
+        .section-number {
+            background: var(--gradient-success);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .section-number-yellow {
+            background: var(--color-warning);
+        }
+        
+        .section-number-blue {
+            background: var(--color-info);
+        }
+        
+        .section-number-purple {
+            background: #8B5CF6;
+        }
+        
+        /* ==================== 统计卡片 ==================== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .stat-card {
+            background: var(--color-bg-card);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-card-light);
+            border: 1px solid var(--color-border);
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .stat-value.success { color: var(--color-success); }
+        .stat-value.danger { color: var(--color-danger); }
+        .stat-value.warning { color: var(--color-warning); }
+        .stat-value.info { color: var(--color-info); }
+        
+        .stat-label {
+            font-size: 11px;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* ==================== 章节卡片 ==================== */
+        .section-card {
+            background: var(--color-bg-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .section-header h2 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+        
+        .section-content {
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+        
+        .section-content p {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        /* ==================== 架构图容器 ==================== */
+        .architecture-container {
+            background: var(--color-bg-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card);
+            padding: var(--spacing-lg);
+            overflow-x: auto;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .architecture-container svg {
+            display: block;
+            margin: 0 auto;
+        }
+        
+        /* ==================== Roadmap卡片 ==================== */
+        .roadmap-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-md);
+        }
+        
+        @media (max-width: 1024px) {
+            .roadmap-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .roadmap-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .phase-card {
+            background: var(--color-bg-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card);
+            padding: var(--spacing-md);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .phase-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+        }
+        
+        .phase-card.p1::before { background: var(--color-success); }
+        .phase-card.p2::before { background: var(--color-info); }
+        .phase-card.p3::before { background: #8B5CF6; }
+        .phase-card.p4::before { background: var(--color-warning); }
+        
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .phase-number {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+            color: white;
+        }
+        
+        .phase-card.p1 .phase-number { background: var(--color-success); }
+        .phase-card.p2 .phase-number { background: var(--color-info); }
+        .phase-card.p3 .phase-number { background: #8B5CF6; }
+        .phase-card.p4 .phase-number { background: var(--color-warning); }
+        
+        .phase-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+        
+        .phase-time {
+            font-size: 11px;
+            color: var(--color-text-muted);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .phase-content h4 {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--spacing-xs);
+            margin-top: var(--spacing-sm);
+        }
+        
+        .phase-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .phase-content li {
+            font-size: 13px;
+            color: var(--color-text-muted);
+            padding: 2px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+        
+        .phase-content li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--color-success);
+            font-size: 11px;
+        }
+        
+        .phase-metrics {
+            margin-top: var(--spacing-sm);
+            padding-top: var(--spacing-sm);
+            border-top: 1px solid var(--color-border-light);
+            font-size: 11px;
+            color: var(--color-text-muted);
+        }
+        
+        .phase-metrics strong {
+            color: var(--color-success);
+        }
+        
+        /* ==================== 状态标签 ==================== */
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 8px;
+            border-radius: var(--radius-full);
+            font-size: 11px;
+            font-weight: 500;
+        }
+        
+        .status-success {
+            background: rgba(26, 127, 55, 0.12);
+            color: var(--color-success);
+        }
+        
+        .status-warning {
+            background: rgba(191, 135, 0, 0.12);
+            color: var(--color-warning-dark);
+        }
+        
+        .status-danger {
+            background: rgba(207, 34, 46, 0.2);
+            color: var(--color-danger);
+        }
+        
+        .status-info {
+            background: rgba(9, 105, 218, 0.12);
+            color: var(--color-info);
+        }
+        
+        /* ==================== 表格样式 ==================== */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: var(--spacing-md) 0;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            min-width: 500px;
+        }
+        
+        th {
+            background: var(--color-bg-table-header);
+            color: var(--color-text-secondary);
+            padding: 12px 16px;
+            font-weight: 600;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+            font-size: 13px;
+        }
+        
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--color-border-light);
+            vertical-align: middle;
+            font-size: 14px;
+        }
+        
+        tbody tr:hover {
+            background: rgba(0, 0, 0, 0.02);
+        }
+        
+        /* ==================== 页脚 ==================== */
+        .footer {
+            text-align: center;
+            padding: var(--spacing-lg) 0;
+            border-top: 1px solid var(--color-border-light);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .footer p {
+            font-size: 13px;
+            color: var(--color-text-muted);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .footer a {
+            color: var(--color-info);
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* ==================== 引用框 ==================== */
+        .quote-box {
+            background: var(--color-bg-table-header);
+            border-left: 3px solid var(--color-info);
+            padding: var(--spacing-md) 20px;
+            color: var(--color-text-primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            margin: var(--spacing-md) 0;
+        }
+        
+        /* ==================== 洞察框 ==================== */
+        .insight-box {
+            border-left: 3px solid var(--color-warning);
+            background: rgba(191, 135, 0, 0.06);
+            padding: var(--spacing-md) 20px;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            margin: var(--spacing-md) 0;
+        }
+        
+        .insight-box .insight-title {
+            font-weight: 600;
+            color: var(--color-warning-dark);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        /* ==================== 特性网格 ==================== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+        
+        @media (max-width: 600px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-sm);
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+        
+        .feature-item::before {
+            content: "✓";
+            color: var(--color-success);
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部区域 -->
+        <header class="header">
+            <span class="badge">🏗️ 产品规划</span>
+            <h1 class="main-title">私募量化数字员工产品架构与Roadmap</h1>
+            <p class="subtitle">基于私募量化公司工作场景分析，设计覆盖投研、交易、风控、运营全链路的AI数字员工产品体系</p>
+        </header>
+        
+        <!-- 导航目录 -->
+        <nav class="toc">
+            <a href="#architecture" class="toc-item">
+                <span class="section-number">1</span>
+                <span>产品架构图</span>
+            </a>
+            <a href="#layers" class="toc-item">
+                <span class="section-number">2</span>
+                <span>五层架构详解</span>
+            </a>
+            <a href="#agents" class="toc-item">
+                <span class="section-number">3</span>
+                <span>Agent能力矩阵</span>
+            </a>
+            <a href="#coverage" class="toc-item">
+                <span class="section-number section-number-blue">4</span>
+                <span>覆盖率计算方式</span>
+            </a>
+            <a href="#roi" class="toc-item">
+                <span class="section-number section-number-purple">5</span>
+                <span>Agent ROI分析</span>
+            </a>
+            <a href="#roadmap" class="toc-item">
+                <span class="section-number section-number-yellow">6</span>
+                <span>产品Roadmap</span>
+            </a>
+        </nav>
+        
+        <!-- 统计卡片 -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value success">8</div>
+                <div class="stat-label">核心Agent</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value info">5</div>
+                <div class="stat-label">架构层级</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value warning">6</div>
+                <div class="stat-label">用户角色</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value success">18月</div>
+                <div class="stat-label">Roadmap周期</div>
+            </div>
+        </div>
+        
+        <!-- 架构图 -->
+        <section id="architecture" class="section-card">
+            <div class="section-header">
+                <span class="section-number">1</span>
+                <h2>产品架构图</h2>
+            </div>
+            <div class="architecture-container">
+                <svg viewBox="0 0 900 780" style="width: 100%; max-width: 900px; height: auto;">
+                    <defs>
+                        <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#1A7F37"/>
+                            <stop offset="100%" style="stop-color:#2DA44E"/>
+                        </linearGradient>
+                        <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#0969DA"/>
+                            <stop offset="100%" style="stop-color:#54AEFF"/>
+                        </linearGradient>
+                        <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#8B5CF6"/>
+                            <stop offset="100%" style="stop-color:#A78BFA"/>
+                        </linearGradient>
+                        <linearGradient id="orangeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#BF8700"/>
+                            <stop offset="100%" style="stop-color:#D9A50B"/>
+                        </linearGradient>
+                        <linearGradient id="pinkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#CF222E"/>
+                            <stop offset="100%" style="stop-color:#FF7B72"/>
+                        </linearGradient>
+                        <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#0891B2"/>
+                            <stop offset="100%" style="stop-color:#22D3EE"/>
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- Title -->
+                    <text x="450" y="25" text-anchor="middle" fill="#24292F" font-size="14" font-weight="600" font-family="system-ui, sans-serif">私募量化数字员工产品架构 (Quant AI Digital Worker)</text>
+                    
+                    <!-- ==================== L1: 用户交互层 ==================== -->
+                    <rect x="30" y="45" width="840" height="95" rx="8" fill="#F6F8FA" stroke="#BF8700" stroke-width="2"/>
+                    <text x="60" y="67" fill="#9A6700" font-size="12" font-weight="600">L1 用户交互层 (User Interaction)</text>
+                    
+                    <!-- 用户角色 -->
+                    <text x="50" y="88" fill="#57606A" font-size="9" font-weight="500">用户角色</text>
+                    <rect x="50" y="95" width="70" height="32" rx="5" fill="url(#orangeGrad)"/>
+                    <text x="85" y="115" text-anchor="middle" fill="white" font-size="9">👨‍💼 量化</text>
+                    <rect x="125" y="95" width="70" height="32" rx="5" fill="url(#orangeGrad)"/>
+                    <text x="160" y="115" text-anchor="middle" fill="white" font-size="9">📊 基金PM</text>
+                    <rect x="200" y="95" width="70" height="32" rx="5" fill="url(#orangeGrad)"/>
+                    <text x="235" y="115" text-anchor="middle" fill="white" font-size="9">⚠️ 风控</text>
+                    <rect x="275" y="95" width="70" height="32" rx="5" fill="url(#orangeGrad)"/>
+                    <text x="310" y="115" text-anchor="middle" fill="white" font-size="9">💹 交易</text>
+                    <rect x="350" y="95" width="70" height="32" rx="5" fill="url(#orangeGrad)"/>
+                    <text x="385" y="115" text-anchor="middle" fill="white" font-size="9">🤝 市场</text>
+                    <rect x="425" y="95" width="70" height="32" rx="5" fill="url(#orangeGrad)"/>
+                    <text x="460" y="115" text-anchor="middle" fill="white" font-size="9">⚙️ 运营</text>
+                    
+                    <!-- 工作场景 -->
+                    <text x="510" y="88" fill="#57606A" font-size="9" font-weight="500">工作场景</text>
+                    <rect x="510" y="95" width="65" height="32" rx="5" fill="white" stroke="#BF8700"/>
+                    <text x="542" y="115" text-anchor="middle" fill="#9A6700" font-size="9">投研分析</text>
+                    <rect x="580" y="95" width="65" height="32" rx="5" fill="white" stroke="#BF8700"/>
+                    <text x="612" y="115" text-anchor="middle" fill="#9A6700" font-size="9">运营合规</text>
+                    
+                    <!-- 终端 -->
+                    <text x="660" y="88" fill="#57606A" font-size="9" font-weight="500">终端</text>
+                    <rect x="660" y="95" width="50" height="32" rx="5" fill="white" stroke="#D0D7DE"/>
+                    <text x="685" y="115" text-anchor="middle" fill="#57606A" font-size="9">📱 移动</text>
+                    <rect x="715" y="95" width="50" height="32" rx="5" fill="white" stroke="#D0D7DE"/>
+                    <text x="740" y="115" text-anchor="middle" fill="#57606A" font-size="9">💻 PC</text>
+                    
+                    <!-- 交互形式 -->
+                    <text x="780" y="88" fill="#57606A" font-size="9" font-weight="500">交互形式</text>
+                    <rect x="780" y="95" width="75" height="32" rx="5" fill="white" stroke="#D0D7DE"/>
+                    <text x="817" y="109" text-anchor="middle" fill="#57606A" font-size="8">💬 对话 | 📋 表单</text>
+                    <text x="817" y="121" text-anchor="middle" fill="#57606A" font-size="8">🔌 API | 🤖 嵌入</text>
+                    
+                    <!-- ==================== L2: 工作流编排层 ==================== -->
+                    <rect x="30" y="150" width="840" height="110" rx="8" fill="#F6F8FA" stroke="#8B5CF6" stroke-width="2"/>
+                    <text x="60" y="172" fill="#7C3AED" font-size="12" font-weight="600">L2 工作流编排层 (Workflow Orchestration)</text>
+                    
+                    <!-- 智能编排中心 -->
+                    <rect x="50" y="185" width="165" height="60" rx="6" fill="url(#purpleGrad)"/>
+                    <text x="132" y="207" text-anchor="middle" fill="white" font-size="10" font-weight="600">🧠 智能编排中心</text>
+                    <text x="132" y="223" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="8">意图识别 → 任务分解 → Agent调度</text>
+                    <text x="132" y="236" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="8">结果聚合 → 响应生成</text>
+                    
+                    <!-- 上下文记忆 -->
+                    <rect x="225" y="185" width="130" height="60" rx="6" fill="white" stroke="#8B5CF6"/>
+                    <text x="290" y="207" text-anchor="middle" fill="#8B5CF6" font-size="10" font-weight="500">💾 上下文记忆</text>
+                    <text x="290" y="223" text-anchor="middle" fill="#8B949E" font-size="8">会话历史 | 用户画像</text>
+                    <text x="290" y="236" text-anchor="middle" fill="#8B949E" font-size="8">偏好学习 | 任务历史</text>
+                    
+                    <!-- 非AI能力集成 -->
+                    <rect x="365" y="185" width="130" height="60" rx="6" fill="white" stroke="#8B5CF6"/>
+                    <text x="430" y="207" text-anchor="middle" fill="#8B5CF6" font-size="10" font-weight="500">⚙️ 非AI能力集成</text>
+                    <text x="430" y="223" text-anchor="middle" fill="#8B949E" font-size="8">规则引擎 | 审批流程</text>
+                    <text x="430" y="236" text-anchor="middle" fill="#8B949E" font-size="8">业务逻辑 | 外部API</text>
+                    
+                    <!-- 工作流引擎 -->
+                    <rect x="505" y="185" width="130" height="60" rx="6" fill="white" stroke="#8B5CF6"/>
+                    <text x="570" y="207" text-anchor="middle" fill="#8B5CF6" font-size="10" font-weight="500">⚡ 工作流引擎</text>
+                    <text x="570" y="223" text-anchor="middle" fill="#8B949E" font-size="8">DAG编排 | 并行执行</text>
+                    <text x="570" y="236" text-anchor="middle" fill="#8B949E" font-size="8">状态管理 | 错误恢复</text>
+                    
+                    <!-- 场景工作流 -->
+                    <rect x="645" y="185" width="210" height="60" rx="6" fill="rgba(139,92,246,0.08)" stroke="#8B5CF6" stroke-dasharray="4,2"/>
+                    <text x="750" y="202" text-anchor="middle" fill="#7C3AED" font-size="9" font-weight="600">场景工作流示例</text>
+                    <text x="680" y="220" fill="#8B949E" font-size="8">• 研报撰写流程</text>
+                    <text x="680" y="233" fill="#8B949E" font-size="8">• 风控预警流程</text>
+                    <text x="780" y="220" fill="#8B949E" font-size="8">• 策略回测流程</text>
+                    <text x="780" y="233" fill="#8B949E" font-size="8">• 合规审核流程</text>
+                    
+                    <!-- ==================== L3: Agent能力层 ==================== -->
+                    <rect x="30" y="270" width="840" height="130" rx="8" fill="#F6F8FA" stroke="#0969DA" stroke-width="2"/>
+                    <text x="60" y="292" fill="#0969DA" font-size="12" font-weight="600">L3 Agent能力层 (Extensible Agents)</text>
+                    
+                    <!-- Agent Row 1 -->
+                    <rect x="50" y="305" width="100" height="42" rx="5" fill="url(#blueGrad)"/>
+                    <text x="100" y="323" text-anchor="middle" fill="white" font-size="9" font-weight="600">📈 Quant</text>
+                    <text x="100" y="337" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="7">策略 | 因子 | 回测</text>
+                    
+                    <rect x="155" y="305" width="100" height="42" rx="5" fill="url(#blueGrad)"/>
+                    <text x="205" y="323" text-anchor="middle" fill="white" font-size="9" font-weight="600">🔬 Research</text>
+                    <text x="205" y="337" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="7">研究 | 分析 | 研报</text>
+                    
+                    <rect x="260" y="305" width="100" height="42" rx="5" fill="url(#blueGrad)"/>
+                    <text x="310" y="323" text-anchor="middle" fill="white" font-size="9" font-weight="600">📊 Data</text>
+                    <text x="310" y="337" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="7">获取 | 清洗 | 可视化</text>
+                    
+                    <rect x="365" y="305" width="100" height="42" rx="5" fill="url(#blueGrad)"/>
+                    <text x="415" y="323" text-anchor="middle" fill="white" font-size="9" font-weight="600">⚠️ Risk</text>
+                    <text x="415" y="337" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="7">风控 | 压测 | 合规</text>
+                    
+                    <!-- Agent Row 2 -->
+                    <rect x="50" y="352" width="100" height="42" rx="5" fill="url(#greenGrad)"/>
+                    <text x="100" y="370" text-anchor="middle" fill="white" font-size="9" font-weight="600">💹 Trading</text>
+                    <text x="100" y="384" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="7">订单 | 执行 | 算法</text>
+                    
+                    <rect x="155" y="352" width="100" height="42" rx="5" fill="url(#greenGrad)"/>
+                    <text x="205" y="370" text-anchor="middle" fill="white" font-size="9" font-weight="600">💬 Chatbot</text>
+                    <text x="205" y="384" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="7">问答 | 写作 | 客服</text>
+                    
+                    <rect x="260" y="352" width="100" height="42" rx="5" fill="url(#greenGrad)"/>
+                    <text x="310" y="370" text-anchor="middle" fill="white" font-size="9" font-weight="600">⚙️ Workflow</text>
+                    <text x="310" y="384" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="7">自动化 | 审核</text>
+                    
+                    <rect x="365" y="352" width="100" height="42" rx="5" fill="url(#greenGrad)"/>
+                    <text x="415" y="370" text-anchor="middle" fill="white" font-size="9" font-weight="600">🌐 Browser</text>
+                    <text x="415" y="384" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="7">采集 | 舆情</text>
+                    
+                    <!-- 可扩展标识 -->
+                    <rect x="470" y="305" width="50" height="89" rx="5" fill="white" stroke="#D0D7DE" stroke-dasharray="4,2"/>
+                    <text x="495" y="345" text-anchor="middle" fill="#8B949E" font-size="20">...</text>
+                    <text x="495" y="375" text-anchor="middle" fill="#8B949E" font-size="8">可扩展</text>
+                    
+                    <!-- Agent通用能力 -->
+                    <rect x="530" y="305" width="325" height="89" rx="6" fill="white" stroke="#D0D7DE"/>
+                    <text x="692" y="325" text-anchor="middle" fill="#57606A" font-size="10" font-weight="600">Agent通用能力框架</text>
+                    <text x="560" y="348" fill="#8B949E" font-size="9">• 规划推理 (Planning)</text>
+                    <text x="560" y="365" fill="#8B949E" font-size="9">• 工具调用 (Tool Use)</text>
+                    <text x="560" y="382" fill="#8B949E" font-size="9">• 反思迭代 (Reflection)</text>
+                    <text x="720" y="348" fill="#8B949E" font-size="9">• 多轮对话 (Multi-turn)</text>
+                    <text x="720" y="365" fill="#8B949E" font-size="9">• 记忆检索 (Memory)</text>
+                    <text x="720" y="382" fill="#8B949E" font-size="9">• 插件扩展 (Plugin)</text>
+                    
+                    <!-- ==================== L4: 基础设施层 ==================== -->
+                    <rect x="30" y="410" width="840" height="130" rx="8" fill="#F6F8FA" stroke="#1A7F37" stroke-width="2"/>
+                    <text x="60" y="432" fill="#1A7F37" font-size="12" font-weight="600">L4 基础设施层 (Foundation Infrastructure)</text>
+                    
+                    <!-- 共享能力 -->
+                    <text x="50" y="455" fill="#57606A" font-size="9" font-weight="500">共享能力</text>
+                    <rect x="50" y="462" width="115" height="35" rx="5" fill="url(#greenGrad)"/>
+                    <text x="107" y="480" text-anchor="middle" fill="white" font-size="9" font-weight="600">🧠 LLM基座</text>
+                    <text x="107" y="492" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="7">GPT | Claude | DeepSeek</text>
+                    
+                    <rect x="170" y="462" width="115" height="35" rx="5" fill="white" stroke="#1A7F37"/>
+                    <text x="227" y="480" text-anchor="middle" fill="#1A7F37" font-size="9" font-weight="500">📚 RAG知识库</text>
+                    <text x="227" y="492" text-anchor="middle" fill="#8B949E" font-size="7">向量检索 | 混合搜索</text>
+                    
+                    <rect x="290" y="462" width="115" height="35" rx="5" fill="white" stroke="#1A7F37"/>
+                    <text x="347" y="480" text-anchor="middle" fill="#1A7F37" font-size="9" font-weight="500">💻 代码沙箱</text>
+                    <text x="347" y="492" text-anchor="middle" fill="#8B949E" font-size="7">Python | 回测引擎</text>
+                    
+                    <rect x="410" y="462" width="115" height="35" rx="5" fill="white" stroke="#1A7F37"/>
+                    <text x="467" y="480" text-anchor="middle" fill="#1A7F37" font-size="9" font-weight="500">🔌 外部系统网关</text>
+                    <text x="467" y="492" text-anchor="middle" fill="#8B949E" font-size="7">Wind | 恒生 | MCP</text>
+                    
+                    <!-- 自进化能力 -->
+                    <text x="540" y="455" fill="#57606A" font-size="9" font-weight="500">自进化调优</text>
+                    <rect x="540" y="462" width="110" height="35" rx="5" fill="white" stroke="#0969DA"/>
+                    <text x="595" y="480" text-anchor="middle" fill="#0969DA" font-size="9" font-weight="500">🔄 模型微调</text>
+                    <text x="595" y="492" text-anchor="middle" fill="#8B949E" font-size="7">SFT | RLHF | 评估</text>
+                    
+                    <rect x="655" y="462" width="110" height="35" rx="5" fill="white" stroke="#0969DA"/>
+                    <text x="710" y="480" text-anchor="middle" fill="#0969DA" font-size="9" font-weight="500">📊 反馈闭环</text>
+                    <text x="710" y="492" text-anchor="middle" fill="#8B949E" font-size="7">日志分析 | A/B测试</text>
+                    
+                    <!-- 安全合规 -->
+                    <text x="50" y="510" fill="#57606A" font-size="9" font-weight="500">安全合规与权限管理</text>
+                    <rect x="50" y="517" width="100" height="18" rx="4" fill="white" stroke="#CF222E"/>
+                    <text x="100" y="530" text-anchor="middle" fill="#CF222E" font-size="8">🛡️ 内容审核</text>
+                    <rect x="155" y="517" width="100" height="18" rx="4" fill="white" stroke="#CF222E"/>
+                    <text x="205" y="530" text-anchor="middle" fill="#CF222E" font-size="8">🔒 权限RBAC</text>
+                    <rect x="260" y="517" width="100" height="18" rx="4" fill="white" stroke="#CF222E"/>
+                    <text x="310" y="530" text-anchor="middle" fill="#CF222E" font-size="8">📝 审计日志</text>
+                    <rect x="365" y="517" width="100" height="18" rx="4" fill="white" stroke="#CF222E"/>
+                    <text x="415" y="530" text-anchor="middle" fill="#CF222E" font-size="8">⚠️ 风险拦截</text>
+                    
+                    <!-- 可观测性 -->
+                    <text x="540" y="510" fill="#57606A" font-size="9" font-weight="500">可观测性</text>
+                    <rect x="540" y="517" width="85" height="18" rx="4" fill="white" stroke="#0891B2"/>
+                    <text x="582" y="530" text-anchor="middle" fill="#0891B2" font-size="8">🔗 链路追踪</text>
+                    <rect x="630" y="517" width="85" height="18" rx="4" fill="white" stroke="#0891B2"/>
+                    <text x="672" y="530" text-anchor="middle" fill="#0891B2" font-size="8">📈 性能监控</text>
+                    <rect x="720" y="517" width="85" height="18" rx="4" fill="white" stroke="#0891B2"/>
+                    <text x="762" y="530" text-anchor="middle" fill="#0891B2" font-size="8">🚨 告警通知</text>
+                    
+                    <!-- ==================== L5: 数据层 ==================== -->
+                    <rect x="30" y="550" width="840" height="85" rx="8" fill="#F6F8FA" stroke="#CF222E" stroke-width="2"/>
+                    <text x="60" y="572" fill="#CF222E" font-size="12" font-weight="600">L5 数据层 (Data Layer)</text>
+                    
+                    <rect x="50" y="585" width="130" height="38" rx="5" fill="white" stroke="#CF222E"/>
+                    <text x="115" y="602" text-anchor="middle" fill="#CF222E" font-size="9" font-weight="500">📈 行情数据</text>
+                    <text x="115" y="616" text-anchor="middle" fill="#8B949E" font-size="7">实时行情 | 历史K线</text>
+                    
+                    <rect x="185" y="585" width="130" height="38" rx="5" fill="white" stroke="#CF222E"/>
+                    <text x="250" y="602" text-anchor="middle" fill="#CF222E" font-size="9" font-weight="500">💰 财务数据</text>
+                    <text x="250" y="616" text-anchor="middle" fill="#8B949E" font-size="7">财报 | 估值 | 指标</text>
+                    
+                    <rect x="320" y="585" width="130" height="38" rx="5" fill="white" stroke="#CF222E"/>
+                    <text x="385" y="602" text-anchor="middle" fill="#CF222E" font-size="9" font-weight="500">📄 研报/公告</text>
+                    <text x="385" y="616" text-anchor="middle" fill="#8B949E" font-size="7">知识库 | 新闻舆情</text>
+                    
+                    <rect x="455" y="585" width="130" height="38" rx="5" fill="white" stroke="#CF222E"/>
+                    <text x="520" y="602" text-anchor="middle" fill="#CF222E" font-size="9" font-weight="500">🛰️ 另类数据</text>
+                    <text x="520" y="616" text-anchor="middle" fill="#8B949E" font-size="7">卫星 | 供应链 | 舆情</text>
+                    
+                    <rect x="590" y="585" width="130" height="38" rx="5" fill="white" stroke="#CF222E"/>
+                    <text x="655" y="602" text-anchor="middle" fill="#CF222E" font-size="9" font-weight="500">🔐 用户/交易数据</text>
+                    <text x="655" y="616" text-anchor="middle" fill="#8B949E" font-size="7">持仓 | 订单 | 画像</text>
+                    
+                    <rect x="725" y="585" width="130" height="38" rx="5" fill="white" stroke="#CF222E"/>
+                    <text x="790" y="602" text-anchor="middle" fill="#CF222E" font-size="9" font-weight="500">☁️ 基础设施</text>
+                    <text x="790" y="616" text-anchor="middle" fill="#8B949E" font-size="7">K8s | GPU | 私有云</text>
+                    
+                    <!-- ==================== 核心特性 ==================== -->
+                    <rect x="30" y="650" width="840" height="115" rx="8" fill="rgba(26,127,55,0.06)" stroke="rgba(26,127,55,0.3)" stroke-width="1"/>
+                    <text x="60" y="675" fill="#1A7F37" font-size="11" font-weight="600">🎯 架构核心特性</text>
+                    
+                    <text x="50" y="700" fill="#24292F" font-size="10" font-weight="500">用户交互层</text>
+                    <text x="50" y="715" fill="#57606A" font-size="9">• 6类用户角色全覆盖</text>
+                    <text x="50" y="730" fill="#57606A" font-size="9">• 移动端/PC端多终端</text>
+                    <text x="50" y="745" fill="#57606A" font-size="9">• 对话/表单/API/嵌入</text>
+                    
+                    <text x="220" y="700" fill="#24292F" font-size="10" font-weight="500">工作流编排层</text>
+                    <text x="220" y="715" fill="#57606A" font-size="9">• 智能意图识别与分解</text>
+                    <text x="220" y="730" fill="#57606A" font-size="9">• 上下文记忆与偏好</text>
+                    <text x="220" y="745" fill="#57606A" font-size="9">• AI+非AI能力融合</text>
+                    
+                    <text x="400" y="700" fill="#24292F" font-size="10" font-weight="500">Agent能力层</text>
+                    <text x="400" y="715" fill="#57606A" font-size="9">• 8+垂直Agent可扩展</text>
+                    <text x="400" y="730" fill="#57606A" font-size="9">• 通用能力框架复用</text>
+                    <text x="400" y="745" fill="#57606A" font-size="9">• 插件化扩展机制</text>
+                    
+                    <text x="570" y="700" fill="#24292F" font-size="10" font-weight="500">基础设施层</text>
+                    <text x="570" y="715" fill="#57606A" font-size="9">• 共享能力池化复用</text>
+                    <text x="570" y="730" fill="#57606A" font-size="9">• 自进化调优闭环</text>
+                    <text x="570" y="745" fill="#57606A" font-size="9">• 安全合规权限管理</text>
+                    
+                    <text x="730" y="700" fill="#24292F" font-size="10" font-weight="500">数据层</text>
+                    <text x="730" y="715" fill="#57606A" font-size="9">• 多源数据统一接入</text>
+                    <text x="730" y="730" fill="#57606A" font-size="9">• 私有化部署隔离</text>
+                    <text x="730" y="745" fill="#57606A" font-size="9">• 数据不出域合规</text>
+                </svg>
+            </div>
+        </section>
+        
+        <!-- 五层架构详解 -->
+        <section id="layers" class="section-card">
+            <div class="section-header">
+                <span class="section-number">2</span>
+                <h2>五层架构详解</h2>
+            </div>
+            <div class="section-content">
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>层级</th>
+                                <th>核心组件</th>
+                                <th>功能说明</th>
+                                <th>技术选型</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="status status-warning">L1</span> 用户交互层</td>
+                                <td>用户角色、工作场景、终端、交互形式</td>
+                                <td>6类用户角色（量化/PM/风控/交易/市场/运营）、移动端/PC端、对话/表单/API/嵌入式</td>
+                                <td>React/Vue、WebSocket、REST API</td>
+                            </tr>
+                            <tr>
+                                <td><span class="status status-info">L2</span> 工作流编排层</td>
+                                <td>智能编排中心、上下文记忆、非AI能力集成、工作流引擎</td>
+                                <td>意图识别→任务分解→Agent调度、会话记忆/用户偏好、规则引擎/审批流程、DAG编排/状态管理</td>
+                                <td>LangChain、LlamaIndex、自研编排框架</td>
+                            </tr>
+                            <tr>
+                                <td><span class="status status-success">L3</span> Agent能力层</td>
+                                <td>8个垂直Agent + 可扩展框架</td>
+                                <td>Quant/Research/Data/Risk/Trading/Chatbot/Workflow/Browser，通用能力：规划推理、工具调用、反思迭代</td>
+                                <td>LLM + 领域工具 + 专业提示词 + 插件扩展</td>
+                            </tr>
+                            <tr>
+                                <td><span class="status status-success">L4</span> 基础设施层</td>
+                                <td>共享能力、自进化调优、安全合规、可观测性</td>
+                                <td>LLM基座/RAG/代码沙箱/外部网关、模型微调/反馈闭环、内容审核/RBAC/审计、链路追踪/监控/告警</td>
+                                <td>GPT-4/Claude/DeepSeek、Milvus、MCP、Prometheus</td>
+                            </tr>
+                            <tr>
+                                <td><span class="status status-danger">L5</span> 数据层</td>
+                                <td>行情数据、财务数据、研报/公告、另类数据、用户数据、基础设施</td>
+                                <td>实时行情/历史K线、财报/估值/指标、知识库/新闻舆情、卫星/供应链、持仓/订单/画像、K8s/GPU/私有云</td>
+                                <td>Wind/Tushare、知识图谱、向量数据库、私有化部署</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- 架构设计亮点 -->
+                <div class="insight-box" style="margin-top: var(--spacing-lg); border-left-color: var(--color-success); background: rgba(26, 127, 55, 0.06);">
+                    <p class="insight-title" style="color: var(--color-success);">🎯 架构设计亮点</p>
+                    <div class="features-grid">
+                        <div class="feature-item">工作流编排层独立，支持复杂场景的多Agent协作</div>
+                        <div class="feature-item">上下文记忆模块，实现用户偏好学习和个性化服务</div>
+                        <div class="feature-item">非AI能力集成，融合规则引擎、审批流程等传统能力</div>
+                        <div class="feature-item">Agent可扩展框架，支持插件化快速扩展新Agent</div>
+                        <div class="feature-item">自进化调优机制，基于反馈持续优化模型效果</div>
+                        <div class="feature-item">数据层独立，强调金融数据的核心地位和私有化部署</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Agent能力矩阵 -->
+        <section id="agents" class="section-card">
+            <div class="section-header">
+                <span class="section-number">3</span>
+                <h2>Agent能力矩阵</h2>
+            </div>
+            <div class="section-content">
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Agent</th>
+                                <th>覆盖率</th>
+                                <th>核心能力</th>
+                                <th>技术栈</th>
+                                <th>优先级</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>📈 Quant Agent</strong></td>
+                                <td><span class="status status-success">28%</span></td>
+                                <td>策略开发、因子计算、回测分析</td>
+                                <td>LLM + 量化框架 + 优化算法</td>
+                                <td><span class="status status-danger">P0</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>🔬 Research Agent</strong></td>
+                                <td><span class="status status-success">18%</span></td>
+                                <td>行业研究、公司分析、研报撰写</td>
+                                <td>LLM + RAG + 搜索</td>
+                                <td><span class="status status-danger">P0</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>📊 Data Agent</strong></td>
+                                <td><span class="status status-info">14%</span></td>
+                                <td>数据获取、清洗、可视化</td>
+                                <td>API + ETL + BI工具</td>
+                                <td><span class="status status-warning">P1</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>⚠️ Risk Agent</strong></td>
+                                <td><span class="status status-info">12%</span></td>
+                                <td>风险监控、压力测试、合规检查</td>
+                                <td>风控模型 + 规则引擎</td>
+                                <td><span class="status status-warning">P1</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>💬 Chatbot Agent</strong></td>
+                                <td><span class="status status-info">11%</span></td>
+                                <td>知识问答、文档写作、客户服务</td>
+                                <td>LLM + RAG</td>
+                                <td><span class="status status-info">P2</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>⚙️ Workflow Agent</strong></td>
+                                <td><span class="status status-warning">9%</span></td>
+                                <td>流程自动化、报告审核</td>
+                                <td>RPA + LLM</td>
+                                <td><span class="status status-info">P2</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>💹 Trading Agent</strong></td>
+                                <td><span class="status status-warning">5%</span></td>
+                                <td>订单执行、执行分析、算法交易</td>
+                                <td>交易系统 + 算法交易</td>
+                                <td><span class="status status-info">P2</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>🌐 Browser Agent</strong></td>
+                                <td><span class="status status-warning">2%</span></td>
+                                <td>信息采集、舆情监控</td>
+                                <td>爬虫 + NLP</td>
+                                <td><span class="status status-success">P3</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 覆盖率计算方式 -->
+        <section id="coverage" class="section-card">
+            <div class="section-header">
+                <span class="section-number section-number-blue">4</span>
+                <h2>覆盖率计算方式</h2>
+            </div>
+            <div class="section-content">
+                <p><strong>覆盖率 = 该Agent可处理的任务时间占比总和</strong></p>
+                
+                <div class="quote-box">
+                    <strong>计算逻辑</strong>：金融从业者的日常工作被划分为若干任务，每个任务有明确的时间占比估算。某Agent的覆盖率 = 所有关联该Agent的任务时间占比之和。验证规则：所有Agent覆盖率总和 = 100%。
+                </div>
+                
+                <h3 style="font-size: 14px; font-weight: 600; color: var(--color-text-primary); margin: 20px 0 12px;">工作场景时间分布</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>场景类型</th>
+                                <th>时间占比</th>
+                                <th>典型任务</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>投研场景</strong></td>
+                                <td><span class="status status-danger">60%</span></td>
+                                <td>策略研发、投资研究、数据分析、市场分析、风险管理</td>
+                            </tr>
+                            <tr>
+                                <td><strong>运营合规场景</strong></td>
+                                <td><span class="status status-warning">40%</span></td>
+                                <td>合规审核、报告生成、客户服务、会议管理、数据报表</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h3 style="font-size: 14px; font-weight: 600; color: var(--color-text-primary); margin: 20px 0 12px;">各Agent覆盖任务明细</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Agent</th>
+                                <th>覆盖率</th>
+                                <th>覆盖的任务</th>
+                                <th>时间占比明细</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>📈 Quant Agent</strong></td>
+                                <td><span class="status status-success">28%</span></td>
+                                <td>策略编写、因子计算、回测分析、技术分析、信号生成</td>
+                                <td>8% + 5% + 5% + 2% + 8%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>🔬 Research Agent</strong></td>
+                                <td><span class="status status-success">18%</span></td>
+                                <td>行业研究、公司分析、研报撰写、宏观分析</td>
+                                <td>6% + 5% + 4% + 3%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>📊 Data Agent</strong></td>
+                                <td><span class="status status-info">14%</span></td>
+                                <td>数据获取、数据清洗、数据可视化、报表生成</td>
+                                <td>4% + 3% + 3% + 4%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>⚠️ Risk Agent</strong></td>
+                                <td><span class="status status-info">12%</span></td>
+                                <td>风险评估、VaR计算、压力测试、合规检查</td>
+                                <td>4% + 2% + 3% + 3%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>💬 Chatbot Agent</strong></td>
+                                <td><span class="status status-info">11%</span></td>
+                                <td>知识问答、文档写作、翻译、客户服务</td>
+                                <td>3% + 3% + 2% + 3%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>⚙️ Workflow Agent</strong></td>
+                                <td><span class="status status-warning">9%</span></td>
+                                <td>流程自动化、报告审核、邮件处理、审批流程</td>
+                                <td>3% + 2% + 2% + 2%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>💹 Trading Agent</strong></td>
+                                <td><span class="status status-warning">5%</span></td>
+                                <td>订单管理、交易执行、执行分析、算法交易</td>
+                                <td>1% + 2% + 1% + 1%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>🌐 Browser Agent</strong></td>
+                                <td><span class="status status-warning">3%</span></td>
+                                <td>信息采集、舆情监控、公告抓取</td>
+                                <td>1% + 1% + 1%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="insight-box">
+                    <div class="insight-title">💡 验证规则</div>
+                    <p>28% + 18% + 14% + 12% + 11% + 9% + 5% + 3% = <strong>100%</strong></p>
+                    <p style="margin-top: 8px; font-size: 13px; color: var(--color-text-muted);">覆盖率决定了开发优先级：覆盖率越高的Agent，能解决的用户痛点越多，ROI越高，应优先开发。</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Agent ROI分析 -->
+        <section id="roi" class="section-card">
+            <div class="section-header">
+                <span class="section-number section-number-purple">5</span>
+                <h2>Agent ROI分析</h2>
+            </div>
+            <div class="section-content">
+                <div class="quote-box">
+                    <strong>ROI计算公式</strong>：ROI = (效率提升带来的人力成本节省 + 更好决策带来的收益增量) / Agent开发与运营成本
+                </div>
+                
+                <h3 style="font-size: 14px; font-weight: 600; color: var(--color-text-primary); margin: 20px 0 12px;">各Agent效率提升与预期收益</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Agent</th>
+                                <th>核心效率提升</th>
+                                <th>预期收益</th>
+                                <th>ROI评估</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>📈 Quant Agent</strong></td>
+                                <td><span class="status status-success">+30%~50%</span></td>
+                                <td>缩短策略开发周期，加速Alpha因子发现</td>
+                                <td><span class="status status-success">极高</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>🔬 Research Agent</strong></td>
+                                <td><span class="status status-success">+80%</span></td>
+                                <td>研报产出时间从数天缩短到数小时</td>
+                                <td><span class="status status-success">极高</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>📊 Data Agent</strong></td>
+                                <td><span class="status status-success">+70%</span></td>
+                                <td>自助查询占比提升，减少IT支持成本</td>
+                                <td><span class="status status-info">高</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>⚠️ Risk Agent</strong></td>
+                                <td><span class="status status-info">95%覆盖</span></td>
+                                <td>自动化合规检查，降低人工审核成本</td>
+                                <td><span class="status status-info">高</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>💬 Chatbot Agent</strong></td>
+                                <td><span class="status status-info">+50%</span></td>
+                                <td>企业级知识库复用，减少重复工作</td>
+                                <td><span class="status status-warning">中</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>⚙️ Workflow Agent</strong></td>
+                                <td><span class="status status-info">+60%</span></td>
+                                <td>降低人工操作成本，减少流程错误</td>
+                                <td><span class="status status-warning">中</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>💹 Trading Agent</strong></td>
+                                <td><span class="status status-warning">+20%</span></td>
+                                <td>算法交易优化，降低交易成本(TCA)</td>
+                                <td><span class="status status-warning">中</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>🌐 Browser Agent</strong></td>
+                                <td><span class="status status-warning">+40%</span></td>
+                                <td>舆情监控自动化，及时发现市场风险</td>
+                                <td><span class="status status-warning">低</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h3 style="font-size: 14px; font-weight: 600; color: var(--color-text-primary); margin: 20px 0 12px;">ROI量化估算示例</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Agent</th>
+                                <th>假设条件</th>
+                                <th>年化节省</th>
+                                <th>开发成本</th>
+                                <th>ROI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>📈 Quant Agent</strong></td>
+                                <td>5名量化 × 80万年薪 × 30%效率</td>
+                                <td><span class="status status-success">120万/年</span></td>
+                                <td>150万</td>
+                                <td><span class="status status-success">80%+</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>🔬 Research Agent</strong></td>
+                                <td>10名研究员 × 60万年薪 × 40%效率</td>
+                                <td><span class="status status-success">240万/年</span></td>
+                                <td>120万</td>
+                                <td><span class="status status-success">200%+</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>📊 Data Agent</strong></td>
+                                <td>3名数据分析师 × 50万年薪 × 50%效率</td>
+                                <td><span class="status status-info">75万/年</span></td>
+                                <td>80万</td>
+                                <td><span class="status status-info">94%</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>⚠️ Risk Agent</strong></td>
+                                <td>合规人力节省 + 罚款风险降低</td>
+                                <td><span class="status status-info">100万/年</span></td>
+                                <td>100万</td>
+                                <td><span class="status status-info">100%</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="insight-box">
+                    <div class="insight-title">💡 开发优先级建议</div>
+                    <div class="features-grid">
+                        <div class="feature-item"><strong>P0（最高优先级）</strong>：Quant Agent + Research Agent，覆盖率46%，ROI最高</div>
+                        <div class="feature-item"><strong>P1（次高优先级）</strong>：Data Agent + Risk Agent，覆盖率26%，基础设施级能力</div>
+                        <div class="feature-item"><strong>P2（中等优先级）</strong>：Chatbot/Workflow/Trading Agent，覆盖率25%，提效但非差异化</div>
+                        <div class="feature-item"><strong>P3（低优先级）</strong>：Browser Agent，覆盖率3%，可用现有工具替代</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Roadmap -->
+        <section id="roadmap" class="section-card">
+            <div class="section-header">
+                <span class="section-number section-number-yellow">6</span>
+                <h2>产品Roadmap</h2>
+            </div>
+            <div class="section-content">
+                <div class="roadmap-grid">
+                    <!-- Phase 1 -->
+                    <div class="phase-card p1">
+                        <div class="phase-header">
+                            <div class="phase-number">1</div>
+                            <div class="phase-title">MVP验证</div>
+                        </div>
+                        <div class="phase-time">📅 Q1 2026 (3个月)</div>
+                        <div class="phase-content">
+                            <h4>核心目标</h4>
+                            <ul>
+                                <li>搭建Agent编排框架</li>
+                                <li>实现Quant Agent原型</li>
+                                <li>对接Wind/Tushare数据</li>
+                                <li>策略回测基础功能</li>
+                            </ul>
+                            <h4>交付物</h4>
+                            <ul>
+                                <li>量化策略助手Demo</li>
+                                <li>内部POC验证报告</li>
+                            </ul>
+                        </div>
+                        <div class="phase-metrics">
+                            目标：<strong>5名量化研究员</strong><br>
+                            指标：<strong>策略编写效率+30%</strong>
+                        </div>
+                    </div>
+                    
+                    <!-- Phase 2 -->
+                    <div class="phase-card p2">
+                        <div class="phase-header">
+                            <div class="phase-number">2</div>
+                            <div class="phase-title">核心能力</div>
+                        </div>
+                        <div class="phase-time">📅 Q2-Q3 2026 (6个月)</div>
+                        <div class="phase-content">
+                            <h4>核心目标</h4>
+                            <ul>
+                                <li>Research Agent上线</li>
+                                <li>Data Agent上线</li>
+                                <li>RAG知识库搭建</li>
+                                <li>多Agent协作机制</li>
+                            </ul>
+                            <h4>交付物</h4>
+                            <ul>
+                                <li>投研助手V1.0</li>
+                                <li>研报自动生成</li>
+                            </ul>
+                        </div>
+                        <div class="phase-metrics">
+                            目标：<strong>50人内测</strong><br>
+                            指标：<strong>研报撰写时间-50%</strong>
+                        </div>
+                    </div>
+                    
+                    <!-- Phase 3 -->
+                    <div class="phase-card p3">
+                        <div class="phase-header">
+                            <div class="phase-number">3</div>
+                            <div class="phase-title">场景扩展</div>
+                        </div>
+                        <div class="phase-time">📅 Q4'26 - Q1'27 (6个月)</div>
+                        <div class="phase-content">
+                            <h4>核心目标</h4>
+                            <ul>
+                                <li>Risk Agent上线</li>
+                                <li>Trading Agent上线</li>
+                                <li>Workflow Agent上线</li>
+                                <li>恒生/Bloomberg对接</li>
+                            </ul>
+                            <h4>交付物</h4>
+                            <ul>
+                                <li>风控预警系统</li>
+                                <li>交易执行助手</li>
+                            </ul>
+                        </div>
+                        <div class="phase-metrics">
+                            目标：<strong>200人规模化</strong><br>
+                            指标：<strong>事务自动化率60%</strong>
+                        </div>
+                    </div>
+                    
+                    <!-- Phase 4 -->
+                    <div class="phase-card p4">
+                        <div class="phase-header">
+                            <div class="phase-number">4</div>
+                            <div class="phase-title">智能升级</div>
+                        </div>
+                        <div class="phase-time">📅 Q2-Q4 2027 (9个月)</div>
+                        <div class="phase-content">
+                            <h4>核心目标</h4>
+                            <ul>
+                                <li>多模态能力（图表理解）</li>
+                                <li>主动式Agent（预警）</li>
+                                <li>个性化学习推荐</li>
+                                <li>端到端任务自主完成</li>
+                            </ul>
+                            <h4>交付物</h4>
+                            <ul>
+                                <li>金融数字员工2.0</li>
+                                <li>智能投顾助手</li>
+                            </ul>
+                        </div>
+                        <div class="phase-metrics">
+                            目标：<strong>全公司覆盖</strong><br>
+                            指标：<strong>人效提升100%</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 页脚 -->
+        <footer class="footer">
+            <p>私募量化数字员工产品架构与Roadmap</p>
+            <p>基于私募量化公司工作场景分析设计 | 2026年2月</p>
+            <p style="margin-top: 12px;">
+                <a href="index.html">← 场景分析</a>
+                <span style="margin: 0 12px;">|</span>
+                <a href="幻方量化调研报告.html">AI转型标杆案例</a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
