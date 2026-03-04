@@ -1,6 +1,6 @@
 # AI-Insight 知识库
 
-> **版本**: v2.1.0
+> **版本**: v4.1.0
 > **创建时间**: 2026-03-04
 > **最后更新**: 2026-03-04
 > **维护者**: 林克 (沈浪的AI分身)
@@ -9,174 +9,200 @@
 
 ## 知识库概述
 
-这是AI-Insight项目的结构化知识库，用于系统性沉淀AI行业的概念、最佳实践、洞察和实体画像。知识来源于：
-1. **每日日报**: 自动提取趋势洞察、新概念
-2. **深度调研**: 拆解后分散到各分类
-3. **用户文章**: 手动触发提取
+这是AI-Insight项目的结构化知识库，用于系统性沉淀AI行业的知识。
 
-**v2.1更新说明**: 补充沉淀AI Agent团队落地指南（来源：字节跳动AI指南调研）。
-
----
-
-## 知识索引
-
-### 📚 概念库 (concepts/) - 4个文档
-
-| 分类 | 文档 | 内容概述 | 内容量 |
-|------|------|---------|-------|
-| **agents/** | `agent-architecture.md` | Agent定义框架、设计原则、五大工作流模式、ACI设计 | 完整 |
-| **agents/** | `agent-types-matrix.md` | 企业AI Agent类型定义、岗位场景匹配、建设优先级 | 完整 |
-| **coding/** | `ai-coding-practices.md` | Vibe Coding vs Vibe Engineering、TDD复兴、上下文管理 | 基础 |
-| **enterprise/** | `software-engineering-3.md` | 软件工程3.0范式、L1-L2-L3成熟度模型、快手实践数据、AI研发提效陷阱 | **完整版** |
-
-### 🛠️ 最佳实践 (best-practices/) - 6个文档
-
-| 文档 | 内容概述 | 来源 | 内容量 |
-|------|---------|------|-------|
-| `ai-agent-team-implementation.md` | AI Agent团队落地四阶段路线图、能力架构、资源估算、风险提示 | **字节跳动AI指南调研** | **完整版** ✨新增 |
-| `ai-coding-workflow.md` | Simon Willison、Addy Osmani、Karpathy的AI编程工作流 | AI大神工作流分析 | **完整版** |
-| `ai-studio-product-design.md` | AI Studio产品方案，主动服务设计、Proactive Agent | 内部产品方案 | **完整版** |
-| `enterprise-ai-product-design.md` | 企业AI数字员工产品设计、从工具到员工转变 | 内部方案 | 基础 |
-| `enterprise-ai-worker-scenarios.md` | 企业数字员工工作场景分析，10种岗位×9种Agent类型 | 岗位场景分析 | **完整版** |
-| `financial-ai-agent-design.md` | 金融AI Agent产品设计、9种Agent详细规格 | 金融AI调研 | **完整版** |
-
-### 💡 洞察 (insights/) - 3个文档
-
-| 分类 | 文档 | 内容概述 | 内容量 |
-|------|------|---------|-------|
-| **根目录** | `ai-industry-principles.md` | 复杂度守恒、泛化是压缩、反馈环路、AI下半场 | 基础 |
-| **根目录** | `ai-industry-trends-2026.md` | 9位AI大神洞察、11个信息源、4大趋势方向、4个底层原理 | **完整版** |
-| **weekly/** | `2026-03-week1.md` | 2026年3月第1周核心信号、关键数据、趋势洞察 | 基础 |
-
-### 👤 实体画像 (entity-profiles/) - 2个文档
-
-| 分类 | 文档 | 内容概述 | 内容量 |
-|------|------|---------|-------|
-| **people/** | `barry-zhang.md` | Barry Zhang (Anthropic) 完整思想体系：Agent定义、五大工作流、Skills范式 | **完整版** |
-| **companies/** | `high-flyer-quant.md` | 幻方量化公司画像、发展历程、AI应用场景、DeepSeek孵化 | **完整版** |
+**v4.1更新**: 按四大维度从源材料重新提取知识，新增5篇维度专属文档：
+- 📊 模型: AI发展史与能力矩阵、AI下半场趋势
+- 🤖 Agent: Agent基础设施与调优方法论
+- 🏢 AI企业: 字节跳动AI全景布局
+- 🏭 企业AI转型: 企业AI转型实战方法论
 
 ---
 
-## 统计信息
+## 📊 统计概览
 
-| 指标 | 数量 | 完整版数量 | 完整版占比 |
-|------|------|-----------|----------|
-| 概念文档 | 4 | 1 | 25% |
-| **最佳实践文档** | **6** | **5** | **83%** |
-| 洞察文档 | 3 | 1 | 33% |
-| 实体画像 | 2 | 2 | 100% |
-| **总计** | **15** | **9** | **60%** |
+| 维度 | 文档数 | 人物 | 新增本次 |
+|------|--------|------|----------|
+| **模型** | 2 | 3人 | +2 ✨ |
+| **Agent** | 13 | 5人 | +1 ✨ |
+| **AI企业** | 2 | 5人 | +1 ✨ |
+| **企业AI转型** | 7 | 2人 | +1 ✨ |
+| **洞察** | 3 | - | - |
+| **总计** | **28** | **7** | **+5** |
 
 ---
 
-## 知识关系图谱
+## 四大维度索引
+
+### 📊 01-模型 (Models) → [详情](01-models/README.md)
+
+大模型技术、架构演进、训练方法、能力评估
+
+| 文档 | 内容 | 来源 |
+|------|------|------|
+| `ai-history-and-capability-matrix.md` ✨ | AI发展史、海外/国内大模型能力矩阵、竞争焦点演进 | 字节AI指南 |
+| `ai-second-half-task-environment.md` ✨ | AI下半场理论、底层原理、趋势洞察 | AI大神分析 |
+
+**日报关联**: 新模型发布、能力评测、技术创新
+
+---
+
+### 🤖 02-Agent → [详情](02-agents/README.md) ⭐核心维度
+
+Agent架构设计、工作流模式、开发实践、落地应用
+
+| 类型 | 数量 | 核心内容 |
+|------|------|---------|
+| 人物画像 | 5人 | Barry Zhang, 姚顺雨, Harrison Chase, Jim Fan, Simon Willison |
+| 概念文档 | 4个 | Agent架构、Agent矩阵、Ambient Agents、Physical AI |
+| 最佳实践 | 4个 | AI编程工作流、金融Agent、团队落地、**Agent基础设施** ✨ |
+
+**新增**: `agent-infra-and-optimization.md` - Agent开发框架(Eino/veADK/扣子) + AgentOps平台(评测·观测·调优)
+
+**日报关联**: Agent框架、开发实践、应用案例
+
+---
+
+### 🏢 03-AI企业 (AI Companies) → [详情](03-ai-companies/README.md)
+
+AI原生企业画像、商业模式、竞争格局
+
+| 类型 | 数量 | 核心内容 |
+|------|------|---------|
+| 公司画像 | 2家 | 幻方量化、**字节跳动** ✨ |
+| 关联人物 | 5人 | 按公司归类 |
+
+**新增**: `bytedance-ai-landscape.md` - 字节AI全景布局、产品矩阵、战略分析、商业模式
+
+**日报关联**: 公司融资、产品发布、战略动态
+
+---
+
+### 🏭 04-企业AI转型 (Enterprise AI) → [详情](04-enterprise-ai/README.md)
+
+传统企业AI应用、数字化转型、组织变革
+
+| 类型 | 数量 | 核心内容 |
+|------|------|---------|
+| 概念文档 | 2个 | 软件工程3.0、AI编程实践 |
+| 最佳实践 | 5个 | AI Studio、数字员工、落地路线图、**转型方法论** ✨ |
+
+**新增**: `enterprise-ai-transformation-methodology.md` - 三步走策略、提效场景全景图、安全合规要点
+
+**日报关联**: 企业案例、研发提效、数字员工
+
+---
+
+## 本次新增内容摘要
+
+### 📊 模型维度
+
+1. **AI发展史与能力矩阵**
+   - 发展历程: 1950→2026关键里程碑
+   - 海外厂商: OpenAI/Google/Anthropic/Meta/xAI对比
+   - 国内厂商: 字节/百度/阿里/腾讯/DeepSeek/华为对比
+   - 六大赛道: Agentic AI、推理效率、垂直场景、端侧部署、多模态、具身智能
+
+2. **AI下半场趋势**
+   - 核心范式转变: 从模型能力→任务环境设计
+   - Agent架构趋势: 简单优先、Skills范式、Ambient Agents
+   - AI编程趋势: Vibe Coding→Agentic Engineering、上下文为王、TDD复兴
+   - 四大底层原理: 复杂度守恒、泛化=压缩、反馈环路、抽象层级
+
+### 🤖 Agent维度
+
+3. **Agent基础设施与调优方法论**
+   - Agent Infra定义: Agent Dev + AgentOps
+   - 开发工具: Eino、veADK、扣子平台、CozeLoop
+   - 三种方案对比: 零码/低码/全码
+   - 评测·观测·调优三件套
+   - Badcase调优流程
+
+### 🏢 AI企业维度
+
+4. **字节跳动AI全景布局**
+   - 发展历程: 2012推荐→2026 Seedance
+   - 核心数据: 豆包2.27亿月活、MaaS>50%、1600亿投入
+   - 产品矩阵: 2C/2B/内部三层全覆盖
+   - 战略布局: 双轨战略、全栈架构
+   - 竞争力分析与风险因素
+
+### 🏭 企业AI转型维度
+
+5. **企业AI转型实战方法论**
+   - 三步走: 工具引入→个人提效→组织提效
+   - 15个提效场景: 业务/产研/职能三类
+   - 安全合规: 无全量数据测试、隐私保护调优
+   - 风险应对与成功要素
+
+---
+
+## 知识资产详情
+
+### 👤 人物画像 (7人)
+
+| 人物 | 公司 | 核心贡献 | 主要维度 |
+|------|------|---------|---------|
+| **Barry Zhang** | Anthropic | Agent定义、五大工作流、Skills范式 | Agent |
+| **姚顺雨** | OpenAI | AI下半场理论、代码即affordance | Agent+模型 |
+| **Andrej Karpathy** | 前OpenAI/Tesla | Software 3.0、Vibe Coding | 模型+Agent |
+| **Simon Willison** | 独立开发者 | Vibe Engineering、上下文管理、TDD复兴 | Agent+企业AI |
+| **Harrison Chase** | LangChain | Ambient Agents、Agent Inbox | Agent+AI企业 |
+| **Jim Fan** | NVIDIA | Physical Turing Test、Simulation 2.0 | Agent+AI企业 |
+| **Addy Osmani** | Google | AI增强工程、六步工作流 | 企业AI |
+
+### 🏢 公司画像 (2家)
+
+| 公司 | 领域 | 核心内容 |
+|------|------|---------|
+| **字节跳动** ✨ | 大模型/AI应用 | 全栈布局、产品矩阵、战略分析 |
+| **幻方量化** | 量化投资 | DeepSeek孵化、AI应用、竞争力分析 |
+
+---
+
+## 日报→知识库映射
+
+| 日报内容类型 | 沉淀维度 | 示例 |
+|-------------|---------|------|
+| 新模型发布/评测 | **模型** | GPT-5发布、Claude 4评测 |
+| 模型技术突破 | **模型** | 新训练方法、推理优化 |
+| Agent框架/工具 | **Agent** | LangGraph更新、新Agent框架 |
+| Agent开发实践 | **Agent** | 工作流设计、上下文管理 |
+| 公司融资/动态 | **AI企业** | OpenAI融资、Anthropic发布 |
+| 企业AI应用案例 | **企业AI** | XX公司AI转型、研发提效 |
+| 人物访谈/分享 | **人物画像** | 新增人物或更新观点 |
+
+---
+
+## 目录结构
 
 ```
-【人物画像】
-entity-profiles/people/barry-zhang.md
-├── 输出到: concepts/agents/agent-architecture.md (Agent设计理论)
-├── 输出到: insights/ai-industry-trends-2026.md (2026趋势分析)
-└── 关联: insights/ai-industry-principles.md (复杂度守恒等原理)
-
-【公司画像】
-entity-profiles/companies/high-flyer-quant.md
-├── 关联: best-practices/financial-ai-agent-design.md (金融AI设计)
-└── 参考: 幻方量化AI应用调研报告 (源文件)
-
-【概念体系】
-concepts/enterprise/software-engineering-3.md
-├── 来源: 快手AI研发范式跃迁报告
-├── 来源: 朱少民软件工程3.0理论
-├── 关联: insights/ai-industry-trends-2026.md (趋势佐证)
-└── 关联: best-practices/ai-studio-product-design.md (产品落地)
-
-【最佳实践体系】
-best-practices/ai-agent-team-implementation.md ✨新增
-├── 来源: 字节跳动AI Agent指南调研
-├── 定义: Agent = 大脑 + 工具 + 记忆 + 技能
-├── 定义: 四阶段落地路线图 (MVP→扩展→集成→推广)
-└── 关联: concepts/agents/agent-architecture.md (架构理论)
-
-best-practices/ai-coding-workflow.md
-├── 来源: Simon Willison工作流
-├── 来源: Addy Osmani工作流  
-├── 来源: Andrej Karpathy Software 3.0
-└── 关联: concepts/coding/ai-coding-practices.md
-
-best-practices/enterprise-ai-worker-scenarios.md
-├── 覆盖: 10种岗位类型详细场景
-├── 定义: 9种Agent类型及覆盖率
-├── 关联: best-practices/ai-studio-product-design.md (产品实现)
-└── 关联: best-practices/financial-ai-agent-design.md (垂直场景)
-
-best-practices/ai-studio-product-design.md
-├── 关联: best-practices/enterprise-ai-worker-scenarios.md (场景支撑)
-├── 定义: Proactive Agent主动服务
-└── 架构: 感知层→决策层→网关层→Agent层→运行时
-
-best-practices/financial-ai-agent-design.md
-├── 垂直于: best-practices/enterprise-ai-worker-scenarios.md
-├── 定义: 金融专属9种Agent类型
-└── 关联: entity-profiles/companies/high-flyer-quant.md (行业案例)
-
-【洞察体系】
-insights/ai-industry-trends-2026.md
-├── 来源: 9位AI大神深度分享
-├── 输出: insights/ai-industry-principles.md (提炼原理)
-└── 关联: entity-profiles/people/barry-zhang.md (核心观点来源)
+04-knowledge-base/
+├── README.md                    # 本文件
+├── 01-models/                   # 模型维度
+│   ├── README.md
+│   ├── ai-history-and-capability-matrix.md  ✨
+│   └── ai-second-half-task-environment.md   ✨
+├── 02-agents/                   # Agent维度
+│   ├── README.md
+│   └── agent-infra-and-optimization.md      ✨
+├── 03-ai-companies/             # AI企业维度
+│   ├── README.md
+│   └── bytedance-ai-landscape.md            ✨
+├── 04-enterprise-ai/            # 企业AI转型维度
+│   ├── README.md
+│   └── enterprise-ai-transformation-methodology.md  ✨
+├── concepts/                    # 概念文档
+│   ├── agents/
+│   ├── coding/
+│   └── enterprise/
+├── best-practices/              # 最佳实践
+├── insights/                    # 洞察
+│   └── weekly/
+└── entity-profiles/             # 实体画像
+    ├── people/
+    └── companies/
 ```
-
----
-
-## 调研来源追踪
-
-| 调研项目 | 沉淀文档 | 状态 |
-|----------|---------|------|
-| AI大神趋势分析 | `insights/ai-industry-trends-2026.md` | ✅ 完整 |
-| Barry Zhang思想体系 | `entity-profiles/people/barry-zhang.md` | ✅ 完整 |
-| 幻方量化调研 | `entity-profiles/companies/high-flyer-quant.md` | ✅ 完整 |
-| 金融AI Agent设计 | `best-practices/financial-ai-agent-design.md` | ✅ 完整 |
-| 企业数字员工场景分析 | `best-practices/enterprise-ai-worker-scenarios.md` | ✅ 完整 |
-| AI Studio产品方案 | `best-practices/ai-studio-product-design.md` | ✅ 完整 |
-| 软件工程3.0 | `concepts/enterprise/software-engineering-3.md` | ✅ 完整 |
-| AI编程最佳实践 | `best-practices/ai-coding-workflow.md` | ✅ 完整 |
-| **字节AI Agent指南** | `best-practices/ai-agent-team-implementation.md` | ✅ 完整 |
-
----
-
-## 待填充目录
-
-以下目录已创建但尚无内容，待后续调研时填充：
-
-- `concepts/models/` - 大模型技术、训练方法
-- `concepts/applications/` - AI应用设计、产品模式
-- `concepts/infrastructure/` - AI基础设施、部署、算力
-- `concepts/safety/` - AI安全、对齐、伦理
-- `insights/quarterly/` - 季度趋势分析
-
----
-
-## 使用指南
-
-### 查询知识
-```
-"知识库里关于Agent的内容有哪些？"
-"回顾一下Barry Zhang的核心观点"
-"AI编程的最佳实践是什么？"
-"金融AI Agent怎么设计？"
-"软件工程3.0是什么？"
-"怎么在团队落地AI Agent？"
-```
-
-### 新增知识
-- 日报/调研完成后自动触发
-- 用户分享文章后说"学习这篇文章"
-
-### 知识更新原则
-1. **完整优先**: 保留核心内容，不过度压缩
-2. **版本记录**: 重大更新标注时间和来源
-3. **交叉引用**: 相关概念间建立链接
-4. **来源标注**: 所有知识点必须标注来源
 
 ---
 
@@ -184,9 +210,12 @@ insights/ai-industry-trends-2026.md
 
 | 版本 | 日期 | 更新内容 |
 |------|------|---------|
-| v2.1.0 | 2026-03-04 | 补充字节AI Agent指南沉淀，总文档数增至15个 |
-| v2.0.0 | 2026-03-04 | 全面重新沉淀，8个完整版文档，确保信息质量 |
-| v1.0.0 | 2026-03-04 | 初始版本，基础框架建立 |
+| v4.1.0 | 2026-03-04 | 按四大维度重新提取知识，新增5篇维度专属文档 |
+| v4.0.0 | 2026-03-04 | 引入四大维度结构，与日报方向对齐 |
+| v3.0.0 | 2026-03-04 | 新增6个人物画像、2个概念专题 |
+| v2.1.0 | 2026-03-04 | 补充字节AI Agent指南 |
+| v2.0.0 | 2026-03-04 | 全面重新沉淀，确保信息质量 |
+| v1.0.0 | 2026-03-04 | 初始版本 |
 
 ---
 

@@ -752,10 +752,16 @@
         </div>
     </nav>
 
-    <!-- 左侧悬浮导航 -->
+    <!-- 右侧悬浮导航 -->
     <nav class="page-sidebar-nav" id="sidebar-nav">
-        <button class="nav-toggle" onclick="toggleSidebar()" title="收起/展开">☰</button>
-        <div class="nav-title">本页导航</div>
+        <div class="nav-header">
+            <div class="nav-title">本页导航</div>
+            <button class="nav-toggle" onclick="toggleSidebar()" title="收起/展开">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
         <ul>
             <li><a href="#timeline">📅 发展时间线</a></li>
             <li><a href="#bytedance-ai-panorama">📊 字节AI全景解析</a></li>
@@ -2113,6 +2119,13 @@
         function toggleSidebar() {
             const nav = document.getElementById('sidebar-nav');
             nav.classList.toggle('collapsed');
+            
+            const btn = nav.querySelector('.nav-toggle svg');
+            if (nav.classList.contains('collapsed')) {
+                btn.innerHTML = '<path d="M4 6h16M4 12h16M4 18h16"/>';
+            } else {
+                btn.innerHTML = '<path d="M18 6L6 18M6 6l12 12"/>';
+            }
         }
 
         function updateActiveNav() {
