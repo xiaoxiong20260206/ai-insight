@@ -1,7 +1,8 @@
 # AI公司追踪清单
 
-> **版本**: v1.1.0
+> **版本**: v1.2.0
 > **更新时间**: 2026-03-04
+> **本次Review重点**: 补充热点创业公司、企业AI平台、互联网/传统IT企业AI转型追踪
 > **维护规则**: 每月 Review 一次，根据产品发布频率和战略重要性动态调整
 
 ---
@@ -67,6 +68,8 @@
 | **零一万物** | 万知 | 开源, 多模态 |
 | **商汤** | 日日新 | 多模态, CV+LLM |
 | **科大讯飞** | 星火 | 语音+大模型, 教育 |
+| **快手可灵** | Kling AI | 视频生成, 国产Sora竞品 |
+| **生数科技** | Vidu | 视频生成, 清华系 |
 
 ---
 
@@ -90,10 +93,40 @@
 | **Augment Code** | Augment | augmentcode.com | 每周1次 | 企业级代码理解 |
 | **Codeium** | Codeium | codeium.com/blog | 每周1次 | 免费AI编程, 企业版 |
 | **Poolside** | (研发中) | — | 每月1次 | 巨额融资, 代码模型 |
+| **Lovable** | Lovable | lovable.dev | 每周1次 | 欧洲独角兽, Vibe Coding |
+| **Bolt** | Bolt.new | bolt.new | 每周1次 | 浏览器端AI开发 |
 
 ---
 
-## 三、AI 应用产品
+## 三、企业AI热点创业公司 (NEW)
+
+### Enterprise AI - 垂直应用
+
+| 公司 | 产品 | 官方渠道 | 检查频率 | 追踪重点 |
+|------|------|---------|---------|---------|
+| **Glean** | Glean | glean.com | 每周1次 | 企业搜索+知识管理, 估值$46亿 |
+| **Harvey** | Harvey | harvey.ai | 每周1次 | 法律AI, Sequoia明星项目 |
+| **Sierra** | Sierra Agent | sierra.ai | 每周1次 | 客服AI Agent, Bret Taylor创立 |
+| **Hebbia** | Matrix | hebbia.ai | 每月1次 | 金融分析AI, RAG先驱 |
+| **Decagon** | Decagon | decagon.ai | 每月1次 | 客服AI Agent, YC系 |
+| **Mercor** | Mercor | mercor.com | 每月1次 | AI招聘平台 |
+| **Writer** | Writer | writer.com | 每周1次 | 企业写作AI, 自有模型 |
+| **EvenUp** | EvenUp | evenuplaw.com | 每月1次 | 法律AI, 伤残索赔 |
+| **Abridge** | Abridge | abridge.com | 每月1次 | 医疗AI, 临床对话摘要 |
+
+### Enterprise AI Platform - 基础设施
+
+| 公司 | 产品 | 官方渠道 | 检查频率 | 追踪重点 |
+|------|------|---------|---------|---------|
+| **Salesforce** | Agentforce | salesforce.com | 每周1次 | CRM + AI Agent, 企业级标杆 |
+| **ServiceNow** | Now AI | servicenow.com | 每周1次 | IT服务 + AI Agent |
+| **Workday** | Workday AI | workday.com | 每月1次 | HR + 财务 AI |
+| **Databricks** | Mosaic | databricks.com/blog | 每周1次 | 数据平台 + LLM 训练 |
+| **Snowflake** | Cortex | snowflake.com | 每月1次 | 数据云 + AI |
+
+---
+
+## 四、AI 应用产品
 
 ### AI 搜索
 
@@ -119,6 +152,10 @@
 | **Pika** | Pika | pika.art | 每周1次 | AI视频生成新锐 |
 | **Suno** | Suno | suno.ai | 每周1次 | AI音乐生成 |
 | **Midjourney** | Midjourney | midjourney.com | 每周1次 | AI图像生成标杆 |
+| **Stability AI** | Stable Diffusion | stability.ai | 每周1次 | 开源图像生成, SD3 |
+| **Ideogram** | Ideogram | ideogram.ai | 每周1次 | 文字图像生成, 设计师友好 |
+| **Luma AI** | Dream Machine | lumalabs.ai | 每周1次 | 3D+视频生成 |
+| **ElevenLabs** | ElevenLabs | elevenlabs.io | 每周1次 | AI语音合成标杆 |
 
 ### AI 生产力/知识
 
@@ -176,7 +213,88 @@
 |------|------|---------|---------|---------|
 | **Figure** | Figure 01/02 | figure.ai | 每月1次 | 人形机器人, OpenAI合作 |
 | **1X** | Neo | 1x.tech | 每月1次 | 人形机器人 |
-| **银河通用** | — | — | 每月1次 | 中国具身智能 |
+| **银河通用** | GalaxyBot | — | 每月1次 | 中国具身智能 |
+| **宇树科技** | Unitree | unitree.com | 每月1次 | 四足/人形机器人, 春晚亮相 |
+| **智元机器人** | 远征A2 | — | 每月1次 | 中国人形机器人, 估值超70亿 |
+| **魔法原子** | MagicLab | — | 每月1次 | 人形机器人, 春晚亮相 |
+| **松延动力** | Noetix | — | 每月1次 | 人形机器人 |
+| **源智机器人** | — | — | 每月1次 | 智源孵化, 物理AI模型 |
+| **Covariant (NEW)** | RFM-1 | covariant.ai | 每月1次 | 机器人基础模型 |
+| **Physical Intelligence** | PI0 | physicalintelligence.company | 每月1次 | 具身智能基础模型, $4亿融资 |
+
+---
+
+## 七、互联网头部公司AI转型追踪 (NEW)
+
+> 重点追踪全球互联网Top20公司的AI战略布局和产品进展
+
+### 海外 Big Tech
+
+| 公司 | AI核心产品/战略 | 追踪重点 | 检查频率 |
+|------|----------------|---------|---------|
+| **Google/Alphabet** | Gemini, Search AI, Cloud AI | 多模态模型, AI搜索, Workspace AI | 每周2次 |
+| **Microsoft** | Copilot, Azure OpenAI | Office AI, GitHub Copilot, 企业AI | 每周2次 |
+| **Amazon** | Bedrock, Rufus, Q | 云AI服务, 电商AI, 企业助手 | 每周1次 |
+| **Apple** | Apple Intelligence | 设备端AI, Siri升级, 隐私AI | 每周1次 |
+| **Meta** | Llama, Meta AI | 开源模型, 社交AI, AR/VR AI | 每周2次 |
+| **Netflix** | 推荐AI, 内容AI | 个性化推荐, AI辅助创作 | 每月1次 |
+| **Uber** | AI调度, 自动驾驶 | 出行优化, Waymo合作 | 每月1次 |
+| **Airbnb** | AI搜索, 智能定价 | 旅行AI助手, 房东工具 | 每月1次 |
+| **Shopify** | Sidekick, Magic | 电商AI助手, AI生成内容 | 每周1次 |
+| **Spotify** | DJ, 推荐AI | 音乐AI, 个性化体验 | 每月1次 |
+
+### 中国互联网头部
+
+| 公司 | AI核心产品/战略 | 追踪重点 | 检查频率 |
+|------|----------------|---------|---------|
+| **字节跳动** | 豆包, 即梦, 可灵 | 多模态应用, 视频生成, 消费级AI | 每周2次 |
+| **阿里巴巴** | 通义千问, 钉钉AI | 开源模型, 企业AI, 电商AI | 每周2次 |
+| **腾讯** | 混元, 腾讯元宝 | 企业AI, 游戏AI, 社交AI | 每周1次 |
+| **百度** | 文心一言, 萝卜快跑 | 搜索AI, 自动驾驶, 企业AI | 每周1次 |
+| **美团** | AI外卖/调度 | 配送优化, 无人配送, LLM应用 | 每月1次 |
+| **京东** | 言犀, 京东云AI | 电商AI, 供应链AI, 物流AI | 每月1次 |
+| **拼多多** | 商品推荐AI | 社交电商AI, 农业AI | 每月1次 |
+| **快手** | 可灵AI, 快影 | 视频生成, 创作者工具, 直播AI | 每周1次 |
+| **网易** | 网易AI, 游戏AI | 游戏AI, 教育AI, 音乐AI | 每月1次 |
+| **小红书** | 内容推荐AI | 社区AI, 电商AI, 创作AI | 每月1次 |
+| **携程** | TripGenie | 旅行AI助手, 智能客服 | 每月1次 |
+| **滴滴** | AI调度, 自动驾驶 | 出行AI, 安全AI | 每月1次 |
+
+---
+
+## 八、传统IT企业AI转型追踪 (NEW)
+
+> 重点追踪传统IT巨头的AI战略转型
+
+### 海外传统IT
+
+| 公司 | AI核心战略 | 追踪重点 | 检查频率 |
+|------|-----------|---------|---------|
+| **IBM** | watsonx, Granite | 企业AI平台, AI基础设施 | 每周1次 |
+| **Oracle** | Oracle AI, Fusion AI | 数据库AI, 企业应用AI | 每月1次 |
+| **SAP** | Joule, Business AI | ERP AI, 企业流程AI | 每月1次 |
+| **Cisco** | AI Assistant, Webex AI | 网络AI, 协作AI, 安全AI | 每月1次 |
+| **Dell** | AI Factory | AI基础设施, 边缘AI | 每月1次 |
+| **HP/HPE** | AI服务器 | AI计算硬件, 企业AI解决方案 | 每月1次 |
+| **Accenture** | AI Refinery | AI咨询, 企业AI部署 | 每月1次 |
+| **Adobe** | Firefly, Sensei | 创意AI, 内容生成 | 每周1次 |
+| **Intuit** | Intuit Assist | 财务AI, 小企业AI | 每月1次 |
+| **Autodesk** | Autodesk AI | 设计AI, 建筑AI | 每月1次 |
+
+### 中国传统IT/软件
+
+| 公司 | AI核心战略 | 追踪重点 | 检查频率 |
+|------|-----------|---------|---------|
+| **华为** | 盘古大模型, 昇腾 | 自主AI芯片, 行业大模型 | 每周1次 |
+| **中兴** | 星云AI | 通信AI, 网络智能 | 每月1次 |
+| **浪潮** | 源1.0, AI服务器 | AI基础设施, 行业AI | 每月1次 |
+| **用友** | YonGPT | 企业AI, ERP智能化 | 每月1次 |
+| **金蝶** | 苍穹AI | 财务AI, 企业管理AI | 每月1次 |
+| **中软国际** | AI开发服务 | 软件AI化, 企业数字化 | 每月1次 |
+
+---
+
+## 九、AI安全与评测
 
 ### 医疗/科研
 
@@ -184,6 +302,18 @@
 |------|------|---------|
 | **Recursion** | AI药物发现 | AI制药 |
 | **Insilico** | AI药物设计 | 中国AI制药 |
+
+---
+
+## 九、AI安全与评测
+
+| 公司 | 产品 | 追踪重点 |
+|------|------|---------|
+| **Anthropic** | Constitutional AI | AI安全标杆 |
+| **Zenity** | Agent安全 | AI Agent安全, Fortune Cyber 60 |
+| **LMSYS** | Chatbot Arena | 模型评测排行榜 |
+| **ARC-AGI** | ARC评测 | AGI能力评测 |
+| **Scale AI** | SEAL评测 | 企业级模型评测 |
 
 ---
 
@@ -202,9 +332,10 @@
 
 ## 快速索引 (按热度)
 
-**海外必追**: OpenAI, Anthropic, Cursor, Perplexity, Hugging Face
-**中国必追**: DeepSeek, 智谱, Kimi, 阿里Qwen
-**新锐关注**: SSI, Poolside, Groq, Figure
+**海外必追**: OpenAI, Anthropic, Cursor, Perplexity, Hugging Face, Glean, Sierra
+**中国必追**: DeepSeek, 智谱, Kimi, 阿里Qwen, 可灵AI
+**新锐关注**: SSI, Poolside, Groq, Figure, Lovable, Harvey, Physical Intelligence
+**企业转型**: Google, Microsoft, Meta, 字节, 阿里, 华为, Salesforce, Adobe
 
 ---
 

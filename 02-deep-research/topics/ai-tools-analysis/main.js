@@ -5,14 +5,109 @@ let currentAgentDesign = 'Chatbot';
 
 // ==================== 初始化 ====================
 document.addEventListener('DOMContentLoaded', () => {
+    initMainTabs();
     initRoleTabs();
     renderAgentCards();
     renderTables();
-    renderGraph();
     initTooltip();
     initAgentDesignTabs();
     renderAgentDesign('Chatbot');
+    initGlobalControls();
+    // 延迟渲染关系图（仅在对应Tab激活时）
 });
+
+// ==================== 主Tab导航切换 ====================
+function initMainTabs() {
+    const tabs = document.querySelectorAll('.tab-nav .tab-btn');
+    const panels = document.querySelectorAll('.tab-panel');
+    
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // 移除所有active
+            tabs.forEach(t => {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+            });
+            panels.forEach(p => p.classList.remove('active'));
+            
+            // 添加active
+            tab.classList.add('active');
+            tab.setAttribute('aria-selected', 'true');
+            const panelId = tab.dataset.tab;
+            const panel = document.getElementById(panelId);
+            if (panel) {
+                panel.classList.add('active');
+            }
+            
+            // 如果切换到岗位场景Tab，渲染关系图
+            if (panelId === 'section-roles') {
+                setTimeout(() => renderGraph(), 100);
+            }
+        });
+    });
+}
+
+// ==================== 全局控制按钮 ====================
+function initGlobalControls() {
+    // 全屏按钮
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+    if (fullscreenBtn) {
+        fullscreenBtn.addEventListener('click', toggleFullscreen);
+    }
+    
+    // 移动端预览按钮
+    const mobilePreviewBtn = document.getElementById('mobilePreviewBtn');
+    if (mobilePreviewBtn) {
+        mobilePreviewBtn.addEventListener('click', toggleMobilePreview);
+    }
+    
+    // 监听全屏状态变化
+    document.addEventListener('fullscreenchange', () => {
+        const btn = document.getElementById('fullscreenBtn');
+        if (btn) {
+            if (document.fullscreenElement) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        }
+    });
+    
+    // ESC键退出移动端预览
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && document.body.classList.contains('mobile-preview-mode')) {
+            toggleMobilePreview();
+        }
+    });
+}
+
+function toggleFullscreen() {
+    const btn = document.getElementById('fullscreenBtn');
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().then(() => {
+            btn.classList.add('active');
+        }).catch(err => {
+            console.log('全屏失败:', err);
+        });
+    } else {
+        document.exitFullscreen().then(() => {
+            btn.classList.remove('active');
+        });
+    }
+}
+
+function toggleMobilePreview() {
+    const btn = document.getElementById('mobilePreviewBtn');
+    const body = document.body;
+    
+    if (body.classList.contains('mobile-preview-mode')) {
+        body.classList.remove('mobile-preview-mode');
+        btn.classList.remove('active');
+    } else {
+        body.classList.add('mobile-preview-mode');
+        btn.classList.add('active');
+    }
+}
 
 // ==================== 角色选择器 ====================
 function initRoleTabs() {
@@ -444,41 +539,40 @@ function showTooltip(e, node) {
     if (node.type === 'role') {
         const role = roleData[node.roleKey];
         content = `
-            <div class="tooltip-title">${node.name}</div>
-            <div class="tooltip-row"><span class="tooltip-label">占企业比例:</span><span class="tooltip-value">${role.percentage}%</span></div>
-            <div class="tooltip-row"><span class="tooltip-label">工作场景:</span><span class="tooltip-value">${Object.keys(role.scenes).length}个</span></div>
+            <strong>${node.name}</strong><br>
+            占企业比例: ${role.percentage}%<br>
+            工作场景: ${Object.keys(role.scenes).length}个
         `;
     } else if (node.type === 'scene') {
         content = `
-            <div class="tooltip-title">${node.name}</div>
-            <div class="tooltip-row"><span class="tooltip-label">类型:</span><span class="tooltip-value">工作场景</span></div>
+            <strong>${node.name}</strong><br>
+            类型: 工作场景
         `;
     } else if (node.type === 'task') {
         content = `
-            <div class="tooltip-title">${node.name}</div>
-            <div class="tooltip-row"><span class="tooltip-label">Agent:</span><span class="tooltip-value">${node.agent}</span></div>
-            <div class="tooltip-row"><span class="tooltip-label">产品:</span><span class="tooltip-value">${node.products?.slice(0, 3).join(', ') || '-'}</span></div>
+            <strong>${node.name}</strong><br>
+            Agent: ${node.agent}<br>
+            产品: ${node.products?.slice(0, 3).join(', ') || '-'}
         `;
     } else if (node.type === 'agent') {
         const agentKey = node.id.replace('agent-', '');
         const agent = agentData[agentKey];
         if (agent) {
             content = `
-                <div class="tooltip-title">${agent.name}</div>
-                <div class="tooltip-row"><span class="tooltip-label">覆盖率:</span><span class="tooltip-value">${agent.coverage}%</span></div>
-                <div class="tooltip-row"><span class="tooltip-label">能力:</span><span class="tooltip-value">${agent.description}</span></div>
+                <strong>${agent.name}</strong><br>
+                覆盖率: ${agent.coverage}%<br>
+                ${agent.description}
             `;
         }
     } else if (node.type === 'product') {
         content = `
-            <div class="tooltip-title">🔗 ${node.name}</div>
-            <div class="tooltip-row"><span class="tooltip-label">点击跳转官网</span></div>
-            <div class="tooltip-row"><span class="tooltip-value" style="font-size:0.75rem;color:#94A3B8">${node.link || ''}</span></div>
+            <strong>🔗 ${node.name}</strong><br>
+            点击跳转官网
         `;
     }
     
     tooltip.innerHTML = content;
-    tooltip.classList.add('visible');
+    tooltip.classList.add('show');
     
     // 定位
     const rect = e.target.getBoundingClientRect();
@@ -497,7 +591,7 @@ function showTooltip(e, node) {
 
 function hideTooltip() {
     const tooltip = document.getElementById('tooltip');
-    tooltip.classList.remove('visible');
+    tooltip.classList.remove('show');
 }
 
 // ==================== 窗口resize时重绘连接线 ====================
@@ -527,9 +621,12 @@ function initAgentDesignTabs() {
     agentItems.forEach(item => {
         item.addEventListener('click', () => {
             const agentType = item.dataset.agent;
-            // 滚动到设计方案区域
-            document.querySelector('.agent-design-section').scrollIntoView({ behavior: 'smooth' });
-            // 切换Tab
+            // 切换到设计方案Tab
+            const designTabBtn = document.querySelector('.tab-btn[data-tab="section-design"]');
+            if (designTabBtn) {
+                designTabBtn.click();
+            }
+            // 切换Agent设计Tab
             setTimeout(() => {
                 document.querySelectorAll('.agent-design-tab').forEach(t => t.classList.remove('active'));
                 document.querySelector(`.agent-design-tab[data-agent="${agentType}"]`)?.classList.add('active');

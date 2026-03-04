@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>字节跳动AI"开挂"指南 - 从算法小白到AI巨头的逆袭之路</title>
-    <!-- 清爽调研报告风格 -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231A7F37'/><path d='M9 16l4 4 10-10' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+    <!-- AI/智能技术类 Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231A7F37'/><circle cx='16' cy='14' r='6' fill='none' stroke='white' stroke-width='2'/><path d='M12 12h8M16 10v4M10 22c0-3.3 2.7-6 6-6s6 2.7 6 6' fill='none' stroke='white' stroke-width='2' stroke-linecap='round'/><circle cx='10' cy='8' r='1.5' fill='white'/><circle cx='22' cy='8' r='1.5' fill='white'/><line x1='11' y1='9' x2='13' y2='11' stroke='white' stroke-width='1.5'/><line x1='21' y1='9' x2='19' y2='11' stroke='white' stroke-width='1.5'/></svg>">
     <link rel="stylesheet" href="css/qingshuang-style.css">
     <style>
         /* 首页补充样式 */
         .hero-stat-value {
             font-family: var(--font-mono);
             font-size: var(--font-size-2xl);
-            font-weight: 600;
+            font-weight: 700;
             color: var(--color-success);
         }
         
@@ -22,10 +22,147 @@
             margin-top: var(--spacing-xs);
         }
         
+        /* 核心发现区域 */
+        .core-finding {
+            background: var(--color-bg-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+            border-left: 4px solid var(--color-success);
+        }
+        
+        .core-finding-label {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-success);
+            margin-bottom: 12px;
+        }
+        
+        .core-finding-label::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--color-success);
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px rgba(26, 127, 55, 0.15);
+        }
+        
+        .core-finding-title {
+            font-size: var(--font-size-xl);
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 12px;
+            color: var(--color-text-primary);
+        }
+        
+        .core-finding-title em {
+            color: var(--color-success);
+            font-style: normal;
+            font-weight: 700;
+        }
+        
+        .core-finding-text {
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-base);
+            line-height: 1.7;
+        }
+        
         /* 开场白列表 */
         .intro-card ul li {
             color: var(--color-text-secondary);
             padding: var(--spacing-xs) 0;
+        }
+        
+        /* 全局控制按钮 */
+        .global-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .global-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: none;
+            background: var(--color-bg-card);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            color: var(--color-text-secondary);
+        }
+        
+        .global-btn:hover {
+            background: var(--color-success);
+            color: #fff;
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(26, 127, 55, 0.25);
+        }
+        
+        .global-btn.active {
+            background: var(--color-success);
+            color: #fff;
+        }
+        
+        .global-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .global-btn-tooltip {
+            position: absolute;
+            right: 54px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--color-text-primary);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.15s ease;
+            pointer-events: none;
+        }
+        
+        .global-btn:hover .global-btn-tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* 移动端预览模式 */
+        body.mobile-preview-mode {
+            background: #2d2d2d;
+        }
+        
+        body.mobile-preview-mode .nav,
+        body.mobile-preview-mode .hero,
+        body.mobile-preview-mode .section,
+        body.mobile-preview-mode .toc-section,
+        body.mobile-preview-mode .footer {
+            max-width: 375px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        body.mobile-preview-mode .container {
+            max-width: 375px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+            background: var(--color-bg);
         }
     </style>
 </head>
@@ -94,6 +231,23 @@
                         <div class="hero-stat-label">Seed数学推理</div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心发现区域（新增） -->
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="core-finding">
+                <div class="core-finding-label">核心发现</div>
+                <h2 class="core-finding-title">
+                    字节AI的护城河不在模型，而在<em>全栈基础设施 + 极致落地能力</em>
+                </h2>
+                <p class="core-finding-text">
+                    通过深度调研字节AI布局，我们发现：豆包2.27亿月活不是偶然，而是「模型能力 × 基础设施 × 产品化」三位一体的结果。
+                    从芯片、云计算到大模型、Agent工具链，字节构建了业内最完整的AI全栈能力。
+                    对金融行业而言，这意味着：不要只盯着模型，<strong>基础设施和落地能力才是真正的差异化竞争力</strong>。
+                </p>
             </div>
         </div>
     </section>
@@ -191,6 +345,23 @@
         </div>
     </section>
 
+    <!-- 全局控制按钮 -->
+    <div class="global-controls">
+        <button class="global-btn" id="fullscreenBtn" title="全屏模式">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+            </svg>
+            <span class="global-btn-tooltip">全屏模式</span>
+        </button>
+        <button class="global-btn" id="mobilePreviewBtn" title="移动端预览">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                <line x1="12" y1="18" x2="12.01" y2="18"/>
+            </svg>
+            <span class="global-btn-tooltip">移动端预览</span>
+        </button>
+    </div>
+
     <!-- 页脚 -->
     <footer class="footer">
         <div class="container">
@@ -204,12 +375,57 @@
             </div>
             <div class="footer-bottom">
                 <p>数据来源：火山引擎官方文档、字节跳动Seed官网、扣子罗盘文档、公开技术分享</p>
-                <p>更新时间：2026年2月 | 纯属技术研究，如有雷同，说明大家都很努力</p>
+                <p>更新时间：2026年2月 | 基于清爽调研报告风格 v2.2</p>
             </div>
         </div>
     </footer>
 
     <script defer>
+        // 全屏功能
+        document.getElementById('fullscreenBtn').addEventListener('click', function() {
+            const btn = this;
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().then(() => {
+                    btn.classList.add('active');
+                }).catch(err => {
+                    console.log('全屏失败:', err);
+                });
+            } else {
+                document.exitFullscreen().then(() => {
+                    btn.classList.remove('active');
+                });
+            }
+        });
+        
+        document.addEventListener('fullscreenchange', () => {
+            const btn = document.getElementById('fullscreenBtn');
+            if (!document.fullscreenElement && btn) {
+                btn.classList.remove('active');
+            }
+        });
+        
+        // 移动端预览
+        document.getElementById('mobilePreviewBtn').addEventListener('click', function() {
+            const btn = this;
+            const body = document.body;
+            
+            if (body.classList.contains('mobile-preview-mode')) {
+                body.classList.remove('mobile-preview-mode');
+                btn.classList.remove('active');
+            } else {
+                body.classList.add('mobile-preview-mode');
+                btn.classList.add('active');
+            }
+        });
+        
+        // ESC键退出移动端预览
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && document.body.classList.contains('mobile-preview-mode')) {
+                document.body.classList.remove('mobile-preview-mode');
+                document.getElementById('mobilePreviewBtn').classList.remove('active');
+            }
+        });
+        
         // 滚动动画
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry, index) => {
@@ -220,7 +436,7 @@
             });
         }, { threshold: 0.1 });
 
-        document.querySelectorAll('.toc-card, .card').forEach(el => {
+        document.querySelectorAll('.toc-card, .card, .core-finding').forEach(el => {
             el.style.opacity = '0';
             observer.observe(el);
         });

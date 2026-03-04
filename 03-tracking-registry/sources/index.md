@@ -1,7 +1,8 @@
 # AI信息源追踪清单
 
-> **版本**: v1.1.0
+> **版本**: v1.2.0
 > **更新时间**: 2026-03-04
+> **本次Review重点**: 补充企业AI、机器人、视频生成、AI安全等领域信息源
 > **维护规则**: 每月 Review 一次，根据信息质量和时效性动态调整
 
 ---
@@ -39,6 +40,31 @@
 | **Replit** | replit.com/blog | 每周1次 | Agent 编程 |
 | **Cognition** | cognition.ai/blog | 每周1次 | Devin 进展 |
 
+### 企业AI / Agent平台 (NEW)
+
+| 公司 | URL | 检查频率 | 内容类型 |
+|------|-----|---------|---------|
+| **Salesforce** | salesforce.com/news | 每周1次 | Agentforce, 企业AI |
+| **ServiceNow** | servicenow.com/blogs | 每月1次 | IT服务AI |
+| **Glean** | glean.com/blog | 每周1次 | 企业搜索AI |
+| **Sierra** | sierra.ai/blog | 每月1次 | 客服AI Agent |
+
+### 视频/图像生成 (NEW)
+
+| 公司 | URL | 检查频率 | 内容类型 |
+|------|-----|---------|---------|
+| **Runway** | research.runwayml.com | 每周1次 | 视频生成研究 |
+| **Stability AI** | stability.ai/news | 每周1次 | 开源图像生成 |
+| **ElevenLabs** | elevenlabs.io/blog | 每月1次 | 语音AI |
+
+### 具身智能/机器人 (NEW)
+
+| 公司 | URL | 检查频率 | 内容类型 |
+|------|-----|---------|---------|
+| **Figure** | figure.ai/news | 每月1次 | 人形机器人 |
+| **Physical Intelligence** | physicalintelligence.company | 每月1次 | 机器人基础模型 |
+| **Covariant** | covariant.ai/insights | 每月1次 | 机器人AI |
+
 ---
 
 ## Newsletter / 博客
@@ -52,6 +78,15 @@
 | **Latent Space** | Swyx | latent.space | 每周1次 | AI 工程前沿, 深度访谈 |
 | **One Useful Thing** | Ethan Mollick | oneusefulthing.org | 每周2次 | AI 对工作方式的影响 |
 | **Stratechery** | Ben Thompson | stratechery.com | 每周1次 | 商业战略分析 |
+
+### AI工程/实践类 (NEW)
+
+| 名称 | 作者 | URL | 检查频率 | 价值定位 |
+|------|------|-----|---------|---------|
+| **Eugene Yan Blog** | Eugene Yan | eugeneyan.com | 每周1次 | AI工程最佳实践 |
+| **Chip Huyen Blog** | Chip Huyen | huyenchip.com | 每周1次 | ML系统设计 |
+| **The Batch** | Andrew Ng | deeplearning.ai/the-batch | 每周1次 | AI教育+行业洞察 |
+| **AI Snake Oil** | Arvind Narayanan | aisnakeoil.com | 每周1次 | AI批判性视角 |
 
 ### 中文圈
 
@@ -84,6 +119,14 @@
 | **疯投圈** | — | 小宇宙 | 每周 | 创投视角, 商业分析 |
 | **OnBoard** | — | 小宇宙 | 每周 | 海外科技产品深度 |
 
+### VC/投资视角 (NEW)
+
+| 播客名 | 主持人 | 平台 | 检查频率 | 价值定位 |
+|--------|-------|------|---------|---------|
+| **20VC** | Harry Stebbings | YouTube/Spotify | 每周 | VC视角AI创业 |
+| **BG2Pod** | Bill Gurley/Brad Gerstner | YouTube | 按更新 | 顶级投资人AI讨论 |
+| **All-In Podcast** | Chamath/Sacks等 | YouTube | 每周 | 科技投资热点 |
+
 ---
 
 ## YouTube 频道
@@ -108,6 +151,17 @@
 | **模型排行** | Hugging Face Hub | huggingface.co/models | 每周1次 | 模型热度/新模型 |
 | **评测排行** | LMSYS Leaderboard | chat.lmsys.org | 每周1次 | 模型对比评测 |
 | **AI会议** | NeurIPS/ICML/ICLR | 会议官网 | 按会议 | 年度重要论文 |
+
+### 年度报告/行业研究 (NEW)
+
+| 类型 | 来源 | URL | 检查频率 | 价值定位 |
+|------|------|-----|---------|---------|
+| **State of AI Report** | Nathan Benaich | stateof.ai | 每年10月 | 年度AI全景报告 |
+| **AI Index Report** | Stanford HAI | hai.stanford.edu | 每年 | 学术权威AI指标 |
+| **a16z AI Canon** | a16z | a16z.com | 持续更新 | AI学习资源 |
+| **Sequoia AI 50** | Sequoia | sequoiacap.com | 每年 | AI投资热点公司 |
+| **McKinsey AI Survey** | McKinsey | mckinsey.com | 每年 | 企业AI采纳调研 |
+| **Gartner Hype Cycle** | Gartner | gartner.com | 每年 | AI技术成熟度 |
 
 ---
 
@@ -159,6 +213,8 @@
 | **McKinsey** | mckinsey.com | 每季度 | `McKinsey AI enterprise productivity` | AI 生产力影响分析 |
 | **IDC** | idc.com | 每季度 | `IDC AI enterprise adoption` | 企业 AI 采纳数据 |
 | **Faros AI** | faros.ai/blog | 每月 | `Faros AI coding ROI developer` | AI 编程 ROI 度量 |
+| **Accenture** | accenture.com | 每季度 | `Accenture AI enterprise transformation` | AI转型咨询 |
+| **BCG** | bcg.com | 每季度 | `BCG AI enterprise strategy` | AI战略咨询 |
 
 ---
 
@@ -226,6 +282,8 @@ AI 融资 投资 2026
 2. AI Coding 产品方（Cursor / Replit / Cognition 等）至少 1 家
 3. 独立研究者 / AI Coding 实践者 至少 1 人
 4. 中国 AI 团队（DeepSeek / 智谱 / Moonshot / 百度 等）至少 1 家
+5. 企业AI/Agent创业公司（Glean / Sierra / Harvey 等）至少 1 家
+6. 互联网头部公司AI动态（Google / Microsoft / Meta / 字节 / 阿里 等）至少 1 家
 
 ---
 

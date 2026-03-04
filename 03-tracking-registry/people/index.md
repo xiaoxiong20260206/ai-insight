@@ -1,7 +1,8 @@
 # AI行业人物追踪清单
 
-> **版本**: v1.1.0
+> **版本**: v1.2.0
 > **更新时间**: 2026-03-04
+> **本次Review重点**: 补充具身智能、多模态、企业AI、AI安全等领域核心人物
 > **维护规则**: 每月 Review 一次，根据输出质量和频率动态调整优先级
 
 ---
@@ -55,6 +56,12 @@
 | **Jeff Dean** | Chief Scientist | X, 演讲 | `"Jeff Dean" Google AI` | AI 系统架构方向 |
 | **Oriol Vinyals** | VP Research | X, Papers | `"Oriol Vinyals" deepmind gemini` | Gemini 系列研究 |
 
+### xAI
+
+| 人物 | 角色 | 主要渠道 | 搜索关键词 | 追踪重点 |
+|------|------|---------|-----------|---------|
+| **Igor Babuschkin** | 联合创始人 | X, 采访 | `"Igor Babuschkin" xAI Grok` | Grok技术架构 |
+
 ### Meta AI (FAIR)
 
 | 人物 | 角色 | 主要渠道 | 搜索关键词 | 追踪重点 |
@@ -91,6 +98,36 @@
 | **Harrison Chase** | LangChain CEO | YouTube, 演讲 | `"Harrison Chase" LangChain` | Agent 工程, Deep Agents |
 | **Chris Lattner** | Modular/Mojo 创始人 | X @clattner_llvm, 博客 | `"Chris Lattner" Mojo AI` | AI 编程语言, 编译器 |
 
+### 具身智能/机器人核心人物
+
+| 人物 | 公司/角色 | 主要渠道 | 搜索关键词 | 追踪重点 |
+|------|----------|---------|-----------|---------|
+| **Pieter Abbeel** | Covariant/UC Berkeley | X @paboreel, Papers | `"Pieter Abbeel" robotics AI` | 机器人学习, 强化学习 |
+| **Chelsea Finn** | Stanford | Papers, 演讲 | `"Chelsea Finn" Stanford robot` | 元学习, 机器人AI |
+| **Fei-Fei Li** | Stanford HAI, World Labs | X @drfeifei, 演讲 | `"Fei-Fei Li" Stanford AI` | 计算机视觉, 空间智能 |
+| **Sergey Levine** | UC Berkeley | Papers | `"Sergey Levine" robot learning` | 机器人强化学习 |
+| **王兴兴** | 宇树科技创始人 | 采访, 产品发布 | `宇树科技 Unitree 王兴兴` | 四足/人形机器人 |
+| **彭志辉** | 智元机器人创始人 | 采访 | `智元机器人 彭志辉 远征` | 人形机器人 |
+
+### 多模态/视觉AI核心人物
+
+| 人物 | 公司/角色 | 主要渠道 | 搜索关键词 | 追踪重点 |
+|------|----------|---------|-----------|---------|
+| **Saining Xie** | NYU (前Meta) | Papers | `"Saining Xie" vision` | 视觉模型架构, ConvNeXt |
+| **Alec Radford** | OpenAI | Papers | `"Alec Radford" OpenAI CLIP` | CLIP, GPT, 多模态 |
+| **Aditya Ramesh** | OpenAI | Papers | `"Aditya Ramesh" DALL-E` | 图像生成, DALL-E |
+
+### 企业AI/Agent核心创业者
+
+| 人物 | 公司/角色 | 主要渠道 | 搜索关键词 | 追踪重点 |
+|------|----------|---------|-----------|---------|
+| **Bret Taylor** | Sierra CEO (前Salesforce) | 采访, 演讲 | `"Bret Taylor" Sierra AI` | 企业AI Agent, 客服AI |
+| **Arvind Jain** | Glean CEO | 采访 | `"Arvind Jain" Glean enterprise` | 企业知识搜索 |
+| **Winston Weinberg** | Harvey CEO | 采访 | `"Winston Weinberg" Harvey legal AI` | 法律AI |
+| **Gabriel Pereyra** | Harvey CTO | Papers, X | `"Gabriel Pereyra" Harvey AI` | 法律AI技术 |
+| **Jesse Zhang** | Decagon CEO | 采访, YC | `"Jesse Zhang" Decagon agent` | 客服AI Agent |
+| **Siqi Chen** | Runway CEO | X @blader | `"Siqi Chen" Runway video AI` | AI视频生成 |
+
 ### 学术界核心人物
 
 | 人物 | 机构/角色 | 主要渠道 | 搜索关键词 | 追踪重点 |
@@ -113,6 +150,15 @@
 | **颜水成** | 360 AI CEO (前新加坡国大) | 采访, 演讲 | `颜水成 360 AI` | 多模态, 企业AI |
 | **刘知远** | 清华大学, OpenBMB | Papers, GitHub | `刘知远 清华 NLP` | 大模型高效微调, 开源 |
 | **贾扬清** | 阿里云AI (Caffe作者) | X, 采访 | `贾扬清 阿里 AI` | AI基础设施, 云原生AI |
+
+### AI安全/对齐核心人物
+
+| 人物 | 公司/角色 | 主要渠道 | 搜索关键词 | 追踪重点 |
+|------|----------|---------|-----------|---------|
+| **Stuart Russell** | UC Berkeley | 书籍, 演讲 | `"Stuart Russell" AI safety` | AI安全理论 |
+| **Nick Bostrom** | 牛津FHI | 书籍, 论文 | `"Nick Bostrom" superintelligence` | 超级智能风险 |
+| **Paul Christiano** | ARC (前OpenAI) | 博客, 论文 | `"Paul Christiano" alignment` | 对齐研究, RLHF |
+| **Dan Hendrycks** | CAIS | Papers, X | `"Dan Hendrycks" AI safety` | AI安全评测 |
 
 ---
 
@@ -139,6 +185,16 @@
 | **Two Minute Papers** | YouTube | 每周2次 | 最快的论文摘要 |
 | **AI Explained** | YouTube | 每周1次 | AI 新闻深度分析 |
 
+### AI工程实践者 (NEW)
+
+| 人物 | 平台/角色 | 主要渠道 | 检查频率 | 价值定位 |
+|------|----------|---------|---------|---------|
+| **Eugene Yan** | Amazon/独立 | eugeneyan.com | 每周1次 | AI工程最佳实践, LLM应用 |
+| **Jason Liu** | Instructor作者 | X @jxnlco | 每周1次 | 结构化输出, LLM工程 |
+| **Thomas Wolf** | Hugging Face CTO | X @Thom_Wolf | 每周1次 | 开源LLM生态 |
+| **Nathan Benaich** | Air Street Capital | stateof.ai | 每年 | State of AI年度报告 |
+| **Chip Huyen** | 独立 | huyenchip.com | 每周1次 | MLOps, LLM系统设计 |
+
 ### 中文圈关键声音
 
 | 人物/媒体 | 平台 | 检查频率 | 价值定位 |
@@ -161,6 +217,15 @@
 | **晚点** | 晚点聊LateTalk | 小宇宙 | 中国科技行业深度对话 |
 | **疯投圈** | 疯投圈 | 小宇宙 | 创投视角, 商业分析 |
 
+### State of AI / 行业报告作者 (NEW)
+
+| 人物/机构 | 报告 | 平台 | 价值定位 |
+|-----------|------|------|---------|
+| **Nathan Benaich** | State of AI Report | stateof.ai | 年度AI行业全景报告 |
+| **a16z** | AI Canon, AI投资趋势 | a16z.com | 顶级VC视角 |
+| **Sequoia** | AI Ascent, AI 50 | sequoiacap.com | AI投资热点 |
+| **McKinsey** | State of AI in Enterprise | mckinsey.com | 企业AI采纳调研 |
+
 ---
 
 ## L3 战略决策者
@@ -174,6 +239,17 @@
 | **Jensen Huang** | NVIDIA CEO | GTC 主题演讲 | `"Jensen Huang" NVIDIA` | AI 基础设施方向 |
 | **Mark Zuckerberg** | Meta CEO | 公开信, 采访 | `"Zuckerberg" meta AI open source` | 开源 AI 策略 |
 | **Guillermo Rauch** | Vercel CEO | X, Blog | `"Guillermo Rauch" vercel AI` | AI 前端 / v0.dev |
+
+### 企业CEO/AI战略决策者 (NEW)
+
+| 人物 | 公司/角色 | 主要渠道 | 搜索关键词 | 信号权重 |
+|------|----------|---------|-----------|---------|
+| **Marc Benioff** | Salesforce CEO | X, 采访 | `"Marc Benioff" Agentforce AI` | 企业AI Agent |
+| **Arvind Krishna** | IBM CEO | 采访, 财报会 | `"Arvind Krishna" IBM watsonx` | 企业AI转型 |
+| **Thomas Kurian** | Google Cloud CEO | 采访, GTC | `"Thomas Kurian" Google Cloud AI` | 云AI战略 |
+| **Andy Jassy** | Amazon CEO | 股东信, 采访 | `"Andy Jassy" Amazon AI Bedrock` | AWS AI战略 |
+| **Christian Klein** | SAP CEO | 采访 | `"Christian Klein" SAP Joule AI` | ERP AI |
+| **Bill McDermott** | ServiceNow CEO | 采访 | `"Bill McDermott" ServiceNow AI` | IT服务AI |
 
 ---
 
