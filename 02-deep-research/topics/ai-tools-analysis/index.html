@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企业数字员工工作场景分析与可视化</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1>🤖 企业数字员工工作场景分析与可视化</h1>
+            <p>基于10大岗位角色的AI Agent能力覆盖评估与产品匹配</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- 角色选择器 -->
+        <section class="role-selector">
+            <h2>📋 选择岗位角色</h2>
+            <div class="role-tabs" id="roleTabs">
+                <button class="role-tab active" data-role="all">全部</button>
+                <button class="role-tab" data-role="tech">👨‍💻 研发技术</button>
+                <button class="role-tab" data-role="finance">💰 财务</button>
+                <button class="role-tab" data-role="admin">📋 行政</button>
+                <button class="role-tab" data-role="it">🖥️ IT支持</button>
+                <button class="role-tab" data-role="hr">👥 人事</button>
+                <button class="role-tab" data-role="sales">💼 销售</button>
+                <button class="role-tab" data-role="marketing">📣 市场</button>
+                <button class="role-tab" data-role="product">📱 产品</button>
+                <button class="role-tab" data-role="service">🎧 客服</button>
+                <button class="role-tab" data-role="legal">⚖️ 法务</button>
+            </div>
+        </section>
+
+        <!-- 统计卡片 -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-value" id="totalRoles">10</div>
+                    <div class="stat-label">岗位角色</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📝</div>
+                    <div class="stat-value" id="totalTasks">180+</div>
+                    <div class="stat-label">工作任务</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🤖</div>
+                    <div class="stat-value" id="totalAgents">9</div>
+                    <div class="stat-label">Agent类型</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🔗</div>
+                    <div class="stat-value" id="totalProducts">50+</div>
+                    <div class="stat-label">业界产品</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 优先级分析 -->
+        <section class="priority-section">
+            <h2>🎯 开发优先级分析</h2>
+            <div class="priority-grid">
+                <div class="priority-card p0">
+                    <div class="priority-badge">P0</div>
+                    <div class="priority-title">核心必建</div>
+                    <div class="priority-agents">Chatbot Agent、Workflow Agent</div>
+                    <div class="priority-coverage">覆盖率: 53%</div>
+                    <div class="priority-desc">全岗位通用，ROI最高</div>
+                </div>
+                <div class="priority-card p1">
+                    <div class="priority-badge">P1</div>
+                    <div class="priority-title">高优先级</div>
+                    <div class="priority-agents">Coding Agent、Data Analysis Agent</div>
+                    <div class="priority-coverage">覆盖率: 27%</div>
+                    <div class="priority-desc">技术+数据岗位核心</div>
+                </div>
+                <div class="priority-card p2">
+                    <div class="priority-badge">P2</div>
+                    <div class="priority-title">中优先级</div>
+                    <div class="priority-agents">Research Agent</div>
+                    <div class="priority-coverage">覆盖率: 8%</div>
+                    <div class="priority-desc">调研分析类场景</div>
+                </div>
+                <div class="priority-card p3">
+                    <div class="priority-badge">P3</div>
+                    <div class="priority-title">扩展建设</div>
+                    <div class="priority-agents">Design Agent、Background Agent</div>
+                    <div class="priority-coverage">覆盖率: 9%</div>
+                    <div class="priority-desc">设计+后台自动化</div>
+                </div>
+                <div class="priority-card p4">
+                    <div class="priority-badge">P4</div>
+                    <div class="priority-title">远期规划</div>
+                    <div class="priority-agents">Browser Use、Computer Use</div>
+                    <div class="priority-coverage">覆盖率: 3%</div>
+                    <div class="priority-desc">GUI自动化操作</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 关系图区域 -->
+        <section class="graph-section">
+            <h2>🔗 工作场景与Agent关系图</h2>
+            <p class="graph-hint">点击节点查看关联关系，点击产品名称可跳转官网</p>
+            <div class="graph-container">
+                <div class="graph-header">
+                    <div class="column-title">岗位角色</div>
+                    <div class="column-title">工作场景</div>
+                    <div class="column-title">具体任务</div>
+                    <div class="column-title">Agent类型</div>
+                    <div class="column-title">业界产品</div>
+                </div>
+                <div class="graph-canvas" id="graphCanvas">
+                    <svg id="connectionsSvg"></svg>
+                    <div class="graph-columns" id="graphColumns">
+                        <!-- 动态生成 -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 开发路线图 -->
+        <section class="roadmap-section">
+            <h2>🚀 数字员工开发路线图</h2>
+            <div class="roadmap">
+                <div class="roadmap-phase">
+                    <div class="phase-marker">1</div>
+                    <div class="phase-content">
+                        <h3>基础能力建设</h3>
+                        <p>Chatbot + Workflow Agent</p>
+                        <ul>
+                            <li>智能问答系统</li>
+                            <li>审批流程自动化</li>
+                            <li>文档辅助写作</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="roadmap-connector"></div>
+                <div class="roadmap-phase">
+                    <div class="phase-marker">2</div>
+                    <div class="phase-content">
+                        <h3>专业场景深化</h3>
+                        <p>Coding + Data Analysis Agent</p>
+                        <ul>
+                            <li>研发效能提升</li>
+                            <li>数据分析自动化</li>
+                            <li>报表智能生成</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="roadmap-connector"></div>
+                <div class="roadmap-phase">
+                    <div class="phase-marker">3</div>
+                    <div class="phase-content">
+                        <h3>能力扩展</h3>
+                        <p>Research + Design Agent</p>
+                        <ul>
+                            <li>智能调研分析</li>
+                            <li>设计素材生成</li>
+                            <li>知识库构建</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="roadmap-connector"></div>
+                <div class="roadmap-phase">
+                    <div class="phase-marker">4</div>
+                    <div class="phase-content">
+                        <h3>全面自动化</h3>
+                        <p>Browser + Computer Use Agent</p>
+                        <ul>
+                            <li>跨系统自动化</li>
+                            <li>GUI操作自动化</li>
+                            <li>端到端流程</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 各岗位场景表格 -->
+        <section class="tables-section">
+            <h2>📊 各岗位工作场景详情</h2>
+            <div class="tables-container" id="tablesContainer">
+                <!-- 动态生成 -->
+            </div>
+        </section>
+
+        <!-- Agent类型卡片 -->
+        <section class="agents-section">
+            <h2>🤖 Agent类型总览</h2>
+            <div class="agents-grid" id="agentsGrid">
+                <!-- 动态生成 -->
+            </div>
+        </section>
+
+        <!-- 产品架构设计 -->
+        <section class="architecture-section">
+            <h2>🏗️ 企业数字员工产品架构</h2>
+            <p class="section-desc">基于9种Agent类型构建的分层式企业数字员工产品架构</p>
+            <div class="architecture-diagram">
+                <div class="arch-layer app-layer">
+                    <div class="layer-title">应用层 Application Layer</div>
+                    <div class="layer-content">
+                        <div class="arch-item">🧑‍💻 研发助手</div>
+                        <div class="arch-item">💰 财务助手</div>
+                        <div class="arch-item">💼 销售助手</div>
+                        <div class="arch-item">👥 HR助手</div>
+                        <div class="arch-item">🎧 客服助手</div>
+                        <div class="arch-item">⚖️ 法务助手</div>
+                    </div>
+                </div>
+                <div class="arch-layer agent-layer">
+                    <div class="layer-title">Agent层 Agent Layer</div>
+                    <div class="layer-content">
+                        <div class="arch-item agent-item" data-agent="Chatbot">💬 Chatbot<br><small>28%</small></div>
+                        <div class="arch-item agent-item" data-agent="Workflow">⚙️ Workflow<br><small>25%</small></div>
+                        <div class="arch-item agent-item" data-agent="Coding">💻 Coding<br><small>15%</small></div>
+                        <div class="arch-item agent-item" data-agent="Data">📊 Data<br><small>12%</small></div>
+                        <div class="arch-item agent-item" data-agent="Research">🔬 Research<br><small>8%</small></div>
+                        <div class="arch-item agent-item" data-agent="Design">🎨 Design<br><small>5%</small></div>
+                        <div class="arch-item agent-item" data-agent="Background">⏰ Background<br><small>4%</small></div>
+                        <div class="arch-item agent-item" data-agent="Browser">🌐 Browser<br><small>2%</small></div>
+                        <div class="arch-item agent-item" data-agent="Computer">🖥️ Computer<br><small>1%</small></div>
+                    </div>
+                </div>
+                <div class="arch-layer capability-layer">
+                    <div class="layer-title">能力层 Capability Layer</div>
+                    <div class="layer-content">
+                        <div class="arch-item">🧠 LLM推理</div>
+                        <div class="arch-item">🔍 RAG检索</div>
+                        <div class="arch-item">🛠️ 工具调用</div>
+                        <div class="arch-item">🖼️ 多模态</div>
+                        <div class="arch-item">📝 代码理解</div>
+                        <div class="arch-item">📈 数据分析</div>
+                    </div>
+                </div>
+                <div class="arch-layer platform-layer">
+                    <div class="layer-title">平台层 Platform Layer</div>
+                    <div class="layer-content">
+                        <div class="arch-item">👤 用户管理</div>
+                        <div class="arch-item">🔐 权限控制</div>
+                        <div class="arch-item">📋 审计日志</div>
+                        <div class="arch-item">💳 计费系统</div>
+                        <div class="arch-item">🤖 模型管理</div>
+                        <div class="arch-item">📚 知识库管理</div>
+                    </div>
+                </div>
+                <div class="arch-layer integration-layer">
+                    <div class="layer-title">集成层 Integration Layer</div>
+                    <div class="layer-content">
+                        <div class="arch-item">🏢 企业系统<br><small>OA/ERP/CRM</small></div>
+                        <div class="arch-item">☁️ SaaS应用<br><small>飞书/钉钉</small></div>
+                        <div class="arch-item">🗄️ 数据源<br><small>数据库/文件</small></div>
+                        <div class="arch-item">🔌 外部API<br><small>第三方服务</small></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Agent产品设计方案 -->
+        <section class="agent-design-section">
+            <h2>📐 Agent产品设计方案</h2>
+            <p class="section-desc">点击Agent类型查看详细的产品设计方案</p>
+            <div class="agent-design-tabs" id="agentDesignTabs">
+                <button class="agent-design-tab active" data-agent="Chatbot">💬 Chatbot</button>
+                <button class="agent-design-tab" data-agent="Workflow">⚙️ Workflow</button>
+                <button class="agent-design-tab" data-agent="Coding">💻 Coding</button>
+                <button class="agent-design-tab" data-agent="Data">📊 Data Analysis</button>
+                <button class="agent-design-tab" data-agent="Research">🔬 Research</button>
+                <button class="agent-design-tab" data-agent="Design">🎨 Design</button>
+                <button class="agent-design-tab" data-agent="Background">⏰ Background</button>
+                <button class="agent-design-tab" data-agent="Browser">🌐 Browser Use</button>
+                <button class="agent-design-tab" data-agent="Computer">🖥️ Computer Use</button>
+            </div>
+            <div class="agent-design-content" id="agentDesignContent">
+                <!-- 动态生成 -->
+            </div>
+        </section>
+
+        <!-- 技术选型 -->
+        <section class="tech-stack-section">
+            <h2>🔧 技术选型建议</h2>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-category">LLM模型</div>
+                    <div class="tech-items">
+                        <span class="tech-item">GPT-4o</span>
+                        <span class="tech-item">Claude 3.5</span>
+                        <span class="tech-item">通义千问</span>
+                        <span class="tech-item">DeepSeek</span>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-category">向量数据库</div>
+                    <div class="tech-items">
+                        <span class="tech-item">Milvus</span>
+                        <span class="tech-item">Pinecone</span>
+                        <span class="tech-item">Qdrant</span>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-category">RAG框架</div>
+                    <div class="tech-items">
+                        <span class="tech-item">LangChain</span>
+                        <span class="tech-item">LlamaIndex</span>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-category">流程引擎</div>
+                    <div class="tech-items">
+                        <span class="tech-item">Temporal</span>
+                        <span class="tech-item">Airflow</span>
+                        <span class="tech-item">n8n</span>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-category">RPA框架</div>
+                    <div class="tech-items">
+                        <span class="tech-item">Playwright</span>
+                        <span class="tech-item">Puppeteer</span>
+                        <span class="tech-item">UiPath</span>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-category">开发框架</div>
+                    <div class="tech-items">
+                        <span class="tech-item">React</span>
+                        <span class="tech-item">Vue3</span>
+                        <span class="tech-item">FastAPI</span>
+                        <span class="tech-item">Go</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>企业数字员工工作场景分析与可视化 v2.0.0</p>
+            <p>基于 AI Studio Skill 规范构建 | 2026</p>
+        </div>
+    </footer>
+
+    <!-- Tooltip -->
+    <div class="tooltip" id="tooltip"></div>
+
+    <script src="network-graph.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

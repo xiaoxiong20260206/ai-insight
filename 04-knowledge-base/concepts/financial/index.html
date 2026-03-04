@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI+金融 调研合集 | AI-Powered Finance Research</title>
+    <!-- Favicon: AI+Finance themed icon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: rgba(20, 20, 30, 0.85);
+            --text-primary: #f5f5f7;
+            --text-secondary: rgba(245, 245, 247, 0.7);
+            --text-muted: rgba(245, 245, 247, 0.5);
+            --accent-gold: #d4af37;
+            --accent-gold-light: #f0d878;
+            --accent-blue: #4a9eff;
+            --accent-purple: #a855f7;
+            --accent-green: #22c55e;
+            --accent-orange: #f59e0b;
+            --border-color: rgba(212, 175, 55, 0.15);
+            --glow-gold: rgba(212, 175, 55, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 80% 100%, rgba(74, 158, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse 50% 30% at 10% 60%, rgba(168, 85, 247, 0.04) 0%, transparent 50%);
+        }
+
+        .grid-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: 
+                linear-gradient(rgba(212, 175, 55, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212, 175, 55, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 20px var(--glow-gold);
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--accent-gold), var(--text-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 4rem 6rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--accent-gold);
+            margin-bottom: 2rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Research Flow Section */
+        .research-flow {
+            padding: 2rem 4rem 4rem;
+            position: relative;
+        }
+
+        .flow-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .flow-title h2 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .flow-title p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Flow Diagram */
+        .flow-diagram {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0;
+            padding: 2rem 0;
+            overflow-x: auto;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+        }
+
+        .flow-card {
+            position: relative;
+            width: 200px;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            backdrop-filter: blur(20px);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .flow-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--accent-gold);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 40px var(--glow-gold);
+        }
+
+        .flow-card::before {
+            content: attr(data-step);
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--accent-gold);
+            color: var(--bg-primary);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+        }
+
+        .flow-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .flow-icon.gold { background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.1)); }
+        .flow-icon.blue { background: linear-gradient(135deg, rgba(74, 158, 255, 0.2), rgba(74, 158, 255, 0.1)); }
+        .flow-icon.purple { background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(168, 85, 247, 0.1)); }
+        .flow-icon.green { background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(34, 197, 94, 0.1)); }
+
+        .flow-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .flow-card p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .flow-arrow {
+            width: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-gold);
+            opacity: 0.5;
+        }
+
+        .flow-arrow svg {
+            width: 40px;
+            height: 40px;
+        }
+
+        /* Cards Grid */
+        .cards-section {
+            padding: 4rem;
+            background: linear-gradient(180deg, transparent 0%, rgba(212, 175, 55, 0.02) 50%, transparent 100%);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .research-card {
+            position: relative;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .research-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--card-accent), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .research-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--card-accent);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .research-card:hover::before {
+            opacity: 1;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .card-meta {
+            flex: 1;
+        }
+
+        .card-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .card-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+
+        .card-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight-tag {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.3rem 0.7rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .card-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--card-accent);
+            transition: gap 0.3s ease;
+        }
+
+        .research-card:hover .card-link {
+            gap: 0.8rem;
+        }
+
+        .card-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Card Color Variants */
+        .card-gold {
+            --card-accent: var(--accent-gold);
+        }
+        .card-gold .card-icon { background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.1)); }
+        .card-gold .card-tag { background: rgba(212, 175, 55, 0.15); color: var(--accent-gold); }
+
+        .card-blue {
+            --card-accent: var(--accent-blue);
+        }
+        .card-blue .card-icon { background: linear-gradient(135deg, rgba(74, 158, 255, 0.2), rgba(74, 158, 255, 0.1)); }
+        .card-blue .card-tag { background: rgba(74, 158, 255, 0.15); color: var(--accent-blue); }
+
+        .card-purple {
+            --card-accent: var(--accent-purple);
+        }
+        .card-purple .card-icon { background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(168, 85, 247, 0.1)); }
+        .card-purple .card-tag { background: rgba(168, 85, 247, 0.15); color: var(--accent-purple); }
+
+        .card-green {
+            --card-accent: var(--accent-green);
+        }
+        .card-green .card-icon { background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(34, 197, 94, 0.1)); }
+        .card-green .card-tag { background: rgba(34, 197, 94, 0.15); color: var(--accent-green); }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 4rem;
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 3rem;
+            font-weight: 500;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 4rem;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            margin-top: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 1.5rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero {
+                padding: 2rem 1.5rem 4rem;
+            }
+
+            .flow-diagram {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+                width: 40px;
+                height: 40px;
+            }
+
+            .flow-card {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .cards-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-section {
+                gap: 2rem;
+            }
+
+            .stat-value {
+                font-size: 2rem;
+            }
+
+            footer {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        /* Animations on scroll */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    <div class="grid-lines"></div>
+
+    <header>
+        <div class="logo">
+            <div class="logo-icon">🔬</div>
+            <span class="logo-text">AI+Finance Research</span>
+        </div>
+        <nav class="nav-links">
+            <a href="#research">调研报告</a>
+            <a href="#flow">研究脉络</a>
+            <a href="https://github.com/xiaoxiong20260206" target="_blank">GitHub</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-badge">2026 Research Collection</div>
+        <h1>AI 赋能金融<br><span>深度调研合集</span></h1>
+        <p class="hero-subtitle">
+            从行业标杆案例到技术架构解读，从场景分析到落地方案，
+            系统性探索 AI Agent 在金融领域的应用实践
+        </p>
+    </section>
+
+    <section class="research-flow" id="flow">
+        <div class="flow-title">
+            <h2>研究脉络 · Research Flow</h2>
+            <p>四篇调研报告形成完整的研究路径</p>
+        </div>
+
+        <div class="flow-diagram">
+            <div class="flow-step">
+                <a href="https://xiaoxiong20260206.github.io/CF0201_Financial/%E5%B9%BB%E6%96%B9%E9%87%8F%E5%8C%96%E8%B0%83%E7%A0%94%E6%8A%A5%E5%91%8A.html" class="flow-card" data-step="01" target="_blank">
+                    <div class="flow-icon gold">🏆</div>
+                    <h3>行业标杆案例</h3>
+                    <p>幻方量化 AI 应用调研，2025年收益56.55%</p>
+                </a>
+            </div>
+
+            <div class="flow-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </div>
+
+            <div class="flow-step">
+                <a href="https://xiaoxiong20260206.github.io/bytedance-ai-guide/home.html" class="flow-card" data-step="02" target="_blank">
+                    <div class="flow-icon blue">🚀</div>
+                    <h3>技术架构解读</h3>
+                    <p>字节跳动 AI 技术栈与 Agent Infra</p>
+                </a>
+            </div>
+
+            <div class="flow-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </div>
+
+            <div class="flow-step">
+                <a href="https://xiaoxiong20260206.github.io/CF0201_Financial/" class="flow-card" data-step="03" target="_blank">
+                    <div class="flow-icon purple">📊</div>
+                    <h3>场景全景分析</h3>
+                    <p>金融从业者工作场景与 Agent 类型</p>
+                </a>
+            </div>
+
+            <div class="flow-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </div>
+
+            <div class="flow-step">
+                <a href="https://xiaoxiong20260206.github.io/ai-transformation-report/ai-transformation-report.html" class="flow-card" data-step="04" target="_blank">
+                    <div class="flow-icon green">🎯</div>
+                    <h3>落地实施方案</h3>
+                    <p>私募量化公司 AI 转型战略</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="cards-section" id="research">
+        <div class="section-header">
+            <h2>深度调研报告</h2>
+            <p>点击卡片查看完整报告内容</p>
+        </div>
+
+        <div class="cards-grid">
+            <!-- Card 1: 幻方量化 -->
+            <a href="https://xiaoxiong20260206.github.io/CF0201_Financial/%E5%B9%BB%E6%96%B9%E9%87%8F%E5%8C%96%E8%B0%83%E7%A0%94%E6%8A%A5%E5%91%8A.html" class="research-card card-gold animate-on-scroll" target="_blank">
+                <div class="card-header">
+                    <div class="card-icon">🏆</div>
+                    <div class="card-meta">
+                        <span class="card-tag">标杆案例</span>
+                        <h3 class="card-title">幻方量化 AI 应用调研</h3>
+                    </div>
+                </div>
+                <p class="card-description">
+                    深入研究"中国版文艺复兴科技"幻方量化的 AI 布局：管理规模 700 亿+、2025 年收益 56.55%、
+                    孵化 DeepSeek 大模型。全链路 AI 覆盖从因子挖掘到交易执行的完整 Agent 矩阵。
+                </p>
+                <div class="card-highlights">
+                    <span class="highlight-tag">DeepSeek</span>
+                    <span class="highlight-tag">萤火超算</span>
+                    <span class="highlight-tag">AI Agent 矩阵</span>
+                    <span class="highlight-tag">56.55%收益</span>
+                </div>
+                <div class="card-footer">
+                    <span class="card-link">
+                        查看报告
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </div>
+            </a>
+
+            <!-- Card 2: 字节跳动 -->
+            <a href="https://xiaoxiong20260206.github.io/bytedance-ai-guide/home.html" class="research-card card-blue animate-on-scroll" target="_blank">
+                <div class="card-header">
+                    <div class="card-icon">🚀</div>
+                    <div class="card-meta">
+                        <span class="card-tag">技术解读</span>
+                        <h3 class="card-title">字节跳动 AI "开挂"指南</h3>
+                    </div>
+                </div>
+                <p class="card-description">
+                    揭秘字节跳动从"推荐算法"到"全栈 AI"的逆袭之路：Seed 团队、豆包大模型、
+                    Agent Infra 全家桶、Seedance 2.0 视频生成。了解 AI 行业的"三国演义"格局。
+                </p>
+                <div class="card-highlights">
+                    <span class="highlight-tag">豆包</span>
+                    <span class="highlight-tag">Agent Infra</span>
+                    <span class="highlight-tag">Seedance 2.0</span>
+                    <span class="highlight-tag">技术栈架构</span>
+                </div>
+                <div class="card-footer">
+                    <span class="card-link">
+                        查看报告
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </div>
+            </a>
+
+            <!-- Card 3: 金融场景分析 -->
+            <a href="https://xiaoxiong20260206.github.io/CF0201_Financial/" class="research-card card-purple animate-on-scroll" target="_blank">
+                <div class="card-header">
+                    <div class="card-icon">📊</div>
+                    <div class="card-meta">
+                        <span class="card-tag">场景分析</span>
+                        <h3 class="card-title">金融从业者工作场景可视化</h3>
+                    </div>
+                </div>
+                <p class="card-description">
+                    系统性梳理量化分析师、基金经理、风控专员等金融从业者的日常工作场景，
+                    分析 8 大用户角色、60+ 工作任务、Agent 类型映射及业界产品对比。
+                </p>
+                <div class="card-highlights">
+                    <span class="highlight-tag">8大角色</span>
+                    <span class="highlight-tag">Quant Agent</span>
+                    <span class="highlight-tag">Research Agent</span>
+                    <span class="highlight-tag">开发路线图</span>
+                </div>
+                <div class="card-footer">
+                    <span class="card-link">
+                        查看报告
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </div>
+            </a>
+
+            <!-- Card 4: AI转型方案 -->
+            <a href="https://xiaoxiong20260206.github.io/ai-transformation-report/ai-transformation-report.html" class="research-card card-green animate-on-scroll" target="_blank">
+                <div class="card-header">
+                    <div class="card-icon">🎯</div>
+                    <div class="card-meta">
+                        <span class="card-tag">落地方案</span>
+                        <h3 class="card-title">私募量化公司 AI 转型战略</h3>
+                    </div>
+                </div>
+                <p class="card-description">
+                    面向私募量化公司的 AI 转型完整方案：金融数字员工愿景、NL2SQL 数据查询 Agent 架构设计、
+                    产品选型对比、分阶段演进路线图，减少 80% 重复性工作。
+                </p>
+                <div class="card-highlights">
+                    <span class="highlight-tag">金融数字员工</span>
+                    <span class="highlight-tag">NL2SQL</span>
+                    <span class="highlight-tag">架构设计</span>
+                    <span class="highlight-tag">产品选型</span>
+                </div>
+                <div class="card-footer">
+                    <span class="card-link">
+                        查看报告
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <div class="stat-item">
+            <div class="stat-value">4</div>
+            <div class="stat-label">深度调研报告</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">8+</div>
+            <div class="stat-label">Agent 类型分析</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">700亿</div>
+            <div class="stat-label">幻方量化管理规模</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">80%</div>
+            <div class="stat-label">目标效率提升</div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">AI+Finance Research</div>
+            <p class="footer-text">探索 AI 赋能金融的无限可能</p>
+            <div class="footer-links">
+                <a href="https://github.com/xiaoxiong20260206" target="_blank">GitHub</a>
+                <a href="#research">查看报告</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll Animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 100);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth hover effect for cards
+        document.querySelectorAll('.research-card, .flow-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+    </script>
+</body>
+</html>
