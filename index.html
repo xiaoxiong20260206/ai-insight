@@ -867,8 +867,8 @@
                 <div class="stat-label">深度调研</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value green">每日</div>
-                <div class="stat-label">AI日报</div>
+                <div class="stat-value green">28</div>
+                <div class="stat-label">知识文档</div>
             </div>
         </div>
         
@@ -1270,26 +1270,346 @@
                 <div class="section-header">
                     <div class="section-icon">📚</div>
                     <div>
-                        <h2 class="section-title">知识库</h2>
-                        <p class="section-desc">概念学习、最佳实践、洞察沉淀</p>
+                        <h2 class="section-title">林克的知识树</h2>
+                        <p class="section-desc">系统化沉淀AI行业知识，四大维度覆盖AI核心领域</p>
                     </div>
                 </div>
                 
-                <div class="content-grid">
-                    <a href="04-knowledge-base/concepts/financial/" target="_blank" class="content-card">
-                        <div class="content-card-header">
-                            <span class="content-card-icon">💰</span>
-                            <span class="content-card-title">金融概念学习</span>
-                            <span class="content-card-tag orange">概念</span>
-                        </div>
-                        <div class="content-card-desc">AI金融领域的核心概念和知识框架</div>
-                    </a>
+                <!-- 知识库统计 -->
+                <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--spacing-md); margin-bottom: var(--spacing-xl);">
+                    <div style="background: linear-gradient(135deg, #1A7F37, #2DA44E); color: white; padding: var(--spacing-md); border-radius: var(--radius-md); text-align: center;">
+                        <div style="font-size: 24px; font-weight: 700;">28</div>
+                        <div style="font-size: 12px; opacity: 0.9;">知识文档</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #0969DA, #0550AE); color: white; padding: var(--spacing-md); border-radius: var(--radius-md); text-align: center;">
+                        <div style="font-size: 24px; font-weight: 700;">7</div>
+                        <div style="font-size: 12px; opacity: 0.9;">人物画像</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #7C3AED, #6D28D9); color: white; padding: var(--spacing-md); border-radius: var(--radius-md); text-align: center;">
+                        <div style="font-size: 24px; font-weight: 700;">4</div>
+                        <div style="font-size: 12px; opacity: 0.9;">核心维度</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #BF8700, #9A6700); color: white; padding: var(--spacing-md); border-radius: var(--radius-md); text-align: center;">
+                        <div style="font-size: 24px; font-weight: 700;">6</div>
+                        <div style="font-size: 12px; opacity: 0.9;">概念专题</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #CF222E, #A40E26); color: white; padding: var(--spacing-md); border-radius: var(--radius-md); text-align: center;">
+                        <div style="font-size: 24px; font-weight: 700;">6</div>
+                        <div style="font-size: 12px; opacity: 0.9;">最佳实践</div>
+                    </div>
                 </div>
                 
-                <div style="margin-top: var(--spacing-xl); padding: var(--spacing-lg); background: var(--color-bg-table-header); border-radius: var(--radius-md); text-align: center;">
-                    <p style="color: var(--color-text-muted); font-size: 14px;">
-                        📝 更多知识内容持续积累中...
-                    </p>
+                <!-- 四大维度知识树 -->
+                
+                <!-- 维度1: 模型 -->
+                <div class="category-section">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <div class="collapsible-left">
+                            <span class="collapsible-emoji">📊</span>
+                            <span class="collapsible-title">模型 (Models)</span>
+                            <span class="collapsible-count">2篇</span>
+                        </div>
+                        <span class="collapsible-icon">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <div style="padding: var(--spacing-md);">
+                            <p style="font-size: 13px; color: var(--color-text-muted); margin-bottom: var(--spacing-md);">大模型技术、架构演进、训练方法、能力评估</p>
+                            <div class="table-wrap" style="overflow-x: auto;">
+                                <table class="tracking-table">
+                                    <thead>
+                                        <tr><th>文档</th><th>内容</th><th>来源</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="04-knowledge-base/01-models/ai-history-and-capability-matrix.md" target="_blank"><strong>AI发展史与能力矩阵</strong></a></td>
+                                            <td>1950→2026里程碑、海外/国内厂商对比、六大赛道竞争</td>
+                                            <td>字节AI指南</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="04-knowledge-base/01-models/ai-second-half-task-environment.md" target="_blank"><strong>AI下半场：任务环境设计</strong></a></td>
+                                            <td>核心范式转变、四大底层原理、趋势洞察</td>
+                                            <td>AI大神分析</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div style="margin-top: var(--spacing-md); padding: var(--spacing-sm); background: rgba(26, 127, 55, 0.08); border-radius: var(--radius-sm); font-size: 12px; color: var(--color-success);">
+                                <strong>相关人物：</strong>Andrej Karpathy (Software 3.0)、姚顺雨 (AI下半场)、Dario Amodei (AI安全)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 维度2: Agent -->
+                <div class="category-section">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <div class="collapsible-left">
+                            <span class="collapsible-emoji">🤖</span>
+                            <span class="collapsible-title">Agent</span>
+                            <span class="collapsible-count" style="background: linear-gradient(135deg, #1A7F37, #2DA44E);">核心维度 · 13篇</span>
+                        </div>
+                        <span class="collapsible-icon">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <div style="padding: var(--spacing-md);">
+                            <p style="font-size: 13px; color: var(--color-text-muted); margin-bottom: var(--spacing-md);">Agent架构设计、工作流模式、开发实践、落地应用</p>
+                            
+                            <h4 style="font-size: 14px; color: var(--color-text-secondary); margin-bottom: var(--spacing-sm);">👤 人物画像 (5人)</h4>
+                            <div class="table-wrap" style="overflow-x: auto; margin-bottom: var(--spacing-md);">
+                                <table class="tracking-table">
+                                    <thead>
+                                        <tr><th>人物</th><th>公司</th><th>核心贡献</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="04-knowledge-base/entity-profiles/people/barry-zhang.md" target="_blank"><strong>Barry Zhang</strong></a></td>
+                                            <td>Anthropic</td>
+                                            <td>Agent = Model + Tools + Loop，五大工作流，Skills范式</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="04-knowledge-base/entity-profiles/people/shunyu-yao.md" target="_blank"><strong>姚顺雨</strong></a></td>
+                                            <td>OpenAI</td>
+                                            <td>AI下半场理论，代码即affordance</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="04-knowledge-base/entity-profiles/people/harrison-chase.md" target="_blank"><strong>Harrison Chase</strong></a></td>
+                                            <td>LangChain</td>
+                                            <td>Ambient Agents，Agent Inbox</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="04-knowledge-base/entity-profiles/people/jim-fan.md" target="_blank"><strong>Jim Fan</strong></a></td>
+                                            <td>NVIDIA</td>
+                                            <td>Physical Turing Test，Simulation 2.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="04-knowledge-base/entity-profiles/people/simon-willison.md" target="_blank"><strong>Simon Willison</strong></a></td>
+                                            <td>Django创始人</td>
+                                            <td>Vibe Engineering，上下文管理</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <h4 style="font-size: 14px; color: var(--color-text-secondary); margin-bottom: var(--spacing-sm);">📖 概念文档 (4个)</h4>
+                            <div class="table-wrap" style="overflow-x: auto; margin-bottom: var(--spacing-md);">
+                                <table class="tracking-table">
+                                    <thead>
+                                        <tr><th>概念</th><th>内容</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="04-knowledge-base/concepts/agents/agent-architecture.md" target="_blank"><strong>Agent架构</strong></a></td>
+                                            <td>Agent定义框架、设计原则、五大工作流</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="04-knowledge-base/concepts/agents/agent-types-matrix.md" target="_blank"><strong>Agent类型矩阵</strong></a></td>
+                                            <td>9种Agent类型、岗位匹配、建设优先级</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="04-knowledge-base/concepts/agents/ambient-agents.md" target="_blank"><strong>Ambient Agents</strong></a></td>
+                                            <td>环境Agent、事件驱动、Agent Inbox</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="04-knowledge-base/concepts/agents/physical-ai.md" target="_blank"><strong>Physical AI</strong></a></td>
+                                            <td>物理AI、具身智能、Simulation 2.0</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <h4 style="font-size: 14px; color: var(--color-text-secondary); margin-bottom: var(--spacing-sm);">🛠️ 最佳实践 (4个)</h4>
+                            <div class="table-wrap" style="overflow-x: auto;">
+                                <table class="tracking-table">
+                                    <thead>
+                                        <tr><th>实践</th><th>内容</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="04-knowledge-base/02-agents/agent-infra-and-optimization.md" target="_blank"><strong>Agent基础设施与调优</strong></a></td>
+                                            <td>Eino/veADK/扣子、评测·观测·调优三件套</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="04-knowledge-base/best-practices/ai-coding-workflow.md" target="_blank"><strong>AI编程工作流</strong></a></td>
+                                            <td>Simon Willison等人的方法论</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="04-knowledge-base/best-practices/financial-ai-agent-design.md" target="_blank"><strong>金融AI Agent</strong></a></td>
+                                            <td>9种金融Agent详细规格</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="04-knowledge-base/best-practices/ai-agent-team-implementation.md" target="_blank"><strong>AI Agent团队落地</strong></a></td>
+                                            <td>四阶段路线图、资源估算</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 维度3: AI企业 -->
+                <div class="category-section">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <div class="collapsible-left">
+                            <span class="collapsible-emoji">🏢</span>
+                            <span class="collapsible-title">AI企业 (AI Companies)</span>
+                            <span class="collapsible-count">2篇</span>
+                        </div>
+                        <span class="collapsible-icon">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <div style="padding: var(--spacing-md);">
+                            <p style="font-size: 13px; color: var(--color-text-muted); margin-bottom: var(--spacing-md);">AI原生企业画像、商业模式、竞争格局、战略分析</p>
+                            
+                            <h4 style="font-size: 14px; color: var(--color-text-secondary); margin-bottom: var(--spacing-sm);">🏢 公司画像</h4>
+                            <div class="table-wrap" style="overflow-x: auto;">
+                                <table class="tracking-table">
+                                    <thead>
+                                        <tr><th>公司</th><th>领域</th><th>核心内容</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="04-knowledge-base/03-ai-companies/bytedance-ai-landscape.md" target="_blank"><strong>字节跳动</strong></a></td>
+                                            <td>大模型/AI应用</td>
+                                            <td>全栈布局、豆包2.27亿月活、1600亿投入、产品矩阵</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="04-knowledge-base/entity-profiles/companies/high-flyer-quant.md" target="_blank"><strong>幻方量化</strong></a></td>
+                                            <td>量化投资/AI</td>
+                                            <td>DeepSeek孵化、AI应用场景、竞争力分析</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div style="margin-top: var(--spacing-md); padding: var(--spacing-sm); background: rgba(9, 105, 218, 0.08); border-radius: var(--radius-sm); font-size: 12px; color: var(--color-info);">
+                                <strong>待补充：</strong>OpenAI、Anthropic、DeepSeek、NVIDIA AI
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 维度4: 企业AI转型 -->
+                <div class="category-section">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <div class="collapsible-left">
+                            <span class="collapsible-emoji">🏭</span>
+                            <span class="collapsible-title">企业AI转型 (Enterprise AI)</span>
+                            <span class="collapsible-count">7篇</span>
+                        </div>
+                        <span class="collapsible-icon">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <div style="padding: var(--spacing-md);">
+                            <p style="font-size: 13px; color: var(--color-text-muted); margin-bottom: var(--spacing-md);">传统企业AI应用、数字化转型、组织变革、落地实践</p>
+                            
+                            <h4 style="font-size: 14px; color: var(--color-text-secondary); margin-bottom: var(--spacing-sm);">📖 概念文档</h4>
+                            <div class="table-wrap" style="overflow-x: auto; margin-bottom: var(--spacing-md);">
+                                <table class="tracking-table">
+                                    <thead>
+                                        <tr><th>概念</th><th>内容</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="04-knowledge-base/concepts/enterprise/software-engineering-3.md" target="_blank"><strong>软件工程3.0</strong></a></td>
+                                            <td>L1-L2-L3成熟度模型、快手实践数据</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="04-knowledge-base/concepts/coding/ai-coding-practices.md" target="_blank"><strong>AI编程实践</strong></a></td>
+                                            <td>Vibe Coding vs Engineering、TDD复兴</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <h4 style="font-size: 14px; color: var(--color-text-secondary); margin-bottom: var(--spacing-sm);">🛠️ 最佳实践</h4>
+                            <div class="table-wrap" style="overflow-x: auto;">
+                                <table class="tracking-table">
+                                    <thead>
+                                        <tr><th>实践</th><th>内容</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="04-knowledge-base/04-enterprise-ai/enterprise-ai-transformation-methodology.md" target="_blank"><strong>企业AI转型方法论</strong></a></td>
+                                            <td>三步走策略、15个提效场景、安全合规</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="04-knowledge-base/best-practices/ai-studio-product-design.md" target="_blank"><strong>AI Studio产品方案</strong></a></td>
+                                            <td>主动服务设计、Proactive Agent</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="04-knowledge-base/best-practices/enterprise-ai-worker-scenarios.md" target="_blank"><strong>企业数字员工场景</strong></a></td>
+                                            <td>10岗位×9种Agent分析</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="04-knowledge-base/best-practices/enterprise-ai-product-design.md" target="_blank"><strong>企业AI产品设计</strong></a></td>
+                                            <td>数字员工产品框架</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div style="margin-top: var(--spacing-md); padding: var(--spacing-sm); background: rgba(191, 135, 0, 0.08); border-radius: var(--radius-sm); font-size: 12px; color: var(--color-warning);">
+                                <strong>关键数据：</strong>L1渗透率55% | L2渗透率21% | L3渗透率3% | 投研提效70% | 数据查询提效80%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 知识树可视化 -->
+                <div style="margin-top: var(--spacing-xl); padding: var(--spacing-lg); background: var(--color-bg-table-header); border-radius: var(--radius-lg); border: 1px solid var(--color-border-light);">
+                    <h3 style="font-size: 16px; font-weight: 600; margin-bottom: var(--spacing-md); display: flex; align-items: center; gap: var(--spacing-sm);">
+                        <span>🌳</span> 知识体系全景图
+                    </h3>
+                    <pre style="font-family: 'SF Mono', Consolas, monospace; font-size: 12px; line-height: 1.6; color: var(--color-text-secondary); overflow-x: auto; white-space: pre;">
+林克的AI知识树
+├── 📊 模型 (2篇)
+│   ├── AI发展史与能力矩阵
+│   └── AI下半场：任务环境设计
+│
+├── 🤖 Agent (13篇) ⭐核心维度
+│   ├── 人物画像 (5人)
+│   │   ├── Barry Zhang → Agent框架、Skills范式
+│   │   ├── 姚顺雨 → AI下半场、affordance
+│   │   ├── Harrison Chase → Ambient Agents
+│   │   ├── Jim Fan → Physical AI
+│   │   └── Simon Willison → Vibe Engineering
+│   │
+│   ├── 概念文档 (4个)
+│   │   ├── Agent架构 → 五大工作流
+│   │   ├── Agent类型矩阵 → 9种类型
+│   │   ├── Ambient Agents → 事件驱动
+│   │   └── Physical AI → 具身智能
+│   │
+│   └── 最佳实践 (4个)
+│       ├── Agent基础设施与调优
+│       ├── AI编程工作流
+│       ├── 金融AI Agent
+│       └── AI Agent团队落地
+│
+├── 🏢 AI企业 (2篇)
+│   ├── 字节跳动 → 全栈布局、豆包生态
+│   └── 幻方量化 → DeepSeek孵化
+│
+└── 🏭 企业AI转型 (7篇)
+    ├── 概念 (2个)
+    │   ├── 软件工程3.0 → L1/L2/L3模型
+    │   └── AI编程实践 → Vibe Coding
+    │
+    └── 实践 (5个)
+        ├── 企业AI转型方法论 → 三步走
+        ├── AI Studio产品方案
+        ├── 企业数字员工场景
+        ├── 企业AI产品设计
+        └── AI Agent团队落地
+                    </pre>
+                </div>
+                
+                <div style="margin-top: var(--spacing-lg); text-align: center;">
+                    <a href="04-knowledge-base/README.md" target="_blank" style="display: inline-flex; align-items: center; gap: var(--spacing-sm); padding: 12px 24px; background: var(--gradient-success); color: white; border-radius: var(--radius-full); font-weight: 600; font-size: 14px; transition: all var(--transition-normal);">
+                        <span>📖</span>
+                        <span>查看完整知识库索引</span>
+                        <span>→</span>
+                    </a>
                 </div>
             </section>
         </article>
