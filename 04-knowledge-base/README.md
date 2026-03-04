@@ -1,8 +1,8 @@
 # AI-Insight 知识库
 
-> **版本**: v4.1.0
+> **版本**: v4.2.0
 > **创建时间**: 2026-03-04
-> **最后更新**: 2026-03-04
+> **最后更新**: 2026-03-05
 > **维护者**: 林克 (沈浪的AI分身)
 
 ---
@@ -11,11 +11,10 @@
 
 这是AI-Insight项目的结构化知识库，用于系统性沉淀AI行业的知识。
 
-**v4.1更新**: 按四大维度从源材料重新提取知识，新增5篇维度专属文档：
-- 📊 模型: AI发展史与能力矩阵、AI下半场趋势
-- 🤖 Agent: Agent基础设施与调优方法论
-- 🏢 AI企业: 字节跳动AI全景布局
-- 🏭 企业AI转型: 企业AI转型实战方法论
+**v4.2更新**: 主动出击网上学习，大幅扩充知识库，新增4篇高质量文档：
+- 📊 模型: **推理模型专题** (OpenAI o系列、DeepSeek-R1、Chain-of-Thought)
+- 🤖 Agent: **MCP协议专题** (Model Context Protocol标准、AAIF基金会)
+- 🏢 AI企业: **OpenAI公司画像**、**Anthropic公司画像**
 
 ---
 
@@ -23,12 +22,12 @@
 
 | 维度 | 文档数 | 人物 | 新增本次 |
 |------|--------|------|----------|
-| **模型** | 2 | 3人 | +2 ✨ |
-| **Agent** | 13 | 5人 | +1 ✨ |
-| **AI企业** | 2 | 5人 | +1 ✨ |
-| **企业AI转型** | 7 | 2人 | +1 ✨ |
+| **模型** | 3 | 3人 | +1 ✨ |
+| **Agent** | 14 | 5人 | +1 ✨ |
+| **AI企业** | 4 | 5人 | +2 ✨ |
+| **企业AI转型** | 7 | 2人 | - |
 | **洞察** | 3 | - | - |
-| **总计** | **28** | **7** | **+5** |
+| **总计** | **32** | **7** | **+4** |
 
 ---
 
@@ -40,8 +39,9 @@
 
 | 文档 | 内容 | 来源 |
 |------|------|------|
-| `ai-history-and-capability-matrix.md` ✨ | AI发展史、海外/国内大模型能力矩阵、竞争焦点演进 | 字节AI指南 |
-| `ai-second-half-task-environment.md` ✨ | AI下半场理论、底层原理、趋势洞察 | AI大神分析 |
+| `ai-history-and-capability-matrix.md` | AI发展史、海外/国内大模型能力矩阵、竞争焦点演进 | 字节AI指南 |
+| `ai-second-half-task-environment.md` | AI下半场理论、底层原理、趋势洞察 | AI大神分析 |
+| `reasoning-models.md` ✨ | **推理模型专题**: OpenAI o系列、DeepSeek-R1、CoT技术 | 网络调研 |
 
 **日报关联**: 新模型发布、能力评测、技术创新
 
@@ -54,10 +54,10 @@ Agent架构设计、工作流模式、开发实践、落地应用
 | 类型 | 数量 | 核心内容 |
 |------|------|---------|
 | 人物画像 | 5人 | Barry Zhang, 姚顺雨, Harrison Chase, Jim Fan, Simon Willison |
-| 概念文档 | 4个 | Agent架构、Agent矩阵、Ambient Agents、Physical AI |
-| 最佳实践 | 4个 | AI编程工作流、金融Agent、团队落地、**Agent基础设施** ✨ |
+| 概念文档 | 5个 | Agent架构、Agent矩阵、Ambient Agents、Physical AI、**MCP协议** ✨ |
+| 最佳实践 | 4个 | AI编程工作流、金融Agent、团队落地、Agent基础设施 |
 
-**新增**: `agent-infra-and-optimization.md` - Agent开发框架(Eino/veADK/扣子) + AgentOps平台(评测·观测·调优)
+**新增**: `model-context-protocol.md` - MCP标准与生态、AAIF基金会、10,000+ MCP Server
 
 **日报关联**: Agent框架、开发实践、应用案例
 
@@ -69,10 +69,12 @@ AI原生企业画像、商业模式、竞争格局
 
 | 类型 | 数量 | 核心内容 |
 |------|------|---------|
-| 公司画像 | 2家 | 幻方量化、**字节跳动** ✨ |
+| 公司画像 | 4家 | 幻方量化、字节跳动、**OpenAI** ✨、**Anthropic** ✨ |
 | 关联人物 | 5人 | 按公司归类 |
 
-**新增**: `bytedance-ai-landscape.md` - 字节AI全景布局、产品矩阵、战略分析、商业模式
+**新增**: 
+- `openai-profile.md` - OpenAI全景: 产品矩阵、$5000亿估值、Stargate项目
+- `anthropic-profile.md` - Anthropic全景: Claude系列、AI安全理念、MCP协议创建者
 
 **日报关联**: 公司融资、产品发布、战略动态
 
@@ -97,43 +99,37 @@ AI原生企业画像、商业模式、竞争格局
 
 ### 📊 模型维度
 
-1. **AI发展史与能力矩阵**
-   - 发展历程: 1950→2026关键里程碑
-   - 海外厂商: OpenAI/Google/Anthropic/Meta/xAI对比
-   - 国内厂商: 字节/百度/阿里/腾讯/DeepSeek/华为对比
-   - 六大赛道: Agentic AI、推理效率、垂直场景、端侧部署、多模态、具身智能
-
-2. **AI下半场趋势**
-   - 核心范式转变: 从模型能力→任务环境设计
-   - Agent架构趋势: 简单优先、Skills范式、Ambient Agents
-   - AI编程趋势: Vibe Coding→Agentic Engineering、上下文为王、TDD复兴
-   - 四大底层原理: 复杂度守恒、泛化=压缩、反馈环路、抽象层级
+1. **推理模型专题** ✨ (v4.2新增)
+   - OpenAI o系列: o1、o3、o4-mini演进，视觉推理、工具使用
+   - DeepSeek-R1: 671B参数MoE架构，MIT开源，4阶段RL训练
+   - 核心技术: Chain-of-Thought、Test-Time Compute、强化学习
+   - 应用: Codex CLI、推理vs传统LLM选择指南
 
 ### 🤖 Agent维度
 
-3. **Agent基础设施与调优方法论**
-   - Agent Infra定义: Agent Dev + AgentOps
-   - 开发工具: Eino、veADK、扣子平台、CozeLoop
-   - 三种方案对比: 零码/低码/全码
-   - 评测·观测·调优三件套
-   - Badcase调优流程
+2. **MCP协议专题** ✨ (v4.2新增)
+   - 定位: "AI的USB-C"，连接AI与外部系统的开放标准
+   - 生态: 10,000+ MCP Server、97M+月SDK下载、75+ Claude Connector
+   - 采用: ChatGPT、Cursor、Gemini、VS Code等主流产品
+   - AAIF: Linux Foundation下的Agentic AI Foundation
+   - 创始项目: MCP (Anthropic)、goose (Block)、AGENTS.md (OpenAI)
 
 ### 🏢 AI企业维度
 
-4. **字节跳动AI全景布局**
-   - 发展历程: 2012推荐→2026 Seedance
-   - 核心数据: 豆包2.27亿月活、MaaS>50%、1600亿投入
-   - 产品矩阵: 2C/2B/内部三层全覆盖
-   - 战略布局: 双轨战略、全栈架构
-   - 竞争力分析与风险因素
+3. **OpenAI公司画像** ✨ (v4.2新增)
+   - 估值: $5,000亿 (2025.10)，全球最高估值私有公司
+   - 收入: $120亿年化 (2025)
+   - 产品矩阵: ChatGPT、GPT-5.2、o3、Sora、Codex CLI等
+   - 战略: Stargate项目($5000亿)、Microsoft合作、政府合同
+   - 争议: 版权诉讼、安全团队流失、2023董事会危机
 
-### 🏭 企业AI转型维度
-
-5. **企业AI转型实战方法论**
-   - 三步走: 工具引入→个人提效→组织提效
-   - 15个提效场景: 业务/产研/职能三类
-   - 安全合规: 无全量数据测试、隐私保护调优
-   - 风险应对与成功要素
+4. **Anthropic公司画像** ✨ (v4.2新增)
+   - 估值: $3,800亿 (2026.02)
+   - 收入: $140亿 (2025)，Claude Code $10亿年化收入
+   - 产品: Claude系列 (4.6最新)、Claude Code、Claude Cowork
+   - 技术特色: Constitutional AI、可解释性研究、MCP协议
+   - 安全立场: 拒绝国防部取消AI安全限制要求 (2026.02)
+   - 收购: Bun (JavaScript运行时)
 
 ---
 
@@ -151,11 +147,13 @@ AI原生企业画像、商业模式、竞争格局
 | **Jim Fan** | NVIDIA | Physical Turing Test、Simulation 2.0 | Agent+AI企业 |
 | **Addy Osmani** | Google | AI增强工程、六步工作流 | 企业AI |
 
-### 🏢 公司画像 (2家)
+### 🏢 公司画像 (4家)
 
 | 公司 | 领域 | 核心内容 |
 |------|------|---------|
-| **字节跳动** ✨ | 大模型/AI应用 | 全栈布局、产品矩阵、战略分析 |
+| **OpenAI** ✨ | 大模型领导者 | 产品矩阵、$5000亿估值、Stargate项目、政府合作 |
+| **Anthropic** ✨ | AI安全公司 | Claude系列、Constitutional AI、MCP协议、安全立场 |
+| **字节跳动** | 大模型/AI应用 | 全栈布局、产品矩阵、战略分析 |
 | **幻方量化** | 量化投资 | DeepSeek孵化、AI应用、竞争力分析 |
 
 ---
@@ -181,17 +179,21 @@ AI原生企业画像、商业模式、竞争格局
 ├── README.md                    # 本文件
 ├── 01-models/                   # 模型维度
 │   ├── README.md
-│   ├── ai-history-and-capability-matrix.md  ✨
-│   └── ai-second-half-task-environment.md   ✨
+│   ├── ai-history-and-capability-matrix.md
+│   ├── ai-second-half-task-environment.md
+│   └── reasoning-models.md              ✨ v4.2新增
 ├── 02-agents/                   # Agent维度
 │   ├── README.md
-│   └── agent-infra-and-optimization.md      ✨
+│   ├── agent-infra-and-optimization.md
+│   └── model-context-protocol.md        ✨ v4.2新增
 ├── 03-ai-companies/             # AI企业维度
 │   ├── README.md
-│   └── bytedance-ai-landscape.md            ✨
+│   ├── bytedance-ai-landscape.md
+│   ├── openai-profile.md                ✨ v4.2新增
+│   └── anthropic-profile.md             ✨ v4.2新增
 ├── 04-enterprise-ai/            # 企业AI转型维度
 │   ├── README.md
-│   └── enterprise-ai-transformation-methodology.md  ✨
+│   └── enterprise-ai-transformation-methodology.md
 ├── concepts/                    # 概念文档
 │   ├── agents/
 │   ├── coding/
@@ -210,6 +212,7 @@ AI原生企业画像、商业模式、竞争格局
 
 | 版本 | 日期 | 更新内容 |
 |------|------|---------|
+| v4.2.0 | 2026-03-05 | 主动网上学习，新增推理模型、MCP协议、OpenAI/Anthropic画像共4篇 |
 | v4.1.0 | 2026-03-04 | 按四大维度重新提取知识，新增5篇维度专属文档 |
 | v4.0.0 | 2026-03-04 | 引入四大维度结构，与日报方向对齐 |
 | v3.0.0 | 2026-03-04 | 新增6个人物画像、2个概念专题 |
@@ -219,4 +222,4 @@ AI原生企业画像、商业模式、竞争格局
 
 ---
 
-*最后更新: 2026-03-04*
+*最后更新: 2026-03-05*
