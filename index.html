@@ -645,40 +645,45 @@
             }
         }
         
-        /* ============ Calendar Styles ============ */
+        /* ============ Calendar Styles (Compact Mini) ============ */
         .calendar-container {
-            margin-top: var(--spacing-lg);
+            margin-top: var(--spacing-md);
+            max-width: 280px;
+            background: var(--color-bg-table-header);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-md);
+            padding: 12px;
         }
         
         .calendar-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: var(--spacing-md);
+            margin-bottom: 8px;
         }
         
         .calendar-month {
-            font-size: 18px;
-            font-weight: 700;
+            font-size: 13px;
+            font-weight: 600;
             color: var(--color-text-primary);
         }
         
         .calendar-nav {
             display: flex;
-            gap: var(--spacing-sm);
+            gap: 2px;
         }
         
         .calendar-nav-btn {
-            width: 32px;
-            height: 32px;
+            width: 22px;
+            height: 22px;
             border: 1px solid var(--color-border);
             background: var(--color-bg-card);
-            border-radius: var(--radius-sm);
+            border-radius: 4px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: 10px;
             color: var(--color-text-muted);
             transition: all var(--transition-fast);
         }
@@ -686,47 +691,49 @@
         .calendar-nav-btn:hover {
             border-color: var(--color-success);
             color: var(--color-success);
+            background: rgba(26, 127, 55, 0.05);
         }
         
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 4px;
+            gap: 2px;
         }
         
         .calendar-weekday {
             text-align: center;
-            font-size: 12px;
+            font-size: 9px;
             font-weight: 600;
             color: var(--color-text-muted);
-            padding: var(--spacing-sm);
-            text-transform: uppercase;
+            padding: 2px 0;
         }
         
         .calendar-day {
-            aspect-ratio: 1;
+            width: 100%;
+            height: 26px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: 11px;
             font-weight: 500;
             color: var(--color-text-secondary);
-            border-radius: var(--radius-sm);
-            background: var(--color-bg-table-header);
+            border-radius: 4px;
+            background: var(--color-bg-card);
             border: 1px solid transparent;
             transition: all var(--transition-fast);
         }
         
         .calendar-day.empty {
             background: transparent;
+            border: none;
         }
         
         .calendar-day.has-report {
-            background: rgba(26, 127, 55, 0.1);
+            background: rgba(26, 127, 55, 0.15);
             color: var(--color-success);
             font-weight: 600;
             cursor: pointer;
-            border-color: var(--color-success);
+            border-color: rgba(26, 127, 55, 0.3);
         }
         
         .calendar-day.has-report:hover {
@@ -746,34 +753,41 @@
         
         .calendar-legend {
             display: flex;
-            gap: var(--spacing-lg);
-            margin-top: var(--spacing-md);
-            padding-top: var(--spacing-md);
+            gap: 10px;
+            margin-top: 6px;
+            padding-top: 6px;
             border-top: 1px solid var(--color-border-light);
-            font-size: 12px;
+            font-size: 10px;
             color: var(--color-text-muted);
         }
         
         .calendar-legend-item {
             display: flex;
             align-items: center;
-            gap: var(--spacing-xs);
+            gap: 3px;
         }
         
         .calendar-legend-dot {
-            width: 12px;
-            height: 12px;
+            width: 8px;
+            height: 8px;
             border-radius: 2px;
         }
         
         .calendar-legend-dot.has-report {
-            background: rgba(26, 127, 55, 0.3);
+            background: rgba(26, 127, 55, 0.25);
             border: 1px solid var(--color-success);
         }
         
         .calendar-legend-dot.today {
             background: transparent;
-            border: 2px solid var(--color-info);
+            border: 1.5px solid var(--color-info);
+        }
+        
+        .calendar-report-count {
+            font-size: 10px;
+            color: var(--color-success);
+            font-weight: 600;
+            margin-left: auto;
         }
         
         /* ============ Footer ============ */
@@ -918,51 +932,19 @@
                     </a>
                 </div>
                 
-                <!-- 日历视图 -->
+                <!-- 日历视图（紧凑版） -->
                 <div class="calendar-container">
                     <div class="calendar-header">
-                        <span class="calendar-month">📅 2026年3月 日报日历</span>
+                        <div class="calendar-nav">
+                            <button class="calendar-nav-btn" onclick="changeMonth(-1)" title="上个月">◀</button>
+                        </div>
+                        <span class="calendar-month" id="calendarMonth">📅 2026年3月</span>
+                        <div class="calendar-nav">
+                            <button class="calendar-nav-btn" onclick="changeMonth(1)" title="下个月">▶</button>
+                        </div>
                     </div>
                     <div class="calendar-grid" id="reportCalendar">
-                        <div class="calendar-weekday">日</div>
-                        <div class="calendar-weekday">一</div>
-                        <div class="calendar-weekday">二</div>
-                        <div class="calendar-weekday">三</div>
-                        <div class="calendar-weekday">四</div>
-                        <div class="calendar-weekday">五</div>
-                        <div class="calendar-weekday">六</div>
-                        <!-- 3月从周日开始 -->
-                        <div class="calendar-day has-report" onclick="window.open('01-daily-reports/2026-03/2026-03-01.html', '_blank')" title="3月1日 AI日报">1</div>
-                        <div class="calendar-day has-report" onclick="window.open('01-daily-reports/2026-03/2026-03-02.html', '_blank')" title="3月2日 AI日报">2</div>
-                        <div class="calendar-day has-report" onclick="window.open('01-daily-reports/2026-03/2026-03-03.html', '_blank')" title="3月3日 AI日报">3</div>
-                        <div class="calendar-day has-report today" onclick="window.open('01-daily-reports/2026-03/2026-03-04.html', '_blank')" title="3月4日 AI日报（今天）">4</div>
-                        <div class="calendar-day">5</div>
-                        <div class="calendar-day">6</div>
-                        <div class="calendar-day">7</div>
-                        <div class="calendar-day">8</div>
-                        <div class="calendar-day">9</div>
-                        <div class="calendar-day">10</div>
-                        <div class="calendar-day">11</div>
-                        <div class="calendar-day">12</div>
-                        <div class="calendar-day">13</div>
-                        <div class="calendar-day">14</div>
-                        <div class="calendar-day">15</div>
-                        <div class="calendar-day">16</div>
-                        <div class="calendar-day">17</div>
-                        <div class="calendar-day">18</div>
-                        <div class="calendar-day">19</div>
-                        <div class="calendar-day">20</div>
-                        <div class="calendar-day">21</div>
-                        <div class="calendar-day">22</div>
-                        <div class="calendar-day">23</div>
-                        <div class="calendar-day">24</div>
-                        <div class="calendar-day">25</div>
-                        <div class="calendar-day">26</div>
-                        <div class="calendar-day">27</div>
-                        <div class="calendar-day">28</div>
-                        <div class="calendar-day">29</div>
-                        <div class="calendar-day">30</div>
-                        <div class="calendar-day">31</div>
+                        <!-- 由 JS 动态生成 -->
                     </div>
                     <div class="calendar-legend">
                         <div class="calendar-legend-item">
@@ -973,6 +955,7 @@
                             <div class="calendar-legend-dot today"></div>
                             <span>今天</span>
                         </div>
+                        <span class="calendar-report-count" id="calendarReportCount"></span>
                     </div>
                 </div>
             </section>
@@ -1352,6 +1335,103 @@
                 content.classList.add('active');
             }
         }
+        
+        // ============ 日历功能 ============
+        // 已有日报的数据（格式: YYYY-MM-DD）
+        const reportsData = {
+            '2026-03': [1, 2, 3, 4],  // 3月有日报的日期
+            '2026-02': [28],          // 2月示例
+        };
+        
+        // 当前显示的月份
+        let currentYear = 2026;
+        let currentMonth = 3; // 1-12
+        
+        // 今天的日期
+        const today = new Date();
+        const todayYear = today.getFullYear();
+        const todayMonth = today.getMonth() + 1;
+        const todayDay = today.getDate();
+        
+        // 渲染日历
+        function renderCalendar() {
+            const grid = document.getElementById('reportCalendar');
+            const monthLabel = document.getElementById('calendarMonth');
+            const countLabel = document.getElementById('calendarReportCount');
+            
+            // 更新月份标题
+            monthLabel.textContent = `📅 ${currentYear}年${currentMonth}月`;
+            
+            // 获取该月第一天是星期几（0=周日）
+            const firstDay = new Date(currentYear, currentMonth - 1, 1).getDay();
+            // 获取该月天数
+            const daysInMonth = new Date(currentYear, currentMonth, 0).getDate();
+            
+            // 获取该月有日报的日期
+            const monthKey = `${currentYear}-${String(currentMonth).padStart(2, '0')}`;
+            const reportDays = reportsData[monthKey] || [];
+            
+            // 生成HTML
+            let html = `
+                <div class="calendar-weekday">日</div>
+                <div class="calendar-weekday">一</div>
+                <div class="calendar-weekday">二</div>
+                <div class="calendar-weekday">三</div>
+                <div class="calendar-weekday">四</div>
+                <div class="calendar-weekday">五</div>
+                <div class="calendar-weekday">六</div>
+            `;
+            
+            // 空白填充
+            for (let i = 0; i < firstDay; i++) {
+                html += '<div class="calendar-day empty"></div>';
+            }
+            
+            // 日期
+            for (let day = 1; day <= daysInMonth; day++) {
+                const hasReport = reportDays.includes(day);
+                const isToday = (currentYear === todayYear && currentMonth === todayMonth && day === todayDay);
+                
+                let classes = 'calendar-day';
+                if (hasReport) classes += ' has-report';
+                if (isToday) classes += ' today';
+                
+                const dateStr = `${currentYear}-${String(currentMonth).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const reportUrl = `01-daily-reports/${currentYear}-${String(currentMonth).padStart(2, '0')}/${dateStr}.html`;
+                
+                if (hasReport) {
+                    const title = isToday ? `${currentMonth}月${day}日 AI日报（今天）` : `${currentMonth}月${day}日 AI日报`;
+                    html += `<div class="${classes}" onclick="window.open('${reportUrl}', '_blank')" title="${title}">${day}</div>`;
+                } else {
+                    html += `<div class="${classes}">${day}</div>`;
+                }
+            }
+            
+            grid.innerHTML = html;
+            
+            // 更新统计
+            if (reportDays.length > 0) {
+                countLabel.textContent = `本月${reportDays.length}篇`;
+            } else {
+                countLabel.textContent = '';
+            }
+        }
+        
+        // 切换月份
+        function changeMonth(delta) {
+            currentMonth += delta;
+            if (currentMonth > 12) {
+                currentMonth = 1;
+                currentYear++;
+            } else if (currentMonth < 1) {
+                currentMonth = 12;
+                currentYear--;
+            }
+            renderCalendar();
+        }
+        
+        // 初始化日历
+        renderCalendar();
     </script>
 </body>
 </html>
