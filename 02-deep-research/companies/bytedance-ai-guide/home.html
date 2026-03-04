@@ -4,97 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>字节跳动AI"开挂"指南 - 从算法小白到AI巨头的逆袭之路</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <!-- 性能优化：仅加载必要的字体字重 400和600 -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="preload" href="css/styles.min.css" as="style">
-    <link rel="stylesheet" href="css/styles.min.css">
+    <!-- 清爽调研报告风格 -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231A7F37'/><path d='M9 16l4 4 10-10' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+    <link rel="stylesheet" href="css/qingshuang-style.css">
     <style>
-        /* 首页特殊样式 */
-        .hero {
-            padding: 100px 0 40px;
-            background: var(--color-bg);
-            text-align: center;
-            position: relative;
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 10;
-        }
-        
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--gradient-badge);
-            padding: 8px 20px;
-            border-radius: var(--radius-full);
-            font-size: var(--font-size-xs);
-            margin-bottom: var(--spacing-lg);
-            color: var(--color-info);
-            font-weight: 500;
-        }
-        
-        .hero-badge::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            background: var(--color-success);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-        
-        .hero-title {
-            font-size: var(--font-size-3xl);
-            font-weight: 600;
-            line-height: 1.2;
-            margin-bottom: var(--spacing-md);
-            color: var(--color-text-primary);
-        }
-        
-        .hero-title .highlight {
-            background: var(--gradient-success);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .hero-subtitle {
-            font-size: var(--font-size-base);
-            color: var(--color-text-secondary);
-            max-width: 700px;
-            margin: 0 auto var(--spacing-lg);
-            line-height: 1.8;
-        }
-        
-        .hero-subtitle .funny {
-            color: var(--color-success);
-            font-weight: 600;
-        }
-        
-        .hero-cta {
-            display: flex;
-            justify-content: center;
-            gap: var(--spacing-md);
-            flex-wrap: wrap;
-        }
-        
-        .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: var(--spacing-xl);
-            margin-top: var(--spacing-xl);
-            flex-wrap: wrap;
-        }
-        
-        .hero-stat {
-            text-align: center;
-        }
-        
+        /* 首页补充样式 */
         .hero-stat-value {
             font-family: var(--font-mono);
             font-size: var(--font-size-2xl);
@@ -108,126 +22,10 @@
             margin-top: var(--spacing-xs);
         }
         
-        /* 导航目录 */
-        .toc-section {
-            padding: var(--spacing-xl) 0;
-            background: var(--color-bg-table-header);
-        }
-        
-        .toc-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--spacing-md);
-        }
-        
-        .toc-card {
-            background: var(--color-bg-card);
-            border-radius: var(--radius-lg);
-            padding: var(--spacing-md);
-            text-decoration: none;
-            color: inherit;
-            transition: var(--transition-normal);
-            border: 1px solid var(--color-border-light);
-            position: relative;
-            overflow: hidden;
-            box-shadow: var(--shadow-card);
-        }
-        
-        .toc-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gradient-success);
-            transform: scaleX(0);
-            transition: var(--transition-normal);
-        }
-        
-        .toc-card:hover {
-            transform: translateY(-2px);
-            border-color: var(--color-success);
-            box-shadow: var(--shadow-md);
-        }
-        
-        .toc-card:hover::before {
-            transform: scaleX(1);
-        }
-        
-        .toc-number {
-            font-family: var(--font-mono);
-            font-size: var(--font-size-2xl);
-            font-weight: 600;
-            color: var(--color-border);
-            position: absolute;
-            top: var(--spacing-md);
-            right: var(--spacing-lg);
-        }
-        
-        .toc-icon {
-            font-size: 2rem;
-            margin-bottom: var(--spacing-sm);
-            display: inline-block;
-        }
-        
-        .toc-card h3 {
-            font-size: var(--font-size-lg);
-            margin-bottom: var(--spacing-sm);
-            color: var(--color-text-primary);
-        }
-        
-        .toc-card p {
-            color: var(--color-text-secondary);
-            font-size: var(--font-size-base);
-            line-height: 1.6;
-        }
-        
-        .toc-card .toc-funny {
-            display: block;
-            margin-top: var(--spacing-sm);
-            font-size: var(--font-size-xs);
-            color: var(--color-success);
-            font-weight: 500;
-        }
-        
-        /* 开场白卡片特殊样式 */
-        .intro-card {
-            background: var(--color-bg-card);
-            border: 1px solid var(--color-border-light);
-            box-shadow: var(--shadow-card);
-        }
-        
-        .intro-card p {
-            color: var(--color-text-secondary);
-        }
-        
-        .intro-card strong {
-            color: var(--color-success);
-        }
-        
-        .intro-card ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        
+        /* 开场白列表 */
         .intro-card ul li {
             color: var(--color-text-secondary);
             padding: var(--spacing-xs) 0;
-        }
-        
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: var(--font-size-xl);
-            }
-            
-            .hero-stats {
-                gap: var(--spacing-lg);
-            }
-            
-            .hero-stat-value {
-                font-size: var(--font-size-xl);
-            }
         }
     </style>
 </head>
