@@ -1,8 +1,15 @@
 #!/usr/bin/env python3
 """
-AI日报 KIM 推送脚本
-====================
+AI日报 KIM 推送脚本 v2.0 (升级版)
+================================
 将 AI 日报推送到林克所在的所有 KIM 群
+
+功能特性:
+- 升级版卡片格式：五大板块 × 三子类（动态/观点/洞察）
+- 每条动态带链接，点击可跳转原文
+- 双按钮：查看完整日报 + 了解AI洞察项目
+- 重试机制：遇到频率限制自动重试
+- 间隔控制：群间2.5秒间隔
 
 使用方式:
   python scripts/send_ai_daily.py                    # 推送今天的日报
@@ -10,8 +17,8 @@ AI日报 KIM 推送脚本
   python scripts/send_ai_daily.py --dry-run          # 试运行，不实际发送
 
 作者: 林克 (沈浪的AI分身)
-版本: 1.1.0
-更新: 2026-03-05 - 增加重试机制、群名获取、间隔控制
+版本: 2.0.0
+更新: 2026-03-05 - 升级卡片格式，增加子类展示和链接
 """
 
 import asyncio
@@ -19,7 +26,7 @@ import argparse
 import re
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Dict, List, Tuple
 
 try:
     import httpx
@@ -36,6 +43,7 @@ GATEWAY_URL = "https://is-gateway.corp.kuaishou.com"
 # 日报路径 (相对于项目根目录)
 DAILY_REPORTS_PATH = Path(__file__).parent.parent / "01-daily-reports"
 REPORT_BASE_URL = "https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports"
+PROJECT_URL = "https://xiaoxiong20260206.github.io/ai-insight/"
 
 # 推送配置
 SEND_INTERVAL = 2.5  # 群间发送间隔(秒)，避免频率限制
@@ -76,36 +84,15 @@ async def get_bot_groups(token: str) -> list:
         result = resp.json()
         if result.get("code") == 0:
             groups = result.get("data", {}).get("groups", [])
-            # 直接使用API返回的群信息（name字段包含群名）
             enriched_groups = []
             for group in groups:
                 enriched_groups.append({
                     "groupId": group.get("groupId", ""),
-                    "groupName": group.get("name", "未知群"),  # API返回的是name字段
+                    "groupName": group.get("name", "未知群"),
                     "memberCount": group.get("userCount", 0)
                 })
             return enriched_groups
         return []
-
-
-async def get_group_info(token: str, group_id: str) -> dict:
-    """获取单个群的详细信息（备用方法，目前未使用）"""
-    try:
-        async with httpx.AsyncClient(timeout=30.0) as client:
-            resp = await client.post(
-                f"{GATEWAY_URL}/openapi/v2/group/info",
-                headers={
-                    "Content-Type": "application/json",
-                    "Authorization": f"Bearer {token}"
-                },
-                json={"groupId": group_id}
-            )
-            result = resp.json()
-            if result.get("code") == 0:
-                return result.get("data", {})
-    except Exception:
-        pass
-    return {}
 
 
 async def send_to_group_with_retry(
@@ -140,7 +127,6 @@ async def send_to_group_with_retry(
                 if result.get("code") == 0:
                     return True
                 
-                # 频率限制错误，需要重试
                 if result.get("code") == 42900:
                     if attempt < MAX_RETRIES - 1:
                         print(f"   ⏳ 频率限制，{RETRY_DELAY}秒后重试 ({attempt + 1}/{MAX_RETRIES})")
@@ -164,9 +150,73 @@ async def send_to_group_with_retry(
     return False
 
 
-# ============ 内容提取 ============
-def read_daily_report(date_str: str) -> Optional[dict]:
-    """从日报MD文件中提取内容"""
+# ============ 内容提取 (升级版) ============
+def extract_section_data(content: str, section_name: str, section_pattern: str) -> Dict:
+    """
+    从日报MD中提取单个板块的完整数据
+    
+    返回:
+    {
+        "news": [(title, url, summary), ...],  # 最多3条新闻
+        "opinion": {"person": str, "quote": str, "url": str},
+        "insight": str
+    }
+    """
+    match = re.search(section_pattern, content, re.DOTALL)
+    if not match:
+        return {"news": [], "opinion": None, "insight": None}
+    
+    section_content = match.group(0)
+    
+    # 1. 提取新闻动态（标题+链接）
+    # 格式: - 🔴 **[标题](链接)** - 来源
+    news_pattern = r'[🔴🟡]\s*\*\*\[([^\]]+)\]\(([^)]+)\)\*\*\s*-\s*([^\n]+)'
+    news_matches = re.findall(news_pattern, section_content)
+    news_items = []
+    for title, url, source in news_matches[:3]:
+        news_items.append((title.strip(), url.strip()))
+    
+    # 2. 提取观点
+    opinion = None
+    opinion_section = re.search(r'### 2\. 热门观点.*?(?=### 3\.|$)', section_content, re.DOTALL)
+    if opinion_section:
+        opinion_text = opinion_section.group(0)
+        # 提取人物
+        person_match = re.search(r'>\s*\*\*([^*]+)\*\*', opinion_text)
+        # 提取引用
+        quote_match = re.search(r'>\s*"([^"]+)"', opinion_text)
+        # 提取来源链接
+        source_match = re.search(r'来源:\s*\[([^\]]+)\]\(([^)]+)\)', opinion_text)
+        
+        if quote_match:
+            person = person_match.group(1).strip() if person_match else "业内人士"
+            # 清理人物名称中的换行
+            person = person.split('\n')[0].strip()
+            quote = quote_match.group(1).strip()
+            # 截取前50字符
+            if len(quote) > 50:
+                quote = quote[:50] + "..."
+            source_url = source_match.group(2) if source_match else ""
+            opinion = {"person": person, "quote": quote, "url": source_url}
+    
+    # 3. 提取洞察（第一句话）
+    insight = None
+    insight_section = re.search(r'### 3\. 趋势洞察\n+\*\*([^*]+)\*\*', section_content)
+    if insight_section:
+        insight = insight_section.group(1).strip()
+        # 截取前60字符
+        if len(insight) > 60:
+            insight = insight[:60] + "..."
+    
+    return {"news": news_items, "opinion": opinion, "insight": insight}
+
+
+def read_daily_report_v2(date_str: str) -> Optional[Dict]:
+    """
+    从日报MD文件中提取升级版内容
+    
+    返回各板块的完整数据，包含链接
+    """
     date_obj = datetime.strptime(date_str, "%Y-%m-%d")
     month_str = date_obj.strftime("%Y-%m")
     md_file = DAILY_REPORTS_PATH / month_str / f"{date_str}.md"
@@ -175,69 +225,74 @@ def read_daily_report(date_str: str) -> Optional[dict]:
         return None
     
     content = md_file.read_text(encoding="utf-8")
-    lines = content.split("\n")
     
-    # 定义板块标记
-    section_markers = {
-        "## 一、大模型": "大模型",
-        "## 二、AI Coding": "AI Coding",
-        "## 三、AI 应用": "AI 应用",
-        "## 四、AI 行业": "AI 行业",
-        "## 五、企业 AI 转型": "企业AI转型",
-    }
+    # 板块配置：(名称, 图标, 正则模式)
+    sections_config = [
+        ("大模型", "🧠", r"## 一、大模型.*?(?=## 二、|$)"),
+        ("AI Coding", "💻", r"## 二、AI Coding.*?(?=## 三、|$)"),
+        ("AI 应用", "📱", r"## 三、AI 应用.*?(?=## 四、|$)"),
+        ("AI 行业", "🏭", r"## 四、AI 行业.*?(?=## 五、|$)"),
+        ("企业AI转型", "🔄", r"## 五、企业 AI 转型.*?(?=## 📊|$)"),
+    ]
     
     result = {}
-    current_section = None
-    items = []
-    
-    for i, line in enumerate(lines):
-        # 检查板块切换
-        for marker, name in section_markers.items():
-            if line.startswith(marker):
-                if current_section and items:
-                    result[current_section] = items[:3]  # 每板块最多3条
-                current_section = name
-                items = []
-                break
-        
-        # 提取新闻标题
-        if current_section and ("🔴" in line or "🟡" in line) and "**[" in line:
-            match = re.search(r'\*\*\[([^\]]+)\]', line)
-            if match:
-                items.append(match.group(1).strip())
-    
-    # 保存最后一个板块
-    if current_section and items:
-        result[current_section] = items[:3]
+    for name, icon, pattern in sections_config:
+        data = extract_section_data(content, name, pattern)
+        result[name] = {"icon": icon, "data": data}
     
     return result
 
 
-def build_card(date_str: str, sections: dict) -> dict:
-    """构建 MixCard 卡片"""
+def build_card_v2(date_str: str, sections: Dict) -> dict:
+    """
+    构建升级版 MixCard 卡片
+    
+    格式：
+    - 每板块显示：动态(带链接) + 观点(带链接) + 洞察
+    - 底部双按钮：查看日报 + 了解项目
+    """
     date_obj = datetime.strptime(date_str, "%Y-%m-%d")
     weekdays = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
     weekday = weekdays[date_obj.weekday()]
     month_str = date_obj.strftime("%Y-%m")
-    
-    section_icons = {
-        "大模型": "🧠",
-        "AI Coding": "💻",
-        "AI 应用": "📱",
-        "AI 行业": "🏭",
-        "企业AI转型": "🔄",
-    }
-    
-    content_blocks = []
-    for section in ["大模型", "AI Coding", "AI 应用", "AI 行业", "企业AI转型"]:
-        items = sections.get(section, ["暂无更新"])
-        icon = section_icons.get(section, "📌")
-        item_lines = [f"{i}. {item}" for i, item in enumerate(items, 1)]
-        block_content = f"{icon} **{section}**\n" + "\n".join(item_lines)
-        content_blocks.append(block_content)
-    
-    overview_text = "\n\n".join(content_blocks)
     report_url = f"{REPORT_BASE_URL}/{month_str}/{date_str}.html"
+    
+    # 构建内容
+    section_blocks = []
+    section_order = ["大模型", "AI Coding", "AI 应用", "AI 行业", "企业AI转型"]
+    
+    for section_name in section_order:
+        section_info = sections.get(section_name, {})
+        icon = section_info.get("icon", "📌")
+        data = section_info.get("data", {})
+        
+        lines = [f"{icon} **{section_name}**"]
+        
+        # 动态
+        news = data.get("news", [])
+        if news:
+            lines.append("📰 *动态*")
+            for title, url in news:
+                # 为每条新闻生成简短摘要（从标题提取关键信息）
+                lines.append(f"• [{title}]({url})")
+        
+        # 观点
+        opinion = data.get("opinion")
+        if opinion and opinion.get("quote"):
+            if opinion.get("url"):
+                lines.append(f"\n💬 *观点* — [{opinion['person']}]({opinion['url']}): \"{opinion['quote']}\"")
+            else:
+                lines.append(f"\n💬 *观点* — {opinion['person']}: \"{opinion['quote']}\"")
+        
+        # 洞察
+        insight = data.get("insight")
+        if insight:
+            lines.append(f"\n💡 *洞察* — {insight}")
+        
+        section_blocks.append("\n".join(lines))
+    
+    # 用分割线连接各板块
+    full_content = "\n\n---\n\n".join(section_blocks)
     
     return {
         "config": {"forward": True, "forwardType": 2, "wideSelfAdaptive": True},
@@ -252,7 +307,7 @@ def build_card(date_str: str, sections: dict) -> dict:
             {
                 "blockId": "overview",
                 "type": "content",
-                "text": {"type": "kimMd", "content": overview_text}
+                "text": {"type": "kimMd", "content": full_content}
             },
             {"blockId": "div1", "type": "divider"},
             {
@@ -269,9 +324,15 @@ def build_card(date_str: str, sections: dict) -> dict:
                         "text": {"type": "plainText", "content": "📄 查看完整日报 >>"},
                         "style": "green",
                         "url": report_url
+                    },
+                    {
+                        "type": "button",
+                        "text": {"type": "plainText", "content": "了解AI洞察项目"},
+                        "style": "blue",
+                        "url": PROJECT_URL
                     }
                 ],
-                "layout": "auto"
+                "layout": "two"
             }
         ]
     }
@@ -279,7 +340,7 @@ def build_card(date_str: str, sections: dict) -> dict:
 
 # ============ 主流程 ============
 async def main():
-    parser = argparse.ArgumentParser(description="AI日报 KIM 推送脚本")
+    parser = argparse.ArgumentParser(description="AI日报 KIM 推送脚本 v2.0")
     parser.add_argument("date", nargs="?", help="日报日期 (YYYY-MM-DD)，默认今天")
     parser.add_argument("--dry-run", action="store_true", help="试运行，不实际发送")
     args = parser.parse_args()
@@ -290,23 +351,26 @@ async def main():
     else:
         date_str = datetime.now().strftime("%Y-%m-%d")
     
-    print(f"🚀 AI 日报推送 - {date_str}")
+    print(f"🚀 AI 日报推送 v2.0 - {date_str}")
     print(f"{'🔍 [DRY-RUN 模式]' if args.dry_run else ''}")
     print("=" * 50)
     
-    # 1. 读取日报内容
+    # 1. 读取日报内容 (升级版)
     print("📖 读取日报内容...")
-    sections = read_daily_report(date_str)
+    sections = read_daily_report_v2(date_str)
     if not sections:
         print(f"❌ 找不到日报文件: {date_str}")
         print(f"   请确认文件存在: {DAILY_REPORTS_PATH / date_str[:7] / f'{date_str}.md'}")
         return
-    print(f"✅ 成功读取 {len(sections)} 个板块")
     
-    # 2. 构建卡片
-    print("🎨 构建消息卡片...")
-    card = build_card(date_str, sections)
-    print("✅ 卡片构建完成")
+    # 统计提取结果
+    total_news = sum(len(s["data"]["news"]) for s in sections.values())
+    print(f"✅ 成功读取 {len(sections)} 个板块, {total_news} 条新闻")
+    
+    # 2. 构建卡片 (升级版)
+    print("🎨 构建升级版消息卡片...")
+    card = build_card_v2(date_str, sections)
+    print("✅ 卡片构建完成（带链接 + 双按钮）")
     
     # 3. 获取 Token
     print("🔑 获取 Access Token...")
@@ -348,7 +412,7 @@ async def main():
         else:
             fail_count += 1
         
-        # 群间间隔，避免频率限制
+        # 群间间隔
         if i < len(groups) - 1 and not args.dry_run:
             await asyncio.sleep(SEND_INTERVAL)
     
