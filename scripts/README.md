@@ -38,12 +38,43 @@ python scripts/send_ai_daily.py 2026-03-05 --dry-run
 pip install httpx
 ```
 
+## 🔄 sync_to_public.py - 双版本同步脚本
+
+将内部版日报同步到公开版本（public目录），自动移除敏感信息。
+
+### 使用方式
+
+```bash
+# 同步今天的日报
+python scripts/sync_to_public.py
+
+# 同步指定日期
+python scripts/sync_to_public.py 2026-03-05
+
+# 同步所有日报
+python scripts/sync_to_public.py --all
+
+# 强制覆盖已存在的文件
+python scripts/sync_to_public.py --all --force
+
+# 同时同步首页
+python scripts/sync_to_public.py --with-index
+```
+
+### 脱敏规则
+
+- 移除"林克"、"沈浪"等个人标识
+- 替换内部话术为中性表达
+- 保持内容和样式一致
+
 ## 📁 目录结构
 
 ```
 scripts/
-├── README.md            # 本文件
-└── send_ai_daily.py     # AI日报推送脚本
+├── README.md              # 本文件
+├── send_ai_daily.py       # AI日报推送脚本 (内部KIM群)
+├── send_deep_research_card.py  # 深度调研推送
+└── sync_to_public.py      # 双版本同步脚本 (NEW)
 ```
 
 ## 🔮 计划中
@@ -51,3 +82,4 @@ scripts/
 - [ ] 周报推送脚本
 - [ ] 定时任务配置
 - [ ] 推送历史记录
+- [x] 双版本同步脚本
