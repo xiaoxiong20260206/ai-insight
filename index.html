@@ -805,126 +805,220 @@
         }
         
         /* ============ Knowledge Tree Styles ============ */
-        .knowledge-tree {
-            padding: var(--spacing-xl) var(--spacing-lg);
+        /* ============ 知识库架构样式 ============ */
+        .kb-architecture {
+            padding: var(--spacing-xl);
             background: linear-gradient(180deg, #FAFBFC 0%, #F1F3F5 100%);
             border-radius: var(--radius-xl);
             border: 1px solid var(--color-border-light);
             box-shadow: var(--shadow-card);
-            position: relative;
-            overflow: hidden;
         }
         
-        .knowledge-tree::before {
-            content: '';
-            position: absolute;
-            top: 0;
+        .kb-version {
+            text-align: center;
+            font-size: 13px;
+            color: var(--color-text-muted);
+            margin-bottom: var(--spacing-lg);
+            padding: 8px 16px;
+            background: rgba(26, 127, 55, 0.06);
+            border-radius: var(--radius-full);
+            display: inline-block;
+            position: relative;
             left: 50%;
-            width: 2px;
-            height: 60px;
-            background: linear-gradient(180deg, var(--color-success) 0%, transparent 100%);
             transform: translateX(-50%);
         }
         
-        .tree-root {
+        /* 根节点 */
+        .kb-root {
             display: flex;
             justify-content: center;
             margin-bottom: var(--spacing-xl);
-            position: relative;
         }
         
-        .root-node {
+        .kb-root-node {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 16px 28px;
+            gap: 16px;
+            padding: 20px 32px;
             background: linear-gradient(135deg, #1A7F37 0%, #238636 50%, #2EA043 100%);
             color: white;
-            border-radius: 50px;
-            box-shadow: 0 8px 24px rgba(26, 127, 55, 0.25), 0 2px 8px rgba(26, 127, 55, 0.15);
-            position: relative;
-            z-index: 2;
+            border-radius: 60px;
+            box-shadow: 0 10px 30px rgba(26, 127, 55, 0.3), 0 4px 12px rgba(26, 127, 55, 0.2);
         }
         
-        .root-node::after {
-            content: '';
-            position: absolute;
-            bottom: -30px;
-            left: 50%;
-            width: 2px;
-            height: 30px;
-            background: var(--color-success);
-            transform: translateX(-50%);
+        .kb-root-icon {
+            font-size: 36px;
         }
         
-        .root-node .node-icon {
-            font-size: 28px;
+        .kb-root-content {
+            display: flex;
+            flex-direction: column;
         }
         
-        .root-node .node-text {
-            font-size: 20px;
+        .kb-root-title {
+            font-size: 22px;
             font-weight: 700;
             letter-spacing: -0.02em;
         }
         
-        .tree-branches {
+        .kb-root-subtitle {
+            font-size: 12px;
+            opacity: 0.85;
+            margin-top: 2px;
+        }
+        
+        /* 分层标签 */
+        .kb-layer-labels {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-2xl);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .kb-layer-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: var(--radius-full);
+            font-size: 13px;
+        }
+        
+        .kb-layer-label.top {
+            background: linear-gradient(135deg, rgba(9, 105, 218, 0.1) 0%, rgba(26, 127, 55, 0.1) 100%);
+            border: 1px solid rgba(9, 105, 218, 0.2);
+        }
+        
+        .kb-layer-label.bottom {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(191, 135, 0, 0.1) 100%);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+        }
+        
+        .label-icon {
+            font-size: 16px;
+        }
+        
+        .label-text {
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+        
+        .label-desc {
+            color: var(--color-text-muted);
+        }
+        
+        /* 分层容器 */
+        .kb-layer {
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .layer-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: var(--spacing-md);
+            padding: 10px 16px;
+            background: var(--color-bg-card);
+            border-radius: var(--radius-full);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .layer-icon {
+            font-size: 18px;
+        }
+        
+        /* 四大维度网格 */
+        .kb-dimensions {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: var(--spacing-lg);
-            max-width: 900px;
-            margin: 0 auto;
-            padding-top: var(--spacing-lg);
+            gap: var(--spacing-md);
         }
         
         @media (max-width: 768px) {
-            .tree-branches {
+            .kb-dimensions {
                 grid-template-columns: 1fr;
             }
         }
         
-        /* Branch Node (维度节点) */
-        .tree-branch {
+        /* 维度卡片 */
+        .kb-dimension {
             background: var(--color-bg-card);
             border-radius: var(--radius-lg);
-            border: 1px solid var(--color-border-light);
+            border: 2px solid var(--color-border-light);
             overflow: hidden;
-            box-shadow: var(--shadow-sm);
             transition: all var(--transition-normal);
         }
         
-        .tree-branch:hover {
-            box-shadow: var(--shadow-md);
+        .kb-dimension:hover {
             border-color: rgba(26, 127, 55, 0.3);
+            box-shadow: var(--shadow-md);
         }
         
-        .branch-node {
+        .kb-dimension.core {
+            border-color: var(--color-info);
+        }
+        
+        .dim-header {
             display: flex;
             align-items: center;
             gap: 12px;
             padding: 16px 20px;
             cursor: pointer;
             transition: all var(--transition-fast);
-            position: relative;
         }
         
-        .branch-node:hover {
+        .dim-header:hover {
             background: rgba(26, 127, 55, 0.03);
         }
         
-        .tree-branch[data-expanded="true"] > .branch-node {
-            border-bottom: 1px solid var(--color-border-light);
+        .dim-icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 22px;
+            color: white;
         }
         
-        .branch-connector {
-            display: none;
+        .dim-models .dim-icon { background: linear-gradient(135deg, #1A7F37, #2DA44E); }
+        .dim-agent .dim-icon { background: linear-gradient(135deg, #0969DA, #0550AE); }
+        .dim-companies .dim-icon { background: linear-gradient(135deg, #7C3AED, #6D28D9); }
+        .dim-enterprise .dim-icon { background: linear-gradient(135deg, #BF8700, #9A6700); }
+        
+        .dim-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
         
-        .node-toggle {
+        .dim-name {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+        
+        .dim-count {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            margin-top: 2px;
+        }
+        
+        .dim-count.core {
+            color: var(--color-info);
+            font-weight: 600;
+        }
+        
+        .dim-toggle {
             font-size: 12px;
             color: var(--color-text-muted);
             transition: transform var(--transition-normal);
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -932,216 +1026,318 @@
             border-radius: 50%;
         }
         
-        .tree-branch[data-expanded="true"] > .branch-node .node-toggle,
-        .tree-subbranch[data-expanded="true"] > .subbranch-node .node-toggle {
+        .kb-dimension[data-expanded="true"] .dim-toggle {
             transform: rotate(90deg);
             background: var(--color-success);
             color: white;
         }
         
-        .branch-node .node-icon {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 12px;
-            font-size: 20px;
-            color: white;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        
-        .branch-node .node-text {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--color-text-primary);
-            flex: 1;
-        }
-        
-        .node-count {
-            font-size: 12px;
-            padding: 4px 12px;
-            background: var(--color-bg-table-header);
-            color: var(--color-text-muted);
-            border-radius: var(--radius-full);
-            font-weight: 500;
-        }
-        
-        .node-count.core {
-            background: linear-gradient(135deg, #0969DA, #0550AE);
-            color: white;
-        }
-        
-        /* Branch Children */
-        .branch-children {
+        .dim-content {
             display: none;
             padding: var(--spacing-md);
+            border-top: 1px solid var(--color-border-light);
             background: linear-gradient(180deg, rgba(246,248,250,0.5) 0%, transparent 100%);
         }
         
-        .tree-branch[data-expanded="true"] > .branch-children {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
+        .kb-dimension[data-expanded="true"] .dim-content {
+            display: block;
             animation: slideDown 0.25s ease-out;
         }
         
-        @keyframes slideDown {
-            from { 
-                opacity: 0; 
-                max-height: 0;
-                transform: translateY(-10px); 
-            }
-            to { 
-                opacity: 1; 
-                max-height: 500px;
-                transform: translateY(0); 
-            }
-        }
-        
-        /* Sub-branch (子分类) */
-        .tree-subbranch {
-            border-radius: var(--radius-md);
-            overflow: hidden;
-        }
-        
-        .subbranch-node {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            padding: 10px 14px;
-            background: var(--color-bg-card);
-            border: 1px solid var(--color-border-light);
-            border-radius: var(--radius-md);
-            cursor: pointer;
-            transition: all var(--transition-fast);
-        }
-        
-        .subbranch-node:hover {
-            background: rgba(9, 105, 218, 0.04);
-            border-color: var(--color-info);
-        }
-        
-        .tree-subbranch[data-expanded="true"] > .subbranch-node {
-            border-radius: var(--radius-md) var(--radius-md) 0 0;
-            border-bottom-color: transparent;
-            background: rgba(9, 105, 218, 0.06);
-        }
-        
-        .subbranch-connector {
-            display: none;
-        }
-        
-        .subbranch-icon {
-            font-size: 16px;
-        }
-        
-        .subbranch-text {
+        .dim-desc {
             font-size: 13px;
-            font-weight: 600;
+            color: var(--color-text-muted);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .dim-stats {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-sm);
+            font-size: 12px;
             color: var(--color-text-secondary);
-            flex: 1;
         }
         
-        .subbranch-count {
-            font-size: 11px;
-            padding: 2px 8px;
-            background: rgba(9, 105, 218, 0.1);
-            color: var(--color-info);
+        .dim-stats span {
+            padding: 4px 10px;
+            background: var(--color-bg);
             border-radius: var(--radius-full);
-            font-weight: 500;
         }
         
-        .subbranch-children {
-            display: none;
-            padding: var(--spacing-sm);
-            background: rgba(9, 105, 218, 0.03);
-            border: 1px solid var(--color-border-light);
-            border-top: none;
-            border-radius: 0 0 var(--radius-md) var(--radius-md);
-        }
-        
-        .tree-subbranch[data-expanded="true"] > .subbranch-children {
+        .dim-items {
             display: flex;
             flex-direction: column;
-            gap: 4px;
-            animation: fadeIn 0.2s ease-out;
+            gap: 6px;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        /* Tree Leaf (叶子节点 - 知识文档) */
-        .tree-leaf {
+        .kb-item {
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 12px 16px;
+            padding: 10px 14px;
             background: var(--color-bg-card);
             border: 1px solid transparent;
             border-radius: var(--radius-md);
             text-decoration: none;
             transition: all var(--transition-fast);
-            position: relative;
         }
         
-        .tree-leaf:hover {
+        .kb-item:hover {
             background: linear-gradient(135deg, rgba(26, 127, 55, 0.06) 0%, rgba(9, 105, 218, 0.04) 100%);
             border-color: var(--color-success);
-            transform: translateX(6px);
-            box-shadow: var(--shadow-sm);
+            transform: translateX(4px);
         }
         
-        .tree-leaf.small {
-            padding: 8px 12px;
-        }
-        
-        .leaf-connector {
-            display: none;
-        }
-        
-        .leaf-icon {
+        .item-icon {
             font-size: 16px;
-            width: 28px;
-            height: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--color-bg-table-header);
-            border-radius: 8px;
         }
         
-        .leaf-text {
+        .item-text {
             font-size: 14px;
             font-weight: 500;
             color: var(--color-text-primary);
             flex: 1;
         }
         
-        .tree-leaf.small .leaf-text {
-            font-size: 13px;
-        }
-        
-        .leaf-tag {
+        .item-tag {
             font-size: 10px;
-            padding: 3px 8px;
-            background: var(--color-bg-table-header);
-            color: var(--color-text-muted);
+            padding: 2px 8px;
             border-radius: var(--radius-full);
             font-weight: 500;
         }
         
-        .leaf-tag.new {
+        .item-tag.new {
             background: linear-gradient(135deg, #CF222E, #F85149);
             color: white;
             animation: pulse 2s ease-in-out infinite;
         }
         
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+        /* 分层连接线 */
+        .kb-layer-connector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-lg) 0;
+        }
+        
+        .connector-line {
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, var(--color-border) 50%, transparent 100%);
+            max-width: 150px;
+        }
+        
+        .connector-label {
+            padding: 6px 16px;
+            background: var(--color-bg-card);
+            border: 1px dashed var(--color-border);
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            color: var(--color-text-muted);
+            font-weight: 500;
+        }
+        
+        /* 底层基础设施 */
+        .kb-foundations {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-md);
+        }
+        
+        @media (max-width: 992px) {
+            .kb-foundations {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .kb-foundations {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .kb-foundation {
+            background: var(--color-bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-md);
+            border: 2px solid var(--color-border-light);
+            transition: all var(--transition-normal);
+        }
+        
+        .kb-foundation:hover {
+            box-shadow: var(--shadow-md);
+        }
+        
+        .foundation-entities { border-left: 4px solid #7C3AED; }
+        .foundation-concepts { border-left: 4px solid #0969DA; }
+        .foundation-practices { border-left: 4px solid #2DA44E; }
+        .foundation-insights { border-left: 4px solid #BF8700; }
+        
+        .foundation-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .foundation-icon {
+            font-size: 20px;
+        }
+        
+        .foundation-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+        
+        .foundation-stats {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-sm);
+            font-size: 12px;
+            color: var(--color-text-muted);
+        }
+        
+        .stat-item strong {
+            color: var(--color-success);
+        }
+        
+        .foundation-items {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .foundation-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 10px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            transition: all var(--transition-fast);
+        }
+        
+        .foundation-link:hover {
+            background: rgba(124, 58, 237, 0.06);
+        }
+        
+        .link-avatar {
+            font-size: 14px;
+        }
+        
+        .link-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            flex: 1;
+        }
+        
+        .link-org {
+            font-size: 10px;
+            padding: 2px 6px;
+            background: var(--color-bg);
+            border-radius: var(--radius-sm);
+            color: var(--color-text-muted);
+        }
+        
+        /* 概念标签 */
+        .foundation-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        
+        .concept-tag, .practice-tag {
+            display: inline-block;
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: var(--radius-full);
+            text-decoration: none;
+            transition: all var(--transition-fast);
+        }
+        
+        .concept-tag {
+            background: rgba(9, 105, 218, 0.08);
+            color: var(--color-info);
+            border: 1px solid rgba(9, 105, 218, 0.15);
+        }
+        
+        .concept-tag:hover {
+            background: rgba(9, 105, 218, 0.15);
+            border-color: var(--color-info);
+        }
+        
+        .concept-tag.new {
+            background: linear-gradient(135deg, #CF222E, #F85149);
+            color: white;
+            border: none;
+        }
+        
+        .practice-tag {
+            background: rgba(45, 164, 78, 0.08);
+            color: var(--color-success);
+            border: 1px solid rgba(45, 164, 78, 0.15);
+        }
+        
+        .practice-tag:hover {
+            background: rgba(45, 164, 78, 0.15);
+            border-color: var(--color-success);
+        }
+        
+        /* 洞察链接 */
+        .insight-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 10px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            transition: all var(--transition-fast);
+        }
+        
+        .insight-link:hover {
+            background: rgba(191, 135, 0, 0.08);
+        }
+        
+        .insight-icon {
+            font-size: 14px;
+        }
+        
+        .insight-text {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+        }
+        
+        /* 架构说明 */
+        .kb-architecture-note {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-top: var(--spacing-xl);
+            padding: var(--spacing-md);
+            background: linear-gradient(135deg, rgba(9, 105, 218, 0.04) 0%, rgba(26, 127, 55, 0.04) 100%);
+            border-radius: var(--radius-lg);
+            border: 1px dashed var(--color-border);
+        }
+        
+        .note-icon {
+            font-size: 20px;
+        }
+        
+        .note-content {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+        }
+        
+        .note-content strong {
+            color: var(--color-success);
         }
         
         /* Tree Action Buttons */
@@ -1178,26 +1374,23 @@
             box-shadow: var(--shadow-hover);
         }
         
-        /* Mobile Responsive for Tree */
-        @media (max-width: 768px) {
-            .knowledge-tree {
-                padding: var(--spacing-md);
+        @keyframes slideDown {
+            from { 
+                opacity: 0; 
+                max-height: 0;
+                transform: translateY(-10px); 
             }
-            
-            .tree-branch {
-                margin-left: 10px;
+            to { 
+                opacity: 1; 
+                max-height: 500px;
+                transform: translateY(0); 
             }
-            
-            .branch-children {
-                margin-left: 24px;
-            }
-            
-            .tree-branches {
-                gap: var(--spacing-sm);
-            }
-            
-            .root-node .node-text {
-                font-size: 16px;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
             }
         }
         
@@ -1731,256 +1924,324 @@
         <article id="knowledge" class="tab-panel">
             <section class="section">
                 <div class="section-header">
-                    <div class="section-icon">🌳</div>
+                    <div class="section-icon">🧠</div>
                     <div>
                         <h2 class="section-title">林克的AI知识库</h2>
-                        <p class="section-desc">点击维度卡片展开知识，点击文档直接跳转</p>
+                        <p class="section-desc">系统性AI认知体系 · 顶层视角 + 底层资产</p>
                     </div>
                 </div>
                 
-                <!-- 知识树统计条 -->
-                <div style="display: flex; gap: var(--spacing-lg); justify-content: center; flex-wrap: wrap; margin-bottom: var(--spacing-xl); padding: var(--spacing-md) var(--spacing-lg); background: linear-gradient(135deg, rgba(26, 127, 55, 0.06) 0%, rgba(9, 105, 218, 0.04) 100%); border-radius: var(--radius-full); border: 1px solid rgba(26, 127, 55, 0.12);">
-                    <span style="font-size: 14px; color: var(--color-text-secondary); display: flex; align-items: center; gap: 6px;"><span style="font-size: 18px;">📄</span><strong style="color: var(--color-success);">32</strong> 篇文档</span>
-                    <span style="color: var(--color-border);">·</span>
-                    <span style="font-size: 14px; color: var(--color-text-secondary); display: flex; align-items: center; gap: 6px;"><span style="font-size: 18px;">🎯</span><strong style="color: var(--color-info);">4</strong> 大维度</span>
-                    <span style="color: var(--color-border);">·</span>
-                    <span style="font-size: 14px; color: var(--color-text-secondary); display: flex; align-items: center; gap: 6px;"><span style="font-size: 18px;">👤</span><strong style="color: var(--color-purple);">7</strong> 位人物</span>
-                    <span style="color: var(--color-border);">·</span>
-                    <span style="font-size: 14px; color: var(--color-text-secondary); display: flex; align-items: center; gap: 6px;"><span style="font-size: 18px;">🏢</span><strong style="color: var(--color-warning);">4</strong> 家企业</span>
-                </div>
-                
-                <!-- 交互式知识树 -->
-                <div class="knowledge-tree">
+                <!-- 知识库架构可视化 -->
+                <div class="kb-architecture">
+                    <!-- 版本标识 -->
+                    <div class="kb-version">v4.2.0 · 32篇文档 · 7位人物 · 4家企业</div>
+                    
                     <!-- 根节点 -->
-                    <div class="tree-root">
-                        <div class="tree-node root-node">
-                            <span class="node-icon">🌳</span>
-                            <span class="node-text">林克的AI知识库</span>
+                    <div class="kb-root">
+                        <div class="kb-root-node">
+                            <span class="kb-root-icon">🧠</span>
+                            <div class="kb-root-content">
+                                <span class="kb-root-title">林克的AI知识库</span>
+                                <span class="kb-root-subtitle">持续追踪 · 深度沉淀 · 系统认知</span>
+                            </div>
                         </div>
                     </div>
                     
-                    <!-- 四大维度分支 -->
-                    <div class="tree-branches">
+                    <!-- 架构分层说明 -->
+                    <div class="kb-layer-labels">
+                        <div class="kb-layer-label top">
+                            <span class="label-icon">🎯</span>
+                            <span class="label-text">顶层视角</span>
+                            <span class="label-desc">四大研究维度</span>
+                        </div>
+                        <div class="kb-layer-label bottom">
+                            <span class="label-icon">🔧</span>
+                            <span class="label-text">底层基础</span>
+                            <span class="label-desc">知识资产原子单元</span>
+                        </div>
+                    </div>
+                    
+                    <!-- === 顶层：四大维度 === -->
+                    <div class="kb-layer kb-layer-top">
+                        <div class="layer-title">
+                            <span class="layer-icon">🎯</span>
+                            <span>四大维度 · 研究视角</span>
+                        </div>
+                        <div class="kb-dimensions">
                         
                         <!-- 维度1: 模型 -->
-                        <div class="tree-branch" data-expanded="false">
-                            <div class="branch-node" onclick="toggleTreeBranch(this)">
-                                <span class="node-toggle">▶</span>
-                                <span class="node-icon" style="background: linear-gradient(135deg, #1A7F37, #2DA44E);">📊</span>
-                                <span class="node-text">模型</span>
-                                <span class="node-count">3篇</span>
+                            <div class="kb-dimension dim-models" data-expanded="false">
+                                <div class="dim-header" onclick="toggleKBDimension(this)">
+                                    <div class="dim-icon">📊</div>
+                                    <div class="dim-info">
+                                        <span class="dim-name">模型</span>
+                                        <span class="dim-count">3篇</span>
+                                    </div>
+                                    <span class="dim-toggle">▶</span>
+                                </div>
+                                <div class="dim-content">
+                                    <div class="dim-desc">大模型技术、架构演进、能力评估</div>
+                                    <div class="dim-items">
+                                        <a href="04-knowledge-base/01-models/ai-history-and-capability-matrix.md" target="_blank" class="kb-item">
+                                            <span class="item-icon">📄</span>
+                                            <span class="item-text">AI发展史与能力矩阵</span>
+                                        </a>
+                                        <a href="04-knowledge-base/01-models/ai-second-half-task-environment.md" target="_blank" class="kb-item">
+                                            <span class="item-icon">📄</span>
+                                            <span class="item-text">AI下半场理论</span>
+                                        </a>
+                                        <a href="04-knowledge-base/01-models/reasoning-models.md" target="_blank" class="kb-item new">
+                                            <span class="item-icon">📄</span>
+                                            <span class="item-text">推理模型专题</span>
+                                            <span class="item-tag new">NEW</span>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="branch-children">
-                                <a href="04-knowledge-base/01-models/ai-history-and-capability-matrix.md" target="_blank" class="tree-leaf">
-                                    <span class="leaf-icon">📄</span>
-                                    <span class="leaf-text">AI发展史与能力矩阵</span>
-                                    <span class="leaf-tag">字节AI指南</span>
-                                </a>
-                                <a href="04-knowledge-base/01-models/ai-second-half-task-environment.md" target="_blank" class="tree-leaf">
-                                    <span class="leaf-icon">📄</span>
-                                    <span class="leaf-text">AI下半场：任务环境设计</span>
-                                    <span class="leaf-tag">姚顺雨</span>
-                                </a>
-                                <a href="04-knowledge-base/01-models/reasoning-models.md" target="_blank" class="tree-leaf">
-                                    <span class="leaf-icon">📄</span>
-                                    <span class="leaf-text">推理模型专题</span>
-                                    <span class="leaf-tag new">NEW</span>
-                                </a>
-                            </div>
-                        </div>
                         
-                        <!-- 维度2: Agent (核心维度) -->
-                        <div class="tree-branch" data-expanded="false">
-                            <div class="branch-node" onclick="toggleTreeBranch(this)">
-                                <span class="node-toggle">▶</span>
-                                <span class="node-icon" style="background: linear-gradient(135deg, #0969DA, #0550AE);">🤖</span>
-                                <span class="node-text">Agent</span>
-                                <span class="node-count core">⭐ 14篇</span>
-                            </div>
-                            <div class="branch-children">
-                                <!-- Agent子分支: 人物画像 -->
-                                <div class="tree-subbranch" data-expanded="false">
-                                    <div class="subbranch-node" onclick="toggleTreeBranch(this)">
-                                        <span class="subbranch-connector"></span>
-                                        <span class="node-toggle">▶</span>
-                                        <span class="subbranch-icon">👤</span>
-                                        <span class="subbranch-text">人物画像</span>
-                                        <span class="subbranch-count">5人</span>
+                            <!-- 维度2: Agent (核心维度) -->
+                            <div class="kb-dimension dim-agent core" data-expanded="false">
+                                <div class="dim-header" onclick="toggleKBDimension(this)">
+                                    <div class="dim-icon">🤖</div>
+                                    <div class="dim-info">
+                                        <span class="dim-name">Agent</span>
+                                        <span class="dim-count core">⭐ 核心</span>
                                     </div>
-                                    <div class="subbranch-children">
-                                        <a href="04-knowledge-base/entity-profiles/people/barry-zhang.md" target="_blank" class="tree-leaf small">
-                                            <span class="leaf-text">Barry Zhang</span>
-                                            <span class="leaf-tag">Anthropic</span>
-                                        </a>
-                                        <a href="04-knowledge-base/entity-profiles/people/shunyu-yao.md" target="_blank" class="tree-leaf small">
-                                            <span class="leaf-text">姚顺雨</span>
-                                            <span class="leaf-tag">OpenAI</span>
-                                        </a>
-                                        <a href="04-knowledge-base/entity-profiles/people/harrison-chase.md" target="_blank" class="tree-leaf small">
-                                            <span class="leaf-text">Harrison Chase</span>
-                                            <span class="leaf-tag">LangChain</span>
-                                        </a>
-                                        <a href="04-knowledge-base/entity-profiles/people/jim-fan.md" target="_blank" class="tree-leaf small">
-                                            <span class="leaf-text">Jim Fan</span>
-                                            <span class="leaf-tag">NVIDIA</span>
-                                        </a>
-                                        <a href="04-knowledge-base/entity-profiles/people/simon-willison.md" target="_blank" class="tree-leaf small">
-                                            <span class="leaf-text">Simon Willison</span>
-                                            <span class="leaf-tag">Django</span>
-                                        </a>
-                                    </div>
+                                    <span class="dim-toggle">▶</span>
                                 </div>
-                                <!-- Agent子分支: 概念文档 -->
-                                <div class="tree-subbranch" data-expanded="false">
-                                    <div class="subbranch-node" onclick="toggleTreeBranch(this)">
-                                        <span class="subbranch-connector"></span>
-                                        <span class="node-toggle">▶</span>
-                                        <span class="subbranch-icon">📖</span>
-                                        <span class="subbranch-text">概念文档</span>
-                                        <span class="subbranch-count">5个</span>
+                                <div class="dim-content">
+                                    <div class="dim-desc">架构设计 · 工作流模式 · 开发实践</div>
+                                    <div class="dim-stats">
+                                        <span>👤 5人画像</span>
+                                        <span>📖 5概念</span>
+                                        <span>🛠️ 4实践</span>
                                     </div>
-                                    <div class="subbranch-children">
-                                        <a href="04-knowledge-base/concepts/agents/agent-architecture.md" target="_blank" class="tree-leaf small">
-                                            <span class="leaf-text">Agent架构</span>
+                                    <div class="dim-items">
+                                        <a href="04-knowledge-base/02-agents/model-context-protocol.md" target="_blank" class="kb-item new">
+                                            <span class="item-icon">🔌</span>
+                                            <span class="item-text">MCP协议全解</span>
+                                            <span class="item-tag new">NEW</span>
                                         </a>
-                                        <a href="04-knowledge-base/concepts/agents/agent-types-matrix.md" target="_blank" class="tree-leaf small">
-                                            <span class="leaf-text">Agent类型矩阵</span>
+                                        <a href="04-knowledge-base/concepts/agents/agent-architecture.md" target="_blank" class="kb-item">
+                                            <span class="item-icon">🏗️</span>
+                                            <span class="item-text">Agent架构</span>
                                         </a>
-                                        <a href="04-knowledge-base/concepts/agents/ambient-agents.md" target="_blank" class="tree-leaf small">
-                                            <span class="leaf-text">Ambient Agents</span>
-                                        </a>
-                                        <a href="04-knowledge-base/concepts/agents/physical-ai.md" target="_blank" class="tree-leaf small">
-                                            <span class="leaf-text">Physical AI</span>
-                                        </a>
-                                        <a href="04-knowledge-base/02-agents/model-context-protocol.md" target="_blank" class="tree-leaf small">
-                                            <span class="leaf-text">MCP协议</span>
-                                            <span class="leaf-tag new">NEW</span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- Agent子分支: 最佳实践 -->
-                                <div class="tree-subbranch" data-expanded="false">
-                                    <div class="subbranch-node" onclick="toggleTreeBranch(this)">
-                                        <span class="subbranch-connector"></span>
-                                        <span class="node-toggle">▶</span>
-                                        <span class="subbranch-icon">🛠️</span>
-                                        <span class="subbranch-text">最佳实践</span>
-                                        <span class="subbranch-count">4个</span>
-                                    </div>
-                                    <div class="subbranch-children">
-                                        <a href="04-knowledge-base/02-agents/agent-infra-and-optimization.md" target="_blank" class="tree-leaf small">
-                                            <span class="leaf-text">Agent基础设施与调优</span>
-                                        </a>
-                                        <a href="04-knowledge-base/best-practices/ai-coding-workflow.md" target="_blank" class="tree-leaf small">
-                                            <span class="leaf-text">AI编程工作流</span>
-                                        </a>
-                                        <a href="04-knowledge-base/best-practices/financial-ai-agent-design.md" target="_blank" class="tree-leaf small">
-                                            <span class="leaf-text">金融AI Agent</span>
-                                        </a>
-                                        <a href="04-knowledge-base/best-practices/ai-agent-team-implementation.md" target="_blank" class="tree-leaf small">
-                                            <span class="leaf-text">AI Agent团队落地</span>
+                                        <a href="04-knowledge-base/concepts/agents/ambient-agents.md" target="_blank" class="kb-item">
+                                            <span class="item-icon">🌐</span>
+                                            <span class="item-text">Ambient Agents</span>
                                         </a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         
-                        <!-- 维度3: AI企业 -->
-                        <div class="tree-branch" data-expanded="false">
-                            <div class="branch-node" onclick="toggleTreeBranch(this)">
-                                <span class="node-toggle">▶</span>
-                                <span class="node-icon" style="background: linear-gradient(135deg, #7C3AED, #6D28D9);">🏢</span>
-                                <span class="node-text">AI企业</span>
-                                <span class="node-count">4家</span>
-                            </div>
-                            <div class="branch-children">
-                                <a href="04-knowledge-base/03-ai-companies/openai-profile.md" target="_blank" class="tree-leaf">
-                                    <span class="leaf-icon">🏢</span>
-                                    <span class="leaf-text">OpenAI</span>
-                                    <span class="leaf-tag new">NEW</span>
-                                </a>
-                                <a href="04-knowledge-base/03-ai-companies/anthropic-profile.md" target="_blank" class="tree-leaf">
-                                    <span class="leaf-icon">🏢</span>
-                                    <span class="leaf-text">Anthropic</span>
-                                    <span class="leaf-tag new">NEW</span>
-                                </a>
-                                <a href="04-knowledge-base/03-ai-companies/bytedance-ai-landscape.md" target="_blank" class="tree-leaf">
-                                    <span class="leaf-icon">🏢</span>
-                                    <span class="leaf-text">字节跳动</span>
-                                    <span class="leaf-tag">豆包生态</span>
-                                </a>
-                                <a href="04-knowledge-base/entity-profiles/companies/high-flyer-quant.md" target="_blank" class="tree-leaf">
-                                    <span class="leaf-icon">🏢</span>
-                                    <span class="leaf-text">幻方量化</span>
-                                    <span class="leaf-tag">DeepSeek</span>
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <!-- 维度4: 企业AI转型 -->
-                        <div class="tree-branch" data-expanded="false">
-                            <div class="branch-node" onclick="toggleTreeBranch(this)">
-                                <span class="node-toggle">▶</span>
-                                <span class="node-icon" style="background: linear-gradient(135deg, #BF8700, #9A6700);">🏭</span>
-                                <span class="node-text">企业AI转型</span>
-                                <span class="node-count">7篇</span>
-                            </div>
-                            <div class="branch-children">
-                                <!-- 企业AI子分支: 概念 -->
-                                <div class="tree-subbranch" data-expanded="false">
-                                    <div class="subbranch-node" onclick="toggleTreeBranch(this)">
-                                        <span class="node-toggle">▶</span>
-                                        <span class="subbranch-icon">📖</span>
-                                        <span class="subbranch-text">概念</span>
-                                        <span class="subbranch-count">2个</span>
+                            <!-- 维度3: AI企业 -->
+                            <div class="kb-dimension dim-companies" data-expanded="false">
+                                <div class="dim-header" onclick="toggleKBDimension(this)">
+                                    <div class="dim-icon">🏢</div>
+                                    <div class="dim-info">
+                                        <span class="dim-name">AI企业</span>
+                                        <span class="dim-count">4家</span>
                                     </div>
-                                    <div class="subbranch-children">
-                                        <a href="04-knowledge-base/concepts/enterprise/software-engineering-3.md" target="_blank" class="tree-leaf small">
-                                            <span class="leaf-text">软件工程3.0</span>
+                                    <span class="dim-toggle">▶</span>
+                                </div>
+                                <div class="dim-content">
+                                    <div class="dim-desc">AI原生企业画像、商业模式、竞争格局</div>
+                                    <div class="dim-items">
+                                        <a href="04-knowledge-base/03-ai-companies/openai-profile.md" target="_blank" class="kb-item new">
+                                            <span class="item-icon">🏢</span>
+                                            <span class="item-text">OpenAI · $5000亿估值</span>
+                                            <span class="item-tag new">NEW</span>
                                         </a>
-                                        <a href="04-knowledge-base/concepts/coding/ai-coding-practices.md" target="_blank" class="tree-leaf small">
-                                            <span class="leaf-text">AI编程实践</span>
+                                        <a href="04-knowledge-base/03-ai-companies/anthropic-profile.md" target="_blank" class="kb-item new">
+                                            <span class="item-icon">🏢</span>
+                                            <span class="item-text">Anthropic · MCP创建者</span>
+                                            <span class="item-tag new">NEW</span>
+                                        </a>
+                                        <a href="04-knowledge-base/03-ai-companies/bytedance-ai-landscape.md" target="_blank" class="kb-item">
+                                            <span class="item-icon">🏢</span>
+                                            <span class="item-text">字节跳动 · 豆包生态</span>
                                         </a>
                                     </div>
                                 </div>
-                                <!-- 企业AI子分支: 实践 -->
-                                <div class="tree-subbranch" data-expanded="false">
-                                    <div class="subbranch-node" onclick="toggleTreeBranch(this)">
-                                        <span class="node-toggle">▶</span>
-                                        <span class="subbranch-icon">🛠️</span>
-                                        <span class="subbranch-text">实践</span>
-                                        <span class="subbranch-count">5个</span>
+                            </div>
+                        
+                            <!-- 维度4: 企业AI转型 -->
+                            <div class="kb-dimension dim-enterprise" data-expanded="false">
+                                <div class="dim-header" onclick="toggleKBDimension(this)">
+                                    <div class="dim-icon">🏭</div>
+                                    <div class="dim-info">
+                                        <span class="dim-name">企业AI转型</span>
+                                        <span class="dim-count">7篇</span>
                                     </div>
-                                    <div class="subbranch-children">
-                                        <a href="04-knowledge-base/04-enterprise-ai/enterprise-ai-transformation-methodology.md" target="_blank" class="tree-leaf small">
-                                            <span class="leaf-text">企业AI转型方法论</span>
+                                    <span class="dim-toggle">▶</span>
+                                </div>
+                                <div class="dim-content">
+                                    <div class="dim-desc">传统企业AI应用、数字化转型、组织变革</div>
+                                    <div class="dim-items">
+                                        <a href="04-knowledge-base/04-enterprise-ai/enterprise-ai-transformation-methodology.md" target="_blank" class="kb-item">
+                                            <span class="item-icon">📋</span>
+                                            <span class="item-text">AI转型方法论</span>
                                         </a>
-                                        <a href="04-knowledge-base/best-practices/ai-studio-product-design.md" target="_blank" class="tree-leaf small">
-                                            <span class="leaf-text">AI Studio产品方案</span>
+                                        <a href="04-knowledge-base/concepts/enterprise/software-engineering-3.md" target="_blank" class="kb-item">
+                                            <span class="item-icon">⚙️</span>
+                                            <span class="item-text">软件工程3.0</span>
                                         </a>
-                                        <a href="04-knowledge-base/best-practices/enterprise-ai-worker-scenarios.md" target="_blank" class="tree-leaf small">
-                                            <span class="leaf-text">企业数字员工场景</span>
-                                        </a>
-                                        <a href="04-knowledge-base/best-practices/enterprise-ai-product-design.md" target="_blank" class="tree-leaf small">
-                                            <span class="leaf-text">企业AI产品设计</span>
-                                        </a>
-                                        <a href="04-knowledge-base/best-practices/ai-agent-team-implementation.md" target="_blank" class="tree-leaf small">
-                                            <span class="leaf-text">AI Agent团队落地</span>
+                                        <a href="04-knowledge-base/best-practices/ai-studio-product-design.md" target="_blank" class="kb-item">
+                                            <span class="item-icon">🎨</span>
+                                            <span class="item-text">AI Studio产品方案</span>
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+                    </div>
+                    
+                    <!-- === 分层连接线 === -->
+                    <div class="kb-layer-connector">
+                        <div class="connector-line"></div>
+                        <div class="connector-label">支撑</div>
+                        <div class="connector-line"></div>
+                    </div>
+                    
+                    <!-- === 底层：知识资产基础设施 === -->
+                    <div class="kb-layer kb-layer-bottom">
+                        <div class="layer-title">
+                            <span class="layer-icon">🔧</span>
+                            <span>底层资产 · 知识原子</span>
+                        </div>
+                        <div class="kb-foundations">
+                            
+                            <!-- 底层1: 实体画像 -->
+                            <div class="kb-foundation foundation-entities">
+                                <div class="foundation-header">
+                                    <span class="foundation-icon">👤</span>
+                                    <span class="foundation-title">实体画像</span>
+                                </div>
+                                <div class="foundation-stats">
+                                    <span class="stat-item"><strong>7</strong>位人物</span>
+                                    <span class="stat-item"><strong>4</strong>家企业</span>
+                                </div>
+                                <div class="foundation-items">
+                                    <a href="04-knowledge-base/entity-profiles/people/barry-zhang.md" target="_blank" class="foundation-link">
+                                        <span class="link-avatar">👤</span>
+                                        <span class="link-name">Barry Zhang</span>
+                                        <span class="link-org">Anthropic</span>
+                                    </a>
+                                    <a href="04-knowledge-base/entity-profiles/people/shunyu-yao.md" target="_blank" class="foundation-link">
+                                        <span class="link-avatar">👤</span>
+                                        <span class="link-name">姚顺雨</span>
+                                        <span class="link-org">OpenAI</span>
+                                    </a>
+                                    <a href="04-knowledge-base/entity-profiles/people/harrison-chase.md" target="_blank" class="foundation-link">
+                                        <span class="link-avatar">👤</span>
+                                        <span class="link-name">Harrison Chase</span>
+                                        <span class="link-org">LangChain</span>
+                                    </a>
+                                    <a href="04-knowledge-base/entity-profiles/people/jim-fan.md" target="_blank" class="foundation-link">
+                                        <span class="link-avatar">👤</span>
+                                        <span class="link-name">Jim Fan</span>
+                                        <span class="link-org">NVIDIA</span>
+                                    </a>
+                                    <a href="04-knowledge-base/entity-profiles/people/andrej-karpathy.md" target="_blank" class="foundation-link">
+                                        <span class="link-avatar">👤</span>
+                                        <span class="link-name">Andrej Karpathy</span>
+                                        <span class="link-org">前OpenAI</span>
+                                    </a>
+                                    <a href="04-knowledge-base/entity-profiles/people/simon-willison.md" target="_blank" class="foundation-link">
+                                        <span class="link-avatar">👤</span>
+                                        <span class="link-name">Simon Willison</span>
+                                        <span class="link-org">Django</span>
+                                    </a>
+                                    <a href="04-knowledge-base/entity-profiles/people/addy-osmani.md" target="_blank" class="foundation-link">
+                                        <span class="link-avatar">👤</span>
+                                        <span class="link-name">Addy Osmani</span>
+                                        <span class="link-org">Google</span>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- 底层2: 概念库 -->
+                            <div class="kb-foundation foundation-concepts">
+                                <div class="foundation-header">
+                                    <span class="foundation-icon">📖</span>
+                                    <span class="foundation-title">概念库</span>
+                                </div>
+                                <div class="foundation-stats">
+                                    <span class="stat-item"><strong>8</strong>个概念</span>
+                                </div>
+                                <div class="foundation-tags">
+                                    <a href="04-knowledge-base/concepts/agents/agent-architecture.md" target="_blank" class="concept-tag">Agent架构</a>
+                                    <a href="04-knowledge-base/concepts/agents/agent-types-matrix.md" target="_blank" class="concept-tag">Agent矩阵</a>
+                                    <a href="04-knowledge-base/concepts/agents/ambient-agents.md" target="_blank" class="concept-tag">Ambient Agent</a>
+                                    <a href="04-knowledge-base/concepts/agents/physical-ai.md" target="_blank" class="concept-tag">Physical AI</a>
+                                    <a href="04-knowledge-base/02-agents/model-context-protocol.md" target="_blank" class="concept-tag new">MCP协议</a>
+                                    <a href="04-knowledge-base/concepts/enterprise/software-engineering-3.md" target="_blank" class="concept-tag">软件3.0</a>
+                                    <a href="04-knowledge-base/concepts/coding/ai-coding-practices.md" target="_blank" class="concept-tag">AI编程</a>
+                                </div>
+                            </div>
+                            
+                            <!-- 底层3: 最佳实践 -->
+                            <div class="kb-foundation foundation-practices">
+                                <div class="foundation-header">
+                                    <span class="foundation-icon">🛠️</span>
+                                    <span class="foundation-title">最佳实践</span>
+                                </div>
+                                <div class="foundation-stats">
+                                    <span class="stat-item"><strong>6</strong>个方案</span>
+                                </div>
+                                <div class="foundation-tags">
+                                    <a href="04-knowledge-base/best-practices/ai-coding-workflow.md" target="_blank" class="practice-tag">AI编程工作流</a>
+                                    <a href="04-knowledge-base/best-practices/financial-ai-agent-design.md" target="_blank" class="practice-tag">金融Agent</a>
+                                    <a href="04-knowledge-base/best-practices/ai-agent-team-implementation.md" target="_blank" class="practice-tag">团队落地</a>
+                                    <a href="04-knowledge-base/best-practices/ai-studio-product-design.md" target="_blank" class="practice-tag">AI Studio</a>
+                                    <a href="04-knowledge-base/best-practices/enterprise-ai-worker-scenarios.md" target="_blank" class="practice-tag">数字员工</a>
+                                    <a href="04-knowledge-base/02-agents/agent-infra-and-optimization.md" target="_blank" class="practice-tag">Agent调优</a>
+                                </div>
+                            </div>
+                            
+                            <!-- 底层4: 洞察库 -->
+                            <div class="kb-foundation foundation-insights">
+                                <div class="foundation-header">
+                                    <span class="foundation-icon">💡</span>
+                                    <span class="foundation-title">洞察库</span>
+                                </div>
+                                <div class="foundation-stats">
+                                    <span class="stat-item"><strong>3</strong>份洞察</span>
+                                </div>
+                                <div class="foundation-items">
+                                    <a href="04-knowledge-base/insights/ai-industry-trends-2026.md" target="_blank" class="insight-link">
+                                        <span class="insight-icon">📈</span>
+                                        <span class="insight-text">2026 AI趋势洞察</span>
+                                    </a>
+                                    <a href="04-knowledge-base/insights/ai-industry-principles.md" target="_blank" class="insight-link">
+                                        <span class="insight-icon">📜</span>
+                                        <span class="insight-text">AI行业原则</span>
+                                    </a>
+                                    <a href="04-knowledge-base/insights/weekly/2026-03-week1.md" target="_blank" class="insight-link">
+                                        <span class="insight-icon">📅</span>
+                                        <span class="insight-text">周洞察 · 3月第1周</span>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- 架构说明 -->
+                    <div class="kb-architecture-note">
+                        <div class="note-icon">💡</div>
+                        <div class="note-content">
+                            <strong>架构说明</strong>：顶层四大维度是研究视角，底层四大资产是知识原子。每个维度的研究成果都会沉淀到对应的底层资产中，形成<strong>「追踪→沉淀→复用」</strong>的知识闭环。
+                        </div>
                     </div>
                 </div>
                 
                 <!-- 底部操作 -->
                 <div style="margin-top: var(--spacing-xl); display: flex; justify-content: center; gap: var(--spacing-md);">
-                    <button onclick="expandAllTree()" class="tree-action-btn">
+                    <button onclick="expandAllKB()" class="tree-action-btn">
                         <span>📂</span> 全部展开
                     </button>
-                    <button onclick="collapseAllTree()" class="tree-action-btn">
+                    <button onclick="collapseAllKB()" class="tree-action-btn">
                         <span>📁</span> 全部折叠
                     </button>
                     <a href="04-knowledge-base/README.md" target="_blank" class="tree-action-btn primary">
@@ -2130,31 +2391,27 @@
         // 初始化日历
         renderCalendar();
         
-        // ============ 知识树功能 ============
-        // 展开/折叠树枝
-        function toggleTreeBranch(node) {
-            // 阻止事件冒泡（针对嵌套的子分支）
+        // ============ 知识库架构功能 ============
+        // 展开/折叠维度卡片
+        function toggleKBDimension(node) {
             event.stopPropagation();
-            
-            // 找到父级 tree-branch 或 tree-subbranch
-            const branch = node.closest('.tree-branch, .tree-subbranch');
-            if (!branch) return;
-            
-            const isExpanded = branch.getAttribute('data-expanded') === 'true';
-            branch.setAttribute('data-expanded', !isExpanded);
+            const dimension = node.closest('.kb-dimension');
+            if (!dimension) return;
+            const isExpanded = dimension.getAttribute('data-expanded') === 'true';
+            dimension.setAttribute('data-expanded', !isExpanded);
         }
         
         // 全部展开
-        function expandAllTree() {
-            document.querySelectorAll('.tree-branch, .tree-subbranch').forEach(branch => {
-                branch.setAttribute('data-expanded', 'true');
+        function expandAllKB() {
+            document.querySelectorAll('.kb-dimension').forEach(dim => {
+                dim.setAttribute('data-expanded', 'true');
             });
         }
         
         // 全部折叠
-        function collapseAllTree() {
-            document.querySelectorAll('.tree-branch, .tree-subbranch').forEach(branch => {
-                branch.setAttribute('data-expanded', 'false');
+        function collapseAllKB() {
+            document.querySelectorAll('.kb-dimension').forEach(dim => {
+                dim.setAttribute('data-expanded', 'false');
             });
         }
     </script>
