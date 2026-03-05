@@ -807,95 +807,16 @@
         /* ============ Knowledge Tree Styles ============ */
         /* ============ 知识库架构样式 ============ */
         .kb-architecture {
-            padding: var(--spacing-xl);
+            padding: var(--spacing-md) var(--spacing-lg);
             background: linear-gradient(180deg, #FAFBFC 0%, #F1F3F5 100%);
             border-radius: var(--radius-xl);
             border: 1px solid var(--color-border-light);
             box-shadow: var(--shadow-card);
         }
         
-        .kb-version {
-            text-align: center;
-            font-size: 13px;
-            color: var(--color-text-muted);
-            margin-bottom: var(--spacing-lg);
-            padding: 8px 16px;
-            background: rgba(26, 127, 55, 0.06);
-            border-radius: var(--radius-full);
-            display: inline-block;
-            position: relative;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        /* 根节点 */
-        .kb-root {
-            display: flex;
-            justify-content: center;
-            margin-bottom: var(--spacing-xl);
-        }
-        
-        .kb-root-node {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 20px 32px;
-            background: linear-gradient(135deg, #1A7F37 0%, #238636 50%, #2EA043 100%);
-            color: white;
-            border-radius: 60px;
-            box-shadow: 0 10px 30px rgba(26, 127, 55, 0.3), 0 4px 12px rgba(26, 127, 55, 0.2);
-        }
-        
-        .kb-root-icon {
-            font-size: 36px;
-        }
-        
-        .kb-root-content {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .kb-root-title {
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
-        
-        .kb-root-subtitle {
-            font-size: 12px;
-            opacity: 0.85;
-            margin-top: 2px;
-        }
-        
-        /* 分层标签 */
-        .kb-layer-labels {
-            display: flex;
-            justify-content: center;
-            gap: var(--spacing-2xl);
-            margin-bottom: var(--spacing-lg);
-        }
-        
-        .kb-layer-label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            border-radius: var(--radius-full);
-            font-size: 13px;
-        }
-        
-        .kb-layer-label.top {
-            background: linear-gradient(135deg, rgba(9, 105, 218, 0.1) 0%, rgba(26, 127, 55, 0.1) 100%);
-            border: 1px solid rgba(9, 105, 218, 0.2);
-        }
-        
-        .kb-layer-label.bottom {
-            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(191, 135, 0, 0.1) 100%);
-            border: 1px solid rgba(124, 58, 237, 0.2);
-        }
-        
-        .label-icon {
-            font-size: 16px;
+        /* 分层标签 - 移除 */
+        .kb-layer-labels, .kb-version, .kb-root, .kb-layer-connector, .kb-architecture-note {
+            display: none;
         }
         
         .label-text {
@@ -909,25 +830,34 @@
         
         /* 分层容器 */
         .kb-layer {
-            margin-bottom: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
         }
         
         .layer-title {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 8px;
-            margin-bottom: var(--spacing-md);
-            padding: 10px 16px;
+            margin-bottom: var(--spacing-sm);
+            padding: 6px 14px;
             background: var(--color-bg-card);
             border-radius: var(--radius-full);
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             color: var(--color-text-secondary);
             box-shadow: var(--shadow-sm);
         }
         
         .layer-icon {
-            font-size: 18px;
+            font-size: 14px;
+        }
+        
+        .layer-stats {
+            font-size: 11px;
+            font-weight: 400;
+            color: var(--color-text-muted);
+            margin-left: 8px;
+            padding-left: 8px;
+            border-left: 1px solid var(--color-border);
         }
         
         /* 四大维度网格 */
@@ -947,14 +877,14 @@
         .kb-dimension {
             background: var(--color-bg-card);
             border-radius: var(--radius-lg);
-            border: 2px solid var(--color-border-light);
+            border: 1px solid var(--color-border-light);
             overflow: hidden;
             transition: all var(--transition-normal);
         }
         
         .kb-dimension:hover {
             border-color: rgba(26, 127, 55, 0.3);
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-sm);
         }
         
         .kb-dimension.core {
@@ -964,8 +894,8 @@
         .dim-header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 16px 20px;
+            gap: 10px;
+            padding: 12px 14px;
             cursor: pointer;
             transition: all var(--transition-fast);
         }
@@ -975,13 +905,13 @@
         }
         
         .dim-icon {
-            width: 44px;
-            height: 44px;
+            width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 12px;
-            font-size: 22px;
+            border-radius: 10px;
+            font-size: 18px;
             color: white;
         }
         
@@ -997,15 +927,15 @@
         }
         
         .dim-name {
-            font-size: 17px;
-            font-weight: 700;
+            font-size: 15px;
+            font-weight: 600;
             color: var(--color-text-primary);
         }
         
         .dim-count {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--color-text-muted);
-            margin-top: 2px;
+            margin-top: 1px;
         }
         
         .dim-count.core {
@@ -1014,11 +944,11 @@
         }
         
         .dim-toggle {
-            font-size: 12px;
+            font-size: 10px;
             color: var(--color-text-muted);
             transition: transform var(--transition-normal);
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1034,32 +964,32 @@
         
         .dim-content {
             display: none;
-            padding: var(--spacing-md);
+            padding: var(--spacing-sm) var(--spacing-md);
             border-top: 1px solid var(--color-border-light);
             background: linear-gradient(180deg, rgba(246,248,250,0.5) 0%, transparent 100%);
         }
         
         .kb-dimension[data-expanded="true"] .dim-content {
             display: block;
-            animation: slideDown 0.25s ease-out;
+            animation: slideDown 0.2s ease-out;
         }
         
         .dim-desc {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--color-text-muted);
-            margin-bottom: var(--spacing-sm);
+            margin-bottom: var(--spacing-xs);
         }
         
         .dim-stats {
             display: flex;
-            gap: var(--spacing-sm);
-            margin-bottom: var(--spacing-sm);
-            font-size: 12px;
+            gap: var(--spacing-xs);
+            margin-bottom: var(--spacing-xs);
+            font-size: 11px;
             color: var(--color-text-secondary);
         }
         
         .dim-stats span {
-            padding: 4px 10px;
+            padding: 2px 8px;
             background: var(--color-bg);
             border-radius: var(--radius-full);
         }
@@ -1067,17 +997,17 @@
         .dim-items {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
         }
         
         .kb-item {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 10px 14px;
+            gap: 8px;
+            padding: 8px 12px;
             background: var(--color-bg-card);
             border: 1px solid transparent;
-            border-radius: var(--radius-md);
+            border-radius: var(--radius-sm);
             text-decoration: none;
             transition: all var(--transition-fast);
         }
@@ -1085,23 +1015,23 @@
         .kb-item:hover {
             background: linear-gradient(135deg, rgba(26, 127, 55, 0.06) 0%, rgba(9, 105, 218, 0.04) 100%);
             border-color: var(--color-success);
-            transform: translateX(4px);
+            transform: translateX(3px);
         }
         
         .item-icon {
-            font-size: 16px;
+            font-size: 14px;
         }
         
         .item-text {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             color: var(--color-text-primary);
             flex: 1;
         }
         
         .item-tag {
-            font-size: 10px;
-            padding: 2px 8px;
+            font-size: 9px;
+            padding: 2px 6px;
             border-radius: var(--radius-full);
             font-weight: 500;
         }
@@ -1112,37 +1042,11 @@
             animation: pulse 2s ease-in-out infinite;
         }
         
-        /* 分层连接线 */
-        .kb-layer-connector {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--spacing-md);
-            padding: var(--spacing-lg) 0;
-        }
-        
-        .connector-line {
-            flex: 1;
-            height: 2px;
-            background: linear-gradient(90deg, transparent 0%, var(--color-border) 50%, transparent 100%);
-            max-width: 150px;
-        }
-        
-        .connector-label {
-            padding: 6px 16px;
-            background: var(--color-bg-card);
-            border: 1px dashed var(--color-border);
-            border-radius: var(--radius-full);
-            font-size: 12px;
-            color: var(--color-text-muted);
-            font-weight: 500;
-        }
-        
         /* 底层基础设施 */
         .kb-foundations {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: var(--spacing-md);
+            gap: var(--spacing-sm);
         }
         
         @media (max-width: 992px) {
@@ -1159,43 +1063,43 @@
         
         .kb-foundation {
             background: var(--color-bg-card);
-            border-radius: var(--radius-lg);
-            padding: var(--spacing-md);
-            border: 2px solid var(--color-border-light);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-sm);
+            border: 1px solid var(--color-border-light);
             transition: all var(--transition-normal);
         }
         
         .kb-foundation:hover {
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-sm);
         }
         
-        .foundation-entities { border-left: 4px solid #7C3AED; }
-        .foundation-concepts { border-left: 4px solid #0969DA; }
-        .foundation-practices { border-left: 4px solid #2DA44E; }
-        .foundation-insights { border-left: 4px solid #BF8700; }
+        .foundation-entities { border-left: 3px solid #7C3AED; }
+        .foundation-concepts { border-left: 3px solid #0969DA; }
+        .foundation-practices { border-left: 3px solid #2DA44E; }
+        .foundation-insights { border-left: 3px solid #BF8700; }
         
         .foundation-header {
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-bottom: var(--spacing-sm);
+            gap: 6px;
+            margin-bottom: var(--spacing-xs);
         }
         
         .foundation-icon {
-            font-size: 20px;
+            font-size: 16px;
         }
         
         .foundation-title {
-            font-size: 15px;
-            font-weight: 700;
+            font-size: 13px;
+            font-weight: 600;
             color: var(--color-text-primary);
         }
         
         .foundation-stats {
             display: flex;
-            gap: var(--spacing-sm);
-            margin-bottom: var(--spacing-sm);
-            font-size: 12px;
+            gap: var(--spacing-xs);
+            margin-bottom: var(--spacing-xs);
+            font-size: 11px;
             color: var(--color-text-muted);
         }
         
@@ -1206,16 +1110,16 @@
         .foundation-items {
             display: flex;
             flex-direction: column;
-            gap: 4px;
-            max-height: 200px;
+            gap: 2px;
+            max-height: 120px;
             overflow-y: auto;
         }
         
         .foundation-link {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 10px;
+            gap: 6px;
+            padding: 5px 8px;
             border-radius: var(--radius-sm);
             text-decoration: none;
             transition: all var(--transition-fast);
@@ -1226,19 +1130,19 @@
         }
         
         .link-avatar {
-            font-size: 14px;
+            font-size: 12px;
         }
         
         .link-name {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
             color: var(--color-text-primary);
             flex: 1;
         }
         
         .link-org {
-            font-size: 10px;
-            padding: 2px 6px;
+            font-size: 9px;
+            padding: 1px 5px;
             background: var(--color-bg);
             border-radius: var(--radius-sm);
             color: var(--color-text-muted);
@@ -1248,13 +1152,13 @@
         .foundation-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
+            gap: 4px;
         }
         
         .concept-tag, .practice-tag {
             display: inline-block;
-            padding: 6px 12px;
-            font-size: 12px;
+            padding: 4px 8px;
+            font-size: 11px;
             font-weight: 500;
             border-radius: var(--radius-full);
             text-decoration: none;
@@ -1293,8 +1197,8 @@
         .insight-link {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 10px;
+            gap: 6px;
+            padding: 5px 8px;
             border-radius: var(--radius-sm);
             text-decoration: none;
             transition: all var(--transition-fast);
@@ -1305,52 +1209,26 @@
         }
         
         .insight-icon {
-            font-size: 14px;
+            font-size: 12px;
         }
         
         .insight-text {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
             color: var(--color-text-primary);
-        }
-        
-        /* 架构说明 */
-        .kb-architecture-note {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-top: var(--spacing-xl);
-            padding: var(--spacing-md);
-            background: linear-gradient(135deg, rgba(9, 105, 218, 0.04) 0%, rgba(26, 127, 55, 0.04) 100%);
-            border-radius: var(--radius-lg);
-            border: 1px dashed var(--color-border);
-        }
-        
-        .note-icon {
-            font-size: 20px;
-        }
-        
-        .note-content {
-            font-size: 13px;
-            color: var(--color-text-secondary);
-            line-height: 1.6;
-        }
-        
-        .note-content strong {
-            color: var(--color-success);
         }
         
         /* Tree Action Buttons */
         .tree-action-btn {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            padding: 12px 20px;
+            gap: 5px;
+            padding: 8px 14px;
             border: 1px solid var(--color-border);
             background: var(--color-bg-card);
             color: var(--color-text-secondary);
             border-radius: var(--radius-full);
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 500;
             cursor: pointer;
             transition: all var(--transition-fast);
@@ -1923,49 +1801,15 @@
         <!-- 4. 知识库 -->
         <article id="knowledge" class="tab-panel">
             <section class="section">
-                <div class="section-header">
-                    <div class="section-icon">🧠</div>
-                    <div>
-                        <h2 class="section-title">林克的AI知识库</h2>
-                        <p class="section-desc">系统性AI认知体系 · 顶层视角 + 底层资产</p>
-                    </div>
-                </div>
-                
-                <!-- 知识库架构可视化 -->
+                <!-- 知识库架构可视化 - 精简版 -->
                 <div class="kb-architecture">
-                    <!-- 版本标识 -->
-                    <div class="kb-version">v4.2.0 · 32篇文档 · 7位人物 · 4家企业</div>
-                    
-                    <!-- 根节点 -->
-                    <div class="kb-root">
-                        <div class="kb-root-node">
-                            <span class="kb-root-icon">🧠</span>
-                            <div class="kb-root-content">
-                                <span class="kb-root-title">林克的AI知识库</span>
-                                <span class="kb-root-subtitle">持续追踪 · 深度沉淀 · 系统认知</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 架构分层说明 -->
-                    <div class="kb-layer-labels">
-                        <div class="kb-layer-label top">
-                            <span class="label-icon">🎯</span>
-                            <span class="label-text">顶层视角</span>
-                            <span class="label-desc">四大研究维度</span>
-                        </div>
-                        <div class="kb-layer-label bottom">
-                            <span class="label-icon">🔧</span>
-                            <span class="label-text">底层基础</span>
-                            <span class="label-desc">知识资产原子单元</span>
-                        </div>
-                    </div>
                     
                     <!-- === 顶层：四大维度 === -->
                     <div class="kb-layer kb-layer-top">
                         <div class="layer-title">
                             <span class="layer-icon">🎯</span>
-                            <span>四大维度 · 研究视角</span>
+                            <span>四大维度</span>
+                            <span class="layer-stats">35篇 · 7人 · 4企业</span>
                         </div>
                         <div class="kb-dimensions">
                         
@@ -1975,7 +1819,7 @@
                                     <div class="dim-icon">📊</div>
                                     <div class="dim-info">
                                         <span class="dim-name">模型</span>
-                                        <span class="dim-count">3篇</span>
+                                        <span class="dim-count">4篇</span>
                                     </div>
                                     <span class="dim-toggle">▶</span>
                                 </div>
@@ -1990,9 +1834,13 @@
                                             <span class="item-icon">📄</span>
                                             <span class="item-text">AI下半场理论</span>
                                         </a>
-                                        <a href="04-knowledge-base/01-models/reasoning-models.md" target="_blank" class="kb-item new">
+                                        <a href="04-knowledge-base/01-models/reasoning-models.md" target="_blank" class="kb-item">
                                             <span class="item-icon">📄</span>
                                             <span class="item-text">推理模型专题</span>
+                                        </a>
+                                        <a href="04-knowledge-base/01-models/gemini-3-series.md" target="_blank" class="kb-item new">
+                                            <span class="item-icon">📄</span>
+                                            <span class="item-text">Gemini 3系列</span>
                                             <span class="item-tag new">NEW</span>
                                         </a>
                                     </div>
@@ -2049,7 +1897,7 @@
                                     <div class="dim-items">
                                         <a href="04-knowledge-base/03-ai-companies/openai-profile.md" target="_blank" class="kb-item new">
                                             <span class="item-icon">🏢</span>
-                                            <span class="item-text">OpenAI · $5000亿估值</span>
+                                            <span class="item-text">OpenAI · $8400亿估值</span>
                                             <span class="item-tag new">NEW</span>
                                         </a>
                                         <a href="04-knowledge-base/03-ai-companies/anthropic-profile.md" target="_blank" class="kb-item new">
@@ -2096,18 +1944,11 @@
                         </div>
                     </div>
                     
-                    <!-- === 分层连接线 === -->
-                    <div class="kb-layer-connector">
-                        <div class="connector-line"></div>
-                        <div class="connector-label">支撑</div>
-                        <div class="connector-line"></div>
-                    </div>
-                    
-                    <!-- === 底层：知识资产基础设施 === -->
+                    <!-- === 底层：知识资产 === -->
                     <div class="kb-layer kb-layer-bottom">
                         <div class="layer-title">
                             <span class="layer-icon">🔧</span>
-                            <span>底层资产 · 知识原子</span>
+                            <span>底层资产</span>
                         </div>
                         <div class="kb-foundations">
                             
@@ -2211,7 +2052,7 @@
                                 <div class="foundation-items">
                                     <a href="04-knowledge-base/insights/ai-industry-trends-2026.md" target="_blank" class="insight-link">
                                         <span class="insight-icon">📈</span>
-                                        <span class="insight-text">2026 AI趋势洞察</span>
+                                        <span class="insight-text">2026 AI趋势洞察 (含2月融资)</span>
                                     </a>
                                     <a href="04-knowledge-base/insights/ai-industry-principles.md" target="_blank" class="insight-link">
                                         <span class="insight-icon">📜</span>
@@ -2226,18 +2067,10 @@
                             
                         </div>
                     </div>
-                    
-                    <!-- 架构说明 -->
-                    <div class="kb-architecture-note">
-                        <div class="note-icon">💡</div>
-                        <div class="note-content">
-                            <strong>架构说明</strong>：顶层四大维度是研究视角，底层四大资产是知识原子。每个维度的研究成果都会沉淀到对应的底层资产中，形成<strong>「追踪→沉淀→复用」</strong>的知识闭环。
-                        </div>
-                    </div>
                 </div>
                 
                 <!-- 底部操作 -->
-                <div style="margin-top: var(--spacing-xl); display: flex; justify-content: center; gap: var(--spacing-md);">
+                <div style="margin-top: var(--spacing-lg); display: flex; justify-content: center; gap: var(--spacing-md);">
                     <button onclick="expandAllKB()" class="tree-action-btn">
                         <span>📂</span> 全部展开
                     </button>
