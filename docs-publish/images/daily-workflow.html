@@ -12,27 +12,38 @@
         }
         
         html, body {
-            width: 1000px;
-            height: 450px;
+            width: 1060px;
+            height: 560px;
             overflow: hidden;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            background: #FFFFFF;
         }
         
-        .container {
-            width: 1000px;
-            height: 450px;
-            padding: 30px 40px;
+        .white-border {
+            width: 1060px;
+            height: 560px;
+            padding: 20px;
+            background: #FFFFFF;
+        }
+        
+        .outer-container {
+            width: 1020px;
+            height: 520px;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            border-radius: 16px;
+            padding: 26px 34px;
             display: flex;
             flex-direction: column;
+            box-shadow: 0 8px 30px rgba(48, 43, 99, 0.3);
         }
         
         .title {
             text-align: center;
             color: white;
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 700;
-            margin-bottom: 30px;
+            margin-bottom: 24px;
+            flex-shrink: 0;
         }
         
         .workflow {
@@ -40,62 +51,62 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 20px;
+            gap: 14px;
         }
         
         .step {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
         
         .step-circle {
-            width: 90px;
-            height: 90px;
+            width: 76px;
+            height: 76px;
             border-radius: 50%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
         }
         
         .step-icon {
-            font-size: 32px;
+            font-size: 26px;
         }
         
         .step-number {
             position: absolute;
-            top: -8px;
-            right: -8px;
-            width: 28px;
-            height: 28px;
+            top: -6px;
+            right: -6px;
+            width: 22px;
+            height: 22px;
             background: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: 11px;
             font-weight: 700;
             color: #302b63;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
         
         .step-label {
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 600;
             color: white;
             text-align: center;
         }
         
         .step-time {
-            font-size: 12px;
+            font-size: 10px;
             color: #888;
             background: rgba(255,255,255,0.1);
-            padding: 4px 12px;
-            border-radius: 10px;
+            padding: 3px 9px;
+            border-radius: 8px;
         }
         
         .s1 .step-circle { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
@@ -106,34 +117,35 @@
         
         .arrow {
             color: rgba(255,255,255,0.4);
-            font-size: 28px;
+            font-size: 22px;
         }
         
         .timeline {
-            margin-top: 30px;
+            margin-top: 22px;
             background: rgba(255,255,255,0.05);
-            border-radius: 12px;
-            padding: 20px 30px;
+            border-radius: 10px;
+            padding: 14px 26px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-shrink: 0;
         }
         
         .timeline-item {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 7px;
         }
         
         .timeline-dot {
-            width: 12px;
-            height: 12px;
+            width: 9px;
+            height: 9px;
             border-radius: 50%;
             background: #4facfe;
         }
         
         .timeline-text {
-            font-size: 13px;
+            font-size: 11px;
             color: #aaa;
         }
         
@@ -146,88 +158,90 @@
             flex: 1;
             height: 2px;
             background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-            margin: 0 20px;
+            margin: 0 14px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="title">📡 AI日报 · 每日工作流程</div>
-        
-        <div class="workflow">
-            <div class="step s1">
-                <div class="step-circle">
-                    <div class="step-number">1</div>
-                    <span class="step-icon">🔍</span>
+    <div class="white-border">
+        <div class="outer-container">
+            <div class="title">📡 AI日报 · 每日工作流程</div>
+            
+            <div class="workflow">
+                <div class="step s1">
+                    <div class="step-circle">
+                        <div class="step-number">1</div>
+                        <span class="step-icon">🔍</span>
+                    </div>
+                    <div class="step-label">系统调研</div>
+                    <div class="step-time">5大板块搜索</div>
                 </div>
-                <div class="step-label">系统调研</div>
-                <div class="step-time">5大板块搜索</div>
-            </div>
-            
-            <div class="arrow">→</div>
-            
-            <div class="step s2">
-                <div class="step-circle">
-                    <div class="step-number">2</div>
-                    <span class="step-icon">📝</span>
+                
+                <div class="arrow">→</div>
+                
+                <div class="step s2">
+                    <div class="step-circle">
+                        <div class="step-number">2</div>
+                        <span class="step-icon">📝</span>
+                    </div>
+                    <div class="step-label">内容筛选</div>
+                    <div class="step-time">去重+标注重要度</div>
                 </div>
-                <div class="step-label">内容筛选</div>
-                <div class="step-time">去重+标注重要度</div>
-            </div>
-            
-            <div class="arrow">→</div>
-            
-            <div class="step s3">
-                <div class="step-circle">
-                    <div class="step-number">3</div>
-                    <span class="step-icon">📄</span>
+                
+                <div class="arrow">→</div>
+                
+                <div class="step s3">
+                    <div class="step-circle">
+                        <div class="step-number">3</div>
+                        <span class="step-icon">📄</span>
+                    </div>
+                    <div class="step-label">生成报告</div>
+                    <div class="step-time">MD + HTML</div>
                 </div>
-                <div class="step-label">生成报告</div>
-                <div class="step-time">MD + HTML</div>
-            </div>
-            
-            <div class="arrow">→</div>
-            
-            <div class="step s4">
-                <div class="step-circle">
-                    <div class="step-number">4</div>
-                    <span class="step-icon">🚀</span>
+                
+                <div class="arrow">→</div>
+                
+                <div class="step s4">
+                    <div class="step-circle">
+                        <div class="step-number">4</div>
+                        <span class="step-icon">🚀</span>
+                    </div>
+                    <div class="step-label">部署上线</div>
+                    <div class="step-time">GitHub Pages</div>
                 </div>
-                <div class="step-label">部署上线</div>
-                <div class="step-time">GitHub Pages</div>
-            </div>
-            
-            <div class="arrow">→</div>
-            
-            <div class="step s5">
-                <div class="step-circle">
-                    <div class="step-number">5</div>
-                    <span class="step-icon">📤</span>
+                
+                <div class="arrow">→</div>
+                
+                <div class="step s5">
+                    <div class="step-circle">
+                        <div class="step-number">5</div>
+                        <span class="step-icon">📤</span>
+                    </div>
+                    <div class="step-label">群内推送</div>
+                    <div class="step-time">KIM卡片</div>
                 </div>
-                <div class="step-label">群内推送</div>
-                <div class="step-time">KIM卡片</div>
             </div>
-        </div>
-        
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <span class="timeline-text"><span class="timeline-highlight">08:00</span> 定时触发</span>
-            </div>
-            <div class="timeline-line"></div>
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <span class="timeline-text"><span class="timeline-highlight">08:30</span> 调研完成</span>
-            </div>
-            <div class="timeline-line"></div>
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <span class="timeline-text"><span class="timeline-highlight">09:00</span> 报告生成</span>
-            </div>
-            <div class="timeline-line"></div>
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <span class="timeline-text"><span class="timeline-highlight">09:15</span> 推送完成</span>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <span class="timeline-text"><span class="timeline-highlight">08:00</span> 定时触发</span>
+                </div>
+                <div class="timeline-line"></div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <span class="timeline-text"><span class="timeline-highlight">08:30</span> 调研完成</span>
+                </div>
+                <div class="timeline-line"></div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <span class="timeline-text"><span class="timeline-highlight">09:00</span> 报告生成</span>
+                </div>
+                <div class="timeline-line"></div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <span class="timeline-text"><span class="timeline-highlight">09:15</span> 推送完成</span>
+                </div>
             </div>
         </div>
     </div>
