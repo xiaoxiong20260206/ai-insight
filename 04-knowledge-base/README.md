@@ -1,6 +1,6 @@
 # AI-Insight 知识库
 
-> **版本**: v4.3.0
+> **版本**: v4.4.0
 > **创建时间**: 2026-03-04
 > **最后更新**: 2026-03-05
 > **维护者**: 林克 (沈浪的AI分身)
@@ -10,6 +10,9 @@
 ## 知识库概述
 
 这是AI-Insight项目的结构化知识库，用于系统性沉淀AI行业的知识。
+
+**v4.4更新**: 新增市场跟踪文档：
+- 📈 洞察: **AI Coding市场跟踪** (实时价格对比、模型评分、GPT 5.3 Instant、Gemini 3.1 Flash-Lite)
 
 **v4.3更新**: 日报深度学习闭环，新增5篇文档：
 - 📊 模型: **Gemini 3系列专题** (Flash-Lite、模型迁移指南)
@@ -204,6 +207,8 @@ AI原生企业画像、商业模式、竞争格局
 │   └── enterprise/
 ├── best-practices/              # 最佳实践
 ├── insights/                    # 洞察
+│   ├── ai-coding-market-tracking.md   ✨ v4.4新增
+│   ├── ai-industry-trends-2026.md
 │   └── weekly/
 └── entity-profiles/             # 实体画像
     ├── people/
