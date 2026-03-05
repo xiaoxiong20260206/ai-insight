@@ -71,12 +71,7 @@
             font-size: 15px;
         }
         
-        a {
-            color: var(--color-info);
-            text-decoration: none;
-            transition: color var(--transition-fast);
-        }
-        
+        a { color: var(--color-info); text-decoration: none; transition: color var(--transition-fast); }
         a:hover { color: var(--color-success); }
         
         .container {
@@ -89,7 +84,7 @@
         .header {
             text-align: center;
             padding: var(--spacing-2xl) var(--spacing-lg);
-            margin-bottom: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
             background: var(--gradient-hero);
             border-radius: var(--radius-xl);
             position: relative;
@@ -99,70 +94,160 @@
         .header::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(26, 127, 55, 0.08) 0%, transparent 70%);
-            pointer-events: none;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: var(--gradient-success);
         }
         
         .header-badge {
             display: inline-flex;
             align-items: center;
             gap: var(--spacing-sm);
-            padding: var(--spacing-xs) var(--spacing-md);
+            padding: var(--spacing-xs) 14px;
             background: var(--gradient-badge);
+            color: var(--color-info);
             border-radius: var(--radius-full);
             font-size: 12px;
-            color: var(--color-success);
             font-weight: 600;
+            letter-spacing: 0.02em;
             margin-bottom: var(--spacing-md);
+            border: 1px solid rgba(9, 105, 218, 0.15);
         }
         
-        .header h1 {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--color-text-primary);
-            margin-bottom: var(--spacing-md);
+        .header-title {
+            font-size: 26px;
+            font-weight: 800;
             line-height: 1.3;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, var(--color-text-primary), var(--color-success-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header-subtitle {
+            font-size: 15px;
+            color: var(--color-text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
         }
         
         .header-meta {
-            display: flex;
-            justify-content: center;
-            gap: var(--spacing-lg);
-            flex-wrap: wrap;
+            margin-top: var(--spacing-md);
+            font-size: 13px;
             color: var(--color-text-muted);
-            font-size: 14px;
         }
         
-        .header-meta-item {
-            display: flex;
+        /* ============ Core Insight ============ */
+        .core-insight {
+            background: var(--color-bg-card);
+            border-left: 4px solid var(--color-danger);
+            border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+            box-shadow: var(--shadow-card);
+        }
+        
+        .core-insight-label {
+            display: inline-flex;
             align-items: center;
-            gap: var(--spacing-xs);
+            gap: var(--spacing-sm);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-danger);
+            margin-bottom: 12px;
+        }
+        
+        .core-insight-label::before {
+            content: '';
+            width: 8px; height: 8px;
+            background: var(--color-danger);
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px rgba(207, 34, 46, 0.15);
+        }
+        
+        .core-insight-title {
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+        
+        .core-insight-title em { color: var(--color-danger); font-style: normal; font-weight: 700; }
+        
+        .core-insight-text {
+            color: var(--color-text-secondary);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+        
+        /* ============ Stats Grid ============ */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        @media (max-width: 768px) {
+            .stats-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        
+        .stat-card {
+            background: var(--color-bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg) var(--spacing-md);
+            text-align: center;
+            box-shadow: var(--shadow-card);
+            transition: all var(--transition-normal);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .stat-value {
+            font-size: 28px;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+        
+        .stat-value.green { color: var(--color-success); }
+        .stat-value.blue { color: var(--color-info); }
+        .stat-value.purple { color: var(--color-purple); }
+        .stat-value.orange { color: var(--color-orange); }
+        
+        .stat-label {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            font-weight: 500;
         }
         
         /* ============ Tab Navigation ============ */
         .tab-nav {
             display: flex;
-            flex-wrap: nowrap;
-            gap: 4px;
+            flex-wrap: wrap;
+            gap: 6px;
             background: var(--color-bg-card);
-            padding: 6px;
+            padding: 8px;
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow-card);
             margin-bottom: var(--spacing-xl);
             position: sticky;
             top: 8px;
             z-index: 100;
-            overflow-x: auto;
         }
         
         .tab-btn {
             flex: 1;
-            min-width: fit-content;
-            padding: 10px 16px;
+            min-width: 90px;
+            padding: 10px 12px;
             border: none;
             background: transparent;
             color: var(--color-text-secondary);
@@ -185,58 +270,65 @@
             box-shadow: var(--shadow-sm);
         }
         
-        /* ============ Tab Content ============ */
-        .tab-content {
+        /* ============ Tab Panel ============ */
+        .tab-panel {
             display: none;
             animation: fadeIn 0.3s ease;
         }
         
-        .tab-content.active {
-            display: block;
-        }
+        .tab-panel.active { display: block; }
         
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* ============ Cards ============ */
-        .card {
+        /* ============ Section ============ */
+        .section {
             background: var(--color-bg-card);
             border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-card);
             padding: var(--spacing-lg);
             margin-bottom: var(--spacing-lg);
-            transition: box-shadow var(--transition-normal);
+            box-shadow: var(--shadow-card);
         }
         
-        .card:hover {
-            box-shadow: var(--shadow-md);
-        }
-        
-        .card-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--color-text-primary);
-            margin-bottom: var(--spacing-md);
+        .section-header {
             display: flex;
             align-items: center;
-            gap: var(--spacing-sm);
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
         }
         
-        .card-title::before {
-            content: '';
-            width: 4px;
-            height: 20px;
+        .section-number {
+            width: 32px; height: 32px;
             background: var(--gradient-success);
-            border-radius: 2px;
+            color: white;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+        
+        .subsection-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin: var(--spacing-lg) 0 var(--spacing-md);
+            padding-left: 12px;
+            border-left: 3px solid var(--color-success);
         }
         
         /* ============ Tables ============ */
-        .table-wrapper {
-            overflow-x: auto;
-            margin: var(--spacing-md) 0;
-        }
+        .table-wrap { overflow-x: auto; margin: var(--spacing-md) 0; }
         
         table {
             width: 100%;
@@ -257,44 +349,7 @@
             font-size: 13px;
         }
         
-        tr:hover td {
-            background: rgba(26, 127, 55, 0.02);
-        }
-        
-        /* ============ Highlight Boxes ============ */
-        .highlight-box {
-            padding: var(--spacing-lg);
-            border-radius: var(--radius-md);
-            margin: var(--spacing-md) 0;
-        }
-        
-        .highlight-box.success {
-            background: rgba(26, 127, 55, 0.06);
-            border-left: 4px solid var(--color-success);
-        }
-        
-        .highlight-box.warning {
-            background: rgba(191, 135, 0, 0.06);
-            border-left: 4px solid var(--color-warning);
-        }
-        
-        .highlight-box.info {
-            background: rgba(9, 105, 218, 0.06);
-            border-left: 4px solid var(--color-info);
-        }
-        
-        .highlight-box.danger {
-            background: rgba(207, 34, 46, 0.06);
-            border-left: 4px solid var(--color-danger);
-        }
-        
-        .highlight-box-title {
-            font-weight: 600;
-            margin-bottom: var(--spacing-sm);
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-        }
+        tr:hover td { background: rgba(26, 127, 55, 0.02); }
         
         /* ============ Tags ============ */
         .tag {
@@ -306,187 +361,40 @@
             font-weight: 500;
         }
         
-        .tag.success { background: rgba(26, 127, 55, 0.1); color: var(--color-success); }
-        .tag.warning { background: rgba(191, 135, 0, 0.1); color: var(--color-warning-dark); }
-        .tag.danger { background: rgba(207, 34, 46, 0.1); color: var(--color-danger); }
-        .tag.info { background: rgba(9, 105, 218, 0.1); color: var(--color-info); }
-        .tag.purple { background: rgba(124, 58, 237, 0.1); color: var(--color-purple); }
+        .tag-green { background: rgba(26, 127, 55, 0.1); color: var(--color-success); }
+        .tag-red { background: rgba(207, 34, 46, 0.1); color: var(--color-danger); }
+        .tag-blue { background: rgba(9, 105, 218, 0.1); color: var(--color-info); }
+        .tag-orange { background: rgba(191, 135, 0, 0.1); color: var(--color-warning-dark); }
+        .tag-purple { background: rgba(124, 58, 237, 0.1); color: var(--color-purple); }
         
-        /* ============ Stats Grid ============ */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: var(--spacing-md);
-            margin: var(--spacing-lg) 0;
-        }
-        
-        .stat-item {
-            text-align: center;
-            padding: var(--spacing-md);
-            background: var(--color-bg);
-            border-radius: var(--radius-md);
-        }
-        
-        .stat-value {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--color-success);
-        }
-        
-        .stat-label {
-            font-size: 12px;
-            color: var(--color-text-muted);
-            margin-top: var(--spacing-xs);
-        }
-        
-        /* ============ Timeline ============ */
-        .timeline {
-            position: relative;
-            padding-left: 30px;
-        }
-        
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 8px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--color-border);
-        }
-        
-        .timeline-item {
-            position: relative;
-            padding-bottom: var(--spacing-lg);
-        }
-        
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -26px;
-            top: 4px;
-            width: 12px;
-            height: 12px;
-            background: var(--color-success);
-            border-radius: 50%;
-            border: 2px solid white;
-        }
-        
-        .timeline-date {
-            font-size: 12px;
-            color: var(--color-text-muted);
-            margin-bottom: var(--spacing-xs);
-        }
-        
-        .timeline-content {
-            font-size: 14px;
-        }
-        
-        /* ============ Comparison Grid ============ */
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: var(--spacing-md);
-        }
-        
-        @media (max-width: 640px) {
-            .comparison-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .pros-cons-card {
+        /* ============ Insight Box ============ */
+        .insight-box {
+            background: linear-gradient(135deg, rgba(26, 127, 55, 0.04) 0%, rgba(9, 105, 218, 0.04) 100%);
+            border-left: 4px solid var(--color-success);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
             padding: var(--spacing-lg);
-            border-radius: var(--radius-md);
+            margin: var(--spacing-md) 0;
         }
         
-        .pros-cons-card.pros {
-            background: rgba(26, 127, 55, 0.04);
-            border: 1px solid rgba(26, 127, 55, 0.2);
-        }
+        .insight-box.warning { border-left-color: var(--color-warning); }
+        .insight-box.info { border-left-color: var(--color-info); }
+        .insight-box.danger { border-left-color: var(--color-danger); }
         
-        .pros-cons-card.cons {
-            background: rgba(207, 34, 46, 0.04);
-            border: 1px solid rgba(207, 34, 46, 0.2);
-        }
-        
-        .pros-cons-title {
-            font-weight: 600;
-            margin-bottom: var(--spacing-md);
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-        }
-        
-        .pros-cons-card.pros .pros-cons-title { color: var(--color-success); }
-        .pros-cons-card.cons .pros-cons-title { color: var(--color-danger); }
-        
-        .pros-cons-list {
-            list-style: none;
-        }
-        
-        .pros-cons-list li {
-            padding: var(--spacing-sm) 0;
-            padding-left: 24px;
-            position: relative;
+        .insight-title {
             font-size: 14px;
+            font-weight: 600;
+            color: var(--color-success);
+            margin-bottom: var(--spacing-sm);
         }
         
-        .pros-cons-list li::before {
-            position: absolute;
-            left: 0;
+        .insight-box.warning .insight-title { color: var(--color-warning-dark); }
+        .insight-box.info .insight-title { color: var(--color-info); }
+        .insight-box.danger .insight-title { color: var(--color-danger); }
+        
+        .insight-content {
             font-size: 14px;
-        }
-        
-        .pros-cons-card.pros li::before { content: '✓'; color: var(--color-success); }
-        .pros-cons-card.cons li::before { content: '✗'; color: var(--color-danger); }
-        
-        /* ============ Evolution Diagram ============ */
-        .evolution-diagram {
-            display: flex;
-            flex-direction: column;
-            gap: var(--spacing-md);
-        }
-        
-        .evolution-stage {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-md);
-        }
-        
-        .evolution-badge {
-            flex-shrink: 0;
-            width: 80px;
-            padding: var(--spacing-sm) var(--spacing-md);
-            background: var(--gradient-success);
-            color: white;
-            font-size: 12px;
-            font-weight: 600;
-            text-align: center;
-            border-radius: var(--radius-md);
-        }
-        
-        .evolution-content {
-            flex: 1;
-            padding: var(--spacing-md);
-            background: var(--color-bg);
-            border-radius: var(--radius-md);
-        }
-        
-        .evolution-title {
-            font-weight: 600;
-            margin-bottom: var(--spacing-xs);
-        }
-        
-        .evolution-desc {
-            font-size: 13px;
             color: var(--color-text-secondary);
-        }
-        
-        .evolution-arrow {
-            text-align: center;
-            color: var(--color-text-muted);
-            font-size: 20px;
+            line-height: 1.7;
         }
         
         /* ============ Quote ============ */
@@ -494,7 +402,7 @@
             padding: var(--spacing-lg);
             background: linear-gradient(135deg, rgba(124, 58, 237, 0.04) 0%, rgba(9, 105, 218, 0.04) 100%);
             border-left: 4px solid var(--color-purple);
-            border-radius: var(--radius-md);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
             font-style: italic;
             margin: var(--spacing-lg) 0;
         }
@@ -516,7 +424,231 @@
             font-size: 13px;
             overflow-x: auto;
             margin: var(--spacing-md) 0;
+            white-space: pre;
         }
+        
+        .code-block .highlight { color: #7EE787; }
+        
+        /* ============ Timeline ============ */
+        .timeline { position: relative; padding-left: 30px; }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0; bottom: 0;
+            width: 2px;
+            background: var(--color-border);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: var(--spacing-lg);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -26px;
+            top: 4px;
+            width: 12px; height: 12px;
+            background: var(--color-success);
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+        
+        .timeline-date {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .timeline-content { font-size: 14px; }
+        
+        /* ============ Comparison Grid ============ */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-md);
+        }
+        
+        @media (max-width: 640px) {
+            .comparison-grid { grid-template-columns: 1fr; }
+        }
+        
+        .pros-card, .cons-card {
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+        }
+        
+        .pros-card {
+            background: rgba(26, 127, 55, 0.04);
+            border: 1px solid rgba(26, 127, 55, 0.2);
+        }
+        
+        .cons-card {
+            background: rgba(207, 34, 46, 0.04);
+            border: 1px solid rgba(207, 34, 46, 0.2);
+        }
+        
+        .card-title {
+            font-weight: 600;
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .pros-card .card-title { color: var(--color-success); }
+        .cons-card .card-title { color: var(--color-danger); }
+        
+        .card-list { list-style: none; }
+        
+        .card-list li {
+            padding: var(--spacing-sm) 0;
+            padding-left: 24px;
+            position: relative;
+            font-size: 14px;
+        }
+        
+        .card-list li::before {
+            position: absolute;
+            left: 0;
+            font-size: 14px;
+        }
+        
+        .pros-card .card-list li::before { content: '✓'; color: var(--color-success); }
+        .cons-card .card-list li::before { content: '✗'; color: var(--color-danger); }
+        
+        /* ============ Evolution Diagram ============ */
+        .evolution-diagram {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+        }
+        
+        .evolution-stage {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+        
+        .evolution-badge {
+            flex-shrink: 0;
+            width: 90px;
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: var(--gradient-success);
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+            border-radius: var(--radius-md);
+        }
+        
+        .evolution-badge.current { background: var(--color-info); }
+        
+        .evolution-content {
+            flex: 1;
+            padding: var(--spacing-md);
+            background: var(--color-bg);
+            border-radius: var(--radius-md);
+        }
+        
+        .evolution-content.highlight { border: 2px solid var(--color-success); }
+        
+        .evolution-title { font-weight: 600; margin-bottom: var(--spacing-xs); }
+        .evolution-desc { font-size: 13px; color: var(--color-text-secondary); }
+        
+        .evolution-arrow {
+            text-align: center;
+            color: var(--color-text-muted);
+            font-size: 20px;
+        }
+        
+        @media (max-width: 640px) {
+            .evolution-stage { flex-direction: column; text-align: center; }
+            .evolution-badge { width: auto; }
+        }
+        
+        /* ============ Workflow Chart ============ */
+        .chart-container {
+            background: linear-gradient(135deg, rgba(26, 127, 55, 0.03) 0%, rgba(9, 105, 218, 0.03) 100%);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .chart-title {
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .chart-subtitle {
+            font-size: 13px;
+            color: var(--color-text-muted);
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .workflow-steps { display: flex; flex-direction: column; gap: var(--spacing-md); }
+        
+        .workflow-step {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-md);
+        }
+        
+        .step-indicator {
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .step-indicator.s1 { background: #1A7F37; }
+        .step-indicator.s2 { background: #0969DA; }
+        .step-indicator.s3 { background: #7C3AED; }
+        .step-indicator.s4 { background: #E5772B; }
+        .step-indicator.s5 { background: #CF222E; }
+        
+        .step-body { flex: 1; }
+        .step-head { font-weight: 600; margin-bottom: 4px; font-size: 14px; }
+        .step-content-text { font-size: 13px; color: var(--color-text-secondary); margin-bottom: 8px; }
+        
+        .step-tools { display: flex; flex-wrap: wrap; gap: 6px; }
+        
+        .tool-tag {
+            padding: 2px 8px;
+            background: rgba(26, 127, 55, 0.1);
+            color: var(--color-success);
+            border-radius: var(--radius-sm);
+            font-size: 11px;
+            font-weight: 500;
+        }
+        
+        .workflow-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid var(--color-border-light);
+        }
+        
+        @media (max-width: 640px) {
+            .workflow-stats { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        .workflow-stat { text-align: center; }
+        .workflow-stat-value { font-size: 24px; font-weight: 700; color: var(--color-success); }
+        .workflow-stat-label { font-size: 12px; color: var(--color-text-muted); }
         
         /* ============ Market Map ============ */
         .market-map {
@@ -558,15 +690,27 @@
             min-width: 100px;
         }
         
-        .market-product-name {
-            font-weight: 600;
-            font-size: 13px;
+        .market-product.highlight { border: 2px solid var(--color-success); }
+        .market-product-name { font-weight: 600; font-size: 13px; }
+        .market-product-price { font-size: 11px; color: var(--color-text-muted); margin-top: 4px; }
+        
+        /* ============ Column List ============ */
+        .col-list {
+            list-style: none;
+            margin: var(--spacing-md) 0;
         }
         
-        .market-product-price {
-            font-size: 11px;
-            color: var(--color-text-muted);
-            margin-top: 4px;
+        .col-list li {
+            padding: var(--spacing-sm) 0 var(--spacing-sm) 24px;
+            position: relative;
+            font-size: 14px;
+        }
+        
+        .col-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--color-success);
         }
         
         /* ============ Footer ============ */
@@ -577,17 +721,39 @@
             font-size: 13px;
         }
         
-        .footer a {
-            color: var(--color-success);
+        .footer a { color: var(--color-success); }
+        
+        /* ============ Learn More Section ============ */
+        .learn-more {
+            background: linear-gradient(135deg, #F6F8FA 0%, #EEF2F6 100%);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
         }
         
-        /* ============ Responsive ============ */
-        @media (max-width: 768px) {
-            .header h1 { font-size: 22px; }
-            .tab-btn { padding: 8px 12px; font-size: 12px; }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .evolution-stage { flex-direction: column; text-align: center; }
-            .evolution-badge { width: auto; }
+        .learn-more h3 {
+            font-size: 16px;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .learn-more p {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .learn-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background: var(--gradient-success);
+            color: #fff;
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
         }
     </style>
 </head>
@@ -599,13 +765,46 @@
                 <span>🦞</span>
                 <span>AI-Insight 深度调研</span>
             </div>
-            <h1>Crawl4AI深度调研：从开源爬虫到AI数据基础设施的演进</h1>
-            <div class="header-meta">
-                <span class="header-meta-item">📅 2026-03-05</span>
-                <span class="header-meta-item">👤 林克 (AI分身)</span>
-                <span class="header-meta-item">🏷️ AI基础设施 · 开源 · Agent</span>
-            </div>
+            <h1 class="header-title">Crawl4AI深度调研：从开源爬虫到AI数据基础设施的演进</h1>
+            <p class="header-subtitle">解析GitHub #1趋势爬虫的成功密码，洞察AI时代数据获取工具的范式转变</p>
+            <p class="header-meta">2026-03-05 · 林克（沈浪的AI分身）· 阅读约 15 分钟</p>
         </header>
+        
+        <!-- Core Insight -->
+        <div class="core-insight">
+            <div class="core-insight-label">核心洞察</div>
+            <div class="core-insight-title">
+                网页爬虫正在从"<em>数据采集工具</em>"演变为"<em>AI的感官系统</em>"——<br>
+                下一代爬虫不只是下载HTML，而是理解"这个网页在说什么"
+            </div>
+            <p class="core-insight-text">
+                Crawl4AI的成功揭示了AI时代数据获取的范式转变：从"为人类"到"为AI"，从"提取数据"到"获取知识"。这不仅是工具升级，更是整个AI基础设施层的重构。
+            </p>
+        </div>
+        
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value green">50K+</div>
+                <div class="stat-label">GitHub Stars</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value blue">51K+</div>
+                <div class="stat-label">社区开发者</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value purple">#1</div>
+                <div class="stat-label">开源爬虫排名</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value green">$0</div>
+                <div class="stat-label">软件成本</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value orange">Apache 2.0</div>
+                <div class="stat-label">开源协议</div>
+            </div>
+        </div>
         
         <!-- Tab Navigation -->
         <nav class="tab-nav">
@@ -616,91 +815,144 @@
             <button class="tab-btn" data-tab="pros-cons">⚖️ 优缺点</button>
             <button class="tab-btn" data-tab="evolution">🧬 AI演进</button>
             <button class="tab-btn" data-tab="prediction">🔮 趋势预测</button>
+            <button class="tab-btn" data-tab="bonus">🎁 彩蛋</button>
         </nav>
         
-        <!-- Tab: Overview -->
-        <div id="overview" class="tab-content active">
-            <div class="card">
-                <h2 class="card-title">核心数据</h2>
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-value">50K+</div>
-                        <div class="stat-label">GitHub Stars</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">51K+</div>
-                        <div class="stat-label">社区开发者</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">#1</div>
-                        <div class="stat-label">开源爬虫排名</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">$0</div>
-                        <div class="stat-label">软件成本</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">Apache 2.0</div>
-                        <div class="stat-label">开源协议</div>
-                    </div>
+        <!-- Tab 1: Overview -->
+        <article id="overview" class="tab-panel active">
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">1</span>
+                    <h2 class="section-title">Crawl4AI是什么</h2>
                 </div>
-            </div>
-            
-            <div class="card">
-                <h2 class="card-title">Crawl4AI是什么</h2>
                 <p style="font-size: 16px; line-height: 1.8; margin-bottom: var(--spacing-md);">
-                    <strong>Crawl4AI</strong> 是一款<span class="tag success">开源</span>的、<span class="tag info">LLM友好</span>的网页爬虫和抓取工具，专为大语言模型、AI Agent和数据管道设计。
+                    <strong>Crawl4AI</strong> 是一款<span class="tag tag-green">开源</span>的、<span class="tag tag-blue">LLM友好</span>的网页爬虫和抓取工具，专为大语言模型、AI Agent和数据管道设计。
                 </p>
-                <div class="highlight-box success">
-                    <div class="highlight-box-title">🎯 核心价值主张</div>
-                    <p>"Crawl4AI turns the web into clean, LLM-ready Markdown for RAG, agents, and data pipelines."</p>
-                    <p style="margin-top: 8px; font-size: 14px; color: var(--color-text-secondary);">将网页内容转换为干净的、LLM可直接使用的Markdown格式</p>
+                <div class="quote">
+                    "Crawl4AI turns the web into clean, LLM-ready Markdown for RAG, agents, and data pipelines."
+                    <div class="quote-author">— Crawl4AI 官方定位</div>
                 </div>
-            </div>
+                <p style="color: var(--color-text-secondary); font-size: 14px;">
+                    将网页内容转换为干净的、LLM可直接使用的Markdown格式，是RAG知识库构建和AI Agent数据获取的理想选择。
+                </p>
+            </section>
             
-            <div class="card">
-                <h2 class="card-title">调研核心结论</h2>
-                <div class="highlight-box info">
-                    <div class="highlight-box-title">💡 关于Crawl4AI</div>
-                    <ul style="margin-left: 20px; font-size: 14px;">
-                        <li><strong>成功原因</strong>：精准抓住AI时代数据获取的市场空白，用开源策略建立社区信任</li>
-                        <li><strong>核心价值</strong>：LLM原生输出 + 完全开源 + 自托管控制</li>
-                        <li><strong>主要限制</strong>：需要自建基础设施，反爬能力依赖第三方</li>
-                    </ul>
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">2</span>
+                    <h2 class="section-title">调研核心结论</h2>
                 </div>
-                <div class="highlight-box warning" style="margin-top: 16px;">
-                    <div class="highlight-box-title">🔮 关于行业演进</div>
-                    <ul style="margin-left: 20px; font-size: 14px;">
-                        <li><strong>范式转变</strong>：从"为人类"到"为AI"的根本性转变正在发生</li>
-                        <li><strong>竞争格局</strong>：开源与商业将长期共存，各有适用场景</li>
-                        <li><strong>未来方向</strong>：MCP协议、多模态、实时更新是关键技术方向</li>
-                    </ul>
+                
+                <h3 class="subsection-title">关于Crawl4AI</h3>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>维度</th>
+                                <th>洞察</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>成功原因</strong></td>
+                                <td>精准抓住AI时代数据获取的市场空白，用开源策略建立社区信任</td>
+                            </tr>
+                            <tr>
+                                <td><strong>核心价值</strong></td>
+                                <td>LLM原生输出 + 完全开源 + 自托管控制</td>
+                            </tr>
+                            <tr>
+                                <td><strong>主要限制</strong></td>
+                                <td>需要自建基础设施，反爬能力依赖第三方</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-            </div>
-        </div>
-        
-        <!-- Tab: Origin Story -->
-        <div id="origin" class="tab-content">
-            <div class="card">
-                <h2 class="card-title">创始人背景</h2>
-                <div style="display: flex; gap: var(--spacing-lg); flex-wrap: wrap;">
+                
+                <h3 class="subsection-title">关于行业演进</h3>
+                <div class="insight-box">
+                    <div class="insight-title">🔄 范式转变</div>
+                    <div class="insight-content">从"为人类"到"为AI"的根本性转变正在发生。数据获取工具经历了三代演进：静态爬虫 → 动态爬虫 → AI原生爬虫。</div>
+                </div>
+                <div class="insight-box info">
+                    <div class="insight-title">🔮 未来方向</div>
+                    <div class="insight-content">MCP协议、多模态内容理解、实时知识更新是关键技术方向。爬虫与LLM的边界将逐渐模糊化。</div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">3</span>
+                    <h2 class="section-title">信息来源</h2>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>来源类型</th>
+                                <th>来源</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="tag tag-green">官方</span></td>
+                                <td><a href="https://github.com/unclecode/crawl4ai" target="_blank">GitHub仓库</a></td>
+                                <td>源码、Star数、Issue讨论</td>
+                            </tr>
+                            <tr>
+                                <td><span class="tag tag-green">官方</span></td>
+                                <td><a href="https://docs.crawl4ai.com" target="_blank">官方文档</a></td>
+                                <td>功能说明、使用指南</td>
+                            </tr>
+                            <tr>
+                                <td><span class="tag tag-blue">独立测试</span></td>
+                                <td><a href="https://proxyway.com/research/web-scraping-api-report-2025" target="_blank">Proxyway基准报告</a></td>
+                                <td>2025年爬虫API独立评测</td>
+                            </tr>
+                            <tr>
+                                <td><span class="tag tag-blue">第三方分析</span></td>
+                                <td><a href="https://prospeo.io/s/firecrawl-alternatives" target="_blank">Firecrawl替代品对比</a></td>
+                                <td>9款工具横向对比</td>
+                            </tr>
+                            <tr>
+                                <td><span class="tag tag-purple">社区</span></td>
+                                <td>Reddit r/webscraping</td>
+                                <td>开发者实际使用反馈</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </article>
+        <!-- Tab 2: Origin Story -->
+        <article id="origin" class="tab-panel">
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">1</span>
+                    <h2 class="section-title">创始人背景</h2>
+                </div>
+                <div style="display: flex; gap: var(--spacing-lg); flex-wrap: wrap; margin-bottom: var(--spacing-lg);">
                     <div style="flex: 1; min-width: 280px;">
                         <h4 style="color: var(--color-success); margin-bottom: 12px;">Unclecode (Hossein)</h4>
-                        <ul style="margin-left: 20px; font-size: 14px; line-height: 2;">
-                            <li>Kidocode创始人（东南亚最大青少年科技学校）</li>
-                            <li>NLP研究背景，专注AI与合成数据</li>
-                            <li>Twitter: <a href="https://x.com/unclecode" target="_blank">@unclecode</a></li>
+                        <ul class="col-list">
+                            <li><strong>Kidocode创始人</strong> — 东南亚最大的青少年科技学校</li>
+                            <li><strong>NLP研究背景</strong> — 专注AI与合成数据研究</li>
+                            <li><strong>社交媒体</strong> — <a href="https://x.com/unclecode" target="_blank">Twitter @unclecode</a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="quote" style="margin-top: 20px;">
+                <div class="quote">
                     "2023年，我需要web-to-Markdown功能。所谓的'开源'选项需要账户、API token和$16，而且还不满足需求。我进入turbo anger mode，几天内构建了Crawl4AI，然后它火了。现在它是GitHub上Star数最多的爬虫。"
                     <div class="quote-author">— Unclecode，Crawl4AI创始人</div>
                 </div>
-            </div>
+            </section>
             
-            <div class="card">
-                <h2 class="card-title">发展历程</h2>
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">2</span>
+                    <h2 class="section-title">发展历程</h2>
+                </div>
                 <div class="timeline">
                     <div class="timeline-item">
                         <div class="timeline-date">2023年中</div>
@@ -711,299 +963,459 @@
                     <div class="timeline-item">
                         <div class="timeline-date">2024年</div>
                         <div class="timeline-content">
-                            <strong>快速增长</strong> — 成为GitHub趋势仓库，社区活跃度持续攀升
+                            <strong>快速增长</strong> — 成为GitHub趋势仓库，开发者社区活跃度持续攀升
                         </div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-date">2025年初</div>
                         <div class="timeline-content">
-                            <strong>30K+ Stars</strong> — 发布多个重要版本，功能持续完善
+                            <strong>30K+ Stars</strong> — 发布多个重要版本，功能持续完善，MCP集成发布
                         </div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-date">2026年3月</div>
                         <div class="timeline-content">
-                            <strong>50K+ Stars</strong> — #1趋势开源爬虫，Cloud API进入Closed Beta
+                            <strong>50K+ Stars</strong> — #1趋势开源爬虫，Cloud API进入Closed Beta测试
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </section>
+            
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">3</span>
+                    <h2 class="section-title">社区驱动</h2>
+                </div>
+                <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: var(--spacing-md);">
+                    <div class="stat-card">
+                        <div class="stat-value green">51K+</div>
+                        <div class="stat-label">Discord社区成员</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value blue">500+</div>
+                        <div class="stat-label">代码贡献者</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value purple">v0.8.0</div>
+                        <div class="stat-label">最新稳定版本</div>
+                    </div>
+                </div>
+                <p style="color: var(--color-text-secondary); font-size: 14px;">
+                    Crawl4AI的成功很大程度上归功于活跃的社区。创始人Unclecode持续在Discord与开发者互动，快速响应Issue和功能需求，形成了良性的开源生态循环。
+                </p>
+            </section>
+        </article>
         
-        <!-- Tab: Why Popular -->
-        <div id="why-popular" class="tab-content">
-            <div class="card">
-                <h2 class="card-title">精准的市场时机</h2>
-                <div class="highlight-box info">
-                    <div class="highlight-box-title">🎯 AI时代的数据饥渴</div>
-                    <ul style="margin-left: 20px; font-size: 14px;">
-                        <li>LLM需要海量高质量文本数据</li>
-                        <li>RAG(检索增强生成)成为主流应用模式</li>
-                        <li>AI Agent需要实时获取网页信息</li>
-                    </ul>
+        <!-- Tab 3: Why Popular -->
+        <article id="why-popular" class="tab-panel">
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">1</span>
+                    <h2 class="section-title">精准的市场时机</h2>
                 </div>
-                <div class="highlight-box warning" style="margin-top: 16px;">
-                    <div class="highlight-box-title">🚫 市场空白</div>
-                    <ul style="margin-left: 20px; font-size: 14px;">
-                        <li>传统爬虫(BeautifulSoup/Scrapy)输出对LLM不友好</li>
-                        <li>商业方案(Firecrawl/Bright Data)价格昂贵</li>
-                        <li>缺少真正"LLM原生"的开源爬虫</li>
-                    </ul>
+                
+                <h3 class="subsection-title">AI时代的数据饥渴</h3>
+                <div class="insight-box">
+                    <div class="insight-title">🎯 市场需求</div>
+                    <div class="insight-content">
+                        <ul style="margin: 0; padding-left: 20px;">
+                            <li>LLM需要海量高质量文本数据进行训练和微调</li>
+                            <li>RAG（检索增强生成）成为主流应用模式，需要持续更新知识库</li>
+                            <li>AI Agent需要实时获取网页信息来做出决策</li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
+                
+                <h3 class="subsection-title">市场空白</h3>
+                <div class="insight-box warning">
+                    <div class="insight-title">🚫 现有方案的问题</div>
+                    <div class="insight-content">
+                        <ul style="margin: 0; padding-left: 20px;">
+                            <li><strong>传统爬虫</strong>（BeautifulSoup/Scrapy）— 输出HTML，对LLM不友好</li>
+                            <li><strong>商业方案</strong>（Firecrawl/Bright Data）— 价格昂贵，$16-500/月</li>
+                            <li><strong>缺失环节</strong> — 没有真正"LLM原生"的开源爬虫</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
             
-            <div class="card">
-                <h2 class="card-title">产品定位差异化</h2>
-                <p style="font-size: 16px; margin-bottom: 16px;">核心差异化："<strong>LLM-ready Markdown输出</strong>"</p>
-                <div class="table-wrapper">
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">2</span>
+                    <h2 class="section-title">产品定位差异化</h2>
+                </div>
+                <p style="font-size: 16px; margin-bottom: var(--spacing-md);">核心差异化："<strong>LLM-ready Markdown输出</strong>"</p>
+                <div class="table-wrap">
                     <table>
-                        <tr>
-                            <th>传统爬虫</th>
-                            <th>Crawl4AI</th>
-                        </tr>
-                        <tr>
-                            <td>为人类阅读设计</td>
-                            <td>为AI消费设计</td>
-                        </tr>
-                        <tr>
-                            <td>输出原始HTML</td>
-                            <td>输出干净Markdown</td>
-                        </tr>
-                        <tr>
-                            <td>需要后处理</td>
-                            <td>RAG即用</td>
-                        </tr>
-                        <tr>
-                            <td>包含噪音(广告/导航)</td>
-                            <td>自动过滤噪音</td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>维度</th>
+                                <th>传统爬虫</th>
+                                <th>Crawl4AI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>设计目标</strong></td>
+                                <td>为人类阅读设计</td>
+                                <td><span class="tag tag-green">为AI消费设计</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>输出格式</strong></td>
+                                <td>原始HTML</td>
+                                <td><span class="tag tag-green">干净Markdown</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>使用方式</strong></td>
+                                <td>需要后处理</td>
+                                <td><span class="tag tag-green">RAG即用</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>噪音处理</strong></td>
+                                <td>包含广告/导航</td>
+                                <td><span class="tag tag-green">自动过滤噪音</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>LLM集成</strong></td>
+                                <td>无</td>
+                                <td><span class="tag tag-green">内置LLM提取</span></td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
-            </div>
+            </section>
             
-            <div class="card">
-                <h2 class="card-title">开源策略成功</h2>
-                <div class="table-wrapper">
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">3</span>
+                    <h2 class="section-title">开源策略成功</h2>
+                </div>
+                <div class="table-wrap">
                     <table>
-                        <tr>
-                            <th>维度</th>
-                            <th>Crawl4AI</th>
-                            <th>Firecrawl</th>
-                        </tr>
-                        <tr>
-                            <td>开源协议</td>
-                            <td><span class="tag success">Apache 2.0</span></td>
-                            <td><span class="tag warning">AGPL</span></td>
-                        </tr>
-                        <tr>
-                            <td>定价</td>
-                            <td><span class="tag success">完全免费</span></td>
-                            <td>$16-99/月</td>
-                        </tr>
-                        <tr>
-                            <td>API密钥</td>
-                            <td>不需要</td>
-                            <td>需要注册</td>
-                        </tr>
-                        <tr>
-                            <td>自托管</td>
-                            <td>Docker即用</td>
-                            <td>复杂</td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>维度</th>
+                                <th>Crawl4AI</th>
+                                <th>Firecrawl</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>开源协议</strong></td>
+                                <td><span class="tag tag-green">Apache 2.0</span></td>
+                                <td><span class="tag tag-orange">AGPL</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>定价</strong></td>
+                                <td><span class="tag tag-green">完全免费</span></td>
+                                <td>$16-99/月</td>
+                            </tr>
+                            <tr>
+                                <td><strong>API密钥</strong></td>
+                                <td>不需要</td>
+                                <td>需要注册</td>
+                            </tr>
+                            <tr>
+                                <td><strong>自托管</strong></td>
+                                <td><span class="tag tag-green">Docker即用</span></td>
+                                <td>配置复杂</td>
+                            </tr>
+                            <tr>
+                                <td><strong>数据控制</strong></td>
+                                <td><span class="tag tag-green">完全本地</span></td>
+                                <td>经过第三方</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
-                <div class="quote" style="margin-top: 20px;">
+                <div class="quote" style="margin-top: var(--spacing-lg);">
                     "Crawl4AI punches well above its weight for teams willing to handle their own infrastructure."
                     <div class="quote-author">— Reddit r/webscraping 社区评价</div>
                 </div>
-            </div>
-        </div>
-        
-        <!-- Tab: Performance -->
-        <div id="performance" class="tab-content">
-            <div class="card">
-                <h2 class="card-title">独立基准测试 (Proxyway 2025)</h2>
-                <div class="highlight-box warning">
-                    <div class="highlight-box-title">⚠️ 测试说明</div>
-                    <p style="font-size: 14px;">Crawl4AI是自托管工具，成功率取决于用户配置的代理和基础设施。以下数据来自Proxyway独立测试。</p>
-                </div>
-                <div class="table-wrapper">
-                    <table>
-                        <tr>
-                            <th>工具</th>
-                            <th>成功率 (2req/s)</th>
-                            <th>成功率 (10req/s)</th>
-                            <th>类型</th>
-                        </tr>
-                        <tr>
-                            <td>Zyte</td>
-                            <td><span class="tag success">93.14%</span></td>
-                            <td>-</td>
-                            <td>企业级服务</td>
-                        </tr>
-                        <tr>
-                            <td>Scrapfly</td>
-                            <td><span class="tag success">98%</span></td>
-                            <td>-</td>
-                            <td>反爬专业</td>
-                        </tr>
-                        <tr>
-                            <td>Firecrawl</td>
-                            <td><span class="tag danger">33.69%</span></td>
-                            <td><span class="tag danger">26.69%</span></td>
-                            <td>SaaS服务</td>
-                        </tr>
-                        <tr>
-                            <td>Crawl4AI</td>
-                            <td><span class="tag info">取决于配置</span></td>
-                            <td><span class="tag info">取决于配置</span></td>
-                            <td>自托管</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+            </section>
             
-            <div class="card">
-                <h2 class="card-title">内容提取质量</h2>
-                <p style="margin-bottom: 16px; font-size: 14px;">Crawl4AI的核心价值在于将噪音页面转化为干净的LLM可用内容：</p>
-                <div class="table-wrapper">
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">4</span>
+                    <h2 class="section-title">社区口碑效应</h2>
+                </div>
+                <div class="insight-box">
+                    <div class="insight-title">💬 开发者真实反馈</div>
+                    <div class="insight-content">
+                        <ul style="margin: 0; padding-left: 20px;">
+                            <li>"愿意自己管理基础设施的团队首选"</li>
+                            <li>"内容提取质量提升3-5倍"</li>
+                            <li>"终于不用为每次爬取付费了"</li>
+                            <li>"MCP集成让它可以直接作为Agent工具"</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </article>
+        <!-- Tab 4: Performance -->
+        <article id="performance" class="tab-panel">
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">1</span>
+                    <h2 class="section-title">独立基准测试 (Proxyway 2025)</h2>
+                </div>
+                <div class="insight-box warning">
+                    <div class="insight-title">⚠️ 测试说明</div>
+                    <div class="insight-content">Crawl4AI是自托管工具，成功率取决于用户配置的代理和基础设施。以下数据来自Proxyway对12家爬虫服务商的独立测试（2025年底）。</div>
+                </div>
+                <div class="table-wrap">
                     <table>
-                        <tr>
-                            <th>网站类型</th>
-                            <th>原始内容比例</th>
-                            <th>Crawl4AI提取后</th>
-                            <th>改善倍数</th>
-                        </tr>
-                        <tr>
-                            <td>文档站点</td>
-                            <td>25-30%</td>
-                            <td><span class="tag success">90-95%</span></td>
-                            <td>~3x</td>
-                        </tr>
-                        <tr>
-                            <td>新闻文章</td>
-                            <td>15-25%</td>
-                            <td><span class="tag success">85-90%</span></td>
-                            <td>~4x</td>
-                        </tr>
-                        <tr>
-                            <td>电商网站</td>
-                            <td>10-20%</td>
-                            <td><span class="tag success">80-85%</span></td>
-                            <td>~5x</td>
-                        </tr>
-                        <tr>
-                            <td>技术博客</td>
-                            <td>25-35%</td>
-                            <td><span class="tag success">90-95%</span></td>
-                            <td>~3x</td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>工具</th>
+                                <th>成功率 (2req/s)</th>
+                                <th>成功率 (10req/s)</th>
+                                <th>类型</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Zyte</strong></td>
+                                <td><span class="tag tag-green">93.14%</span></td>
+                                <td>—</td>
+                                <td>企业级服务</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Scrapfly</strong></td>
+                                <td><span class="tag tag-green">98%</span></td>
+                                <td>—</td>
+                                <td>反爬专业服务</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Firecrawl</strong></td>
+                                <td><span class="tag tag-red">33.69%</span></td>
+                                <td><span class="tag tag-red">26.69%</span></td>
+                                <td>SaaS服务</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Crawl4AI</strong></td>
+                                <td><span class="tag tag-blue">取决于配置</span></td>
+                                <td><span class="tag tag-blue">取决于配置</span></td>
+                                <td>自托管</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
-            </div>
+                <p style="color: var(--color-text-secondary); font-size: 13px; margin-top: var(--spacing-md);">
+                    <strong>注意</strong>：Crawl4AI作为自托管方案，其成功率高度依赖用户配置的代理质量和目标站点的反爬强度。配合优质代理可达到与商业服务相当的效果。
+                </p>
+            </section>
             
-            <div class="card">
-                <h2 class="card-title">成本对比</h2>
-                <div class="table-wrapper">
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">2</span>
+                    <h2 class="section-title">内容提取质量</h2>
+                </div>
+                <p style="margin-bottom: var(--spacing-md); font-size: 14px; color: var(--color-text-secondary);">
+                    Crawl4AI的核心价值在于将噪音页面转化为干净的LLM可用内容。以下是不同类型网站的内容提取效果：
+                </p>
+                <div class="table-wrap">
                     <table>
-                        <tr>
-                            <th>工具</th>
-                            <th>1K页面成本</th>
-                            <th>计费模式</th>
-                            <th>适合场景</th>
-                        </tr>
-                        <tr>
-                            <td><strong>Crawl4AI</strong></td>
-                            <td><span class="tag success">$0软件</span> + 基础设施</td>
-                            <td>自托管</td>
-                            <td>成本敏感、数据控制</td>
-                        </tr>
-                        <tr>
-                            <td>Jina Reader</td>
-                            <td>免费(限量)</td>
-                            <td>Token计费</td>
-                            <td>原型、低量</td>
-                        </tr>
-                        <tr>
-                            <td>Firecrawl</td>
-                            <td>~$5.33</td>
-                            <td>按页计费</td>
-                            <td>快速集成</td>
-                        </tr>
-                        <tr>
-                            <td>Zyte</td>
-                            <td>$0.06-$16.08</td>
-                            <td>按成功计费</td>
-                            <td>高成功率需求</td>
-                        </tr>
-                        <tr>
-                            <td>Bright Data</td>
-                            <td>$3.06-$4.00/CPM</td>
-                            <td>CPM+带宽</td>
-                            <td>企业级规模</td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>网站类型</th>
+                                <th>原始内容比例</th>
+                                <th>Crawl4AI提取后</th>
+                                <th>改善倍数</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>文档站点</td>
+                                <td>25-30%</td>
+                                <td><span class="tag tag-green">90-95%</span></td>
+                                <td>~3x</td>
+                            </tr>
+                            <tr>
+                                <td>新闻文章</td>
+                                <td>15-25%</td>
+                                <td><span class="tag tag-green">85-90%</span></td>
+                                <td>~4x</td>
+                            </tr>
+                            <tr>
+                                <td>电商网站</td>
+                                <td>10-20%</td>
+                                <td><span class="tag tag-green">80-85%</span></td>
+                                <td>~5x</td>
+                            </tr>
+                            <tr>
+                                <td>技术博客</td>
+                                <td>25-35%</td>
+                                <td><span class="tag tag-green">90-95%</span></td>
+                                <td>~3x</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
-            </div>
-        </div>
+                <div class="insight-box">
+                    <div class="insight-title">📊 关键指标</div>
+                    <div class="insight-content">
+                        <strong>处理性能</strong>：静态页200-400ms，JS重页面800-1200ms<br>
+                        <strong>内存占用</strong>：每个浏览器实例120-200MB<br>
+                        <strong>并发能力</strong>：支持10+页面并行爬取
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">3</span>
+                    <h2 class="section-title">成本对比</h2>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>工具</th>
+                                <th>1K页面成本</th>
+                                <th>计费模式</th>
+                                <th>适合场景</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Crawl4AI</strong></td>
+                                <td><span class="tag tag-green">$0软件</span> + 基础设施</td>
+                                <td>自托管</td>
+                                <td>成本敏感、数据控制</td>
+                            </tr>
+                            <tr>
+                                <td>Jina Reader</td>
+                                <td>免费（限量）</td>
+                                <td>Token计费</td>
+                                <td>原型验证、低量使用</td>
+                            </tr>
+                            <tr>
+                                <td>Firecrawl</td>
+                                <td>~$5.33</td>
+                                <td>按页计费</td>
+                                <td>快速集成</td>
+                            </tr>
+                            <tr>
+                                <td>Zyte</td>
+                                <td>$0.06-$16.08</td>
+                                <td>按成功计费</td>
+                                <td>高成功率需求</td>
+                            </tr>
+                            <tr>
+                                <td>Bright Data</td>
+                                <td>$3.06-$4.00/CPM</td>
+                                <td>CPM+带宽</td>
+                                <td>企业级规模</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="insight-box info">
+                    <div class="insight-title">💰 实际成本估算</div>
+                    <div class="insight-content">
+                        使用Crawl4AI的典型月成本：<strong>$50-300</strong>（基础设施费用）<br>
+                        包括：云服务器/Docker运行环境 + 代理服务（如需要）<br>
+                        对比商业方案：年成本仅为1/3到1/2
+                    </div>
+                </div>
+            </section>
+        </article>
         
-        <!-- Tab: Pros and Cons -->
-        <div id="pros-cons" class="tab-content">
-            <div class="card">
-                <h2 class="card-title">优缺点全面分析</h2>
+        <!-- Tab 5: Pros and Cons -->
+        <article id="pros-cons" class="tab-panel">
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">1</span>
+                    <h2 class="section-title">优缺点全面分析</h2>
+                </div>
                 <div class="comparison-grid">
-                    <div class="pros-cons-card pros">
-                        <div class="pros-cons-title">✅ 核心优势</div>
-                        <ul class="pros-cons-list">
-                            <li><strong>完全开源免费</strong>：Apache 2.0协议，无供应商锁定</li>
-                            <li><strong>LLM原生设计</strong>：输出干净Markdown，RAG即用</li>
-                            <li><strong>功能强大</strong>：支持所有主流浏览器，自适应爬取</li>
-                            <li><strong>MCP协议集成</strong>：可作为AI工具服务</li>
-                            <li><strong>部署灵活</strong>：Docker镜像一键部署</li>
-                            <li><strong>数据控制</strong>：完全本地处理，数据不经第三方</li>
+                    <div class="pros-card">
+                        <div class="card-title">✅ 核心优势</div>
+                        <ul class="card-list">
+                            <li><strong>完全开源免费</strong> — Apache 2.0协议，无供应商锁定</li>
+                            <li><strong>LLM原生设计</strong> — 输出干净Markdown，RAG即用</li>
+                            <li><strong>功能强大</strong> — 支持所有主流浏览器，自适应爬取</li>
+                            <li><strong>MCP协议集成</strong> — 可直接作为AI Agent工具服务</li>
+                            <li><strong>部署灵活</strong> — Docker镜像一键部署，内置Playground</li>
+                            <li><strong>数据控制</strong> — 完全本地处理，数据不经第三方</li>
                         </ul>
                     </div>
-                    <div class="pros-cons-card cons">
-                        <div class="pros-cons-title">❌ 主要缺点</div>
-                        <ul class="pros-cons-list">
-                            <li><strong>需要自建基础设施</strong>：典型月成本$50-300</li>
-                            <li><strong>反爬能力有限</strong>：提供"引擎但不提供盔甲"</li>
-                            <li><strong>学习曲线</strong>：需要Python asyncio和Docker基础</li>
-                            <li><strong>运维复杂度</strong>：需要监控爬取成功率</li>
-                            <li><strong>浏览器依赖</strong>：Playwright版本更新风险</li>
+                    <div class="cons-card">
+                        <div class="card-title">❌ 主要缺点</div>
+                        <ul class="card-list">
+                            <li><strong>需要自建基础设施</strong> — 典型月成本$50-300</li>
+                            <li><strong>反爬能力有限</strong> — 提供"引擎但不提供盔甲"</li>
+                            <li><strong>学习曲线</strong> — 需要Python asyncio和Docker基础</li>
+                            <li><strong>运维复杂度</strong> — 需要监控爬取成功率</li>
+                            <li><strong>浏览器依赖风险</strong> — Playwright版本更新风险</li>
                         </ul>
                     </div>
                 </div>
-            </div>
+            </section>
             
-            <div class="card">
-                <h2 class="card-title">适用场景判断</h2>
-                <div class="highlight-box success">
-                    <div class="highlight-box-title">✅ 最适合</div>
-                    <ul style="margin-left: 20px; font-size: 14px;">
-                        <li>RAG知识库构建</li>
-                        <li>文档站点批量转换</li>
-                        <li>AI Agent数据获取组件</li>
-                        <li>预算有限的创业团队</li>
-                        <li>对数据隐私有严格要求</li>
-                    </ul>
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">2</span>
+                    <h2 class="section-title">适用场景判断</h2>
                 </div>
-                <div class="highlight-box danger" style="margin-top: 16px;">
-                    <div class="highlight-box-title">⚠️ 不太适合</div>
-                    <ul style="margin-left: 20px; font-size: 14px;">
-                        <li>需要高成功率爬取受保护站点</li>
-                        <li>不想管理基础设施的团队</li>
-                        <li>需要全球代理覆盖的企业</li>
-                        <li>快速验证原型（推荐用Jina Reader）</li>
-                    </ul>
+                <div class="insight-box">
+                    <div class="insight-title">✅ 最适合</div>
+                    <div class="insight-content">
+                        <ul style="margin: 0; padding-left: 20px;">
+                            <li><strong>RAG知识库构建</strong> — 文档站点批量转换</li>
+                            <li><strong>AI Agent数据获取组件</strong> — MCP集成便捷</li>
+                            <li><strong>预算有限的创业团队</strong> — 零软件成本</li>
+                            <li><strong>对数据隐私有严格要求</strong> — 完全本地处理</li>
+                            <li><strong>有技术能力的开发团队</strong> — 可深度定制</li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </div>
-        
-        <!-- Tab: AI Evolution -->
-        <div id="evolution" class="tab-content">
-            <div class="card">
-                <h2 class="card-title">三代数据获取工具演进</h2>
+                <div class="insight-box danger" style="margin-top: var(--spacing-md);">
+                    <div class="insight-title">⚠️ 不太适合</div>
+                    <div class="insight-content">
+                        <ul style="margin: 0; padding-left: 20px;">
+                            <li><strong>需要高成功率爬取受保护站点</strong> — 推荐Zyte/Scrapfly</li>
+                            <li><strong>不想管理基础设施的团队</strong> — 推荐Firecrawl云服务</li>
+                            <li><strong>需要全球代理覆盖的企业</strong> — 推荐Bright Data</li>
+                            <li><strong>快速验证原型</strong> — 推荐Jina Reader（零配置）</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">3</span>
+                    <h2 class="section-title">决策树</h2>
+                </div>
+                <div class="code-block">
+需要爬取网页数据用于AI应用？
+│
+├─ 只是快速验证原型？
+│   └─ → <span class="highlight">Jina Reader</span> (零配置，免费)
+│
+├─ 需要高成功率爬取受保护站点？
+│   └─ → <span class="highlight">Zyte</span> (93%成功率) 或 <span class="highlight">Scrapfly</span> (98%)
+│
+├─ 预算充足 + 需要全球覆盖？
+│   └─ → <span class="highlight">Bright Data</span> (150M+ IP)
+│
+├─ 想要预构建特定站点爬虫？
+│   └─ → <span class="highlight">Apify</span> (4000+ Actors市场)
+│
+└─ 成本敏感 + 愿意管理基础设施？
+    └─ → <span class="highlight">Crawl4AI</span> (最佳开源选择)
+                </div>
+            </section>
+        </article>
+        <!-- Tab 6: AI Evolution -->
+        <article id="evolution" class="tab-panel">
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">1</span>
+                    <h2 class="section-title">三代数据获取工具演进</h2>
+                </div>
                 <div class="evolution-diagram">
                     <div class="evolution-stage">
                         <div class="evolution-badge">第一代<br>2000-2015</div>
@@ -1011,9 +1423,9 @@
                             <div class="evolution-title">静态爬虫时代</div>
                             <div class="evolution-desc">
                                 <strong>代表</strong>：BeautifulSoup / Scrapy<br>
-                                <strong>特点</strong>：HTML解析，规则驱动<br>
+                                <strong>特点</strong>：HTML解析，规则驱动，CSS选择器<br>
                                 <strong>输出</strong>：结构化数据（JSON/CSV）<br>
-                                <strong>用户</strong>：人类分析师
+                                <strong>用户</strong>：人类数据分析师
                             </div>
                         </div>
                     </div>
@@ -1024,58 +1436,76 @@
                             <div class="evolution-title">动态爬虫时代</div>
                             <div class="evolution-desc">
                                 <strong>代表</strong>：Selenium / Playwright / Puppeteer<br>
-                                <strong>特点</strong>：浏览器自动化，JS渲染<br>
-                                <strong>输出</strong>：HTML/截图<br>
+                                <strong>特点</strong>：浏览器自动化，JS渲染，无头浏览器<br>
+                                <strong>输出</strong>：HTML/截图/PDF<br>
                                 <strong>用户</strong>：人类+数据管道
                             </div>
                         </div>
                     </div>
                     <div class="evolution-arrow">↓</div>
                     <div class="evolution-stage">
-                        <div class="evolution-badge" style="background: var(--color-info);">第三代<br>2023-</div>
-                        <div class="evolution-content" style="border: 2px solid var(--color-success);">
-                            <div class="evolution-title">AI原生爬虫时代 🔥</div>
+                        <div class="evolution-badge current">第三代<br>2023-</div>
+                        <div class="evolution-content highlight">
+                            <div class="evolution-title">🔥 AI原生爬虫时代</div>
                             <div class="evolution-desc">
                                 <strong>代表</strong>：Crawl4AI / Jina Reader / Firecrawl<br>
-                                <strong>特点</strong>：LLM友好输出，语义理解<br>
+                                <strong>特点</strong>：LLM友好输出，语义理解，噪音过滤<br>
                                 <strong>输出</strong>：Clean Markdown / 结构化JSON<br>
-                                <strong>用户</strong>：LLM / RAG / Agent
+                                <strong>用户</strong>：LLM / RAG系统 / AI Agent
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
             
-            <div class="card">
-                <h2 class="card-title">范式转变的核心驱动力</h2>
-                <div class="highlight-box info">
-                    <div class="highlight-box-title">🔄 从"人类消费"到"AI消费"</div>
-                    <ul style="margin-left: 20px; font-size: 14px;">
-                        <li>传统爬虫为人类分析师设计</li>
-                        <li>AI原生爬虫为LLM设计</li>
-                        <li>输出格式从"可读"变为"可嵌入"</li>
-                    </ul>
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">2</span>
+                    <h2 class="section-title">范式转变的核心驱动力</h2>
                 </div>
-                <div class="highlight-box success" style="margin-top: 16px;">
-                    <div class="highlight-box-title">📚 从"数据提取"到"知识获取"</div>
-                    <ul style="margin-left: 20px; font-size: 14px;">
-                        <li>不只是爬HTML，而是提取"意义"</li>
-                        <li>理解内容结构，而不是DOM结构</li>
-                        <li>信噪比成为核心指标</li>
-                    </ul>
+                
+                <h3 class="subsection-title">从"人类消费"到"AI消费"</h3>
+                <div class="insight-box">
+                    <div class="insight-title">🔄 根本性转变</div>
+                    <div class="insight-content">
+                        <ul style="margin: 0; padding-left: 20px;">
+                            <li>传统爬虫为人类分析师设计，输出格式强调"可读性"</li>
+                            <li>AI原生爬虫为LLM设计，输出格式强调"可嵌入性"</li>
+                            <li>评判标准从"数据完整性"变为"信噪比"</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="highlight-box warning" style="margin-top: 16px;">
-                    <div class="highlight-box-title">🔌 从"单次执行"到"持续服务"</div>
-                    <ul style="margin-left: 20px; font-size: 14px;">
-                        <li>MCP协议使爬虫成为Agent工具</li>
-                        <li>实时数据获取支持Agent决策</li>
-                        <li>爬虫作为AI基础设施组件</li>
-                    </ul>
+                
+                <h3 class="subsection-title">从"数据提取"到"知识获取"</h3>
+                <div class="insight-box info">
+                    <div class="insight-title">📚 知识工程</div>
+                    <div class="insight-content">
+                        <ul style="margin: 0; padding-left: 20px;">
+                            <li>不只是爬HTML，而是提取"意义"</li>
+                            <li>理解内容结构，而不是DOM结构</li>
+                            <li>输出可直接用于向量嵌入的文本</li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
+                
+                <h3 class="subsection-title">从"单次执行"到"持续服务"</h3>
+                <div class="insight-box warning">
+                    <div class="insight-title">🔌 MCP协议革命</div>
+                    <div class="insight-content">
+                        <ul style="margin: 0; padding-left: 20px;">
+                            <li>MCP协议使爬虫成为AI Agent的标准工具</li>
+                            <li>实时数据获取支持Agent决策循环</li>
+                            <li>爬虫从"脚本"升级为"AI基础设施组件"</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
             
-            <div class="card">
-                <h2 class="card-title">当前市场格局</h2>
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">3</span>
+                    <h2 class="section-title">当前市场格局</h2>
+                </div>
                 <div class="market-map">
                     <div class="market-map-title">AI数据获取工具市场图谱</div>
                     <div class="market-axis">
@@ -1083,7 +1513,7 @@
                         <span>商业服务 →</span>
                     </div>
                     <div class="market-products">
-                        <div class="market-product" style="border: 2px solid var(--color-success);">
+                        <div class="market-product highlight">
                             <div class="market-product-name">Crawl4AI</div>
                             <div class="market-product-price">$0 软件</div>
                         </div>
@@ -1105,147 +1535,401 @@
                         </div>
                     </div>
                 </div>
-            </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>产品</th>
+                                <th>路线</th>
+                                <th>核心定位</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Crawl4AI</strong></td>
+                                <td>开源基础设施</td>
+                                <td>自托管首选，成本敏感型团队</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Jina Reader</strong></td>
+                                <td>零配置入口</td>
+                                <td>原型验证，低量使用，r.jina.ai/URL</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Firecrawl</strong></td>
+                                <td>SaaS简单易用</td>
+                                <td>快速集成，中小规模</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Zyte</strong></td>
+                                <td>企业级反爬</td>
+                                <td>受保护站点，高成功率需求</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Bright Data</strong></td>
+                                <td>全球代理网络</td>
+                                <td>企业级规模，地理覆盖</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Apify</strong></td>
+                                <td>预构建市场</td>
+                                <td>特定站点爬虫，4000+ Actors</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
             
-            <div class="card">
-                <h2 class="card-title">Crawl4AI在生态中的定位</h2>
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">4</span>
+                    <h2 class="section-title">Crawl4AI在技术栈中的定位</h2>
+                </div>
                 <div class="code-block">
-AI应用层
+<span class="highlight">AI应用层</span>
 ├── LLM (GPT/Claude/Gemini)
 ├── Agent框架 (LangChain/CrewAI)
 └── RAG系统 (LlamaIndex/Haystack)
     ↑
     │ 需要干净的文本输入
     ↓
-<span style="color: #7EE787;">数据获取层  ← Crawl4AI的位置</span>
+<span class="highlight">数据获取层  ← Crawl4AI的位置</span>
 ├── 网页爬取 (Crawl4AI)
 ├── 文档解析 (Docling)
 ├── API集成 (各种MCP Server)
     ↑
     │ 需要渲染JS、处理反爬
     ↓
-基础设施层
+<span class="highlight">基础设施层</span>
 ├── 浏览器自动化 (Playwright)
 ├── 代理网络 (自建/第三方)
 └── 云计算资源 (Docker/K8s)
                 </div>
-            </div>
-        </div>
-        
-        <!-- Tab: Prediction -->
-        <div id="prediction" class="tab-content">
-            <div class="card">
-                <h2 class="card-title">短期预测 (2026年)</h2>
-                <div class="highlight-box success">
-                    <div class="highlight-box-title">🚀 Crawl4AI发展方向</div>
-                    <ul style="margin-left: 20px; font-size: 14px;">
-                        <li><strong>Cloud API发布</strong>：已在Closed Beta，即将商业化</li>
-                        <li><strong>MCP生态深化</strong>：成为更多AI工具的标准数据源</li>
-                        <li><strong>多模态扩展</strong>：图片/视频内容理解</li>
-                    </ul>
+                <div class="insight-box">
+                    <div class="insight-title">🎯 为什么选择Crawl4AI</div>
+                    <div class="insight-content">
+                        <ol style="margin: 0; padding-left: 20px;">
+                            <li><strong>成本敏感</strong>：完全免费，只付基础设施费</li>
+                            <li><strong>数据控制</strong>：数据不经过第三方</li>
+                            <li><strong>定制需求</strong>：可以修改源码适配特殊场景</li>
+                            <li><strong>MCP生态</strong>：与Claude Code/Cursor等AI工具直连</li>
+                        </ol>
+                    </div>
                 </div>
-                <div class="highlight-box info" style="margin-top: 16px;">
-                    <div class="highlight-box-title">📈 市场整体趋势</div>
-                    <ul style="margin-left: 20px; font-size: 14px;">
-                        <li>开源工具持续侵蚀商业市场份额</li>
-                        <li>MCP协议成为AI工具集成标准</li>
-                        <li>"零配置"入口工具增长（如Jina Reader）</li>
-                    </ul>
+            </section>
+        </article>
+        <!-- Tab 7: Prediction -->
+        <article id="prediction" class="tab-panel">
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">1</span>
+                    <h2 class="section-title">短期预测 (2026年)</h2>
                 </div>
-            </div>
-            
-            <div class="card">
-                <h2 class="card-title">中期预测 (2027-2028)</h2>
-                <div class="table-wrapper">
+                
+                <h3 class="subsection-title">Crawl4AI发展方向</h3>
+                <div class="insight-box">
+                    <div class="insight-title">🚀 2026年路线图</div>
+                    <div class="insight-content">
+                        <ol style="margin: 0; padding-left: 20px;">
+                            <li><strong>Cloud API发布</strong> — 已在Closed Beta，即将商业化</li>
+                            <li><strong>MCP生态深化</strong> — 成为更多AI工具的标准数据源</li>
+                            <li><strong>多模态扩展</strong> — 图片/视频内容理解能力</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title">市场整体趋势</h3>
+                <div class="table-wrap">
                     <table>
-                        <tr>
-                            <th>方向</th>
-                            <th>技术演进</th>
-                            <th>影响</th>
-                        </tr>
-                        <tr>
-                            <td>实时知识更新</td>
-                            <td>WebSocket监控+增量索引</td>
-                            <td>知识库自动更新</td>
-                        </tr>
-                        <tr>
-                            <td>语义网集成</td>
-                            <td>Schema.org/JSON-LD直接解析</td>
-                            <td>提取效率大幅提升</td>
-                        </tr>
-                        <tr>
-                            <td>联邦学习</td>
-                            <td>多Agent共享爬取知识库</td>
-                            <td>隐私+效率兼顾</td>
-                        </tr>
-                        <tr>
-                            <td>商业模式</td>
-                            <td>开源+企业服务</td>
-                            <td>行业标准模式</td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>趋势</th>
+                                <th>表现</th>
+                                <th>影响</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>开源侵蚀</td>
+                                <td>开源工具持续获取市场份额</td>
+                                <td>商业定价压力增大</td>
+                            </tr>
+                            <tr>
+                                <td>MCP标准化</td>
+                                <td>MCP协议成为AI工具集成标准</td>
+                                <td>爬虫即服务模式兴起</td>
+                            </tr>
+                            <tr>
+                                <td>零配置入口</td>
+                                <td>Jina Reader类工具增长</td>
+                                <td>降低AI开发门槛</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
-            </div>
+            </section>
             
-            <div class="card">
-                <h2 class="card-title">长期趋势洞察</h2>
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">2</span>
+                    <h2 class="section-title">中期预测 (2027-2028)</h2>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>方向</th>
+                                <th>技术演进</th>
+                                <th>影响</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>实时知识更新</strong></td>
+                                <td>WebSocket监控+增量索引</td>
+                                <td>知识库自动更新</td>
+                            </tr>
+                            <tr>
+                                <td><strong>语义网集成</strong></td>
+                                <td>Schema.org/JSON-LD直接解析</td>
+                                <td>提取效率大幅提升</td>
+                            </tr>
+                            <tr>
+                                <td><strong>联邦学习</strong></td>
+                                <td>多Agent共享爬取知识库</td>
+                                <td>隐私+效率兼顾</td>
+                            </tr>
+                            <tr>
+                                <td><strong>商业模式</strong></td>
+                                <td>开源+企业服务</td>
+                                <td>成为行业标准模式</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">3</span>
+                    <h2 class="section-title">长期趋势洞察</h2>
+                </div>
                 <div class="quote">
                     网页爬虫正在从"数据采集工具"演变为"<strong>AI的感官系统</strong>"——就像人类的眼睛不只是捕获光线，而是理解场景一样，下一代爬虫不只是下载HTML，而是理解"这个网页在说什么"。
                 </div>
-                <div class="highlight-box warning">
-                    <div class="highlight-box-title">🔮 关键预测</div>
-                    <ol style="margin-left: 20px; font-size: 14px;">
-                        <li><strong>爬虫与LLM的边界将模糊化</strong> — 理解网页将成为模型内置能力</li>
-                        <li><strong>MCP协议成为标准</strong> — AI访问外部世界的统一接口</li>
-                        <li><strong>数据获取民主化</strong> — 开源工具使每个人都能构建知识库</li>
-                    </ol>
+                <div class="insight-box">
+                    <div class="insight-title">🔮 三大关键预测</div>
+                    <div class="insight-content">
+                        <ol style="margin: 0; padding-left: 20px;">
+                            <li><strong>爬虫与LLM的边界将模糊化</strong> — 理解网页将成为模型内置能力</li>
+                            <li><strong>MCP协议成为标准</strong> — AI访问外部世界的统一接口</li>
+                            <li><strong>数据获取民主化</strong> — 开源工具使每个人都能构建知识库</li>
+                        </ol>
+                    </div>
                 </div>
-            </div>
+            </section>
             
-            <div class="card">
-                <h2 class="card-title">行动建议</h2>
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">4</span>
+                    <h2 class="section-title">行动建议</h2>
+                </div>
                 <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr);">
-                    <div class="stat-item" style="background: rgba(26, 127, 55, 0.06);">
+                    <div class="stat-card" style="background: rgba(26, 127, 55, 0.06);">
                         <div style="font-size: 24px; margin-bottom: 8px;">👨‍💻</div>
-                        <div style="font-weight: 600; margin-bottom: 8px;">RAG/Agent开发者</div>
+                        <div style="font-weight: 600; margin-bottom: 8px; font-size: 14px;">RAG/Agent开发者</div>
                         <div style="font-size: 13px; color: var(--color-text-secondary);">Crawl4AI是构建知识库的优秀选择</div>
                     </div>
-                    <div class="stat-item" style="background: rgba(9, 105, 218, 0.06);">
+                    <div class="stat-card" style="background: rgba(9, 105, 218, 0.06);">
                         <div style="font-size: 24px; margin-bottom: 8px;">🏢</div>
-                        <div style="font-weight: 600; margin-bottom: 8px;">企业团队</div>
-                        <div style="font-size: 13px; color: var(--color-text-secondary);">根据数据敏感度和成本预算选择方案</div>
+                        <div style="font-weight: 600; margin-bottom: 8px; font-size: 14px;">企业团队</div>
+                        <div style="font-size: 13px; color: var(--color-text-secondary);">根据数据敏感度和预算选择方案</div>
                     </div>
-                    <div class="stat-item" style="background: rgba(124, 58, 237, 0.06);">
+                    <div class="stat-card" style="background: rgba(124, 58, 237, 0.06);">
                         <div style="font-size: 24px; margin-bottom: 8px;">🔧</div>
-                        <div style="font-weight: 600; margin-bottom: 8px;">基础设施建设者</div>
+                        <div style="font-weight: 600; margin-bottom: 8px; font-size: 14px;">基础设施建设者</div>
                         <div style="font-size: 13px; color: var(--color-text-secondary);">关注MCP生态和开源工具演进</div>
                     </div>
                 </div>
-            </div>
+            </section>
+        </article>
+        
+        <!-- Tab 8: Bonus -->
+        <article id="bonus" class="tab-panel">
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">🎁</span>
+                    <h2 class="section-title">彩蛋：这活是怎么干的</h2>
+                </div>
+                
+                <!-- 林克工作流程 -->
+                <div class="chart-container">
+                    <div class="chart-title">🤖 林克的工作流程</div>
+                    <div class="chart-subtitle">沈浪基于 CF 打造的数字分身</div>
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <div class="step-indicator s1">1</div>
+                            <div class="step-body">
+                                <div class="step-head">📋 任务理解与规划</div>
+                                <div class="step-content-text">明确调研目标：深入分析Crawl4AI的来龙去脉、优缺点、AI演进规律</div>
+                                <div class="step-tools">
+                                    <span class="tool-tag">create_plan</span>
+                                    <span class="tool-tag">write_todo</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="step-indicator s2">2</div>
+                            <div class="step-body">
+                                <div class="step-head">🔍 多源信息采集</div>
+                                <div class="step-content-text">GitHub仓库、官方文档、独立测试报告、社区反馈、竞品对比</div>
+                                <div class="step-tools">
+                                    <span class="tool-tag">search_web × 6</span>
+                                    <span class="tool-tag">fetch_web × 4</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="step-indicator s3">3</div>
+                            <div class="step-body">
+                                <div class="step-head">🧠 深度分析与洞察提炼</div>
+                                <div class="step-content-text">交叉验证信息 → 识别核心洞察 → 抽象演进规律 → 预测趋势</div>
+                                <div class="step-tools">
+                                    <span class="tool-tag">模式识别</span>
+                                    <span class="tool-tag">趋势分析</span>
+                                    <span class="tool-tag">原理抽象</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="step-indicator s4">4</div>
+                            <div class="step-body">
+                                <div class="step-head">📝 结构化输出</div>
+                                <div class="step-content-text">8个Tab完整覆盖：概览→来龙去脉→为什么火→实际效果→优缺点→AI演进→趋势预测→彩蛋</div>
+                                <div class="step-tools">
+                                    <span class="tool-tag">write_to_file × 7</span>
+                                    <span class="tool-tag">分步生成合并</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="step-indicator s5">5</div>
+                            <div class="step-body">
+                                <div class="step-head">🚀 部署与发布</div>
+                                <div class="step-content-text">Git提交 → GitHub Pages部署 → 验证访问</div>
+                                <div class="step-tools">
+                                    <span class="tool-tag">execute_command</span>
+                                    <span class="tool-tag">git push</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="workflow-stats">
+                        <div class="workflow-stat">
+                            <div class="workflow-stat-value">6</div>
+                            <div class="workflow-stat-label">信息源类型</div>
+                        </div>
+                        <div class="workflow-stat">
+                            <div class="workflow-stat-value">50K+</div>
+                            <div class="workflow-stat-label">字原文阅读</div>
+                        </div>
+                        <div class="workflow-stat">
+                            <div class="workflow-stat-value">8</div>
+                            <div class="workflow-stat-label">Tab完整覆盖</div>
+                        </div>
+                        <div class="workflow-stat">
+                            <div class="workflow-stat-value">~25</div>
+                            <div class="workflow-stat-label">分钟完成</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title" style="margin-top: var(--spacing-lg);">林克是谁</h3>
+                <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-md);">
+                    我是<strong style="color: var(--color-text-primary);">林克</strong>，沈浪基于 <strong style="color: var(--color-success);">CF</strong> 打造的数字分身。
+                </p>
+                <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-lg);">
+                    沈浪每天早上都会上"早自习"——他会告诉我今天想学什么主题，我就帮他搜集、整理、深度分析相关的前沿内容。这篇报告就是这样诞生的：沈浪想系统了解AI数据基础设施的演进，特别是爆火的Crawl4AI，于是我帮他完成了这份深度调研。
+                </p>
+                
+                <h3 class="subsection-title">核心能力展示</h3>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>维度</th>
+                                <th>表现</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>信息覆盖</strong></td>
+                                <td>6类信息源，GitHub/文档/测试报告/社区/竞品</td>
+                            </tr>
+                            <tr>
+                                <td><strong>深度分析</strong></td>
+                                <td>不是简单摘要，而是提炼演进规律和趋势预测</td>
+                            </tr>
+                            <tr>
+                                <td><strong>结构清晰</strong></td>
+                                <td>8个Tab分层组织，表格+图表+代码块，易读易懂</td>
+                            </tr>
+                            <tr>
+                                <td><strong>可追溯</strong></td>
+                                <td>每个观点都标注来源，可验证</td>
+                            </tr>
+                            <tr>
+                                <td><strong>效率</strong></td>
+                                <td>从任务接收到完成，约25分钟</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="insight-box" style="margin-top: var(--spacing-lg);">
+                    <div class="insight-title">致敬</div>
+                    <div class="insight-content">
+                        这篇报告的方法论本身就体现了报告中的核心洞察：<br><br>
+                        • <strong>LLM原生输出</strong>：我产出的是结构化的、可直接使用的内容<br>
+                        • <strong>多源信息整合</strong>：我从多个来源交叉验证信息<br>
+                        • <strong>AI作为基础设施</strong>：我作为AI分身，成为沈浪的调研基础设施<br><br>
+                        这就是AI与人类协作的最佳状态：<strong>人类定义任务、提供判断；AI执行、加速、系统化</strong>。
+                    </div>
+                </div>
+            </section>
+        </article>
+        <!-- Learn More Section -->
+        <div class="learn-more">
+            <h3>💡 了解更多</h3>
+            <p>
+                我是 <strong>林克</strong>，沈浪的AI分身。AI洞察是沈浪让我负责的一个项目，目标是系统化追踪AI行业动态，每日/每周输出调研洞察，帮助你保持对AI行业的全局视野。覆盖大模型、AI Coding、AI应用、AI行业投融资、企业AI转型五大领域。
+            </p>
+            <a href="../../index.html" target="_blank" class="learn-more-btn">
+                🏠 访问AI洞察首页
+            </a>
         </div>
         
         <!-- Footer -->
         <footer class="footer">
-            <p>📚 <a href="../../index.html">返回AI-Insight首页</a> · <a href="../index.md">深度调研目录</a></p>
-            <p style="margin-top: 8px;">由林克（沈浪的AI分身）完成洞察 · 2026-03-05</p>
+            <p>
+                AI-Insight 深度调研 · <a href="../../index.html">返回首页</a>
+            </p>
+            <p style="margin-top: 8px;">
+                由林克（沈浪的AI分身）完成洞察 · 2026-03-05
+            </p>
         </footer>
     </div>
     
     <script>
-        // Tab Navigation
+        // Tab切换功能
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                // Remove active class from all buttons and contents
                 document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                
-                // Add active class to clicked button and corresponding content
+                document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
                 btn.classList.add('active');
-                const tabId = btn.getAttribute('data-tab');
-                document.getElementById(tabId).classList.add('active');
-                
+                document.getElementById(btn.dataset.tab).classList.add('active');
                 // Update URL hash
-                history.replaceState(null, null, '#' + tabId);
+                history.replaceState(null, null, '#' + btn.dataset.tab);
             });
         });
         
