@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知识体系四维度</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            width: 1000px;
+            height: 550px;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        }
+        
+        .container {
+            width: 1000px;
+            height: 550px;
+            padding: 30px 40px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .title {
+            text-align: center;
+            color: white;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+        
+        .dimensions {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .dimension {
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dimension::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+        }
+        
+        .d1::before { background: linear-gradient(90deg, #667eea 0%, #764ba2 100%); }
+        .d2::before { background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%); }
+        .d3::before { background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%); }
+        .d4::before { background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%); }
+        
+        .dim-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .dim-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+        
+        .d1 .dim-icon { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .d2 .dim-icon { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .d3 .dim-icon { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .d4 .dim-icon { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        
+        .dim-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+        
+        .dim-count {
+            margin-left: auto;
+            background: #f0f0f0;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 13px;
+            color: #666;
+            font-weight: 600;
+        }
+        
+        .dim-content {
+            flex: 1;
+        }
+        
+        .dim-list {
+            list-style: none;
+        }
+        
+        .dim-list li {
+            padding: 6px 0;
+            font-size: 13px;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .dim-list li::before {
+            content: "•";
+            font-weight: bold;
+        }
+        
+        .d1 .dim-list li::before { color: #667eea; }
+        .d2 .dim-list li::before { color: #f5576c; }
+        .d3 .dim-list li::before { color: #4facfe; }
+        .d4 .dim-list li::before { color: #43e97b; }
+        
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .footer {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+        
+        .footer-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.15);
+            padding: 12px 24px;
+            border-radius: 30px;
+        }
+        
+        .footer-value {
+            font-size: 26px;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .footer-label {
+            font-size: 13px;
+            color: rgba(255,255,255,0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">📚 知识体系 · 四大维度架构</div>
+        
+        <div class="dimensions">
+            <div class="dimension d1">
+                <div class="dim-header">
+                    <div class="dim-icon">📊</div>
+                    <div class="dim-title">模型维度</div>
+                    <div class="dim-count">4篇</div>
+                </div>
+                <div class="dim-content">
+                    <ul class="dim-list">
+                        <li>AI发展史与能力矩阵</li>
+                        <li>AI下半场理论（姚顺雨）</li>
+                        <li>推理模型专题 (o系列/R1)</li>
+                        <li>Gemini 3系列专题</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="dimension d2">
+                <div class="dim-header">
+                    <div class="dim-icon">🤖</div>
+                    <div class="dim-title">Agent维度</div>
+                    <div class="dim-count">14篇</div>
+                </div>
+                <div class="dim-content">
+                    <ul class="dim-list">
+                        <li>Agent五大设计原则 (Barry Zhang)</li>
+                        <li>Ambient Agents概念</li>
+                        <li>MCP协议生态 <span class="highlight">10,000+ Server</span></li>
+                        <li>AI编程工作流最佳实践</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="dimension d3">
+                <div class="dim-header">
+                    <div class="dim-icon">🏢</div>
+                    <div class="dim-title">AI企业维度</div>
+                    <div class="dim-count">4篇</div>
+                </div>
+                <div class="dim-content">
+                    <ul class="dim-list">
+                        <li>OpenAI画像 <span class="highlight">$5000亿估值</span></li>
+                        <li>Anthropic画像 (安全AI路线)</li>
+                        <li>字节AI全景布局</li>
+                        <li>幻方量化/DeepSeek</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="dimension d4">
+                <div class="dim-header">
+                    <div class="dim-icon">🏭</div>
+                    <div class="dim-title">企业AI转型</div>
+                    <div class="dim-count">7篇</div>
+                </div>
+                <div class="dim-content">
+                    <ul class="dim-list">
+                        <li>软件工程3.0理论</li>
+                        <li>企业AI转型方法论</li>
+                        <li>AI Studio产品设计</li>
+                        <li>企业数字员工场景全景图</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div class="footer-item">
+                <div class="footer-value">35+</div>
+                <div class="footer-label">知识文档</div>
+            </div>
+            <div class="footer-item">
+                <div class="footer-value">7</div>
+                <div class="footer-label">人物画像</div>
+            </div>
+            <div class="footer-item">
+                <div class="footer-value">4</div>
+                <div class="footer-label">公司画像</div>
+            </div>
+            <div class="footer-item">
+                <div class="footer-value">持续</div>
+                <div class="footer-label">沉淀更新</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

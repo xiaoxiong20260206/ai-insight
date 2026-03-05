@@ -3,7 +3,7 @@
 > **知识类型**: 产品概念/基础设施
 > **来源**: GitHub、官方文档 (https://github.com/unclecode/crawl4ai, https://docs.crawl4ai.com)
 > **更新时间**: 2026-03-05
-> **版本**: v1.0
+> **版本**: v1.1
 
 ---
 
@@ -255,6 +255,20 @@ docker run -d -p 11235:11235 --name crawl4ai --shm-size=1g unclecode/crawl4ai:la
 - MCP生态发展
 - 企业级功能进展
 - Cloud API发布
+
+---
+
+## 深度调研链接
+
+📊 **完整深度调研报告**: [Crawl4AI深度调研：从开源爬虫到AI数据基础设施的演进](../../02-deep-research/topics/crawl4ai-deep-research-2026.html)
+
+报告内容包括：
+- 🌱 来龙去脉：创始人故事与发展历程
+- 🔥 为什么火：市场时机与产品定位
+- 📈 实际效果：独立基准测试与成本对比
+- ⚖️ 优缺点：全面分析
+- 🧬 AI演进：三代数据获取工具范式变迁
+- 🔮 趋势预测：未来发展方向
 
 ---
 

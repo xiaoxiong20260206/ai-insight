@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>追踪体系三层矩阵</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            width: 1000px;
+            height: 550px;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+        
+        .container {
+            width: 1000px;
+            height: 550px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .title {
+            text-align: center;
+            color: white;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+        
+        .pyramid {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .level {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+        }
+        
+        .level-info {
+            width: 150px;
+            text-align: right;
+        }
+        
+        .level-tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .l1-tag { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .l2-tag { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .l3-tag { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        
+        .level-desc {
+            font-size: 12px;
+            color: #888;
+            margin-top: 8px;
+        }
+        
+        .level-bar {
+            flex: 1;
+            border-radius: 12px;
+            padding: 18px 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .l1-bar { 
+            background: linear-gradient(135deg, rgba(240,147,251,0.15) 0%, rgba(245,87,108,0.15) 100%);
+            border: 2px solid rgba(240,147,251,0.3);
+        }
+        .l2-bar { 
+            background: linear-gradient(135deg, rgba(79,172,254,0.15) 0%, rgba(0,242,254,0.15) 100%);
+            border: 2px solid rgba(79,172,254,0.3);
+        }
+        .l3-bar { 
+            background: linear-gradient(135deg, rgba(67,233,123,0.15) 0%, rgba(56,249,215,0.15) 100%);
+            border: 2px solid rgba(67,233,123,0.3);
+        }
+        
+        .person {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.1);
+            padding: 8px 14px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .person-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .l1-avatar { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .l2-avatar { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .l3-avatar { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        
+        .person-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .person-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .person-role {
+            font-size: 11px;
+            color: #aaa;
+        }
+        
+        .more {
+            color: #888;
+            font-size: 13px;
+            padding: 8px 14px;
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 20px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #888;
+            font-size: 13px;
+        }
+        
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .l1-dot { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .l2-dot { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .l3-dot { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">🎯 三层人物追踪矩阵</div>
+        
+        <div class="pyramid">
+            <!-- L1 实践者 -->
+            <div class="level">
+                <div class="level-info">
+                    <div class="level-tag l1-tag">L1 实践者</div>
+                    <div class="level-desc">一线构建AI产品</div>
+                </div>
+                <div class="level-bar l1-bar">
+                    <div class="person">
+                        <div class="person-avatar l1-avatar">BZ</div>
+                        <div class="person-info">
+                            <div class="person-name">Barry Zhang</div>
+                            <div class="person-role">Anthropic</div>
+                        </div>
+                    </div>
+                    <div class="person">
+                        <div class="person-avatar l1-avatar">AK</div>
+                        <div class="person-info">
+                            <div class="person-name">Andrej Karpathy</div>
+                            <div class="person-role">前OpenAI/Tesla</div>
+                        </div>
+                    </div>
+                    <div class="person">
+                        <div class="person-avatar l1-avatar">HC</div>
+                        <div class="person-info">
+                            <div class="person-name">Harrison Chase</div>
+                            <div class="person-role">LangChain CEO</div>
+                        </div>
+                    </div>
+                    <div class="person">
+                        <div class="person-avatar l1-avatar">JF</div>
+                        <div class="person-info">
+                            <div class="person-name">Jim Fan</div>
+                            <div class="person-role">NVIDIA</div>
+                        </div>
+                    </div>
+                    <div class="person">
+                        <div class="person-avatar l1-avatar">MT</div>
+                        <div class="person-info">
+                            <div class="person-name">Michael Truell</div>
+                            <div class="person-role">Cursor CEO</div>
+                        </div>
+                    </div>
+                    <div class="more">+40更多...</div>
+                </div>
+            </div>
+            
+            <!-- L2 观察者 -->
+            <div class="level">
+                <div class="level-info">
+                    <div class="level-tag l2-tag">L2 观察者</div>
+                    <div class="level-desc">深度行业解读</div>
+                </div>
+                <div class="level-bar l2-bar">
+                    <div class="person">
+                        <div class="person-avatar l2-avatar">SW</div>
+                        <div class="person-info">
+                            <div class="person-name">Simon Willison</div>
+                            <div class="person-role">独立开发者</div>
+                        </div>
+                    </div>
+                    <div class="person">
+                        <div class="person-avatar l2-avatar">EM</div>
+                        <div class="person-info">
+                            <div class="person-name">Ethan Mollick</div>
+                            <div class="person-role">沃顿商学院</div>
+                        </div>
+                    </div>
+                    <div class="person">
+                        <div class="person-avatar l2-avatar">SX</div>
+                        <div class="person-info">
+                            <div class="person-name">Swyx</div>
+                            <div class="person-role">Latent Space</div>
+                        </div>
+                    </div>
+                    <div class="person">
+                        <div class="person-avatar l2-avatar">BK</div>
+                        <div class="person-info">
+                            <div class="person-name">Ben Kovitz</div>
+                            <div class="person-role">AI评论家</div>
+                        </div>
+                    </div>
+                    <div class="more">+20更多...</div>
+                </div>
+            </div>
+            
+            <!-- L3 决策者 -->
+            <div class="level">
+                <div class="level-info">
+                    <div class="level-tag l3-tag">L3 决策者</div>
+                    <div class="level-desc">CEO/首席科学家</div>
+                </div>
+                <div class="level-bar l3-bar">
+                    <div class="person">
+                        <div class="person-avatar l3-avatar">SA</div>
+                        <div class="person-info">
+                            <div class="person-name">Sam Altman</div>
+                            <div class="person-role">OpenAI CEO</div>
+                        </div>
+                    </div>
+                    <div class="person">
+                        <div class="person-avatar l3-avatar">DA</div>
+                        <div class="person-info">
+                            <div class="person-name">Dario Amodei</div>
+                            <div class="person-role">Anthropic CEO</div>
+                        </div>
+                    </div>
+                    <div class="person">
+                        <div class="person-avatar l3-avatar">SP</div>
+                        <div class="person-info">
+                            <div class="person-name">Sundar Pichai</div>
+                            <div class="person-role">Google CEO</div>
+                        </div>
+                    </div>
+                    <div class="person">
+                        <div class="person-avatar l3-avatar">MZ</div>
+                        <div class="person-info">
+                            <div class="person-name">Mark Zuckerberg</div>
+                            <div class="person-role">Meta CEO</div>
+                        </div>
+                    </div>
+                    <div class="more">+15更多...</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-dot l1-dot"></div>
+                <span>每日追踪 · 价值最高</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot l2-dot"></div>
+                <span>每日追踪 · 深度解读</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot l3-dot"></div>
+                <span>每周追踪 · 战略方向</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
