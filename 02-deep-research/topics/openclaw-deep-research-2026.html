@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenClaw深度调研：开源主权智能体的崛起 | AI-Insight</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23D73A4A'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='white'>🦞</text></svg>">
+    
+    <style>
+        /* ============ CSS 变量定义 ============ */
+        :root {
+            --color-success: #1A7F37;
+            --color-success-light: #2DA44E;
+            --color-success-dark: #116329;
+            --color-danger: #CF222E;
+            --color-danger-light: #FF7B72;
+            --color-warning: #BF8700;
+            --color-warning-dark: #9A6700;
+            --color-info: #0969DA;
+            --color-info-light: #54AEFF;
+            --color-purple: #7C3AED;
+            --color-orange: #E5772B;
+            
+            --color-text-primary: #1F2328;
+            --color-text-secondary: #4D5561;
+            --color-text-muted: #656D76;
+            --color-border: #D0D7DE;
+            --color-border-light: #E8ECF0;
+            --color-bg: #F6F8FA;
+            --color-bg-card: #FFFFFF;
+            --color-bg-table-header: #F3F5F7;
+            
+            --gradient-success: linear-gradient(135deg, #1A7F37 0%, #2DA44E 100%);
+            --gradient-badge: linear-gradient(135deg, #E6F7ED 0%, #E1F0F8 100%);
+            --gradient-hero: linear-gradient(135deg, rgba(215, 58, 74, 0.08) 0%, rgba(215, 58, 74, 0.04) 100%);
+            
+            --shadow-sm: 0 1px 3px rgba(31, 35, 40, 0.06), 0 1px 2px rgba(31, 35, 40, 0.04);
+            --shadow-card: 0 2px 8px rgba(31, 35, 40, 0.06), 0 1px 2px rgba(31, 35, 40, 0.04);
+            --shadow-md: 0 4px 12px rgba(31, 35, 40, 0.08), 0 2px 4px rgba(31, 35, 40, 0.04);
+            --shadow-hover: 0 6px 16px rgba(215, 58, 74, 0.15), 0 2px 6px rgba(215, 58, 74, 0.1);
+            
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --spacing-2xl: 40px;
+            
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 14px;
+            --radius-xl: 18px;
+            --radius-full: 999px;
+            
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+            
+            --content-max-width: 980px;
+        }
+        
+        /* ============ 基础样式 ============ */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, "system-ui", "Segoe UI", "Noto Sans SC", Helvetica, Arial, sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text-primary);
+            line-height: 1.7;
+            font-size: 15px;
+        }
+        
+        a {
+            color: var(--color-info);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+        
+        a:hover { color: var(--color-danger); }
+        
+        .container {
+            max-width: var(--content-max-width);
+            margin: 0 auto;
+            padding: var(--spacing-xl) var(--spacing-lg) 60px;
+        }
+        
+        /* ============ Header ============ */
+        .header {
+            text-align: center;
+            padding: var(--spacing-2xl) var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            background: var(--gradient-hero);
+            border-radius: var(--radius-xl);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(215, 58, 74, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-xs) var(--spacing-md);
+            background: linear-gradient(135deg, #FFE5E7 0%, #FFDEE0 100%);
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            color: var(--color-danger);
+            font-weight: 600;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.3;
+        }
+        
+        .header-meta {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-lg);
+            flex-wrap: wrap;
+            color: var(--color-text-muted);
+            font-size: 14px;
+        }
+        
+        .header-meta-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+        
+        /* ============ Tab Navigation ============ */
+        .tab-nav {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 4px;
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 6px;
+            margin-bottom: var(--spacing-lg);
+            box-shadow: var(--shadow-card);
+            position: sticky;
+            top: 12px;
+            z-index: 100;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .tab-btn {
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 10px 12px;
+            background: transparent;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+        }
+        
+        .tab-btn:hover {
+            background: var(--color-bg-table-header);
+            color: var(--color-text-secondary);
+        }
+        
+        .tab-btn.active {
+            background: linear-gradient(135deg, #D73A4A 0%, #E65C6A 100%);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(215, 58, 74, 0.25);
+        }
+        
+        .tab-btn-num {
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.06);
+            border-radius: var(--radius-full);
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .tab-btn.active .tab-btn-num {
+            background: rgba(255,255,255,0.25);
+        }
+        
+        /* ============ Tab Content ============ */
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        
+        /* ============ Cards ============ */
+        .card {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+            box-shadow: var(--shadow-card);
+            transition: all var(--transition-normal);
+        }
+        
+        .card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--color-border-light);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .card-icon {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #FFE5E7 0%, #FFDEE0 100%);
+            border-radius: var(--radius-md);
+            font-size: 18px;
+        }
+        
+        .card-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+        
+        /* ============ Section Headers ============ */
+        .section-header {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin: var(--spacing-xl) 0 var(--spacing-md);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 2px solid var(--color-danger);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .section-header:first-child {
+            margin-top: 0;
+        }
+        
+        /* ============ Stats Grid ============ */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .stat-card {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
+            text-align: center;
+            transition: all var(--transition-normal);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-danger);
+            line-height: 1.2;
+        }
+        
+        .stat-value.green { color: var(--color-success); }
+        .stat-value.blue { color: var(--color-info); }
+        .stat-value.orange { color: var(--color-orange); }
+        .stat-value.purple { color: var(--color-purple); }
+        
+        .stat-label {
+            font-size: 13px;
+            color: var(--color-text-muted);
+            margin-top: var(--spacing-xs);
+        }
+        
+        /* ============ Lists ============ */
+        .content-list {
+            list-style: none;
+        }
+        
+        .content-list li {
+            padding: var(--spacing-sm) 0;
+            border-bottom: 1px solid var(--color-border-light);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-sm);
+        }
+        
+        .content-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .list-icon {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 3px;
+        }
+        
+        /* ============ Quote Box ============ */
+        .quote-box {
+            background: linear-gradient(135deg, rgba(215, 58, 74, 0.06) 0%, rgba(215, 58, 74, 0.02) 100%);
+            border-left: 4px solid var(--color-danger);
+            border-radius: var(--radius-sm);
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            font-style: italic;
+            color: var(--color-text-secondary);
+        }
+        
+        .quote-box .quote-source {
+            margin-top: var(--spacing-sm);
+            font-style: normal;
+            font-size: 13px;
+            color: var(--color-text-muted);
+        }
+        
+        /* ============ Feature Box ============ */
+        .feature-box {
+            background: linear-gradient(135deg, rgba(215, 58, 74, 0.04) 0%, rgba(124, 58, 237, 0.02) 100%);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            margin: var(--spacing-md) 0;
+        }
+        
+        .feature-box h4 {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        /* ============ Comparison Table ============ */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--spacing-md) 0;
+            font-size: 14px;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: 1px solid var(--color-border);
+            text-align: left;
+        }
+        
+        .comparison-table th {
+            background: var(--color-bg-table-header);
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: var(--color-bg);
+        }
+        
+        .comparison-table tr:hover {
+            background: rgba(215, 58, 74, 0.04);
+        }
+        
+        /* ============ Timeline ============ */
+        .timeline {
+            position: relative;
+            padding-left: 28px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--color-border);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: var(--spacing-md);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            background: var(--color-danger);
+            border-radius: 50%;
+            border: 2px solid var(--color-bg);
+        }
+        
+        .timeline-date {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .timeline-content {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+        
+        /* ============ Code Block ============ */
+        .code-block {
+            background: #1E1E1E;
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            overflow-x: auto;
+            font-family: "SF Mono", Consolas, monospace;
+            font-size: 13px;
+            color: #D4D4D4;
+            line-height: 1.5;
+        }
+        
+        .code-comment { color: #6A9955; }
+        .code-keyword { color: #569CD6; }
+        .code-string { color: #CE9178; }
+        
+        /* ============ Highlight Box ============ */
+        .highlight-box {
+            background: linear-gradient(135deg, #FFF8E6 0%, #FFF5DB 100%);
+            border: 1px solid rgba(191, 135, 0, 0.3);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+        }
+        
+        .highlight-box.danger {
+            background: linear-gradient(135deg, #FFE5E7 0%, #FFDEE0 100%);
+            border-color: rgba(207, 34, 46, 0.3);
+        }
+        
+        .highlight-box.success {
+            background: linear-gradient(135deg, #E6F7ED 0%, #DCFCE7 100%);
+            border-color: rgba(26, 127, 55, 0.3);
+        }
+        
+        .highlight-box h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        /* ============ Footer ============ */
+        .footer {
+            text-align: center;
+            padding: var(--spacing-xl);
+            color: var(--color-text-muted);
+            font-size: 13px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        /* ============ Responsive ============ */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 24px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .tab-nav { gap: 2px; padding: 4px; }
+            .tab-btn { padding: 8px 10px; font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-badge">
+                <span>🦞</span>
+                <span>深度调研 · 开源Agent</span>
+            </div>
+            <h1>OpenClaw深度调研：开源主权智能体的崛起</h1>
+            <div class="header-meta">
+                <span class="header-meta-item">📅 2026年3月</span>
+                <span class="header-meta-item">⭐ 239K+ Stars</span>
+                <span class="header-meta-item">👤 作者: Peter Steinberger</span>
+            </div>
+        </header>
+        
+        <!-- Tab Navigation -->
+        <nav class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('overview')">
+                <span class="tab-btn-num">1</span>
+                <span>概览</span>
+            </button>
+            <button class="tab-btn" onclick="switchTab('history')">
+                <span class="tab-btn-num">2</span>
+                <span>来龙去脉</span>
+            </button>
+            <button class="tab-btn" onclick="switchTab('why-hot')">
+                <span class="tab-btn-num">3</span>
+                <span>为什么火</span>
+            </button>
+            <button class="tab-btn" onclick="switchTab('architecture')">
+                <span class="tab-btn-num">4</span>
+                <span>技术架构</span>
+            </button>
+            <button class="tab-btn" onclick="switchTab('pros-cons')">
+                <span class="tab-btn-num">5</span>
+                <span>优缺点</span>
+            </button>
+            <button class="tab-btn" onclick="switchTab('industry')">
+                <span class="tab-btn-num">6</span>
+                <span>行业影响</span>
+            </button>
+            <button class="tab-btn" onclick="switchTab('future')">
+                <span class="tab-btn-num">7</span>
+                <span>趋势预测</span>
+            </button>
+            <button class="tab-btn" onclick="switchTab('easter-egg')">
+                <span>🥚</span>
+                <span>彩蛋</span>
+            </button>
+        </nav>
+        
+        <!-- Tab 1: 概览 -->
+        <div id="overview" class="tab-content active">
+            <h2 class="section-header">🦞 一句话概括</h2>
+            <div class="card">
+                <div class="quote-box">
+                    <p><strong>OpenClaw</strong>（外号"小龙虾"）是GitHub历史上增长最快的开源AI Agent项目，第一个将Deep Research + Computer Use + Coding三大能力融为一体的开源"主权智能体"——用户拥有数据、算力和控制权的完整自主权。</p>
+                </div>
+            </div>
+            
+            <h2 class="section-header">📊 核心数据</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">239K+</div>
+                    <div class="stat-label">GitHub Stars</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value green">1天</div>
+                    <div class="stat-label">爆火时间</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value blue">20+</div>
+                    <div class="stat-label">通讯渠道支持</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value orange">48h</div>
+                    <div class="stat-label">百款插件诞生</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value purple">3</div>
+                    <div class="stat-label">次改名风波</div>
+                </div>
+            </div>
+            
+            <h2 class="section-header">🎯 核心定位</h2>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🏠</div>
+                    <span class="card-title">主权智能体 (Sovereign Agent)</span>
+                </div>
+                <ul class="content-list">
+                    <li>
+                        <span class="list-icon">🔐</span>
+                        <div><strong>数据主权</strong>：所有数据留在本地，不经任何第三方服务器</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">⚡</span>
+                        <div><strong>算力主权</strong>：可选云端API或本地Ollama，断网也能工作</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">🎮</span>
+                        <div><strong>控制权主权</strong>：Agent行为完全由用户决定，无厂商限制</div>
+                    </li>
+                </ul>
+            </div>
+            
+            <h2 class="section-header">🔧 核心能力</h2>
+            <div class="card">
+                <ul class="content-list">
+                    <li>
+                        <span class="list-icon">📡</span>
+                        <div><strong>多渠道接入</strong>：WhatsApp、Telegram、Discord、iMessage、Signal、微信等20+通讯软件</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">🎤</span>
+                        <div><strong>语音交互</strong>：Voice Wake唤醒词 + Talk Mode持续语音对话</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">🖥️</span>
+                        <div><strong>Computer Use</strong>：基于视觉识别和GUI自动化操控任意软件界面</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">⌨️</span>
+                        <div><strong>Coding Agent</strong>：读写文件、执行代码、运行终端命令</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">🔍</span>
+                        <div><strong>Deep Research</strong>：Web搜索、信息综合、生成调研报告</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">🧠</span>
+                        <div><strong>智能记忆</strong>：Markdown文件存储 + 混合检索（向量+BM25）</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Tab 2: 来龙去脉 -->
+        <div id="history" class="tab-content">
+            <h2 class="section-header">📜 发展历程</h2>
+            <div class="card">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2024年10月</div>
+                        <div class="timeline-content"><strong>Anthropic发布Computer Use</strong>：AI操控GUI的范式突破，但API形式难以直接使用</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025年初</div>
+                        <div class="timeline-content"><strong>Claude Cowork发布</strong>：$100/月订阅，功能受限的"围墙花园"</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025年3月</div>
+                        <div class="timeline-content"><strong>Manus爆火</strong>：首个将三大Agent能力融合的产品，但闭源</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025年11月</div>
+                        <div class="timeline-content"><strong>Peter Steinberger开始开发</strong>：财务自由后的"第二人生"项目</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025年12月</div>
+                        <div class="timeline-content"><strong>Manus被Meta收购</strong>：$20亿美元收购，彻底闭源</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025年12月</div>
+                        <div class="timeline-content"><strong>Clawdbot开源发布</strong>：首个三合一开源Agent</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2026年1月25日</div>
+                        <div class="timeline-content"><strong>一夜爆火</strong>：首日斩获9000 Stars，不到一周突破7万</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2026年1月27日</div>
+                        <div class="timeline-content"><strong>改名Moltbot</strong>：因商标问题被Anthropic发送停止函</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2026年1月27日</div>
+                        <div class="timeline-content"><strong>账号被劫持</strong>：加密货币骗子抢注旧账号，$CLAWD代币暴涨暴跌</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2026年1月30日</div>
+                        <div class="timeline-content"><strong>更名OpenClaw</strong>：确立最终品牌身份</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2026年2月</div>
+                        <div class="timeline-content"><strong>突破17万Stars</strong>：成为GitHub历史上增长最快的开源项目</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2026年2月中旬</div>
+                        <div class="timeline-content"><strong>创始人被聘请</strong>：OpenAI/Anthropic争相招揽Peter Steinberger</div>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="section-header">👤 创始人传奇</h2>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🦸</div>
+                    <span class="card-title">Peter Steinberger</span>
+                </div>
+                <ul class="content-list">
+                    <li>
+                        <span class="list-icon">🏢</span>
+                        <div><strong>前创业者</strong>：创办PSPDFKit（后更名Nutrient.io），2021年获Insight Partners 1亿欧元投资后财务自由</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">🚀</span>
+                        <div><strong>惊人效率</strong>：自称"Polyagentmorous"，同时驾驭多个AI Agent并行编程</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">📊</span>
+                        <div><strong>开发数据</strong>：日均4-5万行代码、每日消耗18亿Token、单日1374次Git Commit</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">💡</span>
+                        <div><strong>纯粹热情</strong>：财务自由后的技术理想主义项目，不以盈利为目的</div>
+                    </li>
+                </ul>
+            </div>
+            
+            <h2 class="section-header">🎭 改名风波</h2>
+            <div class="highlight-box danger">
+                <h4>⚠️ 三次品牌危机</h4>
+                <ol style="margin-left: 20px; color: var(--color-text-secondary);">
+                    <li><strong>Clawdbot</strong>："Clawd"与"Claude"发音一致，Anthropic发送商标停止函</li>
+                    <li><strong>Moltbot</strong>：改名过程中账号被加密货币骗子抢注，$CLAWD代币市值一度达1600万美元后暴跌</li>
+                    <li><strong>OpenClaw</strong>：最终确定的品牌名，小龙虾Logo成为标志性符号 🦞</li>
+                </ol>
+            </div>
+        </div>
+        
+        <!-- Tab 3: 为什么火 -->
+        <div id="why-hot" class="tab-content">
+            <h2 class="section-header">🔥 爆火三要素</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">1️⃣</div>
+                    <span class="card-title">订阅制疲劳的反叛</span>
+                </div>
+                <p style="color: var(--color-text-secondary);">用户厌倦了每个AI应用都要几十美金/月的订阅费。OpenClaw作为"自带API Key（BYOK）"的框架，用户只需为实际使用的Token付费，没有中间商赚差价。</p>
+                <div class="feature-box" style="margin-top: 16px;">
+                    <table class="comparison-table">
+                        <tr>
+                            <th>方案</th>
+                            <th>月费</th>
+                            <th>实际Token价值</th>
+                        </tr>
+                        <tr>
+                            <td>Claude Cowork</td>
+                            <td>$100/月</td>
+                            <td>~$300-400</td>
+                        </tr>
+                        <tr>
+                            <td>OpenClaw + API</td>
+                            <td>按量付费</td>
+                            <td>用多少付多少</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">2️⃣</div>
+                    <span class="card-title">"贾维斯幻想"的落地</span>
+                </div>
+                <p style="color: var(--color-text-secondary);">科幻作品中的AI助手（如钢铁侠的Jarvis）终于变得触手可及——不是网页里的聊天机器人，而是运行在系统后台、能操控整台电脑的数字管家。</p>
+                <div class="quote-box">
+                    <p>"当下最接近Jarvis的产品，它不是黑盒SaaS，而是全透明、可魔改的本地运行时。"</p>
+                    <div class="quote-source">— 腾讯云开发者社区</div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">3️⃣</div>
+                    <span class="card-title">社区裂变与插件生态</span>
+                </div>
+                <p style="color: var(--color-text-secondary);">开发者可为其编写插件，让AI控制智能家居、自动发消息、整理文件。48小时内诞生上百个社区插件，形成"自然语言操作系统接口"。</p>
+                <div class="feature-box" style="margin-top: 16px;">
+                    <h4>典型插件示例</h4>
+                    <ul class="content-list">
+                        <li><span class="list-icon">🗺️</span><div><strong>goplaces</strong>：Google Maps API查询地点</div></li>
+                        <li><span class="list-icon">☕</span><div><strong>local-places</strong>：搜索附近咖啡馆等本地商户</div></li>
+                        <li><span class="list-icon">📊</span><div><strong>native-app-performance</strong>：Xcode工具链分析App性能</div></li>
+                        <li><span class="list-icon">🏠</span><div><strong>Home Assistant</strong>：自然语言控制物联网设备</div></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h2 class="section-header">💻 Mac Mini效应</h2>
+            <div class="card">
+                <p style="color: var(--color-text-secondary); margin-bottom: 16px;">OpenClaw带动Mac Mini销量异常波动，原因：</p>
+                <ul class="content-list">
+                    <li>
+                        <span class="list-icon">💬</span>
+                        <div><strong>iMessage接入</strong>：Mac Mini是连接AI和iMessage的唯一物理桥梁</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">🧠</span>
+                        <div><strong>统一内存架构</strong>：Apple Silicon本地跑量化模型性价比高</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">🔌</span>
+                        <div><strong>24小时待命</strong>：低功耗完美契合"家庭AI服务器"角色</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Tab 4: 技术架构 -->
+        <div id="architecture" class="tab-content">
+            <h2 class="section-header">🏗️ 四层架构</h2>
+            <div class="card">
+                <div class="code-block">
+<span class="code-comment">// OpenClaw 四层架构</span>
+
+┌─────────────────────────────────────────────────────────┐
+│  <span class="code-keyword">网关层 (Gateway)</span>                                       │
+│  WhatsApp / Telegram / Discord / iMessage / Signal...   │
+│  多平台消息接入 + 会话路由                                 │
+└─────────────────────────────────────────────────────────┘
+                           │
+                           ▼
+┌─────────────────────────────────────────────────────────┐
+│  <span class="code-keyword">核心层 (Agent Core)</span>                                    │
+│  pi-coding-agent 运行时 + ReAct循环 + 工具调用             │
+│  认知推理 + 任务规划 + 多Agent协调                         │
+└─────────────────────────────────────────────────────────┘
+                           │
+                           ▼
+┌─────────────────────────────────────────────────────────┐
+│  <span class="code-keyword">记忆层 (Memory System)</span>                                 │
+│  MEMORY.md + 每日日志 + SQLite混合检索                     │
+│  向量搜索(0.7) + BM25关键词搜索(0.3)                       │
+└─────────────────────────────────────────────────────────┘
+                           │
+                           ▼
+┌─────────────────────────────────────────────────────────┐
+│  <span class="code-keyword">执行层 (Execution Layer)</span>                               │
+│  Shell执行 + Playwright浏览器控制 + 文件系统操作           │
+│  Docker沙箱 + 权限控制                                    │
+└─────────────────────────────────────────────────────────┘
+</div>
+            </div>
+            
+            <h2 class="section-header">🔧 七大基础工具</h2>
+            <div class="card">
+                <p style="color: var(--color-text-secondary); margin-bottom: 16px;">Coding Agent核心只需7个基础工具即可完成几乎所有任务：</p>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" style="font-size: 24px;">📖</div>
+                        <div class="stat-label">Read</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" style="font-size: 24px;">✏️</div>
+                        <div class="stat-label">Write</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" style="font-size: 24px;">🔄</div>
+                        <div class="stat-label">Edit</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" style="font-size: 24px;">🔍</div>
+                        <div class="stat-label">Find</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" style="font-size: 24px;">🔎</div>
+                        <div class="stat-label">Search</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" style="font-size: 24px;">🐍</div>
+                        <div class="stat-label">Python</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" style="font-size: 24px;">💻</div>
+                        <div class="stat-label">Bash</div>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="section-header">🧠 记忆系统设计</h2>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">📝</div>
+                    <span class="card-title">为什么选择Markdown？</span>
+                </div>
+                <ul class="content-list">
+                    <li>
+                        <span class="list-icon">👁️</span>
+                        <div><strong>可读可编辑</strong>：用户可直接查看和修改AI记忆，删除幻觉内容</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">📅</span>
+                        <div><strong>时间线性</strong>：按日期归档，保留时间上下文，避免混淆历史项目</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">📦</span>
+                        <div><strong>Git版本控制</strong>：每次记忆修改都有提交记录，可追溯、可回滚</div>
+                    </li>
+                </ul>
+                <div class="code-block" style="margin-top: 16px;">
+<span class="code-comment"># 记忆文件结构</span>
+~/.openclaw/workspace/
+├── MEMORY.md         <span class="code-comment"># 长期记忆：事实、偏好、核心指令</span>
+├── USER.md           <span class="code-comment"># 用户画像：属性、喜好、背景</span>
+├── SOUL.md           <span class="code-comment"># Agent人设：性格、边界、行为准则</span>
+├── AGENTS.md         <span class="code-comment"># 元认知：能力边界、学习记录</span>
+└── memory/
+    └── YYYY-MM-DD.md <span class="code-comment"># 每日日志：原始交互记录</span>
+</div>
+            </div>
+            
+            <h2 class="section-header">🔍 混合检索机制</h2>
+            <div class="card">
+                <p style="color: var(--color-text-secondary); margin-bottom: 16px;">结合向量语义搜索和BM25关键词匹配，解决纯向量检索的精度问题：</p>
+                <div class="code-block">
+<span class="code-comment"># 结果融合公式</span>
+finalScore = <span class="code-keyword">0.7</span> × vectorScore + <span class="code-keyword">0.3</span> × textScore
+
+<span class="code-comment"># 向量搜索：语义相似度，适合"上次的项目"这类模糊查询</span>
+<span class="code-comment"># BM25搜索：精确令牌匹配，适合专有名词和代码符号</span>
+</div>
+            </div>
+        </div>
+        
+        <!-- Tab 5: 优缺点 -->
+        <div id="pros-cons" class="tab-content">
+            <h2 class="section-header">✅ 核心优势</h2>
+            <div class="card">
+                <ul class="content-list">
+                    <li>
+                        <span class="list-icon" style="color: var(--color-success);">✓</span>
+                        <div><strong>开源透明</strong>：MIT协议，完全可审计、可定制、可魔改</div>
+                    </li>
+                    <li>
+                        <span class="list-icon" style="color: var(--color-success);">✓</span>
+                        <div><strong>数据主权</strong>：所有数据留在本地，隐私保护最大化</div>
+                    </li>
+                    <li>
+                        <span class="list-icon" style="color: var(--color-success);">✓</span>
+                        <div><strong>多模型支持</strong>：Claude/GPT/DeepSeek/本地Ollama，不锁定厂商</div>
+                    </li>
+                    <li>
+                        <span class="list-icon" style="color: var(--color-success);">✓</span>
+                        <div><strong>多渠道接入</strong>：20+通讯软件统一管理</div>
+                    </li>
+                    <li>
+                        <span class="list-icon" style="color: var(--color-success);">✓</span>
+                        <div><strong>可扩展性强</strong>：Skills插件系统，社区生态繁荣</div>
+                    </li>
+                    <li>
+                        <span class="list-icon" style="color: var(--color-success);">✓</span>
+                        <div><strong>按量付费</strong>：无订阅费，Token用多少付多少</div>
+                    </li>
+                    <li>
+                        <span class="list-icon" style="color: var(--color-success);">✓</span>
+                        <div><strong>离线能力</strong>：配合本地模型，断网也能工作</div>
+                    </li>
+                </ul>
+            </div>
+            
+            <h2 class="section-header">❌ 风险与局限</h2>
+            <div class="card">
+                <ul class="content-list">
+                    <li>
+                        <span class="list-icon" style="color: var(--color-danger);">✗</span>
+                        <div><strong>安全风险高</strong>：提示词注入可能导致执行危险命令（如rm -rf）</div>
+                    </li>
+                    <li>
+                        <span class="list-icon" style="color: var(--color-danger);">✗</span>
+                        <div><strong>供应链风险</strong>：插件生态缺乏审计，恶意插件可能植入后门</div>
+                    </li>
+                    <li>
+                        <span class="list-icon" style="color: var(--color-danger);">✗</span>
+                        <div><strong>端口暴露</strong>：已发现数百个实例在互联网上零认证暴露</div>
+                    </li>
+                    <li>
+                        <span class="list-icon" style="color: var(--color-danger);">✗</span>
+                        <div><strong>Token消耗大</strong>：重度使用几十条对话后输入Token达110K+</div>
+                    </li>
+                    <li>
+                        <span class="list-icon" style="color: var(--color-danger);">✗</span>
+                        <div><strong>模型依赖强</strong>：效果严重依赖基础模型能力，弱模型体验差</div>
+                    </li>
+                    <li>
+                        <span class="list-icon" style="color: var(--color-danger);">✗</span>
+                        <div><strong>门槛较高</strong>：需要一定技术能力配置和维护</div>
+                    </li>
+                </ul>
+            </div>
+            
+            <h2 class="section-header">⚠️ 安全警告</h2>
+            <div class="highlight-box danger">
+                <h4>🚨 不建议在个人电脑上直接运行</h4>
+                <p style="color: var(--color-text-secondary); margin-top: 8px;">存在安全漏洞，可能导致电脑变成"肉鸡"。如必须本地运行，请：</p>
+                <ul style="margin-left: 20px; margin-top: 8px; color: var(--color-text-secondary);">
+                    <li>使用Docker沙箱化运行</li>
+                    <li>启用Human-in-the-Loop高危操作确认</li>
+                    <li>用完后关闭，不要半夜开着</li>
+                    <li>定期运行 <code>openclaw doctor</code> 安全审计</li>
+                </ul>
+            </div>
+            
+            <h2 class="section-header">⚖️ 与Claude Cowork对比</h2>
+            <div class="card">
+                <table class="comparison-table">
+                    <tr>
+                        <th>维度</th>
+                        <th>Claude Cowork</th>
+                        <th>OpenClaw</th>
+                    </tr>
+                    <tr>
+                        <td>设计哲学</td>
+                        <td>中心化银行：安全但受限</td>
+                        <td>去中心化：自由但风险自担</td>
+                    </tr>
+                    <tr>
+                        <td>部署模式</td>
+                        <td>云端沙箱/受限本地</td>
+                        <td>本地宿主机/私有服务器</td>
+                    </tr>
+                    <tr>
+                        <td>系统权限</td>
+                        <td>仅限特定文件夹</td>
+                        <td>默认用户级完全开放</td>
+                    </tr>
+                    <tr>
+                        <td>模型绑定</td>
+                        <td>仅限Claude系列</td>
+                        <td>多模型支持</td>
+                    </tr>
+                    <tr>
+                        <td>成本结构</td>
+                        <td>$100+/月订阅</td>
+                        <td>API按量付费</td>
+                    </tr>
+                    <tr>
+                        <td>安全保障</td>
+                        <td>大厂负责</td>
+                        <td>用户自负</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Tab 6: 行业影响 -->
+        <div id="industry" class="tab-content">
+            <h2 class="section-header">🌊 国内厂商跟进</h2>
+            <div class="card">
+                <p style="color: var(--color-text-secondary); margin-bottom: 16px;">OpenClaw爆火后，国内厂商48小时内快速响应：</p>
+                <ul class="content-list">
+                    <li>
+                        <span class="list-icon">☁️</span>
+                        <div><strong>阿里云</strong>：推出CoPaw适配方案</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">☁️</span>
+                        <div><strong>腾讯云</strong>：发布OpenClaw部署模板</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">🔍</span>
+                        <div><strong>百度千帆</strong>：上线OpenClaw Skill</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">🔥</span>
+                        <div><strong>火山引擎</strong>：推出豆包+OpenClaw方案</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">🤖</span>
+                        <div><strong>MiniMax</strong>：MaxClaw变体出现</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">🌙</span>
+                        <div><strong>Kimi</strong>：KimiClaw集成方案</div>
+                    </li>
+                </ul>
+            </div>
+            
+            <h2 class="section-header">🔗 SaaS自我革命</h2>
+            <div class="card">
+                <p style="color: var(--color-text-secondary); margin-bottom: 16px;">为了不被Agent绕过，传统SaaS开始开放Agent友好接口：</p>
+                <ul class="content-list">
+                    <li>
+                        <span class="list-icon">📄</span>
+                        <div><strong>飞书</strong>：发布Agent友好协议，开放更多API</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">📊</span>
+                        <div><strong>WPS</strong>：开放行动套件（Action Kit）</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">🔄</span>
+                        <div><strong>RPA厂商</strong>：从竞争转向拥抱，提供Agent适配层</div>
+                    </li>
+                </ul>
+            </div>
+            
+            <h2 class="section-header">🚧 中国市场挑战</h2>
+            <div class="highlight-box">
+                <h4>⚠️ 生态壁垒问题</h4>
+                <p style="color: var(--color-text-secondary); margin-top: 8px;">中国互联网生态是巨头主导、中心化封闭的。OpenClaw在中国面临：</p>
+                <ul style="margin-left: 20px; margin-top: 8px; color: var(--color-text-secondary);">
+                    <li><strong>微信封杀</strong>：腾讯向GitHub发DMCA，下架30+微信相关工具</li>
+                    <li><strong>豆包手机事件</strong>：字节AI手机自动操作微信/淘宝被封杀</li>
+                    <li><strong>2C应用不开放</strong>：微信、淘宝、抖音既不开放API也禁止自动化</li>
+                </ul>
+                <p style="color: var(--color-text-secondary); margin-top: 12px;"><strong>适用场景</strong>：在中国更适合做不涉及封闭App的任务（整理本地文件、自动化开发工作流等）</p>
+            </div>
+        </div>
+        
+        <!-- Tab 7: 趋势预测 -->
+        <div id="future" class="tab-content">
+            <h2 class="section-header">🔮 个人计算的回归</h2>
+            <div class="card">
+                <p style="color: var(--color-text-secondary); margin-bottom: 16px;">计算历史是个<strong>钟摆</strong>，在个人计算和云计算之间摆动。OpenClaw预示着：</p>
+                <div class="quote-box">
+                    <p>"算力、模型、Agent、数据全部放在本地，不用云的任何东西，哪怕不上网，Agent也能工作。"</p>
+                </div>
+                <div class="feature-box" style="margin-top: 16px;">
+                    <h4>端侧计算四大优势</h4>
+                    <ul class="content-list">
+                        <li><span class="list-icon">⚡</span><div><strong>低延迟</strong>：本地推理无需网络往返</div></li>
+                        <li><span class="list-icon">📶</span><div><strong>离线可用</strong>：随时随地可用</div></li>
+                        <li><span class="list-icon">💰</span><div><strong>边际成本趋零</strong>：已购设备算力不用白不用</div></li>
+                        <li><span class="list-icon">🔒</span><div><strong>隐私保护</strong>：数据完全不出本地</div></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h2 class="section-header">📉 推理成本惊人下降</h2>
+            <div class="card">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value green">100x</div>
+                        <div class="stat-label">3年成本下降</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value blue">50%</div>
+                        <div class="stat-label">每半年缩减</div>
+                    </div>
+                </div>
+                <p style="color: var(--color-text-secondary); margin-top: 16px;">按此趋势，<strong>再过三年</strong>，普通手机就可能拥有当前模型水平的本地算力。模型算力有望变得像水和电一样普及。</p>
+            </div>
+            
+            <h2 class="section-header">🖥️ 大模型作为新操作系统</h2>
+            <div class="card">
+                <p style="color: var(--color-text-secondary); margin-bottom: 16px;">未来软件范式可能演变为：</p>
+                <div class="code-block">
+硬件层
+  ↓
+传统操作系统（Linux/macOS/Windows）
+  ↓
+<span class="code-keyword">大模型（作为新的"操作系统"抽象层）</span>
+  ↓
+各种 Agent（每个 Agent = 一个"应用"）
+  ↓
+用户（通过自然语言交互）
+</div>
+                <p style="color: var(--color-text-secondary); margin-top: 16px;">一种极端但可能的未来：操作系统不再需要GUI——只需一个OpenClaw加一个终端，就是完整的操作系统。</p>
+            </div>
+            
+            <h2 class="section-header">🏁 大厂与开源的博弈</h2>
+            <div class="card">
+                <ul class="content-list">
+                    <li>
+                        <span class="list-icon">🏢</span>
+                        <div><strong>大厂理想</strong>：封闭API，只允许使用自家应用</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">⚔️</span>
+                        <div><strong>竞争现实</strong>：各家模型水平相近，封闭会流失开发者</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">👤</span>
+                        <div><strong>用户最优</strong>：开源Agent + BYOK，用多少付多少</div>
+                    </li>
+                </ul>
+                <div class="highlight-box success" style="margin-top: 16px;">
+                    <h4>💡 关键变量</h4>
+                    <ol style="margin-left: 20px; color: var(--color-text-secondary);">
+                        <li><strong>Scaling Law是否停滞</strong>：如果模型能力增长放缓，格局会大不同</li>
+                        <li><strong>竞争态势</strong>：一家独大还是多家焦灼，直接影响API开放程度</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tab 8: 彩蛋 -->
+        <div id="easter-egg" class="tab-content">
+            <h2 class="section-header">🥚 这篇调研是怎么做出来的</h2>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🔍</div>
+                    <span class="card-title">调研过程</span>
+                </div>
+                <ul class="content-list">
+                    <li>
+                        <span class="list-icon">1️⃣</span>
+                        <div><strong>多源搜索</strong>：Google搜索中英文关键词（OpenClaw、Clawdbot、小龙虾AI Agent等）</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">2️⃣</span>
+                        <div><strong>官方资料</strong>：GitHub仓库README（239K+ Stars）、官方文档</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">3️⃣</span>
+                        <div><strong>深度解析</strong>：腾讯云开发者社区技术拆解、01.me深度调研报告</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">4️⃣</span>
+                        <div><strong>行业分析</strong>：36氪产业分析、LinkedIn行业讨论、Reddit用户反馈</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">5️⃣</span>
+                        <div><strong>信息整合</strong>：按主题分类、交叉验证、提炼核心洞察</div>
+                    </li>
+                </ul>
+            </div>
+            
+            <h2 class="section-header">📚 参考来源</h2>
+            <div class="card">
+                <ul class="content-list">
+                    <li>
+                        <span class="list-icon">🔗</span>
+                        <div><a href="https://github.com/openclaw/openclaw" target="_blank">OpenClaw GitHub仓库</a> - 官方代码和文档</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">🔗</span>
+                        <div><a href="https://cloud.tencent.com/developer/article/2627190" target="_blank">解构Clawdbot - 腾讯云开发者社区</a> - 技术架构深度解析</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">🔗</span>
+                        <div><a href="https://01.me/2026/01/clawdbot-openclaw-analysis/" target="_blank">主权智能体深度调研 - Bojie Li</a> - 六维度全面分析</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">🔗</span>
+                        <div><a href="https://eu.36kr.com/zh/p/3707034484437385" target="_blank">36氪产业分析</a> - 行业影响与厂商跟进</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">🔗</span>
+                        <div><a href="https://zhuanlan.zhihu.com/p/2000850539936765122" target="_blank">知乎OpenClaw分析与教程</a> - 中文社区解读</div>
+                    </li>
+                </ul>
+            </div>
+            
+            <h2 class="section-header">🦞 小龙虾的由来</h2>
+            <div class="card">
+                <p style="color: var(--color-text-secondary);">OpenClaw的Logo是一只可爱的小龙虾 🦞，这个设计来源于：</p>
+                <ul class="content-list" style="margin-top: 16px;">
+                    <li>
+                        <span class="list-icon">🦞</span>
+                        <div><strong>Molty</strong>：项目最初为名为Molty的"太空龙虾AI助手"而构建</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">✨</span>
+                        <div><strong>口号</strong>："EXFOLIATE! EXFOLIATE!"（脱壳！脱壳！）</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">🐾</span>
+                        <div><strong>Claw</strong>：龙虾的钳子（Claw），象征Agent的"手"——能够操控电脑的能力</div>
+                    </li>
+                </ul>
+                <div class="quote-box" style="margin-top: 16px;">
+                    <p>龙虾的钳子能够抓取、操作物体，就像OpenClaw能够操控电脑、执行任务一样。小龙虾虽小，但钳子有力——这也是OpenClaw作为个人AI助手的精神：小而强大。</p>
+                </div>
+            </div>
+            
+            <h2 class="section-header">💬 了解更多</h2>
+            <div class="card">
+                <p style="color: var(--color-text-secondary); margin-bottom: 16px;">如果你对AI Agent感兴趣，可以关注：</p>
+                <ul class="content-list">
+                    <li>
+                        <span class="list-icon">🏠</span>
+                        <div><a href="../../index.html">AI洞察首页</a> - 持续追踪AI行业动态</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">📰</span>
+                        <div><a href="../../01-daily-reports/index.html">AI日报</a> - 每日AI行业资讯</div>
+                    </li>
+                    <li>
+                        <span class="list-icon">🔬</span>
+                        <div><a href="../index.html">深度调研</a> - 更多AI专题研究</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="../../index.html">← 返回首页</a>
+                <a href="../index.html">深度调研列表</a>
+            </div>
+            <p>AI洞察 · 深度调研系列 · 2026年3月</p>
+        </footer>
+    </div>
+    
+    <script>
+        function switchTab(tabId) {
+            // 隐藏所有tab内容
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // 移除所有按钮的active状态
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // 显示选中的tab
+            document.getElementById(tabId).classList.add('active');
+            
+            // 激活对应按钮
+            event.currentTarget.classList.add('active');
+            
+            // 滚动到顶部
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
