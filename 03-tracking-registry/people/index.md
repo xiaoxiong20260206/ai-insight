@@ -1,8 +1,8 @@
 # AI行业人物追踪清单
 
-> **版本**: v1.2.0
-> **更新时间**: 2026-03-04
-> **本次Review重点**: 补充具身智能、多模态、企业AI、AI安全等领域核心人物
+> **版本**: v1.3.0
+> **更新时间**: 2026-03-05
+> **本次Review重点**: 新增Crawl4AI创始人 Unclecode (AI基础设施工具开源实践者)
 > **维护规则**: 每月 Review 一次，根据输出质量和频率动态调整优先级
 
 ---
@@ -85,6 +85,12 @@
 | **Addy Osmani** | Google Chrome 工程总监 | addyosmani.com/blog | `"Addy Osmani" AI coding LLM` | LLM Coding Workflow |
 | **Kent Beck** | 极限编程之父 | X, Pragmatic Engineer | `"Kent Beck" AI coding TDD` | TDD + AI Agent 方法论 |
 | **Steve Yegge** | Sourcegraph | sourcegraph.com/blog | `"Steve Yegge" AI coding` | AI 对开发者影响 |
+
+### AI基础设施/工具开源实践者 (NEW)
+
+| 人物 | 公司/角色 | 主要渠道 | 搜索关键词 | 追踪重点 |
+|------|----------|---------|-----------|---------|
+| **Unclecode (Hossein)** | Crawl4AI创始人, Kidocode CEO | X @unclecode, GitHub | `"unclecode" crawl4ai` | LLM友好网页爬取, 开源AI工具 |
 
 ### 大模型核心研究者（独立/跨机构）
 
