@@ -229,8 +229,46 @@ Simon Willison的推荐工具链：
 |------|------|---------|
 | **GitHub Copilot** | 集成度高，补全为主 | 日常编码辅助 |
 | **Cursor** | Composer功能强大，上下文管理好 | 复杂项目开发 |
-| **Claude Code** | 推理能力强，对话自然 | 架构设计、复杂逻辑 |
+| **Claude Code** | 推理能力强，对话自然，功能丰富(sub-agents, hooks) | 架构设计、复杂逻辑 |
+| **OpenAI Codex** | GPT-5优化，GitHub集成强，开源CLI | 企业级开发、CI/CD集成 |
+| **Gemini CLI** | 免费、支持MCP、GEMINI.md配置 | 个人开发者、快速原型 |
 | **Windsurf (Codeium)** | 免费可用，功能完整 | 个人开发者 |
+
+#### Codex vs Claude Code深度对比 (2026.03更新)
+
+| 维度 | Codex胜出 | Claude Code胜出 | 评价 |
+|------|----------|----------------|------|
+| **Agent能力** | - | - | 平手，都趋于收敛 |
+| **定价/限额** | ✅ GPT-5成本更低，限额更慷慨 | - | Codex明显优势 |
+| **GitHub集成** | ✅ 自动PR审查，inline评论修复 | - | Codex决定性优势 |
+| **UX权限** | - | ✅ 终端UI更成熟 | Claude Code稍优 |
+| **功能丰富度** | - | ✅ sub-agents, hooks, slash命令 | Claude Code优势 |
+| **指令文件** | ✅ 支持Agents.md标准 | 仅支持Claude.md | Codex更标准化 |
+
+> **Builder.io用户调研**: GPT-5用户满意度比Claude Sonnet高40%
+
+**关键选择因素**:
+- 重度使用+预算敏感 → Codex
+- GitHub工作流深度集成 → Codex  
+- 功能丰富+定制化需求 → Claude Code
+- 团队协作+可视化编辑 → 二者配合Builder.io等工具
+
+#### Gemini CLI实践要点 (2026.03新增)
+
+> 作者: Riccardo Carlesso (Google)
+
+**核心特性**:
+- 免费，使用Gemini API Key
+- 支持GEMINI.md项目配置文件
+- 内置记忆功能，跨会话持久化
+- 支持MCP协议连接外部服务
+- 可自动化CLI反馈循环任务
+
+**最佳实践**:
+1. **AutoMagic Feedback Loop**: 给CLI可见错误的任务，自动循环修复
+2. **声明式GEMINI.md**: 用"ensure x y z"而非"do x y z"，避免误删代码
+3. **DRY原则**: 将常用实践集中到主GEMINI.md，其他文件委托读取
+4. **Markdown记忆**: 用AI_REASONING.md持久化决策记录
 
 ### 6.2 上下文工具
 
