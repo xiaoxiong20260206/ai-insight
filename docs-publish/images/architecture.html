@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI洞察项目架构图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            width: 1000px;
+            height: 600px;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .container {
+            width: 1000px;
+            height: 600px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .title {
+            text-align: center;
+            color: white;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .architecture {
+            flex: 1;
+            display: flex;
+            gap: 20px;
+            align-items: stretch;
+        }
+        
+        .column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .box {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+        
+        .box:hover {
+            transform: translateY(-3px);
+        }
+        
+        .box-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        
+        .box-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .box-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+        
+        .box-content {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .box-content ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .box-content li {
+            padding: 3px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+        
+        .box-content li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .input { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); }
+        .tracking { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); }
+        .daily { background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); }
+        .deep { background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%); }
+        .knowledge { background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%); }
+        .output { background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); }
+        
+        .center-column {
+            flex: 1.2;
+        }
+        
+        .arrow-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px 0;
+        }
+        
+        .arrow {
+            font-size: 24px;
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .stats-row {
+            display: flex;
+            gap: 15px;
+            margin-top: auto;
+        }
+        
+        .stat-box {
+            flex: 1;
+            background: rgba(255,255,255,0.95);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">🎯 AI洞察项目架构</div>
+        
+        <div class="architecture">
+            <!-- 左列：输入层 -->
+            <div class="column">
+                <div class="box" style="flex: 1;">
+                    <div class="box-header">
+                        <div class="box-icon input">🌐</div>
+                        <div class="box-title">信息输入层</div>
+                    </div>
+                    <div class="box-content">
+                        <ul>
+                            <li>X (Twitter) 动态</li>
+                            <li>官方博客/论文</li>
+                            <li>Newsletter订阅</li>
+                            <li>YouTube/播客</li>
+                            <li>行业新闻媒体</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="box" style="flex: 1;">
+                    <div class="box-header">
+                        <div class="box-icon tracking">🎯</div>
+                        <div class="box-title">追踪体系</div>
+                    </div>
+                    <div class="box-content">
+                        <ul>
+                            <li>L1 实践者 (构建AI)</li>
+                            <li>L2 观察者 (深度解读)</li>
+                            <li>L3 决策者 (定方向)</li>
+                            <li>130+ 公司追踪</li>
+                            <li>90+ 信息源</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 中列：处理层 -->
+            <div class="column center-column">
+                <div class="box" style="flex: 1;">
+                    <div class="box-header">
+                        <div class="box-icon daily">📰</div>
+                        <div class="box-title">每日调研 → AI日报</div>
+                    </div>
+                    <div class="box-content">
+                        <ul>
+                            <li>🧠 大模型：新模型/评测</li>
+                            <li>⌨️ AI Coding：工具/实践</li>
+                            <li>📱 AI应用：产品/创新</li>
+                            <li>🏭 AI行业：融资/格局</li>
+                            <li>🔄 企业AI：转型/案例</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="arrow-container">
+                    <span class="arrow">↓</span>
+                </div>
+                
+                <div class="box" style="flex: 1;">
+                    <div class="box-header">
+                        <div class="box-icon deep">🔬</div>
+                        <div class="box-title">深度调研</div>
+                    </div>
+                    <div class="box-content">
+                        <ul>
+                            <li>趋势分析报告</li>
+                            <li>公司深度调研</li>
+                            <li>人物思想体系</li>
+                            <li>专题研究报告</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 右列：输出层 -->
+            <div class="column">
+                <div class="box" style="flex: 1;">
+                    <div class="box-header">
+                        <div class="box-icon knowledge">📚</div>
+                        <div class="box-title">知识沉淀</div>
+                    </div>
+                    <div class="box-content">
+                        <ul>
+                            <li>📊 模型维度</li>
+                            <li>🤖 Agent维度</li>
+                            <li>🏢 AI企业维度</li>
+                            <li>🏭 企业AI维度</li>
+                            <li>👤 人物画像</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="box" style="flex: 1;">
+                    <div class="box-header">
+                        <div class="box-icon output">📤</div>
+                        <div class="box-title">分发触达</div>
+                    </div>
+                    <div class="box-content">
+                        <ul>
+                            <li>GitHub Pages网站</li>
+                            <li>KIM群每日推送</li>
+                            <li>深度报告分享</li>
+                            <li>知识库持续更新</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stats-row">
+            <div class="stat-box">
+                <div class="stat-value">85+</div>
+                <div class="stat-label">追踪人物</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">130+</div>
+                <div class="stat-label">追踪公司</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">35+</div>
+                <div class="stat-label">知识文档</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">5</div>
+                <div class="stat-label">日报板块</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
