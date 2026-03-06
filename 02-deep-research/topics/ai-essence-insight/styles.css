@@ -1,5 +1,5 @@
-/* AI生态本质洞察报告 v2.0 - 高端视觉设计 */
-/* 基于清爽调研报告风格 + Opus 4.6级视觉提升 */
+/* AI生态本质洞察报告 v3.0 - 五层闭环洞察框架 */
+/* 基于清爽调研报告风格 + 本质洞察力 v2.0 */
 
 /* ============ Design Tokens ============ */
 :root {
@@ -855,6 +855,128 @@ body {
     font-family: var(--font-mono);
     color: var(--c-emerald-dark);
 }
+
+/* ============ L3 Mapping Row ============ */
+.row.mapping {
+    background: linear-gradient(135deg, rgba(37,99,235,0.03) 0%, rgba(124,58,237,0.02) 100%);
+}
+
+.mapping-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+    margin-top: var(--sp-2);
+}
+
+.mapping-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sp-2);
+    padding: 6px var(--sp-3);
+    background: rgba(255,255,255,0.7);
+    border-radius: var(--r-sm);
+    border: 1px solid rgba(37,99,235,0.08);
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.mapping-item .phenom {
+    flex-shrink: 0;
+    font-weight: 600;
+    color: var(--text-primary);
+    min-width: 80px;
+}
+
+.mapping-item .arrow {
+    flex-shrink: 0;
+    color: var(--c-blue);
+    font-weight: 700;
+    margin: 0 2px;
+}
+
+.mapping-verify {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: var(--sp-2);
+    padding: 6px var(--sp-3);
+    background: rgba(5,150,105,0.06);
+    border-radius: var(--r-sm);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--c-emerald-dark);
+}
+
+/* L4 Evolve Row */
+.row.evolve {
+    background: linear-gradient(135deg, rgba(124,58,237,0.03) 0%, rgba(124,58,237,0.01) 100%);
+}
+
+.evolve-box {
+    margin-top: var(--sp-2);
+    padding: var(--sp-3) var(--sp-4);
+    background: rgba(124,58,237,0.04);
+    border-radius: var(--r-md);
+    border-left: 3px solid var(--c-violet);
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.evolve-box strong {
+    color: var(--c-violet);
+}
+
+/* L5 Predict Row */
+.row.predict {
+    background: linear-gradient(135deg, rgba(14,165,233,0.03) 0%, rgba(14,165,233,0.01) 100%);
+}
+
+.predict-list {
+    margin: var(--sp-2) 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.predict-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sp-2);
+    padding: 4px 0;
+    margin-bottom: 2px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.predict-list li::before {
+    content: '';
+    flex-shrink: 0;
+    width: 6px; height: 6px;
+    margin-top: 7px;
+    background: var(--c-sky);
+    border-radius: 50%;
+}
+
+.predict-time {
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--c-sky);
+    padding: 1px 6px;
+    background: rgba(14,165,233,0.08);
+    border-radius: 4px;
+    min-width: 52px;
+    text-align: center;
+}
+
+/* Row label colors per layer */
+.row-label.l1 { color: var(--text-muted); }
+.row-label.l2 { color: var(--c-emerald); }
+.row-label.l3 { color: var(--c-blue); }
+.row-label.l4 { color: var(--c-violet); }
+.row-label.l5 { color: var(--c-sky); }
 
 /* ============ Responsive ============ */
 @media (max-width: 768px) {
