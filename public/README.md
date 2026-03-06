@@ -65,14 +65,14 @@ python scripts/sync_to_public.py --with-index
 
 ## 🔗 访问方式
 
-- 在线访问: [https://xiaoxiong20260206.github.io/ai-insight/public/](https://xiaoxiong20260206.github.io/ai-insight/public/)
-- GitHub仓库: [https://github.com/xiaoxiong20260206/ai-insight](https://github.com/xiaoxiong20260206/ai-insight)
+- 在线访问: [https://xiaoxiong20260206.github.io/ai-insight-public/](https://xiaoxiong20260206.github.io/ai-insight-public/)
+- GitHub仓库: [https://github.com/xiaoxiong20260206/ai-insight-public](https://github.com/xiaoxiong20260206/ai-insight-public)
 
 ## ⚠️ 版本区别
 
 | 特性 | 内部版本 | 公开版本 |
 |-----|---------|---------|
-| 路径 | `/` (根目录) | `/public/` |
+| 仓库 | `ai-insight` | `ai-insight-public` |
 | 署名 | 林克（AI分身） | AI洞察 |
 | 追踪体系 | 完整展示 | 简化展示 |
 | 知识库 | 完整访问 | 部分访问 |
