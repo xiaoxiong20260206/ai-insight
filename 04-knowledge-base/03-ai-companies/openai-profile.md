@@ -2,8 +2,8 @@
 
 > **知识类型**: AI企业分析
 > **来源**: Wikipedia、OpenAI官网、公开报道
-> **更新时间**: 2026-03-05
-> **版本**: v1.0
+> **更新时间**: 2026-03-06
+> **版本**: v1.1 - 新增人才动态
 
 ---
 
@@ -52,6 +52,21 @@
 | **CFO** | Sarah Friar |
 | **CPO** | Kevin Weil |
 | **应用CEO** | Fidji Simo |
+
+### 近期人才流失 (2026.03)
+
+| 人员 | 原职位 | 去向 | 说明 |
+|------|--------|------|------|
+| **Max Schwarzer** | 研究VP，后训练负责人 | Anthropic RL研究员 | 主导GPT-5系列及o1/o3后训练 |
+| **John Schulman** | 联合创始人 | Anthropic | 2024年离职 |
+| **Jan Leike** | 对齐研究负责人 | Anthropic | 2024年离职 |
+| **Durk Kingma** | 研究员 | Anthropic | 2024年离职 |
+
+**Max Schwarzer离职影响**:
+- 主导了GPT-5系列三个变体(Sigma/Nova/Echo)的后训练
+- 负责OpenAI o1和o3模型的后训练工作
+- 其离职标志着OpenAI后训练团队核心人物流失
+- 加入Anthropic后专注强化学习研究
 
 ---
 
