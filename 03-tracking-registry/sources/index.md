@@ -1,8 +1,8 @@
 # AI信息源追踪清单
 
-> **版本**: v1.3.0
+> **版本**: v1.4.0
 > **更新时间**: 2026-03-06
-> **本次Review重点**: 大规模新增微信公众号信息源（50+），覆盖综合媒体、深度分析、学术解读、大模型专项、创投视角等
+> **本次Review重点**: 全面扩展信息源覆盖，新增Discord社区(10+)、X/Twitter账号(20+)、AI安全机构(6+)、B站UP主(7个)、权威期刊(5个)等
 > **维护规则**: 每月 Review 一次，根据信息质量和时效性动态调整
 
 ---
@@ -12,12 +12,16 @@
 | 类型 | 定义 | 检查频率 | 价值特点 | 数量 |
 |------|------|---------|---------|------|
 | **官方博客** | 公司官方发布渠道 | 每日/每周 | 一手信息, 产品更新 | 20+ |
-| **Newsletter** | 个人/机构深度分析 | 每周2-3次 | 深度洞察, 趋势解读 | 10+ |
+| **Newsletter** | 个人/机构深度分析 | 每周2-3次 | 深度洞察, 趋势解读 | **20+** |
 | **微信公众号** | 中文信息核心渠道 | 每日/每周 | 本土视角, 全面覆盖 | **50+** |
+| **Discord社区** | 实时社区交流 | 按需 | 一手讨论, 产品反馈 | **10+** |
+| **X/Twitter账号** | 关键人物动态 | 每日 | 最快信息源, 行业洞察 | **20+** |
 | **播客** | 长对话, 深度访谈 | 每周 | 思想碰撞, 一手观点 | 15+ |
-| **YouTube** | 视频内容 | 每周 | 论文解读, 教程 | 6 |
-| **学术源** | 论文/评测 | 每周 | 前沿研究 | 10+ |
-| **媒体** | 新闻/投融资报道 | 每日 | 市场动态, 资本信号 | 15+ |
+| **YouTube/B站** | 视频内容 | 每周 | 论文解读, 教程 | **13+** |
+| **学术源** | 论文/评测/期刊 | 每周 | 前沿研究 | **15+** |
+| **AI安全机构** | 对齐/安全研究 | 每月 | 长期安全视角 | **6+** |
+| **媒体** | 新闻/投融资报道 | 每日 | 市场动态, 资本信号 | **20+** |
+| **社区/论坛** | 开源/讨论社区 | 每日/每周 | 技术讨论, 项目发现 | **10+** |
 
 ---
 
@@ -82,7 +86,7 @@
 | **One Useful Thing** | Ethan Mollick | oneusefulthing.org | 每周2次 | AI 对工作方式的影响 |
 | **Stratechery** | Ben Thompson | stratechery.com | 每周1次 | 商业战略分析 |
 
-### AI工程/实践类 (NEW)
+### AI工程/实践类
 
 | 名称 | 作者 | URL | 检查频率 | 价值定位 |
 |------|------|-----|---------|---------|
@@ -90,6 +94,21 @@
 | **Chip Huyen Blog** | Chip Huyen | huyenchip.com | 每周1次 | ML系统设计 |
 | **The Batch** | Andrew Ng | deeplearning.ai/the-batch | 每周1次 | AI教育+行业洞察 |
 | **AI Snake Oil** | Arvind Narayanan | aisnakeoil.com | 每周1次 | AI批判性视角 |
+
+### 高订阅量必读 (NEW)
+
+| 名称 | 作者 | URL | 订阅量 | 价值定位 |
+|------|------|-----|--------|---------|
+| **Import AI** | Jack Clark | jack-clark.net | 顶级 | Anthropic联合创始人，AI政策+技术研究，2016年创立 |
+| **Ben's Bites** | Ben Tossell | bensbites.com | 14万+ | 轻松风格的AI工具+新闻，创业圈最流行 |
+| **The Rundown AI** | Rowan Cheung | therundown.ai | 100万+ | 5分钟掌握AI动态，商业应用导向 |
+| **Superhuman AI** | Zain Kahn | superhuman.ai | 100万+ | 3分钟AI快报，职场人首选 |
+| **There's An AI For That** | John Hayes | theresanaiforthat.com | 170万+ | AI工具聚合，发现新工具首选 |
+| **Lenny's Newsletter** | Lenny Rachitsky | lennysnewsletter.com | 100万+ | 产品策略+AI趋势，PM必读 |
+| **AI Optimist** | Hugo Pickford-Wardle | substack | — | C-suite战略简报，领导者视角 |
+| **Visually AI** | Heather B. Cooper | substack | 1万+ | AI+视觉设计，Wired推荐 |
+| **Marketing AI Institute** | Paul Roetzer | marketingaiinstitute.com | 4万+ | 营销+AI应用，非技术友好 |
+| **Almost Timely** | Christopher S. Penn | substack | — | AI营销分析，数据驱动视角 |
 
 ### 中文圈
 
@@ -240,6 +259,18 @@
 | **李沐** | 李沐 | 每周1次 | 中文最好的论文解读 |
 | **sentdex** | Harrison Kinsley | 每周1次 | Python/AI 教程 |
 
+### B站/国内视频平台 (NEW)
+
+| UP主/频道 | B站ID | 粉丝量 | 内容定位 |
+|----------|-------|--------|---------|
+| **跟李沐学AI** | 跟李沐学AI | 100万+ | 论文精读、深度学习教程 |
+| **ShowMeAI** | ShowMeAI研究中心 | 10万+ | AI硬核资料库、系统化教程 |
+| **同济子豪兄** | 同济子豪兄 | 20万+ | CV/深度学习、工程实践 |
+| **刘二大人** | 刘二大人 | 30万+ | PyTorch入门教程 |
+| **Shusen Wang** | 王树森 | 10万+ | 机器学习白板推导系列 |
+| **3Blue1Brown中文** | 3Blue1Brown | — | 数学可视化、神经网络直观理解 |
+| **莫烦Python** | 莫烦Python | 20万+ | Python/ML教程、入门友好 |
+
 ---
 
 ## 学术/研究源
@@ -273,7 +304,108 @@
 | **Hacker News** | news.ycombinator.com | 每日 | 技术社区热点 |
 | **Reddit r/MachineLearning** | reddit.com/r/MachineLearning | 每周2次 | ML 社区讨论 |
 | **Reddit r/LocalLLaMA** | reddit.com/r/LocalLLaMA | 每周2次 | 本地部署社区 |
-| **Discord AI服务器** | 各公司官方 | 按需 | 产品更新、社区讨论 |
+| **Product Hunt AI** | producthunt.com | 每周2次 | AI产品发布首选平台 |
+
+### 其他重要社区 (NEW)
+
+| 平台 | URL | 检查频率 | 价值定位 |
+|------|-----|---------|---------|
+| **LessWrong** | lesswrong.com | 每周1次 | AI安全/对齐核心讨论社区 |
+| **Alignment Forum** | alignmentforum.org | 每周1次 | 对齐研究专业论坛 |
+| **AI Grant** | aigrant.org | 每月1次 | AI创业投资，创业者资源 |
+| **小宇宙 AI播客** | xiaoyuzhoufm.com | 每周1次 | 中文AI播客聚合平台 |
+
+### Discord社区 (NEW)
+
+> **说明**: Discord是AI社区实时交流的主要平台，可获得产品更新、技术讨论、一手信息
+
+#### 公司官方Discord
+
+| 社区 | 邀请链接 | 成员规模 | 价值定位 |
+|------|---------|---------|---------|
+| **OpenAI** | discord.gg/openai | 100万+ | ChatGPT/Sora官方社区，产品更新、开发者交流 |
+| **Anthropic** | discord.gg/anthropic | 10万+ | Claude官方，MCP讨论、API支持、模型变更报告 |
+| **Hugging Face** | discord.gg/hugging-face | 20万+ | 开源ML社区，NLP/CV讨论、模型分享 |
+| **Mistral AI** | discord.gg/mistral-ai | — | 开源模型讨论，Le Chat支持 |
+| **Midjourney** | discord.gg/midjourney | 1500万+ | 最活跃的AI艺术社区，图像生成 |
+| **ElevenLabs** | discord.gg/elevenlabs | — | 语音AI，TTS技术讨论 |
+
+#### 研究/学习型Discord
+
+| 社区 | 邀请链接 | 定位 | 价值定位 |
+|------|---------|------|---------|
+| **Eleuther AI** | discord.gg/eleutherai | 开源LLM研究 | 顶级研究者聚集地，GPT-NeoX等 |
+| **GPU Mode** | discord.gg/gpumode | GPU优化 | CUDA编程、推理优化、性能调优 |
+| **ML Collective** | discord.gg/mlcollective | ML研究社区 | 论文讨论、研究协作 |
+| **Learn AI Together** | discord.gg/learnaitogether | 学习社区 | 入门学习、项目协作、导师指导 |
+| **Learn Prompting** | discord.gg/learn-prompting | 提示工程 | Prompt Engineering专项学习 |
+
+---
+
+## X/Twitter关键账号 (NEW)
+
+> **说明**: X/Twitter是AI一手信息的重要渠道，关键人物的动态往往比正式发布更早
+
+### AI实验室领袖
+
+| 账号 | 身份 | 关注价值 |
+|------|------|---------|
+| **@sama** | Sam Altman | OpenAI CEO，产品方向、行业观点 |
+| **@DarioAmodei** | Dario Amodei | Anthropic CEO，AI安全思想领袖 |
+| **@demaborges** | Demis Hassabis | DeepMind CEO，AGI视角 |
+| **@JeffDean** | Jeff Dean | Google AI负责人，技术突破 |
+| **@ylecun** | Yann LeCun | Meta首席科学家，学术观点、行业辩论 |
+
+### AI研究者/工程师
+
+| 账号 | 身份 | 关注价值 |
+|------|------|---------|
+| **@karpathy** | Andrej Karpathy | 前OpenAI/Tesla，教育视频、技术洞察 |
+| **@fchollet** | François Chollet | Keras创始人，AGI思考、ARC挑战 |
+| **@delaboratory** | Jim Fan | NVIDIA研究，具身智能、Foundation Agent |
+| **@ilonakar** | Ilya Sutskever | OpenAI联合创始人，Scaling思想 |
+| **@emollick** | Ethan Mollick | 沃顿教授，AI对工作影响研究 |
+
+### AI实践者/Builder
+
+| 账号 | 身份 | 关注价值 |
+|------|------|---------|
+| **@swyx** | Swyx | Latent Space主理人，AI工程前沿 |
+| **@simonw** | Simon Willison | AI工具评测，LLM实践 |
+| **@mattshumer_** | Matt Shumer | HyperWrite CEO，AI实践分享 |
+| **@aabordes** | Antoine Bordes | AI创业者，产品视角 |
+| **@dotey** | 宝玉 | 海外AI信息翻译，中文圈必关注 |
+
+### 政策/安全研究者
+
+| 账号 | 身份 | 关注价值 |
+|------|------|---------|
+| **@Miles_Brundage** | Miles Brundage | AI政策研究，安全治理 |
+| **@jackclarkSF** | Jack Clark | Anthropic联合创始人，Import AI作者 |
+| **@GaryMarcus** | Gary Marcus | AI批评家，AGI怀疑论 |
+
+---
+
+## AI安全/对齐研究机构 (NEW)
+
+> **说明**: AI安全是长期重要议题，以下机构是该领域最权威的研究来源
+
+| 机构 | 网站 | 定位 | 检查频率 |
+|------|------|------|---------|
+| **MIRI** | intelligence.org | AI对齐先驱，长期安全研究 | 每月1次 |
+| **ARC (Alignment Research Center)** | alignment.org | 对齐评估，模型安全评测 | 每月1次 |
+| **Center for AI Safety (CAIS)** | safe.ai | AI安全倡导，风险研究 | 每月1次 |
+| **Redwood Research** | redwoodresearch.org | 技术对齐研究 | 每月1次 |
+| **MATS Program** | matsprogram.org | 对齐人才培养，顶级导师 | 每季度 |
+| **Anthropic Alignment** | anthropic.com/research | Constitutional AI等 | 每周1次 |
+
+### 安全相关论坛/社区
+
+| 平台 | URL | 定位 |
+|------|-----|------|
+| **LessWrong** | lesswrong.com | AI安全讨论核心社区 |
+| **Alignment Forum** | alignmentforum.org | 对齐研究专业论坛 |
+| **EA Forum (AI tag)** | forum.effectivealtruism.org | 有效利他主义视角的AI安全 |
 
 ---
 
@@ -286,6 +418,19 @@
 | **TechCrunch** | techcrunch.com | 每日 | `site:techcrunch.com AI` | 融资新闻, 产品发布 |
 | **The Verge** | theverge.com | 每日 | `site:theverge.com AI` | 科技新闻, 产品评测 |
 | **Ars Technica** | arstechnica.com | 每周2次 | `site:arstechnica.com AI` | 技术深度分析 |
+| **MIT Technology Review** | technologyreview.com | 每周2次 | `site:technologyreview.com AI` | 最权威科技杂志之一 |
+| **Wired** | wired.com | 每周2次 | `site:wired.com artificial intelligence` | 科技文化深度 |
+| **IEEE Spectrum** | spectrum.ieee.org | 每周1次 | `IEEE Spectrum AI machine learning` | 工程视角 |
+
+### 学术期刊/杂志 (NEW)
+
+| 期刊 | URL | 检查频率 | 定位 |
+|------|-----|---------|------|
+| **Nature Machine Intelligence** | nature.com/natmachintell | 每月1次 | 顶级AI学术期刊 |
+| **Communications of ACM** | cacm.acm.org | 每月1次 | ACM官方杂志 |
+| **AI Magazine (AAAI)** | aaai.org/ai-magazine | 每季度 | AAAI官方杂志 |
+| **Journal of AI Research** | jair.org | 每月1次 | 开放获取AI期刊 |
+| **Distill.pub** | distill.pub | 按更新 | 可视化ML研究解释 |
 
 ### 投融资数据
 
@@ -410,14 +555,16 @@ PaperWeekly 论文 (本周论文解读)
 
 ## 覆盖均衡性原则
 
-**每日 L1 轮换搜索必须覆盖以下至少 5 组**（防止信息窄化）：
+**每日 L1 轮换搜索必须覆盖以下至少 6 组**（防止信息窄化）：
 1. 海外头部实验室（OpenAI / Anthropic / Google / Meta）至少 2 组
 2. AI Coding 产品方（Cursor / Replit / Cognition 等）至少 1 家
 3. 独立研究者 / AI Coding 实践者 至少 1 人
 4. 中国 AI 团队（DeepSeek / 智谱 / Moonshot / 百度 等）至少 1 家
 5. 企业AI/Agent创业公司（Glean / Sierra / Harvey 等）至少 1 家
 6. 互联网头部公司AI动态（Google / Microsoft / Meta / 字节 / 阿里 等）至少 1 家
-7. **微信公众号**（机器之心 / 量子位 / 宝玉 等）至少 2 个 ← **新增**
+7. **微信公众号**（机器之心 / 量子位 / 宝玉 等）至少 2 个
+8. **X/Twitter关键账号**（@karpathy / @sama / @ylecun 等）至少 2 个 ← **新增**
+9. **Discord社区**（OpenAI / Anthropic / Hugging Face 等）每周至少浏览 1 个 ← **新增**
 
 ---
 
@@ -426,15 +573,26 @@ PaperWeekly 论文 (本周论文解读)
 | 信息源类型 | 数量 | 覆盖领域 |
 |-----------|------|---------|
 | 官方博客 | 20+ | 实验室、AI Coding、企业AI、视频生成、机器人 |
-| Newsletter | 10+ | 海外顶级、AI工程实践、中文圈 |
+| Newsletter | **20+** | 海外顶级、AI工程实践、高订阅量必读、中文圈 |
 | **微信公众号** | **50+** | 综合媒体、深度洞察、学术解读、大模型专项、创投视角、公司官方号 |
+| **Discord社区** | **10+** | 公司官方Discord、研究/学习型社区 |
+| **X/Twitter账号** | **20+** | 实验室领袖、研究者、实践者、政策研究者 |
 | 播客 | 15+ | 海外必听、中文播客、VC视角 |
-| YouTube | 6 | 论文解读、AI新闻、教程 |
-| 学术/研究源 | 10+ | 预印本、排行榜、年度报告 |
-| 社区/开源 | 5 | GitHub、HN、Reddit |
-| 媒体/投融资 | 15+ | 海外科技媒体、投融资数据、中文科技媒体、企业AI研究 |
+| YouTube/B站 | **13+** | 论文解读、AI新闻、教程、中文技术教程 |
+| 学术/研究源 | **15+** | 预印本、排行榜、年度报告、学术期刊 |
+| **AI安全机构** | **6+** | MIRI、ARC、CAIS、对齐论坛 |
+| 媒体/投融资 | **20+** | 海外科技媒体、权威期刊、投融资数据、中文媒体 |
+| 社区/开源 | **10+** | GitHub、HN、Reddit、Product Hunt、小宇宙 |
+
+**总计: 200+ 个高质量AI信息源**
 
 ---
 
 *清单由林克维护，每月 Review 一次*
-*最近更新: 2026-03-06 - 新增50+微信公众号信息源*
+*最近更新: 2026-03-06 - 大规模扩展信息源（v1.4.0）*
+*- 新增50+微信公众号*
+*- 新增10+ Discord社区*
+*- 新增20+ X/Twitter关键账号*
+*- 新增6+ AI安全研究机构*
+*- 新增7个B站UP主*
+*- 新增8个权威媒体/期刊*
