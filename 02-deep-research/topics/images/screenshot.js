@@ -5,7 +5,7 @@ const files = [
   { html: 'openclaw-key-stats.html', png: 'openclaw-key-stats.png', width: 1060, height: 400 },
   { html: 'openclaw-evolution-stages.html', png: 'openclaw-evolution-stages.png', width: 1060, height: 520 },
   { html: 'openclaw-trend-deduction.html', png: 'openclaw-trend-deduction.png', width: 1060, height: 480 },
-  { html: 'openclaw-verdict.html', png: 'openclaw-verdict.png', width: 1060, height: 420 },
+  { html: 'openclaw-verdict.html', png: 'openclaw-verdict.png', width: 1060, height: 480 },
   { html: 'openclaw-about-link.html', png: 'openclaw-about-link.png', width: 1060, height: 380 },
 ];
 
