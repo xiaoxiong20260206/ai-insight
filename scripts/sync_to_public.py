@@ -129,6 +129,10 @@ def sync_all_reports(force: bool = False):
             if html_file.name == "index.html":
                 continue
             
+            # 跳过测试文件
+            if "test" in html_file.name:
+                continue
+            
             # 从文件名提取日期
             date_str = html_file.stem  # 例如 "2026-03-05"
             if sync_report(date_str, force):
