@@ -19,17 +19,20 @@
 
 ## 内容索引
 
-### AI Coding工具 (2篇)
+### AI Coding工具 (3篇)
 
 | 类型 | 内容 | 来源 | 位置 |
 |------|------|------|------|
 | **工具演进** | AI Coding工具演进与多Agent实践 | AI日报 2026-03-06 | [→链接](ai-coding-tools-evolution-2026-03.md) |
 | **最佳实践** | Agent基础设施与调优方法论 | 字节AI开挂指南 | [→链接](agent-infra-and-optimization.md) |
+| **Agentic Engineering** | Simon Willison的Agentic Engineering Patterns (2026) | 主动学习 | [→链接](agentic-engineering-patterns-2026.md) |
 
 核心内容 (2026-03-06更新)：
+- **Agentic Engineering模式**: Vibe Coding vs Agentic Engineering区分，Red/Green TDD，Linear Walkthroughs
 - **多Agent并行**: Codex Windows版标配，同时运行多个Agent处理不同任务
 - **工具趋同进化**: Claude Code创新功能被Cursor/Codex快速学习
 - **GPT-5.4+Codex**: 编程能力与推理能力深度整合
+- **Claw概念**: 个人硬件上运行的AI Agent新类别
 
 ### 核心人物画像 (5人)
 
