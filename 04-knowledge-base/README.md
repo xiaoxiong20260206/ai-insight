@@ -1,6 +1,6 @@
 # AI-Insight 知识库
 
-> **版本**: v4.6.0
+> **版本**: v4.7.0
 > **创建时间**: 2026-03-04
 > **最后更新**: 2026-03-06
 > **维护者**: 林克 (沈浪的AI分身)
@@ -11,10 +11,12 @@
 
 这是AI-Insight项目的结构化知识库，用于系统性沉淀AI行业的知识。
 
-**v4.6更新** (2026-03-06 日报知识沉淀):
-- 📊 模型: **GPT-5系列演进** (GPT-5.4 Thinking中途调整, GPT-5.3 Instant幻觉率降26.8%)
-- 🏢 AI企业: **2026年AI投融资动态** (2月$1890亿创历史记录, 83%流向三巨头)
-- 🤖 Agent: **AI Coding工具演进** (Codex Windows版, 多Agent并行, 工具趋同进化)
+**v4.7更新** (2026-03-06 系统性主动学习):
+- 🤖 Agent: **Agentic Engineering Patterns** - Simon Willison的2026编程范式指南
+- ⚠️ 安全: **AI安全时间线预测** - MIRI、Jack Clark等对AGI时间线的分析
+- 📈 洞察: **周报更新** - November 2025 Inflection Point多方验证
+- 📊 模型: 索引更新 - GPT-5.4、Gemini 3.1系列、Qwen 3.5动态
+- 🏢 AI企业: Anthropic画像更新 - 2027盈利目标、$700亿2028营收目标
 
 **v4.5更新**: 新增Crawl4AI开源LLM友好爬虫研究：
 - 🛠️ 基础设施: **Crawl4AI技术调研** (开源爬虫, 50K+ Star, LLM友好Markdown, MCP集成, Agent数据获取)
@@ -35,13 +37,13 @@
 
 | 维度 | 文档数 | 人物 | 新增本次 |
 |------|--------|------|----------|
-| **模型** | 5 | 3人 | +1 ✨ (GPT-5系列) |
-| **Agent** | 15 | 5人 | +1 ✨ (多Agent并行) |
-| **AI企业** | 5 | 5人 | +1 ✨ (融资动态) |
+| **模型** | 5 | 3人 | - |
+| **Agent** | 16 | 5人 | +1 ✨ (Agentic Engineering) |
+| **AI企业** | 5 | 5人 | 更新Anthropic画像 |
 | **企业AI转型** | 7 | 2人 | - |
-| **应用** | 1 | - | - |
-| **洞察** | 3 | - | - |
-| **总计** | **38** | **7** | **+3新增** |
+| **安全** | 1 | - | +1 ✨ (AI安全时间线) |
+| **洞察** | 4 | - | 更新周报 |
+| **总计** | **40** | **7** | **+2新增** |
 
 ---
 
@@ -68,12 +70,12 @@ Agent架构设计、工作流模式、开发实践、落地应用
 
 | 类型 | 数量 | 核心内容 |
 |------|------|---------|
-| AI Coding | 2篇 | **AI Coding工具演进(多Agent并行)** ✨, Agent基础设施 |
+| AI Coding | 3篇 | **Agentic Engineering Patterns** ✨, AI Coding工具演进, Agent基础设施 |
 | 人物画像 | 5人 | Barry Zhang, 姚顺雨, Harrison Chase, Jim Fan, Simon Willison |
 | 概念文档 | 5个 | Agent架构、Agent矩阵、Ambient Agents、Physical AI、**MCP协议** |
 | 最佳实践 | 4个 | AI编程工作流、金融Agent、团队落地、Agent基础设施 |
 
-**新增**: `ai-coding-tools-evolution-2026-03.md` - Codex Windows版、多Agent并行实践、工具趋同进化
+**新增**: `agentic-engineering-patterns-2026.md` - Simon Willison的Agentic Engineering Patterns，Vibe Coding vs Agentic Engineering区分，核心模式（代码成本低、Red/Green TDD、线性走读、技能囤积）
 
 **日报关联**: Agent框架、开发实践、应用案例
 
@@ -230,6 +232,8 @@ AI原生企业画像、商业模式、竞争格局
 
 | 版本 | 日期 | 更新内容 |
 |------|------|---------|
+| v4.7.0 | 2026-03-06 | 系统性主动学习：Agentic Engineering Patterns、AI安全时间线、周报更新 |
+| v4.6.0 | 2026-03-06 | 日报知识沉淀：GPT-5系列演进、融资动态、多Agent并行 |
 | v4.5.0 | 2026-03-05 | 新增Crawl4AI开源LLM友好爬虫技术调研(基础设施维度) |
 | v4.4.0 | 2026-03-05 | 新增AI Coding市场跟踪文档 |
 | v4.3.0 | 2026-03-05 | 日报深度学习闭环，新增Gemini 3系列、Gemini for Home，更新OpenAI/AI编程/融资数据 |
@@ -243,4 +247,4 @@ AI原生企业画像、商业模式、竞争格局
 
 ---
 
-*最后更新: 2026-03-05*
+*最后更新: 2026-03-06*
