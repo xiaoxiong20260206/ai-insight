@@ -1,5 +1,5 @@
-/* AI生态本质洞察报告 v3.0 - 五层闭环洞察框架 */
-/* 基于清爽调研报告风格 + 本质洞察力 v2.0 */
+/* AI生态本质洞察报告 v3.3 - 五层闭环洞察框架 */
+/* 基于清爽调研报告风格 + 本质洞察力 v2.2 */
 
 /* ============ Design Tokens ============ */
 :root {
@@ -295,6 +295,129 @@ body {
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.04em;
+}
+
+/* ============ Meta Insight (跨域元洞察) ============ */
+.meta-insight {
+    background: var(--bg-card);
+    border-radius: var(--r-xl);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-md);
+    margin-bottom: var(--sp-6);
+    overflow: hidden;
+}
+
+.meta-insight-accent {
+    height: 3px;
+    background: linear-gradient(135deg, var(--c-violet) 0%, var(--c-blue) 50%, var(--c-emerald) 100%);
+}
+
+.meta-insight-body {
+    padding: var(--sp-6);
+}
+
+.meta-insight-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--c-violet);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: var(--sp-2);
+}
+
+.meta-insight-label::before {
+    content: '';
+    width: 8px; height: 8px;
+    background: var(--c-violet);
+    border-radius: 50%;
+}
+
+.meta-insight-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--sp-2);
+}
+
+.meta-insight-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--sp-5);
+}
+
+.meta-insight-desc strong {
+    color: var(--c-violet);
+    background: rgba(124,58,237,0.08);
+    padding: 1px 6px;
+    border-radius: 4px;
+}
+
+.meta-evo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-3);
+    flex-wrap: wrap;
+}
+
+.meta-evo-step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    background: var(--c-gray-50);
+    border-radius: var(--r-md);
+    border: 1px solid var(--border-light);
+    transition: all var(--t-normal);
+}
+
+.meta-evo-step.current {
+    background: rgba(37,99,235,0.06);
+    border-color: var(--c-blue);
+}
+
+.meta-evo-step.future {
+    background: rgba(124,58,237,0.06);
+    border-color: var(--c-violet);
+}
+
+.meta-evo-num {
+    width: 28px; height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--c-white);
+    background: var(--c-gray-400);
+    flex-shrink: 0;
+}
+
+.meta-evo-step.current .meta-evo-num { background: var(--c-blue); }
+.meta-evo-step.future .meta-evo-num { background: var(--c-violet); }
+
+.meta-evo-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.4;
+}
+
+.meta-evo-text small {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text-muted);
+}
+
+.meta-evo-arrow {
+    color: var(--text-muted);
+    font-size: 20px;
+    font-weight: 700;
 }
 
 /* ============ Tab Navigation ============ */
@@ -997,6 +1120,8 @@ body {
     .people-grid { grid-template-columns: 1fr; }
     .evo-flow:not(.vertical) { flex-direction: column; align-items: flex-start; }
     .evo-arrow:not(.down) { display: none; }
+    .meta-evo { flex-direction: column; }
+    .meta-evo-arrow { display: none; }
     .tab-nav { gap: 2px; padding: 4px; }
     .tab-btn { padding: 10px 8px; font-size: 13px; }
     /* Insight Table responsive */
