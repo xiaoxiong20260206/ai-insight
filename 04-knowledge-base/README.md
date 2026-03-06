@@ -1,8 +1,8 @@
 # AI-Insight 知识库
 
-> **版本**: v4.5.0
+> **版本**: v4.6.0
 > **创建时间**: 2026-03-04
-> **最后更新**: 2026-03-05
+> **最后更新**: 2026-03-06
 > **维护者**: 林克 (沈浪的AI分身)
 
 ---
@@ -10,6 +10,11 @@
 ## 知识库概述
 
 这是AI-Insight项目的结构化知识库，用于系统性沉淀AI行业的知识。
+
+**v4.6更新** (2026-03-06 日报知识沉淀):
+- 📊 模型: **GPT-5系列演进** (GPT-5.4 Thinking中途调整, GPT-5.3 Instant幻觉率降26.8%)
+- 🏢 AI企业: **2026年AI投融资动态** (2月$1890亿创历史记录, 83%流向三巨头)
+- 🤖 Agent: **AI Coding工具演进** (Codex Windows版, 多Agent并行, 工具趋同进化)
 
 **v4.5更新**: 新增Crawl4AI开源LLM友好爬虫研究：
 - 🛠️ 基础设施: **Crawl4AI技术调研** (开源爬虫, 50K+ Star, LLM友好Markdown, MCP集成, Agent数据获取)
@@ -30,13 +35,13 @@
 
 | 维度 | 文档数 | 人物 | 新增本次 |
 |------|--------|------|----------|
-| **模型** | 4 | 3人 | +1 ✨ |
-| **Agent** | 14 | 5人 | - (更新) |
-| **AI企业** | 4 | 5人 | - (更新) |
+| **模型** | 5 | 3人 | +1 ✨ (GPT-5系列) |
+| **Agent** | 15 | 5人 | +1 ✨ (多Agent并行) |
+| **AI企业** | 5 | 5人 | +1 ✨ (融资动态) |
 | **企业AI转型** | 7 | 2人 | - |
-| **应用** | 1 | - | +1 ✨ |
-| **洞察** | 3 | - | - (更新) |
-| **总计** | **35** | **7** | **+2新增, 3更新** |
+| **应用** | 1 | - | - |
+| **洞察** | 3 | - | - |
+| **总计** | **38** | **7** | **+3新增** |
 
 ---
 
@@ -48,9 +53,10 @@
 
 | 文档 | 内容 | 来源 |
 |------|------|------|
+| `gpt-5-series-evolution.md` ✨ | **GPT-5系列演进**: GPT-5.4 Thinking中途调整, GPT-5.3 Instant幻觉率降26.8% | AI日报 2026-03-06 |
 | `ai-history-and-capability-matrix.md` | AI发展史、海外/国内大模型能力矩阵、竞争焦点演进 | 字节AI指南 |
 | `ai-second-half-task-environment.md` | AI下半场理论、底层原理、趋势洞察 | AI大神分析 |
-| `reasoning-models.md` ✨ | **推理模型专题**: OpenAI o系列、DeepSeek-R1、CoT技术 | 网络调研 |
+| `reasoning-models.md` | **推理模型专题**: OpenAI o系列、DeepSeek-R1、CoT技术 | 网络调研 |
 
 **日报关联**: 新模型发布、能力评测、技术创新
 
@@ -62,11 +68,12 @@ Agent架构设计、工作流模式、开发实践、落地应用
 
 | 类型 | 数量 | 核心内容 |
 |------|------|---------|
+| AI Coding | 2篇 | **AI Coding工具演进(多Agent并行)** ✨, Agent基础设施 |
 | 人物画像 | 5人 | Barry Zhang, 姚顺雨, Harrison Chase, Jim Fan, Simon Willison |
-| 概念文档 | 5个 | Agent架构、Agent矩阵、Ambient Agents、Physical AI、**MCP协议** ✨ |
+| 概念文档 | 5个 | Agent架构、Agent矩阵、Ambient Agents、Physical AI、**MCP协议** |
 | 最佳实践 | 4个 | AI编程工作流、金融Agent、团队落地、Agent基础设施 |
 
-**新增**: `model-context-protocol.md` - MCP标准与生态、AAIF基金会、10,000+ MCP Server
+**新增**: `ai-coding-tools-evolution-2026-03.md` - Codex Windows版、多Agent并行实践、工具趋同进化
 
 **日报关联**: Agent框架、开发实践、应用案例
 
@@ -78,12 +85,11 @@ AI原生企业画像、商业模式、竞争格局
 
 | 类型 | 数量 | 核心内容 |
 |------|------|---------|
-| 公司画像 | 4家 | 幻方量化、字节跳动、**OpenAI** ✨、**Anthropic** ✨ |
+| 行业分析 | 1篇 | **2026年AI投融资动态** ✨ (2月$1890亿创历史记录) |
+| 公司画像 | 4家 | 幻方量化、字节跳动、OpenAI、Anthropic |
 | 关联人物 | 5人 | 按公司归类 |
 
-**新增**: 
-- `openai-profile.md` - OpenAI全景: 产品矩阵、$5000亿估值、Stargate项目
-- `anthropic-profile.md` - Anthropic全景: Claude系列、AI安全理念、MCP协议创建者
+**新增**: `ai-funding-2026.md` - 2月融资$1890亿创历史, 83%流向三巨头, 美国占92%
 
 **日报关联**: 公司融资、产品发布、战略动态
 
