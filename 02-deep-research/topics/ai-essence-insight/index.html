@@ -3,849 +3,691 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI生态本质洞察报告 - AI Insight</title>
-    
-    <!-- Favicon - 思考/洞察类 -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231A7F37'/><path d='M16 6c-4.4 0-8 3.6-8 8 0 2.5 1.2 4.8 3 6.2V24l5-3 5 3v-3.8c1.8-1.4 3-3.7 3-6.2 0-4.4-3.6-8-8-8z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/><line x1='16' y1='10' x2='16' y2='15' stroke='white' stroke-width='2' stroke-linecap='round'/><circle cx='16' cy='18' r='1' fill='white'/></svg>">
-    
+    <title>AI生态本质洞察报告 v2.0 - AI Insight</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23059669'/><path d='M16 6c-4.4 0-8 3.6-8 8 0 2.5 1.2 4.8 3 6.2V24l5-3 5 3v-3.8c1.8-1.4 3-3.7 3-6.2 0-4.4-3.6-8-8-8z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/><circle cx='16' cy='14' r='2.5' fill='white'/></svg>">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <!-- 页面头部 -->
-        <header class="header">
-            <span class="header-badge">🔍 本质洞察力 × 四层框架</span>
-            <h1 class="header-title">AI生态本质洞察报告</h1>
-            <p class="header-subtitle">从技术栈分层、应用领域、关键玩家到生态视角，系统性洞察AI世界的本质规律</p>
-        </header>
+<div class="container">
 
-        <!-- 核心洞察区域 -->
-        <section class="core-insight">
-            <div class="core-insight-card">
-                <div class="core-insight-header">
-                    <span class="core-insight-dot"></span>
-                    <span class="core-insight-title">核心洞察</span>
+    <!-- ==================== Hero ==================== -->
+    <header class="hero">
+        <span class="hero-badge">🔍 本质洞察力 × 四层框架</span>
+        <h1 class="hero-title">AI生态本质洞察报告</h1>
+        <p class="hero-subtitle">从技术栈、应用领域、关键玩家到生态视角，系统性洞察AI世界的本质规律与最新演进</p>
+        <span class="hero-version"><span class="dot"></span> v2.0 · 2026-03-06 更新</span>
+    </header>
+
+    <!-- ==================== Core Insight ==================== -->
+    <section class="core-insight">
+        <div class="core-insight-accent"></div>
+        <div class="core-insight-body">
+            <span class="core-insight-label">核心洞察</span>
+            <p class="core-insight-text">
+                AI的本质是<em>"可编程的认知"</em>，正在从单向输出进化为<em>双向协作</em>。
+                GPT-5.4的中途调整能力标志着人机交互从"提问-回答"进入"协作思考"时代，认知不再是AI单方面输出，而是人与AI共同构建。
+            </p>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-num emerald">13</div>
+                    <div class="stat-text">洞察对象</div>
                 </div>
-                <p class="core-insight-text">
-                    AI的本质是<em>"可编程的认知"</em>——如同印刷术让知识可以复制，AI让认知能力可以被编程和规模化。
-                    这一根本性变化正在重塑技术栈的每一层，改变每一个应用领域，驱动关键玩家的战略选择。
-                </p>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-value">13</div>
-                        <div class="stat-label">洞察对象</div>
+                <div class="stat-item">
+                    <div class="stat-num blue">4</div>
+                    <div class="stat-text">分析层级</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num violet">13</div>
+                    <div class="stat-text">类比映射</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num amber">$1890亿</div>
+                    <div class="stat-text">2月AI融资</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== Tab Nav ==================== -->
+    <nav class="tab-nav" role="navigation">
+        <button class="tab-btn active" data-tab="s1"><span class="tab-num">1</span> 技术栈分层</button>
+        <button class="tab-btn" data-tab="s2"><span class="tab-num">2</span> 应用领域</button>
+        <button class="tab-btn" data-tab="s3"><span class="tab-num">3</span> 关键玩家</button>
+        <button class="tab-btn" data-tab="s4"><span class="tab-num">4</span> 生态视角</button>
+    </nav>
+
+    <!-- ==================== 第一层：技术栈分层 ==================== -->
+    <article id="s1" class="tab-panel active">
+        <div class="section-overview">
+            <span class="overview-label">📊 章节概览</span>
+            <div class="overview-content">
+                <svg viewBox="0 0 600 150" style="max-width: 580px; width: 100%;">
+                    <defs><linearGradient id="g1" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#047857"/></linearGradient></defs>
+                    <g transform="translate(200,5)"><rect width="200" height="30" rx="6" fill="url(#g1)"/><text x="100" y="20" text-anchor="middle" font-size="12" font-weight="700" fill="white">L4 应用层：协作思维伙伴</text></g>
+                    <path d="M300 35 L300 42" stroke="#D6D3D1" stroke-width="1.5"/>
+                    <g transform="translate(170,44)"><rect width="260" height="30" rx="6" fill="#ECFDF5" stroke="#059669"/><text x="130" y="20" text-anchor="middle" font-size="12" font-weight="500" fill="#059669">L3 Agent层：多Agent并行协作</text></g>
+                    <path d="M300 74 L300 81" stroke="#D6D3D1" stroke-width="1.5"/>
+                    <g transform="translate(140,83)"><rect width="320" height="30" rx="6" fill="#ECFDF5" stroke="#059669"/><text x="160" y="20" text-anchor="middle" font-size="12" font-weight="500" fill="#059669">L2 模型层：融合认知引擎 (GPT-5.4 / Gemini 3.1)</text></g>
+                    <path d="M300 113 L300 120" stroke="#D6D3D1" stroke-width="1.5"/>
+                    <g transform="translate(110,122)"><rect width="380" height="30" rx="6" fill="#F5F5F4" stroke="#D6D3D1"/><text x="190" y="20" text-anchor="middle" font-size="12" font-weight="500" fill="#57534E">L1 基础设施层：MCP · 10000+ Server · 97M月下载</text></g>
+                </svg>
+            </div>
+        </div>
+
+        <!-- L4 AI产品 -->
+        <div class="insight-card">
+            <div class="card-header">
+                <span class="card-level">L4</span>
+                <h3 class="card-title">AI产品</h3>
+                <span class="update-badge">已更新</span>
+            </div>
+            <div class="row">
+                <div class="row-label">表象</div>
+                <div class="row-content">ChatGPT、Claude、Cursor等产品密集迭代。GPT-5.4支持中途调整响应方向，Claude登顶美国App Store下载榜第一</div>
+            </div>
+            <div class="row highlight">
+                <div class="row-label">本质</div>
+                <div class="row-content"><strong>从意图编译器到协作思维伙伴</strong>
+                    <div class="evo-flow">
+                        <div class="evo-step"><span class="evo-tag">1.0</span><span class="evo-text">工具：点击菜单完成操作</span></div>
+                        <span class="evo-arrow">→</span>
+                        <div class="evo-step"><span class="evo-tag">2.0</span><span class="evo-text">助手：说需求等AI输出</span></div>
+                        <span class="evo-arrow">→</span>
+                        <div class="evo-step active"><span class="evo-tag">3.0</span><span class="evo-text">伙伴：过程中协作共创</span></div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-value blue">4</div>
-                        <div class="stat-label">分析层级</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value purple">13</div>
-                        <div class="stat-label">类比映射</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value orange">40+</div>
-                        <div class="stat-label">未来规律</div>
+                    <p style="margin-top:12px;color:var(--text-secondary);font-size:13px;">GPT-5.4的"中途调整"标志着从单向输出到双向协作的范式转变——用户不再只是审批者，而是AI思考过程的引导者</p>
+                </div>
+            </div>
+            <div class="row analogy">
+                <div class="row-label">类比</div>
+                <div class="row-content">🎯 AI产品正在从<strong>翻译官</strong>升级为<strong>结对编程的搭档</strong>——翻译官只管你说什么它翻什么；搭档是你说"往左"它会问"偏多少"，边做边调，一起达到最佳结果</div>
+            </div>
+            <div class="row">
+                <div class="row-label">未来规律</div>
+                <div class="row-content">
+                    <ul>
+                        <li>交互轮次大幅缩减：中途调整可节省30-50%的重新生成</li>
+                        <li>AI产品分化为"思考型"和"执行型"两条路线</li>
+                        <li>用户的"引导能力"比"提示词能力"更重要</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- L3 Agent -->
+        <div class="insight-card">
+            <div class="card-header">
+                <span class="card-level">L3</span>
+                <h3 class="card-title">Agent</h3>
+                <span class="update-badge">已更新</span>
+            </div>
+            <div class="row">
+                <div class="row-label">表象</div>
+                <div class="row-content">Codex Windows版上线，支持多Agent并行。Claude Code创新功能被Cursor、Codex快速学习。AI Coding工具趋同进化</div>
+            </div>
+            <div class="row highlight">
+                <div class="row-label">本质</div>
+                <div class="row-content"><strong>从单体智能到集群智能</strong> — 单Agent时代结束，进入多Agent并行协作时代
+                    <div class="compare-box">
+                        <div class="compare-item"><span class="compare-tag">旧范式</span><span class="compare-text">单Agent串行：任务A→等待→任务B→等待→任务C</span></div>
+                        <div class="compare-item" style="background:rgba(5,150,105,0.04);border-color:rgba(5,150,105,0.15);"><span class="compare-tag" style="color:var(--c-emerald);background:rgba(5,150,105,0.08);">新范式</span><span class="compare-text">多Agent并行：A/B/C同时进行 → 合并Review</span></div>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Tab导航 -->
-        <nav class="tab-nav" role="navigation" aria-label="章节导航">
-            <button class="tab-btn active" data-tab="section-1" aria-selected="true">
-                <span class="tab-btn-num">1</span>
-                <span class="tab-btn-text">技术栈分层</span>
-            </button>
-            <button class="tab-btn" data-tab="section-2" aria-selected="false">
-                <span class="tab-btn-num">2</span>
-                <span class="tab-btn-text">应用领域</span>
-            </button>
-            <button class="tab-btn" data-tab="section-3" aria-selected="false">
-                <span class="tab-btn-num">3</span>
-                <span class="tab-btn-text">关键玩家</span>
-            </button>
-            <button class="tab-btn" data-tab="section-4" aria-selected="false">
-                <span class="tab-btn-num">4</span>
-                <span class="tab-btn-text">生态视角</span>
-            </button>
-        </nav>
-
-        <!-- ==================== 第一层：技术栈分层 ==================== -->
-        <article id="section-1" class="tab-panel active">
-            <!-- 章节概览图 -->
-            <div class="section-overview">
-                <span class="section-overview-label">章节概览</span>
-                <div class="section-overview-content">
-                    <svg viewBox="0 0 600 140" style="max-width: 600px;">
-                        <defs>
-                            <linearGradient id="layerGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" stop-color="#1A7F37"/>
-                                <stop offset="100%" stop-color="#116329"/>
-                            </linearGradient>
-                        </defs>
-                        <!-- L4 应用层 -->
-                        <g transform="translate(200, 5)">
-                            <rect width="200" height="28" rx="4" fill="url(#layerGrad1)"/>
-                            <text x="100" y="19" text-anchor="middle" font-size="12" font-weight="600" fill="white">L4 应用层：AI产品 = 意图编译器</text>
-                        </g>
-                        <path d="M300 33 L300 38" stroke="#D0D7DE" stroke-width="1.5"/>
-                        <!-- L3 Agent层 -->
-                        <g transform="translate(175, 40)">
-                            <rect width="250" height="28" rx="4" fill="#E6F7ED" stroke="#1A7F37"/>
-                            <text x="125" y="19" text-anchor="middle" font-size="12" font-weight="500" fill="#1A7F37">L3 Agent层：Agent = Model + Tools + Loop</text>
-                        </g>
-                        <path d="M300 68 L300 73" stroke="#D0D7DE" stroke-width="1.5"/>
-                        <!-- L2 模型层 -->
-                        <g transform="translate(150, 75)">
-                            <rect width="300" height="28" rx="4" fill="#E6F7ED" stroke="#1A7F37"/>
-                            <text x="150" y="19" text-anchor="middle" font-size="12" font-weight="500" fill="#1A7F37">L2 模型层：大模型 + 推理模型 = 知识压缩包</text>
-                        </g>
-                        <path d="M300 103 L300 108" stroke="#D0D7DE" stroke-width="1.5"/>
-                        <!-- L1 基础设施层 -->
-                        <g transform="translate(125, 110)">
-                            <rect width="350" height="28" rx="4" fill="#F6F8FA" stroke="#D0D7DE"/>
-                            <text x="175" y="19" text-anchor="middle" font-size="12" font-weight="500" fill="#4D5561">L1 基础设施层：MCP = AI的感官神经系统</text>
-                        </g>
-                    </svg>
+            <div class="row analogy">
+                <div class="row-label">类比</div>
+                <div class="row-content">🎯 Agent从<strong>一个能干的全栈工程师</strong>进化为<strong>一个项目团队</strong>——以前只能一个人干活等结果，现在是一组人同时干，最后合并成果</div>
+            </div>
+            <div class="row">
+                <div class="row-label">未来规律</div>
+                <div class="row-content">
+                    <ul>
+                        <li>多Agent并行成为标配：Codex、Claude Code已全面支持</li>
+                        <li>功能趋同化：好设计在几周内被全行业学习</li>
+                        <li>竞争焦点转向生态集成和定价策略</li>
+                    </ul>
                 </div>
             </div>
+        </div>
 
-            <!-- L4 AI产品 -->
-            <div class="insight-card">
-                <div class="insight-card-header">
-                    <span class="insight-level">L4</span>
-                    <h3 class="insight-card-title">AI产品</h3>
-                </div>
-                <div class="insight-row">
-                    <div class="insight-label">表象</div>
-                    <div class="insight-content">各种AI产品涌现（ChatGPT、Claude、Cursor），从点击菜单到自然语言对话，非专业人士也能完成专业任务</div>
-                </div>
-                <div class="insight-row highlight">
-                    <div class="insight-label">本质</div>
-                    <div class="insight-content"><strong>意图编译器</strong> — AI产品将人类意图"编译"成可执行结果，这是人机交互范式的根本转变</div>
-                </div>
-                <div class="insight-row analogy">
-                    <div class="insight-label">类比</div>
-                    <div class="insight-content">🎯 AI产品就像<strong>翻译官</strong>——以前你必须学外语（专业技能）才能完成任务，现在说中文（自然语言）就行</div>
-                </div>
-                <div class="insight-row">
-                    <div class="insight-label">未来规律</div>
-                    <div class="insight-content">
-                        <ul>
-                            <li>意图理解能力成为核心竞争力</li>
-                            <li>"会表达"比"会操作"更重要</li>
-                            <li>专业工具被AI原生产品替代</li>
-                        </ul>
+        <!-- L2 大模型 -->
+        <div class="insight-card">
+            <div class="card-header">
+                <span class="card-level">L2</span>
+                <h3 class="card-title">大模型</h3>
+                <span class="update-badge">已更新</span>
+            </div>
+            <div class="row">
+                <div class="row-label">表象</div>
+                <div class="row-content">GPT-5.4融合推理+编程+Agent能力，GPT-5.3 Instant幻觉率降低26.8%，Gemini 3.1 Flash-Lite主打极致性价比</div>
+            </div>
+            <div class="row highlight">
+                <div class="row-label">本质</div>
+                <div class="row-content"><strong>从知识压缩包到融合认知引擎</strong> — 不再只是压缩和解压知识，而是整合推理、编程、工具调用为一体的认知引擎
+                    <div class="evo-flow">
+                        <div class="evo-step"><span class="evo-tag">GPT-4</span><span class="evo-text">知识压缩包</span></div>
+                        <span class="evo-arrow">→</span>
+                        <div class="evo-step"><span class="evo-tag">GPT-5.3</span><span class="evo-text">降幻觉+去说教</span></div>
+                        <span class="evo-arrow">→</span>
+                        <div class="evo-step active"><span class="evo-tag">GPT-5.4</span><span class="evo-text">融合认知引擎</span></div>
                     </div>
                 </div>
             </div>
+            <div class="row analogy">
+                <div class="row-label">类比</div>
+                <div class="row-content">🎯 大模型从<strong>WinRAR压缩包</strong>进化到<strong>瑞士军刀</strong>——以前是解压知识给你看，现在是集推理、编程、执行于一身，该用哪把刀自己选</div>
+            </div>
+            <div class="row">
+                <div class="row-label">未来规律</div>
+                <div class="row-content">
+                    <ul>
+                        <li>能力融合成为主流：推理+编程+Agent不再分开</li>
+                        <li>轻量模型成兵家必争：Gemini Flash-Lite vs GPT-5.3 Instant</li>
+                        <li>幻觉率持续下降，但"0幻觉"仍遥远</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-            <!-- L3 Agent -->
-            <div class="insight-card">
-                <div class="insight-card-header">
-                    <span class="insight-level">L3</span>
-                    <h3 class="insight-card-title">Agent</h3>
-                </div>
-                <div class="insight-row">
-                    <div class="insight-label">表象</div>
-                    <div class="insight-content">大厂纷纷推出Agent产品，概念火热但定义混乱，能调用工具、自主决策、完成复杂任务</div>
-                </div>
-                <div class="insight-row highlight">
-                    <div class="insight-label">本质</div>
-                    <div class="insight-content"><strong>带反馈环的智能体</strong> — Agent = Model（大脑）+ Tools（手脚）+ Loop（反馈环）</div>
-                </div>
-                <div class="insight-row analogy">
-                    <div class="insight-label">类比</div>
-                    <div class="insight-content">🎯 Agent就像<strong>有手有脚还能持续工作的大脑</strong>——普通LLM是坐在椅子上的顾问，只能给建议；Agent是站起来亲自干活的员工</div>
-                </div>
-                <div class="insight-row">
-                    <div class="insight-label">未来规律</div>
-                    <div class="insight-content">
-                        <ul>
-                            <li>Loop质量决定Agent能力</li>
-                            <li>从对话式到环境式（Ambient Agents）</li>
-                            <li>技能化取代多Agent化</li>
-                        </ul>
+        <!-- L2 推理模型 -->
+        <div class="insight-card">
+            <div class="card-header">
+                <span class="card-level">L2</span>
+                <h3 class="card-title">推理模型</h3>
+            </div>
+            <div class="row">
+                <div class="row-label">表象</div>
+                <div class="row-content">GPT-5.4 Thinking支持可配置思考深度，Gemini 3.1支持Thinking Levels，推理不再是开/关而是可调节</div>
+            </div>
+            <div class="row highlight">
+                <div class="row-label">本质</div>
+                <div class="row-content"><strong>从"能不能想"到"想多深"</strong> — 推理能力已成标配，竞争转向思考深度的精细控制
+                    <div class="compare-box">
+                        <div class="compare-item"><span class="compare-tag">旧问题</span><span class="compare-text">这个模型能推理吗？（二元：能/不能）</span></div>
+                        <div class="compare-item" style="background:rgba(5,150,105,0.04);border-color:rgba(5,150,105,0.15);"><span class="compare-tag" style="color:var(--c-emerald);background:rgba(5,150,105,0.08);">新问题</span><span class="compare-text">这个任务需要想多深？（连续谱：快速→深度）</span></div>
                     </div>
                 </div>
             </div>
+            <div class="row analogy">
+                <div class="row-label">类比</div>
+                <div class="row-content">🎯 推理能力从<strong>灯泡的开关</strong>变成了<strong>灯泡的调光器</strong>——以前只能开或关（推理/不推理），现在可以旋转旋钮选择亮度（思考深度），简单问题低亮度，难题全亮</div>
+            </div>
+            <div class="row">
+                <div class="row-label">未来规律</div>
+                <div class="row-content">
+                    <ul>
+                        <li>思考深度按需分配：简单任务快思考，复杂任务深思考</li>
+                        <li>推理成本持续下降，Test-Time Compute成新范式</li>
+                        <li>System 1 + System 2无缝切换成为标准</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-            <!-- L2 大模型 -->
-            <div class="insight-card">
-                <div class="insight-card-header">
-                    <span class="insight-level">L2</span>
-                    <h3 class="insight-card-title">大模型</h3>
-                </div>
-                <div class="insight-row">
-                    <div class="insight-label">表象</div>
-                    <div class="insight-content">参数规模不断增大，能力持续提升，多模态融合，训练成本高昂</div>
-                </div>
-                <div class="insight-row highlight">
-                    <div class="insight-label">本质</div>
-                    <div class="insight-content"><strong>知识压缩包</strong> — 训练=把人类知识压缩进参数矩阵；推理=根据上下文解压缩相关知识</div>
-                </div>
-                <div class="insight-row analogy">
-                    <div class="insight-label">类比</div>
-                    <div class="insight-content">🎯 大模型就像<strong>人类集体智慧的WinRAR压缩包</strong>——几千年的知识被压缩成几百GB的参数文件，每次对话就是解压缩你需要的那部分</div>
-                </div>
-                <div class="insight-row">
-                    <div class="insight-label">未来规律</div>
-                    <div class="insight-content">
-                        <ul>
-                            <li>规模效应递减，推理能力成新前沿</li>
-                            <li>多模态融合加速</li>
-                            <li>大模型通用，小模型专精</li>
-                        </ul>
+        <!-- L1 MCP -->
+        <div class="insight-card">
+            <div class="card-header">
+                <span class="card-level">L1</span>
+                <h3 class="card-title">MCP协议</h3>
+                <span class="update-badge">已更新</span>
+            </div>
+            <div class="row">
+                <div class="row-label">表象</div>
+                <div class="row-content">MCP Server超过10,000个，月下载量97M+。ChatGPT、Gemini、Copilot全部采用。Anthropic将MCP捐赠给Linux Foundation下的AAIF</div>
+            </div>
+            <div class="row highlight">
+                <div class="row-label">本质</div>
+                <div class="row-content"><strong>AI的标准化感官神经系统 — 已成事实标准</strong>
+                    <div class="evo-flow vertical">
+                        <div class="evo-step"><span class="evo-tag">2024.11</span><span class="evo-text">Anthropic发布MCP，开源协议</span></div>
+                        <span class="evo-arrow down">↓</span>
+                        <div class="evo-step"><span class="evo-tag">2025.12</span><span class="evo-text">捐赠给Linux Foundation，10000+ Server</span></div>
+                        <span class="evo-arrow down">↓</span>
+                        <div class="evo-step active"><span class="evo-tag">2026.03</span><span class="evo-text">所有主流AI产品标配：ChatGPT/Gemini/Copilot/Cursor</span></div>
                     </div>
                 </div>
             </div>
+            <div class="row analogy">
+                <div class="row-label">类比</div>
+                <div class="row-content">🎯 MCP已经从<strong>USB-C接口</strong>进化为<strong>TCP/IP协议</strong>——USB-C只是一个物理接口标准，TCP/IP是互联网的基础协议。MCP正在成为AI世界的"互联网协议"，所有AI应用都通过它连接外部世界</div>
+            </div>
+            <div class="row">
+                <div class="row-label">未来规律</div>
+                <div class="row-content">
+                    <ul>
+                        <li>生态壁垒形成：MCP Server数量是Anthropic的战略护城河</li>
+                        <li>从"连接"到"编排"：不只是接入，而是智能调度多个Server</li>
+                        <li>企业级MCP部署：AWS/GCP/Azure已全面支持</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </article>
 
-            <!-- L2 推理模型 -->
-            <div class="insight-card">
-                <div class="insight-card-header">
-                    <span class="insight-level">L2</span>
-                    <h3 class="insight-card-title">推理模型</h3>
-                </div>
-                <div class="insight-row">
-                    <div class="insight-label">表象</div>
-                    <div class="insight-content">o1、o3、DeepSeek R1涌现，能进行链式思考，数学/编程性能大幅提升</div>
-                </div>
-                <div class="insight-row highlight">
-                    <div class="insight-label">本质</div>
-                    <div class="insight-content"><strong>会深度思考的压缩包</strong> — 普通大模型是System 1（直觉），推理模型是System 2（分析）</div>
-                </div>
-                <div class="insight-row analogy">
-                    <div class="insight-label">类比</div>
-                    <div class="insight-content">🎯 从<strong>快速问答的学生</strong>升级到<strong>认真审题的学霸</strong>——普通模型看到问题就答，推理模型会先想、列步骤、验证、再给答案</div>
-                </div>
-                <div class="insight-row">
-                    <div class="insight-label">未来规律</div>
-                    <div class="insight-content">
-                        <ul>
-                            <li>Test-Time Compute成为新范式</li>
-                            <li>System 1 + System 2按需切换</li>
-                            <li>推理成本会下降</li>
-                        </ul>
+    <!-- ==================== 第二层：应用领域 ==================== -->
+    <article id="s2" class="tab-panel">
+        <div class="section-overview">
+            <span class="overview-label">📊 章节概览</span>
+            <div class="overview-content">
+                <svg viewBox="0 0 600 120" style="max-width: 580px; width: 100%;">
+                    <g transform="translate(50,20)"><rect width="220" height="80" rx="12" fill="#ECFDF5" stroke="#059669" stroke-width="2"/><text x="110" y="30" text-anchor="middle" font-size="15" font-weight="700" fill="#059669">数字世界</text><text x="110" y="50" text-anchor="middle" font-size="12" fill="#57534E">多Agent并行 · 工具趋同进化</text><text x="110" y="68" text-anchor="middle" font-size="11" fill="#78716C">"从Vibe Coding到Vibe Engineering"</text></g>
+                    <g transform="translate(280,50)"><path d="M0 10 L50 10" stroke="#D6D3D1" stroke-width="2"/><polygon points="50,5 62,10 50,15" fill="#059669"/><text x="31" y="30" text-anchor="middle" font-size="10" fill="#78716C">扩展</text></g>
+                    <g transform="translate(350,20)"><rect width="220" height="80" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/><text x="110" y="30" text-anchor="middle" font-size="15" font-weight="700" fill="#2563EB">物理世界</text><text x="110" y="50" text-anchor="middle" font-size="12" fill="#57534E">Waymo $160亿 · World Labs</text><text x="110" y="68" text-anchor="middle" font-size="11" fill="#78716C">"AI进入现实，资本涌入"</text></g>
+                </svg>
+            </div>
+        </div>
+
+        <!-- AI编程 -->
+        <div class="insight-card">
+            <div class="card-header">
+                <span class="card-level domain">领域</span>
+                <h3 class="card-title">AI编程 / Software 3.0</h3>
+                <span class="update-badge">已更新</span>
+            </div>
+            <div class="row">
+                <div class="row-label">表象</div>
+                <div class="row-content">Codex全平台覆盖（Windows+macOS），多Agent并行处理。Claude Code、Cursor、Codex功能趋同。Gemini CLI成为免费替代方案</div>
+            </div>
+            <div class="row highlight">
+                <div class="row-label">本质</div>
+                <div class="row-content"><strong>Software 3.0进入工业化阶段</strong> — 从个人工具到团队级基础设施
+                    <div class="evo-flow">
+                        <div class="evo-step"><span class="evo-tag">探索期</span><span class="evo-text">Copilot补全代码</span></div>
+                        <span class="evo-arrow">→</span>
+                        <div class="evo-step"><span class="evo-tag">成长期</span><span class="evo-text">Cursor/Claude Code自主编程</span></div>
+                        <span class="evo-arrow">→</span>
+                        <div class="evo-step active"><span class="evo-tag">工业化</span><span class="evo-text">多Agent并行+跨平台+工具趋同</span></div>
                     </div>
                 </div>
             </div>
+            <div class="row analogy">
+                <div class="row-label">类比</div>
+                <div class="row-content">🎯 AI编程正从<strong>手工作坊</strong>进入<strong>流水线工厂</strong>——早期是一个匠人(Agent)精雕细琢，现在是多条流水线(多Agent)同时运转，产品质量标准化(功能趋同)，选哪家工厂差别不大(竞争转向价格和生态)</div>
+            </div>
+            <div class="row">
+                <div class="row-label">未来规律</div>
+                <div class="row-content">
+                    <ul>
+                        <li>Vibe Coding → Vibe Engineering：保持工程纪律的同时享受AI加速</li>
+                        <li>AI编程工具免费化趋势：Gemini CLI等免费替代方案涌现</li>
+                        <li>程序员角色定型：意图设计师 + 代码审查官 + 架构决策者</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-            <!-- L1 MCP -->
-            <div class="insight-card">
-                <div class="insight-card-header">
-                    <span class="insight-level">L1</span>
-                    <h3 class="insight-card-title">MCP协议</h3>
+        <!-- Physical AI -->
+        <div class="insight-card">
+            <div class="card-header">
+                <span class="card-level domain-blue">领域</span>
+                <h3 class="card-title">Physical AI</h3>
+                <span class="update-badge">已更新</span>
+            </div>
+            <div class="row">
+                <div class="row-label">表象</div>
+                <div class="row-content">Waymo获$160亿融资，World Labs完成大额融资。资本验证Physical AI赛道。Gemini 3系列支持Computer Use工具</div>
+            </div>
+            <div class="row highlight">
+                <div class="row-label">本质</div>
+                <div class="row-content"><strong>AI从数字世界进入物理世界 — 资本已投票</strong>
+                    <div class="compare-box">
+                        <div class="compare-item"><span class="compare-tag">语言AI</span><span class="compare-text">压缩语言和知识 — 互联网数据够用</span></div>
+                        <div class="compare-item warn"><span class="compare-tag" style="color:var(--c-rose);background:rgba(225,29,72,0.08);">Physical AI</span><span class="compare-text">压缩物理规律和运动技能 — 数据稀缺！需要仿真</span></div>
+                    </div>
+                    <p style="margin-top:12px;font-size:13px;color:var(--text-secondary);">2月三巨头之一Waymo获得$160亿融资，说明资本认为Physical AI已到关键时刻</p>
                 </div>
-                <div class="insight-row">
-                    <div class="insight-label">表象</div>
-                    <div class="insight-content">Anthropic推出Model Context Protocol，各家IDE/工具开始支持，像USB-C一样的统一协议</div>
+            </div>
+            <div class="row analogy">
+                <div class="row-label">类比</div>
+                <div class="row-content">🎯 Physical AI就像<strong>让AI从网上下载灵魂，装进机器人身体</strong>——语言AI是灵魂（思考、说话），Physical AI是给灵魂造身体。难点：灵魂容易复制，身体技能必须一个一个练</div>
+            </div>
+            <div class="row">
+                <div class="row-label">未来规律</div>
+                <div class="row-content">
+                    <ul>
+                        <li>资本加速涌入：Waymo、World Labs等获得巨额融资</li>
+                        <li>Computer Use桥接：Gemini 3支持计算机操控，是物理世界的过渡</li>
+                        <li>受控环境先落地：工厂、仓库、自动驾驶先于家庭</li>
+                    </ul>
                 </div>
-                <div class="insight-row highlight">
-                    <div class="insight-label">本质</div>
-                    <div class="insight-content"><strong>AI的感官神经系统</strong> — AI模型是大脑，MCP是连接大脑和外部世界的神经系统</div>
-                </div>
-                <div class="insight-row analogy">
-                    <div class="insight-label">类比</div>
-                    <div class="insight-content">🎯 MCP就像<strong>AI世界的USB-C接口</strong>——以前每个设备都有自己的接口，现在统一成一个标准，插上就能用</div>
-                </div>
-                <div class="insight-row">
-                    <div class="insight-label">未来规律</div>
-                    <div class="insight-content">
-                        <ul>
-                            <li>成为事实标准（类似HTTP）</li>
-                            <li>生态爆发，MCP Server涌现</li>
-                            <li>从连接到智能编排</li>
-                        </ul>
+            </div>
+        </div>
+    </article>
+
+    <!-- ==================== 第三层：关键玩家 ==================== -->
+    <article id="s3" class="tab-panel">
+        <div class="section-overview">
+            <span class="overview-label">📊 章节概览</span>
+            <div class="overview-content">
+                <svg viewBox="0 0 640 160" style="max-width: 620px; width: 100%;">
+                    <g transform="translate(15,10)"><rect width="295" height="140" rx="10" fill="#F5F5F4" stroke="#D6D3D1"/>
+                        <text x="148" y="25" text-anchor="middle" font-size="12" font-weight="700" fill="#57534E">企业</text>
+                        <g transform="translate(15,35)"><rect width="82" height="55" rx="8" fill="#E11D48" fill-opacity="0.06" stroke="#E11D48" stroke-opacity="0.3"/><text x="41" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#E11D48">OpenAI</text><text x="41" y="38" text-anchor="middle" font-size="9" fill="#57534E">$8400亿</text><text x="41" y="50" text-anchor="middle" font-size="8" fill="#78716C">速度派</text></g>
+                        <g transform="translate(107,35)"><rect width="82" height="55" rx="8" fill="#059669" fill-opacity="0.06" stroke="#059669" stroke-opacity="0.3"/><text x="41" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#059669">Anthropic</text><text x="41" y="38" text-anchor="middle" font-size="9" fill="#57534E">$3800亿</text><text x="41" y="50" text-anchor="middle" font-size="8" fill="#78716C">安全派</text></g>
+                        <g transform="translate(199,35)"><rect width="82" height="55" rx="8" fill="#2563EB" fill-opacity="0.06" stroke="#2563EB" stroke-opacity="0.3"/><text x="41" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#2563EB">字节跳动</text><text x="41" y="38" text-anchor="middle" font-size="9" fill="#57534E">豆包生态</text><text x="41" y="50" text-anchor="middle" font-size="8" fill="#78716C">应用派</text></g>
+                        <text x="148" y="125" text-anchor="middle" font-size="10" fill="#78716C">三种路线 · 资本极端集中</text>
+                    </g>
+                    <g transform="translate(335,10)"><rect width="295" height="140" rx="10" fill="#F5F5F4" stroke="#D6D3D1"/>
+                        <text x="148" y="25" text-anchor="middle" font-size="12" font-weight="700" fill="#57534E">人物</text>
+                        <g transform="translate(12,35)"><rect width="62" height="48" rx="6" fill="white" stroke="#E7E5E4"/><text x="31" y="20" text-anchor="middle" font-size="9" font-weight="600" fill="#1C1917">Barry</text><text x="31" y="36" text-anchor="middle" font-size="8" fill="#78716C">务实者</text></g>
+                        <g transform="translate(80,35)"><rect width="62" height="48" rx="6" fill="white" stroke="#E7E5E4"/><text x="31" y="20" text-anchor="middle" font-size="9" font-weight="600" fill="#1C1917">姚顺雨</text><text x="31" y="36" text-anchor="middle" font-size="8" fill="#78716C">理论家</text></g>
+                        <g transform="translate(148,35)"><rect width="62" height="48" rx="6" fill="white" stroke="#E7E5E4"/><text x="31" y="20" text-anchor="middle" font-size="9" font-weight="600" fill="#1C1917">Karpathy</text><text x="31" y="36" text-anchor="middle" font-size="8" fill="#78716C">布道者</text></g>
+                        <g transform="translate(216,35)"><rect width="62" height="48" rx="6" fill="white" stroke="#E7E5E4"/><text x="31" y="20" text-anchor="middle" font-size="9" font-weight="600" fill="#1C1917">Harrison</text><text x="31" y="36" text-anchor="middle" font-size="8" fill="#78716C">建设者</text></g>
+                        <text x="148" y="125" text-anchor="middle" font-size="10" fill="#78716C">四种角色 · 互补推进</text>
+                    </g>
+                </svg>
+            </div>
+        </div>
+
+        <h3 class="sub-title">🏢 企业篇</h3>
+
+        <!-- OpenAI -->
+        <div class="insight-card">
+            <div class="card-header">
+                <span class="card-level red">企业</span>
+                <h3 class="card-title">OpenAI</h3>
+                <span class="card-tag red">$8400亿估值</span>
+            </div>
+            <div class="row">
+                <div class="row-label">表象</div>
+                <div class="row-content">估值达$8400亿，2月融$1100亿。GPT-5.4 Thinking发布，Codex全平台覆盖。但面临人才流失——后训练负责人Max Schwarzer离职加入Anthropic</div>
+            </div>
+            <div class="row highlight">
+                <div class="row-label">动机</div>
+                <div class="row-content"><strong>"速度+融合 = 不可替代"</strong>
+                    <div class="moti-box">
+                        <div class="moti-row"><span class="moti-tag">追求</span>将推理+编程+Agent融合为一体，让用户只需一个入口</div>
+                        <div class="moti-row"><span class="moti-tag">恐惧</span>人才持续流向Anthropic，核心技术被带走</div>
+                        <div class="moti-row"><span class="moti-tag">信念</span>整合一切的产品会赢——从ChatGPT到一站式AI平台</div>
                     </div>
                 </div>
             </div>
-        </article>
-
-        <!-- ==================== 第二层：应用领域 ==================== -->
-        <article id="section-2" class="tab-panel">
-            <!-- 章节概览图 -->
-            <div class="section-overview">
-                <span class="section-overview-label">章节概览</span>
-                <div class="section-overview-content">
-                    <svg viewBox="0 0 600 120" style="max-width: 600px;">
-                        <!-- 数字世界 -->
-                        <g transform="translate(60, 20)">
-                            <rect width="200" height="80" rx="10" fill="#E6F7ED" stroke="#1A7F37" stroke-width="2"/>
-                            <text x="100" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#1A7F37">数字世界</text>
-                            <text x="100" y="50" text-anchor="middle" font-size="12" fill="#4D5561">AI编程 / Software 3.0</text>
-                            <text x="100" y="68" text-anchor="middle" font-size="11" fill="#656D76">"自然语言编程"</text>
-                        </g>
-                        <!-- 箭头 -->
-                        <g transform="translate(270, 50)">
-                            <path d="M0 10 L50 10" stroke="#D0D7DE" stroke-width="2"/>
-                            <polygon points="50,5 60,10 50,15" fill="#1A7F37"/>
-                            <text x="30" y="30" text-anchor="middle" font-size="10" fill="#656D76">扩展</text>
-                        </g>
-                        <!-- 物理世界 -->
-                        <g transform="translate(340, 20)">
-                            <rect width="200" height="80" rx="10" fill="#EFF6FF" stroke="#0969DA" stroke-width="2"/>
-                            <text x="100" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#0969DA">物理世界</text>
-                            <text x="100" y="50" text-anchor="middle" font-size="12" fill="#4D5561">Physical AI / 机器人</text>
-                            <text x="100" y="68" text-anchor="middle" font-size="11" fill="#656D76">"AI进入现实"</text>
-                        </g>
-                    </svg>
+            <div class="row analogy">
+                <div class="row-label">类比</div>
+                <div class="row-content">🎯 OpenAI就像<strong>快速扩张的连锁帝国</strong>——门店（产品线）越开越多，估值越来越高，但核心厨师（关键人才）开始跳槽去对面的精品餐厅（Anthropic）</div>
+            </div>
+            <div class="row">
+                <div class="row-label">行为预测</div>
+                <div class="row-content">
+                    <ul>
+                        <li>继续"全家桶"策略：推理+编程+搜索+图片+视频融为一体</li>
+                        <li>加速人才保留措施，应对向Anthropic的人才流失</li>
+                        <li>GPT-5.4 Pro版本即将发布，进一步拉开与竞品差距</li>
+                    </ul>
                 </div>
             </div>
+        </div>
 
-            <!-- AI编程 / Software 3.0 -->
-            <div class="insight-card">
-                <div class="insight-card-header">
-                    <span class="insight-level domain">领域</span>
-                    <h3 class="insight-card-title">AI编程 / Software 3.0</h3>
-                </div>
-                <div class="insight-row">
-                    <div class="insight-label">表象</div>
-                    <div class="insight-content">AI编程工具涌现（Cursor、Claude Code、Copilot），从代码补全到Agent自主编程，开发效率提升2-10倍</div>
-                </div>
-                <div class="insight-row highlight">
-                    <div class="insight-label">本质</div>
-                    <div class="insight-content"><strong>Software 3.0 — 软件的第三次范式革命</strong>
-                        <div class="evolution-box">
-                            <div class="evolution-item">
-                                <span class="evo-label">1.0</span>
-                                <span class="evo-text">人类写逻辑代码</span>
-                            </div>
-                            <span class="evo-arrow">→</span>
-                            <div class="evolution-item">
-                                <span class="evo-label">2.0</span>
-                                <span class="evo-text">机器学习模型</span>
-                            </div>
-                            <span class="evo-arrow">→</span>
-                            <div class="evolution-item active">
-                                <span class="evo-label">3.0</span>
-                                <span class="evo-text">自然语言编程</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="insight-row analogy">
-                    <div class="insight-label">类比</div>
-                    <div class="insight-content">🎯 Software 3.0就像<strong>编程界的工业革命</strong>——手工作坊（手写代码）被机器生产（AI生成）取代，程序员从"织布工"变成"工厂设计师"</div>
-                </div>
-                <div class="insight-row">
-                    <div class="insight-label">未来规律</div>
-                    <div class="insight-content">
-                        <ul>
-                            <li>程序员角色转变：从"写代码"到"设计意图+审查代码"</li>
-                            <li>编程门槛消失：表达能力比编程语法更重要</li>
-                            <li>Vibe Coding → Vibe Engineering：保持工程师的责任心</li>
-                        </ul>
+        <!-- Anthropic -->
+        <div class="insight-card">
+            <div class="card-header">
+                <span class="card-level green">企业</span>
+                <h3 class="card-title">Anthropic</h3>
+                <span class="card-tag green">$3800亿 · App Store #1</span>
+            </div>
+            <div class="row">
+                <div class="row-label">表象</div>
+                <div class="row-content">估值$3800亿，年收入$140亿，计划2027年盈利。Claude登顶美国App Store第一（超越ChatGPT），免费用户增长60%+。招揽OpenAI后训练负责人</div>
+            </div>
+            <div class="row highlight">
+                <div class="row-label">动机</div>
+                <div class="row-content"><strong>"安全×开放×平台 = 终极护城河"</strong>
+                    <div class="moti-box">
+                        <div class="moti-row"><span class="moti-tag">追求</span>证明安全与性能不冲突，同时用MCP构建平台生态</div>
+                        <div class="moti-row"><span class="moti-tag">恐惧</span>Claude宕机暴露的增长与基础设施不匹配</div>
+                        <div class="moti-row"><span class="moti-tag">信念</span>MCP生态+人才虹吸+安全品牌 = 长期胜出</div>
                     </div>
                 </div>
             </div>
+            <div class="row analogy">
+                <div class="row-label">类比</div>
+                <div class="row-content">🎯 Anthropic正在成为<strong>AI界的Apple</strong>——产品体验极致（Claude登顶），生态封闭强大（MCP），品牌溢价高（安全承诺），还在疯狂挖人（OpenAI→Anthropic = Google→Apple的人才流动）</div>
+            </div>
+            <div class="row">
+                <div class="row-label">行为预测</div>
+                <div class="row-content">
+                    <ul>
+                        <li>MCP生态持续扩大，成为AI应用层的事实标准</li>
+                        <li>加速招聘OpenAI/Google顶级人才</li>
+                        <li>基础设施大规模升级，应对"前所未有的需求"</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-            <!-- Physical AI -->
-            <div class="insight-card">
-                <div class="insight-card-header">
-                    <span class="insight-level domain blue">领域</span>
-                    <h3 class="insight-card-title">Physical AI</h3>
-                </div>
-                <div class="insight-row">
-                    <div class="insight-label">表象</div>
-                    <div class="insight-content">人形机器人热潮（Figure、Tesla Optimus），自动驾驶演进，数字孪生技术发展</div>
-                </div>
-                <div class="insight-row highlight">
-                    <div class="insight-label">本质</div>
-                    <div class="insight-content"><strong>AI从数字世界进入物理世界</strong>
-                        <div class="comparison-mini">
-                            <div class="comp-item">
-                                <span class="comp-label">语言AI</span>
-                                <span class="comp-text">压缩语言和知识（互联网数据够用）</span>
-                            </div>
-                            <div class="comp-item highlight">
-                                <span class="comp-label">Physical AI</span>
-                                <span class="comp-text">压缩物理规律和运动技能（数据稀缺！）</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="insight-row analogy">
-                    <div class="insight-label">类比</div>
-                    <div class="insight-content">🎯 Physical AI就像<strong>让AI从网上下载灵魂，装进机器人身体</strong>——语言AI是灵魂（思考、说话），Physical AI是给灵魂造身体。难点：灵魂容易复制，身体技能必须一个一个练</div>
-                </div>
-                <div class="insight-row">
-                    <div class="insight-label">未来规律</div>
-                    <div class="insight-content">
-                        <ul>
-                            <li>Simulation 2.0：用视频扩散模型生成仿真环境</li>
-                            <li>数字孪生：10000x速度虚拟训练，再迁移到现实</li>
-                            <li>Physical Turing Test：机器人达到人类无法分辨的水平</li>
-                            <li>受控环境先落地：工厂、仓库先于家庭</li>
-                        </ul>
+        <!-- 字节跳动 -->
+        <div class="insight-card">
+            <div class="card-header">
+                <span class="card-level blue">企业</span>
+                <h3 class="card-title">字节跳动</h3>
+                <span class="card-tag blue">豆包+火山</span>
+            </div>
+            <div class="row">
+                <div class="row-label">表象</div>
+                <div class="row-content">豆包稳居国内最大AI应用。DeepSeek冲击一周年后，中国低成本AI模型潮持续，阿里、字节持续发布新模型</div>
+            </div>
+            <div class="row highlight">
+                <div class="row-label">动机</div>
+                <div class="row-content"><strong>"用AI放大内容帝国，用低成本颠覆市场"</strong>
+                    <div class="moti-box">
+                        <div class="moti-row"><span class="moti-tag">追求</span>在内容+AI交叉点建立不可撼动的优势</div>
+                        <div class="moti-row"><span class="moti-tag">恐惧</span>被AI原生公司颠覆，或被中国低成本AI潮冲击</div>
+                        <div class="moti-row"><span class="moti-tag">信念</span>AI是内容创作和分发的终极放大器</div>
                     </div>
                 </div>
             </div>
-        </article>
-
-        <!-- ==================== 第三层：关键玩家 ==================== -->
-        <article id="section-3" class="tab-panel">
-            <!-- 章节概览图 -->
-            <div class="section-overview">
-                <span class="section-overview-label">章节概览</span>
-                <div class="section-overview-content">
-                    <svg viewBox="0 0 650 160" style="max-width: 650px;">
-                        <!-- 企业区域 -->
-                        <g transform="translate(20, 10)">
-                            <rect width="290" height="140" rx="8" fill="#F6F8FA" stroke="#D0D7DE"/>
-                            <text x="145" y="25" text-anchor="middle" font-size="12" font-weight="600" fill="#656D76">企业</text>
-                            <!-- OpenAI -->
-                            <g transform="translate(15, 35)">
-                                <rect width="80" height="50" rx="6" fill="#CF222E" fill-opacity="0.1" stroke="#CF222E"/>
-                                <text x="40" y="22" text-anchor="middle" font-size="11" font-weight="600" fill="#CF222E">OpenAI</text>
-                                <text x="40" y="38" text-anchor="middle" font-size="9" fill="#4D5561">速度派</text>
-                            </g>
-                            <!-- Anthropic -->
-                            <g transform="translate(105, 35)">
-                                <rect width="80" height="50" rx="6" fill="#1A7F37" fill-opacity="0.1" stroke="#1A7F37"/>
-                                <text x="40" y="22" text-anchor="middle" font-size="11" font-weight="600" fill="#1A7F37">Anthropic</text>
-                                <text x="40" y="38" text-anchor="middle" font-size="9" fill="#4D5561">安全派</text>
-                            </g>
-                            <!-- 字节跳动 -->
-                            <g transform="translate(195, 35)">
-                                <rect width="80" height="50" rx="6" fill="#0969DA" fill-opacity="0.1" stroke="#0969DA"/>
-                                <text x="40" y="22" text-anchor="middle" font-size="11" font-weight="600" fill="#0969DA">字节跳动</text>
-                                <text x="40" y="38" text-anchor="middle" font-size="9" fill="#4D5561">应用派</text>
-                            </g>
-                            <text x="145" y="120" text-anchor="middle" font-size="10" fill="#656D76">三种路线的博弈</text>
-                        </g>
-                        <!-- 人物区域 -->
-                        <g transform="translate(340, 10)">
-                            <rect width="290" height="140" rx="8" fill="#F6F8FA" stroke="#D0D7DE"/>
-                            <text x="145" y="25" text-anchor="middle" font-size="12" font-weight="600" fill="#656D76">人物</text>
-                            <!-- 人物卡片 -->
-                            <g transform="translate(15, 35)">
-                                <rect width="60" height="45" rx="4" fill="white" stroke="#E8ECF0"/>
-                                <text x="30" y="20" text-anchor="middle" font-size="9" font-weight="500" fill="#1F2328">Barry</text>
-                                <text x="30" y="35" text-anchor="middle" font-size="8" fill="#656D76">务实者</text>
-                            </g>
-                            <g transform="translate(80, 35)">
-                                <rect width="60" height="45" rx="4" fill="white" stroke="#E8ECF0"/>
-                                <text x="30" y="20" text-anchor="middle" font-size="9" font-weight="500" fill="#1F2328">姚顺雨</text>
-                                <text x="30" y="35" text-anchor="middle" font-size="8" fill="#656D76">理论家</text>
-                            </g>
-                            <g transform="translate(145, 35)">
-                                <rect width="60" height="45" rx="4" fill="white" stroke="#E8ECF0"/>
-                                <text x="30" y="20" text-anchor="middle" font-size="9" font-weight="500" fill="#1F2328">Karpathy</text>
-                                <text x="30" y="35" text-anchor="middle" font-size="8" fill="#656D76">布道者</text>
-                            </g>
-                            <g transform="translate(210, 35)">
-                                <rect width="60" height="45" rx="4" fill="white" stroke="#E8ECF0"/>
-                                <text x="30" y="20" text-anchor="middle" font-size="9" font-weight="500" fill="#1F2328">Harrison</text>
-                                <text x="30" y="35" text-anchor="middle" font-size="8" fill="#656D76">建设者</text>
-                            </g>
-                            <text x="145" y="120" text-anchor="middle" font-size="10" fill="#656D76">四种角色的互补</text>
-                        </g>
-                    </svg>
+            <div class="row analogy">
+                <div class="row-label">类比</div>
+                <div class="row-content">🎯 字节跳动就像<strong>装上了AI引擎的内容工厂</strong>——原来的工厂已经很强大（抖音、头条），现在引擎升级了（AI），生产效率要再上一个台阶</div>
+            </div>
+            <div class="row">
+                <div class="row-label">行为预测</div>
+                <div class="row-content">
+                    <ul>
+                        <li>继续强化AI在内容创作/分发中的应用</li>
+                        <li>豆包向企业市场扩展，对标国际产品</li>
+                        <li>低成本模型策略持续，延续DeepSeek带来的"性价比革命"</li>
+                    </ul>
                 </div>
             </div>
+        </div>
 
-            <h3 class="subsection-title">🏢 企业篇</h3>
+        <h3 class="sub-title">👤 人物篇</h3>
 
-            <!-- OpenAI -->
-            <div class="insight-card company">
-                <div class="insight-card-header">
-                    <span class="insight-level red">企业</span>
-                    <h3 class="insight-card-title">OpenAI</h3>
-                    <span class="company-tag">$5000亿估值</span>
-                </div>
-                <div class="insight-row">
-                    <div class="insight-label">表象</div>
-                    <div class="insight-content">全球最大AI公司，产品矩阵（ChatGPT、GPT-4o、o1、Sora），激进商业化，与政府合作</div>
-                </div>
-                <div class="insight-row highlight">
-                    <div class="insight-label">动机</div>
-                    <div class="insight-content"><strong>"速度即护城河"</strong>
-                        <div class="motivation-box">
-                            <div class="moti-item"><span class="moti-label">追求</span>抢占AGI时代的主导地位</div>
-                            <div class="moti-item"><span class="moti-label">恐惧</span>被后来者追上或超越</div>
-                            <div class="moti-item"><span class="moti-label">信念</span>先发优势决定最终格局</div>
-                        </div>
+        <div class="people-grid">
+            <div class="person-card">
+                <div class="person-top"><span class="person-name">Barry Zhang</span><span class="person-org">Anthropic</span></div>
+                <div class="person-info"><strong>动机：</strong>"让AI真正能用"</div>
+                <div class="person-info"><strong>角色：</strong>务实主义者 + 教育者</div>
+                <div class="person-analogy">🎯 <strong>AI界的老中医</strong>——不开花哨方子，坚持"对症下药"</div>
+            </div>
+            <div class="person-card">
+                <div class="person-top"><span class="person-name">姚顺雨</span><span class="person-org">OpenAI</span></div>
+                <div class="person-info"><strong>动机：</strong>"定义问题本身"</div>
+                <div class="person-info"><strong>角色：</strong>理论家 + 系统思考者</div>
+                <div class="person-analogy">🎯 <strong>发明望远镜的天文学家</strong>——与其争论星星颜色，不如先造能看清楚的工具</div>
+            </div>
+            <div class="person-card">
+                <div class="person-top"><span class="person-name">Andrej Karpathy</span><span class="person-org">前OpenAI/Tesla</span></div>
+                <div class="person-info"><strong>动机：</strong>"命名和布道"</div>
+                <div class="person-info"><strong>角色：</strong>先知 + 布道者</div>
+                <div class="person-analogy">🎯 <strong>AI界的林奈</strong>——给AI世界的现象命名、分类，塑造共同语言</div>
+            </div>
+            <div class="person-card">
+                <div class="person-top"><span class="person-name">Harrison Chase</span><span class="person-org">LangChain</span></div>
+                <div class="person-info"><strong>动机：</strong>"建设Agent基础设施"</div>
+                <div class="person-info"><strong>角色：</strong>平台建设者</div>
+                <div class="person-analogy">🎯 <strong>高速公路建造者</strong>——不亲自开车送货，但建好了路让所有人更快到达</div>
+            </div>
+            <div class="person-card">
+                <div class="person-top"><span class="person-name">Jim Fan</span><span class="person-org">NVIDIA</span></div>
+                <div class="person-info"><strong>动机：</strong>"让AI走出数字世界"</div>
+                <div class="person-info"><strong>角色：</strong>物理AI布道者</div>
+                <div class="person-analogy">🎯 <strong>AI的身体设计师</strong>——别人造灵魂，他造身体。没有身体的灵魂是不完整的</div>
+            </div>
+        </div>
+    </article>
+
+    <!-- ==================== 第四层：生态视角 ==================== -->
+    <article id="s4" class="tab-panel">
+        <div class="section-overview">
+            <span class="overview-label">📊 章节概览</span>
+            <div class="overview-content">
+                <svg viewBox="0 0 600 140" style="max-width: 580px; width: 100%;">
+                    <defs><linearGradient id="gE" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#10B981"/></linearGradient></defs>
+                    <g transform="translate(210,10)"><rect width="180" height="50" rx="25" fill="url(#gE)"/><text x="90" y="22" text-anchor="middle" font-size="12" font-weight="700" fill="white">AI = 协作认知</text><text x="90" y="38" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.8)">可编程 → 可协作</text></g>
+                    <path d="M210 35 Q130 35 80 85" stroke="#D6D3D1" stroke-width="2" fill="none"/>
+                    <g transform="translate(0,75)"><rect width="160" height="50" rx="8" fill="#ECFDF5" stroke="#059669"/><text x="80" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#059669">发展规律</text><text x="80" y="40" text-anchor="middle" font-size="10" fill="#57534E">资本寡头化 · 能力涌现</text></g>
+                    <path d="M390 35 Q470 35 520 85" stroke="#D6D3D1" stroke-width="2" fill="none"/>
+                    <g transform="translate(440,75)"><rect width="160" height="50" rx="8" fill="#EFF6FF" stroke="#2563EB"/><text x="80" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#2563EB">企业转型</text><text x="80" y="40" text-anchor="middle" font-size="10" fill="#57534E">AI×组织 · 认知架构</text></g>
+                </svg>
+            </div>
+        </div>
+
+        <!-- AI本身 -->
+        <div class="insight-card">
+            <div class="card-header">
+                <span class="card-level violet">生态</span>
+                <h3 class="card-title">AI本身</h3>
+                <span class="update-badge">已更新</span>
+            </div>
+            <div class="row">
+                <div class="row-label">表象</div>
+                <div class="row-content">AI能力融合加速（GPT-5.4 = 推理+编程+Agent），人机交互从单向输出进化为双向协作，Claude超越ChatGPT登顶App Store</div>
+            </div>
+            <div class="row highlight">
+                <div class="row-label">本质</div>
+                <div class="row-content"><strong>"从可编程的认知到可协作的认知"</strong>
+                    <div class="evo-flow vertical">
+                        <div class="evo-step"><span class="evo-tag">Software 1.0</span><span class="evo-text">可编程的逻辑</span></div>
+                        <span class="evo-arrow down">↓</span>
+                        <div class="evo-step"><span class="evo-tag">Software 2.0</span><span class="evo-text">可编程的模式识别</span></div>
+                        <span class="evo-arrow down">↓</span>
+                        <div class="evo-step"><span class="evo-tag">Software 3.0</span><span class="evo-text">可编程的认知</span></div>
+                        <span class="evo-arrow down">↓</span>
+                        <div class="evo-step active"><span class="evo-tag">Software 3.5</span><span class="evo-text">可协作的认知（GPT-5.4中途调整）</span></div>
                     </div>
-                </div>
-                <div class="insight-row analogy">
-                    <div class="insight-label">类比</div>
-                    <div class="insight-content">🎯 OpenAI就像<strong>新大陆的探险队领队</strong>——发现了金矿（AI能力），全力以赴跑马圈地。不是不在乎安全，是怕慢下来被别人抢了地盘</div>
-                </div>
-                <div class="insight-row">
-                    <div class="insight-label">行为预测</div>
-                    <div class="insight-content">
-                        <ul>
-                            <li>继续激进发布新能力，即使有风险</li>
-                            <li>加速商业化，从ToC扩展到ToB和ToG</li>
-                            <li>与政府关系会越来越近</li>
-                        </ul>
-                    </div>
+                    <p style="margin-top:12px;color:var(--text-secondary);font-size:13px;">认知不再只是AI单方面输出，而是人与AI共同构建——这是质的跃迁</p>
                 </div>
             </div>
+            <div class="row analogy">
+                <div class="row-label">类比</div>
+                <div class="row-content">🎯 AI从<strong>认知的印刷术</strong>进化为<strong>认知的互联网</strong>——印刷术是单向传播（作者→读者），互联网是双向互动（创作者⇆用户）。GPT-5.4的中途调整就像认知领域的Web 2.0时刻</div>
+            </div>
+            <div class="row">
+                <div class="row-label">未来规律</div>
+                <div class="row-content">
+                    <ul>
+                        <li>认知协作成为常态：人类引导方向，AI执行和优化</li>
+                        <li>认知能力差距缩小：AI让每个人都拥有专家级认知能力</li>
+                        <li>认知的"UGC"时代：人人都能通过AI创造认知产品</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-            <!-- Anthropic -->
-            <div class="insight-card company">
-                <div class="insight-card-header">
-                    <span class="insight-level green">企业</span>
-                    <h3 class="insight-card-title">Anthropic</h3>
-                    <span class="company-tag green">安全标杆</span>
-                </div>
-                <div class="insight-row">
-                    <div class="insight-label">表象</div>
-                    <div class="insight-content">Claude系列（最佳编程模型），Constitutional AI，MCP协议开源，拒绝国防部取消安全限制</div>
-                </div>
-                <div class="insight-row highlight">
-                    <div class="insight-label">动机</div>
-                    <div class="insight-content"><strong>"证明负责任的AI可以赢"</strong>
-                        <div class="motivation-box">
-                            <div class="moti-item"><span class="moti-label">追求</span>成为安全AI的标杆，证明这条路商业可行</div>
-                            <div class="moti-item"><span class="moti-label">恐惧</span>AI安全被边缘化</div>
-                            <div class="moti-item"><span class="moti-label">信念</span>安全是长期护城河，不是短期成本</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="insight-row analogy">
-                    <div class="insight-label">类比</div>
-                    <div class="insight-content">🎯 Anthropic就像<strong>AI界的医生</strong>——坚守"不伤害"原则（First, do no harm）。即使病人（市场）催促，也不乱开药</div>
-                </div>
-                <div class="insight-row">
-                    <div class="insight-label">行为预测</div>
-                    <div class="insight-content">
-                        <ul>
-                            <li>继续在安全方面投入，作为差异化</li>
-                            <li>MCP生态会成为重要战略资产</li>
-                            <li>在特定垂直领域（编程、企业）建立优势</li>
-                        </ul>
+        <!-- AI发展规律 -->
+        <div class="insight-card">
+            <div class="card-header">
+                <span class="card-level violet">生态</span>
+                <h3 class="card-title">AI发展规律</h3>
+                <span class="update-badge">已更新</span>
+            </div>
+            <div class="row">
+                <div class="row-label">表象</div>
+                <div class="row-content">2月全球风投$1890亿创历史记录，83%流向三巨头。OpenAI估值$8400亿，Anthropic $3800亿。美国占全球AI风投92%</div>
+            </div>
+            <div class="row highlight">
+                <div class="row-label">本质</div>
+                <div class="row-content"><strong>"压缩-涌现-协同-寡头化"四重规律</strong>
+                    <div class="laws">
+                        <div class="law"><div class="law-num">1</div><div><div class="law-title">压缩定律</div><div class="law-desc">模型压缩知识的深度，决定了理解的层次</div></div></div>
+                        <div class="law"><div class="law-num">2</div><div><div class="law-title">涌现定律</div><div class="law-desc">量变积累到临界点，能力突然涌现（如GPT-5.4的中途调整）</div></div></div>
+                        <div class="law"><div class="law-num">3</div><div><div class="law-title">协同定律</div><div class="law-desc">AI价值 = AI能力 × 与人/系统的协同程度</div></div></div>
+                        <div class="law"><div class="law-num" style="background:var(--grad-rose);">4</div><div><div class="law-title">寡头定律 <span class="data-callout">NEW</span></div><div class="law-desc">资本极端集中（83%→三巨头），赢家通吃加速，创业门槛急剧升高</div></div></div>
                     </div>
                 </div>
             </div>
-
-            <!-- 字节跳动 -->
-            <div class="insight-card company">
-                <div class="insight-card-header">
-                    <span class="insight-level blue">企业</span>
-                    <h3 class="insight-card-title">字节跳动</h3>
-                    <span class="company-tag blue">内容+AI</span>
-                </div>
-                <div class="insight-row">
-                    <div class="insight-label">表象</div>
-                    <div class="insight-content">豆包（国内最大AI应用），火山引擎，内部大量AI应用，收购/投资AI公司</div>
-                </div>
-                <div class="insight-row highlight">
-                    <div class="insight-label">动机</div>
-                    <div class="insight-content"><strong>"用AI放大内容帝国"</strong>
-                        <div class="motivation-box">
-                            <div class="moti-item"><span class="moti-label">追求</span>在内容+AI的交叉点建立不可撼动的优势</div>
-                            <div class="moti-item"><span class="moti-label">恐惧</span>被AI原生公司颠覆</div>
-                            <div class="moti-item"><span class="moti-label">信念</span>AI是内容创作和分发的终极放大器</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="insight-row analogy">
-                    <div class="insight-label">类比</div>
-                    <div class="insight-content">🎯 字节跳动就像<strong>装上了AI引擎的内容工厂</strong>——原来的工厂已经很强大（抖音、头条），现在引擎升级了（AI），生产效率要再上一个台阶</div>
-                </div>
-                <div class="insight-row">
-                    <div class="insight-label">行为预测</div>
-                    <div class="insight-content">
-                        <ul>
-                            <li>继续强化AI在内容创作/分发中的应用</li>
-                            <li>豆包会向企业市场扩展</li>
-                            <li>会通过收购/投资补齐AI能力短板</li>
-                        </ul>
-                    </div>
+            <div class="row analogy">
+                <div class="row-label">类比</div>
+                <div class="row-content">🎯 AI行业正在经历<strong>从"春秋"到"战国"</strong>——春秋时期百家争鸣（2023-2025），现在进入战国兼并（2026），几个超级大国（OpenAI、Anthropic、Google）开始主导格局，小国（创业公司）要么依附大国要么灭亡</div>
+            </div>
+            <div class="row">
+                <div class="row-label">未来规律</div>
+                <div class="row-content">
+                    <ul>
+                        <li>资本寡头化加剧：种子轮下降11%，头部融资创记录</li>
+                        <li>地缘集中不可持续：美国占92%，政策风险巨大</li>
+                        <li>并购潮即将到来：中小AI公司被迫寻求并购出路</li>
+                    </ul>
                 </div>
             </div>
+        </div>
 
-            <h3 class="subsection-title">👤 人物篇</h3>
-
-            <div class="people-grid">
-                <!-- Barry Zhang -->
-                <div class="people-card">
-                    <div class="people-header">
-                        <span class="people-name">Barry Zhang</span>
-                        <span class="people-role">Anthropic</span>
+        <!-- 企业AI转型 -->
+        <div class="insight-card">
+            <div class="card-header">
+                <span class="card-level blue">生态</span>
+                <h3 class="card-title">企业AI转型</h3>
+                <span class="update-badge">已更新</span>
+            </div>
+            <div class="row">
+                <div class="row-label">表象</div>
+                <div class="row-content">西门子Transform 2026聚焦AI+可持续发展。德勤2026数字化挑战赛主题：AI×Organization。联想展示模块化企业AI方案</div>
+            </div>
+            <div class="row highlight">
+                <div class="row-label">本质</div>
+                <div class="row-content"><strong>"认知架构的重构" — 组织变革是真正的瓶颈</strong>
+                    <div class="levels">
+                        <div class="level-row"><span class="level-badge">Level 1</span><span class="level-name">工具替代</span><span class="level-desc">用AI工具提升个人效率</span></div>
+                        <div class="level-row"><span class="level-badge">Level 2</span><span class="level-name">流程重构</span><span class="level-desc">用AI重新设计业务流程</span></div>
+                        <div class="level-row active"><span class="level-badge">Level 3</span><span class="level-name">AI×组织</span><span class="level-desc">用AI重构组织的认知架构和决策方式</span></div>
                     </div>
-                    <div class="people-motivation"><strong>动机：</strong>"让AI真正能用"</div>
-                    <div class="people-role-type"><strong>角色：</strong>务实主义者 + 教育者</div>
-                    <div class="people-analogy">🎯 <strong>AI界的老中医</strong>——不开花哨方子，坚持"对症下药"</div>
-                </div>
-
-                <!-- 姚顺雨 -->
-                <div class="people-card">
-                    <div class="people-header">
-                        <span class="people-name">姚顺雨</span>
-                        <span class="people-role">OpenAI</span>
-                    </div>
-                    <div class="people-motivation"><strong>动机：</strong>"定义问题本身"</div>
-                    <div class="people-role-type"><strong>角色：</strong>理论家 + 系统思考者</div>
-                    <div class="people-analogy">🎯 <strong>发明望远镜的天文学家</strong>——与其争论星星颜色，不如先造能看清楚的工具</div>
-                </div>
-
-                <!-- Karpathy -->
-                <div class="people-card">
-                    <div class="people-header">
-                        <span class="people-name">Andrej Karpathy</span>
-                        <span class="people-role">前OpenAI/Tesla</span>
-                    </div>
-                    <div class="people-motivation"><strong>动机：</strong>"命名和布道"</div>
-                    <div class="people-role-type"><strong>角色：</strong>先知 + 布道者</div>
-                    <div class="people-analogy">🎯 <strong>AI界的林奈</strong>——给AI世界的现象命名、分类，塑造共同语言</div>
-                </div>
-
-                <!-- Harrison Chase -->
-                <div class="people-card">
-                    <div class="people-header">
-                        <span class="people-name">Harrison Chase</span>
-                        <span class="people-role">LangChain</span>
-                    </div>
-                    <div class="people-motivation"><strong>动机：</strong>"建设Agent基础设施"</div>
-                    <div class="people-role-type"><strong>角色：</strong>平台建设者</div>
-                    <div class="people-analogy">🎯 <strong>高速公路建造者</strong>——不亲自开车送货，但建好了路让所有人更快到达</div>
-                </div>
-
-                <!-- Jim Fan -->
-                <div class="people-card">
-                    <div class="people-header">
-                        <span class="people-name">Jim Fan</span>
-                        <span class="people-role">NVIDIA</span>
-                    </div>
-                    <div class="people-motivation"><strong>动机：</strong>"让AI走出数字世界"</div>
-                    <div class="people-role-type"><strong>角色：</strong>物理AI布道者</div>
-                    <div class="people-analogy">🎯 <strong>AI的身体设计师</strong>——别人造灵魂，他造身体。没有身体的灵魂是不完整的</div>
+                    <p style="margin-top:12px;color:var(--text-secondary);font-size:13px;">德勤2026挑战赛主题"AI×Organization"标志着行业共识：技术不是瓶颈，组织才是</p>
                 </div>
             </div>
-        </article>
-
-        <!-- ==================== 第四层：生态视角 ==================== -->
-        <article id="section-4" class="tab-panel">
-            <!-- 章节概览图 -->
-            <div class="section-overview">
-                <span class="section-overview-label">章节概览</span>
-                <div class="section-overview-content">
-                    <svg viewBox="0 0 600 130" style="max-width: 600px;">
-                        <defs>
-                            <linearGradient id="ecosysGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#1A7F37"/>
-                                <stop offset="100%" stop-color="#2DA44E"/>
-                            </linearGradient>
-                        </defs>
-                        <!-- 中心：AI本身 -->
-                        <g transform="translate(230, 20)">
-                            <rect width="140" height="50" rx="25" fill="url(#ecosysGrad)"/>
-                            <text x="70" y="32" text-anchor="middle" font-size="13" font-weight="600" fill="white">AI = 可编程的认知</text>
-                        </g>
-                        <!-- 左分支：发展规律 -->
-                        <path d="M230 45 Q150 45 100 90" stroke="#D0D7DE" stroke-width="2" fill="none"/>
-                        <g transform="translate(20, 75)">
-                            <rect width="160" height="45" rx="6" fill="#F0FDF4" stroke="#1A7F37"/>
-                            <text x="80" y="20" text-anchor="middle" font-size="11" font-weight="600" fill="#1A7F37">发展规律</text>
-                            <text x="80" y="36" text-anchor="middle" font-size="10" fill="#4D5561">压缩 → 涌现 → 协同</text>
-                        </g>
-                        <!-- 右分支：企业转型 -->
-                        <path d="M370 45 Q450 45 500 90" stroke="#D0D7DE" stroke-width="2" fill="none"/>
-                        <g transform="translate(420, 75)">
-                            <rect width="160" height="45" rx="6" fill="#EFF6FF" stroke="#0969DA"/>
-                            <text x="80" y="20" text-anchor="middle" font-size="11" font-weight="600" fill="#0969DA">企业转型</text>
-                            <text x="80" y="36" text-anchor="middle" font-size="10" fill="#4D5561">认知架构的重构</text>
-                        </g>
-                    </svg>
+            <div class="row analogy">
+                <div class="row-label">类比</div>
+                <div class="row-content">🎯 企业AI转型就像<strong>企业的"大脑移植"</strong>——不是给员工发个AI工具（戴个帽子），而是要改变企业思考和决策的方式（换个大脑）。换大脑比戴帽子难得多，但效果也大得多</div>
+            </div>
+            <div class="row">
+                <div class="row-label">未来规律</div>
+                <div class="row-content">
+                    <ul>
+                        <li>AI×组织成为核心议题：德勤、西门子都在聚焦此方向</li>
+                        <li>差距加速拉大：成功转型的企业 vs 停留在工具替代的企业</li>
+                        <li>欧洲双重目标：数字化+可持续发展并行，与美国纯效率路线不同</li>
+                    </ul>
                 </div>
             </div>
+        </div>
+    </article>
 
-            <!-- AI本身 -->
-            <div class="insight-card ecosystem">
-                <div class="insight-card-header">
-                    <span class="insight-level purple">生态</span>
-                    <h3 class="insight-card-title">AI本身</h3>
-                </div>
-                <div class="insight-row">
-                    <div class="insight-label">表象</div>
-                    <div class="insight-content">AI能力爆发式增长，从专用到通用，渗透各行各业，改变人类工作和生活方式</div>
-                </div>
-                <div class="insight-row highlight">
-                    <div class="insight-label">本质</div>
-                    <div class="insight-content"><strong>"可编程的认知"</strong>
-                        <div class="evolution-box vertical">
-                            <div class="evolution-item">
-                                <span class="evo-label">Software 1.0</span>
-                                <span class="evo-text">可编程的逻辑</span>
-                            </div>
-                            <span class="evo-arrow-down">↓</span>
-                            <div class="evolution-item">
-                                <span class="evo-label">Software 2.0</span>
-                                <span class="evo-text">可编程的模式识别</span>
-                            </div>
-                            <span class="evo-arrow-down">↓</span>
-                            <div class="evolution-item active">
-                                <span class="evo-label">Software 3.0</span>
-                                <span class="evo-text">可编程的认知</span>
-                            </div>
-                        </div>
-                        <p style="margin-top:12px;color:#4D5561;">AI让"认知"这个原本只属于人脑的能力，变得可以被定义、被复制、被规模化</p>
-                    </div>
-                </div>
-                <div class="insight-row analogy">
-                    <div class="insight-label">类比</div>
-                    <div class="insight-content">🎯 AI就像<strong>认知的印刷术</strong>——印刷术让知识可以被复制和分发，AI让认知能力可以被编程和规模化。正如印刷术改变了知识传播，AI正在改变认知的生产和分配</div>
-                </div>
-                <div class="insight-row">
-                    <div class="insight-label">未来规律</div>
-                    <div class="insight-content">
-                        <ul>
-                            <li>认知能力平民化：专家级认知能力变得人人可用</li>
-                            <li>认知即服务：认知能力成为可调用的云服务</li>
-                            <li>人机认知融合：人类和AI的认知边界模糊化</li>
-                            <li>认知基础设施化：AI成为像水电一样的基础设施</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <!-- ==================== Footer ==================== -->
+    <footer class="footer">
+        <p>AI生态本质洞察报告 v2.0 · 更新于 2026-03-06</p>
+        <p style="margin-top:6px;">由<strong>林克</strong>（沈浪的AI分身）使用<strong>本质洞察力</strong>元能力生成 · <a href="../../index.html">返回AI洞察首页</a></p>
+        <p style="margin-top:6px;font-style:italic;font-size:12px;color:var(--text-muted);">🌱 随着对AI领域的持续追踪，洞察会越来越深入。本报告持续迭代更新。</p>
+    </footer>
 
-            <!-- AI发展规律 -->
-            <div class="insight-card ecosystem">
-                <div class="insight-card-header">
-                    <span class="insight-level purple">生态</span>
-                    <h3 class="insight-card-title">AI发展规律</h3>
-                </div>
-                <div class="insight-row">
-                    <div class="insight-label">表象</div>
-                    <div class="insight-content">能力曲线快速演进，应用从实验室到产品到行业，万亿美元涌入AI领域</div>
-                </div>
-                <div class="insight-row highlight">
-                    <div class="insight-label">本质</div>
-                    <div class="insight-content"><strong>"压缩-涌现-协同"三重规律</strong>
-                        <div class="three-laws">
-                            <div class="law-item">
-                                <div class="law-num">1</div>
-                                <div class="law-content">
-                                    <div class="law-title">压缩定律</div>
-                                    <div class="law-desc">模型压缩知识的深度，决定了理解的层次</div>
-                                </div>
-                            </div>
-                            <div class="law-item">
-                                <div class="law-num">2</div>
-                                <div class="law-content">
-                                    <div class="law-title">涌现定律</div>
-                                    <div class="law-desc">量变积累到临界点，能力会突然涌现</div>
-                                </div>
-                            </div>
-                            <div class="law-item">
-                                <div class="law-num">3</div>
-                                <div class="law-content">
-                                    <div class="law-title">协同定律</div>
-                                    <div class="law-desc">AI价值 = AI能力 × 与人/系统的协同程度</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="insight-row analogy">
-                    <div class="insight-label">类比</div>
-                    <div class="insight-content">🎯 AI发展就像<strong>水从液态到气态</strong>——温度（算力/数据）持续升高，大部分时间只是"更热的水"，但到了100°C（临界点），突然变成蒸汽（新能力涌现）。我们无法精确预测沸点，但知道继续加热一定会沸腾</div>
-                </div>
-                <div class="insight-row">
-                    <div class="insight-label">未来规律</div>
-                    <div class="insight-content">
-                        <ul>
-                            <li>涌现会继续发生：只是不知道在哪里、什么时候</li>
-                            <li>瓶颈会转移：从模型能力 → 数据质量 → 反馈环设计 → 协同机制</li>
-                            <li>边界会扩展：从数字世界到物理世界</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+</div>
 
-            <!-- 企业AI转型 -->
-            <div class="insight-card ecosystem">
-                <div class="insight-card-header">
-                    <span class="insight-level blue">生态</span>
-                    <h3 class="insight-card-title">企业AI转型</h3>
-                </div>
-                <div class="insight-row">
-                    <div class="insight-label">表象</div>
-                    <div class="insight-content">企业纷纷宣布AI战略，AI预算大幅增加，试点众多但规模化落地少</div>
-                </div>
-                <div class="insight-row highlight">
-                    <div class="insight-label">本质</div>
-                    <div class="insight-content"><strong>"认知架构的重构"</strong>
-                        <div class="level-box">
-                            <div class="level-item">
-                                <span class="level-tag">Level 1</span>
-                                <span class="level-name">工具替代</span>
-                                <span class="level-desc">用AI工具提升个人效率</span>
-                            </div>
-                            <div class="level-item">
-                                <span class="level-tag">Level 2</span>
-                                <span class="level-name">流程重构</span>
-                                <span class="level-desc">用AI重新设计业务流程</span>
-                            </div>
-                            <div class="level-item highlight">
-                                <span class="level-tag">Level 3</span>
-                                <span class="level-name">认知架构</span>
-                                <span class="level-desc">用AI重构组织的认知能力</span>
-                            </div>
-                        </div>
-                        <p style="margin-top:12px;color:#656D76;font-size:13px;">大多数企业停留在Level 1，少数进入Level 2，几乎没有到达Level 3</p>
-                    </div>
-                </div>
-                <div class="insight-row analogy">
-                    <div class="insight-label">类比</div>
-                    <div class="insight-content">🎯 企业AI转型就像<strong>企业的"大脑移植"</strong>——不是给员工发个AI工具（戴个帽子），而是要改变企业思考和决策的方式（换个大脑）。换大脑比戴帽子难得多，但效果也大得多</div>
-                </div>
-                <div class="insight-row">
-                    <div class="insight-label">未来规律</div>
-                    <div class="insight-content">
-                        <ul>
-                            <li>差距会拉大：AI转型成功和失败的企业差距越来越大</li>
-                            <li>组织变革是关键：技术不是瓶颈，组织和文化才是</li>
-                            <li>人机协同新模式：不是"AI替代人"，而是"人+AI>人"</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </article>
-
-        <!-- 页脚 -->
-        <footer class="footer">
-            <p>AI生态本质洞察报告 | 创建于 2026-03-05</p>
-            <p>本报告使用<strong>本质洞察力</strong>元能力生成 | <a href="../../index.html">返回深度调研首页</a></p>
-        </footer>
-    </div>
-
-    <script>
-        // Tab切换
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                // 移除所有active
-                document.querySelectorAll('.tab-btn').forEach(b => {
-                    b.classList.remove('active');
-                    b.setAttribute('aria-selected', 'false');
-                });
-                document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-                
-                // 添加active
-                btn.classList.add('active');
-                btn.setAttribute('aria-selected', 'true');
-                document.getElementById(btn.dataset.tab).classList.add('active');
-                
-                // 更新URL hash
-                window.history.replaceState(null, null, '#' + btn.dataset.tab);
-            });
-        });
-
-        // 处理URL hash
-        function handleHash() {
-            const hash = window.location.hash.slice(1);
-            if (hash) {
-                const btn = document.querySelector(`[data-tab="${hash}"]`);
-                if (btn) btn.click();
-            }
-        }
-        
-        window.addEventListener('hashchange', handleHash);
-        if (window.location.hash) handleHash();
-    </script>
+<script>
+document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.tab).classList.add('active');
+        history.replaceState(null, null, '#' + btn.dataset.tab);
+    });
+});
+function handleHash() {
+    const hash = location.hash.slice(1);
+    if (hash) { const b = document.querySelector(`[data-tab="${hash}"]`); if (b) b.click(); }
+}
+addEventListener('hashchange', handleHash);
+if (location.hash) handleHash();
+</script>
 </body>
 </html>
