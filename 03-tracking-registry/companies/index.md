@@ -59,13 +59,22 @@
 | **腾讯** | 混元 | hunyuan.tencent.com | 每周1次 | 企业应用, 生态集成 |
 | **华为** | 盘古 | huaweicloud.com/product/pangu | 每周1次 | 行业大模型, 自主算力 |
 
+### 中国 Tier 2.5 - 新晋独立力量 (NEW)
+
+| 公司 | 核心产品 | 官方渠道 | 检查频率 | 追踪重点 |
+|------|---------|---------|---------|--------|
+| **蚂蚁集团** | 蚂蚁百灵, 阿福APP | antgroup.com | 每周1次 | 独立基座大模型, 金融AI, 阿福登顶App Store |
+| **面壁智能** | MiniCPM系列 | modelbest.cn | 每周1次 | 端侧高效模型, 清华系, OPPO等手机厂商合作 |
+| **昆仑万维** | 天工大模型4.0, 天工AI搜索 | tiangong.cn | 每周1次 | 搜索增强AI, 国内首个AI搜索, Web+App |
+| **360** | 360智脑 | ai.360.com | 每月1次 | 企业安全+AI, 颜水成领导, 2B+2C双线 |
+
 ### 中国 Tier 3 - 垂直/新锐
 
 | 公司 | 核心产品 | 追踪重点 |
-|------|---------|---------|
-| **MiniMax** | 海螺AI | 多模态, 语音生成 |
-| **阶跃星辰** | 跃问 | 多模态, 视频生成 |
-| **零一万物** | 万知 | 开源, 多模态 |
+|------|---------|--------|
+| **MiniMax** | 海螺AI | 多模态, 语音生成, 已上市 |
+| **阶跃星辰** | 跃问 | 多模态, 视频生成, 开源音乐模型 |
+| **零一万物** | 万知 | 开源, 多模态, 产业大模型基地 |
 | **商汤** | 日日新 | 多模态, CV+LLM |
 | **科大讯飞** | 星火 | 语音+大模型, 教育 |
 | **快手可灵** | Kling AI | 视频生成, 国产Sora竞品 |
@@ -333,17 +342,10 @@
 ## 快速索引 (按热度)
 
 **海外必追**: OpenAI, Anthropic, Cursor, Perplexity, Hugging Face, Glean, Sierra
-**中国必追**: DeepSeek, 智谱, Kimi, 阿里Qwen, 可灵AI
-**新锐关注**: SSI, Poolside, Groq, Figure, Lovable, Harvey, Physical Intelligence
-**企业转型**: Google, Microsoft, Meta, 字节, 阿里, 华为, Salesforce, Adobe
-
----
-
-## 快速索引 (按热度)
-
-**海外必追**: OpenAI, Anthropic, Cursor, Perplexity, Hugging Face, Glean, Sierra
 **中国大模型必追**: DeepSeek, 智谱, Kimi, 阿里通义, 字节豆包, 百度文心, 蚂蚁百灵
 **中国AI Coding必追**: 字节Trae, 阿里通义灵码, 智谱CodeGeeX, 百度文心快码, 字节MarsCode
+**新锐关注**: SSI, Poolside, Groq, Figure, Lovable, Harvey, Physical Intelligence
+**企业转型**: Google, Microsoft, Meta, 字节, 阿里, 华为, Salesforce, Adobe
 
 ---
 
