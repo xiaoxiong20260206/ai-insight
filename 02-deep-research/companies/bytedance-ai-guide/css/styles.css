@@ -7,13 +7,13 @@
 /* ==================== CSS 变量定义 - 清爽调研报告风格 v1.6.0 ==================== */
 :root {
     /* ============ 主色调（语义化）============ */
-    --color-success: #1A7F37;           /* 成功/正向/推荐 */
-    --color-success-light: #2DA44E;     /* 成功色亮色 */
-    --color-danger: #CF222E;            /* 危险/负向/警告 */
+    --color-success: #059669;           /* 成功/正向/推荐 */
+    --color-success-light: #10B981;     /* 成功色亮色 */
+    --color-danger: #E11D48;            /* 危险/负向/警告 */
     --color-danger-light: #FF7B72;      /* 危险色亮色 */
-    --color-warning: #BF8700;           /* 警告/注意/部分达标 */
-    --color-warning-dark: #9A6700;      /* 警告色深色（文字用） */
-    --color-info: #0969DA;              /* 信息/链接/中性信息 */
+    --color-warning: #D97706;           /* 警告/注意/部分达标 */
+    --color-warning-dark: #B45309;      /* 警告色深色（文字用） */
+    --color-info: #2563EB;              /* 信息/链接/中性信息 */
     --color-info-light: #54AEFF;        /* 信息色亮色 */
     
     /* ============ 中性色 ============ */
@@ -21,28 +21,28 @@
     --color-text-secondary: #57606A;    /* 次要文字：正文、描述 */
     --color-text-tertiary: #6E7781;     /* 三级文字 */
     --color-text-muted: #6E7781;        /* 辅助文字：标签、备注 */
-    --color-border: #D0D7DE;            /* 边框色：卡片、表格 */
-    --color-border-light: #EAEEF2;      /* 浅边框：分隔线 */
+    --color-border: #E7E5E4;            /* 边框色：卡片、表格 */
+    --color-border-light: #F5F5F4;      /* 浅边框：分隔线 */
     --color-bg: #FAFBFC;                /* 页面背景 */
     --color-bg-card: #FFFFFF;           /* 卡片背景 */
-    --color-bg-table-header: #F6F8FA;   /* 表头背景、次级区域 */
+    --color-bg-table-header: #F8FAFB;   /* 表头背景、次级区域 */
     
     /* ============ 渐变色 ============ */
-    --gradient-success: linear-gradient(135deg, #1A7F37 0%, #2DA44E 100%);
+    --gradient-success: linear-gradient(135deg, #059669 0%, #10B981 100%);
     --gradient-badge: linear-gradient(135deg, #DDF4FF 0%, #D4F8E8 100%);
-    --gradient-blue-text: linear-gradient(90deg, #0969DA, #54AEFF);
-    --gradient-red-text: linear-gradient(90deg, #CF222E, #FF7B72);
+    --gradient-blue-text: linear-gradient(90deg, #2563EB, #54AEFF);
+    --gradient-red-text: linear-gradient(90deg, #E11D48, #FF7B72);
     
     /* ============ 透明度变体颜色 ============ */
-    --color-success-subtle: rgba(26, 127, 55, 0.12);
-    --color-success-hover: rgba(26, 127, 55, 0.08);
-    --color-success-light-bg: rgba(26, 127, 55, 0.04);
-    --color-danger-subtle: rgba(207, 34, 46, 0.12);
-    --color-danger-hover: rgba(207, 34, 46, 0.08);
-    --color-warning-subtle: rgba(191, 135, 0, 0.12);
-    --color-warning-hover: rgba(191, 135, 0, 0.08);
-    --color-info-subtle: rgba(9, 105, 218, 0.12);
-    --color-info-hover: rgba(9, 105, 218, 0.08);
+    --color-success-subtle: rgba(5, 150, 105, 0.12);
+    --color-success-hover: rgba(5, 150, 105, 0.08);
+    --color-success-light-bg: rgba(5, 150, 105, 0.04);
+    --color-danger-subtle: rgba(225, 29, 72, 0.12);
+    --color-danger-hover: rgba(225, 29, 72, 0.08);
+    --color-warning-subtle: rgba(217, 119, 6, 0.12);
+    --color-warning-hover: rgba(217, 119, 6, 0.08);
+    --color-info-subtle: rgba(37, 99, 235, 0.12);
+    --color-info-hover: rgba(37, 99, 235, 0.08);
     
     /* ============ 边框宽度 ============ */
     --border-accent: 3px;
@@ -120,7 +120,7 @@
     --bg-card: var(--color-bg-card);
     --border-color: var(--color-border);
     --border-hover: var(--color-success);
-    --glow-gold: rgba(26, 127, 55, 0.2);
+    --glow-gold: rgba(5, 150, 105, 0.2);
     --glow-sm: 0 0 10px var(--glow-gold);
     --glow-md: 0 0 20px var(--glow-gold);
 }
@@ -351,12 +351,12 @@ h6 {
 
 .nav-links a:hover {
     color: var(--color-success);
-    background: rgba(26, 127, 55, 0.08);
+    background: rgba(5, 150, 105, 0.08);
 }
 
 .nav-links a.active {
     color: var(--color-success);
-    background: rgba(26, 127, 55, 0.12);
+    background: rgba(5, 150, 105, 0.12);
 }
 
 @media (max-width: 768px) {
@@ -425,10 +425,10 @@ h6 {
     flex-shrink: 0;
 }
 
-.card-icon.gold { background: rgba(26, 127, 55, 0.12); }
-.card-icon.blue { background: rgba(9, 105, 218, 0.12); }
+.card-icon.gold { background: rgba(5, 150, 105, 0.12); }
+.card-icon.blue { background: rgba(37, 99, 235, 0.12); }
 .card-icon.purple { background: rgba(130, 80, 223, 0.12); }
-.card-icon.green { background: rgba(26, 127, 55, 0.12); }
+.card-icon.green { background: rgba(5, 150, 105, 0.12); }
 
 /* 章节卡片 */
 .section-card {
@@ -594,12 +594,12 @@ h6 {
 }
 
 .btn-ghost {
-    background: rgba(26, 127, 55, 0.08);
+    background: rgba(5, 150, 105, 0.08);
     color: var(--color-success);
 }
 
 .btn-ghost:hover {
-    background: rgba(26, 127, 55, 0.15);
+    background: rgba(5, 150, 105, 0.15);
 }
 
 /* ==================== 状态标签 ==================== */
@@ -614,12 +614,12 @@ h6 {
 }
 
 .tag-gold, .status-success {
-    background: rgba(26, 127, 55, 0.12);
+    background: rgba(5, 150, 105, 0.12);
     color: var(--color-success);
 }
 
 .tag-blue, .status-info {
-    background: rgba(9, 105, 218, 0.12);
+    background: rgba(37, 99, 235, 0.12);
     color: var(--color-info);
 }
 
@@ -629,17 +629,17 @@ h6 {
 }
 
 .tag-green {
-    background: rgba(26, 127, 55, 0.12);
+    background: rgba(5, 150, 105, 0.12);
     color: var(--color-success);
 }
 
 .status-warning {
-    background: rgba(191, 135, 0, 0.12);
+    background: rgba(217, 119, 6, 0.12);
     color: var(--color-warning-dark);
 }
 
 .status-danger {
-    background: rgba(207, 34, 46, 0.15);
+    background: rgba(225, 29, 72, 0.15);
     color: var(--color-danger);
 }
 
@@ -722,8 +722,8 @@ h6 {
 }
 
 .correct-path {
-    border-left: 3px solid rgba(26, 127, 55, 0.5);
-    background: rgba(26, 127, 55, 0.04);
+    border-left: 3px solid rgba(5, 150, 105, 0.5);
+    background: rgba(5, 150, 105, 0.04);
     border-radius: var(--radius-lg);
     padding: var(--spacing-lg);
 }
@@ -738,8 +738,8 @@ h6 {
 }
 
 .wrong-path {
-    border-left: 3px solid rgba(207, 34, 46, 0.5);
-    background: rgba(207, 34, 46, 0.04);
+    border-left: 3px solid rgba(225, 29, 72, 0.5);
+    background: rgba(225, 29, 72, 0.04);
     border-radius: var(--radius-lg);
     padding: var(--spacing-lg);
 }
@@ -1031,7 +1031,7 @@ tbody tr:hover {
 
 /* ==================== 选中文字样式 ==================== */
 ::selection {
-    background: rgba(26, 127, 55, 0.2);
+    background: rgba(5, 150, 105, 0.2);
     color: var(--color-text-primary);
 }
 
@@ -1199,7 +1199,7 @@ tbody tr:hover {
 }
 
 .toc-list .toc-item.active {
-    background: rgba(26, 127, 55, 0.08);
+    background: rgba(5, 150, 105, 0.08);
     color: var(--color-success);
     border-left-color: var(--color-success);
     font-weight: 600;
@@ -1324,7 +1324,7 @@ tbody tr:hover {
     align-items: center;
     gap: var(--spacing-sm);
     background: var(--color-success-subtle);
-    border: 1px solid rgba(26, 127, 55, 0.3);
+    border: 1px solid rgba(5, 150, 105, 0.3);
     padding: var(--spacing-xs) var(--spacing-md);
     border-radius: var(--radius-full);
     font-size: var(--font-size-sm);
@@ -1674,7 +1674,7 @@ tbody tr:hover {
     justify-content: space-between;
     padding: 12px 16px;
     border-bottom: 1px solid var(--color-border-light);
-    background: linear-gradient(135deg, rgba(26, 127, 55, 0.05) 0%, rgba(9, 105, 218, 0.03) 100%);
+    background: linear-gradient(135deg, rgba(5, 150, 105, 0.05) 0%, rgba(37, 99, 235, 0.03) 100%);
 }
 
 .page-sidebar-nav .nav-title {
@@ -1697,7 +1697,7 @@ tbody tr:hover {
     height: 6px;
     background: var(--color-success);
     border-radius: 50%;
-    box-shadow: 0 0 0 2px rgba(26, 127, 55, 0.2);
+    box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.2);
 }
 
 .page-sidebar-nav ul {
@@ -1726,13 +1726,13 @@ tbody tr:hover {
 
 .page-sidebar-nav a:hover {
     color: var(--color-success);
-    background: rgba(26, 127, 55, 0.06);
-    border-left-color: rgba(26, 127, 55, 0.3);
+    background: rgba(5, 150, 105, 0.06);
+    border-left-color: rgba(5, 150, 105, 0.3);
 }
 
 .page-sidebar-nav a.active {
     color: var(--color-success);
-    background: rgba(26, 127, 55, 0.1);
+    background: rgba(5, 150, 105, 0.1);
     font-weight: 600;
     border-left-color: var(--color-success);
 }
@@ -1794,7 +1794,7 @@ tbody tr:hover {
 }
 
 .page-sidebar-nav.collapsed .nav-toggle:hover {
-    background: rgba(26, 127, 55, 0.1);
+    background: rgba(5, 150, 105, 0.1);
     color: var(--color-success);
 }
 
@@ -1896,7 +1896,7 @@ tbody tr:hover {
 .tab-btn.active {
     background: var(--gradient-success);
     color: #fff;
-    box-shadow: 0 2px 8px rgba(26, 127, 55, 0.25);
+    box-shadow: 0 2px 8px rgba(5, 150, 105, 0.25);
 }
 
 .tab-btn-num {
@@ -2008,7 +2008,7 @@ tbody tr:hover {
     height: 8px;
     background: var(--color-danger);
     border-radius: 50%;
-    box-shadow: 0 0 0 3px rgba(207, 34, 46, 0.15);
+    box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.15);
 }
 
 .summary-title {
@@ -2220,7 +2220,7 @@ tbody tr:hover {
     background: var(--color-success);
     color: #fff;
     transform: scale(1.05);
-    box-shadow: 0 6px 16px rgba(26, 127, 55, 0.25);
+    box-shadow: 0 6px 16px rgba(5, 150, 105, 0.25);
 }
 
 .global-btn.active {
