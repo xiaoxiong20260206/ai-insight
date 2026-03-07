@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生成式AI市场全景深度研究 | 2024 Q1</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
+    <style>
+/* ==================== CSS 变量定义 ==================== */
+:root {
+    --color-success: #059669;
+    --color-success-light: #10B981;
+    --color-danger: #E11D48;
+    --color-danger-light: #F43F5E;
+    --color-warning: #D97706;
+    --color-warning-light: #F59E0B;
+    --color-info: #2563EB;
+    --color-info-light: #3B82F6;
+    --color-purple: #7C3AED;
+    --color-purple-light: #8B5CF6;
+    --color-text-primary: #1C1917;
+    --color-text-secondary: #57534E;
+    --color-text-muted: #78716C;
+    --color-border: #E7E5E4;
+    --color-border-light: #F5F5F4;
+    --color-bg: #F8FAFB;
+    --color-bg-card: #FFFFFF;
+    --color-bg-table-header: #FAFAF9;
+    --gradient-success: linear-gradient(135deg, #059669 0%, #10B981 100%);
+    --gradient-hero: linear-gradient(135deg, #059669 0%, #2563EB 50%, #7C3AED 100%);
+    --gradient-badge: linear-gradient(135deg, #ECFDF5 0%, #EFF6FF 100%);
+    --gradient-mesh: 
+        radial-gradient(at 20% 20%, rgba(5,150,105,0.08) 0%, transparent 50%),
+        radial-gradient(at 80% 80%, rgba(37,99,235,0.06) 0%, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(124,58,237,0.04) 0%, transparent 50%);
+    --shadow-xs: 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-card: 0 2px 8px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.04);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.04);
+    --shadow-glow-success: 0 4px 14px rgba(5,150,105,0.15);
+    --shadow-hover: 0 6px 16px rgba(5,150,105,0.15), 0 2px 6px rgba(5,150,105,0.1);
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-2xl: 40px;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-full: 9999px;
+    --font-family: -apple-system, "SF Pro Display", "system-ui", "Segoe UI", "Noto Sans SC", Helvetica, Arial, sans-serif;
+    --font-mono: "SF Mono", "Fira Code", monospace;
+    --heading-1: 28px;
+    --heading-2: 18px;
+    --heading-3: 15px;
+    --heading-4: 13px;
+    --body-text: 14px;
+    --body-small: 13px;
+    --caption: 12px;
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+    font-family: var(--font-family);
+    font-size: var(--body-text);
+    line-height: 1.65;
+    color: var(--color-text-primary);
+    background: var(--color-bg);
+    background-image: var(--gradient-mesh);
+    background-attachment: fixed;
+    -webkit-font-smoothing: antialiased;
+}
+
+.container { max-width: 1020px; margin: 0 auto; padding: var(--spacing-lg) var(--spacing-md) 48px; }
+
+/* Header */
+.header {
+    text-align: center;
+    padding: var(--spacing-2xl) 0;
+    margin-bottom: var(--spacing-xl);
+    position: relative;
+}
+.header::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gradient-hero);
+}
+.header-badge {
+    display: inline-flex;
+    align-items: center;
+    background: var(--gradient-badge);
+    color: var(--color-info);
+    padding: var(--spacing-xs) 12px;
+    border-radius: var(--radius-full);
+    font-size: var(--caption);
+    font-weight: 500;
+    margin-bottom: 20px;
+    border: 1px solid rgba(9,105,218,0.15);
+}
+.header-title {
+    font-size: 34px;
+    font-weight: 800;
+    line-height: 1.3;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+    background: var(--gradient-hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.header-subtitle {
+    font-size: var(--body-text);
+    color: var(--color-text-secondary);
+    max-width: 640px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+.header-meta {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 16px;
+    font-size: var(--caption);
+    color: var(--color-text-muted);
+}
+
+/* Summary Box */
+.summary-box {
+    background: var(--color-bg-card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    border-left: 4px solid var(--color-danger);
+}
+.summary-label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: var(--caption);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-danger);
+    margin-bottom: 12px;
+}
+.summary-label::before {
+    content: '';
+    width: 8px; height: 8px;
+    background: var(--color-danger);
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px rgba(225,29,72,0.15);
+}
+.summary-title {
+    font-size: var(--heading-2);
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 12px;
+}
+.summary-title em { color: var(--color-danger); font-style: normal; font-weight: 600; }
+.summary-text { color: var(--color-text-secondary); line-height: 1.7; }
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+}
+@media (max-width: 768px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+.stat-card {
+    background: var(--color-bg-card);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-border);
+    padding: 20px;
+    text-align: center;
+    transition: box-shadow var(--transition-normal), transform var(--transition-normal);
+}
+.stat-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+.stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 4px;
+}
+.stat-value.emerald { color: var(--color-success); }
+.stat-value.blue { color: var(--color-info); }
+.stat-value.purple { color: var(--color-purple); }
+.stat-value.rose { color: var(--color-danger); }
+.stat-value.amber { color: var(--color-warning); }
+.stat-label {
+    font-size: var(--caption);
+    color: var(--color-text-muted);
+    font-weight: 500;
+}
+
+/* Tab Navigation */
+.tab-nav {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 4px;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 6px;
+    margin-bottom: var(--spacing-lg);
+    position: sticky;
+    top: 12px;
+    z-index: 100;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    box-shadow: var(--shadow-card);
+}
+.tab-btn {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 14px;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: var(--body-small);
+    font-weight: 500;
+    color: var(--color-text-muted);
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+}
+.tab-btn:hover { background: var(--color-bg-table-header); color: var(--color-text-secondary); }
+.tab-btn.active {
+    background: var(--gradient-success);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(5,150,105,0.25);
+}
+.tab-panel { display: none; animation: fadeIn 0.3s ease-out; }
+.tab-panel.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Section Card */
+.section {
+    background: var(--color-bg-card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    border: 1px solid var(--color-border);
+}
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border-light);
+}
+.section-number {
+    background: var(--gradient-success);
+    color: white;
+    width: 32px; height: 32px;
+    border-radius: var(--radius-md);
+    font-size: 14px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 4px rgba(5,150,105,0.25);
+}
+.section-number.blue { background: linear-gradient(135deg, #2563EB, #3B82F6); box-shadow: 0 2px 4px rgba(37,99,235,0.25); }
+.section-number.purple { background: linear-gradient(135deg, #7C3AED, #8B5CF6); box-shadow: 0 2px 4px rgba(124,58,237,0.25); }
+.section-number.rose { background: linear-gradient(135deg, #E11D48, #F43F5E); box-shadow: 0 2px 4px rgba(225,29,72,0.25); }
+.section-number.amber { background: linear-gradient(135deg, #D97706, #F59E0B); box-shadow: 0 2px 4px rgba(217,119,6,0.25); }
+.section-title {
+    font-size: var(--heading-2);
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+/* Table */
+.table-wrap { overflow-x: auto; margin: 16px 0; border-radius: var(--radius-md); border: 1px solid var(--color-border); }
+table { width: 100%; border-collapse: collapse; font-size: var(--body-small); }
+th {
+    background: var(--color-bg-table-header);
+    font-weight: 600;
+    font-size: var(--heading-4);
+    text-align: left;
+    padding: 12px 14px;
+    color: var(--color-text-primary);
+    border-bottom: 2px solid var(--color-border);
+    white-space: nowrap;
+}
+td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--color-border-light);
+    color: var(--color-text-secondary);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(5,150,105,0.03); }
+.up { color: var(--color-success); font-weight: 600; }
+.down { color: var(--color-danger); font-weight: 600; }
+.hot { color: var(--color-warning); font-weight: 600; }
+.tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+    font-size: 11px;
+    font-weight: 600;
+}
+.tag-up { background: #ECFDF5; color: #059669; }
+.tag-down { background: #FFF1F2; color: #E11D48; }
+.tag-hot { background: #FFFBEB; color: #D97706; }
+.tag-blue { background: #EFF6FF; color: #2563EB; }
+.tag-purple { background: #F5F3FF; color: #7C3AED; }
+
+/* Insight Box */
+.insight-box {
+    background: linear-gradient(135deg, rgba(124,58,237,0.06) 0%, rgba(37,99,235,0.04) 100%);
+    border: 1px solid rgba(124,58,237,0.15);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    margin: 16px 0;
+}
+.insight-box.warning {
+    background: linear-gradient(135deg, rgba(217,119,6,0.06) 0%, rgba(225,29,72,0.04) 100%);
+    border-color: rgba(217,119,6,0.15);
+}
+.insight-box.success {
+    background: linear-gradient(135deg, rgba(5,150,105,0.06) 0%, rgba(37,99,235,0.04) 100%);
+    border-color: rgba(5,150,105,0.15);
+}
+.insight-title {
+    font-size: var(--heading-4);
+    font-weight: 600;
+    color: var(--color-purple);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.insight-box.warning .insight-title { color: var(--color-warning); }
+.insight-box.success .insight-title { color: var(--color-success); }
+.insight-text { font-size: var(--body-small); color: var(--color-text-secondary); line-height: 1.7; }
+
+/* Mini Stats */
+.mini-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 16px 0;
+}
+@media (max-width: 640px) { .mini-stats { grid-template-columns: repeat(2, 1fr); } }
+.mini-stat {
+    background: var(--color-bg-table-header);
+    border-radius: var(--radius-sm);
+    padding: 12px;
+    text-align: center;
+}
+.mini-stat-value { font-size: 18px; font-weight: 700; }
+.mini-stat-label { font-size: 11px; color: var(--color-text-muted); margin-top: 2px; }
+
+/* Track Card (compact) */
+.track-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 16px 0;
+}
+@media (max-width: 640px) { .track-grid { grid-template-columns: 1fr; } }
+.track-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 14px;
+    background: var(--color-bg-card);
+    transition: box-shadow var(--transition-fast);
+}
+.track-card:hover { box-shadow: var(--shadow-md); }
+.track-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+.track-name { font-size: var(--heading-3); font-weight: 600; color: var(--color-text-primary); }
+.track-pv { font-size: var(--heading-3); font-weight: 700; }
+.track-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 6px;
+    font-size: 11px;
+}
+.track-detail { font-size: var(--body-small); color: var(--color-text-secondary); line-height: 1.6; margin-top: 8px; }
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: var(--spacing-2xl) 0 var(--spacing-md);
+    color: var(--color-text-muted);
+    font-size: var(--caption);
+    border-top: 1px solid var(--color-border);
+    margin-top: var(--spacing-2xl);
+}
+.footer a { color: var(--color-info); text-decoration: none; }
+.footer a:hover { text-decoration: underline; }
+
+/* Subsection Title */
+.sub-title {
+    font-size: var(--heading-3);
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 20px 0 12px;
+    padding-left: 10px;
+    border-left: 3px solid var(--color-success);
+}
+.sub-title.blue { border-left-color: var(--color-info); }
+.sub-title.purple { border-left-color: var(--color-purple); }
+.sub-title.rose { border-left-color: var(--color-danger); }
+.sub-title.amber { border-left-color: var(--color-warning); }
+
+p { margin-bottom: 10px; color: var(--color-text-secondary); }
+ul, ol { margin: 8px 0 12px 20px; color: var(--color-text-secondary); }
+li { margin-bottom: 4px; line-height: 1.6; }
+strong { color: var(--color-text-primary); }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+    <div class="header-badge">DEEP RESEARCH REPORT</div>
+    <h1 class="header-title">生成式AI市场全景深度研究</h1>
+    <p class="header-subtitle">基于aiwatch.ai 2024Q1季度数据报告（219页），覆盖7大品类、40+细分赛道的系统性分析，追踪Top200 GenAI产品的流量、估值与竞争格局</p>
+    <div class="header-meta">
+        <span>原始报告: 郎瀚威 / 张蔚 / 江志桐</span>
+        <span>数据来源: Similarweb</span>
+        <span>时间范围: 2023.04 - 2024.03</span>
+    </div>
+</header>
+
+<!-- ===== EXECUTIVE SUMMARY ===== -->
+<div class="summary-box">
+    <div class="summary-label">EXECUTIVE SUMMARY</div>
+    <div class="summary-title">GenAI市场年流量增长<em>翻倍</em>，但结构性分化正在加速：通用模型蚕食垂类，头部效应与长尾爆发并存</div>
+    <div class="summary-text">
+        2024年Q1数据显示，Top200 GenAI工具月总流量从2023年4月的约450亿增长到超900亿PV，年增长率约100%。但增长并非均匀分布——ChatGPT市场份额从94%降至73%，Gemini贡献了聊天机器人赛道70%的增量；功能单薄的垂类工具（Prompt工具-26%、代码助手-12%、艺术-42%）被通用模型吞噬；而音乐（+54%）、Agent（+67%）、虚拟陪伴（TAM $2000亿）、记忆（+263%）等差异化赛道则呈现爆发式增长。中国产品首次大规模进入全球视野：Kimi增长1524%、秘塔搜索增长668900%、字节Coze增长112900%。
+    </div>
+</div>
+
+<!-- ===== KEY STATS ===== -->
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-value emerald">~900亿</div>
+        <div class="stat-label">月总PV (2024.03)</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value blue">40+</div>
+        <div class="stat-label">细分赛道</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value purple">7大品类</div>
+        <div class="stat-label">文字/图像/视频/音频/代码/Agent/B2B</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value rose">219页</div>
+        <div class="stat-label">原始报告页数</div>
+    </div>
+</div>
+
+<!-- ===== TAB NAVIGATION ===== -->
+<div class="tab-nav" id="tabNav">
+    <button class="tab-btn active" onclick="switchTab('overview')">📊 全景</button>
+    <button class="tab-btn" onclick="switchTab('text')">📝 文字/生产力</button>
+    <button class="tab-btn" onclick="switchTab('image')">🎨 图像</button>
+    <button class="tab-btn" onclick="switchTab('video')">🎬 视频</button>
+    <button class="tab-btn" onclick="switchTab('audio')">🎵 音频</button>
+    <button class="tab-btn" onclick="switchTab('code')">💻 代码/Agent</button>
+    <button class="tab-btn" onclick="switchTab('b2b')">🏢 B2B垂类</button>
+    <button class="tab-btn" onclick="switchTab('insight')">💡 深度洞察</button>
+</div>
+
+<!-- ===================== TAB 1: OVERVIEW ===================== -->
+<div class="tab-panel active" id="panel-overview">
+
+<div class="section">
+    <div class="section-header">
+        <div class="section-number">1</div>
+        <div class="section-title">市场全景：七大品类规模与增长</div>
+    </div>
+    <p>报告基于a16z的GenAI分类体系，将市场划分为<strong>文字/生产力、图像、视频、音频、代码、Agent、B2B垂类</strong>七大品类，涵盖40+细分赛道。数据来源为Similarweb的网页端访问量(PV)，时间跨度为2023年4月至2024年3月。</p>
+
+    <div class="table-wrap">
+    <table>
+        <thead>
+            <tr><th>品类</th><th>代表赛道</th><th>头部月PV</th><th>整体趋势</th><th>核心特征</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>文字/生产力</strong></td><td>ChatBot、搜索、翻译、写作、教育</td><td>24亿 (ChatBot)</td><td class="up">高速增长</td><td>ChatGPT统治但份额下滑，Gemini强势崛起</td></tr>
+            <tr><td><strong>图像</strong></td><td>图像生成、设计工具、图像编辑</td><td>6.1亿 (设计工具)</td><td class="up">平稳增长</td><td>Canva绝对统治(92%)，Midjourney核心在Discord</td></tr>
+            <tr><td><strong>视频</strong></td><td>数字人、图生视频、视频编辑</td><td>8267万 (视频编辑)</td><td class="down">分化明显</td><td>Sora冲击严重，Runway领先但增长放缓</td></tr>
+            <tr><td><strong>音频</strong></td><td>音乐、TTS、会议总结</td><td>4759万 (TTS)</td><td class="up">高速增长</td><td>Suno AI爆发(+159%)，ElevenLabs统治TTS</td></tr>
+            <tr><td><strong>代码</strong></td><td>开发者工具、代码助手、低代码</td><td>7910万 (代码助手)</td><td class="down">严重下滑</td><td>通用模型覆盖代码功能，GitHub Copilot 1M付费</td></tr>
+            <tr><td><strong>Agent</strong></td><td>自动化、工作流</td><td>806万</td><td class="up">高速增长</td><td>Zapier主导(42%)，Coze崛起，技术壁垒高</td></tr>
+            <tr><td><strong>B2B垂类</strong></td><td>客服、金融、医疗、法律</td><td>9981万 (客服)</td><td class="up">快速增长</td><td>Salesforce统治客服(84%)，医疗增速最快(+118%)</td></tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-header">
+        <div class="section-number blue">2</div>
+        <div class="section-title">增速排行：高速增长与加速衰退赛道</div>
+    </div>
+    <div class="two-col">
+        <div>
+            <div class="sub-title" style="border-left-color: var(--color-success);">高速增长赛道 TOP 10</div>
+            <div class="table-wrap">
+            <table>
+                <thead><tr><th>赛道</th><th>增速</th><th>月PV</th></tr></thead>
+                <tbody>
+                    <tr><td>记忆/新交互</td><td class="up">+263%</td><td>218万</td></tr>
+                    <tr><td>医疗保健</td><td class="up">+118%</td><td>577万</td></tr>
+                    <tr><td>SQL</td><td class="up">+103%</td><td>63万</td></tr>
+                    <tr><td>数据分析</td><td class="up">+88%</td><td>446万</td></tr>
+                    <tr><td>Agent</td><td class="up">+67%</td><td>806万</td></tr>
+                    <tr><td>社媒助手</td><td class="up">+61%</td><td>804万</td></tr>
+                    <tr><td>音乐</td><td class="up">+54%</td><td>4458万</td></tr>
+                    <tr><td>AI学习</td><td class="up">+50%</td><td>480万</td></tr>
+                    <tr><td>会议总结</td><td class="up">+48%</td><td>1114万</td></tr>
+                    <tr><td>人力资源</td><td class="up">+42%</td><td>1694万</td></tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+        <div>
+            <div class="sub-title rose">衰退/停滞赛道</div>
+            <div class="table-wrap">
+            <table>
+                <thead><tr><th>赛道</th><th>增速</th><th>核心原因</th></tr></thead>
+                <tbody>
+                    <tr><td>Prompt工具</td><td class="down">-26%</td><td>模型自身能力提升</td></tr>
+                    <tr><td>个人视频</td><td class="down">-19%</td><td>市场饱和+换脸伦理</td></tr>
+                    <tr><td>代码助手</td><td class="down">-12%</td><td>通用模型覆盖</td></tr>
+                    <tr><td>电商工具</td><td class="down">-12%</td><td>Shopify等大厂统治</td></tr>
+                    <tr><td>销售</td><td class="down">-9%</td><td>功能单薄被大厂覆盖</td></tr>
+                    <tr><td>建站</td><td class="down">-6%</td><td>Webflow一家独大</td></tr>
+                    <tr><td>SEO写作</td><td class="down">-6%</td><td>ChatGPT替代专用工具</td></tr>
+                    <tr><td>艺术</td><td class="down">-42%(YoY)</td><td>多模态模型覆盖</td></tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="insight-box">
+        <div class="insight-title">💡 结构性分化的底层逻辑</div>
+        <div class="insight-text">
+            高增长赛道有三个共同特征：<strong>1) 高技术壁垒</strong>（音乐生成、Agent、医疗需要专业know-how）；<strong>2) 强差异化场景</strong>（虚拟陪伴的记忆和情感理解、会议总结的多人对话理解）；<strong>3) 通用模型难以直接覆盖</strong>。而衰退赛道则恰恰相反——功能单一、技术壁垒低、用ChatGPT就能完成80%的工作。这意味着GenAI创业的"安全区"正在从"包装GPT API"转向"建立真正的差异化壁垒"。
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-header">
+        <div class="section-number purple">3</div>
+        <div class="section-title">中国产品全球化突破</div>
+    </div>
+    <p>2024年Q1是中国AI产品首次大规模进入全球流量榜单的转折点。以下产品在Similarweb数据中实现了惊人的增长：</p>
+    <div class="mini-stats">
+        <div class="mini-stat"><div class="mini-stat-value up">Kimi</div><div class="mini-stat-label">+1524%增速</div></div>
+        <div class="mini-stat"><div class="mini-stat-value up">秘塔AI搜索</div><div class="mini-stat-label">+668,900%增速</div></div>
+        <div class="mini-stat"><div class="mini-stat-value up">字节Coze</div><div class="mini-stat-label">+112,900%增速</div></div>
+    </div>
+    <p>此外，百度飞桨AI Studio在AI学习赛道进入前三，帆软数据在数据分析赛道表现突出。中国团队的Fotor在图像编辑赛道位列Top3（1492万PV）。这标志着中国GenAI从"国内市场"向"全球竞争"的转型。</p>
+</div>
+
+</div><!-- /panel-overview -->
+
+<!-- ===================== TAB 2: TEXT/PRODUCTIVITY ===================== -->
+<div class="tab-panel" id="panel-text">
+
+<div class="section">
+    <div class="section-header">
+        <div class="section-number">1</div>
+        <div class="section-title">ChatBot赛道 — 月PV 24亿，TAM $2570亿</div>
+    </div>
+    <div class="mini-stats">
+        <div class="mini-stat"><div class="mini-stat-value emerald">24亿</div><div class="mini-stat-label">月总PV</div></div>
+        <div class="mini-stat"><div class="mini-stat-value blue">+21%</div><div class="mini-stat-label">季度增速</div></div>
+        <div class="mini-stat"><div class="mini-stat-value amber">$2570亿</div><div class="mini-stat-label">TAM</div></div>
+    </div>
+    <div class="table-wrap">
+    <table>
+        <thead><tr><th>产品</th><th>3月PV(万)</th><th>市场份额</th><th>YoY变化</th><th>估值/收入</th></tr></thead>
+        <tbody>
+            <tr><td><strong>ChatGPT</strong></td><td>176,000</td><td>73%</td><td class="up">+3990万</td><td>$860亿(2024)</td></tr>
+            <tr><td><strong>Gemini</strong></td><td>43,000</td><td>17%</td><td class="up">+43,000万(新)</td><td>Google</td></tr>
+            <tr><td><strong>Poe</strong></td><td>4,930</td><td>2%</td><td class="up">+3480万</td><td>Quora</td></tr>
+            <tr><td><strong>Claude</strong></td><td>2,370</td><td>1%</td><td class="up">+2370万(新)</td><td>$180亿(2024)</td></tr>
+            <tr><td><strong>Perplexity</strong></td><td>未单列</td><td>搜索赛道</td><td class="up">高增长</td><td>$100亿(2024)</td></tr>
+        </tbody>
+    </table>
+    </div>
+    <div class="insight-box">
+        <div class="insight-title">💡 ChatGPT的"统治衰退"</div>
+        <div class="insight-text">ChatGPT市场份额从94%降至73%，但绝对PV仍在增长。真正的变化是<strong>Gemini贡献了赛道70%的增量</strong>，Claude贡献10%。这意味着ChatBot赛道从"一家独大"进入"三强格局"时代，且Google凭借搜索入口优势在快速追赶。</div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-header">
+        <div class="section-number blue">2</div>
+        <div class="section-title">搜索赛道 — 月PV 15.1亿，TAM $2.04万亿</div>
+    </div>
+    <div class="track-detail">
+        <p>AI搜索是TAM最大的赛道。<strong>NewBing</strong>以92%的份额独占鳌头（14亿PV），但这主要得益于微软Bing的存量用户转化。<strong>Perplexity</strong>以6149万PV位列创业公司第一，估值$100亿。月平均增速4072万PV/月，增长率8.37%。</p>
+        <p>中国产品<strong>秘塔AI搜索</strong>增长668900%，<strong>Kimi</strong>增长1524%，正在快速切入搜索场景。</p>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-header">
+        <div class="section-number">3</div>
+        <div class="section-title">核心生产力工具矩阵</div>
+    </div>
+    <div class="table-wrap">
+    <table>
+        <thead><tr><th>赛道</th><th>月PV(万)</th><th>增速</th><th>TAM</th><th>Top1产品</th><th>Top1份额</th><th>马太效应</th></tr></thead>
+        <tbody>
+            <tr><td><strong>翻译</strong></td><td>33,000</td><td class="up">+11%</td><td>$1亿</td><td>DeepL</td><td>79%</td><td>强</td></tr>
+            <tr><td><strong>通用写作</strong></td><td>29,500</td><td class="up">+21%</td><td>$156亿</td><td>Notion AI</td><td>57%</td><td>中</td></tr>
+            <tr><td><strong>教育工具</strong></td><td>29,700</td><td class="up">+22%</td><td>$30亿</td><td>Quizlet</td><td>45%</td><td>弱</td></tr>
+            <tr><td><strong>虚拟陪伴</strong></td><td>33,000</td><td class="up">+22%</td><td>$2000亿</td><td>Character.AI</td><td>64%</td><td>中</td></tr>
+            <tr><td><strong>复制撰写</strong></td><td>7,030</td><td class="up">+14%</td><td>$150亿</td><td>Quillbot</td><td>89%</td><td>极强</td></tr>
+            <tr><td><strong>市场营销</strong></td><td>5,021</td><td class="up">+4%</td><td>$60亿</td><td>BeaconsAI</td><td>42%</td><td>弱</td></tr>
+            <tr><td><strong>邮件助手</strong></td><td>3,456</td><td class="up">+5%</td><td>$100亿</td><td>Mailchimp</td><td>53%</td><td>中</td></tr>
+            <tr><td><strong>PPT</strong></td><td>5,429</td><td>+2%</td><td>$30亿</td><td>Prezi</td><td>33%</td><td>弱</td></tr>
+            <tr><td><strong>PDF</strong></td><td>2,477</td><td class="up">+34%</td><td>$30亿</td><td>ChatPDF</td><td>43%</td><td>弱</td></tr>
+            <tr><td><strong>AI检测</strong></td><td>2,552</td><td class="up">+17%</td><td>$数亿</td><td>GPTZero</td><td>39%</td><td>弱</td></tr>
+            <tr><td><strong>讲故事</strong></td><td>1,570</td><td class="up">+32%</td><td>$100亿</td><td>NovelAI</td><td>45%</td><td>弱</td></tr>
+            <tr><td><strong>导航网站</strong></td><td>2,209</td><td class="up">+3%</td><td>小众</td><td>TAAFT</td><td>24%</td><td>弱</td></tr>
+        </tbody>
+    </table>
+    </div>
+
+    <div class="insight-box warning">
+        <div class="insight-title">⚠️ 通用Chatbot对垂类工具的"蚕食效应"</div>
+        <div class="insight-text">
+            多个原本独立的赛道正在被ChatGPT/Gemini/Claude覆盖：<strong>SEO写作</strong>（Writesonic -63%）、<strong>邮件助手</strong>（ChatGPT Writer -91%）、<strong>研究</strong>（Elicit -87%）、<strong>Prompt工具</strong>（PromptBase -79%）。这些赛道的共同特征是"功能薄、壁垒低"——用户发现直接用ChatGPT就能完成同样的工作，无需专用工具。
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-header">
+        <div class="section-number rose">4</div>
+        <div class="section-title">虚拟陪伴 — 最被低估的超级赛道</div>
+    </div>
+    <div class="mini-stats">
+        <div class="mini-stat"><div class="mini-stat-value rose">$2000亿</div><div class="mini-stat-label">TAM</div></div>
+        <div class="mini-stat"><div class="mini-stat-value emerald">3.3亿</div><div class="mini-stat-label">月PV</div></div>
+        <div class="mini-stat"><div class="mini-stat-value blue">+22%</div><div class="mini-stat-label">季度增速</div></div>
+    </div>
+    <p>Character.AI以2.1亿PV统治该赛道（64%份额），但份额在下降——从96%降至62%。<strong>JanitorAI</strong>（3202万）、<strong>Crushon</strong>（2005万）等新玩家正在抢占市场。</p>
+    <p>该赛道的核心价值在于<strong>用户时长和留存远超其他品类</strong>，虽然总流量不及ChatGPT，但头部应用的用户粘性在各品类中遥遥领先。技术壁垒高——记忆长度管理、成本控制、情感理解是核心难题。</p>
+    <p>对标公司为抖音、米哈游。中国大厂都在试水，美国大厂不积极。90%以上为原生AI产品。</p>
+</div>
+
+<div class="section">
+    <div class="section-header">
+        <div class="section-number amber">5</div>
+        <div class="section-title">记忆/新交互 — 下一代平台入口</div>
+    </div>
+    <p>月PV仅218万，但增速高达<strong>+263%</strong>，是所有赛道中增速最快的。代表产品<strong>Rabbit</strong>（硬件+AI）和<strong>Humane</strong>正在探索"post-smartphone"的交互形态。</p>
+    <p>TAM潜力$600亿，对标Apple，技术门槛极高。目前市场极早期，马太效应较强（Top1占77%），但验证了"AI+硬件"方向的市场需求。</p>
+</div>
+
+</div><!-- /panel-text -->
+
+<!-- ===================== TAB 3: IMAGE ===================== -->
+<div class="tab-panel" id="panel-image">
+
+<div class="section">
+    <div class="section-header">
+        <div class="section-number">1</div>
+        <div class="section-title">图像赛道全景：从生成到编辑的完整产业链</div>
+    </div>
+    <div class="table-wrap">
+    <table>
+        <thead><tr><th>子赛道</th><th>月PV(万)</th><th>增速</th><th>TAM</th><th>Top1产品</th><th>份额</th><th>马太效应</th><th>大厂入局</th></tr></thead>
+        <tbody>
+            <tr><td><strong>图像生成</strong></td><td>65,302</td><td class="up">+11%</td><td>~$600亿</td><td>Adobe Firefly</td><td>47%</td><td>中</td><td>激烈</td></tr>
+            <tr><td><strong>设计工具</strong></td><td>62,290</td><td class="up">+14%</td><td>~$600亿</td><td>Canva</td><td>92%</td><td>极强</td><td>是</td></tr>
+            <tr><td><strong>图像编辑</strong></td><td>15,340</td><td class="down">-4%</td><td>$数十亿</td><td>Remove.bg</td><td>38%</td><td>弱</td><td>都有</td></tr>
+            <tr><td><strong>设计助理</strong></td><td>2,756</td><td class="up">+9%</td><td>~$500亿</td><td>123RF</td><td>49%</td><td>中</td><td>入局</td></tr>
+            <tr><td><strong>Logo生成</strong></td><td>1,845</td><td class="down">-2%</td><td>$数亿</td><td>Namecheap</td><td>51%</td><td>中</td><td>否</td></tr>
+            <tr><td><strong>个人头像</strong></td><td>1,755</td><td class="up">+6%</td><td>$数十亿</td><td>MyHeritage</td><td>69%</td><td>较强</td><td>否</td></tr>
+            <tr><td><strong>3D图像</strong></td><td>1,138</td><td class="up">+7%</td><td>$30亿</td><td>Daz3D</td><td>21%</td><td>高</td><td>是</td></tr>
+            <tr><td><strong>艺术</strong></td><td>757</td><td class="down">-42%(YoY)</td><td>$数十亿</td><td>PlaybookAI</td><td>21%</td><td>弱</td><td>否</td></tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-header">
+        <div class="section-number blue">2</div>
+        <div class="section-title">Canva：GenAI时代的绝对赢家</div>
+    </div>
+    <div class="mini-stats">
+        <div class="mini-stat"><div class="mini-stat-value emerald">5.68亿</div><div class="mini-stat-label">月PV</div></div>
+        <div class="mini-stat"><div class="mini-stat-value blue">$260亿</div><div class="mini-stat-label">估值(2024)</div></div>
+        <div class="mini-stat"><div class="mini-stat-value amber">$20亿</div><div class="mini-stat-label">年收入(2023)</div></div>
+    </div>
+    <p>Canva在设计工具赛道占据<strong>92%</strong>的市场份额，是所有GenAI赛道中马太效应最强的。其月PV增长了1.5亿，占整个赛道增长的87%。PS倍数13x，单用户PV价值$45.8。</p>
+    <p>澳大利亚团队，强网络效应。竞品CF Spark（1066万）和Adobe Firefly（880万）只占到边缘份额。</p>
+    <div class="insight-box success">
+        <div class="insight-title">✅ Canva的护城河</div>
+        <div class="insight-text">Canva的成功不仅是"加AI功能"——它拥有<strong>庞大的模板生态、用户习惯粘性、协作网络效应</strong>三重护城河。即使AI降低了设计门槛，用户仍然需要一个"平台"来组织和分享设计资产。这是为什么纯AI生成工具无法替代Canva的根本原因。</div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-header">
+        <div class="section-number">3</div>
+        <div class="section-title">图像生成：Adobe vs Midjourney的巨头之战</div>
+    </div>
+    <p>图像生成赛道月PV 6.53亿，年增长25%。但竞争格局正在重塑：</p>
+    <ul>
+        <li><strong>Adobe Firefly</strong>：3.06亿PV，占47%，靠Adobe生态的存量用户转化，年增5740万PV（占赛道增量44%）</li>
+        <li><strong>Freepik</strong>：9220万PV，传统素材平台转型AI</li>
+        <li><strong>Midjourney</strong>：估值$100亿，收入$2-3亿，PS 33.3x。但Web端流量仅1848万且下降（-2426万），核心用户在Discord（2000万人）</li>
+    </ul>
+    <p>大厂激烈入局，Adobe计划将Sora/Gen-2/Pika等工具整合到Premiere Pro中。技术壁垒中等，网络效应强（模型社区）。</p>
+</div>
+
+</div><!-- /panel-image -->
+
+<!-- ===================== TAB 4: VIDEO ===================== -->
+<div class="tab-panel" id="panel-video">
+
+<div class="section">
+    <div class="section-header">
+        <div class="section-number">1</div>
+        <div class="section-title">视频赛道全景：Sora冲击下的洗牌</div>
+    </div>
+    <p>2024年初OpenAI发布Sora对整个视频生成赛道产生了巨大冲击。数据显示，数字人和图生视频赛道均出现下滑（-3.29%），而视频编辑等下游环节保持增长。</p>
+    <div class="table-wrap">
+    <table>
+        <thead><tr><th>子赛道</th><th>月PV(万)</th><th>增速</th><th>TAM</th><th>Top1产品</th><th>份额</th><th>关键发现</th></tr></thead>
+        <tbody>
+            <tr><td><strong>视频编辑</strong></td><td>8,267</td><td class="up">+6%</td><td>$40亿</td><td>Loom</td><td>23%</td><td>Loom被$9.75亿收购，VeedAI崛起</td></tr>
+            <tr><td><strong>数字人</strong></td><td>2,000</td><td class="down">-3%</td><td>$数百亿</td><td>VidnozAI</td><td>79%</td><td>D-ID -490万PV，Sora冲击严重</td></tr>
+            <tr><td><strong>图生视频</strong></td><td>1,500</td><td class="down">-3%</td><td>$数百亿</td><td>Runway</td><td>79%</td><td>Runway $15亿估值，总量不变但新玩家增多</td></tr>
+            <tr><td><strong>个人视频</strong></td><td>74</td><td class="down">-19%</td><td>$14亿</td><td>Deepfakes Web</td><td>74%</td><td>市场饱和+伦理争议，严重下滑</td></tr>
+        </tbody>
+    </table>
+    </div>
+    <div class="insight-box warning">
+        <div class="insight-title">⚠️ Sora效应的真实影响</div>
+        <div class="insight-text">
+            Sora虽然尚未正式商用（截至报告期），但其演示已经对市场预期产生了剧烈冲击。数字人赛道中，<strong>D-ID的月PV从600万暴跌至110万</strong>（-490万），HeyGen虽然技术领先但也面临压力。投资者对视频生成创业公司的态度从"积极投资"转向"等待Sora开放API后再决策"。Runway的$15亿估值（$225单用户PV价值）在Sora阴影下面临重估压力。
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-header">
+        <div class="section-number blue">2</div>
+        <div class="section-title">视频编辑：传统工具+AI的稳健增长</div>
+    </div>
+    <p>视频编辑赛道是视频品类中最稳定的，月PV增长386%（从1403万到6830万），但这主要是因为更多传统视频编辑工具被归入统计。</p>
+    <ul>
+        <li><strong>Loom</strong>: 1865万PV，被Atlassian以$9.75亿收购，PS 27.86x</li>
+        <li><strong>VeedAI</strong>: 1213万PV，快速增长的AI视频编辑工具</li>
+        <li><strong>Clipchamp</strong>: 968万PV，微软旗下</li>
+    </ul>
+    <p>赛道特点：原生AI产品占比低，多为传统视频编辑工具增加GenAI功能。对标公司为剪映（字节跳动）和Adobe。马太效应弱，竞争分散。</p>
+</div>
+
+</div><!-- /panel-video -->
+
+<!-- ===================== TAB 5: AUDIO ===================== -->
+<div class="tab-panel" id="panel-audio">
+
+<div class="section">
+    <div class="section-header">
+        <div class="section-number">1</div>
+        <div class="section-title">音频赛道全景：Suno AI引爆音乐革命</div>
+    </div>
+    <div class="table-wrap">
+    <table>
+        <thead><tr><th>子赛道</th><th>月PV(万)</th><th>增速</th><th>TAM</th><th>Top1产品</th><th>份额</th><th>技术壁垒</th></tr></thead>
+        <tbody>
+            <tr><td><strong>文字转音频(TTS)</strong></td><td>5,016</td><td class="up">+7%</td><td>$22亿</td><td>ElevenLabs</td><td>39%</td><td>中</td></tr>
+            <tr><td><strong>音乐</strong></td><td>4,872</td><td class="hot">+54%</td><td>$200亿</td><td>Suno AI</td><td>45%</td><td>高</td></tr>
+            <tr><td><strong>会议总结</strong></td><td>2,146</td><td class="up">+48%</td><td>$77亿</td><td>Tactig</td><td>16%</td><td>低</td></tr>
+            <tr><td><strong>音频编辑</strong></td><td>2,137</td><td class="up">+8%</td><td>$数十亿</td><td>Riverside</td><td>17%</td><td>低</td></tr>
+            <tr><td><strong>转录</strong></td><td>1,270</td><td class="up">+3%</td><td>$200亿</td><td>Auto Sub Gen</td><td>42%</td><td>中</td></tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-header">
+        <div class="section-number rose">2</div>
+        <div class="section-title">Suno AI：2024年度最佳爆发产品</div>
+    </div>
+    <div class="mini-stats">
+        <div class="mini-stat"><div class="mini-stat-value rose">2192万</div><div class="mini-stat-label">月PV（从0到）</div></div>
+        <div class="mini-stat"><div class="mini-stat-value emerald">+159%</div><div class="mini-stat-label">赛道年增长率</div></div>
+        <div class="mini-stat"><div class="mini-stat-value blue">73%</div><div class="mini-stat-label">占赛道增量</div></div>
+    </div>
+    <p>Suno AI是2024年Q1最令人瞩目的产品爆发。从几乎零流量增长到2192万月PV，独自贡献了音乐赛道73%的增量。赛道整体月访问量从1878万增长到4872万（+159.5%），是增速最快的大体量赛道之一。</p>
+    <p>估值仅$600万（极度低估），单用户PV价值$0.27（变现空间巨大），对标公司Spotify（$200亿TAM）。技术壁垒高，网络效应较高，大厂虽入局但占比低。</p>
+    <div class="insight-box">
+        <div class="insight-title">💡 Suno为什么能爆发？</div>
+        <div class="insight-text">音乐生成是一个<strong>"0到1"的需求创造</strong>——在Suno之前，普通人几乎不可能创作音乐。这与图像生成类似（Midjourney让人人成为画家），但音乐的创作门槛更高，所以AI的"赋能杠杆"更大。同时，音乐的社交传播属性天然适合病毒式增长。</div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-header">
+        <div class="section-number blue">3</div>
+        <div class="section-title">ElevenLabs：TTS赛道的超级独角兽</div>
+    </div>
+    <p><strong>ElevenLabs</strong>以1962万月PV位居TTS赛道第一（39%份额），估值$11亿（2024），单用户PV价值$56——是所有GenAI产品中<strong>单用户价值最高的之一</strong>。</p>
+    <p>更惊人的是，ElevenLabs贡献了TTS赛道<strong>97.4%的增量</strong>（1148万PV增长）。这意味着整个TTS赛道的增长几乎完全由一家公司驱动。</p>
+    <p>竞品Speechify（706万）、MurfAI在萎缩。大厂未入局，技术门槛中等。赛道增长与音频内容消费增加密切相关。</p>
+</div>
+
+<div class="section">
+    <div class="section-header">
+        <div class="section-number">4</div>
+        <div class="section-title">会议总结：远程办公的核心工具</div>
+    </div>
+    <p>月PV从1315万增长到2146万（+63%），但竞争极度分散——Top1仅占16%（Tactig 181万PV），Top3仅48%，马太效应极弱。</p>
+    <p><strong>Otter AI</strong>以529万PV（25%份额）是最知名的产品，但增长率仅12%。赛道增长受益于远程办公和在线会议的常态化。TAM $77亿，对标Notion和微软。</p>
+</div>
+
+</div><!-- /panel-audio -->
+
+<!-- ===================== TAB 6: CODE/AGENT ===================== -->
+<div class="tab-panel" id="panel-code">
+
+<div class="section">
+    <div class="section-header">
+        <div class="section-number">1</div>
+        <div class="section-title">代码工具赛道全景</div>
+    </div>
+    <div class="table-wrap">
+    <table>
+        <thead><tr><th>子赛道</th><th>月PV(万)</th><th>增速</th><th>TAM</th><th>Top1产品</th><th>份额</th><th>关键发现</th></tr></thead>
+        <tbody>
+            <tr><td><strong>代码助手</strong></td><td>8,151</td><td class="down">-12%</td><td>$300亿</td><td>GPT3 Playground</td><td>60%</td><td>通用模型覆盖，独立工具衰退</td></tr>
+            <tr><td><strong>开发者工具</strong></td><td>2,097</td><td class="up">+15%</td><td>$120亿</td><td>LangChain</td><td>17%</td><td>LangChain+FlutterFlow驱动增长</td></tr>
+            <tr><td><strong>建站</strong></td><td>1,814</td><td class="down">-6%</td><td>$20亿</td><td>Webflow</td><td>60%</td><td>Webflow $40亿估值，一家独大</td></tr>
+            <tr><td><strong>Agent</strong></td><td>2,421</td><td class="hot">+67%</td><td>$数百亿</td><td>Zapier</td><td>42%</td><td>Coze(333万)快速崛起</td></tr>
+            <tr><td><strong>低代码</strong></td><td>504</td><td class="down">-36%(YoY)</td><td>$270亿</td><td>Nanonets</td><td>20%</td><td>整体萎缩，仅Nanonets逆势增长</td></tr>
+            <tr><td><strong>数据分析</strong></td><td>490</td><td class="hot">+88%</td><td>$1000亿</td><td>Prolific.co</td><td>41%</td><td>年增长1663%，新兴赛道</td></tr>
+            <tr><td><strong>SQL</strong></td><td>75</td><td class="up">+103%</td><td>$100亿</td><td>Akkio</td><td>25%</td><td>体量小但增速极快</td></tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-header">
+        <div class="section-number rose">2</div>
+        <div class="section-title">代码助手的"自相矛盾"：市场巨大但独立产品萎缩</div>
+    </div>
+    <p>代码助手赛道TAM $300亿，但整体趋势<strong>严重下滑(-12.31%)</strong>。这个看似矛盾的数据背后是一个关键洞察：</p>
+    <ul>
+        <li><strong>GPT3 Playground</strong>以4925万PV占据60%份额——说明开发者直接用通用模型写代码</li>
+        <li><strong>GitHub Copilot</strong>已有100万付费用户，但作为IDE插件不计入Web流量</li>
+        <li><strong>Replit</strong>从1369万降至1004万PV，估值$11.6亿面临压力</li>
+    </ul>
+    <div class="insight-box warning">
+        <div class="insight-title">⚠️ 代码赛道的真实图景</div>
+        <div class="insight-text">Web PV数据严重低估了AI编程的真实规模。GitHub Copilot的1M付费用户、Cursor的快速增长都不在Web流量统计中。真正的信号是：<strong>独立AI编程网站在萎缩，而集成到IDE中的AI助手在爆发</strong>。这意味着代码赛道的竞争核心不是"建网站"而是"深入开发者工作流"。</div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-header">
+        <div class="section-number amber">3</div>
+        <div class="section-title">Agent赛道：2024年度最值得关注</div>
+    </div>
+    <div class="mini-stats">
+        <div class="mini-stat"><div class="mini-stat-value amber">+67%</div><div class="mini-stat-label">季度增速</div></div>
+        <div class="mini-stat"><div class="mini-stat-value emerald">2421万</div><div class="mini-stat-label">月PV</div></div>
+        <div class="mini-stat"><div class="mini-stat-value purple">$数百亿</div><div class="mini-stat-label">TAM</div></div>
+    </div>
+    <p>Agent赛道呈现三足鼎立格局：</p>
+    <ul>
+        <li><strong>Zapier</strong>: 1018万PV（42%），从自动化工具转型AI Agent，估值未披露但年收入超$1亿</li>
+        <li><strong>Make</strong>: 388万PV（16%），欧洲自动化平台</li>
+        <li><strong>Coze</strong>（字节扣子）: 333万PV（14%），中国出海产品，增长迅猛</li>
+    </ul>
+    <p>值得注意的是，早期明星<strong>AgentGPT</strong>从515万骤降至几乎归零，说明"概念验证型"Agent无法持续——用户需要的是"能真正完成工作的Agent"。</p>
+    <p>技术壁垒高，网络效应中，对标Gitlab/Atlassian。企业对自动化工具的需求增加是核心驱动力。</p>
+</div>
+
+</div><!-- /panel-code -->
+
+<!-- ===================== TAB 7: B2B ===================== -->
+<div class="tab-panel" id="panel-b2b">
+
+<div class="section">
+    <div class="section-header">
+        <div class="section-number">1</div>
+        <div class="section-title">B2B垂类全景：企业AI应用加速落地</div>
+    </div>
+    <p>B2B垂类是2024年最被低估的增长引擎。YC W24数据显示：65%的创业公司是B2B SaaS/企业方向。企业端正在从"尝试1个模型"转向"多模型策略"，60%的企业领导者表示当开源模型达到闭源同等性能时，会考虑完全切换。</p>
+    <div class="table-wrap">
+    <table>
+        <thead><tr><th>垂类</th><th>月PV(万)</th><th>增速</th><th>TAM</th><th>Top1产品</th><th>份额</th><th>马太效应</th><th>技术壁垒</th></tr></thead>
+        <tbody>
+            <tr><td><strong>客服支持</strong></td><td>10,203</td><td class="up">+12%</td><td>$400亿</td><td>Salesforce</td><td>84%</td><td>极强</td><td>中</td></tr>
+            <tr><td><strong>电商工具</strong></td><td>10,433</td><td class="down">-12%</td><td>$千亿</td><td>Shop(Shopify)</td><td>87%</td><td>极强</td><td>中</td></tr>
+            <tr><td><strong>人力资源</strong></td><td>2,758</td><td class="hot">+42%</td><td>$100亿</td><td>Teal</td><td>11%</td><td>弱</td><td>较低</td></tr>
+            <tr><td><strong>生活助理</strong></td><td>1,974</td><td class="up">+23%</td><td>碎片化</td><td>FaceCheckID</td><td>37%</td><td>弱</td><td>取决应用</td></tr>
+            <tr><td><strong>游戏</strong></td><td>1,591</td><td class="up">+13%</td><td>$14亿</td><td>Unity</td><td>75%</td><td>较强</td><td>高</td></tr>
+            <tr><td><strong>金融财务</strong></td><td>1,385</td><td class="up">+33%</td><td>$数千亿</td><td>TipRanks</td><td>61%</td><td>较强</td><td>高</td></tr>
+            <tr><td><strong>Crypto</strong></td><td>1,322</td><td class="up">+38%</td><td>$数十亿</td><td>Crypto.com Amy</td><td>68%</td><td>较强</td><td>低</td></tr>
+            <tr><td><strong>法律</strong></td><td>917</td><td class="up">+16%</td><td>$300亿</td><td>Casetext</td><td>68%</td><td>高</td><td>较高</td></tr>
+            <tr><td><strong>医疗保健</strong></td><td>577</td><td class="hot">+118%</td><td>$数千亿</td><td>SpoiledChild</td><td>N/A</td><td>-</td><td>较高</td></tr>
+            <tr><td><strong>房地产</strong></td><td>262</td><td class="down">-60%(YoY)</td><td>$1800亿</td><td>HomeDesignsAI</td><td>29%</td><td>弱</td><td>中</td></tr>
+            <tr><td><strong>旅游</strong></td><td>2,493</td><td class="down">-2%</td><td>$9000亿</td><td>PLAN by ixigo</td><td>42%</td><td>弱</td><td>高</td></tr>
+            <tr><td><strong>销售</strong></td><td>165</td><td class="down">-9%</td><td>$数十亿</td><td>FlashIntel</td><td>23%</td><td>弱</td><td>低</td></tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-header">
+        <div class="section-number blue">2</div>
+        <div class="section-title">Salesforce：企业AI的绝对统治者</div>
+    </div>
+    <p>在客服支持赛道，Salesforce以8421万PV占据<strong>84%</strong>的市场份额，年增长率2581%（从379万到10203万）。这是一个典型的"大厂降维打击"案例：</p>
+    <ul>
+        <li>Salesforce贡献了赛道增长的<strong>85.7%</strong></li>
+        <li>创业公司<strong>Intercom</strong>（Fin AI bot）仅502万PV（5%），单用户PV价值$259</li>
+        <li>早期玩家SiteGPT从80万降至边缘</li>
+    </ul>
+    <div class="insight-box warning">
+        <div class="insight-title">⚠️ B2B垂类的"大厂陷阱"</div>
+        <div class="insight-text">客服（Salesforce 84%）和电商（Shopify 87%）两个最大的B2B赛道都被大厂统治。这给创业公司的启示是：<strong>避免在大厂已有强势产品的垂类正面竞争</strong>。真正的机会在大厂"看不上"或"做不了"的领域——比如法律（Casetext被$6.5亿收购）、医疗（+118%增速，大厂占比低）、和人力资源（极度分散，马太效应弱）。</div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-header">
+        <div class="section-number rose">3</div>
+        <div class="section-title">医疗保健：增速最快的B2B垂类</div>
+    </div>
+    <p>医疗保健赛道增速<strong>+118%</strong>，TAM高达数千亿美金，但目前流量基数极小（577万PV）。</p>
+    <p>特殊之处在于SpoiledChild（Oddity母公司，已上市$20亿）贡献了近300万增量，主要是AI驱动的个性化护肤推荐。排除该产品后，纯医疗AI工具整体仍在下降。</p>
+    <p>这意味着"AI+医疗"目前更多是<strong>"AI+健康消费品"先行，"AI+核心医疗"尚在酝酿</strong>。技术壁垒较高，大厂入局但占比低。</p>
+</div>
+
+<div class="section">
+    <div class="section-header">
+        <div class="section-number">4</div>
+        <div class="section-title">企业模型选择趋势：多模型+开源</div>
+    </div>
+    <p>a16z最新调研揭示了企业端的两大关键趋势：</p>
+    <div class="two-col">
+        <div class="insight-box success">
+            <div class="insight-title">✅ 多模型策略</div>
+            <div class="insight-text">6个月前绝大多数企业只用1-2个模型（主要是OpenAI），现在大多数企业领导者在尝试使用<strong>多个模型</strong>，原因有三：1) 根据性能/规模/成本定制最佳方案；2) 分散对单一厂商的依赖；3) 快速体验最新技术。</div>
+        </div>
+        <div class="insight-box">
+            <div class="insight-title">💡 转向开源</div>
+            <div class="insight-text">2023年80-90%的企业用闭源模型（主要是OpenAI）。现在<strong>近60%的领导者</strong>表示：当开源模型经微调后达到闭源同等性能时，会考虑完全切换到开源。这对OpenAI的B2B收入形成潜在压力。</div>
+        </div>
+    </div>
+</div>
+
+</div><!-- /panel-b2b -->
+
+<!-- ===================== TAB 8: DEEP INSIGHTS ===================== -->
+<div class="tab-panel" id="panel-insight">
+
+<div class="section">
+    <div class="section-header">
+        <div class="section-number purple">1</div>
+        <div class="section-title">六大核心洞察</div>
+    </div>
+
+    <div class="sub-title purple">洞察一：通用模型的"引力效应"正在重塑市场结构</div>
+    <p>ChatGPT、Gemini、Claude三大通用模型像黑洞一样吸收着周边垂类产品的用户。数据证据：</p>
+    <ul>
+        <li>SEO写作赛道：Writesonic -63%、Content at Scale -49%</li>
+        <li>邮件助手：ChatGPT Writer -91%</li>
+        <li>Prompt工具：PromptBase -79%、PromptHero -43%</li>
+        <li>研究工具：Elicit -87%</li>
+        <li>代码助手整体：-12.31%</li>
+    </ul>
+    <p><strong>生存法则</strong>：垂类工具必须建立"超越API调用"的壁垒——数据飞轮、工作流集成、行业know-how、或社区网络效应。</p>
+
+    <div class="sub-title purple">洞察二：单用户价值差异揭示了真正的商业机会</div>
+    <div class="table-wrap">
+    <table>
+        <thead><tr><th>产品</th><th>单用户PV价值</th><th>赛道</th><th>启示</th></tr></thead>
+        <tbody>
+            <tr><td>Webflow</td><td class="hot">$370.7</td><td>建站</td><td>专业工具的高定价权</td></tr>
+            <tr><td>Intercom(Fin)</td><td class="hot">$259</td><td>客服</td><td>B2B企业级产品高价值</td></tr>
+            <tr><td>Runway</td><td class="hot">$225</td><td>图生视频</td><td>创意工具的Pro用户价值</td></tr>
+            <tr><td>Casetext</td><td class="hot">$103.5</td><td>法律</td><td>专业垂类的溢价能力</td></tr>
+            <tr><td>ElevenLabs</td><td class="hot">$56</td><td>TTS</td><td>技术独占性的变现</td></tr>
+            <tr><td>Canva</td><td>$45.8</td><td>设计工具</td><td>规模+定价的平衡</td></tr>
+            <tr><td>Character.AI</td><td>$4.7</td><td>虚拟陪伴</td><td>C端大流量低ARPU</td></tr>
+            <tr><td>Suno AI</td><td>$0.27</td><td>音乐</td><td>超早期，变现空间巨大</td></tr>
+        </tbody>
+    </table>
+    </div>
+    <p><strong>规律</strong>：B2B > B2C，专业工具 > 通用工具，创作者 > 消费者。单用户价值最高的产品往往是"不可替代"的专业工具。</p>
+
+    <div class="sub-title purple">洞察三：马太效应的"U型分布"</div>
+    <p>报告数据揭示了一个有趣的规律——马太效应在两个极端最强：</p>
+    <ul>
+        <li><strong>极强马太效应（Top1 > 80%）</strong>：Canva (92%), Salesforce (84%), Shopify (87%), NewBing (92%) → 平台型产品，网络效应+生态锁定</li>
+        <li><strong>极弱马太效应（Top1 < 25%）</strong>：市场营销、人力资源、会议总结 → 市场早期，尚无赢家定论</li>
+        <li><strong>中间地带（Top1 40-70%）</strong>：ChatGPT (73%), DeepL (79%), Character.AI (64%) → 有领先者但追赶者正在缩小差距</li>
+    </ul>
+    <p>创业启示：选择马太效应弱的赛道（窗口期仍开放），或在马太效应强的赛道找到差异化切入点。</p>
+
+    <div class="sub-title purple">洞察四：流量增长的"接力赛"模式</div>
+    <p>多个赛道出现了"老产品衰退、新产品接棒"的经典模式：</p>
+    <ul>
+        <li>音乐：Uberduck衰退 → <strong>Suno AI崛起</strong>（+2192万）</li>
+        <li>邮件：ChatGPT Writer -91% → <strong>Mailchimp +1838万</strong></li>
+        <li>导航：Futurepedia -72% → <strong>TAAFT +283万</strong></li>
+        <li>头像：Pfpmaker -45% → <strong>AI Time Machine +1204万</strong></li>
+        <li>Agent：AgentGPT消失 → <strong>Zapier +191万，Coze +333万</strong></li>
+    </ul>
+    <p>这说明GenAI市场仍在"快速迭代"阶段，先发优势不等于持久优势。</p>
+
+    <div class="sub-title purple">洞察五：YC W24揭示的创业趋势</div>
+    <p>Y Combinator 2024冬季批次的分布：</p>
+    <div class="mini-stats">
+        <div class="mini-stat"><div class="mini-stat-value blue">65%</div><div class="mini-stat-label">B2B SaaS/企业</div></div>
+        <div class="mini-stat"><div class="mini-stat-value emerald">11%</div><div class="mini-stat-label">消费者产品</div></div>
+        <div class="mini-stat"><div class="mini-stat-value rose">10%</div><div class="mini-stat-label">医疗保健</div></div>
+    </div>
+    <p>三大趋势：1) 长尾效应正在延伸；2) AI基础设施持续成熟；3) 自训练模型依然被需要。消费型AI公司的浪潮是本届YC的主要趋势之一，AI给C端产品带来了更大的想象空间。</p>
+
+    <div class="sub-title purple">洞察六：估值泡沫与价值回归</div>
+    <p>比较不同赛道的估值倍数（PS），可以看到GenAI市场的估值分化：</p>
+    <div class="table-wrap">
+    <table>
+        <thead><tr><th>公司</th><th>估值</th><th>收入</th><th>PS倍数</th><th>合理性</th></tr></thead>
+        <tbody>
+            <tr><td>Midjourney</td><td>$100亿</td><td>$2-3亿</td><td>33-50x</td><td class="hot">偏高，依赖Discord生态</td></tr>
+            <tr><td>Webflow</td><td>$40亿</td><td>$1.28亿</td><td>31.25x</td><td>合理，高单用户价值</td></tr>
+            <tr><td>Loom</td><td>$9.75亿</td><td>$3500万</td><td>27.86x</td><td>已被收购退出</td></tr>
+            <tr><td>Canva</td><td>$260亿</td><td>$20亿</td><td>13x</td><td class="up">相对合理，增长强劲</td></tr>
+            <tr><td>Quizlet</td><td>$10亿</td><td>$7500万</td><td>13.3x</td><td class="up">合理</td></tr>
+            <tr><td>Photoroom</td><td>$5亿</td><td>$6500万</td><td>7.7x</td><td class="up">被低估</td></tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-header">
+        <div class="section-number rose">2</div>
+        <div class="section-title">投资建议与未来展望</div>
+    </div>
+    <div class="two-col">
+        <div class="insight-box success">
+            <div class="insight-title">✅ 值得重点关注的方向</div>
+            <div class="insight-text">
+                <strong>1. AI+音乐/音频</strong>：Suno爆发验证需求，ElevenLabs高单价验证商业模型<br>
+                <strong>2. Agent/自动化</strong>：Zapier模式验证PMF，企业需求强劲<br>
+                <strong>3. 虚拟陪伴/社交</strong>：$2000亿TAM，高用户粘性<br>
+                <strong>4. 医疗AI</strong>：+118%增速，大厂占比低，长期TAM数千亿<br>
+                <strong>5. 法律AI</strong>：Casetext $6.5亿收购验证退出路径<br>
+                <strong>6. 会议/协作</strong>：远程办公常态化驱动，$77亿TAM
+            </div>
+        </div>
+        <div class="insight-box warning">
+            <div class="insight-title">⚠️ 需要警惕的方向</div>
+            <div class="insight-text">
+                <strong>1. 纯文本工具</strong>：SEO/邮件/复写等被ChatGPT覆盖<br>
+                <strong>2. Prompt工具</strong>：模型进化使Prompt工程贬值<br>
+                <strong>3. 独立代码网站</strong>：IDE集成模式胜出<br>
+                <strong>4. 大厂已统治的B2B</strong>：客服(Salesforce)、电商(Shopify)<br>
+                <strong>5. 概念型Agent</strong>：AgentGPT消亡说明概念不等于产品<br>
+                <strong>6. 换脸/深伪类</strong>：伦理风险+市场萎缩(-19%)
+            </div>
+        </div>
+    </div>
+</div>
+
+</div><!-- /panel-insight -->
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <p>原始数据来源: <a href="https://aiwatch.ai" target="_blank">aiwatch.ai</a> | Similarweb | a16z</p>
+    <p>原始报告作者: 郎瀚威 Will (GPTDAO) / 张蔚 WeitoAGI / 江志桐 Clara (天际资本VC)</p>
+    <p style="margin-top: 12px;">本深度研究报告由 AI-Insight 平台生成 | 数据时间范围: 2023.04 - 2024.03</p>
+</footer>
+
+</div><!-- /container -->
+
+<script>
+function switchTab(tabId) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + tabId).classList.add('active');
+    event.target.closest('.tab-btn').classList.add('active');
+}
+</script>
+</body>
+</html>
