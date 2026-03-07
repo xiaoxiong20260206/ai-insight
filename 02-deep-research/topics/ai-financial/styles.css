@@ -1,29 +1,29 @@
 /* ===== 沈浪调研报告风格变量 ===== */
 :root {
     /* 主色调 */
-    --color-success: #1A7F37;
-    --color-success-light: #2DA44E;
-    --color-danger: #CF222E;
+    --color-success: #059669;
+    --color-success-light: #10B981;
+    --color-danger: #E11D48;
     --color-danger-light: #FF7B72;
-    --color-warning: #BF8700;
-    --color-warning-dark: #9A6700;
-    --color-info: #0969DA;
+    --color-warning: #D97706;
+    --color-warning-dark: #B45309;
+    --color-info: #2563EB;
     --color-info-light: #54AEFF;
     
     /* 中性色 - 亮色主题 */
     --color-text-primary: #24292F;
     --color-text-secondary: #57606A;
     --color-text-muted: #8B949E;
-    --color-border: #D0D7DE;
-    --color-border-light: #EAEEF2;
+    --color-border: #E7E5E4;
+    --color-border-light: #F5F5F4;
     --color-bg: #FAFBFC;
     --color-bg-card: #FFFFFF;
-    --color-bg-table-header: #F6F8FA;
+    --color-bg-table-header: #F8FAFB;
     
     /* 渐变色 */
-    --gradient-success: linear-gradient(135deg, #1A7F37 0%, #2DA44E 100%);
+    --gradient-success: linear-gradient(135deg, #059669 0%, #10B981 100%);
     --gradient-badge: linear-gradient(135deg, #DDF4FF 0%, #D4F8E8 100%);
-    --gradient-blue-text: linear-gradient(90deg, #0969DA, #54AEFF);
+    --gradient-blue-text: linear-gradient(90deg, #2563EB, #54AEFF);
     
     /* 阴影 */
     --shadow-card: rgba(31, 35, 40, 0.04) 0px 1px 3px 0px, rgba(31, 35, 40, 0.04) 0px 3px 8px 0px;
@@ -31,52 +31,52 @@
     
     /* 兼容旧变量名 */
     --bg-primary: #FAFBFC;
-    --bg-secondary: #F6F8FA;
+    --bg-secondary: #F8FAFB;
     --bg-card: #FFFFFF;
     --text-primary: #24292F;
     --text-secondary: #57606A;
     --text-muted: #8B949E;
-    --accent-gold: #BF8700;
+    --accent-gold: #D97706;
     --accent-gold-light: #D9A50B;
-    --glow-gold: rgba(191, 135, 0, 0.2);
-    --accent-blue: #0969DA;
+    --glow-gold: rgba(217, 119, 6, 0.2);
+    --accent-blue: #2563EB;
     --accent-purple: #8B5CF6;
-    --accent-green: #1A7F37;
-    --accent-orange: #BF8700;
-    --accent-red: #CF222E;
+    --accent-green: #059669;
+    --accent-orange: #D97706;
+    --accent-red: #E11D48;
     --accent-pink: #EC4899;
-    --border-color: #D0D7DE;
+    --border-color: #E7E5E4;
     
     /* 场景色 */
-    --research-color: #0969DA;
-    --research-light: rgba(9, 105, 218, 0.12);
+    --research-color: #2563EB;
+    --research-light: rgba(37, 99, 235, 0.12);
     --operation-color: #8B5CF6;
     --operation-light: rgba(139, 92, 246, 0.12);
     
     /* 优先级色 */
-    --p0-color: #CF222E;
-    --p1-color: #BF8700;
-    --p2-color: #9A6700;
-    --p3-color: #0969DA;
+    --p0-color: #E11D48;
+    --p1-color: #D97706;
+    --p2-color: #B45309;
+    --p3-color: #2563EB;
     --p4-color: #57606A;
     
     /* Agent徽章色 - 亮色版 */
-    --badge-quant-bg: rgba(191, 135, 0, 0.12);
-    --badge-quant-text: #9A6700;
-    --badge-research-bg: rgba(9, 105, 218, 0.12);
-    --badge-research-text: #0969DA;
-    --badge-data-bg: rgba(26, 127, 55, 0.12);
-    --badge-data-text: #1A7F37;
-    --badge-risk-bg: rgba(207, 34, 46, 0.12);
-    --badge-risk-text: #CF222E;
+    --badge-quant-bg: rgba(217, 119, 6, 0.12);
+    --badge-quant-text: #B45309;
+    --badge-research-bg: rgba(37, 99, 235, 0.12);
+    --badge-research-text: #2563EB;
+    --badge-data-bg: rgba(5, 150, 105, 0.12);
+    --badge-data-text: #059669;
+    --badge-risk-bg: rgba(225, 29, 72, 0.12);
+    --badge-risk-text: #E11D48;
     --badge-chatbot-bg: rgba(139, 92, 246, 0.12);
     --badge-chatbot-text: #8B5CF6;
     --badge-workflow-bg: rgba(139, 92, 246, 0.12);
     --badge-workflow-text: #7C3AED;
-    --badge-trading-bg: rgba(26, 127, 55, 0.12);
-    --badge-trading-text: #1A7F37;
-    --badge-browser-bg: rgba(9, 105, 218, 0.12);
-    --badge-browser-text: #0969DA;
+    --badge-trading-bg: rgba(5, 150, 105, 0.12);
+    --badge-trading-text: #059669;
+    --badge-browser-bg: rgba(37, 99, 235, 0.12);
+    --badge-browser-text: #2563EB;
     --badge-background-bg: rgba(87, 96, 106, 0.12);
     --badge-background-text: #57606A;
     
@@ -834,7 +834,7 @@ section {
 
 .back-to-top:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(26, 127, 55, 0.3);
+    box-shadow: 0 8px 20px rgba(5, 150, 105, 0.3);
 }
 
 /* ===== 响应式设计 ===== */

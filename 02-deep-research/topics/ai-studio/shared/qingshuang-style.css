@@ -6,36 +6,36 @@
 /* ============ CSS 变量定义 ============ */
 :root {
     /* 品牌色彩 - 清爽绿色主色调 */
-    --color-success: #1A7F37;
-    --color-success-light: #2DA44E;
-    --color-success-dark: #116329;
-    --color-danger: #CF222E;
-    --color-warning: #BF8700;
-    --color-warning-dark: #9A6700;
-    --color-info: #0969DA;
+    --color-success: #059669;
+    --color-success-light: #10B981;
+    --color-success-dark: #047857;
+    --color-danger: #E11D48;
+    --color-warning: #D97706;
+    --color-warning-dark: #B45309;
+    --color-info: #2563EB;
     --color-purple: #7C3AED;
     
     /* 文字颜色 */
-    --color-text-primary: #1F2328;
-    --color-text-secondary: #4D5561;
-    --color-text-muted: #656D76;
+    --color-text-primary: #1C1917;
+    --color-text-secondary: #57534E;
+    --color-text-muted: #78716C;
     
     /* 边框与背景 */
-    --color-border: #D0D7DE;
-    --color-border-light: #E8ECF0;
-    --color-bg: #F6F8FA;
+    --color-border: #E7E5E4;
+    --color-border-light: #F5F5F4;
+    --color-bg: #F8FAFB;
     --color-bg-card: #FFFFFF;
-    --color-bg-table-header: #F3F5F7;
+    --color-bg-table-header: #FAFAF9;
     
     /* 渐变 */
-    --gradient-success: linear-gradient(135deg, #1A7F37 0%, #2DA44E 100%);
+    --gradient-success: linear-gradient(135deg, #059669 0%, #10B981 100%);
     --gradient-badge: linear-gradient(135deg, #E6F7ED 0%, #E1F0F8 100%);
-    --gradient-hero: linear-gradient(135deg, rgba(26, 127, 55, 0.06) 0%, rgba(9, 105, 218, 0.04) 100%);
+    --gradient-hero: linear-gradient(135deg, rgba(5, 150, 105, 0.06) 0%, rgba(37, 99, 235, 0.04) 100%);
     
     /* 阴影 */
     --shadow-sm: 0 1px 3px rgba(31, 35, 40, 0.06);
     --shadow-card: 0 2px 8px rgba(31, 35, 40, 0.06);
-    --shadow-hover: 0 6px 16px rgba(26, 127, 55, 0.15);
+    --shadow-hover: 0 6px 16px rgba(5, 150, 105, 0.15);
     
     /* 间距 */
     --spacing-xs: 4px;
@@ -139,7 +139,7 @@ a:hover { color: var(--color-success); }
     font-size: var(--font-size-xs);
     font-weight: 600;
     margin-bottom: var(--spacing-md);
-    border: 1px solid rgba(9, 105, 218, 0.15);
+    border: 1px solid rgba(37, 99, 235, 0.15);
 }
 
 .hero h1, .hero-title {
@@ -274,7 +274,7 @@ a:hover { color: var(--color-success); }
 .btn-primary, .cta-btn {
     background: var(--gradient-success);
     color: white;
-    box-shadow: 0 2px 8px rgba(26, 127, 55, 0.25);
+    box-shadow: 0 2px 8px rgba(5, 150, 105, 0.25);
 }
 
 .btn-primary:hover, .cta-btn:hover {
@@ -304,11 +304,11 @@ a:hover { color: var(--color-success); }
     font-weight: 500;
 }
 
-.tag-green, .badge-success { background: rgba(26, 127, 55, 0.12); color: var(--color-success); }
-.tag-blue, .badge-info { background: rgba(9, 105, 218, 0.12); color: var(--color-info); }
-.tag-orange, .badge-warning { background: rgba(191, 135, 0, 0.12); color: var(--color-warning-dark); }
+.tag-green, .badge-success { background: rgba(5, 150, 105, 0.12); color: var(--color-success); }
+.tag-blue, .badge-info { background: rgba(37, 99, 235, 0.12); color: var(--color-info); }
+.tag-orange, .badge-warning { background: rgba(217, 119, 6, 0.12); color: var(--color-warning-dark); }
 .tag-purple { background: rgba(124, 58, 237, 0.12); color: var(--color-purple); }
-.tag-red, .badge-danger { background: rgba(207, 34, 46, 0.12); color: var(--color-danger); }
+.tag-red, .badge-danger { background: rgba(225, 29, 72, 0.12); color: var(--color-danger); }
 
 /* ============ 表格 ============ */
 .table-wrap { overflow-x: auto; margin: var(--spacing-md) 0; }
@@ -350,7 +350,7 @@ tbody tr:hover td { background: rgba(0, 0, 0, 0.02); }
 /* ============ 洞察框 ============ */
 .insight-box, .highlight-box {
     border-left: 3px solid var(--color-warning);
-    background: rgba(191, 135, 0, 0.06);
+    background: rgba(217, 119, 6, 0.06);
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
     padding: var(--spacing-md) 20px;
     margin: var(--spacing-md) 0;
@@ -493,7 +493,7 @@ tbody tr:hover td { background: rgba(0, 0, 0, 0.02); }
 .tab-btn.active, .tab.active {
     background: var(--gradient-success);
     color: #fff;
-    box-shadow: 0 2px 8px rgba(26, 127, 55, 0.25);
+    box-shadow: 0 2px 8px rgba(5, 150, 105, 0.25);
 }
 
 .tab-panel { display: none; animation: fadeIn 0.3s ease-out; }
@@ -510,7 +510,7 @@ pre, code {
 }
 
 pre {
-    background: #1F2328;
+    background: #1C1917;
     color: #E6EDF3;
     border-radius: var(--radius-md);
     padding: var(--spacing-md);
