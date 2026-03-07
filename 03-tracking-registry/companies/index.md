@@ -1,8 +1,8 @@
 # AI公司追踪清单
 
-> **版本**: v1.3.0
-> **更新时间**: 2026-03-05
-> **本次Review重点**: 新增Crawl4AI开源LLM友好爬虫工具 (AI基础设施分类)
+> **版本**: v1.4.0
+> **更新时间**: 2026-03-07
+> **本次Review重点**: 新增国内AI Coding工具完整梯队(11家) + 补充4家大模型公司(蚂蚁/面壁/昆仑万维/360)
 > **维护规则**: 每月 Review 一次，根据产品发布频率和战略重要性动态调整
 
 ---
@@ -336,6 +336,14 @@
 **中国必追**: DeepSeek, 智谱, Kimi, 阿里Qwen, 可灵AI
 **新锐关注**: SSI, Poolside, Groq, Figure, Lovable, Harvey, Physical Intelligence
 **企业转型**: Google, Microsoft, Meta, 字节, 阿里, 华为, Salesforce, Adobe
+
+---
+
+## 快速索引 (按热度)
+
+**海外必追**: OpenAI, Anthropic, Cursor, Perplexity, Hugging Face, Glean, Sierra
+**中国大模型必追**: DeepSeek, 智谱, Kimi, 阿里通义, 字节豆包, 百度文心, 蚂蚁百灵
+**中国AI Coding必追**: 字节Trae, 阿里通义灵码, 智谱CodeGeeX, 百度文心快码, 字节MarsCode
 
 ---
 
