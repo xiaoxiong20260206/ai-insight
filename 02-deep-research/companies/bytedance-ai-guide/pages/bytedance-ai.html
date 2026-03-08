@@ -2150,7 +2150,15 @@
             });
         }
 
-        window.addEventListener('scroll', updateActiveNav);
+        // scroll节流：使用requestAnimationFrame
+        let rafId = null;
+        window.addEventListener('scroll', () => {
+            if (rafId) return;
+            rafId = requestAnimationFrame(() => {
+                updateActiveNav();
+                rafId = null;
+            });
+        });
         document.addEventListener('DOMContentLoaded', updateActiveNav);
     </script>
 </body>

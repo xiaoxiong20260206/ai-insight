@@ -2,6 +2,24 @@
 let currentRole = 'all';
 let highlightedNodes = new Set();
 let currentAgentDesign = 'Chatbot';
+let currentConnections = []; // 缓存当前连接线数据供resize使用
+
+// DOM查询缓存（避免重复querySelectorAll）
+let _cachedNodes = null;
+let _cachedLines = null;
+
+function getCachedNodes() {
+    if (!_cachedNodes || !_cachedNodes.length) _cachedNodes = document.querySelectorAll('.graph-node');
+    return _cachedNodes;
+}
+function getCachedLines() {
+    if (!_cachedLines || !_cachedLines.length) _cachedLines = document.querySelectorAll('.connection-line');
+    return _cachedLines;
+}
+function clearDOMCache() {
+    _cachedNodes = null;
+    _cachedLines = null;
+}
 
 // ==================== 初始化 ====================
 document.addEventListener('DOMContentLoaded', () => {
@@ -270,6 +288,7 @@ function getAgentClass(agent) {
 function renderGraph() {
     const container = document.getElementById('graphColumns');
     const svg = document.getElementById('connectionsSvg');
+    if (!container || !svg) return; // 防止DOM元素不存在时崩溃
     container.innerHTML = '';
     svg.innerHTML = '';
     
@@ -410,17 +429,23 @@ function renderGraph() {
         container.appendChild(colDiv);
     });
     
-    // 绘制连接线（延迟执行以确保DOM已渲染）
+    // 缓存连接线数据并绘制（延迟执行以确保DOM已渲染）
+    currentConnections = connections;
+    clearDOMCache();
     setTimeout(() => {
         drawConnections(connections, svg);
     }, 100);
     
-    // 点击空白取消高亮
-    document.querySelector('.graph-canvas').addEventListener('click', (e) => {
-        if (e.target.classList.contains('graph-canvas') || e.target.id === 'connectionsSvg') {
-            clearHighlight();
-        }
-    });
+    // 点击空白取消高亮（事件委托，避免重复绑定）
+    const canvas = document.querySelector('.graph-canvas');
+    if (canvas && !canvas._bindCleared) {
+        canvas.addEventListener('click', (e) => {
+            if (e.target.classList.contains('graph-canvas') || e.target.id === 'connectionsSvg') {
+                clearHighlight();
+            }
+        });
+        canvas._bindCleared = true;
+    }
 }
 
 // ==================== 绘制连接线 ====================
@@ -493,8 +518,8 @@ function handleNodeClick(nodeId, connections) {
     // 合并所有需要高亮的节点
     const allHighlighted = new Set([...directlyConnected, ...secondLevel]);
     
-    // 高亮节点
-    document.querySelectorAll('.graph-node').forEach(node => {
+    // 高亮节点（使用缓存）
+    getCachedNodes().forEach(node => {
         if (allHighlighted.has(node.id)) {
             node.classList.add('highlighted');
         } else {
@@ -502,8 +527,8 @@ function handleNodeClick(nodeId, connections) {
         }
     });
     
-    // 高亮连接线 - 只高亮实际连接的线
-    document.querySelectorAll('.connection-line').forEach((line) => {
+    // 高亮连接线 - 只高亮实际连接的线（使用缓存）
+    getCachedLines().forEach((line) => {
         const fromId = line.dataset.from;
         const toId = line.dataset.to;
         // 连接线两端的节点都需要在高亮集合中才高亮这条线
@@ -518,10 +543,10 @@ function handleNodeClick(nodeId, connections) {
 }
 
 function clearHighlight() {
-    document.querySelectorAll('.graph-node').forEach(node => {
+    getCachedNodes().forEach(node => {
         node.classList.remove('highlighted', 'dimmed');
     });
-    document.querySelectorAll('.connection-line').forEach(line => {
+    getCachedLines().forEach(line => {
         line.classList.remove('highlighted', 'dimmed');
     });
     highlightedNodes.clear();
@@ -529,11 +554,12 @@ function clearHighlight() {
 
 // ==================== Tooltip ====================
 function initTooltip() {
-    // Tooltip已在HTML中定义
+    // Tooltip已在HTML中定义，无需初始化
 }
 
 function showTooltip(e, node) {
     const tooltip = document.getElementById('tooltip');
+    if (!tooltip) return; // 防御性检查
     let content = '';
     
     if (node.type === 'role') {
@@ -591,16 +617,22 @@ function showTooltip(e, node) {
 
 function hideTooltip() {
     const tooltip = document.getElementById('tooltip');
-    tooltip.classList.remove('show');
+    if (tooltip) tooltip.classList.remove('show');
 }
 
 // ==================== 窗口resize时重绘连接线 ====================
+// resize时只重绘连接线，不重建DOM
 let resizeTimeout;
 window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(() => {
-        renderGraph();
-    }, 200);
+        clearDOMCache();
+        const svg = document.getElementById('connectionsSvg');
+        if (svg) {
+            svg.innerHTML = '';
+            drawConnections(currentConnections || [], svg);
+        }
+    }, 250);
 });
 
 // ==================== Agent设计方案Tab ====================
@@ -639,6 +671,7 @@ function initAgentDesignTabs() {
 // ==================== 渲染Agent设计方案 ====================
 function renderAgentDesign(agentType) {
     const container = document.getElementById('agentDesignContent');
+    if (!container) return; // 防止DOM元素不存在时崩溃
     const agent = agentData[agentType];
     const design = agentDesignData[agentType];
     

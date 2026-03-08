@@ -17,7 +17,7 @@ body {
     line-height: 1.9;
     color: #333;
     background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-    background-attachment: fixed;
+    /* background-attachment: fixed 已移除 — 移动端性能优化 */
     min-height: 100vh;
     padding: 25px;
     font-size: 16px;
@@ -49,8 +49,8 @@ body::before {
 /* ===== 头部样式 ===== */
 .header {
     background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-radius: 24px;
     padding: 55px 50px;
     text-align: center;
