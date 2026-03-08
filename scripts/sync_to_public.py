@@ -97,8 +97,10 @@ def sync_report(date_str: str, force: bool = False) -> bool:
     date_obj = datetime.strptime(date_str, "%Y-%m-%d")
     month_str = date_obj.strftime("%Y-%m")
     
-    # 源文件路径
-    src_html = INTERNAL_REPORTS / month_str / f"{date_str}.html"
+    # 源文件路径（优先使用v3版本）
+    src_html_v3 = INTERNAL_REPORTS / month_str / f"{date_str}-v3.html"
+    src_html_plain = INTERNAL_REPORTS / month_str / f"{date_str}.html"
+    src_html = src_html_v3 if src_html_v3.exists() else src_html_plain
     src_md = INTERNAL_REPORTS / month_str / f"{date_str}.md"
     
     # 目标路径
@@ -130,6 +132,7 @@ def sync_report(date_str: str, force: bool = False) -> bool:
 def sync_all_reports(force: bool = False):
     """同步所有日报"""
     count = 0
+    synced_dates = set()  # 防止重复同步同一天
     for month_dir in sorted(INTERNAL_REPORTS.iterdir()):
         if not month_dir.is_dir() or month_dir.name.startswith('.'):
             continue
@@ -142,8 +145,18 @@ def sync_all_reports(force: bool = False):
             if "test" in html_file.name:
                 continue
             
-            # 从文件名提取日期
-            date_str = html_file.stem  # 例如 "2026-03-05"
+            # 从文件名提取日期（支持 2026-03-05.html 和 2026-03-05-v3.html 格式）
+            stem = html_file.stem  # 例如 "2026-03-05" 或 "2026-03-05-v3"
+            date_match = re.match(r'^(\d{4}-\d{2}-\d{2})', stem)
+            if not date_match:
+                continue
+            date_str = date_match.group(1)
+            
+            # 跳过已同步的日期
+            if date_str in synced_dates:
+                continue
+            synced_dates.add(date_str)
+            
             if sync_report(date_str, force):
                 count += 1
     
