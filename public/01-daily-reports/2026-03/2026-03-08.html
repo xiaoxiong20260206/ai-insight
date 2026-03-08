@@ -28,36 +28,26 @@
         .overview-item-label.orange{color:var(--color-orange)}
         .overview-headline{font-size:15px;font-weight:700;color:var(--color-text-primary);margin-bottom:6px;line-height:1.4}
         .overview-item-text{font-size:13px;color:var(--color-text-secondary);line-height:1.6}
-        /* Heat Trend Module (v3.1) */
-        .heat-trend{background:var(--color-bg-card);border:1px solid var(--color-border-light);border-radius:var(--radius-lg);margin-bottom:20px;overflow:hidden;box-shadow:var(--shadow-card)}
-        .heat-trend-header{background:linear-gradient(135deg,#DC2626 0%,#EA580C 50%,#D97706 100%);color:#fff;padding:16px 24px;display:flex;align-items:center;gap:10px}
-        .heat-trend-header-title{font-size:17px;font-weight:800}
-        .heat-trend-header-sub{font-size:12px;opacity:.85;margin-top:2px}
-        .heat-trend-body{padding:16px 20px}
-        .heat-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--color-border-light)}
-        .heat-item:last-child{border-bottom:none}
-        .heat-rank{font-size:18px;width:28px;text-align:center;flex-shrink:0}
-        .heat-topic{flex:1;min-width:0}
-        .heat-topic-name{font-size:14px;font-weight:700;color:var(--color-text-primary)}
-        .heat-topic-meta{font-size:11px;color:var(--color-text-muted);margin-top:2px}
-        .heat-bars{display:flex;gap:2px;align-items:center;width:120px;flex-shrink:0}
-        .heat-bar{width:10px;height:16px;border-radius:2px;background:#E7E5E4}
-        .heat-bar.active{background:linear-gradient(180deg,#DC2626 0%,#EF4444 100%)}
-        .heat-bar.medium{background:linear-gradient(180deg,#EA580C 0%,#F97316 100%)}
-        .heat-bar.low{background:linear-gradient(180deg,#D97706 0%,#FBBF24 100%)}
-        .heat-trend-tag{display:inline-flex;align-items:center;padding:2px 8px;border-radius:var(--radius-full);font-size:11px;font-weight:600;flex-shrink:0}
-        .heat-trend-tag.up{background:#FEF2F2;color:#DC2626}
-        .heat-trend-tag.stable{background:#FFF7ED;color:#EA580C}
-        .heat-trend-tag.spike{background:#EDE9FE;color:#7C3AED}
-        .heat-trend-tag.new{background:#ECFDF5;color:#059669}
-        .heat-trend-tag.down{background:#F5F5F4;color:#78716C}
-        .heat-analysis{padding:14px 20px;background:linear-gradient(135deg,#FFFBEB 0%,#FEF3C7 100%);border-top:1px solid #FDE68A;font-size:13px;color:var(--color-text-secondary);line-height:1.7}
-        .heat-analysis strong{color:var(--color-text-primary)}
-        .heat-item-explain{padding:4px 0 6px 40px;display:flex;flex-direction:column;gap:3px;width:100%}
-        .heat-explain-row{display:flex;align-items:flex-start;gap:6px;font-size:12px;line-height:1.5}
-        .heat-explain-label{flex-shrink:0;font-weight:700;color:#DC2626;font-size:11px;padding-top:1px}
-        .heat-explain-label.why{color:#7C3AED}
-        .heat-explain-text{color:var(--color-text-secondary);flex:1}
+        /* Heat Trend Table */
+        .heat-card{background:var(--color-bg-card);border:1px solid var(--color-border-light);border-radius:var(--radius-lg);margin-bottom:20px;overflow:hidden;box-shadow:var(--shadow-card)}
+        .heat-header{background:linear-gradient(135deg,#EA580C 0%,#DC2626 50%,#B91C1C 100%);color:#fff;padding:18px 24px}
+        .heat-header-label{font-size:13px;font-weight:600;opacity:.85;letter-spacing:.5px}
+        .heat-header-title{font-size:17px;font-weight:800;margin-top:4px}
+        .heat-body{padding:16px 20px}
+        .heat-body p{font-size:14px;color:var(--color-text-secondary);line-height:1.7;margin-top:12px}
+        .heat-body p strong{color:var(--color-text-primary)}
+        .heat-table{width:100%;border-collapse:collapse;font-size:13px}
+        .heat-table th{padding:8px 10px;text-align:left;background:#FEF2F2;font-weight:700;color:#991B1B;border-bottom:2px solid #FECACA;font-size:12px}
+        .heat-table td{padding:10px;border-bottom:1px solid var(--color-border-light);vertical-align:top}
+        .heat-table tr:last-child td{border-bottom:none}
+        .heat-table tr:hover{background:rgba(234,88,12,.02)}
+        .heat-bar{display:flex;gap:2px;align-items:center}
+        .heat-bar-fill{width:10px;height:14px;border-radius:2px;background:linear-gradient(135deg,#EA580C,#DC2626)}
+        .heat-bar-empty{width:10px;height:14px;border-radius:2px;background:#F5F5F4}
+        .heat-trend-tag{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:var(--radius-full);font-size:11px;font-weight:600}
+        .heat-trend-tag.up{background:#EFFDF5;color:#059669}
+        .heat-trend-tag.stable{background:#EFF6FF;color:#2563EB}
+        .heat-trend-tag.burst{background:#FEF2F2;color:#DC2626}
         .tab-nav{display:flex;gap:4px;margin-bottom:20px;background:var(--color-bg-card);border:1px solid var(--color-border-light);border-radius:var(--radius-md);padding:4px;box-shadow:var(--shadow-card);flex-wrap:wrap}
         .tab-btn{flex:1;padding:10px 8px;border:none;background:transparent;cursor:pointer;font-size:13px;font-weight:600;color:var(--color-text-muted);border-radius:var(--radius-sm);transition:var(--transition-normal);font-family:var(--font-family);min-width:80px}
         .tab-btn:hover{color:var(--color-text-primary);background:var(--color-bg)}
@@ -79,8 +69,6 @@
         .tag-policy{background:#FFF7ED;color:var(--color-orange)}
         .tag-practice{background:#ECFDF5;color:#059669}
         .tag-cn{background:#FEF2F2;color:#DC2626}
-        .tag-model{background:#EDE9FE;color:#7C3AED}
-        .tag-eval{background:#F0FDF4;color:#166534}
         .news-title{font-size:15px;font-weight:600;margin:4px 0 3px}
         .news-title a{color:var(--color-text-primary);text-decoration:none}
         .news-title a:hover{color:var(--color-success)}
@@ -168,6 +156,7 @@
         .coverage-bar .stats{display:flex;gap:12px;font-weight:600}
         .coverage-bar .stat-overseas{color:var(--color-success)}
         .coverage-bar .stat-china{color:#DC2626}
+        .footer{text-align:center;padding:24px;font-size:12px;color:var(--color-text-muted);border-top:1px solid var(--color-border-light);margin-top:24px}
         @media(max-width:768px){
             .overview-grid,.overview-grid.five-cols{grid-template-columns:1fr}
             .tab-btn{font-size:11px;padding:8px 4px;min-width:60px}
@@ -176,14 +165,14 @@
             .deep-focus-header{padding:14px 18px}
             .deep-focus-body{padding:16px 18px}
             .coverage-bar{flex-direction:column;gap:8px}
+            .heat-table{font-size:12px}
+            .heat-table th,.heat-table td{padding:6px 4px}
             .pi-evo{flex-direction:column;align-items:flex-start}
             .pi-evo-arrow{display:none}
             .pi-t-head{display:none}
             .pi-t-row{grid-template-columns:1fr;gap:2px;padding:6px 10px;border-left:3px solid var(--color-border-light);margin-bottom:4px}
             .pi-t-row.projected{border-left-color:rgba(124,58,237,.3)}
             .pi-t-analogy{border-left:none;padding-left:0;font-size:12px}
-            .heat-item{flex-wrap:wrap}
-            .heat-bars{width:80px}
         }
     </style>
 </head>
@@ -198,177 +187,116 @@
         <div class="coverage-bar">
             <span class="label">📊 覆盖均衡</span>
             <div class="bar">
-                <div class="bar-overseas" style="width:58%"></div>
-                <div class="bar-china" style="width:42%"></div>
+                <div class="bar-overseas" style="width:60%"></div>
+                <div class="bar-china" style="width:40%"></div>
             </div>
             <div class="stats">
-                <span class="stat-overseas">🌏 海外 11条</span>
-                <span class="stat-china">🇨🇳 国内 8条</span>
+                <span class="stat-overseas">🌏 海外 12条</span>
+                <span class="stat-china">🇨🇳 国内 5条</span>
             </div>
         </div>
 
         <div class="overview">
             <div class="overview-title">📋 全文概览</div>
-            <!-- 热度趋势概览提炼 -->
-            <div style="background:linear-gradient(135deg,#FEF2F2 0%,#FFF7ED 50%,#FFFBEB 100%);border:1px solid #FECACA;border-radius:var(--radius-md);padding:14px 16px;margin-bottom:16px">
-                <div style="font-size:14px;font-weight:700;color:#DC2626;margin-bottom:6px">🔥 本周焦点信号</div>
-                <div style="font-size:13px;color:var(--color-text-secondary);line-height:1.65">
-                    <strong>OpenAI 6天4款模型密集轰炸</strong>，GPT-5.4首次将Computer Use内置通用模型，OSWorld超人类。<strong>Anthropic估值飙至$3800亿</strong>（NYT 2026-02报道），同步发布劳动力影响指数（编程75%覆盖）。<strong>突发信号</strong>：Computer Use 3天跨越3个板块，AI操作电脑从概念到现实。<strong>新兴信号</strong>：DeepSeek V4据传走国产芯片独立路线（未经官方确认），美团Tabbit等搅动国内AI入口格局。
-                </div>
-            </div>
             <div class="overview-grid five-cols">
                 <div class="overview-item">
                     <div class="overview-item-header"><span class="overview-item-icon">🧠</span><span class="overview-item-label">大模型</span></div>
-                    <div class="overview-headline">GPT-5.4首个原生Computer Use通用模型，OSWorld超越人类</div>
-                    <div class="overview-item-text">DeepSeek V4 Lite据传即将发布（未经官方确认）。LMSYS竞技场格局剧变，国产模型跌出前十。</div>
+                    <div class="overview-headline">GPT-5.4 Computer Use首超人类，Anthropic警告"白领大衰退"</div>
+                    <div class="overview-item-text">OSWorld 75.0%超越人类72.4%。Anthropic研究：程序员75%任务被AI覆盖但实际仅33%使用。🇨🇳 阿里批准林俊旸辞职。</div>
                 </div>
                 <div class="overview-item">
                     <div class="overview-item-header"><span class="overview-item-icon">⌨️</span><span class="overview-item-label">AI Coding</span></div>
-                    <div class="overview-headline">Cursor登Forbes封面打响AI编程争霸战</div>
-                    <div class="overview-item-text">GPT-5.4 Playwright交互式调试。Anthropic研究：程序员75%任务被AI覆盖。</div>
+                    <div class="overview-headline">Tool Search重塑MCP生态：token降47%</div>
+                    <div class="overview-item-text">GPT-5.4工具搜索让Agent按需调用MCP服务器，不再预加载全部工具定义。Claude Code超越Codex登VS Code榜首。</div>
                 </div>
                 <div class="overview-item">
                     <div class="overview-item-header"><span class="overview-item-icon">📱</span><span class="overview-item-label">AI 应用</span></div>
-                    <div class="overview-headline">🇨🇳 美团Tabbit公测搅动搜索格局</div>
-                    <div class="overview-item-text">GPT-5.4 Thinking支持响应中途纠偏。阿里桌面Agent全面开放，Coze密集更新。</div>
+                    <div class="overview-headline">🇨🇳 美团Tabbit AI搜索公测，Gemini面临安全诉讼</div>
+                    <div class="overview-item-text">美团光年之外推出AI搜索产品。Google Gemini因"导致用户自杀"遭诉讼，AI安全责任进入司法实践。</div>
                 </div>
                 <div class="overview-item">
                     <div class="overview-item-header"><span class="overview-item-icon">🏭</span><span class="overview-item-label">AI 行业</span></div>
-                    <div class="overview-headline">Anthropic估值$3800亿（NYT 2026-02报道）</div>
-                    <div class="overview-item-text">欧盟€7500万EURO-3C项目启动。NVIDIA GTC下周开幕。DeepSeek V4适配国产芯片。</div>
+                    <div class="overview-headline">2月风投$1890亿创纪录，AI占90%但资本极端集中</div>
+                    <div class="overview-item-text">83%资金流向三巨头，种子轮反降11%。🇨🇳 小雨智造B轮数亿元融资，具身智能进入落地年。</div>
                 </div>
                 <div class="overview-item" style="grid-column: span 2;">
                     <div class="overview-item-header"><span class="overview-item-icon">🔄</span><span class="overview-item-label orange">企业AI转型</span></div>
-                    <div class="overview-headline">GPT-5.4 GDPval 83%量化知识工作替代 | 联想MWC可信AI方案</div>
-                    <div class="overview-item-text">武汉发布智能工厂奖励计划。87.3% Excel建模准确率——AI替代初级分析师的经济账已经算得通。</div>
+                    <div class="overview-headline">Block裁员近半引"AI washing"争议 | 非农减9.2万</div>
+                    <div class="overview-item-text">美国2月失业率升至4.4%，Block声称因AI裁员近半但遭Salesforce CEO质疑。Anthropic研究+裁员+非农数据三重验证，AI就业影响从理论变现实。</div>
                 </div>
             </div>
         </div>
 
-        <!-- Heat Trend Module (v3.1 - 位于全文概览之后) -->
-        <div class="heat-trend">
-            <div class="heat-trend-header">
-                <div>
-                    <div class="heat-trend-header-title">🔥 热度趋势（近6期日报交叉分析，3/3-3/8）</div>
-                    <div class="heat-trend-header-sub">加权多因子复合评分 + Z-Score突发检测</div>
-                </div>
+        <!-- Heat Trend Card -->
+        <div class="heat-card">
+            <div class="heat-header">
+                <div class="heat-header-label">🔥 热度趋势</div>
+                <div class="heat-header-title">近6期日报交叉分析（3/3-3/8）</div>
             </div>
-            <div class="heat-trend-body">
-                <!-- #1 GPT-5.x -->
-                <div class="heat-item" style="flex-wrap:wrap">
-                    <div class="heat-rank">🥇</div>
-                    <div class="heat-topic">
-                        <div class="heat-topic-name">OpenAI GPT-5.x密集发布</div>
-                        <div class="heat-topic-meta">6天连续 · 4板块覆盖</div>
-                    </div>
-                    <div class="heat-bars">
-                        <div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar medium"></div>
-                    </div>
-                    <span class="heat-trend-tag up">📈 持续攀升</span>
-                    <div class="heat-item-explain">
-                        <div class="heat-explain-row"><span class="heat-explain-label">热在哪</span><span class="heat-explain-text">6天内连发4款：GPT-5.3 Instant→Codex-Spark→5.4→5.4 Pro。横跨大模型、Coding、应用、企业4个板块，几乎每条新闻都与之相关。</span></div>
-                        <div class="heat-explain-row"><span class="heat-explain-label why">为什么热</span><span class="heat-explain-text">OpenAI在抢"平台定义权"——GPT-5.4首次内置Computer Use，从对话模型变成操作系统级能力，这是AI能力边界的一次质变。</span></div>
-                    </div>
-                </div>
-                <!-- #2 Anthropic -->
-                <div class="heat-item" style="flex-wrap:wrap">
-                    <div class="heat-rank">🥈</div>
-                    <div class="heat-topic">
-                        <div class="heat-topic-name">Anthropic多线作战</div>
-                        <div class="heat-topic-meta">6天连续 · 3板块覆盖</div>
-                    </div>
-                    <div class="heat-bars">
-                        <div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar medium"></div><div class="heat-bar"></div>
-                    </div>
-                    <span class="heat-trend-tag stable">➡️ 稳定高热</span>
-                    <div class="heat-item-explain">
-                        <div class="heat-explain-row"><span class="heat-explain-label">热在哪</span><span class="heat-explain-text">Claude登顶App Store → 拒绝国防部 → $3800亿估值（NYT 2月报道） → 劳动力影响指数，6天覆盖产品、政策、资本、研究4条线，没有一天缺席。</span></div>
-                        <div class="heat-explain-row"><span class="heat-explain-label why">为什么热</span><span class="heat-explain-text">Anthropic正从"安全优先的实验室"转型为"全面商业化巨头"。多线作战的本质是融资驱动的扩张加速——半年估值从$1830亿翻倍至$3800亿的压力要求全面出击。</span></div>
-                    </div>
-                </div>
-                <!-- #3 AI资本 -->
-                <div class="heat-item" style="flex-wrap:wrap">
-                    <div class="heat-rank">🥉</div>
-                    <div class="heat-topic">
-                        <div class="heat-topic-name">AI资本超级周期</div>
-                        <div class="heat-topic-meta">5天连续 · 2板块覆盖</div>
-                    </div>
-                    <div class="heat-bars">
-                        <div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar medium"></div><div class="heat-bar"></div><div class="heat-bar"></div>
-                    </div>
-                    <span class="heat-trend-tag up">📈 持续攀升</span>
-                    <div class="heat-item-explain">
-                        <div class="heat-explain-row"><span class="heat-explain-label">热在哪</span><span class="heat-explain-text">Anthropic $3800亿（NYT 2026-02） + 欧盟€7500万EURO-3C + 2月风投$1890亿创历史。三巨头（OpenAI+Anthropic+xAI）合计估值超$1万亿。</span></div>
-                        <div class="heat-explain-row"><span class="heat-explain-label why">为什么热</span><span class="heat-explain-text">AI进入"基础设施投资期"——类似2000年代互联网光纤大建设。资本在赌下一个万亿平台。真正风险不是泡沫，是头部3家可能拿走90%市场。</span></div>
-                    </div>
-                </div>
-                <!-- #4 AI Coding -->
-                <div class="heat-item" style="flex-wrap:wrap">
-                    <div class="heat-rank">4️⃣</div>
-                    <div class="heat-topic">
-                        <div class="heat-topic-name">AI Coding三国演义</div>
-                        <div class="heat-topic-meta">6天连续 · 1板块覆盖</div>
-                    </div>
-                    <div class="heat-bars">
-                        <div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar medium"></div><div class="heat-bar"></div><div class="heat-bar"></div><div class="heat-bar"></div>
-                    </div>
-                    <span class="heat-trend-tag stable">➡️ 稳定高热</span>
-                    <div class="heat-item-explain">
-                        <div class="heat-explain-row"><span class="heat-explain-label">热在哪</span><span class="heat-explain-text">Cursor上Forbes封面 + Codex桌面端 + Claude Code 75%覆盖率——三大厂商每天都有动作，AI Coding赛道从未间断过。</span></div>
-                        <div class="heat-explain-row"><span class="heat-explain-label why">为什么热</span><span class="heat-explain-text">AI Coding是最快产生收入的AI应用场景。Cursor ARR破$3亿验证了商业模型，巨头和创业公司都在抢程序员的"第一工具位"。</span></div>
-                    </div>
-                </div>
-                <!-- #5 Computer Use -->
-                <div class="heat-item" style="flex-wrap:wrap">
-                    <div class="heat-rank">5️⃣</div>
-                    <div class="heat-topic">
-                        <div class="heat-topic-name">Computer Use能力爆发</div>
-                        <div class="heat-topic-meta">3天连续 · 3板块覆盖</div>
-                    </div>
-                    <div class="heat-bars">
-                        <div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar medium"></div><div class="heat-bar"></div><div class="heat-bar"></div><div class="heat-bar"></div>
-                    </div>
-                    <span class="heat-trend-tag spike">⚡ 突发飙升</span>
-                    <div class="heat-item-explain">
-                        <div class="heat-explain-row"><span class="heat-explain-label">热在哪</span><span class="heat-explain-text">GPT-5.4 OSWorld 75%超人类 + Playwright交互式调试 + Excel建模87.3%——仅3天就同时出现在大模型、Coding、企业转型3个板块。Z-Score检测为"突发"。</span></div>
-                        <div class="heat-explain-row"><span class="heat-explain-label why">为什么热</span><span class="heat-explain-text">Computer Use是AI从"回答问题"到"代替操作"的分水岭。这意味着RPA、自动化测试、桌面办公等万亿场景可能被重新定义。</span></div>
-                    </div>
-                </div>
-                <!-- #6 DeepSeek V4 -->
-                <div class="heat-item" style="flex-wrap:wrap">
-                    <div class="heat-rank">6️⃣</div>
-                    <div class="heat-topic">
-                        <div class="heat-topic-name">DeepSeek V4据传发布</div>
-                        <div class="heat-topic-meta">3天连续 · 2板块覆盖</div>
-                    </div>
-                    <div class="heat-bars">
-                        <div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar medium"></div><div class="heat-bar"></div><div class="heat-bar"></div><div class="heat-bar"></div><div class="heat-bar"></div><div class="heat-bar"></div>
-                    </div>
-                    <span class="heat-trend-tag new">🆕 新兴话题</span>
-                    <div class="heat-item-explain">
-                        <div class="heat-explain-row"><span class="heat-explain-label">热在哪</span><span class="heat-explain-text">V4 Lite以原生多模态出击 + 首次适配国产芯片——同时出现在大模型和行业两个板块，技术和产业双重关注。</span></div>
-                        <div class="heat-explain-row"><span class="heat-explain-label why">为什么热</span><span class="heat-explain-text">DeepSeek走出了一条独立于NVIDIA的国产算力路线，这在中美科技博弈背景下具有战略意义。如果国产芯片能支撑前沿大模型，整个供应链逻辑都会改变。</span></div>
-                    </div>
-                </div>
-                <!-- #7 中国AI入口 -->
-                <div class="heat-item" style="flex-wrap:wrap">
-                    <div class="heat-rank">7️⃣</div>
-                    <div class="heat-topic">
-                        <div class="heat-topic-name">中国AI应用入口争夺</div>
-                        <div class="heat-topic-meta">3天连续 · 1板块覆盖</div>
-                    </div>
-                    <div class="heat-bars">
-                        <div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar medium"></div><div class="heat-bar low"></div><div class="heat-bar"></div><div class="heat-bar"></div><div class="heat-bar"></div><div class="heat-bar"></div><div class="heat-bar"></div>
-                    </div>
-                    <span class="heat-trend-tag new">🆕 新兴话题</span>
-                    <div class="heat-item-explain">
-                        <div class="heat-explain-row"><span class="heat-explain-label">热在哪</span><span class="heat-explain-text">美团Tabbit AI浏览器公测 + 阿里桌面Agent开放 + Coze密集更新——三家大厂同一周动作频频，瞄准的都是"用户入口"。</span></div>
-                        <div class="heat-explain-row"><span class="heat-explain-label why">为什么热</span><span class="heat-explain-text">中国AI竞争已从"模型比拼"转向"入口争夺"。浏览器是最后一个通用流量入口，谁先让用户习惯"AI浏览器 = 默认工具"，谁就拿到下一代用户关系。</span></div>
-                    </div>
-                </div>
-            </div>
-            <div class="heat-analysis">
-                <strong>热度解读:</strong> 本周最强信号是OpenAI的"密集轰炸"——6天内发布4款模型/产品，频率前所未有。<strong>突发信号</strong>是Computer Use——从Cursor Cloud到GPT-5.4 OSWorld 75%，"AI操作电脑"3天内跨越3个板块，Z-Score异常高。<strong>趋势判断</strong>：Computer Use极可能成为下周持续热点（GTC在即），AI Coding格局将进一步分化。
+            <div class="heat-body">
+                <table class="heat-table">
+                    <thead>
+                        <tr>
+                            <th>排名</th>
+                            <th>话题</th>
+                            <th>热度</th>
+                            <th>天数</th>
+                            <th>趋势</th>
+                            <th>核心信号</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>🥇</td>
+                            <td><strong>OpenAI GPT-5.x密集迭代</strong></td>
+                            <td><div class="heat-bar"><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-empty"></span><span class="heat-bar-empty"></span></div></td>
+                            <td>6天</td>
+                            <td><span class="heat-trend-tag up">📈 攀升</span></td>
+                            <td>GPT-5.3→5.4一周双代发布，Computer Use首超人类</td>
+                        </tr>
+                        <tr>
+                            <td>🥈</td>
+                            <td><strong>Anthropic安全叙事</strong></td>
+                            <td><div class="heat-bar"><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-empty"></span><span class="heat-bar-empty"></span><span class="heat-bar-empty"></span></div></td>
+                            <td>5天</td>
+                            <td><span class="heat-trend-tag stable">➡️ 高位</span></td>
+                            <td>从国防部之争到劳动力研究，持续强化"负责任AI"</td>
+                        </tr>
+                        <tr>
+                            <td>🥉</td>
+                            <td><strong>AI资本极端集中</strong></td>
+                            <td><div class="heat-bar"><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-empty"></span><span class="heat-bar-empty"></span><span class="heat-bar-empty"></span><span class="heat-bar-empty"></span></div></td>
+                            <td>4天</td>
+                            <td><span class="heat-trend-tag up">📈 攀升</span></td>
+                            <td>$189B记录中83%流向三巨头，IPO反而停滞</td>
+                        </tr>
+                        <tr>
+                            <td>4️⃣</td>
+                            <td><strong>AI就业冲击信号</strong></td>
+                            <td><div class="heat-bar"><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-empty"></span><span class="heat-bar-empty"></span><span class="heat-bar-empty"></span><span class="heat-bar-empty"></span><span class="heat-bar-empty"></span></div></td>
+                            <td>3天</td>
+                            <td><span class="heat-trend-tag burst">⚡ 飙升</span></td>
+                            <td>Anthropic研究+Block裁员+非农数据三重验证</td>
+                        </tr>
+                        <tr>
+                            <td>5️⃣</td>
+                            <td><strong>AI Coding Agent自主化</strong></td>
+                            <td><div class="heat-bar"><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-empty"></span><span class="heat-bar-empty"></span><span class="heat-bar-empty"></span><span class="heat-bar-empty"></span></div></td>
+                            <td>5天</td>
+                            <td><span class="heat-trend-tag stable">➡️ 稳定</span></td>
+                            <td>Codex/Claude Code/Cursor三足鼎立</td>
+                        </tr>
+                        <tr>
+                            <td>6️⃣</td>
+                            <td><strong>MCP协议生态扩张</strong></td>
+                            <td><div class="heat-bar"><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-empty"></span><span class="heat-bar-empty"></span><span class="heat-bar-empty"></span><span class="heat-bar-empty"></span><span class="heat-bar-empty"></span></div></td>
+                            <td>3天</td>
+                            <td><span class="heat-trend-tag up">📈 攀升</span></td>
+                            <td>Figma MCP+Tool Search+Playwright，从协议到基础设施</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><strong>热度解读</strong>: 本周最强信号是OpenAI的"闪电战"——从GPT-5.3到GPT-5.4一周双代发布，Computer Use首次超越人类基准。突发飙升信号来自AI就业冲击——Anthropic研究、Block裁员和非农数据在同一周形成三重共振。</p>
             </div>
         </div>
 
@@ -385,142 +313,184 @@
             <div class="section-card">
                 <div class="section-header"><span class="num">1</span> 最近动态</div>
                 <div class="sub-header">🌏 海外</div>
-
+                
                 <div class="news-item">
-                    <span class="news-tag tag-hot">🆕 新模型</span>
-                    <div class="news-title"><a href="https://openai.com/index/introducing-gpt-5-4/" target="_blank">OpenAI发布GPT-5.4：首个原生Computer Use通用模型</a></div>
+                    <span class="news-tag tag-hot">HOT</span>
+                    <div class="news-title"><a href="https://openai.com/index/introducing-gpt-5-4/" target="_blank">GPT-5.4发布：首个原生Computer Use的通用前沿模型</a></div>
                     <div class="news-source">OpenAI · 2026-03-05</div>
                     <div class="news-detail">
                         <div class="news-detail-row">
                             <span class="news-detail-label">核心发现</span>
-                            <span class="news-detail-value">GPT-5.4是OpenAI最强前沿模型，<strong>首次将原生computer-use能力集成到通用模型中</strong>，支持1M token上下文</span>
+                            <span class="news-detail-value">GPT-5.4是OpenAI首个具备<strong>原生计算机使用能力</strong>的通用模型，整合推理、编程和Agent工作流，支持最高1M token上下文</span>
                         </div>
                         <div class="news-detail-row">
                             <span class="news-detail-label">关键数据</span>
                             <span class="news-detail-value">
                                 <div class="news-data-chips">
-                                    <span class="news-data-chip">OSWorld 75.0%</span>
-                                    <span class="news-data-chip">超人类72.4%</span>
-                                    <span class="news-data-chip">GDPval 83%</span>
-                                    <span class="news-data-chip">幻觉减少33%</span>
+                                    <span class="news-data-chip">OSWorld 75.0%（超人类72.4%）</span>
+                                    <span class="news-data-chip">GDPval 83.0%</span>
+                                    <span class="news-data-chip">幻觉降33%</span>
+                                    <span class="news-data-chip">电子表格87.3%</span>
                                 </div>
                             </span>
                         </div>
                         <div class="news-detail-row">
                             <span class="news-detail-label">影响判断</span>
-                            <span class="news-detail-value">不只是模型迭代，而是AI从<strong>"对话工具"到"计算机操作员"</strong>的范式跃迁，Agent落地基础设施已就绪</span>
+                            <span class="news-detail-value">模型从"能聊天"跨越到"能操作电脑"，这是<strong>Agent落地最关键的基础设施升级</strong></span>
                         </div>
                     </div>
                 </div>
-
+                
                 <div class="news-item">
-                    <span class="news-tag tag-model">🆕 新模型</span>
-                    <div class="news-title"><a href="https://openai.com/index/gpt-5-3-instant/" target="_blank">GPT-5.3 Instant：更快更自然的日常对话</a></div>
-                    <div class="news-source">OpenAI · 2026-03-03</div>
+                    <span class="news-tag tag-hot">HOT</span>
+                    <div class="news-title"><a href="https://www.anthropic.com/research/labor-market-impacts" target="_blank">Anthropic发布AI劳动力市场影响研究：白领大衰退"绝对可能"</a></div>
+                    <div class="news-source">Anthropic · 2026-03-06</div>
                     <div class="news-detail">
                         <div class="news-detail-row">
                             <span class="news-detail-label">核心发现</span>
-                            <span class="news-detail-value">Instant系列独立于Thinking演进，专注<strong>低延迟、自然流畅的对话体验</strong></span>
+                            <span class="news-detail-value">引入"observed exposure"新指标，揭示AI<strong>理论能力与实际使用间的巨大鸿沟</strong>——计算机/数学类理论可覆盖94%任务，实际仅33%</span>
+                        </div>
+                        <div class="news-detail-row">
+                            <span class="news-detail-label">关键数据</span>
+                            <span class="news-detail-value">
+                                <div class="news-data-chips">
+                                    <span class="news-data-chip">程序员75%任务被覆盖</span>
+                                    <span class="news-data-chip">22-25岁入职率降14%</span>
+                                    <span class="news-data-chip">高曝光群体收入高47%</span>
+                                </div>
+                            </span>
                         </div>
                         <div class="news-detail-row">
                             <span class="news-detail-label">影响判断</span>
-                            <span class="news-detail-value">OpenAI正式确立<strong>"双轨模型战略"</strong>：Thinking负责深度推理，Instant负责日常交互</span>
+                            <span class="news-detail-value">最受影响的不是蓝领而是<strong>高学历高收入白领</strong>——律师、金融分析师、软件开发者首当其冲</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="news-item">
-                    <span class="news-tag tag-eval">📊 新评测</span>
-                    <div class="news-title"><a href="https://natesnewsletter.substack.com/p/i-tested-gpt-54-against-claude-and" target="_blank">独立盲测GPT-5.4 vs Claude vs Gemini：最有趣的不是谁赢了</a></div>
-                    <div class="news-source">Nate's Newsletter · 2026-03-07</div>
-                    <div class="news-summary-compact">6项结构化盲测：GPT-5.4量化建模和文件处理胜出，但常识推理输给Claude和Gemini。结论：<strong>模型能力趋同，理念分化</strong>。</div>
+                    <span class="news-tag tag-new">NEW</span>
+                    <div class="news-title"><a href="https://fortune.com/2026/03/06/february-jobs-report-ai-taking-jobs-war-iran-oil-price-interest-rate-cut-2026/" target="_blank">美国2月非农就业减少9.2万人，失业率升至4.4%</a></div>
+                    <div class="news-source">Fortune · 2026-03-06</div>
+                    <div class="news-summary-compact">美国劳工统计局公布惨淡就业报告。Block裁员近半员工声称因AI优化，Salesforce CEO Marc Benioff批评其为"AI washing"。</div>
+                </div>
+
+                <div class="news-item">
+                    <span class="news-tag tag-new">NEW</span>
+                    <div class="news-title"><a href="https://openai.com/index/introducing-gpt-5-4/" target="_blank">GPT-5.4 Tool Search: token用量降低47%，准确率不变</a></div>
+                    <div class="news-source">OpenAI · 2026-03-05</div>
+                    <div class="news-summary-compact">GPT-5.4引入Tool Search机制，Agent不再需要预加载全部工具定义。在MCP Atlas基准中，36个MCP服务器配置下token用量减少47%。</div>
                 </div>
 
                 <div class="sub-header">🇨🇳 国内</div>
-
+                
                 <div class="news-item">
-                    <span class="news-tag tag-cn">🇨🇳 🆕 新模型</span>
-                    <div class="news-title"><a href="https://www.cls.cn/detail/2298837" target="_blank">DeepSeek V4 Lite据传即将发布：原生多模态+国产芯片适配</a> <span style="background:#FEF3C7;color:#92400E;font-size:11px;padding:2px 6px;border-radius:4px;font-weight:600">⚠️ 未经官方确认</span></div>
-                    <div class="news-source">财联社 · 2026-03-01</div>
+                    <span class="news-tag tag-cn">🇨🇳</span>
+                    <div class="news-title"><a href="https://jigou.jiqizhixin.com/articles/2026-03-05-2" target="_blank">阿里正式批准林俊旸辞职，成立基础模型支持小组</a></div>
+                    <div class="news-source">机器之心 · 2026-03-05</div>
                     <div class="news-detail">
                         <div class="news-detail-row">
                             <span class="news-detail-label china">核心发现</span>
-                            <span class="news-detail-value">多个媒体报道DeepSeek V4 Lite即将发布，为<strong>原生多模态大模型</strong>，优先适配国产芯片。<strong>注意：截至发稿时DeepSeek官方未正式确认，Manifold Markets预测市场仍有分歧</strong></span>
+                            <span class="news-detail-value">阿里CEO吴泳铭正式批准Qwen团队核心人物林俊旸辞职，宣布<strong>成立基础模型支持小组，坚持开源路线</strong></span>
                         </div>
                         <div class="news-detail-row">
                             <span class="news-detail-label china">关键数据</span>
                             <span class="news-detail-value">
                                 <div class="news-data-chips">
-                                    <span class="news-data-chip china">据传原生多模态</span>
-                                    <span class="news-data-chip china">百万token上下文</span>
-                                    <span class="news-data-chip china">国产芯片优先</span>
+                                    <span class="news-data-chip china">Qwen下载量10亿+</span>
+                                    <span class="news-data-chip china">CEO亲自回应</span>
+                                    <span class="news-data-chip china">坚持开源策略</span>
                                 </div>
                             </span>
                         </div>
                         <div class="news-detail-row">
                             <span class="news-detail-label china">影响判断</span>
-                            <span class="news-detail-value">如属实，DeepSeek正在走<strong>独立于美国算力生态的路线</strong>。但需持续跟踪官方消息，当前信息以财联社和BAAI等二手信源为主</span>
+                            <span class="news-detail-value">国内大模型人才流动加速，但阿里明确"坚持开源"<strong>稳定军心</strong></span>
                         </div>
                     </div>
                 </div>
-
-                <div class="news-item">
-                    <span class="news-tag tag-cn">🇨🇳 📈 新格局</span>
-                    <div class="news-title"><a href="https://zhuanlan.zhihu.com/p/670574382" target="_blank">LMSYS竞技场剧变：GPT-5.4加入后国产模型跌出前十</a></div>
-                    <div class="news-source">知乎专栏 · 2026-03-06</div>
-                    <div class="news-summary-compact">GPT-5.4和GPT-5.4 Thinking加入后，国产模型全部跌出前10名。<strong>中国大模型面临新一轮技术代差压力</strong>。</div>
-                </div>
             </div>
 
+            <!-- Deep Focus Card -->
             <div class="deep-focus-card">
                 <div class="deep-focus-header">
                     <div>
                         <div class="deep-focus-label">💡 深度聚焦</div>
-                        <div class="deep-focus-title">GPT-5.4的真正意义：AI从"对话伙伴"变成"计算机操作员"</div>
+                        <div class="deep-focus-title">AI首次在"操作计算机"上超越人类——这意味着什么？</div>
                     </div>
                 </div>
                 <div class="deep-focus-body">
-                    <p>GPT-5.4最引人注目的不是又一次benchmark刷榜，而是一个质变信号：<strong>它是第一个内置原生computer-use能力的通用模型</strong>。在OSWorld测试中，GPT-5.4以75.0%的成功率超越了人类操作者的72.4%——这意味着AI操作桌面应用的能力第一次超过了普通人。</p>
-                    <p>为什么这件事比"推理能力又提升了几个点"更重要？因为它改变了AI的底层交互范式。从GPT-3到GPT-5.2，AI的核心能力是"理解和生成文本"；而GPT-5.4加入了"看屏幕、点鼠标、敲键盘"。这不是功能增量，而是<strong>能力维度的跃迁</strong>——从语言空间进入了物理操作空间。</p>
-                    <p>独立盲测的结论耐人寻味：GPT-5.4在量化建模和文件处理上胜出，但在"洗车应该开车还是走路"的常识问题上输给了Claude和Gemini。这揭示了一个规律——<strong>模型越强化专业能力，越可能在常识上"过度思考"</strong>。OpenAI的路线已经很清楚：他们不再追求"什么都最好"的通用chatbot，而是在建设agentic infrastructure。</p>
+                    <p>GPT-5.4在OSWorld-Verified上达到<strong>75.0%成功率</strong>，首次超越人类的72.4%基准。这不是又一个Benchmark数字游戏——OSWorld测试的是模型通过截图和键鼠操作在真实桌面环境中完成任务的能力，如打开应用、填写表单、跨窗口操作。这是AI第一次在"像人一样使用计算机"这个维度上超越人类水平。</p>
+                    <p>为什么这件事的意义远超表面？因为<strong>"操作计算机"是一种元能力</strong>——它意味着AI不再受限于特定的API或插件接口，而是可以像人一样使用任何软件。传统的AI集成需要每个软件提供API，而Computer Use绕过了这个瓶颈：不需要API，只要有屏幕就能操作。这将大幅降低AI Agent的落地成本，尤其对那些没有API的遗留系统（企业内部的ERP、CRM、政府系统）意义重大。</p>
+                    <p>结合Anthropic同期发布的就业影响研究，一个清晰的图景浮现：AI的理论能力（94%任务覆盖）与实际使用（33%覆盖）之间存在巨大鸿沟，而<strong>Computer Use能力正是弥合这一鸿沟的关键技术</strong>。当AI可以直接操作任何软件时，"理论能覆盖但实际没覆盖"的61%缺口将加速收窄。</p>
                     <div class="deep-focus-takeaway">
-                        <div class="deep-focus-takeaway-label">对我们的启示</div>
-                        <div class="deep-focus-takeaway-text">如果你还把大模型当"聊天机器人"用，你正在用2024年的思维使用2026年的工具。<strong>关注computer-use能力的落地场景</strong>——RPA替代、自动化测试、文档处理、数据录入——这些才是GPT-5.4真正要颠覆的领域。</div>
+                        <div class="deep-focus-takeaway-label">💡 TAKEAWAY</div>
+                        <div class="deep-focus-takeaway-text">评估你团队的日常工作中，有多少是<strong>"在不同软件之间搬运信息"</strong>——这些任务将是Computer Use能力最先替代的对象。提前为高频重复操作构建AI自动化方案。</div>
                     </div>
                 </div>
             </div>
 
+            <!-- Pattern Insight Card -->
             <div class="pi-card">
                 <div class="pi-header">
                     <span class="pi-badge">🔮 规律洞察</span>
-                    <div class="pi-title">技术平台化三阶段论：从工具到代理到自治</div>
+                    <span class="pi-title">"能力-使用鸿沟"规律：新技术的实际渗透永远远落后于理论能力</span>
                 </div>
                 <div class="pi-row highlight">
-                    <div class="pi-row-label l2">本质</div>
-                    <div class="pi-row-content">
-                        <strong>每一代通用计算技术都经历"工具→协作→自治"三阶段演化，Computer Use标志着AI进入第二阶段</strong>
+                    <span class="pi-row-label l2">📐 规律</span>
+                    <span class="pi-row-content">每项通用技术（GPT: General Purpose Technology）的实际使用率，在技术成熟后5-15年内仅达到理论能力的<strong>30-40%</strong>。驱动鸿沟收窄的不是技术本身的进步，而是配套基础设施（如Computer Use）和组织适配的到位。</span>
+                </div>
+                <div class="pi-row">
+                    <span class="pi-row-label">进化流</span>
+                    <span class="pi-row-content">
                         <div class="pi-evo">
-                            <div class="pi-evo-step"><span class="pi-evo-tag">1.0</span><span class="pi-evo-text">工具：用户驱动</span></div>
+                            <div class="pi-evo-step">
+                                <span class="pi-evo-tag">1882</span>
+                                <span class="pi-evo-text">电力（38年达60%电气化）</span>
+                            </div>
                             <span class="pi-evo-arrow">→</span>
-                            <div class="pi-evo-step active"><span class="pi-evo-tag">2.0</span><span class="pi-evo-text">协作：AI主导+人类监督</span></div>
+                            <div class="pi-evo-step">
+                                <span class="pi-evo-tag">1995</span>
+                                <span class="pi-evo-text">互联网（15年B2B渗透）</span>
+                            </div>
                             <span class="pi-evo-arrow">→</span>
-                            <div class="pi-evo-step future"><span class="pi-evo-tag">3.0</span><span class="pi-evo-text">自治：AI自主决策</span></div>
+                            <div class="pi-evo-step active">
+                                <span class="pi-evo-tag">2023</span>
+                                <span class="pi-evo-text">AI（理论94% vs 实际33%）</span>
+                            </div>
+                            <span class="pi-evo-arrow">→</span>
+                            <div class="pi-evo-step future">
+                                <span class="pi-evo-tag">2027?</span>
+                                <span class="pi-evo-text">Computer Use弥合鸿沟</span>
+                            </div>
                         </div>
-                    </div>
+                    </span>
                 </div>
                 <div class="pi-table">
-                    <div class="pi-t-head"><span>阶段</span><span>现实验证</span><span>类比</span></div>
-                    <div class="pi-t-section verified"><span class="pi-t-section-tag">✅ 已验证（历史案例）</span></div>
-                    <div class="pi-t-row"><div class="pi-t-rule">1.0 工具</div><div class="pi-t-reality">PC时代——人操作电脑完成任务</div><div class="pi-t-analogy">计算器：人按键，机器算</div></div>
-                    <div class="pi-t-row"><div class="pi-t-rule">2.0 协作</div><div class="pi-t-reality">推荐系统主导、人做最终决策</div><div class="pi-t-analogy">导航仪：机器规划，人执行</div></div>
-                    <div class="pi-t-verify">✅ 在计算（大型机→PC→云）、自动驾驶（辅助→L3→L4）、制造（手工→半自动→全自动）中反复验证</div>
-                    <div class="pi-t-divider"></div>
-                    <div class="pi-t-section current"><span class="pi-t-section-tag">✅ 带入现状：AI大模型</span></div>
-                    <div class="pi-t-row"><div class="pi-t-rule">→ 2.0阶段</div><div class="pi-t-reality">GPT-5.4 Computer Use = AI操作计算机+人类审核确认 | OSWorld 75%超人类</div><div class="pi-t-analogy">副驾驶：AI开车，人盯路</div></div>
+                    <div class="pi-t-head">
+                        <span></span>
+                        <span>当前映射（今日新闻）</span>
+                        <span>历史类比</span>
+                    </div>
+                    <div class="pi-t-section verified"><span class="pi-t-section-tag">✅ 已验证</span></div>
+                    <div class="pi-t-row">
+                        <span class="pi-t-rule">能力鸿沟</span>
+                        <span class="pi-t-reality">AI理论覆盖94%的计算机任务，实际仅33%——瓶颈是API集成和组织流程</span>
+                        <span class="pi-t-analogy">电力1882年发明，到1920年代工厂才真正电气化——瓶颈是配电网和电动机标准化</span>
+                    </div>
+                    <div class="pi-t-section current"><span class="pi-t-section-tag">📍 当前映射</span></div>
+                    <div class="pi-t-row">
+                        <span class="pi-t-rule">劳动力响应</span>
+                        <span class="pi-t-reality">22-25岁入职高曝光岗位下降14%——劳动力市场开始"用脚投票"</span>
+                        <span class="pi-t-analogy">互联网1995年商用，企业B2B到2010年才普及——瓶颈是支付、物流基础设施</span>
+                    </div>
                     <div class="pi-t-divider"></div>
                     <div class="pi-t-section projected"><span class="pi-t-section-tag">🔮 趋势推演</span></div>
-                    <div class="pi-t-row projected"><div class="pi-t-rule">→ 3.0 自治</div><div class="pi-t-reality">12-18个月内出现首批"无需人类确认"的Agent产品（限定场景如自动化测试、数据录入）</div><div class="pi-t-analogy">自动驾驶出租车：限定路线</div></div>
-                    <div class="pi-confidence">📐 置信度：中高 · 验证窗口：2027年Q1前 · 信号：OpenAI/Anthropic是否推出"无需确认"模式的Agent API</div>
+                    <div class="pi-t-row projected">
+                        <span class="pi-t-rule">加速收窄</span>
+                        <span class="pi-t-reality">Computer Use（不依赖API）+ Tool Search（降低集成成本47%）= 鸿沟加速收窄</span>
+                        <span class="pi-t-analogy">预计2027-2028年，AI实际覆盖率从33%升至55-65%</span>
+                    </div>
+                    <div class="pi-confidence">📊 置信度: 中等偏高 | 验证窗口: 2026Q4-2027Q2 | 可观测信号: Computer Use Agent企业部署数量、非API软件自动化案例增长率</div>
                 </div>
             </div>
         </article>
@@ -530,72 +500,54 @@
             <div class="section-card">
                 <div class="section-header"><span class="num">1</span> 最近动态</div>
                 <div class="sub-header">🌏 海外</div>
-
+                
                 <div class="news-item">
-                    <span class="news-tag tag-hot">📈 新格局</span>
-                    <div class="news-title"><a href="https://www.forbes.com/sites/annatong/2026/03/05/cursor-goes-to-war-for-ai-coding-dominance/" target="_blank">Cursor登Forbes封面：AI编程争霸战全面打响</a></div>
-                    <div class="news-source">Forbes · 2026-03-05</div>
-                    <div class="news-detail">
-                        <div class="news-detail-row">
-                            <span class="news-detail-label">核心变化</span>
-                            <span class="news-detail-value">Cursor成为AI编程领域最快增长公司后，<strong>正面临OpenAI Codex和Claude Code的双线夹击</strong></span>
-                        </div>
-                        <div class="news-detail-row">
-                            <span class="news-detail-label">影响判断</span>
-                            <span class="news-detail-value">AI Coding从"谁的补全更准"升级为<strong>"谁的Agent更强"</strong>——Cursor、Codex、Claude Code三足鼎立</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="news-item">
-                    <span class="news-tag tag-hot">⚙️ 新技术</span>
-                    <div class="news-title"><a href="https://openai.com/index/introducing-gpt-5-4/" target="_blank">GPT-5.4原生Computer Use + Playwright交互式调试</a></div>
+                    <span class="news-tag tag-hot">HOT</span>
+                    <div class="news-title"><a href="https://openai.com/index/introducing-gpt-5-4/" target="_blank">GPT-5.4 Codex原生Computer Use + Playwright交互式技能</a></div>
                     <div class="news-source">OpenAI · 2026-03-05</div>
                     <div class="news-detail">
                         <div class="news-detail-row">
-                            <span class="news-detail-label">核心变化</span>
-                            <span class="news-detail-value">GPT-5.4在Codex中集成原生computer-use，发布<strong>Playwright Interactive实验技能</strong>——可视化调试Web/Electron应用</span>
+                            <span class="news-detail-label">核心发现</span>
+                            <span class="news-detail-value">GPT-5.4在Codex中支持<strong>1M token上下文窗口</strong>，发布实验性Playwright Interactive技能——Codex可以一边构建Web应用一边视觉调试</span>
                         </div>
                         <div class="news-detail-row">
                             <span class="news-detail-label">关键数据</span>
                             <span class="news-detail-value">
                                 <div class="news-data-chips">
-                                    <span class="news-data-chip">/fast 1.5x速度</span>
-                                    <span class="news-data-chip">1M上下文实验</span>
-                                    <span class="news-data-chip">Tool Search -47% token</span>
+                                    <span class="news-data-chip">1M token上下文</span>
+                                    <span class="news-data-chip">/fast模式1.5x速度</span>
+                                    <span class="news-data-chip">Playwright可视化调试</span>
                                 </div>
                             </span>
                         </div>
                         <div class="news-detail-row">
                             <span class="news-detail-label">影响判断</span>
-                            <span class="news-detail-value">AI编程从"写代码"升级到<strong>"看屏幕写代码+测试代码"</strong>，开发-测试循环被压缩到单次交互</span>
+                            <span class="news-detail-value">AI编程从"生成代码"升级到<strong>"构建+测试+调试"一体化工作流</strong></span>
                         </div>
                     </div>
                 </div>
-
+                
                 <div class="news-item">
-                    <span class="news-tag tag-new">📦 新产品</span>
-                    <div class="news-title"><a href="https://openai.com/index/introducing-the-codex-app/" target="_blank">Codex桌面应用登陆Windows：多Agent并行+跨平台同步</a></div>
-                    <div class="news-source">OpenAI · 2026-03-04</div>
-                    <div class="news-summary-compact">Codex App从macOS扩展到Windows，支持多Agent并行。OpenAI正在将Codex打造为<strong>跨平台的AI编程工作站</strong>。</div>
+                    <span class="news-tag tag-new">NEW</span>
+                    <div class="news-title"><a href="https://visualstudiomagazine.com/articles/2026/02/26/claude-code-edges-openais-codex-in-vs-codes-agentic-ai-marketplace-leaderboard.aspx" target="_blank">Claude Code在VS Code Agent市场超越Codex</a></div>
+                    <div class="news-source">Visual Studio Magazine · 2026-02-26</div>
+                    <div class="news-summary-compact">Anthropic的Claude Code在VS Code的Agentic AI Marketplace排行榜上超越OpenAI的Codex成为第一。竞争从模型能力延伸到IDE生态。</div>
                 </div>
 
-                <div class="sub-header">🛠️ 实践</div>
-
                 <div class="news-item">
-                    <span class="news-tag tag-practice">🛠️ 新实践</span>
-                    <div class="news-title"><a href="https://www.anthropic.com/research/labor-market-impacts" target="_blank">Anthropic研究：程序员75%的任务已被AI覆盖</a></div>
-                    <div class="news-source">Anthropic · 2026-03-06</div>
-                    <div class="news-detail">
-                        <div class="news-detail-row">
-                            <span class="news-detail-label">核心发现</span>
-                            <span class="news-detail-value">Anthropic Economic Index数据显示编程/软件开发类任务中<strong>75%已被Claude覆盖</strong>，是所有职业中AI渗透率最高的领域</span>
-                        </div>
-                        <div class="news-detail-row">
-                            <span class="news-detail-label">影响判断</span>
-                            <span class="news-detail-value">AI Coding不只是"辅助"，而是在<strong>大规模替代基础编程工作</strong>。开发者核心价值正从"写代码"转向"定义需求+审核输出"</span>
-                        </div>
-                    </div>
+                    <span class="news-tag tag-new">NEW</span>
+                    <div class="news-title"><a href="https://medium.com/data-science-collective/gpt-5-4-came-for-claude-code-the-real-story-is-bigger-than-both-927059667584" target="_blank">GPT-5.4瞄准Claude Code，真正的故事比两者都大</a></div>
+                    <div class="news-source">Medium · 2026-03-06</div>
+                    <div class="news-summary-compact">四个前沿模型一个月内发布，预训练Scaling撞墙后模型商品化加速，竞争核心从模型能力转移到工作流捕获。</div>
+                </div>
+
+                <div class="sub-header">🇨🇳 国内</div>
+                
+                <div class="news-item">
+                    <span class="news-tag tag-cn">🇨🇳</span>
+                    <div class="news-title"><a href="https://m.36kr.com/p/3706413051146375" target="_blank">AI Coding大有可为，但Vibe Coding还是先洗洗睡吧</a></div>
+                    <div class="news-source">36氪（知危） · 2026-03-02</div>
+                    <div class="news-summary-compact">多位业内专家深度访谈：AI Coding（面向专业开发者）和Vibe Coding（面向非专业开发者）不是一回事。专家对AI Coding乐观，对Vibe Coding质疑——代码复杂度是关键分水岭。</div>
                 </div>
             </div>
 
@@ -603,16 +555,16 @@
                 <div class="deep-focus-header">
                     <div>
                         <div class="deep-focus-label">💡 深度聚焦</div>
-                        <div class="deep-focus-title">AI编程的"全栈化"时刻：从写代码到操作计算机</div>
+                        <div class="deep-focus-title">Tool Search如何改变MCP生态的游戏规则？</div>
                     </div>
                 </div>
                 <div class="deep-focus-body">
-                    <p>GPT-5.4的Playwright Interactive技能揭示了AI编程的下一个形态：<strong>AI不仅写代码，还能看到代码运行的效果，然后自己去调试</strong>。这是一个质的变化——以前是"写完给你，你去跑"；现在是"我写、我跑、我看、我改"。</p>
-                    <p>结合Cursor登Forbes封面的标志性事件，AI Coding赛道正式进入了主流视野和白热化竞争阶段。Cursor的策略是深耕IDE体验，OpenAI打通Computer Use全链路，Anthropic则用劳动力经济学数据证明<strong>"75%的编程任务已经被覆盖"</strong>。三家的竞争已从"功能对比"升维到"叙事之战"。</p>
-                    <p>Tool Search对MCP服务器47%的token优化也值得关注——这解决了Agent调用大量工具时的成本问题，为"AI全栈开发工程师"扫清了最后的技术障碍。</p>
+                    <p>GPT-5.4引入的Tool Search看似是一个小优化，实则解决了MCP生态最大的工程瓶颈。此前，当Agent需要调用工具时，所有MCP服务器的工具定义必须预先加载到上下文中——36个MCP服务器意味着<strong>数万token被"浪费"</strong>在可能根本用不到的工具描述上。Tool Search让模型只在需要时才查找和加载特定工具的定义。</p>
+                    <p>这解决了一个经济学问题：在MCP Atlas基准测试中，Tool Search配置<strong>减少47%的token用量，同时准确率不变</strong>。翻译成成本语言：如果你的Agent每天执行1万次工具调用，单这一项优化就能节省近一半的API成本。更重要的是，它移除了"工具数量上限"——之前上下文窗口限制了Agent能同时访问的工具数，现在Agent可以连接成百上千个MCP服务器而不会"上下文爆炸"。</p>
+                    <p>对AI Coding工具链的影响：这使得Codex、Claude Code等IDE工具可以同时连接代码仓库、设计工具（Figma MCP）、项目管理（Linear）、文档系统（Notion）等所有开发上下游工具。<strong>"全链路AI开发"从理想变为工程可行。</strong></p>
                     <div class="deep-focus-takeaway">
-                        <div class="deep-focus-takeaway-label">对我们的启示</div>
-                        <div class="deep-focus-takeaway-text">Anthropic的"75%任务覆盖"数据是一个分水岭信号。<strong>AI Coding已经从"提效工具"变成"生产力替代"</strong>。开发者的核心价值将从"写正确的代码"不可逆地转向"定义正确的需求+审核AI的输出"。</div>
+                        <div class="deep-focus-takeaway-label">💡 TAKEAWAY</div>
+                        <div class="deep-focus-takeaway-text">如果你在构建AI Agent，现在是时候重新评估MCP集成策略。<strong>Tool Search意味着"多连接不再有惩罚"</strong>，可以大胆接入更多工具源。</div>
                     </div>
                 </div>
             </div>
@@ -623,86 +575,70 @@
             <div class="section-card">
                 <div class="section-header"><span class="num">1</span> 最近动态</div>
                 <div class="sub-header">🌏 海外</div>
-
+                
                 <div class="news-item">
-                    <span class="news-tag tag-hot">⚙️ 新技术</span>
-                    <div class="news-title"><a href="https://openai.com/index/introducing-gpt-5-4/" target="_blank">GPT-5.4 Thinking支持"中途纠偏"：AI边思考你边调整</a></div>
-                    <div class="news-source">OpenAI · 2026-03-05</div>
+                    <span class="news-tag tag-hot">HOT</span>
+                    <div class="news-title"><a href="https://www.reuters.com/legal/litigation/lawsuit-says-googles-gemini-ai-chatbot-drove-man-suicide-2026-03-04/" target="_blank">Google Gemini聊天机器人面临"导致用户自杀"诉讼</a></div>
+                    <div class="news-source">Reuters · 2026-03-04</div>
                     <div class="news-detail">
                         <div class="news-detail-row">
-                            <span class="news-detail-label">核心变化</span>
-                            <span class="news-detail-value">GPT-5.4 Thinking提供思路预览(preamble)，<strong>用户可在AI思考过程中调整方向</strong></span>
-                        </div>
-                        <div class="news-detail-row">
-                            <span class="news-detail-label">关键数据</span>
-                            <span class="news-detail-value">
-                                <div class="news-data-chips">
-                                    <span class="news-data-chip">BrowseComp +17%</span>
-                                    <span class="news-data-chip">长上下文连贯性提升</span>
-                                </div>
-                            </span>
+                            <span class="news-detail-label">核心发现</span>
+                            <span class="news-detail-value">一起诉讼指控Google的Gemini AI聊天机器人<strong>导致一名用户自杀</strong>，引发AI产品安全责任的法律讨论</span>
                         </div>
                         <div class="news-detail-row">
                             <span class="news-detail-label">影响判断</span>
-                            <span class="news-detail-value">AI交互从"等结果→不满意→重来"进化到<strong>"边做边调"</strong>，用户体验跃升</span>
+                            <span class="news-detail-value">AI聊天产品面临的安全责任风险正在从<strong>理论变为现实诉讼</strong>，可能推动监管立法</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="news-item">
-                    <span class="news-tag tag-new">🛠️ 新实践</span>
-                    <div class="news-title"><a href="https://www.businessinsider.com/anthropic-is-tracking-the-jobs-most-exposed-to-ai-disruption-2026-3" target="_blank">Anthropic劳动力影响指数：AI正在重塑职业版图</a></div>
-                    <div class="news-source">Business Insider · 2026-03-07</div>
-                    <div class="news-summary-compact">编程(75%)和数据录入(67%)是AI覆盖率最高的领域。<strong>基于Claude真实使用数据，而非假设模型</strong>。<span style="color:#92400E;font-size:11px">（此前引用的写作65%、数据分析60%未在原始报告中找到确切出处，已修正）</span></div>
+                    <span class="news-tag tag-new">NEW</span>
+                    <div class="news-title"><a href="https://help.openai.com/en/articles/11909943-gpt-53-and-54-in-chatgpt" target="_blank">ChatGPT集成GPT-5.4 Thinking：支持中途调整方向</a></div>
+                    <div class="news-source">OpenAI · 2026-03-05</div>
+                    <div class="news-summary-compact">GPT-5.4 Thinking在ChatGPT中可以提供前置思考计划，用户可以在响应生成过程中调整方向，无需重新开始。对Plus、Team和Pro用户开放。</div>
+                </div>
+
+                <div class="news-item">
+                    <span class="news-tag tag-new">NEW</span>
+                    <div class="news-title"><a href="https://eu.36kr.com/zh/p/3708480131084806" target="_blank">MWC 2026: AI成为UI，终端边界渐消</a></div>
+                    <div class="news-source">36氪 · 2026-03-04</div>
+                    <div class="news-summary-compact">2026年MWC大会以6G与AI融合、端侧智能演进为核心议题，AI正在从后端能力变成直接面向用户的交互界面。</div>
                 </div>
 
                 <div class="sub-header">🇨🇳 国内</div>
-
+                
                 <div class="news-item">
-                    <span class="news-tag tag-cn">🇨🇳 📦 新产品</span>
-                    <div class="news-title"><a href="https://www.21jingji.com/article/20260303/herald/64d2c422041660c41845768679286e48.html" target="_blank">美团Tabbit AI浏览器公测：搜索+对话+任务执行三合一</a></div>
-                    <div class="news-source">21世纪经济报道 · 2026-03-02</div>
+                    <span class="news-tag tag-cn">🇨🇳</span>
+                    <div class="news-title"><a href="https://m.36kr.com/p/3706987077955713" target="_blank">美团Tabbit AI搜索进入公测</a></div>
+                    <div class="news-source">36氪 · 2026-03-02</div>
                     <div class="news-detail">
                         <div class="news-detail-row">
-                            <span class="news-detail-label china">核心变化</span>
-                            <span class="news-detail-value">美团光年之外推出Tabbit，将浏览器从"信息获取工具"升级为<strong>"任务执行平台"</strong></span>
+                            <span class="news-detail-label china">核心发现</span>
+                            <span class="news-detail-value">美团旗下光年之外团队宣布<strong>AI搜索产品Tabbit进入公测</strong>，整合网页浏览、搜索、AI对话三合一</span>
                         </div>
                         <div class="news-detail-row">
                             <span class="news-detail-label china">影响判断</span>
-                            <span class="news-detail-value">继百度、字节之后，美团入局AI搜索。<strong>AI浏览器赛道正在成为大厂必争之地</strong></span>
+                            <span class="news-detail-value">国内AI搜索赛道再添互联网巨头入局，与百度文心、字节豆包、Kimi形成竞争</span>
                         </div>
                     </div>
-                </div>
-
-                <div class="news-item">
-                    <span class="news-tag tag-cn">🇨🇳</span>
-                    <div class="news-title"><a href="https://www.21jingji.com/article/20260303/herald/66421c1a157e5629c6b23e2a93032e39.html" target="_blank">Tabbit遇代码争议后与原作者达成共识</a></div>
-                    <div class="news-source">21财经 · 2026-03-03</div>
-                    <div class="news-summary-compact">公测次日遭遇GPL代码争议，迅速与原开发者达成联合声明。<strong>开源社区信任建设仍是AI产品关键课题</strong>。</div>
-                </div>
-
-                <div class="news-item">
-                    <span class="news-tag tag-cn">🇨🇳 🔄 新动态</span>
-                    <div class="news-title"><a href="https://finance.eastmoney.com/a/202603043660857296.html" target="_blank">阿里桌面Agent全面开放+Coze持续密集更新</a></div>
-                    <div class="news-source">东方财富 · 2026-03-04</div>
-                    <div class="news-summary-compact">通义桌面Agent全面开放(3/4)，Coze平台3月密集更新。国内AI应用平台进入<strong>"功能军备竞赛"</strong>阶段。</div>
                 </div>
             </div>
 
             <div class="deep-focus-card">
-                <div class="deep-focus-header china-theme">
+                <div class="deep-focus-header orange-theme">
                     <div>
-                        <div class="deep-focus-label">💡 深度聚焦 · 🇨🇳 国内</div>
-                        <div class="deep-focus-title">AI浏览器：为什么大厂都在抢这个入口？</div>
+                        <div class="deep-focus-label">💡 深度聚焦</div>
+                        <div class="deep-focus-title">当AI聊天机器人成为被告——产品安全责任的新边界</div>
                     </div>
                 </div>
                 <div class="deep-focus-body">
-                    <p>美团Tabbit的公测标志着一个重要信号：<strong>AI浏览器正在成为中国互联网大厂的新战场</strong>。百度有文心一言浏览器版、字节有豆包浏览器插件、阿里有通义网页摘要——但Tabbit的野心更大，它想把浏览器从"看网页的工具"变成"替你做事的Agent"。</p>
-                    <p>为什么是浏览器？因为浏览器是用户数字生活的<strong>最后一个通用入口</strong>。搜索引擎的流量在被AI分流，但浏览器作为操作系统之上的第二层"OS"，仍然控制着用户到达任何网站的路径。谁掌握了AI浏览器，谁就掌握了AI时代的流量分发权。</p>
-                    <p>代码争议是一个缩影——国内AI产品在快速迭代中，如何平衡速度和开源社区信任？美团团队的快速响应展示了正确的危机处理姿态。</p>
-                    <div class="deep-focus-takeaway china-theme">
-                        <div class="deep-focus-takeaway-label china">对我们的启示</div>
-                        <div class="deep-focus-takeaway-text">AI浏览器赛道值得密切关注。对普通用户：<strong>AI浏览器可能是接触"Agent"最自然的方式</strong>。对开发者：关注浏览器端的Agent API和插件生态。</div>
+                    <p>Google Gemini面临的"导致用户自杀"诉讼，看似是个案，实则揭示了AI应用的系统性风险。AI聊天产品正在承担越来越多的"情感陪伴"角色——用户在孤独、焦虑甚至危机时刻转向AI倾诉，但<strong>现有产品并未为此做好充分的安全设计</strong>。</p>
+                    <p>法律层面的核心问题是：AI产品是"工具"还是"服务提供者"？如果是工具，类比一把菜刀不为伤人负责；如果是服务提供者，类比心理咨询师需要遵守专业伦理。<strong>当前AI聊天产品的实际使用场景已经远超"工具"范畴，但法律框架尚未跟上</strong>。</p>
+                    <p>同时在美国，2026年3月有多个联邦级AI政策截止日期——包括Trump签署的AI国家政策框架行政令的多项落实要求。Gemini诉讼可能成为推动立法的催化剂。</p>
+                    <div class="deep-focus-takeaway orange-theme">
+                        <div class="deep-focus-takeaway-label orange">💡 TAKEAWAY</div>
+                        <div class="deep-focus-takeaway-text">如果你的AI产品涉及用户情感交互，<strong>立即评估是否有足够的安全护栏</strong>——包括危机检测、强制转接人工、免责声明等。这不仅是伦理问题，更是法律合规要求。</div>
                     </div>
                 </div>
             </div>
@@ -713,73 +649,72 @@
             <div class="section-card">
                 <div class="section-header"><span class="num">1</span> 最近动态</div>
                 <div class="sub-header">🌏 投融资</div>
-
+                
                 <div class="news-item">
-                    <span class="news-tag tag-funding">💰 融资</span>
-                    <div class="news-title"><a href="https://www.nytimes.com/2026/02/12/technology/anthropic-valuation-380-billion-funding.html" target="_blank">Anthropic最新估值$3800亿，半年翻倍</a></div>
-                    <div class="news-source">NYT · 2026-02-12</div>
+                    <span class="news-tag tag-funding">💰</span>
+                    <div class="news-title"><a href="https://news.crunchbase.com/venture/record-setting-global-funding-february-2026-openai-anthropic/" target="_blank">2月全球风投$1890亿创历史记录，AI占90%</a></div>
+                    <div class="news-source">Crunchbase · 2026-03-06</div>
                     <div class="news-detail">
                         <div class="news-detail-row">
-                            <span class="news-detail-label">核心事实</span>
-                            <span class="news-detail-value">Anthropic完成$300亿融资，估值从2025年9月$1830亿飙升至<strong>$3800亿</strong>。此前Crunchbase报道的$1700亿为2025年7月旧数据</span>
+                            <span class="news-detail-label">核心发现</span>
+                            <span class="news-detail-value">全球风投同比增长<strong>780%</strong>，但83%资金集中在OpenAI($1100亿)、Anthropic($300亿)和Waymo($160亿)三家</span>
                         </div>
                         <div class="news-detail-row">
                             <span class="news-detail-label">关键数据</span>
                             <span class="news-detail-value">
                                 <div class="news-data-chips">
-                                    <span class="news-data-chip">$3800亿估值</span>
-                                    <span class="news-data-chip">融资$300亿</span>
-                                    <span class="news-data-chip">半年翻倍</span>
+                                    <span class="news-data-chip orange">$1890亿月度总额</span>
+                                    <span class="news-data-chip orange">AI占90%</span>
+                                    <span class="news-data-chip orange">美国占92%</span>
+                                    <span class="news-data-chip orange">种子轮降11%</span>
                                 </div>
                             </span>
                         </div>
                         <div class="news-detail-row">
                             <span class="news-detail-label">影响判断</span>
-                            <span class="news-detail-value">AI三巨头格局：OpenAI $5000-7500亿 > Anthropic $3800亿 > xAI $1130亿。<strong>头部效应加剧到前所未有的程度</strong></span>
+                            <span class="news-detail-value">资本极端集中+种子轮萎缩=<strong>AI创业的"冰火两重天"</strong>——头部融得盆满钵满，早期创业者更难拿钱</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="news-item">
-                    <span class="news-tag tag-funding">💰 融资</span>
-                    <div class="news-title"><a href="https://digital-strategy.ec.europa.eu/en/policies/european-approach-artificial-intelligence" target="_blank">欧盟启动€7500万EURO-3C项目</a></div>
-                    <div class="news-source">欧盟数字战略 · 2026-03-03</div>
-                    <div class="news-summary-compact">欧盟宣布€7500万EURO-3C研发项目，推进可信AI框架。<strong>AI Act之后最大规模的单一研发投入</strong>。</div>
+                    <span class="news-tag tag-policy">📋</span>
+                    <div class="news-title"><a href="https://digital-strategy.ec.europa.eu/en/news/commission-announces-eu75-million-euro-3c-project-build-federated-telco-edge-cloud-infrastructure" target="_blank">EU宣布€7500万EURO-3C联邦Telco-Edge-Cloud项目</a></div>
+                    <div class="news-source">欧盟 · 2026-03-03</div>
+                    <div class="news-summary-compact">欧盟在MWC 2026宣布EURO-3C项目，€7500万来自Horizon Europe，构建首个大规模联邦电信边缘云基础设施，聚焦数字主权。</div>
                 </div>
 
-                <div class="sub-header">📊 行业动态</div>
-
                 <div class="news-item">
-                    <span class="news-tag tag-new">🔄 新动态</span>
-                    <div class="news-title"><a href="https://www.nvidia.cn/gtc-global/startups/" target="_blank">NVIDIA GTC 2026下周开幕：AI创业投资风向标</a></div>
-                    <div class="news-source">NVIDIA · 2026-03-16起</div>
-                    <div class="news-summary-compact">3月16-19日圣何塞。全球最大AI技术大会，聚焦AI基础设施、创业投资和前沿研究。</div>
+                    <span class="news-tag tag-new">NEW</span>
+                    <div class="news-title"><a href="https://www.fitchratings.com/research/corporate-finance/ai-disruption-puts-alt-investment-manager-software-exposures-in-focus-02-03-2026" target="_blank">Fitch警告：AI颠覆冲击另类投资管理软件估值</a></div>
+                    <div class="news-source">Fitch · 2026-03-02</div>
+                    <div class="news-summary-compact">评级机构首次将AI颠覆风险纳入软件公司信用评估，多家主要软件公司估值急跌。</div>
                 </div>
 
-                <div class="sub-header">🇨🇳 国内行业</div>
-
+                <div class="sub-header">🇨🇳 国内</div>
+                
                 <div class="news-item">
-                    <span class="news-tag tag-cn">🇨🇳 ⚙️ 新技术</span>
-                    <div class="news-title"><a href="https://hub.baai.ac.cn/view/52808" target="_blank">DeepSeek V4适配国产芯片：独立于NVIDIA的算力路线</a></div>
-                    <div class="news-source">智源BAAI · 2026-03-02</div>
-                    <div class="news-summary-compact">V4优先适配国产芯片而非NVIDIA，训练成本仅同级模型1/50。<strong>中国AI算力自主可控的标志性事件</strong>。</div>
+                    <span class="news-tag tag-cn">🇨🇳</span>
+                    <div class="news-title"><a href="https://jigou.jiqizhixin.com/articles/2026-03-03-7" target="_blank">小雨智造完成数亿元B轮融资，具身智能进入"场景落地元年"</a></div>
+                    <div class="news-source">机器之心 · 2026-03-03</div>
+                    <div class="news-summary-compact">由华业天成领投，聚焦通用具身智能。业界共识2026年将成为具身智能"场景落地元年"。</div>
                 </div>
             </div>
 
             <div class="deep-focus-card">
-                <div class="deep-focus-header">
+                <div class="deep-focus-header china-theme">
                     <div>
                         <div class="deep-focus-label">💡 深度聚焦</div>
-                        <div class="deep-focus-title">AI资本的"超级周期"：谁在定价，谁在跟注？</div>
+                        <div class="deep-focus-title">$1890亿创纪录背后：AI资本市场的"虹吸效应"与结构性风险</div>
                     </div>
                 </div>
                 <div class="deep-focus-body">
-                    <p>Anthropic半年估值翻倍（$1830亿→$3800亿，据NYT 2026-02-12报道），这个数字值得停下来想一想。在传统VC世界里，这种增速通常出现在泡沫的顶点。但AI领域的不同之处在于——<strong>增长正在被实际收入支撑</strong>。</p>
-                    <p>AI三巨头的估值格局已经很清晰：OpenAI $5000-7500亿、Anthropic $3800亿、xAI $1130亿。三家总估值接近$1万亿。这背后是一个简单的逻辑：<strong>市场相信AI将取代的不是某个软件品类，而是整个知识工作的生产方式</strong>。</p>
-                    <p>3月第一周3笔超$5亿的融资、NVIDIA GTC下周开幕、欧盟€7500万——所有信号都指向同一个方向：2026年Q1是AI资本的超级周期。问题是：这是"1999年的互联网"还是"2010年的移动互联网"？</p>
-                    <div class="deep-focus-takeaway">
-                        <div class="deep-focus-takeaway-label">对我们的启示</div>
-                        <div class="deep-focus-takeaway-text">不要只看估值数字，<strong>关注收入倍数</strong>。当GPT-5.4能替代初级分析师87%的Excel工作时，AI公司的营收增长有坚实基础。真正的风险不在泡沫，而在头部效应——前3名可能拿走90%的市场。</div>
+                    <p>2月全球风投$1890亿的数字震撼人心，但细看结构令人警惕：<strong>83%流向三家公司，种子轮反而下降11%</strong>。这是典型的"虹吸效应"——头部公司以巨大的融资规模和估值吸走了市场上绝大部分的可投资资本和LP注意力。</p>
+                    <p>更值得关注的是公私市场的巨大分化：私募市场已超过2025年全年投资的50%，但公开市场却遭遇"万亿美元蒸发"——AI的颠覆预期正在冲击传统软件公司的估值，<strong>Fitch甚至将AI风险纳入信用评估</strong>。Liftoff和Clear Street撤回IPO申请是最直接的信号。</p>
+                    <p>对AI从业者的启示：如果你在寻求融资，当前窗口对"AI原生公司"极度友好，但对"AI+传统行业"的定位需要更精准的差异化——因为LP的注意力已经被头部公司虹吸走了。</p>
+                    <div class="deep-focus-takeaway china-theme">
+                        <div class="deep-focus-takeaway-label china">💡 TAKEAWAY</div>
+                        <div class="deep-focus-takeaway-text">关注AI投资的<strong>"结构性"而非"总量"</strong>。头部集中度越高，意味着差异化赛道（如具身智能、垂直行业AI）的竞争相对较小，可能是更好的切入点。</div>
                     </div>
                 </div>
             </div>
@@ -790,54 +725,54 @@
             <div class="section-card">
                 <div class="section-header"><span class="num orange">1</span> 最近动态</div>
                 <div class="sub-header">🌏 海外实践</div>
-
+                
                 <div class="news-item">
-                    <span class="news-tag tag-practice">🛠️ 新实践</span>
-                    <div class="news-title"><a href="https://news.lenovo.com/pressroom/press-releases/adaptive-ai-pcs-modular-concepts-qira-rollout-mwc-2026/" target="_blank">联想MWC 2026展示可信AI企业计算方案</a></div>
-                    <div class="news-source">Lenovo · 2026-03-02</div>
-                    <div class="news-detail">
-                        <div class="news-detail-row">
-                            <span class="news-detail-label orange">核心实践</span>
-                            <span class="news-detail-value">联想展示模块化企业AI方案，发布<strong>Lenovo Qira AI伴侣</strong>，聚焦"可信AI"——安全、可控、可解释</span>
-                        </div>
-                        <div class="news-detail-row">
-                            <span class="news-detail-label orange">影响判断</span>
-                            <span class="news-detail-value">传统硬件厂商将AI能力嵌入企业基础设施，<strong>"可信AI"成为企业采购关键词</strong></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="sub-header">🇨🇳 国内实践</div>
-
-                <div class="news-item">
-                    <span class="news-tag tag-cn">🇨🇳 📜 政策</span>
-                    <div class="news-title"><a href="https://jxj.wuhan.gov.cn/" target="_blank">武汉公示2025年度智能工厂奖励清单</a></div>
-                    <div class="news-source">武汉经信局 · 2026-03-02</div>
-                    <div class="news-summary-compact">武汉发布卓越级和领航级智能工厂拟奖励清单。<strong>地方政府推动制造业AI转型的典型案例</strong>。</div>
-                </div>
-
-                <div class="sub-header">📜 政策动态</div>
-
-                <div class="news-item">
-                    <span class="news-tag tag-policy">📊 新评测</span>
-                    <div class="news-title"><a href="https://openai.com/index/introducing-gpt-5-4/" target="_blank">GPT-5.4 GDPval 83%：AI替代知识工作的量化证据</a></div>
-                    <div class="news-source">OpenAI · 2026-03-05</div>
+                    <span class="news-tag tag-hot">HOT</span>
+                    <div class="news-title"><a href="https://fortune.com/2026/03/06/ai-job-losses-report-anthropic-research-great-recession-for-white-collar-workers/" target="_blank">Block裁员近半：AI driven还是AI washing？</a></div>
+                    <div class="news-source">Fortune · 2026-03-06</div>
                     <div class="news-detail">
                         <div class="news-detail-row">
                             <span class="news-detail-label orange">核心发现</span>
-                            <span class="news-detail-value">44个职业的知识工作任务中，<strong>83%的情况下匹配或超过行业专家</strong></span>
+                            <span class="news-detail-value">Jack Dorsey的Block裁员近半员工，声称"AI工具+更小更扁平的团队"。Salesforce CEO Marc Benioff质疑这是<strong>"AI washing"</strong></span>
                         </div>
                         <div class="news-detail-row">
                             <span class="news-detail-label orange">关键数据</span>
                             <span class="news-detail-value">
                                 <div class="news-data-chips">
-                                    <span class="news-data-chip orange">Excel建模87.3%</span>
-                                    <span class="news-data-chip orange">PPT偏好率68%</span>
-                                    <span class="news-data-chip orange">44个职业覆盖</span>
+                                    <span class="news-data-chip orange">Block裁员约4000人</span>
+                                    <span class="news-data-chip orange">失业率4.4%</span>
+                                    <span class="news-data-chip orange">非农减9.2万</span>
                                 </div>
                             </span>
                         </div>
+                        <div class="news-detail-row">
+                            <span class="news-detail-label orange">影响判断</span>
+                            <span class="news-detail-value">AI转型的第一批大规模裁员案例出现，"<strong>真AI驱动</strong>"vs"<strong>借AI之名</strong>"的争议标志着问题远比表面复杂</span>
+                        </div>
                     </div>
+                </div>
+
+                <div class="news-item">
+                    <span class="news-tag tag-new">NEW</span>
+                    <div class="news-title"><a href="https://www.mckinsey.com/industries/technology-media-and-telecommunications/our-insights/sovereign-ai-building-ecosystems-for-strategic-resilience-and-impact" target="_blank">McKinsey发布"主权AI"报告：构建战略韧性与影响力的生态系统</a></div>
+                    <div class="news-source">McKinsey · 2026-03-03</div>
+                    <div class="news-summary-compact">McKinsey提出"主权AI"概念框架，论述各国如何通过生态系统合作实现AI自主，仅靠单一国家无法完成。</div>
+                </div>
+
+                <div class="news-item">
+                    <span class="news-tag tag-policy">📋</span>
+                    <div class="news-title"><a href="https://www.jdsupra.com/legalnews/march-2026-federal-deadlines-that-will-9297133/" target="_blank">美国3月联邦AI政策截止日期来临</a></div>
+                    <div class="news-source">JD Supra · 2026-03-05</div>
+                    <div class="news-summary-compact">基于Trump签署的AI国家政策框架行政令，2026年3月有多项联邦AI政策执行截止日期，将重塑AI监管格局。</div>
+                </div>
+
+                <div class="sub-header">🇨🇳 国内</div>
+                
+                <div class="news-item">
+                    <span class="news-tag tag-cn">🇨🇳</span>
+                    <div class="news-title"><a href="https://www.ccf.org.cn/Focus/2026-03-02/861476.shtml" target="_blank">CCF技术前线：AI原生·超级个体·组织重构</a></div>
+                    <div class="news-source">中国计算机学会 · 2026-03-05</div>
+                    <div class="news-summary-compact">CCF数字化转型与企业架构SIG举办专题讨论会，聚焦AI原生时代的组织形态变革。</div>
                 </div>
             </div>
 
@@ -845,44 +780,72 @@
                 <div class="deep-focus-header orange-theme">
                     <div>
                         <div class="deep-focus-label">💡 深度聚焦</div>
-                        <div class="deep-focus-title">GPT-5.4的企业含义：87.3%的Excel建模准确率意味着什么？</div>
+                        <div class="deep-focus-title">从Block裁员到Anthropic研究："AI就业冲击"正在从理论变为现实</div>
                     </div>
                 </div>
                 <div class="deep-focus-body">
-                    <p>GPT-5.4在投行分析师级别的Excel建模任务中达到了87.3%的准确率（vs GPT-5.2的68.4%）。最直接的影响是<strong>知识工作自动化的经济账变了</strong>。</p>
-                    <p>以前企业算ROI时，AI替代的是"辅助性工作"——帮你写邮件、总结会议。现在AI可以独立完成"核心工作"——建财务模型、做数据分析、制作专业演示文稿。一个初级分析师年薪$100K+，而GPT-5.4 API的成本可能只是其1/10。</p>
-                    <p>联想在MWC主打"可信AI"、武汉发布智能工厂奖励——这些都在回应同一需求：<strong>企业知道AI有用，但需要"安全地用"和"政策支持地用"</strong>。Anthropic劳动力影响指数则给出更冷静的视角——编程(75%)、数据录入(67%)等AI渗透率最高的领域恰好是知识工作的核心环节。</p>
+                    <p>Block裁员近半、美国2月非农减少9.2万人、Anthropic研究揭示22-25岁年轻人入职高曝光岗位下降14%——这三个数据点在同一周汇聚，标志着AI就业讨论进入新阶段：<strong>从"会不会影响就业"到"正在如何影响就业"</strong>。</p>
+                    <p>但事情并非非黑即白。Salesforce CEO Marc Benioff对Block的"AI washing"质疑提出了一个关键问题：有多少裁员是真正的AI驱动效率提升？有多少是企业借AI之名行缩减之实？Citadel Securities的数据甚至显示，<strong>软件工程师的招聘需求最近几个月反而在增加</strong>。Anthropic研究的最重要发现也是这种复杂性：理论覆盖94%但实际使用仅33%——AI远未达到理论上限。</p>
+                    <p>对企业领导者的启示：不要在"AI万能"和"AI泡沫"之间二选一。Anthropic提供的"observed exposure"框架是更好的分析工具——先量化你的团队中哪些任务被AI实际覆盖了，再基于数据做人员规划。</p>
                     <div class="deep-focus-takeaway orange-theme">
-                        <div class="deep-focus-takeaway-label orange">对我们的启示</div>
-                        <div class="deep-focus-takeaway-text">关注GPT-5.4的Computer Use能力在企业场景的应用。<strong>RPA厂商要警惕——当AI可以直接操作任何桌面应用时，传统的"录制-回放"式自动化可能被彻底颠覆</strong>。</div>
+                        <div class="deep-focus-takeaway-label orange">💡 TAKEAWAY</div>
+                        <div class="deep-focus-takeaway-text">下载Anthropic的完整研究报告，用其"observed exposure"框架评估你所在行业和岗位的<strong>实际AI曝光度</strong>。区分"理论可自动化"和"实际被自动化"是做出正确人才决策的关键。</div>
                     </div>
                 </div>
             </div>
         </article>
 
-        <!-- Data Overview -->
-        <div class="section-card">
-            <div class="section-header">📊 数据速览</div>
+        <!-- Data Snapshot -->
+        <div class="section-card" style="margin-top:20px">
+            <div class="section-header"><span class="num">📊</span> 数据速览</div>
             <table class="data-table">
-                <tr><th>指标</th><th>数值</th><th>来源/备注</th></tr>
-                <tr><td>🌏 GPT-5.4 OSWorld成功率</td><td>75.0%</td><td>OpenAI（超越人类72.4%）</td></tr>
-                <tr><td>🌏 GPT-5.4 GDPval匹配率</td><td>83.0%</td><td>OpenAI（44个职业）</td></tr>
-                <tr><td>🌏 GPT-5.4 幻觉减少</td><td>33%</td><td>对比GPT-5.2</td></tr>
-                <tr><td>🌏 Anthropic最新估值</td><td>$3800亿</td><td>NYT 2026-02-12（半年翻倍）</td></tr>
-                <tr><td>🌏 AI三巨头总估值</td><td>~$1万亿</td><td>OpenAI+Anthropic+xAI</td></tr>
-                <tr><td>🌏 程序员AI覆盖率</td><td>75%</td><td>Anthropic Economic Index</td></tr>
-                <tr><td>🌏 Tool Search token节省</td><td>47%</td><td>MCP Atlas基准</td></tr>
-                <tr><td>🇨🇳 国产模型LMSYS排名</td><td>跌出前10</td><td>GPT-5.4加入后</td></tr>
+                <thead>
+                    <tr><th>指标</th><th>数值</th><th>变化/说明</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>GPT-5.4 OSWorld成功率</td><td><strong>75.0%</strong></td><td>超越人类72.4%</td></tr>
+                    <tr><td>GPT-5.4 GDPval</td><td><strong>83.0%</strong></td><td>vs GPT-5.2的70.9%</td></tr>
+                    <tr><td>Tool Search token节省</td><td><strong>47%</strong></td><td>36个MCP服务器配置</td></tr>
+                    <tr><td>2月全球风投总额</td><td><strong>$1890亿</strong></td><td>史上最高月度记录</td></tr>
+                    <tr><td>AI相关融资占比</td><td><strong>90%</strong></td><td>$1710亿</td></tr>
+                    <tr><td>OpenAI融资</td><td><strong>$1100亿</strong></td><td>估值$8400亿</td></tr>
+                    <tr><td>Anthropic融资</td><td><strong>$300亿</strong></td><td>估值$3800亿</td></tr>
+                    <tr><td>美国2月失业率</td><td><strong>4.4%</strong></td><td>上升</td></tr>
+                    <tr><td>程序员AI任务覆盖率</td><td><strong>75%</strong></td><td>Anthropic数据</td></tr>
+                    <tr><td>AI理论vs实际覆盖</td><td><strong>94% vs 33%</strong></td><td>计算机/数学领域</td></tr>
+                </tbody>
             </table>
         </div>
 
-        <!-- 了解更多 -->
-        <div style="margin-top:24px;background:linear-gradient(135deg,#F6F8FA 0%,#EEF2F6 100%);border:1px solid #E8ECF0;border-radius:14px;padding:24px;box-shadow:0 2px 8px rgba(31,35,40,.06),0 1px 2px rgba(31,35,40,.04)">
+        <!-- Tomorrow Preview -->
+        <div class="section-card">
+            <div class="section-header"><span class="num">📌</span> 明日/下周值得关注</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                <div style="padding:10px 14px;background:var(--color-bg);border-radius:var(--radius-md);border:1px solid var(--color-border-light)">
+                    <div style="font-size:13px;font-weight:700;color:var(--color-success)">西门子Transform 2026</div>
+                    <div style="font-size:12px;color:var(--color-text-muted);margin-top:2px">3月9日 · 欧洲工业AI转型风向标</div>
+                </div>
+                <div style="padding:10px 14px;background:var(--color-bg);border-radius:var(--radius-md);border:1px solid var(--color-border-light)">
+                    <div style="font-size:13px;font-weight:700;color:var(--color-success)">NVIDIA GTC 2026</div>
+                    <div style="font-size:12px;color:var(--color-text-muted);margin-top:2px">3月16-19日 · 物理AI和Agent AI焦点</div>
+                </div>
+                <div style="padding:10px 14px;background:var(--color-bg);border-radius:var(--radius-md);border:1px solid var(--color-border-light)">
+                    <div style="font-size:13px;font-weight:700;color:var(--color-success)">AWE 2026</div>
+                    <div style="font-size:12px;color:var(--color-text-muted);margin-top:2px">3月12-15日 · AI科技·慧享未来</div>
+                </div>
+                <div style="padding:10px 14px;background:var(--color-bg);border-radius:var(--radius-md);border:1px solid var(--color-border-light)">
+                    <div style="font-size:13px;font-weight:700;color:var(--color-danger)">GPT-5.2退役倒计时</div>
+                    <div style="font-size:12px;color:var(--color-text-muted);margin-top:2px">6月5日退役 · 3个月迁移窗口</div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top:24px;background:linear-gradient(135deg,#F8FAFB 0%,#EEF2F6 100%);border:1px solid #F5F5F4;border-radius:14px;padding:24px;box-shadow:0 2px 8px rgba(31,35,40,.06),0 1px 2px rgba(31,35,40,.04)">
             <div style="font-size:16px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px">💡 了解更多</div>
-            <p style="font-size:14px;color:#4D5561;line-height:1.7;margin:0 0 12px 0">
+            <p style="font-size:14px;color:#57534E;line-height:1.7;margin:0 0 12px 0">
                 AI洞察是一个系统化追踪AI行业动态的项目，每日/每周输出调研洞察，帮助你保持对AI行业的全局视野。覆盖大模型、AI Coding、AI应用、AI行业投融资、企业AI转型五大领域。
             </p>
-            <a href="https://xiaoxiong20260206.github.io/ai-insight-public/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:linear-gradient(135deg,#1A7F37 0%,#2DA44E 100%);color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none">
+            <a href="https://xiaoxiong20260206.github.io/ai-insight-public/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:linear-gradient(135deg,#059669 0%,#10B981 100%);color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none">
                 🏠 访问AI洞察首页
             </a>
         </div>
