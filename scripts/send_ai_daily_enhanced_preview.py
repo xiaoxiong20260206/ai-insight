@@ -59,7 +59,7 @@ def build_card():
         "",
         "\U0001f4f0 **\u52a8\u6001**",
         "- \u2699\ufe0f \u65b0\u6280\u672f | [GPT-5.4 Codex: 1M\u4e0a\u4e0b\u6587+Playwright\u53ef\u89c6\u5316\u8c03\u8bd5](https://openai.com/index/introducing-gpt-5-4/)",
-        "- \U0001f4c8 \u65b0\u683c\u5c40 | [Claude Code\u5728VS Code Agent\u5e02\u573a\u8d85\u8d8aCodex](https://visualstudiomagazine.com/articles/2026/02/26/claude-code-edges-openais-codex-in-vs-codes-agentic-ai-marketplace-leaderboard.aspx)",
+        "- \U0001f4c8 \u65b0\u683c\u5c40 | [GPT-5.4\u7784\u51c6Claude Code\uff0c\u7ade\u4e89\u7126\u70b9\u4ece\u6a21\u578b\u8f6c\u5411\u5de5\u4f5c\u6d41](https://medium.com/data-science-collective/gpt-5-4-came-for-claude-code-the-real-story-is-bigger-than-both-927059667584)",
         "- \U0001f504 \u65b0\u52a8\u6001 | [Tool Search: token\u7528\u91cf\u964d\u4f4e47%\uff0c\u51c6\u786e\u7387\u4e0d\u53d8](https://openai.com/index/introducing-gpt-5-4/)",
         "- \U0001f1e8\U0001f1f3 \u56fd\u5185 | [AI Coding\u5927\u6709\u53ef\u4e3a\uff0c\u4f46Vibe Coding\u8fd8\u662f\u5148\u6d17\u6d17\u7761\u5427](https://m.36kr.com/p/3706413051146375)",
         "",
@@ -87,7 +87,7 @@ def build_card():
         "",
         "\U0001f4f0 **\u52a8\u6001**",
         "- \U0001f4b0 \u878d\u8d44 | [2\u6708\u5168\u7403\u98ce\u6295$1890\u4ebf\u521b\u7eaa\u5f55\uff0cAI\u53590%](https://news.crunchbase.com/venture/record-setting-global-funding-february-2026-openai-anthropic/)",
-        "- \U0001f4dc \u653f\u7b56 | [EU\u5ba3\u5e037500\u4e07\u6b27\u5143EURO-3C AI\u7814\u7a76\u9879\u76ee](https://digital-strategy.ec.europa.eu/en/policies/european-approach-artificial-intelligence)",
+        "- \U0001f4dc \u653f\u7b56 | [EU\u5ba3\u5e03\u20ac7500\u4e07EURO-3C\u8054\u90a6\u8fb9\u7f18\u4e91\u9879\u76ee](https://digital-strategy.ec.europa.eu/en/news/commission-announces-eu75-million-euro-3c-project-build-federated-telco-edge-cloud-infrastructure)",
         "- \U0001f504 \u65b0\u52a8\u6001 | [Fitch\u8b66\u544a\uff1aAI\u98a0\u8986\u51b2\u51fb\u53e6\u7c7b\u6295\u8d44\u7ba1\u7406\u8f6f\u4ef6\u4f30\u503c](https://www.fitchratings.com/research/corporate-finance/ai-disruption-puts-alt-investment-manager-software-exposures-in-focus-02-03-2026)",
         "- \U0001f1e8\U0001f1f3 \u56fd\u5185 | [\u5c0f\u96e8\u667a\u9020\u5b8c\u6210\u6570\u4ebf\u5143B\u8f6e\u878d\u8d44\uff0c\u5177\u8eab\u667a\u80fd\u8fdb\u5165\u843d\u5730\u5e74](https://jigou.jiqizhixin.com/articles/2026-03-03-7)",
         "",
@@ -102,7 +102,7 @@ def build_card():
         "\U0001f4f0 **\u52a8\u6001**",
         "- \U0001f4ca \u65b0\u8bc4\u6d4b | [Block\u88c1\u5458\u8fd1\u534a\uff1aAI driven\u8fd8\u662fAI washing\uff1f](https://fortune.com/2026/03/06/ai-job-losses-report-anthropic-research-great-recession-for-white-collar-workers/)",
         "- \U0001f4dc \u653f\u7b56 | [\u7f8e\u56fd3\u6708\u8054\u90a6AI\u653f\u7b56\u622a\u6b62\u65e5\u671f\u6765\u4e34](https://www.jdsupra.com/legalnews/march-2026-federal-deadlines-that-will-9297133/)",
-        "- \U0001f504 \u65b0\u52a8\u6001 | [McKinsey\u53d1\u5e03\u4e3b\u6743AI\u62a5\u544a](https://www.mckinsey.com/capabilities/quantumblack/our-insights)",
+        "- \U0001f504 \u65b0\u52a8\u6001 | [McKinsey\u4e3b\u6743AI\u62a5\u544a\uff1a\u751f\u6001\u7cfb\u7edf\u6784\u5efa\u6218\u7565\u97e7\u6027](https://www.mckinsey.com/industries/technology-media-and-telecommunications/our-insights/sovereign-ai-building-ecosystems-for-strategic-resilience-and-impact)",
         "- \U0001f1e8\U0001f1f3 \u56fd\u5185 | [CCF\u6280\u672f\u524d\u7ebf\uff1aAI\u539f\u751f\u00b7\u8d85\u7ea7\u4e2a\u4f53\u00b7\u7ec4\u7ec7\u91cd\u6784](https://www.ccf.org.cn/Focus/2026-03-02/861476.shtml)",
         "",
         f"\U0001f4a1 **\u6df1\u5ea6\u805a\u7126** \u2014 AI\u5c31\u4e1a\u51b2\u51fb\u6b63\u5728\u4ece\u7406\u8bba\u53d8\u4e3a\u73b0\u5b9e",
@@ -239,7 +239,7 @@ async def main():
                 result = resp.json()
                 status = "OK" if result.get("code") == 0 else "FAIL"
                 print(f"  [{status}] {gname} ({gid}): {result.get('message', '')}")
-                time.sleep(0.5)  # 避免频率限制
+                time.sleep(2)  # 避免频率限制（0.5s会触发many request）
             print(f"Done - sent to {len(groups)} groups")
 
 
