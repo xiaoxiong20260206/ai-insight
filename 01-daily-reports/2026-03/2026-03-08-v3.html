@@ -53,6 +53,11 @@
         .heat-trend-tag.down{background:#F5F5F4;color:#78716C}
         .heat-analysis{padding:14px 20px;background:linear-gradient(135deg,#FFFBEB 0%,#FEF3C7 100%);border-top:1px solid #FDE68A;font-size:13px;color:var(--color-text-secondary);line-height:1.7}
         .heat-analysis strong{color:var(--color-text-primary)}
+        .heat-item-explain{padding:4px 0 6px 40px;display:flex;flex-direction:column;gap:3px;width:100%}
+        .heat-explain-row{display:flex;align-items:flex-start;gap:6px;font-size:12px;line-height:1.5}
+        .heat-explain-label{flex-shrink:0;font-weight:700;color:#DC2626;font-size:11px;padding-top:1px}
+        .heat-explain-label.why{color:#7C3AED}
+        .heat-explain-text{color:var(--color-text-secondary);flex:1}
         .tab-nav{display:flex;gap:4px;margin-bottom:20px;background:var(--color-bg-card);border:1px solid var(--color-border-light);border-radius:var(--radius-md);padding:4px;box-shadow:var(--shadow-card);flex-wrap:wrap}
         .tab-btn{flex:1;padding:10px 8px;border:none;background:transparent;cursor:pointer;font-size:13px;font-weight:600;color:var(--color-text-muted);border-radius:var(--radius-sm);transition:var(--transition-normal);font-family:var(--font-family);min-width:80px}
         .tab-btn:hover{color:var(--color-text-primary);background:var(--color-bg)}
@@ -202,100 +207,15 @@
             </div>
         </div>
 
-        <!-- Heat Trend Module (v3.1 NEW) -->
-        <div class="heat-trend">
-            <div class="heat-trend-header">
-                <div>
-                    <div class="heat-trend-header-title">🔥 热度趋势（近6期日报交叉分析，3/3-3/8）</div>
-                    <div class="heat-trend-header-sub">加权多因子复合评分 + Z-Score突发检测</div>
-                </div>
-            </div>
-            <div class="heat-trend-body">
-                <div class="heat-item">
-                    <div class="heat-rank">🥇</div>
-                    <div class="heat-topic">
-                        <div class="heat-topic-name">OpenAI GPT-5.x密集发布</div>
-                        <div class="heat-topic-meta">6天连续 · 4板块覆盖</div>
-                    </div>
-                    <div class="heat-bars">
-                        <div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar medium"></div>
-                    </div>
-                    <span class="heat-trend-tag up">📈 持续攀升</span>
-                </div>
-                <div class="heat-item">
-                    <div class="heat-rank">🥈</div>
-                    <div class="heat-topic">
-                        <div class="heat-topic-name">Anthropic多线作战</div>
-                        <div class="heat-topic-meta">6天连续 · 3板块覆盖</div>
-                    </div>
-                    <div class="heat-bars">
-                        <div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar medium"></div><div class="heat-bar"></div>
-                    </div>
-                    <span class="heat-trend-tag stable">➡️ 稳定高热</span>
-                </div>
-                <div class="heat-item">
-                    <div class="heat-rank">🥉</div>
-                    <div class="heat-topic">
-                        <div class="heat-topic-name">AI资本超级周期</div>
-                        <div class="heat-topic-meta">5天连续 · 2板块覆盖</div>
-                    </div>
-                    <div class="heat-bars">
-                        <div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar medium"></div><div class="heat-bar"></div><div class="heat-bar"></div>
-                    </div>
-                    <span class="heat-trend-tag up">📈 持续攀升</span>
-                </div>
-                <div class="heat-item">
-                    <div class="heat-rank">4️⃣</div>
-                    <div class="heat-topic">
-                        <div class="heat-topic-name">AI Coding三国演义</div>
-                        <div class="heat-topic-meta">6天连续 · 1板块覆盖</div>
-                    </div>
-                    <div class="heat-bars">
-                        <div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar medium"></div><div class="heat-bar"></div><div class="heat-bar"></div><div class="heat-bar"></div>
-                    </div>
-                    <span class="heat-trend-tag stable">➡️ 稳定高热</span>
-                </div>
-                <div class="heat-item">
-                    <div class="heat-rank">5️⃣</div>
-                    <div class="heat-topic">
-                        <div class="heat-topic-name">Computer Use能力爆发</div>
-                        <div class="heat-topic-meta">3天连续 · 3板块覆盖</div>
-                    </div>
-                    <div class="heat-bars">
-                        <div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar medium"></div><div class="heat-bar"></div><div class="heat-bar"></div><div class="heat-bar"></div>
-                    </div>
-                    <span class="heat-trend-tag spike">⚡ 突发飙升</span>
-                </div>
-                <div class="heat-item">
-                    <div class="heat-rank">6️⃣</div>
-                    <div class="heat-topic">
-                        <div class="heat-topic-name">DeepSeek V4发布</div>
-                        <div class="heat-topic-meta">3天连续 · 2板块覆盖</div>
-                    </div>
-                    <div class="heat-bars">
-                        <div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar medium"></div><div class="heat-bar"></div><div class="heat-bar"></div><div class="heat-bar"></div><div class="heat-bar"></div><div class="heat-bar"></div>
-                    </div>
-                    <span class="heat-trend-tag new">🆕 新兴话题</span>
-                </div>
-                <div class="heat-item">
-                    <div class="heat-rank">7️⃣</div>
-                    <div class="heat-topic">
-                        <div class="heat-topic-name">中国AI应用入口争夺</div>
-                        <div class="heat-topic-meta">3天连续 · 1板块覆盖</div>
-                    </div>
-                    <div class="heat-bars">
-                        <div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar medium"></div><div class="heat-bar low"></div><div class="heat-bar"></div><div class="heat-bar"></div><div class="heat-bar"></div><div class="heat-bar"></div><div class="heat-bar"></div>
-                    </div>
-                    <span class="heat-trend-tag new">🆕 新兴话题</span>
-                </div>
-            </div>
-            <div class="heat-analysis">
-                <strong>热度解读:</strong> 本周最强信号是OpenAI的"密集轰炸"——6天内发布4款模型/产品，频率前所未有。<strong>突发信号</strong>是Computer Use——从Cursor Cloud Agents到GPT-5.4 OSWorld 75%，"AI操作电脑"3天内跨越3个板块。DeepSeek V4和中国AI应用入口争夺作为新兴话题值得持续关注。
-            </div>
-        </div>
-
         <div class="overview">
             <div class="overview-title">📋 全文概览</div>
+            <!-- 热度趋势概览提炼 -->
+            <div style="background:linear-gradient(135deg,#FEF2F2 0%,#FFF7ED 50%,#FFFBEB 100%);border:1px solid #FECACA;border-radius:var(--radius-md);padding:14px 16px;margin-bottom:16px">
+                <div style="font-size:14px;font-weight:700;color:#DC2626;margin-bottom:6px">🔥 本周焦点信号</div>
+                <div style="font-size:13px;color:var(--color-text-secondary);line-height:1.65">
+                    <strong>OpenAI 6天4款模型密集轰炸</strong>，GPT-5.4首次将Computer Use内置通用模型，OSWorld超人类。<strong>Anthropic估值飙至$1700亿</strong>，同步发布劳动力影响指数（编程75%覆盖）。<strong>突发信号</strong>：Computer Use 3天跨越3个板块，AI操作电脑从概念到现实。<strong>新兴信号</strong>：DeepSeek V4走国产芯片独立路线，美团Tabbit等搅动国内AI入口格局。
+                </div>
+            </div>
             <div class="overview-grid five-cols">
                 <div class="overview-item">
                     <div class="overview-item-header"><span class="overview-item-icon">🧠</span><span class="overview-item-label">大模型</span></div>
@@ -322,6 +242,133 @@
                     <div class="overview-headline">GPT-5.4 GDPval 83%量化知识工作替代 | 联想MWC可信AI方案</div>
                     <div class="overview-item-text">武汉发布智能工厂奖励计划。87.3% Excel建模准确率——AI替代初级分析师的经济账已经算得通。</div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Heat Trend Module (v3.1 - 位于全文概览之后) -->
+        <div class="heat-trend">
+            <div class="heat-trend-header">
+                <div>
+                    <div class="heat-trend-header-title">🔥 热度趋势（近6期日报交叉分析，3/3-3/8）</div>
+                    <div class="heat-trend-header-sub">加权多因子复合评分 + Z-Score突发检测</div>
+                </div>
+            </div>
+            <div class="heat-trend-body">
+                <!-- #1 GPT-5.x -->
+                <div class="heat-item" style="flex-wrap:wrap">
+                    <div class="heat-rank">🥇</div>
+                    <div class="heat-topic">
+                        <div class="heat-topic-name">OpenAI GPT-5.x密集发布</div>
+                        <div class="heat-topic-meta">6天连续 · 4板块覆盖</div>
+                    </div>
+                    <div class="heat-bars">
+                        <div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar medium"></div>
+                    </div>
+                    <span class="heat-trend-tag up">📈 持续攀升</span>
+                    <div class="heat-item-explain">
+                        <div class="heat-explain-row"><span class="heat-explain-label">热在哪</span><span class="heat-explain-text">6天内连发4款：GPT-5.3 Instant→Codex-Spark→5.4→5.4 Pro。横跨大模型、Coding、应用、企业4个板块，几乎每条新闻都与之相关。</span></div>
+                        <div class="heat-explain-row"><span class="heat-explain-label why">为什么热</span><span class="heat-explain-text">OpenAI在抢"平台定义权"——GPT-5.4首次内置Computer Use，从对话模型变成操作系统级能力，这是AI能力边界的一次质变。</span></div>
+                    </div>
+                </div>
+                <!-- #2 Anthropic -->
+                <div class="heat-item" style="flex-wrap:wrap">
+                    <div class="heat-rank">🥈</div>
+                    <div class="heat-topic">
+                        <div class="heat-topic-name">Anthropic多线作战</div>
+                        <div class="heat-topic-meta">6天连续 · 3板块覆盖</div>
+                    </div>
+                    <div class="heat-bars">
+                        <div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar medium"></div><div class="heat-bar"></div>
+                    </div>
+                    <span class="heat-trend-tag stable">➡️ 稳定高热</span>
+                    <div class="heat-item-explain">
+                        <div class="heat-explain-row"><span class="heat-explain-label">热在哪</span><span class="heat-explain-text">Claude登顶App Store → 拒绝国防部 → $1700亿融资 → 劳动力影响指数，6天覆盖产品、政策、资本、研究4条线，没有一天缺席。</span></div>
+                        <div class="heat-explain-row"><span class="heat-explain-label why">为什么热</span><span class="heat-explain-text">Anthropic正从"安全优先的实验室"转型为"全面商业化巨头"。多线作战的本质是融资驱动的扩张加速——18个月估值涨9倍的压力要求全面出击。</span></div>
+                    </div>
+                </div>
+                <!-- #3 AI资本 -->
+                <div class="heat-item" style="flex-wrap:wrap">
+                    <div class="heat-rank">🥉</div>
+                    <div class="heat-topic">
+                        <div class="heat-topic-name">AI资本超级周期</div>
+                        <div class="heat-topic-meta">5天连续 · 2板块覆盖</div>
+                    </div>
+                    <div class="heat-bars">
+                        <div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar medium"></div><div class="heat-bar"></div><div class="heat-bar"></div>
+                    </div>
+                    <span class="heat-trend-tag up">📈 持续攀升</span>
+                    <div class="heat-item-explain">
+                        <div class="heat-explain-row"><span class="heat-explain-label">热在哪</span><span class="heat-explain-text">Anthropic $1700亿 + 欧盟€7500万EURO-3C + 2月风投$1890亿创历史。三巨头（OpenAI+Anthropic+xAI）合计估值~$5830亿。</span></div>
+                        <div class="heat-explain-row"><span class="heat-explain-label why">为什么热</span><span class="heat-explain-text">AI进入"基础设施投资期"——类似2000年代互联网光纤大建设。资本在赌下一个万亿平台。真正风险不是泡沫，是头部3家可能拿走90%市场。</span></div>
+                    </div>
+                </div>
+                <!-- #4 AI Coding -->
+                <div class="heat-item" style="flex-wrap:wrap">
+                    <div class="heat-rank">4️⃣</div>
+                    <div class="heat-topic">
+                        <div class="heat-topic-name">AI Coding三国演义</div>
+                        <div class="heat-topic-meta">6天连续 · 1板块覆盖</div>
+                    </div>
+                    <div class="heat-bars">
+                        <div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar medium"></div><div class="heat-bar"></div><div class="heat-bar"></div><div class="heat-bar"></div>
+                    </div>
+                    <span class="heat-trend-tag stable">➡️ 稳定高热</span>
+                    <div class="heat-item-explain">
+                        <div class="heat-explain-row"><span class="heat-explain-label">热在哪</span><span class="heat-explain-text">Cursor上Forbes封面 + Codex桌面端 + Claude Code 75%覆盖率——三大厂商每天都有动作，AI Coding赛道从未间断过。</span></div>
+                        <div class="heat-explain-row"><span class="heat-explain-label why">为什么热</span><span class="heat-explain-text">AI Coding是最快产生收入的AI应用场景。Cursor ARR破$3亿验证了商业模型，巨头和创业公司都在抢程序员的"第一工具位"。</span></div>
+                    </div>
+                </div>
+                <!-- #5 Computer Use -->
+                <div class="heat-item" style="flex-wrap:wrap">
+                    <div class="heat-rank">5️⃣</div>
+                    <div class="heat-topic">
+                        <div class="heat-topic-name">Computer Use能力爆发</div>
+                        <div class="heat-topic-meta">3天连续 · 3板块覆盖</div>
+                    </div>
+                    <div class="heat-bars">
+                        <div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar medium"></div><div class="heat-bar"></div><div class="heat-bar"></div><div class="heat-bar"></div>
+                    </div>
+                    <span class="heat-trend-tag spike">⚡ 突发飙升</span>
+                    <div class="heat-item-explain">
+                        <div class="heat-explain-row"><span class="heat-explain-label">热在哪</span><span class="heat-explain-text">GPT-5.4 OSWorld 75%超人类 + Playwright交互式调试 + Excel建模87.3%——仅3天就同时出现在大模型、Coding、企业转型3个板块。Z-Score检测为"突发"。</span></div>
+                        <div class="heat-explain-row"><span class="heat-explain-label why">为什么热</span><span class="heat-explain-text">Computer Use是AI从"回答问题"到"代替操作"的分水岭。这意味着RPA、自动化测试、桌面办公等万亿场景可能被重新定义。</span></div>
+                    </div>
+                </div>
+                <!-- #6 DeepSeek V4 -->
+                <div class="heat-item" style="flex-wrap:wrap">
+                    <div class="heat-rank">6️⃣</div>
+                    <div class="heat-topic">
+                        <div class="heat-topic-name">DeepSeek V4发布</div>
+                        <div class="heat-topic-meta">3天连续 · 2板块覆盖</div>
+                    </div>
+                    <div class="heat-bars">
+                        <div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar medium"></div><div class="heat-bar"></div><div class="heat-bar"></div><div class="heat-bar"></div><div class="heat-bar"></div><div class="heat-bar"></div>
+                    </div>
+                    <span class="heat-trend-tag new">🆕 新兴话题</span>
+                    <div class="heat-item-explain">
+                        <div class="heat-explain-row"><span class="heat-explain-label">热在哪</span><span class="heat-explain-text">V4 Lite以原生多模态出击 + 首次适配国产芯片——同时出现在大模型和行业两个板块，技术和产业双重关注。</span></div>
+                        <div class="heat-explain-row"><span class="heat-explain-label why">为什么热</span><span class="heat-explain-text">DeepSeek走出了一条独立于NVIDIA的国产算力路线，这在中美科技博弈背景下具有战略意义。如果国产芯片能支撑前沿大模型，整个供应链逻辑都会改变。</span></div>
+                    </div>
+                </div>
+                <!-- #7 中国AI入口 -->
+                <div class="heat-item" style="flex-wrap:wrap">
+                    <div class="heat-rank">7️⃣</div>
+                    <div class="heat-topic">
+                        <div class="heat-topic-name">中国AI应用入口争夺</div>
+                        <div class="heat-topic-meta">3天连续 · 1板块覆盖</div>
+                    </div>
+                    <div class="heat-bars">
+                        <div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar active"></div><div class="heat-bar medium"></div><div class="heat-bar low"></div><div class="heat-bar"></div><div class="heat-bar"></div><div class="heat-bar"></div><div class="heat-bar"></div><div class="heat-bar"></div>
+                    </div>
+                    <span class="heat-trend-tag new">🆕 新兴话题</span>
+                    <div class="heat-item-explain">
+                        <div class="heat-explain-row"><span class="heat-explain-label">热在哪</span><span class="heat-explain-text">美团Tabbit AI浏览器公测 + 阿里桌面Agent开放 + Coze密集更新——三家大厂同一周动作频频，瞄准的都是"用户入口"。</span></div>
+                        <div class="heat-explain-row"><span class="heat-explain-label why">为什么热</span><span class="heat-explain-text">中国AI竞争已从"模型比拼"转向"入口争夺"。浏览器是最后一个通用流量入口，谁先让用户习惯"AI浏览器 = 默认工具"，谁就拿到下一代用户关系。</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="heat-analysis">
+                <strong>热度解读:</strong> 本周最强信号是OpenAI的"密集轰炸"——6天内发布4款模型/产品，频率前所未有。<strong>突发信号</strong>是Computer Use——从Cursor Cloud到GPT-5.4 OSWorld 75%，"AI操作电脑"3天内跨越3个板块，Z-Score异常高。<strong>趋势判断</strong>：Computer Use极可能成为下周持续热点（GTC在即），AI Coding格局将进一步分化。
             </div>
         </div>
 
