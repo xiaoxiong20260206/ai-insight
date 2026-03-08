@@ -23,7 +23,6 @@ AI日报外部版本同步脚本
 
 import argparse
 import os
-import re
 import shutil
 import subprocess
 from datetime import datetime
