@@ -56,8 +56,8 @@ def get_week_dates(week_str: str = None):
         if not match:
             raise ValueError(f"Invalid week format: {week_str}, expected YYYY-WNN")
         year, week_num = int(match.group(1)), int(match.group(2))
-        # ISO周一为周起始
-        start_date = datetime.strptime(f"{year}-W{week_num:02d}-1", "%Y-W%W-%w").date()
+        # ISO周一为周起始（使用%G-%V-%u格式正确处理ISO周数）
+        start_date = datetime.strptime(f"{year}-W{week_num:02d}-1", "%G-W%V-%u").date()
     else:
         today = datetime.now().date()
         # 上一周
