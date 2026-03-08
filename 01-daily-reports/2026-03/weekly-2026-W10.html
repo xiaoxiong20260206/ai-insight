@@ -68,9 +68,9 @@
         .insight-event-date{flex-shrink:0;font-weight:600;color:var(--c-info);width:30px}
         /* Tab Navigation */
         .tab-nav{display:flex;gap:4px;margin-bottom:20px;background:var(--c-card);border:1px solid var(--c-border-l);border-radius:var(--r-md);padding:4px;box-shadow:var(--shadow);flex-wrap:wrap}
-        .tab-btn{flex:1;padding:10px 8px;border:none;background:transparent;cursor:pointer;font-size:13px;font-weight:600;color:var(--c-text3);border-radius:var(--r-sm);transition:var(--trans);font-family:var(--font);min-width:80px}
+        .tab-btn{flex:1;padding:10px 12px;border:none;background:transparent;cursor:pointer;font-size:13px;font-weight:600;color:var(--c-text3);border-radius:var(--r-sm);transition:var(--trans);font-family:var(--font);min-width:100px;white-space:nowrap}
         .tab-btn:hover{color:var(--c-text);background:var(--c-bg)}
-        .tab-btn[aria-selected="true"]{background:var(--g-blue);color:#fff}
+        .tab-btn[aria-selected="true"]{background:var(--g-blue);color:#fff;box-shadow:0 2px 4px rgba(37,99,235,.3)}
         .tab-panel{display:none}.tab-panel.active{display:block}
         /* Section Card */
         .section-card{background:var(--c-card);border:1px solid var(--c-border-l);border-radius:var(--r-lg);padding:24px;margin-bottom:16px;box-shadow:var(--shadow)}
@@ -117,7 +117,7 @@
         /* Daily Index */
         .daily-index{background:var(--c-card);border:1px solid var(--c-border-l);border-radius:var(--r-lg);padding:24px;margin-bottom:20px;box-shadow:var(--shadow)}
         .daily-index h3{font-size:16px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
-        .daily-index-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+        .daily-index-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px}
         .daily-index-item{text-align:center;padding:12px 8px;border-radius:var(--r-md);border:1px solid var(--c-border-l);text-decoration:none;color:var(--c-text);transition:var(--trans)}
         .daily-index-item:hover{border-color:var(--c-info);background:#EFF6FF;transform:translateY(-2px);box-shadow:var(--shadow)}
         .daily-index-day{font-size:12px;color:var(--c-text3);font-weight:600}
@@ -292,11 +292,11 @@
 
 <!-- Tab Navigation for Sections -->
 <div class="tab-nav" role="tablist">
-    <button class="tab-btn" role="tab" aria-selected="true" onclick="switchTab('models')">🧠 大模型</button>
-    <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab('coding')">⌨️ AI Coding</button>
-    <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab('apps')">📱 AI 应用</button>
-    <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab('industry')">🏭 AI 行业</button>
-    <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab('enterprise')">🔄 企业转型</button>
+    <button class="tab-btn" role="tab" aria-selected="true" onclick="switchTab('models',this)">🧠 大模型</button>
+    <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab('coding',this)">⌨️ AI Coding</button>
+    <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab('apps',this)">📱 AI 应用</button>
+    <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab('industry',this)">🏭 AI 行业</button>
+    <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab('enterprise',this)">🔄 企业转型</button>
 </div>
 
 <!-- 大模型 Panel -->
@@ -578,11 +578,11 @@
 </div><!-- /.container -->
 
 <script>
-function switchTab(name){
+function switchTab(name,btn){
     document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(b=>b.setAttribute('aria-selected','false'));
     document.getElementById('panel-'+name).classList.add('active');
-    event.target.setAttribute('aria-selected','true');
+    btn.setAttribute('aria-selected','true');
 }
 </script>
 </body>
