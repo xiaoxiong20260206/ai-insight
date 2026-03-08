@@ -37,6 +37,10 @@ REPLACEMENTS = [
     (r'xiaoxiong20260206\.github\.io/ai-insight/', 'xiaoxiong20260206.github.io/ai-insight-public/'),
     (r'github\.com/xiaoxiong20260206/ai-insight', 'github.com/xiaoxiong20260206/ai-insight-public'),
     
+    # ===== 文件名重写（public版统一去掉-v3后缀） =====
+    # sync_report()会把-v3.html重命名为.html，index.html中的链接也必须同步
+    (r'(\d{4}-\d{2}-\d{2})-v3\.html', r'\1.html'),
+    
     # ===== 标题和描述 =====
     (r'林克的AI洞察', 'AI行业洞察'),
     (r'我是林克，这是沈浪让我负责的AI洞察项目', 'AI洞察 · 持续追踪AI行业动态'),
