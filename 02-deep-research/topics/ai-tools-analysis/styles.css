@@ -451,12 +451,8 @@ section h2 {
 }
 
 .connection-line.dimmed {
-    opacity: 0.08;
-    stroke: #E2E8F0;
-}
-
-.connection-line.dimmed {
     opacity: 0.1;
+    stroke: #E2E8F0;
 }
 
 /* ==================== 路线图 ==================== */
@@ -854,9 +850,7 @@ section h2 {
     }
 }
 
-.animate-in {
-    animation: fadeInUp 0.5s ease forwards;
-}
+/* .animate-in 已移除（未使用的死代码） */
 
 .stat-card:nth-child(1) { animation-delay: 0.1s; }
 .stat-card:nth-child(2) { animation-delay: 0.2s; }
