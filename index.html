@@ -1433,11 +1433,11 @@
         <!-- Stats -->
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-value green">85+</div>
+                <div class="stat-value green">100+</div>
                 <div class="stat-label">追踪人物</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value blue">130+</div>
+                <div class="stat-value blue">140+</div>
                 <div class="stat-label">追踪公司</div>
             </div>
             <div class="stat-card">
@@ -1698,197 +1698,356 @@
                     </div>
                 </div>
                 
-                <!-- 人物追踪 - 可展开 -->
+                <!-- 人物追踪 -->
                 <div class="category-section">
                     <div class="collapsible-header" onclick="toggleCollapsible(this)">
                         <div class="collapsible-left">
                             <span class="collapsible-emoji">👤</span>
                             <span class="collapsible-title">人物追踪</span>
-                            <span class="collapsible-count">85+</span>
+                            <span class="collapsible-count">100+</span>
                         </div>
                         <span class="collapsible-icon">▼</span>
                     </div>
                     <div class="collapsible-content">
                         <div style="padding: var(--spacing-md);">
-                            <h4 style="font-size: 14px; color: var(--color-text-secondary); margin-bottom: var(--spacing-md);">L1 实践者/构建者（每日追踪）</h4>
-                            <div class="table-wrap" style="overflow-x: auto;">
-                                <table class="tracking-table">
-                                    <thead>
-                                        <tr><th>人物</th><th>公司/角色</th><th>主要渠道</th><th>追踪重点</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td><strong>Barry Zhang</strong></td><td>Anthropic Head of Applied AI</td><td>X @barry_zyj</td><td>Agent设计原则, Skills范式</td></tr>
-                                        <tr><td><strong>Jason Wei</strong></td><td>OpenAI Research Lead</td><td>X, Papers</td><td>Chain-of-thought, 模型能力研究</td></tr>
-                                        <tr><td><strong>Noam Brown</strong></td><td>OpenAI Research (推理)</td><td>X, Papers</td><td>o1/o3 推理模型方法论</td></tr>
-                                        <tr><td><strong>Andrej Karpathy</strong></td><td>独立 (前OpenAI/Tesla)</td><td>YouTube, X</td><td>最通俗的技术深度解读</td></tr>
-                                        <tr><td><strong>Michael Truell</strong></td><td>Cursor CEO</td><td>采访, Podcast</td><td>Cursor产品愿景</td></tr>
-                                        <tr><td><strong>Scott Wu</strong></td><td>Cognition (Devin) CEO</td><td>X, 博客</td><td>自主编程Agent</td></tr>
-                                        <tr><td><strong>姚顺雨</strong></td><td>OpenAI 研究员</td><td>播客, 演讲</td><td>Agent理论, 语言世界</td></tr>
-                                        <tr><td><strong>Harrison Chase</strong></td><td>LangChain CEO</td><td>YouTube, 演讲</td><td>Agent工程, Deep Agents</td></tr>
-                                        <tr><td><strong>Jim Fan</strong></td><td>NVIDIA 机器人总监</td><td>X @DrJimFan</td><td>Physical AI, 具身智能</td></tr>
-                                        <tr><td><strong>Tri Dao</strong></td><td>Together AI</td><td>X, Papers</td><td>FlashAttention, 推理效率</td></tr>
-                                        <tr><td><strong>梁文锋</strong></td><td>DeepSeek 创始人</td><td>采访</td><td>开源大模型, MoE架构</td></tr>
-                                        <tr><td><strong>杨植麟</strong></td><td>Moonshot AI / Kimi 创始人</td><td>采访, 演讲</td><td>长上下文, 消费级AI</td></tr>
-                                        <tr><td><strong>Bret Taylor</strong></td><td>Sierra CEO (前Salesforce)</td><td>采访, 演讲</td><td>企业AI Agent, 客服AI</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            
-                            <h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">L2 深度观察者（每日/每周追踪）</h4>
-                            <div class="table-wrap" style="overflow-x: auto;">
-                                <table class="tracking-table">
-                                    <thead>
-                                        <tr><th>人物/媒体</th><th>平台</th><th>检查频率</th><th>价值定位</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td><strong>Simon Willison</strong></td><td>simonwillison.net</td><td>每日</td><td>最及时的AI工具评测</td></tr>
-                                        <tr><td><strong>Gergely Orosz</strong></td><td>Pragmatic Engineer</td><td>每周2次</td><td>最深入的工程视角</td></tr>
-                                        <tr><td><strong>Swyx</strong></td><td>Latent Space</td><td>每周1次</td><td>AI工程前沿, 深度访谈</td></tr>
-                                        <tr><td><strong>Ethan Mollick</strong></td><td>oneusefulthing.org</td><td>每周2次</td><td>AI对工作方式的影响</td></tr>
-                                        <tr><td><strong>Eugene Yan</strong></td><td>eugeneyan.com</td><td>每周1次</td><td>AI工程最佳实践, LLM应用</td></tr>
-                                        <tr><td><strong>Chip Huyen</strong></td><td>huyenchip.com</td><td>每周1次</td><td>MLOps, LLM系统设计</td></tr>
-                                        <tr><td><strong>宝玉</strong></td><td>X @dotey</td><td>每日</td><td>最快的海外AI信息翻译</td></tr>
-                                        <tr><td><strong>李沐</strong></td><td>YouTube/B站</td><td>每周1次</td><td>中文世界最好的论文解读</td></tr>
-                                        <tr><td><strong>Yannic Kilcher</strong></td><td>YouTube</td><td>每周1次</td><td>最深入的论文解读</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            
-                            <h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">L3 战略决策者（每周追踪）</h4>
-                            <div class="table-wrap" style="overflow-x: auto;">
-                                <table class="tracking-table">
-                                    <thead>
-                                        <tr><th>人物</th><th>公司/角色</th><th>主要渠道</th><th>信号权重</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td><strong>Sam Altman</strong></td><td>OpenAI CEO</td><td>Blog, X</td><td>GPT路线图</td></tr>
-                                        <tr><td><strong>Dario Amodei</strong></td><td>Anthropic CEO</td><td>长文Essays</td><td>Claude战略方向</td></tr>
-                                        <tr><td><strong>Jensen Huang</strong></td><td>NVIDIA CEO</td><td>GTC演讲</td><td>AI基础设施方向</td></tr>
-                                        <tr><td><strong>Ilya Sutskever</strong></td><td>SSI 联合创始人</td><td>采访, 演讲</td><td>超级智能安全</td></tr>
-                                        <tr><td><strong>Mark Zuckerberg</strong></td><td>Meta CEO</td><td>公开信, 采访</td><td>开源AI策略</td></tr>
-                                        <tr><td><strong>Satya Nadella</strong></td><td>Microsoft CEO</td><td>采访, LinkedIn</td><td>Copilot战略</td></tr>
-                                        <tr><td><strong>Marc Benioff</strong></td><td>Salesforce CEO</td><td>X, 采访</td><td>企业AI Agent</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin-bottom: var(--spacing-md);">L1 实践者/构建者 — AI实验室核心</h4>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>人物</th><th>公司/角色</th><th>主要渠道</th><th>追踪重点</th></tr></thead>
+<tbody>
+<tr><td><strong>Jason Wei</strong></td><td>OpenAI Research Lead</td><td>X, Papers</td><td>Chain-of-thought, 模型能力研究</td></tr>
+<tr><td><strong>Mark Chen</strong></td><td>OpenAI VP of Research</td><td>X, 采访</td><td>GPT/o-系列路线图</td></tr>
+<tr><td><strong>Noam Brown</strong></td><td>OpenAI Research (推理)</td><td>X, Papers</td><td>o1/o3 推理模型方法论</td></tr>
+<tr><td><strong>Barry Zhang</strong></td><td>Anthropic Head of Applied AI</td><td>X @barry_zyj</td><td>Agent设计原则, Skills范式</td></tr>
+<tr><td><strong>Amanda Askell</strong></td><td>Anthropic Alignment</td><td>X @amandaaskell</td><td>Claude System Prompt设计者</td></tr>
+<tr><td><strong>Alex Albert</strong></td><td>Anthropic Claude Relations</td><td>X @alexalbert__</td><td>Claude使用技巧, 功能更新</td></tr>
+<tr><td><strong>Jan Leike</strong></td><td>Anthropic Alignment Lead</td><td>X, Papers</td><td>超级对齐, 安全研究</td></tr>
+<tr><td><strong>Ilya Sutskever</strong></td><td>SSI 联合创始人</td><td>采访, 演讲</td><td>超级智能安全</td></tr>
+<tr><td><strong>Jeff Dean</strong></td><td>Google Chief Scientist</td><td>X, 演讲</td><td>AI系统架构方向</td></tr>
+<tr><td><strong>Yann LeCun</strong></td><td>Meta AI 首席科学家</td><td>X @ylecun</td><td>技术路线争鸣, 开源策略</td></tr>
+<tr><td><strong>Igor Babuschkin</strong></td><td>xAI 联合创始人</td><td>X, 采访</td><td>Grok技术架构</td></tr>
+</tbody>
+</table>
+</div>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">L1 实践者 — AI Coding 产品 & 实践者</h4>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>人物</th><th>公司/角色</th><th>主要渠道</th><th>追踪重点</th></tr></thead>
+<tbody>
+<tr><td><strong>Michael Truell</strong></td><td>Cursor CEO</td><td>采访, Podcast</td><td>Cursor产品愿景</td></tr>
+<tr><td><strong>Aman Sanger</strong></td><td>Cursor CTO</td><td>X, 技术演讲</td><td>技术架构, Agent模式</td></tr>
+<tr><td><strong>Amjad Masad</strong></td><td>Replit CEO</td><td>X, 博客</td><td>AI Agent编程</td></tr>
+<tr><td><strong>Scott Wu</strong></td><td>Cognition (Devin) CEO</td><td>X, 博客</td><td>自主编程Agent</td></tr>
+<tr><td><strong>Addy Osmani</strong></td><td>Google Chrome 工程总监</td><td>addyosmani.com</td><td>LLM Coding Workflow</td></tr>
+<tr><td><strong>Kent Beck</strong></td><td>极限编程之父</td><td>X, Newsletter</td><td>TDD + AI Agent方法论</td></tr>
+<tr><td><strong>Steve Yegge</strong></td><td>Sourcegraph</td><td>sourcegraph.com</td><td>AI对开发者影响</td></tr>
+<tr><td><strong>Unclecode</strong></td><td>Crawl4AI创始人</td><td>X, GitHub</td><td>LLM友好网页爬取</td></tr>
+</tbody>
+</table>
+</div>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">L1 实践者 — 大模型核心研究者 & 具身智能</h4>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>人物</th><th>公司/角色</th><th>主要渠道</th><th>追踪重点</th></tr></thead>
+<tbody>
+<tr><td><strong>Andrej Karpathy</strong></td><td>独立 (前OpenAI/Tesla)</td><td>YouTube, X</td><td>最通俗的技术深度解读</td></tr>
+<tr><td><strong>Jim Fan</strong></td><td>NVIDIA 机器人总监</td><td>X @DrJimFan</td><td>Physical AI, 具身智能</td></tr>
+<tr><td><strong>Tri Dao</strong></td><td>Together AI</td><td>X, Papers</td><td>FlashAttention, 推理效率</td></tr>
+<tr><td><strong>François Chollet</strong></td><td>ARC-AGI 创始人</td><td>X @fchollet</td><td>AGI评测, 批判性思考</td></tr>
+<tr><td><strong>姚顺雨</strong></td><td>OpenAI 研究员</td><td>播客, 演讲</td><td>Agent理论, 语言世界</td></tr>
+<tr><td><strong>Harrison Chase</strong></td><td>LangChain CEO</td><td>YouTube, 演讲</td><td>Agent工程, Deep Agents</td></tr>
+<tr><td><strong>Chris Lattner</strong></td><td>Modular/Mojo 创始人</td><td>X, 博客</td><td>AI编程语言, 编译器</td></tr>
+<tr><td><strong>Pieter Abbeel</strong></td><td>Covariant/UC Berkeley</td><td>X, Papers</td><td>机器人学习, 强化学习</td></tr>
+<tr><td><strong>Chelsea Finn</strong></td><td>Stanford</td><td>Papers, 演讲</td><td>元学习, 机器人AI</td></tr>
+<tr><td><strong>Fei-Fei Li</strong></td><td>Stanford HAI, World Labs</td><td>X, 演讲</td><td>计算机视觉, 空间智能</td></tr>
+<tr><td><strong>Saining Xie</strong></td><td>NYU (前Meta)</td><td>Papers</td><td>视觉Transformer, 架构设计</td></tr>
+<tr><td><strong>王兴兴</strong></td><td>宇树科技创始人</td><td>采访, 产品发布</td><td>四足/人形机器人</td></tr>
+</tbody>
+</table>
+</div>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">L1 实践者 — 企业AI/Agent & 学术界</h4>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>人物</th><th>公司/角色</th><th>主要渠道</th><th>追踪重点</th></tr></thead>
+<tbody>
+<tr><td><strong>Bret Taylor</strong></td><td>Sierra CEO (前Salesforce)</td><td>采访, 演讲</td><td>企业AI Agent, 客服AI</td></tr>
+<tr><td><strong>Arvind Jain</strong></td><td>Glean CEO</td><td>采访</td><td>企业知识搜索</td></tr>
+<tr><td><strong>Winston Weinberg</strong></td><td>Harvey CEO</td><td>采访</td><td>法律AI</td></tr>
+<tr><td><strong>Percy Liang</strong></td><td>Stanford HAI, HELM</td><td>Papers, 演讲</td><td>模型评测, 基准测试</td></tr>
+<tr><td><strong>Sasha Rush</strong></td><td>Cornell/HuggingFace</td><td>X, Papers</td><td>Transformer架构</td></tr>
+<tr><td><strong>Andrew Ng</strong></td><td>DeepLearning.AI</td><td>YouTube, Newsletter</td><td>AI教育, 产业应用</td></tr>
+</tbody>
+</table>
+</div>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">L1 实践者 — 中国AI核心人物</h4>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>人物</th><th>公司/角色</th><th>主要渠道</th><th>追踪重点</th></tr></thead>
+<tbody>
+<tr><td><strong>梁文锋</strong></td><td>DeepSeek 创始人</td><td>采访</td><td>开源大模型, MoE架构</td></tr>
+<tr><td><strong>杨植麟</strong></td><td>Moonshot AI / Kimi 创始人</td><td>采访, 演讲</td><td>长上下文, 消费级AI</td></tr>
+<tr><td><strong>唐杰</strong></td><td>智谱AI 首席科学家</td><td>论文, 演讲</td><td>GLM系列, Agent</td></tr>
+<tr><td><strong>王小川</strong></td><td>百川智能 CEO</td><td>X, 公众号</td><td>搜索增强, 企业AI</td></tr>
+<tr><td><strong>李彦宏</strong></td><td>百度 CEO</td><td>演讲, 采访</td><td>国内AI战略</td></tr>
+<tr><td><strong>朱松纯</strong></td><td>北大, 通用AI研究院</td><td>论文, 演讲</td><td>通用人工智能, 认知科学</td></tr>
+<tr><td><strong>刘知远</strong></td><td>清华大学, OpenBMB</td><td>Papers, GitHub</td><td>大模型高效微调, 开源</td></tr>
+<tr><td><strong>贾扬清</strong></td><td>阿里云AI (Caffe作者)</td><td>X, 采访</td><td>AI基础设施, 云原生AI</td></tr>
+</tbody>
+</table>
+</div>
+<h4 style="font-size: 14px; color: #DC2626; font-weight: 700; margin: var(--spacing-lg) 0 var(--spacing-md);">🆕 L1 实践者 — 中国AI Coding & 新晋力量</h4>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>人物</th><th>公司/角色</th><th>主要渠道</th><th>追踪重点</th></tr></thead>
+<tbody>
+<tr><td><strong>陈鑫</strong></td><td>阿里云 通义灵码负责人</td><td>演讲, 采访</td><td>国内AI Coding标杆产品</td></tr>
+<tr><td><strong>郗杰</strong></td><td>字节跳动 Trae团队</td><td>演讲, 技术博客</td><td>国内AI IDE先驱</td></tr>
+<tr><td><strong>张俊林</strong></td><td>字节跳动 MarsCode</td><td>演讲, 采访</td><td>云端AI编程</td></tr>
+<tr><td><strong>张建锋</strong></td><td>蚂蚁集团 CodeFuse</td><td>GitHub, 演讲</td><td>开源AI编程框架</td></tr>
+<tr><td><strong>李大海</strong></td><td>面壁智能 CEO</td><td>采访, 演讲</td><td>端侧高效模型, MiniCPM</td></tr>
+<tr><td><strong>方汉</strong></td><td>昆仑万维 CEO</td><td>采访, 演讲</td><td>AI搜索, 天工大模型</td></tr>
+<tr><td><strong>王晓云</strong></td><td>蚂蚁集团 CTO</td><td>采访, 演讲</td><td>蚂蚁百灵, 金融AI</td></tr>
+</tbody>
+</table>
+</div>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">L1 实践者 — AI安全/对齐核心人物</h4>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>人物</th><th>公司/角色</th><th>主要渠道</th><th>追踪重点</th></tr></thead>
+<tbody>
+<tr><td><strong>Stuart Russell</strong></td><td>UC Berkeley</td><td>书籍, 演讲</td><td>AI安全理论</td></tr>
+<tr><td><strong>Nick Bostrom</strong></td><td>牛津FHI</td><td>书籍, 论文</td><td>超级智能风险</td></tr>
+<tr><td><strong>Paul Christiano</strong></td><td>ARC (前OpenAI)</td><td>博客, 论文</td><td>对齐研究, RLHF</td></tr>
+<tr><td><strong>Dan Hendrycks</strong></td><td>CAIS</td><td>Papers, X</td><td>AI安全评测</td></tr>
+</tbody>
+</table>
+</div>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">L2 深度观察者 — Newsletter/博客 & AI工程</h4>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>人物/媒体</th><th>平台</th><th>检查频率</th><th>价值定位</th></tr></thead>
+<tbody>
+<tr><td><strong>Simon Willison</strong></td><td>simonwillison.net</td><td>每日</td><td>最及时的AI工具评测</td></tr>
+<tr><td><strong>Gergely Orosz</strong></td><td>Pragmatic Engineer</td><td>每周2次</td><td>最深入的工程视角</td></tr>
+<tr><td><strong>Swyx</strong></td><td>Latent Space</td><td>每周1次</td><td>AI工程前沿, 深度访谈</td></tr>
+<tr><td><strong>Ethan Mollick</strong></td><td>oneusefulthing.org</td><td>每周2次</td><td>AI对工作方式的影响</td></tr>
+<tr><td><strong>Jack Clark</strong></td><td>Import AI</td><td>每周1次</td><td>AI政策与产业宏观</td></tr>
+<tr><td><strong>Eugene Yan</strong></td><td>eugeneyan.com</td><td>每周1次</td><td>AI工程最佳实践</td></tr>
+<tr><td><strong>Chip Huyen</strong></td><td>huyenchip.com</td><td>每周1次</td><td>MLOps, LLM系统设计</td></tr>
+<tr><td><strong>Jason Liu</strong></td><td>X @jxnlco</td><td>每周1次</td><td>结构化输出, LLM工程</td></tr>
+<tr><td><strong>Thomas Wolf</strong></td><td>Hugging Face CTO</td><td>每周1次</td><td>开源LLM生态</td></tr>
+<tr><td><strong>Nathan Benaich</strong></td><td>stateof.ai</td><td>每年</td><td>State of AI年度报告</td></tr>
+</tbody>
+</table>
+</div>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">L2 深度观察者 — 中文圈 & YouTube/播客</h4>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>人物/媒体</th><th>平台</th><th>检查频率</th><th>价值定位</th></tr></thead>
+<tbody>
+<tr><td><strong>宝玉</strong></td><td>X @dotey, 微信公众号</td><td>每日</td><td>最快的海外AI信息翻译</td></tr>
+<tr><td><strong>李沐</strong></td><td>YouTube/B站</td><td>每周1次</td><td>中文世界最好的论文解读</td></tr>
+<tr><td><strong>潘乱</strong></td><td>乱翻书 (微信公众号)</td><td>每周1次</td><td>中国互联网深度分析</td></tr>
+<tr><td><strong>海外独角兽</strong></td><td>微信公众号</td><td>每周1次</td><td>硅谷创投深度报道</td></tr>
+<tr><td><strong>Yannic Kilcher</strong></td><td>YouTube</td><td>每周1次</td><td>最深入的论文解读</td></tr>
+<tr><td><strong>Two Minute Papers</strong></td><td>YouTube</td><td>每周2次</td><td>最快的论文摘要</td></tr>
+<tr><td><strong>Lex Fridman</strong></td><td>YouTube</td><td>按嘉宾</td><td>长对话, 深度思想交流</td></tr>
+<tr><td><strong>泓君</strong></td><td>硅谷101 (播客)</td><td>每周</td><td>最好的硅谷科技播客</td></tr>
+<tr><td><strong>张小珺</strong></td><td>小宇宙 (播客)</td><td>每周</td><td>科技创业深度访谈</td></tr>
+</tbody>
+</table>
+</div>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">L3 战略决策者</h4>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>人物</th><th>公司/角色</th><th>主要渠道</th><th>信号权重</th></tr></thead>
+<tbody>
+<tr><td><strong>Sam Altman</strong></td><td>OpenAI CEO</td><td>Blog, X</td><td>GPT路线图</td></tr>
+<tr><td><strong>Dario Amodei</strong></td><td>Anthropic CEO</td><td>长文Essays</td><td>Claude战略方向</td></tr>
+<tr><td><strong>Jensen Huang</strong></td><td>NVIDIA CEO</td><td>GTC演讲</td><td>AI基础设施方向</td></tr>
+<tr><td><strong>Sundar Pichai</strong></td><td>Google CEO</td><td>采访, GTC</td><td>Google AI战略</td></tr>
+<tr><td><strong>Satya Nadella</strong></td><td>Microsoft CEO</td><td>采访, LinkedIn</td><td>Copilot战略</td></tr>
+<tr><td><strong>Mark Zuckerberg</strong></td><td>Meta CEO</td><td>公开信, 采访</td><td>开源AI策略</td></tr>
+<tr><td><strong>Marc Benioff</strong></td><td>Salesforce CEO</td><td>X, 采访</td><td>企业AI Agent</td></tr>
+<tr><td><strong>Arvind Krishna</strong></td><td>IBM CEO</td><td>采访, 财报会</td><td>企业AI转型</td></tr>
+<tr><td><strong>Andy Jassy</strong></td><td>Amazon CEO</td><td>股东信, 采访</td><td>AWS AI战略</td></tr>
+<tr><td><strong>Guillermo Rauch</strong></td><td>Vercel CEO</td><td>X, Blog</td><td>AI前端 / v0.dev</td></tr>
+</tbody>
+</table>
+</div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- 公司追踪 - 可展开 -->
+                <!-- 公司追踪 -->
                 <div class="category-section">
                     <div class="collapsible-header" onclick="toggleCollapsible(this)">
                         <div class="collapsible-left">
                             <span class="collapsible-emoji">🏢</span>
                             <span class="collapsible-title">公司追踪</span>
-                            <span class="collapsible-count">130+</span>
+                            <span class="collapsible-count">140+</span>
                         </div>
                         <span class="collapsible-icon">▼</span>
                     </div>
                     <div class="collapsible-content">
                         <div style="padding: var(--spacing-md);">
-                            <h4 style="font-size: 14px; color: var(--color-text-secondary); margin-bottom: var(--spacing-md);">模型实验室</h4>
-                            <div class="table-wrap" style="overflow-x: auto;">
-                                <table class="tracking-table">
-                                    <thead>
-                                        <tr><th>公司</th><th>核心产品</th><th>官方渠道</th><th>检查频率</th><th>追踪重点</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td><strong>OpenAI</strong></td><td>GPT-4/o系列, ChatGPT</td><td>openai.com/blog</td><td>每日</td><td>最强闭源模型, 推理能力</td></tr>
-                                        <tr><td><strong>Anthropic</strong></td><td>Claude系列, Claude Code</td><td>anthropic.com/research</td><td>每日</td><td>安全对齐, Agent设计</td></tr>
-                                        <tr><td><strong>DeepSeek</strong></td><td>DeepSeek V3/R1</td><td>github.com/deepseek-ai</td><td>每日</td><td>开源标杆, MoE架构</td></tr>
-                                        <tr><td><strong>Google DeepMind</strong></td><td>Gemini系列</td><td>deepmind.google</td><td>每周2次</td><td>多模态, 推理</td></tr>
-                                        <tr><td><strong>Meta AI</strong></td><td>Llama系列</td><td>ai.meta.com/blog</td><td>每周2次</td><td>开源模型标杆</td></tr>
-                                        <tr><td><strong>SSI</strong></td><td>(研发中)</td><td>—</td><td>每周1次</td><td>Ilya领衔, 超级智能安全</td></tr>
-                                        <tr><td><strong>智谱AI</strong></td><td>GLM系列, ChatGLM</td><td>zhipuai.cn/news</td><td>每周2次</td><td>GLM开源, Agent平台</td></tr>
-                                        <tr><td><strong>Moonshot AI</strong></td><td>Kimi</td><td>moonshot.cn</td><td>每周2次</td><td>长上下文, 消费级AI</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            
-                            <h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">AI Coding 工具</h4>
-                            <div class="table-wrap" style="overflow-x: auto;">
-                                <table class="tracking-table">
-                                    <thead>
-                                        <tr><th>公司</th><th>产品</th><th>官方渠道</th><th>检查频率</th><th>追踪重点</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td><strong>Anysphere</strong></td><td>Cursor</td><td>cursor.com/blog</td><td>每日</td><td>AI IDE标杆, Agent模式</td></tr>
-                                        <tr><td><strong>Cognition</strong></td><td>Devin, Windsurf</td><td>cognition.ai/blog</td><td>每周2次</td><td>自主编程Agent</td></tr>
-                                        <tr><td><strong>GitHub</strong></td><td>Copilot</td><td>github.blog</td><td>每周1次</td><td>企业级AI编程</td></tr>
-                                        <tr><td><strong>Replit</strong></td><td>Ghostwriter, Agent</td><td>replit.com/blog</td><td>每周1次</td><td>云端AI编程</td></tr>
-                                        <tr><td><strong>Lovable</strong></td><td>Lovable</td><td>lovable.dev</td><td>每周1次</td><td>欧洲独角兽, Vibe Coding</td></tr>
-                                        <tr><td><strong>Bolt</strong></td><td>Bolt.new</td><td>bolt.new</td><td>每周1次</td><td>浏览器端AI开发</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            
-                            <h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">企业AI创业公司</h4>
-                            <div class="table-wrap" style="overflow-x: auto;">
-                                <table class="tracking-table">
-                                    <thead>
-                                        <tr><th>公司</th><th>产品</th><th>领域</th><th>追踪重点</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td><strong>Glean</strong></td><td>Glean</td><td>企业搜索</td><td>企业搜索+知识管理, 估值$46亿</td></tr>
-                                        <tr><td><strong>Harvey</strong></td><td>Harvey</td><td>法律AI</td><td>Sequoia明星项目</td></tr>
-                                        <tr><td><strong>Sierra</strong></td><td>Sierra Agent</td><td>客服AI</td><td>Bret Taylor创立</td></tr>
-                                        <tr><td><strong>Salesforce</strong></td><td>Agentforce</td><td>企业AI</td><td>CRM + AI Agent标杆</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            
-                            <h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">AI 应用产品</h4>
-                            <div class="table-wrap" style="overflow-x: auto;">
-                                <table class="tracking-table">
-                                    <thead>
-                                        <tr><th>公司</th><th>产品</th><th>领域</th><th>追踪重点</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td><strong>Perplexity</strong></td><td>Perplexity</td><td>AI搜索</td><td>AI搜索标杆, RAG</td></tr>
-                                        <tr><td><strong>Midjourney</strong></td><td>Midjourney</td><td>AI图像</td><td>AI图像生成标杆</td></tr>
-                                        <tr><td><strong>Runway</strong></td><td>Gen-3</td><td>AI视频</td><td>AI视频生成标杆</td></tr>
-                                        <tr><td><strong>ElevenLabs</strong></td><td>ElevenLabs</td><td>AI语音</td><td>AI语音合成标杆</td></tr>
-                                        <tr><td><strong>Vercel</strong></td><td>v0.dev</td><td>AI前端</td><td>AI前端生成</td></tr>
-                                        <tr><td><strong>快手可灵</strong></td><td>Kling AI</td><td>视频生成</td><td>国产Sora竞品</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            
-                            <h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">机器人/具身智能</h4>
-                            <div class="table-wrap" style="overflow-x: auto;">
-                                <table class="tracking-table">
-                                    <thead>
-                                        <tr><th>公司</th><th>产品</th><th>追踪重点</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td><strong>Figure</strong></td><td>Figure 01/02</td><td>人形机器人, OpenAI合作</td></tr>
-                                        <tr><td><strong>Physical Intelligence</strong></td><td>PI0</td><td>具身智能基础模型, $4亿融资</td></tr>
-                                        <tr><td><strong>宇树科技</strong></td><td>Unitree</td><td>四足/人形机器人, 春晚亮相</td></tr>
-                                        <tr><td><strong>智元机器人</strong></td><td>远征A2</td><td>中国人形机器人, 估值超70亿</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            
-                            <h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">互联网头部AI转型</h4>
-                            <div class="table-wrap" style="overflow-x: auto;">
-                                <table class="tracking-table">
-                                    <thead>
-                                        <tr><th>公司</th><th>AI核心产品</th><th>追踪重点</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td><strong>字节跳动</strong></td><td>豆包, 即梦, 可灵</td><td>多模态应用, 视频生成</td></tr>
-                                        <tr><td><strong>阿里巴巴</strong></td><td>通义千问, 钉钉AI</td><td>开源模型, 企业AI</td></tr>
-                                        <tr><td><strong>Microsoft</strong></td><td>Copilot, Azure OpenAI</td><td>Office AI, 企业AI</td></tr>
-                                        <tr><td><strong>Google</strong></td><td>Gemini, Search AI</td><td>多模态, AI搜索</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin-bottom: var(--spacing-md);">模型实验室 — 海外头部</h4>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>公司</th><th>核心产品</th><th>检查频率</th><th>追踪重点</th></tr></thead>
+<tbody>
+<tr><td><strong>OpenAI</strong></td><td>GPT-4/o系列, ChatGPT, Codex</td><td>每日</td><td>最强闭源模型, 推理能力</td></tr>
+<tr><td><strong>Anthropic</strong></td><td>Claude系列, Claude Code</td><td>每日</td><td>安全对齐, Agent设计</td></tr>
+<tr><td><strong>Google DeepMind</strong></td><td>Gemini系列, AlphaFold</td><td>每周2次</td><td>多模态, 推理, 科学AI</td></tr>
+<tr><td><strong>Meta AI (FAIR)</strong></td><td>Llama系列</td><td>每周2次</td><td>开源模型标杆</td></tr>
+<tr><td><strong>SSI</strong></td><td>(研发中)</td><td>每周1次</td><td>Ilya领衔, 超级智能安全</td></tr>
+<tr><td><strong>Mistral AI</strong></td><td>Mistral系列</td><td>每周1次</td><td>欧洲开源模型</td></tr>
+<tr><td><strong>xAI</strong></td><td>Grok系列</td><td>每周1次</td><td>Musk系, X平台整合</td></tr>
+<tr><td><strong>Cohere</strong></td><td>Command系列</td><td>每周1次</td><td>企业RAG, 嵌入模型</td></tr>
+</tbody>
+</table>
+</div>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">模型实验室 — 中国</h4>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>公司</th><th>核心产品</th><th>检查频率</th><th>追踪重点</th></tr></thead>
+<tbody>
+<tr><td><strong>DeepSeek</strong></td><td>DeepSeek V3/R1</td><td>每日</td><td>开源标杆, MoE架构</td></tr>
+<tr><td><strong>智谱AI</strong></td><td>GLM系列</td><td>每周2次</td><td>GLM开源, Agent平台</td></tr>
+<tr><td><strong>Moonshot AI</strong></td><td>Kimi</td><td>每周2次</td><td>长上下文, 消费级AI</td></tr>
+<tr><td><strong>百川智能</strong></td><td>Baichuan系列</td><td>每周1次</td><td>搜索增强, 企业AI</td></tr>
+<tr><td><strong>百度</strong></td><td>文心一言, ERNIE</td><td>每周2次</td><td>国产标杆, 行业应用</td></tr>
+<tr><td><strong>阿里</strong></td><td>通义千问, Qwen</td><td>每周2次</td><td>开源, 多模态, 云集成</td></tr>
+<tr><td><strong>字节跳动</strong></td><td>豆包</td><td>每周1次</td><td>消费级AI, 多模态</td></tr>
+<tr><td><strong>腾讯</strong></td><td>混元</td><td>每周1次</td><td>企业应用, 生态集成</td></tr>
+<tr><td><strong>蚂蚁集团 🆕</strong></td><td>蚂蚁百灵, 阿福APP</td><td>每周1次</td><td>独立基座大模型, 金融AI</td></tr>
+<tr><td><strong>面壁智能 🆕</strong></td><td>MiniCPM系列</td><td>每周1次</td><td>端侧高效模型, 清华系</td></tr>
+<tr><td><strong>昆仑万维 🆕</strong></td><td>天工大模型4.0</td><td>每周1次</td><td>AI搜索, 天工</td></tr>
+<tr><td><strong>MiniMax</strong></td><td>海螺AI</td><td>每周1次</td><td>多模态, 语音生成</td></tr>
+<tr><td><strong>阶跃星辰</strong></td><td>跃问</td><td>每周1次</td><td>多模态, 视频生成</td></tr>
+<tr><td><strong>零一万物</strong></td><td>万知</td><td>每月1次</td><td>开源, 多模态</td></tr>
+<tr><td><strong>科大讯飞</strong></td><td>星火</td><td>每周1次</td><td>语音+大模型, 教育</td></tr>
+</tbody>
+</table>
+</div>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">AI Coding 工具 — 海外</h4>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>公司</th><th>产品</th><th>检查频率</th><th>追踪重点</th></tr></thead>
+<tbody>
+<tr><td><strong>Anysphere</strong></td><td>Cursor</td><td>每日</td><td>AI IDE标杆, Agent模式</td></tr>
+<tr><td><strong>Cognition</strong></td><td>Devin, Windsurf</td><td>每周2次</td><td>自主编程Agent</td></tr>
+<tr><td><strong>GitHub</strong></td><td>Copilot</td><td>每周1次</td><td>企业级AI编程</td></tr>
+<tr><td><strong>Replit</strong></td><td>Ghostwriter, Agent</td><td>每周1次</td><td>云端AI编程</td></tr>
+<tr><td><strong>Lovable</strong></td><td>Lovable</td><td>每周1次</td><td>欧洲独角兽, Vibe Coding</td></tr>
+<tr><td><strong>Bolt</strong></td><td>Bolt.new</td><td>每周1次</td><td>浏览器端AI开发</td></tr>
+<tr><td><strong>Sourcegraph</strong></td><td>Cody</td><td>每周1次</td><td>代码搜索 + AI</td></tr>
+</tbody>
+</table>
+</div>
+<h4 style="font-size: 14px; color: #DC2626; font-weight: 700; margin: var(--spacing-lg) 0 var(--spacing-md);">🆕 AI Coding 工具 — 国内</h4>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>公司</th><th>产品</th><th>检查频率</th><th>追踪重点</th></tr></thead>
+<tbody>
+<tr><td><strong>字节跳动</strong></td><td>Trae</td><td>每日</td><td>国内首个AI IDE, 对标Cursor</td></tr>
+<tr><td><strong>字节跳动</strong></td><td>Trae-Agent (开源)</td><td>每周2次</td><td>开源Agent框架, SWE-bench</td></tr>
+<tr><td><strong>阿里云</strong></td><td>通义灵码</td><td>每周2次</td><td>IDE插件, 模型升级</td></tr>
+<tr><td><strong>智谱AI</strong></td><td>CodeGeeX</td><td>每周2次</td><td>开源代码模型, 插件</td></tr>
+<tr><td><strong>百度</strong></td><td>文心快码 Comate</td><td>每周1次</td><td>企业级AI编程</td></tr>
+<tr><td><strong>字节跳动</strong></td><td>豆包MarsCode</td><td>每周1次</td><td>云IDE, AI编程助手</td></tr>
+<tr><td><strong>蚂蚁集团</strong></td><td>CodeFuse (开源)</td><td>每月1次</td><td>开源框架, 多模型支持</td></tr>
+</tbody>
+</table>
+</div>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">企业AI创业公司</h4>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>公司</th><th>产品</th><th>领域</th><th>追踪重点</th></tr></thead>
+<tbody>
+<tr><td><strong>Glean</strong></td><td>Glean</td><td>企业搜索</td><td>知识管理, 估值$46亿</td></tr>
+<tr><td><strong>Harvey</strong></td><td>Harvey</td><td>法律AI</td><td>Sequoia明星项目</td></tr>
+<tr><td><strong>Sierra</strong></td><td>Sierra Agent</td><td>客服AI</td><td>Bret Taylor创立</td></tr>
+<tr><td><strong>Salesforce</strong></td><td>Agentforce</td><td>企业CRM</td><td>CRM + AI Agent标杆</td></tr>
+<tr><td><strong>ServiceNow</strong></td><td>Now AI</td><td>IT服务</td><td>IT服务 + AI Agent</td></tr>
+<tr><td><strong>Hebbia</strong></td><td>Matrix</td><td>金融AI</td><td>金融分析, RAG先驱</td></tr>
+<tr><td><strong>Writer</strong></td><td>Writer</td><td>企业写作</td><td>企业写作AI, 自有模型</td></tr>
+<tr><td><strong>Decagon</strong></td><td>Decagon</td><td>客服AI</td><td>AI Agent, YC系</td></tr>
+</tbody>
+</table>
+</div>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">AI 应用产品</h4>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>公司</th><th>产品</th><th>领域</th><th>追踪重点</th></tr></thead>
+<tbody>
+<tr><td><strong>Perplexity</strong></td><td>Perplexity</td><td>AI搜索</td><td>AI搜索标杆, RAG</td></tr>
+<tr><td><strong>Midjourney</strong></td><td>Midjourney</td><td>AI图像</td><td>AI图像生成标杆</td></tr>
+<tr><td><strong>Runway</strong></td><td>Gen-3</td><td>AI视频</td><td>AI视频生成标杆</td></tr>
+<tr><td><strong>ElevenLabs</strong></td><td>ElevenLabs</td><td>AI语音</td><td>AI语音合成标杆</td></tr>
+<tr><td><strong>Suno</strong></td><td>Suno</td><td>AI音乐</td><td>AI音乐生成</td></tr>
+<tr><td><strong>Vercel</strong></td><td>v0.dev</td><td>AI前端</td><td>AI前端生成</td></tr>
+<tr><td><strong>Canva</strong></td><td>Canva AI</td><td>设计AI</td><td>大众市场设计AI</td></tr>
+<tr><td><strong>Stability AI</strong></td><td>Stable Diffusion</td><td>AI图像</td><td>开源图像生成</td></tr>
+</tbody>
+</table>
+</div>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">机器人/具身智能</h4>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>公司</th><th>产品</th><th>追踪重点</th></tr></thead>
+<tbody>
+<tr><td><strong>Figure</strong></td><td>Figure 01/02</td><td>人形机器人, OpenAI合作</td></tr>
+<tr><td><strong>Physical Intelligence</strong></td><td>PI0</td><td>具身智能基础模型, $4亿融资</td></tr>
+<tr><td><strong>1X</strong></td><td>Neo</td><td>人形机器人</td></tr>
+<tr><td><strong>Covariant</strong></td><td>RFM-1</td><td>机器人基础模型</td></tr>
+<tr><td><strong>宇树科技</strong></td><td>Unitree</td><td>四足/人形机器人, 春晚亮相</td></tr>
+<tr><td><strong>智元机器人</strong></td><td>远征A2</td><td>中国人形机器人, 估值超70亿</td></tr>
+<tr><td><strong>银河通用</strong></td><td>GalaxyBot</td><td>中国具身智能</td></tr>
+</tbody>
+</table>
+</div>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">互联网头部AI转型</h4>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>公司</th><th>AI核心产品</th><th>追踪重点</th></tr></thead>
+<tbody>
+<tr><td><strong>Google</strong></td><td>Gemini, Search AI, Cloud AI</td><td>多模态, AI搜索, Workspace AI</td></tr>
+<tr><td><strong>Microsoft</strong></td><td>Copilot, Azure OpenAI</td><td>Office AI, GitHub Copilot</td></tr>
+<tr><td><strong>Amazon</strong></td><td>Bedrock, Rufus, Q</td><td>云AI服务, 电商AI</td></tr>
+<tr><td><strong>Apple</strong></td><td>Apple Intelligence</td><td>设备端AI, Siri升级</td></tr>
+<tr><td><strong>Meta</strong></td><td>Llama, Meta AI</td><td>开源模型, 社交AI</td></tr>
+<tr><td><strong>字节跳动</strong></td><td>豆包, 即梦, 可灵</td><td>多模态, 视频生成</td></tr>
+<tr><td><strong>阿里巴巴</strong></td><td>通义千问, 钉钉AI</td><td>开源模型, 企业AI</td></tr>
+<tr><td><strong>腾讯</strong></td><td>混元, 腾讯元宝</td><td>企业AI, 游戏AI</td></tr>
+<tr><td><strong>百度</strong></td><td>文心一言, 萝卜快跑</td><td>搜索AI, 自动驾驶</td></tr>
+<tr><td><strong>Shopify</strong></td><td>Sidekick, Magic</td><td>电商AI助手</td></tr>
+<tr><td><strong>Adobe</strong></td><td>Firefly, Sensei</td><td>创意AI, 内容生成</td></tr>
+</tbody>
+</table>
+</div>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">AI基础设施 & 芯片</h4>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>公司</th><th>产品</th><th>追踪重点</th></tr></thead>
+<tbody>
+<tr><td><strong>NVIDIA</strong></td><td>H100/B200, CUDA</td><td>AI芯片霸主, 软件生态</td></tr>
+<tr><td><strong>Hugging Face</strong></td><td>Transformers, Hub</td><td>开源模型Hub, 社区生态</td></tr>
+<tr><td><strong>LangChain</strong></td><td>LangChain, LangGraph</td><td>Agent框架, RAG工具链</td></tr>
+<tr><td><strong>Together AI</strong></td><td>Together Inference</td><td>开源模型推理</td></tr>
+<tr><td><strong>Groq</strong></td><td>LPU Chips</td><td>LPU推理加速, 最快推理</td></tr>
+<tr><td><strong>Scale AI</strong></td><td>Scale</td><td>数据标注, RLHF, 评测</td></tr>
+<tr><td><strong>Databricks</strong></td><td>Mosaic</td><td>数据平台 + LLM训练</td></tr>
+<tr><td><strong>AMD</strong></td><td>MI300</td><td>挑战NVIDIA, ROCm</td></tr>
+<tr><td><strong>华为</strong></td><td>昇腾, 盘古大模型</td><td>自主AI芯片, 行业模型</td></tr>
+</tbody>
+</table>
+</div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- 信息源 - 可展开 -->
+                <!-- 信息源 -->
                 <div class="category-section">
                     <div class="collapsible-header" onclick="toggleCollapsible(this)">
                         <div class="collapsible-left">
@@ -1900,71 +2059,229 @@
                     </div>
                     <div class="collapsible-content">
                         <div style="padding: var(--spacing-md);">
-                            <h4 style="font-size: 14px; color: var(--color-text-secondary); margin-bottom: var(--spacing-md);">官方博客</h4>
-                            <div class="table-wrap" style="overflow-x: auto;">
-                                <table class="tracking-table">
-                                    <thead>
-                                        <tr><th>公司</th><th>URL</th><th>检查频率</th><th>内容类型</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td><strong>OpenAI</strong></td><td>openai.com/blog</td><td>每周2次</td><td>产品发布, 安全研究</td></tr>
-                                        <tr><td><strong>Anthropic</strong></td><td>anthropic.com/research</td><td>每周2次</td><td>研究论文, 产品博客</td></tr>
-                                        <tr><td><strong>Cursor</strong></td><td>cursor.com/blog</td><td>每日</td><td>产品更新, 技术博客</td></tr>
-                                        <tr><td><strong>DeepMind</strong></td><td>deepmind.google</td><td>每周1次</td><td>研究论文, 技术突破</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            
-                            <h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">Newsletter & 博客</h4>
-                            <div class="table-wrap" style="overflow-x: auto;">
-                                <table class="tracking-table">
-                                    <thead>
-                                        <tr><th>名称</th><th>作者</th><th>URL</th><th>价值定位</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td><strong>Simon Willison's Blog</strong></td><td>Simon Willison</td><td>simonwillison.net</td><td>最及时的AI工具评测</td></tr>
-                                        <tr><td><strong>Pragmatic Engineer</strong></td><td>Gergely Orosz</td><td>newsletter.pragmaticengineer.com</td><td>最深入的工程视角</td></tr>
-                                        <tr><td><strong>Latent Space</strong></td><td>Swyx</td><td>latent.space</td><td>AI工程前沿, 深度访谈</td></tr>
-                                        <tr><td><strong>One Useful Thing</strong></td><td>Ethan Mollick</td><td>oneusefulthing.org</td><td>AI对工作方式的影响</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            
-                            <h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">播客</h4>
-                            <div class="table-wrap" style="overflow-x: auto;">
-                                <table class="tracking-table">
-                                    <thead>
-                                        <tr><th>播客名</th><th>主持人</th><th>平台</th><th>价值定位</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td><strong>Latent Space</strong></td><td>Swyx + Alessio</td><td>YouTube/Spotify</td><td>AI工程最前沿访谈</td></tr>
-                                        <tr><td><strong>Lex Fridman</strong></td><td>Lex Fridman</td><td>YouTube</td><td>长对话, 深度思想交流</td></tr>
-                                        <tr><td><strong>硅谷101</strong></td><td>泓君</td><td>Apple/Spotify</td><td>中文圈最好的硅谷科技播客</td></tr>
-                                        <tr><td><strong>晚点聊</strong></td><td>晚点</td><td>小宇宙</td><td>中国科技行业深度对话</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            
-                            <h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">社区 & 学术</h4>
-                            <div class="table-wrap" style="overflow-x: auto;">
-                                <table class="tracking-table">
-                                    <thead>
-                                        <tr><th>平台</th><th>URL</th><th>检查频率</th><th>价值定位</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td><strong>GitHub Trending</strong></td><td>github.com/trending</td><td>每日</td><td>开源热门项目</td></tr>
-                                        <tr><td><strong>Hacker News</strong></td><td>news.ycombinator.com</td><td>每日</td><td>技术社区热点</td></tr>
-                                        <tr><td><strong>ArXiv</strong></td><td>arxiv.org/list/cs.AI</td><td>每周2次</td><td>最前沿论文</td></tr>
-                                        <tr><td><strong>LMSYS</strong></td><td>chat.lmsys.org</td><td>每周1次</td><td>模型对比评测</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin-bottom: var(--spacing-md);">官方博客 & 研究页</h4>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>公司</th><th>URL</th><th>检查频率</th><th>内容类型</th></tr></thead>
+<tbody>
+<tr><td><strong>OpenAI</strong></td><td>openai.com/blog</td><td>每周2次</td><td>产品发布, 安全研究</td></tr>
+<tr><td><strong>Anthropic</strong></td><td>anthropic.com/research</td><td>每周2次</td><td>研究论文, 产品博客</td></tr>
+<tr><td><strong>Cursor</strong></td><td>cursor.com/blog, changelog</td><td>每日</td><td>产品更新, 技术博客</td></tr>
+<tr><td><strong>DeepMind</strong></td><td>deepmind.google/research</td><td>每周1次</td><td>研究论文, 技术突破</td></tr>
+<tr><td><strong>Meta AI</strong></td><td>ai.meta.com/blog</td><td>每周1次</td><td>Llama系列, 开源</td></tr>
+<tr><td><strong>DeepSeek</strong></td><td>github.com/deepseek-ai</td><td>每周2次</td><td>开源模型, 论文</td></tr>
+<tr><td><strong>Trae (字节)</strong></td><td>trae.cn</td><td>每日</td><td>国内AI IDE</td></tr>
+<tr><td><strong>通义灵码</strong></td><td>tongyi.aliyun.com/lingma</td><td>每周2次</td><td>IDE插件, 模型升级</td></tr>
+<tr><td><strong>CodeGeeX</strong></td><td>codegeex.cn</td><td>每周2次</td><td>开源代码模型</td></tr>
+</tbody>
+</table>
+</div>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">Newsletter & 博客</h4>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>名称</th><th>作者</th><th>价值定位</th></tr></thead>
+<tbody>
+<tr><td><strong>Simon Willison Blog</strong></td><td>Simon Willison</td><td>最及时的AI工具评测</td></tr>
+<tr><td><strong>Pragmatic Engineer</strong></td><td>Gergely Orosz</td><td>最深入的工程视角</td></tr>
+<tr><td><strong>Latent Space</strong></td><td>Swyx</td><td>AI工程前沿, 深度访谈</td></tr>
+<tr><td><strong>One Useful Thing</strong></td><td>Ethan Mollick</td><td>AI对工作方式的影响</td></tr>
+<tr><td><strong>Stratechery</strong></td><td>Ben Thompson</td><td>商业战略分析</td></tr>
+<tr><td><strong>Import AI</strong></td><td>Jack Clark</td><td>AI政策+技术研究</td></tr>
+<tr><td><strong>The Batch</strong></td><td>Andrew Ng</td><td>AI教育+行业洞察</td></tr>
+<tr><td><strong>Ben's Bites</strong></td><td>Ben Tossell</td><td>14万+订阅, AI工具+新闻</td></tr>
+<tr><td><strong>The Rundown AI</strong></td><td>Rowan Cheung</td><td>100万+订阅, 5分钟AI动态</td></tr>
+<tr><td><strong>Superhuman AI</strong></td><td>Zain Kahn</td><td>100万+订阅, 3分钟AI快报</td></tr>
+</tbody>
+</table>
+</div>
+<h4 style="font-size: 14px; color: #DC2626; font-weight: 700; margin: var(--spacing-lg) 0 var(--spacing-md);">🆕 微信公众号（50+）— 中文AI信息核心渠道</h4>
+<p style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: var(--spacing-md); padding: 8px 12px; background: #FEF3C7; border-radius: 8px;">通过搜狗微信搜索 + MCP工具自动化追踪，覆盖技术媒体、深度分析、学术解读、创投视角等维度</p>
+<h5 style="font-size: 13px; color: var(--color-text-secondary); margin: var(--spacing-md) 0 8px;">AI综合媒体</h5>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>公众号</th><th>定位</th><th>频率</th><th>价值</th></tr></thead>
+<tbody>
+<tr><td><strong>机器之心</strong></td><td>AI技术媒体</td><td>每日</td><td>最全面的AI技术新闻、论文解读</td></tr>
+<tr><td><strong>量子位</strong></td><td>AI综合媒体</td><td>每日</td><td>国内AI新闻、产品评测、融资</td></tr>
+<tr><td><strong>新智元</strong></td><td>AI资讯媒体</td><td>每日</td><td>大模型动态、国际视野</td></tr>
+<tr><td><strong>AI科技评论</strong></td><td>AI技术媒体</td><td>每日</td><td>产业动态、学术会议</td></tr>
+<tr><td><strong>AI科技大本营</strong></td><td>CSDN旗下</td><td>每日</td><td>技术教程、开发者社区</td></tr>
+<tr><td><strong>智东西</strong></td><td>智能硬件+AI</td><td>每日</td><td>AI硬件、机器人、智能汽车</td></tr>
+<tr><td><strong>雷峰网</strong></td><td>AI深度媒体</td><td>每日</td><td>深度报道、人物访谈</td></tr>
+</tbody>
+</table>
+</div>
+<h5 style="font-size: 13px; color: var(--color-text-secondary); margin: var(--spacing-md) 0 8px;">深度洞察/商业分析</h5>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>公众号</th><th>作者/机构</th><th>频率</th><th>价值</th></tr></thead>
+<tbody>
+<tr><td><strong>宝玉</strong></td><td>宝玉 @dotey</td><td>每日</td><td>最快的海外AI信息翻译</td></tr>
+<tr><td><strong>海外独角兽</strong></td><td>—</td><td>每周1次</td><td>硅谷创投深度报道</td></tr>
+<tr><td><strong>甲子光年</strong></td><td>科技产业媒体</td><td>每周2次</td><td>AI产业深度研究、投融资</td></tr>
+<tr><td><strong>晚点LatePost</strong></td><td>晚点团队</td><td>每周1次</td><td>科技行业深度独家报道</td></tr>
+<tr><td><strong>潘乱/乱翻书</strong></td><td>潘乱</td><td>每周1次</td><td>互联网/AI行业深度分析</td></tr>
+<tr><td><strong>卫夕指北</strong></td><td>卫夕</td><td>每周1次</td><td>科技圈底层逻辑拆解</td></tr>
+<tr><td><strong>极客公园</strong></td><td>极客公园</td><td>每日</td><td>科技创新、创业者访谈</td></tr>
+</tbody>
+</table>
+</div>
+<h5 style="font-size: 13px; color: var(--color-text-secondary); margin: var(--spacing-md) 0 8px;">行业垂直 & 技术解读</h5>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>公众号</th><th>定位</th><th>频率</th><th>价值</th></tr></thead>
+<tbody>
+<tr><td><strong>36氪</strong></td><td>科技商业媒体</td><td>每日</td><td>AI投融资、商业分析</td></tr>
+<tr><td><strong>虎嗅</strong></td><td>商业科技媒体</td><td>每日</td><td>深度商业评论</td></tr>
+<tr><td><strong>钛媒体</strong></td><td>科技财经媒体</td><td>每日</td><td>科技财经深度</td></tr>
+<tr><td><strong>InfoQ</strong></td><td>技术社区</td><td>每周2次</td><td>软件开发、AI工程实践</td></tr>
+<tr><td><strong>PaperWeekly</strong></td><td>学术社区</td><td>每周2次</td><td>顶会论文解读</td></tr>
+<tr><td><strong>夕小瑶科技说</strong></td><td>NLP/深度学习</td><td>每周2次</td><td>NLP技术解读、实战</td></tr>
+</tbody>
+</table>
+</div>
+<h5 style="font-size: 13px; color: var(--color-text-secondary); margin: var(--spacing-md) 0 8px;">大模型/AGI专项</h5>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>公众号</th><th>定位</th><th>频率</th><th>价值</th></tr></thead>
+<tbody>
+<tr><td><strong>符尧</strong></td><td>大模型研究者</td><td>每周1次</td><td>Scaling Law、研究洞察</td></tr>
+<tr><td><strong>李rumor</strong></td><td>AI研究者</td><td>每周1次</td><td>LLM技术解读</td></tr>
+<tr><td><strong>苏剑林科学空间</strong></td><td>苏剑林</td><td>每周1次</td><td>NLP理论、数学推导</td></tr>
+<tr><td><strong>大模型日知录</strong></td><td>—</td><td>每周2次</td><td>大模型每日动态</td></tr>
+</tbody>
+</table>
+</div>
+<h5 style="font-size: 13px; color: var(--color-text-secondary); margin: var(--spacing-md) 0 8px;">AI产品/应用 & 创投</h5>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>公众号</th><th>定位</th><th>频率</th><th>价值</th></tr></thead>
+<tbody>
+<tr><td><strong>AI产品经理大本营</strong></td><td>产品视角</td><td>每周2次</td><td>AI产品设计、落地案例</td></tr>
+<tr><td><strong>AI工具集</strong></td><td>工具聚合</td><td>每周2次</td><td>AI工具推荐、使用教程</td></tr>
+<tr><td><strong>歸藏的AI工具箱</strong></td><td>歸藏</td><td>每周2次</td><td>AI工具深度测评</td></tr>
+<tr><td><strong>红杉汇</strong></td><td>红杉中国</td><td>每周1次</td><td>顶级VC视角、AI投资趋势</td></tr>
+<tr><td><strong>奇绩创坛</strong></td><td>陆奇团队</td><td>每月1次</td><td>创业方法论、AI趋势</td></tr>
+</tbody>
+</table>
+</div>
+<h5 style="font-size: 13px; color: var(--color-text-secondary); margin: var(--spacing-md) 0 8px;">公司/实验室官方号</h5>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>公众号</th><th>所属公司</th><th>频率</th><th>价值</th></tr></thead>
+<tbody>
+<tr><td><strong>智谱AI</strong></td><td>智谱</td><td>每周2次</td><td>GLM模型更新、技术博客</td></tr>
+<tr><td><strong>深度求索DeepSeek</strong></td><td>DeepSeek</td><td>每周2次</td><td>开源模型、技术论文</td></tr>
+<tr><td><strong>月之暗面Moonshot</strong></td><td>月之暗面</td><td>每周1次</td><td>Kimi更新、产品动态</td></tr>
+<tr><td><strong>字节跳动技术团队</strong></td><td>字节跳动</td><td>每周1次</td><td>豆包、Trae、技术分享</td></tr>
+<tr><td><strong>阿里云</strong></td><td>阿里巴巴</td><td>每周1次</td><td>通义系列、云AI服务</td></tr>
+<tr><td><strong>百度AI</strong></td><td>百度</td><td>每周1次</td><td>文心一言、自动驾驶</td></tr>
+<tr><td><strong>腾讯AI实验室</strong></td><td>腾讯</td><td>每周1次</td><td>混元、AI研究</td></tr>
+</tbody>
+</table>
+</div>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">🆕 Discord社区</h4>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>社区</th><th>频率</th><th>价值定位</th></tr></thead>
+<tbody>
+<tr><td><strong>Cursor (Official)</strong></td><td>每日</td><td>Bug反馈、功能讨论、最佳实践</td></tr>
+<tr><td><strong>Anthropic Claude</strong></td><td>每周2次</td><td>Claude使用技巧、API更新</td></tr>
+<tr><td><strong>OpenAI</strong></td><td>每周2次</td><td>ChatGPT、API更新</td></tr>
+<tr><td><strong>Midjourney</strong></td><td>每日</td><td>AI图像社区</td></tr>
+<tr><td><strong>Hugging Face</strong></td><td>每周1次</td><td>开源模型讨论</td></tr>
+<tr><td><strong>LangChain</strong></td><td>每周1次</td><td>Agent开发、工具链</td></tr>
+<tr><td><strong>Replit</strong></td><td>每周1次</td><td>云端AI编程</td></tr>
+<tr><td><strong>Lovable</strong></td><td>每周1次</td><td>Vibe Coding社区</td></tr>
+</tbody>
+</table>
+</div>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">🆕 X/Twitter 关键账号</h4>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>账号</th><th>身份</th><th>频率</th><th>价值定位</th></tr></thead>
+<tbody>
+<tr><td><strong>@dotey (宝玉)</strong></td><td>翻译+评论</td><td>每日</td><td>最快的海外AI信息中文翻译</td></tr>
+<tr><td><strong>@DrJimFan</strong></td><td>NVIDIA Jim Fan</td><td>每日</td><td>具身智能、Physical AI</td></tr>
+<tr><td><strong>@ylecun</strong></td><td>Meta Yann LeCun</td><td>每日</td><td>技术路线争论</td></tr>
+<tr><td><strong>@fchollet</strong></td><td>François Chollet</td><td>每周2次</td><td>AGI评测、批判性思考</td></tr>
+<tr><td><strong>@karpathy</strong></td><td>Andrej Karpathy</td><td>每周2次</td><td>AI教育、技术解读</td></tr>
+<tr><td><strong>@barry_zyj</strong></td><td>Barry Zhang</td><td>每周2次</td><td>Agent设计、Anthropic动态</td></tr>
+<tr><td><strong>@amandaaskell</strong></td><td>Amanda Askell</td><td>每周1次</td><td>Claude System Prompt</td></tr>
+<tr><td><strong>@alexalbert__</strong></td><td>Alex Albert</td><td>每周1次</td><td>Claude功能更新</td></tr>
+<tr><td><strong>@bindureddy</strong></td><td>Bindu Reddy</td><td>每周1次</td><td>AI创业生态</td></tr>
+<tr><td><strong>@sama</strong></td><td>Sam Altman</td><td>每周1次</td><td>OpenAI战略信号</td></tr>
+<tr><td><strong>@swaboredai</strong></td><td>Swyx</td><td>每周1次</td><td>AI工程、Latent Space</td></tr>
+</tbody>
+</table>
+</div>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">播客</h4>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>播客名</th><th>主持人</th><th>平台</th><th>价值定位</th></tr></thead>
+<tbody>
+<tr><td><strong>Latent Space</strong></td><td>Swyx + Alessio</td><td>YouTube/Spotify</td><td>AI工程最前沿访谈</td></tr>
+<tr><td><strong>Lex Fridman Podcast</strong></td><td>Lex Fridman</td><td>YouTube</td><td>长对话, 深度思想交流</td></tr>
+<tr><td><strong>Gradient Dissent</strong></td><td>Weights & Biases</td><td>YouTube/Spotify</td><td>ML从业者访谈</td></tr>
+<tr><td><strong>硅谷101</strong></td><td>泓君</td><td>Apple/Spotify</td><td>中文圈最好的硅谷科技播客</td></tr>
+<tr><td><strong>晚点聊</strong></td><td>晚点</td><td>小宇宙</td><td>中国科技行业深度对话</td></tr>
+<tr><td><strong>张小珺的访谈</strong></td><td>张小珺</td><td>小宇宙</td><td>科技创业深度访谈</td></tr>
+<tr><td><strong>What's Next 科技早知道</strong></td><td>硅谷101</td><td>Apple/Spotify</td><td>科技趋势预判</td></tr>
+<tr><td><strong>OnBoard!</strong></td><td>—</td><td>小宇宙</td><td>真格基金出品, AI创业者访谈</td></tr>
+</tbody>
+</table>
+</div>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">YouTube / B站</h4>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>频道</th><th>平台</th><th>频率</th><th>价值定位</th></tr></thead>
+<tbody>
+<tr><td><strong>Yannic Kilcher</strong></td><td>YouTube</td><td>每周1次</td><td>最深入的论文解读</td></tr>
+<tr><td><strong>Two Minute Papers</strong></td><td>YouTube</td><td>每周2次</td><td>最快的论文摘要</td></tr>
+<tr><td><strong>3Blue1Brown</strong></td><td>YouTube</td><td>按发布</td><td>最好的数学/ML可视化</td></tr>
+<tr><td><strong>AI Explained</strong></td><td>YouTube</td><td>每周1次</td><td>AI新闻深度解读</td></tr>
+<tr><td><strong>李沐</strong></td><td>YouTube/B站</td><td>每周1次</td><td>中文论文解读</td></tr>
+<tr><td><strong>跟李沐学AI</strong></td><td>B站</td><td>每周1次</td><td>AI教程</td></tr>
+<tr><td><strong>AIPRM</strong></td><td>YouTube</td><td>每周1次</td><td>Prompt工程</td></tr>
+</tbody>
+</table>
+</div>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">学术 & 社区</h4>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>平台</th><th>URL</th><th>频率</th><th>价值定位</th></tr></thead>
+<tbody>
+<tr><td><strong>GitHub Trending</strong></td><td>github.com/trending</td><td>每日</td><td>开源热门项目</td></tr>
+<tr><td><strong>Hacker News</strong></td><td>news.ycombinator.com</td><td>每日</td><td>技术社区热点</td></tr>
+<tr><td><strong>ArXiv</strong></td><td>arxiv.org/list/cs.AI</td><td>每周2次</td><td>最前沿论文</td></tr>
+<tr><td><strong>LMSYS</strong></td><td>chat.lmsys.org</td><td>每周1次</td><td>模型对比评测</td></tr>
+<tr><td><strong>Papers With Code</strong></td><td>paperswithcode.com</td><td>每周1次</td><td>论文+代码+排行榜</td></tr>
+<tr><td><strong>Hugging Face Daily</strong></td><td>huggingface.co/papers</td><td>每日</td><td>热门论文日榜</td></tr>
+<tr><td><strong>Reddit r/MachineLearning</strong></td><td>reddit.com/r/ML</td><td>每日</td><td>ML社区讨论</td></tr>
+<tr><td><strong>Reddit r/LocalLLaMA</strong></td><td>reddit.com/r/LocalLLaMA</td><td>每日</td><td>本地部署社区</td></tr>
+</tbody>
+</table>
+</div>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">🆕 AI安全/对齐研究机构</h4>
+<div class="table-wrap" style="overflow-x: auto;">
+<table class="tracking-table">
+<thead><tr><th>机构</th><th>URL</th><th>追踪重点</th></tr></thead>
+<tbody>
+<tr><td><strong>Anthropic Safety</strong></td><td>anthropic.com/research</td><td>Constitutional AI, RLHF</td></tr>
+<tr><td><strong>OpenAI Safety</strong></td><td>openai.com/safety</td><td>超级对齐, 红队测试</td></tr>
+<tr><td><strong>MIRI</strong></td><td>intelligence.org</td><td>AI对齐理论</td></tr>
+<tr><td><strong>ARC</strong></td><td>alignment.org</td><td>RLHF, 对齐研究</td></tr>
+<tr><td><strong>CAIS</strong></td><td>safe.ai</td><td>AI安全评测</td></tr>
+<tr><td><strong>Future of Life</strong></td><td>futureoflife.org</td><td>AI治理, 政策倡导</td></tr>
+</tbody>
+</table>
+</div>
                         </div>
                     </div>
                 </div>
             </section>
         </article>
-        
+
         <!-- 4. 知识库 -->
         <article id="knowledge" class="tab-panel">
             <section class="section">
