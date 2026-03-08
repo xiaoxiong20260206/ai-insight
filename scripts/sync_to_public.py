@@ -22,7 +22,6 @@ import argparse
 import re
 from datetime import datetime
 from pathlib import Path
-import shutil
 
 
 # 项目路径
