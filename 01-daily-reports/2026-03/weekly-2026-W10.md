@@ -92,7 +92,8 @@ ChatGPT进军Excel（3/6）、Figma双向集成（3/6）、Cursor MCP Apps（3/3
 | 3/3 | GPT-5.3 Instant发布：幻觉率降低26.8% | OpenAI | 🔴 |
 | 3/3 | Google Gemini 3.1 Pro Preview发布 | Google | 🟡 |
 | 3/3 | DeepSeek拒绝向NVIDIA展示V4模型 | Reuters | 🔴 |
-| 3/3 | Claude 4.5 Opus登顶SWE-bench 76.80% | SWE-bench | 🟡 |
+| 3/3 | 华为MWC发布Atlas算力底座 | 华为 | 🇨🇳 |
+| 3/3 | 中国AI模型API调用量首超美国 | 银河证券 | 🇨🇳 |
 | 3/4 | Anthropic指控中国AI公司蒸馏攻击Claude | TechCrunch | 🟡 |
 | 3/5 | Gemini 3.1 Flash-Lite Preview发布 | Google | 🔴 |
 | 3/5 | Apple新Siri将采用定制版Google Gemini | Reddit | 🔴 |
