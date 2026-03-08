@@ -61,7 +61,7 @@ def build_card():
         "- \u2699\ufe0f \u65b0\u6280\u672f | [GPT-5.4 Codex: 1M\u4e0a\u4e0b\u6587+Playwright\u53ef\u89c6\u5316\u8c03\u8bd5](https://openai.com/index/introducing-gpt-5-4/)",
         "- \U0001f4c8 \u65b0\u683c\u5c40 | [Claude Code\u5728VS Code Agent\u5e02\u573a\u8d85\u8d8aCodex](https://visualstudiomagazine.com/articles/2026/02/26/claude-code-edges-openais-codex-in-vs-codes-agentic-ai-marketplace-leaderboard.aspx)",
         "- \U0001f504 \u65b0\u52a8\u6001 | [Tool Search: token\u7528\u91cf\u964d\u4f4e47%\uff0c\u51c6\u786e\u7387\u4e0d\u53d8](https://openai.com/index/introducing-gpt-5-4/)",
-        "- \U0001f1e8\U0001f1f3 \u56fd\u5185 | [Trae: \u56fd\u5185\u9996\u4e2aAI IDE\uff0c\u6df1\u5ea6\u9002\u914d\u4e2d\u6587\u5f00\u53d1\u573a\u666f](https://aicoding.csdn.net/)",
+        "- \U0001f1e8\U0001f1f3 \u56fd\u5185 | [AI Coding\u5927\u6709\u53ef\u4e3a\uff0c\u4f46Vibe Coding\u8fd8\u662f\u5148\u6d17\u6d17\u7761\u5427](https://m.36kr.com/p/3706413051146375)",
         "",
         "\U0001f4a1 **\u6df1\u5ea6\u805a\u7126** \u2014 Tool Search\u5982\u4f55\u6539\u53d8MCP\u751f\u6001\u7684\u6e38\u620f\u89c4\u5219\uff1f",
         "\u2192 36\u4e2aMCP\u670d\u52a1\u5668\u914d\u7f6e\u4e0btoken\u51cf\u5c1147%\u3002Agent\u4e0d\u518d\u9884\u52a0\u8f7d\u5168\u90e8\u5de5\u5177\u5b9a\u4e49\uff0c\u6309\u9700\u67e5\u627e\u8c03\u7528\u2014\u2014\u591a\u8fde\u63a5\u4e0d\u518d\u6709\u60e9\u7f5a",
