@@ -24,6 +24,7 @@ AI日报 KIM 推送脚本 v2.0 (升级版)
 import asyncio
 import argparse
 import re
+import sys
 from datetime import datetime
 from pathlib import Path
 from typing import Optional, Dict, List, Tuple
@@ -32,13 +33,18 @@ try:
     import httpx
 except ImportError:
     print("❌ 请先安装 httpx: pip install httpx")
-    exit(1)
+    raise SystemExit(1)
 
+# 使用公共模块加载凭证
+sys.path.insert(0, str(Path(__file__).parent))
+from kim_client import KimConfig
+
+KimConfig.validate()
 
 # ============ 配置 ============
-APP_KEY = "30b847d3-9fe4-4598-ac29-0b9a113eb991"
-SECRET_KEY = "openApp298f3ef63db4ec3e7909ad4e9"
-GATEWAY_URL = "https://is-gateway.corp.kuaishou.com"
+APP_KEY = KimConfig.APP_KEY
+SECRET_KEY = KimConfig.SECRET_KEY
+GATEWAY_URL = KimConfig.GATEWAY_URL
 
 # 日报路径 (相对于项目根目录)
 DAILY_REPORTS_PATH = Path(__file__).parent.parent / "01-daily-reports"

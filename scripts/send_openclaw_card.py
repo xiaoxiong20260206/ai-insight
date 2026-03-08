@@ -14,19 +14,26 @@ OpenClaw 深度洞察 KIM 推送脚本
 
 import asyncio
 import argparse
+import sys
 from datetime import datetime
+from pathlib import Path
 
 try:
     import httpx
 except ImportError:
     print("Please install httpx: pip install httpx")
-    exit(1)
+    raise SystemExit(1)
 
+# 使用公共模块加载凭证
+sys.path.insert(0, str(Path(__file__).parent))
+from kim_client import KimConfig
+
+KimConfig.validate()
 
 # ============ 配置 ============
-APP_KEY = "30b847d3-9fe4-4598-ac29-0b9a113eb991"
-SECRET_KEY = "openApp298f3ef63db4ec3e7909ad4e9"
-GATEWAY_URL = "https://is-gateway.corp.kuaishou.com"
+APP_KEY = KimConfig.APP_KEY
+SECRET_KEY = KimConfig.SECRET_KEY
+GATEWAY_URL = KimConfig.GATEWAY_URL
 
 # OpenClaw 深度调研链接
 RESEARCH_URL = "https://xiaoxiong20260206.github.io/ai-insight/02-deep-research/topics/openclaw-deep-research-2026.html"

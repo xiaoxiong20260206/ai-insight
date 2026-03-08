@@ -6,11 +6,23 @@ AI日报 KIM 卡片 v3.4 - 2026-03-08 (重做版)
 """
 
 import asyncio
-import httpx
+import sys
+from pathlib import Path
 
-APP_KEY = "30b847d3-9fe4-4598-ac29-0b9a113eb991"
-SECRET_KEY = "openApp298f3ef63db4ec3e7909ad4e9"
-GATEWAY_URL = "https://is-gateway.corp.kuaishou.com"
+try:
+    import httpx
+except ImportError:
+    print("Please install httpx: pip install httpx")
+    raise SystemExit(1)
+
+# 使用公共模块加载凭证
+sys.path.insert(0, str(Path(__file__).parent))
+from kim_client import KimConfig
+
+KimConfig.validate()
+APP_KEY = KimConfig.APP_KEY
+SECRET_KEY = KimConfig.SECRET_KEY
+GATEWAY_URL = KimConfig.GATEWAY_URL
 REPORT_URL = "https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-03/2026-03-08-v3.html"
 PROJECT_URL = "https://xiaoxiong20260206.github.io/ai-insight/"
 
@@ -227,7 +239,6 @@ async def main():
             # 群发模式：发到所有群
             groups = await get_bot_groups(client, token)
             print(f"Found {len(groups)} groups")
-            import time
             for g in groups:
                 gid = str(g.get("groupId", ""))
                 gname = g.get("groupName", "unknown")
@@ -239,7 +250,7 @@ async def main():
                 result = resp.json()
                 status = "OK" if result.get("code") == 0 else "FAIL"
                 print(f"  [{status}] {gname} ({gid}): {result.get('message', '')}")
-                time.sleep(2)  # 避免频率限制（0.5s会触发many request）
+                await asyncio.sleep(2)  # 避免频率限制
             print(f"Done - sent to {len(groups)} groups")
 
 
