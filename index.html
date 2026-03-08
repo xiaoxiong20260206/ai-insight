@@ -840,6 +840,97 @@
             border-color: var(--color-success);
         }
         
+        /* 周报标识 */
+        .calendar-day.has-weekly {
+            position: relative;
+        }
+        
+        .calendar-day.has-weekly::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 3px;
+            border-radius: 2px;
+            background: linear-gradient(90deg, var(--color-info), var(--color-purple));
+        }
+        
+        /* 周报入口卡片 */
+        .weekly-report-card {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-md) var(--spacing-lg);
+            background: linear-gradient(135deg, #EFF6FF 0%, #F5F3FF 100%);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            border-radius: var(--radius-md);
+            transition: all var(--transition-normal);
+            margin-bottom: var(--spacing-md);
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .weekly-report-card:hover {
+            border-color: var(--color-info);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow-info);
+        }
+        
+        .weekly-report-card .wrc-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--color-info) 0%, var(--color-purple) 100%);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: #fff;
+            flex-shrink: 0;
+            box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+        }
+        
+        .weekly-report-card .wrc-content {
+            flex: 1;
+        }
+        
+        .weekly-report-card .wrc-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+        }
+        
+        .weekly-report-card .wrc-desc {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+        
+        .weekly-report-card .wrc-badge {
+            display: inline-flex;
+            padding: 3px 10px;
+            background: linear-gradient(135deg, var(--color-info), var(--color-purple));
+            color: #fff;
+            border-radius: var(--radius-full);
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+        
+        .weekly-report-card .wrc-arrow {
+            font-size: 20px;
+            color: var(--color-info);
+            opacity: 0;
+            transition: opacity var(--transition-fast);
+        }
+        
+        .weekly-report-card:hover .wrc-arrow {
+            opacity: 1;
+        }
+        
         .calendar-legend {
             display: flex;
             gap: 10px;
@@ -1482,10 +1573,20 @@
                 <div class="section-header">
                     <div class="section-icon">📰</div>
                     <div>
-                        <h2 class="section-title">AI 日报</h2>
-                        <p class="section-desc">每日AI行业动态汇总，覆盖大模型、AI Coding、AI应用、AI行业、企业AI转型五大领域</p>
+                        <h2 class="section-title">AI 日报 & 周报</h2>
+                        <p class="section-desc">每日/每周AI行业动态汇总，覆盖大模型、AI Coding、AI应用、AI行业、企业AI转型五大领域</p>
                     </div>
                 </div>
+                
+                <!-- 周报入口 -->
+                <a href="01-daily-reports/2026-03/weekly-2026-W10.html" target="_blank" class="weekly-report-card">
+                    <div class="wrc-icon">📊</div>
+                    <div class="wrc-content">
+                        <div class="wrc-title">AI 周报 · 第10周（3.2 - 3.8）<span class="wrc-badge">首期周报</span></div>
+                        <div class="wrc-desc">覆盖80+条资讯 · Top5: GPT-5.4 Computer Use首超人类 / $1890亿创纪录 / AI就业冲击三重验证 / Claude逆袭 / MCP生态爆发</div>
+                    </div>
+                    <span class="wrc-arrow">→</span>
+                </a>
                 
                 <div class="content-list">
                     <a href="01-daily-reports/2026-03/2026-03-08-v3.html" target="_blank" class="list-item">
@@ -1556,6 +1657,10 @@
                         <div class="calendar-legend-item">
                             <div class="calendar-legend-dot has-report"></div>
                             <span>有日报</span>
+                        </div>
+                        <div class="calendar-legend-item">
+                            <div style="width:8px;height:8px;border-radius:2px;background:transparent;border:1px solid var(--color-border);position:relative;"><div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:6px;height:2px;border-radius:1px;background:linear-gradient(90deg,var(--color-info),var(--color-purple));"></div></div>
+                            <span>有周报</span>
                         </div>
                         <div class="calendar-legend-item">
                             <div class="calendar-legend-dot today"></div>
@@ -2650,6 +2755,11 @@
             '2026-02': [28],          // 2月示例
         };
         
+        // 周报数据：键为月份，值为 {日期: 周报文件名}
+        const weeklyReportsData = {
+            '2026-03': {8: 'weekly-2026-W10'}  // 3月8日是W10最后一天
+        };
+        
         // 当前显示的月份
         let currentYear = 2026;
         let currentMonth = 3; // 1-12
@@ -2699,16 +2809,32 @@
                 const hasReport = reportDays.includes(day);
                 const isToday = (currentYear === todayYear && currentMonth === todayMonth && day === todayDay);
                 
+                // 检查是否有周报
+                const weeklyMonthData = weeklyReportsData[monthKey] || {};
+                const hasWeekly = weeklyMonthData[day] !== undefined;
+                
                 let classes = 'calendar-day';
                 if (hasReport) classes += ' has-report';
+                if (hasWeekly) classes += ' has-weekly';
                 if (isToday) classes += ' today';
                 
                 const dateStr = `${currentYear}-${String(currentMonth).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
                 const reportUrl = `01-daily-reports/${currentYear}-${String(currentMonth).padStart(2, '0')}/${dateStr}.html`;
+                const weeklyUrl = hasWeekly ? `01-daily-reports/${currentYear}-${String(currentMonth).padStart(2, '0')}/${weeklyMonthData[day]}.html` : '';
                 
-                if (hasReport) {
-                    const title = isToday ? `${currentMonth}月${day}日 AI日报（今天）` : `${currentMonth}月${day}日 AI日报`;
-                    html += `<div class="${classes}" onclick="window.open('${reportUrl}', '_blank')" title="${title}">${day}</div>`;
+                if (hasReport || hasWeekly) {
+                    let title = '';
+                    let url = reportUrl;
+                    if (hasReport && hasWeekly) {
+                        title = `${currentMonth}月${day}日 AI日报 + 📊 周报`;
+                    } else if (hasWeekly) {
+                        title = `📊 AI 周报（第${weeklyMonthData[day].replace('weekly-2026-W','')}周）`;
+                        url = weeklyUrl;
+                    } else {
+                        title = `${currentMonth}月${day}日 AI日报`;
+                    }
+                    if (isToday) title += '（今天）';
+                    html += `<div class="${classes}" onclick="window.open('${url}', '_blank')" title="${title}">${day}</div>`;
                 } else {
                     html += `<div class="${classes}">${day}</div>`;
                 }
