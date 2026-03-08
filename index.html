@@ -734,27 +734,51 @@
             }
         }
         
-        /* ============ Calendar Styles (Compact Mini) ============ */
+        /* ============ Calendar Styles (Prominent) ============ */
+        .calendar-section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: var(--spacing-xl);
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 1px solid var(--color-border-light);
+        }
+        
+        .calendar-section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+        
+        .calendar-section-hint {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            margin-left: auto;
+        }
+        
         .calendar-container {
-            margin-top: var(--spacing-md);
-            max-width: 280px;
-            background: var(--color-bg-table-header);
+            margin-top: var(--spacing-sm);
+            max-width: 520px;
+            background: var(--color-bg-card);
             border: 1px solid var(--color-border-light);
-            border-radius: var(--radius-md);
-            padding: 12px;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-card);
         }
         
         .calendar-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 8px;
+            margin-bottom: 14px;
         }
         
         .calendar-month {
-            font-size: 13px;
-            font-weight: 600;
+            font-size: 16px;
+            font-weight: 700;
             color: var(--color-text-primary);
+            letter-spacing: -0.01em;
         }
         
         .calendar-nav {
@@ -763,16 +787,16 @@
         }
         
         .calendar-nav-btn {
-            width: 22px;
-            height: 22px;
+            width: 30px;
+            height: 30px;
             border: 1px solid var(--color-border);
             background: var(--color-bg-card);
-            border-radius: 4px;
+            border-radius: var(--radius-sm);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 10px;
+            font-size: 13px;
             color: var(--color-text-muted);
             transition: all var(--transition-fast);
         }
@@ -786,28 +810,28 @@
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 2px;
+            gap: 4px;
         }
         
         .calendar-weekday {
             text-align: center;
-            font-size: 9px;
+            font-size: 12px;
             font-weight: 600;
             color: var(--color-text-muted);
-            padding: 2px 0;
+            padding: 4px 0;
         }
         
         .calendar-day {
             width: 100%;
-            height: 26px;
+            height: 38px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 11px;
+            font-size: 14px;
             font-weight: 500;
             color: var(--color-text-secondary);
-            border-radius: 4px;
-            background: var(--color-bg-card);
+            border-radius: var(--radius-sm);
+            background: var(--color-bg-table-header);
             border: 1px solid transparent;
             transition: all var(--transition-fast);
         }
@@ -848,10 +872,10 @@
         .calendar-day.has-weekly::after {
             content: '';
             position: absolute;
-            bottom: 2px;
+            bottom: 3px;
             left: 50%;
             transform: translateX(-50%);
-            width: 12px;
+            width: 16px;
             height: 3px;
             border-radius: 2px;
             background: linear-gradient(90deg, var(--color-info), var(--color-purple));
@@ -933,11 +957,11 @@
         
         .calendar-legend {
             display: flex;
-            gap: 10px;
-            margin-top: 6px;
-            padding-top: 6px;
+            gap: 14px;
+            margin-top: 12px;
+            padding-top: 10px;
             border-top: 1px solid var(--color-border-light);
-            font-size: 10px;
+            font-size: 12px;
             color: var(--color-text-muted);
         }
         
@@ -964,7 +988,7 @@
         }
         
         .calendar-report-count {
-            font-size: 10px;
+            font-size: 12px;
             color: var(--color-success);
             font-weight: 600;
             margin-left: auto;
@@ -1588,6 +1612,7 @@
                     <span class="wrc-arrow">→</span>
                 </a>
                 
+                <!-- 最新日报（仅展示最近一期） -->
                 <div class="content-list">
                     <a href="01-daily-reports/2026-03/2026-03-08-v3.html" target="_blank" class="list-item">
                         <span class="list-item-icon">📅</span>
@@ -1597,49 +1622,14 @@
                         </div>
                         <span class="list-item-arrow">→</span>
                     </a>
-                    <a href="01-daily-reports/2026-03/2026-03-07.html" target="_blank" class="list-item">
-                        <span class="list-item-icon">📅</span>
-                        <div class="list-item-content">
-                            <div class="list-item-title">2026年3月7日 AI日报</div>
-                            <div class="list-item-desc">Anthropic AI就业影响研究 · ChatGPT for Excel · Figma MCP Server · Anduril $600亿 · OpenAI五大价值模型...</div>
-                        </div>
-                        <span class="list-item-arrow">→</span>
-                    </a>
-                    <a href="01-daily-reports/2026-03/2026-03-06.html" target="_blank" class="list-item">
-                        <span class="list-item-icon">📅</span>
-                        <div class="list-item-content">
-                            <div class="list-item-title">2026年3月6日 AI日报</div>
-                            <div class="list-item-desc">GPT-5.4 Thinking · Claude登顶App Store后宕机 · Codex Windows版 · 2月融资$1890亿...</div>
-                        </div>
-                        <span class="list-item-arrow">→</span>
-                    </a>
-                    <a href="01-daily-reports/2026-03/2026-03-05.html" target="_blank" class="list-item">
-                        <span class="list-item-icon">📅</span>
-                        <div class="list-item-content">
-                            <div class="list-item-title">2026年3月5日 AI日报</div>
-                            <div class="list-item-desc">Gemini 3.1 Flash-Lite · Codex登陆Windows · Apple Siri+Gemini · 2月AI融资$1710亿...</div>
-                        </div>
-                        <span class="list-item-arrow">→</span>
-                    </a>
-                    <a href="01-daily-reports/2026-03/2026-03-04.html" target="_blank" class="list-item">
-                        <span class="list-item-icon">📅</span>
-                        <div class="list-item-content">
-                            <div class="list-item-title">2026年3月4日 AI日报</div>
-                            <div class="list-item-desc">GPT-5.3 Instant · Cursor 2.6 MCP Apps · 风投$1890亿 · 中国电信AI代码40%...</div>
-                        </div>
-                        <span class="list-item-arrow">→</span>
-                    </a>
-                    <a href="01-daily-reports/2026-03/2026-03-03.html" target="_blank" class="list-item">
-                        <span class="list-item-icon">📅</span>
-                        <div class="list-item-content">
-                            <div class="list-item-title">2026年3月3日 AI日报</div>
-                            <div class="list-item-desc">Pentagon解除Anthropic合同 · Cursor 2.6 MCP Apps · Claude冲上App Store榜首...</div>
-                        </div>
-                        <span class="list-item-arrow">→</span>
-                    </a>
                 </div>
                 
-                <!-- 日历视图（紧凑版） -->
+                <!-- 日历导航 —— 往期日报/周报在这里找 -->
+                <div class="calendar-section-header">
+                    <span style="font-size: 18px;">📆</span>
+                    <span class="calendar-section-title">往期日报 & 周报</span>
+                    <span class="calendar-section-hint">点击日期直达 ↓</span>
+                </div>
                 <div class="calendar-container">
                     <div class="calendar-header">
                         <div class="calendar-nav">
