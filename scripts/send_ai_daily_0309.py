@@ -74,7 +74,7 @@ def build_card():
         "- \U0001f4c8 \u65b0\u683c\u5c40 | [Claude Code\u4ec58\u6708\u767b\u9876\uff0c95%\u5de5\u7a0b\u5e08\u6bcf\u5468\u7528AI](https://newsletter.pragmaticengineer.com/p/ai-tooling-2026)",
         "- \U0001f195 \u65b0\u4ea7\u54c1 | [Figma\u96c6\u6210GitHub Copilot\uff1a\u8bbe\u8ba1\u5230\u5f00\u53d1\u5de5\u4f5c\u6d41\u6253\u901a](https://www.figma.com/release-notes/)",
         "- \U0001f4c8 \u65b0\u683c\u5c40 | [OpenAI Codex\u7206\u53d1\u589e\u957f\uff1a\u5df2\u8fbe\u5230Cursor 60%\u4f7f\u7528\u91cf](https://newsletter.pragmaticengineer.com/p/ai-tooling-2026)",
-        "- \U0001f1e8\U0001f1f3 \u56fd\u5185 | [\u56fd\u5185AI Coding\u683c\u5c40\uff1aTrae/\u901a\u4e49\u7075\u7801/MarsCode\u4e09\u8db3\u9f0e\u7acb](https://aicoding.csdn.net/)",
+        "- \U0001f1e8\U0001f1f3 \u56fd\u5185 | [\u56fd\u5185AI Coding\u201cBAT\u5927\u6218\u201d\uff1a\u5b57\u8282Trae/\u901a\u4e49\u7075\u7801/\u817e\u8bafCodeBuddy\u4e09\u7ebf\u89d2\u529b](https://www.21jingji.com/article/20250728/herald/85781931b5cb062ff4b5ebfd4ec39d74.html)",
         "",
         "\U0001f4a1 **\u6df1\u5ea6\u805a\u7126** \u2014 Claude Code\u5d1b\u8d77\u63ed\u793a\u7ade\u4e89\u80dc\u8d1f\u624b",
         f"\u2192 55%\u5de5\u7a0b\u5e08\u5e38\u7528Agent\uff0cStaff+\u7ea7\u522b63.5%\u4f7f\u7528\u7387\u6700\u9ad8\u2014\u2014{LQ}**AI\u4e3b\u8981\u5e2e\u521d\u7ea7**{RQ}\u7684\u5047\u8bbe\u88ab\u9893\u8986",
