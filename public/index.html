@@ -734,27 +734,51 @@
             }
         }
         
-        /* ============ Calendar Styles (Compact Mini) ============ */
+        /* ============ Calendar Styles (Prominent) ============ */
+        .calendar-section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: var(--spacing-xl);
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 1px solid var(--color-border-light);
+        }
+        
+        .calendar-section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+        
+        .calendar-section-hint {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            margin-left: auto;
+        }
+        
         .calendar-container {
-            margin-top: var(--spacing-md);
-            max-width: 280px;
-            background: var(--color-bg-table-header);
+            margin-top: var(--spacing-sm);
+            max-width: 520px;
+            background: var(--color-bg-card);
             border: 1px solid var(--color-border-light);
-            border-radius: var(--radius-md);
-            padding: 12px;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-card);
         }
         
         .calendar-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 8px;
+            margin-bottom: 14px;
         }
         
         .calendar-month {
-            font-size: 13px;
-            font-weight: 600;
+            font-size: 16px;
+            font-weight: 700;
             color: var(--color-text-primary);
+            letter-spacing: -0.01em;
         }
         
         .calendar-nav {
@@ -763,16 +787,16 @@
         }
         
         .calendar-nav-btn {
-            width: 22px;
-            height: 22px;
+            width: 30px;
+            height: 30px;
             border: 1px solid var(--color-border);
             background: var(--color-bg-card);
-            border-radius: 4px;
+            border-radius: var(--radius-sm);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 10px;
+            font-size: 13px;
             color: var(--color-text-muted);
             transition: all var(--transition-fast);
         }
@@ -786,28 +810,28 @@
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 2px;
+            gap: 4px;
         }
         
         .calendar-weekday {
             text-align: center;
-            font-size: 9px;
+            font-size: 12px;
             font-weight: 600;
             color: var(--color-text-muted);
-            padding: 2px 0;
+            padding: 4px 0;
         }
         
         .calendar-day {
             width: 100%;
-            height: 26px;
+            height: 38px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 11px;
+            font-size: 14px;
             font-weight: 500;
             color: var(--color-text-secondary);
-            border-radius: 4px;
-            background: var(--color-bg-card);
+            border-radius: var(--radius-sm);
+            background: var(--color-bg-table-header);
             border: 1px solid transparent;
             transition: all var(--transition-fast);
         }
@@ -848,10 +872,10 @@
         .calendar-day.has-weekly::after {
             content: '';
             position: absolute;
-            bottom: 2px;
+            bottom: 3px;
             left: 50%;
             transform: translateX(-50%);
-            width: 12px;
+            width: 16px;
             height: 3px;
             border-radius: 2px;
             background: linear-gradient(90deg, var(--color-info), var(--color-purple));
@@ -933,11 +957,11 @@
         
         .calendar-legend {
             display: flex;
-            gap: 10px;
-            margin-top: 6px;
-            padding-top: 6px;
+            gap: 14px;
+            margin-top: 12px;
+            padding-top: 10px;
             border-top: 1px solid var(--color-border-light);
-            font-size: 10px;
+            font-size: 12px;
             color: var(--color-text-muted);
         }
         
@@ -964,7 +988,7 @@
         }
         
         .calendar-report-count {
-            font-size: 10px;
+            font-size: 12px;
             color: var(--color-success);
             font-weight: 600;
             margin-left: auto;
@@ -1477,6 +1501,246 @@
             50% { opacity: 0.7; }
         }
         
+        /* ============ About Section: 为什么做 & 有什么特别 ============ */
+        .about-section {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .about-toggle-wrap {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .about-toggle-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            transition: all var(--transition-normal);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .about-toggle-btn:hover {
+            border-color: var(--color-info);
+            color: var(--color-info);
+            box-shadow: var(--shadow-glow-info);
+            transform: translateY(-1px);
+        }
+
+        .about-toggle-btn .about-toggle-arrow {
+            transition: transform var(--transition-normal);
+            font-size: 12px;
+        }
+
+        .about-toggle-btn.expanded .about-toggle-arrow {
+            transform: rotate(180deg);
+        }
+
+        .about-content {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .about-content.active {
+            display: block;
+        }
+
+        /* Pain Points */
+        .pain-points-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .pain-point-card {
+            background: var(--color-bg-table-header);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pain-point-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--color-danger);
+            opacity: 0.7;
+        }
+
+        .pain-point-icon {
+            font-size: 30px;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .pain-point-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .pain-point-desc {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Solution Flow */
+        .solution-flow {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: var(--spacing-2xl);
+            padding: var(--spacing-lg);
+            background: var(--gradient-highlight);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border-light);
+        }
+
+        .flow-step {
+            flex: 1;
+            text-align: center;
+            padding: 0 var(--spacing-sm);
+        }
+
+        .flow-step-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto var(--spacing-sm);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: white;
+        }
+
+        .flow-step-num {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-text-muted);
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .flow-step-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 4px;
+        }
+
+        .flow-step-desc {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+
+        .flow-arrow {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            padding-top: 18px;
+            font-size: 20px;
+            color: var(--color-success);
+            font-weight: 700;
+        }
+
+        /* Highlights */
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-md);
+        }
+
+        .highlight-card {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            transition: all var(--transition-normal);
+        }
+
+        .highlight-card:hover {
+            border-color: var(--color-success);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .highlight-icon {
+            font-size: 28px;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .highlight-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .highlight-desc {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+        }
+
+        /* About Architecture Image */
+        .about-arch-img {
+            display: block;
+            max-width: 100%;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border-light);
+            box-shadow: var(--shadow-card);
+            margin: 0 auto var(--spacing-lg);
+        }
+
+        .about-sub-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .about-sub-title::before {
+            content: '';
+            width: 4px;
+            height: 18px;
+            background: var(--gradient-hero);
+            border-radius: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .pain-points-grid,
+            .highlights-grid {
+                grid-template-columns: 1fr;
+            }
+            .solution-flow {
+                flex-direction: column;
+                align-items: center;
+                gap: var(--spacing-sm);
+            }
+            .flow-arrow {
+                transform: rotate(90deg);
+                padding-top: 0;
+            }
+        }
+
         /* ============ Mobile Responsive ============ */
         @media (max-width: 768px) {
             .header-title {
@@ -1545,6 +1809,91 @@
             </div>
         </div>
         
+        <!-- 关于AI洞察：为什么做 & 有什么特别 -->
+        <div class="about-section">
+            <div class="about-toggle-wrap">
+                <button class="about-toggle-btn" onclick="toggleAbout(this)">
+                    <span>💡</span>
+                    <span>了解AI洞察：为什么做 & 有什么特别</span>
+                    <span class="about-toggle-arrow">▼</span>
+                </button>
+            </div>
+            <div class="about-content" id="aboutContent">
+                <!-- 为什么做 -->
+                <h3 class="about-sub-title">为什么要做这件事</h3>
+                <div class="pain-points-grid">
+                    <div class="pain-point-card">
+                        <div class="pain-point-icon">🌊</div>
+                        <div class="pain-point-title">信息太多太散</div>
+                        <div class="pain-point-desc">每天刷X、公众号、Newsletter……内容铺天盖地。<strong>看了很多，记住很少，能形成体系的更少</strong>。</div>
+                    </div>
+                    <div class="pain-point-card">
+                        <div class="pain-point-icon">🎯</div>
+                        <div class="pain-point-title">容易被带跑偏</div>
+                        <div class="pain-point-desc">信息源质量参差不齐，标题党和震惊体泛滥。不加筛选地吸收，<strong>很容易形成错误认知</strong>。</div>
+                    </div>
+                    <div class="pain-point-card">
+                        <div class="pain-point-icon">⏳</div>
+                        <div class="pain-point-title">难以持续跟踪</div>
+                        <div class="pain-point-desc">有价值的观点，收藏了就忘了；重要人物的分享，<strong>被算法推荐淹没了</strong>。被动接收 ≠ 主动学习。</div>
+                    </div>
+                </div>
+
+                <!-- 怎么解决 -->
+                <h3 class="about-sub-title">解法：四步搭建持续研究平台</h3>
+                <img src="https://h23.static.yximgs.com/udata/pkg/EE-KSTACK/022535885f062bdabfa396bf20a855a0.png" alt="AI洞察整体架构" class="about-arch-img" loading="lazy">
+                <div class="solution-flow">
+                    <div class="flow-step">
+                        <div class="flow-step-icon" style="background: linear-gradient(135deg, #059669, #10B981);">🎯</div>
+                        <div class="flow-step-num">STEP 1</div>
+                        <div class="flow-step-title">建立追踪体系</div>
+                        <div class="flow-step-desc">追踪人而非新闻——85+核心人物、130+公司、200+信息源分三层管理</div>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">
+                        <div class="flow-step-icon" style="background: linear-gradient(135deg, #2563EB, #3B82F6);">📰</div>
+                        <div class="flow-step-num">STEP 2</div>
+                        <div class="flow-step-title">每日生成AI日报</div>
+                        <div class="flow-step-desc">五大板块系统调研：大模型、AI Coding、AI应用、AI行业、企业AI</div>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">
+                        <div class="flow-step-icon" style="background: linear-gradient(135deg, #7C3AED, #8B5CF6);">🔬</div>
+                        <div class="flow-step-num">STEP 3</div>
+                        <div class="flow-step-title">深度调研</div>
+                        <div class="flow-step-desc">从新闻到洞察——不只收集信息，更提炼规律，有论据支撑</div>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">
+                        <div class="flow-step-icon" style="background: linear-gradient(135deg, #D97706, #F59E0B);">📚</div>
+                        <div class="flow-step-num">STEP 4</div>
+                        <div class="flow-step-title">知识沉淀</div>
+                        <div class="flow-step-desc">按维度沉淀到知识库——模型、Agent、企业、人物等多维体系化积累</div>
+                    </div>
+                </div>
+
+                <!-- 有什么特别 -->
+                <h3 class="about-sub-title">有什么特别之处</h3>
+                <div class="highlights-grid">
+                    <div class="highlight-card">
+                        <div class="highlight-icon">🤖</div>
+                        <div class="highlight-title">AI不是工具，是项目成员</div>
+                        <div class="highlight-desc">不是"问一句答一句"——AI洞察主动规划追踪体系、每日执行调研、持续沉淀知识、自我迭代优化流程。</div>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-icon">🔍</div>
+                        <div class="highlight-title">专业化 > 泛化</div>
+                        <div class="highlight-desc">不被算法推送淹没——定向追踪核心人物的一手分享，实践者 > 观察者 > 决策者三层信息源。</div>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-icon">♾️</div>
+                        <div class="highlight-title">持续 > 一次性</div>
+                        <div class="highlight-desc">不是一篇文章，是一个持续运行的系统——每天更新、每周迭代、持续沉淀，形成真正的知识体系。</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <!-- Tab Navigation -->
         <nav class="tab-nav" role="navigation">
             <button class="tab-btn active" data-tab="daily">
@@ -1588,6 +1937,7 @@
                     <span class="wrc-arrow">→</span>
                 </a>
                 
+                <!-- 最新日报（仅展示最近一期） -->
                 <div class="content-list">
                     <a href="01-daily-reports/2026-03/2026-03-08.html" target="_blank" class="list-item">
                         <span class="list-item-icon">📅</span>
@@ -1597,49 +1947,14 @@
                         </div>
                         <span class="list-item-arrow">→</span>
                     </a>
-                    <a href="01-daily-reports/2026-03/2026-03-07.html" target="_blank" class="list-item">
-                        <span class="list-item-icon">📅</span>
-                        <div class="list-item-content">
-                            <div class="list-item-title">2026年3月7日 AI日报</div>
-                            <div class="list-item-desc">Anthropic AI就业影响研究 · ChatGPT for Excel · Figma MCP Server · Anduril $600亿 · OpenAI五大价值模型...</div>
-                        </div>
-                        <span class="list-item-arrow">→</span>
-                    </a>
-                    <a href="01-daily-reports/2026-03/2026-03-06.html" target="_blank" class="list-item">
-                        <span class="list-item-icon">📅</span>
-                        <div class="list-item-content">
-                            <div class="list-item-title">2026年3月6日 AI日报</div>
-                            <div class="list-item-desc">GPT-5.4 Thinking · Claude登顶App Store后宕机 · Codex Windows版 · 2月融资$1890亿...</div>
-                        </div>
-                        <span class="list-item-arrow">→</span>
-                    </a>
-                    <a href="01-daily-reports/2026-03/2026-03-05.html" target="_blank" class="list-item">
-                        <span class="list-item-icon">📅</span>
-                        <div class="list-item-content">
-                            <div class="list-item-title">2026年3月5日 AI日报</div>
-                            <div class="list-item-desc">Gemini 3.1 Flash-Lite · Codex登陆Windows · Apple Siri+Gemini · 2月AI融资$1710亿...</div>
-                        </div>
-                        <span class="list-item-arrow">→</span>
-                    </a>
-                    <a href="01-daily-reports/2026-03/2026-03-04.html" target="_blank" class="list-item">
-                        <span class="list-item-icon">📅</span>
-                        <div class="list-item-content">
-                            <div class="list-item-title">2026年3月4日 AI日报</div>
-                            <div class="list-item-desc">GPT-5.3 Instant · Cursor 2.6 MCP Apps · 风投$1890亿 · 中国电信AI代码40%...</div>
-                        </div>
-                        <span class="list-item-arrow">→</span>
-                    </a>
-                    <a href="01-daily-reports/2026-03/2026-03-03.html" target="_blank" class="list-item">
-                        <span class="list-item-icon">📅</span>
-                        <div class="list-item-content">
-                            <div class="list-item-title">2026年3月3日 AI日报</div>
-                            <div class="list-item-desc">Pentagon解除Anthropic合同 · Cursor 2.6 MCP Apps · Claude冲上App Store榜首...</div>
-                        </div>
-                        <span class="list-item-arrow">→</span>
-                    </a>
                 </div>
                 
-                <!-- 日历视图（紧凑版） -->
+                <!-- 日历导航 —— 往期日报/周报在这里找 -->
+                <div class="calendar-section-header">
+                    <span style="font-size: 18px;">📆</span>
+                    <span class="calendar-section-title">往期日报 & 周报</span>
+                    <span class="calendar-section-hint">点击日期直达 ↓</span>
+                </div>
                 <div class="calendar-container">
                     <div class="calendar-header">
                         <div class="calendar-nav">
@@ -1746,6 +2061,16 @@
                 <div class="category-section">
                     <h3 class="category-title">专题调研</h3>
                     <div class="content-grid">
+                        <a href="02-deep-research/topics/ai-coding-assistant-research/index.html" target="_blank" class="content-card">
+                            <div class="content-card-header">
+                                <span class="content-card-icon">💻</span>
+                                <span class="content-card-title">AI Coding产品深度调研</span>
+                                <span class="content-card-tag green">NEW</span>
+                            </div>
+                            <div class="content-card-desc">聚焦Claude Code：优势劣势拆解 + 八维评估框架 + 海外/国内头部产品对比与选型建议</div>
+                            <div class="content-card-meta">📅 2026-03-09 · 🔧 AI Coding</div>
+                        </a>
+                        
                         <a href="02-deep-research/topics/openclaw-deep-research-2026.html" target="_blank" class="content-card">
                             <div class="content-card-header">
                                 <span class="content-card-icon">🦞</span>
@@ -2721,6 +3046,19 @@
                 });
             }
         })();
+        
+        // 关于AI洞察展开/收起
+        function toggleAbout(btn) {
+            const content = document.getElementById('aboutContent');
+            const isExpanded = btn.classList.contains('expanded');
+            if (isExpanded) {
+                btn.classList.remove('expanded');
+                content.classList.remove('active');
+            } else {
+                btn.classList.add('expanded');
+                content.classList.add('active');
+            }
+        }
         
         // 可折叠区域切换
         function toggleCollapsible(header) {
