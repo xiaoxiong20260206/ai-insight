@@ -132,9 +132,39 @@ def sync_report(date_str: str, force: bool = False) -> bool:
     return True
 
 
+def sync_weekly_report(week_file: Path, force: bool = False) -> bool:
+    """
+    同步单个周报到公开版本
+    
+    Args:
+        week_file: 周报HTML文件路径
+        force: 是否强制覆盖已存在的文件
+    
+    Returns:
+        是否成功同步
+    """
+    month_str = week_file.parent.name
+    dst_dir = PUBLIC_REPORTS / month_str
+    dst_html = dst_dir / week_file.name
+    
+    if dst_html.exists() and not force:
+        print(f"⏭️ 跳过已存在: {dst_html.name}")
+        return True
+    
+    dst_dir.mkdir(parents=True, exist_ok=True)
+    
+    content = week_file.read_text(encoding="utf-8")
+    sanitized = sanitize_html(content)
+    
+    dst_html.write_text(sanitized, encoding="utf-8")
+    print(f"✅ 已同步周报: {week_file.name}")
+    return True
+
+
 def sync_all_reports(force: bool = False):
-    """同步所有日报"""
+    """同步所有日报和周报"""
     count = 0
+    weekly_count = 0
     synced_dates = set()  # 防止重复同步同一天
     for month_dir in sorted(INTERNAL_REPORTS.iterdir()):
         if not month_dir.is_dir() or month_dir.name.startswith('.'):
@@ -146,6 +176,12 @@ def sync_all_reports(force: bool = False):
             
             # 跳过测试文件
             if "test" in html_file.name:
+                continue
+            
+            # 处理周报文件（weekly-YYYY-WNN.html）
+            if html_file.name.startswith("weekly-"):
+                if sync_weekly_report(html_file, force):
+                    weekly_count += 1
                 continue
             
             # 从文件名提取日期（支持 2026-03-05.html 和 2026-03-05-v3.html 格式）
@@ -163,6 +199,8 @@ def sync_all_reports(force: bool = False):
             if sync_report(date_str, force):
                 count += 1
     
+    if weekly_count > 0:
+        print(f"✅ 共同步 {weekly_count} 篇周报")
     return count
 
 
@@ -184,7 +222,7 @@ def sync_index():
 
 
 def main():
-    parser = argparse.ArgumentParser(description="AI日报双版本同步脚本")
+    parser = argparse.ArgumentParser(description="AI日报/周报双版本同步脚本")
     parser.add_argument("date", nargs="?", help="日报日期 (YYYY-MM-DD)，默认今天")
     parser.add_argument("--all", action="store_true", help="同步所有日报")
     parser.add_argument("--force", action="store_true", help="强制覆盖已存在的文件")
@@ -195,7 +233,7 @@ def main():
     print("=" * 50)
     
     if args.all:
-        print("📋 同步所有日报...")
+        print("📋 同步所有日报和周报...")
         count = sync_all_reports(args.force)
         print(f"✅ 共同步 {count} 篇日报")
     else:
