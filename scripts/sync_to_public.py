@@ -330,7 +330,11 @@ def sync_directory(dir_name: str, force: bool = False) -> int:
 
 def verify_sanitization() -> tuple:
     """
-    验证 public/ 目录中是否有敏感词残留（v2.0新增）
+    验证 public/ 目录中是否有敏感词残留和 -v3 链接残留（v2.0新增, v2.2增强）
+    
+    检查项:
+    1. 敏感词残留（林克/沈浪/快手/Kuaishou）
+    2. -v3.html 链接残留（public版文件名已去掉-v3后缀，链接也必须同步去掉）
     
     Returns:
         (is_clean, violations) - 是否干净, 违规列表
@@ -338,6 +342,9 @@ def verify_sanitization() -> tuple:
     violations = []
     
     text_extensions = {'.html', '.css', '.js', '.json', '.md', '.txt'}
+    
+    # v2.2: -v3.html 链接残留检测模式
+    v3_link_pattern = re.compile(r'\d{4}-\d{2}-\d{2}-v3\.html')
     
     for f in PUBLIC_DIR.rglob("*"):
         if not f.is_file():
@@ -354,10 +361,12 @@ def verify_sanitization() -> tuple:
         except (UnicodeDecodeError, PermissionError):
             continue
         
+        rel_path = f.relative_to(PUBLIC_DIR)
+        
+        # 检查1: 敏感词残留
         for word in SENSITIVE_WORDS:
             occurrences = [(m.start(), m.group()) for m in re.finditer(re.escape(word), content)]
             if occurrences:
-                rel_path = f.relative_to(PUBLIC_DIR)
                 for pos, match in occurrences:
                     # 提取上下文（前后30字符）
                     start = max(0, pos - 30)
@@ -368,6 +377,21 @@ def verify_sanitization() -> tuple:
                         "word": word,
                         "context": f"...{context}...",
                     })
+        
+        # 检查2: -v3.html 链接残留（v2.2新增）
+        # public版的文件名已统一去掉-v3后缀，但引用链接可能遗漏替换
+        v3_matches = list(v3_link_pattern.finditer(content))
+        if v3_matches:
+            for m in v3_matches:
+                pos = m.start()
+                start = max(0, pos - 30)
+                end = min(len(content), m.end() + 30)
+                context = content[start:end].replace('\n', ' ').strip()
+                violations.append({
+                    "file": str(rel_path),
+                    "word": f"-v3.html残留({m.group()})",
+                    "context": f"...{context}...",
+                })
     
     is_clean = len(violations) == 0
     return is_clean, violations
