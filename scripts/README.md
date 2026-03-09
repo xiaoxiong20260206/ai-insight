@@ -47,6 +47,20 @@ cp scripts/.env.template scripts/.env
 | `run-ai-daily-report.sh` | 日报执行脚本 | 被plist调用 |
 | `run-ai-weekly-report.sh` | 周报执行脚本 | 被plist调用 |
 
+**执行架构（委托模式）**:
+```
+launchd (每日08:00)
+  → 个人助理_V1/scripts/run-ai-daily-report.sh  (统一入口)
+    → AI-Insight/scripts/run-ai-daily-report.sh  (实际执行)
+      → python3 send_ai_daily.py                 (推送)
+```
+- 所有定时任务由 `个人助理_V1` 统一管理 plist 和日志
+- 项目内的 plist 文件已与 `~/Library/LaunchAgents/` 中的实际加载版本保持一致
+- 日志输出到 `个人助理_V1/data/logs/`，项目本地 `scripts/logs/` 作为备用
+
+**注意**: 定时任务只负责**推送**已生成的日报，不负责**生成**。
+日报内容需要在 CF 中手动触发「跑一下AI日报」生成。
+
 安装定时任务:
 ```bash
 cp scripts/com.cf.ai-daily-report.plist ~/Library/LaunchAgents/
