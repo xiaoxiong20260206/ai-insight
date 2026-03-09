@@ -1501,6 +1501,246 @@
             50% { opacity: 0.7; }
         }
         
+        /* ============ About Section: 为什么做 & 有什么特别 ============ */
+        .about-section {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .about-toggle-wrap {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .about-toggle-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            transition: all var(--transition-normal);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .about-toggle-btn:hover {
+            border-color: var(--color-info);
+            color: var(--color-info);
+            box-shadow: var(--shadow-glow-info);
+            transform: translateY(-1px);
+        }
+
+        .about-toggle-btn .about-toggle-arrow {
+            transition: transform var(--transition-normal);
+            font-size: 12px;
+        }
+
+        .about-toggle-btn.expanded .about-toggle-arrow {
+            transform: rotate(180deg);
+        }
+
+        .about-content {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .about-content.active {
+            display: block;
+        }
+
+        /* Pain Points */
+        .pain-points-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .pain-point-card {
+            background: var(--color-bg-table-header);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pain-point-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--color-danger);
+            opacity: 0.7;
+        }
+
+        .pain-point-icon {
+            font-size: 30px;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .pain-point-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .pain-point-desc {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Solution Flow */
+        .solution-flow {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: var(--spacing-2xl);
+            padding: var(--spacing-lg);
+            background: var(--gradient-highlight);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border-light);
+        }
+
+        .flow-step {
+            flex: 1;
+            text-align: center;
+            padding: 0 var(--spacing-sm);
+        }
+
+        .flow-step-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto var(--spacing-sm);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: white;
+        }
+
+        .flow-step-num {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-text-muted);
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .flow-step-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 4px;
+        }
+
+        .flow-step-desc {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+
+        .flow-arrow {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            padding-top: 18px;
+            font-size: 20px;
+            color: var(--color-success);
+            font-weight: 700;
+        }
+
+        /* Highlights */
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-md);
+        }
+
+        .highlight-card {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            transition: all var(--transition-normal);
+        }
+
+        .highlight-card:hover {
+            border-color: var(--color-success);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .highlight-icon {
+            font-size: 28px;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .highlight-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .highlight-desc {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+        }
+
+        /* About Architecture Image */
+        .about-arch-img {
+            display: block;
+            max-width: 100%;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border-light);
+            box-shadow: var(--shadow-card);
+            margin: 0 auto var(--spacing-lg);
+        }
+
+        .about-sub-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .about-sub-title::before {
+            content: '';
+            width: 4px;
+            height: 18px;
+            background: var(--gradient-hero);
+            border-radius: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .pain-points-grid,
+            .highlights-grid {
+                grid-template-columns: 1fr;
+            }
+            .solution-flow {
+                flex-direction: column;
+                align-items: center;
+                gap: var(--spacing-sm);
+            }
+            .flow-arrow {
+                transform: rotate(90deg);
+                padding-top: 0;
+            }
+        }
+
         /* ============ Mobile Responsive ============ */
         @media (max-width: 768px) {
             .header-title {
@@ -1566,6 +1806,91 @@
             <div class="stat-card">
                 <div class="stat-value green">41</div>
                 <div class="stat-label">知识文档</div>
+            </div>
+        </div>
+        
+        <!-- 关于AI洞察：为什么做 & 有什么特别 -->
+        <div class="about-section">
+            <div class="about-toggle-wrap">
+                <button class="about-toggle-btn" onclick="toggleAbout(this)">
+                    <span>💡</span>
+                    <span>了解AI洞察：为什么做 & 有什么特别</span>
+                    <span class="about-toggle-arrow">▼</span>
+                </button>
+            </div>
+            <div class="about-content" id="aboutContent">
+                <!-- 为什么做 -->
+                <h3 class="about-sub-title">为什么要做这件事</h3>
+                <div class="pain-points-grid">
+                    <div class="pain-point-card">
+                        <div class="pain-point-icon">🌊</div>
+                        <div class="pain-point-title">信息太多太散</div>
+                        <div class="pain-point-desc">每天刷X、公众号、Newsletter……内容铺天盖地。<strong>看了很多，记住很少，能形成体系的更少</strong>。</div>
+                    </div>
+                    <div class="pain-point-card">
+                        <div class="pain-point-icon">🎯</div>
+                        <div class="pain-point-title">容易被带跑偏</div>
+                        <div class="pain-point-desc">信息源质量参差不齐，标题党和震惊体泛滥。不加筛选地吸收，<strong>很容易形成错误认知</strong>。</div>
+                    </div>
+                    <div class="pain-point-card">
+                        <div class="pain-point-icon">⏳</div>
+                        <div class="pain-point-title">难以持续跟踪</div>
+                        <div class="pain-point-desc">有价值的观点，收藏了就忘了；重要人物的分享，<strong>被算法推荐淹没了</strong>。被动接收 ≠ 主动学习。</div>
+                    </div>
+                </div>
+
+                <!-- 怎么解决 -->
+                <h3 class="about-sub-title">解法：四步搭建持续研究平台</h3>
+                <img src="https://h23.static.yximgs.com/udata/pkg/EE-KSTACK/022535885f062bdabfa396bf20a855a0.png" alt="AI洞察整体架构" class="about-arch-img" loading="lazy">
+                <div class="solution-flow">
+                    <div class="flow-step">
+                        <div class="flow-step-icon" style="background: linear-gradient(135deg, #059669, #10B981);">🎯</div>
+                        <div class="flow-step-num">STEP 1</div>
+                        <div class="flow-step-title">建立追踪体系</div>
+                        <div class="flow-step-desc">追踪人而非新闻——85+核心人物、130+公司、200+信息源分三层管理</div>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">
+                        <div class="flow-step-icon" style="background: linear-gradient(135deg, #2563EB, #3B82F6);">📰</div>
+                        <div class="flow-step-num">STEP 2</div>
+                        <div class="flow-step-title">每日生成AI日报</div>
+                        <div class="flow-step-desc">五大板块系统调研：大模型、AI Coding、AI应用、AI行业、企业AI</div>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">
+                        <div class="flow-step-icon" style="background: linear-gradient(135deg, #7C3AED, #8B5CF6);">🔬</div>
+                        <div class="flow-step-num">STEP 3</div>
+                        <div class="flow-step-title">深度调研</div>
+                        <div class="flow-step-desc">从新闻到洞察——不只收集信息，更提炼规律，有论据支撑</div>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">
+                        <div class="flow-step-icon" style="background: linear-gradient(135deg, #D97706, #F59E0B);">📚</div>
+                        <div class="flow-step-num">STEP 4</div>
+                        <div class="flow-step-title">知识沉淀</div>
+                        <div class="flow-step-desc">按维度沉淀到知识库——模型、Agent、企业、人物等多维体系化积累</div>
+                    </div>
+                </div>
+
+                <!-- 有什么特别 -->
+                <h3 class="about-sub-title">有什么特别之处</h3>
+                <div class="highlights-grid">
+                    <div class="highlight-card">
+                        <div class="highlight-icon">🤖</div>
+                        <div class="highlight-title">AI不是工具，是项目成员</div>
+                        <div class="highlight-desc">不是"问一句答一句"——林克主动规划追踪体系、每日执行调研、持续沉淀知识、自我迭代优化流程。</div>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-icon">🔍</div>
+                        <div class="highlight-title">专业化 > 泛化</div>
+                        <div class="highlight-desc">不被算法推送淹没——定向追踪核心人物的一手分享，实践者 > 观察者 > 决策者三层信息源。</div>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-icon">♾️</div>
+                        <div class="highlight-title">持续 > 一次性</div>
+                        <div class="highlight-desc">不是一篇文章，是一个持续运行的系统——每天更新、每周迭代、持续沉淀，形成真正的知识体系。</div>
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -2721,6 +3046,19 @@
                 });
             }
         })();
+        
+        // 关于AI洞察展开/收起
+        function toggleAbout(btn) {
+            const content = document.getElementById('aboutContent');
+            const isExpanded = btn.classList.contains('expanded');
+            if (isExpanded) {
+                btn.classList.remove('expanded');
+                content.classList.remove('active');
+            } else {
+                btn.classList.add('expanded');
+                content.classList.add('active');
+            }
+        }
         
         // 可折叠区域切换
         function toggleCollapsible(header) {
