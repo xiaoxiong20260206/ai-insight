@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-深度调研专题 KIM 推送脚本 v1.0
+深度调研专题 KIM 推送脚本 (通用版，持续迭代)
 ================================
 将深度调研专题推送到 KIM（支持个人/群推送）
 
@@ -11,12 +11,12 @@
 - 重试机制：遇到频率限制自动重试
 
 使用方式:
-  python scripts/send_deep_research_card.py --to-user shenlang    # 发给个人（预览）
-  python scripts/send_deep_research_card.py --to-groups           # 发送到所有群
-  python scripts/send_deep_research_card.py --dry-run             # 试运行，不实际发送
+  python scripts/send_deep_research_card.py --preview             # 发给自己预览
+  python scripts/send_deep_research_card.py --to-user shenlang   # 发给指定用户
+  python scripts/send_deep_research_card.py --to-groups          # 发送到所有群
+  python scripts/send_deep_research_card.py --dry-run            # 试运行
 
 作者: 林克 (沈浪的AI分身)
-版本: 1.0.0
 """
 
 import asyncio
@@ -292,18 +292,23 @@ def build_deep_research_card() -> dict:
 
 # ============ 主流程 ============
 async def main():
-    parser = argparse.ArgumentParser(description="深度调研专题 KIM 推送脚本 v1.0")
+    parser = argparse.ArgumentParser(description="深度调研专题 KIM 推送脚本")
+    parser.add_argument("--preview", action="store_true", help="发给自己预览")
     parser.add_argument("--to-user", type=str, help="发送到指定用户（用户名）")
     parser.add_argument("--to-groups", action="store_true", help="发送到所有群")
     parser.add_argument("--dry-run", action="store_true", help="试运行，不实际发送")
     args = parser.parse_args()
     
+    # --preview 等价于 --to-user shenlang
+    if args.preview:
+        args.to_user = "shenlang"
+    
     if not args.to_user and not args.to_groups:
-        print("❌ 请指定发送目标: --to-user <username> 或 --to-groups")
-        print("   示例: python scripts/send_deep_research_card.py --to-user shenlang")
+        print("❗ 请指定发送目标: --preview 或 --to-user <username> 或 --to-groups")
+        print("   示例: python scripts/send_deep_research_card.py --preview")
         return
     
-    print("🚀 深度调研专题推送 v1.0")
+    print("🚀 深度调研专题推送")
     print(f"   主题: AI大神看2026年下半场")
     print(f"{'🔍 [DRY-RUN 模式]' if args.dry_run else ''}")
     print("=" * 50)
