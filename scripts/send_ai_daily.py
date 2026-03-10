@@ -174,13 +174,35 @@ def extract_section_data(content: str, section_name: str, section_pattern: str) 
     
     section_content = match.group(0)
     
-    # 1. 提取新闻动态（标题+链接）
+    news_items = []
+    
+    # 方式1: 提取新闻动态（标题+链接）
     # 格式: - 🔴 **[标题](链接)** - 来源
     news_pattern = r'[🔴🟡]\s*\*\*\[([^\]]+)\]\(([^)]+)\)\*\*\s*-\s*([^\n]+)'
     news_matches = re.findall(news_pattern, section_content)
-    news_items = []
     for title, url, source in news_matches[:3]:
         news_items.append((title.strip(), url.strip()))
+    
+    # 方式2: 如果方式1没有匹配到，尝试提取 ### 标题 + **来源**：[xxx](url) 格式
+    if not news_items:
+        # 提取所有 ### 标题，然后找对应的来源链接
+        # 格式: ### 标题 ... **来源**：[来源名](链接)
+        sections = re.split(r'(?=^### )', section_content, flags=re.MULTILINE)
+        for sec in sections:
+            if not sec.strip().startswith('###'):
+                continue
+            # 提取标题
+            title_match = re.match(r'### ([^\n]+)', sec)
+            if not title_match:
+                continue
+            title = title_match.group(1).strip()
+            # 提取来源链接
+            source_match = re.search(r'\*\*来源\*\*：\[([^\]]+)\]\(([^)]+)\)', sec)
+            if source_match:
+                url = source_match.group(2).strip()
+                news_items.append((title, url))
+                if len(news_items) >= 3:
+                    break
     
     # 2. 提取观点
     opinion = None
@@ -233,12 +255,13 @@ def read_daily_report_v2(date_str: str) -> Optional[Dict]:
     content = md_file.read_text(encoding="utf-8")
     
     # 板块配置：(名称, 图标, 正则模式)
+    # 支持两种格式：旧版 "## 一、大模型" 和 新版 "## 板块一：大模型动态"
     sections_config = [
-        ("大模型", "🧠", r"## 一、大模型.*?(?=## 二、|$)"),
-        ("AI Coding", "💻", r"## 二、AI Coding.*?(?=## 三、|$)"),
-        ("AI 应用", "📱", r"## 三、AI 应用.*?(?=## 四、|$)"),
-        ("AI 行业", "🏭", r"## 四、AI 行业.*?(?=## 五、|$)"),
-        ("企业AI转型", "🔄", r"## 五、企业 AI 转型.*?(?=## 📊|$)"),
+        ("大模型", "🧠", r"(?:## 一、大模型|## 板块一：大模型).*?(?=## (?:二、|板块二)|$)"),
+        ("AI Coding", "💻", r"(?:## 二、AI Coding|## 板块二：AI Coding).*?(?=## (?:三、|板块三)|$)"),
+        ("AI 应用", "📱", r"(?:## 三、AI 应用|## 板块三：AI).*?(?=## (?:四、|板块四)|$)"),
+        ("AI 行业", "🏭", r"(?:## 四、AI 行业|## 板块四：AI行业).*?(?=## (?:五、|板块五)|$)"),
+        ("企业AI转型", "🔄", r"(?:## 五、企业 AI 转型|## 板块五：企业AI转型).*?(?=## 📊|## 深度聚焦|$)"),
     ]
     
     result = {}
