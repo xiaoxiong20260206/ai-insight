@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-AI日报 KIM 推送脚本 v3.5 (通用版)
-================================
+AI日报 KIM 推送脚本 (通用版，持续迭代)
+=====================================
 将 AI 日报推送到林克所在的所有 KIM 群
 
 功能特性:
-- v3.5卡片格式：热度趋势 + 五大板块 × (动态/深度聚焦)
+- 卡片格式持续迭代（热度趋势 + 五大板块 × 动态/深度聚焦）
 - 每条动态带链接，点击可跳转原文
 - 双按钮：查看完整日报 + AI洞察首页
 - 支持从JSON文件读取数据（优先）或从MD文件解析（兜底）
@@ -19,8 +19,6 @@ AI日报 KIM 推送脚本 v3.5 (通用版)
   python scripts/send_ai_daily.py --dry-run          # 试运行，不实际发送
 
 作者: 林克 (沈浪的AI分身)
-版本: 3.5.0
-更新: 2026-03-10 - 升级为v3.5格式，支持热度趋势+动态+深度聚焦
 """
 
 import asyncio
@@ -399,7 +397,7 @@ def build_card_v35(date_str: str, data: Dict) -> dict:
 
 # ============ 主流程 ============
 async def main():
-    parser = argparse.ArgumentParser(description="AI日报 KIM 推送脚本 v3.5")
+    parser = argparse.ArgumentParser(description="AI日报 KIM 推送脚本")
     parser.add_argument("date", nargs="?", help="日报日期 (YYYY-MM-DD)，默认今天")
     parser.add_argument("--preview", action="store_true", help="先发给自己预览")
     parser.add_argument("--dry-run", action="store_true", help="试运行，不实际发送")
@@ -411,7 +409,7 @@ async def main():
     else:
         date_str = datetime.now().strftime("%Y-%m-%d")
     
-    print(f"🚀 AI 日报推送 v3.5 - {date_str}")
+    print(f"🚀 AI 日报推送 - {date_str}")
     if args.preview:
         print("📱 [预览模式] 发送给 shenlang")
     elif args.dry_run:
@@ -447,7 +445,7 @@ async def main():
     print(f"   📊 {len(tabs)} 个板块, {total_news} 条新闻, {heat_topics} 个热度话题")
     
     # 2. 构建卡片
-    print("🎨 构建v3.5卡片...")
+    print("🎨 构建卡片...")
     card = build_card_v35(date_str, data)
     print("✅ 卡片构建完成")
     
