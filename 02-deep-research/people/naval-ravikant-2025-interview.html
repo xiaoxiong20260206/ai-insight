@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>纳瓦尔2025采访完整版深度调研 | AI洞察</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%237C3AED'/><circle cx='16' cy='12' r='6' fill='white'/><path d='M8 28c0-6 4-10 8-10s8 4 8 10' fill='white'/></svg>">
+    <style>
+        :root {
+            --color-success: #059669;
+            --color-success-light: #10B981;
+            --color-danger: #E11D48;
+            --color-danger-light: #F43F5E;
+            --color-warning: #D97706;
+            --color-warning-light: #F59E0B;
+            --color-info: #2563EB;
+            --color-info-light: #3B82F6;
+            --color-purple: #7C3AED;
+            --color-purple-light: #8B5CF6;
+            --color-text-primary: #1C1917;
+            --color-text-secondary: #57534E;
+            --color-text-muted: #78716C;
+            --color-border: #E7E5E4;
+            --color-border-light: #F5F5F4;
+            --color-bg: #F8FAFB;
+            --color-bg-card: #FFFFFF;
+            --color-bg-table-header: #FAFAF9;
+            --gradient-success: linear-gradient(135deg, #059669 0%, #10B981 100%);
+            --gradient-hero: linear-gradient(135deg, #059669 0%, #2563EB 50%, #7C3AED 100%);
+            --gradient-badge: linear-gradient(135deg, #ECFDF5 0%, #EFF6FF 100%);
+            --gradient-mesh: 
+                radial-gradient(at 20% 20%, rgba(5,150,105,0.08) 0%, transparent 50%),
+                radial-gradient(at 80% 80%, rgba(37,99,235,0.06) 0%, transparent 50%),
+                radial-gradient(at 50% 50%, rgba(124,58,237,0.04) 0%, transparent 50%);
+            --shadow-card: 0 2px 8px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-hover: 0 6px 16px rgba(5,150,105,0.15), 0 2px 6px rgba(5,150,105,0.1);
+            --shadow-glow-purple: 0 4px 14px rgba(124,58,237,0.15);
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --spacing-2xl: 40px;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-full: 9999px;
+            --font-family: -apple-system, "SF Pro Display", "system-ui", "Segoe UI", "Noto Sans SC", Helvetica, Arial, sans-serif;
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-family);
+            font-size: 15px;
+            line-height: 1.65;
+            color: var(--color-text-secondary);
+            background: var(--color-bg);
+            background-image: var(--gradient-mesh);
+            background-attachment: fixed;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        ::selection { background: rgba(124, 58, 237, 0.2); }
+
+        .container {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: var(--spacing-lg) var(--spacing-md) 48px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+            padding: var(--spacing-2xl) 0;
+        }
+        .header::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--gradient-hero);
+        }
+        .badge {
+            display: inline-block;
+            background: var(--gradient-badge);
+            color: var(--color-purple);
+            padding: 4px 14px;
+            border-radius: var(--radius-full);
+            font-size: 11px;
+            font-weight: 500;
+            margin-bottom: var(--spacing-md);
+            border: 1px solid rgba(124, 58, 237, 0.12);
+        }
+        .main-title {
+            font-size: 34px;
+            font-weight: 800;
+            margin-bottom: var(--spacing-sm);
+            letter-spacing: -0.02em;
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle { 
+            color: var(--color-text-secondary); 
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 4px;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(20px) saturate(1.8);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 6px;
+            margin-bottom: var(--spacing-lg);
+            position: sticky;
+            top: 12px;
+            z-index: 100;
+            overflow-x: auto;
+            box-shadow: var(--shadow-card);
+        }
+        .tab-btn {
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 14px;
+            background: transparent;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+        }
+        .tab-btn:hover {
+            background: var(--color-bg-table-header);
+            color: var(--color-text-secondary);
+        }
+        .tab-btn.active {
+            background: var(--gradient-success);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(5, 150, 105, 0.25);
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        @media (max-width: 768px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        .stat-card {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            text-align: center;
+            transition: all var(--transition-fast);
+        }
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--color-success);
+        }
+        .stat-value { font-size: 28px; font-weight: 700; }
+        .stat-value.success { color: var(--color-success); }
+        .stat-value.purple { color: var(--color-purple); }
+        .stat-value.info { color: var(--color-info); }
+        .stat-value.warning { color: var(--color-warning); }
+        .stat-label {
+            font-size: 11px;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 4px;
+        }
+
+        /* Section Card */
+        .section-card {
+            background: var(--color-bg-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: var(--spacing-md);
+        }
+        .section-header h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+        .section-number {
+            background: var(--gradient-success);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .section-number.purple { background: linear-gradient(135deg, #7C3AED 0%, #8B5CF6 100%); }
+        .section-number.info { background: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%); }
+
+        /* Insight Card */
+        .insight-card {
+            background: linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(124,58,237,0.03) 100%);
+            border-left: 4px solid var(--color-purple);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+        .insight-card .quote {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+        .insight-card .source {
+            font-size: 12px;
+            color: var(--color-purple);
+        }
+
+        /* Quote Block */
+        .quote-block {
+            background: linear-gradient(135deg, rgba(5,150,105,0.06) 0%, rgba(5,150,105,0.02) 100%);
+            border-left: 4px solid var(--color-success);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+        }
+        .quote-block p {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+        .quote-block .author {
+            font-size: 12px;
+            color: var(--color-success);
+        }
+
+        /* Evidence Card */
+        .evidence-card {
+            background: var(--color-bg-table-header);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
+            margin-top: var(--spacing-sm);
+        }
+        .evidence-card .label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-info);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .evidence-card ul {
+            margin-left: var(--spacing-md);
+            font-size: 14px;
+        }
+        .evidence-card li {
+            margin-bottom: 6px;
+        }
+
+        /* Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--spacing-md) 0;
+        }
+        .data-table th, .data-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+            font-size: 14px;
+        }
+        .data-table th {
+            background: var(--color-bg-table-header);
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+        .data-table tr:hover {
+            background: rgba(5,150,105,0.04);
+        }
+
+        /* Tags */
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+            font-size: 11px;
+            font-weight: 500;
+        }
+        .tag.success { background: #ECFDF5; color: var(--color-success); }
+        .tag.purple { background: #F5F3FF; color: var(--color-purple); }
+        .tag.info { background: #EFF6FF; color: var(--color-info); }
+        .tag.warning { background: #FFFBEB; color: var(--color-warning); }
+        .tag.danger { background: #FEF2F2; color: var(--color-danger); }
+
+        /* Golden Sentence Grid */
+        .golden-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-md);
+        }
+        @media (max-width: 768px) {
+            .golden-grid { grid-template-columns: 1fr; }
+        }
+        .golden-card {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
+            transition: all var(--transition-fast);
+        }
+        .golden-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--color-success);
+        }
+        .golden-card .theme {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-purple);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+        .golden-card .sentence {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            line-height: 1.5;
+        }
+
+        /* Framework Diagram */
+        .framework-diagram {
+            background: linear-gradient(135deg, #F8FAFB 0%, #F0FDF4 100%);
+            border: 2px solid var(--color-success);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+        }
+        .framework-title {
+            text-align: center;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-success);
+            margin-bottom: var(--spacing-md);
+        }
+        .framework-flow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+        .framework-item {
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 12px 24px;
+            text-align: center;
+            min-width: 200px;
+        }
+        .framework-item .label {
+            font-size: 12px;
+            color: var(--color-text-muted);
+        }
+        .framework-item .value {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+        .framework-arrow {
+            color: var(--color-success);
+            font-size: 20px;
+        }
+
+        /* Learn More */
+        .learn-more {
+            background: linear-gradient(135deg, rgba(37,99,235,0.08) 0%, rgba(37,99,235,0.03) 100%);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-top: var(--spacing-2xl);
+        }
+        .learn-more h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-info);
+            margin-bottom: var(--spacing-md);
+        }
+        .learn-more ul {
+            list-style: none;
+        }
+        .learn-more li {
+            margin-bottom: 10px;
+        }
+        .learn-more a {
+            color: var(--color-info);
+            text-decoration: none;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .learn-more a:hover {
+            text-decoration: underline;
+        }
+
+        /* Overview SVG */
+        .overview-svg {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+            box-shadow: var(--shadow-card);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <span class="badge">👤 人物追踪 · 深度调研</span>
+            <h1 class="main-title">纳瓦尔2025采访完整版深度调研</h1>
+            <p class="subtitle">Naval Ravikant × Chris Williamson · Modern Wisdom #922 · 人性的44个残酷真相 · 3小时16分完整解读</p>
+        </header>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value purple">3h16m</div>
+                <div class="stat-label">采访时长</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value success">10+</div>
+                <div class="stat-label">核心观点</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value info">44</div>
+                <div class="stat-label">残酷真相</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value warning">2025.3</div>
+                <div class="stat-label">发布时间</div>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <nav class="tab-nav">
+            <button class="tab-btn active" data-tab="overview">📋 采访概览</button>
+            <button class="tab-btn" data-tab="happiness">🎯 幸福与成功</button>
+            <button class="tab-btn" data-tab="ai">🤖 AI观点</button>
+            <button class="tab-btn" data-tab="wisdom">💡 人生智慧</button>
+            <button class="tab-btn" data-tab="quotes">✨ 金句集锦</button>
+        </nav>
+
+        <!-- Tab: Overview -->
+        <div id="overview" class="tab-content active">
+            <!-- Overview SVG Diagram -->
+            <div class="overview-svg">
+                <svg viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#059669"/>
+                            <stop offset="50%" style="stop-color:#2563EB"/>
+                            <stop offset="100%" style="stop-color:#7C3AED"/>
+                        </linearGradient>
+                    </defs>
+                    <!-- Background -->
+                    <rect x="0" y="0" width="800" height="200" fill="#F8FAFB" rx="16"/>
+                    <!-- Title -->
+                    <text x="400" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="16" font-weight="700" fill="#1C1917">Naval 2025 核心认知框架</text>
+                    <!-- Flow boxes -->
+                    <g transform="translate(50, 60)">
+                        <rect x="0" y="0" width="130" height="60" rx="8" fill="white" stroke="#E7E5E4"/>
+                        <text x="65" y="25" text-anchor="middle" font-size="11" fill="#78716C">幸福观</text>
+                        <text x="65" y="42" text-anchor="middle" font-size="12" font-weight="600" fill="#1C1917">物质 vs 极简</text>
+                    </g>
+                    <g transform="translate(50, 130)">
+                        <path d="M65 0 L65 -10" stroke="#059669" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                    </g>
+                    <g transform="translate(200, 60)">
+                        <rect x="0" y="0" width="130" height="60" rx="8" fill="white" stroke="#E7E5E4"/>
+                        <text x="65" y="25" text-anchor="middle" font-size="11" fill="#78716C">成功观</text>
+                        <text x="65" y="42" text-anchor="middle" font-size="12" font-weight="600" fill="#1C1917">赢得后摆脱</text>
+                    </g>
+                    <g transform="translate(350, 60)">
+                        <rect x="0" y="0" width="130" height="60" rx="8" fill="white" stroke="#E7E5E4"/>
+                        <text x="65" y="25" text-anchor="middle" font-size="11" fill="#78716C">学习观</text>
+                        <text x="65" y="42" text-anchor="middle" font-size="12" font-weight="600" fill="#1C1917">傲慢是敌人</text>
+                    </g>
+                    <g transform="translate(500, 60)">
+                        <rect x="0" y="0" width="130" height="60" rx="8" fill="#F5F3FF" stroke="#7C3AED"/>
+                        <text x="65" y="25" text-anchor="middle" font-size="11" fill="#7C3AED">AI观</text>
+                        <text x="65" y="42" text-anchor="middle" font-size="12" font-weight="600" fill="#1C1917">判断力>执行</text>
+                    </g>
+                    <g transform="translate(650, 60)">
+                        <rect x="0" y="0" width="130" height="60" rx="8" fill="#ECFDF5" stroke="#059669"/>
+                        <text x="65" y="25" text-anchor="middle" font-size="11" fill="#059669">行动观</text>
+                        <text x="65" y="42" text-anchor="middle" font-size="12" font-weight="600" fill="#1C1917">直觉+迭代</text>
+                    </g>
+                    <!-- Arrows -->
+                    <path d="M180 90 L200 90" stroke="#059669" stroke-width="2" fill="none"/>
+                    <path d="M330 90 L350 90" stroke="#059669" stroke-width="2" fill="none"/>
+                    <path d="M480 90 L500 90" stroke="#059669" stroke-width="2" fill="none"/>
+                    <path d="M630 90 L650 90" stroke="#059669" stroke-width="2" fill="none"/>
+                    <!-- Bottom summary -->
+                    <rect x="200" y="140" width="400" height="40" rx="8" fill="url(#heroGrad)"/>
+                    <text x="400" y="165" text-anchor="middle" font-size="13" font-weight="600" fill="white">核心：在AI时代，成为最好的自己，用AI做不可能的事</text>
+                </svg>
+            </div>
+
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-number">1</span>
+                    <h2>采访背景</h2>
+                </div>
+                <table class="data-table">
+                    <tr>
+                        <th>项目</th>
+                        <th>信息</th>
+                    </tr>
+                    <tr>
+                        <td>采访时间</td>
+                        <td><span class="tag info">2025年3月31日</span></td>
+                    </tr>
+                    <tr>
+                        <td>节目</td>
+                        <td>Modern Wisdom Podcast #922</td>
+                    </tr>
+                    <tr>
+                        <td>主持人</td>
+                        <td>Chris Williamson</td>
+                    </tr>
+                    <tr>
+                        <td>嘉宾</td>
+                        <td>Naval Ravikant（AngelList创始人，硅谷知名天使投资人）</td>
+                    </tr>
+                    <tr>
+                        <td>时长</td>
+                        <td><span class="tag purple">3小时16分钟</span></td>
+                    </tr>
+                    <tr>
+                        <td>主题</td>
+                        <td>44 Harsh Truths About Human Nature（人性的44个残酷真相）</td>
+                    </tr>
+                </table>
+                
+                <div class="quote-block">
+                    <p>"Naval主动联系Chris做这期节目，因为他发现脑海中的对话对象总是Chris。这期长达3小时的采访回答了一个核心问题：什么才是真正的人生赢家？"</p>
+                    <span class="author">— 节目背景</span>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-number purple">2</span>
+                    <h2>话题覆盖</h2>
+                </div>
+                <div class="golden-grid">
+                    <div class="golden-card">
+                        <div class="theme">🎯 幸福与成功</div>
+                        <div class="sentence">两条路径：物质成功 vs 欲望极简</div>
+                    </div>
+                    <div class="golden-card">
+                        <div class="theme">💰 财富与地位</div>
+                        <div class="sentence">财富无限，地位游戏天生有限</div>
+                    </div>
+                    <div class="golden-card">
+                        <div class="theme">🧠 学习与傲慢</div>
+                        <div class="sentence">傲慢是学习的敌人</div>
+                    </div>
+                    <div class="golden-card">
+                        <div class="theme">😰 焦虑与冥想</div>
+                        <div class="sentence">焦虑源于冲突的欲望</div>
+                    </div>
+                    <div class="golden-card">
+                        <div class="theme">🤖 AI与技术</div>
+                        <div class="sentence">AI不会取代程序员，程序员会用AI取代其他人</div>
+                    </div>
+                    <div class="golden-card">
+                        <div class="theme">👨‍👩‍👧 育儿与社会</div>
+                        <div class="sentence">相信直觉，给孩子解释原理而非命令</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Happiness -->
+        <div id="happiness" class="tab-content">
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-number">1</span>
+                    <h2>通往幸福的两条路</h2>
+                </div>
+                
+                <div class="insight-card">
+                    <div class="quote">"幸福有两条路：一是成功，满足物质需求；二是像第欧根尼一样，从一开始就不想要。"</div>
+                    <div class="source">— Naval Ravikant</div>
+                </div>
+
+                <p style="margin: 16px 0;">Naval对这两条路径并无明确倾向，但他坦承自己选择了物质成功的道路。正如佛陀先是王子，看透一切后才离开寻找更深层的意义。</p>
+
+                <div class="evidence-card">
+                    <div class="label">📊 事实印证</div>
+                    <ul>
+                        <li><strong>哈佛幸福研究</strong>：追踪80年发现，人际关系质量（而非财富）是预测幸福的最强指标</li>
+                        <li><strong>Kahneman研究</strong>：收入超过约$75,000后，情感幸福不再随收入增长</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-number">2</span>
+                    <h2>赢得游戏是为了摆脱它</h2>
+                </div>
+                
+                <div class="insight-card">
+                    <div class="quote">"赢得游戏的原因是为了摆脱它。"</div>
+                    <div class="source">— Naval Ravikant</div>
+                </div>
+
+                <p style="margin: 16px 0;">玩游戏，赢得游戏，然后对游戏感到厌倦。当你不再试图赢——或者你知道自己能赢——你就自由了。要么换个游戏，要么纯粹为了乐趣而玩。</p>
+
+                <div class="framework-diagram">
+                    <div class="framework-title">成功循环</div>
+                    <div class="framework-flow">
+                        <div class="framework-item">
+                            <div class="label">阶段1</div>
+                            <div class="value">无聊 → 产生欲望</div>
+                        </div>
+                        <div class="framework-arrow">↓</div>
+                        <div class="framework-item">
+                            <div class="label">阶段2</div>
+                            <div class="value">追逐中受苦</div>
+                        </div>
+                        <div class="framework-arrow">↓</div>
+                        <div class="framework-item">
+                            <div class="label">阶段3</div>
+                            <div class="value">得到 → 习惯</div>
+                        </div>
+                        <div class="framework-arrow">↓</div>
+                        <div class="framework-item">
+                            <div class="label">阶段4</div>
+                            <div class="value">再次无聊 → 循环</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quote-block">
+                    <p>"99%的人生都是旅程，如果你不享受旅程，有什么意义呢？"</p>
+                    <span class="author">— Naval Ravikant</span>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-number">3</span>
+                    <h2>自尊 = 你与自己的名声</h2>
+                </div>
+                
+                <div class="insight-card">
+                    <div class="quote">"自尊等于你与自己的名声。你总是知道自己是否在遵守自己的道德准则。"</div>
+                    <div class="source">— Naval Ravikant</div>
+                </div>
+
+                <h4 style="margin: 16px 0 12px; font-size: 14px; color: var(--color-text-primary);">快速修复自尊的方法：</h4>
+                <ul style="margin-left: 20px;">
+                    <li>有道德准则并严格遵守</li>
+                    <li>为他人做事</li>
+                </ul>
+
+                <div class="evidence-card">
+                    <div class="label">📊 事实印证</div>
+                    <ul>
+                        <li><strong>积极心理学研究</strong>：践行个人价值观与生活满意度高度相关</li>
+                        <li><strong>志愿服务研究</strong>：帮助他人可降低抑郁风险23%</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: AI -->
+        <div id="ai" class="tab-content">
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-number purple">1</span>
+                    <h2>AI时代判断力成为最重要能力</h2>
+                </div>
+
+                <div class="insight-card">
+                    <div class="quote">"AI不会取代程序员——程序员会用AI取代其他人。"</div>
+                    <div class="source">— Naval Ravikant</div>
+                </div>
+
+                <h4 style="margin: 16px 0 12px; font-size: 14px; color: var(--color-text-primary);">Naval的AI核心观点：</h4>
+                <ul style="margin-left: 20px; margin-bottom: 16px;">
+                    <li>AI目前并非真正智能——它是自然语言计算机，可以对话和预测，但<strong>不创造新想法</strong></li>
+                    <li>如果人类能接触AI海量数据的万分之一，就能产生上千个新想法；而AI？<strong>零原创</strong>（Dwarkesh Patel洞察）</li>
+                    <li>AI是通往AGI的一步吗？不太像——它更像是另一种智能，如同美洲豹的本能vs植物的生长能力</li>
+                    <li>自动驾驶会被解决（汽车在受控环境运行），但<strong>AI取代程序员？不会</strong></li>
+                </ul>
+
+                <div class="evidence-card">
+                    <div class="label">📊 事实印证</div>
+                    <ul>
+                        <li><strong>特斯拉FSD V12</strong>：完全转向端到端神经网络方案，验证了Naval"纯摄像头"判断</li>
+                        <li><strong>GitHub Copilot 2025</strong>：开发者使用AI工具后代码生产力提升55%，但创造性决策仍需人类</li>
+                        <li><strong>Sam Altman（达沃斯2025）</strong>："判断力是AI时代的新稀缺资源"</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-number purple">2</span>
+                    <h2>人人都是施法者</h2>
+                </div>
+
+                <div class="insight-card">
+                    <div class="quote">"我们刚刚把一根魔杖交给了地球上的每个人。想法到产品的壁垒本质上已经消失了。"</div>
+                    <div class="source">— Naval Ravikant (2026年播客)</div>
+                </div>
+
+                <p style="margin: 16px 0;">几十年来，程序员是巫师——掌握晦涩命令，用别人不懂的语言与机器对话。现在？你只需说话。用任何语言。机器会听并构建你描述的东西。</p>
+
+                <h4 style="margin: 16px 0 12px; font-size: 14px; color: var(--color-text-primary);">"Vibe Coding"（氛围编程）：</h4>
+                <ul style="margin-left: 20px;">
+                    <li>你描述应用</li>
+                    <li>用自然语言反馈</li>
+                    <li>AI构建、测试、修复bug、迭代</li>
+                    <li>无需睡眠，无自我意识，从不被冒犯</li>
+                </ul>
+            </div>
+
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-number purple">3</span>
+                    <h2>抽象层总会泄漏</h2>
+                </div>
+
+                <div class="insight-card">
+                    <div class="quote">"抽象层是会泄漏的。每一层都隐藏复杂性，但从不消除它。"</div>
+                    <div class="source">— Naval Ravikant</div>
+                </div>
+
+                <p style="margin: 16px 0;">从晶体管→汇编语言→C→Python→大型库。每一层都让下层不可见——除非你需要深入查看。AI编码工具只是最新、最强大的一层。</p>
+
+                <div class="quote-block">
+                    <p>"当出问题时——一定会出——理解底层的人总有优势。你不需要理解抽象下面的所有东西，只需要知道何时抽象失效。"</p>
+                    <span class="author">— Naval Ravikant</span>
+                </div>
+
+                <div class="evidence-card">
+                    <div class="label">📊 事实印证</div>
+                    <ul>
+                        <li><strong>Joel Spolsky</strong>："泄漏抽象法则"（2002）是软件工程经典理论</li>
+                        <li><strong>2024-2025年</strong>：多起AI生成代码导致的安全漏洞案例，印证底层理解的重要性</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-number purple">4</span>
+                    <h2>Tesla vs Waymo</h2>
+                </div>
+
+                <table class="data-table">
+                    <tr>
+                        <th>维度</th>
+                        <th>Waymo</th>
+                        <th>Tesla</th>
+                    </tr>
+                    <tr>
+                        <td>当前状态</td>
+                        <td><span class="tag success">现在可行</span></td>
+                        <td><span class="tag info">长期潜力</span></td>
+                    </tr>
+                    <tr>
+                        <td>方案</td>
+                        <td>激光雷达+高精地图</td>
+                        <td>纯视觉+端到端神经网络</td>
+                    </tr>
+                    <tr>
+                        <td>优势</td>
+                        <td>更多真实世界测试</td>
+                        <td>量产规模+数据优势</td>
+                    </tr>
+                    <tr>
+                        <td>真正输家</td>
+                        <td colspan="2"><span class="tag danger">没有自动驾驶的车企</span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Tab: Wisdom -->
+        <div id="wisdom" class="tab-content">
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-number info">1</span>
+                    <h2>傲慢是学习的敌人</h2>
+                </div>
+
+                <div class="insight-card">
+                    <div class="quote">"傲慢是学习的敌人。成长最少的人往往是最傲慢的人。"</div>
+                    <div class="source">— Naval Ravikant</div>
+                </div>
+
+                <ul style="margin: 16px 0 16px 20px;">
+                    <li>他们认为自己已有答案，不愿公开纠错</li>
+                    <li>名声把人锁在过去的声明中，难以转向</li>
+                    <li>傲慢阻止人们承认错误</li>
+                    <li>这就是傲慢昂贵的原因：你要<strong>反复为它买单</strong></li>
+                </ul>
+
+                <div class="quote-block">
+                    <p>"伟大的艺术家和企业家总有从零开始的能力。埃隆·马斯克从PayPal赚了2亿美元，全部投入SpaceX、Tesla和SolarCity，曾需借钱付房租。"</p>
+                    <span class="author">— Naval Ravikant</span>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-number info">2</span>
+                    <h2>相信直觉胜过大脑</h2>
+                </div>
+
+                <div class="insight-card">
+                    <div class="quote">"相信直觉胜过大脑：直觉决定，大脑事后合理化。"</div>
+                    <div class="source">— Naval Ravikant</div>
+                </div>
+
+                <table class="data-table">
+                    <tr>
+                        <th>直觉</th>
+                        <th>大脑</th>
+                    </tr>
+                    <tr>
+                        <td>精炼的判断力，随时间积累</td>
+                        <td>善于解决外部问题</td>
+                    </tr>
+                    <tr>
+                        <td>做重大决策时更可靠</td>
+                        <td>不擅长做艰难决定</td>
+                    </tr>
+                </table>
+
+                <div class="quote-block">
+                    <p>"在失败的关系中，你通常知道它会失败，但你忽略了这一点。一厢情愿把人困在糟糕的处境中。"</p>
+                    <span class="author">— Naval Ravikant</span>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-number info">3</span>
+                    <h2>化解焦虑的方法</h2>
+                </div>
+
+                <div class="insight-card">
+                    <div class="quote">"想象一下，如果你不再焦虑，你会有多高效。"</div>
+                    <div class="source">— Naval Ravikant</div>
+                </div>
+
+                <h4 style="margin: 16px 0 12px; font-size: 14px; color: var(--color-text-primary);">焦虑的本质：</h4>
+                <p>冲突的欲望把你拉向不同方向。例如：想被喜欢 vs 想做自私的事；不想上班 vs 需要钱。</p>
+
+                <h4 style="margin: 16px 0 12px; font-size: 14px; color: var(--color-text-primary);">化解方法：</h4>
+                <ul style="margin-left: 20px; margin-bottom: 16px;">
+                    <li>坐下来尝试找出原因</li>
+                    <li>写下可能的原因</li>
+                    <li>冥想、日记、与朋友或治疗师交流</li>
+                    <li>注意压力消失的时刻，识别触发器</li>
+                </ul>
+
+                <div class="quote-block">
+                    <p>"你会死的。一切归零。如果一切都会结束，有什么好焦虑的呢？"</p>
+                    <span class="author">— Naval Ravikant</span>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-number info">4</span>
+                    <h2>10000次纠错=专家</h2>
+                </div>
+
+                <div class="insight-card">
+                    <div class="quote">"忘掉10000小时法则。如果你在任何事上得到10000次纠错，你就会成为专家。"</div>
+                    <div class="source">— Naval Ravikant</div>
+                </div>
+
+                <p style="margin: 16px 0;">关键不是重复，而是学习和调整（错误纠正）。迭代才是关键。</p>
+
+                <div class="framework-diagram">
+                    <div class="framework-title">杠铃策略</div>
+                    <div class="framework-flow">
+                        <div class="framework-item" style="border-color: var(--color-success);">
+                            <div class="label" style="color: var(--color-success);">策略A</div>
+                            <div class="value">有效时全力以赴</div>
+                        </div>
+                        <div class="framework-arrow">⟷</div>
+                        <div class="framework-item" style="border-color: var(--color-danger);">
+                            <div class="label" style="color: var(--color-danger);">策略B</div>
+                            <div class="value">无效时迅速离开</div>
+                        </div>
+                    </div>
+                </div>
+
+                <p style="margin-top: 16px;">人们常陷入灰色地带——对不起作用的事情半心半意投入。</p>
+            </div>
+        </div>
+
+        <!-- Tab: Quotes -->
+        <div id="quotes" class="tab-content">
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-number">✨</span>
+                    <h2>金句集锦</h2>
+                </div>
+
+                <div class="golden-grid">
+                    <div class="golden-card">
+                        <div class="theme">成功</div>
+                        <div class="sentence">"如果你想成功，就必须对欲望挑剔。"</div>
+                    </div>
+                    <div class="golden-card">
+                        <div class="theme">幸福</div>
+                        <div class="sentence">"幸福就是接受你现在的处境。"</div>
+                    </div>
+                    <div class="golden-card">
+                        <div class="theme">学习</div>
+                        <div class="sentence">"如果你在任何事上得到10000次纠错，你就会成为专家。"</div>
+                    </div>
+                    <div class="golden-card">
+                        <div class="theme">决策</div>
+                        <div class="sentence">"相信直觉胜过大脑：直觉决定，大脑事后合理化。"</div>
+                    </div>
+                    <div class="golden-card">
+                        <div class="theme">财富</div>
+                        <div class="sentence">"财富是无限的；地位游戏天生有限。"</div>
+                    </div>
+                    <div class="golden-card">
+                        <div class="theme">人生</div>
+                        <div class="sentence">"我不想要心灵的平静——我想要心灵的平和。"</div>
+                    </div>
+                    <div class="golden-card">
+                        <div class="theme">AI</div>
+                        <div class="sentence">"AI不会取代程序员——程序员会用AI取代其他人。"</div>
+                    </div>
+                    <div class="golden-card">
+                        <div class="theme">自由</div>
+                        <div class="sentence">"赢得游戏的原因是为了摆脱它。"</div>
+                    </div>
+                    <div class="golden-card">
+                        <div class="theme">傲慢</div>
+                        <div class="sentence">"傲慢是学习的敌人。"</div>
+                    </div>
+                    <div class="golden-card">
+                        <div class="theme">自尊</div>
+                        <div class="sentence">"自尊等于你与自己的名声。"</div>
+                    </div>
+                    <div class="golden-card">
+                        <div class="theme">抉择</div>
+                        <div class="sentence">"如果你无法决定，说不。如果两个选择相等，选短期更痛苦的那个。"</div>
+                    </div>
+                    <div class="golden-card">
+                        <div class="theme">旅程</div>
+                        <div class="sentence">"旅程不仅是奖励，它是唯一存在的东西。"</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-number purple">🎯</span>
+                    <h2>人生三大决定</h2>
+                </div>
+
+                <div class="framework-diagram">
+                    <div class="framework-title">The Big 3</div>
+                    <div class="framework-flow" style="flex-direction: row; flex-wrap: wrap; justify-content: center;">
+                        <div class="framework-item">
+                            <div class="label">决定1</div>
+                            <div class="value">👤 和谁在一起</div>
+                        </div>
+                        <div class="framework-item">
+                            <div class="label">决定2</div>
+                            <div class="value">💼 做什么</div>
+                        </div>
+                        <div class="framework-item">
+                            <div class="label">决定3</div>
+                            <div class="value">📍 住在哪里</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quote-block">
+                    <p>"人们在'住在哪里'上投入的思考最少，但它决定了一切——约会对象、工作机会、空气质量、家人距离……"</p>
+                    <span class="author">— Naval Ravikant</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Learn More -->
+        <div class="learn-more">
+            <h3>📚 了解更多</h3>
+            <ul>
+                <li><a href="https://singjupost.com/transcript-of-44-harsh-truths-about-human-nature-naval-ravikant/" target="_blank">📄 完整采访文稿（英文）</a></li>
+                <li><a href="https://podcastnotes.org/modern-wisdom/44-harsh-truths-about-human-nature-naval-ravikant-modern-wisdom-with-chris-williamson/" target="_blank">📝 Podcast Notes详细笔记</a></li>
+                <li><a href="https://thewizdomproject.com/naval-ravikant-ai" target="_blank">🤖 Naval的AI观点解读</a></li>
+                <li><a href="https://nav.al/rich" target="_blank">💰 Naval: How to Get Rich（经典）</a></li>
+                <li><a href="https://x.com/naval" target="_blank">🐦 Naval的Twitter</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active from all buttons and contents
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active to clicked button and corresponding content
+                btn.classList.add('active');
+                const tabId = btn.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
