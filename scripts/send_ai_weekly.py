@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-AI周报 KIM 推送脚本 v1.0
+AI周报 KIM 推送脚本 (通用版，持续迭代)
 ========================
 将 AI 周报推送到 KIM（支持个人/群推送）
 
@@ -11,13 +11,13 @@ AI周报 KIM 推送脚本 v1.0
 - 重试机制：遇到频率限制自动重试
 
 使用方式:
-  python scripts/send_ai_weekly.py --to-user shenlang    # 发给个人（预览）
+  python scripts/send_ai_weekly.py --preview              # 发给自己预览
+  python scripts/send_ai_weekly.py --to-user shenlang    # 发给指定用户
   python scripts/send_ai_weekly.py --to-groups            # 发送到所有群
   python scripts/send_ai_weekly.py 2026-W10               # 推送指定周
   python scripts/send_ai_weekly.py --dry-run              # 试运行
 
 作者: 林克 (沈浪的AI分身)
-版本: 1.0.0
 """
 
 import asyncio
@@ -176,16 +176,22 @@ def build_weekly_card(year: int, week_num: int, start_date, end_date, report_dat
 
 
 async def main():
-    parser = argparse.ArgumentParser(description="AI周报 KIM 推送脚本 v1.0")
+    parser = argparse.ArgumentParser(description="AI周报 KIM 推送脚本")
     parser.add_argument("week", nargs="?", help="周标识 (YYYY-WNN)，默认上一周")
+    parser.add_argument("--preview", action="store_true", help="发给自己预览")
     parser.add_argument("--to-user", type=str, help="发送到指定用户（用户名）")
     parser.add_argument("--to-groups", action="store_true", help="发送到所有群")
     parser.add_argument("--dry-run", action="store_true", help="试运行，不实际发送")
     args = parser.parse_args()
 
+    # --preview 等价于 --to-user shenlang
+    if args.preview:
+        args.to_user = "shenlang"
+
     if not args.to_user and not args.to_groups:
-        print("Please specify: --to-user <username> or --to-groups")
-        print("  Example: python scripts/send_ai_weekly.py --to-user shenlang")
+        print("请指定发送目标: --preview 或 --to-user <username> 或 --to-groups")
+        print("  示例: python scripts/send_ai_weekly.py --preview")
+        print("  示例: python scripts/send_ai_weekly.py --to-groups")
         return
 
     # 确定周
@@ -196,7 +202,7 @@ async def main():
         return
 
     date_range = f"{start_date.strftime('%m/%d')}-{end_date.strftime('%m/%d')}"
-    print(f"📊 AI 周报推送 v1.0 - {year}-W{week_num:02d} ({date_range})")
+    print(f"📊 AI 周报推送 - {year}-W{week_num:02d} ({date_range})")
     if args.dry_run:
         print("   [DRY-RUN mode]")
     print("=" * 50)

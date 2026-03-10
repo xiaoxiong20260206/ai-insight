@@ -19,14 +19,17 @@ cp scripts/.env.template scripts/.env
 | 脚本 | 用途 | 使用方式 |
 |------|------|---------|
 | `send_ai_daily.py` | AI日报推送到KIM群 | `python3 scripts/send_ai_daily.py [日期] [--preview] [--dry-run]` |
-| `send_ai_weekly.py` | AI周报推送到KIM | `python3 scripts/send_ai_weekly.py --to-user shenlang` |
-| `send_deep_research_card.py` | 深度调研专题推送 | `python3 scripts/send_deep_research_card.py --to-user shenlang` |
+| `send_ai_weekly.py` | AI周报推送到KIM | `python3 scripts/send_ai_weekly.py [--preview] [--to-groups]` |
+| `send_deep_research_card.py` | 深度调研专题推送 | `python3 scripts/send_deep_research_card.py [--preview] [--to-groups]` |
 | `send_openclaw_card.py` | OpenClaw深度洞察推送 | `python3 scripts/send_openclaw_card.py --to-user shenlang` |
 
-**日报推送参数**:
-- `--preview` 先发给自己预览（推荐首次使用）
+**推送脚本通用参数**:
+- `--preview` 先发给自己预览（推荐首次使用，等价于 `--to-user shenlang`）
+- `--to-groups` 推送到所有群
 - `--dry-run` 试运行，不实际发送
-- 无参数时推送到所有群
+
+**日报专属参数**:
+- 无参数时直接推送到所有群（历史兼容）
 
 ### 🔄 同步脚本
 
