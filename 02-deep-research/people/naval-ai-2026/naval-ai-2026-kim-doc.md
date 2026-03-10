@@ -1,4 +1,6 @@
-# 纳瓦尔AI观点深度解读：思维的摩托车
+# 硅谷"哲学家"纳瓦尔最新AI访谈：我们拥有了思维的摩托车
+
+> 🌐 **Web版本**：本文有精美的网页版，支持Tab导航和交互式阅读，强烈推荐访问 👉 [纳瓦尔AI观点深度解读（Web版）](https://xiaoxiong20260206.github.io/ai-insight/02-deep-research/people/naval-ai-2026/)
 
 > 📌 **本文核心**：Naval Ravikant是硅谷最有影响力的思想家之一。2026年2月，他在播客《A Motorcycle for the Mind》中深度分享了对AI时代的思考。这是他继"如何致富"系列后最重要的思想输出。我将Naval的7个核心观点进行深度解读，帮助你建立AI时代的认知框架。
 
@@ -17,6 +19,8 @@
 ---
 
 # 01 关于Naval：为什么要解读这篇访谈
+
+![思维的摩托车](https://xiaoxiong20260206.github.io/ai-insight/02-deep-research/people/naval-ai-2026/images/01-motorcycle.jpg)
 
 **Naval Ravikant是谁？**
 
@@ -44,8 +48,6 @@
 ---
 
 # 02 思维的摩托车：从做功者到决策者
-
-![思维的摩托车](https://xiaoxiong20260206.github.io/ai-insight/02-deep-research/people/naval-ai-2026/images/01-motorcycle.jpg)
 
 > "Steve Jobs曾说电脑是思维的自行车——它让你比步行更高效地旅行。但现在，也许我们有了思维的摩托车。你仍然需要有人来驾驶它、引导它、踩油门和刹车。"
 > — Naval Ravikant, 2026年2月
