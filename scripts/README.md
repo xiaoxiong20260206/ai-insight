@@ -18,11 +18,15 @@ cp scripts/.env.template scripts/.env
 
 | 脚本 | 用途 | 使用方式 |
 |------|------|---------|
-| `send_ai_daily.py` | AI日报推送到KIM群 | `python3 scripts/send_ai_daily.py [日期] [--dry-run]` |
+| `send_ai_daily.py` | AI日报推送到KIM群(v3.5) | `python3 scripts/send_ai_daily.py [日期] [--preview] [--dry-run]` |
 | `send_ai_weekly.py` | AI周报推送到KIM | `python3 scripts/send_ai_weekly.py --to-user shenlang` |
 | `send_deep_research_card.py` | 深度调研专题推送 | `python3 scripts/send_deep_research_card.py --to-user shenlang` |
 | `send_openclaw_card.py` | OpenClaw深度洞察推送 | `python3 scripts/send_openclaw_card.py --to-user shenlang` |
-| `send_ai_daily_enhanced_preview.py` | 日报v3.4增强预览 (一次性) | `python3 scripts/send_ai_daily_enhanced_preview.py preview` |
+
+**日报推送参数**:
+- `--preview` 先发给自己预览（推荐首次使用）
+- `--dry-run` 试运行，不实际发送
+- 无参数时推送到所有群
 
 ### 🔄 同步脚本
 
@@ -84,14 +88,18 @@ scripts/
 ├── kim_client.py                          # KIM API 公共客户端模块
 ├── .env.template                          # 凭证配置模板
 ├── .env                                   # 实际凭证 (不入Git)
-├── send_ai_daily.py                       # 日报推送
-├── send_ai_daily_enhanced_preview.py      # 日报v3.4增强预览
+├── send_ai_daily.py                       # 日报推送 v3.5（支持JSON/MD双数据源）
 ├── send_ai_weekly.py                      # 周报推送
 ├── send_deep_research_card.py             # 深度调研推送
 ├── send_openclaw_card.py                  # OpenClaw推送
+├── gen_daily_html.py                      # 日报HTML生成器
 ├── sync_to_public.py                      # 脱敏同步
 ├── sync_to_external.py                    # 外部仓库同步
 ├── fix_deep_research_footers.py           # 底部修复工具
+├── fix_json_quotes.py                     # JSON中文引号修复
+├── deploy_daily.sh                        # 日报部署脚本
+├── update_tracking.py                     # 追踪体系更新
+├── update_tracking_section.py             # 追踪区块更新
 ├── com.codeflicker.ai-daily-report.plist  # 日报定时任务
 ├── com.codeflicker.ai-weekly-report.plist # 周报定时任务
 ├── run-ai-daily-report.sh                 # 日报执行脚本
