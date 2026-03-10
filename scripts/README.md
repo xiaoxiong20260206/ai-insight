@@ -18,7 +18,7 @@ cp scripts/.env.template scripts/.env
 
 | 脚本 | 用途 | 使用方式 |
 |------|------|---------|
-| `send_ai_daily.py` | AI日报推送到KIM群(v3.5) | `python3 scripts/send_ai_daily.py [日期] [--preview] [--dry-run]` |
+| `send_ai_daily.py` | AI日报推送到KIM群 | `python3 scripts/send_ai_daily.py [日期] [--preview] [--dry-run]` |
 | `send_ai_weekly.py` | AI周报推送到KIM | `python3 scripts/send_ai_weekly.py --to-user shenlang` |
 | `send_deep_research_card.py` | 深度调研专题推送 | `python3 scripts/send_deep_research_card.py --to-user shenlang` |
 | `send_openclaw_card.py` | OpenClaw深度洞察推送 | `python3 scripts/send_openclaw_card.py --to-user shenlang` |
@@ -88,7 +88,7 @@ scripts/
 ├── kim_client.py                          # KIM API 公共客户端模块
 ├── .env.template                          # 凭证配置模板
 ├── .env                                   # 实际凭证 (不入Git)
-├── send_ai_daily.py                       # 日报推送 v3.5（支持JSON/MD双数据源）
+├── send_ai_daily.py                       # 日报推送（持续迭代，支持JSON/MD双数据源）
 ├── send_ai_weekly.py                      # 周报推送
 ├── send_deep_research_card.py             # 深度调研推送
 ├── send_openclaw_card.py                  # OpenClaw推送
