@@ -167,6 +167,64 @@ async def send_to_target(
     return False
 
 
+# ============ 预检（P0强制，v4.2新增） ============
+def pre_check(date_str: str) -> tuple:
+    """
+    日报推送前强制预检 (3项检查)
+    返回: (通过:bool, 错误信息:str, 数据:dict或None)
+    
+    检查项:
+    1. JSON文件存在性+可解析
+    2. 内容非空检查 (新闻条目>0)
+    3. URL有效性 (禁止 # 占位符)
+    
+    注意：内容中的中文引号是允许的（如新闻标题中的引号），
+    只要JSON语法正确（key/value用英文引号）即可。
+    """
+    json_path = DATA_PATH / f"daily-content-{date_str}.json"
+    
+    # 1. JSON文件存在性 + 解析
+    if not json_path.exists():
+        return False, f"JSON文件不存在: {json_path}\n💡 请先运行: python3 scripts/gen_daily_json.py {date_str}", None
+    
+    try:
+        content = json_path.read_text(encoding="utf-8")
+        data = json.loads(content)
+    except json.JSONDecodeError as e:
+        return False, f"JSON解析失败: {e}\n💡 请检查JSON格式", None
+    except Exception as e:
+        return False, f"读取JSON失败: {e}", None
+    
+    # 2. 内容非空检查
+    tabs = data.get("tabs", [])
+    total_news = sum(
+        len(tab.get("news", {}).get("overseas", [])) + 
+        len(tab.get("news", {}).get("china", []))
+        for tab in tabs
+    )
+    if total_news == 0:
+        return False, f"新闻条目为0，卡片将为空\n💡 请检查JSON数据内容", None
+    
+    # 3. URL有效性（禁止 # 占位符）
+    invalid_urls = []
+    for i, tab in enumerate(tabs):
+        section_names = ["大模型", "AI Coding", "AI 应用", "AI 行业", "企业AI转型"]
+        section_name = section_names[i] if i < len(section_names) else f"板块{i+1}"
+        
+        for region in ['overseas', 'china']:
+            for item in tab.get('news', {}).get(region, []):
+                url = item.get('url', '')
+                title = item.get('title', '未知标题')
+                
+                if url == '#' or not url.startswith('http'):
+                    invalid_urls.append(f"  [{section_name}] {title[:30]} → {url}")
+    
+    if invalid_urls:
+        return False, f"发现{len(invalid_urls)}个无效链接:\n" + "\n".join(invalid_urls[:5]) + ("\n  ..." if len(invalid_urls) > 5 else ""), None
+    
+    return True, "预检通过", data
+
+
 # ============ 数据加载 ============
 def load_json_data(date_str: str) -> Optional[Dict]:
     """从JSON文件加载日报数据（优先方式）"""
@@ -416,21 +474,14 @@ async def main():
         print("🔍 [DRY-RUN 模式]")
     print("=" * 50)
     
-    # 1. 加载数据（优先JSON，兜底MD）
-    print("📖 读取日报内容...")
-    data = load_json_data(date_str)
-    data_source = "JSON"
+    # 1. 预检（P0强制，4项检查）
+    print("🔍 预检...")
+    passed, msg, data = pre_check(date_str)
     
-    if not data:
-        print("   JSON不存在，尝试从MD解析...")
-        data = parse_md_data(date_str)
-        data_source = "MD"
-    
-    if not data:
-        print(f"❌ 找不到日报数据: {date_str}")
-        print(f"   请确认存在以下文件之一:")
-        print(f"   - {DATA_PATH / f'daily-content-{date_str}.json'}")
-        print(f"   - {DAILY_REPORTS_PATH / date_str[:7] / f'{date_str}.md'}")
+    if not passed:
+        print(f"❌ 预检失败!")
+        print(f"   {msg}")
+        print(f"\n💡 请修复后重试: python3 scripts/send_ai_daily.py {date_str}")
         return
     
     # 统计
@@ -441,7 +492,7 @@ async def main():
         for tab in tabs
     )
     heat_topics = len(data.get("heat_trend", {}).get("topics", []))
-    print(f"✅ 成功读取 (来源: {data_source})")
+    print(f"✅ 预检通过!")
     print(f"   📊 {len(tabs)} 个板块, {total_news} 条新闻, {heat_topics} 个热度话题")
     
     # 2. 构建卡片
