@@ -300,7 +300,7 @@ def build_card_v35(date_str: str, data: Dict) -> dict:
     date_obj = datetime.strptime(date_str, "%Y-%m-%d")
     weekday = WEEKDAYS[date_obj.weekday()]
     month_str = date_obj.strftime("%Y-%m")
-    report_url = f"{REPORT_BASE_URL}/{month_str}/{date_str}.html"
+    report_url = f"{REPORT_BASE_URL}/{month_str}/{date_str}-v3.html"
     
     coverage = data.get("coverage", {})
     overseas = coverage.get("overseas", 0)
@@ -428,6 +428,16 @@ def build_card_v35(date_str: str, data: Dict) -> dict:
     for i, section_content in enumerate(sections):
         blocks.append({"blockId": f"sec{i+1}", "type": "content", "text": {"type": "kimMd", "content": section_content}})
         blocks.append({"blockId": f"div{i+1}", "type": "divider"})
+    
+    # 林克能力更新（可选，从data中读取）
+    capability_update = data.get("capability_update", "")
+    if capability_update:
+        blocks.append({
+            "blockId": "capability",
+            "type": "content",
+            "text": {"type": "kimMd", "content": f"🤖 **林克能力更新**\n{capability_update}"},
+        })
+        blocks.append({"blockId": "div_cap", "type": "divider"})
     
     # 页脚和按钮
     blocks.append({

@@ -1,33 +1,357 @@
 {
-  "version": "3.2",
-  "date": "2026-03-11",
-  "title": "AI 日报 - 2026年3月11日",
-  "summary": "Anthropic起诉美国政府｜Cursor年化营收20亿美元｜腾讯龙虾产品矩阵发布｜2月全球风投1890亿创纪录",
+  "coverage": {
+    "overseas": 7,
+    "china": 8
+  },
+  "overview": [
+    {
+      "icon": "🧠",
+      "label": "大模型",
+      "headline": "Anthropic起诉政府+杨立昆10亿融资",
+      "text": "Anthropic被国防部列入供应链风险名单后起诉政府；杨立昆世界模型初创获10.3亿美元"
+    },
+    {
+      "icon": "⌨️",
+      "label": "AI Coding",
+      "headline": "Cursor年化营收20亿美元+进入战时状态",
+      "text": "Cursor三月翻番ARR破20亿；内部宣布进入战时状态应对Claude Code等竞争"
+    },
+    {
+      "icon": "📱",
+      "label": "AI 应用",
+      "headline": "腾讯全系龙虾矩阵发布+SkillHub上线",
+      "text": "腾讯WorkBuddy/QClaw等全系产品发布；SkillHub社区上线收录1.3万AI技能"
+    },
+    {
+      "icon": "🏭",
+      "label": "AI 行业",
+      "headline": "2月风投1890亿创纪录+Nscale融资20亿",
+      "text": "全球风投创纪录AI占90%；AI算力公司Nscale估值146亿美元"
+    },
+    {
+      "icon": "🔄",
+      "label": "企业转型",
+      "label_class": "orange",
+      "headline": "短剧AI化+作家联名抗议",
+      "text": "AI真人剧产能爆发千倍；万名作家联名抗议AI侵权"
+    }
+  ],
+  "heat_trend": {
+    "title": "近7期日报交叉分析（3/5-3/11）",
+    "topics": [
+      {
+        "name": "Anthropic vs 美国国防部",
+        "score": 10,
+        "days": 7,
+        "trend_class": "burst",
+        "trend_label": "⚡ 持续发酵",
+        "signal": "被列入供应链风险名单+起诉政府+行业联名声援"
+      },
+      {
+        "name": "AI龙虾生态大战",
+        "score": 10,
+        "days": 4,
+        "trend_class": "up",
+        "trend_label": "📈 爆发式上涨",
+        "signal": "腾讯全系发布+深圳千人大会+无锡500万补贴"
+      },
+      {
+        "name": "Cursor商业化里程碑",
+        "score": 9,
+        "days": 3,
+        "trend_class": "up",
+        "trend_label": "📈 持续攀升",
+        "signal": "ARR破20亿美元+三月翻番+进入战时状态"
+      },
+      {
+        "name": "全球风投创纪录",
+        "score": 9,
+        "days": 2,
+        "trend_class": "up",
+        "trend_label": "📈 持续攀升",
+        "signal": "2月1890亿美元+AI占90%+三巨头1560亿"
+      },
+      {
+        "name": "杨立昆世界模型融资",
+        "score": 8,
+        "days": 1,
+        "trend_class": "new",
+        "trend_label": "🆕 新兴话题",
+        "signal": "LeCun AI初创获10.3亿美元"
+      },
+      {
+        "name": "Nscale AI算力新贵",
+        "score": 8,
+        "days": 1,
+        "trend_class": "new",
+        "trend_label": "🆕 新兴话题",
+        "signal": "20亿美元C轮+估值146亿美元"
+      }
+    ],
+    "summary": "本期最强信号是<strong>Anthropic与美国政府的正面冲突</strong>——被国防部列入供应链风险名单后起诉政府，OpenAI和Google员工联名声援，AI行业首次出现头部公司与政府公开对抗。<strong>AI龙虾生态大战</strong>全面开打——腾讯WorkBuddy/QClaw全系发布，深圳无锡政府纷纷出台支持政策。<strong>Cursor</strong>以20亿美元年化营收+进入战时状态证明AI编程竞争白热化。"
+  },
+  "tabs": [
+    {
+      "news": {
+        "overseas": [
+          {
+            "tag": "hot",
+            "title": "Anthropic被美国国防部列入供应链风险名单：起诉政府引发行业震动",
+            "url": "https://www.anthropic.com/news/where-stand-department-war",
+            "source": "Anthropic · 3月5日",
+            "details": {
+              "finding": "Anthropic收到国防部确认函，被认定为国家安全供应链风险，CEO Dario Amodei发表声明表示将起诉政府",
+              "highlight": "将在法庭挑战该决定 | 绝大多数客户不受影响 | 继续以名义成本支持国防社区",
+              "impact": "AI行业首次出现头部公司与政府正面法律对抗，标志着AI治理进入新的复杂阶段"
+            }
+          },
+          {
+            "tag": "hot",
+            "title": "杨立昆AI初创公司完成10.3亿美元融资：进军世界模型",
+            "url": "https://news.crunchbase.com/ai/yann-lecun-startup-funding-world-model/",
+            "source": "Crunchbase · 3月11日",
+            "details": {
+              "finding": "图灵奖得主Yann LeCun参与创立的AI初创公司完成大额融资，专注于世界模型研究方向"
+            }
+          },
+          {
+            "tag": "trend",
+            "title": "OpenAI与Google员工联名声援Anthropic起诉国防部",
+            "url": "https://www.theverge.com/2026/3/11/anthropic-lawsuit-defense-department",
+            "source": "The Verge · 3月11日",
+            "details": {
+              "finding": "多家AI公司员工联名支持Anthropic的法律行动，行业罕见的竞争对手相互声援"
+            }
+          }
+        ],
+        "china": [
+          {
+            "title": "阿里Qwen管理层调整：周靖人代管千问模型一号位",
+            "url": "https://mp.weixin.qq.com/s?src=11&timestamp=1773192474&ver=6591&signature=u3HI4DCCF-YMu9*iSNis6xDFG9-JuTomTAaydT3xt3v1epxKlgIs1GkOPlAFVDCuzEKabq8c6qEn5pBY4ygOvk*LXZ4VJYr7RzHx-CipcVBi51tNEYtNE6JCTzJoBMQR&new=1",
+            "source": "公众号 · 3月11日",
+            "details": {
+              "finding": "阿里云CTO周靖人将代管通义千问模型团队一号位，阿里持续调整AI战略布局"
+            }
+          },
+          {
+            "title": "中国大模型周调用量蝉联全球第一：MiniMax M2.5稳坐头把交椅",
+            "url": "https://mp.weixin.qq.com/s?src=11&timestamp=1773192474&ver=6591&signature=7-Dmz1HJUzjag**rNVgMcD3l016pLW68y9RmEKCaORz7M6eKdvel3b-lzSN-85efqKHqXTCUn1Wq0tLmpViVQFD8mJE2aj5jInayAjJtIlRx0icsS1Fr53ngk6TpYnZ*&new=1",
+            "source": "公众号 · 3月11日",
+            "details": {
+              "finding": "中国大模型周调用量连续保持全球第一，MiniMax M2.5凭借多模态能力持续领先"
+            }
+          }
+        ]
+      },
+      "focus": {
+        "title": "Anthropic vs 美国政府：AI行业的反垄断时刻？",
+        "summary": "Anthropic被美国国防部列入供应链风险名单，是AI行业发展史上的标志性事件。CEO Dario Amodei的声明透露：1) 法律依据存疑，将通过法庭挑战；2) 影响范围有限，仅适用于国防部合同；3) 行业团结，OpenAI和Google员工联名声援。这次事件将定义AI公司与政府的边界、AI军事应用的红线、以及行业自律的标准。"
+      }
+    },
+    {
+      "news": {
+        "overseas": [
+          {
+            "tag": "hot",
+            "title": "Cursor年化营收突破20亿美元：三个月翻番创AI编程新纪录",
+            "url": "https://news.crunchbase.com/ai/cursor-2-billion-arr-ai-coding/",
+            "source": "Crunchbase · 3月11日",
+            "details": {
+              "finding": "AI编程工具Cursor的年化收入已突破20亿美元，较三个月前翻倍，约60%收入来自企业客户",
+              "highlight": "ARR 20亿美元 | 三月翻番 | 企业客户占60%",
+              "impact": "AI编程工具已进入商业化爆发期，Cursor证明了独立AI编程工具的可行性"
+            }
+          },
+          {
+            "tag": "hot",
+            "title": "Anthropic发布Claude Code代码审查工具：专治Vibe Coding后遗症",
+            "url": "https://www.anthropic.com/news/claude-code-review",
+            "source": "Anthropic · 3月11日",
+            "details": {
+              "finding": "Anthropic在Claude Code中推出AI代码审查功能，专门解决Vibe Coding带来的代码质量问题",
+              "highlight": "自动审查AI生成代码 | 识别潜在安全风险 | 集成PR工作流",
+              "impact": "AI编程进入生成+审查双轮模式，代码质量保障成为新竞争点"
+            }
+          }
+        ],
+        "china": [
+          {
+            "tag": "hot",
+            "title": "Cursor进入战时状态：捍卫AI编程领先地位",
+            "url": "https://mp.weixin.qq.com/s?src=11&timestamp=1773192474&ver=6591&signature=jgCBh-N8cHPDrs58PSB0hbkGRVVflwXBODheRfUFWx6TZvYqgB0DfN3lL5vCC5kOaNyzSZmyDYp9MzmXnqvObU-1LDPyYY9V4pTs*K98gfbv2I0TvfsUdfOdPdIknSQc&new=1",
+            "source": "公众号 · 3月11日",
+            "details": {
+              "finding": "Cursor内部宣布进入战时状态，面对Claude Code、Copilot、国产工具等多方竞争全力应对"
+            }
+          }
+        ]
+      },
+      "focus": {
+        "title": "Cursor商业化奇迹：20亿美元背后的AI编程革命",
+        "summary": "Cursor在三个月内将年化营收从10亿翻到20亿美元，几个关键点：1) 企业客户主导：60%收入来自企业，AI编程已从个人工具进化为企业级基础设施；2) 竞争反应：Cursor内部进入战时状态；3) 市场证明：独立AI编程工具可以构建独立商业模式；4) 行业影响：代码质量保障成为新竞争点。"
+      }
+    },
+    {
+      "news": {
+        "overseas": [
+          {
+            "tag": "new",
+            "title": "ChatGPT推出交互式数学学习功能：70+主题支持实时实验",
+            "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
+            "source": "OpenAI · 3月10日",
+            "details": {
+              "finding": "ChatGPT新增交互式可视化模块，支持勾股定理、理想气体定律等70+数学和科学主题的实时变量调整"
+            }
+          }
+        ],
+        "china": [
+          {
+            "tag": "hot",
+            "title": "腾讯全系龙虾产品矩阵发布：WorkBuddy/QClaw一键开启AI特工时代",
+            "url": "https://mp.weixin.qq.com/s?src=11&timestamp=1773192489&ver=6591&signature=aGiCI8AaIi26Gtt9xY2t8hZZjskSdtMVUQfg8IVtBRIhnFqKIKwdf4khPnqKjyAtlcTW6GNWEneiYTFV*DQ8CZbkOcRNbRYsPX7MLz4XeSY0H72LtyfiwGnknhuparvu&new=1",
+            "source": "公众号 · 3月11日",
+            "details": {
+              "finding": "腾讯一口气发布WorkBuddy、QClaw等全系龙虾（AI Agent）产品，1分钟连接企微，智能体大战进入桌面时代",
+              "highlight": "首日流量超预期 | 紧急扩容10倍 | 发布致歉补偿",
+              "impact": "腾讯凭借企微/QQ生态优势全面入局AI Agent，国内龙虾大战正式打响"
+            }
+          },
+          {
+            "tag": "hot",
+            "title": "SkillHub社区正式上线：收录超1.3万个AI技能",
+            "url": "https://mp.weixin.qq.com/s?src=11&timestamp=1773192489&ver=6591&signature=dWnfMtsj6EBnNYnh4KPmjpkK1u8wZxTurgDe11F3QQDEHIG5Npe7c7pBjqn5vxLJKPcQ18eo0eBVOkpSr32TxKCRJ5nP1R3HJmydQoaTKCIE9czbgs46r4fFZUaUCpu9&new=1",
+            "source": "公众号 · 3月11日",
+            "details": {
+              "finding": "腾讯SkillHub社区上线，针对中国用户优化，收录超过1.3万个AI技能",
+              "highlight": "1.3万+技能 | 中国用户优化 | 企业级集成",
+              "impact": "AI技能生态正在成为新的竞争维度"
+            }
+          },
+          {
+            "title": "网易龙虾开源LobsterAI发布0.2.2版本：接入企微及QQ",
+            "url": "https://mp.weixin.qq.com/s?src=11&timestamp=1773192489&ver=6591&signature=XTWxFXd1Vm1xc112*QRyWv7IoqXaLpXL0CSt*sXf9m2p0Kyq3t*MxCtSBmOTpy5jSOar11mruZJoNVaMx1do*Aqwjwr71P4070lOmtVXmo49DltcIuUuOXDustnM3DqD&new=1",
+            "source": "公众号 · 3月11日",
+            "details": {
+              "finding": "网易开源AI Agent框架LobsterAI更新，支持企业微信和QQ接入"
+            }
+          },
+          {
+            "tag": "policy",
+            "title": "深圳龙岗联合Kimi举办千人龙虾大会：助阵OpenClaw部署",
+            "url": "https://mp.weixin.qq.com/s?src=11&timestamp=1773192489&ver=6591&signature=Mr5t5qfWAY9XPBE3rQclZoaksyNfFsdhnXCazdD4orCkcTwGJ8ovPTylx8MyuiBFk26dA5XMsZSkT9NFuazuu4e1lXobRn6jpmgHeaHF-zHPokYWk2pjn-bVIriLAWLR&new=1",
+            "source": "公众号 · 3月11日",
+            "details": {
+              "finding": "深圳龙岗区与月之暗面Kimi联合举办千人龙虾大会，推动OpenClaw本地化部署"
+            }
+          }
+        ]
+      },
+      "focus": {
+        "title": "AI龙虾大战：中国版ChatGPT应用商店的三国杀",
+        "summary": "龙虾（AI Agent）正在成为2026年中国AI最热的应用赛道。三股力量：1) 腾讯系：WorkBuddy+QClaw，依托企微/QQ生态，主打1分钟接入；2) 网易开源：LobsterAI开源框架，走社区路线；3) OpenClaw生态：Kimi/深圳政府推动的千人大会，无锡500万补贴。这场大战的本质是AI Agent的分发渠道之争。"
+      }
+    },
+    {
+      "news": {
+        "overseas": [
+          {
+            "tag": "hot",
+            "title": "2月全球风投创1890亿美元纪录：AI占90%，三巨头融资1560亿",
+            "url": "https://news.crunchbase.com/venture/record-setting-global-funding-february-2026-openai-anthropic/",
+            "source": "Crunchbase · 3月10日",
+            "details": {
+              "finding": "2月全球风投总额达1890亿美元，创历史单月纪录；83%资金流向OpenAI/Anthropic/Waymo三家",
+              "highlight": "同比增长780% | AI占90% | 美国占92%",
+              "impact": "AI融资进入超级周期，但资本高度集中于头部"
+            }
+          },
+          {
+            "tag": "hot",
+            "title": "Nscale完成20亿美元C轮融资：估值146亿美元成AI算力新贵",
+            "url": "https://news.crunchbase.com/ai/nscale-funding-round-20b-valuation/",
+            "source": "Crunchbase · 3月11日",
+            "details": {
+              "finding": "AI算力基础设施公司Nscale完成20亿美元C轮融资，估值达到146亿美元",
+              "impact": "AI算力基础设施依然是资本追逐的核心赛道"
+            }
+          }
+        ],
+        "china": [
+          {
+            "tag": "policy",
+            "title": "无锡高新区发布支持OpenClaw开源项目12条措施：单项补贴最高500万",
+            "url": "https://mp.weixin.qq.com/s?src=11&timestamp=1773192489&ver=6591&signature=or7G5xNcwzf00Q2wA2usv7meC8cFchaYw34RKPGy-8v3Wnb-eGK4tFFZZO7oZBJQ00B5tdOlTF*BZEheqoAccNtfX4EK6SiMw5KwAuNeEN3ERfBH6azNopB-zIMe7Rxy&new=1",
+            "source": "公众号 · 3月11日",
+            "details": {
+              "finding": "无锡高新区出台12条支持措施，对OpenClaw开源项目单项补贴最高500万元"
+            }
+          }
+        ]
+      },
+      "focus": {
+        "title": "1890亿美元：AI融资的超级泡沫还是范式转移？",
+        "summary": "2月全球风投1890亿美元的纪录数字背后：1) 极度集中：83%资金流向三家公司，不是行业繁荣，而是头部通吃；2) AI主导：AI占90%，非AI领域融资实际在萎缩；3) 美国绝对主导：92%资金流向美国；4) 早期萎缩：种子轮同比下降11%，新项目启动在减少。对创业者来说，要么做到头部，要么找到头部企业生态位——中间地带正在消失。"
+      }
+    },
+    {
+      "news": {
+        "overseas": [
+          {
+            "title": "微软CEO纳德拉：别担心被AI替代，真正危机是拒绝学习新技能",
+            "url": "https://www.cnbc.com/2026/03/11/microsoft-nadella-ai-job-skills.html",
+            "source": "CNBC · 3月11日",
+            "details": {
+              "finding": "萨提亚·纳德拉强调，AI不会替代会学习的人，真正的职业风险是拒绝适应变化"
+            }
+          }
+        ],
+        "china": [
+          {
+            "tag": "hot",
+            "title": "短剧行业迎来大地震：AI真人剧产能爆发千倍",
+            "url": "https://mp.weixin.qq.com/s?src=11&timestamp=1773192489&ver=6591&signature=k9oYpzp2fwcRLZRUg5n*OUvMtffGJf0ivXfWS4zZXIYLWk8H7AgcjmpTBBGZCdmuNQjzXBZMGGaD3bDmafmO-cjmFw0Jb48xSO1gKi2LW1XuYiMpf-MEgLMI*eNol5Kf&new=1",
+            "source": "公众号 · 3月11日",
+            "details": {
+              "finding": "短剧行业取消真人制作保底要求，AI生成真人短剧产能实现千倍级爆发",
+              "impact": "内容创作正在从稀缺资源变成过剩商品"
+            }
+          },
+          {
+            "title": "万名作家联名出版空白书：石黑一雄等巨匠抗议AI侵权",
+            "url": "https://mp.weixin.qq.com/s?src=11&timestamp=1773192489&ver=6591&signature=FHrRvCRKsoieQEaDRXJ6py3HOJa4XpprNfoNdkPEVFtUKPjfjFhoHlTsUyGrXOe2r5S3v41-8McFbrSoHFP8bxikU048yFCulIXryyGqsIpWpNkUopyFd2GGQqzXSDmz&new=1",
+            "source": "公众号 · 3月11日",
+            "details": {
+              "finding": "全球万名作家联名出版空白书籍，抗议AI公司未经授权使用作品训练模型"
+            }
+          }
+        ]
+      },
+      "focus": {
+        "title": "短剧AI化：内容产业的iPhone时刻",
+        "summary": "真人制作保底取消+AI真人剧产能千倍爆发预示着内容产业的根本性变革：1) 生产力跃升：从人拍到AI生成，产能指数级爆发；2) 成本坍塌：人力、场地、时间成本大幅下降；3) 创意民主化：小团队也能生产准专业级短剧；4) 版权新战场：万名作家联名抗议。内容创作正在从稀缺资源变成过剩商品，未来竞争的核心不是谁能创作，而是谁能分发和谁能获得注意力。"
+      }
+    }
+  ],
   "highlights": [
     {
       "sector": "大模型",
-      "headline": "GPT-5.4 Thinking发布+Anthropic起诉政府",
-      "detail": "OpenAI发布GPT-5.4集成最强编程与推理；Anthropic被国防部列入供应链风险名单后起诉政府"
+      "headline": "Anthropic起诉政府+杨立昆10亿融资"
     },
     {
       "sector": "AI Coding",
-      "headline": "Cursor年化营收20亿美元+Claude Code审查工具",
-      "detail": "Cursor三月翻番ARR破20亿；Anthropic发布代码审查工具专治Vibe Coding后遗症"
+      "headline": "Cursor年化营收20亿美元+进入战时状态"
     },
     {
       "sector": "AI 应用",
-      "headline": "腾讯全系龙虾矩阵发布+SkillHub上线",
-      "detail": "腾讯WorkBuddy/QClaw等全系产品发布；SkillHub社区上线收录1.3万AI技能"
+      "headline": "腾讯全系龙虾矩阵发布+SkillHub上线"
     },
     {
       "sector": "AI 行业",
-      "headline": "2月风投1890亿创纪录+杨立昆10亿融资",
-      "detail": "全球风投创纪录AI占90%；OpenAI/Anthropic/Waymo三巨头融资1560亿"
+      "headline": "2月风投1890亿创纪录+Nscale融资20亿"
     },
     {
       "sector": "企业转型",
-      "headline": "短剧AI化+作家联名抗议",
-      "detail": "AI真人剧产能爆发千倍；万名作家联名抗议AI侵权"
+      "headline": "短剧AI化+作家联名抗议"
     }
   ],
   "hot_topics": [
@@ -36,31 +360,45 @@
       "topic": "Anthropic vs 美国国防部",
       "heat": 98,
       "days": 7,
-      "trend": "持续发酵",
-      "signal": "被列入供应链风险名单+起诉政府+行业联名声援"
+      "trend": "持续发酵"
     },
     {
       "rank": 2,
       "topic": "AI龙虾生态大战",
       "heat": 96,
       "days": 4,
-      "trend": "爆发式上涨",
-      "signal": "腾讯全系发布+深圳千人大会+无锡500万补贴"
+      "trend": "爆发式上涨"
     },
     {
       "rank": 3,
       "topic": "Cursor商业化里程碑",
       "heat": 92,
       "days": 3,
-      "trend": "持续攀升",
-      "signal": "ARR破20亿美元+三月翻番+60%企业客户"
+      "trend": "持续攀升"
     }
   ],
   "key_metrics": [
-    {"name": "Cursor年化营收", "value": "20亿美元", "change": "三月翻番"},
-    {"name": "2月全球风投总额", "value": "1890亿美元", "change": "创历史纪录"},
-    {"name": "AI融资占比", "value": "90%", "change": "2月全球风投"},
-    {"name": "SkillHub技能数", "value": "1.3万+", "change": "腾讯上线"}
+    {
+      "name": "Cursor年化营收",
+      "value": "20亿美元",
+      "change": "三月翻番"
+    },
+    {
+      "name": "2月全球风投总额",
+      "value": "1890亿美元",
+      "change": "创历史纪录"
+    },
+    {
+      "name": "AI融资占比",
+      "value": "90%",
+      "change": "2月全球风投"
+    },
+    {
+      "name": "SkillHub技能数",
+      "value": "1.3万+",
+      "change": "腾讯上线"
+    }
   ],
-  "report_url": "https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-03/2026-03-11-v3.html"
+  "report_url": "https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-03/2026-03-11-v3.html",
+  "capability_update": "本期日报新增两项能力：\n- 📱 **微信公众号抓取** — 接入weixin_search MCP，实现公众号文章的关键词搜索和正文提取，补齐国内AI信息源\n- ⏱️ **链接时效性验证** — 强制检查新闻链接发布日期，确保所有来源都在时间窗口内，避免过时链接混入"
 }
