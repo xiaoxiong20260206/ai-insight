@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 日报 - 2026-03-11 (v3.2)</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231A7F37'/><circle cx='16' cy='14' r='6' fill='none' stroke='white' stroke-width='2'/><path d='M12 12h8M16 10v4M10 22c0-3.3 2.7-6 6-6s6 2.7 6 6' fill='none' stroke='white' stroke-width='2' stroke-linecap='round'/></svg>">
+    <style>
+        :root {
+            --color-success:#059669;--color-success-light:#10B981;--color-danger:#E11D48;--color-danger-light:#FF7B72;--color-warning:#D97706;--color-info:#2563EB;--color-info-light:#54AEFF;--color-purple:#7C3AED;--color-orange:#EA580C;--color-text-primary:#1C1917;--color-text-secondary:#57534E;--color-text-muted:#78716C;--color-border:#E7E5E4;--color-border-light:#F5F5F4;--color-bg:#F8FAFB;--color-bg-card:#FFFFFF;--color-bg-table-header:#FAFAF9;--gradient-success:linear-gradient(135deg,#059669 0%,#10B981 100%);--gradient-orange:linear-gradient(135deg,#EA580C 0%,#F97316 100%);--gradient-purple:linear-gradient(135deg,#7C3AED 0%,#6D28D9 50%,#5B21B6 100%);--gradient-china:linear-gradient(135deg,#DC2626 0%,#EF4444 100%);--shadow-card:0 2px 8px rgba(31,35,40,.06),0 1px 2px rgba(31,35,40,.04);--radius-sm:6px;--radius-md:10px;--radius-lg:14px;--radius-full:999px;--font-family:-apple-system,"system-ui","Segoe UI","Noto Sans SC",Helvetica,Arial,sans-serif;--transition-normal:200ms cubic-bezier(.4,0,.2,1);--content-max-width:980px;
+        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:var(--font-family);background:var(--color-bg);color:var(--color-text-primary);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+        .container{max-width:var(--content-max-width);margin:0 auto;padding:24px 20px}
+        .header{background:var(--gradient-success);color:#fff;border-radius:var(--radius-lg);padding:28px 32px;margin-bottom:20px}
+        .header-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.2);padding:4px 12px;border-radius:var(--radius-full);font-size:12px;font-weight:600;letter-spacing:.5px;margin-bottom:12px}
+        .header-title{font-size:26px;font-weight:800;letter-spacing:-.5px;margin-bottom:6px}
+        .header-date{font-size:14px;opacity:.85}
+        .version-badge{display:inline-flex;align-items:center;background:rgba(255,255,255,.25);padding:2px 8px;border-radius:var(--radius-full);font-size:11px;font-weight:700;margin-left:8px}
+        .overview{background:var(--color-bg-card);border:1px solid var(--color-border-light);border-radius:var(--radius-lg);padding:24px;margin-bottom:20px;box-shadow:var(--shadow-card)}
+        .overview-title{font-size:18px;font-weight:800;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+        .overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+        .overview-grid.five-cols{grid-template-columns:1fr 1fr 1fr}
+        .overview-item{padding:14px 16px;border-radius:var(--radius-md);border:1px solid var(--color-border-light);background:var(--color-bg)}
+        .overview-item-header{display:flex;align-items:center;gap:6px;margin-bottom:6px}
+        .overview-item-icon{font-size:16px}
+        .overview-item-label{font-size:13px;font-weight:700;color:var(--color-success-light);letter-spacing:.3px}
+        .overview-item-label.orange{color:var(--color-orange)}
+        .overview-headline{font-size:15px;font-weight:700;color:var(--color-text-primary);margin-bottom:6px;line-height:1.4}
+        .overview-item-text{font-size:13px;color:var(--color-text-secondary);line-height:1.6}
+        .heat-card{background:var(--color-bg-card);border:1px solid var(--color-border-light);border-radius:var(--radius-lg);margin-bottom:20px;overflow:hidden;box-shadow:var(--shadow-card)}
+        .heat-header{background:linear-gradient(135deg,#EA580C 0%,#DC2626 50%,#B91C1C 100%);color:#fff;padding:18px 24px}
+        .heat-header-label{font-size:13px;font-weight:600;opacity:.85;letter-spacing:.5px}
+        .heat-header-title{font-size:17px;font-weight:800;margin-top:4px}
+        .heat-body{padding:16px 20px}
+        .heat-body p{font-size:14px;color:var(--color-text-secondary);line-height:1.7;margin-top:12px}
+        .heat-body p strong{color:var(--color-text-primary)}
+        .heat-table{width:100%;border-collapse:collapse;font-size:13px}
+        .heat-table th{padding:8px 10px;text-align:left;background:#FEF2F2;font-weight:700;color:#991B1B;border-bottom:2px solid #FECACA;font-size:12px}
+        .heat-table td{padding:10px;border-bottom:1px solid var(--color-border-light);vertical-align:top}
+        .heat-table tr:last-child td{border-bottom:none}
+        .heat-table tr:hover{background:rgba(234,88,12,.02)}
+        .heat-bar{display:flex;gap:2px;align-items:center}
+        .heat-bar-fill{width:10px;height:14px;border-radius:2px;background:linear-gradient(135deg,#EA580C,#DC2626)}
+        .heat-bar-empty{width:10px;height:14px;border-radius:2px;background:#F5F5F4}
+        .heat-trend-tag{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:var(--radius-full);font-size:11px;font-weight:600}
+        .heat-trend-tag.up{background:#EFFDF5;color:#059669}
+        .heat-trend-tag.stable{background:#EFF6FF;color:#2563EB}
+        .heat-trend-tag.burst{background:#FEF2F2;color:#DC2626}
+        .heat-trend-tag.new{background:#FEF2F2;color:#DC2626}
+        .tab-nav{display:flex;gap:4px;margin-bottom:20px;background:var(--color-bg-card);border:1px solid var(--color-border-light);border-radius:var(--radius-md);padding:4px;box-shadow:var(--shadow-card);flex-wrap:wrap}
+        .tab-btn{flex:1;padding:10px 8px;border:none;background:transparent;cursor:pointer;font-size:13px;font-weight:600;color:var(--color-text-muted);border-radius:var(--radius-sm);transition:var(--transition-normal);font-family:var(--font-family);min-width:80px}
+        .tab-btn:hover{color:var(--color-text-primary);background:var(--color-bg)}
+        .tab-btn[aria-selected="true"]{background:var(--gradient-success);color:#fff}
+        .tab-btn.orange[aria-selected="true"]{background:var(--gradient-orange)}
+        .tab-panel{display:none}.tab-panel.active{display:block}
+        .section-card{background:var(--color-bg-card);border:1px solid var(--color-border-light);border-radius:var(--radius-lg);padding:24px;margin-bottom:16px;box-shadow:var(--shadow-card)}
+        .section-header{font-size:16px;font-weight:700;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--color-border-light);display:flex;align-items:center;gap:8px}
+        .section-header .num{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--gradient-success);color:#fff;font-size:12px;font-weight:700}
+        .section-header .num.orange{background:var(--gradient-orange)}
+        .sub-header{font-size:14px;font-weight:700;color:var(--color-text-muted);margin:14px 0 10px;padding-left:4px;letter-spacing:.5px}
+        .sub-header:first-child{margin-top:0}
+        .news-item{padding:12px 0;border-bottom:1px solid var(--color-border-light)}
+        .news-item:last-child{border-bottom:none}
+        .news-tag{display:inline-block;padding:2px 8px;border-radius:var(--radius-full);font-size:11px;font-weight:600}
+        .tag-hot{background:#FEF2F2;color:var(--color-danger)}
+        .tag-new{background:#EFFDF5;color:var(--color-success)}
+        .tag-policy{background:#FFF7ED;color:var(--color-orange)}
+        .news-title{font-size:15px;font-weight:600;margin:4px 0 3px}
+        .news-title a{color:var(--color-text-primary);text-decoration:none}
+        .news-title a:hover{color:var(--color-success)}
+        .news-source{font-size:12px;color:var(--color-text-muted)}
+        .news-detail{margin-top:8px;display:flex;flex-direction:column;gap:4px}
+        .news-detail-row{display:flex;align-items:flex-start;gap:8px;font-size:13.5px;line-height:1.6}
+        .news-detail-label{flex-shrink:0;font-weight:700;color:var(--color-success);font-size:12px;padding:1px 0;min-width:60px}
+        .news-detail-value{color:var(--color-text-secondary);flex:1}
+        .news-detail-value strong{color:var(--color-text-primary);font-weight:600}
+        .deep-focus-card{background:var(--color-bg-card);border:1px solid var(--color-border-light);border-radius:var(--radius-lg);padding:0;margin-bottom:16px;box-shadow:var(--shadow-card);overflow:hidden}
+        .deep-focus-header{background:var(--gradient-purple);color:#fff;padding:18px 24px}
+        .deep-focus-label{font-size:13px;font-weight:600;opacity:.85;letter-spacing:.5px}
+        .deep-focus-title{font-size:17px;font-weight:800;margin-top:4px;line-height:1.4}
+        .deep-focus-body{padding:20px 24px}
+        .deep-focus-body p{font-size:14.5px;color:var(--color-text-secondary);line-height:1.8;margin-bottom:14px}
+        .deep-focus-body p:last-child{margin-bottom:0}
+        .deep-focus-body p strong{color:var(--color-text-primary)}
+        .deep-focus-takeaway{margin-top:16px;padding:14px 16px;background:linear-gradient(135deg,#F5F3FF 0%,#EDE9FE 100%);border-radius:var(--radius-md);border-left:4px solid var(--color-purple)}
+        .deep-focus-takeaway-label{font-size:12px;font-weight:700;color:var(--color-purple);margin-bottom:6px;letter-spacing:.5px}
+        .deep-focus-takeaway-text{font-size:13.5px;color:var(--color-text-secondary);line-height:1.7}
+        .deep-focus-takeaway-text strong{color:var(--color-text-primary)}
+        .data-table{width:100%;border-collapse:collapse;margin-top:16px;font-size:14px}
+        .data-table th,.data-table td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--color-border-light)}
+        .data-table th{background:var(--color-bg-table-header);font-weight:600;color:var(--color-text-secondary)}
+        .data-table td{color:var(--color-text-primary)}
+        .data-table tr:last-child td{border-bottom:none}
+        .coverage-bar{margin-bottom:20px;background:var(--color-bg-card);border:1px solid var(--color-border-light);border-radius:var(--radius-md);padding:12px 16px;box-shadow:var(--shadow-card);display:flex;align-items:center;gap:16px;font-size:13px}
+        .coverage-bar .label{font-weight:700;color:var(--color-text-muted)}
+        .coverage-bar .bar{flex:1;height:8px;background:#E7E5E4;border-radius:4px;overflow:hidden;display:flex}
+        .coverage-bar .bar-overseas{background:var(--gradient-success);height:100%}
+        .coverage-bar .bar-china{background:var(--gradient-china);height:100%}
+        .coverage-bar .stats{display:flex;gap:12px;font-weight:600}
+        .coverage-bar .stat-overseas{color:var(--color-success)}
+        .coverage-bar .stat-china{color:#DC2626}
+        .footer{text-align:center;padding:24px;font-size:12px;color:var(--color-text-muted);border-top:1px solid var(--color-border-light);margin-top:24px}
+        @media(max-width:768px){
+            .overview-grid,.overview-grid.five-cols{grid-template-columns:1fr}
+            .tab-btn{font-size:11px;padding:8px 4px;min-width:60px}
+            .news-detail-row{flex-direction:column;gap:2px}
+            .news-detail-label{min-width:auto}
+            .deep-focus-header{padding:14px 18px}
+            .deep-focus-body{padding:16px 18px}
+            .coverage-bar{flex-direction:column;gap:8px}
+            .heat-table{font-size:12px}
+            .heat-table th,.heat-table td{padding:6px 4px}
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-badge">📡 AI行业洞察项目 - AI日报</div>
+            <div class="header-title">AI 日报 <span class="version-badge">v3.2</span></div>
+            <div class="header-date">2026年3月11日 周三 | 五大板块：大模型 · AI Coding · AI应用 · AI行业 · 企业转型</div>
+        </div>
+
+        <div class="coverage-bar">
+            <span class="label">📊 覆盖均衡</span>
+            <div class="bar">
+                <div class="bar-overseas" style="width:55%"></div>
+                <div class="bar-china" style="width:45%"></div>
+            </div>
+            <div class="stats">
+                <span class="stat-overseas">🌏 海外 7条</span>
+                <span class="stat-china">🇨🇳 国内 6条</span>
+            </div>
+        </div>
+
+        <div class="overview">
+            <div class="overview-title">📋 全文概览</div>
+            <div class="overview-grid five-cols">
+                <div class="overview-item">
+                    <div class="overview-item-header"><span class="overview-item-icon">🧠</span><span class="overview-item-label">大模型</span></div>
+                    <div class="overview-headline">GTC 2026倒计时5天，Feynman芯片即将发布</div>
+                    <div class="overview-item-text">黄仁勋将发布"突破物理极限"芯片；英伟达投资Thinking Machines部署1GW算力；DeepSeek V4传闻下周</div>
+                </div>
+                <div class="overview-item">
+                    <div class="overview-item-header"><span class="overview-item-icon">⌨️</span><span class="overview-item-label">AI Coding</span></div>
+                    <div class="overview-headline">OpenClaw登顶GitHub历史第一，13家大厂"养龙虾"</div>
+                    <div class="overview-item-text">28.4万Stars超越Linux；Mac mini销量暴涨；安全隐患曝光数百实例泄露API密钥</div>
+                </div>
+                <div class="overview-item">
+                    <div class="overview-item-header"><span class="overview-item-icon">📱</span><span class="overview-item-label">AI 应用</span></div>
+                    <div class="overview-headline">OpenAI收购Promptfoo，Claude日注册破百万</div>
+                    <div class="overview-item-text">AI Agent安全成焦点；Claude在Play Store超越ChatGPT；智能体安全成必选项</div>
+                </div>
+                <div class="overview-item">
+                    <div class="overview-item-header"><span class="overview-item-icon">🏭</span><span class="overview-item-label">AI 行业</span></div>
+                    <div class="overview-headline">2月全球VC创纪录$1890亿，资本高度集中</div>
+                    <div class="overview-item-text">OpenAI/Anthropic/Waymo包揽83%；国产算力寒序科技突围"内存墙"</div>
+                </div>
+                <div class="overview-item">
+                    <div class="overview-item-header"><span class="overview-item-icon">🔄</span><span class="overview-item-label orange">企业转型</span></div>
+                    <div class="overview-headline">字节自研芯片+阿里云金山算力中心加速</div>
+                    <div class="overview-item-text">国产算力自主化；河南发布"AI+交通"行动方案；企业AI基础设施建设加速</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="heat-card">
+            <div class="heat-header">
+                <div class="heat-header-label">🔥 热度趋势</div>
+                <div class="heat-header-title">近7期日报交叉分析（3/5-3/11）</div>
+            </div>
+            <div class="heat-body">
+                <table class="heat-table">
+                    <thead><tr><th>排名</th><th>话题</th><th>热度</th><th>天数</th><th>趋势</th><th>核心信号</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td>🥇</td>
+                            <td><strong>GTC 2026倒计时+Feynman芯片</strong></td>
+                            <td><div class="heat-bar"><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span></div></td>
+                            <td>5天</td>
+                            <td><span class="heat-trend-tag up">📈 攀升</span></td>
+                            <td>3月16日主题演讲+Feynman芯片+"突破物理极限"</td>
+                        </tr>
+                        <tr>
+                            <td>🥈</td>
+                            <td><strong>OpenClaw龙虾Agent爆火</strong></td>
+                            <td><div class="heat-bar"><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-empty"></span></div></td>
+                            <td>7天</td>
+                            <td><span class="heat-trend-tag burst">⚡ 爆发</span></td>
+                            <td>28.4万Stars历史第一+13家大厂跟进+安全隐患</td>
+                        </tr>
+                        <tr>
+                            <td>🥉</td>
+                            <td><strong>AI融资超级周期</strong></td>
+                            <td><div class="heat-bar"><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-empty"></span></div></td>
+                            <td>9天</td>
+                            <td><span class="heat-trend-tag up">📈 攀升</span></td>
+                            <td>2月$1890亿创纪录+OpenAI $1100亿</td>
+                        </tr>
+                        <tr>
+                            <td>4️⃣</td>
+                            <td><strong>AI Coding工具三国演义</strong></td>
+                            <td><div class="heat-bar"><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-empty"></span><span class="heat-bar-empty"></span></div></td>
+                            <td>9天</td>
+                            <td><span class="heat-trend-tag up">📈 攀升</span></td>
+                            <td>Cursor/Claude Code/OpenClaw三足鼎立</td>
+                        </tr>
+                        <tr>
+                            <td>5️⃣</td>
+                            <td><strong>OpenAI收购Promptfoo</strong></td>
+                            <td><div class="heat-bar"><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-empty"></span><span class="heat-bar-empty"></span></div></td>
+                            <td>1天</td>
+                            <td><span class="heat-trend-tag new">⚡ 突发</span></td>
+                            <td>AI Agent安全成关键+25%财富500强采用</td>
+                        </tr>
+                        <tr>
+                            <td>6️⃣</td>
+                            <td><strong>国产AI芯片突围</strong></td>
+                            <td><div class="heat-bar"><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-empty"></span><span class="heat-bar-empty"></span><span class="heat-bar-empty"></span></div></td>
+                            <td>3天</td>
+                            <td><span class="heat-trend-tag stable">🆕 新兴</span></td>
+                            <td>字节自研+寒序科技"超大带宽流式推理"</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>本期最大焦点是<strong>GTC 2026倒计时</strong>——3月16日黄仁勋将发布"世界前所未见"的Feynman芯片。<strong>OpenClaw（龙虾）</strong>以28.4万Stars登顶GitHub历史第一，13家国内大厂集体入局"养龙虾"。<strong>OpenAI收购Promptfoo</strong>标志着AI Agent安全成为行业焦点。<strong>2月$1890亿创投纪录</strong>中OpenAI一家就拿走$1100亿，资本高度集中。</p>
+            </div>
+        </div>
+
+        <nav class="tab-nav" role="tablist">
+            <button class="tab-btn" role="tab" aria-selected="true" data-tab="foundation">🧠 大模型</button>
+            <button class="tab-btn" role="tab" aria-selected="false" data-tab="coding">⌨️ AI Coding</button>
+            <button class="tab-btn" role="tab" aria-selected="false" data-tab="application">📱 AI 应用</button>
+            <button class="tab-btn" role="tab" aria-selected="false" data-tab="industry">🏭 AI 行业</button>
+            <button class="tab-btn orange" role="tab" aria-selected="false" data-tab="enterprise">🔄 企业转型</button>
+        </nav>
+
+        <article id="foundation" class="tab-panel active">
+            <div class="section-card">
+                <div class="section-header"><span class="num">1</span> 最近动态</div>
+                <div class="sub-header">🌏 海外</div>
+                <div class="news-item">
+                    <span class="news-tag tag-hot">HOT</span>
+                    <div class="news-title"><a href="https://blogs.nvidia.cn/blog/nvidia-ceo-jensen-huang-and-global-technology-leaders-to-showcase-age-of-ai-at-gtc-2026/">GTC 2026倒计时：黄仁勋将发布"突破物理极限"Feynman芯片</a></div>
+                    <div class="news-source">NVIDIA · 3月3日官宣/持续预热</div>
+                    <div class="news-detail">
+                        <div class="news-detail-row">
+                            <span class="news-detail-label">核心发现</span>
+                            <span class="news-detail-value">英伟达官宣GTC 2026将于<strong>3月16-19日</strong>在圣何塞举行，黄仁勋主题演讲将发布下一代Feynman架构芯片</span>
+                        </div>
+                        <div class="news-detail-row">
+                            <span class="news-detail-label">关键数据</span>
+                            <span class="news-detail-value">3月16日主题演讲 | <strong>1000+场会议</strong> | 190+国家 | 30,000+与会者</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <span class="news-tag tag-hot">HOT</span>
+                    <div class="news-title"><a href="#">英伟达投资Thinking Machines Lab：部署1GW算力训练AI模型</a></div>
+                    <div class="news-source">东方财富 · 3月11日</div>
+                    <div class="news-detail">
+                        <div class="news-detail-row">
+                            <span class="news-detail-label">核心发现</span>
+                            <span class="news-detail-value">英伟达重磅投资AI初创公司Thinking Machines，将部署<strong>1GW级算力</strong>用于AI模型训练</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <span class="news-tag tag-new">NEW</span>
+                    <div class="news-title"><a href="https://www.apple.com.cn/newsroom/2026/03/apple-introduces-macbook-pro-with-all-new-m5-pro-and-m5-max/">Apple M5 Pro/M5 Max芯片MacBook Pro发布</a></div>
+                    <div class="news-source">Apple · 3月3日</div>
+                    <div class="news-detail">
+                        <div class="news-detail-row">
+                            <span class="news-detail-label">核心发现</span>
+                            <span class="news-detail-value">Apple发布搭载M5 Pro和M5 Max芯片的新款MacBook Pro，AI推理性能大幅提升</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub-header">🇨🇳 国内</div>
+                <div class="news-item">
+                    <span class="news-tag tag-new">NEW</span>
+                    <div class="news-title"><a href="#">DeepSeek V4传闻下周发布</a></div>
+                    <div class="news-source">多来源 · 3月10日</div>
+                    <div class="news-detail">
+                        <div class="news-detail-row">
+                            <span class="news-detail-label">核心发现</span>
+                            <span class="news-detail-value">多个信源显示DeepSeek最新版本V4可能于下周发布，继V3.5中文超越GPT-4后持续迭代</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <span class="news-tag tag-new">NEW</span>
+                    <div class="news-title"><a href="#">深度求索发布DeepSeek-OCR2开源模型</a></div>
+                    <div class="news-source">DeepSeek · 近日</div>
+                    <div class="news-detail">
+                        <div class="news-detail-row">
+                            <span class="news-detail-label">核心发现</span>
+                            <span class="news-detail-value">DeepSeek开源OCR专用模型DeepSeek-OCR2，在文档理解、表格识别等场景表现优异</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="deep-focus-card">
+                <div class="deep-focus-header">
+                    <div class="deep-focus-label">💡 深度聚焦</div>
+                    <div class="deep-focus-title">GTC 2026：AI"五层蛋糕"格局的一次完整展示</div>
+                </div>
+                <div class="deep-focus-body">
+                    <p>英伟达GTC 2026被称为"AI界的奥斯卡"，今年的主题是展示AI的"五层蛋糕"——<strong>能源、芯片、基础设施、模型、应用</strong>。黄仁勋在预热中强调："AI不再是单一的突破或应用，而是必不可少的基础设施。每家公司都将拥抱它，每个国家都会建设它。"</p>
+                    <p>Feynman芯片是本届GTC最大看点。从泄露信息来看，Feynman架构专注于<strong>AI推理优化</strong>，采用新的LPU（Language Processing Unit）设计。这暗示着行业拐点：<strong>从"谁训得起"到"谁推得快"的竞争转移</strong>。</p>
+                    <div class="deep-focus-takeaway">
+                        <div class="deep-focus-takeaway-label">TAKEAWAY</div>
+                        <div class="deep-focus-takeaway-text">3月16日GTC主题演讲值得关注——不只是芯片发布，更是2026年AI行业风向标的集中展示。</div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article id="coding" class="tab-panel">
+            <div class="section-card">
+                <div class="section-header"><span class="num">1</span> 最近动态</div>
+                <div class="sub-header">🌏 海外</div>
+                <div class="news-item">
+                    <span class="news-tag tag-hot">HOT</span>
+                    <div class="news-title"><a href="https://socket.dev/blog/openclaw-advisory-surge-highlights-gaps-between-ghsa-and-cve-tracking">OpenClaw登顶GitHub Stars历史第一：28.4万星超越Linux</a></div>
+                    <div class="news-source">多来源 · 3月10-11日</div>
+                    <div class="news-detail">
+                        <div class="news-detail-row">
+                            <span class="news-detail-label">核心发现</span>
+                            <span class="news-detail-value">开源AI Agent OpenClaw仅用百天超越Linux，以<strong>28.4万星</strong>成为GitHub史上最受欢迎项目</span>
+                        </div>
+                        <div class="news-detail-row">
+                            <span class="news-detail-label">关键数据</span>
+                            <span class="news-detail-value">超React 27.5万 | 超Linux 18.8万 | Mac mini销量激增</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <span class="news-tag tag-policy">安全</span>
+                    <div class="news-title"><a href="https://hyperight.com/openclaw-ai-assistant-rebrand/">OpenClaw安全隐患曝光：数百实例API密钥泄露</a></div>
+                    <div class="news-source">安全研究 · 3月上旬</div>
+                    <div class="news-detail">
+                        <div class="news-detail-row">
+                            <span class="news-detail-label">核心发现</span>
+                            <span class="news-detail-value">安全研究人员发现数百个OpenClaw实例暴露在公网，泄露API密钥、私人聊天记录和企业凭证</span>
+                        </div>
+                        <div class="news-detail-row">
+                            <span class="news-detail-label">关键数据</span>
+                            <span class="news-detail-value">数百不安全实例 | Cloudflare/DigitalOcean推出<strong>加固部署</strong></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <span class="news-tag tag-new">NEW</span>
+                    <div class="news-title"><a href="#">AI编程工具"代码垃圾"警告：Codebase Slop成隐形杀手</a></div>
+                    <div class="news-source">技术社区 · 近日</div>
+                    <div class="news-detail">
+                        <div class="news-detail-row">
+                            <span class="news-detail-label">核心发现</span>
+                            <span class="news-detail-value">多位资深开发者警告：过度依赖Cursor、Claude Code等AI编程工具会导致"代码垃圾"堆积</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub-header">🇨🇳 国内</div>
+                <div class="news-item">
+                    <span class="news-tag tag-hot">HOT</span>
+                    <div class="news-title"><a href="#">13家国内大厂集体"养龙虾"：OpenClaw生态爆发</a></div>
+                    <div class="news-source">多来源 · 3月10-11日</div>
+                    <div class="news-detail">
+                        <div class="news-detail-row">
+                            <span class="news-detail-label">核心发现</span>
+                            <span class="news-detail-value">腾讯WorkBuddy、字节ArkClaw、阿里JVS Claw、智谱AutoClaw、小米miclaw等相继上线</span>
+                        </div>
+                        <div class="news-detail-row">
+                            <span class="news-detail-label">关键数据</span>
+                            <span class="news-detail-value"><strong>13家厂商跟进</strong> | 国家超算接入 | 飞书/企业微信集成打通</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="deep-focus-card">
+                <div class="deep-focus-header">
+                    <div class="deep-focus-label">💡 深度聚焦</div>
+                    <div class="deep-focus-title">OpenClaw现象：从"工具"到"数字员工"的跨越</div>
+                </div>
+                <div class="deep-focus-body">
+                    <p>OpenClaw（网友昵称"龙虾"）仅用百天就超越Linux登顶GitHub Stars第一，标志着AI从"工具"向"数字员工"的根本性跨越：</p>
+                    <p>1. <strong>从被动到主动</strong>: 传统AI工具需要用户主动调用，OpenClaw可以自主管理邮件、执行代码、处理系统任务；2. <strong>从单点到全局</strong>: OpenClaw作为"数字参谋长"可协调多任务、跨应用工作；3. <strong>从云端到本地</strong>: 支持本地部署，解决企业数据安全顾虑。</p>
+                    <p>但安全问题不容忽视：数百个实例暴露API密钥和企业凭证，"功能先行、安全后补"的老路风险更高。</p>
+                    <div class="deep-focus-takeaway">
+                        <div class="deep-focus-takeaway-label">TAKEAWAY</div>
+                        <div class="deep-focus-takeaway-text">OpenClaw值得试用，但务必使用安全部署方案。企业环境优先考虑国内大厂定制版本（如腾讯WorkBuddy）。</div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article id="application" class="tab-panel">
+            <div class="section-card">
+                <div class="section-header"><span class="num">1</span> 最近动态</div>
+                <div class="sub-header">🌏 海外</div>
+                <div class="news-item">
+                    <span class="news-tag tag-hot">HOT</span>
+                    <div class="news-title"><a href="#">OpenAI收购AI安全平台Promptfoo：强化Agent安全能力</a></div>
+                    <div class="news-source">OpenAI · 3月10日</div>
+                    <div class="news-detail">
+                        <div class="news-detail-row">
+                            <span class="news-detail-label">核心发现</span>
+                            <span class="news-detail-value">OpenAI正式宣布收购AI安全初创公司Promptfoo，其安全工具套件已获超<strong>25%财富500强</strong>企业信任</span>
+                        </div>
+                        <div class="news-detail-row">
+                            <span class="news-detail-label">关键数据</span>
+                            <span class="news-detail-value">集成到Frontier智能体协作平台 | 增强企业AI合规能力</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <span class="news-tag tag-hot">HOT</span>
+                    <div class="news-title"><a href="#">Claude日注册量破百万：Play Store排名超ChatGPT</a></div>
+                    <div class="news-source">多来源 · 3月上旬</div>
+                    <div class="news-detail">
+                        <div class="news-detail-row">
+                            <span class="news-detail-label">核心发现</span>
+                            <span class="news-detail-value">Anthropic的Claude单日新增注册量突破<strong>100万</strong>，在Google Play Store排名首次超越ChatGPT</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub-header">🇨🇳 国内</div>
+                <div class="news-item">
+                    <span class="news-tag tag-new">NEW</span>
+                    <div class="news-title"><a href="#">QuestMobile：腾讯/抖音/阿里移动用户均超12亿</a></div>
+                    <div class="news-source">QuestMobile · 近日</div>
+                    <div class="news-detail">
+                        <div class="news-detail-row">
+                            <span class="news-detail-label">核心发现</span>
+                            <span class="news-detail-value">2025年12月移动互联网月活达<strong>12.76亿</strong>，腾讯12.75亿居首，抖音12.40亿</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="deep-focus-card">
+                <div class="deep-focus-header">
+                    <div class="deep-focus-label">💡 深度聚焦</div>
+                    <div class="deep-focus-title">OpenAI收购Promptfoo：智能体安全成为必选项</div>
+                </div>
+                <div class="deep-focus-body">
+                    <p>OpenAI收购Promptfoo不是一次普通的技术收购，而是AI行业走向"智能体时代"的关键信号。</p>
+                    <p>Promptfoo的核心能力是AI系统的<strong>评估、测试和安全验证</strong>——确保AI不出错。当AI从"聊天机器人"进化为"能执行任务的Agent"，安全问题从"可选"变为"必须"。一个能发邮件、改代码、操作系统的AI如果出错，后果远比聊天出错严重。</p>
+                    <div class="deep-focus-takeaway">
+                        <div class="deep-focus-takeaway-label">TAKEAWAY</div>
+                        <div class="deep-focus-takeaway-text">如果你在构建企业级AI应用，现在就该把安全评估纳入流程。Promptfoo的开源版本是不错的起点。</div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article id="industry" class="tab-panel">
+            <div class="section-card">
+                <div class="section-header"><span class="num">1</span> 最近动态</div>
+                <div class="sub-header">🌏 海外</div>
+                <div class="news-item">
+                    <span class="news-tag tag-hot">HOT</span>
+                    <div class="news-title"><a href="https://news.crunchbase.com/venture/record-setting-global-funding-february-2026-openai-anthropic/">2月全球VC创纪录$1890亿：OpenAI/Anthropic/Waymo包揽83%</a></div>
+                    <div class="news-source">Crunchbase · 3月2日数据</div>
+                    <div class="news-detail">
+                        <div class="news-detail-row">
+                            <span class="news-detail-label">核心发现</span>
+                            <span class="news-detail-value">2月全球风投总额$1890亿创历史新高，OpenAI <strong>$1100亿</strong>、Anthropic <strong>$300亿</strong>、Waymo <strong>$160亿</strong></span>
+                        </div>
+                        <div class="news-detail-row">
+                            <span class="news-detail-label">关键数据</span>
+                            <span class="news-detail-value">同比增长<strong>780%</strong> | AI相关占90% | 美国占92%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <span class="news-tag tag-new">NEW</span>
+                    <div class="news-title"><a href="#">ECOSUMMIT.AI柏林峰会：3月25-26日聚焦AI+可持续</a></div>
+                    <div class="news-source">即将举办</div>
+                    <div class="news-detail">
+                        <div class="news-detail-row">
+                            <span class="news-detail-label">核心发现</span>
+                            <span class="news-detail-value">ECOSUMMIT.AI将于3月25-26日在柏林举办，聚焦AI如何助力经济脱碳和可持续发展</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub-header">🇨🇳 国内</div>
+                <div class="news-item">
+                    <span class="news-tag tag-hot">HOT</span>
+                    <div class="news-title"><a href="#">国产AI芯片突围：寒序科技完成融资突破"内存墙"</a></div>
+                    <div class="news-source">多来源 · 近日</div>
+                    <div class="news-detail">
+                        <div class="news-detail-row">
+                            <span class="news-detail-label">核心发现</span>
+                            <span class="news-detail-value">北大系创业公司寒序科技完成数千万元融资，专注"<strong>超大带宽流式推理</strong>"路线突破内存墙瓶颈</span>
+                        </div>
+                        <div class="news-detail-row">
+                            <span class="news-detail-label">关键数据</span>
+                            <span class="news-detail-value">北大系 | 已交付流片 | 瞄准推理芯片蓝海</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <span class="news-tag tag-new">NEW</span>
+                    <div class="news-title"><a href="#">字节跳动自研芯片降低算力成本：冲击国产AI芯片厂商</a></div>
+                    <div class="news-source">多来源 · 近日</div>
+                    <div class="news-detail">
+                        <div class="news-detail-row">
+                            <span class="news-detail-label">核心发现</span>
+                            <span class="news-detail-value">字节跳动自研AI推理芯片取得进展，有望大幅降低内部算力成本</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="deep-focus-card">
+                <div class="deep-focus-header">
+                    <div class="deep-focus-label">💡 深度聚焦</div>
+                    <div class="deep-focus-title">$1890亿的启示：AI投资已进入"超级集中"时代</div>
+                </div>
+                <div class="deep-focus-body">
+                    <p>2月全球风投$1890亿创历史新高，但更值得关注的是<strong>资本集中度</strong>：OpenAI $1100亿、Anthropic $300亿、Waymo $160亿，三家公司吃掉83%。</p>
+                    <p>这揭示了AI投资的新逻辑：<strong>投资人不再"广撒网"，而是"重仓头部"</strong>。原因是：1）AI是基础设施生意，规模效应极强；2）AI公司烧钱速度惊人，只有头部有能力持续融资；3）监管和合规成本上升，有钱才能合规。</p>
+                    <div class="deep-focus-takeaway">
+                        <div class="deep-focus-takeaway-label">TAKEAWAY</div>
+                        <div class="deep-focus-takeaway-text">AI投资进入"超级集中"阶段，创业者需要找到"大厂不愿做、做不好、没法做"的细分机会。</div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article id="enterprise" class="tab-panel">
+            <div class="section-card">
+                <div class="section-header"><span class="num">1</span> 最近动态</div>
+                <div class="sub-header">🇨🇳 国内</div>
+                <div class="news-item">
+                    <span class="news-tag tag-new">NEW</span>
+                    <div class="news-title"><a href="#">阿里云金山算力中心加速建设：搭载"真武"芯片</a></div>
+                    <div class="news-source">上海金山区 · 3月10日</div>
+                    <div class="news-detail">
+                        <div class="news-detail-row">
+                            <span class="news-detail-label">核心发现</span>
+                            <span class="news-detail-value">上海金山区与阿里云签署战略合作协议，基于"<strong>真武</strong>"芯片打造算力基础设施</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <span class="news-tag tag-policy">政策</span>
+                    <div class="news-title"><a href="#">河南发布"AI+交通运输"行动方案：2028年建成行业数智底座</a></div>
+                    <div class="news-source">河南省 · 近日</div>
+                    <div class="news-detail">
+                        <div class="news-detail-row">
+                            <span class="news-detail-label">核心发现</span>
+                            <span class="news-detail-value">河南省发布《"人工智能+交通运输"创新应用行动方案》，目标2028年建成行业数智底座</span>
+                        </div>
+                        <div class="news-detail-row">
+                            <span class="news-detail-label">关键数据</span>
+                            <span class="news-detail-value">20+标杆场景 | 15+高质量数据集 | 20+智能化解决方案</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <span class="news-tag tag-new">NEW</span>
+                    <div class="news-title"><a href="#">英特尔推出Bartlett Lake嵌入式处理器：边缘AI工作负载专用</a></div>
+                    <div class="news-source">Intel · 3月10日</div>
+                    <div class="news-detail">
+                        <div class="news-detail-row">
+                            <span class="news-detail-label">核心发现</span>
+                            <span class="news-detail-value">英特尔发布Bartlett Lake 12P处理器，Intel 7制程，最高12个P核，单核睿频<strong>5.9GHz</strong></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="deep-focus-card">
+                <div class="deep-focus-header">
+                    <div class="deep-focus-label">💡 深度聚焦</div>
+                    <div class="deep-focus-title">企业AI转型的"隐形战场"：从模型能力到组织能力</div>
+                </div>
+                <div class="deep-focus-body">
+                    <p>从本周多条新闻可以看出，企业AI转型的竞争重心正在转移：</p>
+                    <p>1. <strong>算力自主化</strong>: 字节自研芯片、阿里"真武"芯片——大厂开始"向下扎根"；2. <strong>生态本土化</strong>: 13家大厂跟进OpenClaw，国家超算接入企业IM；3. <strong>场景深耕化</strong>: 河南"AI+交通"方案——AI从通用场景向行业场景下沉。</p>
+                    <div class="deep-focus-takeaway">
+                        <div class="deep-focus-takeaway-label">TAKEAWAY</div>
+                        <div class="deep-focus-takeaway-text">如果你的企业正在做AI转型，不要只盯着模型选型。算力成本、数据安全、场景适配、组织能力同样重要。</div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <div class="section-card" style="margin-top:20px">
+            <div class="section-header"><span class="num">📊</span> 数据速览</div>
+            <table class="data-table">
+                <thead><tr><th>指标</th><th>数值</th><th>变化/说明</th></tr></thead>
+                <tbody>
+                    <tr><td>OpenClaw GitHub Stars</td><td>28.4万</td><td>历史第一</td></tr>
+                    <tr><td>国内大厂跟进OpenClaw</td><td>13家</td><td>生态爆发</td></tr>
+                    <tr><td>2月全球VC总额</td><td>$1890亿</td><td>历史纪录</td></tr>
+                    <tr><td>OpenAI融资</td><td>$1100亿</td><td>最大单笔</td></tr>
+                    <tr><td>Claude日注册量</td><td>100万+</td><td>超ChatGPT</td></tr>
+                    <tr><td>Promptfoo客户覆盖</td><td>25%财富500强</td><td>被OpenAI收购</td></tr>
+                    <tr><td>GTC 2026参会者</td><td>30,000+</td><td>190+国家</td></tr>
+                    <tr><td>英伟达投资算力</td><td>1GW</td><td>Thinking Machines</td></tr>
+                    <tr><td>Intel Bartlett Lake睿频</td><td>5.9GHz</td><td>边缘AI专用</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section-card">
+            <div class="section-header"><span class="num">📌</span> 明日/下周值得关注</div>
+            <ul style="padding-left:20px;color:var(--color-text-secondary);line-height:2">
+                <li><strong>NVIDIA GTC 2026</strong> (3月16-19日) - Jensen Huang主题演讲，Feynman芯片发布</li>
+                <li><strong>华为中国合作伙伴大会2026</strong> (3月19-20日) - "因聚而升融智有为"，深圳</li>
+                <li><strong>AWE 2026</strong> (3月12-15日) - "AI科技·慧享未来"，上海</li>
+                <li><strong>ECOSUMMIT.AI</strong> (3月25-26日) - AI+可持续发展，柏林</li>
+                <li><strong>DeepSeek V4</strong> - 传闻下周发布</li>
+            </ul>
+        </div>
+
+        <div style="margin-top:24px;background:linear-gradient(135deg,#F8FAFB 0%,#EEF2F6 100%);border:1px solid #F5F5F4;border-radius:14px;padding:24px;box-shadow:0 2px 8px rgba(31,35,40,.06),0 1px 2px rgba(31,35,40,.04)">
+            <div style="font-size:16px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px">💡 了解更多</div>
+            <p style="font-size:14px;color:#57534E;line-height:1.7;margin:0 0 12px 0">
+                AI洞察是一个系统化追踪AI行业动态的项目，每日/每周输出调研洞察，帮助你保持对AI行业的全局视野。覆盖大模型、AI Coding、AI应用、AI行业投融资、企业AI转型五大领域。
+            </p>
+            <a href="https://xiaoxiong20260206.github.io/ai-insight-public/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:linear-gradient(135deg,#059669 0%,#10B981 100%);color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none">
+                🏠 访问AI洞察首页
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.setAttribute('aria-selected', 'false'));
+                document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+                btn.setAttribute('aria-selected', 'true');
+                document.getElementById(btn.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
