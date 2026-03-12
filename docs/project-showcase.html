@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI洞察项目 - 项目全景展示</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23059669'/><circle cx='16' cy='14' r='7' fill='none' stroke='white' stroke-width='2'/><circle cx='16' cy='14' r='3' fill='white'/><path d='M10 24c0-3.3 2.7-6 6-6s6 2.7 6 6' fill='none' stroke='white' stroke-width='2'/></svg>">
+    <style>
+        :root {
+            --color-success: #059669;
+            --color-success-light: #10B981;
+            --color-success-50: #ECFDF5;
+            --color-danger: #E11D48;
+            --color-warning: #D97706;
+            --color-info: #2563EB;
+            --color-info-50: #EFF6FF;
+            --color-purple: #7C3AED;
+            --color-purple-50: #F5F3FF;
+            --color-text-primary: #1C1917;
+            --color-text-secondary: #57534E;
+            --color-text-muted: #78716C;
+            --color-border: #E7E5E4;
+            --color-border-light: #F5F5F4;
+            --color-bg: #F8FAFB;
+            --color-bg-card: #FFFFFF;
+            --color-bg-table-header: #FAFAF9;
+            --gradient-success: linear-gradient(135deg, #059669 0%, #10B981 100%);
+            --gradient-hero: linear-gradient(135deg, #059669 0%, #2563EB 50%, #7C3AED 100%);
+            --gradient-badge: linear-gradient(135deg, #ECFDF5 0%, #EFF6FF 100%);
+            --gradient-mesh: radial-gradient(at 20% 20%, rgba(5,150,105,0.08) 0%, transparent 50%), radial-gradient(at 80% 80%, rgba(37,99,235,0.06) 0%, transparent 50%), radial-gradient(at 50% 50%, rgba(124,58,237,0.04) 0%, transparent 50%);
+            --shadow-xs: 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-card: 0 2px 8px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.04);
+            --shadow-glow-success: 0 4px 14px rgba(5,150,105,0.15);
+            --shadow-hover: 0 6px 16px rgba(5,150,105,0.15), 0 2px 6px rgba(5,150,105,0.1);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-full: 9999px;
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --spacing-2xl: 40px;
+            --font-family: -apple-system, "SF Pro Display", "system-ui", "Segoe UI", "Noto Sans SC", Helvetica, Arial, sans-serif;
+            --transition-normal: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: var(--font-family);
+            font-size: 15px;
+            line-height: 1.65;
+            color: var(--color-text-secondary);
+            background: var(--color-bg);
+            background-image: var(--gradient-mesh);
+            background-attachment: fixed;
+            -webkit-font-smoothing: antialiased;
+        }
+        ::selection { background: rgba(5, 150, 105, 0.2); }
+        .container { max-width: 980px; margin: 0 auto; padding: var(--spacing-lg) var(--spacing-md) 48px; }
+
+        /* Header */
+        .header { text-align: center; margin-bottom: var(--spacing-lg); position: relative; overflow: hidden; padding: var(--spacing-2xl) 0; }
+        .header::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gradient-hero); }
+        .badge { display: inline-block; background: var(--gradient-badge); color: var(--color-info); padding: var(--spacing-xs) 14px; border-radius: var(--radius-full); font-size: 11px; font-weight: 500; margin-bottom: var(--spacing-md); border: 1px solid rgba(37, 99, 235, 0.12); box-shadow: var(--shadow-xs); }
+        .main-title { font-size: 34px; font-weight: 800; margin-bottom: var(--spacing-sm); letter-spacing: -0.02em; background: var(--gradient-hero); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .subtitle { color: var(--color-text-secondary); font-size: 15px; }
+
+        /* Tab Nav */
+        .tab-nav { display: flex; background: rgba(255,255,255,0.85); backdrop-filter: blur(20px) saturate(1.8); border: 1px solid rgba(255,255,255,0.7); border-radius: var(--radius-lg); padding: 5px; position: sticky; top: 12px; z-index: 100; margin-bottom: var(--spacing-lg); box-shadow: var(--shadow-sm); overflow-x: auto; }
+        .tab-btn { flex: 1; padding: 10px 14px; border: none; background: transparent; cursor: pointer; border-radius: var(--radius-md); font-size: 13px; font-weight: 500; color: var(--color-text-muted); transition: all var(--transition-normal); white-space: nowrap; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        .tab-btn:hover { color: var(--color-text-primary); background: rgba(0,0,0,0.03); }
+        .tab-btn.active { background: var(--gradient-success); color: #fff; box-shadow: var(--shadow-glow-success); }
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+
+        /* Stats */
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--spacing-md); margin-bottom: var(--spacing-lg); }
+        .stat-card { background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 20px; text-align: center; transition: all var(--transition-normal); }
+        .stat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: var(--color-success); }
+        .stat-value { font-size: 28px; font-weight: 700; }
+        .stat-value.c1 { color: var(--color-success); }
+        .stat-value.c2 { color: var(--color-info); }
+        .stat-value.c3 { color: var(--color-warning); }
+        .stat-value.c4 { color: var(--color-purple); }
+        .stat-label { font-size: 11px; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+
+        /* Section Card */
+        .section-card { background: var(--color-bg-card); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); padding: var(--spacing-lg); margin-bottom: var(--spacing-lg); }
+        .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: var(--spacing-md); }
+        .section-header h2 { font-size: 17px; font-weight: 700; color: var(--color-text-primary); }
+        .section-number { background: var(--gradient-success); color: white; width: 32px; height: 32px; border-radius: var(--radius-md); font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .sn-blue { background: linear-gradient(135deg, #2563EB, #3B82F6); }
+        .sn-purple { background: linear-gradient(135deg, #7C3AED, #8B5CF6); }
+        .sn-amber { background: linear-gradient(135deg, #D97706, #F59E0B); }
+        .sn-rose { background: linear-gradient(135deg, #E11D48, #F43F5E); }
+
+        /* Module Grid */
+        .module-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-md); }
+        .module-card { background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 20px; transition: all var(--transition-normal); position: relative; overflow: hidden; }
+        .module-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+        .mc-green::before { background: var(--gradient-success); }
+        .mc-blue::before { background: linear-gradient(135deg, #2563EB, #3B82F6); }
+        .mc-purple::before { background: linear-gradient(135deg, #7C3AED, #8B5CF6); }
+        .mc-amber::before { background: linear-gradient(135deg, #D97706, #F59E0B); }
+        .mc-rose::before { background: linear-gradient(135deg, #E11D48, #F43F5E); }
+        .module-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: var(--color-success); }
+        .module-icon { font-size: 28px; margin-bottom: 10px; }
+        .module-title { font-size: 15px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 6px; }
+        .module-desc { font-size: 13px; color: var(--color-text-muted); line-height: 1.5; }
+        .module-meta { margin-top: 12px; display: flex; gap: 6px; flex-wrap: wrap; }
+
+        /* Tags */
+        .tag { display: inline-flex; padding: 2px 8px; border-radius: var(--radius-full); font-size: 11px; font-weight: 500; }
+        .tag-green { background: rgba(5,150,105,0.12); color: #059669; }
+        .tag-blue { background: rgba(37,99,235,0.12); color: #2563EB; }
+        .tag-purple { background: rgba(124,58,237,0.12); color: #7C3AED; }
+        .tag-amber { background: rgba(217,119,6,0.12); color: #D97706; }
+        .tag-rose { background: rgba(225,29,72,0.12); color: #E11D48; }
+
+        /* Table */
+        table { border-collapse: collapse; width: 100%; }
+        th { background: var(--color-bg-table-header); color: var(--color-text-secondary); padding: 12px 16px; font-weight: 600; text-align: left; font-size: 13px; }
+        td { padding: 12px 16px; border-bottom: 1px solid var(--color-border-light); font-size: 14px; }
+        tbody tr:hover { background: rgba(0,0,0,0.02); }
+
+        /* Research Grid */
+        .research-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--spacing-md); }
+        .research-card { background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 20px; transition: all var(--transition-normal); }
+        .research-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--color-success); }
+        .research-title { font-size: 14px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 6px; }
+        .research-desc { font-size: 13px; color: var(--color-text-muted); line-height: 1.5; }
+        .research-tags { margin-top: 10px; display: flex; gap: 6px; flex-wrap: wrap; }
+
+        /* Tracking */
+        .tracking-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-md); }
+        .tracking-card { background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 20px; transition: all var(--transition-normal); }
+        .tracking-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .tracking-icon { font-size: 24px; margin-bottom: 8px; }
+        .tracking-title { font-size: 15px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 10px; }
+        .tracking-list { list-style: none; padding: 0; }
+        .tracking-list li { font-size: 13px; color: var(--color-text-secondary); padding: 5px 0; border-bottom: 1px solid var(--color-border-light); display: flex; justify-content: space-between; align-items: center; }
+        .tracking-list li:last-child { border-bottom: none; }
+        .tracking-count { font-size: 12px; font-weight: 600; color: var(--color-success); background: rgba(5,150,105,0.1); padding: 1px 8px; border-radius: var(--radius-full); }
+
+        /* Flow */
+        .flow-container { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center; margin: var(--spacing-md) 0; }
+        .flow-step { display: flex; align-items: center; gap: 6px; padding: 10px 16px; background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-md); font-size: 13px; font-weight: 500; color: var(--color-text-primary); transition: all var(--transition-normal); }
+        .flow-step:hover { border-color: var(--color-success); box-shadow: var(--shadow-sm); }
+        .flow-arrow { color: var(--color-success); font-size: 18px; font-weight: bold; }
+
+        /* Script name */
+        .sc { font-family: "SF Mono", "Fira Code", monospace; font-size: 12px; color: var(--color-success); background: rgba(5,150,105,0.08); padding: 2px 6px; border-radius: 4px; }
+
+        /* Insight Box */
+        .insight-box { border-left: 3px solid var(--color-warning); background: rgba(217,119,6,0.06); padding: var(--spacing-md) 20px; border-radius: 0 var(--radius-md) var(--radius-md) 0; margin: var(--spacing-md) 0; }
+        .insight-title { font-weight: 600; color: var(--color-warning); margin-bottom: 4px; font-size: 14px; }
+
+        /* Quote Box */
+        .quote-box { background: var(--color-bg-table-header); border-left: 3px solid var(--color-info); padding: var(--spacing-md) 20px; border-radius: 0 var(--radius-md) var(--radius-md) 0; margin: var(--spacing-md) 0; }
+
+        /* Footer */
+        .footer { text-align: center; padding: var(--spacing-xl) 0 var(--spacing-md); color: var(--color-text-muted); font-size: 12px; }
+        .footer a { color: var(--color-success); text-decoration: none; font-weight: 500; }
+        .footer a:hover { text-decoration: underline; }
+
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+        .live-dot { display: inline-block; width: 6px; height: 6px; background: var(--color-success); border-radius: 50%; animation: pulse 1.5s infinite; margin-right: 4px; }
+
+        /* Two-col comparison */
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md); }
+
+        @media (max-width: 768px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .module-grid, .research-grid, .tracking-grid, .two-col { grid-template-columns: 1fr; }
+            .main-title { font-size: 26px; }
+            .tab-btn { padding: 8px 10px; font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <span class="badge"><span class="live-dot"></span> AI-Insight Platform v4.0</span>
+            <h1 class="main-title">AI洞察项目全景</h1>
+            <p class="subtitle">系统化追踪AI行业动态，持续输出深度洞察</p>
+        </header>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value c1">11</div>
+                <div class="stat-label">AI日报期数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value c2">8+</div>
+                <div class="stat-label">深度调研</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value c3">60+</div>
+                <div class="stat-label">追踪对象</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value c4">15+</div>
+                <div class="stat-label">自动化脚本</div>
+            </div>
+        </div>
+
+        <!-- Tab Nav -->
+        <nav class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('overview')">&#127968; 全景概览</button>
+            <button class="tab-btn" onclick="switchTab('modules')">&#128230; 五大模块</button>
+            <button class="tab-btn" onclick="switchTab('research')">&#128300; 深度调研</button>
+            <button class="tab-btn" onclick="switchTab('tracking')">&#127919; 追踪体系</button>
+            <button class="tab-btn" onclick="switchTab('automation')">&#9881; 自动化</button>
+        </nav>
+
+        <!-- ==================== Tab: Overview ==================== -->
+        <div id="tab-overview" class="tab-panel active">
+            <!-- Overview SVG -->
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-number">1</span>
+                    <h2>项目工作流全景</h2>
+                </div>
+                <svg viewBox="0 0 920 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+                    <defs>
+                        <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#10B981"/></linearGradient>
+                        <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#2563EB"/><stop offset="100%" stop-color="#3B82F6"/></linearGradient>
+                        <linearGradient id="g3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#7C3AED"/><stop offset="100%" stop-color="#8B5CF6"/></linearGradient>
+                        <linearGradient id="g4" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#D97706"/><stop offset="100%" stop-color="#F59E0B"/></linearGradient>
+                        <linearGradient id="g5" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#E11D48"/><stop offset="100%" stop-color="#F43F5E"/></linearGradient>
+                        <filter id="ds"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.1"/></filter>
+                    </defs>
+                    <!-- Step 1: Collect -->
+                    <rect x="10" y="30" width="150" height="140" rx="12" fill="white" stroke="#E7E5E4" filter="url(#ds)"/>
+                    <rect x="10" y="30" width="150" height="4" rx="2" fill="url(#g1)"/>
+                    <text x="85" y="60" font-size="13" font-weight="700" fill="#059669" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif">信息采集</text>
+                    <text x="85" y="82" font-size="11" fill="#57534E" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif">搜索引擎 + 公众号</text>
+                    <text x="85" y="100" font-size="11" fill="#57534E" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif">60+ 追踪对象</text>
+                    <text x="85" y="118" font-size="11" fill="#57534E" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif">70+ 信息源</text>
+                    <text x="85" y="155" font-size="10" fill="#78716C" text-anchor="middle" font-family="SF Mono,monospace">tracking-registry/</text>
+                    <!-- Arrow -->
+                    <polygon points="170,100 185,92 185,108" fill="#059669"/>
+                    <!-- Step 2: Daily Report -->
+                    <rect x="195" y="30" width="150" height="140" rx="12" fill="white" stroke="#E7E5E4" filter="url(#ds)"/>
+                    <rect x="195" y="30" width="150" height="4" rx="2" fill="url(#g2)"/>
+                    <text x="270" y="60" font-size="13" font-weight="700" fill="#2563EB" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif">日报生成</text>
+                    <text x="270" y="82" font-size="11" fill="#57534E" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif">MD - HTML - JSON</text>
+                    <text x="270" y="100" font-size="11" fill="#57534E" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif">质量门控(去重+分类)</text>
+                    <text x="270" y="118" font-size="11" fill="#57534E" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif">每日自动产出</text>
+                    <text x="270" y="155" font-size="10" fill="#78716C" text-anchor="middle" font-family="SF Mono,monospace">daily-reports/</text>
+                    <!-- Arrow -->
+                    <polygon points="355,100 370,92 370,108" fill="#2563EB"/>
+                    <!-- Step 3: Deep Research -->
+                    <rect x="380" y="30" width="150" height="140" rx="12" fill="white" stroke="#E7E5E4" filter="url(#ds)"/>
+                    <rect x="380" y="30" width="150" height="4" rx="2" fill="url(#g3)"/>
+                    <text x="455" y="60" font-size="13" font-weight="700" fill="#7C3AED" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif">深度调研</text>
+                    <text x="455" y="82" font-size="11" fill="#57534E" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif">专题 / 公司 / 趋势</text>
+                    <text x="455" y="100" font-size="11" fill="#57534E" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif">HTML + KIM Doc</text>
+                    <text x="455" y="118" font-size="11" fill="#57534E" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif">8+ 深度专题</text>
+                    <text x="455" y="155" font-size="10" fill="#78716C" text-anchor="middle" font-family="SF Mono,monospace">deep-research/</text>
+                    <!-- Arrow -->
+                    <polygon points="540,100 555,92 555,108" fill="#7C3AED"/>
+                    <!-- Step 4: Knowledge -->
+                    <rect x="565" y="30" width="150" height="140" rx="12" fill="white" stroke="#E7E5E4" filter="url(#ds)"/>
+                    <rect x="565" y="30" width="150" height="4" rx="2" fill="url(#g4)"/>
+                    <text x="640" y="60" font-size="13" font-weight="700" fill="#D97706" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif">知识沉淀</text>
+                    <text x="640" y="82" font-size="11" fill="#57534E" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif">概念 / 框架 / 洞察</text>
+                    <text x="640" y="100" font-size="11" fill="#57534E" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif">最佳实践积累</text>
+                    <text x="640" y="118" font-size="11" fill="#57534E" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif">结论沉淀</text>
+                    <text x="640" y="155" font-size="10" fill="#78716C" text-anchor="middle" font-family="SF Mono,monospace">knowledge-base/</text>
+                    <!-- Arrow -->
+                    <polygon points="725,100 740,92 740,108" fill="#D97706"/>
+                    <!-- Step 5: Output -->
+                    <rect x="750" y="30" width="150" height="140" rx="12" fill="white" stroke="#E7E5E4" filter="url(#ds)"/>
+                    <rect x="750" y="30" width="150" height="4" rx="2" fill="url(#g5)"/>
+                    <text x="825" y="60" font-size="13" font-weight="700" fill="#E11D48" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif">对外输出</text>
+                    <text x="825" y="82" font-size="11" fill="#57534E" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif">GitHub Pages</text>
+                    <text x="825" y="100" font-size="11" fill="#57534E" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif">KIM 卡片推送</text>
+                    <text x="825" y="118" font-size="11" fill="#57534E" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif">KIM Doc 文档</text>
+                    <text x="825" y="155" font-size="10" fill="#78716C" text-anchor="middle" font-family="SF Mono,monospace">outputs/</text>
+                </svg>
+            </div>
+
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-number sn-blue">2</span>
+                    <h2>项目定位</h2>
+                </div>
+                <div class="quote-box">
+                    <p style="color:var(--color-text-primary);font-weight:500;">AI洞察是一个<strong>AI行业深度追踪与洞察输出平台</strong>，目标是系统化追踪AI行业动态，每日/每周输出调研洞察，帮助保持对AI行业的全局视野。</p>
+                </div>
+                <div class="insight-box" style="margin-top:16px;">
+                    <div class="insight-title">核心理念</div>
+                    <p>让AI行业情报从「偶尔看看」变成「系统化、可持续、有积累」</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== Tab: Five Modules ==================== -->
+        <div id="tab-modules" class="tab-panel">
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-number">&#9733;</span>
+                    <h2>五大核心模块</h2>
+                </div>
+                <!-- Module Overview SVG -->
+                <svg viewBox="0 0 900 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;margin-bottom:20px;">
+                    <defs>
+                        <linearGradient id="mg1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#059669"/><stop offset="20%" stop-color="#2563EB"/><stop offset="40%" stop-color="#7C3AED"/><stop offset="60%" stop-color="#D97706"/><stop offset="80%" stop-color="#E11D48"/><stop offset="100%" stop-color="#059669"/></linearGradient>
+                    </defs>
+                    <rect x="0" y="55" width="900" height="10" rx="5" fill="#F5F5F4"/>
+                    <rect x="0" y="55" width="900" height="10" rx="5" fill="url(#mg1)" opacity="0.3"/>
+                    <!-- Nodes -->
+                    <circle cx="90" cy="60" r="24" fill="#059669" stroke="white" stroke-width="3"/>
+                    <text x="90" y="65" font-size="16" fill="white" text-anchor="middle" font-family="-apple-system,sans-serif">&#128240;</text>
+                    <text x="90" y="100" font-size="12" font-weight="600" fill="#059669" text-anchor="middle" font-family="-apple-system,sans-serif">AI日报</text>
+                    <circle cx="270" cy="60" r="24" fill="#2563EB" stroke="white" stroke-width="3"/>
+                    <text x="270" y="65" font-size="16" fill="white" text-anchor="middle" font-family="-apple-system,sans-serif">&#128300;</text>
+                    <text x="270" y="100" font-size="12" font-weight="600" fill="#2563EB" text-anchor="middle" font-family="-apple-system,sans-serif">深度调研</text>
+                    <circle cx="450" cy="60" r="24" fill="#7C3AED" stroke="white" stroke-width="3"/>
+                    <text x="450" y="65" font-size="16" fill="white" text-anchor="middle" font-family="-apple-system,sans-serif">&#127919;</text>
+                    <text x="450" y="100" font-size="12" font-weight="600" fill="#7C3AED" text-anchor="middle" font-family="-apple-system,sans-serif">追踪体系</text>
+                    <circle cx="630" cy="60" r="24" fill="#D97706" stroke="white" stroke-width="3"/>
+                    <text x="630" y="65" font-size="16" fill="white" text-anchor="middle" font-family="-apple-system,sans-serif">&#128218;</text>
+                    <text x="630" y="100" font-size="12" font-weight="600" fill="#D97706" text-anchor="middle" font-family="-apple-system,sans-serif">知识沉淀</text>
+                    <circle cx="810" cy="60" r="24" fill="#E11D48" stroke="white" stroke-width="3"/>
+                    <text x="810" y="65" font-size="16" fill="white" text-anchor="middle" font-family="-apple-system,sans-serif">&#128228;</text>
+                    <text x="810" y="100" font-size="12" font-weight="600" fill="#E11D48" text-anchor="middle" font-family="-apple-system,sans-serif">对外输出</text>
+                </svg>
+            </div>
+
+            <!-- Each Module Detail -->
+            <div class="module-grid">
+                <div class="module-card mc-green">
+                    <div class="module-icon">&#128240;</div>
+                    <div class="module-title">01 AI日报</div>
+                    <div class="module-desc">每日自动生成AI行业动态汇总，Markdown + HTML + KIM卡片三件套</div>
+                    <div class="module-meta">
+                        <span class="tag tag-green">每日产出</span>
+                        <span class="tag tag-green">11期</span>
+                    </div>
+                </div>
+                <div class="module-card mc-blue">
+                    <div class="module-icon">&#128300;</div>
+                    <div class="module-title">02 深度调研</div>
+                    <div class="module-desc">公司调研、专题研究、趋势洞察，输出HTML报告 + KIM Doc</div>
+                    <div class="module-meta">
+                        <span class="tag tag-blue">8+ 专题</span>
+                        <span class="tag tag-blue">3 分类</span>
+                    </div>
+                </div>
+                <div class="module-card mc-purple">
+                    <div class="module-icon">&#127919;</div>
+                    <div class="module-title">03 追踪体系</div>
+                    <div class="module-desc">AI人物/公司/信息源三维分级追踪清单，覆盖全行业</div>
+                    <div class="module-meta">
+                        <span class="tag tag-purple">60+ 人物</span>
+                        <span class="tag tag-purple">50+ 公司</span>
+                    </div>
+                </div>
+                <div class="module-card mc-amber">
+                    <div class="module-icon">&#128218;</div>
+                    <div class="module-title">04 知识沉淀</div>
+                    <div class="module-desc">概念框架、最佳实践、洞察结论，形成可查阅的知识库</div>
+                    <div class="module-meta">
+                        <span class="tag tag-amber">概念</span>
+                        <span class="tag tag-amber">最佳实践</span>
+                        <span class="tag tag-amber">洞察</span>
+                    </div>
+                </div>
+                <div class="module-card mc-rose">
+                    <div class="module-icon">&#128228;</div>
+                    <div class="module-title">05 对外输出</div>
+                    <div class="module-desc">GitHub Pages部署、KIM群推送、KIM Doc文档发布</div>
+                    <div class="module-meta">
+                        <span class="tag tag-rose">GitHub Pages</span>
+                        <span class="tag tag-rose">KIM推送</span>
+                    </div>
+                </div>
+                <div class="module-card mc-green">
+                    <div class="module-icon">&#9881;</div>
+                    <div class="module-title">自动化管道</div>
+                    <div class="module-desc">15+ 自动化脚本串联全链路：采集 - 生成 - 部署 - 推送</div>
+                    <div class="module-meta">
+                        <span class="tag tag-green">Python</span>
+                        <span class="tag tag-green">Shell</span>
+                        <span class="tag tag-green">launchd</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== Tab: Deep Research ==================== -->
+        <div id="tab-research" class="tab-panel">
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-number sn-purple">&#9733;</span>
+                    <h2>深度调研成果一览</h2>
+                </div>
+                <p style="margin-bottom:16px;">按「趋势洞察 / 公司调研 / 专题调研」三大类组织，已完成 8+ 深度报告。</p>
+            </div>
+
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-number sn-purple">1</span>
+                    <h2>趋势洞察</h2>
+                </div>
+                <div class="research-grid">
+                    <div class="research-card">
+                        <div class="research-title">AI大神深度分享解读</div>
+                        <div class="research-desc">9位AI领域思想领袖的核心观点提炼与深度分析</div>
+                        <div class="research-tags"><span class="tag tag-purple">趋势</span><span class="tag tag-blue">9位大神</span></div>
+                    </div>
+                    <div class="research-card">
+                        <div class="research-title">Barry Zhang 思想体系</div>
+                        <div class="research-desc">Anthropic Applied AI负责人的Agent设计原则深度解读</div>
+                        <div class="research-tags"><span class="tag tag-purple">人物</span><span class="tag tag-green">Anthropic</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-number sn-blue">2</span>
+                    <h2>公司调研</h2>
+                </div>
+                <div class="research-grid">
+                    <div class="research-card">
+                        <div class="research-title">字节AI开挂指南</div>
+                        <div class="research-desc">字节跳动AI能力全景解析，覆盖产品矩阵与技术布局</div>
+                        <div class="research-tags"><span class="tag tag-blue">公司</span><span class="tag tag-amber">字节跳动</span></div>
+                    </div>
+                    <div class="research-card">
+                        <div class="research-title">Pine AI 原生团队调研</div>
+                        <div class="research-desc">AI-Native团队的组织模式与工作方式深度剖析</div>
+                        <div class="research-tags"><span class="tag tag-blue">公司</span><span class="tag tag-green">AI-Native</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-number sn-amber">3</span>
+                    <h2>专题调研</h2>
+                </div>
+                <div class="research-grid">
+                    <div class="research-card">
+                        <div class="research-title">AI Agent 团队落地指南</div>
+                        <div class="research-desc">4章节完整手册，面向产品经理的Agent落地方法论</div>
+                        <div class="research-tags"><span class="tag tag-amber">专题</span><span class="tag tag-green">4章节</span></div>
+                    </div>
+                    <div class="research-card">
+                        <div class="research-title">企业AI工程师产品体系</div>
+                        <div class="research-desc">从场景分析到产品设计到架构设计的完整方法论</div>
+                        <div class="research-tags"><span class="tag tag-amber">专题</span><span class="tag tag-purple">3层设计</span></div>
+                    </div>
+                    <div class="research-card">
+                        <div class="research-title">AI工具场景分析</div>
+                        <div class="research-desc">AI工程师48个工作任务 + 9种Agent类型映射</div>
+                        <div class="research-tags"><span class="tag tag-amber">专题</span><span class="tag tag-blue">48任务</span></div>
+                    </div>
+                    <div class="research-card">
+                        <div class="research-title">AI Coding助手调研</div>
+                        <div class="research-desc">主流AI编码工具对比分析与产品演进趋势</div>
+                        <div class="research-tags"><span class="tag tag-amber">专题</span><span class="tag tag-rose">Coding</span></div>
+                    </div>
+                    <div class="research-card">
+                        <div class="research-title">OpenClaw 深度调研</div>
+                        <div class="research-desc">开源AI Agent框架深度研究，含Web版和KIM Doc版</div>
+                        <div class="research-tags"><span class="tag tag-amber">专题</span><span class="tag tag-green">开源</span></div>
+                    </div>
+                    <div class="research-card">
+                        <div class="research-title">AI产品转型 2026</div>
+                        <div class="research-desc">AI产品本质洞察与2026年转型趋势预测</div>
+                        <div class="research-tags"><span class="tag tag-amber">专题</span><span class="tag tag-purple">洞察</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== Tab: Tracking ==================== -->
+        <div id="tab-tracking" class="tab-panel">
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-number sn-purple">&#9733;</span>
+                    <h2>三维追踪体系</h2>
+                </div>
+                <p style="margin-bottom:16px;">人物 / 公司 / 信息源三维分级追踪，覆盖AI行业全生态。</p>
+            </div>
+
+            <div class="tracking-grid">
+                <!-- People -->
+                <div class="tracking-card">
+                    <div class="tracking-icon">&#128100;</div>
+                    <div class="tracking-title">人物追踪</div>
+                    <ul class="tracking-list">
+                        <li>L1 实践者/构建者 <span class="tracking-count">30+</span></li>
+                        <li>L2 深度观察者 <span class="tracking-count">20+</span></li>
+                        <li>L3 战略决策者 <span class="tracking-count">10+</span></li>
+                    </ul>
+                    <div style="margin-top:12px;font-size:12px;color:var(--color-text-muted);">
+                        Barry Zhang, Karpathy, Ilya, Sam Altman...
+                    </div>
+                </div>
+                <!-- Companies -->
+                <div class="tracking-card">
+                    <div class="tracking-icon">&#127970;</div>
+                    <div class="tracking-title">公司追踪</div>
+                    <ul class="tracking-list">
+                        <li>模型实验室 <span class="tracking-count">10+</span></li>
+                        <li>AI Coding <span class="tracking-count">6+</span></li>
+                        <li>AI 应用 <span class="tracking-count">10+</span></li>
+                        <li>AI 基础设施 <span class="tracking-count">8+</span></li>
+                        <li>中国AI公司 <span class="tracking-count">10+</span></li>
+                    </ul>
+                </div>
+                <!-- Sources -->
+                <div class="tracking-card">
+                    <div class="tracking-icon">&#128225;</div>
+                    <div class="tracking-title">信息源</div>
+                    <ul class="tracking-list">
+                        <li>官方博客 <span class="tracking-count">20+</span></li>
+                        <li>Newsletter <span class="tracking-count">10+</span></li>
+                        <li>YouTube频道 <span class="tracking-count">6</span></li>
+                        <li>播客 <span class="tracking-count">10+</span></li>
+                        <li>学术源/社区 <span class="tracking-count">5+</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section-card" style="margin-top:24px;">
+                <div class="section-header">
+                    <span class="section-number sn-blue">&#9678;</span>
+                    <h2>公司分类体系</h2>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>分类</th>
+                            <th>代表公司</th>
+                            <th>数量</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="tag tag-green">模型实验室</span></td>
+                            <td>OpenAI, Anthropic, Google DeepMind, Meta, DeepSeek</td>
+                            <td><strong>10+</strong></td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag tag-blue">AI Coding</span></td>
+                            <td>Cursor, Cognition, Replit, GitHub Copilot, Codeium</td>
+                            <td><strong>6+</strong></td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag tag-purple">AI 应用</span></td>
+                            <td>Perplexity, Midjourney, Runway, Jasper, Notion AI</td>
+                            <td><strong>10+</strong></td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag tag-amber">AI 基础设施</span></td>
+                            <td>Hugging Face, LangChain, Scale AI, Groq, Together AI</td>
+                            <td><strong>8+</strong></td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag tag-rose">中国AI公司</span></td>
+                            <td>DeepSeek, 智谱, Moonshot, 百川, 阿里Qwen, 字节豆包</td>
+                            <td><strong>10+</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ==================== Tab: Automation ==================== -->
+        <div id="tab-automation" class="tab-panel">
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-number">&#9733;</span>
+                    <h2>自动化管道全景</h2>
+                </div>
+                <p style="margin-bottom:16px;">15+ 自动化脚本覆盖从采集到部署到推送的完整链路。</p>
+                <div class="flow-container">
+                    <div class="flow-step">&#128269; 信息采集</div>
+                    <span class="flow-arrow">&#8594;</span>
+                    <div class="flow-step">&#128196; MD生成</div>
+                    <span class="flow-arrow">&#8594;</span>
+                    <div class="flow-step">&#127912; HTML渲染</div>
+                    <span class="flow-arrow">&#8594;</span>
+                    <div class="flow-step">&#9989; 质量门控</div>
+                    <span class="flow-arrow">&#8594;</span>
+                    <div class="flow-step">&#128640; 部署发布</div>
+                    <span class="flow-arrow">&#8594;</span>
+                    <div class="flow-step">&#128172; KIM推送</div>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-number sn-blue">1</span>
+                    <h2>日报自动化链路</h2>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>脚本</th>
+                            <th>作用</th>
+                            <th>阶段</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="sc">gen_daily_json.py</span></td>
+                            <td>解析日报MD，生成结构化JSON数据</td>
+                            <td><span class="tag tag-blue">数据层</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="sc">gen_daily_html.py</span></td>
+                            <td>将MD/JSON渲染为精美HTML页面</td>
+                            <td><span class="tag tag-blue">渲染层</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="sc">daily_quality_gate.py</span></td>
+                            <td>分类验证 + 跨天去重 + 质量检查</td>
+                            <td><span class="tag tag-amber">质量层</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="sc">deploy_daily.sh</span></td>
+                            <td>一键部署到GitHub Pages</td>
+                            <td><span class="tag tag-green">部署层</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="sc">send_ai_daily.py</span></td>
+                            <td>KIM MixCard卡片群推送</td>
+                            <td><span class="tag tag-rose">推送层</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-number sn-purple">2</span>
+                    <h2>周报 + 深度调研链路</h2>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>脚本</th>
+                            <th>作用</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="sc">send_ai_weekly.py</span></td>
+                            <td>AI周报生成 + KIM卡片推送</td>
+                        </tr>
+                        <tr>
+                            <td><span class="sc">send_deep_research_card.py</span></td>
+                            <td>深度调研报告卡片推送</td>
+                        </tr>
+                        <tr>
+                            <td><span class="sc">sync_to_public.py</span></td>
+                            <td>同步到GitHub公开版（含脱敏处理）</td>
+                        </tr>
+                        <tr>
+                            <td><span class="sc">update_tracking.py</span></td>
+                            <td>追踪体系自动更新</td>
+                        </tr>
+                        <tr>
+                            <td><span class="sc">kim_client.py</span></td>
+                            <td>KIM OpenAPI客户端封装</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-number sn-amber">3</span>
+                    <h2>定时调度</h2>
+                </div>
+                <div class="two-col">
+                    <div style="background:var(--color-success-50);border-radius:var(--radius-md);padding:16px;">
+                        <div style="font-weight:700;color:var(--color-success);margin-bottom:8px;">&#9200; 日报定时任务</div>
+                        <div style="font-size:13px;color:var(--color-text-secondary);">
+                            <p><span class="sc">com.codeflicker.ai-daily-report.plist</span></p>
+                            <p style="margin-top:6px;">macOS launchd 定时触发，每日自动执行日报生成全链路</p>
+                        </div>
+                    </div>
+                    <div style="background:var(--color-info-50);border-radius:var(--radius-md);padding:16px;">
+                        <div style="font-weight:700;color:var(--color-info);margin-bottom:8px;">&#128197; 周报定时任务</div>
+                        <div style="font-size:13px;color:var(--color-text-secondary);">
+                            <p><span class="sc">com.codeflicker.ai-weekly-report.plist</span></p>
+                            <p style="margin-top:6px;">macOS launchd 定时触发，每周自动执行周报生成全链路</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>AI洞察项目 &middot; 系统化追踪AI行业动态</p>
+            <p style="margin-top:6px;">
+                <a href="https://github.com/xiaoxiong20260206/ai-insight" target="_blank">GitHub</a>
+                &middot; Generated by Link (AI Assistant)
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(name) {
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('tab-' + name).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
