@@ -85,172 +85,248 @@
         "signal": "Claude Review量化数据+Cursor战时状态后续"
       }
     ],
-    "interpretation": "本期最强信号是NVIDIA GTC 2026——距离Jensen Huang主题演讲仅剩4天，NVIDIA提前发布Build-a-Claw活动和OpenClaw Playbook。AI军事化博弈升级——OpenAI拿下五角大楼后向北约32国推销。Google Gemini全面杀入办公领域是今日最大突发事件。"
+    "summary": "本期最强信号是<strong>NVIDIA GTC 2026</strong>——距离Jensen Huang主题演讲仅剩4天，NVIDIA提前发布Build-a-Claw活动和OpenClaw Playbook。<strong>AI军事化博弈</strong>升级——OpenAI拿下五角大楼后向北约32国推销。<strong>Google Gemini全面杀入办公领域</strong>是今日最大突发事件。"
   },
-  "sections": {
-    "models": {
-      "overseas": [
-        {
-          "level": "yellow",
-          "title": "ThinkMorph原生多模态推理新范式：7B参数超越GPT-4o达24.67个百分点",
-          "url": "https://zhuanlan.zhihu.com/p/2014733226174875153",
-          "source": "新加坡国立大学等",
-          "date": "3月11日",
-          "summary": "仅用2.4万条数据微调7B模型，在9个视觉推理基准上平均提升20.74%"
-        }
-      ],
-      "china": [
-        {
-          "level": "red",
-          "title": "上海AI Lab开源MLEvolve：12小时登顶MLE-bench",
-          "url": "https://aitntnews.com/newDetail.html?newId=22987",
-          "source": "上海AI实验室",
-          "date": "3月11日",
-          "summary": "首个AI自主设计算法开源系统，奖牌率61.33%，8个AI智能体协作"
-        },
-        {
-          "level": "yellow",
-          "title": "CoTj框架让扩散模型学会动态分配算力",
-          "url": "https://aitntnews.com/newDetail.html?newId=22981",
-          "source": "中国联通研究院等",
-          "date": "3月11日",
-          "summary": "Diffusion DNA低维难度特征，5毫秒预判去噪难度"
-        }
-      ],
-      "deep_focus": {
-        "title": "MLEvolve：当AI开始自己设计算法",
-        "takeaway": "MLEvolve证明AI正在成为科研的共同研究者，未来人类科研者的核心价值将转向提出好问题和做判断"
+  "tabs": [
+    {
+      "news": {
+        "overseas": [
+          {
+            "tag": "trend",
+            "title": "ThinkMorph原生多模态推理新范式：7B参数超越GPT-4o达24.67个百分点",
+            "url": "https://zhuanlan.zhihu.com/p/2014733226174875153",
+            "source": "新加坡国立大学等 · 3月11日",
+            "details": {
+              "finding": "ThinkMorph让文字与图像在统一架构中边看边想、交替推进，仅用2.4万条数据微调7B模型",
+              "highlight": "SAT空间推理超GPT-4o达24.67pp | BLINK-J超Qwen2.5-VL-72B超10分",
+              "impact": "多模态AI从工具辅助迈向原生智能"
+            }
+          }
+        ],
+        "china": [
+          {
+            "tag": "hot",
+            "title": "上海AI Lab开源MLEvolve：12小时登顶MLE-bench，首个AI自主设计算法框架",
+            "url": "https://aitntnews.com/newDetail.html?newId=22987",
+            "source": "上海AI实验室 · 3月11日",
+            "details": {
+              "finding": "MLEvolve是首个实现AI自主设计算法的开源系统，12小时在MLE-bench登顶榜首",
+              "highlight": "奖牌率61.33% | 高难度题42.22% | 8个专业AI智能体协作",
+              "impact": "从AI写代码到AI设计算法，标志着AI自主科研能力进入新阶段"
+            }
+          },
+          {
+            "tag": "trend",
+            "title": "CoTj框架让扩散模型学会动态分配算力",
+            "url": "https://aitntnews.com/newDetail.html?newId=22981",
+            "source": "中国联通研究院等 · 3月11日",
+            "details": {
+              "finding": "首创Diffusion DNA低维难度特征，5毫秒预判去噪难度，极端5步压缩画质反超传统方法"
+            }
+          }
+        ]
+      },
+      "focus": {
+        "title": "MLEvolve：当AI开始自己设计算法，人类科研者该做什么？",
+        "summary": "上海AI实验室的MLEvolve不是普通的写代码工具，而是首个能持续探索、试错、总结、进化的自主算法设计系统。关键突破：渐进式蒙特卡洛图搜索让不同路径互通经验；全局记忆层记录成败支持语义检索复用；12小时超越所有24小时基线方法。Takeaway：AI正在从工具成为科研的共同研究者。"
       }
     },
-    "coding": {
-      "overseas": [
-        {
-          "level": "red",
-          "title": "Claude Code Review量化数据：问题发现率54%，成本低2000倍",
-          "url": "https://aitntnews.com/newDetail.html?newId=22991",
-          "source": "Anthropic",
-          "date": "3月11日",
-          "summary": "每千行代码7.5个Bug，误报率<1%，传统审计年费5万vs Claude 15-25美元"
-        },
-        {
-          "level": "yellow",
-          "title": "NVIDIA GTC开放模型圆桌：Jensen Huang邀请Cursor/LangChain/A16Z",
-          "url": "https://blogs.nvidia.com/blog/gtc-2026-news/",
-          "source": "NVIDIA",
-          "date": "3月11日",
-          "summary": "3月18日讨论开放模型vs闭源前沿模型"
-        }
-      ],
-      "china": [
-        {
-          "level": "yellow",
-          "title": "CVPR 2026 | 清华联合美团推出3DThinker",
-          "url": "https://zhuanlan.zhihu.com/p/2015010183710003247",
-          "source": "清华大学x美团",
-          "date": "3月11日",
-          "summary": "首个无需3D标注的三维思维大模型，性能提升51.8%-108.8%"
-        }
-      ]
+    {
+      "news": {
+        "overseas": [
+          {
+            "tag": "hot",
+            "title": "Claude Code Review量化数据：问题发现率54%，成本低2000倍",
+            "url": "https://aitntnews.com/newDetail.html?newId=22991",
+            "source": "Anthropic · 3月11日",
+            "details": {
+              "finding": "多Agent协同审查代码，实质性问题发现率从16%提升至54%",
+              "highlight": "每千行代码7.5个Bug | 误报率<1% | 传统审计年费5万vs Claude 15-25美元",
+              "impact": "AI代码审查从辅助变成主力，传统500亿美元代码审计行业面临颠覆"
+            }
+          },
+          {
+            "tag": "trend",
+            "title": "NVIDIA GTC开放模型圆桌：Jensen Huang邀请Cursor/LangChain/A16Z参与",
+            "url": "https://blogs.nvidia.com/blog/gtc-2026-news/",
+            "source": "NVIDIA · 3月11日",
+            "details": {
+              "finding": "3月18日圆桌将讨论开放模型vs闭源前沿模型，Cursor CEO首次与行业顶级机构同台"
+            }
+          }
+        ],
+        "china": [
+          {
+            "tag": "trend",
+            "title": "CVPR 2026 | 清华联合美团推出3DThinker：首个无需3D标注的三维思维大模型",
+            "url": "https://zhuanlan.zhihu.com/p/2015010183710003247",
+            "source": "清华大学x美团 · 3月11日",
+            "details": {
+              "finding": "首个让AI仅凭RGB照片在脑中构建三维空间布局的模型，性能提升51.8%-108.8%"
+            }
+          }
+        ]
+      },
+      "focus": {
+        "title": "Claude Code Review的隐含信号：AI审查AI代码，500亿市场要变天",
+        "summary": "Claude Code Review量化数据揭示真正威力：效果碾压——问题发现率从16%提升到54%；成本颠覆——传统审计年费5万美元vs Claude单次15-25美元（2000倍差距）；精度保障——误报率低于1%。AI编程已进入生成+审查双轮时代。"
+      }
     },
-    "apps": {
-      "overseas": [
-        {
-          "level": "red",
-          "title": "Google Gemini全面融入Workspace挑战Office",
-          "url": "https://www.wired.com/story/google-gemini-workspace-ai-tools-hands-on/",
-          "source": "Google",
-          "date": "3月11日",
-          "summary": "Sheets 70.48%成功率，建表速度提升9倍，面向30亿用户"
-        },
-        {
-          "level": "red",
-          "title": "NVIDIA GTC Build-a-Claw：OpenClaw Playbook本地运行",
-          "url": "https://blogs.nvidia.com/blog/gtc-2026-news/",
-          "source": "NVIDIA",
-          "date": "3月12日",
-          "summary": "190国3万人参会，700+场次，本地优先无需云端"
-        },
-        {
-          "level": "yellow",
-          "title": "Meta收购AI社交网络Moltbook",
-          "url": "https://view.inews.qq.com/k/20260311A03Q1300",
-          "source": "多来源",
-          "date": "3月11日",
-          "summary": "19.4万AI智能体，AI身份锚定机制"
-        }
-      ],
-      "china": [
-        {
-          "level": "yellow",
-          "title": "O-DataMap科研知识地图上线",
-          "url": "https://view.inews.qq.com/k/20260310A05LGM00",
-          "source": "OALL",
-          "date": "3月11日",
-          "summary": "全球首个可导航科技知识地图，超千万实验数据点"
-        }
-      ]
+    {
+      "news": {
+        "overseas": [
+          {
+            "tag": "hot",
+            "title": "Google Gemini全面融入Workspace：AI原生办公正面挑战微软Office",
+            "url": "https://www.wired.com/story/google-gemini-workspace-ai-tools-hands-on/",
+            "source": "Google · 3月11日",
+            "details": {
+              "finding": "Gemini深度融入Docs/Sheets/Slides/Drive，可调用邮件、文件和互联网生成完整初稿",
+              "highlight": "Sheets 70.48%成功率 | 建表速度提升9倍 | 面向全球30亿用户",
+              "impact": "AI原生办公时代正式到来，Google借Gemini正面挑战微软Office"
+            }
+          },
+          {
+            "tag": "hot",
+            "title": "NVIDIA GTC发布Build-a-Claw：OpenClaw Playbook支持DGX Spark本地运行",
+            "url": "https://blogs.nvidia.com/blog/gtc-2026-news/",
+            "source": "NVIDIA · 3月12日",
+            "details": {
+              "finding": "GTC参会者可现场用OpenClaw自定义部署AI助手，Playbook支持本地运行无需云端",
+              "highlight": "190国3万人参会 | 700+场次 | 本地优先 | March 16-19",
+              "impact": "NVIDIA将OpenClaw升级为官方Agent平台，AI Agent从云端走向本地"
+            }
+          },
+          {
+            "tag": "trend",
+            "title": "Meta收购AI社交网络Moltbook：看中智能体身份注册表底层能力",
+            "url": "https://view.inews.qq.com/k/20260311A03Q1300",
+            "source": "多来源 · 3月11日",
+            "details": {
+              "finding": "上线仅一个月拥有19.4万AI智能体和1300万条评论，Meta看中其AI身份锚定机制"
+            }
+          }
+        ],
+        "china": [
+          {
+            "tag": "trend",
+            "title": "O-DataMap全球科学家社区上线：科研界的谷歌地图",
+            "url": "https://view.inews.qq.com/k/20260310A05LGM00",
+            "source": "OALL · 3月11日",
+            "details": {
+              "finding": "全球首个可导航科技知识地图，覆盖超千万实验数据点，7大知识大陆实时更新"
+            }
+          }
+        ]
+      },
+      "focus": {
+        "title": "Google Gemini杀入Workspace：AI办公大战的iPhone时刻",
+        "summary": "Gemini全面融入Workspace四大套件，几个关键维度：规模效应——面向30亿用户，AI直接长在已有工具里；深度整合——能读取邮件、文件、日历生成个性化内容；竞争格局——微软Copilot运行超一年，Google反击够猛；局限性——WIRED评测发现企业体味浓，创意性仍是弱项。"
+      }
     },
-    "industry": {
-      "overseas": [
-        {
-          "level": "red",
-          "title": "黄仁勋联手穆拉蒂：1吉瓦Vera Rubin超级算力",
-          "url": "https://www.163.com/dy/article/KNOAUAIG0511ABV6.html",
-          "source": "多来源",
-          "date": "3月11日",
-          "summary": "建设成本500-600亿美元，NVIDIA芯片350亿，2027年初启用"
-        },
-        {
-          "level": "yellow",
-          "title": "杨立昆AMI完成10.3亿美元融资",
-          "url": "https://www.1ai.net/50807.html",
-          "source": "多来源",
-          "date": "3月11日",
-          "summary": "投前估值35亿，NVIDIA丰田淡马锡软银集体加持"
-        }
-      ],
-      "china": [
-        {
-          "level": "red",
-          "title": "灵初智能获约20亿元融资",
-          "url": "https://www.qbitai.com/2026/03/385824.html",
-          "source": "量子位",
-          "date": "3月11日",
-          "summary": "00后领衔具身智能，国家级资本重仓，估值暴涨7倍"
-        }
-      ]
+    {
+      "news": {
+        "overseas": [
+          {
+            "tag": "hot",
+            "title": "黄仁勋联手前OpenAI CTO穆拉蒂：1吉瓦NVIDIA Vera Rubin超级算力2027年开闸",
+            "url": "https://www.163.com/dy/article/KNOAUAIG0511ABV6.html",
+            "source": "多来源 · 3月11日",
+            "details": {
+              "finding": "穆拉蒂创办的Thinking Machines Lab与NVIDIA联合部署至少1吉瓦下一代AI算力系统",
+              "highlight": "1GW Vera Rubin平台 | 建设成本500-600亿美元 | NVIDIA芯片350亿 | 2027年初启用",
+              "impact": "投钱→买算力→建生态闭环再现，AI算力军备竞赛进入GW量级"
+            }
+          },
+          {
+            "tag": "trend",
+            "title": "杨立昆AI初创AMI完成10.3亿美元融资：投前估值35亿",
+            "url": "https://www.1ai.net/50807.html",
+            "source": "多来源 · 3月11日",
+            "details": {
+              "finding": "图灵奖得主聚焦世界模型，NVIDIA、丰田、淡马锡、软银、贝索斯远征基金集体加持"
+            }
+          }
+        ],
+        "china": [
+          {
+            "tag": "hot",
+            "title": "灵初智能获约20亿元融资：00后领衔具身智能，估值一年暴涨7倍",
+            "url": "https://www.qbitai.com/2026/03/385824.html",
+            "source": "量子位 · 3月11日",
+            "details": {
+              "finding": "00后创办的具身智能公司，国开金融、央视融媒体基金等国家级资本重仓入场",
+              "highlight": "约20亿元 | 估值暴涨6-7倍 | 触觉手套成本仅传统1/10 | 800 UPH抓取节拍",
+              "impact": "具身智能获国家级资本背书，00后创业者在硬科技领域崭露头角"
+            }
+          },
+          {
+            "tag": "trend",
+            "title": "欧盟宣布7500万欧元EURO-3C项目：构建欧洲AI算力基础设施",
+            "url": "https://digital-strategy.ec.europa.eu/en/policies/european-approach-artificial-intelligence",
+            "source": "欧盟 · 3月3日",
+            "details": {
+              "finding": "欧盟加速AI算力自主建设，标志着欧洲在全球AI算力竞赛中的战略布局"
+            }
+          }
+        ]
+      },
+      "focus": {
+        "title": "灵初智能20亿融资：具身智能为什么突然值钱了？",
+        "summary": "00后创业公司拿到约20亿元融资，背后三个关键变量：数据范式创新——自研触觉手套（成本仅传统1/10）解决了高质量操作数据的稀缺瓶颈；国家级资本入场——具身智能已上升到国家战略层面；场景验证闭环——物流场景实现上千件衣物泛化抓取。Takeaway：谁掌握了真实世界的操作数据，谁就掌握了具身AI的入口。"
+      }
     },
-    "enterprise": {
-      "overseas": [
-        {
-          "level": "red",
-          "title": "OpenAI向北约32国推销军事化AI",
-          "url": "https://aitntnews.com/newDetail.html?newId=22993",
-          "source": "多来源",
-          "date": "3月11日",
-          "summary": "拿下五角大楼后向北约推销，与Anthropic路线分道扬镳"
-        },
-        {
-          "level": "yellow",
-          "title": "CNCERT发布OpenClaw安全风险提示",
-          "url": "https://www.1ai.net/50782.html",
-          "source": "国家互联网应急中心",
-          "date": "3月11日",
-          "summary": "超70%下载来自非官方渠道，15%含恶意代码"
-        }
-      ],
-      "china": [
-        {
-          "level": "yellow",
-          "title": "恩和科技发布SAION AI生物制造物理AI平台",
-          "url": "https://www.163.com/dy/article/KNO0A6BR0511ABV6.html",
-          "source": "恩和科技",
-          "date": "3月11日",
-          "summary": "全球首个，文献理解准确率超GPT约20pp"
-        }
-      ]
+    {
+      "news": {
+        "overseas": [
+          {
+            "tag": "hot",
+            "title": "OpenAI拿下五角大楼后向北约32国推销军事化AI：与Anthropic路线分道扬镳",
+            "url": "https://aitntnews.com/newDetail.html?newId=22993",
+            "source": "多来源 · 3月11日",
+            "details": {
+              "finding": "OpenAI获五角大楼机密级合同后，积极接触北约32国意图部署大模型至军事信息系统",
+              "highlight": "32个成员国 | CEO口述覆盖所有机密网络 | 与Anthropic伦理红线形成鲜明对比",
+              "impact": "AI军事化路线出现根本分歧——OpenAI全面拥抱军方，Anthropic坚守红线被惩罚"
+            }
+          },
+          {
+            "tag": "trend",
+            "title": "CNCERT发布OpenClaw安全风险提示：超70%下载来自非官方渠道",
+            "url": "https://www.1ai.net/50782.html",
+            "source": "国家互联网应急中心 · 3月11日",
+            "details": {
+              "finding": "超2300起投诉涉及28省份，15%安装包含恶意代码，部分版本持续监听麦克风权限"
+            }
+          }
+        ],
+        "china": [
+          {
+            "tag": "trend",
+            "title": "恩和科技发布SAION AI：全球首个生物制造物理AI平台",
+            "url": "https://www.163.com/dy/article/KNO0A6BR0511ABV6.html",
+            "source": "恩和科技 · 3月11日",
+            "details": {
+              "finding": "首次让AI走进实验室动手做实验，文献理解准确率70.7%超GPT约20pp，真实质粒组装正确率超90%"
+            }
+          },
+          {
+            "tag": "trend",
+            "title": "O-DataMap上线：科研界的谷歌地图覆盖超千万实验数据点",
+            "url": "https://view.inews.qq.com/k/20260310A05LGM00",
+            "source": "论论全球 · 3月11日",
+            "details": {
+              "finding": "全球首个可导航科技知识地图，7大知识大陆，实时显示AI每秒解析新数据过程"
+            }
+          }
+        ]
+      },
+      "focus": {
+        "title": "OpenAI vs Anthropic：AI军事化的两条路线之争",
+        "summary": "OpenAI路线：五角大楼机密合同→北约32国推销→CEO口述覆盖所有机密网络。Anthropic路线：划定武器和监控红线→被国防部列入风险名单→起诉政府。行业选边：员工立场和公司立场可能相反。Takeaway：AI军事化已不是要不要的问题，而是谁来定规则的问题。"
+      }
     }
-  },
+  ],
   "data_snapshot": [
     { "metric": "MLEvolve奖牌率", "value": "61.33%", "note": "12小时登顶MLE-bench" },
     { "metric": "Claude代码问题发现率", "value": "54%", "note": "vs传统16%，3倍提升" },
