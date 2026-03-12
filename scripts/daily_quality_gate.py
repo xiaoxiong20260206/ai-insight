@@ -9,17 +9,24 @@ AI日报质量门脚本 (Quality Gate)
   python scripts/daily_quality_gate.py 2026-03-11         # 检查指定日期
   python scripts/daily_quality_gate.py 2026-03-11 --fix   # 检查并尝试修复部分问题
 
-检查项 (7项):
+检查项 (9项):
   1. JSON数据文件存在性
   2. 中文引号检测
   3. 链接有效性 (禁止#占位符)
   4. 内容非空检查
-  5. MD/HTML文件存在性
-  6. 6处联动更新检查
-  7. 外部版同步检查
+  5. ⭐ [v2.0新增] 时效性验证 (发布日期在时间窗口内)
+  6. ⭐ [v2.0新增] HTML链接规范 (target="_blank" + 无#占位)
+  7. MD/HTML文件存在性
+  8. 6处联动更新检查
+  9. 外部版同步检查
 
 作者: 林克 (沈浪的AI分身)
-版本: v1.0.0
+版本: v2.0.0 (2026-03-11)
+
+v2.0更新:
+- 新增时效性验证检查 (check_date_window)
+- 新增HTML链接规范检查 (check_html_links)
+- 时效性违规阻断日报发布
 """
 
 import argparse
@@ -27,7 +34,7 @@ import json
 import re
 import subprocess
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Tuple, List, Dict, Optional
 
@@ -40,14 +47,20 @@ EXTERNAL_PATH = PROJECT_ROOT.parent / "ai-insight-public"
 
 # 检查结果
 class CheckResult:
-    def __init__(self, name: str, passed: bool, message: str, fixable: bool = False):
+    def __init__(self, name: str, passed: bool, message: str, fixable: bool = False, severity: str = "error"):
         self.name = name
         self.passed = passed
         self.message = message
         self.fixable = fixable
+        self.severity = severity  # "error" | "warning"
     
     def __str__(self):
-        status = "✅" if self.passed else "❌"
+        if self.passed:
+            status = "✅"
+        elif self.severity == "warning":
+            status = "⚠️"
+        else:
+            status = "❌"
         fix_hint = " (可修复)" if not self.passed and self.fixable else ""
         return f"{status} {self.name}: {self.message}{fix_hint}"
 
@@ -138,8 +151,319 @@ def check_content_nonempty(date_str: str) -> CheckResult:
         return CheckResult("内容非空", False, f"检查失败: {e}")
 
 
+def check_date_window(date_str: str) -> CheckResult:
+    """检查5: ⭐ [v2.0新增] 时效性验证 - 新闻发布日期必须在时间窗口内
+    
+    规则: N日日报只收录 N-1日08:00 ~ N日08:00 之间发布的新闻
+    
+    检查方法:
+    1. 解析source字段中的日期 (格式: "来源 · 3月10日" 或 "来源 · 2026-03-10")
+    2. 检查日期是否在时间窗口内
+    """
+    json_path = DATA_PATH / f"daily-content-{date_str}.json"
+    if not json_path.exists():
+        return CheckResult("时效性", False, "JSON文件不存在，跳过")
+    
+    try:
+        data = json.loads(json_path.read_text(encoding="utf-8"))
+        report_date = datetime.strptime(date_str, "%Y-%m-%d")
+        
+        # 时间窗口: N-1日08:00 ~ N日08:00
+        # 简化为: 发布日期必须是 N日 或 N-1日
+        valid_dates = [
+            report_date.strftime("%m月%d日"),                    # 3月11日
+            (report_date - timedelta(days=1)).strftime("%m月%d日"),  # 3月10日
+            report_date.strftime("%Y-%m-%d"),                    # 2026-03-11
+            (report_date - timedelta(days=1)).strftime("%Y-%m-%d"),  # 2026-03-10
+            f"{report_date.month}月{report_date.day}日",         # 3月11日 (无前导0)
+            f"{(report_date - timedelta(days=1)).month}月{(report_date - timedelta(days=1)).day}日",  # 3月10日
+        ]
+        # 去除前导0的版本
+        valid_dates.extend([
+            f"{report_date.month}月{report_date.day}日",
+            f"{report_date.month}月{report_date.day - 1}日" if report_date.day > 1 else "",
+        ])
+        valid_dates = [d for d in valid_dates if d]  # 过滤空字符串
+        
+        out_of_window = []
+        total_checked = 0
+        
+        for tab in data.get("tabs", []):
+            for region in ['overseas', 'china']:
+                for item in tab.get('news', {}).get(region, []):
+                    source = item.get('source', '')
+                    total_checked += 1
+                    
+                    # 提取日期部分 (格式: "来源 · 日期")
+                    if '·' in source:
+                        date_part = source.split('·')[-1].strip()
+                    else:
+                        date_part = source
+                    
+                    # 检查是否在有效日期范围内
+                    is_valid = any(valid_date in date_part for valid_date in valid_dates)
+                    
+                    if not is_valid and date_part:
+                        # 尝试解析日期判断是否过时
+                        # 匹配 "X月Y日" 格式
+                        match = re.search(r'(\d+)月(\d+)日', date_part)
+                        if match:
+                            month, day = int(match.group(1)), int(match.group(2))
+                            try:
+                                news_date = datetime(report_date.year, month, day)
+                                days_diff = (report_date - news_date).days
+                                if days_diff > 1:  # 超过时间窗口
+                                    title = item.get('title', '')[:25]
+                                    out_of_window.append(f"{title}...({date_part})")
+                            except ValueError:
+                                pass
+        
+        if out_of_window:
+            examples = "; ".join(out_of_window[:3])
+            suffix = f" (+{len(out_of_window)-3}条)" if len(out_of_window) > 3 else ""
+            return CheckResult(
+                "时效性", False, 
+                f"⚠️ {len(out_of_window)}条新闻超出时间窗口: {examples}{suffix}",
+                fixable=False,
+                severity="error"
+            )
+        
+        return CheckResult("时效性", True, f"全部{total_checked}条新闻在时间窗口内")
+    except Exception as e:
+        return CheckResult("时效性", False, f"检查失败: {e}")
+
+
+def check_board_classification(date_str: str) -> CheckResult:
+    """检查6: ⭐ [v3.0新增] 板块分类验证 - 新闻是否被放到了正确的板块
+    
+    规则（基于 daily-report.md L439-466 板块定义）:
+    - 大模型: 模型训练/推理/架构/Benchmark/蒸馏/CVPR等学术会议论文
+    - AI Coding: IDE/代码补全/代码审查/代码生成/DevOps
+    - AI 应用: 面向终端用户的产品/Workspace/Agent平台/社交
+    - AI 行业: 投融资/算力基建/行业会议/人事变动/开源生态
+    - 企业AI转型: 企业落地/政策法规/安全合规/军事化/监管
+    """
+    json_path = DATA_PATH / f"daily-content-{date_str}.json"
+    if not json_path.exists():
+        return CheckResult("板块分类", False, "JSON文件不存在，跳过")
+    
+    try:
+        data = json.loads(json_path.read_text(encoding="utf-8"))
+        
+        # 板块关键词映射 (tab index → 板块名 → 典型关键词)
+        board_keywords = {
+            0: {  # 大模型
+                "name": "大模型",
+                "positive": ["模型", "benchmark", "训练", "推理", "蒸馏", "CVPR", "NeurIPS", "ICML", "ICLR",
+                            "参数", "token", "多模态", "视觉", "3D", "扩散", "生成", "开源模型",
+                            "Foundation Model", "架构", "注意力", "Transformer"],
+                "negative": ["融资", "收购", "估值", "军事", "法规", "IDE", "代码补全", "Cursor"]
+            },
+            1: {  # AI Coding
+                "name": "AI Coding",
+                "positive": ["代码", "编程", "IDE", "Cursor", "Copilot", "Code Review", "DevOps",
+                            "代码生成", "代码审查", "代码补全", "编译", "debug", "开发工具"],
+                "negative": ["融资", "军事", "办公", "Workspace", "模型训练", "CVPR", "3D"]
+            },
+            2: {  # AI 应用
+                "name": "AI 应用",
+                "positive": ["用户", "产品", "App", "Workspace", "办公", "社交", "Agent平台",
+                            "OpenClaw", "Gemini", "搜索", "翻译", "客服", "助手"],
+                "negative": ["融资", "军事", "模型训练", "CVPR"]
+            },
+            3: {  # AI 行业
+                "name": "AI 行业",
+                "positive": ["融资", "投资", "估值", "收购", "IPO", "算力", "数据中心", "芯片",
+                            "GTC", "会议", "峰会", "圆桌", "开源生态", "人事", "离职", "创业"],
+                "negative": ["军事", "法规", "监管", "安全警示"]
+            },
+            4: {  # 企业AI转型
+                "name": "企业AI转型",
+                "positive": ["企业", "落地", "政策", "法规", "监管", "安全", "军事", "军方",
+                            "合规", "伦理", "红线", "诉讼", "国防", "CNCERT"],
+                "negative": ["融资", "模型训练", "IDE"]
+            }
+        }
+        
+        suspects = []
+        
+        for tab_idx, tab in enumerate(data.get("tabs", [])):
+            if tab_idx not in board_keywords:
+                continue
+            board = board_keywords[tab_idx]
+            
+            for region in ['overseas', 'china']:
+                for item in tab.get('news', {}).get(region, []):
+                    title = item.get('title', '')
+                    finding = item.get('details', {}).get('finding', '')
+                    text = f"{title} {finding}"
+                    
+                    # 检查: 如果匹配了其他板块的positive关键词 比当前板块更多
+                    current_score = sum(1 for kw in board["positive"] if kw in text)
+                    
+                    for other_idx, other_board in board_keywords.items():
+                        if other_idx == tab_idx:
+                            continue
+                        other_score = sum(1 for kw in other_board["positive"] if kw in text)
+                        
+                        # 如果另一个板块匹配得更好，且当前板块的negative关键词命中
+                        neg_hit = any(kw in text for kw in board.get("negative", []))
+                        if other_score > current_score and neg_hit:
+                            suspects.append(
+                                f"[{board['name']}→{other_board['name']}?] {title[:30]}..."
+                            )
+                            break
+        
+        if suspects:
+            examples = "; ".join(suspects[:3])
+            return CheckResult(
+                "板块分类", False,
+                f"⚠️ {len(suspects)}条新闻可能分类错误: {examples}",
+                fixable=False,
+                severity="warning"
+            )
+        
+        return CheckResult("板块分类", True, "所有新闻板块分类合理")
+    except Exception as e:
+        return CheckResult("板块分类", False, f"检查失败: {e}")
+
+
+def check_cross_day_dedup(date_str: str) -> CheckResult:
+    """检查7: ⭐ [v3.0新增] 跨天去重+同报去重验证
+    
+    规则:
+    1. 同一条新闻不应在连续3天日报中重复出现（旧闻三连报）
+    2. 同一条新闻不应在同一天日报的不同板块中重复出现
+    """
+    json_path = DATA_PATH / f"daily-content-{date_str}.json"
+    if not json_path.exists():
+        return CheckResult("去重", False, "JSON文件不存在，跳过")
+    
+    try:
+        data = json.loads(json_path.read_text(encoding="utf-8"))
+        report_date = datetime.strptime(date_str, "%Y-%m-%d")
+        
+        # 1. 收集当天所有新闻标题和URL
+        current_items = []
+        for tab_idx, tab in enumerate(data.get("tabs", [])):
+            for region in ['overseas', 'china']:
+                for item in tab.get('news', {}).get(region, []):
+                    current_items.append({
+                        "title": item.get('title', ''),
+                        "url": item.get('url', ''),
+                        "tab": tab_idx
+                    })
+        
+        issues = []
+        
+        # 2. 同报去重: 检查同一URL在不同tab中出现
+        url_tabs = {}
+        for ci in current_items:
+            url = ci["url"]
+            if url and url in url_tabs:
+                issues.append(f"同报重复: {ci['title'][:20]}...(出现在tab{url_tabs[url]}和tab{ci['tab']})")
+            elif url:
+                url_tabs[url] = ci["tab"]
+        
+        # 3. 跨天去重: 检查前3天的日报
+        prev_titles = set()
+        for days_back in range(1, 4):
+            prev_date = report_date - timedelta(days=days_back)
+            prev_path = DATA_PATH / f"daily-content-{prev_date.strftime('%Y-%m-%d')}.json"
+            if prev_path.exists():
+                try:
+                    prev_data = json.loads(prev_path.read_text(encoding="utf-8"))
+                    for tab in prev_data.get("tabs", []):
+                        for region in ['overseas', 'china']:
+                            for item in tab.get('news', {}).get(region, []):
+                                prev_titles.add(item.get('title', '').strip())
+                except Exception:
+                    pass
+        
+        # 检查当天新闻是否与前3天重复
+        for ci in current_items:
+            title = ci["title"].strip()
+            if title and title in prev_titles:
+                issues.append(f"跨天重复: {title[:25]}...")
+        
+        # 模糊匹配: 标题相似度 > 80% (简化版：提取关键实体比较)
+        for ci in current_items:
+            title = ci["title"].strip()
+            for pt in prev_titles:
+                # 去掉来源和日期后比较核心内容
+                core_current = re.sub(r'[\[\]|·\d月日年]', '', title)
+                core_prev = re.sub(r'[\[\]|·\d月日年]', '', pt)
+                if len(core_current) > 10 and len(core_prev) > 10:
+                    # 简单Jaccard相似度
+                    set_c = set(core_current)
+                    set_p = set(core_prev)
+                    intersection = set_c & set_p
+                    union = set_c | set_p
+                    if union and len(intersection) / len(union) > 0.75:
+                        if title not in prev_titles:  # 排除精确匹配已报告的
+                            issues.append(f"疑似旧闻: {title[:25]}...")
+                            break
+        
+        if issues:
+            # 去重issues
+            unique_issues = list(dict.fromkeys(issues))
+            examples = "; ".join(unique_issues[:3])
+            suffix = f" (+{len(unique_issues)-3}条)" if len(unique_issues) > 3 else ""
+            return CheckResult(
+                "去重", False,
+                f"⚠️ {len(unique_issues)}处重复: {examples}{suffix}",
+                fixable=False,
+                severity="warning"
+            )
+        
+        return CheckResult("去重", True, f"无重复 (当天{len(current_items)}条 vs 前3天{len(prev_titles)}条)")
+    except Exception as e:
+        return CheckResult("去重", False, f"检查失败: {e}")
+
+
+def check_html_links(date_str: str) -> CheckResult:
+    """检查6: ⭐ [v2.0新增] HTML链接规范
+    
+    规则:
+    1. 所有外部链接必须有 target="_blank"
+    2. 禁止 href="#" 占位符
+    """
+    date_obj = datetime.strptime(date_str, "%Y-%m-%d")
+    month_str = date_obj.strftime("%Y-%m")
+    html_path = DAILY_REPORTS_PATH / month_str / f"{date_str}-v3.html"
+    
+    if not html_path.exists():
+        return CheckResult("HTML链接", False, "HTML文件不存在，跳过", severity="warning")
+    
+    try:
+        content = html_path.read_text(encoding="utf-8")
+        
+        issues = []
+        
+        # 检查 href="#" 占位符
+        hash_links = len(re.findall(r'href="#"', content))
+        if hash_links > 0:
+            issues.append(f"{hash_links}个#占位符")
+        
+        # 检查外部链接是否有 target="_blank"
+        # 匹配 <a href="http... 但没有 target="_blank"
+        external_links = re.findall(r'<a\s+href="https?://[^"]+"\s*>', content)
+        missing_target = [link for link in external_links if 'target=' not in link]
+        if missing_target:
+            issues.append(f"{len(missing_target)}个链接缺少target")
+        
+        if issues:
+            return CheckResult("HTML链接", False, ", ".join(issues), fixable=True)
+        
+        # 统计正确链接数
+        correct_links = len(re.findall(r'target="_blank"', content))
+        return CheckResult("HTML链接", True, f"{correct_links}个外部链接格式正确")
+    except Exception as e:
+        return CheckResult("HTML链接", False, f"检查失败: {e}")
+
+
 def check_md_html_exists(date_str: str) -> CheckResult:
-    """检查5: MD/HTML文件存在性"""
+    """检查7: MD/HTML文件存在性"""
     date_obj = datetime.strptime(date_str, "%Y-%m-%d")
     month_str = date_obj.strftime("%Y-%m")
     month_dir = DAILY_REPORTS_PATH / month_str
@@ -162,7 +486,7 @@ def check_md_html_exists(date_str: str) -> CheckResult:
 
 
 def check_six_locations(date_str: str) -> CheckResult:
-    """检查6: 6处联动更新检查"""
+    """检查8: 6处联动更新检查"""
     date_obj = datetime.strptime(date_str, "%Y-%m-%d")
     month_str = date_obj.strftime("%Y-%m")
     
@@ -188,7 +512,7 @@ def check_six_locations(date_str: str) -> CheckResult:
 
 
 def check_external_sync(date_str: str) -> CheckResult:
-    """检查7: 外部版同步检查"""
+    """检查9: 外部版同步检查"""
     date_obj = datetime.strptime(date_str, "%Y-%m-%d")
     month_str = date_obj.strftime("%Y-%m")
     
@@ -222,6 +546,10 @@ def run_all_checks(date_str: str) -> Tuple[List[CheckResult], int, int]:
         check_chinese_quotes,
         check_link_validity,
         check_content_nonempty,
+        check_date_window,           # v2.0新增
+        check_board_classification,  # v3.0新增
+        check_cross_day_dedup,       # v3.0新增
+        check_html_links,            # v2.0新增
         check_md_html_exists,
         check_six_locations,
         check_external_sync,
@@ -259,6 +587,32 @@ def fix_chinese_quotes(date_str: str) -> bool:
         return False
 
 
+def fix_html_links(date_str: str) -> bool:
+    """修复HTML链接"""
+    date_obj = datetime.strptime(date_str, "%Y-%m-%d")
+    month_str = date_obj.strftime("%Y-%m")
+    html_path = DAILY_REPORTS_PATH / month_str / f"{date_str}-v3.html"
+    
+    if not html_path.exists():
+        return False
+    
+    try:
+        content = html_path.read_text(encoding="utf-8")
+        
+        # 添加 target="_blank" rel="noopener" 到所有外部链接
+        def add_target_blank(match):
+            tag = match.group(0)
+            if 'target=' not in tag:
+                return tag[:-1] + ' target="_blank" rel="noopener">'
+            return tag
+        
+        content = re.sub(r'<a\s+href="https?://[^"]+"\s*>', add_target_blank, content)
+        html_path.write_text(content, encoding="utf-8")
+        return True
+    except Exception:
+        return False
+
+
 def fix_external_sync(date_str: str) -> bool:
     """修复外部同步"""
     try:
@@ -283,10 +637,11 @@ def fix_external_sync(date_str: str) -> bool:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="AI日报质量门检查")
+    parser = argparse.ArgumentParser(description="AI日报质量门检查 v2.0")
     parser.add_argument("date", nargs="?", help="日报日期 (YYYY-MM-DD)，默认今天")
     parser.add_argument("--fix", action="store_true", help="尝试自动修复部分问题")
     parser.add_argument("--quiet", "-q", action="store_true", help="只输出结果摘要")
+    parser.add_argument("--check-date", action="store_true", help="只运行时效性检查")
     args = parser.parse_args()
     
     # 确定日期
@@ -295,11 +650,18 @@ def main():
     else:
         date_str = datetime.now().strftime("%Y-%m-%d")
     
-    print(f"🔍 AI日报质量门检查 - {date_str}")
+    print(f"🔍 AI日报质量门检查 v2.0 - {date_str}")
     print("=" * 50)
+    
+    # 如果只检查时效性
+    if args.check_date:
+        result = check_date_window(date_str)
+        print(result)
+        return 0 if result.passed else 1
     
     # 运行所有检查
     results, passed, failed = run_all_checks(date_str)
+    total_checks = len(results)
     
     # 输出结果
     if not args.quiet:
@@ -308,7 +670,7 @@ def main():
         print()
     
     # 统计
-    print(f"📊 检查完成: {passed}/7 通过, {failed}/7 失败")
+    print(f"📊 检查完成: {passed}/{total_checks} 通过, {failed}/{total_checks} 失败")
     
     # 尝试修复
     if args.fix and failed > 0:
@@ -323,26 +685,40 @@ def main():
                         fixed += 1
                     else:
                         print(f"  ❌ {result.name}: 修复失败")
+                elif result.name == "HTML链接":
+                    if fix_html_links(date_str):
+                        print(f"  ✅ {result.name}: 已修复")
+                        fixed += 1
+                    else:
+                        print(f"  ❌ {result.name}: 修复失败")
                 elif result.name == "外部同步":
                     if fix_external_sync(date_str):
                         print(f"  ✅ {result.name}: 已修复")
                         fixed += 1
                     else:
                         print(f"  ❌ {result.name}: 修复失败")
+                elif result.name == "时效性":
+                    print(f"  ⚠️ {result.name}: 需手动删除过时新闻并重新生成")
                 else:
                     print(f"  ⏭️ {result.name}: 需手动修复")
         
         if fixed > 0:
             print(f"\n🔄 已修复 {fixed} 项，重新检查...")
             results, passed, failed = run_all_checks(date_str)
-            print(f"📊 重新检查: {passed}/7 通过, {failed}/7 失败")
+            print(f"📊 重新检查: {passed}/{total_checks} 通过, {failed}/{total_checks} 失败")
     
     # 最终结果
     if failed == 0:
         print("\n✅ 质量门通过！可以安全推送日报。")
         return 0
     else:
-        print(f"\n❌ 质量门未通过 ({failed}项失败)，请修复后重试。")
+        # 检查是否有时效性错误（严重错误）
+        timeliness_failed = any(r.name == "时效性" and not r.passed for r in results)
+        if timeliness_failed:
+            print(f"\n🚫 时效性检查未通过！请删除超出时间窗口的新闻后重新生成。")
+            print("   规则: N日日报只收录 N-1日08:00 ~ N日08:00 的内容")
+        else:
+            print(f"\n❌ 质量门未通过 ({failed}项失败)，请修复后重试。")
         print("💡 提示: 使用 --fix 参数可尝试自动修复部分问题")
         return 1
 
