@@ -17,6 +17,30 @@ cd "$PROJECT_DIR"
 echo "🚀 AI日报一键部署: $DATE"
 echo "=================================================="
 
+# ===== 0. 质量门检查（阻断式，不通过则禁止部署） =====
+echo ""
+echo "🔍 Step 0: 质量门检查（阻断式）"
+GATE_RESULT=$(python3 scripts/daily_quality_gate.py "$DATE" 2>&1)
+echo "$GATE_RESULT"
+
+# 检查是否通过（只有全部通过或仅有warning级别的失败才放行）
+if echo "$GATE_RESULT" | grep -q "❌ 质量门未通过"; then
+    # 检查是否所有失败项都是warning级别（可放行）
+    HARD_FAIL=$(echo "$GATE_RESULT" | grep "^❌" | grep -v "⚠️" | head -1)
+    if [ -n "$HARD_FAIL" ]; then
+        echo ""
+        echo "🚫 质量门硬性失败，部署已阻断。请先修复问题后重试。"
+        echo "   如需强制部署: SKIP_GATE=1 $0 $DATE"
+        if [ "${SKIP_GATE:-0}" != "1" ]; then
+            exit 1
+        fi
+        echo "   ⚠️ SKIP_GATE=1 已设置，跳过门控继续部署..."
+    else
+        echo "  ⚠️ 仅有warning级别问题，继续部署..."
+    fi
+fi
+echo "  ✅ 质量门通过"
+
 # ===== 1. 检查文件存在 =====
 echo ""
 echo "📋 Step 1: 检查必要文件"
