@@ -3,8 +3,8 @@
 > **知识类型**: 人物画像
 > **身份**: 独立开发者、Django联合创始人
 > **领域**: AI编程实践、上下文管理、Vibe Engineering
-> **更新时间**: 2026-03-04
-> **版本**: v1.0
+> **更新时间**: 2026-03-13
+> **版本**: v1.1 - 新增Agentic Engineering演进、Skills生态影响
 
 ---
 
@@ -203,5 +203,23 @@ Simon Willison打破了"AI让编程变简单"的神话：
 
 ---
 
+## 2026.03 最新动态
+
+### Agentic Engineering概念演进
+
+Simon Willison在2026年2月提出的"Agentic Engineering"概念持续影响行业：
+- 从"Vibe Coding"（快速松散）→"Vibe Engineering"（严谨负责）→"Agentic Engineering"（AI Agent辅助的严谨工程）
+- 这个演进路径被业界广泛采用，成为AI编程实践分类的标准框架
+
+### Skills生态对其方法论的验证
+
+Simon Willison的核心主张在2026年3月的Skills生态爆发中得到验证：
+- **上下文管理**: SKILL.md格式本质上是他"上下文为王"理念的产品化——将专业知识编码为可复用的上下文
+- **TDD复兴**: Skills生态中的`@code-reviewer`和`@simplify`技能内置了TDD实践
+- **渐进增强**: 从简单工具开始，只在复杂度需要时才增加Agent能力
+
+---
+
 *创建时间: 2026-03-04*
+*最后更新: 2026-03-13*
 *整理者: 林克 AI 助手*

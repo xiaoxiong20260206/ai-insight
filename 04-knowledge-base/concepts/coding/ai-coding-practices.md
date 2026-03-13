@@ -2,8 +2,8 @@
 
 > **知识类型**: 最佳实践
 > **来源**: Andrej Karpathy、Simon Willison、Addy Osmani 深度分享
-> **更新时间**: 2026-03-04
-> **版本**: v1.0
+> **更新时间**: 2026-03-13
+> **版本**: v1.1 - 新增Skills生态、Agent安全测试、GWS MCP
 
 ---
 

@@ -3,8 +3,8 @@
 > **知识类型**: 人物画像
 > **身份**: LangChain CEO & 联合创始人
 > **领域**: Agent架构、Ambient Agents、LangGraph生态
-> **更新时间**: 2026-03-04
-> **版本**: v1.0
+> **更新时间**: 2026-03-13
+> **版本**: v1.1 - 新增MCP生态演进、IETF标准化、Google A2A协议
 
 ---
 
@@ -227,5 +227,33 @@ deep_agent = {
 
 ---
 
+## 2026.03 最新动态
+
+### Agent协议生态演进
+
+Harrison Chase的LangChain/LangGraph生态在2026年3月面临新的协议格局：
+
+| 协议 | 发起方 | 定位 | 状态 |
+|------|--------|------|------|
+| **MCP** | Anthropic → Linux Foundation | Agent与工具连接 | 10,000+ Server |
+| **A2A** | Google | Agent间互操作 | 生态扩展中 |
+| **UCP** | Google | Agent商务交易 | 新发布 |
+| **IETF Agent Gateway** | IETF | 国际标准化 | 草案阶段 |
+
+### Skills范式对LangGraph的影响
+
+Barry Zhang的Skills范式和Harrison Chase的Agent框架正在融合：
+- LangGraph提供Agent运行时和编排能力
+- Skills提供可复用的能力单元
+- SKILL.md格式可与LangGraph的Tool定义互补
+
+### Ambient Agents概念的市场验证
+
+- OpenAI的GPT-5.4 computer-use (OSWorld 75%超人类)验证了Harrison对Ambient Agent的预判
+- Google Workspace Gemini深度整合是Ambient Agent的企业级实现
+
+---
+
 *创建时间: 2026-03-04*
+*最后更新: 2026-03-13*
 *整理者: 林克 AI 助手*
