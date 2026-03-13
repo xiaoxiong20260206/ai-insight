@@ -366,7 +366,7 @@ def build_card_v35(date_str: str, data: Dict) -> dict:
         news_data = tab.get("news", {})
         overseas_news = news_data.get("overseas", [])
         china_news = news_data.get("china", [])
-        focus = tab.get("focus", {})
+        focus = tab.get("deep_focus") or tab.get("focus", {})
         
         lines = [f"## {icon} {name}", "", "📰 **动态**"]
         
@@ -390,9 +390,12 @@ def build_card_v35(date_str: str, data: Dict) -> dict:
             else:
                 lines.append(f"- 🇨🇳 国内 | {title}")
         
-        # 深度聚焦
+        # 深度聚焦（兼容 {summary} 和 {paragraphs[],takeaway} 两种格式）
         focus_title = focus.get("title", "")
         focus_summary = focus.get("summary", "")
+        # 新格式: 从 paragraphs 拼接摘要
+        if not focus_summary and focus.get("paragraphs"):
+            focus_summary = " ".join(focus["paragraphs"])
         if focus_title or focus_summary:
             lines.append("")
             lines.append(f"💡 **深度聚焦** — {focus_title}")

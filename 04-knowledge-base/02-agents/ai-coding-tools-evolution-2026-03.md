@@ -1,7 +1,7 @@
 # AI Coding工具演进与多Agent实践 (2026年3月)
 
-> **更新时间**: 2026-03-06
-> **来源**: AI日报 2026-03-06
+> **更新时间**: 2026-03-13
+> **来源**: AI日报 + 网络调研
 > **维度**: Agent/Coding
 
 ---
@@ -118,6 +118,60 @@ GPT-5.4融入GPT-5.3-Codex的行业领先编程能力，同时改进对电子表
 
 ---
 
+## Agent Skills生态爆发 (2026.03)
+
+### SKILL.md通用格式
+
+截至2026年3月，**SKILL.md已成为跨Agent技能的通用标准格式**。同一份技能文件可在以下工具间通用：
+- Claude Code
+- Cursor
+- Gemini CLI
+- Codex CLI
+- Antigravity IDE
+- GitHub Copilot
+
+### Antigravity Awesome Skills
+
+| 指标 | 数值 |
+|------|------|
+| **技能数量** | 1,234+ |
+| **GitHub Stars** | 22,000+ |
+| **Forks** | 3,800+ |
+| **版本** | v7.3.0 (2026.03) |
+| **兼容工具** | 10+ |
+
+**核心技能分类**:
+- `@brainstorming`: 结构化规划
+- `@architecture`: 系统设计
+- `@debugging-strategies`: 系统化排障
+- `@security-auditor`: 安全审计
+- `@create-pr`: 自动PR创建
+- `@doc-coauthoring`: 技术文档
+
+### Google Workspace CLI (GWS)
+
+Google在2026年3月发布`gws` CLI，3天内获得4,900 GitHub Stars:
+- 动态发现50+ Google Workspace API
+- 内置MCP Server
+- 一条命令即可让Agent访问Gmail/Drive/Calendar/Sheets
+- 预置"Executive Assistant"、"Project Manager"等角色模板
+
+### Shannon: AI自主渗透测试
+
+- **XBOW基准**: 96.15%漏洞利用成功率 (100/104)
+- **覆盖**: 50+漏洞类型，5个OWASP类别
+- **成本**: ~$50/次完整测试 (使用Claude Sonnet)
+- **特点**: "无exploit则不报告"，零误报
+
+### 行业意义
+
+Skills生态的爆发验证了Barry Zhang "Don't Build Agents, Build Skills Instead"的预判：
+- Agent开发者的工作重心从"构建Agent"转向"编写Skills"
+- Skills成为新的可复用资产和竞争壁垒
+- 非技术人员也能通过编写Skills参与AI开发
+
+---
+
 ## 相关链接
 
 - [OpenAI Release Notes](https://help.openai.com/en/articles/6825453-chatgpt-release-notes)
@@ -131,3 +185,4 @@ GPT-5.4融入GPT-5.3-Codex的行业领先编程能力，同时改进对电子表
 | 日期 | 变更内容 |
 |------|---------|
 | 2026-03-06 | 初始创建：Codex Windows版 + 多Agent并行实践 + 趋同进化 |
+| 2026-03-13 | 新增Skills生态爆发章节、SKILL.md通用格式、GWS MCP、Agent安全测试 |
