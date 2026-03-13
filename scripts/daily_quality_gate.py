@@ -328,6 +328,86 @@ def check_board_classification(date_str: str) -> CheckResult:
         return CheckResult("板块分类", False, f"检查失败: {e}")
 
 
+def check_region_classification(date_str: str) -> CheckResult:
+    """检查6b: ⭐ [v4.0新增] 地区分类验证 - overseas/china是否正确
+    
+    规则（按公司/机构总部所在地分类，不按新闻来源语言分类）:
+    - overseas(海外): 总部在中国大陆以外的公司/机构/组织
+    - china(国内): 总部在中国大陆的公司/机构/组织
+    """
+    json_path = DATA_PATH / f"daily-content-{date_str}.json"
+    if not json_path.exists():
+        return CheckResult("地区分类", False, "JSON文件不存在，跳过")
+    
+    try:
+        data = json.loads(json_path.read_text(encoding="utf-8"))
+        
+        # 已知公司/机构→地区映射（持续扩充）
+        overseas_keywords = [
+            "OpenAI", "Anthropic", "Google", "DeepMind", "Meta", "Microsoft", 
+            "Apple", "Amazon", "AWS", "NVIDIA", "英伟达", "Tesla", "特斯拉",
+            "Mistral", "Cohere", "Stability", "Midjourney", "Runway",
+            "Cursor", "GitHub", "Copilot", "Vercel", "Hugging Face",
+            "Manus", "Perplexity", "Character.AI", "Inflection",
+            "METR", "FDA", "EU", "欧盟", "GTC", "GDC",
+            "Samsung", "三星", "Sony", "索尼", "Toyota", "丰田",
+            "OpenClaw",  # 虚拟产品但源于海外
+            "Simon Willison", "Andrej Karpathy", "Sam Altman",
+        ]
+        
+        china_keywords = [
+            "百度", "阿里", "腾讯", "字节", "华为", "小米", "OPPO", "vivo",
+            "美团", "京东", "拼多多", "滴滴", "蚂蚁", "网易",
+            "海尔", "格力", "联想", "比亚迪", "大疆", "商汤", "旷视",
+            "DeepSeek", "深度求索", "智谱", "Moonshot", "月之暗面",
+            "零一万物", "昆仑万维", "科大讯飞", "通义", "文心",
+            "闲鱼", "淘宝", "天猫", "支付宝", "微信", "抖音", "快手",
+            "Trae", "通义灵码", "CodeGeeX",
+            "新华网", "人民网", "央视", "CCTV", "中国", "国内",
+            "AWE", "WAIC", "世界人工智能大会",
+        ]
+        
+        suspects = []
+        
+        for tab_idx, tab in enumerate(data.get("tabs", [])):
+            for region in ['overseas', 'china']:
+                for item in tab.get('news', {}).get(region, []):
+                    title = item.get('title', '')
+                    source = item.get('source', '')
+                    text = f"{title} {source}"
+                    
+                    # 检测: overseas新闻是否包含china关键词
+                    if region == 'overseas':
+                        china_hits = [kw for kw in china_keywords if kw in text]
+                        overseas_hits = [kw for kw in overseas_keywords if kw in text]
+                        if china_hits and not overseas_hits:
+                            suspects.append(
+                                f"[overseas→china?] {title[:35]}... (命中: {', '.join(china_hits[:2])})"
+                            )
+                    
+                    # 检测: china新闻是否包含overseas关键词
+                    elif region == 'china':
+                        overseas_hits = [kw for kw in overseas_keywords if kw in text]
+                        china_hits = [kw for kw in china_keywords if kw in text]
+                        if overseas_hits and not china_hits:
+                            suspects.append(
+                                f"[china→overseas?] {title[:35]}... (命中: {', '.join(overseas_hits[:2])})"
+                            )
+        
+        if suspects:
+            examples = "; ".join(suspects[:3])
+            return CheckResult(
+                "地区分类", False,
+                f"⚠️ {len(suspects)}条新闻可能地区分类错误: {examples}",
+                fixable=False,
+                severity="warning"
+            )
+        
+        return CheckResult("地区分类", True, "所有新闻地区分类合理")
+    except Exception as e:
+        return CheckResult("地区分类", False, f"检查失败: {e}")
+
+
 def check_cross_day_dedup(date_str: str) -> CheckResult:
     """检查7: ⭐ [v3.0新增] 跨天去重+同报去重验证
     
@@ -548,6 +628,7 @@ def run_all_checks(date_str: str) -> Tuple[List[CheckResult], int, int]:
         check_content_nonempty,
         check_date_window,           # v2.0新增
         check_board_classification,  # v3.0新增
+        check_region_classification, # v4.0新增
         check_cross_day_dedup,       # v3.0新增
         check_html_links,            # v2.0新增
         check_md_html_exists,
