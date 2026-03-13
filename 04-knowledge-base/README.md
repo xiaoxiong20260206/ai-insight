@@ -171,25 +171,40 @@ AI原生企业画像、商业模式、竞争格局
 
 ## 知识资产详情
 
-### 👤 人物画像 (7人)
+### 👤 人物画像 (14人)
 
 | 人物 | 公司 | 核心贡献 | 主要维度 |
 |------|------|---------|---------|
+| **Sam Altman** ✨ | OpenAI | ChatGPT帝国、Stargate计划、$8400亿估值 | AI企业 |
+| **Dario Amodei** ✨ | Anthropic | 安全AI领袖、Constitutional AI、$3800亿估值 | AI企业+安全 |
+| **Jensen Huang** ✨ | NVIDIA | AI芯片帝国、$3.4万亿市值、"We run them all" | AI企业 |
+| **Satya Nadella** ✨ | Microsoft | Agentic Web、Copilot生态、OpenAI战略绑定 | AI企业+企业AI |
+| **梁文峰** ✨ | DeepSeek | 效率革命、R1"Sputnik时刻"、开源信仰 | 模型+AI企业 |
+| **李开复** ✨ | 零一万物 | 企业多Agent元年、To B转型 | 企业AI |
+| **Yann LeCun** ✨ | AMI Labs | 图灵奖、世界模型、$10.3亿种子轮 | 模型 |
 | **Barry Zhang** | Anthropic | Agent定义、五大工作流、Skills范式 | Agent |
 | **姚顺雨** | OpenAI | AI下半场理论、代码即affordance | Agent+模型 |
 | **Andrej Karpathy** | 前OpenAI/Tesla | Software 3.0、Vibe Coding | 模型+Agent |
-| **Simon Willison** | 独立开发者 | Vibe Engineering、上下文管理、TDD复兴 | Agent+企业AI |
-| **Harrison Chase** | LangChain | Ambient Agents、Agent Inbox | Agent+AI企业 |
+| **Simon Willison** | 独立开发者 | Agentic Engineering、上下文管理 | Agent+企业AI |
+| **Harrison Chase** | LangChain | Ambient Agents、Agent协议格局 | Agent+AI企业 |
 | **Jim Fan** | NVIDIA | Physical Turing Test、Simulation 2.0 | Agent+AI企业 |
 | **Addy Osmani** | Google | AI增强工程、六步工作流 | 企业AI |
 
-### 🏢 公司画像 (4家)
+### 🏢 公司画像 (12家)
 
 | 公司 | 领域 | 核心内容 |
 |------|------|---------|
-| **OpenAI** ✨ | 大模型领导者 | 产品矩阵、$5000亿估值、Stargate项目、政府合作 |
-| **Anthropic** ✨ | AI安全公司 | Claude系列、Constitutional AI、MCP协议、安全立场 |
-| **字节跳动** | 大模型/AI应用 | 全栈布局、产品矩阵、战略分析 |
+| **OpenAI** | 大模型领导者 | $8400亿估值、$250亿年化收入、GPT-5系列、Stargate |
+| **Anthropic** | AI安全公司 | $3800亿估值、Claude系列、MCP协议、安全立场 |
+| **NVIDIA** ✨ | AI算力基础设施 | $3.4万亿市值、$1305亿收入、AI芯片90%+份额 |
+| **Google DeepMind** ✨ | AI研究+产品 | Gemini系列、AlphaFold诺贝尔奖、GWS MCP |
+| **Meta AI** ✨ | 开源大模型 | Llama系列、MTIA芯片、LeCun离职后转向 |
+| **Microsoft** ✨ | AI平台化 | Copilot生态、Azure AI、OpenAI 27%股权 |
+| **DeepSeek** ✨ | 极致效率开源 | ~1T参数V4、非Nvidia训练、$557万训练R1 |
+| **智谱AI** ✨ | 国产AI国家队 | GLM-5(744B)、港股上市、清华系 |
+| **Cursor/Anysphere** ✨ | AI编程工具 | $293亿估值、$20亿ARR、增长最快的企业软件 |
+| **MiniMax** ✨ | 多模态AI | 港股上市、$1.5亿ARR、"坚决不做豆包" |
+| **字节跳动** | 大模型/AI应用 | 全栈布局、豆包2.27亿MAU、产品矩阵 |
 | **幻方量化** | 量化投资 | DeepSeek孵化、AI应用、竞争力分析 |
 
 ---
