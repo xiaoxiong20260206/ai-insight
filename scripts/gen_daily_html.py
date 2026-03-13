@@ -77,7 +77,12 @@ def render_news_item(item: dict) -> str:
 
     chips_html = ""
     # 兼容 chips(数组) 和 highlight(字符串) 两种格式
-    chip_items = d.get("chips") or ([d["highlight"]] if d.get("highlight") else [])
+    # highlight 字符串用 | 分隔时拆为多个chip
+    raw_chips = d.get("chips")
+    if not raw_chips and d.get("highlight"):
+        hl = d["highlight"]
+        raw_chips = [c.strip() for c in hl.split("|") if c.strip()] if "|" in hl else [hl]
+    chip_items = raw_chips or []
     if chip_items:
         chips = "".join(f'<span class="news-data-chip{chip_class}">{c}</span>' for c in chip_items)
         chips_html = f'''
@@ -253,16 +258,46 @@ def render_preview(events: list) -> str:
     for e in events:
         # 兼容两种格式: preview_events {name,desc,color} 和 watch_list [string]
         if isinstance(e, str):
-            name = e.split(" - ")[0].split("（")[0].strip() if " - " in e or "（" in e else e[:30]
-            desc = e
-            color = "var(--color-success)"
+            # 从字符串中提取名称和描述
+            if " - " in e:
+                parts = e.split(" - ", 1)
+                name = parts[0].strip()
+                desc = parts[1].strip()
+            elif "（" in e:
+                parts = e.split("（", 1)
+                name = parts[0].strip()
+                desc = "（" + parts[1]
+            else:
+                name = e[:30]
+                desc = e
+            # 智能检测紧迫度: 今天/明天的事件用强调色
+            lower = e.lower()
+            if any(k in lower for k in ["今天", "今日", "3月13"]):
+                color = "var(--color-danger)"
+                border_color = "var(--color-danger)"
+                icon = "🔴"
+            elif any(k in lower for k in ["明天", "明日", "3月14"]):
+                color = "var(--color-warning)"
+                border_color = "var(--color-warning)"
+                icon = "🟡"
+            elif any(k in lower for k in ["持续", "监测", "后续"]):
+                color = "var(--color-info)"
+                border_color = "var(--color-info)"
+                icon = "🔵"
+            else:
+                color = "var(--color-success)"
+                border_color = "var(--color-success)"
+                icon = "🟢"
         else:
-            color = f'var(--color-{e.get("color", "success")})'
+            color_key = e.get("color", "success")
+            color = f'var(--color-{color_key})'
+            border_color = color
             name = e.get("name", "")
             desc = e.get("desc", "")
-        items.append(f'''                <div style="padding:10px 14px;background:var(--color-bg);border-radius:var(--radius-md);border:1px solid var(--color-border-light)">
-                    <div style="font-size:13px;font-weight:700;color:{color}">{name}</div>
-                    <div style="font-size:12px;color:var(--color-text-muted);margin-top:2px">{desc}</div>
+            icon = {"danger": "🔴", "warning": "🟡", "info": "🔵"}.get(color_key, "🟢")
+        items.append(f'''                <div style="padding:12px 16px;background:var(--color-bg);border-radius:var(--radius-md);border:1px solid var(--color-border-light);border-left:3px solid {border_color};transition:all .2s">
+                    <div style="font-size:13px;font-weight:700;color:{color};display:flex;align-items:center;gap:6px">{icon} {name}</div>
+                    <div style="font-size:12px;color:var(--color-text-muted);margin-top:4px;line-height:1.5">{desc}</div>
                 </div>''')
     return f'''
         <div class="section-card">
@@ -342,7 +377,7 @@ def generate_html(data: dict) -> str:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI 日报 - {date_str} (v3.1)</title>
+    <title>AI 日报 - {date_str} (v3.2)</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231A7F37'/><circle cx='16' cy='14' r='6' fill='none' stroke='white' stroke-width='2'/><path d='M12 12h8M16 10v4M10 22c0-3.3 2.7-6 6-6s6 2.7 6 6' fill='none' stroke='white' stroke-width='2' stroke-linecap='round'/></svg>">
     {css_block}
 </head>
@@ -350,7 +385,7 @@ def generate_html(data: dict) -> str:
     <div class="container">
         <div class="header">
             <div class="header-badge">📡 林克的AI洞察项目 - AI日报</div>
-            <div class="header-title">AI 日报 <span class="version-badge">v3.1</span></div>
+            <div class="header-title">AI 日报 <span class="version-badge">v3.2</span></div>
             <div class="header-date">{date_obj.strftime("%Y年%-m月%-d日")} {weekday} | 五大板块：大模型 · AI Coding · AI应用 · AI行业 · 企业转型</div>
         </div>
 
