@@ -130,10 +130,16 @@
           }
         ]
       },
-      "focus": {
+      "deep_focus": {
         "title": "Nemotron 3 Super：英伟达为什么要自己做大模型？",
-        "summary": "英伟达作为AI芯片的单一最大受益者，为何还要下场做大模型？答案是“卖铲子的也得自己挖金”——Nemotron 3 Super定位为Agent优化的开源基座，配合即将发布的Feynman芯片，英伟达正在构建从芯片到模型到Agent的全栈闭环。开源策略的核心是降低AI应用门槛，吸引更多开发者使用英伟达生态。Takeaway：英伟达正从“卖铲子”升级为“卖整套挖矿方案”。"
-      }
+        "paragraphs": [
+          "英伟达作为AI芯片的单一最大受益者，为何还要下场做大模型？答案是\"卖铲子的也得自己挖金\"——Nemotron 3 Super定位为Agent优化的开源基座，配合即将发布的Feynman芯片，英伟达正在构建从芯片到模型到Agent的全栈闭环。",
+          "1200亿参数和5倍吞吐量提升的意义不在于技术炫耀，而在于通过模型层绑定开发者生态。开源并非慈善——一旦开发者习惯了免费的Nemotron，自然会倾向于购买英伟达芯片来运行它。这和AWS从计算资源延伸到数据库再到AI服务的路径如出一辙。",
+          "更根本的变化是：英伟达正从单纯的芯片供应商，升级为提供芯片+模型+Agent的完整闭环方案商。对从业者的启示：当基础设施公司开始向应用层扩张时，纯应用层玩家的护城河会受到挤压。"
+        ],
+        "takeaway": "英伟达正从\"卖铲子\"升级为\"卖整套挖矿方案\"——基础设施公司向上游扩张是不可逆趋势。"
+      },
+      "pattern_insight_html": "\n            <div class=\"pi-card\">\n                <div class=\"pi-header\">\n                    <span class=\"pi-badge\">🔮 规律洞察</span>\n                    <span class=\"pi-title\">基础设施公司的垂直整合定律：从卖零件到卖方案</span>\n                </div>\n                <div class=\"pi-row\">\n                    <span class=\"pi-row-label l2\">本质</span>\n                    <div class=\"pi-row-content\"><strong>基础设施公司一旦建立规模优势，必然向应用层扩张</strong>——因为控制上层应用才能最大化底层硬件的价值。</div>\n                </div>\n                <div class=\"pi-row\">\n                    <span class=\"pi-row-label\">进化序列</span>\n                    <div class=\"pi-row-content\">\n                        <div class=\"pi-evo\">\n                            <div class=\"pi-evo-step\"><span class=\"pi-evo-tag\">1.0</span><span class=\"pi-evo-text\">卖零件</span></div>\n                            <span class=\"pi-evo-arrow\">→</span>\n                            <div class=\"pi-evo-step active\"><span class=\"pi-evo-tag\">2.0</span><span class=\"pi-evo-text\">卖平台+生态</span></div>\n                            <span class=\"pi-evo-arrow\">→</span>\n                            <div class=\"pi-evo-step future\"><span class=\"pi-evo-tag\">3.0</span><span class=\"pi-evo-text\">卖完整方案</span></div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"pi-table\">\n                    <div class=\"pi-t-head\"><span>阶段</span><span>现实验证</span><span>类比</span></div>\n                    <div class=\"pi-t-section verified\"><span class=\"pi-t-section-tag\">✅ 已验证</span></div>\n                    <div class=\"pi-t-row\"><span class=\"pi-t-rule\">1.0 卖零件</span><span class=\"pi-t-reality\">Intel只卖CPU，生态由微软/OEM控制</span><span class=\"pi-t-analogy\">像卖面粉的，不管你做面包还是蛋糕</span></div>\n                    <div class=\"pi-t-row\"><span class=\"pi-t-rule\">2.0 卖平台</span><span class=\"pi-t-reality\">AWS从EC2扩展到数据库+AI服务+应用市场</span><span class=\"pi-t-analogy\">从卖地皮到建商场再到自营店铺</span></div>\n                    <div class=\"pi-t-divider\"></div>\n                    <div class=\"pi-t-section current\"><span class=\"pi-t-section-tag\">📍 当前</span></div>\n                    <div class=\"pi-t-row\"><span class=\"pi-t-rule\">2.0→3.0</span><span class=\"pi-t-reality\"><strong>英伟达</strong>：芯片→CUDA生态→Nemotron开源模型→Agent优化</span><span class=\"pi-t-analogy\">从卖铲子到卖整套挖矿方案</span></div>\n                    <div class=\"pi-t-divider\"></div>\n                    <div class=\"pi-t-section projected\"><span class=\"pi-t-section-tag\">🔮 趋势推演</span></div>\n                    <div class=\"pi-t-row projected\"><span class=\"pi-t-rule\">3.0</span><span class=\"pi-t-reality\">6-12个月内，英伟达将推出端到端AI开发平台（芯片+模型+部署+监控）</span><span class=\"pi-t-analogy\">像苹果从芯片到操作系统到应用商店的全栈闭环</span></div>\n                </div>\n                <div class=\"pi-confidence\">📐 置信度: 中高 · 验证窗口: 6-12个月 · 信号: GTC 2026是否发布AI开发平台/Agent市场</div>\n            </div>"
     },
     {
       "news": {
@@ -151,9 +157,14 @@
         ],
         "china": []
       },
-      "focus": {
+      "deep_focus": {
         "title": "Coding After Coders：程序员将变成什么？",
-        "summary": "Simon Willison的文章触及了AI编程的深层问题：当代码生成质量足够好时，程序员的核心价值从“写代码”转向“定义问题+审核方案+架构设计”。结合当前AI Coding工具三强竞争格局（OpenClaw的Agent生态、Cursor的IDE集成、Windsurf的全流程自动化），不同工具其实是在压注不同的程序员转型方向。Takeaway：与其担心被替代，不如主动向“审核者+架构师”转型。"
+        "paragraphs": [
+          "Simon Willison的文章触及了AI编程的深层问题：当代码生成质量足够好时，程序员的核心价值从\"写代码\"转向\"定义问题+审核方案+架构设计\"。编程正从手艺活变成指挥活。",
+          "看当前AI Coding工具的三强竞争——OpenClaw赌Agent生态、Cursor赌IDE集成、Windsurf赌全流程自动化——它们其实在押注程序员的不同转型路径。更根本的变化是：当代码不再是瓶颈时，理解需求和评估方案的能力会成为稀缺资源。",
+          "对从业者的启示：与其焦虑\"AI会不会替代程序员\"，不如主动向审核者和架构师的角色转型——这正是AI最难取代的能力区间。"
+        ],
+        "takeaway": "与其担心被替代，不如主动向\"审核者+架构师\"转型——理解需求比生成代码更稀缺。"
       }
     },
     {
@@ -184,10 +195,17 @@
           }
         ]
       },
-      "focus": {
-        "title": "“养龙虾”热背后的冷思考：AI Agent大众化的机会和陷阱",
-        "summary": "闲鱼搜索量暴1850%表明，OpenClaw已经突破技术圈层进入大众市场。但金融机构的“冷思考”揭示了另一面：超七成下载来自非官方渠道、15%含恶意代码、28省–2300+投诉。AI Agent的iPhone时刻不仅需要好产品，还需要安全基础设施。Takeaway：当AI产品进入大众市场时，安全问题会指数级放大。"
-      }
+      "deep_focus": {
+        "title": "\"养龙虾\"热背后的冷思考：AI Agent大众化的机会和陷阱",
+        "paragraphs": [
+          "闲鱼搜索量暴涨1850%表明，OpenClaw已经突破技术圈层进入大众市场。这是AI Agent领域第一个真正意义上的\"出圈\"事件。",
+          "但金融机构的\"冷思考\"揭示了另一面：超七成下载来自非官方渠道、15%含恶意代码、28省累计2300+投诉。每一次技术产品的大众化都伴随安全危机——从PC时代的病毒泛滥，到移动时代的隐私危机，再到加密货币的诈骗浪潮。AI Agent正在重演同样的剧本。",
+          "对从业者的启示：AI Agent的iPhone时刻不仅需要好产品，更需要安全基础设施。当产品从极客用户扩展到大众时，安全投入必须从附加功能变成核心底线。"
+        ],
+        "takeaway": "当AI产品进入大众市场时，安全问题会指数级放大——安全基础设施是大众化的前提，不是附加项。"
+      },
+      "theme": "china-theme",
+      "pattern_insight_html": "\n            <div class=\"pi-card\">\n                <div class=\"pi-header\">\n                    <span class=\"pi-badge\">🔮 规律洞察</span>\n                    <span class=\"pi-title\">技术大众化的安全真空定律：用户爆发→安全危机→基础设施跟进</span>\n                </div>\n                <div class=\"pi-row\">\n                    <span class=\"pi-row-label l2\">本质</span>\n                    <div class=\"pi-row-content\"><strong>每次技术产品从极客走向大众，都会经历一个\"安全真空期\"</strong>——用户增长速度远超安全基础设施建设速度，直到重大安全事件倒逼治理跟上。</div>\n                </div>\n                <div class=\"pi-row\">\n                    <span class=\"pi-row-label\">进化序列</span>\n                    <div class=\"pi-row-content\">\n                        <div class=\"pi-evo\">\n                            <div class=\"pi-evo-step\"><span class=\"pi-evo-tag\">1.0</span><span class=\"pi-evo-text\">极客尝鲜</span></div>\n                            <span class=\"pi-evo-arrow\">→</span>\n                            <div class=\"pi-evo-step active\"><span class=\"pi-evo-tag\">2.0</span><span class=\"pi-evo-text\">大众涌入+安全真空</span></div>\n                            <span class=\"pi-evo-arrow\">→</span>\n                            <div class=\"pi-evo-step future\"><span class=\"pi-evo-tag\">3.0</span><span class=\"pi-evo-text\">审核机制+应用商店化</span></div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"pi-table\">\n                    <div class=\"pi-t-head\"><span>阶段</span><span>现实验证</span><span>类比</span></div>\n                    <div class=\"pi-t-section verified\"><span class=\"pi-t-section-tag\">✅ 已验证</span></div>\n                    <div class=\"pi-t-row\"><span class=\"pi-t-rule\">PC时代</span><span class=\"pi-t-reality\">互联网普及→病毒泛滥→杀毒软件+防火墙成标配</span><span class=\"pi-t-analogy\">先建房子再装门锁</span></div>\n                    <div class=\"pi-t-row\"><span class=\"pi-t-rule\">移动时代</span><span class=\"pi-t-reality\">智能手机爆发→隐私泄露频发→App Store审核+权限管理</span><span class=\"pi-t-analogy\">先开集市再设管理处</span></div>\n                    <div class=\"pi-t-row\"><span class=\"pi-t-rule\">加密时代</span><span class=\"pi-t-reality\">比特币出圈→诈骗横行→交易所KYC+监管框架</span><span class=\"pi-t-analogy\">先淘金热再建法院</span></div>\n                    <div class=\"pi-t-divider\"></div>\n                    <div class=\"pi-t-section current\"><span class=\"pi-t-section-tag\">📍 当前</span></div>\n                    <div class=\"pi-t-row\"><span class=\"pi-t-rule\">AI Agent</span><span class=\"pi-t-reality\"><strong>OpenClaw搜索量+1850%</strong>，15%非官方版含恶意代码，28省2300+投诉</span><span class=\"pi-t-analogy\">像早期安卓应用市场：自由但混乱</span></div>\n                    <div class=\"pi-t-divider\"></div>\n                    <div class=\"pi-t-section projected\"><span class=\"pi-t-section-tag\">🔮 趋势推演</span></div>\n                    <div class=\"pi-t-row projected\"><span class=\"pi-t-rule\">3.0</span><span class=\"pi-t-reality\">3-6个月内，主流平台将推出AI Agent审核/认证机制，形成类App Store模式</span><span class=\"pi-t-analogy\">像苹果App Store从自由安装到严格审核的演化</span></div>\n                </div>\n                <div class=\"pi-confidence\">📐 置信度: 高 · 验证窗口: 3-6个月 · 信号: 主流平台是否推出Agent认证/审核机制</div>\n            </div>"
     },
     {
       "news": {
@@ -228,9 +246,14 @@
           }
         ]
       },
-      "focus": {
+      "deep_focus": {
         "title": "FDA弃Claude换Gemini：当AI采购变成政治站队",
-        "summary": "FDA的Elsa平台从Claude切换到Gemini，表面是技术迁移，实质是政治博弈的产物——特朗普政府因Anthropic拒绝军事化而报复性封杀。这揭示了一个新现实：AI供应商的伦理立场可能成为商业风险。对企亚的启示：多模型策略（同时对接多个AI供应商）不仅是技术冗余，更是地缘政治对冲策略。Takeaway：企业AI采购需将政治风险纳入决策框架。"
+        "paragraphs": [
+          "FDA的Elsa平台从Claude切换到Gemini，表面是技术迁移，实质是政治博弈的产物——特朗普政府因Anthropic拒绝军事化应用而进行报复性封杀，HHS甚至要求员工停止使用Claude。",
+          "这暴露了一个新现实：AI供应商的伦理立场会直接转化为商业风险。Anthropic坚守\"负责任AI\"的价值观，反而失去了政府关键合同——\"做正确的事\"与\"做赚钱的事\"出现了尖锐冲突。",
+          "对企业的启示：多模型策略不仅是技术冗余，更是地缘政治对冲。同时接入多个AI供应商，能规避单一依赖带来的系统性风险。"
+        ],
+        "takeaway": "企业AI采购需将政治风险纳入决策框架——多模型策略是地缘政治对冲，不只是技术备份。"
       }
     },
     {
@@ -261,10 +284,16 @@
           }
         ]
       },
-      "focus": {
-        "title": "美团星眸升级：“看得见的AI”比“能聊天的AI”更有价值",
-        "summary": "美团星眸的升级展示了AI企业落地的正确姿势：不是做通用聊天机器人，而是让AI“看”实体世界并解决具体问题。百万商家覆盖+日巡检千万次的规模，证明AI视觉模型在线下场景的落地速度远超预期。企业AI转型的关键不是“用了什么模型”，而是“解决了什么问题”。Takeaway：线下场景的AI视觉巡检是被低估的巨大市场。"
-      }
+      "deep_focus": {
+        "title": "美团星眸升级：\"看得见的AI\"比\"能聊天的AI\"更有价值",
+        "paragraphs": [
+          "美团星眸的升级展示了AI企业落地的正确方向：不是开发通用聊天机器人，而是让AI\"看\"实体世界并解决具体问题。百万商家覆盖+日巡检千万次的规模，证明AI视觉模型在线下场景的落地速度远超预期。",
+          "一个值得注意的现象：在企业AI落地实战中，视觉类AI（巡检、质检、安防）比对话类AI（客服、知识问答）更容易证明ROI。原因很简单——视觉任务有明确的判断标准和可量化的效率提升，而聊天类AI的价值往往难以衡量。",
+          "企业AI转型的核心不在于\"用了什么模型\"，而在于\"解决了什么问题\"。美团选择食品安全这个刚需场景，是典型的\"从痛点切入\"策略。"
+        ],
+        "takeaway": "线下场景的AI视觉巡检是被低估的巨大市场——\"看得见的AI\"比\"能聊天的AI\"更容易证明价值。"
+      },
+      "theme": "orange-theme"
     }
   ],
   "data_snapshot": [
