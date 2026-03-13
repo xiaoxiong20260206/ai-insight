@@ -1,7 +1,7 @@
 # Agent
 
 > **维度定义**: Agent架构设计、工作流模式、开发实践、落地应用
-> **更新时间**: 2026-03-06 (微信公众号主动学习)
+> **更新时间**: 2026-03-13 (主动学习+去伪存真)
 > **状态**: 核心维度，内容丰富
 
 ---
@@ -27,11 +27,13 @@
 | **最佳实践** | Agent基础设施与调优方法论 | 字节AI开挂指南 | [→链接](agent-infra-and-optimization.md) |
 | **Agentic Engineering** | Simon Willison的Agentic Engineering Patterns (2026) | 主动学习 | [→链接](agentic-engineering-patterns-2026.md) |
 
-核心内容 (2026-03-06更新)：
+核心内容 (2026-03-13更新)：
+- **Skills生态爆发**: SKILL.md成为跨Agent通用标准格式，Antigravity 1,234+技能库、GWS MCP Server
 - **Agentic Engineering模式**: Vibe Coding vs Agentic Engineering区分，Red/Green TDD，Linear Walkthroughs
 - **多Agent并行**: Codex Windows版标配，同时运行多个Agent处理不同任务
 - **工具趋同进化**: Claude Code创新功能被Cursor/Codex快速学习
-- **GPT-5.4+Codex**: 编程能力与推理能力深度整合
+- **GPT-5.4 Agent OS**: OSWorld 75%超人类、Tool Search省47% token、原生computer-use
+- **AI安全测试**: Shannon自主渗透测试(96.15%成功率)、Claude Opus 4.6 exploit里程碑
 - **Claw概念**: 个人硬件上运行的AI Agent新类别。国内Kimi与MiniMax已发布类似Claw产品
 
 ### 2026年中国AI领军人物共识 (甲子光年38位访谈)
@@ -121,3 +123,4 @@ Agent知识体系
 ---
 
 *创建时间: 2026-03-04*
+*最后更新: 2026-03-13*
