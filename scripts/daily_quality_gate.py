@@ -257,7 +257,8 @@ def check_board_classification(date_str: str) -> CheckResult:
                 "positive": ["模型", "benchmark", "训练", "推理", "蒸馏", "CVPR", "NeurIPS", "ICML", "ICLR",
                             "参数", "token", "多模态", "视觉", "3D", "扩散", "生成", "开源模型",
                             "Foundation Model", "架构", "注意力", "Transformer"],
-                "negative": ["融资", "收购", "估值", "军事", "法规", "IDE", "代码补全", "Cursor"]
+                "negative": ["融资", "收购", "估值", "军事", "法规", "IDE", "代码补全", "Cursor",
+                            "Agent", "个人Agent", "用户", "产品", "App"]
             },
             1: {  # AI Coding
                 "name": "AI Coding",
@@ -267,9 +268,10 @@ def check_board_classification(date_str: str) -> CheckResult:
             },
             2: {  # AI 应用
                 "name": "AI 应用",
-                "positive": ["用户", "产品", "App", "Workspace", "办公", "社交", "Agent平台",
-                            "OpenClaw", "Gemini", "搜索", "翻译", "客服", "助手"],
-                "negative": ["融资", "军事", "模型训练", "CVPR"]
+                "positive": ["用户", "产品", "App", "Workspace", "办公", "社交", "Agent",
+                            "Agent平台", "个人Agent", "Manus", "OpenClaw", "Gemini", "ChatGPT",
+                            "搜索", "翻译", "客服", "助手", "Perplexity", "Character"],
+                "negative": ["融资", "军事", "模型训练", "CVPR", "benchmark"]
             },
             3: {  # AI 行业
                 "name": "AI 行业",
@@ -344,25 +346,51 @@ def check_region_classification(date_str: str) -> CheckResult:
         
         # 已知公司/机构→地区映射（持续扩充）
         overseas_keywords = [
-            "OpenAI", "Anthropic", "Google", "DeepMind", "Meta", "Microsoft", 
-            "Apple", "Amazon", "AWS", "NVIDIA", "英伟达", "Tesla", "特斯拉",
+            # 大模型公司
+            "OpenAI", "Anthropic", "Google", "DeepMind", "Meta", "Microsoft",
+            "Apple", "Amazon", "AWS", "xAI", "Grok",
             "Mistral", "Cohere", "Stability", "Midjourney", "Runway",
+            # AI Coding
             "Cursor", "GitHub", "Copilot", "Vercel", "Hugging Face",
-            "Manus", "Perplexity", "Character.AI", "Inflection",
+            "Replit", "Bolt", "Windsurf", "Codeium", "Devin", "Cognition",
+            # AI应用/Agent
+            "Manus", "Perplexity", "Character.AI", "Inflection", "Notion",
+            "OpenClaw",
+            # 芯片/硬件
+            "NVIDIA", "英伟达", "AMD", "Intel", "Qualcomm", "ARM",
+            "Tesla", "特斯拉",
+            # 行业/政策
             "METR", "FDA", "EU", "欧盟", "GTC", "GDC",
+            # 消费电子
             "Samsung", "三星", "Sony", "索尼", "Toyota", "丰田",
-            "OpenClaw",  # 虚拟产品但源于海外
+            # AI基础设施
+            "Databricks", "Snowflake", "Scale AI", "Together AI",
+            "Salesforce", "Adobe", "Palantir",
+            # AI框架
+            "LangChain", "LlamaIndex",
+            # 知名人物
             "Simon Willison", "Andrej Karpathy", "Sam Altman",
         ]
         
         china_keywords = [
+            # 互联网巨头
             "百度", "阿里", "腾讯", "字节", "华为", "小米", "OPPO", "vivo",
-            "美团", "京东", "拼多多", "滴滴", "蚂蚁", "网易",
+            "美团", "京东", "拼多多", "滴滴", "蚂蚁", "网易", "荣耀",
+            # 家电/制造
             "海尔", "格力", "联想", "比亚迪", "大疆", "商汤", "旷视",
-            "DeepSeek", "深度求索", "智谱", "Moonshot", "月之暗面",
+            # AI大模型
+            "DeepSeek", "深度求索", "幻方量化", "智谱", "Moonshot", "月之暗面", "Kimi",
             "零一万物", "昆仑万维", "科大讯飞", "通义", "文心",
-            "闲鱼", "淘宝", "天猫", "支付宝", "微信", "抖音", "快手",
+            "阶跃星辰", "StepFun", "MiniMax", "百川智能", "面壁智能",
+            "智源研究院", "BAAI",
+            # AI Coding
             "Trae", "通义灵码", "CodeGeeX",
+            # 应用/平台
+            "闲鱼", "淘宝", "天猫", "支付宝", "微信", "抖音", "快手",
+            "小红书", "B站", "哔哩哔哩", "WPS", "金山",
+            # 车企AI
+            "蔚来", "理想", "小鹏", "极氪", "吉利",
+            # 媒体/会议
             "新华网", "人民网", "央视", "CCTV", "中国", "国内",
             "AWE", "WAIC", "世界人工智能大会",
         ]
