@@ -56,6 +56,7 @@ def render_news_item(item: dict) -> str:
         "cn": '<span class="news-tag tag-cn">🇨🇳</span>',
         "funding": '<span class="news-tag tag-funding">💰</span>',
         "policy": '<span class="news-tag tag-policy">📋</span>',
+        "practice": '<span class="news-tag tag-practice">⚙️</span>',
     }
     tag = tag_map.get(item.get("tag", "new"), tag_map["new"])
 
@@ -75,8 +76,10 @@ def render_news_item(item: dict) -> str:
     chip_class = " china" if item.get("tag") == "cn" else ""
 
     chips_html = ""
-    if "chips" in d:
-        chips = "".join(f'<span class="news-data-chip{chip_class}">{c}</span>' for c in d["chips"])
+    # 兼容 chips(数组) 和 highlight(字符串) 两种格式
+    chip_items = d.get("chips") or ([d["highlight"]] if d.get("highlight") else [])
+    if chip_items:
+        chips = "".join(f'<span class="news-data-chip{chip_class}">{c}</span>' for c in chip_items)
         chips_html = f'''
                         <div class="news-detail-row">
                             <span class="news-detail-label {label_class}">关键数据</span>
@@ -95,7 +98,7 @@ def render_news_item(item: dict) -> str:
                         </div>{chips_html}
                         <div class="news-detail-row">
                             <span class="news-detail-label {label_class}">影响判断</span>
-                            <span class="news-detail-value">{d['impact']}</span>
+                            <span class="news-detail-value">{d.get('impact', '')}</span>
                         </div>
                     </div>
                 </div>'''
@@ -244,12 +247,22 @@ def render_data_table(data: list) -> str:
 # ============ 明日/下周预览 ============
 
 def render_preview(events: list) -> str:
+    if not events:
+        return ""
     items = []
     for e in events:
-        color = f'var(--color-{e.get("color", "success")})'
+        # 兼容两种格式: preview_events {name,desc,color} 和 watch_list [string]
+        if isinstance(e, str):
+            name = e.split(" - ")[0].split("（")[0].strip() if " - " in e or "（" in e else e[:30]
+            desc = e
+            color = "var(--color-success)"
+        else:
+            color = f'var(--color-{e.get("color", "success")})'
+            name = e.get("name", "")
+            desc = e.get("desc", "")
         items.append(f'''                <div style="padding:10px 14px;background:var(--color-bg);border-radius:var(--radius-md);border:1px solid var(--color-border-light)">
-                    <div style="font-size:13px;font-weight:700;color:{color}">{e['name']}</div>
-                    <div style="font-size:12px;color:var(--color-text-muted);margin-top:2px">{e['desc']}</div>
+                    <div style="font-size:13px;font-weight:700;color:{color}">{name}</div>
+                    <div style="font-size:12px;color:var(--color-text-muted);margin-top:2px">{desc}</div>
                 </div>''')
     return f'''
         <div class="section-card">
@@ -370,7 +383,7 @@ def generate_html(data: dict) -> str:
 
 {render_data_table(data.get("data_snapshot", []))}
 
-{render_preview(data.get("preview_events", []))}
+{render_preview(data.get('preview_events') or data.get('watch_list', []))}
 
         <div style="margin-top:24px;background:linear-gradient(135deg,#F8FAFB 0%,#EEF2F6 100%);border:1px solid #F5F5F4;border-radius:14px;padding:24px;box-shadow:0 2px 8px rgba(31,35,40,.06),0 1px 2px rgba(31,35,40,.04)">
             <div style="font-size:16px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px">💡 了解更多</div>
