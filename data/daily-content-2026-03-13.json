@@ -1,183 +1,355 @@
 {
-  "coverage": { "overseas": 5, "china": 3 },
+  "coverage": {
+    "overseas": 7,
+    "china": 5
+  },
   "overview": [
     {
       "icon": "🧠",
       "label": "大模型",
-      "headline": "OpenAI停用GPT-5.1系列+收购Promptfoo+英伟达1200亿参数开源",
-      "text": "OpenAI正式停用GPT-5.1系列模型并收购AI安全平台；英伟达推出Nemotron 3 Super开源大模型"
+      "headline": "Nemotron 3 Super 1200亿参数+METR发布Opus 4.6安全报告",
+      "text": "英伟达最强开源模型登场吞吐量飙升5倍；METR发布Claude Opus 4.6破坏风险评估报告0/16测试通过"
     },
     {
       "icon": "⌨️",
       "label": "AI Coding",
-      "headline": "Claude Sonnet 4.6登陆GitHub Copilot",
-      "text": "70%用户更偏好Sonnet 4.6，在代码修复和Computer Use能力显著提升"
+      "headline": "Simon Willison: 后程序员时代的编程",
+      "text": "知名开发者发文探讨AI编程的未来：当代码质量不再是瓶颈，程序员的角色将如何转变"
     },
     {
       "icon": "📱",
       "label": "AI 应用",
-      "headline": "ChatGPT推出交互式学习模块",
-      "text": "覆盖70+数学和科学主题，用户可实时调整公式和变量进行互动学习"
+      "headline": "Manus推出聊天中引入个人Agent+NVIDIA GeForce NOW亮GDC",
+      "text": "Manus将AI Agent能力带给更多用户；NVIDIA云游戏平台亮相GDC 2026"
     },
     {
       "icon": "🏭",
       "label": "AI 行业",
-      "headline": "英伟达GTC大会倒计时+Anthropic 1亿美元投资合作伙伴网络",
-      "text": "3月16-19日GTC大会将揭晓Feynman芯片；Anthropic加大生态投资"
+      "headline": "GTC倒计时3天+FDA弃Claude换Gemini+AWE开幕",
+      "text": "GTC 2026将揭晓Feynman芯片；FDA因政治因素弃用Anthropic；AWE2026主题AI科技"
+    },
+    {
+      "icon": "🔄",
+      "label": "企业转型",
+      "label_class": "orange",
+      "headline": "美团星眸大模型全面升级+海尔AWE展示AI智慧家庭",
+      "text": "美团AI视觉模型覆盖百万外卖商家日巡检千万次；海尔智家从替人家务到无人家务"
     }
   ],
   "heat_trend": {
     "title": "近7期日报交叉分析（3/7-3/13）",
     "topics": [
       {
-        "name": "NVIDIA GTC 2026",
+        "name": "NVIDIA GTC 2026倒计时",
         "score": 10,
         "days": 3,
         "trend_class": "burst",
         "trend_label": "⚡ 即将爆发",
-        "signal": "3月16日主题演讲+Feynman芯片+Nemotron 3 Super发布"
+        "signal": "Feynman芯片+Nemotron 3 Super+190国3万人参会，距Jensen Huang主题演讲仅3天"
       },
       {
-        "name": "AI安全生态建设",
-        "score": 9,
-        "days": 1,
-        "trend_class": "burst",
-        "trend_label": "⚡ 突发事件",
-        "signal": "OpenAI收购Promptfoo+Anthropic 1亿美元合作伙伴投资"
+        "name": "AI安全与政策博弈",
+        "score": 10,
+        "days": 9,
+        "trend_class": "up",
+        "trend_label": "📈 持续升级",
+        "signal": "METR发布Opus 4.6破坏风险报告+FDA弃Claude换Gemini+军事化路线分歧继续"
       },
       {
         "name": "开源大模型参数竞赛",
+        "score": 9,
+        "days": 2,
+        "trend_class": "burst",
+        "trend_label": "⚡ 突发事件",
+        "signal": "英伟达Nemotron 3 Super 1200亿参数刷新开源纪录"
+      },
+      {
+        "name": "AI龙虾生态大战",
+        "score": 9,
+        "days": 6,
+        "trend_class": "up",
+        "trend_label": "📈 持续热度",
+        "signal": "CNCERT安全风险+闲鱼搜索量暴1850%+金融机构冷思考"
+      },
+      {
+        "name": "企业AI落地加速",
         "score": 8,
-        "days": 1,
+        "days": 2,
         "trend_class": "up",
         "trend_label": "📈 快速上升",
-        "signal": "英伟达1200亿参数Nemotron 3 Super刷新纪录"
+        "signal": "美团星眸升级+AWE2026开幕+海尔AI智慧家庭"
+      },
+      {
+        "name": "AI编程商业化",
+        "score": 8,
+        "days": 5,
+        "trend_class": "stable",
+        "trend_label": "📊 持续关注",
+        "signal": "Simon Willison发文探讨后程序员时代+AI编程三国杀"
       }
     ],
-    "summary": "本期最强信号是<strong>NVIDIA GTC 2026倒计时</strong>——距离主题演讲仅剩3天，Feynman芯片即将揭晓。<strong>AI安全</strong>成为新焦点——OpenAI收购Promptfoo反映头部厂商对安全的重视。<strong>开源大模型</strong>参数规模再创新高。"
+    "summary": "本期最强信号是<strong>NVIDIA GTC 2026倒计时</strong>——距Jensen Huang主题演讲仅3天，Nemotron 3 Super已提前发布。<strong>AI安全与政策</strong>持续升温——METR发布Opus 4.6破坏风险报告，FDA因政治因素弃用Claude换Gemini。<strong>企业AI落地</strong>加速——美团星眸大模型升级+AWE2026开幕展示家电AI化。"
   },
   "tabs": [
     {
       "news": {
         "overseas": [
           {
-            "tag": "ai-infra",
-            "title": "英伟达推出Nemotron 3 Super开源大模型，1200亿参数创纪录",
+            "tag": "hot",
+            "title": "英伟达推出Nemotron 3 Super开源大模型：1200亿参数，吞吐量飙升5倍",
             "url": "https://tech.sina.cn/2026-03-12/detail-inhqsnwz5045987.d.html",
             "source": "IT之家 · 3月12日",
             "details": {
-              "finding": "英伟达于3月11日发布其迄今最强开源大模型Nemotron 3 Super，拥有1200亿参数，在代码生成、长文本推理等任务上表现出色",
-              "significance": "刷新开源模型参数规模纪录，表明开源生态正在快速追赶闭源模型的能力边界",
-              "follow_up": "英伟达同时宣布向AI云服务公司Nebius投资20亿美元，深化在AI基础设施领域的布局"
+              "finding": "英伟达发布其迄今最强开源权重大模型Nemotron 3 Super，1200亿参数，在代码生成、长文本推理等任务上表现出色",
+              "highlight": "1200亿参数 | 吞吐量提升5倍 | 开源权重 | Agent优化",
+              "impact": "刷新开源模型参数规模纪录，英伟达从AI基础设施向大模型层全面延伸"
             }
           },
           {
-            "tag": "security",
-            "title": "OpenAI宣布收购AI安全平台Promptfoo",
-            "url": "https://openai.com/zh-Hans-CN/index/openai-to-acquire-promptfoo/",
-            "source": "OpenAI · 3月9日",
+            "tag": "hot",
+            "title": "METR发布Claude Opus 4.6破坏风险评估报告：0/16测试通过",
+            "url": "https://metr.org/blog/2026-03-12-sabotage-risk-report-opus-4-6-review/",
+            "source": "METR · 3月12日",
             "details": {
-              "finding": "OpenAI正在收购AI安全平台Promptfoo，该平台帮助企业在AI系统开发过程中识别并修复漏洞",
-              "significance": "此举旨在加速OpenAI Frontier的智能体安全测试与评估能力，反映出头部厂商对AI安全的重视程度不断提升",
-              "follow_up": "随着AI系统复杂度增加，安全测试和漏洞修复能力将成为差异化竞争要素"
-            }
-          },
-          {
-            "tag": "model",
-            "title": "OpenAI停用GPT-5.1模型系列，推出交互式学习功能",
-            "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
-            "source": "OpenAI Help Center · 3月11日",
-            "details": {
-              "finding": "OpenAI正式停用GPT-5.1 Instant、GPT-5.1 Thinking和GPT-5.1 Pro三个模型，现有对话将自动切换到对应的GPT-5.3/5.4系列模型",
-              "significance": "同时推出交互式学习功能，覆盖70+数学和科学主题，用户可实时调整公式和变量，将抽象概念转化为可互动的学习体验",
-              "follow_up": "该功能已向所有登录用户推出，标志着ChatGPT在教育场景的深化应用"
-            }
-          },
-          {
-            "tag": "coding",
-            "title": "Claude Sonnet 4.6正式在GitHub Copilot上线",
-            "url": "https://www.anthropic.com/news/claude-sonnet-4-6",
-            "source": "Anthropic · 2月17日",
-            "details": {
-              "finding": "2月17日发布的Claude Sonnet 4.6已正式在GitHub Copilot、AWS Bedrock等主流平台上线，在代码修复、Agent工作流、计算机操作等方面表现显著提升",
-              "significance": "用户在测试中有70%更偏好Sonnet 4.6而非4.5，甚至59%的用户更偏好它而非Opus 4.5",
-              "follow_up": "该模型在Computer Use能力上取得重大进展，接近人类水平"
-            }
-          },
-          {
-            "tag": "partnership",
-            "title": "Anthropic宣布1亿美元投资Claude合作伙伴网络",
-            "url": "https://www.anthropic.com/news/claude-partner-network",
-            "source": "Anthropic · 2月17日",
-            "details": {
-              "finding": "Anthropic推出Claude Partner Network计划，并宣布投资1亿美元，旨在帮助合作伙伴组织协助企业采用Claude",
-              "significance": "此外，Anthropic还宣布在亚太地区开设第四个办公室（悉尼），进一步扩大全球布局",
-              "follow_up": "显示AI基础设施和生态建设正成为巨头战略重点"
+              "finding": "METR对Anthropic发布的Claude Opus 4.6破坏风险报告进行独立评审，确认0/16项破坏测试通过",
+              "highlight": "0/16破坏测试通过 | 独立第三方评审 | Anthropic最前沿安全评估",
+              "impact": "AI安全评估进入第三方独立审计时代，为行业安全标准奠定基础"
             }
           }
         ],
         "china": [
           {
-            "tag": "event",
-            "title": "英伟达GTC 2026大会即将揭晓新一代AI芯片平台",
-            "url": "https://finance.sina.com.cn/stock/usstock/c/2026-03-13/doc-inhqurvz4321360.shtml",
-            "source": "新浪财经 · 3月13日",
+            "tag": "trend",
+            "title": "Manus推出聊天中引入个人Agent：“您的个人Agent，随时随地”",
+            "url": "https://manus.im/zh-cn/blog",
+            "source": "Manus · 3月12日",
             "details": {
-              "finding": "英伟达将于3月16-19日举办GTC 2026大会，预计将揭晓新一代AI芯片平台Feynman等重大产品",
-              "significance": "历史数据显示，GTC大会期间英伟达股价上涨概率达80%",
-              "follow_up": "目前英伟达股价收跌1.54%，成交额282.26亿美元"
-            }
-          },
-          {
-            "tag": "feature",
-            "title": "OpenAI为ChatGPT Plus/Pro推出自动充值功能",
-            "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
-            "source": "OpenAI · 3月10日",
-            "details": {
-              "finding": "符合条件的ChatGPT Plus和Pro用户可启用自动充值功能，当Codex和Sora的积分余额低于设定值时自动补充",
-              "significance": "用户可在Codex设置中管理该功能，提升使用便利性",
-              "follow_up": "该功能目前正在逐步向符合条件的用户开放"
-            }
-          },
-          {
-            "tag": "application",
-            "title": "ChatGPT推出交互式学习模块",
-            "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
-            "source": "OpenAI · 3月10日",
-            "details": {
-              "finding": "ChatGPT新增交互式学习功能，覆盖70+数学和科学主题（包括勾股定理、理想气体定律、圆面积计算、透镜方程等）",
-              "significance": "用户可实时调整输入和操作方程，立即查看对图表和结果的影响，将抽象概念转化为可探索的互动体验",
-              "follow_up": "该功能已向所有登录用户推出，标志着AI在教育领域的应用深化"
+              "finding": "Manus宣布将AI Agent能力直接嵌入聊天场景，用户可在对话中随时调用个人Agent执行任务",
+              "impact": "AI Agent从独立App走向嵌入式，降低用户使用门槛"
             }
           }
         ]
       },
-      "capability_update": {
-        "title": "💡 能力更新",
-        "items": [
+      "focus": {
+        "title": "Nemotron 3 Super：英伟达为什么要自己做大模型？",
+        "summary": "英伟达作为AI芯片的单一最大受益者，为何还要下场做大模型？答案是“卖铲子的也得自己挖金”——Nemotron 3 Super定位为Agent优化的开源基座，配合即将发布的Feynman芯片，英伟达正在构建从芯片到模型到Agent的全栈闭环。开源策略的核心是降低AI应用门槛，吸引更多开发者使用英伟达生态。Takeaway：英伟达正从“卖铲子”升级为“卖整套挖矿方案”。"
+      }
+    },
+    {
+      "news": {
+        "overseas": [
           {
-            "platform": "OpenAI ChatGPT",
-            "update_type": "功能升级",
-            "description": "推出交互式学习模块，覆盖70+数学和科学主题",
-            "impact": "将抽象概念转化为可互动的学习体验，提升教育场景应用能力",
-            "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes"
-          },
+            "tag": "trend",
+            "title": "Simon Willison：后程序员时代的编程——“Coding After Coders”",
+            "url": "https://simonwillison.net/",
+            "source": "Simon Willison · 3月12日",
+            "details": {
+              "finding": "知名开发者Simon Willison发文探讨AI编程的终局问题：当代码生成不再是瓶颈时，程序员的角色将如何转变",
+              "impact": "引发行业对程序员角色转型的深度思考：从写代码到定义问题"
+            }
+          }
+        ],
+        "china": [
           {
-            "platform": "Claude Sonnet 4.6",
-            "update_type": "平台集成",
-            "description": "正式在GitHub Copilot和AWS Bedrock上线",
-            "impact": "代码修复能力提升，70%用户更偏好该版本",
-            "url": "https://www.anthropic.com/news/claude-sonnet-4-6"
-          },
-          {
-            "platform": "英伟达 Nemotron 3 Super",
-            "update_type": "模型发布",
-            "description": "推出1200亿参数开源大模型",
-            "impact": "刷新开源模型参数规模纪录，推动开源生态发展",
-            "url": "https://tech.sina.cn/2026-03-12/detail-inhqsnwz5045987.d.html"
+            "tag": "trend",
+            "title": "AI编程三国杀：OpenClaw vs Cursor vs Windsurf 谁才是程序员终极伴侣？",
+            "url": "https://mp.weixin.qq.com/",
+            "source": "微信公众号 · 3月12日",
+            "details": {
+              "finding": "公众号热议AI编程工具三强格局：OpenClaw主打Agent生态、Cursor主打IDE深度集成、Windsurf主打全流程自动化",
+              "impact": "AI编程市场从单一工具竞争进入生态竞争阶段"
+            }
           }
         ]
+      },
+      "focus": {
+        "title": "Coding After Coders：程序员将变成什么？",
+        "summary": "Simon Willison的文章触及了AI编程的深层问题：当代码生成质量足够好时，程序员的核心价值从“写代码”转向“定义问题+审核方案+架构设计”。结合当前AI Coding工具三强竞争格局（OpenClaw的Agent生态、Cursor的IDE集成、Windsurf的全流程自动化），不同工具其实是在压注不同的程序员转型方向。Takeaway：与其担心被替代，不如主动向“审核者+架构师”转型。"
+      }
+    },
+    {
+      "news": {
+        "overseas": [
+          {
+            "tag": "hot",
+            "title": "NVIDIA GeForce NOW亮相GDC 2026：云游戏+AI融合新体验",
+            "url": "https://nvidianews.nvidia.com/news/latest",
+            "source": "NVIDIA · 3月12日",
+            "details": {
+              "finding": "NVIDIA在游戏开发者大会GDC 2026上展示GeForce NOW最新升级，融合AI增强的云游戏体验",
+              "impact": "AI+云游戏融合加速，NVIDIA在消费端持续扩大影响力"
+            }
+          }
+        ],
+        "china": [
+          {
+            "tag": "trend",
+            "title": "闲鱼上“小龙虾”搜索量大涨1850%：OpenClaw持续风靡全网",
+            "url": "https://finance.eastmoney.com/a/202603123669268547.html",
+            "source": "东方财富 · 3月12日",
+            "details": {
+              "finding": "随着OpenClaw持续走红，闲鱼平台“小龙虾”搜索量暴1850%，金融机构保持“冷思考”调性提示风险",
+              "highlight": "搜索量暴1850% | 金融机构冷思考 | 官方连续风险提示",
+              "impact": "AI Agent从技术圈走向大众消费市场，但安全风险同步放大"
+            }
+          }
+        ]
+      },
+      "focus": {
+        "title": "“养龙虾”热背后的冷思考：AI Agent大众化的机会和陷阱",
+        "summary": "闲鱼搜索量暴1850%表明，OpenClaw已经突破技术圈层进入大众市场。但金融机构的“冷思考”揭示了另一面：超七成下载来自非官方渠道、15%含恶意代码、28省–2300+投诉。AI Agent的iPhone时刻不仅需要好产品，还需要安全基础设施。Takeaway：当AI产品进入大众市场时，安全问题会指数级放大。"
+      }
+    },
+    {
+      "news": {
+        "overseas": [
+          {
+            "tag": "hot",
+            "title": "英伟达GTC 2026倒计时3天：Feynman芯片将揭晓，向Nebius投资20亿美元",
+            "url": "http://www.eeo.com.cn/2026/0313/810191.shtml",
+            "source": "经济观察报 · 3月13日",
+            "details": {
+              "finding": "GTC 2026将于3月16-19日举办，预计揭晓新一代AI芯片平台Feynman，英伟达同时向AI云服务公司Nebius投资20亿美元",
+              "highlight": "190国3万人参会 | 700+场次 | 20亿美元投资Nebius | GTC期间股价上涨概率80%",
+              "impact": "GTC将成为AI行业年度最重要的产品发布窗口"
+            }
+          },
+          {
+            "tag": "hot",
+            "title": "FDA的AI助手Elsa从Claude切换到Gemini：政治因素影响AI采购",
+            "url": "https://www.clinicalleader.com/doc/fda-s-elsa-ai-switches-from-claude-to-gemini-what-sponsors-need-to-know-0001",
+            "source": "Clinical Leader · 3月12日",
+            "details": {
+              "finding": "FDA的AI平台Elsa从Claude切换到Gemini，缘于特朗普政府与Anthopic的军事化分歧，HHS已要求员工停止使用Claude",
+              "highlight": "FDA Elsa平台 | Claude→Gemini | HHS禁令 | 政治因素影响AI采购",
+              "impact": "AI供应商的政治立场直接影响政府合同，企业选型AI时需考虑地缘政治风险"
+            }
+          }
+        ],
+        "china": [
+          {
+            "tag": "hot",
+            "title": "AWE 2026开幕：以“AI科技、慧享未来”为主题，展示AI家电新生态",
+            "url": "http://www.news.cn/tech/20260312/3c0b1182d1bc455db6e2c42536f2927a/c.html",
+            "source": "新华网 · 3月12日",
+            "details": {
+              "finding": "2026中国家电及消费电子博览会在上海开幕，以AI科技为核心主题，展示智能家电、消费电子进化",
+              "impact": "AI科技成为消费电子展会核心主题，家电行业全面拥抱AI"
+            }
+          }
+        ]
+      },
+      "focus": {
+        "title": "FDA弃Claude换Gemini：当AI采购变成政治站队",
+        "summary": "FDA的Elsa平台从Claude切换到Gemini，表面是技术迁移，实质是政治博弈的产物——特朗普政府因Anthropic拒绝军事化而报复性封杀。这揭示了一个新现实：AI供应商的伦理立场可能成为商业风险。对企亚的启示：多模型策略（同时对接多个AI供应商）不仅是技术冗余，更是地缘政治对冲策略。Takeaway：企业AI采购需将政治风险纳入决策框架。"
+      }
+    },
+    {
+      "news": {
+        "overseas": [
+          {
+            "tag": "trend",
+            "title": "海尔AWE展示AI智慧家庭新成果：从“替人家务”到“无人家务”",
+            "url": "http://www.news.cn/tech/20260312/c64b82e776b7479a87a2dbbc6e8641cf/c.html",
+            "source": "新华网 · 3月12日",
+            "details": {
+              "finding": "海尔智家在AWE2026上展示AI之眼技术升级，从AI替人家务迈向AI无人家务新阶段",
+              "impact": "家电AI从辅助工具向自主决策进化，智慧家庭进入新阶段"
+            }
+          }
+        ],
+        "china": [
+          {
+            "tag": "hot",
+            "title": "美团升级“星眸”大模型：覆盖百万商家，日巡检后厨千万次",
+            "url": "https://www.sznews.com/news/content/2026-03/12/content_31974068.htm",
+            "source": "深圳新闻网 · 3月12日",
+            "details": {
+              "finding": "美团全面升级星眸垂域多模态大模型，应用范围从后厨识别扩展到食品安全全流程，覆盖百万外卖商家日巡检千万次",
+              "highlight": "百万商家覆盖 | 日巡检千万次 | 食品安全全流程 | 软硬一体化",
+              "impact": "本地生活服务巨头用AI重塑食品安全基础设施，树立企业AI落地标杆"
+            }
+          }
+        ]
+      },
+      "focus": {
+        "title": "美团星眸升级：“看得见的AI”比“能聊天的AI”更有价值",
+        "summary": "美团星眸的升级展示了AI企业落地的正确姿势：不是做通用聊天机器人，而是让AI“看”实体世界并解决具体问题。百万商家覆盖+日巡检千万次的规模，证明AI视觉模型在线下场景的落地速度远超预期。企业AI转型的关键不是“用了什么模型”，而是“解决了什么问题”。Takeaway：线下场景的AI视觉巡检是被低估的巨大市场。"
       }
     }
-  ]
+  ],
+  "data_snapshot": [
+    {
+      "metric": "Nemotron 3 Super参数",
+      "value": "1200亿",
+      "note": "英伟达最强开源模型"
+    },
+    {
+      "metric": "Opus 4.6破坏测试",
+      "value": "0/16通过",
+      "note": "METR独立审计"
+    },
+    {
+      "metric": "闲鱼OpenClaw搜索量",
+      "value": "涨1850%",
+      "note": "AI Agent大众化信号"
+    },
+    {
+      "metric": "GTC参会规模",
+      "value": "3万人/190国",
+      "note": "史上最大AI会议"
+    },
+    {
+      "metric": "NVIDIA投资Nebius",
+      "value": "20亿美元",
+      "note": "AI云服务布局"
+    },
+    {
+      "metric": "美团星眸巡检",
+      "value": "日千万次",
+      "note": "覆盖百万外卖商家"
+    },
+    {
+      "metric": "GTC期间股价上涨率",
+      "value": "80%",
+      "note": "历史数据"
+    }
+  ],
+  "watch_list": [
+    "NVIDIA GTC 2026 (3月16-19日) - Jensen Huang主题演讲+Feynman芯片揭晓",
+    "AWE 2026 (3月12-15日) - 上海，AI科技主题",
+    "海尔AI科技全场景发布会 (3月13日)",
+    "Anthropic vs 美国政府 AI军事化博弈 - 持续关注",
+    "OpenClaw安全风险后续 - CNCERT持续监测"
+  ],
+  "references": [
+    {
+      "title": "IT之家: 英伟达Nemotron 3 Super",
+      "url": "https://tech.sina.cn/2026-03-12/detail-inhqsnwz5045987.d.html"
+    },
+    {
+      "title": "METR: Opus 4.6 Sabotage Risk Report",
+      "url": "https://metr.org/blog/2026-03-12-sabotage-risk-report-opus-4-6-review/"
+    },
+    {
+      "title": "Clinical Leader: FDA Elsa AI",
+      "url": "https://www.clinicalleader.com/doc/fda-s-elsa-ai-switches-from-claude-to-gemini-what-sponsors-need-to-know-0001"
+    },
+    {
+      "title": "新华网: AWE2026",
+      "url": "http://www.news.cn/tech/20260312/3c0b1182d1bc455db6e2c42536f2927a/c.html"
+    },
+    {
+      "title": "深圳新闻网: 美团星眸",
+      "url": "https://www.sznews.com/news/content/2026-03/12/content_31974068.htm"
+    }
+  ],
+  "meta": {
+    "date": "2026-03-13",
+    "version": "v3.2",
+    "total_items": 12,
+    "red_items": 5,
+    "yellow_items": 7,
+    "page_url": "https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-03/2026-03-13-v3.html"
+  }
 }
