@@ -2,8 +2,8 @@
 
 > **知识类型**: 概念
 > **来源**: Barry Zhang (Anthropic)、Harrison Chase (LangChain)、姚顺雨 (OpenAI) 深度分享
-> **更新时间**: 2026-03-04
-> **版本**: v1.0
+> **更新时间**: 2026-03-13
+> **版本**: v1.1 - 新增Skills范式、GPT-5.4 Tool Search、IETF Agent Gateway
 
 ---
 
@@ -26,6 +26,13 @@ Agentic Systems (智能系统)
 **Agent本质公式**：
 ```
 Agent = Model + Tools + Loop (环境反馈)
+```
+
+**2026.03演进**：
+```
+Agent = Model + Skills + Tool Search + Loop
+其中 Skills = 可复用的能力单元 (SKILL.md通用格式)
+     Tool Search = 智能工具发现 (解决上下文爆炸)
 ```
 
 ### Augmented LLM (增强型LLM)
