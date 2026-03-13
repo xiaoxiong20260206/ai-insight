@@ -24,7 +24,7 @@
 |------|------|------|------|
 | **投融资** | 2026年AI行业投融资动态 | AI日报 2026-03-06 | [→链接](ai-funding-2026.md) |
 
-### 已有公司画像 (12家)
+### 已有公司画像 (25家)
 
 | 公司 | 领域 | 核心内容 | 位置 |
 |------|------|---------|------|
@@ -34,12 +34,23 @@
 | **Google DeepMind** ✨ | AI研究+产品 | Gemini系列、AlphaFold诺贝尔奖、GWS MCP | [→链接](../entity-profiles/companies/google-deepmind-profile.md) |
 | **Meta AI** ✨ | 开源大模型 | Llama系列、MTIA芯片、LeCun离职后闭源转向 | [→链接](../entity-profiles/companies/meta-ai-profile.md) |
 | **Microsoft** ✨ | AI平台 | Copilot生态、Azure AI、OpenAI 27%股权 | [→链接](../entity-profiles/companies/microsoft-ai-profile.md) |
+| **xAI** ✨ | AI+社交 | Grok系列、$200亿+融资、五角大楼AI | [→链接](../entity-profiles/companies/xai-profile.md) |
+| **Amazon/AWS AI** ✨ | AI平台 | Bedrock、Nova模型、Anthropic $40亿投资 | [→链接](../entity-profiles/companies/amazon-aws-ai-profile.md) |
+| **SSI** ✨ | 安全超级智能 | Sutskever创立、$320亿估值 | [→链接](../entity-profiles/companies/ssi-profile.md) |
 | **DeepSeek** ✨ | 极致效率开源 | ~1T参数V4、非Nvidia训练、$557万训练R1 | [→链接](../entity-profiles/companies/deepseek-profile.md) |
 | **智谱AI** ✨ | 国产AI国家队 | GLM-5(744B)、港股上市、清华系 | [→链接](../entity-profiles/companies/zhipu-ai-profile.md) |
+| **月之暗面/Kimi** ✨ | C端 AI助手 | $100亿估值、超长上下文先驱 | [→链接](../entity-profiles/companies/moonshot-kimi-profile.md) |
+| **百度AI** ✨ | 全栈AI | 文心一言2亿MAU、Apollo自动驾驶 | [→链接](../entity-profiles/companies/baidu-ai-profile.md) |
+| **阿里巴巴AI** ✨ | 开源+云 | 通义千问全球第一开源、百炼平台 | [→链接](../entity-profiles/companies/alibaba-ai-profile.md) |
 | **Cursor/Anysphere** ✨ | AI编程工具 | $293亿估值、ARR翻倍增长 | [→链接](../entity-profiles/companies/cursor-anysphere-profile.md) |
-| **MiniMax** ✨ | 多模态AI | 港股上市、$1.5亿ARR | [→链接](../entity-profiles/companies/minimax-profile.md) |
-| **字节跳动** | 大模型/AI应用 | 全栈布局、豆包2.27亿MAU、产品矩阵 | [→链接](bytedance-ai-landscape.md) |
-| **幻方量化** | 量化投资/AI | DeepSeek孵化、AI应用场景 | [→链接](../entity-profiles/companies/high-flyer-quant.md) |
+| **Mistral AI** ✨ | 欧洲AI冒军 | €117亿估值、开源+闭源双轨 | [→链接](../entity-profiles/companies/mistral-ai-profile.md) |
+| **Hugging Face** ✨ | AI开源枢纽 | AI界GitHub、100万+模型 | [→链接](../entity-profiles/companies/hugging-face-profile.md) |
+| **Perplexity AI** ✨ | AI搜索 | 5.8%市场份额、$1.48亿收入 | [→链接](../entity-profiles/companies/perplexity-ai-profile.md) |
+| **ElevenLabs** ✨ | AI语音 | $330M ARR、$110亿估值 | [→链接](../entity-profiles/companies/elevenlabs-profile.md) |
+| **Runway** ✨ | AI视频 | Gen-4.5世界顶级、$3.15亿融资 | [→链接](../entity-profiles/companies/runway-profile.md) |
+| **Cohere** ✨ | 企业AI | $2.4亿ARR、Transformer合著者创立 | [→链接](../entity-profiles/companies/cohere-profile.md) |
+| **World Labs** ✨ | 空间智能 | 李飞飞创立、$10亿融资、Marble模型 | [→链接](../entity-profiles/companies/world-labs-profile.md) |
+
 
 ### 字节跳动AI全景摘要
 
@@ -51,7 +62,7 @@
   - 内部: Aime、TRAE、飞书知识库
 - **战略特点**: 短期价格战抢市场、中期Agent平台建生态、长期多模态+具身智能
 
-### 相关人物 (按公司)
+### 相关人物 (按公司, 22位)
 
 | 公司 | 人物 | 位置 |
 |------|------|------|
@@ -61,12 +72,22 @@
 | **Anthropic** | Barry Zhang | [→链接](../entity-profiles/people/barry-zhang.md) |
 | **NVIDIA** | Jensen Huang ✨ | [→链接](../entity-profiles/people/jensen-huang.md) |
 | **NVIDIA** | Jim Fan | [→链接](../entity-profiles/people/jim-fan.md) |
+| **Google DeepMind** | Demis Hassabis ✨ | [→链接](../entity-profiles/people/demis-hassabis.md) |
 | **Microsoft** | Satya Nadella ✨ | [→链接](../entity-profiles/people/satya-nadella.md) |
+| **xAI** | Elon Musk ✨ | [→链接](../entity-profiles/people/elon-musk-ai.md) |
+| **SSI** | Ilya Sutskever ✨ | [→链接](../entity-profiles/people/ilya-sutskever.md) |
 | **DeepSeek** | 梁文峰 ✨ | [→链接](../entity-profiles/people/liang-wenfeng.md) |
+| **月之暗面** | 杨植麟 ✨ | [→链接](../entity-profiles/people/yang-zhilin.md) |
 | **零一万物** | 李开复 ✨ | [→链接](../entity-profiles/people/kai-fu-lee.md) |
 | **AMI Labs** | Yann LeCun ✨ | [→链接](../entity-profiles/people/yann-lecun.md) |
+| **World Labs** | 李飞飞 ✨ | [→链接](../entity-profiles/people/fei-fei-li.md) |
+| **Perplexity** | Aravind Srinivas ✨ | [→链接](../entity-profiles/people/aravind-srinivas.md) |
+| **Cohere** | Aidan Gomez ✨ | [→链接](../entity-profiles/people/aidan-gomez.md) |
+| **DeepLearning.AI** | Andrew Ng ✨ | [→链接](../entity-profiles/people/andrew-ng.md) |
 | **LangChain** | Harrison Chase | [→链接](../entity-profiles/people/harrison-chase.md) |
 | **Google** | Addy Osmani | [→链接](../entity-profiles/people/addy-osmani.md) |
+| **前OpenAI/Tesla** | Andrej Karpathy | [→链接](../entity-profiles/people/andrej-karpathy.md) |
+| **独立开发者** | Simon Willison | [→链接](../entity-profiles/people/simon-willison.md) |
 
 ### 待填充/待扩充
 
