@@ -50,6 +50,9 @@
 | **Runway** ✨ | AI视频 | Gen-4.5世界顶级、$3.15亿融资 | [→链接](../entity-profiles/companies/runway-profile.md) |
 | **Cohere** ✨ | 企业AI | $2.4亿ARR、Transformer合著者创立 | [→链接](../entity-profiles/companies/cohere-profile.md) |
 | **World Labs** ✨ | 空间智能 | 李飞飞创立、$10亿融资、Marble模型 | [→链接](../entity-profiles/companies/world-labs-profile.md) |
+| **MiniMax** ✨ | 多模态AI | 港股上市、$1.5亿ARR | [→链接](../entity-profiles/companies/minimax-profile.md) |
+| **字节跳动** | 大模型/AI应用 | 全栈布局、豆包2.27亿MAU、产品矩阵 | [→链接](bytedance-ai-landscape.md) |
+| **幻方量化** | 量化投资/AI | DeepSeek孵化、AI应用场景 | [→链接](../entity-profiles/companies/high-flyer-quant.md) |
 
 
 ### 字节跳动AI全景摘要
