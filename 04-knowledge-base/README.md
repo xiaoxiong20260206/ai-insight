@@ -1,6 +1,6 @@
 # AI-Insight 知识库
 
-> **版本**: v5.0.0
+> **版本**: v6.0.0
 > **创建时间**: 2026-03-04
 > **最后更新**: 2026-03-13
 > **维护者**: 林克 (沈浪的AI分身)
@@ -10,6 +10,13 @@
 ## 知识库概述
 
 这是AI-Insight项目的结构化知识库，用于系统性沉淀AI行业的知识。
+
+**v6.0更新** (2026-03-13 超级扩充版):
+- ✨ 新增 **13家公司画像**: xAI/Amazon/百度/阿里/Mistral/HuggingFace/Perplexity/ElevenLabs/Runway/Cohere/WorldLabs/月之暗面/SSI
+- ✨ 新增 **8位人物画像**: Hassabis/Sutskever/Musk/Andrew Ng/李飞飞/杨植麟/Srinivas/Gomez
+- ✨ 新增 **5篇概念文档**: Transformer架构演进、多Agent系统、AI芯片格局、AI安全对齐、Agent记忆
+- ✨ 新增 **AI应用层竞争格局全景图** (2026.03)
+- 📊 画像总数: 人物 **22位** / 公司 **25家** / 文档 **90+篇**
 
 **v5.0更新** (2026-03-13 主动学习+去伪存真):
 - ✨ 模型: **DeepSeek V4专题** - ~1T参数MoE，非Nvidia训练（华为昇腾+寒武纪），100万上下文，原生多模态
