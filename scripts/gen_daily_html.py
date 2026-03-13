@@ -117,8 +117,43 @@ def render_section(section: dict) -> str:
 
 # ============ 深度聚焦卡片 ============
 
+def normalize_deep_focus(raw: dict) -> dict:
+    """将 focus / deep_focus 的不同结构归一化为标准格式 {title, paragraphs[], takeaway}"""
+    title = raw.get("title", "")
+    # 已经是标准格式
+    if "paragraphs" in raw:
+        return {"title": title, "paragraphs": raw["paragraphs"], "takeaway": raw.get("takeaway", "")}
+    # 旧格式：只有 summary 字符串 → 拆分
+    summary = raw.get("summary", "")
+    takeaway = ""
+    # 尝试提取 Takeaway
+    for sep in ["Takeaway：", "Takeaway:", "TAKEAWAY：", "TAKEAWAY:"]:
+        if sep in summary:
+            parts = summary.split(sep, 1)
+            summary = parts[0].strip()
+            takeaway = parts[1].strip()
+            break
+    # 按句号拆段（至少2段）
+    sentences = [s.strip() for s in summary.replace("。", "。\n").split("\n") if s.strip()]
+    if len(sentences) <= 1:
+        paragraphs = [summary] if summary else []
+    else:
+        # 合并短句为2-4段
+        paragraphs = []
+        buf = ""
+        for s in sentences:
+            buf += s
+            if len(buf) >= 60:
+                paragraphs.append(buf)
+                buf = ""
+        if buf:
+            paragraphs.append(buf)
+    return {"title": title, "paragraphs": paragraphs, "takeaway": takeaway}
+
+
 def render_deep_focus(df: dict, theme: str = "") -> str:
-    """渲染深度聚焦卡片"""
+    """渲染深度聚焦卡片（兼容 focus 和 deep_focus 两种字段结构）"""
+    ndf = normalize_deep_focus(df)
     theme_class = f" {theme}" if theme else ""
     takeaway_theme = f' {theme}' if theme else ""
     label_color = ""
@@ -127,20 +162,23 @@ def render_deep_focus(df: dict, theme: str = "") -> str:
     elif theme == "china-theme":
         label_color = " china"
 
+    takeaway_html = ""
+    if ndf['takeaway']:
+        takeaway_html = f'''\n                    <div class="deep-focus-takeaway{takeaway_theme}">
+                        <div class="deep-focus-takeaway-label{label_color}">💡 TAKEAWAY</div>
+                        <div class="deep-focus-takeaway-text">{ndf['takeaway']}</div>
+                    </div>'''
+
     return f'''
             <div class="deep-focus-card">
                 <div class="deep-focus-header{theme_class}">
                     <div>
                         <div class="deep-focus-label">💡 深度聚焦</div>
-                        <div class="deep-focus-title">{df['title']}</div>
+                        <div class="deep-focus-title">{ndf['title']}</div>
                     </div>
                 </div>
                 <div class="deep-focus-body">
-                    {''.join(f"<p>{p}</p>" for p in df['paragraphs'])}
-                    <div class="deep-focus-takeaway{takeaway_theme}">
-                        <div class="deep-focus-takeaway-label{label_color}">💡 TAKEAWAY</div>
-                        <div class="deep-focus-takeaway-text">{df['takeaway']}</div>
-                    </div>
+                    {''.join(f"<p>{p}</p>" for p in ndf['paragraphs'])}{takeaway_html}
                 </div>
             </div>'''
 
@@ -269,7 +307,9 @@ def generate_html(data: dict) -> str:
 
         tab_data = tabs[i] if i < len(tabs) else {}
         section_html = render_section(tab_data.get("news", {}))
-        deep_focus_html = render_deep_focus(tab_data["deep_focus"], tab_data.get("theme", "")) if tab_data.get("deep_focus") else ""
+        # 兼容 deep_focus 和 focus 两种字段名
+        df_data = tab_data.get("deep_focus") or tab_data.get("focus")
+        deep_focus_html = render_deep_focus(df_data, tab_data.get("theme", "")) if df_data else ""
         # pattern insight is optional
         pi_html = tab_data.get("pattern_insight_html", "")
 
