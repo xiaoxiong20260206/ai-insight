@@ -2,8 +2,8 @@
 
 > **知识类型**: AI企业分析
 > **来源**: Wikipedia、Anthropic官网、公开报道
-> **更新时间**: 2026-03-06
-> **版本**: v1.2 - 新增流量App超越ChatGPT数据、Max Schwarzer加入
+> **更新时间**: 2026-03-13
+> **版本**: v1.3 - 新增Opus 4.6 exploit里程碑、供应链风险分类
 
 ---
 
@@ -118,9 +118,23 @@ Anthropic的核心训练方法：
 
 Anthropic在**机械可解释性**领域领先：
 
-- 2024: 用dictionary learning识别Claude中数百万个"特征"
+- 2024: 用dictionary learning识别Claude中数百万个“特征”
 - 发现Golden Gate Bridge特征等具体概念表示
-- 2025.03: 发现LLM可以"提前规划"（如写诗时预先想好押韵词）
+- 2025.03: 发现LLM可以“提前规划”（如写诗时预先想好押韵词）
+
+### AI安全能力里程碑 (2026.03)
+
+**Claude Opus 4.6独立编写浏览器exploit**：
+- 与Mozilla合作，两周内发现Firefox的22个漏洞
+- 成功为CVE-2026-2796（WebAssembly JIT类型混淆）编写有效exploit
+- 利用addrof/fakeobj原语实现任意内存读写，最终获得代码执行能力
+- 在约350次尝试中成功2次
+- **首个被观察到在最少人工干预下成功编写浏览器exploit的AI模型**
+- 其他模型（Opus 4.1/4.5、Sonnet 4.5/4.6、Haiku 4.5）均未成功
+- Cybench成功率6个月翻倍，Cybergym成功率4个月翻倍
+- Anthropic将其视为“重要的早期预警信号”
+
+**意义**: AI网络安全能力的重要里程碑，表明LLM正接近“全链exploit”能力
 
 ### 模型上下文协议 (MCP)
 
@@ -234,6 +248,11 @@ Anthropic的使用政策**禁止**:
 - 2.26: Anthropic拒绝取消AI安全限制
 - 2.27: Trump下令联邦机构停用Anthropic模型
 
+**2026.03 被列为“供应链风险”**:
+- 美国国防部将Anthropic列为“供应链风险”
+- Anthropic正在法庭上提出挑战
+- 凸显AI公司与政府关系的复杂性，可能影响Anthropic的政府合同和声誉
+
 ### 委内瑞拉行动
 
 据WSJ报道，美军在2026年委内瑞拉突袭行动中使用了Claude，行动导致83人死亡并逮捕马杜罗总统。
@@ -343,4 +362,4 @@ Anthropic设立的目的信托：
 
 ---
 
-*最后更新: 2026-03-05*
+*最后更新: 2026-03-13*

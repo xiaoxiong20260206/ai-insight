@@ -27,7 +27,7 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parent.parent
 DATA_PATH = PROJECT_ROOT / "data"
 
-# JSON模板结构
+# JSON模板结构 (v2.0 — 与 gen_daily_html.py 完整字段集对齐)
 TEMPLATE = {
     "coverage": {"overseas": 0, "china": 0},
     "overview": [
@@ -39,20 +39,47 @@ TEMPLATE = {
     ],
     "heat_trend": {
         "title": "近7期日报交叉分析",
-        "topics": [],
+        "topics": [
+            {"name": "", "score": 8, "days": 3, "trend_class": "up", "trend_label": "📈 攀升", "signal": ""}
+        ],
         "summary": ""
     },
     "tabs": [
         {
             "news": {
                 "overseas": [
-                    {"tag": "hot", "title": "", "url": "", "source": ""}
+                    {"tag": "hot", "title": "", "url": "", "source": "", "details": {"finding": "", "chips": [], "impact": ""}}
                 ],
                 "china": [
-                    {"tag": "new", "title": "", "url": "", "source": ""}
+                    {"tag": "cn", "title": "", "url": "", "source": "", "details": {"finding": "", "chips": [], "impact": ""}}
                 ]
             },
-            "focus": {"title": "", "summary": ""}
+            "deep_focus": {"title": "", "paragraphs": ["", "", ""], "takeaway": ""},
+            "theme": "",
+            "pattern_insight_html": ""
+        },
+        {
+            "news": {
+                "overseas": [
+                    {"tag": "hot", "title": "", "url": "", "source": "", "details": {"finding": "", "chips": [], "impact": ""}}
+                ],
+                "china": [
+                    {"tag": "cn", "title": "", "url": "", "source": ""}
+                ]
+            },
+            "deep_focus": {"title": "", "paragraphs": ["", "", ""], "takeaway": ""}
+        },
+        {
+            "news": {
+                "overseas": [
+                    {"tag": "new", "title": "", "url": "", "source": ""}
+                ],
+                "china": [
+                    {"tag": "cn", "title": "", "url": "", "source": ""}
+                ]
+            },
+            "deep_focus": {"title": "", "paragraphs": ["", "", ""], "takeaway": ""},
+            "theme": ""
         },
         {
             "news": {
@@ -60,43 +87,37 @@ TEMPLATE = {
                     {"tag": "hot", "title": "", "url": "", "source": ""}
                 ],
                 "china": [
-                    {"tag": "new", "title": "", "url": "", "source": ""}
+                    {"tag": "cn", "title": "", "url": "", "source": ""}
                 ]
             },
-            "focus": {"title": "", "summary": ""}
-        },
-        {
-            "news": {
-                "overseas": [
-                    {"tag": "hot", "title": "", "url": "", "source": ""}
-                ],
-                "china": [
-                    {"tag": "new", "title": "", "url": "", "source": ""}
-                ]
-            },
-            "focus": {"title": "", "summary": ""}
-        },
-        {
-            "news": {
-                "overseas": [
-                    {"tag": "hot", "title": "", "url": "", "source": ""}
-                ],
-                "china": [
-                    {"tag": "new", "title": "", "url": "", "source": ""}
-                ]
-            },
-            "focus": {"title": "", "summary": ""}
+            "deep_focus": {"title": "", "paragraphs": ["", "", ""], "takeaway": ""}
         },
         {
             "news": {
                 "overseas": [],
                 "china": [
-                    {"tag": "new", "title": "", "url": "", "source": ""}
+                    {"tag": "cn", "title": "", "url": "", "source": ""}
                 ]
             },
-            "focus": {"title": "", "summary": ""}
+            "deep_focus": {"title": "", "paragraphs": ["", "", ""], "takeaway": ""},
+            "theme": ""
         }
-    ]
+    ],
+    "data_snapshot": [
+        {"metric": "", "value": "", "note": ""}
+    ],
+    "watch_list": [""],
+    "references": [
+        {"title": "", "url": ""}
+    ],
+    "meta": {
+        "date": "",
+        "version": "v3.2",
+        "total_items": 0,
+        "red_items": 0,
+        "yellow_items": 0,
+        "page_url": ""
+    }
 }
 
 
