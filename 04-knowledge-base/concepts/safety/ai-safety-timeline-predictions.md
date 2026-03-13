@@ -2,7 +2,7 @@
 
 > **知识类型**: AI安全研究
 > **来源**: MIRI, Import AI, 预测市场
-> **更新时间**: 2026-03-06
+> **更新时间**: 2026-03-13
 > **状态**: 持续追踪
 
 ---
@@ -177,14 +177,37 @@ Center for AI Safety (CAIS) 创建的基准测试：
 
 ---
 
+## 2026.03 最新安全事件
+
+### Claude Opus 4.6 独立编写浏览器exploit (2026.03.06)
+
+| 指标 | 数值 | 说明 |
+|------|------|------|
+| **发现漏洞** | 22个 | 两周内（与Mozilla合作） |
+| **成功exploit** | CVE-2026-2796 | WebAssembly JIT类型混淆 |
+| **尝试次数** | 350次中2次 | 首个成功的AI exploit |
+| **Cybench增速** | 6个月翻倍 | AI安全能力快速提升 |
+
+**意义**: 首个LLM独立完成从漏洞发现到exploit编写全链的案例。Anthropic将其视为"重要的早期预警信号"，呼吁开发者加固软件安全。
+
+### AI安全领域的双重加速
+
+1. **AI防御能力提升**: AI辅助发现漏洞的效率远超人类
+2. **AI攻击能力提升**: AI正接近"全链exploit"能力
+3. **窗口期在收窄**: Cybench成功率6个月翻倍，Cybergym 4个月翻倍
+
+---
+
 ## 相关资源
 
 - [MIRI: Thoughts on AI 2027](https://intelligence.org/2025/04/09/thoughts-on-ai-2027/)
 - [Import AI Newsletter](https://jack-clark.net/)
 - [CAIS: Humanity's Last Exam](https://agi.safe.ai/)
 - [NYT Ezra Klein Podcast](https://www.nytimes.com/2026/02/24/opinion/ezra-klein-podcast-jack-clark.html)
+- [Anthropic Red Team: Exploit Research](https://red.anthropic.com/2026/exploit/)
 
 ---
 
 *创建时间: 2026-03-06*
+*最后更新: 2026-03-13*
 *来源: 系统性主动学习*
