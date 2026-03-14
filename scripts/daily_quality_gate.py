@@ -9,16 +9,20 @@ AI日报质量门脚本 (Quality Gate)
   python scripts/daily_quality_gate.py 2026-03-11         # 检查指定日期
   python scripts/daily_quality_gate.py 2026-03-11 --fix   # 检查并尝试修复部分问题
 
-检查项 (9项):
+检查项 (13项):
   1. JSON数据文件存在性
   2. 中文引号检测
   3. 链接有效性 (禁止#占位符)
   4. 内容非空检查
   5. ⭐ [v2.0新增] 时效性验证 (发布日期在时间窗口内)
-  6. ⭐ [v2.0新增] HTML链接规范 (target="_blank" + 无#占位)
-  7. MD/HTML文件存在性
-  8. 6处联动更新检查
-  9. 外部版同步检查
+  6. ⭐ [v3.0新增] 板块分类验证
+  7. ⭐ [v4.0新增] 地区分类验证
+  8. ⭐ [v3.0新增] 跨天去重
+  9. ⭐ [v5.0新增] 信息源多样性 (微信覆盖>=2 + 单源集中度<=40%)
+  10. ⭐ [v2.0新增] HTML链接规范 (target="_blank" + 无#占位)
+  11. MD/HTML文件存在性
+  12. 6处联动更新检查
+  13. 外部版同步检查
 
 作者: 林克 (沈浪的AI分身)
 版本: v2.0.0 (2026-03-11)
@@ -529,6 +533,98 @@ def check_cross_day_dedup(date_str: str) -> CheckResult:
         return CheckResult("去重", False, f"检查失败: {e}")
 
 
+def check_source_diversity(date_str: str) -> CheckResult:
+    """检查X: [v5.0新增] 信息源多样性检查（含微信公众号覆盖）
+    
+    规则:
+    1. 微信公众号覆盖: 新闻条目中至少2条来自或引用微信公众号
+       (url含 mp.weixin.qq.com / weixin.sogou.com，或 source 标注"微信")
+    2. 信息源集中度: 单一域名占比不超过40%
+    """
+    json_path = DATA_PATH / f"daily-content-{date_str}.json"
+    if not json_path.exists():
+        return CheckResult("信息源多样性", False, "JSON数据文件不存在", severity="warning")
+    
+    try:
+        data = json.loads(json_path.read_text(encoding="utf-8"))
+        
+        # 收集所有新闻条目
+        all_items = []
+        for tab in data.get("tabs", []):
+            news = tab.get("news", {})
+            for region in ["overseas", "china"]:
+                for item in news.get(region, []):
+                    all_items.append(item)
+        
+        if not all_items:
+            return CheckResult("信息源多样性", False, "无新闻条目", severity="warning")
+        
+        # --- 检查1: 微信公众号覆盖 ---
+        weixin_direct = 0    # URL直接指向微信文章
+        weixin_crossref = 0  # source字段提到微信（交叉引用）
+        for item in all_items:
+            url = item.get("url", "")
+            source = item.get("source", "")
+            
+            # 直接引用：URL指向微信
+            if "mp.weixin.qq.com" in url or "weixin.sogou.com" in url:
+                weixin_direct += 1
+            # 交叉引用：source字段提到微信但URL不是微信
+            elif "微信" in source or "公众号" in source:
+                weixin_crossref += 1
+        
+        # --- 检查2: 信息源集中度 ---
+        from urllib.parse import urlparse
+        domain_counts: Dict[str, int] = {}
+        for item in all_items:
+            url = item.get("url", "")
+            try:
+                domain = urlparse(url).netloc
+                if domain:
+                    # 统一到主域名 (去掉www/eu等前缀)
+                    parts = domain.split(".")
+                    if len(parts) > 2:
+                        domain = ".".join(parts[-2:])
+                    domain_counts[domain] = domain_counts.get(domain, 0) + 1
+            except Exception:
+                pass
+        
+        total = len(all_items)
+        issues = []
+        
+        # 微信覆盖不足：直接引用微信文章 < 2 篇
+        weixin_total = weixin_direct + weixin_crossref
+        if weixin_direct < 2:
+            if weixin_crossref > 0:
+                issues.append(
+                    f"微信公众号直接引用{weixin_direct}条(交叉引用{weixin_crossref}条)，"
+                    f"建议将优质公众号文章作为主要信源而非仅背景参考"
+                )
+            else:
+                issues.append(f"微信公众号覆盖为0(要求>=2条直接引用)")
+        
+        # 信息源集中度
+        for domain, count in sorted(domain_counts.items(), key=lambda x: -x[1]):
+            ratio = count / total
+            if ratio > 0.4:
+                issues.append(f"{domain}占比{ratio:.0%}({count}/{total}条)过高")
+        
+        if issues:
+            detail = "; ".join(issues)
+            return CheckResult("信息源多样性", False, detail, severity="warning")
+        
+        # 构建通过消息
+        domain_summary = ", ".join(f"{d}({c})" for d, c in 
+                                   sorted(domain_counts.items(), key=lambda x: -x[1])[:5])
+        weixin_msg = f"微信直引{weixin_direct}+交叉{weixin_crossref}"
+        return CheckResult(
+            "信息源多样性", True, 
+            f"{weixin_msg}, Top域名: {domain_summary}"
+        )
+    except Exception as e:
+        return CheckResult("信息源多样性", False, f"检查失败: {e}", severity="warning")
+
+
 def check_html_links(date_str: str) -> CheckResult:
     """检查6: ⭐ [v2.0新增] HTML链接规范
     
@@ -658,6 +754,7 @@ def run_all_checks(date_str: str) -> Tuple[List[CheckResult], int, int]:
         check_board_classification,  # v3.0新增
         check_region_classification, # v4.0新增
         check_cross_day_dedup,       # v3.0新增
+        check_source_diversity,      # v5.0新增 - 信息源多样性+微信覆盖
         check_html_links,            # v2.0新增
         check_md_html_exists,
         check_six_locations,
