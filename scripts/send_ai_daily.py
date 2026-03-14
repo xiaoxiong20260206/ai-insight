@@ -2,18 +2,19 @@
 """
 AI日报 KIM 推送脚本 (通用版，持续迭代)
 =====================================
-将 AI 日报推送到林克所在的所有 KIM 群
+将 AI 日报推送到指定的2个目标群（CodeFlicker项目群 + 研发效能中心全员群）
 
 功能特性:
 - 卡片格式持续迭代（热度趋势 + 五大板块 × 动态/深度聚焦）
 - 每条动态带链接，点击可跳转原文
-- 双按钮：查看完整日报 + AI洞察首页
+- 双按钮：查看完整日报 + 了解AI洞察项目
 - 支持从JSON文件读取数据（优先）或从MD文件解析（兜底）
-- 重试机制：遇到频率限制自动重试
+- P0安全规则：42900限流不自动重试（可能已投递，重试会导致重复消息）
 - 间隔控制：群间2.5秒间隔
+- 推送范围：仅发2个目标群（DAILY_TARGET_GROUPS），周报发所有群
 
 使用方式:
-  python scripts/send_ai_daily.py                    # 推送今天的日报到所有群
+  python scripts/send_ai_daily.py                    # 推送今天的日报到目标群
   python scripts/send_ai_daily.py 2026-03-10         # 推送指定日期的日报
   python scripts/send_ai_daily.py --preview          # 先发给自己预览
   python scripts/send_ai_daily.py --dry-run          # 试运行，不实际发送
@@ -28,7 +29,7 @@ import re
 import sys
 from datetime import datetime
 from pathlib import Path
-from typing import Optional, Dict, List
+from typing import Optional, Dict
 
 try:
     import httpx
@@ -57,7 +58,13 @@ PROJECT_URL = "https://xiaoxiong20260206.github.io/ai-insight/"
 # 推送配置
 SEND_INTERVAL = 2.5  # 群间发送间隔(秒)，避免频率限制
 MAX_RETRIES = 3      # 最大重试次数
-RETRY_DELAY = 5      # 重试间隔(秒)
+RETRY_DELAY = 5
+
+# 日报推送目标群（仅推送到这2个群，周报才推所有群）
+DAILY_TARGET_GROUPS = {
+    "6501852196213070",  # 【项目】CodeFlicker（2026年）
+    "3705455482343722",  # 研发效能中心全员群
+}  # set 类型，O(1) 查找
 
 # 常量
 LQ = "\u201c"  # 中文左引号
@@ -117,7 +124,11 @@ async def send_to_target(
     target_name: str,
     dry_run: bool = False
 ) -> bool:
-    """发送消息到目标（群或个人），带重试机制"""
+    """发送消息到目标（群或个人）。
+    
+    P0安全规则: 42900 频率限制**不自动重试**，因为42900不保证消息未投递，
+    重试可能导致消息重复发送。仅对网络异常做有限重试。
+    """
     if dry_run:
         print(f"   🔍 [DRY-RUN] 将发送到: {target_name} ({target_id})")
         return True
@@ -145,23 +156,20 @@ async def send_to_target(
                     return True
                 
                 if result.get("code") == 42900:
-                    if attempt < MAX_RETRIES - 1:
-                        print(f"   ⏳ 频率限制，{RETRY_DELAY}秒后重试 ({attempt + 1}/{MAX_RETRIES})")
-                        await asyncio.sleep(RETRY_DELAY)
-                        continue
-                    else:
-                        print(f"   ❌ 重试{MAX_RETRIES}次仍失败: {result}")
-                        return False
+                    # P0: 42900 不保证消息未投递，禁止自动重试，避免重复发送
+                    print(f"   ⚠️ 频率限制(42900)，已记录，不自动重试（可能已投递）: {target_name}")
+                    return False
                 else:
                     print(f"   ❌ 发送失败: {result}")
                     return False
                     
         except Exception as e:
+            # 网络异常可安全重试（请求未到达服务器）
             if attempt < MAX_RETRIES - 1:
-                print(f"   ⏳ 发送异常，{RETRY_DELAY}秒后重试: {e}")
+                print(f"   ⏳ 网络异常，{RETRY_DELAY}秒后重试: {e}")
                 await asyncio.sleep(RETRY_DELAY)
             else:
-                print(f"   ❌ 发送异常: {e}")
+                print(f"   ❌ 网络异常: {e}")
                 return False
     
     return False
@@ -330,7 +338,7 @@ def build_card_v35(date_str: str, data: Dict) -> dict:
             rank = rank_icons[i] if i < len(rank_icons) else f"{i+1}️⃣"
             name = topic.get("name", "")
             days = topic.get("days", 0)
-            sectors = 2  # 默认
+            sectors = topic.get("sectors", 2)
             trend_class = topic.get("trend_class", "stable")
             trend_icon = trend_icons.get(trend_class, "➡️")
             signal = topic.get("signal", "")
@@ -453,7 +461,7 @@ def build_card_v35(date_str: str, data: Dict) -> dict:
         "type": "action",
         "actions": [
             {"type": "button", "text": {"type": "plainText", "content": "📄 查看完整日报 >>"}, "style": "green", "url": report_url},
-            {"type": "button", "text": {"type": "plainText", "content": "🏠 AI洞察首页"}, "style": "blue", "url": PROJECT_URL},
+            {"type": "button", "text": {"type": "plainText", "content": "💡 了解AI洞察项目"}, "style": "blue", "url": PROJECT_URL},
         ],
         "layout": "two",
     })
@@ -487,7 +495,7 @@ async def main():
         print("🔍 [DRY-RUN 模式]")
     print("=" * 50)
     
-    # 1. 预检（P0强制，4项检查）
+    # 1. 预检（P0强制，3项检查）
     print("🔍 预检...")
     passed, msg, data = pre_check(date_str)
     
@@ -534,15 +542,22 @@ async def main():
         else:
             print("❌ 预览发送失败")
     else:
-        # 群发模式
+        # 群发模式（日报仅发指定2个群）
         print("📋 获取群列表...")
-        groups = await get_bot_groups(token)
-        if not groups:
+        all_groups = await get_bot_groups(token)
+        if not all_groups:
             print("⚠️ 未找到任何群")
             return
-        print(f"✅ 林克所在群数量: {len(groups)}")
+        
+        # 日报只发目标群
+        groups = [g for g in all_groups if g["groupId"] in DAILY_TARGET_GROUPS]
+        if not groups:
+            print("⚠️ 未找到目标群（CodeFlicker + 研发效能中心）")
+            return
+        
+        print(f"✅ 林克所在群数量: {len(all_groups)}，日报目标群: {len(groups)}")
         for g in groups:
-            print(f"   - {g['groupName']} ({g['groupId']})")
+            print(f"   → {g['groupName']} ({g['groupId']})")
         
         print("\n📤 开始推送...")
         success_count = 0
