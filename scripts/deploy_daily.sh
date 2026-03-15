@@ -17,9 +17,58 @@ cd "$PROJECT_DIR"
 echo "🚀 AI日报一键部署: $DATE"
 echo "=================================================="
 
-# ===== 0. 质量门检查（阻断式，不通过则禁止部署） =====
+# ===== 0a. Orchestrator状态验证（v1.1新增） =====
+# 防止绕过orchestrator直接部署 — 2026-03-15教训
 echo ""
-echo "🔍 Step 0: 质量门检查（阻断式）"
+echo "🔍 Step 0a: Orchestrator状态验证"
+STATE_FILE="data/daily-workflow/$DATE/state.json"
+if [ -f "$STATE_FILE" ]; then
+    # 检查validate步骤是否完成
+    VALIDATE_STATUS=$(python3 -c "
+import json, sys
+try:
+    state = json.load(open('$STATE_FILE'))
+    v = state.get('steps', {}).get('validate', {}).get('status', 'pending')
+    print(v)
+except:
+    print('error')
+" 2>/dev/null)
+    
+    if [ "$VALIDATE_STATUS" = "completed" ]; then
+        echo "  ✅ Orchestrator validate已完成"
+    elif [ "$VALIDATE_STATUS" = "error" ]; then
+        echo "  ⚠️ 读取状态文件失败，跳过此检查"
+    else
+        echo "  🚫 Orchestrator的validate步骤未完成(当前: $VALIDATE_STATUS)"
+        echo "     请通过 orchestrator finalize 执行完整流程，而非直接部署。"
+        echo "     命令: python3 scripts/ai_daily_orchestrator.py finalize --date $DATE"
+        if [ "${FORCE_DEPLOY:-0}" != "1" ]; then
+            echo "     如需强制部署: FORCE_DEPLOY=1 $0 $DATE"
+            exit 1
+        fi
+        echo "     ⚠️ FORCE_DEPLOY=1 已设置，跳过检查..."
+    fi
+    
+    # 检查source快照是否存在（v1.1: 确保Step 2.7抽检已执行）
+    SNAPSHOT_FILE="data/daily-workflow/$DATE/source_snapshot.json"
+    if [ -f "$SNAPSHOT_FILE" ]; then
+        echo "  ✅ Source快照存在"
+    else
+        echo "  ⚠️ Source快照不存在 — 建议通过orchestrator complete --step 2 创建"
+    fi
+else
+    echo "  ⚠️ 未找到orchestrator状态文件($STATE_FILE)"
+    echo "     建议通过 orchestrator 执行完整流程"
+    if [ "${FORCE_DEPLOY:-0}" != "1" ]; then
+        echo "     如需强制部署: FORCE_DEPLOY=1 $0 $DATE"
+        exit 1
+    fi
+    echo "     ⚠️ FORCE_DEPLOY=1 已设置，跳过检查..."
+fi
+
+# ===== 0b. 质量门检查（阻断式，不通过则禁止部署） =====
+echo ""
+echo "🔍 Step 0b: 质量门检查（阻断式）"
 GATE_RESULT=$(python3 scripts/daily_quality_gate.py "$DATE" 2>&1)
 echo "$GATE_RESULT"
 
