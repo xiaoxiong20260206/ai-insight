@@ -441,13 +441,13 @@ def build_card_v35(date_str: str, data: Dict) -> dict:
         blocks.append({"blockId": f"sec{i+1}", "type": "content", "text": {"type": "kimMd", "content": section_content}})
         blocks.append({"blockId": f"div{i+1}", "type": "divider"})
     
-    # 林克能力更新（可选，从data中读取）
+    # 林克自述/能力更新（可选，从data中读取）
     capability_update = data.get("capability_update", "")
     if capability_update:
         blocks.append({
             "blockId": "capability",
             "type": "content",
-            "text": {"type": "kimMd", "content": f"🤖 **林克能力更新**\n{capability_update}"},
+            "text": {"type": "kimMd", "content": capability_update},
         })
         blocks.append({"blockId": "div_cap", "type": "divider"})
     
