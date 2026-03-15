@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
 """
-ai_daily_orchestrator.py — AI日报工作流状态机 v1.0
+ai_daily_orchestrator.py — AI日报工作流状态机 v1.1
 
 编排AI日报的完整流程，追踪状态，支持断点恢复。
 设计原则: 脚本做苦力，Agent做决策。
+
+v1.1更新 (2026-03-15):
+  - Step 2 complete时自动保存source字段快照（篡改检测基础）
+  - finalize前新增Step 2.7: URL抽检+封闭平台链接合规（原手动步骤已脚本化）
+  - 快照+质量门v8.0联动: 阻断source日期篡改绕过行为
 
 工作流:
   Step 1: 搜索调研 [Agent]  — 热点探针 + 两层搜索 + 内容筛选
@@ -21,9 +26,13 @@ ai_daily_orchestrator.py — AI日报工作流状态机 v1.0
   python3 scripts/ai_daily_orchestrator.py reset --step N [--date YYYY-MM-DD]
 """
 
+import hashlib
 import json
+import random
+import re
 import subprocess
 import sys
+import urllib.request
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -88,6 +97,137 @@ def resolve_step(raw: str) -> str:
         return STEP_NUM_MAP[raw]
     if raw in STEPS:
         return raw
+
+# ── Source快照 (v1.1 篡改检测) ─────────────────────────
+def save_source_snapshot(date: str):
+    """Step 2完成时保存source字段快照，用于后续质量门的篡改检测。
+    
+    机制: 记录所有source字段的原始内容和MD5 hash。
+    如果Step 2完成后source被修改（但Step 2没被reset），质量门会报错。
+    
+    v1.1新增 (2026-03-15经验)
+    """
+    json_path = PROJECT_DIR / "data" / f"daily-content-{date}.json"
+    if not json_path.exists():
+        print(f"  ⚠️ JSON不存在，跳过快照保存")
+        return
+    
+    try:
+        data = json.loads(json_path.read_text(encoding="utf-8"))
+        sources = []
+        for tab_idx, tab in enumerate(data.get("tabs", [])):
+            for region in ["overseas", "china"]:
+                for idx, item in enumerate(tab.get("news", {}).get(region, [])):
+                    sources.append({
+                        "tab": tab_idx, "region": region, "idx": idx,
+                        "source": item.get("source", ""),
+                        "title": item.get("title", "")[:50]
+                    })
+        
+        sources_json = json.dumps(sources, ensure_ascii=False)
+        snapshot = {
+            "created": datetime.now().isoformat(),
+            "step": 2,
+            "sources_hash": hashlib.md5(sources_json.encode()).hexdigest(),
+            "sources_count": len(sources),
+            "sources": sources,
+        }
+        
+        snapshot_path = state_dir(date) / "source_snapshot.json"
+        snapshot_path.write_text(json.dumps(snapshot, indent=2, ensure_ascii=False))
+        print(f"  📸 Source快照已保存 ({len(sources)}条, hash={snapshot['sources_hash'][:8]})")
+    except Exception as e:
+        print(f"  ⚠️ 快照保存失败: {e}")
+
+
+def run_url_spot_check(date: str) -> bool:
+    """Step 2.7脚本化: URL真实性抽检 + 封闭平台链接合规
+    
+    在finalize (Step 3+4) 之前自动执行:
+    1. 随机抽检3个URL的HTTP可达性
+    2. 检查禁止的封闭平台链接模式
+    
+    v1.1新增 — 将Skill文档中的Step 2.7从"Agent手动执行"改为"自动强制执行"
+    """
+    json_path = PROJECT_DIR / "data" / f"daily-content-{date}.json"
+    if not json_path.exists():
+        print(f"  ❌ JSON不存在")
+        return False
+    
+    try:
+        data = json.loads(json_path.read_text(encoding="utf-8"))
+        
+        # 收集所有URL
+        all_urls = []
+        forbidden = []
+        
+        FORBIDDEN_PATTERNS = [
+            (r'mp\.weixin\.qq\.com', 'mp.weixin临时链接(约6h过期)'),
+            (r'weixin\.sogou\.com/link\?', '搜狗跳转链接(数小时过期)'),
+        ]
+        
+        for tab in data.get("tabs", []):
+            for region in ['overseas', 'china']:
+                for item in tab.get('news', {}).get(region, []):
+                    url = item.get('url', '')
+                    title = item.get('title', '')[:30]
+                    
+                    if url and url.startswith('http'):
+                        all_urls.append((url, title))
+                        
+                        # 检查封闭平台禁止项
+                        for pattern, desc in FORBIDDEN_PATTERNS:
+                            if re.search(pattern, url):
+                                forbidden.append(f"{title} → {desc}")
+                                break
+        
+        issues = []
+        
+        # 1. 封闭平台链接检查
+        if forbidden:
+            for f in forbidden:
+                print(f"  ❌ 禁止链接: {f}")
+            issues.append(f"{len(forbidden)}个禁止的封闭平台链接")
+        
+        # 2. URL抽检 (最多3个)
+        if all_urls:
+            sample = random.sample(all_urls, min(3, len(all_urls)))
+            unreachable = []
+            for url, title in sample:
+                try:
+                    req = urllib.request.Request(url, method='HEAD')
+                    req.add_header('User-Agent', 'Mozilla/5.0 (AI-Insight Orchestrator/1.1)')
+                    resp = urllib.request.urlopen(req, timeout=10)
+                    if resp.status >= 400:
+                        unreachable.append(f"{title}({resp.status})")
+                except Exception:
+                    try:
+                        req = urllib.request.Request(url)
+                        req.add_header('User-Agent', 'Mozilla/5.0 (AI-Insight Orchestrator/1.1)')
+                        resp = urllib.request.urlopen(req, timeout=10)
+                        if resp.status >= 400:
+                            unreachable.append(f"{title}({resp.status})")
+                    except Exception:
+                        unreachable.append(f"{title}(不可达)")
+            
+            if unreachable:
+                for u in unreachable:
+                    print(f"  ⚠️ 抽检不可达: {u}")
+                issues.append(f"{len(unreachable)}/{len(sample)}个抽检URL不可达")
+            else:
+                print(f"  ✅ URL抽检通过 ({len(sample)}个均可达)")
+        
+        if issues:
+            # 封闭平台链接是硬性失败，URL不可达是警告
+            if forbidden:
+                return False
+            # URL不可达仅警告，不阻断（网络波动可能导致假阳性）
+            print(f"  ⚠️ URL抽检有问题但不阻断（可能是网络波动）")
+        
+        return True
+    except Exception as e:
+        print(f"  ❌ URL抽检异常: {e}")
+        return False
     return raw
 
 # ── 命令: status ──────────────────────────────────────────
@@ -180,9 +320,18 @@ def _script_command(key: str, date: str) -> str:
 
 # ── 命令: finalize (Step 3 + Step 4) ─────────────────────
 def cmd_finalize(date: str) -> bool:
-    """一键执行: 质量门 → HTML生成 → 部署 → 外部同步"""
+    """一键执行: URL抽检 → 质量门 → HTML生成 → 部署 → 外部同步"""
     print(f"\n🚀 AI日报 Finalize: {date}")
     print("=" * 50)
+
+    # --- Step 2.7: URL抽检 (v1.1新增，原Skill文档手动步骤现已自动化) ---
+    print("\n📋 Step 2.7: URL抽检 + 封闭平台链接合规")
+    url_ok = run_url_spot_check(date)
+    if not url_ok:
+        print("\n🚫 URL抽检失败（存在禁止的封闭平台链接），请修复后重试。")
+        print("   提示: 回到 Step 1/2 替换违规链接。")
+        return False
+    print("  ✅ Step 2.7 通过")
 
     # --- Step 3: 质量验证 ---
     print("\n📋 Step 3: 质量门检查")
@@ -368,6 +517,10 @@ def main():
         mark_step(date, step_key, "completed")
         step = STEPS[step_key]
         print(f"✅ Step {step['step_num']}  {step['name']} 已标记完成")
+        
+        # v1.1: Step 2完成时自动保存source快照
+        if step_key == "content":
+            save_source_snapshot(date)
 
     elif cmd == "reset":
         if not step_key:
