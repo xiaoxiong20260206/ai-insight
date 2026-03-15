@@ -1,9 +1,15 @@
 #!/usr/bin/env python3
 """
-ai_daily_orchestrator.py — AI日报工作流状态机 v1.1
+ai_daily_orchestrator.py — AI日报工作流状态机 v1.2
 
-编排AI日报的完整流程，追踪状态，支持断点恢复。
-设计原则: 脚本做苦力，Agent做决策。
+编排AI日报的完整流程，追踪状态和上下文，支持跨会话断点恢复。
+设计原则: 脚本做苦力，Agent做决策，上下文不丢失。
+
+v1.2更新 (2026-03-15):
+  - complete --context: 步骤完成时记录上下文摘要（搜了什么/选了什么/为什么）
+  - resume命令: 新会话第一个命令，输出结构化恢复简报（比status更丰富）
+  - status增强: 附带已完成步骤的context摘要
+  - Session Resume Protocol: 跨会话接力的根治方案
 
 v1.1更新 (2026-03-15):
   - Step 2 complete时自动保存source字段快照（篡改检测基础）
@@ -19,8 +25,9 @@ v1.1更新 (2026-03-15):
 
 用法:
   python3 scripts/ai_daily_orchestrator.py status [--date YYYY-MM-DD]
+  python3 scripts/ai_daily_orchestrator.py resume [--date YYYY-MM-DD]    # 跨会话恢复简报
   python3 scripts/ai_daily_orchestrator.py next   [--date YYYY-MM-DD]
-  python3 scripts/ai_daily_orchestrator.py complete --step N [--date YYYY-MM-DD]
+  python3 scripts/ai_daily_orchestrator.py complete --step N [--context "..."] [--date YYYY-MM-DD]
   python3 scripts/ai_daily_orchestrator.py finalize [--date YYYY-MM-DD]   # 运行 Step 3+4
   python3 scripts/ai_daily_orchestrator.py push [--date YYYY-MM-DD]       # 运行 Step 5
   python3 scripts/ai_daily_orchestrator.py reset --step N [--date YYYY-MM-DD]
@@ -244,6 +251,10 @@ def cmd_status(date: str):
         ts = f' [{s["timestamp"]}]' if "timestamp" in s else ""
         err = f' ⚠️ {s["error"][:60]}' if s.get("error") else ""
         print(f"  {icon} Step {step['step_num']}  {step['name']} [{step['executor']}]{ts}{err}")
+        # v1.2: 显示context摘要（截断到80字符）
+        ctx = s.get("context", "")
+        if ctx:
+            print(f"       {ctx[:80]}{'...' if len(ctx) > 80 else ''}")
 
     # 下一步提示
     nxt = get_next_action(date)
@@ -252,6 +263,123 @@ def cmd_status(date: str):
     else:
         retry = " (重试)" if nxt.get("is_retry") else ""
         print(f"\n 下一步: Step {nxt['step']} {nxt['description']}{retry}")
+    print()
+
+
+# ── 命令: resume (v1.2 跨会话恢复) ───────────────────────
+def cmd_resume(date: str):
+    """生成结构化的跨会话恢复简报。
+    
+    新会话接力时的第一个命令。比status更丰富：
+    - 输出每个已完成步骤的context摘要（做了什么、为什么这么做）
+    - 扫描关键产出文件的存在性和大小
+    - 读取source快照信息
+    - 收集所有遗留issues
+    - 给出明确的下一步操作指令
+    
+    v1.2新增 (2026-03-15经验 — 跨会话上下文丢失根治方案)
+    """
+    state = load_state(date)
+    
+    # 统计进度
+    completed = sum(1 for k in STEP_ORDER if state["steps"][k]["status"] == "completed")
+    total = len(STEP_ORDER)
+    
+    print(f"\n🔄 AI日报工作流恢复 — {date}")
+    print("=" * 50)
+    
+    nxt = get_next_action(date)
+    if nxt["action"] == "all_done":
+        print(f"📍 进度: {completed}/{total} 全部完成")
+    else:
+        print(f"📍 进度: {completed}/{total} 已完成, 下一步: Step {nxt['step']} {nxt['description']}")
+    
+    # ── 已完成步骤摘要 ──
+    has_context = False
+    has_issues = False
+    all_issues = []
+    
+    print(f"\n📋 已完成步骤:")
+    for key in STEP_ORDER:
+        step = STEPS[key]
+        s = state["steps"][key]
+        if s["status"] != "completed":
+            continue
+        
+        ts = s.get("timestamp", "")
+        ctx = s.get("context", "")
+        issues = s.get("issues", [])
+        
+        print(f"  Step {step['step_num']} {step['name']} [{ts}]:")
+        if ctx:
+            has_context = True
+            # 按分号分行显示
+            for part in ctx.split(";"):
+                part = part.strip()
+                if part:
+                    print(f"    {part}")
+        else:
+            print(f"    (无上下文记录 — 建议reset后用 --context 重新complete)")
+        
+        if issues:
+            has_issues = True
+            for issue in issues:
+                print(f"    ⚠️ {issue}")
+                all_issues.append(issue)
+    
+    # ── 产出文件扫描 ──
+    print(f"\n📦 产出文件:")
+    month = date[:7]  # YYYY-MM
+    key_files = [
+        (f"data/daily-content-{date}.json", "JSON数据"),
+        (f"01-daily-reports/{month}/{date}.md", "Markdown"),
+        (f"01-daily-reports/{month}/{date}-v3.html", "HTML页面"),
+        (f"01-daily-reports/{month}/{date}-v3.html", "跳转页"),
+    ]
+    
+    for rel_path, desc in key_files:
+        p = PROJECT_DIR / rel_path
+        if p.exists():
+            size = p.stat().st_size
+            lines = len(p.read_text(encoding="utf-8").splitlines()) if size < 500000 else "?"
+            print(f"  ✅ {desc}: {rel_path} ({lines}行)")
+        else:
+            print(f"  ❌ {desc}: {rel_path} (不存在)")
+    
+    # ── Source快照 ──
+    snapshot_path = state_dir(date) / "source_snapshot.json"
+    if snapshot_path.exists():
+        try:
+            snap = json.loads(snapshot_path.read_text())
+            print(f"\n📸 Source快照: {snap.get('sources_count', '?')}条, "
+                  f"hash={snap.get('sources_hash', '?')[:12]}, "
+                  f"创建于 {snap.get('created', '?')[:16]}")
+        except Exception:
+            print(f"\n📸 Source快照: 存在但读取失败")
+    else:
+        print(f"\n📸 Source快照: 不存在")
+    
+    # ── 遗留问题 ──
+    if all_issues:
+        print(f"\n⚠️ 遗留问题 ({len(all_issues)}):")
+        for issue in all_issues:
+            print(f"  - {issue}")
+    
+    # ── 无上下文提醒 ──
+    if not has_context:
+        print(f"\n💡 提示: 所有已完成步骤均无context记录。")
+        print(f"   建议后续complete时使用 --context 参数保存上下文:")
+        print(f"   python3 scripts/ai_daily_orchestrator.py complete --step N --context \"做了什么;关键决策;遗留问题\"")
+    
+    # ── 下一步 ──
+    if nxt["action"] != "all_done":
+        print(f"\n▶️ 下一步:")
+        if nxt["action"] == "agent_review":
+            print(f"  {nxt.get('instruction', '')}")
+        else:
+            print(f"  {nxt.get('command', '')}")
+    else:
+        print(f"\n✅ 工作流已全部完成，无待执行步骤。")
     print()
 
 # ── 命令: next ────────────────────────────────────────────
@@ -293,13 +421,15 @@ def _agent_instruction(key: str, date: str, is_retry: bool) -> str:
         return (
             f"执行AI日报搜索调研 ({date})。"
             "按 daily-report/workflow.md 的 Step 0.5 + Step 1 + Step 2 执行。"
-            "完成后执行: python3 scripts/ai_daily_orchestrator.py complete --step 1"
+            "完成后执行: python3 scripts/ai_daily_orchestrator.py complete --step 1 "
+            '--context "搜索了N个海外源+N次微信双轨+N次小红书; 发现N个热点: ...; 选定N条新闻(海外N/国内N); 微信直引N条"'
         )
     elif key == "content":
         return (
             f"生成AI日报内容 ({date})。"
             "按 daily-report/workflow.md 的 Step 3 生成 MD + JSON 文件。"
-            "完成后执行: python3 scripts/ai_daily_orchestrator.py complete --step 2"
+            "完成后执行: python3 scripts/ai_daily_orchestrator.py complete --step 2 "
+            '--context "N条新闻(海外N/国内N), N个板块; 微信直引N条; 关键编辑决策: ..."'
         )
     elif key == "push":
         prefix = "重试" if is_retry else "执行"
@@ -480,7 +610,8 @@ def cmd_push(date: str, preview_only: bool = False) -> bool:
 
 # ── CLI ───────────────────────────────────────────────────
 def parse_args():
-    args = {"command": None, "date": None, "step_raw": None, "preview": False}
+    args = {"command": None, "date": None, "step_raw": None, 
+            "preview": False, "context": None, "artifacts": None, "issues": None}
     i = 1
     while i < len(sys.argv):
         arg = sys.argv[i]
@@ -488,6 +619,12 @@ def parse_args():
             args["date"] = sys.argv[i + 1]; i += 2
         elif arg == "--step" and i + 1 < len(sys.argv):
             args["step_raw"] = sys.argv[i + 1]; i += 2
+        elif arg == "--context" and i + 1 < len(sys.argv):
+            args["context"] = sys.argv[i + 1]; i += 2
+        elif arg == "--artifacts" and i + 1 < len(sys.argv):
+            args["artifacts"] = sys.argv[i + 1]; i += 2
+        elif arg == "--issues" and i + 1 < len(sys.argv):
+            args["issues"] = sys.argv[i + 1]; i += 2
         elif arg == "--preview":
             args["preview"] = True; i += 1
         elif not arg.startswith("--") and args["command"] is None:
@@ -514,9 +651,24 @@ def main():
     elif cmd == "complete":
         if not step_key:
             print("❌ 需要 --step N 参数"); sys.exit(1)
-        mark_step(date, step_key, "completed")
+        
+        # v1.2: 收集上下文参数
+        extra = {}
+        if args.get("context"):
+            extra["context"] = args["context"]
+        if args.get("artifacts"):
+            extra["artifacts"] = [a.strip() for a in args["artifacts"].split(",")]
+        if args.get("issues"):
+            extra["issues"] = [i.strip() for i in args["issues"].split(",")]
+        
+        mark_step(date, step_key, "completed", **extra)
         step = STEPS[step_key]
         print(f"✅ Step {step['step_num']}  {step['name']} 已标记完成")
+        
+        if extra.get("context"):
+            print(f"  📝 上下文: {extra['context'][:80]}{'...' if len(extra['context']) > 80 else ''}")
+        else:
+            print(f"  💡 建议: 使用 --context \"做了什么;关键决策\" 记录上下文，便于跨会话恢复")
         
         # v1.1: Step 2完成时自动保存source快照
         if step_key == "content":
@@ -529,6 +681,9 @@ def main():
         step = STEPS[step_key]
         print(f"🔄 Step {step['step_num']}  {step['name']} 已重置")
 
+    elif cmd == "resume":
+        cmd_resume(date)
+
     elif cmd == "finalize":
         cmd_finalize(date)
 
@@ -537,7 +692,7 @@ def main():
 
     else:
         print(f"未知命令: {cmd}")
-        print("可用: status, next, complete, reset, finalize, push")
+        print("可用: status, resume, next, complete, reset, finalize, push")
         sys.exit(1)
 
 if __name__ == "__main__":
