@@ -35,8 +35,8 @@
         .top5-item{padding:18px 24px;border-bottom:1px solid var(--c-border-l);transition:background .15s}
         .top5-item:last-child{border-bottom:none}
         .top5-item:hover{background:rgba(217,119,6,.02)}
-        .top5-item a.top5-link{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:var(--c-info);text-decoration:none;margin-left:12px;padding:2px 8px;background:#EFF6FF;border-radius:var(--r-full);transition:var(--trans)}
-        .top5-item a.top5-link:hover{background:var(--c-info);color:#fff}
+        .top5-item a.top5-link{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:var(--c-info);text-decoration:none;margin-left:auto;padding:3px 10px;background:#EFF6FF;border-radius:var(--r-full);transition:var(--trans);flex-shrink:0;font-weight:600}
+        .top5-item a.top5-link:hover{background:var(--c-info);color:#fff;transform:translateY(-1px);box-shadow:0 2px 6px rgba(37,99,235,.3)}
         .top5-rank{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;font-size:14px;font-weight:800;color:#fff;margin-right:12px;flex-shrink:0}
         .top5-rank.r1{background:linear-gradient(135deg,#B45309,#D97706)}
         .top5-rank.r2{background:linear-gradient(135deg,#6B7280,#9CA3AF)}
@@ -76,7 +76,10 @@
         .data-table th{background:var(--c-table-h);font-weight:600;color:var(--c-text2);font-size:12px;letter-spacing:.3px}
         .data-table td{color:var(--c-text)}
         .data-table tr:last-child td{border-bottom:none}
-        .data-table tr:hover{background:rgba(37,99,235,.02)}
+        .data-table tr:hover{background:rgba(37,99,235,.04)}
+        .back-to-top{position:fixed;bottom:24px;right:24px;width:44px;height:44px;border-radius:50%;background:var(--g-blue);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 4px 12px rgba(37,99,235,.3);transition:var(--trans);opacity:0;visibility:hidden;z-index:100}
+        .back-to-top.show{opacity:1;visibility:visible}
+        .back-to-top:hover{transform:translateY(-3px);box-shadow:0 6px 16px rgba(37,99,235,.4)}
         .tag{display:inline-block;padding:2px 8px;border-radius:var(--r-full);font-size:11px;font-weight:600}
         .tag-hot{background:#FEF2F2;color:#DC2626}
         .tag-note{background:#FFF7ED;color:#EA580C}
@@ -536,6 +539,8 @@
 
 </div>
 
+<button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="返回顶部">↑</button>
+
 <script>
 function switchTab(id,btn){
     document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
@@ -543,6 +548,11 @@ function switchTab(id,btn){
     document.getElementById('panel-'+id).classList.add('active');
     btn.setAttribute('aria-selected','true');
 }
+// 返回顶部按钮显示逻辑
+window.addEventListener('scroll',function(){
+    const btn=document.querySelector('.back-to-top');
+    if(window.scrollY>400){btn.classList.add('show')}else{btn.classList.remove('show')}
+});
 </script>
 </body>
 </html>
