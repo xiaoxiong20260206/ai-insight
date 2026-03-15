@@ -106,29 +106,63 @@ def check_chinese_quotes(date_str: str) -> CheckResult:
 
 
 def check_link_validity(date_str: str) -> CheckResult:
-    """检查3: 链接有效性 (禁止#占位符)"""
+    """检查3: 链接有效性 (禁止#占位符 + v7.0 URL真实性抽检)"""
     json_path = DATA_PATH / f"daily-content-{date_str}.json"
     if not json_path.exists():
         return CheckResult("链接有效", False, "JSON文件不存在，跳过")
     
     try:
+        import urllib.request
+        import random
+        
         data = json.loads(json_path.read_text(encoding="utf-8"))
         invalid_count = 0
         invalid_examples = []
+        all_urls = []
         
         for tab in data.get("tabs", []):
             for region in ['overseas', 'china']:
                 for item in tab.get('news', {}).get(region, []):
                     url = item.get('url', '')
-                    if url == '#' or not url.startswith('http'):
+                    if url == '#' or (url and not url.startswith('http')):
                         invalid_count += 1
                         if len(invalid_examples) < 3:
-                            invalid_examples.append(f"{item.get('title', '')[:20]}→{url}")
+                            invalid_examples.append(f"{item.get('title', '')[:20]}→")
+                    elif url.startswith('http'):
+                        all_urls.append((url, item.get('title', '')[:30]))
         
+        # v7.0: URL真实性抽检 — 随机抽取最多3个URL做HTTP HEAD验证
+        unreachable = []
+        if all_urls:
+            sample = random.sample(all_urls, min(3, len(all_urls)))
+            for url, title in sample:
+                try:
+                    req = urllib.request.Request(url, method='HEAD')
+                    req.add_header('User-Agent', 'Mozilla/5.0 (AI-Insight QualityGate/7.0)')
+                    resp = urllib.request.urlopen(req, timeout=10)
+                    if resp.status >= 400:
+                        unreachable.append(f"{title}({resp.status})")
+                except Exception as e:
+                    # 某些站点拒绝HEAD请求，尝试GET
+                    try:
+                        req = urllib.request.Request(url)
+                        req.add_header('User-Agent', 'Mozilla/5.0 (AI-Insight QualityGate/7.0)')
+                        resp = urllib.request.urlopen(req, timeout=10)
+                        if resp.status >= 400:
+                            unreachable.append(f"{title}({resp.status})")
+                    except Exception:
+                        unreachable.append(f"{title}(不可达)")
+        
+        issues = []
         if invalid_count > 0:
             examples = ", ".join(invalid_examples)
-            return CheckResult("链接有效", False, f"{invalid_count}个无效链接: {examples}", fixable=True)
-        return CheckResult("链接有效", True, "所有链接有效")
+            issues.append(f"{invalid_count}个无效链接: {examples}")
+        if unreachable:
+            issues.append(f"抽检不可达: {', '.join(unreachable)}")
+        
+        if issues:
+            return CheckResult("链接有效", False, "; ".join(issues) + " (可修复)", fixable=True)
+        return CheckResult("链接有效", True, f"所有链接有效(抽检{min(3, len(all_urls))}个URL可达)")
     except Exception as e:
         return CheckResult("链接有效", False, f"检查失败: {e}")
 
