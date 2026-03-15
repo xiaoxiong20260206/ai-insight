@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 """
-ai_daily_orchestrator.py — AI日报工作流状态机 v1.2
+ai_daily_orchestrator.py — AI日报工作流状态机 v1.3
 
 编排AI日报的完整流程，追踪状态和上下文，支持跨会话断点恢复。
 设计原则: 脚本做苦力，Agent做决策，上下文不丢失。
+
+v1.3更新 (2026-03-15):
+  - Step 2 complete时前置执行URL抽检（早发现早修复，减少finalize阶段返工）
+  - 来自skill-dojo技能修炼P0改进项
 
 v1.2更新 (2026-03-15):
   - complete --context: 步骤完成时记录上下文摘要（搜了什么/选了什么/为什么）
@@ -18,7 +22,7 @@ v1.1更新 (2026-03-15):
 
 工作流:
   Step 1: 搜索调研 [Agent]  — 热点探针 + 两层搜索 + 内容筛选
-  Step 2: 内容生成 [Agent]  — 生成 MD + JSON
+  Step 2: 内容生成 [Agent]  — 生成 MD + JSON + **URL预检**
   Step 3: 质量验证 [脚本]   — 质量门 + HTML生成
   Step 4: 部署发布 [脚本]   — git deploy + 外部同步
   Step 5: KIM推送  [Agent确认] — 预览 → 用户确认 → 发群
@@ -671,8 +675,15 @@ def main():
             print(f"  💡 建议: 使用 --context \"做了什么;关键决策\" 记录上下文，便于跨会话恢复")
         
         # v1.1: Step 2完成时自动保存source快照
+        # v1.2: Step 2完成时前置执行URL抽检（早发现早修复，减少finalize阶段的返工）
         if step_key == "content":
             save_source_snapshot(date)
+            print("\n📋 Step 2.7 前置检查: URL抽检 + 封闭平台链接合规")
+            url_ok = run_url_spot_check(date)
+            if not url_ok:
+                print("  ⚠️ 发现链接问题，建议在finalize前修复（finalize会再次检查）")
+            else:
+                print("  ✅ URL抽检预检通过，可以安全执行 finalize")
 
     elif cmd == "reset":
         if not step_key:
