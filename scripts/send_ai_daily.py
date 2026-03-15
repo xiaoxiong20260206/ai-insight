@@ -224,7 +224,8 @@ def pre_check(date_str: str) -> tuple:
                 url = item.get('url', '')
                 title = item.get('title', '未知标题')
                 
-                if url == '#' or not url.startswith('http'):
+                # 空URL是允许的（路径B：封闭平台找不到公开链接时URL留空）
+                if url == '#' or (url and not url.startswith('http')):
                     invalid_urls.append(f"  [{section_name}] {title[:30]} → {url}")
     
     if invalid_urls:
