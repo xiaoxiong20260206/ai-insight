@@ -9,23 +9,30 @@ AI日报质量门脚本 (Quality Gate)
   python scripts/daily_quality_gate.py 2026-03-11         # 检查指定日期
   python scripts/daily_quality_gate.py 2026-03-11 --fix   # 检查并尝试修复部分问题
 
-检查项 (13项):
+检查项 (15项):
   1. JSON数据文件存在性
   2. 中文引号检测
-  3. 链接有效性 (禁止#占位符)
+  3. 链接有效性 (禁止#占位符 + URL真实性抽检)
   4. 内容非空检查
   5. ⭐ [v2.0新增] 时效性验证 (发布日期在时间窗口内)
-  6. ⭐ [v3.0新增] 板块分类验证
-  7. ⭐ [v4.0新增] 地区分类验证
-  8. ⭐ [v3.0新增] 跨天去重
-  9. ⭐ [v5.0新增] 信息源多样性 (微信覆盖>=2 + 单源集中度<=40%)
-  10. ⭐ [v2.0新增] HTML链接规范 (target="_blank" + 无#占位)
-  11. MD/HTML文件存在性
-  12. 6处联动更新检查
-  13. 外部版同步检查
+  6. ⭐ [v8.0新增] 日期篡改检测 (快照对比+可疑模式识别)
+  7. ⭐ [v8.0新增] 封闭平台链接合规 (禁mp.weixin临时+禁搜狗跳转)
+  8. ⭐ [v3.0新增] 板块分类验证
+  9. ⭐ [v4.0新增] 地区分类验证
+  10. ⭐ [v3.0新增] 跨天去重
+  11. ⭐ [v5.0新增] 信息源多样性 (微信覆盖>=2 + 单源集中度<=40%)
+  12. ⭐ [v2.0新增] HTML链接规范 (target="_blank" + 无#占位)
+  13. MD/HTML文件存在性
+  14. 6处联动更新检查
+  15. 外部版同步检查
 
 作者: 林克 (沈浪的AI分身)
-版本: v2.0.0 (2026-03-11)
+版本: v8.0.0 (2026-03-15)
+
+v8.0更新:
+- 新增日期篡改检测 (check_date_tampering) — 双保险: 快照对比+可疑模式识别
+- 新增封闭平台链接合规 (check_closed_platform_urls) — Step 2.7脚本化
+- 经验来源: 2026-03-15教训 — source日期篡改绕过时效检查=P0违规
 
 v2.0更新:
 - 新增时效性验证检查 (check_date_window)
@@ -777,6 +784,198 @@ def check_external_sync(date_str: str) -> CheckResult:
     return CheckResult("外部同步", True, "public/+外部仓库均已同步")
 
 
+def check_date_tampering(date_str: str) -> CheckResult:
+    """检查14: [v8.0新增] source日期篡改检测
+    
+    双保险机制:
+    1. 可疑模式识别（独立于orchestrator，永远生效）
+       - 检测"X月Y日热议/持续/最新"等软化过时日期的常见模式
+       - 仅在解析出的日期超出时间窗口时触发（窗口内的"热议"标注合法）
+    2. 快照对比（仅在orchestrator模式下生效）
+       - 对比Step 2完成时的source快照，发现未经授权的修改
+    
+    经验来源: 2026-03-15教训 — Agent将source日期从"3月10日"改为"3月14日热议"
+    绕过时效性检查。本检查让这种绕过行为不再可能。
+    """
+    json_path = DATA_PATH / f"daily-content-{date_str}.json"
+    if not json_path.exists():
+        return CheckResult("日期篡改", True, "JSON文件不存在，跳过")
+    
+    try:
+        import hashlib
+        
+        data = json.loads(json_path.read_text(encoding="utf-8"))
+        report_date = datetime.strptime(date_str, "%Y-%m-%d")
+        
+        # 有效日期范围: N-1日 和 N日
+        valid_days = {report_date.day, (report_date - timedelta(days=1)).day}
+        valid_months = {report_date.month, (report_date - timedelta(days=1)).month}
+        
+        # ── 保险1: 可疑模式识别 ──
+        # 常见的日期软化pattern（用于模糊化过时日期）
+        SOFTENING_PATTERNS = [
+            (r'(\d+)月(\d+)日\s*热议', '热议'),
+            (r'(\d+)月(\d+)日\s*持续', '持续'),
+            (r'(\d+)月(\d+)日\s*最新', '最新'),
+            (r'(\d+)月(\d+)日\s*独家', '独家'),
+            (r'(\d+)月(\d+)日\s*热度不减', '热度不减'),
+            (r'(\d+)月(\d+)日\s*持续发酵', '持续发酵'),
+            (r'(\d+)月(\d+)日\s*引发关注', '引发关注'),
+        ]
+        
+        suspicious_items = []
+        
+        for tab in data.get("tabs", []):
+            for region in ['overseas', 'china']:
+                for item in tab.get('news', {}).get(region, []):
+                    source = item.get('source', '')
+                    title = item.get('title', '')[:30]
+                    
+                    for pattern, label in SOFTENING_PATTERNS:
+                        match = re.search(pattern, source)
+                        if match:
+                            month, day = int(match.group(1)), int(match.group(2))
+                            # 只有日期超出窗口时才算可疑
+                            # (窗口内的"独家"/"热议"是合法标注)
+                            if day not in valid_days or month not in valid_months:
+                                try:
+                                    news_date = datetime(report_date.year, month, day)
+                                    days_diff = (report_date - news_date).days
+                                    if days_diff > 1:
+                                        suspicious_items.append(
+                                            f"{title}(source含'{label}'但日期为{month}月{day}日，"
+                                            f"距日报{days_diff}天)"
+                                        )
+                                except ValueError:
+                                    pass
+                            break
+        
+        # ── 保险2: 快照对比 ──
+        snapshot_path = PROJECT_ROOT / "data" / "daily-workflow" / date_str / "source_snapshot.json"
+        snapshot_mismatch = False
+        snapshot_msg = ""
+        
+        if snapshot_path.exists():
+            try:
+                snapshot = json.loads(snapshot_path.read_text(encoding="utf-8"))
+                
+                # 从当前JSON重建sources列表
+                current_sources = []
+                for tab_idx, tab in enumerate(data.get("tabs", [])):
+                    for region in ["overseas", "china"]:
+                        for idx, item in enumerate(tab.get("news", {}).get(region, [])):
+                            current_sources.append({
+                                "tab": tab_idx, "region": region, "idx": idx,
+                                "source": item.get("source", ""),
+                                "title": item.get("title", "")[:50]
+                            })
+                
+                current_hash = hashlib.md5(
+                    json.dumps(current_sources, ensure_ascii=False).encode()
+                ).hexdigest()
+                
+                if current_hash != snapshot.get("sources_hash", ""):
+                    # source字段有变化 — 检查orchestrator状态
+                    orch_state_path = PROJECT_ROOT / "data" / "daily-workflow" / date_str / "state.json"
+                    step2_was_reset = False
+                    if orch_state_path.exists():
+                        orch_state = json.loads(orch_state_path.read_text())
+                        content_status = orch_state.get("steps", {}).get("content", {}).get("status", "")
+                        # 如果Step 2已被reset，说明是合法的重新编辑
+                        step2_was_reset = content_status in ("pending", "failed")
+                    
+                    if not step2_was_reset:
+                        # Step 2仍为completed但source变了 → 非法篡改
+                        # 找出具体变化
+                        old_sources = {(s["tab"], s["region"], s["idx"]): s["source"] 
+                                      for s in snapshot.get("sources", [])}
+                        changed = []
+                        for cs in current_sources:
+                            key = (cs["tab"], cs["region"], cs["idx"])
+                            old = old_sources.get(key, "")
+                            if old and old != cs["source"]:
+                                changed.append(f'"{old[:25]}"→"{cs["source"][:25]}"')
+                        
+                        if changed:
+                            snapshot_mismatch = True
+                            snapshot_msg = f"Step 2完成后source被修改({len(changed)}处): {'; '.join(changed[:2])}"
+            except Exception:
+                pass  # 快照损坏不影响其他检查
+        
+        # ── 汇总结果 ──
+        issues = []
+        
+        if snapshot_mismatch:
+            issues.append(f"⛔ 快照对比: {snapshot_msg}")
+        
+        if suspicious_items:
+            examples = "; ".join(suspicious_items[:2])
+            issues.append(f"可疑日期模式: {examples}")
+        
+        if issues:
+            severity = "error" if snapshot_mismatch else "error"
+            return CheckResult(
+                "日期篡改", False,
+                " | ".join(issues),
+                fixable=False,
+                severity=severity
+            )
+        
+        # 通过信息
+        snap_info = "有快照✓" if snapshot_path.exists() else "无快照"
+        return CheckResult("日期篡改", True, f"未检测到篡改({snap_info})")
+    except Exception as e:
+        return CheckResult("日期篡改", False, f"检查失败: {e}")
+
+
+def check_closed_platform_urls(date_str: str) -> CheckResult:
+    """检查15: [v8.0新增] 封闭平台链接合规检查
+    
+    将Step 2.7的封闭平台链接规则脚本化:
+    - 禁止 mp.weixin.qq.com (任何形式，含src=11&timestamp临时URL)
+    - 禁止 weixin.sogou.com/link?url= (搜狗跳转链接，数小时过期)
+    - 允许 weixin.sogou.com/weixin?type=2&query= (搜狗搜索URL，永久稳定)
+    - 允许 xiaohongshu.com/explore/<noteId> (小红书永久链接)
+    """
+    json_path = DATA_PATH / f"daily-content-{date_str}.json"
+    if not json_path.exists():
+        return CheckResult("封闭平台链接", True, "JSON文件不存在，跳过")
+    
+    try:
+        data = json.loads(json_path.read_text(encoding="utf-8"))
+        
+        FORBIDDEN_PATTERNS = [
+            (r'mp\.weixin\.qq\.com', 'mp.weixin临时链接'),
+            (r'weixin\.sogou\.com/link\?', '搜狗跳转链接(过期)'),
+        ]
+        
+        violations = []
+        
+        for tab in data.get("tabs", []):
+            for region in ['overseas', 'china']:
+                for item in tab.get('news', {}).get(region, []):
+                    url = item.get('url', '')
+                    title = item.get('title', '')[:25]
+                    
+                    for pattern, desc in FORBIDDEN_PATTERNS:
+                        if re.search(pattern, url):
+                            violations.append(f"{title}({desc})")
+                            break
+        
+        if violations:
+            examples = "; ".join(violations[:3])
+            return CheckResult(
+                "封闭平台链接", False,
+                f"{len(violations)}个违规链接: {examples}",
+                fixable=False,
+                severity="error"
+            )
+        
+        return CheckResult("封闭平台链接", True, "无违规封闭平台链接")
+    except Exception as e:
+        return CheckResult("封闭平台链接", False, f"检查失败: {e}")
+
+
 def run_all_checks(date_str: str) -> Tuple[List[CheckResult], int, int]:
     """运行所有检查"""
     checks = [
@@ -785,6 +984,8 @@ def run_all_checks(date_str: str) -> Tuple[List[CheckResult], int, int]:
         check_link_validity,
         check_content_nonempty,
         check_date_window,           # v2.0新增
+        check_date_tampering,        # v8.0新增 - 日期篡改检测(双保险)
+        check_closed_platform_urls,  # v8.0新增 - 封闭平台链接合规
         check_board_classification,  # v3.0新增
         check_region_classification, # v4.0新增
         check_cross_day_dedup,       # v3.0新增
@@ -890,7 +1091,7 @@ def main():
     else:
         date_str = datetime.now().strftime("%Y-%m-%d")
     
-    print(f"🔍 AI日报质量门检查 v2.0 - {date_str}")
+    print(f"🔍 AI日报质量门检查 v8.0 - {date_str}")
     print("=" * 50)
     
     # 如果只检查时效性
