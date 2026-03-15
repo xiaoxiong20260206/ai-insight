@@ -73,13 +73,19 @@ def render_news_item(item: dict) -> str:
     if xhs_url:
         xhs_link_html = f' · <a href="{xhs_url}" target="_blank" style="color:#ff2442;font-size:0.85em">📕小红书原帖</a>'
 
+    # 微信公众号原文链接（可选）
+    wx_url = item.get('wx_url', '')
+    wx_link_html = ''
+    if wx_url:
+        wx_link_html = f' · <a href="{wx_url}" target="_blank" style="color:#07C160;font-size:0.85em">💬微信原文</a>'
+
     # 简洁模式：只有标题和摘要
     if "details" not in item:
         return f'''
                 <div class="news-item">
                     {tag}
                     <div class="news-title">{title_html}</div>
-                    <div class="news-source">{item['source']}{xhs_link_html}</div>
+                    <div class="news-source">{item['source']}{xhs_link_html}{wx_link_html}</div>
                     <div class="news-summary-compact">{item.get('summary', '')}</div>
                 </div>'''
 
@@ -108,7 +114,7 @@ def render_news_item(item: dict) -> str:
                 <div class="news-item">
                     {tag}
                     <div class="news-title">{title_html}</div>
-                    <div class="news-source">{item['source']}{xhs_link_html}</div>
+                    <div class="news-source">{item['source']}{xhs_link_html}{wx_link_html}</div>
                     <div class="news-detail">
                         <div class="news-detail-row">
                             <span class="news-detail-label {label_class}">核心发现</span>
