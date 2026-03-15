@@ -935,7 +935,7 @@ def check_closed_platform_urls(date_str: str) -> CheckResult:
     - 禁止 mp.weixin.qq.com (任何形式，含src=11&timestamp临时URL)
     - 禁止 weixin.sogou.com/link?url= (搜狗跳转链接，数小时过期)
     - 允许 weixin.sogou.com/weixin?type=2&query= (搜狗搜索URL，永久稳定)
-    - 允许 xiaohongshu.com/explore/<noteId> (小红书永久链接)
+    - 允许 xiaohongshu.com/explore/<noteId> (小红书永久链接，但noteId必须真实)
     """
     json_path = DATA_PATH / f"daily-content-{date_str}.json"
     if not json_path.exists():
@@ -976,6 +976,101 @@ def check_closed_platform_urls(date_str: str) -> CheckResult:
         return CheckResult("封闭平台链接", False, f"检查失败: {e}")
 
 
+def check_xhs_note_validity(date_str: str) -> CheckResult:
+    """检查16: [v8.1新增] 小红书noteId真实性验证
+    
+    2026-03-15教训: Agent编造了格式正确但不存在的noteId (65f4e2a0..., 65f5a3b1...),
+    质量门无法检测——HTTP HEAD对SPA返回200(假阴性), 随机抽检也可能漏过。
+    
+    验证策略:
+    1. 提取所有xiaohongshu.com/explore/<noteId>链接
+    2. 格式校验: noteId必须是24位hex
+    3. 时间戳校验: noteId前8位是MongoDB ObjectId时间戳,
+       必须在报告日期前90天以内(太旧=可能是编造的过期ID)
+    4. 如无XHS链接则跳过
+    
+    注意: XHS的ObjectId中间字节通常为全零(00000000), 这是正常现象, 不能作为判断依据
+    """
+    json_path = DATA_PATH / f"daily-content-{date_str}.json"
+    if not json_path.exists():
+        return CheckResult("小红书noteId", True, "JSON文件不存在，跳过")
+    
+    try:
+        data = json.loads(json_path.read_text(encoding="utf-8"))
+        
+        xhs_urls = []
+        # 收集所有 xiaohongshu URL (url字段 + xhs_url字段)
+        for tab in data.get("tabs", []):
+            for region in ['overseas', 'china']:
+                for item in tab.get('news', {}).get(region, []):
+                    for field in ['url', 'xhs_url']:
+                        url = item.get(field, '')
+                        if 'xiaohongshu.com/explore/' in url:
+                            match = re.search(r'xiaohongshu\.com/explore/([a-f0-9]+)', url)
+                            if match:
+                                note_id = match.group(1)
+                                title = item.get('title', '')[:25]
+                                xhs_urls.append((note_id, title, field))
+        
+        if not xhs_urls:
+            return CheckResult("小红书noteId", True, "无小红书链接，跳过")
+        
+        violations = []
+        import time as _time
+        
+        # 报告日期的时间戳
+        from datetime import datetime as _dt
+        report_date = _dt.strptime(date_str, "%Y-%m-%d")
+        report_ts = int(report_date.timestamp())
+        
+        for note_id, title, field in xhs_urls:
+            # 检查1: noteId长度必须是24位hex
+            if len(note_id) != 24:
+                violations.append(f"{title}(noteId长度{len(note_id)}≠24, field={field})")
+                continue
+            
+            # 检查2: 必须是合法hex
+            try:
+                int(note_id, 16)
+            except ValueError:
+                violations.append(f"{title}(noteId非法hex: {note_id[:12]}..., field={field})")
+                continue
+            
+            # 检查3: MongoDB ObjectId时间戳校验
+            # 前8位hex = Unix时间戳
+            # 合理范围: 报告日期前90天 ~ 报告日期+1天
+            ts = int(note_id[:8], 16)
+            min_ts = report_ts - 90 * 86400   # 90天前
+            max_ts = report_ts + 86400         # 明天
+            
+            if ts < min_ts:
+                days_ago = (report_ts - ts) // 86400
+                violations.append(
+                    f"{title}(noteId时间戳过旧: {note_id[:8]}→{days_ago}天前, "
+                    f"超过90天窗口, field={field})"
+                )
+            elif ts > max_ts:
+                violations.append(
+                    f"{title}(noteId时间戳在未来: {note_id[:8]}, field={field})"
+                )
+        
+        if violations:
+            examples = "; ".join(violations[:3])
+            return CheckResult(
+                "小红书noteId", False,
+                f"{len(violations)}个疑似伪造: {examples}",
+                fixable=False,
+                severity="error"
+            )
+        
+        return CheckResult(
+            "小红书noteId", True, 
+            f"{len(xhs_urls)}个XHS链接格式+时间戳校验通过"
+        )
+    except Exception as e:
+        return CheckResult("小红书noteId", False, f"检查失败: {e}")
+
+
 def run_all_checks(date_str: str) -> Tuple[List[CheckResult], int, int]:
     """运行所有检查"""
     checks = [
@@ -986,6 +1081,7 @@ def run_all_checks(date_str: str) -> Tuple[List[CheckResult], int, int]:
         check_date_window,           # v2.0新增
         check_date_tampering,        # v8.0新增 - 日期篡改检测(双保险)
         check_closed_platform_urls,  # v8.0新增 - 封闭平台链接合规
+        check_xhs_note_validity,     # v8.1新增 - 小红书noteId真实性验证
         check_board_classification,  # v3.0新增
         check_region_classification, # v4.0新增
         check_cross_day_dedup,       # v3.0新增
