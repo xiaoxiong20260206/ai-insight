@@ -3,7 +3,7 @@
 <plist version="1.0">
 <!--
   AI周报定时推送任务
-  触发时间: 每周一 10:00
+  触发时间: 每周一 07:00
   执行链路: launchd → 个人助理_V1/scripts/run-ai-weekly-report.sh (委托入口)
            → AI-Insight/scripts/run-ai-weekly-report.sh → send_ai_weekly.py
   注意: 实际加载的plist在 ~/Library/LaunchAgents/ 中，由个人助理_V1统一管理。
@@ -21,11 +21,11 @@
     </array>
     <key>StartCalendarInterval</key>
     <dict>
-        <!-- 每周一 (Weekday=1) 上午10点 -->
+        <!-- 每周一 (Weekday=1) 上午7点 -->
         <key>Weekday</key>
         <integer>1</integer>
         <key>Hour</key>
-        <integer>10</integer>
+        <integer>7</integer>
         <key>Minute</key>
         <integer>0</integer>
     </dict>
