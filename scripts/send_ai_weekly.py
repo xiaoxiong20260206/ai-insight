@@ -104,10 +104,14 @@ def build_weekly_card(year: int, week_num: int, start_date, end_date, report_dat
         top5_match = re.search(r"## .*Top 5.*?\n((?:[\s\S]*?))\n## ", content)
         if top5_match:
             top5_text = top5_match.group(1).strip()
+            # 移除末尾的Markdown分割线（避免与KIM divider重复）
+            top5_text = re.sub(r'\n---\s*$', '', top5_text)
         # 尝试提取周度洞察
         insight_match = re.search(r"## .*洞察.*?\n((?:[\s\S]*?))\n## ", content)
         if insight_match:
             insight_text = insight_match.group(1).strip()
+            # 移除末尾的Markdown分割线
+            insight_text = re.sub(r'\n---\s*$', '', insight_text)
 
     # 构建卡片内容
     header_content = f"# 📊 AI 周报（{year}年第{week_num}周，{date_range}）"
