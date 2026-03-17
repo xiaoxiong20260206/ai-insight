@@ -359,11 +359,30 @@ def generate_html(data: dict) -> str:
                     <div class="overview-item-text">{ov['text']}</div>
                 </div>''')
 
-    # Tab面板
+    # Tab面板 — 带验证
     tabs = data.get("tabs", [])
     tab_names = [("🧠", "大模型", "foundation"), ("⌨️", "AI Coding", "coding"),
                  ("📱", "AI 应用", "application"), ("🏭", "AI 行业", "industry"),
                  ("🔄", "企业转型", "enterprise")]
+
+    # === 验证: tab数量必须为5 ===
+    if len(tabs) != 5:
+        print(f"  ⚠️ 警告: JSON包含{len(tabs)}个tab，期望5个。缺失的tab将渲染为空面板。")
+        print(f"     期望: {[n for _, n, _ in tab_names]}")
+
+    # === 验证: 每个tab至少应有内容 ===
+    empty_tabs = []
+    for i, (icon, name, tid) in enumerate(tab_names):
+        if i < len(tabs):
+            news = tabs[i].get("news", {})
+            count = len(news.get("overseas", [])) + len(news.get("china", []))
+            if count == 0:
+                empty_tabs.append(name)
+        else:
+            empty_tabs.append(name)
+    if empty_tabs:
+        print(f"  ⚠️ 警告: 以下板块无新闻条目: {', '.join(empty_tabs)}")
+        print(f"     建议: 每个板块至少2条新闻，回到搜索步骤补充内容。")
     tab_buttons = []
     tab_panels = []
     for i, (icon, name, tid) in enumerate(tab_names):
