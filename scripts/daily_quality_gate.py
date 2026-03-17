@@ -9,25 +9,32 @@ AI日报质量门脚本 (Quality Gate)
   python scripts/daily_quality_gate.py 2026-03-11         # 检查指定日期
   python scripts/daily_quality_gate.py 2026-03-11 --fix   # 检查并尝试修复部分问题
 
-检查项 (15项):
+检查项 (17项):
   1. JSON数据文件存在性
   2. 中文引号检测
   3. 链接有效性 (禁止#占位符 + URL真实性抽检)
   4. 内容非空检查
-  5. ⭐ [v2.0新增] 时效性验证 (发布日期在时间窗口内)
-  6. ⭐ [v8.0新增] 日期篡改检测 (快照对比+可疑模式识别)
-  7. ⭐ [v8.0新增] 封闭平台链接合规 (禁mp.weixin临时+禁搜狗跳转)
-  8. ⭐ [v3.0新增] 板块分类验证
-  9. ⭐ [v4.0新增] 地区分类验证
-  10. ⭐ [v3.0新增] 跨天去重
-  11. ⭐ [v5.0新增] 信息源多样性 (微信覆盖>=2 + 单源集中度<=40%)
-  12. ⭐ [v2.0新增] HTML链接规范 (target="_blank" + 无#占位)
-  13. MD/HTML文件存在性
-  14. 6处联动更新检查
-  15. 外部版同步检查
+  5. ⭐ [v8.3新增] 内容量检查 (防止修复时内容缩水 — 经验37)
+  6. ⭐ [v2.0新增] 时效性验证 (发布日期在时间窗口内)
+  7. ⭐ [v8.0新增] 日期篡改检测 (快照对比+可疑模式识别)
+  8. ⭐ [v8.0新增] 封闭平台链接合规 (禁mp.weixin临时+禁搜狗跳转)
+  9. ⭐ [v8.1新增] 小红书noteId真实性验证
+  10. ⭐ [v3.0新增] 板块分类验证
+  11. ⭐ [v4.0新增] 地区分类验证
+  12. ⭐ [v3.0新增] 跨天去重
+  13. ⭐ [v5.0新增] 信息源多样性 (微信覆盖>=2 + 单源集中度<=40%)
+  14. ⭐ [v2.0新增] HTML链接规范 (target="_blank" + 无#占位)
+  15. MD/HTML文件存在性
+  16. 6处联动更新检查
+  17. 外部版同步检查
 
 作者: 林克 (沈浪的AI分身)
-版本: v8.0.0 (2026-03-15)
+版本: v8.3.0 (2026-03-16)
+
+v8.3更新 (技能修炼改进):
+- 新增内容量检查 (check_content_volume) — 防止修复时"删减≠修复"的陷阱
+  经验37: 质量门报时效性失败后，执行者删除超窗内容导致新闻数从15条降到7条
+- 检查项从16项增加到17项
 
 v8.0更新:
 - 新增日期篡改检测 (check_date_tampering) — 双保险: 快照对比+可疑模式识别
@@ -976,8 +983,78 @@ def check_closed_platform_urls(date_str: str) -> CheckResult:
         return CheckResult("封闭平台链接", False, f"检查失败: {e}")
 
 
+def check_content_volume(date_str: str) -> CheckResult:
+    """检查16b: [v8.3新增] 内容量检查 — 防止修复时内容缩水
+    
+    2026-03-16技能修炼经验37: 质量门报"9条新闻超出时间窗口"后，执行者选择
+    "删除超窗内容"而非"搜索窗口内新闻替换"，导致内容从15条降到7条(-53%)。
+    
+    验证策略:
+    1. 计算当前日报的新闻条数
+    2. 对比前一天日报的新闻条数
+    3. 如果当天 < 前一天 × 0.7，报警
+    4. 检查必需模块是否完整
+    """
+    json_path = DATA_PATH / f"daily-content-{date_str}.json"
+    if not json_path.exists():
+        return CheckResult("内容量", False, "JSON文件不存在，跳过", severity="warning")
+    
+    try:
+        data = json.loads(json_path.read_text(encoding="utf-8"))
+        report_date = datetime.strptime(date_str, "%Y-%m-%d")
+        
+        # 计算当前日报新闻条数
+        current_count = 0
+        for tab in data.get("tabs", []):
+            for region in ['overseas', 'china']:
+                current_count += len(tab.get('news', {}).get(region, []))
+        
+        # 检查必需模块
+        required_modules = ["overview", "tabs", "coverage"]
+        missing_modules = [m for m in required_modules if m not in data or not data[m]]
+        
+        # 查找前一天日报作为参照
+        prev_date = report_date - timedelta(days=1)
+        prev_path = DATA_PATH / f"daily-content-{prev_date.strftime('%Y-%m-%d')}.json"
+        
+        issues = []
+        
+        if prev_path.exists():
+            try:
+                prev_data = json.loads(prev_path.read_text(encoding="utf-8"))
+                prev_count = 0
+                for tab in prev_data.get("tabs", []):
+                    for region in ['overseas', 'china']:
+                        prev_count += len(tab.get('news', {}).get(region, []))
+                
+                if prev_count > 0:
+                    ratio = current_count / prev_count
+                    if ratio < 0.7:
+                        issues.append(
+                            f"⚠️ 内容量异常: 当天{current_count}条 vs 昨天{prev_count}条 "
+                            f"({ratio:.0%}，低于70%阈值)"
+                        )
+            except Exception:
+                pass  # 前一天数据异常不影响检查
+        
+        # 检查必需模块
+        if missing_modules:
+            issues.append(f"缺失必需模块: {', '.join(missing_modules)}")
+        
+        # 最低条数检查
+        if current_count < 8:
+            issues.append(f"新闻条数过少: {current_count}条 (建议≥8条)")
+        
+        if issues:
+            return CheckResult("内容量", False, "; ".join(issues), severity="warning")
+        
+        return CheckResult("内容量", True, f"内容量正常: {current_count}条新闻")
+    except Exception as e:
+        return CheckResult("内容量", False, f"检查失败: {e}", severity="warning")
+
+
 def check_xhs_note_validity(date_str: str) -> CheckResult:
-    """检查16: [v8.1新增] 小红书noteId真实性验证
+    """检查17: [v8.1新增] 小红书noteId真实性验证
     
     2026-03-15教训: Agent编造了格式正确但不存在的noteId (65f4e2a0..., 65f5a3b1...),
     质量门无法检测——HTTP HEAD对SPA返回200(假阴性), 随机抽检也可能漏过。
@@ -1078,6 +1155,7 @@ def run_all_checks(date_str: str) -> Tuple[List[CheckResult], int, int]:
         check_chinese_quotes,
         check_link_validity,
         check_content_nonempty,
+        check_content_volume,        # v8.3新增 - 内容量检查(防修复缩水)
         check_date_window,           # v2.0新增
         check_date_tampering,        # v8.0新增 - 日期篡改检测(双保险)
         check_closed_platform_urls,  # v8.0新增 - 封闭平台链接合规
