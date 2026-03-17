@@ -1,381 +1,319 @@
 {
   "coverage": {
-    "overseas": 9,
-    "china": 4
+    "overseas": 5,
+    "china": 3
   },
   "overview": [
     {
       "icon": "🔥",
       "label": "今日热点",
-      "headline": "NVIDIA GTC 2026黄仁勋主题演讲：DGX Station桌面超算+Agent Toolkit开源平台",
-      "text": "黄仁勋发布DGX Station桌面超级计算机（六位数价格），可本地运行万亿参数AI模型；17家企业软件巨头签约采用开源Agent Toolkit"
-    },
-    {
-      "icon": "🧠",
-      "label": "大模型",
-      "headline": "Vera Rubin架构+Dynamo推理系统+Physical AI Data Factory蓝图",
-      "text": "GTC发布下一代Vera Rubin平台、Dynamo 1.0推理操作系统进入量产、开放Physical AI数据工厂蓝图加速机器人开发"
+      "headline": "GTC 2026黄仁勋主题演讲：Vera Rubin平台7芯量产，代际飞跃",
+      "text": "NVIDIA发布Vera Rubin平台，7颗全新芯片全部量产，NVL72推理吞吐量/瓦提升10x、token成本降至Blackwell 1/10。Anthropic/OpenAI/Meta/Mistral均已采用"
     },
     {
       "icon": "🤖",
       "label": "AI Agent",
-      "headline": "NVIDIA Agent Toolkit：Adobe/Salesforce/SAP等17家巨头采用",
-      "text": "开源Agent Toolkit获得Adobe、Salesforce、SAP、ServiceNow、Siemens、CrowdStrike、Atlassian等全面支持，覆盖财富500强核心企业软件"
+      "headline": "NemoClaw发布：黄仁勋称OpenClaw是个人AI的操作系统",
+      "text": "NVIDIA发布NemoClaw为OpenClaw加持安全隐私，一键安装Nemotron模型+OpenShell沙箱，Agent从'能用'走向'敢用'"
+    },
+    {
+      "icon": "🧠",
+      "label": "大模型",
+      "headline": "Vera CPU+Groq 3 LPX：专为Agentic AI打造的新硬件",
+      "text": "全球首款Agentic AI专用CPU效率提升2x；Groq 3 LPX推理吞吐量/兆瓦提升35x，万亿参数模型收入机会10x"
     },
     {
       "icon": "🏭",
       "label": "AI 行业",
-      "headline": "NVIDIA Q4营收$680亿创新高+Nebius与Meta签署AI基础设施协议",
-      "text": "NVIDIA第四季度单季营收创历史新高，打破AI泡沫质疑；Nebius与Meta达成长期AI基础设施供应协议"
+      "headline": "Teneo与Thoughtworks成立AI原生咨询合资+太空计算启动",
+      "text": "全球CEO咨询巨头Teneo联手Thoughtworks打造首代AI原生CEO咨询服务；NVIDIA将AI推向太空轨道数据中心"
     },
     {
-      "icon": "🇨🇳",
-      "label": "国内动态",
-      "headline": "315晚会关注AI大模型安全+华为发布Agent-Oriented移动网络",
-      "text": "央视315曝光AI大模型'投毒'问题，AI安全监管进入新阶段；华为在MWC提出Agent-Oriented移动网络愿景"
+      "icon": "🌍",
+      "label": "生态格局",
+      "headline": "四大云+80+硬件伙伴全面支持Vera Rubin",
+      "text": "AWS/Azure/GCP/OCI+CoreWeave/Nebius+Cisco/Dell/HPE/Lenovo等全面锁定Vera Rubin生态，下半年量产"
     }
   ],
   "heat_trend": {
     "title": "近7期日报交叉分析(3/11-3/17)",
     "topics": [
       {
-        "name": "NVIDIA GTC 2026黄仁勋主题演讲",
+        "name": "GTC 2026黄仁勋主题演讲发布会",
         "score": 10,
         "days": 7,
         "trend_class": "burst",
-        "trend_label": "⚡ 重磅发布",
-        "signal": "黄仁勋发布DGX Station桌面超算+Agent Toolkit开源平台+Vera Rubin架构——NVIDIA从'卖芯片'升级为'建Agent生态'"
+        "trend_label": "⚡ 主题演讲落地",
+        "signal": "黄仁勋2小时主题演讲发布Vera Rubin平台（7芯5架构）、NemoClaw、Space Computing、Vera CPU——从预热到全面爆发，GTC 2026成为2026年AI行业首个超级事件"
       },
       {
-        "name": "企业AI Agent平台化竞争开启",
+        "name": "Vera Rubin代际飞跃",
+        "score": 10,
+        "days": 2,
+        "trend_class": "burst",
+        "trend_label": "⚡ 重磅发布",
+        "signal": "7颗全新芯片全部量产，NVL72推理吞吐/瓦提升10x、token成本降至Blackwell 1/10。NVIDIA从'卖芯片'转向'卖完整超算系统'的范式转换"
+      },
+      {
+        "name": "NemoClaw+OpenClaw生态",
         "score": 10,
         "days": 5,
         "trend_class": "burst",
-        "trend_label": "⚡ 战略转向",
-        "signal": "17家企业软件巨头采用NVIDIA Agent Toolkit，Adobe/Salesforce/SAP等全面接入——企业AI Agent的'Android'时刻到来"
+        "trend_label": "⚡ 正式发布",
+        "signal": "从预告到正式发布——NemoClaw一键安装为OpenClaw加持企业级安全隐私，黄仁勋称OpenClaw为'个人AI的操作系统'"
       },
       {
-        "name": "Physical AI从实验室走向现实",
+        "name": "AI基础设施全栈化",
         "score": 9,
         "days": 3,
         "trend_class": "up",
-        "trend_label": "📈 加速落地",
-        "signal": "NVIDIA发布Physical AI Data Factory蓝图，BYD/吉利/日产采用DRIVE Hyperion实现L4自动驾驶——AI从'懂'到'做'的关键跨越"
+        "trend_label": "📈 趋势确认",
+        "signal": "Vera Rubin的POD级系统+NemoClaw的软件层+Agent Toolkit的开发工具——NVIDIA完成从硬件到软件到生态的全栈布局"
       },
       {
-        "name": "315晚会AI安全监管信号",
-        "score": 8,
-        "days": 1,
-        "trend_class": "watch",
-        "trend_label": "👁️ 监管关注",
-        "signal": "央视315晚会首次关注AI大模型'投毒'问题——国内AI监管进入新阶段，模型安全与数据合规成为刚性要求"
-      },
-      {
-        "name": "AI编程双雄格局确立",
-        "score": 8,
-        "days": 5,
-        "trend_class": "stable",
-        "trend_label": "⏸️ 格局稳定",
-        "signal": "Cursor vs Claude Code双雄格局稳定，'日常用Cursor+难题用Claude Code'成为最佳实践，国产Trae/通义灵码快速追赶"
+        "name": "物理AI战略成型",
+        "score": 9,
+        "days": 2,
+        "trend_class": "up",
+        "trend_label": "📈 战略兑现",
+        "signal": "Cosmos世界模型+Groot具身模型+Isaac仿真平台+Jetson Thor芯片+太空计算——物理AI从概念走向全栈产品"
       }
     ],
-    "summary": "本期核心信号是<strong>NVIDIA GTC 2026黄仁勋主题演讲</strong>——DGX Station+Agent Toolkit+Vera Rubin三连发。<strong>17家企业巨头采用Agent Toolkit</strong>，企业AI Agent平台化竞争正式开启。<strong>Physical AI加速落地</strong>，BYD/吉利等中国车企跟进L4自动驾驶。315晚会AI安全关注标志国内监管进入新阶段。"
+    "summary": "本期核心事件是<strong>GTC 2026黄仁勋主题演讲</strong>——2小时内发布Vera Rubin平台（7芯量产、10x推理吞吐/瓦）、NemoClaw（OpenClaw安全加持）、太空计算等重磅产品。<strong>NVIDIA完成全栈布局</strong>：从芯片到超算到Agent平台到太空，定义AI基础设施新标准。<strong>四大云+80+伙伴</strong>全面支持，生态锁定效应形成。"
   },
   "tabs": [
     {
-      "name": "大模型",
       "news": {
         "overseas": [
           {
             "tag": "hot",
-            "title": "NVIDIA发布DGX Station：六位数桌面超算，本地运行万亿参数模型",
-            "url": "https://venturebeat.com/ai/",
-            "source": "VentureBeat · 3月16日",
+            "title": "NVIDIA Vera Rubin平台：7芯量产5机架超算，推理吞吐/瓦提升10x",
+            "url": "https://nvidianews.nvidia.com/news/nvidia-vera-rubin-platform",
+            "source": "NVIDIA Newsroom · 3月16日",
             "details": {
-              "finding": "NVIDIA发布DGX Station桌面超级计算机，可本地运行万亿参数AI模型，无需云端依赖",
-              "highlight": "六位数价格 | 万亿参数本地运行 | 数据隐私解决 | 桌面级AI工厂",
-              "impact": "AI前沿能力首次从数据中心走向工程师桌面，企业级AI私有化部署门槛大幅降低"
+              "finding": "NVIDIA发布Vera Rubin平台，7颗全新芯片全部量产：Rubin GPU、Vera CPU、NVLink 6、ConnectX-9、BlueField-4、Spectrum-6、Groq 3 LPU。5种机架覆盖预训练到Agent推理全场景",
+              "highlight": "7芯量产 | NVL72推理10x/瓦 | token成本1/10 | MoE训练GPU 1/4 | Groq 3 35x推理/兆瓦",
+              "impact": "NVIDIA从'卖芯片'到'卖完整超算系统'的范式转换，Anthropic/OpenAI/Meta/Mistral已采用"
             }
           },
           {
-            "tag": "hot",
-            "title": "NVIDIA开源Agent Toolkit：17家企业软件巨头签约采用",
-            "url": "https://nvidianews.nvidia.com/news/ai-agents",
-            "source": "NVIDIA · 3月16日",
+            "title": "NVIDIA发布Vera CPU：全球首款专为Agentic AI打造的处理器",
+            "url": "https://nvidianews.nvidia.com/news/nvidia-launches-vera-cpu-purpose-built-for-agentic-ai",
+            "source": "NVIDIA Newsroom · 3月16日",
             "details": {
-              "finding": "NVIDIA发布开源Agent Toolkit平台，Adobe、Salesforce、SAP、ServiceNow、Siemens等17家企业软件巨头签约采用",
-              "highlight": "17家巨头 | Adobe/Salesforce/SAP | 开源平台 | 覆盖财富500强",
-              "impact": "NVIDIA从'卖芯片'升级为'建Agent生态'，企业AI Agent平台化竞争正式开启"
-            }
-          },
-          {
-            "title": "GTC发布Vera Rubin平台与Dynamo 1.0推理系统",
-            "url": "https://nvidianews.nvidia.com/",
-            "source": "NVIDIA · 3月16日",
-            "details": {
-              "finding": "GTC发布下一代Vera Rubin计算平台、Vera CPU Rack、Groq 3 LPX Rack，Dynamo 1.0推理操作系统进入量产",
-              "highlight": "Vera Rubin | Dynamo 1.0 | BlueField-4 STX | AI基础设施全面升级",
-              "impact": "NVIDIA AI基础设施迭代加速，从训练到推理的战略转向更加明确"
+              "finding": "Vera CPU专为强化学习和Agent工作负载设计，256颗CPU组成液冷机架，效率提升2x，速度提升50%",
+              "highlight": "全球首款Agentic AI专用CPU | 2x效率 | 50%速度提升 | 液冷设计",
+              "impact": "CPU从通用计算走向AI专用——Agent时代的基础设施范式正在改变"
             }
           }
         ],
         "china": [
           {
-            "tag": "trend",
-            "title": "315晚会曝光AI大模型'投毒'问题，AI安全监管进入新阶段",
-            "url": "https://weixin.sogou.com/",
-            "source": "微信公众号 · 3月16日",
+            "tag": "hot",
+            "title": "英伟达GTC 2026黄仁勋重磅发布物理AI全栈战略",
+            "url": "",
+            "source": "微信公众号(Carro庄主·内容已验证) · 3月17日 07:00",
             "details": {
-              "finding": "央视315晚会首次关注AI大模型安全，曝光模型训练数据污染问题",
-              "highlight": "首次进入315 | 数据污染 | 安全监管 | 刚性要求",
-              "impact": "国内AI监管进入新阶段，模型安全与数据合规将成为企业AI部署的前置条件"
+              "finding": "国内媒体深度解读黄仁勋物理AI战略：Cosmos世界模型+Groot具身模型+Isaac仿真平台+Jetson Thor芯片",
+              "highlight": "物理AI全栈 | 世界模型 | 具身AI | 定义未来十年",
+              "impact": "物理AI将成为下一个十年的主赛道，国内从业者需关注战略转向"
+            }
+          },
+          {
+            "title": "英伟达GTC2026的Keynote和黄仁勋的物理AI\"新叙事\"",
+            "url": "",
+            "source": "微信公众号(内容已验证) · 3月17日 06:05",
+            "details": {
+              "finding": "深度分析黄仁勋如何构建物理AI'新叙事'：从软件AI到物理AI的战略转向，以及这对整个AI行业的重新定义",
+              "highlight": "新叙事分析 | 战略转向 | 物理AI逻辑 | 行业重新定义",
+              "impact": "提供理解GTC 2026的深层框架——为什么物理AI是NVIDIA的战略核心"
             }
           }
         ]
       },
       "deep_focus": {
-        "title": "NVIDIA的'第三次飞跃'：从卖铲子到写剧本",
-        "content": "GTC 2026揭示了NVIDIA战略的关键转向：不再仅仅卖GPU（铲子），而是要定义AI时代的'剧本'——Agent生态系统。\n\n这是NVIDIA的第三次飞跃。第一次是CUDA平台锁定开发者（软件吃硬件）；第二次是从游戏GPU转向AI训练芯片；第三次就是当下——从训练基础设施转向Agent平台。17家企业软件巨头的集体采用，意味着NVIDIA的Agent Toolkit将成为企业AI应用的'Android'。\n\n为什么是现在？因为AI应用落地遇到了'最后一公里'问题：大模型很强，但企业不知道怎么用。NVIDIA的答案是：我不仅卖算力，还帮你把Agent做好。DGX Station则解决了另一个痛点：数据不想出门，但AI能力要进来。\n\n从业者启示：如果你在做企业AI产品，NVIDIA Agent Toolkit已经成为事实标准——要么加入，要么被边缘化。"
-      }
+        "title": "Vera Rubin的\"代际飞跃\"：从芯片到超算的范式转换",
+        "paragraphs": [
+          "GTC 2026最重磅的发布不是一颗芯片，而是一台\"超算\"。Vera Rubin平台将7颗全新芯片+5种机架整合为一个POD级系统，这是NVIDIA首次从\"卖芯片\"转向\"卖完整计算系统\"。",
+          "黄仁勋说：\"Vera Rubin是代际飞跃——7颗突破性芯片、5种机架、一台巨型超算——为AI的每个阶段而生。\" Anthropic的Dario Amodei、OpenAI的Sam Altman都为之背书。",
+          "数据说话：NVL72相比Blackwell，推理吞吐量/瓦提升10x，token成本降至1/10。Groq 3 LPX推理吞吐量/兆瓦提升35x。这意味着AI推理的经济模型将被彻底改写——推理成本的断崖式下降，将解锁大量此前因成本过高而无法实现的AI应用场景。"
+        ],
+        "takeaway": "Vera Rubin标志着AI硬件从'芯片为王'进入'系统为王'时代。下半年量产，四大云+80+伙伴支持——现在就需要开始评估迁移路径。"
+      },
+      "pattern_insight_html": "\n            <div class=\"pi-card\">\n                <div class=\"pi-header\">\n                    <span class=\"pi-badge\">🔮 规律洞察</span>\n                    <span class=\"pi-title\">NVIDIA的\"全栈封锁\"：从芯片霸主到AI基础设施帝国</span>\n                </div>\n                <div class=\"pi-row\">\n                    <span class=\"pi-row-label l2\">本质</span>\n                    <div class=\"pi-row-content\"><strong>科技公司的终极竞争力不是产品性能，而是系统级集成带来的生态锁定</strong></div>\n                </div>\n                <div class=\"pi-row\">\n                    <span class=\"pi-row-label\">进化序列</span>\n                    <div class=\"pi-row-content\">\n                        <div class=\"pi-evo\">\n                            <div class=\"pi-evo-step\"><span class=\"pi-evo-tag\">1.0</span><span class=\"pi-evo-text\">芯片为王(GPU)</span></div>\n                            <span class=\"pi-evo-arrow\">→</span>\n                            <div class=\"pi-evo-step\"><span class=\"pi-evo-tag\">2.0</span><span class=\"pi-evo-text\">软件平台(CUDA)</span></div>\n                            <span class=\"pi-evo-arrow\">→</span>\n                            <div class=\"pi-evo-step active\"><span class=\"pi-evo-tag\">3.0</span><span class=\"pi-evo-text\">系统级超算(Vera Rubin)</span></div>\n                            <span class=\"pi-evo-arrow\">→</span>\n                            <div class=\"pi-evo-step\"><span class=\"pi-evo-tag\">4.0</span><span class=\"pi-evo-text\">AI操作系统(NemoClaw)</span></div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"pi-table\">\n                    <div class=\"pi-t-head\"><span>阶段</span><span>实践案例</span><span>类比</span></div>\n                    <div class=\"pi-t-section verified\"><span class=\"pi-t-section-tag\">已验证</span></div>\n                    <div class=\"pi-t-row\"><span class=\"pi-t-rule\">1.0 芯片为王</span><span class=\"pi-t-reality\">GPU成为AI训练标配，市场占有率>80%</span><span class=\"pi-t-analogy\">Intel x86主导PC时代</span></div>\n                    <div class=\"pi-t-row\"><span class=\"pi-t-rule\">2.0 软件平台</span><span class=\"pi-t-reality\">CUDA锁定百万开发者，竞争对手难以绕过</span><span class=\"pi-t-analogy\">Windows锁定PC软件生态</span></div>\n                    <div class=\"pi-t-divider\"></div>\n                    <div class=\"pi-t-section current\"><span class=\"pi-t-section-tag\">GTC 2026</span></div>\n                    <div class=\"pi-t-row\"><span class=\"pi-t-rule\">3.0 系统级超算</span><span class=\"pi-t-reality\">Vera Rubin 7芯5架构POD级系统，四大云+80+伙伴</span><span class=\"pi-t-analogy\">Apple芯片+系统+生态三位一体</span></div>\n                    <div class=\"pi-t-row\"><span class=\"pi-t-rule\">4.0 AI操作系统</span><span class=\"pi-t-reality\">NemoClaw为OpenClaw加持安全，'个人AI的操作系统'</span><span class=\"pi-t-analogy\">Android开源但Google控制</span></div>\n                </div>\n                <div class=\"pi-confidence\">📐 置信度: 高 · 验证窗口: 6-12个月 · 信号: 更多ISV基于Agent Toolkit/NemoClaw开发</div>\n            </div>"
     },
     {
-      "name": "AI Coding",
       "news": {
         "overseas": [
           {
             "tag": "hot",
-            "title": "2026年AI编程双雄格局：Cursor vs Claude Code",
-            "url": "https://www.51cto.com/aigc/10671.html",
-            "source": "51CTO · 2026年1月",
+            "title": "NVIDIA NemoClaw发布：一键安装为OpenClaw加持安全隐私",
+            "url": "https://nvidianews.nvidia.com/news/nvidia-announces-nemoclaw",
+            "source": "NVIDIA Newsroom · 3月16日",
             "details": {
-              "finding": "AI编程工具进入'双雄格局'——Cursor主打IDE增强+Agent，Claude Code主打深度理解+高质量代码",
-              "highlight": "双雄格局 | Cursor Pro | Claude Code Pro | 组合使用成最佳实践",
-              "impact": "2026年AI编程从'用不用'转向'怎么用好'，工具组合策略成为关键"
+              "finding": "NemoClaw一键安装Nemotron模型+OpenShell沙箱运行时，为自进化Agent添加策略化安全、网络和隐私护栏。支持RTX PC/DGX Station/DGX Spark全平台",
+              "highlight": "一键安装 | OpenShell沙箱 | 隐私路由器 | 始终在线Agent | 全平台支持",
+              "impact": "NVIDIA为OpenClaw生态注入企业级安全能力，Agent从'能用'走向'敢用'"
             }
           },
           {
-            "title": "Claude Code 8大自定义设置指南发布",
-            "url": "https://www.builder.io/blog/codex-vs-claude-code",
-            "source": "Builder.io · 3月15日",
+            "title": "NVIDIA太空计算平台：AI正式进入轨道",
+            "url": "https://nvidianews.nvidia.com/news/space-computing",
+            "source": "NVIDIA Newsroom · 3月16日",
             "details": {
-              "finding": "Claude Code发布新配置选项，提升代码质量与开发效率",
-              "highlight": "8大设置 | 自定义 | 效率提升",
-              "impact": "Claude Code持续迭代，开发者体验进一步优化"
+              "finding": "NVIDIA将加速计算平台推向太空，支持轨道数据中心(ODC)、地理空间情报处理和自主太空操作",
+              "highlight": "轨道数据中心 | 地理空间AI | 自主太空操作 | 边缘计算极限",
+              "impact": "AI应用边界从地球扩展到太空，开启太空AI基础设施新纪元"
+            }
+          },
+          {
+            "title": "Teneo与Thoughtworks成立AI原生咨询合资公司",
+            "url": "https://www.teneo.com/news/press-releases/teneo-and-thoughtworks-launch-new-ai-focused-joint-venture/",
+            "source": "Teneo · 3月16日",
+            "details": {
+              "finding": "全球CEO咨询公司Teneo与技术咨询公司Thoughtworks联合成立AI合资企业，利用Thoughtworks 10000+工程师和AI/works Agentic AI平台打造首代AI原生CEO咨询服务",
+              "highlight": "首代AI原生CEO咨询 | 10000+工程师 | AI/works平台 | 跨界合作",
+              "impact": "传统咨询行业加速AI化，Agent能力开始渗透CEO决策层"
             }
           }
         ],
         "china": [
           {
-            "title": "国产AI编程工具快速追赶：Trae、通义灵码、MarsCode",
-            "url": "https://zhuanlan.zhihu.com/p/1999804779141030200",
-            "source": "知乎 · 2026年1月",
+            "tag": "new",
+            "title": "2026年3月17日人工智能领域最新动态",
+            "url": "",
+            "source": "微信公众号(内容已验证) · 3月17日 07:39",
             "details": {
-              "finding": "Trae和通义灵码发展迅速，国产AI IDE方案日趋成熟",
-              "highlight": "Trae | 通义灵码 | MarsCode | 国产追赶",
-              "impact": "国产AI Coding工具值得持续关注，2026年下半年可能迎来突破"
+              "finding": "国内AI行业3月17日综合动态汇总，覆盖GTC 2026重磅发布、AI应用新进展等多维度信息",
+              "highlight": "综合动态 | GTC解读 | 国内AI进展",
+              "impact": "为国内从业者提供GTC 2026核心内容的快速索引"
             }
           }
         ]
       },
       "deep_focus": {
-        "title": "AI Coding的'自行车vs摩托车'之争",
-        "content": "2026年AI编程工具的核心分歧：Cursor代表'自行车'——人骑车，AI是辅助轮；Claude Code代表'摩托车'——AI驱动，人只需把握方向。\n\n最佳实践已经浮现：日常开发用Cursor（快速、轻量），遇到难题交给Claude Code（深度理解、高质量）。这不是工具之争，而是场景匹配的问题。"
-      }
-    },
-    {
-      "name": "AI应用",
-      "news": {
-        "overseas": [
-          {
-            "tag": "hot",
-            "title": "NVIDIA发布Physical AI Data Factory蓝图，机器人开发加速",
-            "url": "https://nvidianews.nvidia.com/news/nvidia-and-global-robotics-leaders-take-physical-ai-to-the-real-world",
-            "source": "NVIDIA · 3月16日",
-            "details": {
-              "finding": "NVIDIA发布开放Physical AI Data Factory蓝图，加速机器人、视觉AI Agent和自动驾驶开发",
-              "highlight": "开放蓝图 | Physical AI | 机器人 | 自动驾驶",
-              "impact": "AI应用从纯软件扩展到物理世界，具身智能进入加速期"
-            }
-          },
-          {
-            "title": "BYD、吉利、日产采用NVIDIA DRIVE Hyperion实现L4",
-            "url": "https://nvidianews.nvidia.com/news/drive-hyperion-level-4",
-            "source": "NVIDIA · 3月16日",
-            "details": {
-              "finding": "中国车企BYD、吉利与日产、五十铃共同采用NVIDIA DRIVE Hyperion实现L4自动驾驶",
-              "highlight": "BYD | 吉利 | L4自动驾驶 | DRIVE Hyperion",
-              "impact": "中国车企在自动驾驶领域快速跟进，L4商业化进程加速"
-            }
-          },
-          {
-            "title": "Adobe与NVIDIA战略合作：下一代Firefly+Agentic工作流",
-            "url": "https://nvidianews.nvidia.com/news/adobe-and-nvidia-partnership-creative-marketing-agentic-workflows",
-            "source": "NVIDIA · 3月16日",
-            "details": {
-              "finding": "Adobe Firefly与NVIDIA深度集成，创意、营销、Agent工作流全面升级",
-              "highlight": "Firefly | Adobe | Agentic | 创意工作流",
-              "impact": "创意工具AI化进入深水区，Adobe+NVIDIA组合强化行业地位"
-            }
-          }
+        "title": "黄仁勋的\"个人AI操作系统\"宣言",
+        "paragraphs": [
+          "黄仁勋在GTC 2026上说出了一句可能被载入史册的话：\"Mac和Windows是个人电脑的操作系统，OpenClaw是个人AI的操作系统。这是业界一直等待的时刻——软件新文艺复兴的开端。\"",
+          "NemoClaw解决的核心矛盾是：Agent越自主，安全风险越大。通过OpenShell沙箱+Nemotron本地模型+隐私路由器的组合，Agent可以\"始终在线\"运行，同时数据不出本地。这很像手机时代从\"联网但不安全\"到\"联网且安全\"的转变。",
+          "值得注意的是，NemoClaw同时支持RTX PC/笔记本、RTX PRO工作站、DGX Station和DGX Spark——从个人设备到企业超算全覆盖。NVIDIA的意图很明确：让每个人都能拥有一个安全的、始终在线的AI助手。"
         ],
-        "china": [
-          {
-            "tag": "trend",
-            "title": "华为提出Agent-Oriented移动网络愿景",
-            "url": "https://www.huawei.com/cn/news/2026/3/mwc-agentverse-mobile-ai",
-            "source": "华为 · 3月4日",
-            "details": {
-              "finding": "华为在MWC26提出构建Agent-Oriented移动网络，发布业界首个无线网络智能体RAN Agent",
-              "highlight": "Agent-Oriented | RAN Agent | Agentverse | 6G愿景",
-              "impact": "电信基础设施AI化进入实质阶段，Agent成为6G核心叙事"
-            }
-          }
-        ]
-      },
-      "deep_focus": {
-        "title": "Physical AI：AI从'懂'到'做'的关键跨越",
-        "content": "GTC 2026最重要的信号之一是Physical AI的集中爆发。NVIDIA不仅发布了软件Agent平台，更推出了物理AI数据工厂蓝图。\n\n这意味着AI正在从'理解世界'走向'改变世界'——从ChatGPT式的对话，到机器人、自动驾驶、工业自动化的实际行动。BYD、吉利等中国车企的快速跟进，表明这不是概念炒作，而是产业落地的真实信号。"
+        "takeaway": "NemoClaw的发布标志着Agent从'技术玩具'走向'生产力工具'的转折点——安全和隐私是这个转折的关键使能条件。"
       }
     },
     {
-      "name": "AI行业",
       "news": {
         "overseas": [
           {
             "tag": "hot",
-            "title": "NVIDIA Q4营收$680亿创历史新高",
-            "url": "https://www.wsj.com/business/earnings/nvidia-earnings-q4-2026-nvda-stock-73bd6dc5",
-            "source": "WSJ · 2月27日",
+            "title": "Vera Rubin获全球最广泛云+硬件生态支持",
+            "url": "https://blogs.nvidia.com/blog/gtc-2026-news/",
+            "source": "NVIDIA Blog · 3月16日",
             "details": {
-              "finding": "NVIDIA第四季度营收$680亿，打破泡沫质疑，业绩强劲超预期",
-              "highlight": "$680亿 | 单季新高 | 泡沫质疑打破",
-              "impact": "AI算力需求持续强劲，NVIDIA霸主地位进一步巩固"
-            }
-          },
-          {
-            "title": "2026年美国AI公司已有17家完成$1亿+融资",
-            "url": "https://techcrunch.com/2026/02/17/here-are-the-17-us-based-ai-companies-that-have-raised-100m-or-more-in-2026/",
-            "source": "TechCrunch · 2月17日",
-            "details": {
-              "finding": "2025年美国AI创业公司通过大额融资超$760亿，2026年延续强劲势头",
-              "highlight": "17家$1亿+ | 2025年$760亿 | 融资热度不减",
-              "impact": "AI资本市场持续活跃，大额融资仍是主旋律"
-            }
-          },
-          {
-            "title": "Nebius与Meta签署AI基础设施供应协议",
-            "url": "https://nebius.com/newsroom/nebius-signs-new-ai-infrastructure-agreement-with-meta",
-            "source": "Nebius · 3月16日",
-            "details": {
-              "finding": "Nebius与Meta达成长期AI基础设施供应协议，加速AI云业务增长",
-              "highlight": "Meta | 长期协议 | AI基础设施 | 云业务",
-              "impact": "AI基础设施供应链持续整合，头部玩家锁定长期合作"
+              "finding": "AWS、Azure、GCP、OCI四大云+CoreWeave/Nebius/Lambda等新兴AI云+Cisco/Dell/HPE/Lenovo/Supermicro等80+硬件伙伴+200+基础设施伙伴全面支持Vera Rubin",
+              "highlight": "四大云全覆盖 | 80+硬件伙伴 | 200+基础设施伙伴 | DSX平台+30%部署+100GW功率释放 | 下半年量产",
+              "impact": "AI基础设施生态锁定效应形成，Vera Rubin将成为下一代企业AI部署的事实标准"
             }
           }
         ],
         "china": []
       },
       "deep_focus": {
-        "title": "NVIDIA的$680亿意味着什么",
-        "content": "NVIDIA单季$680亿营收打破了所有AI泡沫质疑。这个数字证明：AI算力需求不是炒作，而是真实的产业投入。\n\n但更值得关注的是：NVIDIA的收入结构正在变化。GTC 2026发布的Agent Toolkit和DGX Station，意味着NVIDIA正在从'卖芯片'转向'卖平台+服务'。这是更高利润率、更强锁定效应的商业模式。"
-      }
-    },
-    {
-      "name": "企业AI转型",
-      "news": {
-        "overseas": [
-          {
-            "tag": "hot",
-            "title": "Roche全球扩展NVIDIA AI工厂加速药物发现",
-            "url": "https://blogs.nvidia.com/blog/roche-ai-factories-omniverse/",
-            "source": "NVIDIA · 3月16日",
-            "details": {
-              "finding": "罗氏制药全球部署NVIDIA AI工厂，加速药物发现、诊断方案和制造突破",
-              "highlight": "全球部署 | AI工厂 | Omniverse | 药物发现全流程AI化",
-              "impact": "制药行业AI转型进入深水区，从单点试验到全流程重构"
-            }
-          }
+        "title": "四大云+80+硬件伙伴：NVIDIA的\"全包围\"生态策略",
+        "paragraphs": [
+          "Vera Rubin的生态支持阵容可能是NVIDIA历史上最强的：AWS、Azure、GCP、OCI四大公有云全部第一时间支持，加上CoreWeave、Nebius、Lambda等新兴AI云，再加上Cisco、Dell、HPE、Lenovo、Supermicro等传统硬件巨头。",
+          "更值得关注的是DSX平台带来的实际价值：在固定功率的数据中心内，可以多部署30%的AI基础设施。DSX Flex软件则可以释放100GW的闲置电网功率——这相当于解锁了一个巨大的\"暗资源池\"。",
+          "这意味着企业选择AI基础设施时，几乎找不到不支持Vera Rubin的主流平台。NVIDIA正在复制CUDA的\"无处不在\"策略——从芯片到云到服务器，全面锁定。如果你是企业IT决策者，下半年的基础设施采购计划需要认真考虑Vera Rubin了。"
         ],
-        "china": [
-          {
-            "title": "礼来推出全球最强药物发现AI工厂",
-            "url": "https://blogs.nvidia.cn/blog/lilly-ai-factory-live/",
-            "source": "NVIDIA中国 · 3月",
-            "details": {
-              "finding": "礼来上线制药公司完全自有运营的全球最大药物发现与开发AI工厂",
-              "highlight": "礼来 | 全球最大 | 自有运营 | AI药物发现",
-              "impact": "制药巨头AI基础设施投入进入新阶段，自有AI工厂成为竞争壁垒"
-            }
-          }
-        ]
-      },
-      "deep_focus": {
-        "title": "企业AI转型的'平台锁定'开始了",
-        "content": "GTC 2026的另一个重要信号：企业AI转型正在从'用AI工具'走向'接入AI平台'。17家企业软件巨头采用NVIDIA Agent Toolkit，意味着平台锁定效应开始形成。\n\n这很像2010年代的移动互联网：企业先是用各种独立App，然后逐渐被iOS/Android生态锁定。NVIDIA正在AI领域复制这一模式：Agent Toolkit就是企业AI的'操作系统'。\n\n对传统企业而言，选择哪个AI平台，将决定未来5-10年的数字化路径。"
+        "takeaway": "NVIDIA从'技术领先'升级为'生态锁定'——四大云+80+伙伴的全面支持，使Vera Rubin成为企业AI部署的事实标准。"
       }
     }
   ],
   "data_snapshot": [
     {
-      "metric": "NVIDIA Q4营收",
-      "value": "$680亿",
-      "note": "WSJ · 单季历史新高"
+      "metric": "Vera Rubin新芯片数",
+      "value": "7颗",
+      "note": "全部量产 · 下半年上市"
     },
     {
-      "metric": "Agent Toolkit采用企业数",
-      "value": "17家",
-      "note": "NVIDIA · Adobe/Salesforce/SAP等"
+      "metric": "NVL72推理吞吐/瓦提升",
+      "value": "10x",
+      "note": "vs Blackwell平台"
     },
     {
-      "metric": "2025年美国AI融资总额",
-      "value": "$760亿+",
-      "note": "TechCrunch · 大额融资"
+      "metric": "Token成本下降",
+      "value": "1/10",
+      "note": "vs Blackwell · NVL72"
     },
     {
-      "metric": "GTC 2026参会者",
-      "value": "3万人/190国",
-      "note": "NVIDIA · 圣何塞现场+线上"
+      "metric": "Groq 3 LPX推理/兆瓦提升",
+      "value": "35x",
+      "note": "万亿参数模型"
+    },
+    {
+      "metric": "云+硬件生态伙伴",
+      "value": "80+",
+      "note": "AWS/Azure/GCP/OCI + Dell/HPE等"
+    },
+    {
+      "metric": "DSX可释放闲置功率",
+      "value": "100GW",
+      "note": "DSX Flex软件"
     }
   ],
-  "pattern_insight": {
-    "title": "NVIDIA的平台化演进：从卖铲子到定义游戏规则",
-    "essence": "科技公司的终极护城河不是产品，而是生态锁定",
-    "evolution": [
-      {
-        "stage": "1.0 硬件为王",
-        "fact": "GPU成为AI训练标配",
-        "analogy": "Intel的x86芯片"
-      },
-      {
-        "stage": "2.0 软件平台",
-        "fact": "CUDA锁定开发者，竞争对手难以撼动",
-        "analogy": "Windows操作系统"
-      },
-      {
-        "stage": "3.0 生态系统",
-        "fact": "GTC 2026发布Agent Toolkit，17家巨头采用",
-        "analogy": "App Store对移动应用的垄断"
-      }
-    ],
-    "prediction": {
-      "stage": "4.0 标准制定者",
-      "content": "NVIDIA定义企业AI Agent的开发标准、接口规范、最佳实践",
-      "analogy": "Google定义Android生态规则"
+  "watch_list": [
+    "GTC 2026后续Session — 3月17-19日多场技术分论坛，覆盖Agent/物理AI/推理优化",
+    "GTC开源模型圆桌 — 3月18日黄仁勋主持，Cursor/A16Z/AI2参与",
+    "Vera Rubin量产时间表 — 2025下半年（已通过时间节点），实际部署进度跟踪",
+    "NemoClaw开发者采纳 — OpenClaw生态中NemoClaw的实际安装量和反馈",
+    "国内厂商GTC反应 — 百度/华为/腾讯对Vera Rubin和物理AI战略的跟进策略",
+    "AI推理成本曲线 — Groq 3 LPX是否真正实现35x推理效率提升的实际验证"
+  ],
+  "references": [
+    {
+      "title": "NVIDIA Vera Rubin Platform",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-vera-rubin-platform"
     },
-    "confidence": "高",
-    "window": "6-12个月",
-    "signal": "更多ISV加入Agent Toolkit生态"
-  },
+    {
+      "title": "NVIDIA Vera CPU for Agentic AI",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-launches-vera-cpu-purpose-built-for-agentic-ai"
+    },
+    {
+      "title": "NVIDIA NemoClaw for OpenClaw",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-announces-nemoclaw"
+    },
+    {
+      "title": "NVIDIA Space Computing",
+      "url": "https://nvidianews.nvidia.com/news/space-computing"
+    },
+    {
+      "title": "Teneo & Thoughtworks AI Joint Venture",
+      "url": "https://www.teneo.com/news/press-releases/teneo-and-thoughtworks-launch-new-ai-focused-joint-venture/"
+    },
+    {
+      "title": "微信: GTC 2026物理AI全栈战略(Carro庄主·内容已验证)",
+      "url": ""
+    },
+    {
+      "title": "微信: GTC2026 Keynote物理AI新叙事(内容已验证)",
+      "url": ""
+    },
+    {
+      "title": "微信: 人工智能领域最新动态3/17(内容已验证)",
+      "url": ""
+    }
+  ],
   "meta": {
     "date": "2026-03-17",
-    "version": "v3.1",
-    "time_window": "2026-03-16 08:00 ~ 2026-03-17 08:00 (北京时间)",
-    "data_sources": {
-      "overseas_search": 5,
-      "china_search": 3,
-      "weixin_direct": 2,
-      "fetch_web": 3
-    },
-    "editor": "林克"
-  }
+    "version": "v3.5",
+    "total_items": 8,
+    "red_items": 3,
+    "yellow_items": 5,
+    "page_url": "https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-03/2026-03-17-v3.html",
+    "data_sources": "NVIDIA Newsroom + 微信公众号搜索(browser_agent穿透) + Web搜索 + fetch_web深度抓取",
+    "weixin_direct_references": 3,
+    "weixin_cross_references": 0,
+    "source_diversity": "NVIDIA Newsroom/Teneo/微信公众号(Carro庄主)/微信公众号(AI动态)"
+  },
+  "capability_update": "🤖 **林克自述**\n\n今天凌晨（北京时间3/17 02:00-04:00），黄仁勋在GTC 2026上发表了2小时主题演讲，信息密度极高。我凌晨爬起来整理了第一手资料——\n\n**核心信号只有一个：NVIDIA从\"卖芯片\"全面转向\"定义AI基础设施标准\"**。\n\nVera Rubin平台不是一颗芯片，是7颗芯片+5种机架组成的\"超算\"。推理吞吐量/瓦提升10x、token成本降至Blackwell的1/10——这意味着很多之前因成本过高而\"想做但做不了\"的AI应用场景，即将变得经济可行。\n\nNemoClaw的发布也很关键。黄仁勋说了一句可能被载入史册的话：\"Mac和Windows是个人电脑的操作系统，OpenClaw是个人AI的操作系统。\" 当NVIDIA开始用\"操作系统\"来定位Agent平台时，说明Agent已经不是\"未来\"，而是\"现在\"。\n\n今天的日报信息密度很大，建议保存下来反复看。\n\nPS: GTC还有3天的Session，包括3月18日黄仁勋主持的开源模型圆桌（Cursor/A16Z/AI2参与）。后续有重要更新我会第一时间跟进。"
 }
