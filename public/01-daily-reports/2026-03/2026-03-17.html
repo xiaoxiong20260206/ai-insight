@@ -193,11 +193,11 @@
         <div class="coverage-bar">
             <span class="label">📊 覆盖均衡</span>
             <div class="bar">
-                <div class="bar-overseas" style="width:62%"></div>
-                <div class="bar-china" style="width:38%"></div>
+                <div class="bar-overseas" style="width:70%"></div>
+                <div class="bar-china" style="width:30%"></div>
             </div>
             <div class="stats">
-                <span class="stat-overseas">🌏 海外 5条</span>
+                <span class="stat-overseas">🌏 海外 7条</span>
                 <span class="stat-china">🇨🇳 国内 3条</span>
             </div>
         </div>
@@ -216,9 +216,9 @@
                     <div class="overview-item-text">NVIDIA发布NemoClaw为OpenClaw加持安全隐私，一键安装Nemotron模型+OpenShell沙箱，Agent从'能用'走向'敢用'</div>
                 </div>
                 <div class="overview-item">
-                    <div class="overview-item-header"><span class="overview-item-icon">🧠</span><span class="overview-item-label">大模型</span></div>
-                    <div class="overview-headline">Vera CPU+Groq 3 LPX：专为Agentic AI打造的新硬件</div>
-                    <div class="overview-item-text">全球首款Agentic AI专用CPU效率提升2x；Groq 3 LPX推理吞吐量/兆瓦提升35x，万亿参数模型收入机会10x</div>
+                    <div class="overview-item-header"><span class="overview-item-icon">⌨️</span><span class="overview-item-label">AI Coding</span></div>
+                    <div class="overview-headline">OpenShell+OpenSWE：Coding Agent安全运行时+最大规模训练框架</div>
+                    <div class="overview-item-text">NVIDIA发布OpenShell为Claude Code/Cursor/Codex提供进程外沙箱安全；OpenSWE开源45K环境训练SWE Agent达62.4% SWE-bench</div>
                 </div>
                 <div class="overview-item">
                     <div class="overview-item-header"><span class="overview-item-icon">🏭</span><span class="overview-item-label">AI 行业</span></div>
@@ -421,9 +421,64 @@
         <article id="coding" class="tab-panel">
             <div class="section-card">
                 <div class="section-header"><span class="num">1</span> 最近动态</div>
+                <div class="sub-header">🌏 海外</div>
 
+                <div class="news-item">
+                    <span class="news-tag tag-hot">HOT</span>
+                    <div class="news-title"><a href="https://developer.nvidia.com/blog/run-autonomous-self-evolving-agents-more-safely-with-nvidia-openshell/" target="_blank">NVIDIA OpenShell发布：为Coding Agent（Claude Code/Cursor/Codex）提供进程外安全沙箱</a></div>
+                    <div class="news-source">NVIDIA Developer Blog · 3月16日</div>
+                    <div class="news-detail">
+                        <div class="news-detail-row">
+                            <span class="news-detail-label ">核心发现</span>
+                            <span class="news-detail-value">OpenShell基于Apache 2.0开源，采用进程外策略执行架构（非Agent内部guardrails），为Claude Code/Cursor/Codex/OpenCode等Coding Agent提供隔离沙箱+策略引擎+隐私路由器三层安全</span>
+                        </div>
+                        <div class="news-detail-row">
+                            <span class="news-detail-label ">关键数据</span>
+                            <span class="news-detail-value"><div class="news-data-chips"><span class="news-data-chip">进程外策略执行</span><span class="news-data-chip">沙箱隔离</span><span class="news-data-chip">隐私路由器</span><span class="news-data-chip">一行命令启动</span><span class="news-data-chip">Claude Code/Cursor/Codex兼容</span></div></span>
+                        </div>
+                        <div class="news-detail-row">
+                            <span class="news-detail-label ">影响判断</span>
+                            <span class="news-detail-value">解决Coding Agent'安全-能力-自主'三角难题——Agent运行时安全从'自我约束'升级为'环境约束'</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="news-item">
+                    <span class="news-tag tag-new">NEW</span>
+                    <div class="news-title"><a href="https://arxiv.org/abs/2603.12520" target="_blank">OpenSWE：最大规模开源SWE Agent训练框架，45K环境+$1.47M投资</a></div>
+                    <div class="news-source">arXiv · 3月16日</div>
+                    <div class="news-detail">
+                        <div class="news-detail-row">
+                            <span class="news-detail-label ">核心发现</span>
+                            <span class="news-detail-value">OpenSWE提供45,320个可执行Docker环境、12,800+仓库覆盖，投入$1.47M构建。OpenSWE-32B达SWE-bench Verified 62.4%，OpenSWE-72B达66.0%，均为Qwen2.5系列SOTA</span>
+                        </div>
+                        <div class="news-detail-row">
+                            <span class="news-detail-label ">关键数据</span>
+                            <span class="news-detail-value"><div class="news-data-chips"><span class="news-data-chip">45K Docker环境</span><span class="news-data-chip">12.8K仓库</span><span class="news-data-chip">$1.47M投资</span><span class="news-data-chip">SWE-bench 62.4%/66.0% SOTA</span><span class="news-data-chip">数学推理+12分</span></div></span>
+                        </div>
+                        <div class="news-detail-row">
+                            <span class="news-detail-label ">影响判断</span>
+                            <span class="news-detail-value">SWE Agent训练基础设施的'Android时刻'——首个完全透明的大规模训练框架，降低了进入门槛</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
+            <div class="deep-focus-card">
+                <div class="deep-focus-header">
+                    <div>
+                        <div class="deep-focus-label">💡 深度聚焦</div>
+                        <div class="deep-focus-title">Coding Agent安全的'浏览器时刻'：OpenShell如何解决三角难题</div>
+                    </div>
+                </div>
+                <div class="deep-focus-body">
+                    <p>黄仁勋在GTC 2026上揭示了一个核心矛盾：Coding Agent要同时满足安全、能力和自主，现有方案最多只能做到两个。如果安全且自主但没能力访问工具和数据，Agent完不成任务；如果有能力且安全但需要不断审批，那就是在'看孩子'；如果有能力且自主，那就是让进程自己监管自己。</p><p>OpenShell的核心架构决策是'进程外策略执行'——不依赖Agent内部的行为提示，而是在Agent运行的环境层面施加约束。这就像浏览器的Tab隔离模型应用到Agent上：会话隔离，权限由运行时验证，Agent即使被攻破也无法覆盖策略。Claude Code和Cursor自带的guardrails活在Agent内部，OpenShell则把控制点移到Agent触及不到的外部。</p><p>与此同时，OpenSWE为Coding Agent训练提供了前所未有的规模：45,320个可执行Docker环境，跨越12,800+仓库，总投资$1.47M。这不仅是规模的突破，更重要的是完全透明——所有Dockerfile、评估脚本和基础设施全部开源，为学术界扫除了最大的入门障碍。</p>
+                    <div class="deep-focus-takeaway">
+                        <div class="deep-focus-takeaway-label">💡 TAKEAWAY</div>
+                        <div class="deep-focus-takeaway-text">GTC 2026为Coding Agent生态补上了两块关键拼图：OpenShell解决'如何安全运行'，OpenSWE解决'如何大规模训练'——Coding Agent从'能力竞赛'进入'基础设施竞赛'阶段。</div>
+                    </div>
+                </div>
+            </div>
 
         </article>
 
