@@ -1173,16 +1173,19 @@ def run_all_checks(date_str: str) -> Tuple[List[CheckResult], int, int]:
     results = []
     passed = 0
     failed = 0
+    warnings = 0
     
     for check_func in checks:
         result = check_func(date_str)
         results.append(result)
         if result.passed:
             passed += 1
+        elif result.severity == "warning":
+            warnings += 1
         else:
             failed += 1
     
-    return results, passed, failed
+    return results, passed, failed, warnings
 
 
 def fix_chinese_quotes(date_str: str) -> bool:
@@ -1275,7 +1278,7 @@ def main():
         return 0 if result.passed else 1
     
     # 运行所有检查
-    results, passed, failed = run_all_checks(date_str)
+    results, passed, failed, warnings = run_all_checks(date_str)
     total_checks = len(results)
     
     # 输出结果
@@ -1285,7 +1288,10 @@ def main():
         print()
     
     # 统计
-    print(f"📊 检查完成: {passed}/{total_checks} 通过, {failed}/{total_checks} 失败")
+    if warnings > 0:
+        print(f"📊 检查完成: {passed}/{total_checks} 通过, {warnings}/{total_checks} 警告, {failed}/{total_checks} 失败")
+    else:
+        print(f"📊 检查完成: {passed}/{total_checks} 通过, {failed}/{total_checks} 失败")
     
     # 尝试修复
     if args.fix and failed > 0:
@@ -1319,12 +1325,18 @@ def main():
         
         if fixed > 0:
             print(f"\n🔄 已修复 {fixed} 项，重新检查...")
-            results, passed, failed = run_all_checks(date_str)
-            print(f"📊 重新检查: {passed}/{total_checks} 通过, {failed}/{total_checks} 失败")
+            results, passed, failed, warnings = run_all_checks(date_str)
+            if warnings > 0:
+                print(f"📊 重新检查: {passed}/{total_checks} 通过, {warnings}/{total_checks} 警告, {failed}/{total_checks} 失败")
+            else:
+                print(f"📊 重新检查: {passed}/{total_checks} 通过, {failed}/{total_checks} 失败")
     
     # 最终结果
     if failed == 0:
-        print("\n✅ 质量门通过！可以安全推送日报。")
+        if warnings > 0:
+            print(f"\n✅ 质量门通过！({warnings}项警告，不阻断)")
+        else:
+            print("\n✅ 质量门通过！可以安全推送日报。")
         return 0
     else:
         # 检查是否有时效性错误（严重错误）
