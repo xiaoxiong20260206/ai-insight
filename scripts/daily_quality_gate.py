@@ -203,6 +203,65 @@ def check_content_nonempty(date_str: str) -> CheckResult:
         return CheckResult("内容非空", False, f"检查失败: {e}")
 
 
+def check_tab_balance(date_str: str) -> CheckResult:
+    """检查4.5: [v9.0新增] Tab均衡检查 — 防止大事件导致板块失衡
+    
+    规则:
+    - JSON必须包含恰好5个tab
+    - 每个tab至少1条新闻(warning)，建议至少2条
+    - 空tab = 严重结构问题(error)
+    """
+    json_path = DATA_PATH / f"daily-content-{date_str}.json"
+    if not json_path.exists():
+        return CheckResult("板块均衡", False, "JSON文件不存在")
+    
+    try:
+        data = json.loads(json_path.read_text(encoding="utf-8"))
+        tabs = data.get("tabs", [])
+        tab_names = ["大模型", "AI Coding", "AI 应用", "AI 行业", "企业转型"]
+        
+        # 检查1: tab数量
+        if len(tabs) != 5:
+            return CheckResult(
+                "板块均衡", False,
+                f"tab数量错误: {len(tabs)}个(期望5个)。缺失tab会导致HTML空面板。"
+            )
+        
+        # 检查2: 每个tab内容量
+        empty_tabs = []
+        thin_tabs = []  # 只有1条
+        tab_counts = []
+        for i, tab in enumerate(tabs):
+            news = tab.get("news", {})
+            count = len(news.get("overseas", [])) + len(news.get("china", []))
+            name = tab_names[i] if i < len(tab_names) else f"Tab{i}"
+            tab_counts.append(f"{name}={count}")
+            if count == 0:
+                empty_tabs.append(name)
+            elif count < 2:
+                thin_tabs.append(f"{name}({count})")
+        
+        if empty_tabs:
+            return CheckResult(
+                "板块均衡", False,
+                f"空板块: {', '.join(empty_tabs)}。每个板块至少需要1条新闻。分布: {', '.join(tab_counts)}"
+            )
+        
+        if thin_tabs:
+            return CheckResult(
+                "板块均衡", True,
+                f"偏薄板块: {', '.join(thin_tabs)}(建议>=2条)。分布: {', '.join(tab_counts)}",
+                severity="warning"
+            )
+        
+        return CheckResult(
+            "板块均衡", True,
+            f"均衡: {', '.join(tab_counts)}"
+        )
+    except Exception as e:
+        return CheckResult("板块均衡", False, f"检查失败: {e}")
+
+
 def check_date_window(date_str: str) -> CheckResult:
     """检查5: ⭐ [v2.0新增] 时效性验证 - 新闻发布日期必须在时间窗口内
     
@@ -1155,6 +1214,7 @@ def run_all_checks(date_str: str) -> Tuple[List[CheckResult], int, int]:
         check_chinese_quotes,
         check_link_validity,
         check_content_nonempty,
+        check_tab_balance,           # v9.0新增 - 板块均衡(防大事件隧道视野)
         check_content_volume,        # v8.3新增 - 内容量检查(防修复缩水)
         check_date_window,           # v2.0新增
         check_date_tampering,        # v8.0新增 - 日期篡改检测(双保险)
