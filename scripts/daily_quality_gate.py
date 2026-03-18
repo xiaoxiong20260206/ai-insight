@@ -19,17 +19,27 @@ AI日报质量门脚本 (Quality Gate)
   7. ⭐ [v8.0新增] 日期篡改检测 (快照对比+可疑模式识别)
   8. ⭐ [v8.0新增] 封闭平台链接合规 (禁mp.weixin临时+禁搜狗跳转)
   9. ⭐ [v8.1新增] 小红书noteId真实性验证
-  10. ⭐ [v3.0新增] 板块分类验证
-  11. ⭐ [v4.0新增] 地区分类验证
+  10. ⭐ [v9.1升级] 板块分类验证 → WARNING升级为ERROR
+  11. ⭐ [v9.1升级] 地区分类验证 → WARNING升级为ERROR
   12. ⭐ [v3.0新增] 跨天去重
-  13. ⭐ [v5.0新增] 信息源多样性 (微信覆盖>=2 + 单源集中度<=40%)
+  13. ⭐ [v9.1升级] 信息源多样性 (微信>=2 + 小红书>=1 + 集中度<=40%) → 全部ERROR
   14. ⭐ [v2.0新增] HTML链接规范 (target="_blank" + 无#占位)
   15. MD/HTML文件存在性
   16. 6处联动更新检查
   17. 外部版同步检查
 
 作者: 林克 (沈浪的AI分身)
-版本: v8.3.0 (2026-03-16)
+版本: v9.1.0 (2026-03-18)
+
+v9.1更新 (WARNING→ERROR升级 — 经验40):
+- check_board_classification: WARNING→ERROR，板块分类错误必须阻断部署
+- check_region_classification: WARNING→ERROR，地区分类错误必须阻断部署
+- check_source_diversity: WARNING→ERROR + 新增小红书覆盖>=1检查
+  - 微信直引<2 → ERROR
+  - 小红书覆盖=0 → ERROR
+  - 单域名占比>40% → ERROR
+- 增强板块分类关键词映射(防止RTX PRO/DGX被误分到AI Coding)
+- 根因: 3月18日复盘“同一类问题反复出现”的根本原因—WARNING级别等于不存在
 
 v8.3更新 (技能修炼改进):
 - 新增内容量检查 (check_content_volume) — 防止修复时"删减≠修复"的陷阱
@@ -369,31 +379,37 @@ def check_board_classification(date_str: str) -> CheckResult:
                             "参数", "token", "多模态", "视觉", "3D", "扩散", "生成", "开源模型",
                             "Foundation Model", "架构", "注意力", "Transformer"],
                 "negative": ["融资", "收购", "估值", "军事", "法规", "IDE", "代码补全", "Cursor",
-                            "Agent", "个人Agent", "用户", "产品", "App"]
+                            "Agent", "个人Agent", "用户", "产品", "App",
+                            "工作站", "服务器", "DGX", "RTX PRO"]
             },
             1: {  # AI Coding
                 "name": "AI Coding",
                 "positive": ["代码", "编程", "IDE", "Cursor", "Copilot", "Code Review", "DevOps",
                             "代码生成", "代码审查", "代码补全", "编译", "debug", "开发工具"],
-                "negative": ["融资", "军事", "办公", "Workspace", "模型训练", "CVPR", "3D"]
+                "negative": ["融资", "军事", "办公", "Workspace", "模型训练", "CVPR", "3D",
+                            "工作站", "服务器", "数据中心", "DGX", "RTX PRO", "硬件", "芯片",
+                            "出货", "交付", "产能", "工厂", "基础设施", "部署方案"]
             },
             2: {  # AI 应用
                 "name": "AI 应用",
                 "positive": ["用户", "产品", "App", "Workspace", "办公", "社交", "Agent",
                             "Agent平台", "个人Agent", "Manus", "OpenClaw", "Gemini", "ChatGPT",
                             "搜索", "翻译", "客服", "助手", "Perplexity", "Character"],
-                "negative": ["融资", "军事", "模型训练", "CVPR", "benchmark"]
+                "negative": ["融资", "军事", "模型训练", "CVPR", "benchmark",
+                            "出货", "交付", "订单", "产能", "工厂", "里程碑"]
             },
             3: {  # AI 行业
                 "name": "AI 行业",
                 "positive": ["融资", "投资", "估值", "收购", "IPO", "算力", "数据中心", "芯片",
-                            "GTC", "会议", "峰会", "圆桌", "开源生态", "人事", "离职", "创业"],
+                            "GTC", "会议", "峰会", "圆桌", "开源生态", "人事", "离职", "创业",
+                            "出货", "交付", "里程碑", "产能", "工厂扩建", "订单"],
                 "negative": ["军事", "法规", "监管", "安全警示"]
             },
             4: {  # 企业AI转型
                 "name": "企业AI转型",
                 "positive": ["企业", "落地", "政策", "法规", "监管", "安全", "军事", "军方",
-                            "合规", "伦理", "红线", "诉讼", "国防", "CNCERT"],
+                            "合规", "伦理", "红线", "诉讼", "国防", "CNCERT",
+                            "工作站", "服务器", "RTX PRO", "DGX", "部署方案", "基础设施"],
                 "negative": ["融资", "模型训练", "IDE"]
             }
         }
@@ -431,9 +447,9 @@ def check_board_classification(date_str: str) -> CheckResult:
             examples = "; ".join(suspects[:3])
             return CheckResult(
                 "板块分类", False,
-                f"⚠️ {len(suspects)}条新闻可能分类错误: {examples}",
-                fixable=False,
-                severity="warning"
+                f"❌ {len(suspects)}条新闻可能分类错误: {examples}",
+                fixable=False
+                # v9.1: 从warning升级为error(默认)，分类错误必须阻断部署
             )
         
         return CheckResult("板块分类", True, "所有新闻板块分类合理")
@@ -537,9 +553,9 @@ def check_region_classification(date_str: str) -> CheckResult:
             examples = "; ".join(suspects[:3])
             return CheckResult(
                 "地区分类", False,
-                f"⚠️ {len(suspects)}条新闻可能地区分类错误: {examples}",
-                fixable=False,
-                severity="warning"
+                f"❌ {len(suspects)}条新闻可能地区分类错误: {examples}",
+                fixable=False
+                # v9.1: 从warning升级为error(默认)，地区分类错误必须阻断部署
             )
         
         return CheckResult("地区分类", True, "所有新闻地区分类合理")
@@ -641,16 +657,16 @@ def check_cross_day_dedup(date_str: str) -> CheckResult:
 
 
 def check_source_diversity(date_str: str) -> CheckResult:
-    """检查X: [v5.0新增] 信息源多样性检查（含微信公众号覆盖）
+    """检查X: [v9.1升级] 信息源多样性检查（含微信+小红书覆盖）
     
-    规则:
-    1. 微信公众号覆盖: 新闻条目中至少2条来自或引用微信公众号
-       (url含 mp.weixin.qq.com / weixin.sogou.com，或 source 标注"微信")
-    2. 信息源集中度: 单一域名占比不超过40%
+    规则（v9.1 全部升级为ERROR，从警告变为硬阻断）:
+    1. 微信公众号覆盖: 新闻条目中至少2条来自或引用微信公众号 → ERROR
+    2. 小红书覆盖: 至少1条小红书数据源 → ERROR (v9.1新增)
+    3. 信息源集中度: 单一域名占比不超过40% → ERROR
     """
     json_path = DATA_PATH / f"daily-content-{date_str}.json"
     if not json_path.exists():
-        return CheckResult("信息源多样性", False, "JSON数据文件不存在", severity="warning")
+        return CheckResult("信息源多样性", False, "JSON数据文件不存在")
     
     try:
         data = json.loads(json_path.read_text(encoding="utf-8"))
@@ -664,14 +680,14 @@ def check_source_diversity(date_str: str) -> CheckResult:
                     all_items.append(item)
         
         if not all_items:
-            return CheckResult("信息源多样性", False, "无新闻条目", severity="warning")
+            return CheckResult("信息源多样性", False, "无新闻条目")
         
         # --- 检查1: 微信公众号覆盖 ---
         weixin_direct = 0    # URL直接指向微信文章
         weixin_crossref = 0  # source字段提到微信（交叉引用）
         for item in all_items:
-            url = item.get("url", "")
-            source = item.get("source", "")
+            url = str(item.get("url", "") or "")
+            source = str(item.get("source", "") or "")
             
             # 直接引用：URL指向微信
             if "mp.weixin.qq.com" in url or "weixin.sogou.com" in url:
@@ -680,7 +696,36 @@ def check_source_diversity(date_str: str) -> CheckResult:
             elif "微信" in source or "公众号" in source:
                 weixin_crossref += 1
         
-        # --- 检查2: 信息源集中度 ---
+        # --- 检查2: 小红书覆盖 (v9.1新增) ---
+        xhs_count = 0
+        for item in all_items:
+            url = item.get("url", "") or ""
+            xhs_url = item.get("xhs_url", "") or ""
+            source = item.get("source", "") or ""
+            
+            # 确保都是字符串类型
+            url = str(url) if url else ""
+            xhs_url = str(xhs_url) if xhs_url else ""
+            source = str(source) if source else ""
+            
+            # 任意一种方式表明有小红书数据源
+            if "xiaohongshu.com" in url or "xiaohongshu.com" in xhs_url:
+                xhs_count += 1
+            elif "小红书" in source:
+                xhs_count += 1
+        
+        # 也检查meta中的xiaohongshu_references字段
+        meta = data.get("meta", {})
+        xhs_refs_in_meta = 0
+        if isinstance(meta, dict):
+            # xiaohongshu_references可能在meta顶层或meta.data_sources里
+            xhs_refs_in_meta = meta.get("xiaohongshu_references", 0) or 0
+            # 如果是dict类型的data_sources，也尝试读取
+            data_sources = meta.get("data_sources", {})
+            if isinstance(data_sources, dict):
+                xhs_refs_in_meta = max(xhs_refs_in_meta, data_sources.get("xiaohongshu_references", 0) or 0)
+        
+        # --- 检查3: 信息源集中度 ---
         from urllib.parse import urlparse
         domain_counts: Dict[str, int] = {}
         for item in all_items:
@@ -697,36 +742,45 @@ def check_source_diversity(date_str: str) -> CheckResult:
                 pass
         
         total = len(all_items)
-        issues = []
+        errors = []   # v9.1: 硬阻断错误
+        warnings = [] # 仅供信息展示
         
-        # 微信覆盖不足：直接引用微信文章 < 2 篇
-        weixin_total = weixin_direct + weixin_crossref
+        # 微信覆盖不足：直接引用微信文章 < 2 篇 → ERROR
         if weixin_direct < 2:
             if weixin_crossref > 0:
-                issues.append(
-                    f"微信公众号直接引用{weixin_direct}条(交叉引用{weixin_crossref}条)，"
-                    f"建议将优质公众号文章作为主要信源而非仅背景参考"
+                errors.append(
+                    f"❌ 微信直引{weixin_direct}条<2(交叉{weixin_crossref}条不计入)，"
+                    f"需搜索并获取微信文章真实链接"
                 )
             else:
-                issues.append(f"微信公众号覆盖为0(要求>=2条直接引用)")
+                errors.append(f"❌ 微信覆盖为0(要求>=2条直接引用)")
         
-        # 信息源集中度
+        # 小红书覆盖不足: 0条 → ERROR (v9.1新增)
+        effective_xhs = max(xhs_count, xhs_refs_in_meta)
+        if effective_xhs == 0:
+            errors.append(f"❌ 小红书覆盖为0(要求>=1条，需执行xiaohongshu search)")
+        
+        # 信息源集中度 > 40% → ERROR
         for domain, count in sorted(domain_counts.items(), key=lambda x: -x[1]):
             ratio = count / total
             if ratio > 0.4:
-                issues.append(f"{domain}占比{ratio:.0%}({count}/{total}条)过高")
+                errors.append(f"❌ {domain}占比{ratio:.0%}({count}/{total}条)>40%，需增加其他来源")
+                break  # 只报最严重的一个
         
-        if issues:
-            detail = "; ".join(issues)
-            return CheckResult("信息源多样性", False, detail, severity="warning")
+        if errors:
+            detail = "; ".join(errors)
+            return CheckResult(
+                "信息源多样性", False, detail
+                # v9.1: 不传severity，默认为error，硬阻断部署
+            )
         
         # 构建通过消息
         domain_summary = ", ".join(f"{d}({c})" for d, c in 
                                    sorted(domain_counts.items(), key=lambda x: -x[1])[:5])
-        weixin_msg = f"微信直引{weixin_direct}+交叉{weixin_crossref}"
+        coverage_msg = f"微信直引{weixin_direct}+交叉{weixin_crossref}, 小红书{effective_xhs}"
         return CheckResult(
             "信息源多样性", True, 
-            f"{weixin_msg}, Top域名: {domain_summary}"
+            f"{coverage_msg}, Top域名: {domain_summary}"
         )
     except Exception as e:
         return CheckResult("信息源多样性", False, f"检查失败: {e}", severity="warning")
