@@ -8,7 +8,7 @@
 ### 方式一：使用 Python HTTP 服务器（推荐）
 
 ```bash
-cd /Users/shenlang/Documents/Codeflicker/AI-Insight
+cd /Users/shenlang/Documents/Codeflicker/个人助理_V1/AI-Insight
 python3 -m http.server 8080
 ```
 
@@ -17,7 +17,7 @@ python3 -m http.server 8080
 ### 方式二：使用 Node.js serve
 
 ```bash
-cd /Users/shenlang/Documents/Codeflicker/AI-Insight
+cd /Users/shenlang/Documents/Codeflicker/个人助理_V1/AI-Insight
 npx serve -p 8080
 ```
 
