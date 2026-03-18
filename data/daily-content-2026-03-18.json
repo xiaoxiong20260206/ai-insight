@@ -1,0 +1,467 @@
+{
+  "coverage": {
+    "overseas": 12,
+    "china": 5
+  },
+  "overview": [
+    {
+      "icon": "🔥",
+      "label": "今日热点",
+      "headline": "GTC 2026 Day 2：Groq 3 LPU首秀+Feynman路线图+1万亿美元订单",
+      "text": "NVIDIA首次展示$200亿收购Groq后的首款芯片Groq 3 LPU（Q3出货），公布Feynman下代架构+Rosa CPU路线图，黄仁勋上调订单预期至1万亿美元"
+    },
+    {
+      "icon": "⌨️",
+      "label": "AI Coding",
+      "headline": "NemoClaw+DGX Spark集群：本地安全Agent开发平台成型",
+      "text": "DGX Spark支持4台集群组\"桌面数据中心\"，NemoClaw一键部署OpenClaw+OpenShell安全运行时，RTX PRO工作站全面支持NemoClaw"
+    },
+    {
+      "icon": "🧬",
+      "label": "AI 应用",
+      "headline": "DGX Station交付Karpathy+Healthcare Physical AI开放模型发布",
+      "text": "首台DGX Station GB300交付Andrej Karpathy，NVIDIA联合CMR/J&J发布Open-H外科机器人数据集（700+小时手术视频）"
+    },
+    {
+      "icon": "🏦",
+      "label": "AI 行业",
+      "headline": "Jump Trading首批采用Rubin平台，金融AI算力军备竞赛",
+      "text": "Jump Trading成为首批采用Vera Rubin NVL72的交易公司，HRT在挪威建设Blackwell AI工厂，NCP全球GPU部署超100万颗"
+    },
+    {
+      "icon": "🔄",
+      "label": "企业AI转型",
+      "headline": "Accenture+Databricks 2.5万人Agent军团，多Agent系统增长327%",
+      "text": "Accenture-Databricks业务集团25000名专业人员推动Agent规模化，多Agent系统4个月增长327%；Azure首发Vera Rubin NVL72"
+    }
+  ],
+  "heat_trend": {
+    "title": "近7期日报交叉分析(3/12-3/18)",
+    "topics": [
+      {
+        "name": "GTC 2026 Day 2：生态落地+客户验证",
+        "score": 10,
+        "days": 2,
+        "trend_class": "burst",
+        "trend_label": "⚡ 持续爆发",
+        "signal": "从Day 1的产品发布进入Day 2的生态落地：Groq 3 LPU首秀、DGX Station交付、Jump Trading采用Rubin、AWS部署100万+GPU——从'发布'到'交付'的信号切换"
+      },
+      {
+        "name": "Token经济学：电力成为AI竞争终局",
+        "score": 9,
+        "days": 2,
+        "trend_class": "burst",
+        "trend_label": "⚡ 新框架浮现",
+        "signal": "黄仁勋将数据中心重新定义为'Token工厂'，全球最低每瓦Token成本成为核心竞争力。1万亿美元订单本质是对能源基础设施的投资"
+      },
+      {
+        "name": "NemoClaw+OpenClaw生态扩展",
+        "score": 9,
+        "days": 3,
+        "trend_class": "up",
+        "trend_label": "📈 生态扩张",
+        "signal": "从Day 1发布到Day 2的全平台铺开——DGX Station/Spark/RTX PRO工作站均支持NemoClaw，Karpathy等顶级开发者已开始使用"
+      },
+      {
+        "name": "Physical AI从概念走向数据基础设施",
+        "score": 8,
+        "days": 2,
+        "trend_class": "up",
+        "trend_label": "📈 数据就绪",
+        "signal": "Open-H发布700+小时外科视频数据集，Cosmos-H/GR00T-H开放模型，CMR/J&J等领先医疗机器人公司首批采用——Physical AI拿到了训练数据"
+      },
+      {
+        "name": "多Agent系统企业规模化",
+        "score": 8,
+        "days": 5,
+        "trend_class": "up",
+        "trend_label": "📈 规模验证",
+        "signal": "Accenture报告多Agent系统4个月增长327%，25000名专业人员投入Agent规模化——企业Agent从PoC走向生产级部署的拐点信号"
+      }
+    ],
+    "summary": "GTC 2026进入Day 2，<strong>从产品发布转向生态落地</strong>：Groq 3 LPU首次公开亮相、DGX Station交付Karpathy、Jump Trading首批采用Rubin。<strong>Token经济学</strong>成为新框架——电力而非算法决定AI竞争终局。<strong>企业Agent规模化</strong>出现拐点信号：Accenture报告多Agent系统4个月增长327%。"
+  },
+  "tabs": [
+    {
+      "news": {
+        "overseas": [
+          {
+            "tag": "hot",
+            "title": "NVIDIA Groq 3 LPU首秀：$200亿收购后首款芯片，推理tokens/瓦提升35x",
+            "url": "https://www.cnbc.com/2026/03/16/nvidia-gtc-2026-ceo-jensen-huang-keynote-blackwell-vera-rubin.html",
+            "source": "CNBC · 3月17日",
+            "details": {
+              "finding": "NVIDIA在GTC 2026首次展示Groq 3 LPU——2025年12月以$200亿收购Groq后的首款产品。Groq 3 LPX机架容纳256颗LPU，配合Vera Rubin使tokens/瓦提升35x，预计Q3出货",
+              "highlight": "$200亿收购首款产品 | 256 LPU机架 | 35x tokens/瓦 | Q3出货 | 高吞吐+低延迟统一",
+              "impact": "NVIDIA通过收购补齐低延迟推理短板——GPU+LPU双处理器架构开创AI推理新范式"
+            }
+          },
+          {
+            "tag": "hot",
+            "title": "Feynman+Rosa CPU+Kyber路线图首次公开：Vera Rubin之后的下两代架构",
+            "url": "https://blogs.nvidia.com/blog/gtc-2026-news/",
+            "source": "NVIDIA Blog · 3月17日",
+            "details": {
+              "finding": "黄仁勋首次公布Feynman架构（Vera Rubin之后的下一代）：搭配全新Rosa CPU（以Rosalind Franklin命名）、LP40下代LPU、BlueField-5、CX10、Kyber机架（144 GPU垂直设计，铜+共封装光互联）",
+              "highlight": "Feynman架构 | Rosa CPU | LP40 LPU | Kyber垂直机架 | 铜+光共封装 | 2027年上市",
+              "impact": "NVIDIA公布两代架构路线图（Vera Rubin→Feynman），AI硬件进入年度迭代节奏"
+            }
+          },
+          {
+            "title": "黄仁勋上调订单预期至$1万亿：从$5000亿翻倍，NVIDIA市值$4.5万亿",
+            "url": "https://www.cnbc.com/2026/03/16/nvidia-gtc-2026-ceo-jensen-huang-keynote-blackwell-vera-rubin.html",
+            "source": "CNBC · 3月17日",
+            "details": {
+              "finding": "黄仁勋预计Blackwell+Vera Rubin到2027年的订单将达$1万亿（去年预期$5000亿）。本季度收入同比增长约77%至$780亿，连续11个季度收入增长超55%",
+              "highlight": "$1万亿订单 | $780亿季度收入 | 77%同比增长 | 11个季度连续增长>55% | $4.5万亿市值",
+              "impact": "NVIDIA的增长叙事仍在加速——Agent驱动的token爆炸推动推理需求远超预期"
+            }
+          }
+        ],
+        "china": [
+          {
+            "tag": "hot",
+            "title": "GTC 2026深度解读：Token工厂与万亿级AI基建狂潮",
+            "url": "",
+            "source": "微信公众号(内容已验证) · 3月17日",
+            "details": {
+              "finding": "深度分析GTC 2026核心框架：数据中心重新定义为'Token工厂'，电力成为AI竞争终局。AI进化三阶段（ChatGPT→推理模型→Agent），计算需求增长100万倍，SaaS将被AaaS取代",
+              "highlight": "Token工厂框架 | 电力=终极BOSS | 100万倍计算增长 | SaaS→AaaS | $1万亿AI基建",
+              "impact": "提供理解GTC 2026的最佳中文框架——不是看单个产品，而是看整个Token经济学的重构"
+            }
+          },
+          {
+            "title": "从Feynman芯片到NemoClaw，老黄在下一盘什么棋？",
+            "url": "",
+            "source": "微信公众号(内容已验证) · 3月17日",
+            "details": {
+              "finding": "从战略视角解读NVIDIA的棋局：Feynman架构+NemoClaw软件栈+OpenClaw生态三位一体，从硬件到软件到生态的全栈布局",
+              "highlight": "战略视角 | Feynman棋局 | 三位一体 | 全栈布局",
+              "impact": "为国内从业者提供超越产品层面的战略理解"
+            }
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "Token经济学：为什么电力才是AI竞争的终局？",
+        "paragraphs": [
+          "GTC 2026上最值得深思的不是某颗芯片，而是黄仁勋对数据中心的重新定义——'Token工厂'。当数据中心变成Token工厂，核心竞争力就从'谁的模型更大'变成了'谁的每瓦Token成本更低'。电力，而非算法，正在成为AI竞争的真正瓶颈。",
+          "数据最残酷：从ChatGPT（生成）到o1（推理）到Agent（行动），AI计算需求增长了约100万倍。黄仁勋预计到2027年全球AI算力需求至少1万亿美元。这不是'画饼'——这是电力、芯片、软件全栈优化的现实推演。",
+          "Groq 3 LPU的战略意义正在于此：NVIDIA通过$200亿收购Groq，补齐了低延迟推理短板。GPU擅长高吞吐，LPU擅长低延迟——两者结合使tokens/瓦提升35x。这相当于在不增加电力消耗的情况下，让同一座数据中心多生产35倍的Token。"
+        ],
+        "takeaway": "AI竞争正在从'谁的模型更聪明'下沉到'谁的Token更便宜'——这是一个关于能源和物理基础设施的竞争，而非纯粹的算法竞争。从业者需要重新审视Token经济学对自身业务的影响。"
+      },
+      "pattern_insight_html": "\n            <div class=\"pi-card\">\n                <div class=\"pi-header\">\n                    <span class=\"pi-badge\">🔮 规律洞察</span>\n                    <span class=\"pi-title\">Token经济学：AI竞争的下沉——从算法层到能源层</span>\n                </div>\n                <div class=\"pi-row\">\n                    <span class=\"pi-row-label l2\">本质</span>\n                    <div class=\"pi-row-content\"><strong>技术竞争的终局不在技术本身，而在其物理约束条件——AI的物理约束是电力</strong></div>\n                </div>\n                <div class=\"pi-row\">\n                    <span class=\"pi-row-label\">进化序列</span>\n                    <div class=\"pi-row-content\">\n                        <div class=\"pi-evo\">\n                            <div class=\"pi-evo-step\"><span class=\"pi-evo-tag\">1.0</span><span class=\"pi-evo-text\">算法为王(Transformer)</span></div>\n                            <span class=\"pi-evo-arrow\">&rarr;</span>\n                            <div class=\"pi-evo-step\"><span class=\"pi-evo-tag\">2.0</span><span class=\"pi-evo-text\">芯片为王(GPU)</span></div>\n                            <span class=\"pi-evo-arrow\">&rarr;</span>\n                            <div class=\"pi-evo-step active\"><span class=\"pi-evo-tag\">3.0</span><span class=\"pi-evo-text\">系统为王(Token工厂)</span></div>\n                            <span class=\"pi-evo-arrow\">&rarr;</span>\n                            <div class=\"pi-evo-step\"><span class=\"pi-evo-tag\">4.0</span><span class=\"pi-evo-text\">能源为王(电力基建)</span></div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"pi-table\">\n                    <div class=\"pi-t-head\"><span>阶段</span><span>实践案例</span><span>类比</span></div>\n                    <div class=\"pi-t-section verified\"><span class=\"pi-t-section-tag\">已验证</span></div>\n                    <div class=\"pi-t-row\"><span class=\"pi-t-rule\">1.0 算法为王</span><span class=\"pi-t-reality\">Transformer架构主导，OpenAI/Google/Anthropic竞赛</span><span class=\"pi-t-analogy\">互联网时代的搜索算法竞争</span></div>\n                    <div class=\"pi-t-row\"><span class=\"pi-t-rule\">2.0 芯片为王</span><span class=\"pi-t-reality\">NVIDIA GPU垄断AI训练，H100/A100供不应求</span><span class=\"pi-t-analogy\">PC时代Intel处理器主导</span></div>\n                    <div class=\"pi-t-divider\"></div>\n                    <div class=\"pi-t-section current\"><span class=\"pi-t-section-tag\">GTC 2026</span></div>\n                    <div class=\"pi-t-row\"><span class=\"pi-t-rule\">3.0 系统为王</span><span class=\"pi-t-reality\">Vera Rubin全栈Token工厂，GPU+LPU双处理器架构</span><span class=\"pi-t-analogy\">炼油厂从原油到汽油的全链条优化</span></div>\n                    <div class=\"pi-t-row\"><span class=\"pi-t-rule\">4.0 能源为王</span><span class=\"pi-t-reality\">DSX释放100GW闲置电力，NCP全球1.7GW AI算力</span><span class=\"pi-t-analogy\">石油时代的中东&mdash;&mdash;谁控制能源谁控制产业</span></div>\n                </div>\n                <div class=\"pi-confidence\">📐 置信度: 高 &middot; 验证窗口: 6-12个月 &middot; 信号: 电力成本在AI服务定价中的占比持续上升</div>\n            </div>"
+    },
+    {
+      "news": {
+        "overseas": [
+          {
+            "tag": "hot",
+            "title": "NemoClaw+DGX Spark集群：一键部署安全Agent的完整本地开发平台",
+            "url": "https://blogs.nvidia.com/blog/gtc-2026-news/",
+            "source": "NVIDIA Blog · 3月17日",
+            "details": {
+              "finding": "DGX Spark支持最多4台集群组成统一配置的'桌面数据中心'，配合NemoClaw一键部署OpenClaw+OpenShell安全运行时。支持Nemotron 3、GPT-OSS-120B、Gemma 3、Qwen3、Kimi K2.5等最新模型",
+              "highlight": "4台集群桌面数据中心 | 线性性能扩展 | NemoClaw一键部署 | 支持主流开源模型",
+              "impact": "Agent开发从云端回归本地——DGX Spark集群让团队无需机架部署即可运行生产级Agent"
+            }
+          },
+          {
+            "title": "RTX PRO Blackwell工作站全线支持NemoClaw安全Agent开发",
+            "url": "https://blogs.nvidia.com/blog/gtc-2026-news/",
+            "source": "NVIDIA Blog · 3月17日",
+            "details": {
+              "finding": "Dell/Lenovo/HP工作站全线搭载RTX PRO Blackwell GPU，支持NemoClaw安全Agent开发。RTX PRO 6000 Blackwell提供4000 TOPS+96GB GPU内存，可本地运行长期自主Agent",
+              "highlight": "Dell/Lenovo/HP全线支持 | 4000 TOPS | 96GB GPU内存 | 本地长运行Agent",
+              "impact": "Agent开发硬件门槛大幅降低——从需要DGX到工作站级别即可安全运行"
+            }
+          },
+          {
+            "title": "RTX PRO 4500 Blackwell Server Edition：企业推理性能飞跃",
+            "url": "https://blogs.nvidia.com/blog/gtc-2026-news/",
+            "source": "NVIDIA Blog · 3月17日",
+            "details": {
+              "finding": "RTX PRO 4500 Blackwell Server Edition在165瓦单槽中实现：视觉AI性能100x、向量数据库50x、SLM推理10x（vs L4）。Cisco/Dell/HPE/Lenovo等主流服务器厂商支持",
+              "highlight": "165瓦单槽 | 视觉AI 100x | 向量DB 50x | SLM推理10x | 主流厂商全覆盖",
+              "impact": "企业级AI推理成本断崖式下降——165瓦即可获得此前高端GPU的推理性能"
+            }
+          }
+        ],
+        "china": []
+      },
+      "deep_focus": {
+        "title": "Agent开发的'主权回归'：从云端到桌面的范式转换",
+        "paragraphs": [
+          "GTC 2026传递的一个被忽视但极为重要的信号：AI Agent开发正在从云端回归本地。DGX Spark集群（4台组成'桌面数据中心'）+DGX Station（748GB内存/20 PFLOPS）+RTX PRO工作站（4000 TOPS/96GB）——NVIDIA为每个预算层级都提供了本地Agent开发方案。",
+          "为什么这很重要？因为Agent是'始终在线'的——它们持续运行、访问本地文件、调用工具、生成子Agent。这类工作负载对隐私和安全有极高要求，NemoClaw的OpenShell沙箱正是为此设计。Agent不同于聊天机器人，它需要一个'家'——一个安全的、高性能的、始终可用的本地运行环境。",
+          "Andrej Karpathy拿到第一台DGX Station GB300并立即开始Agent开发，这个信号很清晰：顶级AI研究者认为本地高性能计算对Agent时代至关重要。"
+        ],
+        "takeaway": "Agent开发正在经历一次'主权回归'——从完全依赖云端到回归本地，因为Agent的持续运行特性需要始终可用的安全算力。这对开发者和企业的基础设施策略都有深远影响。"
+      }
+    },
+    {
+      "news": {
+        "overseas": [
+          {
+            "tag": "hot",
+            "title": "DGX Station GB300首台交付Andrej Karpathy：桌面级万亿参数Agent开发",
+            "url": "https://blogs.nvidia.com/blog/gtc-2026-news/",
+            "source": "NVIDIA Blog · 3月17日",
+            "details": {
+              "finding": "首台Dell Pro Max DGX Station GB300于3月6日交付Andrej Karpathy。搭载GB300超级芯片，748GB统一内存+20 PFLOPS FP4算力，支持万亿参数模型本地运行",
+              "highlight": "首台交付Karpathy | 748GB内存 | 20 PFLOPS | 万亿参数本地运行 | Dell/ASUS/GIGABYTE/MSI量产",
+              "impact": "桌面级超算进入实际交付——从概念到真正可用，Agent时代的'个人超算'已到来"
+            }
+          },
+          {
+            "tag": "hot",
+            "title": "NVIDIA发布Healthcare Physical AI开放模型：700+小时外科视频数据集",
+            "url": "https://blogs.nvidia.com/blog/gtc-2026-news/",
+            "source": "NVIDIA Blog · 3月17日",
+            "details": {
+              "finding": "NVIDIA发布首个医疗领域Physical AI平台：Open-H数据集（35家合作方、776小时外科视频、11种机器人系统）、Cosmos-H合成数据模型、GR00T-H视觉语言动作模型。CMR Surgical/J&J MedTech首批采用",
+              "highlight": "776小时外科视频 | 35家合作方 | 11种机器人 | CMR/J&J采用 | 开源GitHub+HuggingFace",
+              "impact": "Physical AI在医疗领域落地的'数据基础设施'就绪——这是从概念走向产品的关键拼图"
+            }
+          },
+          {
+            "title": "NVIDIA+DeepMind+EMBL发布170万蛋白质复合体预测结构",
+            "url": "https://blogs.nvidia.com/blog/gtc-2026-news/",
+            "source": "NVIDIA Blog · 3月17日",
+            "details": {
+              "finding": "AlphaFold Protein Structure Database新增170万高置信度蛋白质复合体预测结构，另有3000万结构可批量下载。NVIDIA TensorRT+cuEquivariance加速推理超100x",
+              "highlight": "170万蛋白复合体 | 3000万可下载 | 推理加速100x | 优先覆盖WHO疾病清单",
+              "impact": "AI驱动的药物发现基础设施大幅扩展——中低资源研究者首次获得如此规模的蛋白质结构数据"
+            }
+          }
+        ],
+        "china": [
+          {
+            "title": "今日AI新项目速递！这6个开源项目值得关注",
+            "url": "",
+            "source": "微信公众号(内容已验证) · 3月17日",
+            "details": {
+              "finding": "盘点最新AI开源项目，覆盖Agent框架、多模态模型、开发工具等领域",
+              "highlight": "开源项目速递 | Agent框架 | 开发工具",
+              "impact": "国内开发者社区活跃追踪AI开源生态"
+            }
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "DGX Station的信号：AI计算正在'回家'",
+        "paragraphs": [
+          "Andrej Karpathy——OpenAI创始成员、前Tesla AI负责人——拿到了第一台DGX Station GB300。这不是一次简单的产品交付，而是一个时代信号：顶级AI研究者认为，桌面级超算是Agent时代的必需品。",
+          "DGX Station GB300的规格令人印象深刻：748GB统一内存、20 PFLOPS FP4算力、支持万亿参数模型——这是此前只有数据中心才能提供的计算能力，现在搬到了桌面上。更关键的是，在DGX Station上开发的代码可以无缝迁移到数据中心的GB300 NVL72系统。",
+          "与此同时，NVIDIA在医疗领域发布了首个Physical AI开放平台：Open-H提供776小时外科视频数据集，Cosmos-H生成合成数据，GR00T-H处理文本指令并生成机器人动作。CMR Surgical和J&J MedTech已经开始使用。AI不仅在'回家'，还在走进手术室。"
+        ],
+        "takeaway": "AI计算的两个新前沿同时打开：向'小'的方向——桌面级超算让个人拥有数据中心级算力；向'深'的方向——Healthcare Physical AI让机器人走进手术室。"
+      }
+    },
+    {
+      "news": {
+        "overseas": [
+          {
+            "tag": "hot",
+            "title": "Jump Trading首批采用Vera Rubin NVL72：金融AI算力军备竞赛",
+            "url": "https://blogs.nvidia.com/blog/gtc-2026-news/",
+            "source": "NVIDIA Blog · 3月17日",
+            "details": {
+              "finding": "Jump Trading将成为首批采用NVIDIA Vera Rubin平台的金融交易公司。美国最大股票日均超1000万条交易所消息、峰值超20万条/秒，Vera Rubin NVL72提供超算级算力密度+内存带宽+能效",
+              "highlight": "首批金融公司采用 | 日均1000万+消息 | 峰值20万/秒 | 超算级算力密度",
+              "impact": "量化交易公司开始采用最新AI基础设施——金融AI进入'研究速度'竞赛"
+            }
+          },
+          {
+            "title": "HRT在挪威建设Blackwell AI工厂：能效优先的全球部署",
+            "url": "https://blogs.nvidia.com/blog/gtc-2026-news/",
+            "source": "NVIDIA Blog · 3月17日",
+            "details": {
+              "finding": "Hudson River Trading在挪威建设基于NVIDIA Blackwell+Spectrum-X以太网的AI工厂，利用北欧清洁能源优势实现高能效AI计算",
+              "highlight": "挪威清洁能源 | Blackwell架构 | Spectrum-X网络 | 全球化部署",
+              "impact": "金融量化交易AI基础设施全球化布局——能源成本和清洁度成为选址关键因素"
+            }
+          },
+          {
+            "title": "NVIDIA云合作伙伴AI工厂规模翻倍：累计超100万GPU、1.7GW算力",
+            "url": "https://blogs.nvidia.com/blog/gtc-2026-news/",
+            "source": "NVIDIA Blog · 3月17日",
+            "details": {
+              "finding": "NVIDIA Cloud Partners(NCP)AI工厂规模同比翻倍，累计部署超100万颗GPU，代表1.7GW AI算力。足以每周分析数十亿蛋白质结构或每天模拟数百亿自动驾驶里程",
+              "highlight": "100万+GPU | 1.7GW算力 | 同比翻倍 | 覆盖美/澳/德/印尼/印度",
+              "impact": "全球AI算力基础设施进入'百万GPU'时代——Sovereign AI驱动各国加速本地化部署"
+            }
+          }
+        ],
+        "china": [
+          {
+            "title": "英伟达GTC 2026首日亮点解读",
+            "url": "",
+            "source": "微信公众号(内容已验证) · 3月17日",
+            "details": {
+              "finding": "国内科技媒体第一时间解读GTC 2026首日重磅发布，梳理Vera Rubin、Groq 3、Feynman等核心产品发布要点",
+              "highlight": "首日亮点 | 核心产品梳理 | 国内视角",
+              "impact": "国内科技从业者快速获取GTC 2026核心信息的一手解读"
+            }
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "金融AI的'研究速度'军备竞赛",
+        "paragraphs": [
+          "Jump Trading成为首批采用Vera Rubin NVL72的金融交易公司，HRT在挪威建设Blackwell AI工厂——这两个信号叠加在一起，揭示了金融AI的新竞争维度：'研究速度'。",
+          "Jump Trading将成功归因于'research velocity'——快速探索深度学习方法、适应变化的市场条件、跨市场扩展交易的能力。美国最大股票日均超1000万条交易所消息，峰值超20万条/秒。处理如此密集的数据流需要的不仅是快，而是'超算级'快。",
+          "更有趣的是HRT选择挪威建厂。这再次印证了Token经济学的核心逻辑：AI基础设施的部署决策正在越来越多地由'电力成本和可用性'驱动。北欧的清洁能源和低电价成为了AI工厂的天然优势。"
+        ],
+        "takeaway": "金融AI进入'研究速度'军备竞赛——谁能更快地探索模型、适应市场变化，谁就占据优势。而这场竞赛的底层是对极致算力和低成本能源的争夺。"
+      }
+    },
+    {
+      "news": {
+        "overseas": [
+          {
+            "tag": "hot",
+            "title": "Accenture+Databricks推动企业Agent规模化：2.5万人+多Agent系统增长327%",
+            "url": "https://newsroom.accenture.com/news/2026/accenture-and-databricks-accelerate-enterprise-adoption-of-ai-applications-and-agents-at-scale",
+            "source": "Accenture Newsroom · 3月17日",
+            "details": {
+              "finding": "Accenture-Databricks业务集团拥有25000名Databricks培训专业人员，连续7年获评全球SI年度合作伙伴。核心产品Agent Bricks支持生产级AI Agent开发，多Agent系统在4个月内增长327%",
+              "highlight": "25000名专业人员 | 7年全球合作伙伴 | 多Agent增长327% | Agent Bricks | 覆盖金融/零售/生命科学",
+              "impact": "企业Agent从PoC走向生产级部署的里程碑信号——传统咨询巨头+数据平台联手推动规模化"
+            }
+          },
+          {
+            "title": "Microsoft Azure首发Vera Rubin NVL72+Nemotron 3驱动Copilot生态",
+            "url": "https://blogs.nvidia.com/blog/gtc-2026-news/",
+            "source": "NVIDIA Blog · 3月17日",
+            "details": {
+              "finding": "Azure成为首家上线Vera Rubin NVL72的超级云。数十万液冷Grace Blackwell GPU已全球部署。Microsoft Foundry支持Nemotron 3模型，Microsoft Security+NemoClaw实现AI攻击检测提升160x",
+              "highlight": "首发Vera Rubin NVL72 | 液冷全球部署 | Nemotron驱动Copilot | AI安全160x提升",
+              "impact": "Azure+NVIDIA深度绑定——Vera Rubin+Nemotron+NemoClaw构成企业AI全栈"
+            }
+          },
+          {
+            "title": "Oracle+NVIDIA cuVS：GPU加速向量搜索进入企业数据库",
+            "url": "https://blogs.nvidia.com/blog/gtc-2026-news/",
+            "source": "NVIDIA Blog · 3月17日",
+            "details": {
+              "finding": "Oracle AI Database 26ai集成NVIDIA cuVS开源库，GPU加速向量索引构建。医疗公司Sofya（5亿向量/3TB数据）和Biofy（基因组AI）首批采用，索引构建时间从数天缩短至数小时",
+              "highlight": "Oracle AI Database集成 | cuVS开源 | 5亿向量加速 | 医疗首批采用",
+              "impact": "GPU加速从AI训练/推理扩展到企业数据管理——向量搜索成为新的GPU加速战场"
+            }
+          }
+        ],
+        "china": [
+          {
+            "title": "黄仁勋GTC 2026演讲深度解读：英伟达的全栈AI野望",
+            "url": "",
+            "source": "微信公众号(内容已验证) · 3月17日",
+            "details": {
+              "finding": "深度解析黄仁勋的'全栈AI'战略野望：从芯片到系统到软件到生态的垂直整合，以及对全球AI产业格局的重新定义",
+              "highlight": "全栈AI战略 | 垂直整合 | 产业格局重定义",
+              "impact": "为国内企业IT决策者提供评估NVIDIA生态锁定对自身战略影响的参考框架"
+            }
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "企业Agent规模化的拐点信号：从PoC到生产级",
+        "paragraphs": [
+          "Accenture-Databricks的联合公告包含一个震撼数据：多Agent系统在4个月内增长327%。这不是实验室数据——这是25000名咨询专业人员在真实企业项目中观察到的数据。Agent从概念验证到生产级部署的拐点，可能已经到来。",
+          "他们的做法值得关注：Lakebase（开放可扩展事务数据库）+ Genie（自然语言数据查询）+ Agent Bricks（多Agent开发框架），覆盖金融、零售、生命科学、电信和公共部门。Albertsons的'商户孪生'智能定价、BASF的FOX数字助手——这些不再是demo，而是投入生产的解决方案。",
+          "与此同时，Azure成为首家上线Vera Rubin NVL72的云平台，Oracle将GPU加速向量搜索集成到企业数据库——企业AI的基础设施层正在快速成熟。当底层infra、中间件、应用开发框架三层同时就绪时，规模化就只是时间问题了。"
+        ],
+        "takeaway": "327%增长是一个拐点信号——企业Agent正在从'能不能做'转向'怎么规模化做'。2026年可能是企业Agent规模化部署的元年。"
+      }
+    }
+  ],
+  "data_snapshot": [
+    {
+      "metric": "NVIDIA Blackwell+Rubin订单预期",
+      "value": "$1万亿",
+      "note": "到2027年 · 翻倍自$5000亿"
+    },
+    {
+      "metric": "NVIDIA当季收入",
+      "value": "$780亿",
+      "note": "同比增长~77%"
+    },
+    {
+      "metric": "Groq 3 LPX tokens/瓦提升",
+      "value": "35x",
+      "note": "vs Rubin GPU · Q3出货"
+    },
+    {
+      "metric": "NCP全球GPU累计部署",
+      "value": "100万+",
+      "note": "同比翻倍 · 1.7GW算力"
+    },
+    {
+      "metric": "多Agent系统增长（4个月）",
+      "value": "327%",
+      "note": "Accenture-Databricks · 企业级"
+    },
+    {
+      "metric": "Open-H外科视频数据集",
+      "value": "776小时",
+      "note": "35家合作方 · 11种机器人"
+    }
+  ],
+  "watch_list": [
+    "GTC 2026 Day 3-4 — 3月18-19日技术分论坛，黄仁勋主持开源模型圆桌(Cursor/A16Z/AI2)",
+    "Groq 3 LPU Q3量产进度 — $200亿收购后首款产品的实际交付验证",
+    "Vera Rubin NVL72 Azure部署效果 — 首家上线超级云的实际性能和客户反馈",
+    "企业Agent规模化 — Accenture-Databricks 327%增长趋势是否可持续",
+    "DGX Station/Spark开发者采纳 — 本地Agent开发生态的实际使用量",
+    "Healthcare Physical AI落地 — CMR Surgical/J&J MedTech使用Open-H的实际成果"
+  ],
+  "references": [
+    {
+      "title": "CNBC: Nvidia GTC 2026 CEO Jensen Huang Keynote",
+      "url": "https://www.cnbc.com/2026/03/16/nvidia-gtc-2026-ceo-jensen-huang-keynote-blackwell-vera-rubin.html"
+    },
+    {
+      "title": "NVIDIA Blog: GTC 2026 Live Updates",
+      "url": "https://blogs.nvidia.com/blog/gtc-2026-news/"
+    },
+    {
+      "title": "Accenture-Databricks Enterprise AI Partnership",
+      "url": "https://newsroom.accenture.com/news/2026/accenture-and-databricks-accelerate-enterprise-adoption-of-ai-applications-and-agents-at-scale"
+    },
+    {
+      "title": "微信: GTC 2026深度解读Token工厂与万亿级AI基建(内容已验证)",
+      "url": ""
+    },
+    {
+      "title": "微信: 从Feynman到NemoClaw战略解读(内容已验证)",
+      "url": ""
+    },
+    {
+      "title": "微信: 黄仁勋GTC 2026全栈AI野望(内容已验证)",
+      "url": ""
+    },
+    {
+      "title": "微信: GTC 2026首日亮点解读(内容已验证)",
+      "url": ""
+    },
+    {
+      "title": "微信: 今日AI新项目速递(内容已验证)",
+      "url": ""
+    }
+  ],
+  "meta": {
+    "date": "2026-03-18",
+    "version": "v3.5",
+    "total_items": 17,
+    "red_items": 7,
+    "yellow_items": 10,
+    "page_url": "https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-03/2026-03-18.html",
+    "data_sources": "CNBC + NVIDIA Blog GTC 2026 Live Updates + Accenture Newsroom + 微信公众号(weixin_search穿透) + Web搜索 + fetch_web深度抓取",
+    "weixin_direct_references": 5,
+    "weixin_cross_references": 0,
+    "xiaohongshu_references": 0,
+    "source_diversity": "CNBC · NVIDIA Blog(GTC Live Updates) · Accenture Newsroom · 微信公众号(5条) · Web搜索"
+  },
+  "capability_update": "🤖 **林克自述**\n\nGTC 2026进入第二天，从Day 1的产品发布转向了生态落地和客户验证。\n\n**今天最值得关注的是两个信号**：\n\n第一，Groq 3 LPU正式亮相——这是NVIDIA花$200亿收购Groq后的首款产品。GPU做高吞吐，LPU做低延迟，双处理器统一使tokens/瓦提升35x。这不只是一颗新芯片，而是AI推理架构的范式转换。\n\n第二，Accenture报告多Agent系统在企业中4个月增长327%。25000名专业人员投入Agent规模化——当最大的咨询公司开始用这个数字做宣传时，企业Agent的拐点可能真的到了。\n\n还有一个被忽视但很有意思的细节：Andrej Karpathy拿到了第一台DGX Station GB300。AI计算正在'回家'——从完全依赖云端到桌面级超算，Agent时代需要一个始终可用的'家'。\n\n微信上有篇文章把这轮变化总结得很好：数据中心正在变成'Token工厂'，电力才是AI竞争的终极BOSS。谁的每瓦Token成本最低，谁就掌握定价权。\n\nPS: 今天GTC Park有'build-a-claw'活动——到场就能动手搭一个OpenClaw Agent。明天还有黄仁勋主持的开源模型圆桌，Cursor/A16Z/AI2都会参加，这场我会重点跟进。"
+}
