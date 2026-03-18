@@ -109,13 +109,13 @@
             <div class="header-meta">
                 <span>📅 2026年3月18日</span>
                 <span>🏢 阿里巴巴·钉钉</span>
-                <span>🔍 研究者: 林克</span>
+                <span>🔍 研究者: AI洞察</span>
             </div>
         </header>
 
         <nav class="tab-nav">
             <button class="tab-btn active" onclick="switchTab('info')">🐵 悟空的前世今生</button>
-            <button class="tab-btn" onclick="switchTab('insight')">🔮 林克的深度洞察</button>
+            <button class="tab-btn" onclick="switchTab('insight')">🔮 AI洞察的深度洞察</button>
         </nav>
 
         <!-- ==================== Tab 1: 前世今生 ==================== -->
@@ -139,59 +139,162 @@
             </div>
 
             <!-- 悟空四大核心能力 -->
-            <h2 class="section-header">✨ 悟空的独特价值</h2>
-            <p style="margin-bottom: 16px; color: var(--color-text-secondary);">悟空用四大核心能力重新定义企业级AI助手——不是聊天机器人，是真正能"动手做事"的数字员工。</p>
+            <!-- 🎬 产品核心能力展示 - 独立章节 -->
+            <h2 class="section-header">🎬 产品核心能力展示</h2>
+            <p style="margin-bottom: 20px; color: var(--color-text-secondary);">以下内容直接来自<a href="https://www.dingtalk.com/wukong" target="_blank" style="color: var(--color-primary); font-weight: 600;">钉钉悟空官网</a>，完整展示产品的四大核心能力和视觉体验。</p>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px;">
-                <!-- 能力1: 身外化身 -->
-                <div style="background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%); border: 1px solid rgba(234,88,12,0.2); border-radius: 14px; padding: 24px; position: relative; overflow: hidden;">
-                    <div style="position: absolute; top: 12px; right: 16px; font-size: 32px; opacity: 0.15;">🎭</div>
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
-                        <span style="font-size: 24px;">🎭</span>
-                        <span style="font-size: 16px; font-weight: 700; color: #EA580C;">身外化身</span>
+            <!-- 产品主视觉 -->
+            <div class="card" style="padding: 0; overflow: hidden; margin-bottom: 24px;">
+                <div style="position: relative;">
+                    <img src="https://gw.alicdn.com/imgextra/i3/O1CN01rjskoo1TqMkw8ZIgt_!!6000000002433-2-tps-3024-1088.png" alt="悟空产品主视觉" style="width: 100%; height: auto; display: block;">
+                    <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.7)); padding: 24px;">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <img src="https://gw.alicdn.com/imgextra/i2/O1CN01zFejns1fV5kQfQuXD_!!6000000004011-2-tps-300-300.png" alt="悟空Logo" style="width: 48px; height: 48px; border-radius: 12px;">
+                            <div>
+                                <div style="color: #fff; font-size: 20px; font-weight: 700;">悟空</div>
+                                <div style="color: rgba(255,255,255,0.8); font-size: 13px;">全球首个企业级AI原生工作平台</div>
+                            </div>
+                        </div>
                     </div>
-                    <div style="font-size: 15px; font-weight: 600; color: #1C1917; margin-bottom: 8px; line-height: 1.4;">从"对话式AI"到"行动式AI"</div>
-                    <p style="font-size: 13px; color: #57534E; line-height: 1.6; margin: 0;">传统AI助手只能回答问题、生成文本。悟空更进一步——它能<strong>直接操作你的电脑完成任务</strong>。不是告诉你怎么做，而是直接帮你做。</p>
+                </div>
+            </div>
+            
+            <!-- 四大核心能力详细展示 -->
+            <div style="display: flex; flex-direction: column; gap: 32px; margin-bottom: 32px;">
+                
+                <!-- 能力1: 身外化身 -->
+                <div class="card" style="padding: 0; overflow: hidden;">
+                    <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 0;" class="capability-card">
+                        <div style="padding: 32px; background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%); display: flex; flex-direction: column; justify-content: center;">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                                <img src="https://gw.alicdn.com/imgextra/i3/O1CN01yrx2xL1OAABEmDLPz_!!6000000001664-2-tps-246-246.png" alt="身外化身图标" style="width: 56px; height: 56px;">
+                                <div>
+                                    <div style="font-size: 11px; color: #EA580C; font-weight: 600; letter-spacing: 1px;">核心能力 01</div>
+                                    <div style="font-size: 22px; font-weight: 700; color: #1C1917;">身外化身</div>
+                                </div>
+                            </div>
+                            <h3 style="font-size: 18px; font-weight: 700; color: #1C1917; margin-bottom: 12px; line-height: 1.4;">从"对话式AI"到"行动式AI"</h3>
+                            <p style="font-size: 14px; color: #57534E; line-height: 1.8; margin: 0;">传统AI助手只能回答问题、生成文本。悟空更进一步——它能<strong style="color: #EA580C;">直接操作你的电脑完成任务</strong>。不是告诉你怎么做，而是直接帮你做。</p>
+                            <div style="margin-top: 16px; padding: 12px; background: rgba(234,88,12,0.1); border-radius: 8px;">
+                                <div style="font-size: 12px; color: #EA580C; font-weight: 600;">✨ 核心价值</div>
+                                <div style="font-size: 13px; color: #57534E; margin-top: 4px;">打开浏览器、填写表单、上传文件、发送邮件——这些操作都可以由悟空直接执行</div>
+                            </div>
+                        </div>
+                        <div style="background: #1C1917; position: relative; min-height: 300px; overflow: hidden;">
+                            <img src="https://gw.alicdn.com/imgextra/i4/O1CN01jJge2K1bKJyFE42KN_!!6000000003446-2-tps-3087-2280.png" alt="身外化身演示" style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
+                        </div>
+                    </div>
                 </div>
                 
                 <!-- 能力2: 如意万法 -->
-                <div style="background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%); border: 1px solid rgba(34,197,94,0.2); border-radius: 14px; padding: 24px; position: relative; overflow: hidden;">
-                    <div style="position: absolute; top: 12px; right: 16px; font-size: 32px; opacity: 0.15;">🎯</div>
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
-                        <span style="font-size: 24px;">🎯</span>
-                        <span style="font-size: 16px; font-weight: 700; color: #16A34A;">如意万法</span>
+                <div class="card" style="padding: 0; overflow: hidden;">
+                    <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 0;" class="capability-card">
+                        <div style="background: #1C1917; position: relative; min-height: 300px; overflow: hidden;">
+                            <img src="https://gw.alicdn.com/imgextra/i1/O1CN01poLpqA228PIGQnESE_!!6000000007075-2-tps-3087-2280.png" alt="如意万法演示" style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
+                        </div>
+                        <div style="padding: 32px; background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%); display: flex; flex-direction: column; justify-content: center;">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                                <img src="https://gw.alicdn.com/imgextra/i1/O1CN01Avdfgi1KGnSGnXAkE_!!6000000001137-2-tps-246-246.png" alt="如意万法图标" style="width: 56px; height: 56px;">
+                                <div>
+                                    <div style="font-size: 11px; color: #16A34A; font-weight: 600; letter-spacing: 1px;">核心能力 02</div>
+                                    <div style="font-size: 22px; font-weight: 700; color: #1C1917;">如意万法</div>
+                                </div>
+                            </div>
+                            <h3 style="font-size: 18px; font-weight: 700; color: #1C1917; margin-bottom: 12px; line-height: 1.4;">技能生态，能力无限扩展</h3>
+                            <p style="font-size: 14px; color: #57534E; line-height: 1.8; margin: 0;">悟空的技能市场持续丰富，覆盖<strong style="color: #16A34A;">内容创作、电商运营、数据分析、法务财务</strong>等多个领域，并支持用户自己添加Skill。</p>
+                            <div style="margin-top: 16px; padding: 12px; background: rgba(22,163,74,0.1); border-radius: 8px;">
+                                <div style="font-size: 12px; color: #16A34A; font-weight: 600;">✨ 核心价值</div>
+                                <div style="font-size: 13px; color: #57534E; margin-top: 4px;">技能可以像App一样安装、组合，甚至自己开发，实现"能力的乐高"</div>
+                            </div>
+                        </div>
                     </div>
-                    <div style="font-size: 15px; font-weight: 600; color: #1C1917; margin-bottom: 8px; line-height: 1.4;">技能生态，能力无限扩展</div>
-                    <p style="font-size: 13px; color: #57534E; line-height: 1.6; margin: 0;">悟空的技能市场持续丰富，覆盖<strong>内容创作、电商运营、数据分析、法务财务</strong>等多个领域，并支持用户自己添加Skill。</p>
                 </div>
                 
                 <!-- 能力3: 千里传音 -->
-                <div style="background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); border: 1px solid rgba(59,130,246,0.2); border-radius: 14px; padding: 24px; position: relative; overflow: hidden;">
-                    <div style="position: absolute; top: 12px; right: 16px; font-size: 32px; opacity: 0.15;">📱</div>
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
-                        <span style="font-size: 24px;">📱</span>
-                        <span style="font-size: 16px; font-weight: 700; color: #2563EB;">千里传音</span>
+                <div class="card" style="padding: 0; overflow: hidden;">
+                    <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 0;" class="capability-card">
+                        <div style="padding: 32px; background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); display: flex; flex-direction: column; justify-content: center;">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                                <img src="https://gw.alicdn.com/imgextra/i4/O1CN01tsQwB71MOF7rNNMs0_!!6000000001424-2-tps-246-246.png" alt="千里传音图标" style="width: 56px; height: 56px;">
+                                <div>
+                                    <div style="font-size: 11px; color: #2563EB; font-weight: 600; letter-spacing: 1px;">核心能力 03</div>
+                                    <div style="font-size: 22px; font-weight: 700; color: #1C1917;">千里传音</div>
+                                </div>
+                            </div>
+                            <h3 style="font-size: 18px; font-weight: 700; color: #1C1917; margin-bottom: 12px; line-height: 1.4;">钉钉深度集成，随时随地掌控</h3>
+                            <p style="font-size: 14px; color: #57534E; line-height: 1.8; margin: 0;">通过钉钉IM可以<strong style="color: #2563EB;">随时发起任务、接收进度通知、查看执行结果</strong>。即使电脑离线，任务状态也会自动同步到手机端。</p>
+                            <div style="margin-top: 16px; padding: 12px; background: rgba(37,99,235,0.1); border-radius: 8px;">
+                                <div style="font-size: 12px; color: #2563EB; font-weight: 600;">✨ 核心价值</div>
+                                <div style="font-size: 13px; color: #57534E; margin-top: 4px;">开会时手机下达任务，悟空在电脑上执行，完成后手机收到通知</div>
+                            </div>
+                        </div>
+                        <div style="background: #1C1917; position: relative; min-height: 300px; overflow: hidden;">
+                            <img src="https://gw.alicdn.com/imgextra/i4/O1CN01BjCNYw1lpbAzLKBpz_!!6000000004868-2-tps-3087-2280.png" alt="千里传音演示" style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
+                        </div>
                     </div>
-                    <div style="font-size: 15px; font-weight: 600; color: #1C1917; margin-bottom: 8px; line-height: 1.4;">钉钉深度集成，随时随地掌控</div>
-                    <p style="font-size: 13px; color: #57534E; line-height: 1.6; margin: 0;">通过钉钉IM可以<strong>随时发起任务、接收进度通知、查看执行结果</strong>。即使电脑离线，任务状态也会自动同步到手机端。</p>
                 </div>
                 
                 <!-- 能力4: 灵根共长 -->
-                <div style="background: linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%); border: 1px solid rgba(139,92,246,0.2); border-radius: 14px; padding: 24px; position: relative; overflow: hidden;">
-                    <div style="position: absolute; top: 12px; right: 16px; font-size: 32px; opacity: 0.15;">🧠</div>
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
-                        <span style="font-size: 24px;">🧠</span>
-                        <span style="font-size: 16px; font-weight: 700; color: #7C3AED;">灵根共长</span>
+                <div class="card" style="padding: 0; overflow: hidden;">
+                    <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 0;" class="capability-card">
+                        <div style="background: #1C1917; position: relative; min-height: 300px; overflow: hidden;">
+                            <img src="https://gw.alicdn.com/imgextra/i3/O1CN01Zg6WB71S0K8TIpUd8_!!6000000002184-2-tps-3087-2280.png" alt="灵根共长演示" style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
+                        </div>
+                        <div style="padding: 32px; background: linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%); display: flex; flex-direction: column; justify-content: center;">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                                <img src="https://gw.alicdn.com/imgextra/i1/O1CN01CqakKr24v4btoXxW9_!!6000000007452-2-tps-246-246.png" alt="灵根共长图标" style="width: 56px; height: 56px;">
+                                <div>
+                                    <div style="font-size: 11px; color: #7C3AED; font-weight: 600; letter-spacing: 1px;">核心能力 04</div>
+                                    <div style="font-size: 22px; font-weight: 700; color: #1C1917;">灵根共长</div>
+                                </div>
+                            </div>
+                            <h3 style="font-size: 18px; font-weight: 700; color: #1C1917; margin-bottom: 12px; line-height: 1.4;">长期记忆，越用越聪明</h3>
+                            <p style="font-size: 14px; color: #57534E; line-height: 1.8; margin: 0;">记忆你的上下文，通过你和悟空的沟通，帮助悟空<strong style="color: #7C3AED;">持续成长，越来越了解你</strong>。你的偏好、习惯、工作方式都会被学习。</p>
+                            <div style="margin-top: 16px; padding: 12px; background: rgba(124,58,237,0.1); border-radius: 8px;">
+                                <div style="font-size: 12px; color: #7C3AED; font-weight: 600;">✨ 核心价值</div>
+                                <div style="font-size: 13px; color: #57534E; margin-top: 4px;">第一次用需要详细说明，用多了悟空自己就知道你的风格和习惯</div>
+                            </div>
+                        </div>
                     </div>
-                    <div style="font-size: 15px; font-weight: 600; color: #1C1917; margin-bottom: 8px; line-height: 1.4;">长期记忆，越用越聪明</div>
-                    <p style="font-size: 13px; color: #57534E; line-height: 1.6; margin: 0;">记忆你的上下文，通过你和悟空的沟通，帮助悟空<strong>持续成长，越来越了解你</strong>。你的偏好、习惯、工作方式都会被学习。</p>
                 </div>
             </div>
             
-            <div class="highlight-box info">
+            <!-- 四能力总结卡片 -->
+            <div class="highlight-box info" style="margin-bottom: 32px;">
                 <h4>💡 从"聊天"到"干活"的本质飞跃</h4>
-                <p>这四大能力构成了悟空区别于ChatGPT等传统AI的核心差异：<strong>传统AI是"顾问"——只给建议</strong>，<strong>悟空是"员工"——直接干活</strong>。这是从LUI（自然语言用户界面）到CLI（命令行接口被AI调用）的范式转移。</p>
+                <p style="margin-bottom: 12px;">这四大能力构成了悟空区别于ChatGPT等传统AI的核心差异：</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+                    <div style="background: rgba(255,255,255,0.6); padding: 12px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 24px; margin-bottom: 4px;">🎭</div>
+                        <div style="font-size: 13px; font-weight: 600;">身外化身</div>
+                        <div style="font-size: 12px; color: #57534E;">能操作 = 有手</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.6); padding: 12px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 24px; margin-bottom: 4px;">🎯</div>
+                        <div style="font-size: 13px; font-weight: 600;">如意万法</div>
+                        <div style="font-size: 12px; color: #57534E;">能扩展 = 有技</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.6); padding: 12px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 24px; margin-bottom: 4px;">📱</div>
+                        <div style="font-size: 13px; font-weight: 600;">千里传音</div>
+                        <div style="font-size: 12px; color: #57534E;">能协作 = 有网</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.6); padding: 12px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 24px; margin-bottom: 4px;">🧠</div>
+                        <div style="font-size: 13px; font-weight: 600;">灵根共长</div>
+                        <div style="font-size: 12px; color: #57534E;">能成长 = 有脑</div>
+                    </div>
+                </div>
+                <p style="margin-top: 12px;"><strong>传统AI是"顾问"——只给建议</strong>，<strong>悟空是"员工"——直接干活</strong>。这是从LUI（自然语言用户界面）到CLI（命令行接口被AI调用）的范式转移。</p>
             </div>
+            
+            <style>
+                @media (max-width: 768px) {
+                    .capability-card { grid-template-columns: 1fr !important; }
+                    .capability-card > div:first-child { order: 1; }
+                    .capability-card > div:last-child { order: 2; }
+                }
+            </style>
 
             <h2 class="section-header">⏳ 来龙去脉</h2>
             <div class="card">
@@ -312,7 +415,7 @@
             </div>
         </div>
 
-        <!-- ==================== Tab 2: 林克的深度洞察 ==================== -->
+        <!-- ==================== Tab 2: AI洞察的深度洞察 ==================== -->
         <div id="insight" class="tab-content">
 
             <h2 class="section-header">💡 核心洞察</h2>
@@ -334,7 +437,7 @@
                     <li><span class="list-icon">⚡</span><div><strong>2026- CLI时代</strong>：AI直接调用系统能力，人只做决策和监督</div></li>
                 </ul>
                 <div class="highlight-box insight">
-                    <h4>🔮 林克的判断</h4>
+                    <h4>🔮 AI洞察的判断</h4>
                     <p>这不是产品功能升级，而是产品哲学的根本转变。过去是"人用钉钉工作"，未来是"AI用钉钉工作"。企业软件厂商需要重新思考：你的产品是为人设计的，还是为AI设计的？</p>
                 </div>
             </div>
@@ -383,7 +486,7 @@
                     <tr><td><strong>悟空</strong></td><td>B端AI原生工作平台</td><td>企业组织</td></tr>
                 </table>
                 <div class="highlight-box insight" style="margin-top: 12px;">
-                    <h4>🔮 林克的判断</h4>
+                    <h4>🔮 AI洞察的判断</h4>
                     <p>阿里不只是要做一个好用的AI产品，而是要<strong>卡住这个时代的核心资源流转节点</strong>。当技能可以像商品一样流通，Token的消耗才能真正规模化——阿里要建的不是一个产品，是一个市场。</p>
                 </div>
             </div>
@@ -446,7 +549,7 @@
                     <li><span class="list-icon">🏢</span><div><strong>企业采纳意愿</strong>：从发布会到真正跑通，还需要验证真实业务场景中的可靠性</div></li>
                 </ul>
                 <div class="highlight-box" style="margin-top: 12px;">
-                    <h4>📝 林克的总结</h4>
+                    <h4>📝 AI洞察的总结</h4>
                     <p>灰度内测的十个行业录屏很惊艳，但十个行业和一百个行业之间的距离，往往比零到一更难跨越。<strong>金箍已经戴上，取经的路才刚开始。</strong></p>
                 </div>
             </div>
@@ -468,10 +571,10 @@
         <div style="margin-top:24px;background:linear-gradient(135deg,#F8FAFB 0%,#EEF2F6 100%);border:1px solid #F5F5F4;border-radius:14px;padding:24px;box-shadow:0 2px 8px rgba(31,35,40,.06),0 1px 2px rgba(31,35,40,.04)">
             <div style="font-size:16px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px">💡 了解更多</div>
             <p style="font-size:14px;color:#57534E;line-height:1.7;margin:0 0 12px 0">
-                我是 <strong>林克</strong>，沈浪的AI分身。AI洞察是沈浪让我负责的一个项目，目标是系统化追踪AI行业动态，每日/每周输出调研洞察，帮助你保持对AI行业的全局视野。覆盖大模型、AI Coding、AI应用、AI行业投融资、企业AI转型五大领域。
+                AI洞察是一个系统化追踪AI行业动态的项目，每日/每周输出调研洞察，帮助你保持对AI行业的全局视野。覆盖大模型、AI Coding、AI应用、AI行业投融资、企业AI转型五大领域。
             </p>
             <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:16px;">
-                <a href="https://xiaoxiong20260206.github.io/ai-insight/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:linear-gradient(135deg,#059669 0%,#10B981 100%);color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none">
+                <a href="https://xiaoxiong20260206.github.io/ai-insight-public/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:linear-gradient(135deg,#059669 0%,#10B981 100%);color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none">
                     🏠 访问AI洞察首页
                 </a>
             </div>
