@@ -9,27 +9,34 @@ AI日报质量门脚本 (Quality Gate)
   python scripts/daily_quality_gate.py 2026-03-11         # 检查指定日期
   python scripts/daily_quality_gate.py 2026-03-11 --fix   # 检查并尝试修复部分问题
 
-检查项 (17项):
+检查项 (19项):
   1. JSON数据文件存在性
   2. 中文引号检测
   3. 链接有效性 (禁止#占位符 + URL真实性抽检)
   4. 内容非空检查
-  5. ⭐ [v8.3新增] 内容量检查 (防止修复时内容缩水 — 经验37)
-  6. ⭐ [v2.0新增] 时效性验证 (发布日期在时间窗口内)
-  7. ⭐ [v8.0新增] 日期篡改检测 (快照对比+可疑模式识别)
-  8. ⭐ [v8.0新增] 封闭平台链接合规 (禁mp.weixin临时+禁搜狗跳转)
-  9. ⭐ [v8.1新增] 小红书noteId真实性验证
-  10. ⭐ [v9.1升级] 板块分类验证 → WARNING升级为ERROR
-  11. ⭐ [v9.1升级] 地区分类验证 → WARNING升级为ERROR
-  12. ⭐ [v3.0新增] 跨天去重
-  13. ⭐ [v9.1升级] 信息源多样性 (微信>=2 + 小红书>=1 + 集中度<=40%) → 全部ERROR
-  14. ⭐ [v2.0新增] HTML链接规范 (target="_blank" + 无#占位)
-  15. MD/HTML文件存在性
-  16. 6处联动更新检查
-  17. 外部版同步检查
+  5. ⭐ [v6.0新增] 林克自述(capability_update)必填检查
+  6. ⭐ [v9.0新增] 板块均衡检查 (防大事件隧道视野)
+  7. ⭐ [v8.3新增] 内容量检查 (防止修复时内容缩水 — 经验37)
+  8. ⭐ [v2.0新增] 时效性验证 (发布日期在时间窗口内)
+  9. ⭐ [v8.0新增] 日期篡改检测 (快照对比+可疑模式识别)
+  10. ⭐ [v8.0新增] 封闭平台链接合规 (禁mp.weixin临时+禁搜狗跳转)
+  11. ⭐ [v8.1新增] 小红书noteId真实性验证
+  12. ⭐ [v9.1升级] 板块分类验证 → WARNING升级为ERROR
+  13. ⭐ [v9.1升级] 地区分类验证 → WARNING升级为ERROR
+  14. ⭐ [v3.0新增] 跨天去重
+  15. ⭐ [v9.1升级] 信息源多样性 (微信>=2 + 小红书>=1 + 集中度<=40%) → 全部ERROR
+  16. ⭐ [v2.0新增] HTML链接规范 (target="_blank" + 无#占位)
+  17. MD/HTML文件存在性
+  18. 6处联动更新检查
+  19. 外部版同步检查
 
 作者: 林克 (沈浪的AI分身)
-版本: v9.1.0 (2026-03-18)
+版本: v10.0.0 (2026-03-19)
+
+v10.0更新 (林克自述必填 — 经验43):
+- 新增check_capability_update检查 — capability_update字段必填
+- 教训: 2026-03-19日报遗漏林克自述，用户反馈"为什么没有林克自述"
+- 检查项从18项增加到19项
 
 v9.1更新 (WARNING→ERROR升级 — 经验40):
 - check_board_classification: WARNING→ERROR，板块分类错误必须阻断部署
@@ -211,6 +218,42 @@ def check_content_nonempty(date_str: str) -> CheckResult:
         return CheckResult("内容非空", True, f"{len(tabs)}板块, {total_news}条新闻")
     except Exception as e:
         return CheckResult("内容非空", False, f"检查失败: {e}")
+
+
+def check_capability_update(date_str: str) -> CheckResult:
+    """检查4.1: [v6.0新增] 林克自述(capability_update)必填检查
+    
+    规则:
+    - JSON必须包含capability_update字段
+    - 该字段不能为空字符串
+    - 教训: 2026-03-19日报遗漏此字段，用户反馈"为什么没有林克自述"
+    """
+    json_path = DATA_PATH / f"daily-content-{date_str}.json"
+    if not json_path.exists():
+        return CheckResult("林克自述", False, "JSON文件不存在")
+    
+    try:
+        data = json.loads(json_path.read_text(encoding="utf-8"))
+        capability_update = data.get("capability_update", "")
+        
+        if not capability_update:
+            return CheckResult(
+                "林克自述", False,
+                "缺少capability_update字段（林克自述）- 每期日报必须包含林克的个人视角分享",
+                severity="error"
+            )
+        
+        # 检查是否过于简短
+        if len(capability_update) < 50:
+            return CheckResult(
+                "林克自述", False,
+                f"capability_update内容过短({len(capability_update)}字符)，建议至少50字符",
+                severity="warning"
+            )
+        
+        return CheckResult("林克自述", True, f"已填写({len(capability_update)}字符)")
+    except Exception as e:
+        return CheckResult("林克自述", False, f"检查失败: {e}")
 
 
 def check_tab_balance(date_str: str) -> CheckResult:
@@ -1268,6 +1311,7 @@ def run_all_checks(date_str: str) -> Tuple[List[CheckResult], int, int]:
         check_chinese_quotes,
         check_link_validity,
         check_content_nonempty,
+        check_capability_update,     # v6.0新增 - 林克自述必填检查
         check_tab_balance,           # v9.0新增 - 板块均衡(防大事件隧道视野)
         check_content_volume,        # v8.3新增 - 内容量检查(防修复缩水)
         check_date_window,           # v2.0新增
