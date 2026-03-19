@@ -451,7 +451,8 @@
             <button class="tab-btn active" onclick="showTab('overview')">📊 全局概览</button>
             <button class="tab-btn" onclick="showTab('products')">🚀 产品详解</button>
             <button class="tab-btn" onclick="showTab('comparison')">⚖️ 深度对比</button>
-            <button class="tab-btn" onclick="showTab('insights')">💡 核心洞察</button>
+            <button class="tab-btn" onclick="showTab('essence')">🔮 本质洞察</button>
+            <button class="tab-btn" onclick="showTab('insights')">💡 趋势判断</button>
         </nav>
         
         <!-- Tab 1: Overview -->
@@ -860,31 +861,200 @@
             </div>
         </section>
         
-        <!-- Tab 4: Insights -->
-        <section id="insights" class="tab-content">
-            <h2 class="section-title">核心洞察</h2>
+        <!-- Tab 4: Essence Insight (本质洞察) -->
+        <section id="essence" class="tab-content">
+            <h2 class="section-title">① 表象观察</h2>
+            <div class="card">
+                <p style="font-size:15px;color:var(--color-text-primary);margin-bottom:16px;">2026年Q1，企业级AI Agent市场呈现以下典型现象：</p>
+                <ul class="feature-list">
+                    <li><strong>大厂全面入局</strong>：阿里（悟空）、字节（飞书Aily/ByteClaw）、智谱（AutoClaw）几乎同期发布企业级Agent产品</li>
+                    <li><strong>架构路线分化</strong>：有的走CLI命令行路线（钉钉悟空），有的走平台化路线（飞书Aily），有的走本地化路线（AutoClaw）</li>
+                    <li><strong>安全成为焦点</strong>：字节率先发布五类安全风险规范，钉钉强调四层安全防护体系</li>
+                    <li><strong>定价模式多样</strong>：订阅制、Token计费、"剃刀-刀片"模式并存</li>
+                    <li><strong>生态壁垒加深</strong>：各平台优先打通自家生态（阿里系、字节系、智谱系）</li>
+                </ul>
+            </div>
             
-            <div class="insight-box">
-                <h4>💡 洞察1：企业级Agent的核心竞争力是"权限体系的AI化"</h4>
+            <h2 class="section-title">② 本质规律 — 核心洞察</h2>
+            <div class="insight-box" style="background:linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);border-color:rgba(217,119,6,0.3);">
+                <h4 style="color:#B45309;font-size:18px;">🎯 本质洞察</h4>
+                <p style="font-size:17px;font-weight:600;color:#1C1917;margin-bottom:16px;">
+                    企业级AI Agent的本质不是"让AI能干活"，<br>而是"让AI在现有信任边界内干活"
+                </p>
+                <p style="color:var(--color-text-secondary);line-height:1.8;">
+                    OpenClaw证明了AI能力已足够强；但企业不敢用的根本原因不是能力不够，而是<strong>无法把AI纳入现有的管控体系</strong>——权限管不住、操作查不到、成本算不清。<br><br>
+                    四大平台的所有差异化战略，本质上都是在回答同一个问题：<strong>如何在不破坏企业现有信任边界的前提下，让AI进入企业核心业务？</strong>
+                </p>
+            </div>
+            
+            <div class="card" style="border-left:4px solid var(--color-success);">
+                <h4 style="font-weight:700;color:var(--color-text-primary);margin-bottom:16px;display:flex;align-items:center;gap:10px;">
+                    <span style="font-size:24px;">🎭</span> 形象类比：AI Agent就像新员工
+                </h4>
+                <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:16px;">
+                    <div style="padding:16px;background:#FEF2F2;border-radius:12px;">
+                        <div style="font-weight:600;color:var(--color-danger);margin-bottom:8px;">❌ 自由职业者（个人版Agent）</div>
+                        <ul style="font-size:13px;color:var(--color-text-secondary);margin:0;padding-left:16px;">
+                            <li>能力再强，企业也不敢让他碰核心系统</li>
+                            <li>没有劳动合同，没有权限体系</li>
+                            <li>出了问题难追责</li>
+                            <li>用于非核心、低风险任务</li>
+                        </ul>
+                    </div>
+                    <div style="padding:16px;background:var(--color-success-50);border-radius:12px;">
+                        <div style="font-weight:600;color:var(--color-success);margin-bottom:8px;">✅ 正式员工（企业版Agent）</div>
+                        <ul style="font-size:13px;color:var(--color-text-secondary);margin:0;padding-left:16px;">
+                            <li>能力一般，但企业敢让他干重要事</li>
+                            <li>有合同、有权限、有追责机制</li>
+                            <li>操作全程留痕可审计</li>
+                            <li>可进入企业核心业务流程</li>
+                        </ul>
+                    </div>
+                </div>
+                <p style="margin-top:16px;padding:12px;background:#F5F5F4;border-radius:8px;font-size:14px;color:var(--color-text-secondary);">
+                    <strong>关键洞察：</strong>钉钉悟空之所以敢让AI调用全量API，不是因为AI更聪明，而是因为它先把"员工管理体系"建好了——CLI体系实现了标准化操作语言，Enterprise层实现了权限继承，安全沙箱实现了风险隔离。<br><br>
+                    <strong>这正是2000万企业愿意买单的真正原因：不是买AI能力，而是买"可管控的AI能力"。</strong>
+                </p>
+            </div>
+            
+            <h2 class="section-title">③ 趋势推演</h2>
+            <p style="margin-bottom:20px;color:var(--color-text-secondary);">用"信任边界扩展"视角，审视过去→现在→未来的演进：</p>
+            
+            <!-- L3 已验证 -->
+            <div class="card" style="border-left:4px solid var(--color-success);">
+                <h4 style="font-weight:700;color:var(--color-success);margin-bottom:16px;">✅ 已验证：信任边界如何决定产品形态</h4>
+                <div style="overflow-x:auto;">
+                    <table class="compare-table" style="margin:0;">
+                        <thead>
+                            <tr>
+                                <th style="width:18%;">信任阶段</th>
+                                <th style="width:42%;">平台表现</th>
+                                <th style="width:40%;">类比</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>1.0 零信任</strong><br><span style="font-size:12px;color:var(--color-text-muted);">AI只能看不能做</span></td>
+                                <td>早期ChatGPT：只能问答，不能操作任何系统</td>
+                                <td>实习生——只能旁观学习，不给系统权限</td>
+                            </tr>
+                            <tr>
+                                <td><strong>2.0 边缘信任</strong><br><span style="font-size:12px;color:var(--color-text-muted);">AI能做非核心任务</span></td>
+                                <td>智谱AutoClaw：本地执行，基础沙箱隔离，适合个人开发者</td>
+                                <td>临时工——能干活但只能碰边缘系统</td>
+                            </tr>
+                            <tr>
+                                <td><strong>3.0 有限信任</strong><br><span style="font-size:12px;color:var(--color-text-muted);">AI能进入核心流程</span></td>
+                                <td>飞书Aily：深度集成飞书生态，MCP协议标准化，知识平台统一管理</td>
+                                <td>试用期员工——有权限但受密切监督</td>
+                            </tr>
+                            <tr>
+                                <td><strong>4.0 全面信任</strong><br><span style="font-size:12px;color:var(--color-text-muted);">AI成为核心员工</span></td>
+                                <td>钉钉悟空：CLI原生操作、企业权限继承、四层安全防护、成本透明</td>
+                                <td>正式员工——全权限但全程可追责</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="margin-top:12px;font-size:13px;color:var(--color-success);font-weight:600;">
+                    ✅ 验证结论：四个平台的定位差异，完全可以用"信任边界"这一维度解释——信任边界越宽，能进入的业务越核心，企业愿意支付的价格越高。
+                </p>
+            </div>
+            
+            <!-- L4 演变 -->
+            <div class="card" style="border-left:4px solid var(--color-info);margin-top:16px;">
+                <h4 style="font-weight:700;color:var(--color-info);margin-bottom:16px;">🔄 正在演变：信任边界的扩展机制</h4>
+                <div style="overflow-x:auto;">
+                    <table class="compare-table" style="margin:0;">
+                        <thead>
+                            <tr>
+                                <th style="width:18%;">信任阶段</th>
+                                <th style="width:42%;">演变趋势</th>
+                                <th style="width:40%;">类比</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>2.0 边缘信任</strong></td>
+                                <td>个人版Agent逐渐消亡，被平台版吸收；AutoClaw的"入门→转化"模式将成为主流</td>
+                                <td>临时工被正式聘用或淘汰</td>
+                            </tr>
+                            <tr>
+                                <td><strong>3.0 有限信任</strong></td>
+                                <td>平台间互通需求增长，但各家更倾向于深耕自家生态；MCP等协议将成为标准</td>
+                                <td>员工跨部门协作但仍有边界</td>
+                            </tr>
+                            <tr>
+                                <td><strong>4.0 全面信任</strong></td>
+                                <td>竞争焦点从"能力"转向"合规认证"；行业级安全标准将出现（类似ISO）</td>
+                                <td>员工晋升需要通过资质考试</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- L5 预测 -->
+            <div class="card" style="border-left:4px solid var(--color-purple);margin-top:16px;">
+                <h4 style="font-weight:700;color:var(--color-purple);margin-bottom:16px;">🔮 未来预测：新阶段——从"员工"到"团队"</h4>
+                <div style="overflow-x:auto;">
+                    <table class="compare-table" style="margin:0;">
+                        <thead>
+                            <tr>
+                                <th style="width:18%;">新阶段</th>
+                                <th style="width:42%;">预测的现实</th>
+                                <th style="width:40%;">类比</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>5.0 团队信任</strong><br><span style="font-size:12px;color:var(--color-text-muted);">AI团队协作</span></td>
+                                <td>多Agent协同执行复杂任务；悟空OPT"一人团队"是这个方向的早期探索</td>
+                                <td>从单兵作战到项目组作战</td>
+                            </tr>
+                            <tr>
+                                <td><strong>6.0 自治信任</strong><br><span style="font-size:12px;color:var(--color-text-muted);">AI自主决策</span></td>
+                                <td>AI Agent在预设边界内自主决策，人类只管最终验收；24/7无人值守成为现实</td>
+                                <td>从带教到授权——老板只定目标不管过程</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="margin-top:12px;font-size:13px;color:var(--color-purple);font-weight:600;">
+                    🔮 预测判断：钉钉悟空已经展示了"一人团队"（OPT）的可能性，这预示着AI Agent的下一个进化方向是从"单Agent"到"Agent团队"。而这需要更复杂的"团队级信任边界"——如何让多个Agent协作而不互相越权？这将是2026-2027年的核心命题。
+                </p>
+            </div>
+            
+            <h2 class="section-title">④ 深层洞察</h2>
+            
+            <div class="insight-box" style="background:linear-gradient(135deg, var(--color-success-50) 0%, #D1FAE5 100%);border-color:rgba(5,150,105,0.3);">
+                <h4 style="color:var(--color-success);">💡 洞察1：企业级Agent的核心竞争力是"权限体系的AI化"</h4>
                 <p>钉钉悟空的成功不在于AI多强，而在于它把企业积累多年的组织架构、审批流、权限管理等资产，通过CLI体系暴露给AI。这意味着<strong>企业级Agent不是在替代流程，而是在增强流程</strong>——大企业愿意为"可控的增强"买单，但不会为"不可控的替代"冒险。</p>
             </div>
             
-            <div class="insight-box">
-                <h4>💡 洞察2：企业级Agent的核心是"业务深度集成"</h4>
-                <p>飞书Aily的核心价值不是功能多强，而是<strong>与企业工作流的深度融合</strong>。它与飞书云文档、多维表格、会议纪要、日程等深度打通，让AI真正成为工作流的一部分。字节跳动数十人IT团队借助Aily支持全球十余万人的咨询需求，这就是平台化的威力——AI不是孤岛，而是流程的一环。</p>
+            <div class="insight-box" style="background:linear-gradient(135deg, var(--color-info-50) 0%, #DBEAFE 100%);border-color:rgba(37,99,235,0.3);">
+                <h4 style="color:var(--color-info);">💡 洞察2：平台化的核心是"知识的一次配置，全员共享"</h4>
+                <p>飞书Aily的核心价值不是功能多强，而是<strong>让企业知识变成AI可调用的资产</strong>。它与飞书云文档、多维表格、会议纪要深度打通，让AI真正"懂"企业——这是传统SaaS做不到的。字节跳动数十人IT团队借助Aily支持全球十余万人咨询需求，这就是"知识平台化"的威力。</p>
             </div>
             
-            <div class="insight-box">
-                <h4>💡 洞察3：安全合规将成为下一个战场</h4>
-                <p>字节发布五类安全风险规范+内部ByteClaw的组合拳，预示着<strong>企业级AI Agent的下一个战场是安全合规</strong>。当Agent能力趋于同质化，"谁能让企业放心用"将成为核心竞争点。五类风险（访问控制、提示词注入、敏感信息、供应链、恶意插件）将成为企业选型的标准checklist。</p>
+            <div class="insight-box" style="background:linear-gradient(135deg, #FEF2F2 0%, #FECACA 100%);border-color:rgba(225,29,72,0.3);">
+                <h4 style="color:var(--color-danger);">💡 洞察3：安全不是成本，是企业级Agent的核心资产</h4>
+                <p>字节发布五类安全风险规范，看似是"限制"，实则是"赋能"——有了明确的安全边界，企业才敢放心使用。<strong>当Agent能力趋于同质化，"谁能让企业放心用"将成为核心竞争点</strong>。五类风险（访问控制、提示词注入、敏感信息、供应链、恶意插件）将成为企业选型的标准checklist。</p>
             </div>
             
-            <div class="insight-box">
-                <h4>💡 洞察4："剃刀-刀片"模式正在Agent领域复制</h4>
-                <p>智谱AutoClaw的策略是"以Agent带模型"——用低门槛的Agent入口，让用户习惯调用GLM模型，然后通过API收费变现。API涨价20-30%正是这个策略开始变现的信号。<strong>未来Agent可能越来越便宜（甚至免费），但背后的模型调用会越来越贵</strong>。</p>
+            <div class="insight-box" style="background:linear-gradient(135deg, var(--color-purple-50) 0%, #E9D5FF 100%);border-color:rgba(124,58,237,0.3);">
+                <h4 style="color:var(--color-purple);">💡 洞察4：Agent免费，模型收费——新一代"剃刀-刀片"模式</h4>
+                <p>智谱AutoClaw的策略是"以Agent带模型"——用低门槛的Agent入口，让用户习惯调用GLM模型，然后通过API收费变现。API涨价20-30%正是这个策略开始变现的信号。<strong>未来Agent入口可能越来越便宜（甚至免费），但背后的模型调用会越来越贵</strong>——这正如打印机便宜但墨盒贵的经典模式。</p>
             </div>
             
-            <h2 class="section-title">趋势判断</h2>
+            <div class="highlight" style="margin-top:24px;">
+                <strong>一句话总结本质：</strong>企业级AI Agent市场的竞争，本质不是"AI能力"的竞争，而是"信任基础设施"的竞争——谁能让AI在企业的权限体系、安全边界、成本管控内运行，谁就能赢得企业客户。
+            </div>
+        </section>
+        
+        <!-- Tab 5: Insights -->
+        <section id="insights" class="tab-content">
+            <h2 class="section-title">2026年下半年趋势预测</h2>
             
             <div class="card">
                 <h4 style="font-weight:700;color:var(--color-text-primary);margin-bottom:16px;">📈 2026年下半年趋势预测</h4>
