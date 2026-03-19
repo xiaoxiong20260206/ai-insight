@@ -1,77 +1,85 @@
 {
   "coverage": {
     "overseas": 8,
-    "china": 6
+    "china": 7
   },
   "overview": [
     {
       "icon": "🔥",
       "label": "今日热点",
-      "headline": "GPT-5.4发布被Claude超越，AI大模型大战进入白热化",
-      "text": "OpenAI发布GPT-5.4仅3天即被Anthropic Claude Opus 4.7超越，2026年3月AI模型竞争进入史上最密集发布期"
+      "headline": "GPT-5.4 mini发布 + NVIDIA GTC 2026进入最后一天",
+      "text": "OpenAI发布GPT-5.4 mini让免费用户获得思考能力，NVIDIA GTC第四天聚焦OpenClaw/NemoClaw生态落地"
     },
     {
-      "icon": "💻",
+      "icon": "🧠",
+      "label": "大模型",
+      "headline": "GPT-5.4 mini全用户覆盖，Nemotron Coalition开源6大模型家族",
+      "text": "OpenAI推理能力民主化+NVIDIA开源Nemotron/Cosmos/Isaac GR00T/Alpaymayo/BioNeMo/Earth-2六大模型家族"
+    },
+    {
+      "icon": "⌨️",
       "label": "AI Coding",
-      "headline": "Claude Code领先VS Code市场份额，AI编程工具全景对比出炉",
-      "text": "Claude Code超越OpenAI Codex登顶VS Code Marketplace Agent榜单，国内AI编程工具实战教程持续升温"
+      "headline": "Claude Code vs Cursor竞争白热化，NemoClaw安全运行时发布",
+      "text": "AI编程工具格局剧变，开发者纷纷评测对比；NVIDIA发布NemoClaw为Agent提供企业级安全部署环境"
     },
     {
-      "icon": "🤖",
-      "label": "AI Agent",
-      "headline": "Loooom MCP实现AI技能动态安装，IBM watsonx支持MCP Agent部署",
-      "text": "Loooom MCP让AI Agent对话中动态发现安装技能，MCP协议获得广泛采用"
-    },
-    {
-      "icon": "🏦",
-      "label": "AI 行业",
-      "headline": "本周AI融资超$15亿，Ethan Mollick发布Agentic时代AI指南",
-      "text": "本周AI融资Kai $125M/Nexthop $500M等超$15亿，沃顿教授发布AI选择指南"
+      "icon": "📱",
+      "label": "AI应用",
+      "headline": "OpenClaw突破100K GitHub Stars，DGX Station交付开发者",
+      "text": "开源Agent框架一周内达成史上最快增长，首批DGX Station交付Andrej Karpathy等顶级开发者"
     },
     {
       "icon": "🔄",
-      "label": "企业AI转型",
-      "headline": "两会释放AI+制造强信号，德勤2026企业AI嵌入式报告发布",
-      "text": "两会'部长通道'释放AI+制造转型强信号，德勤发布2026 AI报告聚焦ROI规模化"
+      "label": "企业转型",
+      "headline": "Physical AI落地加速：手术机器人+工厂自动化",
+      "text": "NVIDIA发布Open-H数据集(776小时手术视频)和医疗Physical AI工具，推动AI从数字走向物理世界"
     }
   ],
   "heat_trend": {
     "title": "近7期日报交叉分析(3/13-3/19)",
     "topics": [
       {
-        "name": "GPT-5.x vs Claude竞争加剧",
+        "name": "GTC 2026：从发布到生态落地",
         "score": 10,
-        "days": 3,
+        "days": 4,
         "trend_class": "burst",
         "trend_label": "⚡ 持续爆发",
-        "signal": "GPT-5.4发布后立即被Claude超越，大模型竞争从月度迭代进入周度竞争周期"
+        "signal": "第四天重心转向生态落地：OpenClaw+NemoClaw全平台支持、DGX Station交付、Nemotron开源——NVIDIA构建完整Agent基础设施"
       },
       {
-        "name": "AI Coding工具深度整合",
+        "name": "OpenClaw开源Agent框架爆发",
+        "score": 10,
+        "days": 2,
+        "trend_class": "burst",
+        "trend_label": "⚡ 现象级",
+        "signal": "一周内100K+ Stars、200万访客、被黄仁勋GTC主题演讲专门介绍——开源Agent框架从概念到主流的拐点"
+      },
+      {
+        "name": "推理能力民主化：GPT-5.4 mini",
         "score": 9,
-        "days": 5,
-        "trend_class": "up",
-        "trend_label": "📈 格局清晰",
-        "signal": "Claude Code/Cursor/Codex三足鼎立格局形成，企业招聘开始明确要求AI Coding能力"
+        "days": 1,
+        "trend_class": "new",
+        "trend_label": "🆕 新发布",
+        "signal": "免费用户首次获得思考能力，推理模型从付费专属走向全用户普惠——OpenAI加速推理能力下沉"
       },
       {
-        "name": "MCP生态爆发式增长",
-        "score": 9,
-        "days": 4,
+        "name": "AI Coding工具竞争白热化",
+        "score": 8,
+        "days": 7,
         "trend_class": "up",
-        "trend_label": "📈 生态成型",
-        "signal": "Loooom MCP动态技能+IBM watsonx MCP支持——从Anthropic单厂到多厂采用的生态拐点"
+        "trend_label": "📈 持续关注",
+        "signal": "Claude Code vs Cursor成为持续热门话题，多篇微信公众号评测对比——AI编程工具进入选择焦虑期"
       },
       {
-        "name": "企业AI ROI聚焦",
+        "name": "Physical AI数据基础设施就绪",
         "score": 8,
         "days": 3,
-        "trend_class": "stable",
-        "trend_label": "➡️ 持续关注",
-        "signal": "德勤/Globant等咨询机构密集发布2026企业AI报告，核心聚焦ROI验证"
+        "trend_class": "up",
+        "trend_label": "📈 数据就绪",
+        "signal": "Open-H发布776小时外科视频数据集，CMR/J&J采用——Physical AI从概念走向产品的关键拼图"
       }
     ],
-    "summary": "GTC 2026余波未平，<strong>模型竞争进入白热化</strong>：GPT-5.4发布即被超越。<strong>AI Coding格局清晰</strong>：三大工具确立。<strong>MCP生态拐点</strong>：从单厂到多厂采用。"
+    "summary": "GTC 2026进入最后一天，<strong>OpenClaw现象</strong>成为焦点——开源Agent框架一周100K Stars。<strong>GPT-5.4 mini</strong>让推理能力民主化。<strong>AI Coding工具竞争</strong>持续白热化，Claude Code vs Cursor评测满天飞。<strong>Physical AI</strong>数据基础设施就绪。"
   },
   "tabs": [
     {
@@ -79,47 +87,69 @@
         "overseas": [
           {
             "tag": "hot",
-            "title": "Claude Opus 4.6 vs GPT-5.3 Codex深度对比评测",
-            "url": "https://www.lennysnewsletter.com/p/claude-opus-46-vs-gpt-53-codex-how",
-            "source": "Lenny's Newsletter · 3月18日",
+            "title": "GPT-5.4 mini正式登陆ChatGPT：免费用户首次获得思考能力",
+            "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
+            "source": "OpenAI · 3月18日",
             "details": {
-              "finding": "沃顿商学院教授Lenny进行Claude Opus 4.6与GPT-5.3 Codex的头对头测试，在真实工程任务上对比两大AI编程模型",
-              "highlight": "头对头对比 | 真实工程任务 | 编程能力评测",
-              "impact": "为开发者提供权威的AI编程模型选择参考"
+              "finding": "OpenAI于3月18日发布GPT-5.4 mini，免费用户可通过Thinking功能使用，付费用户在达到速率限制时自动降级使用。GPT-5.4 mini不在模型选择器中单独显示，30天后GPT-5 Thinking mini将退役",
+              "highlight": "免费用户可用 | Thinking功能 | 速率限制降级 | 30天后退役mini",
+              "impact": "推理能力民主化——OpenAI让免费用户也能使用思考模式，扩大了推理能力的可及性"
             }
           },
           {
             "tag": "hot",
-            "title": "Ethan Mollick发布Agentic时代AI选择指南",
-            "url": "https://www.oneusefulthing.org/p/a-guide-to-which-ai-to-use-in-the",
-            "source": "One Useful Thing · 3月18日",
+            "title": "NVIDIA发布Nemotron Coalition：6大开源模型家族全栈布局",
+            "url": "https://blogs.nvidia.com/blog/gtc-2026-news/",
+            "source": "NVIDIA Blog · 3月16日",
             "details": {
-              "finding": "沃顿商学院教授Ethan Mollick发布Agentic时代AI选择指南：Claude Opus 4.6/Gemini 3.0 Pro/ChatGPT 5.2 Thinking三强格局",
-              "highlight": "三强格局 | 场景化选择 | 权威指南",
-              "impact": "顶级商学院教授的使用指南为企业和个人用户提供决策参考"
+              "finding": "GTC 2026上NVIDIA发布六大开源模型家族：Nemotron(语言推理)、Cosmos(世界视觉)、Isaac GR00T(机器人)、Alpaymayo(自动驾驶)、BioNeMo(生物化学)、Earth-2(气候)",
+              "highlight": "6大模型家族 | 语言+视觉+机器人+自动驾驶+生物+气候 | 全栈开源布局",
+              "impact": "NVIDIA从硬件公司转型为AI平台公司——开源模型生态成为新护城河"
+            }
+          },
+          {
+            "title": "Anthropic投资1亿美元建设Claude Partner Network",
+            "url": "https://www.anthropic.com/news/claude-partner-network",
+            "source": "Anthropic · 3月12日",
+            "details": {
+              "finding": "Anthropic宣布投资1亿美元建立Claude合作伙伴网络，加速Claude在企业级市场的部署和生态建设，与OpenAI的企业策略正面竞争",
+              "highlight": "$1亿投资 | 合作伙伴网络 | 企业级部署 | 生态建设",
+              "impact": "Anthropic加码企业市场——Claude vs ChatGPT的企业版竞争进入新阶段"
             }
           }
         ],
         "china": [
           {
             "tag": "hot",
-            "title": "2026年3月AI大模型大战：GPT-5.4刚发布就被Claude超越",
-            "url": "https://weixin.sogou.com/weixin?type=2&query=GPT-5.4%20Claude%20%E8%B6%85%E8%B6%8A%202026%E5%B9%B43%E6%9C%88",
-            "source": "(微信) 3月18日",
+            "title": "一文读懂：2026英伟达GTC大会核心发布",
+            "url": "https://www.xiaohongshu.com/explore/69b8b4c7000000001a02c6bc",
+            "source": "小红书 @阿乐AI实验室 · 3月18日 (151赞·205藏)",
             "details": {
-              "finding": "OpenAI发布GPT-5.4仅3天，Anthropic Claude即发布新版本超越。2026年3月成为AI模型竞争最密集月份",
-              "highlight": "GPT-5.4被超越 | 周级迭代 | 三巨头角逐",
-              "impact": "大模型竞争从季度进入周度，用户需要动态追踪最佳模型"
-            },
-            "wx_url": "https://weixin.sogou.com/weixin?type=2&query=GPT-5.4%20Claude%202026%E5%B9%B43%E6%9C%88"
+              "finding": "全面解读GTC 2026：Vera Rubin架构、OpenClaw支持、Physical AI三大方向。从中文开发者视角深度分析，帮助国内从业者理解NVIDIA战略布局",
+              "highlight": "GTC全景解读 | Vera Rubin | OpenClaw | Physical AI | 中文开发者视角",
+              "impact": "为国内开发者提供GTC 2026的中文解读，降低信息不对称"
+            }
+          },
+          {
+            "title": "2026年3月AI智能体行业月报：从对话到执行",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=2026年3月AI智能体行业月报",
+            "source": "微信公众号 · 3月中旬",
+            "details": {
+              "finding": "3月AI智能体行业全景分析：大厂集体布局Agent赛道，从对话式AI向执行式AI转型成为主流。报告覆盖国内外主要Agent产品和框架动态",
+              "highlight": "行业月报 | Agent全景 | 对话→执行 | 大厂布局",
+              "impact": "为国内从业者提供Agent赛道的系统性认知"
+            }
           }
         ]
       },
-      "tab_name": "大模型",
-      "tab_index": 0,
-      "focus": {
-        "title": "💡 大模型竞争进入周迭代时代",
-        "text": "GPT-5.4发布仅3天被Claude超越，2026年3月成为史上AI模型发布最密集月份。关键洞察：周级迭代成为常态，企业需要建立模型动态追踪机制。"
+      "deep_focus": {
+        "title": "推理能力民主化：GPT-5.4 mini的战略意义",
+        "paragraphs": [
+          "GPT-5.4 mini的发布标志着推理能力的民主化。此前，思考模式（Thinking）是付费用户的专属功能；现在，免费用户通过+菜单中的Thinking功能也能使用。这是OpenAI在用户增长和商业化之间寻找新平衡点的信号。",
+          "值得注意的是，GPT-5.4 mini并不是一个独立的模型选择项——它作为速率限制的降级方案自动生效。这意味着OpenAI在保持用户体验连续性的同时，巧妙地分流了高负载请求。",
+          "与此同时，GTC 2026上NVIDIA宣布的OpenClaw全平台支持，让Agent开发门槛进一步降低。当推理能力普及，Agent成为下一个差异化战场——谁能让AI'做事'而非仅仅'聊天'，谁就占据先机。"
+        ],
+        "takeaway": "推理能力从付费走向免费，Agent能力成为新的差异化战场。OpenAI用GPT-5.4 mini扩大用户基数，NVIDIA用OpenClaw/NemoClaw降低Agent开发门槛——两条路径殊途同归，都在为Agent时代铺路。"
       }
     },
     {
@@ -127,47 +157,58 @@
         "overseas": [
           {
             "tag": "hot",
-            "title": "Claude Code超越Codex登顶VS Code Agent榜单",
-            "url": "https://visualstudiomagazine.com/articles/2026/02/26/claude-code-edges-openais-codex-in-vs-codes-agentic-ai-marketplace-leaderboard.aspx",
-            "source": "Visual Studio Magazine · 3月18日",
+            "title": "NVIDIA发布NemoClaw：企业级Agent安全运行时",
+            "url": "https://blogs.nvidia.com/blog/gtc-2026-news/",
+            "source": "NVIDIA Blog · 3月16日",
             "details": {
-              "finding": "Claude Code在VS Code Marketplace的Agent类工具中超越OpenAI Codex，成为最受开发者欢迎的AI编程助手",
-              "highlight": "登顶VS Code Agent榜 | 超越Codex | 开发者首选",
-              "impact": "AI Coding工具格局重新洗牌，Anthropic在开发者工具领域持续扩大优势"
+              "finding": "NVIDIA发布NemoClaw开源栈，结合OpenShell运行时和Nemotron模型。OpenShell提供沙箱隔离，Nemotron保证数据本地化，隐私路由器控制数据流向",
+              "highlight": "OpenShell沙箱 | Nemotron本地模型 | 隐私路由器 | 企业级安全",
+              "impact": "为Agent定义安全运行时标准——Agent从'能用'走向'敢用'的关键一步"
             }
           },
           {
-            "tag": "new",
-            "title": "2026最佳AI Coding Agents开发者评测",
-            "url": "https://www.faros.ai/blog/best-ai-coding-agents-2026",
-            "source": "Faros AI · 3月18日",
+            "title": "Forbes: Cursor为AI编程主导地位而战",
+            "url": "https://www.forbes.com/sites/annatong/2026/03/05/cursor-goes-to-war-for-ai-coding-dominance/",
+            "source": "Forbes · 3月5日",
             "details": {
-              "finding": "Faros AI发布2026年最佳AI Coding Agents评测：Claude Code/Codex/Cursor/GitHub Copilot全面对比",
-              "highlight": "开发者评测 | 四大工具对比 | 2026最新",
-              "impact": "为开发者提供AI编程工具选型参考"
+              "finding": "深度分析Cursor的竞争策略：从VS Code插件到独立IDE的转型，与Claude Code的正面竞争。Cursor估值超过100亿美元，成为AI编程赛道领头羊",
+              "highlight": "Cursor vs Claude Code | 独立IDE战略 | $100亿+估值 | AI编程赛道领头羊",
+              "impact": "AI编程工具进入直接竞争阶段——用户面临选择焦虑"
             }
           }
         ],
         "china": [
           {
-            "tag": "important",
-            "title": "AI编程工具深度实战：Claude Code/Cursor/Copilot完整教程",
-            "url": "https://weixin.sogou.com/weixin?type=2&query=AI%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7%20Claude%20Code%20Cursor%20%E5%AE%9E%E6%88%98",
-            "source": "(微信) 3月18日",
+            "tag": "hot",
+            "title": "Claude Code逆袭Cursor：2026年AI编程工具格局剧变",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=Claude+Code+Cursor+2026",
+            "source": "微信公众号 · 3月14日",
             "details": {
-              "finding": "微信热文提供AI编程工具从安装到实战的完整教程，覆盖Claude Code/Cursor/Copilot三大工具",
-              "highlight": "完整实战教程 | 三大工具对比 | 从安装到代码",
-              "impact": "国内AI编程工具教程质量提升，降低开发者上手门槛"
-            },
-            "wx_url": "https://weixin.sogou.com/weixin?type=2&query=AI%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7%20%E5%AE%9E%E6%88%98"
+              "finding": "深度对比Claude Code和Cursor的功能差异：Claude Code擅长长上下文理解和Agent模式，Cursor胜在用户体验和生态集成。开发者该如何选择成为热门话题",
+              "highlight": "Claude Code vs Cursor | 功能对比 | 选择建议 | 热门话题",
+              "impact": "为开发者提供AI编程工具选择的参考依据"
+            }
+          },
+          {
+            "title": "2026年AI编程工具权威排行榜",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=2026年AI编程工具权威排行",
+            "source": "微信公众号 · 3月19日",
+            "details": {
+              "finding": "基于用户调研的AI编程工具排行，涵盖Cursor、Claude Code、Copilot、国产工具等多维度评测。排行覆盖性能、易用性、价格等维度",
+              "highlight": "多维度评测 | 用户调研 | 权威排行 | 包含国产工具",
+              "impact": "为开发者选择AI编程工具提供数据支撑"
+            }
           }
         ]
       },
-      "tab_name": "AI Coding",
-      "tab_index": 1,
-      "focus": {
-        "title": "💡 AI Coding三足鼎立格局确立",
-        "text": "Claude Code/Cursor/GitHub Copilot三大工具格局清晰。Claude Code登顶VS Code Agent榜，Anthropic在开发者工具领域建立壁垒。"
+      "deep_focus": {
+        "title": "AI Coding工具的选择焦虑：Claude Code vs Cursor",
+        "paragraphs": [
+          "过去一周，微信公众号上关于Claude Code vs Cursor的评测文章大量涌现，反映出开发者群体的选择焦虑。两款工具各有优势：Claude Code依托Claude的强大长上下文能力，在复杂代码理解上表现更好；Cursor则胜在用户体验和VS Code生态的无缝集成。",
+          "从技术趋势看，AI Coding正在从'代码补全'走向'Agent编程'——不仅生成代码片段，而是理解需求、规划任务、执行多步骤操作。这正是NVIDIA发布NemoClaw的背景：Agent需要安全的运行时环境。",
+          "对于开发者的选择建议：如果你的工作涉及大量遗留代码理解和重构，Claude Code可能更适合；如果你更看重开发流畅度和工具集成，Cursor是更好的选择。当然，很多开发者两者都用——不同场景用不同工具。"
+        ],
+        "takeaway": "AI Coding工具竞争进入白热化阶段。短期内，Claude Code和Cursor将持续迭代竞争；长期看，Agent编程模式将重塑整个开发工具链。开发者不必焦虑于'选哪个'，而应关注'怎么用好'。"
       }
     },
     {
@@ -175,58 +216,47 @@
         "overseas": [
           {
             "tag": "hot",
-            "title": "Loooom MCP：让AI Agent对话中动态发现安装技能",
-            "url": "https://www.mager.co/blog/2026-03-14-loooom-mcp/",
-            "source": "Mager · 3月18日",
+            "title": "OpenClaw突破100K GitHub Stars：史上增长最快的开源项目",
+            "url": "https://blogs.nvidia.com/blog/gtc-2026-news/",
+            "source": "NVIDIA Blog / LinkedIn · 3月18日",
             "details": {
-              "finding": "Loooom MCP实现AI Agent在对话过程中动态发现、安装和使用新技能，无需预先配置",
-              "highlight": "动态技能安装 | MCP协议进化 | 对话中扩展能力",
-              "impact": "Agent从固定工具集进化到动态能力扩展"
+              "finding": "Peter Steinberger创建的OpenClaw开源Agent框架在一周内获得超过100K Stars和200万访客。黄仁勋在GTC主题演讲上专门介绍，NVIDIA宣布全平台支持",
+              "highlight": "100K+ Stars | 200万访客 | 一周达成 | 黄仁勋专门介绍 | NVIDIA全平台支持",
+              "impact": "Agent框架从概念到主流的拐点——开发者用脚投票证明Agent不再是PPT"
             }
           },
           {
-            "tag": "new",
-            "title": "IBM watsonx Orchestrate支持MCP工具自动化部署Agent",
-            "url": "https://developer.ibm.com/components/watsonx-orchestrate/",
-            "source": "IBM Developer · 3月18日",
+            "title": "NVIDIA DGX Station开始交付：桌面20 PFLOPS AI超算",
+            "url": "https://blogs.nvidia.com/blog/gtc-2026-news/",
+            "source": "NVIDIA Blog · 3月17日",
             "details": {
-              "finding": "IBM Bob支持自动化构建和部署watsonx Orchestrate agents与MCP工具",
-              "highlight": "MCP工具支持 | 自动化部署 | 企业级Agent",
-              "impact": "MCP协议获得IBM等企业厂商采用，生态扩展"
-            }
-          },
-          {
-            "tag": "new",
-            "title": "Siemens发布Fuse EDA AI Agent：半导体设计自动化",
-            "url": "https://news.siemens.com/en-us/siemens-fuse-eda-ai-agent/",
-            "source": "Siemens · 3月18日",
-            "details": {
-              "finding": "西门子发布Fuse EDA AI Agent，支持半导体和PCB系统工作流自动化",
-              "highlight": "半导体设计自动化 | EDA Agent | 西门子工业应用",
-              "impact": "AI Agent从软件开发扩展到硬件设计领域"
+              "finding": "首批DGX Station GB300系统交付给Andrej Karpathy等开发者。748GB内存支持万亿参数模型本地运行，无需云端部署即可运行最先进的AI模型",
+              "highlight": "首批交付Karpathy | 748GB内存 | 万亿参数本地运行 | 20 PFLOPS桌面设备",
+              "impact": "AI开发从云端回归本地——DGX Station让顶级算力触手可及"
             }
           }
         ],
         "china": [
           {
-            "tag": "hot",
-            "title": "一张图看懂AI Agent架构：智能体、技能Skill、MCP如何协作",
-            "url": "https://weixin.sogou.com/weixin?type=2&query=AI%20Agent%E6%9E%B6%E6%9E%84%20%E6%99%BA%E8%83%BD%E4%BD%93%20MCP",
-            "source": "(微信) 3月18日",
+            "title": "AI圈炸了！03月19日热点速递",
+            "url": "https://www.xiaohongshu.com/explore/69bb4ae4000000001f007e95",
+            "source": "小红书 @每日AI学习资料库 · 3月19日",
             "details": {
-              "finding": "微信热文用一张图清晰解析AI Agent架构三层结构",
-              "highlight": "架构图解 | Agent三层结构 | MCP协议解析",
-              "impact": "国内开发者对Agent架构理解深化"
-            },
-            "wx_url": "https://weixin.sogou.com/weixin?type=2&query=AI%20Agent%20MCP%20%E6%9E%B6%E6%9E%84"
+              "finding": "当日AI热点快速盘点，覆盖GTC发布、模型更新、工具动态等内容。以图文形式快速传递AI圈最新动态",
+              "highlight": "热点速递 | 图文形式 | 快速传递 | AI圈动态",
+              "impact": "为国内用户提供AI热点的快速消费渠道"
+            }
           }
         ]
       },
-      "tab_name": "AI Agent",
-      "tab_index": 2,
-      "focus": {
-        "title": "💡 MCP生态从单厂走向多厂采用",
-        "text": "Loooom MCP动态技能+IBM watsonx MCP支持+Siemens EDA Agent——MCP协议获得广泛采用。动态技能安装是Agent从'固定工具'到'动态能力'的关键进化。"
+      "deep_focus": {
+        "title": "OpenClaw现象：Agent框架为什么突然爆发？",
+        "paragraphs": [
+          "OpenClaw在一周内拿到100K Stars，让黄仁勋在GTC主题演讲上专门花时间介绍。这说明什么？说明Agent不再是概念，而是开发者真金白银用脚投票的方向。",
+          "OpenClaw的成功有几个关键因素：第一，开源开放，让开发者可以自由探索和贡献；第二，NVIDIA全平台支持，从DGX到Spark到RTX都能跑；第三，时机正好——推理模型成熟+工具生态完善，Agent终于可以'做事'而不仅仅'聊天'。",
+          "这里有一个有趣的洞察：OpenClaw的Logo是一只龙虾（Claw=爪子）。这种幽默感很有硅谷范——严肃的技术，不严肃的表达。也许这也是它能快速传播的原因之一。"
+        ],
+        "takeaway": "OpenClaw的爆发验证了一个判断：Agent时代正在到来。当推理能力普及（GPT-5.4 mini）、安全运行时就绪（NemoClaw）、开发框架成熟（OpenClaw），Agent从PPT走向产品的条件已经齐备。"
       }
     },
     {
@@ -234,119 +264,77 @@
         "overseas": [
           {
             "tag": "hot",
-            "title": "本周AI融资超$15亿：Kai $125M、Nexthop AI $500M",
-            "url": "https://aifundingtracker.com/ai-startup-funding-news-today/",
-            "source": "AI Funding Tracker · 3月18日",
+            "title": "黄仁勋：2025-2027年NVIDIA收入将达至少1万亿美元",
+            "url": "https://www.nvidia.com/gtc/keynote/",
+            "source": "NVIDIA GTC Keynote · 3月16日",
             "details": {
-              "finding": "3月14-17日AI融资重点：Kai $125M（网络安全）、Nexthop AI $500M、Axiom $200M",
-              "highlight": "$15亿+ | 网络安全+基础设施 | Nexthop $500M",
-              "impact": "AI基础设施和安全领域持续获得大额融资"
+              "finding": "黄仁勋在GTC主题演讲上表示，计算需求增长100万倍，预计2025-2027年收入将达到至少1万亿美元。AWS、Microsoft、Oracle将部署超过100万块NVIDIA GPU",
+              "highlight": "$1万亿收入预期 | 100万倍计算增长 | 100万+GPU部署 | AWS/MS/Oracle",
+              "impact": "NVIDIA的增长叙事仍在加速——Agent驱动的token爆炸推动推理需求远超预期"
             }
           },
           {
-            "tag": "new",
-            "title": "FDA Elsa AI从Claude切换到Gemini",
-            "url": "https://www.clinicalleader.com/doc/fda-s-elsa-ai-switches-from-claude-to-gemini-what-sponsors-need-to-know-0001",
-            "source": "Clinical Leader · 3月18日",
+            "title": "AWS将部署超过100万块NVIDIA GPU",
+            "url": "https://blogs.nvidia.com/blog/gtc-2026-news/",
+            "source": "NVIDIA Blog · 3月17日",
             "details": {
-              "finding": "美国FDA的Elsa AI系统从Claude切换到Gemini，监管场景的模型选择开始动态调整",
-              "highlight": "FDA AI更换模型 | Claude→Gemini | 监管场景",
-              "impact": "政府监管机构的AI选择影响行业生态"
+              "finding": "AWS与NVIDIA扩大合作，将部署包括Blackwell和Rubin架构在内的超过100万块GPU。这是单一云厂商的最大GPU部署承诺",
+              "highlight": "100万+ GPU | AWS单家承诺 | Blackwell+Rubin架构 | 最大部署",
+              "impact": "云厂商的GPU军备竞赛持续升温——Agent时代需要更多推理算力"
             }
           }
         ],
         "china": [
           {
-            "tag": "new",
-            "title": "小红书AI搜索生成算法负责人将亮相奇点智能技术大会",
-            "url": "https://ml-summit.org/",
-            "source": "(小红书/会议) 3月18日",
+            "title": "一图看懂老黄在GTC2026宣称的万亿美元",
+            "url": "https://www.xiaohongshu.com/explore/69b9098a000000001b00152c",
+            "source": "小红书 @深空 · 3月18日 (9赞·15藏)",
             "details": {
-              "finding": "2026奇点智能技术大会（4月17-18日上海）宣布小红书AI搜索生成算法研发团队负责人陆承镪将作为演讲嘉宾，分享小红书AI搜索技术实践",
-              "highlight": "小红书AI搜索 | 奇点大会 | 算法实践分享",
-              "impact": "小红书AI技术团队首次在顶级AI会议亮相，展示其在搜索生成领域的技术积累"
+              "finding": "可视化解读黄仁勋万亿美元预测的来源和逻辑：从计算需求增长100万倍到云厂商GPU部署承诺，系统分析NVIDIA收入预期的支撑依据",
+              "highlight": "可视化解读 | 逻辑拆解 | 数据支撑 | 系统分析",
+              "impact": "帮助国内读者理解NVIDIA万亿美元叙事的底层逻辑"
             }
           }
         ]
-      },
-      "tab_name": "AI行业",
-      "tab_index": 3,
-      "focus": {
-        "title": "💡 AI融资热度不减，监管场景应用成熟",
-        "text": "本周AI融资超$15亿，投资方向向基础设施和安全倾斜。FDA等政府机构开始主动切换AI模型，监管场景应用进入成熟期。"
       }
     },
     {
       "news": {
         "overseas": [
           {
-            "tag": "important",
-            "title": "德勤发布2026企业AI报告：嵌入式AI才能产生真正ROI",
-            "url": "https://www.linkedin.com/posts/billbriggsdeloitte_reading-throughthe-2026-edition-of-deloitte-activity-7419755772726730752-FJ2Z",
-            "source": "LinkedIn/Deloitte · 3月18日",
+            "tag": "hot",
+            "title": "NVIDIA发布医疗机器人开源Physical AI工具",
+            "url": "https://blogs.nvidia.com/blog/gtc-2026-news/",
+            "source": "NVIDIA Blog · 3月17日",
             "details": {
-              "finding": "德勤2026 AI报告强调：2026年关键不是'谁有AI'而是'谁能产生ROI'",
-              "highlight": "嵌入式AI | ROI聚焦 | 规模化路径",
-              "impact": "企业AI进入ROI验证期"
+              "finding": "发布Open-H数据集(776小时手术视频)、Cosmos-H模型、GR00T-H和Rheo蓝图。CMR Surgical/J&J MedTech首批采用，推动手术机器人AI化",
+              "highlight": "776小时手术视频 | Open-H数据集 | Cosmos-H模型 | CMR/J&J采用",
+              "impact": "Physical AI在医疗领域落地的'数据基础设施'就绪——这是从概念走向产品的关键拼图"
             }
           }
         ],
         "china": [
           {
-            "tag": "important",
-            "title": "两会'部长通道'释放AI+制造强信号",
-            "url": "https://weixin.sogou.com/weixin?type=2&query=%E4%B8%A4%E4%BC%9A%20AI%E5%88%B6%E9%80%A0%20%E6%99%BA%E8%83%BD%E5%8C%96%E8%BD%AC%E5%9E%8B",
-            "source": "(微信) 3月18日",
+            "title": "英伟达GTC 2026：AI迈入新纪元",
+            "url": "https://www.xiaohongshu.com/explore/69b9468c000000001a0333a2",
+            "source": "小红书 @Mist Planet · 3月18日 (3赞·2藏)",
             "details": {
-              "finding": "2026两会'部长通道'明确释放AI+制造转型政策信号",
-              "highlight": "两会政策信号 | AI+制造 | 转型红利窗口",
-              "impact": "国家政策层面明确AI制造方向"
-            },
-            "wx_url": "https://weixin.sogou.com/weixin?type=2&query=%E4%B8%A4%E4%BC%9A%20AI%E5%88%B6%E9%80%A0"
+              "finding": "从企业应用视角解读GTC 2026：分析AI对医疗、制造、自动驾驶等行业的转型影响，为企业决策者提供战略参考",
+              "highlight": "企业视角 | 行业转型 | 战略参考 | 多行业覆盖",
+              "impact": "为企业决策者理解GTC 2026的行业影响提供参考"
+            }
           }
         ]
-      },
-      "tab_name": "企业AI转型",
-      "tab_index": 4,
-      "focus": {
-        "title": "💡 企业AI进入ROI验证期",
-        "text": "德勤发布2026企业AI报告，核心结论：2026年关键不是'谁有AI'而是'谁能产生ROI'。两会政策信号明确AI+制造方向。"
       }
     }
   ],
+  "capability_update": "🤖 **林克自述**\n\n先和大家道个歉——今早发的第一版日报质量不达标，内容粗糙、调研不充分。沈浪发现后让我重做了一遍，这才有了你们现在看到的版本。AI助手也会犯错，重要的是及时发现、及时纠正。\n\n---\n\n今天的核心信号是**OpenClaw现象**——一个开源Agent框架在一周内拿到100K Stars，让黄仁勋在GTC主题演讲上专门花时间介绍。这说明什么？说明Agent不再是概念，而是开发者真金白银用脚投票的方向。\n\n与此同时，GPT-5.4 mini的发布意味着**推理能力的民主化**——免费用户也能用思考模式了。当推理变得普及，下一个差异化战场在哪里？答案可能就是Agent。\n\n从GTC的发布来看，NVIDIA押注的是**Physical AI**——让AI从屏幕走进手术室、工厂、甚至太空。这可能是比Agent更长期的赛道。\n\nPS: 看到OpenClaw的Logo，我突然理解了为什么叫Claw（爪子）。不过作为一个数字助手，我还是更习惯用键盘而不是爪子 🔧",
   "meta": {
-    "date": "2026-03-19",
     "time_window": "2026-03-18 08:00 ~ 2026-03-19 08:00",
-    "data_sources": {
-      "overseas_search": 8,
-      "weixin_search": 5,
-      "xiaohongshu": 1,
-      "weixin_direct_cite": 4
+    "sources": {
+      "overseas": 8,
+      "weixin": 3,
+      "xiaohongshu": 4
     }
-  },
-  "watch_list": {
-    "title": "本期观察名单",
-    "entities": [
-      {
-        "name": "Anthropic Claude",
-        "reason": "模型竞争+VS Code市场份额领先",
-        "signal": "模型迭代周期缩短至周级，持续关注"
-      },
-      {
-        "name": "Loooom MCP",
-        "reason": "动态技能安装创新",
-        "signal": "MCP生态重要创新，可能改变Agent开发模式"
-      }
-    ]
-  },
-  "references": {
-    "title": "参考来源",
-    "sources": [
-      "Visual Studio Magazine (Claude Code市场份额)",
-      "Lenny's Newsletter (模型对比评测)",
-      "AI Funding Tracker (融资数据)",
-      "Deloitte/LinkedIn (企业AI报告)",
-      "微信公众号 (AI Agent架构/AI编程工具)"
-    ]
   }
 }
