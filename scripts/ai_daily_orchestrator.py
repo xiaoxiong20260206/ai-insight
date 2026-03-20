@@ -459,7 +459,7 @@ def _agent_instruction(key: str, date: str, is_retry: bool) -> str:
             f"执行AI日报搜索调研 ({date})。"
             "按 daily-report/workflow.md 的 Step 0.5 + Step 1 + Step 2 执行。"
             "完成后执行: python3 scripts/ai_daily_orchestrator.py complete --step 1 "
-            '--context "搜索了N个海外源+N次微信双轨+N次小红书; 发现N个热点: ...; 选定N条新闻(海外N/国内N); 微信直引N条"'
+            '--context "搜索了N个海外源+N次微信双轨; 发现N个热点: ...; 选定N条新闻(海外N/国内N); 微信直引N条"'
         )
     elif key == "content":
         return (

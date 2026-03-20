@@ -24,14 +24,19 @@ AI日报质量门脚本 (Quality Gate)
   12. ⭐ [v9.1升级] 板块分类验证 → WARNING升级为ERROR
   13. ⭐ [v9.1升级] 地区分类验证 → WARNING升级为ERROR
   14. ⭐ [v3.0新增] 跨天去重
-  15. ⭐ [v9.1升级] 信息源多样性 (微信>=2 + 小红书>=1 + 集中度<=40%) → 全部ERROR
+  15. ⭐ [v9.8更新] 信息源多样性 (微信>=2 + 集中度<=40%) → ERROR（小红书改为可选）
   16. ⭐ [v2.0新增] HTML链接规范 (target="_blank" + 无#占位)
   17. MD/HTML文件存在性
   18. 6处联动更新检查
   19. 外部版同步检查
 
 作者: 林克 (沈浪的AI分身)
-版本: v10.0.0 (2026-03-19)
+版本: v10.1.0 (2026-03-20)
+
+v10.1更新 (小红书搜索策略调整 — v9.8):
+- check_source_diversity: 小红书检查从ERROR降级为WARNING
+- 默认不搜索小红书，仅当用户明确要求时才执行
+- 小红书覆盖=0不再阻断部署，仅显示提示
 
 v10.0更新 (林克自述必填 — 经验43):
 - 新增check_capability_update检查 — capability_update字段必填
@@ -41,9 +46,9 @@ v10.0更新 (林克自述必填 — 经验43):
 v9.1更新 (WARNING→ERROR升级 — 经验40):
 - check_board_classification: WARNING→ERROR，板块分类错误必须阻断部署
 - check_region_classification: WARNING→ERROR，地区分类错误必须阻断部署
-- check_source_diversity: WARNING→ERROR + 新增小红书覆盖>=1检查
+- check_source_diversity: 小红书检查改为WARNING（v9.8）
   - 微信直引<2 → ERROR
-  - 小红书覆盖=0 → ERROR
+  - 小红书覆盖=0 → WARNING（仅提示，不阻断）
   - 单域名占比>40% → ERROR
 - 增强板块分类关键词映射(防止RTX PRO/DGX被误分到AI Coding)
 - 根因: 3月18日复盘“同一类问题反复出现”的根本原因—WARNING级别等于不存在
@@ -761,11 +766,11 @@ def check_cross_day_dedup(date_str: str) -> CheckResult:
 
 
 def check_source_diversity(date_str: str) -> CheckResult:
-    """检查X: [v9.1升级] 信息源多样性检查（含微信+小红书覆盖）
+    """检查X: [v9.8更新] 信息源多样性检查（含微信覆盖，小红书改为可选）
     
-    规则（v9.1 全部升级为ERROR，从警告变为硬阻断）:
+    规则（v9.8更新）:
     1. 微信公众号覆盖: 新闻条目中至少2条来自或引用微信公众号 → ERROR
-    2. 小红书覆盖: 至少1条小红书数据源 → ERROR (v9.1新增)
+    2. 小红书覆盖: 可选，缺失时仅显示警告（v9.8变更：默认不搜索小红书）
     3. 信息源集中度: 单一域名占比不超过40% → ERROR
     """
     json_path = DATA_PATH / f"daily-content-{date_str}.json"
@@ -864,10 +869,11 @@ def check_source_diversity(date_str: str) -> CheckResult:
             else:
                 errors.append(f"❌ 微信覆盖为0(要求>=2条直接引用)")
         
-        # 小红书覆盖不足: 0条 → ERROR (v9.1新增)
+        # 小红书覆盖不足: 0条 → WARNING (仅提示, v9.8变更: 默认不搜索小红书)
         effective_xhs = max(xhs_count, xhs_refs_in_meta)
+        xhs_warning = None
         if effective_xhs == 0:
-            errors.append(f"❌ 小红书覆盖为0(要求>=1条，需执行xiaohongshu search)")
+            xhs_warning = "⚠️ 小红书覆盖为0(如需搜索小红书请明确说明)"
         
         # 信息源集中度 > 40% → ERROR
         for domain, count in sorted(domain_counts.items(), key=lambda x: -x[1]):
@@ -887,6 +893,15 @@ def check_source_diversity(date_str: str) -> CheckResult:
         domain_summary = ", ".join(f"{d}({c})" for d, c in 
                                    sorted(domain_counts.items(), key=lambda x: -x[1])[:5])
         coverage_msg = f"微信直引{weixin_direct}+交叉{weixin_crossref}, 小红书{effective_xhs}"
+        
+        # v9.8: 如果有小红书警告，但没有错误，作为WARNING返回(不阻断部署)
+        if xhs_warning and not errors:
+            return CheckResult(
+                "信息源多样性", True,  # passed=True，不阻断
+                f"{coverage_msg}, Top域名: {domain_summary}. {xhs_warning}",
+                severity="warning"
+            )
+        
         return CheckResult(
             "信息源多样性", True, 
             f"{coverage_msg}, Top域名: {domain_summary}"
