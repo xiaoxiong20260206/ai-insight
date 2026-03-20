@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 1: 问题与诊断 - AI产品终极形态思考</title>
+    <!-- Favicon - 思考/洞察类 -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231A7F37'/><path d='M16 6c-4.4 0-8 3.6-8 8 0 2.5 1.2 4.8 3 6.2V24l5-3 5 3v-3.8c1.8-1.4 3-3.7 3-6.2 0-4.4-3.6-8-8-8z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/><line x1='16' y1='10' x2='16' y2='15' stroke='white' stroke-width='2' stroke-linecap='round'/><circle cx='16' cy='18' r='1' fill='white'/></svg>">
+    <style>
+        :root {
+            --color-success: #1A7F37;
+            --color-success-light: #2DA44E;
+            --color-danger: #CF222E;
+            --color-warning: #BF8700;
+            --color-warning-dark: #9A6700;
+            --color-info: #0969DA;
+            --color-purple: #7C3AED;
+            --color-text-primary: #1F2328;
+            --color-text-secondary: #4D5561;
+            --color-text-muted: #656D76;
+            --color-border: #D0D7DE;
+            --color-border-light: #E8ECF0;
+            --color-bg: #F6F8FA;
+            --color-bg-card: #FFFFFF;
+            --color-bg-table-header: #F3F5F7;
+            --gradient-success: linear-gradient(135deg, #1A7F37 0%, #2DA44E 100%);
+            --gradient-badge: linear-gradient(135deg, #E6F7ED 0%, #E1F0F8 100%);
+            --shadow-sm: 0 1px 3px rgba(31, 35, 40, 0.06), 0 1px 2px rgba(31, 35, 40, 0.04);
+            --shadow-card: 0 2px 8px rgba(31, 35, 40, 0.06), 0 1px 2px rgba(31, 35, 40, 0.04);
+            --shadow-hover: 0 6px 16px rgba(26, 127, 55, 0.15), 0 2px 6px rgba(26, 127, 55, 0.1);
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 14px;
+            --radius-full: 999px;
+            --font-family: -apple-system, "system-ui", "Segoe UI", "Noto Sans SC", Helvetica, Arial, sans-serif;
+            --heading-1: 30px;
+            --heading-2: 20px;
+            --heading-3: 16px;
+            --heading-4: 14px;
+            --body-text: 15px;
+            --body-small: 14px;
+            --caption: 12px;
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+            --content-max-width: 980px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-family);
+            font-size: var(--body-text);
+            line-height: 1.65;
+            color: var(--color-text-secondary);
+            background: var(--color-bg);
+        }
+
+        .container {
+            max-width: var(--content-max-width);
+            margin: 0 auto;
+            padding: var(--spacing-lg) var(--spacing-md) 48px;
+        }
+
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 4px;
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 6px;
+            margin-bottom: var(--spacing-lg);
+            box-shadow: var(--shadow-card);
+            position: sticky;
+            top: 12px;
+            z-index: 100;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 12px 16px;
+            background: transparent;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+            text-decoration: none;
+        }
+
+        .tab-btn:hover {
+            background: var(--color-bg-table-header);
+            color: var(--color-text-secondary);
+        }
+
+        .tab-btn.active {
+            background: var(--gradient-success);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(26, 127, 55, 0.25);
+        }
+
+        .tab-btn-num {
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.06);
+            border-radius: var(--radius-sm);
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .tab-btn.active .tab-btn-num {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: var(--spacing-xl) var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            background: linear-gradient(135deg, rgba(26, 127, 55, 0.06) 0%, rgba(9, 105, 218, 0.04) 100%);
+            border-radius: var(--radius-lg);
+        }
+
+        .page-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            background: var(--gradient-success);
+            color: white;
+            border-radius: var(--radius-full);
+            font-size: var(--caption);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .page-title {
+            font-size: var(--heading-1);
+            font-weight: 800;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            font-size: var(--body-text);
+            color: var(--color-text-secondary);
+        }
+
+        /* Section */
+        .section {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            box-shadow: var(--shadow-card);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 1px solid var(--color-border-light);
+        }
+
+        .section-number {
+            width: 32px;
+            height: 32px;
+            background: var(--gradient-success);
+            color: #fff;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            flex-shrink: 0;
+            box-shadow: 0 2px 4px rgba(26, 127, 55, 0.25);
+        }
+
+        .section-title {
+            font-size: var(--heading-2);
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        .subsection-title {
+            font-size: var(--heading-3);
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin: var(--spacing-lg) 0 var(--spacing-md);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 2px solid var(--color-border-light);
+        }
+
+        /* Insight Box */
+        .insight-box {
+            border-left: 3px solid var(--color-warning);
+            background: rgba(191, 135, 0, 0.06);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: var(--spacing-md) 20px;
+            margin: var(--spacing-lg) 0;
+        }
+
+        .insight-label {
+            font-size: var(--caption);
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-warning-dark);
+            margin-bottom: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .insight-label::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--color-warning);
+            border-radius: 50%;
+        }
+
+        .insight-text {
+            font-size: var(--body-text);
+            font-weight: 600;
+            line-height: 1.6;
+            color: var(--color-text-primary);
+        }
+
+        .insight-text em {
+            color: var(--color-warning-dark);
+            font-style: normal;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .stat-card {
+            background: var(--color-bg-card);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--color-border-light);
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-normal);
+        }
+
+        .stat-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+            border-color: var(--color-success);
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .stat-value.green { color: var(--color-success); }
+        .stat-value.red { color: var(--color-danger); }
+        .stat-value.blue { color: var(--color-info); }
+
+        .stat-label {
+            font-size: var(--caption);
+            color: var(--color-text-muted);
+            font-weight: 500;
+        }
+
+        /* Table */
+        .table-wrap {
+            overflow-x: auto;
+            margin: var(--spacing-md) 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: var(--body-small);
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border-light);
+            vertical-align: middle;
+        }
+
+        th {
+            background: var(--color-bg-table-header);
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            font-size: var(--heading-4);
+            white-space: nowrap;
+        }
+
+        tbody tr:hover td { 
+            background: rgba(0, 0, 0, 0.02); 
+        }
+
+        td:first-child { 
+            font-weight: 500;
+            color: var(--color-text-primary);
+        }
+
+        /* Tags */
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 8px;
+            border-radius: var(--radius-full);
+            font-size: var(--caption);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .tag-green { background: rgba(26, 127, 55, 0.12); color: var(--color-success); }
+        .tag-red { background: rgba(207, 34, 46, 0.12); color: var(--color-danger); }
+        .tag-blue { background: rgba(9, 105, 218, 0.12); color: var(--color-info); }
+        .tag-orange { background: rgba(234, 88, 12, 0.12); color: #EA580C; }
+        .tag-purple { background: rgba(124, 58, 237, 0.12); color: #7C3AED; }
+
+        /* Quote */
+        .quote {
+            background: var(--color-bg-table-header);
+            border-left: 3px solid var(--color-info);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: var(--spacing-md) 20px;
+            margin: var(--spacing-lg) 0;
+        }
+
+        .quote-text {
+            font-size: var(--body-text);
+            font-style: italic;
+            color: var(--color-text-primary);
+            line-height: 1.7;
+        }
+
+        /* Diagram Box */
+        .diagram-box {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: var(--radius-md);
+            padding: 20px;
+            margin: var(--spacing-lg) 0;
+            font-family: "SF Mono", Monaco, monospace;
+            font-size: 11px;
+            line-height: 1.5;
+            overflow-x: auto;
+            white-space: pre;
+        }
+
+        .diagram-box .hl { color: #4ade80; font-weight: bold; }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+
+        @media (max-width: 768px) {
+            .feature-grid { grid-template-columns: 1fr; }
+        }
+
+        .feature-card {
+            background: var(--color-bg-table-header);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
+        }
+
+        .feature-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--gradient-success);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .feature-title {
+            font-size: var(--heading-4);
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .feature-desc {
+            font-size: var(--caption);
+            color: var(--color-text-secondary);
+        }
+
+        /* Navigation Footer */
+        .nav-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-lg) 0;
+            border-top: 1px solid var(--color-border-light);
+            margin-top: var(--spacing-xl);
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            text-decoration: none;
+            font-size: var(--body-small);
+            font-weight: 500;
+            color: var(--color-info);
+            transition: color var(--transition-fast);
+        }
+
+        .nav-link:hover { color: var(--color-success); }
+        .nav-link.next { color: var(--color-success); }
+
+        p { margin: var(--spacing-sm) 0; }
+        strong { color: var(--color-text-primary); }
+
+        /* Insight Box Color Variants */
+        .insight-box.green {
+            border-left-color: var(--color-success);
+            background: rgba(26, 127, 55, 0.06);
+        }
+        .insight-box.green .insight-label { color: var(--color-success); }
+        .insight-box.green .insight-text em { color: var(--color-success); }
+        
+        .insight-box.blue {
+            border-left-color: var(--color-info);
+            background: rgba(9, 105, 218, 0.06);
+        }
+        .insight-box.blue .insight-label { color: var(--color-info); }
+        .insight-box.blue .insight-text em { color: var(--color-info); }
+        
+        .insight-box.orange {
+            border-left-color: #EA580C;
+            background: rgba(234, 88, 12, 0.06);
+        }
+        .insight-box.orange .insight-label { color: #EA580C; }
+        .insight-box.orange .insight-text em { color: #EA580C; }
+        
+        .insight-box.purple {
+            border-left-color: #7C3AED;
+            background: rgba(124, 58, 237, 0.06);
+        }
+        .insight-box.purple .insight-label { color: #7C3AED; }
+        .insight-box.purple .insight-text em { color: #7C3AED; }
+
+        /* Card Hover Effects with Top Indicator */
+        .section {
+            position: relative;
+            overflow: hidden;
+        }
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-success);
+            opacity: 0;
+            transition: var(--transition-normal);
+        }
+        .section:hover::before {
+            opacity: 1;
+        }
+        .section:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .feature-card {
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition-normal);
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-success);
+            opacity: 0;
+            transition: var(--transition-normal);
+        }
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--color-success);
+        }
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Text Selection */
+        ::selection {
+            background: rgba(26, 127, 55, 0.2);
+            color: var(--color-text-primary);
+        }
+
+        /* Focus States */
+        :focus-visible {
+            outline: 2px solid var(--color-success);
+            outline-offset: 2px;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--color-bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-border);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-text-muted);
+        }
+
+        @media (max-width: 768px) {
+            .page-title { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Tab Navigation -->
+        <nav class="tab-nav">
+            <a href="index.html" class="tab-btn">
+                <span class="tab-btn-num">🏠</span>
+                <span>首页</span>
+            </a>
+            <a href="part1.html" class="tab-btn active">
+                <span class="tab-btn-num">1</span>
+                <span>问题与诊断</span>
+            </a>
+            <a href="part2.html" class="tab-btn">
+                <span class="tab-btn-num">2</span>
+                <span>关键抉择</span>
+            </a>
+            <a href="part3.html" class="tab-btn">
+                <span class="tab-btn-num">3</span>
+                <span>验证分析</span>
+            </a>
+            <a href="part4.html" class="tab-btn">
+                <span class="tab-btn-num">4</span>
+                <span>AI分身实证</span>
+            </a>
+            <a href="part5.html" class="tab-btn">
+                <span class="tab-btn-num">5</span>
+                <span>技术实施</span>
+            </a>
+            <a href="architecture.html" class="tab-btn">
+                <span class="tab-btn-num">🗺️</span>
+                <span>架构全景</span>
+            </a>
+        </nav>
+
+        <!-- Page Header -->
+        <header class="page-header">
+            <div class="page-badge">Part 1</div>
+            <h1 class="page-title">问题与诊断</h1>
+            <p class="page-subtitle">第1-4章：问题定义、现状诊断、终态判断、核心架构</p>
+        </header>
+
+        <!-- Chapter 1 -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-number">1</span>
+                <h2 class="section-title">问题定义：我们在回答什么问题</h2>
+            </div>
+
+            <div class="insight-box">
+                <div class="insight-label">核心问题</div>
+                <p class="insight-text">
+                    在AI技术快速发展的3-5年内，什么样的<em>产品架构</em>能够成为AI产品的主流形态？
+                </p>
+            </div>
+
+            <h3 class="subsection-title">为什么问"产品架构"</h3>
+            <p>这不是一个技术问题（"用什么模型"），也不是一个功能问题（"做什么功能"），而是一个<strong>架构问题</strong>——决定了产品的可扩展性、护城河和长期价值。</p>
+
+            <h3 class="subsection-title">约束条件</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>约束</th><th>说明</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>时间窗口</strong></td><td>3-5年，不是遥远的未来，也不是当下</td></tr>
+                        <tr><td><strong>技术基础</strong></td><td>基于当前可见的技术趋势（LLM、Agent、MCP等）</td></tr>
+                        <tr><td><strong>价值导向</strong></td><td>能真正创造用户价值，而非技术展示</td></tr>
+                        <tr><td><strong>商业可行</strong></td><td>能形成可持续的商业模式</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Chapter 2 -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-number">2</span>
+                <h2 class="section-title">现状诊断：当前AI产品的根本问题</h2>
+            </div>
+
+            <h3 class="subsection-title">GenAI悖论</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value green">78%</div>
+                    <div class="stat-label">员工使用GenAI</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value red">80%</div>
+                    <div class="stat-label">未贡献生产力</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value blue">47%</div>
+                    <div class="stat-label">不知如何使用</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value red">32%</div>
+                    <div class="stat-label">不信任AI</div>
+                </div>
+            </div>
+            <p>大多数人在"玩"AI，而不是"用"AI。</p>
+
+            <h3 class="subsection-title">LLM的四大局限</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>局限</th><th>表现</th><th>后果</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>无记忆</strong></td><td>每次对话都是全新开始</td><td>无法积累对用户的理解</td></tr>
+                        <tr><td><strong>无主动</strong></td><td>只能被动响应</td><td>无法主动发起任务或预判需求</td></tr>
+                        <tr><td><strong>无行动</strong></td><td>只能输出文本</td><td>无法执行真正的操作</td></tr>
+                        <tr><td><strong>无成长</strong></td><td>能力不会提升</td><td>用100次和用1次能力一样</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="subsection-title">工具割裂问题</h3>
+            <p>当前AI产品格局：ChatGPT、Cursor、Perplexity、Notion AI、Claude... 每个场景一个工具，用户不得不在不同工具间切换。</p>
+            <div class="quote">
+                <p class="quote-text">
+                    <strong>问题本质</strong>：用户需要的不是一堆"工具"，而是一个能帮他处理各种事务的"伙伴"。
+                </p>
+            </div>
+        </section>
+
+        <!-- Chapter 3 -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-number">3</span>
+                <h2 class="section-title">终态判断：什么是"终极形态"</h2>
+            </div>
+
+            <div class="insight-box">
+                <div class="insight-label">终态定义</div>
+                <p class="insight-text">
+                    终态 = <em>用户认知中的"必需品"</em> + <em>难以被替代</em>
+                </p>
+            </div>
+
+            <h3 class="subsection-title">终态的三个标准</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <div class="feature-title">不可替代性</div>
+                    <div class="feature-desc">用户不会轻易切换到其他产品</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <div class="feature-title">持续价值</div>
+                    <div class="feature-desc">越用越有价值，而不是一次性消费</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <div class="feature-title">网络效应</div>
+                    <div class="feature-desc">用户越多，产品越强</div>
+                </div>
+            </div>
+
+            <h3 class="subsection-title">类比：智能手机的终极形态</h3>
+            <p>智能手机不是"更好的功能机"，而是"个人计算中心"。同样，AI产品的终极形态不是"更好的搜索引擎"或"更好的写作工具"，而是<strong>"个人AI中心"</strong>。</p>
+        </section>
+
+        <!-- Chapter 4 -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-number">4</span>
+                <h2 class="section-title">核心思考：为什么是AgentCore + Skills</h2>
+            </div>
+
+            <div class="insight-box">
+                <div class="insight-label">核心架构</div>
+                <p class="insight-text">
+                    AI产品的终极形态 = <em>AgentCore</em>（通用能力内核）+ <em>Skills</em>（可扩展专业能力）
+                </p>
+            </div>
+
+            <h3 class="subsection-title">AgentCore的六大能力</h3>
+            <div class="diagram-box">┌─────────────────────────────────────────────────────────────────┐
+│                       <span class="hl">AgentCore 架构</span>                            │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│   ┌───────────────┐  ┌───────────────┐  ┌───────────────┐     │
+│   │   <span class="hl">Memory</span>      │  │  <span class="hl">Reasoning</span>   │  │   <span class="hl">Planning</span>   │     │
+│   │   长期记忆    │  │   推理引擎    │  │   规划引擎    │     │
+│   │   偏好学习    │  │   意图理解    │  │   任务分解    │     │
+│   └───────────────┘  └───────────────┘  └───────────────┘     │
+│                                                                 │
+│   ┌───────────────┐  ┌───────────────┐  ┌───────────────┐     │
+│   │<span class="hl">Orchestration</span> │  │  <span class="hl">Reflection</span>  │  │ <span class="hl">Integration</span>  │     │
+│   │   调度编排    │  │   反思优化    │  │   工具集成    │     │
+│   │   能力组合    │  │   自我改进    │  │   MCP/API     │     │
+│   └───────────────┘  └───────────────┘  └───────────────┘     │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘</div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>能力</th><th>说明</th><th>解决什么问题</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Memory 记忆</strong></td><td>长期记忆系统</td><td>解决LLM“无记忆”问题</td></tr>
+                        <tr><td><strong>Reasoning 推理</strong></td><td>推理引擎</td><td>复杂问题分析和决策</td></tr>
+                        <tr><td><strong>Planning 规划</strong></td><td>规划引擎</td><td>多步骤任务分解和安排</td></tr>
+                        <tr><td><strong>Orchestration 编排</strong></td><td>调度编排</td><td>多能力组合、并行执行</td></tr>
+                        <tr><td><strong>Reflection 反思</strong></td><td>反思优化</td><td>自我改进、策略调整</td></tr>
+                        <tr><td><strong>Integration 集成</strong></td><td>工具集成</td><td>连接外部系统（MCP/API）</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="subsection-title">Skills：可插拔的专业能力</h3>
+            <p>Skills不是"函数调用"，而是<strong>"程序性知识包"</strong>——Agent通过"学习"Skills获得新能力。</p>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>维度</th><th>Tools（传统）</th><th>Skills（新范式）</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>定义</td><td>函数调用</td><td><span class="tag tag-green">程序性知识包</span></td></tr>
+                        <tr><td>使用</td><td>调用执行</td><td><span class="tag tag-green">学习后执行</span></td></tr>
+                        <tr><td>灵活性</td><td>参数固定</td><td><span class="tag tag-green">可根据上下文调整</span></td></tr>
+                        <tr><td>可学习</td><td>工具是固定的</td><td><span class="tag tag-green">Agent可学习新Skill</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="subsection-title">概念关系图：AgentCore · Skills · Tools · MCP</h3>
+            <p>为避免概念混淆，明确四个核心概念的边界和关系：</p>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>概念</th><th>定义</th><th>类比</th><th>关系</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>AgentCore</strong></td><td>统一认知内核，具备记忆/推理/规划/编排/反思/集成六大能力</td><td>人的大脑</td><td>所有能力的基座，调度Skills和Tools</td></tr>
+                        <tr><td><strong>Skills</strong></td><td>程序性知识包，封装特定领域的方法论和执行流程</td><td>人学会的技能（写代码/做调研）</td><td>被 AgentCore 加载和编排，可调用 Tools</td></tr>
+                        <tr><td><strong>Tools</strong></td><td>原子化的函数调用，单一功能的执行单元</td><td>人使用的工具（锤子/计算器）</td><td>被 Skills 或 AgentCore 直接调用</td></tr>
+                        <tr><td><strong>MCP</strong></td><td>模型上下文协议，统一的外部服务连接标准</td><td>人世界的USB接口</td><td>连接层，让 AgentCore 通过统一协议访问外部服务</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="insight-box green">
+                <div class="insight-label">一句话记住</div>
+                <p class="insight-text">
+                    AgentCore是<em>大脑</em>，Skills是<em>技能</em>，Tools是<em>工具</em>，MCP是<em>接口</em>。大脑调度技能，技能使用工具，工具通过接口连接外部世界。
+                </p>
+            </div>
+        </section>
+
+        <!-- Navigation Footer -->
+        <nav class="nav-footer">
+            <a href="index.html" class="nav-link">← 返回首页</a>
+            <span style="color: var(--color-text-muted);">Part 1 of 4</span>
+            <a href="part2.html" class="nav-link next">Part 2: 关键抉择 →</a>
+        </nav>
+    </div>
+</body>
+</html>

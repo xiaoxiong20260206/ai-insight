@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 3: 验证分析 - AI产品终极形态思考</title>
+    <!-- Favicon - 思考/洞察类 -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231A7F37'/><path d='M16 6c-4.4 0-8 3.6-8 8 0 2.5 1.2 4.8 3 6.2V24l5-3 5 3v-3.8c1.8-1.4 3-3.7 3-6.2 0-4.4-3.6-8-8-8z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/><line x1='16' y1='10' x2='16' y2='15' stroke='white' stroke-width='2' stroke-linecap='round'/><circle cx='16' cy='18' r='1' fill='white'/></svg>">
+    <style>
+        :root {
+            --color-success: #1A7F37;
+            --color-success-light: #2DA44E;
+            --color-danger: #CF222E;
+            --color-warning: #BF8700;
+            --color-warning-dark: #9A6700;
+            --color-info: #0969DA;
+            --color-teal: #14B8A6;
+            --color-text-primary: #1F2328;
+            --color-text-secondary: #4D5561;
+            --color-text-muted: #656D76;
+            --color-border: #D0D7DE;
+            --color-border-light: #E8ECF0;
+            --color-bg: #F6F8FA;
+            --color-bg-card: #FFFFFF;
+            --color-bg-table-header: #F3F5F7;
+            --gradient-success: linear-gradient(135deg, #1A7F37 0%, #2DA44E 100%);
+            --gradient-teal: linear-gradient(135deg, #14B8A6 0%, #06B6D4 100%);
+            --shadow-sm: 0 1px 3px rgba(31, 35, 40, 0.06), 0 1px 2px rgba(31, 35, 40, 0.04);
+            --shadow-card: 0 2px 8px rgba(31, 35, 40, 0.06), 0 1px 2px rgba(31, 35, 40, 0.04);
+            --shadow-hover: 0 6px 16px rgba(26, 127, 55, 0.15), 0 2px 6px rgba(26, 127, 55, 0.1);
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 14px;
+            --radius-full: 999px;
+            --font-family: -apple-system, "system-ui", "Segoe UI", "Noto Sans SC", Helvetica, Arial, sans-serif;
+            --heading-1: 30px;
+            --heading-2: 20px;
+            --heading-3: 16px;
+            --heading-4: 14px;
+            --body-text: 15px;
+            --body-small: 14px;
+            --caption: 12px;
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+            --content-max-width: 980px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-family);
+            font-size: var(--body-text);
+            line-height: 1.65;
+            color: var(--color-text-secondary);
+            background: var(--color-bg);
+        }
+
+        .container {
+            max-width: var(--content-max-width);
+            margin: 0 auto;
+            padding: var(--spacing-lg) var(--spacing-md) 48px;
+        }
+
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 4px;
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 6px;
+            margin-bottom: var(--spacing-lg);
+            box-shadow: var(--shadow-card);
+            position: sticky;
+            top: 12px;
+            z-index: 100;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 12px 16px;
+            background: transparent;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+            text-decoration: none;
+        }
+
+        .tab-btn:hover {
+            background: var(--color-bg-table-header);
+            color: var(--color-text-secondary);
+        }
+
+        .tab-btn.active {
+            background: var(--gradient-success);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(26, 127, 55, 0.25);
+        }
+
+        .tab-btn-num {
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.06);
+            border-radius: var(--radius-sm);
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .tab-btn.active .tab-btn-num {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: var(--spacing-xl) var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            background: linear-gradient(135deg, rgba(20, 184, 166, 0.08) 0%, rgba(6, 182, 212, 0.06) 100%);
+            border-radius: var(--radius-lg);
+        }
+
+        .page-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            background: var(--color-teal);
+            color: white;
+            border-radius: var(--radius-full);
+            font-size: var(--caption);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .page-title {
+            font-size: var(--heading-1);
+            font-weight: 800;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            font-size: var(--body-text);
+            color: var(--color-text-secondary);
+        }
+
+        /* Section */
+        .section {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            box-shadow: var(--shadow-card);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 1px solid var(--color-border-light);
+        }
+
+        .section-number {
+            width: 32px;
+            height: 32px;
+            background: var(--gradient-teal);
+            color: #fff;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            flex-shrink: 0;
+            box-shadow: 0 2px 4px rgba(20, 184, 166, 0.25);
+        }
+
+        .section-title {
+            font-size: var(--heading-2);
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        .subsection-title {
+            font-size: var(--heading-3);
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin: var(--spacing-lg) 0 var(--spacing-md);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 2px solid var(--color-border-light);
+        }
+
+        /* Insight Box */
+        .insight-box {
+            border-left: 3px solid var(--color-teal);
+            background: rgba(20, 184, 166, 0.06);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: var(--spacing-md) 20px;
+            margin: var(--spacing-lg) 0;
+        }
+
+        .insight-label {
+            font-size: var(--caption);
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-teal);
+            margin-bottom: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .insight-label::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--color-teal);
+            border-radius: 50%;
+        }
+
+        .insight-text {
+            font-size: var(--body-text);
+            font-weight: 600;
+            line-height: 1.6;
+            color: var(--color-text-primary);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .stat-card {
+            background: var(--color-bg-card);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--color-border-light);
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-normal);
+        }
+
+        .stat-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+            border-color: var(--color-success);
+        }
+
+        .stat-value {
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .stat-value.green { color: var(--color-success); }
+        .stat-value.blue { color: var(--color-info); }
+        .stat-value.teal { color: var(--color-teal); }
+
+        .stat-label {
+            font-size: var(--caption);
+            color: var(--color-text-muted);
+            font-weight: 500;
+        }
+
+        /* Table */
+        .table-wrap {
+            overflow-x: auto;
+            margin: var(--spacing-md) 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: var(--body-small);
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border-light);
+            vertical-align: middle;
+        }
+
+        th {
+            background: var(--color-bg-table-header);
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            font-size: var(--heading-4);
+            white-space: nowrap;
+        }
+
+        tbody tr:hover td { 
+            background: rgba(0, 0, 0, 0.02); 
+        }
+
+        td:first-child { 
+            font-weight: 500;
+            color: var(--color-text-primary);
+        }
+
+        /* Tags */
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 8px;
+            border-radius: var(--radius-full);
+            font-size: var(--caption);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .tag-green { background: rgba(26, 127, 55, 0.12); color: var(--color-success); }
+        .tag-yellow { background: rgba(191, 135, 0, 0.12); color: var(--color-warning-dark); }
+        .tag-blue { background: rgba(9, 105, 218, 0.12); color: var(--color-info); }
+        .tag-orange { background: rgba(234, 88, 12, 0.12); color: #EA580C; }
+        .tag-purple { background: rgba(124, 58, 237, 0.12); color: #7C3AED; }
+        .tag-teal { background: rgba(20, 184, 166, 0.12); color: var(--color-teal); }
+
+        /* Comparison Grid */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+
+        @media (max-width: 600px) {
+            .comparison-grid { grid-template-columns: 1fr; }
+        }
+
+        .comparison-card {
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+        }
+
+        .comparison-card.bad {
+            background: rgba(207, 34, 46, 0.05);
+            border-left: 3px solid var(--color-danger);
+        }
+
+        .comparison-card.good {
+            background: rgba(20, 184, 166, 0.05);
+            border-left: 3px solid var(--color-teal);
+        }
+
+        .comparison-title {
+            font-size: var(--heading-4);
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .comparison-card.bad .comparison-title { color: var(--color-danger); }
+        .comparison-card.good .comparison-title { color: var(--color-teal); }
+
+        .comparison-list {
+            list-style: none;
+        }
+
+        .comparison-list li {
+            padding: 6px 0;
+            padding-left: 20px;
+            position: relative;
+            font-size: var(--body-small);
+            color: var(--color-text-secondary);
+        }
+
+        .comparison-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            color: var(--color-text-muted);
+        }
+
+        /* Quote */
+        .quote {
+            background: linear-gradient(135deg, rgba(9, 105, 218, 0.08), rgba(20, 184, 166, 0.06));
+            border-left: 3px solid var(--color-info);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: var(--spacing-md) 20px;
+            margin: var(--spacing-lg) 0;
+        }
+
+        .quote-text {
+            font-size: var(--body-text);
+            font-style: italic;
+            color: var(--color-text-primary);
+            line-height: 1.7;
+        }
+
+        .quote-author {
+            font-size: var(--caption);
+            color: var(--color-info);
+            margin-top: var(--spacing-sm);
+            font-weight: 600;
+        }
+
+        /* Navigation Footer */
+        .nav-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-lg) 0;
+            border-top: 1px solid var(--color-border-light);
+            margin-top: var(--spacing-xl);
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            text-decoration: none;
+            font-size: var(--body-small);
+            font-weight: 500;
+            color: var(--color-info);
+            transition: color var(--transition-fast);
+        }
+
+        .nav-link:hover { color: var(--color-success); }
+        .nav-link.next { color: var(--color-success); }
+
+        p { margin: var(--spacing-sm) 0; }
+        strong { color: var(--color-text-primary); }
+
+        /* Insight Box Color Variants */
+        .insight-box.green {
+            border-left-color: var(--color-success);
+            background: rgba(26, 127, 55, 0.06);
+        }
+        .insight-box.green .insight-label { color: var(--color-success); }
+        
+        .insight-box.blue {
+            border-left-color: var(--color-info);
+            background: rgba(9, 105, 218, 0.06);
+        }
+        .insight-box.blue .insight-label { color: var(--color-info); }
+
+        /* Card Hover Effects with Top Indicator */
+        .section {
+            position: relative;
+            overflow: hidden;
+        }
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-teal);
+            opacity: 0;
+            transition: var(--transition-normal);
+        }
+        .section:hover::before {
+            opacity: 1;
+        }
+        .section:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .comparison-card {
+            transition: all var(--transition-normal);
+        }
+        .comparison-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Text Selection */
+        ::selection {
+            background: rgba(20, 184, 166, 0.2);
+            color: var(--color-text-primary);
+        }
+
+        /* Focus States */
+        :focus-visible {
+            outline: 2px solid var(--color-teal);
+            outline-offset: 2px;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--color-bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-border);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-text-muted);
+        }
+
+        @media (max-width: 768px) {
+            .page-title { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Tab Navigation -->
+        <nav class="tab-nav">
+            <a href="index.html" class="tab-btn">
+                <span class="tab-btn-num">🏠</span>
+                <span>首页</span>
+            </a>
+            <a href="part1.html" class="tab-btn">
+                <span class="tab-btn-num">1</span>
+                <span>问题与诊断</span>
+            </a>
+            <a href="part2.html" class="tab-btn">
+                <span class="tab-btn-num">2</span>
+                <span>关键抉择</span>
+            </a>
+            <a href="part3.html" class="tab-btn active">
+                <span class="tab-btn-num">3</span>
+                <span>验证分析</span>
+            </a>
+            <a href="part4.html" class="tab-btn">
+                <span class="tab-btn-num">4</span>
+                <span>AI分身实证</span>
+            </a>
+            <a href="part5.html" class="tab-btn">
+                <span class="tab-btn-num">5</span>
+                <span>技术实施</span>
+            </a>
+            <a href="architecture.html" class="tab-btn">
+                <span class="tab-btn-num">🗺️</span>
+                <span>架构全景</span>
+            </a>
+        </nav>
+
+        <!-- Page Header -->
+        <header class="page-header">
+            <div class="page-badge">Part 3</div>
+            <h1 class="page-title">验证分析</h1>
+            <p class="page-subtitle">第8-10章：反面思考、可行性分析、行业验证</p>
+        </header>
+
+        <!-- Chapter 8 -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-number">8</span>
+                <h2 class="section-title">反面思考：为什么不是其他方案</h2>
+            </div>
+
+            <p>一个完整的思考，必须回应可能的反对意见。</p>
+
+            <h3 class="subsection-title">为什么不是 Multi-Agent 系统？</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>维度</th><th>Multi-Agent</th><th>单Agent + Skills</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>协作成本</td><td>Agent间需要复杂通信</td><td><span class="tag tag-green">天然协调</span></td></tr>
+                        <tr><td>上下文一致</td><td>上下文传递会丢失</td><td><span class="tag tag-green">天然共享</span></td></tr>
+                        <tr><td>人格统一</td><td>每个Agent有自己人格</td><td><span class="tag tag-green">统一人格</span></td></tr>
+                        <tr><td>用户体验</td><td>不知道在和谁对话</td><td><span class="tag tag-green">始终同一伙伴</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p><strong>结论</strong>：Multi-Agent是技术实现方式，但从用户体验看，应该呈现为"单一Agent"。</p>
+
+            <h3 class="subsection-title">为什么不是纯工具流（Workflow）？</h3>
+            <div class="comparison-grid">
+                <div class="comparison-card bad">
+                    <div class="comparison-title">纯工具流</div>
+                    <ul class="comparison-list">
+                        <li>固定流程，难以处理异常</li>
+                        <li>场景变化需要重新设计</li>
+                        <li>无学习能力</li>
+                    </ul>
+                </div>
+                <div class="comparison-card good">
+                    <div class="comparison-title">Agent + Skills</div>
+                    <ul class="comparison-list">
+                        <li>动态规划，灵活应变</li>
+                        <li>同一Agent适应多场景</li>
+                        <li>可以从执行中学习优化</li>
+                    </ul>
+                </div>
+            </div>
+            <p><strong>本质差异</strong>：工具流是"程序"，Agent是"人"。</p>
+
+            <h3 class="subsection-title">为什么Skills比Tools更好？</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>维度</th><th>Tools</th><th>Skills</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>定义</td><td>函数调用</td><td><span class="tag tag-green">程序性知识包</span></td></tr>
+                        <tr><td>使用方式</td><td>调用执行</td><td><span class="tag tag-green">学习后执行</span></td></tr>
+                        <tr><td>灵活性</td><td>参数固定</td><td><span class="tag tag-green">可根据上下文调整</span></td></tr>
+                        <tr><td>可学习性</td><td>工具是固定的</td><td><span class="tag tag-green">Agent可学习新Skill</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p><strong>关键差异</strong>：Tools是"能力"，Skills是"知识"——Agent通过学习Skills获得新能力。</p>
+        </section>
+
+        <!-- Chapter 9 -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-number">9</span>
+                <h2 class="section-title">可行性分析：技术、商业、风险</h2>
+            </div>
+
+            <h3 class="subsection-title">技术可行性</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>能力模块</th><th>成熟度</th><th>当前方案</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Memory 记忆</strong></td><td><span class="tag tag-green">✓ 成熟</span></td><td>向量数据库、知识图谱</td></tr>
+                        <tr><td><strong>Reasoning 推理</strong></td><td><span class="tag tag-green">✓ 成熟</span></td><td>Claude、GPT-4等</td></tr>
+                        <tr><td><strong>Planning 规划</strong></td><td><span class="tag tag-yellow">⚠️ 基本可用</span></td><td>CoT、ReAct框架</td></tr>
+                        <tr><td><strong>Orchestration 编排</strong></td><td><span class="tag tag-yellow">⚠️ 发展中</span></td><td>LangGraph、CrewAI</td></tr>
+                        <tr><td><strong>Reflection 反思</strong></td><td><span class="tag tag-yellow">⚠️ 早期</span></td><td>Self-Refinement机制</td></tr>
+                        <tr><td><strong>Integration 集成</strong></td><td><span class="tag tag-green">✓ 成熟</span></td><td>MCP协议、Function Calling</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p><strong>结论</strong>：核心能力已经可用，部分能力需要持续优化。</p>
+
+            <h3 class="subsection-title">护城河分析</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value green">⭐⭐⭐⭐⭐</div>
+                    <div class="stat-label">用户数据(Memory)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value green">⭐⭐⭐⭐</div>
+                    <div class="stat-label">Skill生态</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value green">⭐⭐⭐⭐</div>
+                    <div class="stat-label">个性化程度</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value green">⭐⭐⭐⭐</div>
+                    <div class="stat-label">养成情感</div>
+                </div>
+            </div>
+
+            <h3 class="subsection-title">风险分析</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>风险</th><th>概率</th><th>影响</th><th>应对</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>模型能力瓶颈</td><td>中</td><td>高</td><td>保持架构灵活，可切换模型</td></tr>
+                        <tr><td>大厂碾压</td><td>高</td><td>中</td><td>聚焦差异化，建立数据护城河</td></tr>
+                        <tr><td>技术路线变化</td><td>低</td><td>高</td><td>模块化架构可适应变化</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Chapter 10 -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-number">10</span>
+                <h2 class="section-title">行业验证：我们不是在凭空想象</h2>
+            </div>
+
+            <h3 class="subsection-title">Anthropic 的 Skills 范式</h3>
+            <div class="quote">
+                <p class="quote-text">
+                    "We used to think agents in different domains will look very different. The agent underneath is actually <strong>more universal</strong> than we thought."<br><br>
+                    "The industry doesn't need a flurry of agent-building. Instead, 'skills' can equip a general agent with domain expertise."
+                </p>
+                <div class="quote-author">— Barry Zhang, Head of Applied AI, Anthropic</div>
+            </div>
+            <p><strong>翻译</strong>：不要做很多Agent，做一个通用Agent + 可扩展的Skills。<strong>这与我们的架构完全一致。</strong></p>
+
+            <h3 class="subsection-title">实际采用数据</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value green">数千个</div>
+                    <div class="stat-label">5周内创建的Skills</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value blue">742K+</div>
+                    <div class="stat-label">演讲观看量</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value teal">Fortune 100</div>
+                    <div class="stat-label">正在使用Skills</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value green">非技术领域</div>
+                    <div class="stat-label">会计/法律/招聘</div>
+                </div>
+            </div>
+
+            <h3 class="subsection-title">与我们思路的对照</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>我们的架构设计</th><th>Anthropic的实践</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>AgentCore + Skills</strong></td><td>Claude Code + Skills</td></tr>
+                        <tr><td><strong>Code Agent 为核心</strong></td><td>"Claude Code is a general-purpose agent"</td></tr>
+                        <tr><td><strong>Skill 可插拔/可组合</strong></td><td>Skills 按需加载、Token高效</td></tr>
+                        <tr><td><strong>成长系统</strong></td><td>Agent 为 Agent 写 Skills</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="insight-box">
+                <div class="insight-label">结论</div>
+                <p class="insight-text">
+                    ✓ 我们的思路与全球顶尖AI实验室的方向完全一致
+                </p>
+            </div>
+        </section>
+
+        <!-- Navigation Footer -->
+        <nav class="nav-footer">
+            <a href="part2.html" class="nav-link">← Part 2: 关键抉择</a>
+            <span style="color: var(--color-text-muted);">Part 3 of 4</span>
+            <a href="part4.html" class="nav-link next">Part 4: AI分身实证 →</a>
+        </nav>
+    </div>
+</body>
+</html>

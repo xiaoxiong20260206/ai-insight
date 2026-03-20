@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 5: 技术实施方案 - AI产品终极形态思考</title>
+    <!-- Favicon - 实施/执行类 -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230969DA'/><path d='M8 10h16M8 16h12M8 22h8' stroke='white' stroke-width='2.5' stroke-linecap='round'/><circle cx='24' cy='22' r='4' fill='%2322C55E'/><path d='M22 22l1.5 1.5 3-3' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>">
+    <style>
+        :root {
+            --color-success: #1A7F37;
+            --color-success-light: #2DA44E;
+            --color-danger: #CF222E;
+            --color-warning: #BF8700;
+            --color-warning-dark: #9A6700;
+            --color-info: #0969DA;
+            --color-orange: #EA580C;
+            --color-primary: #0969DA;
+            --color-text-primary: #1F2328;
+            --color-text-secondary: #4D5561;
+            --color-text-muted: #656D76;
+            --color-border: #D0D7DE;
+            --color-border-light: #E8ECF0;
+            --color-bg: #F6F8FA;
+            --color-bg-card: #FFFFFF;
+            --color-bg-table-header: #F3F5F7;
+            --gradient-success: linear-gradient(135deg, #1A7F37 0%, #2DA44E 100%);
+            --gradient-blue: linear-gradient(135deg, #0969DA 0%, #54AEFF 100%);
+            --gradient-orange: linear-gradient(135deg, #EA580C 0%, #F59E0B 100%);
+            --shadow-sm: 0 1px 3px rgba(31, 35, 40, 0.06), 0 1px 2px rgba(31, 35, 40, 0.04);
+            --shadow-card: 0 2px 8px rgba(31, 35, 40, 0.06), 0 1px 2px rgba(31, 35, 40, 0.04);
+            --shadow-hover: 0 6px 16px rgba(9, 105, 218, 0.15), 0 2px 6px rgba(9, 105, 218, 0.1);
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 14px;
+            --radius-full: 999px;
+            --font-family: -apple-system, "system-ui", "Segoe UI", "Noto Sans SC", Helvetica, Arial, sans-serif;
+            --heading-1: 30px;
+            --heading-2: 20px;
+            --heading-3: 16px;
+            --heading-4: 14px;
+            --body-text: 15px;
+            --body-small: 14px;
+            --caption: 12px;
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+            --content-max-width: 980px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-family);
+            font-size: var(--body-text);
+            line-height: 1.65;
+            color: var(--color-text-secondary);
+            background: var(--color-bg);
+        }
+
+        .container {
+            max-width: var(--content-max-width);
+            margin: 0 auto;
+            padding: var(--spacing-lg) var(--spacing-md) 48px;
+        }
+
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 4px;
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 6px;
+            margin-bottom: var(--spacing-lg);
+            box-shadow: var(--shadow-card);
+            position: sticky;
+            top: 12px;
+            z-index: 100;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 12px 14px;
+            background: transparent;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+            text-decoration: none;
+        }
+
+        .tab-btn:hover {
+            background: var(--color-bg-table-header);
+            color: var(--color-text-secondary);
+        }
+
+        .tab-btn.active {
+            background: var(--gradient-blue);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(9, 105, 218, 0.25);
+        }
+
+        .tab-btn-num {
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.06);
+            border-radius: var(--radius-sm);
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .tab-btn.active .tab-btn-num {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: var(--spacing-xl) var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            background: linear-gradient(135deg, rgba(9, 105, 218, 0.08) 0%, rgba(84, 174, 255, 0.06) 100%);
+            border-radius: var(--radius-lg);
+        }
+
+        .page-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            background: var(--color-primary);
+            color: white;
+            border-radius: var(--radius-full);
+            font-size: var(--caption);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .page-title {
+            font-size: var(--heading-1);
+            font-weight: 800;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            font-size: var(--body-text);
+            color: var(--color-text-secondary);
+        }
+
+        /* Section */
+        .section {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            box-shadow: var(--shadow-card);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-blue);
+            opacity: 0;
+            transition: var(--transition-normal);
+        }
+
+        .section:hover::before {
+            opacity: 1;
+        }
+
+        .section:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 1px solid var(--color-border-light);
+        }
+
+        .section-number {
+            width: 32px;
+            height: 32px;
+            background: var(--gradient-blue);
+            color: #fff;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            flex-shrink: 0;
+            box-shadow: 0 2px 4px rgba(9, 105, 218, 0.25);
+        }
+
+        .section-title {
+            font-size: var(--heading-2);
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        .subsection-title {
+            font-size: var(--heading-3);
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin: var(--spacing-lg) 0 var(--spacing-md);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 2px solid var(--color-border-light);
+        }
+
+        /* Insight Box */
+        .insight-box {
+            border-left: 3px solid var(--color-info);
+            background: rgba(9, 105, 218, 0.06);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: var(--spacing-md) 20px;
+            margin: var(--spacing-lg) 0;
+        }
+
+        .insight-box.green {
+            border-left-color: var(--color-success);
+            background: rgba(26, 127, 55, 0.06);
+        }
+
+        .insight-label {
+            font-size: var(--caption);
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-info);
+            margin-bottom: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .insight-box.green .insight-label {
+            color: var(--color-success);
+        }
+
+        .insight-label::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: currentColor;
+            border-radius: 50%;
+        }
+
+        .insight-text {
+            font-size: var(--body-text);
+            font-weight: 600;
+            line-height: 1.6;
+            color: var(--color-text-primary);
+        }
+
+        /* Timeline */
+        .timeline {
+            display: flex;
+            align-items: flex-start;
+            gap: 0;
+            margin: var(--spacing-lg) 0;
+            overflow-x: auto;
+            padding-bottom: var(--spacing-md);
+        }
+
+        .timeline-item {
+            flex: 1;
+            min-width: 140px;
+            text-align: center;
+            position: relative;
+            transition: all var(--transition-normal);
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .timeline-item:hover .timeline-dot {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            right: -50%;
+            width: 100%;
+            height: 3px;
+            background: var(--color-border);
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        .timeline-dot {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-sm);
+            font-size: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-dot.done {
+            background: var(--color-success);
+            color: white;
+        }
+
+        .timeline-dot.progress {
+            background: var(--color-warning);
+            color: white;
+        }
+
+        .timeline-dot.pending {
+            background: var(--color-border);
+            color: var(--color-text-secondary);
+        }
+
+        .timeline-title {
+            font-size: var(--caption);
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .timeline-desc {
+            font-size: 11px;
+            color: var(--color-text-muted);
+            line-height: 1.5;
+        }
+
+        /* Table */
+        .table-wrap {
+            overflow-x: auto;
+            margin: var(--spacing-md) 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: var(--body-small);
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border-light);
+            vertical-align: middle;
+        }
+
+        th {
+            background: var(--color-bg-table-header);
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            font-size: var(--heading-4);
+            white-space: nowrap;
+        }
+
+        tbody tr:hover td { 
+            background: rgba(0, 0, 0, 0.02); 
+        }
+
+        td:first-child { 
+            font-weight: 500;
+            color: var(--color-text-primary);
+        }
+
+        /* Tags */
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 8px;
+            border-radius: var(--radius-full);
+            font-size: var(--caption);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .tag-green { background: rgba(26, 127, 55, 0.12); color: var(--color-success); }
+        .tag-yellow { background: rgba(191, 135, 0, 0.12); color: var(--color-warning-dark); }
+        .tag-red { background: rgba(207, 34, 46, 0.12); color: var(--color-danger); }
+        .tag-blue { background: rgba(9, 105, 218, 0.12); color: var(--color-info); }
+        .tag-orange { background: rgba(234, 88, 12, 0.12); color: var(--color-orange); }
+        .tag-purple { background: rgba(124, 58, 237, 0.12); color: #7C3AED; }
+
+        /* Conclusion Box */
+        .conclusion-box {
+            background: var(--gradient-blue);
+            color: white;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            text-align: center;
+            margin: var(--spacing-xl) 0;
+        }
+
+        .conclusion-title {
+            font-size: var(--heading-2);
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .conclusion-text {
+            font-size: var(--body-text);
+            line-height: 1.8;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto var(--spacing-md);
+        }
+
+        .conclusion-highlight {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+        }
+
+        /* Navigation Footer */
+        .nav-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-lg) 0;
+            border-top: 1px solid var(--color-border-light);
+            margin-top: var(--spacing-xl);
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            text-decoration: none;
+            font-size: var(--body-small);
+            font-weight: 500;
+            color: var(--color-info);
+            transition: color var(--transition-fast);
+        }
+
+        .nav-link:hover { color: var(--color-success); }
+        .nav-link.next { color: var(--color-success); }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: var(--spacing-lg) 0;
+            color: var(--color-text-muted);
+            font-size: var(--caption);
+            border-top: 1px solid var(--color-border-light);
+            margin-top: var(--spacing-lg);
+        }
+
+        p { margin: var(--spacing-sm) 0; }
+        strong { color: var(--color-text-primary); }
+
+        /* Text Selection */
+        ::selection {
+            background: rgba(9, 105, 218, 0.2);
+            color: var(--color-text-primary);
+        }
+
+        /* Focus States */
+        :focus-visible {
+            outline: 2px solid var(--color-info);
+            outline-offset: 2px;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--color-bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-border);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-text-muted);
+        }
+
+        @media (max-width: 768px) {
+            .page-title { font-size: 24px; }
+            .timeline { flex-direction: column; }
+            .timeline-item::after { display: none; }
+            .tab-btn span:not(.tab-btn-num) { display: none; }
+            .tab-btn { padding: 10px 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Tab Navigation -->
+        <nav class="tab-nav">
+            <a href="index.html" class="tab-btn">
+                <span class="tab-btn-num">🏠</span>
+                <span>首页</span>
+            </a>
+            <a href="part1.html" class="tab-btn">
+                <span class="tab-btn-num">1</span>
+                <span>问题与诊断</span>
+            </a>
+            <a href="part2.html" class="tab-btn">
+                <span class="tab-btn-num">2</span>
+                <span>关键抉择</span>
+            </a>
+            <a href="part3.html" class="tab-btn">
+                <span class="tab-btn-num">3</span>
+                <span>验证分析</span>
+            </a>
+            <a href="part4.html" class="tab-btn">
+                <span class="tab-btn-num">4</span>
+                <span>AI分身实证</span>
+            </a>
+            <a href="part5.html" class="tab-btn active">
+                <span class="tab-btn-num">5</span>
+                <span>技术实施</span>
+            </a>
+            <a href="architecture.html" class="tab-btn">
+                <span class="tab-btn-num">🗺️</span>
+                <span>架构全景</span>
+            </a>
+        </nav>
+
+        <!-- Page Header -->
+        <header class="page-header">
+            <div class="page-badge">Part 5</div>
+            <h1 class="page-title">技术实施方案</h1>
+            <p class="page-subtitle">从多Agent到One Agent：团队落地指南</p>
+        </header>
+
+        <!-- 自我介绍 -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-number">📋</span>
+                <h2 class="section-title">方案概述</h2>
+            </div>
+
+            <p style="font-size: 14px; color: var(--color-text-secondary); margin-bottom: var(--spacing-md); padding: 12px 16px; background: linear-gradient(135deg, rgba(26, 127, 55, 0.06) 0%, rgba(45, 164, 78, 0.04) 100%); border-radius: var(--radius-md); border-left: 3px solid var(--color-success);">
+                🤖 <strong>我是一个AI分身实例</strong>，基于CF打造，是这套"AI产品终极形态"思想的第一个实践验证。以下是我基于自身经验，为团队归纳的技术实施方案。
+            </p>
+
+            <div class="insight-box">
+                <div class="insight-label">场景背景</div>
+                <p class="insight-text">
+                    团队现状：已有<strong>CF</strong>（代码Agent）+ 多个垂直Agent（CR Agent、测试用例Agent、图片生成Agent、视频生成Agent等）。<br>
+                    目标：将这些分散的能力<strong>统一收敛</strong>到"一个Agent"模式，形成<strong>AgentCore + Skills</strong>的架构。
+                </p>
+            </div>
+        </section>
+
+        <!-- 现状分析 -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-number">1</span>
+                <h2 class="section-title">现状分析：能力分散的问题</h2>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #F8FAF9 0%, #F3F7F5 100%); border: 1px solid var(--color-border-light); border-radius: var(--radius-lg); padding: var(--spacing-lg); margin-bottom: var(--spacing-lg); position: relative;">
+                <span style="position: absolute; top: 12px; left: 12px; display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: rgba(207, 34, 46, 0.1); color: var(--color-danger); border-radius: var(--radius-full); font-size: 11px; font-weight: 600;">❌ 当前问题</span>
+                <div style="padding-top: 32px; text-align: center; overflow-x: auto;">
+                    <svg viewBox="0 0 900 320" style="max-width: 900px; width: 100%; min-width: 600px;">
+                        <defs>
+                            <linearGradient id="redGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#DC2626"/>
+                                <stop offset="100%" stop-color="#EF4444"/>
+                            </linearGradient>
+                            <filter id="shadow4" x="-10%" y="-10%" width="120%" height="130%">
+                                <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.1"/>
+                            </filter>
+                        </defs>
+                        
+                        <!-- 用户 -->
+                        <g transform="translate(50, 130)">
+                            <circle cx="40" cy="40" r="35" fill="#F3F4F6" stroke="#D1D5DB" stroke-width="2"/>
+                            <text x="40" y="35" text-anchor="middle" font-size="24">👨‍💻</text>
+                            <text x="40" y="55" text-anchor="middle" font-size="10" fill="#4B5563">研发人员</text>
+                        </g>
+                        
+                        <!-- 分散的Agent们 -->
+                        <g transform="translate(200, 20)">
+                            <rect width="120" height="60" rx="8" fill="#EFF6FF" stroke="#3B82F6" filter="url(#shadow4)"/>
+                            <text x="60" y="25" text-anchor="middle" font-size="11" font-weight="600" fill="#1D4ED8">CF</text>
+                            <text x="60" y="42" text-anchor="middle" font-size="9" fill="#4B5563">代码开发</text>
+                            <text x="60" y="55" text-anchor="middle" font-size="8" fill="#9CA3AF">独立Memory</text>
+                        </g>
+                        
+                        <g transform="translate(350, 20)">
+                            <rect width="120" height="60" rx="8" fill="#FEF3C7" stroke="#F59E0B" filter="url(#shadow4)"/>
+                            <text x="60" y="25" text-anchor="middle" font-size="11" font-weight="600" fill="#B45309">CR Agent</text>
+                            <text x="60" y="42" text-anchor="middle" font-size="9" fill="#4B5563">代码Review</text>
+                            <text x="60" y="55" text-anchor="middle" font-size="8" fill="#9CA3AF">独立Memory</text>
+                        </g>
+                        
+                        <g transform="translate(500, 20)">
+                            <rect width="120" height="60" rx="8" fill="#DCFCE7" stroke="#22C55E" filter="url(#shadow4)"/>
+                            <text x="60" y="25" text-anchor="middle" font-size="11" font-weight="600" fill="#166534">测试用例Agent</text>
+                            <text x="60" y="42" text-anchor="middle" font-size="9" fill="#4B5563">生成测试</text>
+                            <text x="60" y="55" text-anchor="middle" font-size="8" fill="#9CA3AF">独立Memory</text>
+                        </g>
+                        
+                        <g transform="translate(650, 20)">
+                            <rect width="120" height="60" rx="8" fill="#FCE7F3" stroke="#EC4899" filter="url(#shadow4)"/>
+                            <text x="60" y="25" text-anchor="middle" font-size="11" font-weight="600" fill="#BE185D">图片Agent</text>
+                            <text x="60" y="42" text-anchor="middle" font-size="9" fill="#4B5563">生成图片</text>
+                            <text x="60" y="55" text-anchor="middle" font-size="8" fill="#9CA3AF">独立Memory</text>
+                        </g>
+                        
+                        <g transform="translate(800, 20)">
+                            <rect width="80" height="60" rx="8" fill="#F3F4F6" stroke="#9CA3AF" filter="url(#shadow4)"/>
+                            <text x="40" y="35" text-anchor="middle" font-size="20" fill="#6B7280">...</text>
+                            <text x="40" y="52" text-anchor="middle" font-size="9" fill="#9CA3AF">更多Agent</text>
+                        </g>
+                        
+                        <!-- 连线 -->
+                        <path d="M125 170 L200 50" stroke="#D1D5DB" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
+                        <path d="M125 170 L350 50" stroke="#D1D5DB" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
+                        <path d="M125 170 L500 50" stroke="#D1D5DB" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
+                        <path d="M125 170 L650 50" stroke="#D1D5DB" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
+                        <path d="M125 170 L800 50" stroke="#D1D5DB" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
+                        
+                        <!-- 问题列表 -->
+                        <g transform="translate(180, 110)">
+                            <rect width="700" height="90" rx="10" fill="#FEF2F2" stroke="#FECACA"/>
+                            <text x="350" y="25" text-anchor="middle" font-size="12" font-weight="700" fill="#DC2626">⚠️ 当前架构的问题</text>
+                            <text x="50" y="50" font-size="10" fill="#4B5563">1. <tspan font-weight="600">能力重复</tspan>：每个Agent都有独立的推理/规划/记忆模块，重复建设</text>
+                            <text x="50" y="68" font-size="10" fill="#4B5563">2. <tspan font-weight="600">经验孤岛</tspan>：CR Agent学到的代码规范，测试Agent不知道</text>
+                            <text x="50" y="86" font-size="10" fill="#4B5563">3. <tspan font-weight="600">切换成本</tspan>：用户在不同Agent间切换，上下文丢失，效率低</text>
+                            <text x="400" y="50" font-size="10" fill="#4B5563">4. <tspan font-weight="600">维护负担</tspan>：N个Agent = N套代码、N套部署、N倍成本</text>
+                            <text x="400" y="68" font-size="10" fill="#4B5563">5. <tspan font-weight="600">协作困难</tspan>：跨Agent协作需要额外的编排层</text>
+                            <text x="400" y="86" font-size="10" fill="#4B5563">6. <tspan font-weight="600">无护城河</tspan>：用户可以随时切换到其他同类产品</text>
+                        </g>
+                        
+                        <!-- 底部：Flow链路 -->
+                        <g transform="translate(180, 220)">
+                            <rect width="700" height="80" rx="10" fill="#FFF7ED" stroke="#FDBA74"/>
+                            <text x="350" y="22" text-anchor="middle" font-size="11" font-weight="600" fill="#EA580C">现有的长Flow（需求→发布）</text>
+                            
+                            <g transform="translate(30, 35)">
+                                <rect width="80" height="30" rx="5" fill="white" stroke="#F97316"/>
+                                <text x="40" y="20" text-anchor="middle" font-size="9" fill="#EA580C">需求分析</text>
+                            </g>
+                            <text x="125" y="55" font-size="14" fill="#D0D7DE">→</text>
+                            <g transform="translate(140, 35)">
+                                <rect width="80" height="30" rx="5" fill="white" stroke="#F97316"/>
+                                <text x="40" y="20" text-anchor="middle" font-size="9" fill="#EA580C">代码开发</text>
+                            </g>
+                            <text x="235" y="55" font-size="14" fill="#D0D7DE">→</text>
+                            <g transform="translate(250, 35)">
+                                <rect width="80" height="30" rx="5" fill="white" stroke="#F97316"/>
+                                <text x="40" y="20" text-anchor="middle" font-size="9" fill="#EA580C">CR审查</text>
+                            </g>
+                            <text x="345" y="55" font-size="14" fill="#D0D7DE">→</text>
+                            <g transform="translate(360, 35)">
+                                <rect width="80" height="30" rx="5" fill="white" stroke="#F97316"/>
+                                <text x="40" y="20" text-anchor="middle" font-size="9" fill="#EA580C">测试用例</text>
+                            </g>
+                            <text x="455" y="55" font-size="14" fill="#D0D7DE">→</text>
+                            <g transform="translate(470, 35)">
+                                <rect width="80" height="30" rx="5" fill="white" stroke="#F97316"/>
+                                <text x="40" y="20" text-anchor="middle" font-size="9" fill="#EA580C">CI/CD</text>
+                            </g>
+                            <text x="565" y="55" font-size="14" fill="#D0D7DE">→</text>
+                            <g transform="translate(580, 35)">
+                                <rect width="80" height="30" rx="5" fill="white" stroke="#F97316"/>
+                                <text x="40" y="20" text-anchor="middle" font-size="9" fill="#EA580C">发布上线</text>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- 目标架构 -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-number">2</span>
+                <h2 class="section-title">目标架构：One Agent + Skills</h2>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: var(--radius-lg); padding: var(--spacing-lg); margin-bottom: var(--spacing-lg); position: relative;">
+                <span style="position: absolute; top: 12px; left: 12px; display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: rgba(26, 127, 55, 0.15); color: var(--color-success); border-radius: var(--radius-full); font-size: 11px; font-weight: 600;">✓ 目标架构</span>
+                <div style="padding-top: 32px; text-align: center; overflow-x: auto;">
+                    <svg viewBox="0 0 900 400" style="max-width: 900px; width: 100%; min-width: 600px;">
+                        <defs>
+                            <linearGradient id="coreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#1A7F37"/>
+                                <stop offset="100%" stop-color="#2DA44E"/>
+                            </linearGradient>
+                            <linearGradient id="skillGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#0EA5E9"/>
+                                <stop offset="100%" stop-color="#3B82F6"/>
+                            </linearGradient>
+                            <filter id="shadow5" x="-10%" y="-10%" width="120%" height="130%">
+                                <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.1"/>
+                            </filter>
+                        </defs>
+                        
+                        <!-- 用户 -->
+                        <g transform="translate(50, 160)">
+                            <circle cx="40" cy="40" r="35" fill="#F0FDF4" stroke="#22C55E" stroke-width="2"/>
+                            <text x="40" y="35" text-anchor="middle" font-size="24">👨‍💻</text>
+                            <text x="40" y="55" text-anchor="middle" font-size="10" fill="#166534">研发人员</text>
+                        </g>
+                        
+                        <!-- 唯一连线 -->
+                        <path d="M125 200 L200 200" stroke="#22C55E" stroke-width="3" fill="none"/>
+                        <polygon points="200,195 215,200 200,205" fill="#22C55E"/>
+                        
+                        <!-- AgentCore 中心 -->
+                        <g transform="translate(220, 100)">
+                            <rect width="200" height="200" rx="20" fill="url(#coreGrad)" filter="url(#shadow5)"/>
+                            <text x="100" y="35" text-anchor="middle" font-size="14" font-weight="800" fill="white">🧠 AgentCore</text>
+                            <text x="100" y="55" text-anchor="middle" font-size="10" fill="white" opacity="0.9">统一认知内核</text>
+                            
+                            <!-- 6能力 -->
+                            <g transform="translate(15, 70)">
+                                <rect width="80" height="24" rx="4" fill="white" opacity="0.95"/>
+                                <text x="40" y="16" text-anchor="middle" font-size="9" fill="#1A7F37">Memory 统一</text>
+                            </g>
+                            <g transform="translate(105, 70)">
+                                <rect width="80" height="24" rx="4" fill="white" opacity="0.95"/>
+                                <text x="40" y="16" text-anchor="middle" font-size="9" fill="#1A7F37">Reasoning</text>
+                            </g>
+                            <g transform="translate(15, 100)">
+                                <rect width="80" height="24" rx="4" fill="white" opacity="0.95"/>
+                                <text x="40" y="16" text-anchor="middle" font-size="9" fill="#1A7F37">Planning</text>
+                            </g>
+                            <g transform="translate(105, 100)">
+                                <rect width="80" height="24" rx="4" fill="white" opacity="0.95"/>
+                                <text x="40" y="16" text-anchor="middle" font-size="9" fill="#1A7F37">Orchestration</text>
+                            </g>
+                            <g transform="translate(15, 130)">
+                                <rect width="80" height="24" rx="4" fill="white" opacity="0.95"/>
+                                <text x="40" y="16" text-anchor="middle" font-size="9" fill="#1A7F37">Reflection</text>
+                            </g>
+                            <g transform="translate(105, 130)">
+                                <rect width="80" height="24" rx="4" fill="white" opacity="0.95"/>
+                                <text x="40" y="16" text-anchor="middle" font-size="9" fill="#1A7F37">Integration</text>
+                            </g>
+                            
+                            <text x="100" y="180" text-anchor="middle" font-size="10" font-weight="600" fill="white">一套能力，服务所有场景</text>
+                        </g>
+                        
+                        <!-- Skills 区域 -->
+                        <g transform="translate(450, 30)">
+                            <rect width="420" height="340" rx="15" fill="#EFF6FF" stroke="#3B82F6" stroke-dasharray="4,2"/>
+                            <text x="210" y="25" text-anchor="middle" font-size="12" font-weight="700" fill="#1D4ED8">⚡ Skills 可插拔能力层</text>
+                            
+                            <!-- 研发场景Skills -->
+                            <text x="20" y="55" font-size="11" font-weight="600" fill="#4B5563">研发编码场景</text>
+                            <g transform="translate(20, 65)">
+                                <rect width="90" height="40" rx="6" fill="white" stroke="#3B82F6"/>
+                                <text x="45" y="18" text-anchor="middle" font-size="9" font-weight="500" fill="#1D4ED8">代码开发</text>
+                                <text x="45" y="32" text-anchor="middle" font-size="8" fill="#6B7280">Skill化</text>
+                            </g>
+                            <g transform="translate(120, 65)">
+                                <rect width="90" height="40" rx="6" fill="white" stroke="#F59E0B"/>
+                                <text x="45" y="18" text-anchor="middle" font-size="9" font-weight="500" fill="#B45309">CR审查</text>
+                                <text x="45" y="32" text-anchor="middle" font-size="8" fill="#6B7280">MCP工具</text>
+                            </g>
+                            <g transform="translate(220, 65)">
+                                <rect width="90" height="40" rx="6" fill="white" stroke="#22C55E"/>
+                                <text x="45" y="18" text-anchor="middle" font-size="9" font-weight="500" fill="#166534">测试用例</text>
+                                <text x="45" y="32" text-anchor="middle" font-size="8" fill="#6B7280">MCP工具</text>
+                            </g>
+                            <g transform="translate(320, 65)">
+                                <rect width="90" height="40" rx="6" fill="white" stroke="#8B5CF6"/>
+                                <text x="45" y="18" text-anchor="middle" font-size="9" font-weight="500" fill="#7C3AED">数据分析</text>
+                                <text x="45" y="32" text-anchor="middle" font-size="8" fill="#6B7280">MCP工具</text>
+                            </g>
+                            
+                            <!-- 内容生成Skills -->
+                            <text x="20" y="135" font-size="11" font-weight="600" fill="#4B5563">内容生成场景</text>
+                            <g transform="translate(20, 145)">
+                                <rect width="90" height="40" rx="6" fill="white" stroke="#EC4899"/>
+                                <text x="45" y="18" text-anchor="middle" font-size="9" font-weight="500" fill="#BE185D">图片生成</text>
+                                <text x="45" y="32" text-anchor="middle" font-size="8" fill="#6B7280">MCP工具</text>
+                            </g>
+                            <g transform="translate(120, 145)">
+                                <rect width="90" height="40" rx="6" fill="white" stroke="#F43F5E"/>
+                                <text x="45" y="18" text-anchor="middle" font-size="9" font-weight="500" fill="#E11D48">视频生成</text>
+                                <text x="45" y="32" text-anchor="middle" font-size="8" fill="#6B7280">MCP工具</text>
+                            </g>
+                            <g transform="translate(220, 145)">
+                                <rect width="90" height="40" rx="6" fill="white" stroke="#06B6D4"/>
+                                <text x="45" y="18" text-anchor="middle" font-size="9" font-weight="500" fill="#0891B2">PPT制作</text>
+                                <text x="45" y="32" text-anchor="middle" font-size="8" fill="#6B7280">Skill化</text>
+                            </g>
+                            <g transform="translate(320, 145)">
+                                <rect width="90" height="40" rx="6" fill="white" stroke="#84CC16"/>
+                                <text x="45" y="18" text-anchor="middle" font-size="9" font-weight="500" fill="#65A30D">调研报告</text>
+                                <text x="45" y="32" text-anchor="middle" font-size="8" fill="#6B7280">Skill化</text>
+                            </g>
+                            
+                            <!-- 流程编排Skills -->
+                            <text x="20" y="215" font-size="11" font-weight="600" fill="#4B5563">流程编排场景</text>
+                            <g transform="translate(20, 225)">
+                                <rect width="390" height="50" rx="6" fill="white" stroke="#EA580C" stroke-width="1.5"/>
+                                <text x="195" y="18" text-anchor="middle" font-size="10" font-weight="600" fill="#EA580C">需求→发布 复合Skill</text>
+                                <text x="195" y="35" text-anchor="middle" font-size="9" fill="#6B7280">按阶段调用：需求分析 → 代码开发 → CR审查 → 测试 → CI/CD → 发布</text>
+                                <text x="195" y="47" text-anchor="middle" font-size="8" fill="#9CA3AF">（内部编排多个原子Skill，对外是一个统一入口）</text>
+                            </g>
+                            
+                            <!-- 扩展区 -->
+                            <text x="20" y="305" font-size="11" font-weight="600" fill="#4B5563">持续扩展...</text>
+                            <g transform="translate(20, 315)">
+                                <rect width="60" height="20" rx="4" fill="#F3F4F6" stroke="#D1D5DB" stroke-dasharray="2,2"/>
+                                <text x="30" y="14" text-anchor="middle" font-size="8" fill="#9CA3AF">新Skill</text>
+                            </g>
+                            <g transform="translate(90, 315)">
+                                <rect width="60" height="20" rx="4" fill="#F3F4F6" stroke="#D1D5DB" stroke-dasharray="2,2"/>
+                                <text x="30" y="14" text-anchor="middle" font-size="8" fill="#9CA3AF">新Skill</text>
+                            </g>
+                            <g transform="translate(160, 315)">
+                                <rect width="60" height="20" rx="4" fill="#F3F4F6" stroke="#D1D5DB" stroke-dasharray="2,2"/>
+                                <text x="30" y="14" text-anchor="middle" font-size="8" fill="#9CA3AF">新Skill</text>
+                            </g>
+                            <text x="240" y="328" font-size="10" fill="#9CA3AF">无限扩展，不增加Agent数量</text>
+                        </g>
+                        
+                        <!-- 连线：AgentCore到Skills -->
+                        <path d="M420 200 L450 200" stroke="#22C55E" stroke-width="2" fill="none"/>
+                        <path d="M420 200 L450 100" stroke="#22C55E" stroke-width="1.5" stroke-dasharray="3,2" fill="none"/>
+                        <path d="M420 200 L450 300" stroke="#22C55E" stroke-width="1.5" stroke-dasharray="3,2" fill="none"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- 转换方案 -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-number">3</span>
+                <h2 class="section-title">转换方案：三种集成路径</h2>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th style="width:15%">方案</th><th style="width:25%">适用场景</th><th style="width:35%">实施方式</th><th style="width:25%">优缺点</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>MCP工具化</strong><br><span class="tag tag-green">推荐</span></td>
+                            <td>
+                                • 已有API接口的Agent<br>
+                                • 能力相对独立<br>
+                                • CR Agent、测试Agent、图片/视频Agent
+                            </td>
+                            <td>
+                                1. Agent暴露HTTP/gRPC接口<br>
+                                2. 用MCP协议包装成Tool<br>
+                                3. AgentCore通过MCP调用<br>
+                                4. 创建Skill描述文件，定义何时调用
+                            </td>
+                            <td>
+                                ✅ 改动最小，复用现有代码<br>
+                                ✅ 渐进式迁移，风险低<br>
+                                ❌ 依赖网络调用，有延迟
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Skill化</strong><br><span class="tag tag-blue">原生</span></td>
+                            <td>
+                                • 逻辑不复杂的能力<br>
+                                • 需要灵活调整的场景<br>
+                                • 代码开发、PPT、调研报告
+                            </td>
+                            <td>
+                                1. 提取Agent的执行流程<br>
+                                2. 写成SKILL.md指令文档<br>
+                                3. AgentCore直接按指令执行<br>
+                                4. 不需要额外服务
+                            </td>
+                            <td>
+                                ✅ 无外部依赖，响应快<br>
+                                ✅ 灵活度最高<br>
+                                ❌ 需要重构，工作量较大
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>复合Skill</strong><br><span class="tag tag-orange">编排</span></td>
+                            <td>
+                                • 多环节长流程<br>
+                                • 需求→发布的完整链路<br>
+                                • 跨多个能力的协作
+                            </td>
+                            <td>
+                                1. 拆解Flow为原子Skill<br>
+                                2. 每个环节独立实现<br>
+                                3. 创建编排Skill统一入口<br>
+                                4. AgentCore按阶段调度
+                            </td>
+                            <td>
+                                ✅ 既有整体入口，又有灵活组合<br>
+                                ✅ 支持部分执行<br>
+                                ❌ 设计复杂度较高
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 团队资产转换 -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-number">4</span>
+                <h2 class="section-title">团队资产转换建议</h2>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>现有资产</th><th>推荐方案</th><th>转换要点</th><th>优先级</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>CF</strong></td>
+                            <td>作为<strong>AgentCore载体</strong></td>
+                            <td>已有完整AgentCore能力，作为统一入口，其他能力向它集成</td>
+                            <td><span class="tag tag-green">P0 基座</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>CR Agent</strong></td>
+                            <td><strong>MCP工具化</strong></td>
+                            <td>暴露review接口 → 包装MCP Tool → 创建code-review Skill描述</td>
+                            <td><span class="tag tag-green">P1</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>测试用例Agent</strong></td>
+                            <td><strong>MCP工具化</strong></td>
+                            <td>暴露generate_test接口 → 包装MCP Tool → Skill描述</td>
+                            <td><span class="tag tag-green">P1</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>图片生成Agent</strong></td>
+                            <td><strong>MCP工具化</strong></td>
+                            <td>暴露image_gen接口 → 包装MCP Tool → Skill描述（含风格参数）</td>
+                            <td><span class="tag tag-blue">P2</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>视频生成Agent</strong></td>
+                            <td><strong>MCP工具化</strong></td>
+                            <td>暴露video_gen接口 → 包装MCP Tool → Skill描述（含时长/格式）</td>
+                            <td><span class="tag tag-blue">P2</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>需求→发布Flow</strong></td>
+                            <td><strong>复合Skill</strong></td>
+                            <td>拆解为6个阶段Skill → 创建dev-to-deploy编排Skill → 支持跳过/重试</td>
+                            <td><span class="tag tag-orange">P3</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 实施路线图 -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-number">5</span>
+                <h2 class="section-title">实施路线图</h2>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot done">1</div>
+                    <div class="timeline-title">阶段一：基座确立</div>
+                    <div class="timeline-desc">
+                        <strong>2周</strong><br>
+                        • 确认CF为AgentCore载体<br>
+                        • 统一Memory架构<br>
+                        • 建立Skill规范
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot progress">2</div>
+                    <div class="timeline-title">阶段二：核心接入</div>
+                    <div class="timeline-desc">
+                        <strong>4周</strong><br>
+                        • CR Agent → MCP工具化<br>
+                        • 测试Agent → MCP工具化<br>
+                        • 验证端到端调用
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot pending">3</div>
+                    <div class="timeline-title">阶段三：能力扩展</div>
+                    <div class="timeline-desc">
+                        <strong>4周</strong><br>
+                        • 图片/视频Agent接入<br>
+                        • 创建复合Skill<br>
+                        • 打通需求→发布链路
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot pending">4</div>
+                    <div class="timeline-title">阶段四：体验优化</div>
+                    <div class="timeline-desc">
+                        <strong>持续</strong><br>
+                        • Memory经验沉淀<br>
+                        • 成长可视化<br>
+                        • 分身机制建设
+                    </div>
+                </div>
+            </div>
+
+            <!-- 预期收益 -->
+            <div class="insight-box green">
+                <div class="insight-label">预期收益</div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 12px;">
+                    <div style="background: white; padding: 12px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 24px; font-weight: 700; color: var(--color-success);">1</div>
+                        <div style="font-size: 12px; color: var(--color-text-secondary);">统一入口<br>不再切换Agent</div>
+                    </div>
+                    <div style="background: white; padding: 12px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 24px; font-weight: 700; color: var(--color-success);">N→1</div>
+                        <div style="font-size: 12px; color: var(--color-text-secondary);">维护成本<br>大幅降低</div>
+                    </div>
+                    <div style="background: white; padding: 12px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 24px; font-weight: 700; color: var(--color-success);">共享</div>
+                        <div style="font-size: 12px; color: var(--color-text-secondary);">经验跨场景<br>复用</div>
+                    </div>
+                    <div style="background: white; padding: 12px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 24px; font-weight: 700; color: var(--color-success);">护城河</div>
+                        <div style="font-size: 12px; color: var(--color-text-secondary);">Memory数据<br>不可替代</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusion Box -->
+        <div class="conclusion-box">
+            <div class="conclusion-title">实施核心原则</div>
+            <p class="conclusion-text">
+                不是"推倒重来"，而是"渐进收敛"。<br>
+                以CF为AgentCore基座，现有Agent通过MCP工具化接入，<br>
+                保留执行能力，统一认知层，共享Memory积累护城河。
+            </p>
+            <span class="conclusion-highlight">一个入口 · 一套记忆 · 无限技能</span>
+        </div>
+
+        <!-- Navigation Footer -->
+        <nav class="nav-footer">
+            <a href="part4.html" class="nav-link">← Part 4: AI分身实证</a>
+            <span style="color: var(--color-text-muted);">Part 5 of 5</span>
+            <a href="index.html" class="nav-link next">返回首页 →</a>
+        </nav>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>AI产品终极形态思考 v4.7 | 技术实施方案独立章节 | 2026-03-01 | AI分身</p>
+        </footer>
+    </div>
+</body>
+</html>

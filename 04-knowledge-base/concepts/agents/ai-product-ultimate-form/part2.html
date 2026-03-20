@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 2: 关键抉择 - AI产品终极形态思考</title>
+    <!-- Favicon - 思考/洞察类 -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231A7F37'/><path d='M16 6c-4.4 0-8 3.6-8 8 0 2.5 1.2 4.8 3 6.2V24l5-3 5 3v-3.8c1.8-1.4 3-3.7 3-6.2 0-4.4-3.6-8-8-8z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/><line x1='16' y1='10' x2='16' y2='15' stroke='white' stroke-width='2' stroke-linecap='round'/><circle cx='16' cy='18' r='1' fill='white'/></svg>">
+    <style>
+        :root {
+            --color-success: #1A7F37;
+            --color-success-light: #2DA44E;
+            --color-danger: #CF222E;
+            --color-warning: #BF8700;
+            --color-warning-dark: #9A6700;
+            --color-info: #0969DA;
+            --color-purple: #7C3AED;
+            --color-text-primary: #1F2328;
+            --color-text-secondary: #4D5561;
+            --color-text-muted: #656D76;
+            --color-border: #D0D7DE;
+            --color-border-light: #E8ECF0;
+            --color-bg: #F6F8FA;
+            --color-bg-card: #FFFFFF;
+            --color-bg-table-header: #F3F5F7;
+            --gradient-success: linear-gradient(135deg, #1A7F37 0%, #2DA44E 100%);
+            --gradient-purple: linear-gradient(135deg, #7C3AED 0%, #EC4899 100%);
+            --shadow-sm: 0 1px 3px rgba(31, 35, 40, 0.06), 0 1px 2px rgba(31, 35, 40, 0.04);
+            --shadow-card: 0 2px 8px rgba(31, 35, 40, 0.06), 0 1px 2px rgba(31, 35, 40, 0.04);
+            --shadow-hover: 0 6px 16px rgba(26, 127, 55, 0.15), 0 2px 6px rgba(26, 127, 55, 0.1);
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 14px;
+            --radius-full: 999px;
+            --font-family: -apple-system, "system-ui", "Segoe UI", "Noto Sans SC", Helvetica, Arial, sans-serif;
+            --heading-1: 30px;
+            --heading-2: 20px;
+            --heading-3: 16px;
+            --heading-4: 14px;
+            --body-text: 15px;
+            --body-small: 14px;
+            --caption: 12px;
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+            --content-max-width: 980px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-family);
+            font-size: var(--body-text);
+            line-height: 1.65;
+            color: var(--color-text-secondary);
+            background: var(--color-bg);
+        }
+
+        .container {
+            max-width: var(--content-max-width);
+            margin: 0 auto;
+            padding: var(--spacing-lg) var(--spacing-md) 48px;
+        }
+
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 4px;
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 6px;
+            margin-bottom: var(--spacing-lg);
+            box-shadow: var(--shadow-card);
+            position: sticky;
+            top: 12px;
+            z-index: 100;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 12px 16px;
+            background: transparent;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+            text-decoration: none;
+        }
+
+        .tab-btn:hover {
+            background: var(--color-bg-table-header);
+            color: var(--color-text-secondary);
+        }
+
+        .tab-btn.active {
+            background: var(--gradient-success);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(26, 127, 55, 0.25);
+        }
+
+        .tab-btn-num {
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.06);
+            border-radius: var(--radius-sm);
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .tab-btn.active .tab-btn-num {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: var(--spacing-xl) var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.08) 0%, rgba(236, 72, 153, 0.06) 100%);
+            border-radius: var(--radius-lg);
+        }
+
+        .page-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            background: var(--color-purple);
+            color: white;
+            border-radius: var(--radius-full);
+            font-size: var(--caption);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .page-title {
+            font-size: var(--heading-1);
+            font-weight: 800;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            font-size: var(--body-text);
+            color: var(--color-text-secondary);
+        }
+
+        /* Section */
+        .section {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            box-shadow: var(--shadow-card);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 1px solid var(--color-border-light);
+        }
+
+        .section-number {
+            width: 32px;
+            height: 32px;
+            background: var(--gradient-purple);
+            color: #fff;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            flex-shrink: 0;
+            box-shadow: 0 2px 4px rgba(124, 58, 237, 0.25);
+        }
+
+        .section-title {
+            font-size: var(--heading-2);
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        .subsection-title {
+            font-size: var(--heading-3);
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin: var(--spacing-lg) 0 var(--spacing-md);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 2px solid var(--color-border-light);
+        }
+
+        /* Insight Box */
+        .insight-box {
+            border-left: 3px solid var(--color-purple);
+            background: rgba(124, 58, 237, 0.06);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: var(--spacing-md) 20px;
+            margin: var(--spacing-lg) 0;
+        }
+
+        .insight-label {
+            font-size: var(--caption);
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-purple);
+            margin-bottom: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .insight-label::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--color-purple);
+            border-radius: 50%;
+        }
+
+        .insight-text {
+            font-size: var(--body-text);
+            font-weight: 600;
+            line-height: 1.6;
+            color: var(--color-text-primary);
+        }
+
+        .insight-text em {
+            color: var(--color-purple);
+            font-style: normal;
+        }
+
+        /* Table */
+        .table-wrap {
+            overflow-x: auto;
+            margin: var(--spacing-md) 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: var(--body-small);
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border-light);
+            vertical-align: middle;
+        }
+
+        th {
+            background: var(--color-bg-table-header);
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            font-size: var(--heading-4);
+            white-space: nowrap;
+        }
+
+        tbody tr:hover td { 
+            background: rgba(0, 0, 0, 0.02); 
+        }
+
+        td:first-child { 
+            font-weight: 500;
+            color: var(--color-text-primary);
+        }
+
+        /* Tags */
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 8px;
+            border-radius: var(--radius-full);
+            font-size: var(--caption);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .tag-green { background: rgba(26, 127, 55, 0.12); color: var(--color-success); }
+        .tag-red { background: rgba(207, 34, 46, 0.12); color: var(--color-danger); }
+        .tag-blue { background: rgba(9, 105, 218, 0.12); color: var(--color-info); }
+        .tag-orange { background: rgba(234, 88, 12, 0.12); color: #EA580C; }
+        .tag-purple { background: rgba(124, 58, 237, 0.12); color: var(--color-purple); }
+
+        /* Quote */
+        .quote {
+            background: var(--color-bg-table-header);
+            border-left: 3px solid var(--color-info);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: var(--spacing-md) 20px;
+            margin: var(--spacing-lg) 0;
+        }
+
+        .quote-text {
+            font-size: var(--body-text);
+            font-style: italic;
+            color: var(--color-text-primary);
+            line-height: 1.7;
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+
+        @media (max-width: 768px) {
+            .feature-grid { grid-template-columns: 1fr; }
+        }
+
+        .feature-card {
+            background: var(--color-bg-table-header);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
+        }
+
+        .feature-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--gradient-purple);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .feature-title {
+            font-size: var(--heading-4);
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .feature-desc {
+            font-size: var(--caption);
+            color: var(--color-text-secondary);
+        }
+
+        /* Comparison Grid */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+
+        @media (max-width: 600px) {
+            .comparison-grid { grid-template-columns: 1fr; }
+        }
+
+        .comparison-card {
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+        }
+
+        .comparison-card.bad {
+            background: rgba(207, 34, 46, 0.05);
+            border-left: 3px solid var(--color-danger);
+        }
+
+        .comparison-card.good {
+            background: rgba(124, 58, 237, 0.05);
+            border-left: 3px solid var(--color-purple);
+        }
+
+        .comparison-title {
+            font-size: var(--heading-4);
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .comparison-card.bad .comparison-title { color: var(--color-danger); }
+        .comparison-card.good .comparison-title { color: var(--color-purple); }
+
+        .comparison-list {
+            list-style: none;
+        }
+
+        .comparison-list li {
+            padding: 6px 0;
+            padding-left: 20px;
+            position: relative;
+            font-size: var(--body-small);
+            color: var(--color-text-secondary);
+        }
+
+        .comparison-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            color: var(--color-text-muted);
+        }
+
+        /* Diagram Box */
+        .diagram-box {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: var(--radius-md);
+            padding: 20px;
+            margin: var(--spacing-lg) 0;
+            font-family: "SF Mono", Monaco, monospace;
+            font-size: 11px;
+            line-height: 1.5;
+            overflow-x: auto;
+            white-space: pre;
+        }
+
+        .diagram-box .hl { color: #4ade80; font-weight: bold; }
+
+        /* Navigation Footer */
+        .nav-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-lg) 0;
+            border-top: 1px solid var(--color-border-light);
+            margin-top: var(--spacing-xl);
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            text-decoration: none;
+            font-size: var(--body-small);
+            font-weight: 500;
+            color: var(--color-info);
+            transition: color var(--transition-fast);
+        }
+
+        .nav-link:hover { color: var(--color-success); }
+        .nav-link.next { color: var(--color-success); }
+
+        p { margin: var(--spacing-sm) 0; }
+        strong { color: var(--color-text-primary); }
+
+        /* Insight Box Color Variants */
+        .insight-box.green {
+            border-left-color: var(--color-success);
+            background: rgba(26, 127, 55, 0.06);
+        }
+        .insight-box.green .insight-label { color: var(--color-success); }
+        .insight-box.green .insight-text em { color: var(--color-success); }
+        
+        .insight-box.blue {
+            border-left-color: var(--color-info);
+            background: rgba(9, 105, 218, 0.06);
+        }
+        .insight-box.blue .insight-label { color: var(--color-info); }
+        .insight-box.blue .insight-text em { color: var(--color-info); }
+        
+        .insight-box.orange {
+            border-left-color: #EA580C;
+            background: rgba(234, 88, 12, 0.06);
+        }
+        .insight-box.orange .insight-label { color: #EA580C; }
+        .insight-box.orange .insight-text em { color: #EA580C; }
+
+        /* Card Hover Effects with Top Indicator */
+        .section {
+            position: relative;
+            overflow: hidden;
+        }
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-purple);
+            opacity: 0;
+            transition: var(--transition-normal);
+        }
+        .section:hover::before {
+            opacity: 1;
+        }
+        .section:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .feature-card {
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition-normal);
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-purple);
+            opacity: 0;
+            transition: var(--transition-normal);
+        }
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--color-purple);
+        }
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .comparison-card {
+            transition: all var(--transition-normal);
+        }
+        .comparison-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Text Selection */
+        ::selection {
+            background: rgba(124, 58, 237, 0.2);
+            color: var(--color-text-primary);
+        }
+
+        /* Focus States */
+        :focus-visible {
+            outline: 2px solid var(--color-purple);
+            outline-offset: 2px;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--color-bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-border);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-text-muted);
+        }
+
+        @media (max-width: 768px) {
+            .page-title { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Tab Navigation -->
+        <nav class="tab-nav">
+            <a href="index.html" class="tab-btn">
+                <span class="tab-btn-num">🏠</span>
+                <span>首页</span>
+            </a>
+            <a href="part1.html" class="tab-btn">
+                <span class="tab-btn-num">1</span>
+                <span>问题与诊断</span>
+            </a>
+            <a href="part2.html" class="tab-btn active">
+                <span class="tab-btn-num">2</span>
+                <span>关键抉择</span>
+            </a>
+            <a href="part3.html" class="tab-btn">
+                <span class="tab-btn-num">3</span>
+                <span>验证分析</span>
+            </a>
+            <a href="part4.html" class="tab-btn">
+                <span class="tab-btn-num">4</span>
+                <span>AI分身实证</span>
+            </a>
+            <a href="part5.html" class="tab-btn">
+                <span class="tab-btn-num">5</span>
+                <span>技术实施</span>
+            </a>
+            <a href="architecture.html" class="tab-btn">
+                <span class="tab-btn-num">🗺️</span>
+                <span>架构全景</span>
+            </a>
+        </nav>
+
+        <!-- Page Header -->
+        <header class="page-header">
+            <div class="page-badge">Part 2</div>
+            <h1 class="page-title">关键抉择与产品形态</h1>
+            <p class="page-subtitle">第5-7章：Code Agent起点、养成游戏形态、分身机制</p>
+        </header>
+
+        <!-- Chapter 5 -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-number">5</span>
+                <h2 class="section-title">关键抉择：为什么必须从Code Agent出发</h2>
+            </div>
+
+            <div class="insight-box">
+                <div class="insight-label">核心论断</div>
+                <p class="insight-text">
+                    AI产品的终极形态，必然是从<em>Code Agent</em>扩展出来的"一专多能"产品，而不是从通用Agent出发的"通才"产品。
+                </p>
+            </div>
+
+            <h3 class="subsection-title">T型人才模型</h3>
+            <div class="quote">
+                <p class="quote-text">
+                    没有人是"一开始就什么都做"然后成功的：<br><br>
+                    <strong>Elon Musk</strong>：物理+编程 → 支付 → 火箭 → 汽车 → AI<br>
+                    <strong>比尔·盖茨</strong>：编程 → 操作系统 → 办公软件 → 云服务<br>
+                    <strong>任正非</strong>：通信技术 → 设备 → 手机 → 云 → 汽车<br><br>
+                    成功路径总是：<strong>先在一个领域做到极致，然后以此为根基扩展。</strong>
+                </p>
+            </div>
+
+            <h3 class="subsection-title">为什么是Code Agent</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <div class="feature-title">代码是"元技能"</div>
+                    <div class="feature-desc">会写代码的AI可以"造"其他能力：自动写脚本、创建工具、生成报告</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <div class="feature-title">推理优势</div>
+                    <div class="feature-desc">结构化思维、精确性、可验证性——代码能跑通就是最好的验证</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <div class="feature-title">自我扩展</div>
+                    <div class="feature-desc">Code Agent可以为自己开发新Skill，实现能力自增长</div>
+                </div>
+            </div>
+
+            <div class="insight-box green">
+                <div class="insight-label">技术层面的必然性</div>
+                <p class="insight-text">
+                    代码能力是Agent得以“自我进化”的根基。<em>Claude Code、Cursor、Windsurf</em>都从代码场景出发，因为代码是唯一可以“自己验证自己”的输出（跑通=正确），这让Agent有了<em>闭环学习</em>的能力。
+                </p>
+            </div>
+
+            <h3 class="subsection-title">产品路线对比</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>产品类型</th><th>起点</th><th>问题</th><th>预测</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Manus/小龙虾</strong></td>
+                            <td>通用能力</td>
+                            <td>什么都做一点，什么都不精通</td>
+                            <td><span class="tag tag-red">❌ 无法建立深度护城河</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cursor/Windsurf</strong></td>
+                            <td>代码能力</td>
+                            <td>代码精通，正在向通用扩展</td>
+                            <td><span class="tag tag-green">✓ 有深度根基，扩展更稳固</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Chapter 6 -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-number">6</span>
+                <h2 class="section-title">产品形态：为什么是"养成类游戏"</h2>
+            </div>
+
+            <div class="insight-box">
+                <div class="insight-label">核心洞察</div>
+                <p class="insight-text">
+                    AI产品的终极形态，本质上是一个<em>"养成类游戏"</em>——用户在其中培养一个"AI人"，持续增强其能力，最终为用户工作。
+                </p>
+            </div>
+
+            <h3 class="subsection-title">用户体验：养成的产品界面长什么样？</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #EC4899, #F43F5E);">🌟</div>
+                    <div class="feature-title">成长仪表盘</div>
+                    <div class="feature-desc">展示 Agent 当前能力等级、已解锁技能数、累计任务量，让用户感知成长</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #EC4899, #F43F5E);">🌳</div>
+                    <div class="feature-title">技能树视图</div>
+                    <div class="feature-desc">可视化展示已学会和待解锁的 Skills，引导用户主动“培养”</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #EC4899, #F43F5E);">🏆</div>
+                    <div class="feature-title">里程碑推送</div>
+                    <div class="feature-desc">“您的AI学会了第10个技能！”“完成第100个任务！”等反馈</div>
+                </div>
+            </div>
+
+            <h3 class="subsection-title">心理学基础</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #EC4899, #F43F5E);">🛠️</div>
+                    <div class="feature-title">宜家效应</div>
+                    <div class="feature-desc">人们对自己参与创造的东西估值更高</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #EC4899, #F43F5E);">💰</div>
+                    <div class="feature-title">沉没成本</div>
+                    <div class="feature-desc">投入越多，越不舍得离开</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #EC4899, #F43F5E);">🧠</div>
+                    <div class="feature-title">拟人化倾向</div>
+                    <div class="feature-desc">人类天然会对有"人格"的东西产生情感</div>
+                </div>
+            </div>
+
+            <h3 class="subsection-title">用户心态转变</h3>
+            <div class="comparison-grid">
+                <div class="comparison-card bad">
+                    <div class="comparison-title">传统工具用户</div>
+                    <ul class="comparison-list">
+                        <li>"这个工具不好用，换一个"</li>
+                        <li>"有更好的替代品，试试看"</li>
+                        <li>"它只是个工具"</li>
+                    </ul>
+                </div>
+                <div class="comparison-card good">
+                    <div class="comparison-title">养成游戏用户</div>
+                    <ul class="comparison-list">
+                        <li>"我的AI还不够强，继续培养"</li>
+                        <li>"花了这么多时间培养，舍不得换"</li>
+                        <li>"它是我的助手/伙伴/分身"</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 class="subsection-title">游戏化要素映射</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>养成游戏要素</th><th>AI产品映射</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>角色等级/成长曲线</td><td>Agent能力等级（新手→专家→大师）</td></tr>
+                        <tr><td>技能树</td><td>Skill系统（可解锁/学习新技能）</td></tr>
+                        <tr><td>装备/道具</td><td>工具集成（MCP连接、API调用）</td></tr>
+                        <tr><td>经验值</td><td>使用频率+任务完成度</td></tr>
+                        <tr><td>成就系统</td><td>里程碑（第一次写PPT、第一次调研...）</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Chapter 7 -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-number">7</span>
+                <h2 class="section-title">架构设计：Agent模板 + 分身机制</h2>
+            </div>
+
+            <div class="insight-box" style="border-left-color: var(--color-warning);">
+                <div class="insight-label" style="color: var(--color-warning-dark);">核心设计</div>
+                <p class="insight-text">
+                    应该是一个非常强的<em style="color: var(--color-warning-dark);">Agent模板</em>，然后可以派生出<em style="color: var(--color-warning-dark);">Agent分身</em>并行干活。
+                </p>
+            </div>
+
+            <h3 class="subsection-title">架构图</h3>
+            <div class="diagram-box">┌─────────────────────────────────────────────────────────────────┐
+│                    <span class="hl">Agent模板 + 分身架构</span>                          │
+├─────────────────────────────────────────────────────────────────┤
+│                    ┌─────────────────┐                          │
+│                    │   <span class="hl">主Agent模板</span>    │                          │
+│                    │  (AgentCore)     │                          │
+│                    │  • 全部能力      │                          │
+│                    │  • 全部记忆      │                          │
+│                    │  • 全部人格      │                          │
+│                    └────────┬────────┘                          │
+│                             │                                    │
+│              派生（共享核心，独立执行）                             │
+│           ┌─────────────────┼─────────────────┐                 │
+│           ▼                 ▼                 ▼                 │
+│     ┌──────────┐     ┌──────────┐     ┌──────────┐            │
+│     │  分身 A  │     │  分身 B  │     │  分身 C  │            │
+│     │ 独立上下文│     │ 独立上下文│     │ 独立上下文│            │
+│     │ 共享Memory│     │ 共享Memory│     │ 共享Memory│            │
+│     └────┬─────┘     └────┬─────┘     └────┬─────┘            │
+│          └────────────────┼────────────────┘                    │
+│                    <span class="hl">经验回流/统一沉淀</span>                              │
+└─────────────────────────────────────────────────────────────────┘</div>
+
+            <h3 class="subsection-title">核心设计原则</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>设计要点</th><th>说明</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>共享Memory</strong></td><td>所有分身共享主Agent的记忆，知道用户偏好</td></tr>
+                        <tr><td><strong>独立上下文</strong></td><td>每个分身有独立的任务上下文，互不干扰</td></tr>
+                        <tr><td><strong>能力继承</strong></td><td>分身继承主Agent的所有Skill</td></tr>
+                        <tr><td><strong>经验回流</strong></td><td>分身执行的结果和经验沉淀回主Agent</td></tr>
+                        <tr><td><strong>按需创建</strong></td><td>分身是临时的执行实例，任务完成即销毁</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="subsection-title">用户侧感知：分身对用户透明</h3>
+            <div class="quote">
+                <p class="quote-text">
+                    用户不需要知道“分身”的存在。从用户视角看：“我只是让AI同时做几件事，它都能并行处理好”——<br><br>
+                    <strong>产品界面体现为：</strong>“正在执行3个任务...”的进度面板，每个任务独立进度条、每个都可查看详情和中间结果。任务完成后统一汇总展示。
+                </p>
+            </div>
+
+            <h3 class="subsection-title">成长阶梯与付费模式</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>成长阶段</th><th>并行能力</th><th>付费层级</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>新手期</strong></td><td>串行（1个任务）</td><td>免费版</td></tr>
+                        <tr><td><strong>成长期</strong></td><td>2-3个并行</td><td>基础版</td></tr>
+                        <tr><td><strong>成熟期</strong></td><td>5-10个并行</td><td>专业版</td></tr>
+                        <tr><td><strong>专家期</strong></td><td>无限并行</td><td>团队版</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Navigation Footer -->
+        <nav class="nav-footer">
+            <a href="part1.html" class="nav-link">← Part 1: 问题与诊断</a>
+            <span style="color: var(--color-text-muted);">Part 2 of 5</span>
+            <a href="part3.html" class="nav-link next">Part 3: 验证分析 →</a>
+        </nav>
+    </div>
+</body>
+</html>

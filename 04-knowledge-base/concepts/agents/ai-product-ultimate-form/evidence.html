@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI分身实证 - AI产品终极形态思考</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23059669'/><path d='M16 6c-4.4 0-8 3.6-8 8 0 2.5 1.2 4.8 3 6.2V24l5-3 5 3v-3.8c1.8-1.4 3-3.7 3-6.2 0-4.4-3.6-8-8-8z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/><line x1='16' y1='10' x2='16' y2='15' stroke='white' stroke-width='2' stroke-linecap='round'/><circle cx='16' cy='18' r='1' fill='white'/></svg>">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+/* === Navigation === */
+.site-nav { display:flex; gap:4px; justify-content:center; background:rgba(255,255,255,0.9); backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.7); border-radius:var(--radius-lg); padding:5px; margin-bottom:var(--spacing-2xl); position:sticky; top:12px; z-index:100; box-shadow:var(--shadow-lg); }
+.site-nav a { flex:1; text-align:center; padding:10px 12px; border-radius:var(--radius-md); font-size:13px; font-weight:500; color:var(--color-text-muted); text-decoration:none; transition:all var(--transition-fast); white-space:nowrap; }
+.site-nav a:hover { background:var(--color-bg-table-header); color:var(--color-text-secondary); }
+.site-nav a.active { background:var(--gradient-success); color:#fff; font-weight:600; box-shadow:var(--shadow-glow-success); }
+
+/* === Page Header === */
+.page-header { text-align:center; padding:var(--spacing-xl) var(--spacing-lg); margin-bottom:var(--spacing-2xl); background:linear-gradient(135deg, rgba(234,88,12,0.06) 0%, rgba(245,158,11,0.04) 100%); border-radius:var(--radius-lg); }
+.page-badge { display:inline-block; padding:6px 14px; background:linear-gradient(135deg,#EA580C,#F59E0B); color:white; border-radius:var(--radius-full); font-size:var(--caption); font-weight:600; margin-bottom:12px; }
+.page-title { font-size:var(--heading-1); font-weight:800; color:var(--color-text-primary); margin-bottom:8px; }
+.page-subtitle { font-size:var(--body-text); color:var(--color-text-secondary); }
+
+/* === Person Profile Card === */
+.person-profile {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    margin-bottom: var(--spacing-2xl);
+    overflow: hidden;
+}
+.profile-top {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 24px 28px;
+    background: linear-gradient(135deg, rgba(5,150,105,0.06) 0%, rgba(37,99,235,0.04) 50%, rgba(124,58,237,0.03) 100%);
+    border-bottom: 1px solid var(--color-border-light);
+}
+.profile-avatar {
+    width: 72px; height: 72px;
+    background: linear-gradient(135deg, #059669, #2563EB);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 36px;
+    box-shadow: 0 4px 16px rgba(5,150,105,0.25);
+    flex-shrink: 0;
+}
+.profile-info { flex: 1; }
+.profile-name { font-size: 22px; font-weight: 800; color: var(--color-text-primary); margin-bottom: 2px; }
+.profile-tagline { font-size: 14px; color: var(--color-text-secondary); margin-bottom: 8px; }
+.profile-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.profile-tag {
+    padding: 3px 10px; border-radius: var(--radius-full);
+    font-size: 11px; font-weight: 600;
+}
+.profile-tag.green { background: #ECFDF5; color: #059669; }
+.profile-tag.blue { background: #EFF6FF; color: #2563EB; }
+.profile-tag.purple { background: #F5F3FF; color: #7C3AED; }
+.profile-tag.orange { background: #FFF7ED; color: #EA580C; }
+
+.profile-stats {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 0; padding: 0;
+}
+.profile-stat {
+    text-align: center; padding: 16px 8px;
+    border-right: 1px solid var(--color-border-light);
+    transition: background 150ms;
+}
+.profile-stat:last-child { border-right: none; }
+.profile-stat:hover { background: rgba(5,150,105,0.03); }
+.stat-value { font-size: 24px; font-weight: 800; margin-bottom: 2px; }
+.stat-label { font-size: 11px; color: var(--color-text-muted); font-weight: 500; }
+
+/* === Section Cards === */
+.section { background:var(--color-bg-card); border:1px solid var(--color-border-light); border-radius:var(--radius-lg); padding:var(--spacing-lg); margin-bottom:var(--spacing-lg); box-shadow:var(--shadow-card); position:relative; overflow:hidden; }
+.section::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; opacity:0; transition:var(--transition-normal); }
+.section:hover::before { opacity:1; }
+.section:hover { box-shadow:var(--shadow-md); }
+.section.brain::before { background:linear-gradient(135deg,#059669,#10B981); }
+.section.skills::before { background:linear-gradient(135deg,#2563EB,#60A5FA); }
+.section.memory::before { background:linear-gradient(135deg,#EC4899,#F472B6); }
+.section.routine::before { background:linear-gradient(135deg,#F59E0B,#FBBF24); }
+.section.growth::before { background:linear-gradient(135deg,#7C3AED,#A78BFA); }
+.section.compare::before { background:linear-gradient(135deg,#EA580C,#F97316); }
+
+.section-hdr { display:flex; align-items:center; gap:12px; margin-bottom:var(--spacing-lg); padding-bottom:var(--spacing-md); border-bottom:1px solid var(--color-border-light); }
+.section-icon {
+    width: 40px; height: 40px;
+    border-radius: var(--radius-md);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; color: #fff; flex-shrink: 0;
+}
+.section-icon.brain { background: linear-gradient(135deg, #059669, #10B981); }
+.section-icon.skills { background: linear-gradient(135deg, #2563EB, #60A5FA); }
+.section-icon.memory { background: linear-gradient(135deg, #EC4899, #F472B6); }
+.section-icon.routine { background: linear-gradient(135deg, #F59E0B, #FBBF24); }
+.section-icon.growth { background: linear-gradient(135deg, #7C3AED, #A78BFA); }
+.section-icon.compare { background: linear-gradient(135deg, #EA580C, #F97316); }
+.section-title { font-size:var(--heading-2); font-weight:700; color:var(--color-text-primary); }
+.section-subtitle { font-size: 12px; color: var(--color-text-muted); font-weight: 500; }
+.section-analogy {
+    margin-left: auto;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    font-size: 11px; font-weight: 600;
+    background: rgba(0,0,0,0.04);
+    color: var(--color-text-muted);
+    white-space: nowrap;
+}
+
+/* === Brain Grid (AgentCore) === */
+.brain-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 10px; margin: var(--spacing-md) 0;
+}
+.brain-card {
+    padding: 14px; border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-light);
+    background: linear-gradient(135deg, rgba(5,150,105,0.03) 0%, transparent 100%);
+    transition: all var(--transition-fast);
+}
+.brain-card:hover { border-color: #059669; box-shadow: var(--shadow-sm); transform: translateY(-1px); }
+.brain-card-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.brain-card-icon { font-size: 18px; }
+.brain-card-name { font-size: 14px; font-weight: 700; color: var(--color-text-primary); }
+.brain-card-status { margin-left: auto; font-size: 10px; font-weight: 700; color: #059669; background: #ECFDF5; padding: 2px 8px; border-radius: var(--radius-full); }
+.brain-card-desc { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; margin-bottom: 6px; }
+.brain-card-proof { font-size: 11px; color: #059669; padding: 6px 8px; background: rgba(5,150,105,0.06); border-radius: var(--radius-sm); line-height: 1.4; }
+
+/* === Skill Category Grid === */
+.skill-category-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--spacing-md); margin:var(--spacing-md) 0; }
+.skill-cat-card { background:var(--color-bg-table-header); border:1px solid var(--color-border-light); border-radius:var(--radius-md); padding:var(--spacing-md); transition:all var(--transition-fast); border-left:3px solid transparent; }
+.skill-cat-card:hover { transform:translateY(-2px); box-shadow:var(--shadow-card); }
+.skill-cat-icon { font-size:20px; margin-bottom:4px; }
+.skill-cat-name { font-size:var(--heading-4); font-weight:700; color:var(--color-text-primary); margin-bottom:2px; }
+.skill-cat-count { font-size:var(--caption); font-weight:600; margin-bottom:6px; }
+.skill-cat-items { font-size:11px; color:var(--color-text-muted); line-height:1.6; }
+.skill-cat-items code { background:rgba(0,0,0,0.05); padding:1px 5px; border-radius:3px; font-size:10px; }
+
+/* === Memory Grid === */
+.memory-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:var(--spacing-md); margin:var(--spacing-md) 0; }
+.memory-card { background:white; border:1px solid var(--color-border-light); border-radius:var(--radius-md); padding:14px; display:flex; align-items:center; gap:12px; transition: all var(--transition-fast); }
+.memory-card:hover { box-shadow: var(--shadow-sm); }
+.memory-num { font-size:20px; font-weight:800; min-width:36px; text-align:center; }
+.memory-info { flex:1; }
+.memory-name { font-size:13px; font-weight:600; color:var(--color-text-primary); }
+.memory-desc { font-size:11px; color:var(--color-text-muted); }
+.memory-bar { height:4px; border-radius:2px; background:#E5E7EB; margin-top:4px; }
+.memory-bar-fill { height:100%; border-radius:2px; }
+
+/* === Workflow Cards === */
+.workflow-card { background:linear-gradient(135deg,rgba(245,158,11,0.04),rgba(37,99,235,0.02)); border:1px solid rgba(245,158,11,0.15); border-radius:var(--radius-md); padding:var(--spacing-md); margin:var(--spacing-md) 0; transition: all var(--transition-fast); }
+.workflow-card:hover { box-shadow: var(--shadow-sm); }
+.workflow-title { font-size:var(--heading-4); font-weight:700; color:var(--color-text-primary); margin-bottom:8px; display:flex; align-items:center; gap:8px; }
+.workflow-steps { display:flex; align-items:center; gap:0; flex-wrap:wrap; margin-bottom:8px; }
+.wf-step { padding:4px 10px; border-radius:var(--radius-full); font-size:11px; font-weight:600; background:rgba(245,158,11,0.1); color:#D97706; }
+.wf-arrow { font-size:12px; color:var(--color-text-muted); margin:0 4px; }
+.workflow-note { font-size:12px; color:var(--color-text-muted); }
+
+/* === Evolution Grid === */
+.evo-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--spacing-md); margin:var(--spacing-md) 0; }
+.evo-card { border:1px solid var(--color-border-light); border-radius:var(--radius-md); padding:var(--spacing-md); position:relative; overflow:hidden; transition: all var(--transition-fast); }
+.evo-card:hover { box-shadow: var(--shadow-card); transform: translateY(-2px); }
+.evo-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; }
+.evo-card:nth-child(1)::before { background:#EC4899; }
+.evo-card:nth-child(2)::before { background:var(--color-purple); }
+.evo-card:nth-child(3)::before { background:var(--color-success); }
+.evo-level { font-size:var(--caption); font-weight:700; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px; }
+.evo-title { font-size:var(--heading-4); font-weight:700; color:var(--color-text-primary); margin-bottom:6px; }
+.evo-desc { font-size:12px; color:var(--color-text-secondary); line-height:1.6; }
+.evo-proof { font-size:11px; color:var(--color-success); font-weight:600; margin-top:8px; padding:6px 10px; background:rgba(5,150,105,0.06); border-radius:var(--radius-sm); }
+.evo-arrow-row {
+    display: flex; align-items: center; justify-content: center;
+    gap: 0; margin: var(--spacing-md) 0;
+    font-size: 13px; color: var(--color-text-muted);
+}
+.evo-arrow-label {
+    padding: 6px 14px; border-radius: var(--radius-full);
+    background: rgba(124,58,237,0.06); color: #7C3AED;
+    font-size: 12px; font-weight: 600;
+}
+
+/* === Competitor Grid === */
+.comp-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--spacing-md); margin:var(--spacing-md) 0; }
+.comp-card { border-radius:var(--radius-md); padding:var(--spacing-md); text-align:center; transition: all var(--transition-fast); }
+.comp-card:hover { transform: translateY(-2px); }
+.comp-card.muted { background:#F9FAFB; border:1px solid #E5E7EB; }
+.comp-card.highlight { background:linear-gradient(135deg,rgba(5,150,105,0.08),rgba(37,99,235,0.06)); border:2px solid var(--color-success); }
+.comp-name { font-size:var(--heading-4); font-weight:700; margin-bottom:4px; }
+.comp-card.muted .comp-name { color:#6B7280; }
+.comp-card.highlight .comp-name { color:var(--color-success); }
+.comp-desc { font-size:var(--caption); color:var(--color-text-muted); margin-bottom:8px; }
+.comp-metrics { display:flex; flex-direction:column; gap:4px; text-align:left; font-size:11px; }
+.comp-metric { display:flex; justify-content:space-between; padding:3px 0; border-bottom:1px solid var(--color-border-light); }
+.comp-metric:last-child { border-bottom:none; }
+.comp-level { display:inline-block; margin-top:8px; padding:2px 10px; border-radius:var(--radius-full); font-size:11px; font-weight:600; }
+.comp-card.muted .comp-level { background:#F3F4F6; color:#9CA3AF; }
+.comp-card.highlight .comp-level { background:#ECFDF5; color:var(--color-success); }
+
+/* === Insight Boxes === */
+.insight-box { border-left:3px solid var(--color-success); background:rgba(5,150,105,0.06); border-radius:0 var(--radius-md) var(--radius-md) 0; padding:var(--spacing-md) 20px; margin:var(--spacing-lg) 0; }
+.insight-box.purple { border-left-color:var(--color-purple); background:rgba(124,58,237,0.06); }
+.insight-box.orange { border-left-color:#EA580C; background:rgba(234,88,12,0.06); }
+.insight-box.blue { border-left-color:#2563EB; background:rgba(37,99,235,0.06); }
+.insight-label { font-size:var(--caption); font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-success); margin-bottom:var(--spacing-sm); display:flex; align-items:center; gap:var(--spacing-sm); }
+.insight-box.purple .insight-label { color:var(--color-purple); }
+.insight-box.orange .insight-label { color:#EA580C; }
+.insight-box.blue .insight-label { color:#2563EB; }
+.insight-text { font-size:var(--body-text); font-weight:600; line-height:1.6; color:var(--color-text-primary); }
+.insight-text em { color:var(--color-success); font-style:normal; }
+.insight-box.purple .insight-text em { color:var(--color-purple); }
+
+/* === Conclusion === */
+.conclusion-box { background:var(--gradient-success); color:white; border-radius:var(--radius-lg); padding:var(--spacing-xl); text-align:center; margin-top:var(--spacing-2xl); }
+.conclusion-title { font-size:var(--heading-3); font-weight:700; margin-bottom:12px; }
+.conclusion-text { font-size:var(--body-text); line-height:1.7; margin-bottom:12px; opacity:0.95; }
+.conclusion-highlight { display:inline-block; background:rgba(255,255,255,0.2); padding:6px 16px; border-radius:var(--radius-full); font-size:var(--body-small); margin-top:8px; }
+
+/* === Validation Table === */
+.table-wrap { overflow-x:auto; margin:var(--spacing-md) 0; }
+table { width:100%; border-collapse:collapse; font-size:var(--body-small); }
+th, td { padding:10px 14px; text-align:left; border-bottom:1px solid var(--color-border-light); }
+th { background:var(--color-bg-table-header); font-weight:600; color:var(--color-text-secondary); font-size:var(--heading-4); }
+td:first-child { font-weight:500; color:var(--color-text-primary); }
+
+.footer { text-align:center; padding:var(--spacing-lg) 0; color:var(--color-text-muted); font-size:var(--caption); border-top:1px solid var(--color-border-light); margin-top:var(--spacing-2xl); }
+p { margin:var(--spacing-sm) 0; }
+strong { color:var(--color-text-primary); }
+
+@media (max-width:768px) {
+    .page-title { font-size:24px; }
+    .profile-top { flex-direction: column; text-align: center; }
+    .profile-stats { grid-template-columns: repeat(3, 1fr); }
+    .profile-stat:nth-child(3) { border-right: none; }
+    .brain-grid { grid-template-columns: 1fr; }
+    .skill-category-grid { grid-template-columns:1fr; }
+    .memory-grid { grid-template-columns:1fr; }
+    .evo-grid { grid-template-columns:1fr; }
+    .comp-grid { grid-template-columns:1fr; }
+    .site-nav { flex-wrap:wrap; }
+    .site-nav a { font-size:12px; padding:8px; }
+    .section-analogy { display: none; }
+}
+    </style>
+</head>
+<body>
+<div class="container">
+    <nav class="site-nav">
+        <a href="index.html">首页</a>
+        <a href="deep-dive.html">详细论证</a>
+        <a href="evidence.html" class="active">AI分身实证</a>
+        <a href="architecture.html">架构全景</a>
+        <a href="implementation.html">技术实施</a>
+    </nav>
+
+    <header class="page-header">
+        <div class="page-badge">🧬 AI分身实证</div>
+        <h1 class="page-title">如果 AI 分身是一个人，TA 长什么样？</h1>
+        <p class="page-subtitle">把一个已运行半年的真实 AI 系统，类比成一个人来看<br>TA 的大脑、技能、记忆、日常、成长轨迹 — 一目了然</p>
+    </header>
+
+    <!-- ==================== 人物档案卡 ==================== -->
+    <div class="person-profile">
+        <div class="profile-top">
+            <div class="profile-avatar">🧠</div>
+            <div class="profile-info">
+                <div class="profile-name">AI 分身</div>
+                <div class="profile-tagline">一个已运行半年、持续自进化的数字生命体 — 不是工具，是另一个你</div>
+                <div class="profile-tags">
+                    <span class="profile-tag green">🧠 6大认知能力</span>
+                    <span class="profile-tag blue">⚡ 50+项专业技能</span>
+                    <span class="profile-tag purple">💗 59条人生经验</span>
+                    <span class="profile-tag orange">🔌 10+外部连接</span>
+                </div>
+            </div>
+        </div>
+        <div class="profile-stats">
+            <div class="profile-stat">
+                <div class="stat-value" style="color:#059669;">6/6</div>
+                <div class="stat-label">大脑模块<br>全部在线</div>
+            </div>
+            <div class="profile-stat">
+                <div class="stat-value" style="color:#2563EB;">50+</div>
+                <div class="stat-label">专业技能<br>9大领域</div>
+            </div>
+            <div class="profile-stat">
+                <div class="stat-value" style="color:#EC4899;">59</div>
+                <div class="stat-label">人生记忆<br>7大类别</div>
+            </div>
+            <div class="profile-stat">
+                <div class="stat-value" style="color:#7C3AED;">150+</div>
+                <div class="stat-label">知识储备<br>结构化沉淀</div>
+            </div>
+            <div class="profile-stat">
+                <div class="stat-value" style="color:#EA580C;">3/3</div>
+                <div class="stat-label">进化层级<br>全部达成</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 一张图看清 · 人物全息图 ==================== -->
+    <div style="margin-bottom:var(--spacing-2xl);">
+    <svg viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;border-radius:var(--radius-lg);background:linear-gradient(135deg,#FFFBEB 0%,#FFF7ED 30%,#FEF2F2 100%);border:1px solid #FED7AA;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <defs>
+        <filter id="ds"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.08"/></filter>
+        <linearGradient id="gBrain" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#10B981"/></linearGradient>
+        <linearGradient id="gSkill" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#2563EB"/><stop offset="100%" stop-color="#60A5FA"/></linearGradient>
+        <linearGradient id="gMemory" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#EC4899"/><stop offset="100%" stop-color="#F472B6"/></linearGradient>
+        <linearGradient id="gRoutine" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#F59E0B"/><stop offset="100%" stop-color="#FBBF24"/></linearGradient>
+        <linearGradient id="gGrowth" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7C3AED"/><stop offset="100%" stop-color="#A78BFA"/></linearGradient>
+        <linearGradient id="gBody" x1="0.5" y1="0" x2="0.5" y2="1"><stop offset="0%" stop-color="#059669" stop-opacity="0.15"/><stop offset="100%" stop-color="#2563EB" stop-opacity="0.08"/></linearGradient>
+      </defs>
+
+      <!-- Title -->
+      <text x="450" y="26" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="14" font-weight="700" fill="#64748B" letter-spacing="0.5">一张图看清 · 如果 AI 分身是一个人</text>
+
+      <!-- === Center: Person Silhouette === -->
+      <!-- Head -->
+      <circle cx="450" cy="115" r="50" fill="url(#gBody)" stroke="#059669" stroke-width="2" stroke-opacity="0.3"/>
+      <text x="450" y="110" text-anchor="middle" font-size="28">🧠</text>
+      <text x="450" y="132" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" font-weight="700" fill="#059669">AgentCore</text>
+      <!-- Neck -->
+      <line x1="450" y1="165" x2="450" y2="185" stroke="#94A3B8" stroke-width="2" stroke-opacity="0.3"/>
+      <!-- Body -->
+      <rect x="410" y="185" width="80" height="100" rx="16" fill="url(#gBody)" stroke="#2563EB" stroke-width="1.5" stroke-opacity="0.2"/>
+      <!-- Left arm -->
+      <line x1="410" y1="200" x2="350" y2="250" stroke="#2563EB" stroke-width="2" stroke-opacity="0.2"/>
+      <circle cx="340" cy="258" r="10" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5" stroke-opacity="0.3"/>
+      <text x="340" y="262" text-anchor="middle" font-size="10">⚡</text>
+      <!-- Right arm -->
+      <line x1="490" y1="200" x2="550" y2="250" stroke="#EC4899" stroke-width="2" stroke-opacity="0.2"/>
+      <circle cx="560" cy="258" r="10" fill="#FDF2F8" stroke="#EC4899" stroke-width="1.5" stroke-opacity="0.3"/>
+      <text x="560" y="262" text-anchor="middle" font-size="10">💗</text>
+      <!-- Heart -->
+      <text x="450" y="235" text-anchor="middle" font-size="16">💗</text>
+      <!-- Left leg -->
+      <line x1="430" y1="285" x2="410" y2="350" stroke="#F59E0B" stroke-width="2" stroke-opacity="0.2"/>
+      <circle cx="405" cy="358" r="10" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.5" stroke-opacity="0.3"/>
+      <text x="405" y="362" text-anchor="middle" font-size="10">📅</text>
+      <!-- Right leg -->
+      <line x1="470" y1="285" x2="490" y2="350" stroke="#7C3AED" stroke-width="2" stroke-opacity="0.2"/>
+      <circle cx="495" cy="358" r="10" fill="#F5F3FF" stroke="#7C3AED" stroke-width="1.5" stroke-opacity="0.3"/>
+      <text x="495" y="362" text-anchor="middle" font-size="10">📈</text>
+
+      <!-- === Left Panel: Brain === -->
+      <rect x="20" y="48" width="270" height="130" rx="10" fill="white" stroke="#E2E8F0" filter="url(#ds)"/>
+      <rect x="20" y="48" width="270" height="3" rx="1" fill="url(#gBrain)"/>
+      <text x="35" y="72" font-family="-apple-system,system-ui,sans-serif" font-size="12" font-weight="800" fill="#059669">🧠 大脑 — 6大认知能力（全部在线）</text>
+      <!-- 6 modules -->
+      <rect x="30" y="82" width="78" height="28" rx="6" fill="#ECFDF5" stroke="#A7F3D0"/>
+      <text x="69" y="96" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" font-weight="700" fill="#059669">🧠 记忆</text>
+      <text x="69" y="106" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="7" fill="#6B7280">Memory</text>
+      <rect x="113" y="82" width="78" height="28" rx="6" fill="#ECFDF5" stroke="#A7F3D0"/>
+      <text x="152" y="96" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" font-weight="700" fill="#059669">🔍 推理</text>
+      <text x="152" y="106" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="7" fill="#6B7280">Reasoning</text>
+      <rect x="196" y="82" width="78" height="28" rx="6" fill="#ECFDF5" stroke="#A7F3D0"/>
+      <text x="235" y="96" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" font-weight="700" fill="#059669">📋 规划</text>
+      <text x="235" y="106" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="7" fill="#6B7280">Planning</text>
+      <rect x="30" y="115" width="78" height="28" rx="6" fill="#ECFDF5" stroke="#A7F3D0"/>
+      <text x="69" y="129" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" font-weight="700" fill="#059669">🎯 编排</text>
+      <text x="69" y="139" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="7" fill="#6B7280">Orchestration</text>
+      <rect x="113" y="115" width="78" height="28" rx="6" fill="#ECFDF5" stroke="#A7F3D0"/>
+      <text x="152" y="129" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" font-weight="700" fill="#059669">🔄 反思</text>
+      <text x="152" y="139" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="7" fill="#6B7280">Reflection</text>
+      <rect x="196" y="115" width="78" height="28" rx="6" fill="#ECFDF5" stroke="#A7F3D0"/>
+      <text x="235" y="129" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" font-weight="700" fill="#059669">🔗 集成</text>
+      <text x="235" y="139" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="7" fill="#6B7280">Integration</text>
+      <text x="155" y="170" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#059669" font-weight="600">类比：人的认知功能 — 记住、思考、计划、协调、反省、社交</text>
+      <!-- connector to head -->
+      <line x1="290" y1="110" x2="398" y2="110" stroke="#059669" stroke-width="1.5" stroke-dasharray="4 3" stroke-opacity="0.4"/>
+
+      <!-- === Right Panel: Skills === -->
+      <rect x="610" y="48" width="270" height="130" rx="10" fill="white" stroke="#E2E8F0" filter="url(#ds)"/>
+      <rect x="610" y="48" width="270" height="3" rx="1" fill="url(#gSkill)"/>
+      <text x="625" y="72" font-family="-apple-system,system-ui,sans-serif" font-size="12" font-weight="800" fill="#2563EB">⚡ 技能 — 50+ 专业能力 × 9大领域</text>
+      <rect x="620" y="82" width="78" height="20" rx="4" fill="#ECFDF5" stroke="#A7F3D0"/>
+      <text x="659" y="95" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="8" font-weight="600" fill="#059669">🔄 自进化 ×9</text>
+      <rect x="703" y="82" width="78" height="20" rx="4" fill="#EFF6FF" stroke="#BFDBFE"/>
+      <text x="742" y="95" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="8" font-weight="600" fill="#2563EB">🔬 洞察 ×5</text>
+      <rect x="786" y="82" width="78" height="20" rx="4" fill="#F5F3FF" stroke="#DDD6FE"/>
+      <text x="825" y="95" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="8" font-weight="600" fill="#7C3AED">🎨 创作 ×10</text>
+      <rect x="620" y="107" width="78" height="20" rx="4" fill="#FFF7ED" stroke="#FED7AA"/>
+      <text x="659" y="120" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="8" font-weight="600" fill="#EA580C">🌐 开发 ×6</text>
+      <rect x="703" y="107" width="78" height="20" rx="4" fill="#ECFEFF" stroke="#A5F3FC"/>
+      <text x="742" y="120" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="8" font-weight="600" fill="#0891B2">📊 研究 ×8</text>
+      <rect x="786" y="107" width="78" height="20" rx="4" fill="#FFFBEB" stroke="#FDE68A"/>
+      <text x="825" y="120" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="8" font-weight="600" fill="#D97706">📨 协作 ×3</text>
+      <rect x="620" y="132" width="78" height="20" rx="4" fill="#FAF5FF" stroke="#E9D5FF"/>
+      <text x="659" y="145" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="8" font-weight="600" fill="#8B5CF6">📄 文档 ×2</text>
+      <rect x="703" y="132" width="78" height="20" rx="4" fill="#EFF6FF" stroke="#BFDBFE"/>
+      <text x="742" y="145" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="8" font-weight="600" fill="#2563EB">🛠 框架 ×7</text>
+      <rect x="786" y="132" width="78" height="20" rx="4" fill="#FDF2F8" stroke="#FBCFE8"/>
+      <text x="825" y="145" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="8" font-weight="600" fill="#EC4899">🎮 专项 ×4</text>
+      <text x="745" y="170" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#2563EB" font-weight="600">类比：人的技能树 — 会写代码、做PPT、搞调研...</text>
+      <!-- connector to left arm -->
+      <line x1="610" y1="140" x2="502" y2="110" stroke="#2563EB" stroke-width="1.5" stroke-dasharray="4 3" stroke-opacity="0.4"/>
+
+      <!-- === Left Bottom: Memory === -->
+      <rect x="20" y="200" width="270" height="160" rx="10" fill="white" stroke="#E2E8F0" filter="url(#ds)"/>
+      <rect x="20" y="200" width="270" height="3" rx="1" fill="url(#gMemory)"/>
+      <text x="35" y="224" font-family="-apple-system,system-ui,sans-serif" font-size="12" font-weight="800" fill="#EC4899">💗 记忆 — 59条人生经验 × 7大类</text>
+      <!-- Memory bars -->
+      <text x="35" y="244" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#64748B">踩坑经验</text>
+      <rect x="105" y="236" width="165" height="10" rx="3" fill="#FEE2E2"/>
+      <rect x="105" y="236" width="115" height="10" rx="3" fill="#F87171"/>
+      <text x="228" y="245" font-family="-apple-system,system-ui,sans-serif" font-size="8" font-weight="700" fill="#DC2626">26</text>
+      <text x="35" y="260" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#64748B">任务流程</text>
+      <rect x="105" y="252" width="165" height="10" rx="3" fill="#EDE9FE"/>
+      <rect x="105" y="252" width="66" height="10" rx="3" fill="#A78BFA"/>
+      <text x="179" y="261" font-family="-apple-system,system-ui,sans-serif" font-size="8" font-weight="700" fill="#7C3AED">15</text>
+      <text x="35" y="276" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#64748B">开发实践</text>
+      <rect x="105" y="268" width="165" height="10" rx="3" fill="#D1FAE5"/>
+      <rect x="105" y="268" width="27" height="10" rx="3" fill="#34D399"/>
+      <text x="140" y="277" font-family="-apple-system,system-ui,sans-serif" font-size="8" font-weight="700" fill="#059669">6</text>
+      <text x="35" y="292" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#64748B">约束规则</text>
+      <rect x="105" y="284" width="165" height="10" rx="3" fill="#FFE4E6"/>
+      <rect x="105" y="284" width="22" height="10" rx="3" fill="#FB7185"/>
+      <text x="135" y="293" font-family="-apple-system,system-ui,sans-serif" font-size="8" font-weight="700" fill="#E11D48">5</text>
+      <text x="35" y="308" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#64748B">身份+沟通+爱好</text>
+      <rect x="105" y="300" width="165" height="10" rx="3" fill="#DBEAFE"/>
+      <rect x="105" y="300" width="30" height="10" rx="3" fill="#60A5FA"/>
+      <text x="143" y="309" font-family="-apple-system,system-ui,sans-serif" font-size="8" font-weight="700" fill="#2563EB">7</text>
+      <rect x="30" y="318" width="250" height="26" rx="5" fill="#FDF2F8" stroke="#FBCFE8"/>
+      <text x="155" y="335" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" font-weight="600" fill="#EC4899">类比：人的阅历 — 踩过的坑、总结的经验、个人偏好</text>
+      <!-- connector to heart -->
+      <line x1="290" y1="280" x2="410" y2="235" stroke="#EC4899" stroke-width="1.5" stroke-dasharray="4 3" stroke-opacity="0.4"/>
+
+      <!-- === Right Bottom: Daily Routine === -->
+      <rect x="610" y="200" width="270" height="160" rx="10" fill="white" stroke="#E2E8F0" filter="url(#ds)"/>
+      <rect x="610" y="200" width="270" height="3" rx="1" fill="url(#gRoutine)"/>
+      <text x="625" y="224" font-family="-apple-system,system-ui,sans-serif" font-size="12" font-weight="800" fill="#D97706">📅 日常 — 每天在做的事</text>
+      <!-- Routine 1 -->
+      <rect x="620" y="234" width="250" height="32" rx="6" fill="#FFFBEB" stroke="#FDE68A"/>
+      <text x="630" y="250" font-family="-apple-system,system-ui,sans-serif" font-size="9" font-weight="700" fill="#D97706">📰 AI日报 · 每天自动执行</text>
+      <text x="630" y="262" font-family="-apple-system,system-ui,sans-serif" font-size="7" fill="#94A3B8">搜索→抓取→分析→生成→部署→推送</text>
+      <!-- Routine 2 -->
+      <rect x="620" y="272" width="250" height="32" rx="6" fill="#EFF6FF" stroke="#BFDBFE"/>
+      <text x="630" y="288" font-family="-apple-system,system-ui,sans-serif" font-size="9" font-weight="700" fill="#2563EB">🔬 深度调研 · 按需触发</text>
+      <text x="630" y="300" font-family="-apple-system,system-ui,sans-serif" font-size="7" fill="#94A3B8">收集→阅读→分析→生成→预览→部署→同步</text>
+      <!-- Routine 3 -->
+      <rect x="620" y="310" width="250" height="32" rx="6" fill="#F5F3FF" stroke="#DDD6FE"/>
+      <text x="630" y="326" font-family="-apple-system,system-ui,sans-serif" font-size="9" font-weight="700" fill="#7C3AED">🔄 每日自进化 · 自动触发</text>
+      <text x="630" y="338" font-family="-apple-system,system-ui,sans-serif" font-size="7" fill="#94A3B8">回顾→分析→提炼→Memory→Skill→知识沉淀</text>
+      <text x="745" y="356" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#D97706" font-weight="600">类比：人的工作习惯 — 每天固定做的事</text>
+      <!-- connector to body -->
+      <line x1="610" y1="280" x2="490" y2="235" stroke="#F59E0B" stroke-width="1.5" stroke-dasharray="4 3" stroke-opacity="0.4"/>
+
+      <!-- === Bottom Center: Growth === -->
+      <rect x="200" y="390" width="500" height="80" rx="10" fill="white" stroke="#E2E8F0" filter="url(#ds)"/>
+      <rect x="200" y="390" width="500" height="3" rx="1" fill="url(#gGrowth)"/>
+      <text x="450" y="414" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="12" font-weight="800" fill="#7C3AED">📈 成长轨迹 — 自进化三层全部达成</text>
+      <!-- 3 levels -->
+      <rect x="220" y="424" width="140" height="34" rx="6" fill="#FDF2F8" stroke="#FBCFE8"/>
+      <text x="290" y="439" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" font-weight="700" fill="#EC4899">L1 行为适应</text>
+      <text x="290" y="452" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="8" fill="#94A3B8">记住偏好、避免重复犯错</text>
+      <text x="368" y="444" font-family="-apple-system,system-ui,sans-serif" font-size="14" fill="#94A3B8">→</text>
+      <rect x="380" y="424" width="140" height="34" rx="6" fill="#F5F3FF" stroke="#DDD6FE"/>
+      <text x="450" y="439" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" font-weight="700" fill="#7C3AED">L2 技能进化</text>
+      <text x="450" y="452" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="8" fill="#94A3B8">从经验中提炼新技能</text>
+      <text x="528" y="444" font-family="-apple-system,system-ui,sans-serif" font-size="14" fill="#94A3B8">→</text>
+      <rect x="540" y="424" width="140" height="34" rx="6" fill="#ECFDF5" stroke="#A7F3D0"/>
+      <text x="610" y="439" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" font-weight="700" fill="#059669">L3 认知进化</text>
+      <text x="610" y="452" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="8" fill="#94A3B8">元技能自我优化</text>
+      <!-- connector to legs -->
+      <line x1="450" y1="390" x2="450" y2="368" stroke="#7C3AED" stroke-width="1.5" stroke-dasharray="4 3" stroke-opacity="0.4"/>
+
+      <!-- Bottom summary -->
+      <text x="450" y="500" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="11" font-weight="700" fill="#EA580C">Manus/OpenClaw 是你用的工具，AI分身正在成为另一个你 — 因为 TA 有记忆、会成长</text>
+      <text x="450" y="515" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">类比一个人来看：大脑(认知) + 双手(技能) + 心脏(记忆) + 日常(习惯) + 成长(进化)</text>
+    </svg>
+    </div>
+
+    <!-- ============================================================
+         Section 1: 大脑 — AgentCore 6大认知能力
+         ============================================================ -->
+    <section class="section brain">
+        <div class="section-hdr">
+            <span class="section-icon brain">🧠</span>
+            <div>
+                <h2 class="section-title">大脑 — 6大认知能力</h2>
+                <div class="section-subtitle">AgentCore：TA 怎么思考？</div>
+            </div>
+            <span class="section-analogy">🧑 类比：人的认知功能 — 记住、思考、计划、协调、反省、社交</span>
+        </div>
+        <p>人有记忆力、推理力、规划力...AI 分身的大脑也有对应的6个模块，而且<strong>全部在线运行</strong>。</p>
+
+        <div class="brain-grid">
+            <div class="brain-card">
+                <div class="brain-card-head">
+                    <span class="brain-card-icon">🧠</span>
+                    <span class="brain-card-name">记忆力</span>
+                    <span class="brain-card-status">运行中</span>
+                </div>
+                <div class="brain-card-desc">长期记忆存储与检索。记住用户偏好、项目规范、踩坑经验。自动执行记忆优化（合并重复、清理过时）。</div>
+                <div class="brain-card-proof">✓ 59条结构化记忆，按7大类自动分类</div>
+            </div>
+            <div class="brain-card">
+                <div class="brain-card-head">
+                    <span class="brain-card-icon">🔍</span>
+                    <span class="brain-card-name">推理力</span>
+                    <span class="brain-card-status">运行中</span>
+                </div>
+                <div class="brain-card-desc">深度推理与分析。执行本质洞察分析，自动识别隐藏前提，进行信息失真三问法验证。</div>
+                <div class="brain-card-proof">✓ 信息失真三问法（确认度×时效性×溯源性）</div>
+            </div>
+            <div class="brain-card">
+                <div class="brain-card-head">
+                    <span class="brain-card-icon">📋</span>
+                    <span class="brain-card-name">规划力</span>
+                    <span class="brain-card-status">运行中</span>
+                </div>
+                <div class="brain-card-desc">任务规划与分解。自动将复杂任务拆解为子任务，五层思考框架（从执行到战略）。</div>
+                <div class="brain-card-proof">✓ 五层思考框架 + 体系化任务识别与前置设计</div>
+            </div>
+            <div class="brain-card">
+                <div class="brain-card-head">
+                    <span class="brain-card-icon">🎯</span>
+                    <span class="brain-card-name">协调力</span>
+                    <span class="brain-card-status">运行中</span>
+                </div>
+                <div class="brain-card-desc">多技能编排调度。AI日报工作流串联8+技能自动执行，深度调研全链路自动协调。</div>
+                <div class="brain-card-proof">✓ 日报工作流自动串联 搜索→生成→部署→推送</div>
+            </div>
+            <div class="brain-card">
+                <div class="brain-card-head">
+                    <span class="brain-card-icon">🔄</span>
+                    <span class="brain-card-name">反省力</span>
+                    <span class="brain-card-status">运行中</span>
+                </div>
+                <div class="brain-card-desc">自我评估与改进。每日自动反思，Meta-Execution 工作模式确保一次做对，自动识别重复问题并沉淀经验。</div>
+                <div class="brain-card-proof">✓ 每日自动反思 + 自动识别重复问题并沉淀</div>
+            </div>
+            <div class="brain-card">
+                <div class="brain-card-head">
+                    <span class="brain-card-icon">🔗</span>
+                    <span class="brain-card-name">社交力</span>
+                    <span class="brain-card-status">运行中</span>
+                </div>
+                <div class="brain-card-desc">外部系统连接。10+ MCP工具连接外部世界：GitHub、KIM消息、微信公众号、浏览器自动化。</div>
+                <div class="brain-card-proof">✓ 10+ MCP工具 · GitHub部署 · KIM推送 · 公众号抓取</div>
+            </div>
+        </div>
+
+        <div class="insight-box">
+            <div class="insight-label">人的类比</div>
+            <p class="insight-text">就像一个人具备记忆、思考、规划、协调、反省、社交六种认知能力 — <em>AI 分身的大脑模块与人的认知功能一一对应，且全部在运行</em>。</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Section 2: 技能 — 50+ Skills
+         ============================================================ -->
+    <section class="section skills">
+        <div class="section-hdr">
+            <span class="section-icon skills">⚡</span>
+            <div>
+                <h2 class="section-title">技能 — 50+ 专业能力</h2>
+                <div class="section-subtitle">Skills 体系：TA 会什么？</div>
+            </div>
+            <span class="section-analogy">🧑 类比：人的技能树 — 编程、写作、分析、设计...</span>
+        </div>
+        <p>人通过学习和练习掌握各种技能。AI 分身也有自己的<strong>技能树</strong>，覆盖9大专业领域：</p>
+
+        <div class="skill-category-grid">
+            <div class="skill-cat-card" style="border-left-color:var(--color-success);">
+                <div class="skill-cat-icon">🔄</div>
+                <div class="skill-cat-name">自进化体系</div>
+                <div class="skill-cat-count" style="color:var(--color-success);">9 个技能</div>
+                <div class="skill-cat-items"><code>meta-execution</code> <code>daily-reflection</code> <code>xiaowuxianggong</code> <code>xixingdafa</code> <code>neigong-cultivation</code> <code>skill-architecture</code> <code>memory-hygiene</code> <code>knowledge-curator</code> <code>knowledge-acquisition</code></div>
+            </div>
+            <div class="skill-cat-card" style="border-left-color:var(--color-info);">
+                <div class="skill-cat-icon">🔬</div>
+                <div class="skill-cat-name">AI洞察平台</div>
+                <div class="skill-cat-count" style="color:var(--color-info);">5 个技能</div>
+                <div class="skill-cat-items"><code>ai-insight</code> <code>wechat-research</code> <code>knowledge-base</code> <code>ai-column-writer</code> <code>essence-insight</code></div>
+            </div>
+            <div class="skill-cat-card" style="border-left-color:var(--color-purple);">
+                <div class="skill-cat-icon">🎨</div>
+                <div class="skill-cat-name">内容创作</div>
+                <div class="skill-cat-count" style="color:var(--color-purple);">10 个技能</div>
+                <div class="skill-cat-items"><code>ai-image-generator</code> <code>pptx</code> <code>keynote</code> <code>docx</code> <code>pdf</code> <code>xlsx</code> <code>canvas-design</code> <code>work-report-ppt</code> <code>theme-factory</code> <code>promotion-coaching</code></div>
+            </div>
+            <div class="skill-cat-card" style="border-left-color:#EA580C;">
+                <div class="skill-cat-icon">🌐</div>
+                <div class="skill-cat-name">网页开发</div>
+                <div class="skill-cat-count" style="color:#EA580C;">6 个技能</div>
+                <div class="skill-cat-items"><code>web-dev-workflow</code> <code>frontend-design</code> <code>zelda-style</code> <code>qingshuang-research</code> <code>github-deploy</code> <code>link-homepage</code></div>
+            </div>
+            <div class="skill-cat-card" style="border-left-color:#0891B2;">
+                <div class="skill-cat-icon">📊</div>
+                <div class="skill-cat-name">研究分析</div>
+                <div class="skill-cat-count" style="color:#0891B2;">8 个技能</div>
+                <div class="skill-cat-items"><code>industry-research</code> <code>research</code> <code>stock-analysis</code> <code>investment-tracker</code> <code>apify-trend</code> <code>apify-market</code> <code>apify-competitor</code> <code>product-thinking</code></div>
+            </div>
+            <div class="skill-cat-card" style="border-left-color:#F59E0B;">
+                <div class="skill-cat-icon">📨</div>
+                <div class="skill-cat-name">消息与协作</div>
+                <div class="skill-cat-count" style="color:#F59E0B;">3 个技能</div>
+                <div class="skill-cat-items"><code>linke-kim-message</code> <code>feishu-assistant</code> <code>cf-weekly-report</code></div>
+            </div>
+            <div class="skill-cat-card" style="border-left-color:#8B5CF6;">
+                <div class="skill-cat-icon">📄</div>
+                <div class="skill-cat-name">文档系统</div>
+                <div class="skill-cat-count" style="color:#8B5CF6;">2 个技能</div>
+                <div class="skill-cat-items"><code>ks-kim-docs-shuttle</code> <code>yuque-publisher</code></div>
+            </div>
+            <div class="skill-cat-card" style="border-left-color:#2563EB;">
+                <div class="skill-cat-icon">🛠️</div>
+                <div class="skill-cat-name">开发框架</div>
+                <div class="skill-cat-count" style="color:#2563EB;">7 个技能</div>
+                <div class="skill-cat-items"><code>vercel-react</code> <code>react-native</code> <code>composition-patterns</code> <code>remotion</code> <code>mcp-builder</code> <code>ui-ux-pro-max</code> <code>web-design-guidelines</code></div>
+            </div>
+            <div class="skill-cat-card" style="border-left-color:#EC4899;">
+                <div class="skill-cat-icon">🎮</div>
+                <div class="skill-cat-name">专项能力</div>
+                <div class="skill-cat-count" style="color:#EC4899;">4 个技能</div>
+                <div class="skill-cat-items"><code>pixel-action-game</code> <code>night-task-runner</code> <code>personal-assistant</code> <code>find-skills</code></div>
+            </div>
+        </div>
+
+        <div class="insight-box blue">
+            <div class="insight-label">架构验证</div>
+            <p class="insight-text">50+ 技能<em>共享同一个大脑（AgentCore）</em>，不需要 50 个独立 Agent。就像一个人拥有多项技能，但只有一个大脑。</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Section 3: 记忆 — 59条精炼记忆
+         ============================================================ -->
+    <section class="section memory">
+        <div class="section-hdr">
+            <span class="section-icon memory">💗</span>
+            <div>
+                <h2 class="section-title">记忆 — 59条人生经验</h2>
+                <div class="section-subtitle">Memory 体系：TA 经历过什么？</div>
+            </div>
+            <span class="section-analogy">🧑 类比：人的阅历 — 踩过的坑、总结的经验、个人偏好</span>
+        </div>
+        <p>人的阅历定义了 TA 是谁。AI 分身的<strong>59条精炼记忆</strong>就是 TA 半年深度交互积累的"人生经验"：</p>
+
+        <div class="memory-grid">
+            <div class="memory-card">
+                <div class="memory-num" style="color:#EA580C;">26</div>
+                <div class="memory-info">
+                    <div class="memory-name">踩坑经验</div>
+                    <div class="memory-desc">部署验证、多文件联动、CSS陷阱、链接时效性...</div>
+                    <div class="memory-bar"><div class="memory-bar-fill" style="width:44%;background:#EA580C;"></div></div>
+                </div>
+            </div>
+            <div class="memory-card">
+                <div class="memory-num" style="color:var(--color-purple);">15</div>
+                <div class="memory-info">
+                    <div class="memory-name">任务流程经验</div>
+                    <div class="memory-desc">五层思考框架、本质洞察力、迭代式完善、信息源优先...</div>
+                    <div class="memory-bar"><div class="memory-bar-fill" style="width:25%;background:var(--color-purple);"></div></div>
+                </div>
+            </div>
+            <div class="memory-card">
+                <div class="memory-num" style="color:var(--color-success);">6</div>
+                <div class="memory-info">
+                    <div class="memory-name">开发实践规范</div>
+                    <div class="memory-desc">链接格式规范、网页开发工作流、默认提供预览链接...</div>
+                    <div class="memory-bar"><div class="memory-bar-fill" style="width:10%;background:var(--color-success);"></div></div>
+                </div>
+            </div>
+            <div class="memory-card">
+                <div class="memory-num" style="color:#E11D48;">5</div>
+                <div class="memory-info">
+                    <div class="memory-name">约束/禁止规则</div>
+                    <div class="memory-desc">身份保密、重构约束、敏感词管理、推理闭环原则...</div>
+                    <div class="memory-bar"><div class="memory-bar-fill" style="width:8%;background:#E11D48;"></div></div>
+                </div>
+            </div>
+            <div class="memory-card">
+                <div class="memory-num" style="color:var(--color-info);">4</div>
+                <div class="memory-info">
+                    <div class="memory-name">用户身份信息</div>
+                    <div class="memory-desc">思想体系、写作风格、核心身份关系、称呼规范...</div>
+                    <div class="memory-bar"><div class="memory-bar-fill" style="width:7%;background:var(--color-info);"></div></div>
+                </div>
+            </div>
+            <div class="memory-card">
+                <div class="memory-num" style="color:#F59E0B;">2</div>
+                <div class="memory-info">
+                    <div class="memory-name">沟通偏好</div>
+                    <div class="memory-desc">默认工作模式、思维方式、表达风格...</div>
+                    <div class="memory-bar"><div class="memory-bar-fill" style="width:3%;background:#F59E0B;"></div></div>
+                </div>
+            </div>
+            <div class="memory-card" style="grid-column:span 2;">
+                <div class="memory-num" style="color:#8B5CF6;">1</div>
+                <div class="memory-info">
+                    <div class="memory-name">兴趣爱好</div>
+                    <div class="memory-desc">投资理财偏好、基金持仓追踪...</div>
+                    <div class="memory-bar"><div class="memory-bar-fill" style="width:2%;background:#8B5CF6;"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="insight-box purple">
+            <div class="insight-label">护城河本质</div>
+            <p class="insight-text">这59条记忆代表了<em>半年的深度交互积累</em>。换一个AI = 丢失所有这些"人生经验"。<br>就像你不会抛弃一个共事多年的同事 — <em>Memory 是最强的护城河</em>。</p>
+        </div>
+        <div class="insight-box orange">
+            <div class="insight-label">自我净化</div>
+            <p class="insight-text">Memory 从最初的79条经过<em>自动优化清理</em>精炼到59条 — 这本身就是自进化的证据：系统会自主清理过时记忆、合并重复项、提升记忆质量。就像人会遗忘不重要的事，留下真正有价值的经验。</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Section 4: 日常 — 真实工作流
+         ============================================================ -->
+    <section class="section routine">
+        <div class="section-hdr">
+            <span class="section-icon routine">📅</span>
+            <div>
+                <h2 class="section-title">日常 — 每天在做的事</h2>
+                <div class="section-subtitle">真实工作流：TA 的一天怎么过？</div>
+            </div>
+            <span class="section-analogy">🧑 类比：人的工作习惯 — 晨会、日报、复盘</span>
+        </div>
+        <p>不是 Demo，是<strong>每天真实在跑的流水线</strong>。就像一个人有固定的工作节奏：</p>
+
+        <div class="workflow-card">
+            <div class="workflow-title">📰 早间 · AI日报自动生成</div>
+            <div class="workflow-steps">
+                <span class="wf-step">Web搜索</span><span class="wf-arrow">→</span>
+                <span class="wf-step">公众号抓取</span><span class="wf-arrow">→</span>
+                <span class="wf-step">内容筛选</span><span class="wf-arrow">→</span>
+                <span class="wf-step">深度分析</span><span class="wf-arrow">→</span>
+                <span class="wf-step">HTML生成</span><span class="wf-arrow">→</span>
+                <span class="wf-step">GitHub部署</span><span class="wf-arrow">→</span>
+                <span class="wf-step">KIM卡片推送</span>
+            </div>
+            <div class="workflow-note">调用技能：ai-insight + wechat-research + web-dev-workflow + linke-kim-message | 全程自动，无需人工干预</div>
+        </div>
+
+        <div class="workflow-card">
+            <div class="workflow-title">🔬 工作中 · 深度调研全链路</div>
+            <div class="workflow-steps">
+                <span class="wf-step">信息源收集</span><span class="wf-arrow">→</span>
+                <span class="wf-step">全文深度阅读</span><span class="wf-arrow">→</span>
+                <span class="wf-step">结构化分析</span><span class="wf-arrow">→</span>
+                <span class="wf-step">网页生成</span><span class="wf-arrow">→</span>
+                <span class="wf-step">本地预览</span><span class="wf-arrow">→</span>
+                <span class="wf-step">部署上线</span><span class="wf-arrow">→</span>
+                <span class="wf-step">首页同步</span>
+            </div>
+            <div class="workflow-note">调用技能：industry-research + essence-insight + qingshuang-research-style + github-deploy | 已产出10+份深度调研报告</div>
+        </div>
+
+        <div class="workflow-card">
+            <div class="workflow-title">🔄 下班后 · 每日自进化</div>
+            <div class="workflow-steps">
+                <span class="wf-step">工作回顾</span><span class="wf-arrow">→</span>
+                <span class="wf-step">模式分析</span><span class="wf-arrow">→</span>
+                <span class="wf-step">经验提炼</span><span class="wf-arrow">→</span>
+                <span class="wf-step">Memory更新</span><span class="wf-arrow">→</span>
+                <span class="wf-step">Skill优化</span><span class="wf-arrow">→</span>
+                <span class="wf-step">知识沉淀</span>
+            </div>
+            <div class="workflow-note">调用技能：daily-reflection-evolution + meta-execution + memory-hygiene | 这是"越用越强"的核心机制</div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Section 5: 成长 — 自进化三层
+         ============================================================ -->
+    <section class="section growth">
+        <div class="section-hdr">
+            <span class="section-icon growth">📈</span>
+            <div>
+                <h2 class="section-title">成长 — 自进化三层全部达成</h2>
+                <div class="section-subtitle">进化轨迹：TA 怎么成长？</div>
+            </div>
+            <span class="section-analogy">🧑 类比：人的成长路径 — 新手→熟练→专家</span>
+        </div>
+        <p>人从新手成长为专家，需要经历行为习惯→技能精进→认知升级三个阶段。AI 分身也一样，而且<strong>三层全部达成</strong>：</p>
+
+        <div class="evo-grid">
+            <div class="evo-card">
+                <div class="evo-level" style="color:#EC4899;">Layer 1 · 新人期</div>
+                <div class="evo-title">行为适应</div>
+                <div class="evo-desc">
+                    学习用户的思维方式、表达风格、工作偏好。<br>
+                    记住项目规范、代码规范、输出格式偏好。<br>
+                    积累踩坑经验，避免重复犯错。
+                </div>
+                <div class="evo-proof">
+                    ✓ 证据：59条记忆中有26条踩坑经验 + 15条流程经验<br>
+                    ✓ 类比：新人入职后学习团队规范和工作习惯
+                </div>
+            </div>
+            <div class="evo-card">
+                <div class="evo-level" style="color:var(--color-purple);">Layer 2 · 成长期</div>
+                <div class="evo-title">技能进化</div>
+                <div class="evo-desc">
+                    从重复模式中提炼新 Skill。<br>
+                    自动识别合并信号，优化技能粒度。<br>
+                    Agent 为 Agent 写 Skills（自我扩展能力树）。
+                </div>
+                <div class="evo-proof">
+                    ✓ 证据：wechat-content-access 自动合并到 wechat-research<br>
+                    ✓ 类比：熟练工总结出自己的工作方法论
+                </div>
+            </div>
+            <div class="evo-card">
+                <div class="evo-level" style="color:var(--color-success);">Layer 3 · 专家期</div>
+                <div class="evo-title">认知进化</div>
+                <div class="evo-desc">
+                    元技能自我优化（meta-execution 工作模式）。<br>
+                    自进化体系自我审视（xiaowuxianggong 导航器）。<br>
+                    知识体系持续重构（knowledge-curator 管理）。
+                </div>
+                <div class="evo-proof">
+                    ✓ 证据：meta-execution v1.7 + xiaowuxianggong v5.0<br>
+                    ✓ 类比：专家开始反思方法论本身，优化思维框架
+                </div>
+            </div>
+        </div>
+
+        <div class="evo-arrow-row">
+            <span class="evo-arrow-label">🔄 完整进化链：行为适应 → 技能进化 → 认知进化 → 循环提升</span>
+        </div>
+
+        <div class="insight-box">
+            <div class="insight-label">自进化完整度</div>
+            <p class="insight-text">三层进化 × 三棵树（Memory/Skill/Knowledge）= <em>完整的自进化系统</em>。<br>就像一个人从新手成长为专家，最终开始<em>反思和优化自己的思维方式</em> — 这就是认知进化。</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Section 6: 独特性 — 竞品对比
+         ============================================================ -->
+    <section class="section compare">
+        <div class="section-hdr">
+            <span class="section-icon compare">⭐</span>
+            <div>
+                <h2 class="section-title">独特性 — 和其他 AI 有什么不同？</h2>
+                <div class="section-subtitle">核心差异：不是功能多少，是进化能力</div>
+            </div>
+            <span class="section-analogy">🧑 类比：工具 vs 同事 vs 分身</span>
+        </div>
+        <p>不是功能对比，而是<strong>进化能力</strong>的本质差异 — 你用的是工具，还是在培养一个人？</p>
+
+        <div class="comp-grid">
+            <div class="comp-card muted">
+                <div style="font-size:24px; margin-bottom:4px;">🤖</div>
+                <div class="comp-name">Manus</div>
+                <div class="comp-desc">类比：临时工 — 能干活，不记人</div>
+                <div class="comp-metrics">
+                    <div class="comp-metric"><span>Skills体系</span><span style="color:#E11D48;">无标准框架</span></div>
+                    <div class="comp-metric"><span>Memory</span><span style="color:#E11D48;">无持久记忆</span></div>
+                    <div class="comp-metric"><span>自进化</span><span style="color:#E11D48;">无进化机制</span></div>
+                    <div class="comp-metric"><span>定制化</span><span style="color:#E11D48;">不理解你</span></div>
+                </div>
+                <div class="comp-level">自进化 0/3 层</div>
+            </div>
+            <div class="comp-card muted">
+                <div style="font-size:24px; margin-bottom:4px;">🤖</div>
+                <div class="comp-name">OpenClaw</div>
+                <div class="comp-desc">类比：实习生 — 有潜力，不成熟</div>
+                <div class="comp-metrics">
+                    <div class="comp-metric"><span>Skills体系</span><span style="color:#F59E0B;">有但不学习</span></div>
+                    <div class="comp-metric"><span>Memory</span><span style="color:#F59E0B;">有存储无理解</span></div>
+                    <div class="comp-metric"><span>自进化</span><span style="color:#F59E0B;">仅行为适应</span></div>
+                    <div class="comp-metric"><span>安全性</span><span style="color:#E11D48;">CVE 9.6高危</span></div>
+                </div>
+                <div class="comp-level">自进化 1/3 层</div>
+            </div>
+            <div class="comp-card highlight">
+                <div style="font-size:24px; margin-bottom:4px;">🧠</div>
+                <div class="comp-name">AI分身 (本系统)</div>
+                <div class="comp-desc">类比：你的分身 — 懂你、会长大</div>
+                <div class="comp-metrics">
+                    <div class="comp-metric"><span>Skills体系</span><span style="color:var(--color-success);">50+ 可插拔技能</span></div>
+                    <div class="comp-metric"><span>Memory</span><span style="color:var(--color-success);">59条结构化记忆</span></div>
+                    <div class="comp-metric"><span>自进化</span><span style="color:var(--color-success);">3层完整进化链</span></div>
+                    <div class="comp-metric"><span>定制化</span><span style="color:var(--color-success);">用你的方式思考</span></div>
+                </div>
+                <div class="comp-level">自进化 3/3 层 ✓</div>
+            </div>
+        </div>
+
+        <div class="insight-box purple">
+            <div class="insight-label">一句话总结</div>
+            <p class="insight-text"><strong>Manus 是临时工，OpenClaw 是实习生，AI分身是你的分身。</strong><br><span style="font-weight:normal; opacity:0.9;">工具可以替换，但你不会抛弃"懂你"的数字分身 — 这就是 Memory 护城河。</span></p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Section 7: 实证结论
+         ============================================================ -->
+    <section class="section">
+        <div class="section-hdr">
+            <span class="section-icon brain">🎯</span>
+            <div>
+                <h2 class="section-title">实证结论</h2>
+                <div class="section-subtitle">把 AI 分身当一个人看，所有假设全部验证通过</div>
+            </div>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>验证假设</th><th>人的类比</th><th>验证结果</th><th>关键证据</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>AgentCore 可行</strong></td><td>人有完整的认知能力</td><td style="color:var(--color-success);font-weight:700;">✓ 完全可行</td><td>6/6 能力模块已全部在线运行</td></tr>
+                    <tr><td><strong>Skills 可扩展</strong></td><td>人能持续学习新技能</td><td style="color:var(--color-success);font-weight:700;">✓ 已验证</td><td>50+ 技能共享一个大脑，9大类全覆盖</td></tr>
+                    <tr><td><strong>Memory 是护城河</strong></td><td>人的阅历不可替代</td><td style="color:var(--color-success);font-weight:700;">✓ 已验证</td><td>59条精炼记忆 = 半年深度积累的不可替代资产</td></tr>
+                    <tr><td><strong>自进化可实现</strong></td><td>人能从新手成长为专家</td><td style="color:var(--color-success);font-weight:700;">✓ 三层全通</td><td>行为适应 + 技能进化 + 认知进化 = 完整成长路径</td></tr>
+                    <tr><td><strong>优于竞品</strong></td><td>分身 vs 临时工</td><td style="color:var(--color-success);font-weight:700;">✓ 显著优势</td><td>Manus 0/3层，OpenClaw 1/3层，本系统 3/3层</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Conclusion -->
+    <div class="conclusion-box">
+        <div class="conclusion-title">把 AI 分身当一个人来看，一切都清晰了</div>
+        <p class="conclusion-text">
+            TA 有完整的大脑（6大认知能力），掌握50+项专业技能，<br>
+            积累了59条人生经验，每天有固定的工作节奏，<br>
+            更重要的是 — TA 在<strong>持续成长</strong>，从新手到专家的三层进化全部达成。
+        </p>
+        <span class="conclusion-highlight">大脑 6/6 · 技能 50+ · 记忆 59 · 知识 150+ · 进化 3/3</span>
+    </div>
+
+    <footer class="footer">
+        <p>AI产品终极形态思考 v7.0 · AI分身实证 · 以人为镜 | 2026-03</p>
+    </footer>
+</div>
+</body>
+</html>

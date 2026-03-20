@@ -30,6 +30,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 from typing import Optional, Dict
+from urllib.parse import quote, urlparse, urlunparse, parse_qs, urlencode
 
 try:
     import httpx
@@ -302,6 +303,36 @@ def parse_md_data(date_str: str) -> Optional[Dict]:
     }
 
 
+def encode_url_for_markdown(url: str) -> str:
+    """对URL进行编码，确保KIM Markdown可以正确解析链接
+    
+    主要处理URL中的中文字符，如微信搜索的query参数
+    """
+    if not url:
+        return url
+    try:
+        parsed = urlparse(url)
+        # 对query参数进行编码
+        if parsed.query:
+            # 解析query参数
+            params = parse_qs(parsed.query, keep_blank_values=True)
+            # 重新编码（会自动处理中文）
+            encoded_query = urlencode(params, doseq=True)
+            # 重新组装URL
+            encoded_url = urlunparse((
+                parsed.scheme,
+                parsed.netloc,
+                parsed.path,
+                parsed.params,
+                encoded_query,
+                parsed.fragment
+            ))
+            return encoded_url
+        return url
+    except Exception:
+        return url
+
+
 # ============ 卡片构建 v3.5 ============
 def build_card_v35(date_str: str, data: Dict) -> dict:
     """构建v3.5格式卡片（热度趋势+动态+深度聚焦）"""
@@ -384,18 +415,18 @@ def build_card_v35(date_str: str, data: Dict) -> dict:
             tag = news.get("tag", "")
             tag_display = tag_icons.get(tag, "📌") if tag else "📌"
             title = news.get("title", "")
-            url = news.get("url", "")
+            url = encode_url_for_markdown(news.get("url", ""))
             # KIM kimMd 支持标准markdown链接语法 [text](url)
             if url:
                 lines.append(f"- {tag_display} | [{title}]({url})")
             else:
                 lines.append(f"- {tag_display} | {title}")
         
-        # 国内新闻（链接内嵌在标题中，KIM Markdown会自动渲染）
+        # 国内新闻（URL需要编码中文字符，否则KIM Markdown无法解析）
         for news in china_news[:2]:
             title = news.get("title", "")
-            url = news.get("url", "")
-            # KIM kimMd 支持标准markdown链接语法 [text](url)
+            url = encode_url_for_markdown(news.get("url", ""))
+            # KIM kimMd 支持标准markdown链接语法 [text](url)，但URL中文字符必须编码
             if url:
                 lines.append(f"- 🇨🇳 国内 | [{title}]({url})")
             else:
