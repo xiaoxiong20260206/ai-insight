@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI产品终极形态思考</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23059669'/><path d='M16 6c-4.4 0-8 3.6-8 8 0 2.5 1.2 4.8 3 6.2V24l5-3 5 3v-3.8c1.8-1.4 3-3.7 3-6.2 0-4.4-3.6-8-8-8z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/><line x1='16' y1='10' x2='16' y2='15' stroke='white' stroke-width='2' stroke-linecap='round'/><circle cx='16' cy='18' r='1' fill='white'/></svg>">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+/* === Index-specific styles === */
+.site-nav { display:flex; gap:4px; justify-content:center; background:rgba(255,255,255,0.9); backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.7); border-radius:var(--radius-lg); padding:5px; margin-bottom:var(--spacing-2xl); position:sticky; top:12px; z-index:100; box-shadow:var(--shadow-lg); max-width:var(--content-max-width); margin-left:auto; margin-right:auto; }
+.site-nav a { flex:1; text-align:center; padding:10px 12px; border-radius:var(--radius-md); font-size:13px; font-weight:500; color:var(--color-text-muted); text-decoration:none; transition:all var(--transition-fast); white-space:nowrap; }
+.site-nav a:hover { background:var(--color-bg-table-header); color:var(--color-text-secondary); }
+.site-nav a.active { background:var(--gradient-success); color:#fff; font-weight:600; box-shadow:var(--shadow-glow-success); }
+
+.hero { text-align:center; padding:var(--spacing-3xl) 0 var(--spacing-2xl); }
+.hero-badge { display:inline-flex; align-items:center; padding:var(--spacing-xs) 14px; background:var(--gradient-badge); color:var(--color-info); border-radius:var(--radius-full); font-size:var(--caption); font-weight:500; margin-bottom:20px; border:1px solid rgba(37,99,235,0.12); }
+.hero h1 { font-size:34px; font-weight:800; line-height:1.3; margin-bottom:16px; letter-spacing:-0.02em; background:var(--gradient-hero); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.hero-thesis { font-size:18px; color:var(--color-text-primary); font-weight:600; max-width:640px; margin:0 auto 12px; line-height:1.6; }
+.hero-sub { font-size:var(--body-text); color:var(--color-text-secondary); max-width:580px; margin:0 auto; }
+
+.narrative-section { margin-bottom:var(--spacing-3xl); }
+.section-num { display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; background:var(--gradient-success); color:#fff; border-radius:50%; font-size:13px; font-weight:700; margin-right:10px; }
+.section-header { display:flex; align-items:center; margin-bottom:var(--spacing-lg); }
+.section-header h2 { font-size:var(--heading-2); font-weight:700; color:var(--color-text-primary); }
+
+/* Problem grid */
+.limitation-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--spacing-md); margin-bottom:var(--spacing-lg); }
+.limitation-card { background:var(--color-bg-card); border:1px solid var(--color-border-light); border-radius:var(--radius-md); padding:var(--spacing-md); text-align:center; transition:all var(--transition-fast); }
+.limitation-card:hover { border-color:var(--color-danger-light); box-shadow:var(--shadow-card); }
+.limitation-icon { font-size:28px; margin-bottom:8px; }
+.limitation-title { font-size:var(--heading-4); font-weight:700; color:var(--color-text-primary); margin-bottom:4px; }
+.limitation-desc { font-size:var(--caption); color:var(--color-text-muted); }
+
+/* Comparison */
+.compare-grid { display:grid; grid-template-columns:1fr auto 1fr; gap:var(--spacing-md); align-items:stretch; margin-bottom:var(--spacing-lg); }
+.compare-card { background:var(--color-bg-card); border-radius:var(--radius-lg); padding:var(--spacing-lg); position:relative; overflow:hidden; }
+.compare-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; }
+.compare-card.old { border:1px solid rgba(156,163,175,0.3); }
+.compare-card.old::before { background:#9CA3AF; }
+.compare-card.new { border:1px solid rgba(5,150,105,0.3); }
+.compare-card.new::before { background:var(--gradient-success); }
+.compare-icon { font-size:28px; margin-bottom:12px; }
+.compare-title { font-size:var(--heading-3); font-weight:700; margin-bottom:4px; }
+.compare-card.old .compare-title { color:#6B7280; }
+.compare-card.new .compare-title { color:var(--color-success); }
+.compare-subtitle { font-size:var(--caption); color:var(--color-text-muted); margin-bottom:var(--spacing-md); }
+.compare-list { list-style:none; }
+.compare-list li { padding:7px 0 7px 20px; position:relative; font-size:13px; color:var(--color-text-secondary); border-bottom:1px solid var(--color-border-light); }
+.compare-list li:last-child { border-bottom:none; }
+.compare-list li::before { content:''; position:absolute; left:0; top:50%; transform:translateY(-50%); width:6px; height:6px; border-radius:50%; }
+.compare-card.old .compare-list li::before { background:#9CA3AF; }
+.compare-card.new .compare-list li::before { background:var(--color-success); }
+.compare-vs { display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:800; color:var(--color-text-muted); }
+
+/* AgentCore brief */
+.agentcore-brief { background:linear-gradient(135deg,rgba(5,150,105,0.06),rgba(37,99,235,0.04)); border:1px solid rgba(5,150,105,0.2); border-radius:var(--radius-lg); padding:var(--spacing-lg); text-align:center; }
+.agentcore-modules { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin:var(--spacing-md) 0; }
+.agentcore-module { display:inline-flex; align-items:center; gap:6px; padding:8px 14px; background:var(--color-bg-card); border:1px solid rgba(5,150,105,0.2); border-radius:var(--radius-full); font-size:13px; font-weight:500; color:var(--color-success); }
+.agentcore-module .check { color:var(--color-success); font-weight:700; }
+
+/* Analogy */
+.analogy-compact { display:grid; grid-template-columns:repeat(2,1fr); gap:var(--spacing-md); margin-bottom:var(--spacing-lg); }
+.analogy-item { background:var(--color-bg-card); border:1px solid var(--color-border-light); border-radius:var(--radius-md); padding:var(--spacing-md); display:flex; gap:var(--spacing-md); transition:all var(--transition-fast); }
+.analogy-item:hover { border-color:#F97316; box-shadow:0 4px 12px rgba(249,115,22,0.1); }
+.analogy-left { flex:1; padding-right:var(--spacing-md); border-right:2px dashed var(--color-border-light); }
+.analogy-right { flex:1; }
+.analogy-label { font-size:10px; font-weight:600; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:4px; }
+.analogy-left .analogy-label { color:#F97316; }
+.analogy-right .analogy-label { color:var(--color-success); }
+.analogy-name { font-size:13px; font-weight:600; color:var(--color-text-primary); }
+
+/* Quote */
+.quote-box { background:var(--color-bg-card); border-radius:var(--radius-lg); padding:var(--spacing-xl); border-left:4px solid var(--color-purple); margin-bottom:var(--spacing-lg); }
+.quote-text { font-size:var(--body-text); color:var(--color-text-primary); line-height:1.8; font-style:italic; margin-bottom:var(--spacing-md); }
+.quote-text strong { color:var(--color-purple); font-style:normal; }
+.quote-author { font-size:var(--body-small); color:var(--color-text-muted); }
+
+/* Validation table */
+.validation-table { width:100%; border-collapse:separate; border-spacing:0; border:1px solid var(--color-border); border-radius:var(--radius-md); overflow:hidden; margin-bottom:var(--spacing-lg); }
+.validation-table th { background:var(--color-bg-table-header); padding:12px 16px; font-size:13px; font-weight:700; color:var(--color-text-primary); text-align:left; border-bottom:1px solid var(--color-border); }
+.validation-table td { padding:10px 16px; font-size:13px; color:var(--color-text-secondary); border-bottom:1px solid var(--color-border-light); }
+.validation-table tr:last-child td { border-bottom:none; }
+
+/* Evidence metrics */
+.metrics-row { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--spacing-md); margin-bottom:var(--spacing-lg); }
+.metric-card { background:var(--color-bg-card); border-radius:var(--radius-lg); padding:var(--spacing-lg); text-align:center; border:1px solid var(--color-border-light); transition:all var(--transition-fast); }
+.metric-card:hover { box-shadow:var(--shadow-card); transform:translateY(-2px); }
+.metric-icon { font-size:28px; margin-bottom:8px; }
+.metric-value { font-size:24px; font-weight:800; margin-bottom:4px; }
+.metric-label { font-size:var(--caption); color:var(--color-text-muted); }
+
+/* Competitor strip */
+.competitor-strip { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--spacing-md); margin-bottom:var(--spacing-lg); }
+.competitor-card { border-radius:var(--radius-md); padding:var(--spacing-md); text-align:center; }
+.competitor-card.muted { background:#F9FAFB; border:1px solid #E5E7EB; }
+.competitor-card.highlight { background:linear-gradient(135deg,rgba(5,150,105,0.08),rgba(37,99,235,0.06)); border:2px solid var(--color-success); }
+.competitor-name { font-size:var(--heading-4); font-weight:700; margin-bottom:4px; }
+.competitor-card.muted .competitor-name { color:#6B7280; }
+.competitor-card.highlight .competitor-name { color:var(--color-success); }
+.competitor-desc { font-size:var(--caption); color:var(--color-text-muted); }
+.competitor-level { display:inline-block; margin-top:8px; padding:2px 10px; border-radius:var(--radius-full); font-size:11px; font-weight:600; }
+.competitor-card.muted .competitor-level { background:#F3F4F6; color:#9CA3AF; }
+.competitor-card.highlight .competitor-level { background:#ECFDF5; color:var(--color-success); }
+
+/* Roadmap */
+.roadmap { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--spacing-md); margin-bottom:var(--spacing-lg); }
+.roadmap-step { background:var(--color-bg-card); border:1px solid var(--color-border-light); border-radius:var(--radius-md); padding:var(--spacing-md); position:relative; }
+.roadmap-step::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; border-radius:var(--radius-md) var(--radius-md) 0 0; }
+.roadmap-step:nth-child(1)::before { background:#2563EB; }
+.roadmap-step:nth-child(2)::before { background:#059669; }
+.roadmap-step:nth-child(3)::before { background:#7C3AED; }
+.roadmap-step:nth-child(4)::before { background:#EA580C; }
+.roadmap-phase { font-size:11px; font-weight:700; color:var(--color-text-muted); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px; }
+.roadmap-title { font-size:var(--heading-4); font-weight:700; color:var(--color-text-primary); margin-bottom:4px; }
+.roadmap-time { font-size:var(--caption); color:var(--color-success); font-weight:600; margin-bottom:8px; }
+.roadmap-items { font-size:var(--caption); color:var(--color-text-secondary); line-height:1.8; }
+
+/* Deep dive cards */
+.dive-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:var(--spacing-md); margin-bottom:var(--spacing-2xl); }
+.dive-card { background:var(--color-bg-card); border:1px solid var(--color-border-light); border-radius:var(--radius-lg); padding:var(--spacing-lg); text-decoration:none; transition:all var(--transition-normal); position:relative; overflow:hidden; }
+.dive-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; opacity:0; transition:var(--transition-normal); }
+.dive-card:nth-child(1)::before { background:#2563EB; }
+.dive-card:nth-child(2)::before { background:#EA580C; }
+.dive-card:nth-child(3)::before { background:#059669; }
+.dive-card:nth-child(4)::before { background:#7C3AED; }
+.dive-card:hover { transform:translateY(-3px); box-shadow:var(--shadow-hover); }
+.dive-card:hover::before { opacity:1; }
+.dive-badge { display:inline-block; padding:4px 10px; border-radius:var(--radius-full); font-size:11px; font-weight:600; color:#fff; margin-bottom:12px; }
+.dive-card:nth-child(1) .dive-badge { background:#2563EB; }
+.dive-card:nth-child(2) .dive-badge { background:#EA580C; }
+.dive-card:nth-child(3) .dive-badge { background:#059669; }
+.dive-card:nth-child(4) .dive-badge { background:#7C3AED; }
+.dive-title { font-size:var(--heading-3); font-weight:700; color:var(--color-text-primary); margin-bottom:8px; }
+.dive-desc { font-size:var(--body-small); color:var(--color-text-secondary); line-height:1.6; }
+
+/* Insight callout */
+.insight-box { background:linear-gradient(135deg,rgba(5,150,105,0.08),rgba(14,165,233,0.06)); border:1px solid rgba(5,150,105,0.3); border-radius:var(--radius-md); padding:var(--spacing-lg); text-align:center; margin-top:var(--spacing-lg); }
+.insight-text { font-size:var(--body-text); color:var(--color-text-primary); line-height:1.7; font-weight:500; }
+.insight-text em { color:var(--color-success); font-style:normal; font-weight:700; }
+
+/* Conclusion */
+.conclusion-box { background:var(--gradient-success); color:white; border-radius:var(--radius-lg); padding:var(--spacing-xl); text-align:center; margin-bottom:var(--spacing-2xl); }
+.conclusion-title { font-size:var(--heading-2); font-weight:700; margin-bottom:var(--spacing-md); }
+.conclusion-text { font-size:var(--body-text); line-height:1.8; opacity:0.95; max-width:600px; margin:0 auto var(--spacing-md); }
+.conclusion-highlight { display:inline-block; background:rgba(255,255,255,0.2); padding:10px 20px; border-radius:var(--radius-sm); font-weight:600; font-size:var(--body-text); }
+
+.footer { text-align:center; padding:var(--spacing-lg) 0; color:var(--color-text-muted); font-size:var(--caption); border-top:1px solid var(--color-border-light); }
+
+/* Responsive */
+@media (max-width:768px) {
+    .hero h1 { font-size:24px; }
+    .limitation-grid { grid-template-columns:repeat(2,1fr); }
+    .compare-grid { grid-template-columns:1fr; }
+    .compare-vs { transform:rotate(90deg); margin:var(--spacing-sm) auto; }
+    .analogy-compact { grid-template-columns:1fr; }
+    .metrics-row { grid-template-columns:repeat(2,1fr); }
+    .competitor-strip { grid-template-columns:1fr; }
+    .roadmap { grid-template-columns:repeat(2,1fr); }
+    .dive-grid { grid-template-columns:1fr; }
+    .site-nav { flex-wrap:wrap; }
+    .site-nav a { font-size:12px; padding:8px 8px; }
+}
+@media (max-width:480px) {
+    .limitation-grid { grid-template-columns:1fr; }
+    .roadmap { grid-template-columns:1fr; }
+}
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Unified Navigation -->
+    <nav class="site-nav">
+        <a href="index.html" class="active">首页</a>
+        <a href="deep-dive.html">详细论证</a>
+        <a href="evidence.html">AI分身实证</a>
+        <a href="architecture.html">架构全景</a>
+        <a href="implementation.html">技术实施</a>
+    </nav>
+
+    <!-- ==================== HERO ==================== -->
+    <header class="hero">
+        <div class="hero-badge">v6.0 · 2026-03</div>
+        <h1>AI产品终极形态思考</h1>
+        <p class="hero-thesis">AI产品的终极形态是 AgentCore + Skills<br>一个能成长的Agent，而非一堆各自为政的Agent</p>
+        <p class="hero-sub">从问题定义到架构设计，完整推演AI产品的演进路径与终极形态</p>
+    </header>
+
+    <!-- 全景信息图 -->
+    <div style="margin-bottom:var(--spacing-2xl);">
+    <svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;border-radius:var(--radius-lg);background:linear-gradient(135deg,#F8FAFC 0%,#F0FDF4 50%,#EFF6FF 100%);border:1px solid #E2E8F0;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <defs>
+        <marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#94A3B8"/></marker>
+        <filter id="ds"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.08"/></filter>
+      </defs>
+      <!-- Title -->
+      <text x="450" y="28" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="13" font-weight="700" fill="#64748B" letter-spacing="0.5">一张图看清 · 论述全景</text>
+      <!-- 6 Main Nodes -->
+      <!-- 1. 问题 -->
+      <rect x="20" y="50" width="130" height="130" rx="12" fill="white" stroke="#F87171" stroke-width="1.5" filter="url(#ds)"/>
+      <rect x="20" y="50" width="130" height="4" rx="2" fill="#EF4444"/>
+      <text x="85" y="75" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="12" font-weight="800" fill="#DC2626">① 问题</text>
+      <text x="85" y="93" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#64748B">LLM 四大根本局限</text>
+      <text x="30" y="112" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">🧠 无记忆 · 每次从零</text>
+      <text x="30" y="124" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">💤 无主动 · 被动响应</text>
+      <text x="30" y="136" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">🔗 无行动 · 纯文本</text>
+      <text x="30" y="148" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">📈 无成长 · 用100=用1</text>
+      <text x="85" y="170" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" font-weight="600" fill="#DC2626">→ 需要一个"伙伴"</text>
+      <!-- Arrow 1→2 -->
+      <line x1="155" y1="115" x2="170" y2="115" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#ah)"/>
+      <!-- 2. 答案 -->
+      <rect x="175" y="50" width="130" height="130" rx="12" fill="white" stroke="#34D399" stroke-width="1.5" filter="url(#ds)"/>
+      <rect x="175" y="50" width="130" height="4" rx="2" fill="#059669"/>
+      <text x="240" y="75" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="12" font-weight="800" fill="#059669">② 答案</text>
+      <text x="240" y="93" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#64748B">AgentCore + Skills</text>
+      <text x="185" y="112" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">🧠 AgentCore 六大模块</text>
+      <text x="185" y="124" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">⚡ Skills 可插拔技能</text>
+      <text x="185" y="136" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">💗 Memory 个性化记忆</text>
+      <text x="185" y="148" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">🔄 自主学习与进化</text>
+      <text x="240" y="170" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" font-weight="600" fill="#059669">→ 一个内核无限扩展</text>
+      <!-- Arrow 2→3 -->
+      <line x1="310" y1="115" x2="325" y2="115" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#ah)"/>
+      <!-- 3. 类比 -->
+      <rect x="330" y="50" width="130" height="130" rx="12" fill="white" stroke="#A78BFA" stroke-width="1.5" filter="url(#ds)"/>
+      <rect x="330" y="50" width="130" height="4" rx="2" fill="#7C3AED"/>
+      <text x="395" y="75" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="12" font-weight="800" fill="#7C3AED">③ 为什么</text>
+      <text x="395" y="93" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#64748B">像养孩子一样理解</text>
+      <text x="340" y="112" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">👶 大脑 = AgentCore</text>
+      <text x="340" y="124" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">📚 技能 = Skills</text>
+      <text x="340" y="136" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">💗 经历 = Memory</text>
+      <text x="340" y="148" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">🎯 元学习 = Code Agent</text>
+      <text x="395" y="170" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" font-weight="600" fill="#7C3AED">→ Memory是护城河</text>
+      <!-- Arrow 3→4 -->
+      <line x1="465" y1="115" x2="480" y2="115" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#ah)"/>
+      <!-- 4. 验证 -->
+      <rect x="485" y="50" width="130" height="130" rx="12" fill="white" stroke="#60A5FA" stroke-width="1.5" filter="url(#ds)"/>
+      <rect x="485" y="50" width="130" height="4" rx="2" fill="#2563EB"/>
+      <text x="550" y="75" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="12" font-weight="800" fill="#2563EB">④ 行业验证</text>
+      <text x="550" y="93" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#64748B">Anthropic 完全一致</text>
+      <text x="495" y="112" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">✓ AgentCore+Skills</text>
+      <text x="495" y="124" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">✓ Code Agent为核心</text>
+      <text x="495" y="136" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">✓ Skill可插拔组合</text>
+      <text x="495" y="148" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">✓ Agent写Skills</text>
+      <text x="550" y="170" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" font-weight="600" fill="#2563EB">→ 方向完全正确</text>
+      <!-- Arrow 4→5 -->
+      <line x1="620" y1="115" x2="635" y2="115" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#ah)"/>
+      <!-- 5. 实证 -->
+      <rect x="640" y="50" width="130" height="130" rx="12" fill="white" stroke="#F59E0B" stroke-width="1.5" filter="url(#ds)"/>
+      <rect x="640" y="50" width="130" height="4" rx="2" fill="#D97706"/>
+      <text x="705" y="75" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="12" font-weight="800" fill="#D97706">⑤ AI分身实证</text>
+      <text x="705" y="93" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#64748B">已运行半年的真实系统</text>
+      <text x="650" y="112" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">🧠 AgentCore 6/6</text>
+      <text x="650" y="124" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">⚡ Skills 50+</text>
+      <text x="650" y="136" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">💗 Memory 59条</text>
+      <text x="650" y="148" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">📚 知识库 150+</text>
+      <text x="705" y="170" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" font-weight="600" fill="#D97706">→ 自进化 3/3 层</text>
+      <!-- Arrow 5→6 (down) -->
+      <path d="M705,185 L705,200 L450,200 L450,215" stroke="#94A3B8" stroke-width="1.5" fill="none" marker-end="url(#ah)"/>
+      <!-- 6. 行动 - Bottom center, wider -->
+      <rect x="170" y="220" width="560" height="90" rx="12" fill="white" stroke="#059669" stroke-width="1.5" filter="url(#ds)"/>
+      <rect x="170" y="220" width="560" height="4" rx="2" fill="#059669"/>
+      <text x="450" y="244" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="12" font-weight="800" fill="#059669">⑥ 四阶段落地路线</text>
+      <!-- 4 phases -->
+      <rect x="185" y="256" width="120" height="40" rx="6" fill="#EFF6FF" stroke="#BFDBFE"/>
+      <text x="245" y="273" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" font-weight="700" fill="#2563EB">Phase 1</text>
+      <text x="245" y="286" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#64748B">基座确立 · 2周</text>
+      <text x="310" y="276" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#94A3B8">→</text>
+      <rect x="320" y="256" width="120" height="40" rx="6" fill="#ECFDF5" stroke="#A7F3D0"/>
+      <text x="380" y="273" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" font-weight="700" fill="#059669">Phase 2</text>
+      <text x="380" y="286" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#64748B">核心接入 · 4周</text>
+      <text x="445" y="276" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#94A3B8">→</text>
+      <rect x="455" y="256" width="120" height="40" rx="6" fill="#F5F3FF" stroke="#DDD6FE"/>
+      <text x="515" y="273" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" font-weight="700" fill="#7C3AED">Phase 3</text>
+      <text x="515" y="286" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#64748B">能力扩展 · 4周</text>
+      <text x="580" y="276" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#94A3B8">→</text>
+      <rect x="590" y="256" width="120" height="40" rx="6" fill="#FFF7ED" stroke="#FED7AA"/>
+      <text x="650" y="273" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" font-weight="700" fill="#EA580C">Phase 4</text>
+      <text x="650" y="286" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#64748B">体验优化 · 持续</text>
+      <!-- Bottom conclusion -->
+      <rect x="170" y="330" width="560" height="50" rx="10" fill="linear-gradient(135deg,#059669,#2563EB)" opacity="0.06"/>
+      <rect x="170" y="330" width="560" height="50" rx="10" fill="none" stroke="#059669" stroke-width="1" stroke-dasharray="4,4" opacity="0.4"/>
+      <text x="450" y="352" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="11" font-weight="700" fill="#059669">核心结论：一个能成长的 Agent（AgentCore + Skills）> 一堆各自为政的 Agent</text>
+      <text x="450" y="370" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#64748B">Memory 是护城河 — 用户不会抛弃自己养大的 AI</text>
+      <!-- Competitive banner -->
+      <rect x="790" y="60" width="90" height="110" rx="8" fill="#F0FDF4" stroke="#A7F3D0" filter="url(#ds)"/>
+      <text x="835" y="80" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" font-weight="700" fill="#059669">竞品对比</text>
+      <text x="835" y="96" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">Manus 0/3</text>
+      <text x="835" y="110" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">Claw 1/3</text>
+      <line x1="800" y1="118" x2="870" y2="118" stroke="#D1FAE5" stroke-width="1"/>
+      <text x="835" y="134" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" font-weight="800" fill="#059669">我们 3/3</text>
+      <text x="835" y="148" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="14">✓</text>
+      <text x="835" y="164" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="8" fill="#059669">完整进化链</text>
+    </svg>
+    </div>
+
+    <!-- ==================== 1. 问题 ==================== -->
+    <section class="narrative-section">
+        <div class="section-header">
+            <span class="section-num">1</span>
+            <h2>问题：大模型很强，但用户只是在"玩"</h2>
+        </div>
+        <p style="margin-bottom:var(--spacing-lg); color:var(--color-text-secondary); line-height:1.7;">
+            ChatGPT月活2亿，但多数用户仍在"聊天"而非"使用"。核心原因：LLM本身有四个根本局限，导致它无法成为用户的长期工具。
+        </p>
+        <div class="limitation-grid">
+            <div class="limitation-card">
+                <div class="limitation-icon">🧠</div>
+                <div class="limitation-title">无记忆</div>
+                <div class="limitation-desc">每次对话从零开始<br>不记得你是谁</div>
+            </div>
+            <div class="limitation-card">
+                <div class="limitation-icon">💤</div>
+                <div class="limitation-title">无主动</div>
+                <div class="limitation-desc">只能被动响应<br>不会主动做事</div>
+            </div>
+            <div class="limitation-card">
+                <div class="limitation-icon">🔗</div>
+                <div class="limitation-title">无行动</div>
+                <div class="limitation-desc">只能生成文本<br>无法操作外部系统</div>
+            </div>
+            <div class="limitation-card">
+                <div class="limitation-icon">📈</div>
+                <div class="limitation-title">无成长</div>
+                <div class="limitation-desc">用100次和用1次<br>没有任何区别</div>
+            </div>
+        </div>
+        <div class="insight-box">
+            <p class="insight-text">这四个局限的本质：LLM是一个<em>没有记忆、不会行动、不能成长</em>的大脑。<br>用户需要的不是"更聪明的聊天"，而是一个<em>懂自己、能做事、会成长的伙伴</em>。</p>
+        </div>
+    </section>
+
+    <!-- ==================== 2. 答案 ==================== -->
+    <section class="narrative-section">
+        <div class="section-header">
+            <span class="section-num">2</span>
+            <h2>答案：AgentCore + Skills 架构</h2>
+        </div>
+        <p style="margin-bottom:var(--spacing-lg); color:var(--color-text-secondary); line-height:1.7;">
+            传统SaaS产品和AI Agent产品，<strong style="color:var(--color-text-primary)">根本不是同一个物种</strong>。理解这个隐藏前提，才能设计正确的AI产品架构。
+        </p>
+
+        <!-- SaaS vs Agent -->
+        <div class="compare-grid">
+            <div class="compare-card old">
+                <div class="compare-icon">🧰</div>
+                <h3 class="compare-title">传统SaaS产品</h3>
+                <p class="compare-subtitle">本质：功能的集合 / 类比：工具箱</p>
+                <ul class="compare-list">
+                    <li>需求 → 抽象成功能 → 固化为代码</li>
+                    <li>每个垂直场景需要独立产品</li>
+                    <li>扩展方式：加功能（需要开发）</li>
+                    <li>Notion + Figma + Jira + ...</li>
+                </ul>
+            </div>
+            <div class="compare-vs">VS</div>
+            <div class="compare-card new">
+                <div class="compare-icon">🤖</div>
+                <h3 class="compare-title">AI Agent产品</h3>
+                <p class="compare-subtitle">本质：能力的载体 / 类比：人</p>
+                <ul class="compare-list">
+                    <li>理解意图 → 规划步骤 → 调用工具执行</li>
+                    <li>一个Agent可覆盖无数场景</li>
+                    <li>扩展方式：学技能（自主学习）</li>
+                    <li>一个Agent = 全部工具</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- AgentCore brief -->
+        <div class="agentcore-brief">
+            <p style="font-size:var(--heading-4); font-weight:700; color:var(--color-text-primary); margin-bottom:4px;">🧠 AgentCore — 统一认知内核</p>
+            <p style="font-size:var(--body-small); color:var(--color-text-secondary); margin-bottom:var(--spacing-md);">六大能力模块，作为所有AI产品共享的"大脑"</p>
+            <div class="agentcore-modules">
+                <span class="agentcore-module"><span class="check">✓</span> Memory 记忆</span>
+                <span class="agentcore-module"><span class="check">✓</span> Reasoning 推理</span>
+                <span class="agentcore-module"><span class="check">✓</span> Planning 规划</span>
+                <span class="agentcore-module"><span class="check">✓</span> Orchestration 编排</span>
+                <span class="agentcore-module"><span class="check">✓</span> Reflection 反思</span>
+                <span class="agentcore-module"><span class="check">✓</span> Integration 集成</span>
+            </div>
+            <p style="font-size:var(--body-small); color:var(--color-text-muted);">AgentCore 提供通用认知能力，Skills 提供专业技能 → 一个内核，无限扩展</p>
+        </div>
+    </section>
+
+    <!-- ==================== 3. 为什么 ==================== -->
+    <section class="narrative-section">
+        <div class="section-header">
+            <span class="section-num">3</span>
+            <h2>为什么：像养育孩子一样理解AI产品</h2>
+        </div>
+        <p style="margin-bottom:var(--spacing-lg); color:var(--color-text-secondary); line-height:1.7;">
+            好的产品设计是对自然规律的模仿。人的成长过程，和打造一个能成长的AI Agent，几乎完全对应。
+        </p>
+
+        <div class="analogy-compact">
+            <div class="analogy-item">
+                <div class="analogy-left">
+                    <div class="analogy-label">👶 人的成长</div>
+                    <div class="analogy-name">大脑神经系统</div>
+                </div>
+                <div class="analogy-right">
+                    <div class="analogy-label">🤖 AI Agent</div>
+                    <div class="analogy-name">AgentCore 认知内核</div>
+                </div>
+            </div>
+            <div class="analogy-item">
+                <div class="analogy-left">
+                    <div class="analogy-label">👶 人的成长</div>
+                    <div class="analogy-name">后天学会的技能</div>
+                </div>
+                <div class="analogy-right">
+                    <div class="analogy-label">🤖 AI Agent</div>
+                    <div class="analogy-name">Skills 可插拔技能</div>
+                </div>
+            </div>
+            <div class="analogy-item">
+                <div class="analogy-left">
+                    <div class="analogy-label">👶 人的成长</div>
+                    <div class="analogy-name">人生经历和记忆</div>
+                </div>
+                <div class="analogy-right">
+                    <div class="analogy-label">🤖 AI Agent</div>
+                    <div class="analogy-name">Memory 个性化记忆</div>
+                </div>
+            </div>
+            <div class="analogy-item">
+                <div class="analogy-left">
+                    <div class="analogy-label">👶 人的成长</div>
+                    <div class="analogy-name">先学会"学习方法"</div>
+                </div>
+                <div class="analogy-right">
+                    <div class="analogy-label">🤖 AI Agent</div>
+                    <div class="analogy-name">Code Agent 元技能起点</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="insight-box">
+            <p class="insight-text">
+                与其做<em>十个各有专长的孩子</em>（多个专用Agent），<br>
+                不如专注培养<em>一个全能的孩子</em>（一个能成长的AgentCore + Skills）。<br><br>
+                你不会抛弃自己养大的孩子 — 这就是 <em>Memory 护城河</em>的本质。
+            </p>
+        </div>
+    </section>
+
+    <!-- ==================== 4. 行业验证 ==================== -->
+    <section class="narrative-section">
+        <div class="section-header">
+            <span class="section-num">4</span>
+            <h2>验证：Anthropic 的实践完全一致</h2>
+        </div>
+
+        <div class="quote-box">
+            <p class="quote-text">
+                "We used to think agents in different domains will look very different. The agent underneath is actually <strong>more universal</strong> than we thought."<br><br>
+                "The industry doesn't need a flurry of agent-building. Instead, <strong>'skills' can equip a general agent</strong> with domain expertise."
+            </p>
+            <p class="quote-author">— Barry Zhang, Head of Applied AI, Anthropic</p>
+        </div>
+
+        <table class="validation-table">
+            <thead>
+                <tr><th style="width:50%">我们的架构设计</th><th style="width:50%">Anthropic 的实践</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>AgentCore + Skills</strong></td><td>Claude Code + Skills</td></tr>
+                <tr><td><strong>Code Agent 为核心</strong></td><td>"Claude Code is a general-purpose agent"</td></tr>
+                <tr><td><strong>Skill 可插拔/可组合</strong></td><td>Skills 按需加载、Token 高效</td></tr>
+                <tr><td><strong>Agent 自主进化</strong></td><td>Agent 为 Agent 写 Skills</td></tr>
+            </tbody>
+        </table>
+
+        <div class="insight-box">
+            <p class="insight-text">我们的思路与全球顶尖AI实验室的方向<em>完全一致</em>。</p>
+        </div>
+    </section>
+
+    <!-- ==================== 5. 实证 ==================== -->
+    <section class="narrative-section">
+        <div class="section-header">
+            <span class="section-num">5</span>
+            <h2>实证：基于 CF 的 AI 分身已验证全部架构</h2>
+        </div>
+        <p style="margin-bottom:var(--spacing-lg); color:var(--color-text-secondary); line-height:1.7;">
+            我们基于 CF 打造了一个完整的 AI 分身实例，验证了 AgentCore + Skills 架构的可行性。
+        </p>
+
+        <div class="metrics-row">
+            <div class="metric-card">
+                <div class="metric-icon">🧠</div>
+                <div class="metric-value" style="color:var(--color-success);">6/6</div>
+                <div class="metric-label">AgentCore 能力模块<br>全部已实现</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon">⚡</div>
+                <div class="metric-value" style="color:var(--color-info);">50+</div>
+                <div class="metric-label">Skills 可插拔技能<br>9大类持续扩展</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon">💗</div>
+                <div class="metric-value" style="color:var(--color-danger);">59</div>
+                <div class="metric-label">Memory 精炼记忆<br>7大类结构化</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon">📚</div>
+                <div class="metric-value" style="color:var(--color-purple);">150+</div>
+                <div class="metric-label">知识库文档<br>结构化沉淀</div>
+            </div>
+        </div>
+
+        <!-- Competitor comparison -->
+        <div class="competitor-strip">
+            <div class="competitor-card muted">
+                <div style="font-size:24px; margin-bottom:4px;">🤖</div>
+                <div class="competitor-name">Manus</div>
+                <div class="competitor-desc">强执行，弱理解<br>不记得用户偏好</div>
+                <div class="competitor-level">自进化 0/3 层</div>
+            </div>
+            <div class="competitor-card muted">
+                <div style="font-size:24px; margin-bottom:4px;">🤖</div>
+                <div class="competitor-name">OpenClaw</div>
+                <div class="competitor-desc">有存储无理解<br>安全风险高 (CVE 9.6)</div>
+                <div class="competitor-level">自进化 1/3 层</div>
+            </div>
+            <div class="competitor-card highlight">
+                <div style="font-size:24px; margin-bottom:4px;">🧠</div>
+                <div class="competitor-name">AI分身 (本系统)</div>
+                <div class="competitor-desc">50+技能 · 59条记忆<br>3层完整自进化链</div>
+                <div class="competitor-level">自进化 3/3 层 ✓</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 6. 行动路径 ==================== -->
+    <section class="narrative-section">
+        <div class="section-header">
+            <span class="section-num">6</span>
+            <h2>行动：四阶段落地路线</h2>
+        </div>
+        <p style="margin-bottom:var(--spacing-lg); color:var(--color-text-secondary); line-height:1.7;">
+            核心原则：不是"推倒重来"，而是"渐进收敛"。以 CF 为 AgentCore 基座，现有 Agent 通过 MCP 工具化接入。
+        </p>
+
+        <div class="roadmap">
+            <div class="roadmap-step">
+                <div class="roadmap-phase">Phase 1</div>
+                <div class="roadmap-title">基座确立</div>
+                <div class="roadmap-time">2周</div>
+                <div class="roadmap-items">
+                    确认 AgentCore 载体<br>
+                    统一 Memory 架构<br>
+                    建立 Skill 规范
+                </div>
+            </div>
+            <div class="roadmap-step">
+                <div class="roadmap-phase">Phase 2</div>
+                <div class="roadmap-title">核心接入</div>
+                <div class="roadmap-time">4周</div>
+                <div class="roadmap-items">
+                    CR Agent → MCP工具化<br>
+                    测试Agent → MCP工具化<br>
+                    端到端验证
+                </div>
+            </div>
+            <div class="roadmap-step">
+                <div class="roadmap-phase">Phase 3</div>
+                <div class="roadmap-title">能力扩展</div>
+                <div class="roadmap-time">4周</div>
+                <div class="roadmap-items">
+                    图片/视频Agent接入<br>
+                    创建复合Skill<br>
+                    打通需求→发布链路
+                </div>
+            </div>
+            <div class="roadmap-step">
+                <div class="roadmap-phase">Phase 4</div>
+                <div class="roadmap-title">体验优化</div>
+                <div class="roadmap-time">持续</div>
+                <div class="roadmap-items">
+                    Memory经验沉淀<br>
+                    成长可视化<br>
+                    分身机制建设
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 深入阅读 ==================== -->
+    <section class="narrative-section">
+        <div class="section-header">
+            <h2 style="font-size:var(--heading-3);">深入阅读</h2>
+        </div>
+        <div class="dive-grid">
+            <a href="deep-dive.html" class="dive-card">
+                <div class="dive-badge">详细论证</div>
+                <h3 class="dive-title">问题诊断 → 关键抉择 → 验证分析</h3>
+                <p class="dive-desc">完整的12章论证过程：GenAI悖论、LLM局限、为什么不是Multi-Agent/Workflow、Code Agent起点论证、养成类游戏形态、技术可行性与风险。</p>
+            </a>
+            <a href="evidence.html" class="dive-card">
+                <div class="dive-badge">AI分身实证</div>
+                <h3 class="dive-title">不是概念验证，是已运行半年的真实系统</h3>
+                <p class="dive-desc">50+ 技能 × 59条记忆 × 3层自进化的真实数据展示。Skills 9大类分布、Memory 7大类结构、真实工作流、与 Manus/OpenClaw 的核心差异。</p>
+            </a>
+            <a href="architecture.html" class="dive-card">
+                <div class="dive-badge">架构全景</div>
+                <h3 class="dive-title">三层架构 · 四类技能 · 运行流程</h3>
+                <p class="dive-desc">交互式架构全景图：Product Layer / Agent Layer / Agent OS 三层设计，四类Skill（原生/工具/任务/流程）运行时序，三种Runtime适配器。</p>
+            </a>
+            <a href="implementation.html" class="dive-card">
+                <div class="dive-badge">技术实施</div>
+                <h3 class="dive-title">从多Agent到One Agent：团队落地指南</h3>
+                <p class="dive-desc">基于三层架构的落地方案：现有Agent按四类Skill分类接入、三种Runtime适配、四阶段渐进式实施路线图。</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- ==================== 结论 ==================== -->
+    <div class="conclusion-box">
+        <div class="conclusion-title">核心结论</div>
+        <p class="conclusion-text">
+            AI产品的最优架构是 <strong>AgentCore + Skills</strong>。<br>
+            Code Agent 是技术团队的最佳起点，产品形态应是渐进式学习成长。<br>
+            Memory 是核心护城河 — 用户不会抛弃一个"懂自己"的AI。
+        </p>
+        <span class="conclusion-highlight">Skills 50+ · Memory 59 · 知识库 150+ · AgentCore 6/6</span>
+    </div>
+
+    <footer class="footer">
+        <p>AI产品终极形态思考 v6.0 | 2026-03</p>
+    </footer>
+</div>
+</body>
+</html>
