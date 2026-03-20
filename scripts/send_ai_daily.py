@@ -379,21 +379,23 @@ def build_card_v35(date_str: str, data: Dict) -> dict:
         
         lines = [f"## {icon} {name}", "", "📰 **动态**"]
         
-        # 海外新闻
+        # 海外新闻（链接内嵌在标题中，KIM Markdown会自动渲染）
         for news in overseas_news[:3]:
             tag = news.get("tag", "")
             tag_display = tag_icons.get(tag, "📌") if tag else "📌"
             title = news.get("title", "")
             url = news.get("url", "")
+            # KIM kimMd 支持标准markdown链接语法 [text](url)
             if url:
                 lines.append(f"- {tag_display} | [{title}]({url})")
             else:
                 lines.append(f"- {tag_display} | {title}")
         
-        # 国内新闻
+        # 国内新闻（链接内嵌在标题中，KIM Markdown会自动渲染）
         for news in china_news[:2]:
             title = news.get("title", "")
             url = news.get("url", "")
+            # KIM kimMd 支持标准markdown链接语法 [text](url)
             if url:
                 lines.append(f"- 🇨🇳 国内 | [{title}]({url})")
             else:
