@@ -916,12 +916,23 @@ def check_six_locations(date_str: str) -> CheckResult:
     homepage = PROJECT_ROOT / "index.html"
     if homepage.exists():
         content = homepage.read_text(encoding="utf-8")
-        if date_str not in content:
-            issues.append("首页日历数据未更新")
+        import re as _re
+        day = date_obj.day
+        # 2a. 日历数组包含当日日期
+        cal_match = _re.search(rf"'{re.escape(month_str)}':\s*\[([^\]]+)\]", content)
+        if not cal_match or str(day) not in cal_match.group(1).split(','):
+            issues.append(f"首页日历数组未包含{day}日")
+        # 2b. list-item-href 指向最新日报
+        if f'01-daily-reports/{month_str}/{date_str}.html' not in content:
+            issues.append("首页最新日报链接未更新")
+        # 2c. list-item-title 包含正确日期（中文格式）
+        date_cn = f"{date_obj.year}年{date_obj.month}月{date_obj.day}日"
+        if date_cn not in content:
+            issues.append(f"首页最新日报标题未更新（应含{date_cn}）")
     
     if issues:
         return CheckResult("6处联动", False, ", ".join(issues), fixable=True)
-    return CheckResult("6处联动", True, "首页+索引页均已更新")
+    return CheckResult("6处联动", True, "首页日历+链接+标题均已更新")
 
 
 def check_external_sync(date_str: str) -> CheckResult:

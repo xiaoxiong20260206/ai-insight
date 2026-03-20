@@ -555,6 +555,45 @@ def main():
     print(f"✅ Generated: {out_path}")
     print(f"   {len(html):,} chars, {html.count(chr(10)):,} lines")
 
+    # ============ 关键板块渲染完整性验证 ============
+    warnings = []
+
+    # 1. 验证"明日/下周值得关注"板块是否渲染（有内容）
+    if "明日/下周值得关注" not in html:
+        warnings.append("❌ [关键] '明日/下周值得关注'板块未渲染 — 检查watch_list/preview_events字段格式")
+    else:
+        # 检查板块内是否有实际条目内容
+        import re as _re
+        section_match = _re.search(r"明日/下周值得关注(.*?)(?:了解更多|</div>\s*</div>\s*<div style=\"margin-top:24px)", html, _re.DOTALL)
+        if section_match and len(section_match.group(1)) < 100:
+            warnings.append("⚠️ [警告] '明日/下周值得关注'板块内容疑似为空，请检查渲染输出")
+
+    # 2. 验证5个Tab板块都有内容
+    tab_checks = [("大模型", "foundation"), ("AI Coding", "coding"),
+                  ("AI 应用", "application"), ("AI 行业", "industry"), ("企业转型", "enterprise")]
+    for tab_name, tab_id in tab_checks:
+        pattern = f'id="{tab_id}".*?class="tab-panel'
+        m = _re.search(f'id="{tab_id}"(.*?)id="[a-z]', html, _re.DOTALL)
+        if m and len(m.group(1)) < 500:
+            warnings.append(f"⚠️ [警告] Tab '{tab_name}' 内容疑似为空")
+
+    # 3. 验证overview板块
+    if "overview-headline" not in html:
+        warnings.append("❌ [关键] '全文概览'板块未渲染 — 检查overview字段")
+
+    # 4. 验证热度趋势
+    if "heat-trend" not in html and "热度趋势" not in html:
+        warnings.append("⚠️ [警告] 热度趋势板块未渲染 — 检查heat_trend字段")
+
+    if warnings:
+        print()
+        print("⚠️  渲染完整性检查发现问题：")
+        for w in warnings:
+            print(f"   {w}")
+        print("   → 请检查JSON数据格式，确保字段名和数据结构符合模板要求")
+    else:
+        print("   ✅ 渲染完整性检查通过（所有关键板块正常）")
+
 
 if __name__ == "__main__":
     main()
