@@ -80,6 +80,22 @@ DAILY_REPORTS_PATH = PROJECT_ROOT / "01-daily-reports"
 PUBLIC_PATH = PROJECT_ROOT / "public"
 EXTERNAL_PATH = PROJECT_ROOT.parent / "ai-insight-public"
 
+# v9.8: 共享数据缓存 — run_all_checks预加载后，各检查函数通过此变量复用，避免14次重复JSON解析
+_SHARED_DATA: Optional[dict] = None
+
+def _load_data(date_str: str) -> Optional[dict]:
+    """加载当天JSON数据。优先复用_SHARED_DATA，否则从磁盘读取。"""
+    global _SHARED_DATA
+    if _SHARED_DATA is not None:
+        return _SHARED_DATA
+    json_path = DATA_PATH / f"daily-content-{date_str}.json"
+    if not json_path.exists():
+        return None
+    try:
+        return json.loads(json_path.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+
 # 检查结果
 class CheckResult:
     def __init__(self, name: str, passed: bool, message: str, fixable: bool = False, severity: str = "error"):
@@ -119,16 +135,19 @@ def check_chinese_quotes(date_str: str) -> CheckResult:
         content = json_path.read_text(encoding="utf-8")
         
         # 尝试解析JSON，如果成功说明语法正确
+        # v9.8: 优先使用 _SHARED_DATA (若已加载则说明语法正确，无需重新解析)
+        if _SHARED_DATA is not None:
+            return CheckResult("中文引号", True, "JSON语法正确")
         try:
             json.loads(content)
             return CheckResult("中文引号", True, "JSON语法正确")
         except json.JSONDecodeError as e:
             # 检查错误信息是否与中文引号相关
-            if '"' in content or '"' in content:
+            if '\u201c' in content or '\u201d' in content:
                 # 检查是否在JSON key/value位置使用了中文引号
                 # 模式: 中文引号后面紧跟字母/数字/冒号，或前面紧跟冒号/逗号
                 import re
-                pattern = r'[""]\s*[:\[\{,]|[:\[\{,]\s*[""]'
+                pattern = r'[\u201c\u201d]\s*[:\[\{,]|[:\[\{,]\s*[\u201c\u201d]'
                 if re.search(pattern, content):
                     return CheckResult("中文引号", False, f"JSON语法中使用了中文引号: {e}", fixable=True)
             return CheckResult("中文引号", False, f"JSON解析失败: {e}", fixable=True)
@@ -137,7 +156,12 @@ def check_chinese_quotes(date_str: str) -> CheckResult:
 
 
 def check_link_validity(date_str: str) -> CheckResult:
-    """检查3: 链接有效性 (禁止#占位符 + v7.0 URL真实性抽检)"""
+    """检查3: 链接有效性 (禁止#占位符 + v7.0 URL真实性抽检)
+    
+    v9.8优化: 优先复用 orchestrator 在 Step 2.7 写入的 url_check_cache.json，
+    避免重复发起 HTTP 请求（原来和 run_url_spot_check 共形成3套重复抽检）。
+    若缓存不存在（直接运行 quality_gate 时），则自行执行并发抽检。
+    """
     json_path = DATA_PATH / f"daily-content-{date_str}.json"
     if not json_path.exists():
         return CheckResult("链接有效", False, "JSON文件不存在，跳过")
@@ -145,6 +169,7 @@ def check_link_validity(date_str: str) -> CheckResult:
     try:
         import urllib.request
         import random
+        from concurrent.futures import ThreadPoolExecutor, as_completed as cf_as_completed
         
         data = json.loads(json_path.read_text(encoding="utf-8"))
         invalid_count = 0
@@ -162,27 +187,52 @@ def check_link_validity(date_str: str) -> CheckResult:
                     elif url.startswith('http'):
                         all_urls.append((url, item.get('title', '')[:30]))
         
-        # v7.0: URL真实性抽检 — 随机抽取最多3个URL做HTTP HEAD验证
+        # v9.8: 优先复用 orchestrator 的缓存，避免重复 HTTP 请求
         unreachable = []
-        if all_urls:
+        cache_used = False
+        cache_path = DATA_PATH.parent / "state" / date_str / "url_check_cache.json"
+        if cache_path.exists():
+            try:
+                cache = json.loads(cache_path.read_text(encoding="utf-8"))
+                # 缓存有效且是当天的
+                if cache.get("date") == date_str and cache.get("sample_count", 0) > 0:
+                    url_results = cache.get("url_check_results", {})
+                    failed_urls = [url for url, ok in url_results.items() if not ok]
+                    if failed_urls:
+                        unreachable = [f"{url[:40]}(缓存不可达)" for url in failed_urls]
+                    cache_used = True
+            except Exception:
+                pass  # 缓存损坏，退回到自行检查
+        
+        if not cache_used and all_urls:
+            # 无缓存时自行执行并发抽检
             sample = random.sample(all_urls, min(3, len(all_urls)))
-            for url, title in sample:
+            
+            def _check_url(pair):
+                url, title = pair
                 try:
                     req = urllib.request.Request(url, method='HEAD')
-                    req.add_header('User-Agent', 'Mozilla/5.0 (AI-Insight QualityGate/7.0)')
+                    req.add_header('User-Agent', 'Mozilla/5.0 (AI-Insight QualityGate/9.8)')
                     resp = urllib.request.urlopen(req, timeout=10)
-                    if resp.status >= 400:
-                        unreachable.append(f"{title}({resp.status})")
-                except Exception as e:
-                    # 某些站点拒绝HEAD请求，尝试GET
+                    return (True, f"{title}({resp.status})" if resp.status >= 400 else None)
+                except Exception:
                     try:
                         req = urllib.request.Request(url)
-                        req.add_header('User-Agent', 'Mozilla/5.0 (AI-Insight QualityGate/7.0)')
+                        req.add_header('User-Agent', 'Mozilla/5.0 (AI-Insight QualityGate/9.8)')
                         resp = urllib.request.urlopen(req, timeout=10)
-                        if resp.status >= 400:
-                            unreachable.append(f"{title}({resp.status})")
+                        return (True, f"{title}({resp.status})" if resp.status >= 400 else None)
                     except Exception:
-                        unreachable.append(f"{title}(不可达)")
+                        return (False, f"{title}(不可达)")
+            
+            with ThreadPoolExecutor(max_workers=3) as executor:
+                futures = [executor.submit(_check_url, pair) for pair in sample]
+                for future in cf_as_completed(futures, timeout=20):
+                    try:
+                        ok, label = future.result()
+                        if not ok:
+                            unreachable.append(label)
+                    except Exception:
+                        pass
         
         issues = []
         warnings = []
@@ -193,12 +243,13 @@ def check_link_validity(date_str: str) -> CheckResult:
             # 网络不可达视为warning（可能是境外站点网络限制），不阻断部署
             warnings.append(f"⚠️ 抽检不可达: {', '.join(unreachable)}")
         
+        cache_note = " (已复用Step2.7缓存)" if cache_used else ""
         if issues:
             warn_str = " ".join(warnings)
             return CheckResult("链接有效", False, "; ".join(issues) + (" " + warn_str if warn_str else "") + " (可修复)", fixable=True)
         if warnings:
-            return CheckResult("链接有效", True, " ".join(warnings) + " (境外站点网络限制，不阻断)")
-        return CheckResult("链接有效", True, f"所有链接有效(抽检{min(3, len(all_urls))}个URL可达)")
+            return CheckResult("链接有效", True, " ".join(warnings) + f" (境外站点网络限制，不阻断{cache_note})")
+        return CheckResult("链接有效", True, f"所有链接有效(抽检{min(3, len(all_urls))}个URL可达{cache_note})")
     except Exception as e:
         return CheckResult("链接有效", False, f"检查失败: {e}")
 
@@ -210,7 +261,7 @@ def check_content_nonempty(date_str: str) -> CheckResult:
         return CheckResult("内容非空", False, "JSON文件不存在，跳过")
     
     try:
-        data = json.loads(json_path.read_text(encoding="utf-8"))
+        data = _load_data(date_str) or json.loads(json_path.read_text(encoding="utf-8"))
         tabs = data.get("tabs", [])
         total_news = sum(
             len(tab.get("news", {}).get("overseas", [])) + 
@@ -238,7 +289,7 @@ def check_capability_update(date_str: str) -> CheckResult:
         return CheckResult("林克自述", False, "JSON文件不存在")
     
     try:
-        data = json.loads(json_path.read_text(encoding="utf-8"))
+        data = _load_data(date_str) or json.loads(json_path.read_text(encoding="utf-8"))
         capability_update = data.get("capability_update", "")
         
         if not capability_update:
@@ -274,7 +325,7 @@ def check_tab_balance(date_str: str) -> CheckResult:
         return CheckResult("板块均衡", False, "JSON文件不存在")
     
     try:
-        data = json.loads(json_path.read_text(encoding="utf-8"))
+        data = _load_data(date_str) or json.loads(json_path.read_text(encoding="utf-8"))
         tabs = data.get("tabs", [])
         tab_names = ["大模型", "AI Coding", "AI 应用", "AI 行业", "企业转型"]
         
@@ -334,7 +385,7 @@ def check_date_window(date_str: str) -> CheckResult:
         return CheckResult("时效性", False, "JSON文件不存在，跳过")
     
     try:
-        data = json.loads(json_path.read_text(encoding="utf-8"))
+        data = _load_data(date_str) or json.loads(json_path.read_text(encoding="utf-8"))
         report_date = datetime.strptime(date_str, "%Y-%m-%d")
         
         # 时间窗口: N-1日08:00 ~ N日08:00
@@ -417,7 +468,7 @@ def check_board_classification(date_str: str) -> CheckResult:
         return CheckResult("板块分类", False, "JSON文件不存在，跳过")
     
     try:
-        data = json.loads(json_path.read_text(encoding="utf-8"))
+        data = _load_data(date_str) or json.loads(json_path.read_text(encoding="utf-8"))
         
         # 板块关键词映射 (tab index → 板块名 → 典型关键词)
         board_keywords = {
@@ -517,7 +568,7 @@ def check_region_classification(date_str: str) -> CheckResult:
         return CheckResult("地区分类", False, "JSON文件不存在，跳过")
     
     try:
-        data = json.loads(json_path.read_text(encoding="utf-8"))
+        data = _load_data(date_str) or json.loads(json_path.read_text(encoding="utf-8"))
         
         # 已知公司/机构→地区映射（持续扩充）
         overseas_keywords = [
@@ -623,7 +674,7 @@ def check_cross_day_dedup(date_str: str) -> CheckResult:
         return CheckResult("去重", False, "JSON文件不存在，跳过")
     
     try:
-        data = json.loads(json_path.read_text(encoding="utf-8"))
+        data = _load_data(date_str) or json.loads(json_path.read_text(encoding="utf-8"))
         report_date = datetime.strptime(date_str, "%Y-%m-%d")
         
         # 1. 收集当天所有新闻标题和URL
@@ -717,7 +768,7 @@ def check_source_diversity(date_str: str) -> CheckResult:
         return CheckResult("信息源多样性", False, "JSON数据文件不存在")
     
     try:
-        data = json.loads(json_path.read_text(encoding="utf-8"))
+        data = _load_data(date_str) or json.loads(json_path.read_text(encoding="utf-8"))
         
         # 收集所有新闻条目
         all_items = []
@@ -983,7 +1034,7 @@ def check_date_tampering(date_str: str) -> CheckResult:
     try:
         import hashlib
         
-        data = json.loads(json_path.read_text(encoding="utf-8"))
+        data = _load_data(date_str) or json.loads(json_path.read_text(encoding="utf-8"))
         report_date = datetime.strptime(date_str, "%Y-%m-%d")
         
         # 有效日期范围: N-1日 和 N日
@@ -1121,7 +1172,7 @@ def check_closed_platform_urls(date_str: str) -> CheckResult:
         return CheckResult("封闭平台链接", True, "JSON文件不存在，跳过")
     
     try:
-        data = json.loads(json_path.read_text(encoding="utf-8"))
+        data = _load_data(date_str) or json.loads(json_path.read_text(encoding="utf-8"))
         
         FORBIDDEN_PATTERNS = [
             (r'mp\.weixin\.qq\.com', 'mp.weixin临时链接'),
@@ -1172,7 +1223,7 @@ def check_content_volume(date_str: str) -> CheckResult:
         return CheckResult("内容量", False, "JSON文件不存在，跳过", severity="warning")
     
     try:
-        data = json.loads(json_path.read_text(encoding="utf-8"))
+        data = _load_data(date_str) or json.loads(json_path.read_text(encoding="utf-8"))
         report_date = datetime.strptime(date_str, "%Y-%m-%d")
         
         # 计算当前日报新闻条数
@@ -1245,7 +1296,7 @@ def check_xhs_note_validity(date_str: str) -> CheckResult:
         return CheckResult("小红书noteId", True, "JSON文件不存在，跳过")
     
     try:
-        data = json.loads(json_path.read_text(encoding="utf-8"))
+        data = _load_data(date_str) or json.loads(json_path.read_text(encoding="utf-8"))
         
         xhs_urls = []
         # 收集所有 xiaohongshu URL (url字段 + xhs_url字段)
@@ -1321,7 +1372,19 @@ def check_xhs_note_validity(date_str: str) -> CheckResult:
 
 
 def run_all_checks(date_str: str) -> Tuple[List[CheckResult], int, int]:
-    """运行所有检查"""
+    """运行所有检查 — v9.8: 预加载JSON，所有检查函数通过_SHARED_DATA复用，避免14次重复解析"""
+    global _SHARED_DATA
+    
+    # 预加载当天JSON（仅当文件存在时），供所有检查函数复用
+    json_path = DATA_PATH / f"daily-content-{date_str}.json"
+    if json_path.exists():
+        try:
+            _SHARED_DATA = json.loads(json_path.read_text(encoding="utf-8"))
+        except Exception:
+            _SHARED_DATA = None
+    else:
+        _SHARED_DATA = None
+    
     checks = [
         check_json_exists,
         check_chinese_quotes,
@@ -1359,6 +1422,8 @@ def run_all_checks(date_str: str) -> Tuple[List[CheckResult], int, int]:
         else:
             failed += 1
     
+    # 检查完毕，清理共享数据（防状态泄露）
+    _SHARED_DATA = None
     return results, passed, failed, warnings
 
 
