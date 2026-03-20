@@ -265,8 +265,14 @@ if git diff --cached --quiet; then
     echo "  ⏭️ 无变更需要提交"
 else
     git commit -m "feat: AI日报 $DATE 部署（自动化）"
-    git push origin main
-    echo "  ✅ 已推送到GitHub（含public/index.html）"
+    echo "  ⏳ 推送到GitHub（通常需 20-60s，超时上限120s）..."
+    PUSH_START=$SECONDS
+    if timeout 120 git push origin main; then
+        echo "  ✅ 已推送到GitHub (耗时$((SECONDS - PUSH_START))s，含public/index.html)"
+    else
+        echo "  ❌ git push 超时或失败（超过120s），请检查网络后手动 git push"
+        exit 1
+    fi
 fi
 
 # ===== 7. 同步外部版（如果被orchestrator调用则跳过，由orchestrator统一执行） =====
