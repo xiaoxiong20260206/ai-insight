@@ -275,8 +275,38 @@ def render_preview(events: list) -> str:
         return ""
     items = []
     for e in events:
-        # 兼容两种格式: preview_events {name,desc,color} 和 watch_list [string]
-        if isinstance(e, str):
+        # 格式1: {category, items: [...]} — 按分类展示
+        if isinstance(e, dict) and "category" in e and "items" in e:
+            cat = e.get("category", "")
+            sub_items = e.get("items", [])
+            if not sub_items:
+                continue
+            # 按category选颜色
+            if "日期" in cat or "📅" in cat:
+                color = "var(--color-warning)"
+                border_color = "var(--color-warning)"
+                icon = "📅"
+            elif "指标" in cat or "📊" in cat:
+                color = "var(--color-info)"
+                border_color = "var(--color-info)"
+                icon = "📊"
+            elif "信号" in cat or "🔍" in cat:
+                color = "var(--color-success)"
+                border_color = "var(--color-success)"
+                icon = "🔍"
+            else:
+                color = "var(--color-success)"
+                border_color = "var(--color-success)"
+                icon = "📌"
+            desc_html = "".join(f'<div style="margin-top:3px">• {item}</div>' for item in sub_items)
+            # 如果category本身已含emoji，则不再重复加icon
+            cat_display = cat if any(ord(c) > 127 for c in cat[:2]) else f"{icon} {cat}"
+            items.append(f'''                <div style="padding:12px 16px;background:var(--color-bg);border-radius:var(--radius-md);border:1px solid var(--color-border-light);border-left:3px solid {border_color};transition:all .2s">
+                    <div style="font-size:13px;font-weight:700;color:{color};display:flex;align-items:center;gap:6px">{cat_display}</div>
+                    <div style="font-size:12px;color:var(--color-text-muted);margin-top:4px;line-height:1.5">{desc_html}</div>
+                </div>''')
+        # 格式2: str — 单条文本
+        elif isinstance(e, str):
             # 从字符串中提取名称和描述
             if " - " in e:
                 parts = e.split(" - ", 1)
@@ -289,24 +319,20 @@ def render_preview(events: list) -> str:
             else:
                 name = e[:30]
                 desc = e
-            # 智能检测紧迫度: 今天/明天的事件用强调色
             lower = e.lower()
-            if any(k in lower for k in ["今天", "今日", "3月13"]):
-                color = "var(--color-danger)"
-                border_color = "var(--color-danger)"
-                icon = "🔴"
-            elif any(k in lower for k in ["明天", "明日", "3月14"]):
-                color = "var(--color-warning)"
-                border_color = "var(--color-warning)"
-                icon = "🟡"
+            if any(k in lower for k in ["今天", "今日"]):
+                color = "var(--color-danger)"; border_color = color; icon = "🔴"
+            elif any(k in lower for k in ["明天", "明日"]):
+                color = "var(--color-warning)"; border_color = color; icon = "🟡"
             elif any(k in lower for k in ["持续", "监测", "后续"]):
-                color = "var(--color-info)"
-                border_color = "var(--color-info)"
-                icon = "🔵"
+                color = "var(--color-info)"; border_color = color; icon = "🔵"
             else:
-                color = "var(--color-success)"
-                border_color = "var(--color-success)"
-                icon = "🟢"
+                color = "var(--color-success)"; border_color = color; icon = "🟢"
+            items.append(f'''                <div style="padding:12px 16px;background:var(--color-bg);border-radius:var(--radius-md);border:1px solid var(--color-border-light);border-left:3px solid {border_color};transition:all .2s">
+                    <div style="font-size:13px;font-weight:700;color:{color};display:flex;align-items:center;gap:6px">{icon} {name}</div>
+                    <div style="font-size:12px;color:var(--color-text-muted);margin-top:4px;line-height:1.5">{desc}</div>
+                </div>''')
+        # 格式3: {name, desc, color} — 旧格式兼容
         else:
             color_key = e.get("color", "success")
             color = f'var(--color-{color_key})'
@@ -314,10 +340,12 @@ def render_preview(events: list) -> str:
             name = e.get("name", "")
             desc = e.get("desc", "")
             icon = {"danger": "🔴", "warning": "🟡", "info": "🔵"}.get(color_key, "🟢")
-        items.append(f'''                <div style="padding:12px 16px;background:var(--color-bg);border-radius:var(--radius-md);border:1px solid var(--color-border-light);border-left:3px solid {border_color};transition:all .2s">
+            items.append(f'''                <div style="padding:12px 16px;background:var(--color-bg);border-radius:var(--radius-md);border:1px solid var(--color-border-light);border-left:3px solid {border_color};transition:all .2s">
                     <div style="font-size:13px;font-weight:700;color:{color};display:flex;align-items:center;gap:6px">{icon} {name}</div>
                     <div style="font-size:12px;color:var(--color-text-muted);margin-top:4px;line-height:1.5">{desc}</div>
                 </div>''')
+    if not items:
+        return ""
     return f'''
         <div class="section-card">
             <div class="section-header"><span class="num">📌</span> 明日/下周值得关注</div>
