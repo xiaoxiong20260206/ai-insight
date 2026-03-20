@@ -454,7 +454,7 @@ def _script_command(key: str, date: str) -> str:
 
 # ── 命令: finalize (Step 3 + Step 4) ─────────────────────
 def cmd_finalize(date: str) -> bool:
-    """一键执行: URL抽检 → 质量门 → HTML生成 → 部署 → 外部同步"""
+    """一键执行: URL抽检 → 质量门 → HTML生成 → 部署 → 外部同步 → 林克首页"""
     print(f"\n🚀 AI日报 Finalize: {date}")
     print("=" * 50)
 
@@ -496,10 +496,16 @@ def cmd_finalize(date: str) -> bool:
         mark_step(date, "deploy", "failed", error="部署失败")
         return False
 
+    # --- Step 4.5: 外部版同步 (v9.5: 失败阻断) ---
     sync_ok = run_external_sync()
     if not sync_ok:
-        mark_step(date, "deploy", "failed", error="外部同步失败")
+        mark_step(date, "deploy", "failed", error="外部版同步失败")
+        print("\n🚫 外部版同步失败，finalize 中止。")
+        print("   请先解决外部版仓库问题，然后重新运行 finalize。")
         return False
+
+    # --- Step 4.6: 林克首页联动更新 (v9.5 新增) ---
+    run_link_homepage_sync()  # 不阻断，只是联动
 
     mark_step(date, "deploy", "completed")
     print("  ✅ Step 4 完成")
@@ -569,21 +575,63 @@ def run_deploy(date: str) -> bool:
         return False
 
 def run_external_sync() -> bool:
-    """外部版同步"""
+    """外部版同步（v9.5: 失败必须阻断）"""
+    print("\n  📤 Step 4.5: 外部版同步...")
     try:
         result = subprocess.run(
             ["python3", str(SCRIPT_DIR / "sync_to_external.py"), "--full", "--verify"],
             capture_output=True, text=True, timeout=120, cwd=str(PROJECT_DIR)
         )
         if result.returncode == 0:
-            print(f"  ✅ 外部同步完成")
+            print(f"  ✅ 外部版同步完成")
             return True
         else:
-            print(f"  ⚠️ 外部同步警告 (exit={result.returncode})")
-            # 不阻断，只记录
-            return True
+            print(f"  ❌ 外部版同步失败 (exit={result.returncode})")
+            print(f"     输出: {result.stdout[-500:]}" if result.stdout else "")
+            print(f"     错误: {result.stderr[-500:]}" if result.stderr else "")
+            print("\n  💡 如果是仓库不存在，请先执行:")
+            print("     cd ~/Documents/Codeflicker/个人助理_V1")
+            print("     git clone https://github.com/xiaoxiong20260206/ai-insight-public.git ai-insight-public")
+            return False  # v9.5: 必须阻断，不能静默通过
     except Exception as e:
-        print(f"  ⚠️ 外部同步异常: {e}")
+        print(f"  ❌ 外部版同步异常: {e}")
+        return False  # v9.5: 必须阻断
+
+
+def run_link_homepage_sync() -> bool:
+    """林克首页日报数据同步（v9.5 新增）"""
+    print("\n  📤 Step 4.6: 林克首页日报数据同步...")
+    homepage_scripts = PROJECT_DIR.parent / "scripts"
+    link_homepage = PROJECT_DIR.parent / "link-homepage"
+    
+    if not homepage_scripts.exists():
+        print(f"  ⚠️ 首页脚本目录不存在: {homepage_scripts}")
+        print("     跳过林克首页更新（不阻断）")
+        return True  # 不阻断，因为这是可选依赖
+    
+    try:
+        # Step 1: 生成日报数据
+        result = subprocess.run(
+            ["python3", str(homepage_scripts / "generate_daily_report.py")],
+            capture_output=True, text=True, timeout=60, cwd=str(PROJECT_DIR.parent)
+        )
+        if result.returncode != 0:
+            print(f"  ⚠️ 日报数据生成失败: {result.stderr[:200]}")
+            return True  # 不阻断
+        
+        # Step 2: 部署首页
+        result = subprocess.run(
+            ["bash", str(homepage_scripts / "update-homepage.sh"), "auto: 日报联动更新"],
+            capture_output=True, text=True, timeout=180, cwd=str(PROJECT_DIR.parent)
+        )
+        if result.returncode == 0:
+            print(f"  ✅ 林克首页更新完成")
+        else:
+            print(f"  ⚠️ 林克首页部署警告: {result.stderr[:200]}")
+        
+        return True
+    except Exception as e:
+        print(f"  ⚠️ 林克首页更新异常: {e}")
         return True  # 不阻断
 
 # ── 命令: push (Step 5) ──────────────────────────────────
