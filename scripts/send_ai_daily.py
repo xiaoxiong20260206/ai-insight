@@ -309,7 +309,8 @@ def build_card_v35(date_str: str, data: Dict) -> dict:
     date_obj = datetime.strptime(date_str, "%Y-%m-%d")
     weekday = WEEKDAYS[date_obj.weekday()]
     month_str = date_obj.strftime("%Y-%m")
-    report_url = f"{REPORT_BASE_URL}/{month_str}/{date_str}-v3.html"
+    # 公开版文件名为 {date_str}.html（无-v3后缀），与内部版 {date_str}-v3.html 不同
+    report_url = f"{REPORT_BASE_URL}/{month_str}/{date_str}.html"
     
     coverage = data.get("coverage", {})
     overseas = coverage.get("overseas", 0)
