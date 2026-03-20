@@ -997,7 +997,7 @@ def check_six_locations(date_str: str) -> CheckResult:
         day = date_obj.day
         # 2a. 日历数组包含当日日期
         cal_match = _re.search(rf"'{re.escape(month_str)}':\s*\[([^\]]+)\]", content)
-        if not cal_match or str(day) not in cal_match.group(1).split(','):
+        if not cal_match or str(day) not in [x.strip() for x in cal_match.group(1).split(',')]:
             issues.append(f"首页日历数组未包含{day}日")
         # 2b. list-item-href 指向最新日报
         if f'01-daily-reports/{month_str}/{date_str}.html' not in content:
