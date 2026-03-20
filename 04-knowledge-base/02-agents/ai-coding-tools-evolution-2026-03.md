@@ -186,3 +186,33 @@ Skills生态的爆发验证了Barry Zhang "Don't Build Agents, Build Skills Inst
 |------|---------|
 | 2026-03-06 | 初始创建：Codex Windows版 + 多Agent并行实践 + 趋同进化 |
 | 2026-03-13 | 新增Skills生态爆发章节、SKILL.md通用格式、GWS MCP、Agent安全测试 |
+| 2026-03-20 | 新增OpenAI收购Astral + Cursor Composer 2章节 |
+
+---
+
+## 2026-03-19 重大事件：OpenAI收购Astral — Python底座被纳入Codex生态
+
+### 收购概要
+- **目标**: Astral (uv / Ruff / ty)，Python工具链领军工具
+- **周活**: 200万+ (uv为核心)
+- **意义**: OpenAI Codex将获得Python包管理+格式化+类型检查全链路能力
+
+### 战略解读
+- Astral工具已是Python开发者默认选择，收购=控制Python基础设施入口
+- Codex未来可能从代码生成延伸到"依赖管理→格式化→类型检查→执行"完整链路
+- 竞争格局：Microsoft(GitHub Copilot+VS Code) vs OpenAI(Codex+Python底座)
+
+### 行业影响
+- 国内算力同步涨价（阿里/百度），AI创业成本压力上升，头部收购行为加速分化
+
+---
+
+## 2026-03-19 Cursor Composer 2：旗舰级AI编码性能
+
+### 核心数据
+- **CursorBench**: 最优成绩（所有AI Coding工具中最高）
+- **定价**: 两档（Fast优先/Standard），Fast模式默认开启
+- **特点**: 多文件同步编辑、自然语言需求→可运行代码全链路
+
+### 市场地位
+- 与GitHub Copilot、Windsurf三足鼎立，通过独立基准建立差异化
