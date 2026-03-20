@@ -3,11 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>快手AI员工 · 完整架构图</title>
+    <title>架构全景 · AI产品终极形态思考</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23059669'/><path d='M16 6c-4.4 0-8 3.6-8 8 0 2.5 1.2 4.8 3 6.2V24l5-3 5 3v-3.8c1.8-1.4 3-3.7 3-6.2 0-4.4-3.6-8-8-8z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/><line x1='16' y1='10' x2='16' y2='15' stroke='white' stroke-width='2' stroke-linecap='round'/><circle cx='16' cy='18' r='1' fill='white'/></svg>">
     <style>
         :root {
             --c-product: #0969DA;
+            --c-agent: #1A7F37;
+            --c-agent-light: #2DA44E;
+            --c-os: #24292F;
+            --c-os-light: #3D444D;
+            --c-native: #2DA44E;
+            --c-tool: #7C3AED;
+            --c-task: #EA580C;
+            --c-flow: #0969DA;
             --c-text: #1F2328;
             --c-text-2: #4D5561;
             --c-text-3: #656D76;
@@ -15,7 +23,9 @@
             --c-border-light: #E8ECF0;
             --c-bg: #F6F8FA;
             --c-card: #FFFFFF;
+            --shadow-sm: 0 1px 3px rgba(31,35,40,.06);
             --shadow-card: 0 2px 8px rgba(31,35,40,.06), 0 1px 2px rgba(31,35,40,.04);
+            --shadow-hover: 0 8px 24px rgba(31,35,40,.12);
             --r-sm: 6px; --r-md: 10px; --r-lg: 14px; --r-full: 999px;
             --font: -apple-system, "system-ui", "Segoe UI", "Noto Sans SC", Helvetica, Arial, sans-serif;
             --ease: cubic-bezier(0.25, 1, 0.5, 1);
@@ -26,7 +36,7 @@
             color: var(--c-text-2); background: var(--c-bg);
             -webkit-font-smoothing: antialiased;
         }
-        .page { max-width: 1600px; margin: 0 auto; padding: 24px 20px 48px; }
+        .page { max-width: 1120px; margin: 0 auto; padding: 24px 20px 48px; }
 
         /* === TAB NAV === */
         .tab-nav {
@@ -35,7 +45,6 @@
             border-radius: var(--r-lg); padding: 6px;
             margin-bottom: 24px; box-shadow: var(--shadow-card);
             position: sticky; top: 12px; z-index: 100; overflow-x: auto;
-            max-width: 700px;
         }
         .tab-btn {
             flex: 1; display: flex; align-items: center; justify-content: center;
@@ -46,360 +55,599 @@
         }
         .tab-btn:hover { background: var(--c-bg); color: var(--c-text); }
         .tab-btn.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #0969DA 0%, #54AEFF 100%);
             color: #fff; font-weight: 600;
-            box-shadow: 0 2px 8px rgba(102,126,234,.25);
+            box-shadow: 0 2px 8px rgba(9,105,218,.25);
         }
 
-        /* === CANVAS === */
-        .canvas {
-            background: white;
-            border-radius: 24px;
-            padding: 48px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        /* === HEADER === */
+        .header { text-align: center; margin-bottom: 28px; }
+        .header-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 4px 14px; border-radius: var(--r-full);
+            background: linear-gradient(135deg, #E6F7ED 0%, #E1F0F8 100%);
+            color: var(--c-product); font-size: 12px; font-weight: 600;
+            margin-bottom: 10px;
         }
-        
-        .header {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-        
         .header h1 {
-            font-size: 42px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 900;
-            margin-bottom: 12px;
+            font-size: 26px; font-weight: 800; color: var(--c-text);
+            letter-spacing: -0.5px; margin-bottom: 6px;
         }
-        
-        .header .subtitle {
-            font-size: 18px;
-            color: #64748b;
-            font-weight: 500;
+        .header p { font-size: 13px; color: var(--c-text-3); }
+
+        /* === SCENARIO BAR === */
+        .scenario-bar {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 8px; margin-bottom: 24px;
         }
-        
-        /* 双泳道 */
-        .swimlanes {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0;
-            position: relative;
-            margin-bottom: 40px;
+        .sc-btn {
+            background: var(--c-card); border: 1.5px solid var(--c-border-light);
+            border-radius: var(--r-md); padding: 10px 12px;
+            cursor: pointer; transition: all 250ms var(--ease);
+            text-align: left; position: relative; overflow: hidden;
         }
-        
-        .swimlane {
-            position: relative;
+        .sc-btn::before {
+            content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+            width: 3px; border-radius: 0 3px 3px 0;
         }
-        
-        .lane-header {
-            color: white;
-            padding: 20px 24px;
-            text-align: center;
+        .sc-btn:hover { border-color: var(--c-border); box-shadow: var(--shadow-card); transform: translateY(-1px); }
+        .sc-btn.active { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+        .sc-btn.active::before { width: 4px; }
+        .sc-btn .sc-q { font-size: 13px; font-weight: 700; color: var(--c-text); line-height: 1.3; }
+        .sc-btn .sc-meta { font-size: 10px; color: var(--c-text-3); margin-top: 4px; display: flex; align-items: center; gap: 5px; }
+        .sc-btn .sc-badge {
+            display: inline-block; padding: 1px 6px; border-radius: var(--r-full);
+            font-size: 9px; font-weight: 700; color: #fff;
         }
-        
-        .lane-header:first-child {
-            border-radius: 16px 0 0 0;
+        /* Per-type */
+        .sc-btn[data-type="native"]::before { background: var(--c-native); }
+        .sc-btn[data-type="native"].active { border-color: var(--c-native); }
+        .sc-btn[data-type="native"] .sc-badge { background: var(--c-native); }
+        .sc-btn[data-type="tool"]::before { background: var(--c-tool); }
+        .sc-btn[data-type="tool"].active { border-color: var(--c-tool); }
+        .sc-btn[data-type="tool"] .sc-badge { background: var(--c-tool); }
+        .sc-btn[data-type="task"]::before { background: var(--c-task); }
+        .sc-btn[data-type="task"].active { border-color: var(--c-task); }
+        .sc-btn[data-type="task"] .sc-badge { background: var(--c-task); }
+        .sc-btn[data-type="flow"]::before { background: var(--c-flow); }
+        .sc-btn[data-type="flow"].active { border-color: var(--c-flow); }
+        .sc-btn[data-type="flow"] .sc-badge { background: var(--c-flow); }
+
+        /* === LAYER CARDS === */
+        .layer {
+            background: var(--c-card); border: 1px solid var(--c-border-light);
+            border-radius: var(--r-lg); margin-bottom: 12px;
+            box-shadow: var(--shadow-card); overflow: hidden;
+            transition: box-shadow 300ms var(--ease);
         }
-        
-        .lane-title {
-            font-size: 22px;
-            font-weight: 800;
-            margin-bottom: 4px;
+        .layer-header {
+            display: flex; align-items: center; gap: 10px;
+            padding: 12px 18px;
+            border-bottom: 1px solid var(--c-border-light);
         }
-        
-        .lane-subtitle {
-            font-size: 13px;
-            opacity: 0.9;
+        .layer-header .layer-tag {
+            padding: 3px 10px; border-radius: var(--r-full);
+            font-size: 10px; font-weight: 800; color: #fff; letter-spacing: 0.5px;
         }
-        
-        .lane-body {
-            padding: 24px;
-            background: #fafbfc;
-            min-height: 100%;
+        .layer-header h2 { font-size: 14px; font-weight: 800; color: var(--c-text); }
+        .layer-header .game-tag {
+            margin-left: auto; font-size: 11px; font-weight: 600;
+            padding: 2px 10px; border-radius: var(--r-full);
+            background: rgba(0,0,0,0.04);
         }
-        
-        .swimlane:first-child .lane-body {
-            border-right: 3px dashed #cbd5e1;
+        .layer-body { padding: 16px 18px; }
+
+        /* Product layer */
+        .layer.product .layer-header { background: linear-gradient(135deg, rgba(9,105,218,0.04) 0%, rgba(84,174,255,0.04) 100%); }
+        .layer.product .layer-tag { background: linear-gradient(135deg, #0969DA, #54AEFF); }
+
+        .products-row {
+            display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
         }
-        
-        /* 层级区块 */
-        .layer-block {
-            margin-bottom: 24px;
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            border-left: 6px solid var(--color);
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        .product-chip {
+            padding: 6px 14px; border-radius: var(--r-md);
+            border: 1px solid rgba(9,105,218,0.2);
+            background: rgba(9,105,218,0.04);
+            font-size: 12px; font-weight: 600; color: var(--c-product);
+            transition: all 200ms var(--ease);
         }
-        
-        .layer-block:last-child {
-            margin-bottom: 0;
-        }
-        
-        .layer-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--color);
-            margin-bottom: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #f1f5f9;
-        }
-        
-        .modules {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        
-        .mod {
-            background: #f8fafc;
-            border-radius: 10px;
-            padding: 14px 16px;
-            border: 2px solid #e2e8f0;
-            transition: all 0.3s;
-            cursor: pointer;
-            position: relative;
-        }
-        
-        .mod:hover {
-            border-color: var(--color);
-            transform: translateX(4px);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-        }
-        
-        .mod-name {
-            font-size: 15px;
-            font-weight: 700;
-            color: #1e293b;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 6px;
-        }
-        
-        .mod-desc {
-            font-size: 12px;
-            color: #64748b;
-            line-height: 1.6;
-        }
-        
-        .mod-tags {
-            margin-top: 8px;
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-        
-        .tag {
-            padding: 3px 8px;
-            border-radius: 6px;
-            font-size: 10px;
-            font-weight: 600;
-        }
-        
-        .tag-logic {
-            background: #dbeafe;
-            color: #1e40af;
-        }
-        
-        .tag-physical {
-            background: #fef3c7;
-            color: #92400e;
-        }
-        
-        /* SVG连线 */
-        #connSvg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 10;
-        }
-        
-        /* 存储基础 */
-        .storage-bar {
-            margin-top: 32px;
-            padding: 28px 32px;
-            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
-            border-radius: 16px;
-            border: 4px solid #10b981;
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 24px;
-            align-items: center;
-        }
-        
-        .storage-label {
-            font-size: 20px;
-            font-weight: 800;
-            color: #065f46;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .storage-features {
-            font-size: 13px;
-            color: #047857;
-            line-height: 1.8;
-        }
-        
-        .storage-features strong {
-            color: #065f46;
-        }
-        
-        .storage-sync {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-        }
-        
-        .sync-icon {
-            font-size: 36px;
-        }
-        
-        .sync-arrow {
-            font-size: 28px;
-            color: #10b981;
-            font-weight: 700;
-        }
-        
-        .sync-label {
-            font-size: 12px;
-            font-weight: 700;
-            color: #065f46;
-        }
-        
-        /* 图例 */
-        .legend {
-            margin-top: 28px;
-            padding: 20px 24px;
-            background: #f8fafc;
-            border-radius: 12px;
-            border: 2px solid #e2e8f0;
-        }
-        
-        .legend-title {
-            font-size: 15px;
-            font-weight: 700;
-            color: #1e293b;
-            margin-bottom: 12px;
-        }
-        
-        .legend-items {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-            color: #475569;
-            font-weight: 600;
-        }
-        
-        .legend-dot {
-            width: 16px;
-            height: 16px;
-            border-radius: 4px;
-        }
-        
-        .legend-line {
-            width: 32px;
-            height: 3px;
-            border-radius: 2px;
+        .product-chip.dimmed { opacity: 0.35; }
+        .product-chip.active { background: rgba(9,105,218,0.12); border-color: var(--c-product); box-shadow: 0 0 0 2px rgba(9,105,218,0.1); }
+        .product-chip.more { border-style: dashed; color: var(--c-text-3); background: transparent; }
+        .adapt-chip {
+            margin-left: auto; padding: 5px 10px; border-radius: var(--r-sm);
+            background: rgba(9,105,218,0.04); border: 1px solid rgba(9,105,218,0.15);
+            font-size: 10px; font-weight: 600; color: var(--c-product);
         }
 
-        /* Tooltip */
-        .tooltip {
-            position: absolute;
-            z-index: 1000;
-            max-width: 320px;
-            padding: 14px 16px;
-            background: rgba(255,255,255,0.98);
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            box-shadow: 0 12px 32px rgba(0,0,0,0.15);
-            font-size: 12px;
-            line-height: 1.6;
-            pointer-events: none;
-            opacity: 0;
-            transform: translateY(8px);
-            transition: all 0.2s ease;
+        /* Layer connector */
+        .layer-connector {
+            display: flex; align-items: center; justify-content: center;
+            gap: 8px; padding: 6px 0; color: var(--c-border); font-size: 14px;
+            transition: color 300ms var(--ease);
         }
-        
-        .tooltip.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .layer-connector.active { color: var(--c-native); }
+        .layer-connector .conn-label {
+            font-size: 10px; font-weight: 600; color: var(--c-text-3);
+            padding: 2px 10px; border-radius: var(--r-full);
+            background: var(--c-bg); border: 1px solid var(--c-border-light);
+            white-space: nowrap;
         }
-        
-        .tooltip-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: #1e293b;
+        .layer-connector.active .conn-label { border-color: currentColor; color: inherit; background: rgba(45,164,78,0.06); }
+
+        /* Agent layer */
+        .layer.agent .layer-header { background: linear-gradient(135deg, rgba(26,127,55,0.04) 0%, rgba(45,164,78,0.04) 100%); }
+        .layer.agent .layer-tag { background: linear-gradient(135deg, #1A7F37, #2DA44E); }
+
+        .agent-core {
+            display: flex; align-items: center; gap: 12px;
+            padding: 10px 14px; margin-bottom: 14px;
+            background: linear-gradient(135deg, rgba(26,127,55,0.06) 0%, rgba(45,164,78,0.03) 100%);
+            border: 1px solid rgba(45,164,78,0.15);
+            border-radius: var(--r-md);
+        }
+        .agent-core .emoji { font-size: 24px; }
+        .agent-core .info { flex: 1; }
+        .agent-core .name { font-size: 14px; font-weight: 800; color: var(--c-agent); }
+        .agent-core .desc { font-size: 11px; color: var(--c-text-3); }
+        .agent-core .game-note {
+            font-size: 10px; font-weight: 600; color: var(--c-text-3);
+            padding: 3px 10px; border-radius: var(--r-full);
+            background: rgba(45,164,78,0.08);
+        }
+
+        /* Skill cards */
+        .skill-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+            margin-bottom: 12px;
+        }
+        .skill-card {
+            border: 1.5px solid var(--c-border-light); border-radius: var(--r-md);
+            overflow: hidden; transition: all 300ms var(--ease);
+            cursor: pointer; position: relative;
+        }
+        .skill-card:hover { box-shadow: var(--shadow-card); transform: translateY(-1px); }
+        .skill-card.dimmed { opacity: 0.3; transform: scale(0.98); }
+        .skill-card.active { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
+
+        .skill-card .sk-head {
+            padding: 10px 12px 8px; display: flex; align-items: center; gap: 6px;
+        }
+        .skill-card .sk-num {
+            width: 22px; height: 22px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 10px; font-weight: 800; color: #fff;
+        }
+        .skill-card .sk-title { font-size: 12px; font-weight: 800; color: var(--c-text); }
+
+        .skill-card .sk-game {
+            padding: 0 12px; margin-bottom: 6px;
+            display: flex; align-items: center; gap: 5px;
+            font-size: 11px; color: var(--c-text-3);
+        }
+        .skill-card .sk-game-icon { font-size: 14px; }
+
+        .skill-card .sk-instance {
+            padding: 6px 12px 10px;
+            border-top: 1px solid var(--c-border-light);
+            background: var(--c-bg);
+        }
+        .skill-card .sk-instance .inst-label {
+            font-size: 9px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.5px; color: var(--c-text-3); margin-bottom: 4px;
+        }
+
+        /* Instance visualizations per type */
+        .inst-visual { display: flex; align-items: center; gap: 4px; }
+        .inst-dot {
+            width: 10px; height: 10px; border-radius: 50%; border: 2px solid;
+        }
+        .inst-dot.solid { border: none; }
+        .inst-arrow { font-size: 10px; color: var(--c-text-3); }
+        .inst-label-text { font-size: 9px; color: var(--c-text-2); font-weight: 600; }
+
+        /* Native */
+        .skill-card[data-type="native"] { border-top: 3px solid var(--c-native); }
+        .skill-card[data-type="native"].active { border-color: var(--c-native); }
+        .skill-card[data-type="native"] .sk-num { background: var(--c-native); }
+        /* Tool */
+        .skill-card[data-type="tool"] { border-top: 3px solid var(--c-tool); }
+        .skill-card[data-type="tool"].active { border-color: var(--c-tool); }
+        .skill-card[data-type="tool"] .sk-num { background: var(--c-tool); }
+        /* Task */
+        .skill-card[data-type="task"] { border-top: 3px solid var(--c-task); }
+        .skill-card[data-type="task"].active { border-color: var(--c-task); }
+        .skill-card[data-type="task"] .sk-num { background: var(--c-task); }
+        /* Flow */
+        .skill-card[data-type="flow"] { border-top: 3px solid var(--c-flow); }
+        .skill-card[data-type="flow"].active { border-color: var(--c-flow); }
+        .skill-card[data-type="flow"] .sk-num { background: var(--c-flow); }
+
+        /* Cross-cutting concerns */
+        .crosscut {
+            display: flex; gap: 6px; flex-wrap: wrap; padding: 8px 0 0;
+            border-top: 1px dashed var(--c-border-light);
+        }
+        .crosscut-pill {
+            padding: 4px 10px; border-radius: var(--r-full);
+            font-size: 10px; font-weight: 600; border: 1px solid;
+        }
+        .crosscut-pill.cc-eval { background: #FFF7ED; color: #9A6700; border-color: rgba(154,103,0,0.2); }
+        .crosscut-pill.cc-security { background: #FFF1F0; color: #CF222E; border-color: rgba(207,34,46,0.2); }
+        .crosscut-pill.cc-observe { background: #F5F3FF; color: #7C3AED; border-color: rgba(124,58,237,0.2); }
+        .crosscut-pill.cc-memory { background: #E6F7ED; color: #1A7F37; border-color: rgba(26,127,55,0.2); }
+        .crosscut-pill.cc-skill { background: #E1F0F8; color: #0969DA; border-color: rgba(9,105,218,0.2); }
+
+        /* OS layer */
+        .layer.os .layer-header { background: linear-gradient(135deg, rgba(36,41,47,0.04) 0%, rgba(61,68,77,0.04) 100%); }
+        .layer.os .layer-tag { background: linear-gradient(135deg, #24292F, #3D444D); }
+
+        .os-grid {
+            display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 10px;
+        }
+        .os-block.os-block-wide { grid-column: auto; }
+
+        /* Runtime Adapters inside Instance Manager */
+        .rt-adapters {
+            display: flex; gap: 6px; margin-top: 10px;
+            padding-top: 8px; border-top: 1px dashed var(--c-border-light);
+        }
+        .rt-adapter {
+            flex: 1; display: flex; align-items: center; gap: 6px;
+            padding: 6px 8px; border-radius: var(--r-sm);
+            border: 1px solid var(--c-border-light); background: #fff;
+            transition: all 200ms var(--ease); position: relative;
+        }
+        .rt-adapter.active { box-shadow: 0 0 0 2px rgba(9,105,218,0.2); border-color: var(--c-product); }
+        .rt-adapter-icon { font-size: 16px; flex: none; }
+        .rt-adapter-info { flex: 1; min-width: 0; }
+        .rt-adapter-name { font-size: 10px; font-weight: 700; color: var(--c-text); white-space: nowrap; }
+        .rt-adapter-desc { font-size: 9px; color: var(--c-text-3); white-space: nowrap; }
+        .rt-adapter-tag {
+            font-size: 8px; font-weight: 700; color: #fff;
+            padding: 1px 5px; border-radius: var(--r-full);
+            white-space: nowrap;
+        }
+        .rt-local .rt-adapter-tag { background: #2DA44E; }
+        .rt-sandbox .rt-adapter-tag { background: #EA580C; }
+        .rt-service .rt-adapter-tag { background: #0969DA; }
+        .os-block {
+            padding: 10px 12px; border-radius: var(--r-sm);
+            border: 1px solid var(--c-border-light); background: var(--c-bg);
+            transition: all 200ms var(--ease);
+        }
+        .os-block.active { background: #fff; border-color: var(--c-border); box-shadow: var(--shadow-sm); }
+        .os-block .os-icon { font-size: 16px; margin-bottom: 4px; }
+        .os-block .os-name { font-size: 11px; font-weight: 700; color: var(--c-text); }
+        .os-block .os-sub { font-size: 10px; color: var(--c-text-3); }
+        .os-block .os-game { font-size: 9px; color: var(--c-text-3); font-style: italic; margin-top: 3px; }
+        .os-caps-inline {
+            display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px;
+            padding-top: 7px; border-top: 1px dashed var(--c-border-light);
+        }
+        .os-caps-inline .os-cap {
+            padding: 2px 7px; border-radius: var(--r-full);
+            font-size: 10px; font-weight: 600; background: #F3F5F7;
+            color: var(--c-text-2);
+        }
+        .os-caps {
+            display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px;
+            padding-top: 8px; border-top: 1px solid var(--c-border-light);
+        }
+        .os-cap {
+            padding: 2px 7px; border-radius: var(--r-full);
+            font-size: 9px; font-weight: 600; background: #F3F5F7;
+            color: var(--c-text-3);
+        }
+
+        /* Growth loop */
+        .growth {
+            background: linear-gradient(135deg, rgba(5,150,105,0.04) 0%, rgba(9,105,218,0.04) 100%);
+            border: 1px solid rgba(5,150,105,0.15);
+            border-radius: var(--r-lg); padding: 14px 18px; margin-top: 12px;
+        }
+        .growth-header {
+            display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
+        }
+        .growth-header h3 { font-size: 13px; font-weight: 800; color: #059669; }
+        .growth-header .game-tag {
+            font-size: 10px; font-weight: 600; color: var(--c-text-3);
+            padding: 2px 8px; border-radius: var(--r-full);
+            background: rgba(5,150,105,0.08);
+        }
+        .growth-flow {
+            display: flex; align-items: center; gap: 0; flex-wrap: wrap;
             margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
-        
-        .tooltip-content {
-            color: #64748b;
+        .growth-step {
+            padding: 4px 10px; border-radius: var(--r-full);
+            font-size: 11px; font-weight: 600; color: #059669;
+            background: rgba(5,150,105,0.08);
         }
-        
-        .tooltip-content ul {
-            margin: 8px 0 0 16px;
+        .growth-arrow { color: #059669; font-size: 12px; margin: 0 4px; }
+        .growth-levels {
+            display: flex; gap: 8px; flex-wrap: wrap;
         }
-        
-        .tooltip-content li {
-            margin-bottom: 4px;
+        .growth-level {
+            font-size: 10px; color: var(--c-text-2); padding: 3px 10px;
+            border-radius: var(--r-full); background: rgba(5,150,105,0.06);
+            border: 1px solid rgba(5,150,105,0.12);
         }
-        
-        .tooltip-footer {
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid #e2e8f0;
-            font-size: 11px;
-            color: #94a3b8;
+
+        /* === DETAIL PANEL (shows on scenario click) === */
+        .detail-panel {
+            margin-top: 16px; background: var(--c-card);
+            border: 1px solid var(--c-border-light);
+            border-radius: var(--r-lg); box-shadow: var(--shadow-card);
+            overflow: hidden; transition: all 300ms var(--ease);
         }
+        .detail-panel.hidden { display: none; }
+        .detail-top {
+            display: flex; align-items: center; gap: 10px;
+            padding: 12px 18px; border-bottom: 1px solid var(--c-border-light);
+        }
+        .detail-top .dt-icon {
+            width: 32px; height: 32px; border-radius: var(--r-sm);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 15px; color: #fff;
+        }
+        .detail-top h3 { font-size: 14px; font-weight: 700; color: var(--c-text); }
+        .detail-top .dt-sub { font-size: 11px; color: var(--c-text-3); }
+        .detail-body { padding: 16px 18px; }
+
+        /* Runtime flow steps */
+        .rt-flow {
+            display: flex; align-items: flex-start; gap: 0;
+            overflow-x: auto; padding: 4px 0 12px;
+        }
+        .rt-step {
+            display: flex; flex-direction: column; align-items: center;
+            min-width: 90px; text-align: center;
+        }
+        .rt-step-num {
+            width: 26px; height: 26px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 11px; font-weight: 700; color: #fff;
+            margin-bottom: 5px;
+        }
+        .rt-step-label { font-size: 11px; font-weight: 700; color: var(--c-text); }
+        .rt-step-desc { font-size: 9px; color: var(--c-text-3); max-width: 80px; margin-top: 2px; }
+        .rt-arrow { color: var(--c-border); font-size: 16px; margin: 4px -4px 0; }
+
+        /* Instance detail */
+        .inst-detail-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px; margin-top: 12px;
+        }
+        .inst-detail-card {
+            border: 1px solid var(--c-border-light); border-radius: var(--r-md);
+            padding: 12px; border-left: 3px solid var(--c-border);
+        }
+        .inst-detail-card .idc-name { font-size: 12px; font-weight: 700; color: var(--c-text); }
+        .inst-detail-card .idc-sub { font-size: 10px; color: var(--c-text-3); }
+        .inst-detail-card .idc-binds {
+            display: flex; flex-wrap: wrap; gap: 3px; margin-top: 6px;
+        }
+        .inst-detail-card .idc-bind {
+            padding: 2px 7px; border-radius: var(--r-full);
+            font-size: 9px; font-weight: 600;
+        }
+        .idc-bind.skill { background: #E6F7ED; color: #1A7F37; }
+        .idc-bind.tool { background: #F5F3FF; color: #7C3AED; }
+        .idc-bind.memory { background: #FFF7ED; color: #9A6700; }
+        .inst-detail-card .idc-status {
+            display: flex; align-items: center; gap: 4px;
+            margin-top: 6px; font-size: 10px; font-weight: 600;
+        }
+        .idc-status .dot {
+            width: 6px; height: 6px; border-radius: 50%;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+        /* Flow stages (for s4) */
+        .flow-stages {
+            display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; margin-top: 12px;
+        }
+        .flow-stage {
+            text-align: center; padding: 8px 4px; border-radius: var(--r-sm);
+            border: 1px solid var(--c-border-light); background: var(--c-bg);
+            position: relative;
+        }
+        .flow-stage:not(:last-child)::after {
+            content: '→'; position: absolute; right: -10px; top: 50%;
+            transform: translateY(-50%); color: var(--c-border); font-size: 11px;
+            z-index: 1;
+        }
+        .flow-stage .fs-num {
+            width: 20px; height: 20px; border-radius: 50%; margin: 0 auto 4px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 9px; font-weight: 700; color: #fff;
+        }
+        .flow-stage .fs-name { font-size: 10px; font-weight: 700; color: var(--c-text); }
+        .flow-stage .fs-type { font-size: 9px; font-weight: 600; }
+
+        /* Insight callout */
+        .insight-box {
+            margin-top: 12px; padding: 10px 14px; border-radius: var(--r-md);
+            background: var(--c-bg); border-left: 3px solid;
+            font-size: 12px; color: var(--c-text-2); line-height: 1.5;
+        }
+        .insight-box strong { color: var(--c-text); }
 
         /* Footer */
         .footer {
-            text-align: center;
-            padding: 24px 0;
-            margin-top: 32px;
-            border-top: 1px solid #e2e8f0;
-            color: #94a3b8;
-            font-size: 12px;
+            text-align: center; padding: 16px 0; margin-top: 24px;
+            border-top: 1px solid var(--c-border-light);
+            color: var(--c-text-3); font-size: 11px;
+        }
+
+        /* === TOOLTIP === */
+        #cf-tooltip {
+            position: fixed; z-index: 9999;
+            max-width: min(360px, calc(100vw - 24px));
+            padding: 10px 12px;
+            background: rgba(255,255,255,0.97);
+            border: 1px solid rgba(208,215,222,0.9);
+            border-radius: var(--r-md);
+            box-shadow: 0 12px 28px rgba(31,35,40,0.14);
+            font-size: 12px; line-height: 1.5;
+            pointer-events: none; opacity: 0;
+            transform: translateY(6px);
+            transition: opacity 120ms var(--ease), transform 120ms var(--ease);
+        }
+        #cf-tooltip.visible { opacity: 1; transform: translateY(0); }
+        #cf-tooltip .tt-title {
+            display: flex; align-items: center; gap: 6px;
+            font-weight: 800; color: var(--c-text); margin-bottom: 4px;
+        }
+        #cf-tooltip .tt-dot { width: 8px; height: 8px; border-radius: 50%; }
+        #cf-tooltip .tt-row { display: flex; gap: 6px; margin: 3px 0; }
+        #cf-tooltip .tt-k { flex: none; width: 56px; font-weight: 700; color: var(--c-text-3); }
+        #cf-tooltip .tt-v { flex: 1; color: var(--c-text-2); }
+
+        /* Unified badge */
+        .unified-badge {
+            font-size: 10px; font-weight: 700;
+            padding: 2px 10px; border-radius: var(--r-full);
+            background: linear-gradient(135deg, #FFF7ED, #FEF3C7);
+            color: #92400E; border: 1px solid rgba(146,64,14,0.15);
+            white-space: nowrap;
+        }
+
+        /* Architecture stack + deploy sidebar */
+        .arch-stack {
+            display: flex; gap: 16px; align-items: stretch;
+        }
+        .arch-main { flex: 1; min-width: 0; }
+        .deploy-sidebar {
+            flex: none; width: 110px; display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            padding: 14px 8px; border-radius: var(--r-lg);
+            border: 1.5px dashed var(--c-border);
+            background: linear-gradient(180deg, rgba(9,105,218,0.03) 0%, rgba(36,41,47,0.03) 100%);
+            position: relative;
+        }
+        .deploy-sidebar .ds-title {
+            font-size: 10px; font-weight: 800; color: var(--c-text-3);
+            letter-spacing: 0.5px; text-transform: uppercase;
+            writing-mode: vertical-rl; text-orientation: mixed;
+            margin-bottom: 12px;
+        }
+        .deploy-sidebar .ds-modes {
+            display: flex; flex-direction: column; gap: 10px; align-items: center;
+        }
+        .deploy-sidebar .ds-mode {
+            padding: 6px 10px; border-radius: var(--r-md);
+            border: 1px solid var(--c-border-light); background: var(--c-card);
+            text-align: center; font-size: 11px; font-weight: 700;
+            color: var(--c-text); line-height: 1.4;
+        }
+        .deploy-sidebar .ds-mode .ds-emoji { font-size: 18px; display: block; margin-bottom: 2px; }
+        .deploy-sidebar .ds-mode .ds-sub { font-size: 9px; font-weight: 400; color: var(--c-text-3); }
+        .ds-cloud-split {
+            display: flex; flex-direction: column; gap: 3px; margin-top: 4px;
+            padding-top: 4px; border-top: 1px dashed var(--c-border-light);
+        }
+        .ds-cloud-item {
+            display: flex; align-items: center; gap: 4px;
+            font-size: 9px; font-weight: 600; color: var(--c-text-2);
+        }
+        .ds-cloud-dot { width: 6px; height: 6px; border-radius: 50%; flex: none; }
+        .ds-cloud-note { font-weight: 400; color: var(--c-text-3); }
+        .deploy-sidebar .ds-or {
+            font-size: 10px; font-weight: 700; color: var(--c-text-3);
+            padding: 2px 8px; border-radius: var(--r-full);
+            background: var(--c-card); border: 1px solid var(--c-border-light);
+        }
+        .deploy-sidebar .ds-bracket {
+            position: absolute; right: -1px; top: 18px; bottom: 18px;
+            width: 6px; border: 2px solid var(--c-border);
+            border-left: none; border-radius: 0 4px 4px 0;
+        }
+
+        /* Complexity gradient bar */
+        .complexity-bar {
+            display: flex; align-items: center; gap: 0;
+            margin-bottom: 10px; padding: 0 2px;
+        }
+        .complexity-bar .cb-label {
+            font-size: 9px; font-weight: 700; color: var(--c-text-3);
+            text-transform: uppercase; letter-spacing: 0.3px;
+            white-space: nowrap;
+        }
+        .complexity-bar .cb-track {
+            flex: 1; height: 3px; margin: 0 8px;
+            background: linear-gradient(90deg, var(--c-native), var(--c-tool), var(--c-task), var(--c-flow));
+            border-radius: 2px;
+        }
+
+        /* View controls */
+        .view-controls {
+            display: flex; justify-content: center; margin-bottom: 18px;
+        }
+        .toggle-btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 5px 14px; border-radius: var(--r-full);
+            border: 1px solid var(--c-border-light); background: var(--c-card);
+            font-family: inherit; font-size: 11px; font-weight: 600;
+            color: var(--c-text-3); cursor: pointer;
+            transition: all 200ms var(--ease);
+        }
+        .toggle-btn:hover { border-color: var(--c-border); color: var(--c-text); }
+        .toggle-btn.active { background: #FFF7ED; border-color: rgba(154,103,0,0.3); color: #9A6700; }
+        .toggle-switch {
+            width: 28px; height: 16px; border-radius: 8px;
+            background: var(--c-border); position: relative;
+            transition: background 200ms var(--ease);
+        }
+        .toggle-switch::after {
+            content: ''; position: absolute; width: 12px; height: 12px;
+            border-radius: 50%; background: #fff; top: 2px; left: 2px;
+            transition: transform 200ms var(--ease);
+        }
+        .toggle-btn.active .toggle-switch { background: #9A6700; }
+        .toggle-btn.active .toggle-switch::after { transform: translateX(12px); }
+
+        /* Game elements visibility */
+        .game-hidden .game-tag,
+        .game-hidden .os-game,
+        .game-hidden .sk-game,
+        .game-hidden .game-note { display: none !important; }
+
+        /* Growth key diff badge */
+        .growth-key-diff {
+            margin-left: auto; font-size: 10px; font-weight: 700;
+            padding: 3px 10px; border-radius: var(--r-full);
+            background: rgba(5,150,105,0.12); color: #059669;
+            border: 1px solid rgba(5,150,105,0.2);
+        }
+        .growth-sub {
+            font-size: 11px; color: var(--c-text-3); margin-bottom: 10px;
+            padding-left: 26px;
         }
 
         /* Responsive */
-        @media (max-width: 1200px) {
-            .canvas { padding: 32px; }
-            .header h1 { font-size: 32px; }
-        }
-        
         @media (max-width: 900px) {
-            .swimlanes { grid-template-columns: 1fr; }
-            .swimlane:first-child .lane-body { border-right: none; border-bottom: 3px dashed #cbd5e1; }
-            .storage-bar { grid-template-columns: 1fr; text-align: center; }
+            .scenario-bar { grid-template-columns: 1fr 1fr; }
+            .skill-grid { grid-template-columns: 1fr 1fr; }
+            .os-grid { grid-template-columns: 1fr; }
+            .rt-adapters { flex-direction: column; }
+            .flow-stages { grid-template-columns: repeat(3, 1fr); }
+            .arch-stack { flex-direction: column; }
+            .deploy-sidebar {
+                width: 100%; flex-direction: row; writing-mode: horizontal-tb;
+                padding: 10px 16px;
+            }
+            .deploy-sidebar .ds-title { writing-mode: horizontal-tb; margin-bottom: 0; margin-right: 12px; }
+            .deploy-sidebar .ds-modes { flex-direction: row; }
+            .deploy-sidebar .ds-bracket { display: none; }
         }
-        
         @media (max-width: 600px) {
-            .canvas { padding: 20px; border-radius: 16px; }
-            .header h1 { font-size: 24px; }
-            .tab-nav { max-width: 100%; }
+            .scenario-bar { grid-template-columns: 1fr; }
+            .skill-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 20px; }
+            .flow-stages { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
@@ -411,386 +659,721 @@
         <a href="deep-dive.html" class="tab-btn"><span>📖</span><span>详细论证</span></a>
         <a href="evidence.html" class="tab-btn"><span>🧬</span><span>AI分身实证</span></a>
         <a href="architecture.html" class="tab-btn active"><span>🗺️</span><span>架构全景</span></a>
+        <a href="implementation.html" class="tab-btn"><span>🔧</span><span>技术实施</span></a>
     </nav>
 
-    <div class="canvas">
-        <div class="header">
-            <h1>⚡ 快手AI员工 · 完整架构图</h1>
-            <div class="subtitle">产品架构 ↔ 技术架构（逻辑+物理）· 精准模块映射 — 鼠标悬停模块查看详细说明</div>
-        </div>
-        
-        <div class="swimlanes" id="swimlanes">
-            <svg id="connSvg"></svg>
-            
-            <!-- 左泳道：产品架构 -->
-            <div class="swimlane">
-                <div class="lane-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px 0 0 0;">
-                    <div class="lane-title">🎨 产品架构</div>
-                    <div class="lane-subtitle">用户视角的功能与价值</div>
-                </div>
-                <div class="lane-body">
-                    <!-- 用户触点层 -->
-                    <div class="layer-block" style="--color: #667eea;">
-                        <div class="layer-title">
-                            <span>🌍</span>
-                            <span>L1.1 用户触点层</span>
-                        </div>
-                        <div class="modules">
-                            <div class="mod" data-m="p-kim" data-tooltip="KIM 对话|企业IM即时交互入口，消息号「卡瓦」|用户在KIM中直接与AI对话，无需切换工具|覆盖日常办公、IM场景">
-                                <div class="mod-name"><span>💬</span> KIM 对话</div>
-                                <div class="mod-desc">企业IM即时交互 · 消息号：卡瓦</div>
-                            </div>
-                            <div class="mod" data-m="p-web" data-tooltip="Web 管理|一键激活部署和可视化监控|Skill管理、系统配置、监控仪表盘|支持技能市场入口、用户激活流程">
-                                <div class="mod-name"><span>🌐</span> Web 管理</div>
-                                <div class="mod-desc">一键激活部署 · 可视化监控</div>
-                            </div>
-                            <div class="mod" data-m="p-local" data-tooltip="本地客户端|深度嵌入开发者日常 IDE 工作流|智能补全、Code Review、Debug 助手、架构分析|面向工程师的本地 IDE 插件">
-                                <div class="mod-name"><span>🖥️</span> 本地客户端</div>
-                                <div class="mod-desc">深度任务处理 · 独立沙箱</div>
-                            </div>
-                            <div class="mod" data-m="p-market" data-tooltip="全局知识&技能市场|Skills/知识包的发现、试用、安装|类似 App Store 的浏览选购体验|支持公司级、业务级、个人级三层分发">
-                                <div class="mod-name"><span>🏪</span> 全局知识&技能市场</div>
-                                <div class="mod-desc">Web平台 · Skills/知识浏览选购 · 独立站</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 核心能力层 -->
-                    <div class="layer-block" style="--color: #10b981;">
-                        <div class="layer-title">
-                            <span>🤖</span>
-                            <span>L1.2 核心能力层</span>
-                        </div>
-                        <div class="modules">
-                            <div class="mod" data-m="p-skills" data-tooltip="Skills 能力|500+ 精品技能 · 开箱即用|公司级默认预装（评测驱动）|业务级合作共建 · 个人级开放生态">
-                                <div class="mod-name"><span>📚</span> Skills 能力</div>
-                                <div class="mod-desc">500+ 精品技能 · 开箱即用</div>
-                            </div>
-                            <div class="mod" data-m="p-agent" data-tooltip="全能 Agent|Code Agent 是能力天花板最高的 Agent 类型|自主编程：缺什么能力，写代码补上|Skill自创建：自动将成功经验沉淀为新Skill">
-                                <div class="mod-name"><span>⚡</span> 全能 Agent</div>
-                                <div class="mod-desc">以Code Agent为核心 · 能力无上限</div>
-                            </div>
-                            <div class="mod" data-m="p-memory" data-tooltip="记忆系统|长期记忆：用户偏好、历史对话积累|工作记忆：当前任务上下文管理|基于KFS存储，云↔本地实时增量同步">
-                                <div class="mod-name"><span>🧠</span> 记忆系统</div>
-                                <div class="mod-desc">用户偏好 · 云端同步</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 增值服务层 -->
-                    <div class="layer-block" style="--color: #8b5cf6;">
-                        <div class="layer-title">
-                            <span>⚡</span>
-                            <span>L1.3 增值服务层</span>
-                        </div>
-                        <div class="modules">
-                            <div class="mod" data-m="p-routing" data-tooltip="智能路由|按任务复杂度自动选最优模型|复杂推理 → Claude / 万擎大杯|常规分析 → 万擎中杯|简单对话 → 万擎小杯">
-                                <div class="mod-name"><span>🎯</span> 智能路由</div>
-                                <div class="mod-desc">自动选模型 · 成本优化50%+</div>
-                            </div>
-                            <div class="mod" data-m="p-security" data-tooltip="安全审计|万擎平台租户级数据隔离|统一Skill审核，上架前安全检查|统一日志 + 异常检测 + 事件追溯">
-                                <div class="mod-name"><span>🔐</span> 安全审计</div>
-                                <div class="mod-desc">全链路追溯 · 权限管理</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 右泳道：技术架构（逻辑+物理合一） -->
-            <div class="swimlane">
-                <div class="lane-header" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 0 16px 0 0;">
-                    <div class="lane-title">🏗️ 技术架构</div>
-                    <div class="lane-subtitle">实现逻辑 + 部署拓扑</div>
-                </div>
-                <div class="lane-body">
-                    <!-- 接入层 -->
-                    <div class="layer-block" style="--color: #667eea;">
-                        <div class="layer-title">
-                            <span>📥</span>
-                            <span>T1 接入层</span>
-                        </div>
-                        <div class="modules">
-                            <div class="mod" data-m="t-access" data-tooltip="多端请求接入|统一接收来自四个端的请求|IDE 插件 → VS Code / JetBrains 端|KIM 对话 → 企业 IM 消息通道|Web 管理台 → 浏览器前端|本地端 → macOS/Windows 本地进程">
-                                <div class="mod-name"><span>📨</span> 多端请求接入</div>
-                                <div class="mod-desc">接收KIM/Web/本地三端请求，统一协议格式</div>
-                                <div class="mod-tags">
-                                    <span class="tag tag-logic">逻辑: HTTP/WebSocket协议</span>
-                                    <span class="tag tag-physical">物理: KIM平台 + Nginx + React SPA</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 网关层 -->
-                    <div class="layer-block" style="--color: #f59e0b;">
-                        <div class="layer-title">
-                            <span>🚪</span>
-                            <span>T2 网关层</span>
-                        </div>
-                        <div class="modules">
-                            <div class="mod" data-m="t-gateway" data-tooltip="Gateway 鉴权路由|JWT Token 身份验证（SSO 统一登录）|消息路由：根据请求类型分发到对应 Agent|协议桥接：WebSocket ↔ HTTP 双向转换|流量管控：限流 + 降级 + 熔断">
-                                <div class="mod-name"><span>🛡️</span> Gateway 鉴权路由</div>
-                                <div class="mod-desc">Token验证 · 消息路由分发 · 协议桥接 · 状态管理</div>
-                                <div class="mod-tags">
-                                    <span class="tag tag-logic">逻辑: JWT鉴权 + 路由分发</span>
-                                    <span class="tag tag-physical">物理: Node.js Service | Port 18789</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 计算层 -->
-                    <div class="layer-block" style="--color: #10b981;">
-                        <div class="layer-title">
-                            <span>⚙️</span>
-                            <span>T3 计算层</span>
-                        </div>
-                        <div class="modules">
-                            <div class="mod" data-m="t-agent" data-tooltip="OpenClaw Agent 处理|Agent 运行容器：每个用户独占 Pod（4C8G）|Skills 调度：动态加载所需技能包|代码生成：AST 级别代码修改与创建|沙箱执行：隔离环境运行用户代码">
-                                <div class="mod-name"><span>📦</span> OpenClaw Agent 处理</div>
-                                <div class="mod-desc">调用Skills · 生成代码 · 访问记忆 · 沙箱执行</div>
-                                <div class="mod-tags">
-                                    <span class="tag tag-logic">逻辑: Code Agent + Skills调度</span>
-                                    <span class="tag tag-physical">物理: K8S Pod池 | 4C8G/Pod | StatefulSet</span>
-                                </div>
-                            </div>
-                            <div class="mod" data-m="t-skills-hub" data-tooltip="Skills Hub 技能中心|技能注册：Schema 定义 + 自动校验|版本管理：语义化版本 + 灰度发布|审核流：安全扫描 + 人工审批|CDN 分发：全球加速 + 按需拉取">
-                                <div class="mod-name"><span>🏪</span> Skills Hub 技能中心</div>
-                                <div class="mod-desc">Schema管理 · 版本控制 · 安全审计 · 分发推送</div>
-                                <div class="mod-tags">
-                                    <span class="tag tag-logic">逻辑: 技能注册+审核+版本</span>
-                                    <span class="tag tag-physical">物理: S3 + CDN + Git版本管理</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 推理层 -->
-                    <div class="layer-block" style="--color: #8b5cf6;">
-                        <div class="layer-title">
-                            <span>🧠</span>
-                            <span>T4 推理层</span>
-                        </div>
-                        <div class="modules">
-                            <div class="mod" data-m="t-model" data-tooltip="智能模型路由 + 推理|复杂度评估：自动判断任务难度|小杯任务 → 轻量模型（低延迟、低成本）|大杯任务 → 旗舰模型（高精度推理）|Fallback 机制：主模型不可用自动切换备选">
-                                <div class="mod-name"><span>🎯</span> 智能模型路由 + 推理</div>
-                                <div class="mod-desc">按任务复杂度自动选模型：简单→小杯 · 复杂→大杯/Claude</div>
-                                <div class="mod-tags">
-                                    <span class="tag tag-logic">逻辑: 复杂度评估 + 路由策略</span>
-                                    <span class="tag tag-physical">物理: 万擎(大中小杯) + Claude | MAAS API</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 存储层 -->
-                    <div class="layer-block" style="--color: #ec4899;">
-                        <div class="layer-title">
-                            <span>💾</span>
-                            <span>T5 存储层</span>
-                        </div>
-                        <div class="modules">
-                            <div class="mod" data-m="t-storage" data-tooltip="KFS 存储 + 同步|KFS 持久卷：配置/会话/记忆中心化存储|云↔本地同步：实时增量，换设备无缝衔接|流式返回：大文件分块传输|秒级 Failover：Pod 故障数据自动迁移">
-                                <div class="mod-name"><span>🗄️</span> KFS 存储 + 同步</div>
-                                <div class="mod-desc">结果持久化 · 记忆写入 · 云端↔本地双向同步</div>
-                                <div class="mod-tags">
-                                    <span class="tag tag-logic">逻辑: 流式返回 + 增量同步</span>
-                                    <span class="tag tag-physical">物理: KFS分布式卷 | 挂载 /home/node/.openclaw</span>
-                                </div>
-                            </div>
-                            <div class="mod" data-m="t-monitor" data-tooltip="监控 + 日志|任务统计：完成率/延迟/错误率仪表盘|成本追踪：Token 消耗 + 模型调用计费|异常告警：P0 故障 < 1min 触达|日志聚合：全链路 Trace ID 串联">
-                                <div class="mod-name"><span>📊</span> 监控 + 日志</div>
-                                <div class="mod-desc">任务统计 · 成本追踪 · 异常告警</div>
-                                <div class="mod-tags">
-                                    <span class="tag tag-physical">物理: Prometheus + Grafana</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-badge">🗺️ Unified Architecture Panorama</div>
+        <h1>统一AI产品架构全景图</h1>
+        <p>一张图看清：三层架构 · 四类技能 · 运行时实例 · 成长闭环<br>
+        <span style="font-size:11px;opacity:0.7">点击下方场景，查看完整运行流程 ↓</span></p>
+    </header>
+
+    <!-- View Controls -->
+    <div class="view-controls">
+        <button class="toggle-btn active" id="game-toggle" onclick="toggleGame()">
+            <span>🎮 游戏类比</span>
+            <span class="toggle-switch"></span>
+        </button>
+    </div>
+
+    <!-- Scenario Bar -->
+    <div class="scenario-bar">
+        <div class="sc-btn" data-type="native" data-id="s1" onclick="activate('s1')">
+            <div class="sc-q">"帮我写个调研报告"</div>
+            <div class="sc-meta">
+                <span class="sc-badge">Ⅰ 原生</span>
+                <span>⏱ 分钟级</span>
             </div>
         </div>
-        
-        <!-- 存储基础 -->
-        <div class="storage-bar">
-            <div class="storage-label">
-                <span>💾</span>
-                <span>存储架构基础</span>
-            </div>
-            <div class="storage-features">
-                <strong>独立KFS存储</strong> · 配置/会话/记忆中心化<br>
-                <strong>秒级Failover</strong> · Pod故障数据自动迁移<br>
-                <strong>跨Pod迁移</strong> · 历史数据完整保留
-            </div>
-            <div class="storage-sync">
-                <div style="text-align: center;">
-                    <div class="sync-icon">☁️</div>
-                    <div class="sync-label">云端KFS</div>
-                </div>
-                <div class="sync-arrow">⇄</div>
-                <div style="text-align: center;">
-                    <div class="sync-icon">🖥️</div>
-                    <div class="sync-label">本地Pod</div>
-                </div>
+        <div class="sc-btn" data-type="tool" data-id="s2" onclick="activate('s2')">
+            <div class="sc-q">"帮我生成一张配图"</div>
+            <div class="sc-meta">
+                <span class="sc-badge">Ⅱ 工具</span>
+                <span>⏱ 秒级</span>
             </div>
         </div>
-        
-        <!-- 图例 -->
-        <div class="legend">
-            <div class="legend-title">📊 架构映射关系（连线说明）</div>
-            <div class="legend-items">
-                <div class="legend-item">
-                    <div class="legend-line" style="background: #667eea;"></div>
-                    <span>用户触点 → 接入层</span>
+        <div class="sc-btn" data-type="task" data-id="s3" onclick="activate('s3')">
+            <div class="sc-q">"帮我Review这个PR"</div>
+            <div class="sc-meta">
+                <span class="sc-badge">Ⅲ 任务</span>
+                <span>⏱ 分钟级</span>
+            </div>
+        </div>
+        <div class="sc-btn" data-type="flow" data-id="s4" onclick="activate('s4')">
+            <div class="sc-q">"帮我把需求做到上线"</div>
+            <div class="sc-meta">
+                <span class="sc-badge">Ⅳ 流程</span>
+                <span>⏱ 小时级</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== THE UNIFIED DIAGRAM ==================== -->
+    <div class="arch-stack">
+    <div class="arch-main">
+
+    <!-- LAYER 1: PRODUCT -->
+    <div class="layer product" id="layer-product">
+        <div class="layer-header">
+            <span class="layer-tag">PRODUCT</span>
+            <h2>产品层</h2>
+            <span class="game-tag">🎮 = 不同游戏，共享同一引擎</span>
+        </div>
+        <div class="layer-body">
+            <div class="products-row" id="product-row">
+                <div class="product-chip" data-prod="cf">💻 CF<br><span style="font-size:10px;font-weight:400;opacity:.7">AI工程师</span></div>
+                <div class="product-chip" data-prod="kate">🏢 KATE-Studio<br><span style="font-size:10px;font-weight:400;opacity:.7">企业AI员工/团队</span></div>
+                <div class="product-chip" data-prod="pa">🌍 MyAIWorld<br><span style="font-size:10px;font-weight:400;opacity:.7">个人AI分身（类似养成类网游）</span></div>
+                <div class="product-chip more">···</div>
+                <div class="adapt-chip">🔧 产品适配层<br><span style="font-weight:400">UI · 权限 · Skill集</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layer-connector" id="conn-1">
+        <span class="conn-label">用户意图 + 产品配置</span>
+        <span>▼</span>
+    </div>
+
+    <!-- LAYER 2: AGENT -->
+    <div class="layer agent" id="layer-agent">
+        <div class="layer-header">
+            <span class="layer-tag">AGENT</span>
+            <h2>Agent 层</h2>
+            <span class="unified-badge" id="badge-unified">🧠 统一大脑</span>
+            <span class="game-tag">🎮 = 玩家 + 技能书 + 副本</span>
+        </div>
+        <div class="layer-body">
+            <!-- Main Agent -->
+            <div class="agent-core" id="main-agent">
+                <div class="emoji">🧠</div>
+                <div class="info">
+                    <div class="name">主 Agent — 决策指挥中枢</div>
+                    <div class="desc">理解意图 → 查 Memory → 选 Skill → 派实例 → 收经验&nbsp;&nbsp;|&nbsp;&nbsp;只做决策调度，不执行具体任务</div>
                 </div>
-                <div class="legend-item">
-                    <div class="legend-line" style="background: #f59e0b;"></div>
-                    <span>安全审计 → 网关层</span>
+                <div class="game-note">🎮 = 玩家本人</div>
+            </div>
+
+            <!-- Complexity gradient -->
+            <div class="complexity-bar">
+                <span class="cb-label">简单</span>
+                <div class="cb-track"></div>
+                <span class="cb-label">复杂</span>
+            </div>
+
+            <!-- 4 Skill Cards (three-in-one) -->
+            <div class="skill-grid" id="skill-grid">
+                <!-- Native -->
+                <div class="skill-card" data-type="native" data-id="s1" onclick="activate('s1')">
+                    <div class="sk-head">
+                        <div class="sk-num">Ⅰ</div>
+                        <div class="sk-title">原生 Skill</div>
+                    </div>
+                    <div class="sk-game">
+                        <span class="sk-game-icon">🗡️</span>
+                        单人任务 — 独立完成
+                    </div>
+                    <div class="sk-instance">
+                        <div class="inst-label">实例模型</div>
+                        <div class="inst-visual">
+                            <div class="inst-dot solid" style="background:var(--c-native)"></div>
+                            <span class="inst-label-text">1个实例（会话）· 纯Skill指令</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="legend-item">
-                    <div class="legend-line" style="background: #10b981;"></div>
-                    <span>核心能力 → 计算层</span>
+                <!-- Tool -->
+                <div class="skill-card" data-type="tool" data-id="s2" onclick="activate('s2')">
+                    <div class="sk-head">
+                        <div class="sk-num">Ⅱ</div>
+                        <div class="sk-title">工具 Skill</div>
+                    </div>
+                    <div class="sk-game">
+                        <span class="sk-game-icon">🏪</span>
+                        NPC商店 — 调用外部
+                    </div>
+                    <div class="sk-instance">
+                        <div class="inst-label">实例模型</div>
+                        <div class="inst-visual">
+                            <div class="inst-dot solid" style="background:var(--c-tool)"></div>
+                            <span class="inst-arrow">→</span>
+                            <span class="inst-label-text" style="color:var(--c-tool)">MCP</span>
+                            <span class="inst-label-text">1实例 + 外部API</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="legend-item">
-                    <div class="legend-line" style="background: #8b5cf6;"></div>
-                    <span>智能路由 → 推理层</span>
+                <!-- Task -->
+                <div class="skill-card" data-type="task" data-id="s3" onclick="activate('s3')">
+                    <div class="sk-head">
+                        <div class="sk-num">Ⅲ</div>
+                        <div class="sk-title">任务 Skill</div>
+                    </div>
+                    <div class="sk-game">
+                        <span class="sk-game-icon">⚔️</span>
+                        组队副本 — N人并行
+                    </div>
+                    <div class="sk-instance">
+                        <div class="inst-label">实例模型</div>
+                        <div class="inst-visual">
+                            <div class="inst-dot solid" style="background:var(--c-task)"></div>
+                            <div class="inst-dot solid" style="background:var(--c-task)"></div>
+                            <div class="inst-dot solid" style="background:var(--c-task)"></div>
+                            <span class="inst-label-text">N个并行实例 · 共享Memory</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="legend-item">
-                    <div class="legend-line" style="background: #ec4899;"></div>
-                    <span>记忆系统 → 存储层</span>
+                <!-- Flow -->
+                <div class="skill-card" data-type="flow" data-id="s4" onclick="activate('s4')">
+                    <div class="sk-head">
+                        <div class="sk-num">Ⅳ</div>
+                        <div class="sk-title">流程 Skill</div>
+                    </div>
+                    <div class="sk-game">
+                        <span class="sk-game-icon">🏰</span>
+                        Raid Boss — 多阶段
+                    </div>
+                    <div class="sk-instance">
+                        <div class="inst-label">实例模型</div>
+                        <div class="inst-visual">
+                            <div class="inst-dot" style="border-color:var(--c-flow)"></div>
+                            <span class="inst-arrow">⇢</span>
+                            <div class="inst-dot solid" style="background:var(--c-flow);width:8px;height:8px"></div>
+                            <div class="inst-dot solid" style="background:var(--c-flow);width:8px;height:8px"></div>
+                            <div class="inst-dot solid" style="background:var(--c-flow);width:8px;height:8px"></div>
+                            <span class="inst-label-text">1总控 + N实例 · 分阶段编排</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="legend-item">
-                    <div class="legend-dot" style="background: #dbeafe;"></div>
-                    <span>逻辑标签</span>
+            </div>
+
+            <!-- Cross-cutting concerns -->
+            <div class="crosscut">
+                <span class="crosscut-pill cc-eval">🔍 Eval 评估</span>
+                <span class="crosscut-pill cc-security">🔒 安全合规</span>
+                <span class="crosscut-pill cc-observe">📊 可观测性</span>
+                <span class="crosscut-pill cc-memory">🧠 Memory管理</span>
+                <span class="crosscut-pill cc-skill">📋 Skill注册中心</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="layer-connector" id="conn-2">
+        <span class="conn-label">能力调用 + 实例生命周期</span>
+        <span>▼</span>
+    </div>
+
+    <!-- LAYER 3: AGENT OS -->
+    <div class="layer os" id="layer-os">
+        <div class="layer-header">
+            <span class="layer-tag">AGENT OS</span>
+            <h2>底层运行时</h2>
+            <span class="unified-badge">🧠 统一大脑 + 🦵 多种四肢</span>
+            <span class="game-tag">🎮 = 游戏引擎</span>
+        </div>
+        <div class="layer-body">
+            <div class="os-grid" id="os-grid">
+                <div class="os-block" id="os-core">
+                    <div class="os-icon">🧬</div>
+                    <div class="os-name">AgentCore 六大能力</div>
+                    <div class="os-sub">通用推理 / 规划 / 反思引擎</div>
+                    <div class="os-game">🎮 = 物理引擎 + AI系统</div>
+                    <div class="os-caps-inline">
+                        <span class="os-cap">记忆</span>
+                        <span class="os-cap">推理</span>
+                        <span class="os-cap">规划</span>
+                        <span class="os-cap">编排</span>
+                        <span class="os-cap">反思</span>
+                        <span class="os-cap">集成</span>
+                    </div>
                 </div>
-                <div class="legend-item">
-                    <div class="legend-dot" style="background: #fef3c7;"></div>
-                    <span>物理标签</span>
+                <div class="os-block os-block-wide" id="os-instance-mgr">
+                    <div class="os-icon">⚡</div>
+                    <div class="os-name">实例管理器 <span style="font-size:9px;font-weight:400;color:var(--c-text-3)">— 统一调度，多 Runtime 适配</span></div>
+                    <div class="os-sub">创建 · 监控 · 回收 · 汇总</div>
+                    <div class="os-game">🎮 = 副本系统</div>
+                    <div class="rt-adapters">
+                        <div class="rt-adapter rt-local" id="adapter-local">
+                            <div class="rt-adapter-icon">🖥️</div>
+                            <div class="rt-adapter-info">
+                                <div class="rt-adapter-name">LocalAdapter</div>
+                                <div class="rt-adapter-desc">IDE 内进程</div>
+                            </div>
+                            <div class="rt-adapter-tag">CF</div>
+                        </div>
+                        <div class="rt-adapter rt-sandbox" id="adapter-sandbox">
+                            <div class="rt-adapter-icon">📦</div>
+                            <div class="rt-adapter-info">
+                                <div class="rt-adapter-name">SandboxAdapter</div>
+                                <div class="rt-adapter-desc">隔离容器 / MicroVM</div>
+                            </div>
+                            <div class="rt-adapter-tag">Code Agent</div>
+                        </div>
+                        <div class="rt-adapter rt-service" id="adapter-service">
+                            <div class="rt-adapter-icon">☁️</div>
+                            <div class="rt-adapter-info">
+                                <div class="rt-adapter-name">ServiceAdapter</div>
+                                <div class="rt-adapter-desc">微服务 / Serverless</div>
+                            </div>
+                            <div class="rt-adapter-tag">KATE-Studio</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="os-block" id="os-mcp">
+                    <div class="os-icon">🔌</div>
+                    <div class="os-name">MCP 网关</div>
+                    <div class="os-sub">统一工具调用 · 外部服务</div>
+                    <div class="os-game">🎮 = 插件 API</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <div class="footer">
-        研发线 · 研发效能中心 · 2026 年 3 月
+    </div><!-- /arch-main -->
+
+    <!-- DEPLOY SIDEBAR -->
+    <div class="deploy-sidebar" id="deploy-sidebar">
+        <div class="ds-title">部署模式</div>
+        <div class="ds-modes">
+            <div class="ds-mode">
+                <span class="ds-emoji">🖥️</span>
+                <strong>本地</strong>
+                <span class="ds-sub">IDE嵌入 · 数据私有</span>
+            </div>
+            <span class="ds-or">或</span>
+            <div class="ds-mode ds-mode-cloud">
+                <span class="ds-emoji">☁️</span>
+                <strong>云端</strong>
+                <span class="ds-sub">统一大脑</span>
+                <div class="ds-cloud-split">
+                    <div class="ds-cloud-item"><span class="ds-cloud-dot" style="background:#EA580C"></span>沙箱 <span class="ds-cloud-note">Code</span></div>
+                    <div class="ds-cloud-item"><span class="ds-cloud-dot" style="background:#0969DA"></span>服务 <span class="ds-cloud-note">Biz</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="ds-bracket"></div>
     </div>
+
+    </div><!-- /arch-stack -->
+
+    <!-- GROWTH LOOP -->
+    <div class="growth" id="growth-loop">
+        <div class="growth-header">
+            <span style="font-size:18px">🔄</span>
+            <h3>成长闭环 — 实例用完即毁，Memory 持久成长</h3>
+            <span class="game-tag">🎮 = 经验值 + 升级</span>
+            <span class="growth-key-diff">⭐ 核心差异化</span>
+        </div>
+        <div class="growth-sub">传统软件交付后静态不变；Agent 越用越强、持续进化</div>
+        <div class="growth-flow">
+            <span class="growth-step">执行任务</span>
+            <span class="growth-arrow">→</span>
+            <span class="growth-step">Reflection 自评</span>
+            <span class="growth-arrow">→</span>
+            <span class="growth-step">经验 → Memory</span>
+            <span class="growth-arrow">→</span>
+            <span class="growth-step">下次执行更好</span>
+            <span class="growth-arrow">↻</span>
+        </div>
+        <div class="growth-levels">
+            <span class="growth-level">L1 行为适应 = 🎮 熟练度</span>
+            <span class="growth-level">L2 技能进化 = 🎮 天赋树</span>
+            <span class="growth-level">L3 认知进化 = 🎮 觉醒</span>
+        </div>
+    </div>
+
+    <!-- DETAIL PANEL (dynamically rendered) -->
+    <div class="detail-panel hidden" id="detail-panel">
+        <div class="detail-top" id="detail-top">
+            <div class="dt-icon" id="dt-icon">📄</div>
+            <div>
+                <h3 id="dt-title">运行时序</h3>
+                <div class="dt-sub" id="dt-sub"></div>
+            </div>
+        </div>
+        <div class="detail-body" id="detail-body"></div>
+    </div>
+
+    <footer class="footer">
+        架构全景 · AI产品终极形态 · v7.0 · 统一大脑+多Runtime · 2026-03
+    </footer>
 </div>
 
-<!-- Tooltip Element -->
-<div class="tooltip" id="tooltip"></div>
+<!-- Tooltip container -->
+<div id="cf-tooltip" aria-hidden="true"></div>
 
 <script>
-    // 精准映射关系
-    const mappings = [
-        // 用户触点域
-        { from: 'p-kim', to: 't-access', color: '#667eea' },
-        { from: 'p-web', to: 't-access', color: '#667eea' },
-        { from: 'p-local', to: 't-access', color: '#667eea' },
-        { from: 'p-market', to: 't-skills-hub', color: '#667eea' },
-        // 网关鉴权域
-        { from: 'p-security', to: 't-gateway', color: '#f59e0b' },
-        // Agent处理域
-        { from: 'p-skills', to: 't-agent', color: '#10b981' },
-        { from: 'p-skills', to: 't-skills-hub', color: '#10b981' },
-        { from: 'p-agent', to: 't-agent', color: '#10b981' },
-        // 模型调用域
-        { from: 'p-routing', to: 't-model', color: '#8b5cf6' },
-        // 存储同步域
-        { from: 'p-memory', to: 't-storage', color: '#ec4899' }
-    ];
-    
-    function drawLines() {
-        const svg = document.getElementById('connSvg');
-        const box = document.getElementById('swimlanes');
-        const rect = box.getBoundingClientRect();
-        
-        svg.setAttribute('width', rect.width);
-        svg.setAttribute('height', rect.height);
-        svg.setAttribute('viewBox', `0 0 ${rect.width} ${rect.height}`);
-        svg.innerHTML = '';
-        
-        mappings.forEach(m => {
-            const a = document.querySelector(`[data-m="${m.from}"]`);
-            const b = document.querySelector(`[data-m="${m.to}"]`);
-            if (!a || !b) return;
-            
-            const ar = a.getBoundingClientRect();
-            const br = b.getBoundingClientRect();
-            
-            const x1 = ar.right - rect.left;
-            const y1 = ar.top + ar.height / 2 - rect.top;
-            const x2 = br.left - rect.left;
-            const y2 = br.top + br.height / 2 - rect.top;
-            
-            const mx = (x1 + x2) / 2;
-            
-            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            path.setAttribute('d', `M ${x1} ${y1} C ${mx} ${y1}, ${mx} ${y2}, ${x2} ${y2}`);
-            path.setAttribute('stroke', m.color);
-            path.setAttribute('stroke-width', '2.5');
-            path.setAttribute('fill', 'none');
-            path.setAttribute('opacity', '0.5');
-            path.setAttribute('stroke-dasharray', '6,3');
-            
-            // 箭头
-            const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-            arrow.setAttribute('cx', x2);
-            arrow.setAttribute('cy', y2);
-            arrow.setAttribute('r', '4');
-            arrow.setAttribute('fill', m.color);
-            arrow.setAttribute('opacity', '0.7');
-            
-            svg.appendChild(path);
-            svg.appendChild(arrow);
-        });
+// ============ STATE ============
+let activeScenario = null;
+
+// ============ SCENARIO DATA ============
+const DATA = {
+    s1: {
+        type: 'native', title: '"帮我写个调研报告"',
+        subtitle: '原生Skill · 1个独立实例（会话形式）完成全过程',
+        color: '#2DA44E', product: 'cf',
+        steps: [
+            { label: '语义理解', desc: '识别意图=调研', color: '#2DA44E' },
+            { label: '查Memory', desc: '偏好:清爽报告', color: '#2DA44E' },
+            { label: '匹配Skill', desc: 'industry-research', color: '#2DA44E' },
+            { label: '派实例', desc: '1个独立工作实例', color: '#2DA44E' },
+            { label: '搜索+撰写', desc: '自主执行全流程', color: '#2DA44E' },
+            { label: '经验回流', desc: '实例销毁→Memory', color: '#2DA44E' },
+        ],
+        instances: [{
+            name: '调研实例', sub: '独立工作会话',
+            binds: [{ type: 'skill', label: 'industry-research' }],
+            status: '执行中', statusColor: '#2DA44E'
+        }],
+        insight: '最轻量的Skill类型：无需外部服务、无需并行。用户可通过自然语言"教"Agent新技能，直接变成原生Skill。',
+        osHighlight: ['os-core', 'os-instance-mgr'],
+    },
+    s2: {
+        type: 'tool', title: '"帮我生成一张配图"',
+        subtitle: '工具Skill · 1个实例（会话形式）+ MCP调外部API',
+        color: '#7C3AED', product: 'cf',
+        steps: [
+            { label: '语义理解', desc: '识别意图=生图', color: '#7C3AED' },
+            { label: '查Memory', desc: '偏好:简洁风格', color: '#7C3AED' },
+            { label: '匹配Skill', desc: 'image-gen Tool', color: '#7C3AED' },
+            { label: '派实例+MCP', desc: '1实例→调API', color: '#7C3AED' },
+            { label: '外部生成', desc: '图片服务返回', color: '#7C3AED' },
+            { label: '经验回流', desc: 'prompt模板→Memory', color: '#7C3AED' },
+        ],
+        instances: [{
+            name: '生图实例', sub: '会话 + MCP 调用',
+            binds: [{ type: 'skill', label: 'image-gen' }, { type: 'tool', label: 'image-api MCP' }],
+            status: '执行中', statusColor: '#7C3AED'
+        }],
+        insight: '现有的图片Agent、视频Agent等可直接封装为工具Skill——不需要并行实例，只需API包装。这是从多Agent迁移到统一架构的<strong>最低成本路径</strong>。',
+        osHighlight: ['os-core', 'os-instance-mgr', 'os-mcp'],
+    },
+    s3: {
+        type: 'task', title: '"帮我Review这个PR"',
+        subtitle: '任务Skill · 派N个并行实例（Task形式）各自独立执行',
+        color: '#EA580C', product: 'cf',
+        steps: [
+            { label: '语义理解', desc: '识别意图=CR', color: '#EA580C' },
+            { label: '查Memory', desc: '代码规范偏好', color: '#EA580C' },
+            { label: '匹配Skill', desc: 'code-review Task', color: '#EA580C' },
+            { label: '派多实例', desc: '3个并行工作实例', color: '#EA580C' },
+            { label: '并行执行', desc: '读码/审查/总结', color: '#EA580C' },
+            { label: '汇总回流', desc: '合并→Memory', color: '#EA580C' },
+        ],
+        instances: [
+            { name: '代码阅读', sub: 'Code Reader', binds: [{ type: 'skill', label: 'code-analyzer' }], status: '执行中', statusColor: '#EA580C' },
+            { name: '审查检查', sub: 'Review Checker', binds: [{ type: 'skill', label: 'review-rules' }, { type: 'memory', label: '团队规范' }], status: '执行中', statusColor: '#EA580C' },
+            { name: '汇总撰写', sub: 'Summary Writer', binds: [{ type: 'skill', label: 'report-writer' }], status: '等待中', statusColor: '#9CA3AF' },
+        ],
+        insight: '对外呈现为单一Agent——用户不感知底层有多个实例。共享Memory但各自独立上下文，执行完毕后经验回流，实例全部销毁。',
+        osHighlight: ['os-core', 'os-instance-mgr'],
+    },
+    s4: {
+        type: 'flow', title: '"帮我把需求做到上线"',
+        subtitle: '流程Skill · 1总控实例（Flow形式）编排6个阶段',
+        color: '#0969DA', product: 'cf',
+        steps: [
+            { label: '语义理解', desc: '识别=全链路', color: '#0969DA' },
+            { label: '查Memory', desc: '项目上下文', color: '#0969DA' },
+            { label: '匹配Skill', desc: 'dev-pipeline Flow', color: '#0969DA' },
+            { label: '总控编排', desc: '分解6阶段', color: '#0969DA' },
+            { label: '逐阶段派遣', desc: '每阶段不同实例', color: '#0969DA' },
+            { label: '经验回流', desc: '项目经验→Memory', color: '#0969DA' },
+        ],
+        flowStages: [
+            { name: '需求分析', type: 'Task', typeColor: '#EA580C' },
+            { name: '代码开发', type: 'Native', typeColor: '#2DA44E' },
+            { name: 'CR 审查', type: 'Task', typeColor: '#EA580C' },
+            { name: '测试生成', type: 'Tool', typeColor: '#7C3AED' },
+            { name: 'CI/CD', type: 'Tool', typeColor: '#7C3AED' },
+            { name: '发布上线', type: 'Tool', typeColor: '#7C3AED' },
+        ],
+        insight: '最复杂也最强大的Skill类型——可组合其他所有类型。支持<strong>跳过、重试、断点续跑</strong>。每个阶段都可以派出 Native / Task / Tool 任意类型的执行实例。',
+        osHighlight: ['os-core', 'os-instance-mgr', 'os-mcp'],
     }
-    
-    // Tooltip functionality
-    const tooltip = document.getElementById('tooltip');
-    
-    document.querySelectorAll('.mod[data-tooltip]').forEach(mod => {
-        mod.addEventListener('mouseenter', function(e) {
-            const data = this.getAttribute('data-tooltip').split('|');
-            const title = data[0] || '';
-            const lines = data.slice(1);
-            
-            let html = `<div class="tooltip-title">${title}</div>`;
-            if (lines.length > 0) {
-                html += '<div class="tooltip-content"><ul>';
-                lines.forEach(line => {
-                    if (line.trim()) {
-                        html += `<li>${line.trim()}</li>`;
-                    }
-                });
-                html += '</ul></div>';
-            }
-            
-            tooltip.innerHTML = html;
-            tooltip.classList.add('visible');
-        });
-        
-        mod.addEventListener('mousemove', function(e) {
-            const x = e.clientX + 15;
-            const y = e.clientY + 15;
-            
-            // Keep tooltip within viewport
-            const rect = tooltip.getBoundingClientRect();
-            const maxX = window.innerWidth - rect.width - 20;
-            const maxY = window.innerHeight - rect.height - 20;
-            
-            tooltip.style.left = Math.min(x, maxX) + 'px';
-            tooltip.style.top = Math.min(y, maxY) + 'px';
-        });
-        
-        mod.addEventListener('mouseleave', function() {
-            tooltip.classList.remove('visible');
-        });
+};
+
+// ============ ACTIVATION ============
+function activate(id) {
+    if (activeScenario === id) {
+        deactivate();
+        return;
+    }
+    activeScenario = id;
+    const d = DATA[id];
+
+    // Scenario bar
+    document.querySelectorAll('.sc-btn').forEach(b => b.classList.toggle('active', b.dataset.id === id));
+
+    // Product chips
+    document.querySelectorAll('.product-chip').forEach(c => {
+        if (c.dataset.prod) {
+            c.classList.toggle('active', c.dataset.prod === d.product);
+            c.classList.toggle('dimmed', c.dataset.prod !== d.product && !c.classList.contains('more'));
+        }
     });
-    
-    window.addEventListener('load', () => setTimeout(drawLines, 150));
-    window.addEventListener('resize', drawLines);
+
+    // Skill cards
+    document.querySelectorAll('.skill-card').forEach(c => {
+        c.classList.toggle('active', c.dataset.id === id);
+        c.classList.toggle('dimmed', c.dataset.id !== id);
+    });
+
+    // Connectors
+    document.getElementById('conn-1').classList.add('active');
+    document.getElementById('conn-1').style.color = d.color;
+    document.getElementById('conn-2').classList.add('active');
+    document.getElementById('conn-2').style.color = d.color;
+
+    // OS blocks
+    document.querySelectorAll('.os-block').forEach(b => {
+        b.classList.toggle('active', d.osHighlight.includes(b.id));
+    });
+
+    // Render detail panel
+    renderDetail(id);
+
+    // Scroll to detail
+    setTimeout(() => {
+        document.getElementById('detail-panel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 100);
+}
+
+function deactivate() {
+    activeScenario = null;
+    document.querySelectorAll('.sc-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.product-chip').forEach(c => { c.classList.remove('active', 'dimmed'); });
+    document.querySelectorAll('.skill-card').forEach(c => { c.classList.remove('active', 'dimmed'); });
+    document.querySelectorAll('.os-block').forEach(b => b.classList.remove('active'));
+    document.getElementById('conn-1').classList.remove('active');
+    document.getElementById('conn-1').style.color = '';
+    document.getElementById('conn-2').classList.remove('active');
+    document.getElementById('conn-2').style.color = '';
+    document.getElementById('detail-panel').classList.add('hidden');
+}
+
+// ============ RENDER DETAIL ============
+function renderDetail(id) {
+    const d = DATA[id];
+    const panel = document.getElementById('detail-panel');
+    const icon = document.getElementById('dt-icon');
+    const title = document.getElementById('dt-title');
+    const sub = document.getElementById('dt-sub');
+    const body = document.getElementById('detail-body');
+
+    panel.classList.remove('hidden');
+    icon.style.background = d.color;
+    icon.textContent = d.type === 'native' ? '📄' : d.type === 'tool' ? '🔧' : d.type === 'task' ? '⚡' : '🔄';
+    title.textContent = '运行时序: ' + d.title;
+    sub.textContent = d.subtitle;
+
+    let html = '';
+
+    // Flow steps
+    html += '<div class="rt-flow">';
+    d.steps.forEach((s, i) => {
+        if (i > 0) html += '<span class="rt-arrow">→</span>';
+        html += `<div class="rt-step">
+            <div class="rt-step-num" style="background:${s.color}">${i+1}</div>
+            <div class="rt-step-label">${s.label}</div>
+            <div class="rt-step-desc">${s.desc}</div>
+        </div>`;
+    });
+    html += '</div>';
+
+    // Instance cards or Flow stages
+    if (d.flowStages) {
+        html += '<div style="font-size:11px;font-weight:700;color:var(--c-text);margin:4px 0 6px">📋 6阶段编排 — 每阶段可使用不同Skill类型：</div>';
+        html += '<div class="flow-stages">';
+        d.flowStages.forEach((s, i) => {
+            html += `<div class="flow-stage">
+                <div class="fs-num" style="background:${s.typeColor}">${i+1}</div>
+                <div class="fs-name">${s.name}</div>
+                <div class="fs-type" style="color:${s.typeColor}">[${s.type}]</div>
+            </div>`;
+        });
+        html += '</div>';
+    } else {
+        html += '<div style="font-size:11px;font-weight:700;color:var(--c-text);margin:4px 0 6px">🔸 运行中的实例：</div>';
+        html += '<div class="inst-detail-grid">';
+        d.instances.forEach(inst => {
+            html += `<div class="inst-detail-card" style="border-left-color:${d.color}">
+                <div class="idc-name">${inst.name}</div>
+                <div class="idc-sub">${inst.sub}</div>
+                <div class="idc-binds">
+                    ${inst.binds.map(b => `<span class="idc-bind ${b.type}">${b.label}</span>`).join('')}
+                </div>
+                <div class="idc-status">
+                    <span class="dot" style="background:${inst.statusColor}"></span>
+                    <span style="color:${inst.statusColor}">${inst.status}</span>
+                </div>
+            </div>`;
+        });
+        html += '</div>';
+    }
+
+    // Insight
+    html += `<div class="insight-box" style="border-left-color:${d.color}">
+        <strong>💡 关键洞察：</strong>${d.insight}
+    </div>`;
+
+    body.innerHTML = html;
+}
+
+// ============ TOOLTIPS ============
+const TIPS = {
+    'layer-product': {
+        color: '#0969DA', title: '产品层（Product Layer）',
+        rows: [
+            ['核心思想', '多产品共享同一Agent内核 + 产品适配层做差异化'],
+            ['类比', '不同游戏（FPS/RPG/策略）共用同一游戏引擎'],
+            ['适配层', 'UI组件适配 · Skill集筛选 · 权限模型 · 治理接口'],
+        ]
+    },
+    'layer-agent': {
+        color: '#1A7F37', title: 'Agent 层（统一大脑）',
+        rows: [
+            ['主Agent', '决策指挥中枢，只做调度不执行——跨产品共享同一套决策逻辑'],
+            ['四类Skill', 'Native / Tool / Task / Flow 覆盖全复杂度，跨产品复用'],
+            ['统一意义', '不同产品共享同一套Memory、Skill、经验，用得越多越聪明'],
+            ['横切关注', 'Eval · 安全 · 可观测 · Memory · Skill注册'],
+        ]
+    },
+    'main-agent': {
+        color: '#1A7F37', title: '主 Agent（决策指挥中枢）',
+        rows: [
+            ['角色', '理解用户意图、选择合适的Skill、派遣工作实例'],
+            ['关键', '只做决策调度，不执行具体任务——这保证了架构的统一性'],
+            ['类比', '🎮 玩家本人——操控角色但自己不进入战场'],
+        ]
+    },
+    'layer-os': {
+        color: '#24292F', title: 'Agent OS（底层运行时）',
+        rows: [
+            ['AgentCore', '六大通用能力：记忆 · 推理 · 规划 · 编排 · 反思 · 集成'],
+            ['实例管理器', '统一调度器，通过Adapter模式适配三种Runtime（本地/沙箱/服务）'],
+            ['MCP网关', '统一工具调用接口，抽象外部服务差异'],
+            ['核心思想', '统一大脑 + 多种四肢——思考方式一样，只是“手”不一样'],
+        ]
+    },
+    'os-instance-mgr': {
+        color: '#EA580C', title: '实例管理器（多 Runtime 调度器）',
+        rows: [
+            ['核心职责', '统一创建、监控、回收工作实例，对上层透明'],
+            ['Adapter模式', '主Agent只说“我要一个实例”，管理器自动选择合适的Runtime'],
+            ['关键价值', '让N个产品共享同一套实例管理能力，避免重复建设'],
+        ]
+    },
+    'adapter-local': {
+        color: '#2DA44E', title: 'LocalAdapter（本地运行时）',
+        rows: [
+            ['场景', 'IDE内嵌入的Agent，如CF本地模式'],
+            ['运行方式', '本地进程，直接访问文件系统、终端、IDE接口'],
+            ['优势', '零延迟、数据完全私有、无网络依赖'],
+            ['典型实例', '会话级，轻量，随用随建'],
+        ]
+    },
+    'adapter-sandbox': {
+        color: '#EA580C', title: 'SandboxAdapter（沙箱运行时）',
+        rows: [
+            ['场景', '远端Code Agent，如后台编程、自动修复、CI集成'],
+            ['运行方式', '隔离容器/MicroVM，完整OS + 开发工具链'],
+            ['安全模型', '网络隔离 + syscall过滤，防沙箱逃逸'],
+            ['成本特征', 'GB级内存、分钟级时长、用完即毁'],
+            ['典型产品', 'Devin、Codex、CF Background Agent'],
+        ]
+    },
+    'adapter-service': {
+        color: '#0969DA', title: 'ServiceAdapter（服务端运行时）',
+        rows: [
+            ['场景', '服务端Agent，如企业数字员工、数据分析、客服'],
+            ['运行方式', '微服务或Serverless函数，轻量级、IO密集'],
+            ['安全模型', 'API认证 + RBAC权限 + 数据脱敏审计'],
+            ['成本特征', 'MB级内存、秒级响应、弹性扩容'],
+            ['典型产品', 'KATE-Studio、Salesforce AgentForce'],
+        ]
+    },
+    'deploy-sidebar': {
+        color: '#4D5561', title: '部署模式（跨层架构决策）',
+        rows: [
+            ['核心思想', '部署模式是整个技术栈的选择，不是某一层的属性'],
+            ['本地模式', 'IDE嵌入，数据私有，零网络依赖，单机版'],
+            ['云端-沙箱', '远端隔离容器，达到Code场景安全与算力需求'],
+            ['云端-服务', '微服务/Serverless，达到业务场景低延迟与弹性扩展'],
+            ['统一大脑', '无论哪种部署，AgentCore + Memory + Skill保持一致'],
+        ]
+    },
+    'badge-unified': {
+        color: '#92400E', title: '统一大脑 — 架构核心原则',
+        rows: [
+            ['含义', '所有产品共享同一套决策逻辑、Memory、Skill体系'],
+            ['为什么', 'N个产品的经验互通，Agent越用越聪明，避免各自造轮子'],
+            ['对比', '传统多产品线各自维护一套AI→经验不互通、重复建设'],
+            ['边界', '大脑统一，但“四肢”（Runtime）可以不同——这才是关键'],
+        ]
+    },
+    'growth-loop': {
+        color: '#059669', title: '成长闭环（Growth Loop）',
+        rows: [
+            ['核心', '执行→Reflection自评→经验写入Memory→下次更好'],
+            ['关键区别', '传统软件交付后静态；Agent越用越强、持续成长'],
+            ['三级进化', 'L1行为适应(偏好) → L2技能进化(方法论) → L3认知进化(知识图谱)'],
+        ]
+    },
+};
+
+function renderTip(tip) {
+    const rows = (tip.rows || []).map(([k, v]) =>
+        `<div class="tt-row"><div class="tt-k">${k}</div><div class="tt-v">${v}</div></div>`
+    ).join('');
+    return `<div class="tt-title"><span class="tt-dot" style="background:${tip.color}"></span><span>${tip.title}</span></div>${rows}`;
+}
+
+function bindTip(el) {
+    const tip = TIPS[el.id];
+    if (!tip) return;
+    const tt = document.getElementById('cf-tooltip');
+
+    el.addEventListener('mouseenter', (e) => {
+        tt.innerHTML = renderTip(tip);
+        tt.classList.add('visible');
+        moveTip(e);
+    });
+    el.addEventListener('mousemove', moveTip);
+    el.addEventListener('mouseleave', () => tt.classList.remove('visible'));
+}
+
+function moveTip(e) {
+    const tt = document.getElementById('cf-tooltip');
+    const pad = 12, off = 14;
+    tt.style.left = '0px'; tt.style.top = '0px';
+    const r = tt.getBoundingClientRect();
+    let x = e.clientX + off, y = e.clientY + off;
+    if (x + r.width + pad > window.innerWidth) x = Math.max(pad, window.innerWidth - r.width - pad);
+    if (y + r.height + pad > window.innerHeight) y = Math.max(pad, e.clientY - r.height - off);
+    tt.style.left = x + 'px'; tt.style.top = y + 'px';
+}
+
+// ============ GAME TOGGLE ============
+let gameVisible = true;
+function toggleGame() {
+    gameVisible = !gameVisible;
+    document.querySelector('.page').classList.toggle('game-hidden', !gameVisible);
+    document.getElementById('game-toggle').classList.toggle('active', gameVisible);
+}
+
+// ============ INIT ============
+document.addEventListener('DOMContentLoaded', () => {
+    // Bind tooltips
+    Object.keys(TIPS).forEach(id => {
+        const el = document.getElementById(id);
+        if (el) { el.style.cursor = 'help'; bindTip(el); }
+    });
+    // URL param: ?s=s1 to auto-activate
+    const p = new URLSearchParams(location.search);
+    const s = p.get('s');
+    if (s && DATA[s]) setTimeout(() => activate(s), 200);
+});
 </script>
 </body>
 </html>
