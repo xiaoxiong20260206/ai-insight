@@ -6,7 +6,7 @@
 # 用法: ./scripts/deploy_daily.sh 2026-03-09
 # ============================================================
 
-set -e
+set -euo pipefail
 
 DATE="${1:?用法: $0 <YYYY-MM-DD>}"
 MONTH=$(echo "$DATE" | cut -d- -f1-2)
@@ -147,12 +147,29 @@ if ! grep -q "'$MONTH'.*\b$DAY\b" index.html; then
 import re, sys
 with open('index.html', 'r', encoding='utf-8') as f:
     content = f.read()
-# 在当月数组末尾追加日期
+# 在当月数组末尾追加日期（若当月数组已存在）
 pattern = r"('$MONTH': \[)([^\]]+)(\])"
-def add_day(m):
-    existing = m.group(2).strip().rstrip(',')
-    return m.group(1) + existing + ', $DAY' + m.group(3)
-new_content = re.sub(pattern, add_day, content)
+if re.search(pattern, content):
+    def add_day(m):
+        existing = m.group(2).strip().rstrip(',')
+        return m.group(1) + existing + ', $DAY' + m.group(3)
+    new_content = re.sub(pattern, add_day, content)
+else:
+    # 新月第一天：在上一个月数组后插入新月条目
+    prev_month_pattern = r"(const reportsData = \{[^}]*?)'(\d{4}-\d{2})': \[([^\]]*)\](\s*\})"
+    if re.search(r"'$MONTH'", content):
+        print('  ⚠️  当月数组已存在但未匹配，请手动检查')
+        sys.exit(1)
+    # 在 reportsData 第一个月条目前插入新月
+    new_content = re.sub(
+        r"(const reportsData = \{)\s*\n(\s*')",
+        r"\1\n            '$MONTH': [$DAY],  // $MONTH日报日期 (最新: $DATE)\n\2",
+        content
+    )
+    if new_content == content:
+        print('  ❌ 无法自动插入新月日历数组，请手动更新 index.html')
+        sys.exit(1)
+    print('  ✅ 新月 $MONTH 日历数组已创建，第一条日期: $DAY')
 # 同时更新注释中的最新日期
 new_content = re.sub(r'最新: \d{4}-\d{2}-\d{2}', '最新: $DATE', new_content)
 with open('index.html', 'w', encoding='utf-8') as f:
@@ -229,14 +246,15 @@ grep -o "'$MONTH': \[[^\]]*\]" index.html | head -1
 # ===== 5. 先同步public版（因为public/index.html需要被commit进去） =====
 echo ""
 echo "📋 Step 4: 同步公开版（先于commit，确保public/index.html纳入提交）"
-python3 scripts/sync_to_public.py --full --force 2>&1 | tail -5
-# 强制敏感词二次核查（不依赖sync_to_public自检）
-SENSITIVE_COUNT=$(grep -rl "沈浪\|林克\|快手\|Kuaishou" public/ 2>/dev/null | wc -l | tr -d ' ')
+python3 scripts/sync_to_public.py --full --force
+# 强制敏感词二次核查（不依赖sync_to_public自检）—— 发现残留直接abort，禁止继续推送
+SENSITIVE_COUNT=$(grep -rl "沈浪\|林克\|快手\|Kuaishou\|CF" public/ 2>/dev/null | wc -l | tr -d ' ')
 if [ "$SENSITIVE_COUNT" -gt 0 ]; then
-    echo "  ❌ 警告: public/目录中有 ${SENSITIVE_COUNT} 个文件含敏感词！请检查脱敏逻辑"
-    grep -rl "沈浪\|林克\|快手\|Kuaishou" public/ | head -5
+    echo "  ❌ [ABORT] public/目录中有 ${SENSITIVE_COUNT} 个文件含敏感词，禁止继续推送！"
+    grep -rl "沈浪\|林克\|快手\|Kuaishou\|CF" public/ | head -5
+    exit 1
 else
-    echo "  ✅ 敏感词验证通过（0处残留）"
+    echo "  ✅ 敏感词验证通过（0处残留，含CF检查）"
 fi
 
 # ===== 6. Git提交+推送（包含public/index.html） =====
@@ -251,11 +269,15 @@ else
     echo "  ✅ 已推送到GitHub（含public/index.html）"
 fi
 
-# ===== 7. 同步外部版 =====
+# ===== 7. 同步外部版（如果被orchestrator调用则跳过，由orchestrator统一执行） =====
 echo ""
 echo "📋 Step 6: 同步外部版（ai-insight-public）"
-echo "---"
-python3 scripts/sync_to_external.py --full --verify 2>&1 | tail -8
+if [ "${SKIP_GATE:-0}" = "1" ]; then
+    echo "  ⏭️ 由orchestrator调用，外部版同步由orchestrator负责，此处跳过（防双重同步）"
+else
+    echo "---"
+    python3 scripts/sync_to_external.py --full --verify
+fi
 
 # ===== 8. 验证 =====
 echo ""

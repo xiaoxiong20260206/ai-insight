@@ -108,6 +108,9 @@ def resolve_step(raw: str) -> str:
         return STEP_NUM_MAP[raw]
     if raw in STEPS:
         return raw
+    # 无效 step 参数：返回空字符串，调用方应检查空值（v9.7修复：原缺少兜底return）
+    print(f"  ⚠️ 无效的 step 参数: {raw!r}，可用值: {list(STEP_NUM_MAP.keys()) + list(STEPS)}")
+    return ""
 
 # ── Source快照 (v1.1 篡改检测) ─────────────────────────
 def save_source_snapshot(date: str):
@@ -239,7 +242,7 @@ def run_url_spot_check(date: str) -> bool:
     except Exception as e:
         print(f"  ❌ URL抽检异常: {e}")
         return False
-    return raw
+    # v9.7修复：删除死代码 `return raw`（raw未在此作用域定义，此行永不可达）
 
 # ── 命令: status ──────────────────────────────────────────
 def cmd_status(date: str):
@@ -338,7 +341,7 @@ def cmd_resume(date: str):
         (f"data/daily-content-{date}.json", "JSON数据"),
         (f"01-daily-reports/{month}/{date}.md", "Markdown"),
         (f"01-daily-reports/{month}/{date}-v3.html", "HTML页面"),
-        (f"01-daily-reports/{month}/{date}-v3.html", "跳转页"),
+        (f"01-daily-reports/{month}/{date}.html", "跳转页"),  # 修复v9.7: 原来错误地指向-v3.html
     ]
     
     for rel_path, desc in key_files:
@@ -685,6 +688,12 @@ def parse_args():
             i += 1
     if not args["date"]:
         args["date"] = datetime.now().strftime("%Y-%m-%d")
+    # 日期格式验证：必须是YYYY-MM-DD格式，防止斜杠/无分隔符等错误格式导致断点恢复失效
+    import re as _re
+    if not _re.match(r'^\d{4}-\d{2}-\d{2}$', args["date"]):
+        print(f"❌ 日期格式错误: {args['date']!r}，必须是YYYY-MM-DD格式，例: 2026-03-20")
+        import sys
+        sys.exit(1)
     return args
 
 def main():

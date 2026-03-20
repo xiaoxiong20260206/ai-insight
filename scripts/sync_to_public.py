@@ -88,6 +88,7 @@ REPLACEMENTS = [
     # ===== 页脚和署名 =====
     (r'由 <strong>林克</strong>（沈浪的AI分身）完成洞察', 'AI洞察'),
     (r'林克（沈浪的AI分身）· AI洞察', 'AI洞察'),
+    (r'由 <a href="https://github.com/xiaoxiong20260206" target="_blank">[^<]*</a>（[^）]*）负责维护', 'AI洞察 · 持续追踪AI行业动态'),
     (r'由 <a href="https://github.com/xiaoxiong20260206" target="_blank">林克</a>（沈浪的AI分身）负责维护', 'AI洞察 · 持续追踪AI行业动态'),
     (r'由林克（沈浪的AI分身）每日更新', '每日更新'),
     
@@ -101,8 +102,10 @@ REPLACEMENTS = [
     # ===== 简单替换（兜底） =====
     (r'林克', 'AI洞察'),
     (r'沈浪', ''),
-    (r'（的AI分身）', ''),
-    (r'的AI分身', ''),
+    # CF品牌词替换（v9.6新增：防止品牌词泄露到公开版）
+    (r'CF', 'AI助手平台'),
+    (r'基于CF打造的', ''),
+    (r'AI数字分身', 'AI洞察'),
     (r'沈浪让我负责的', ''),
     
     # ===== 时间戳格式调整 =====
@@ -118,7 +121,7 @@ REPLACEMENTS = [
 ]
 
 # 敏感词验证列表（脱敏后不应出现的词）
-SENSITIVE_WORDS = ['林克', '沈浪', '快手', 'Kuaishou']
+SENSITIVE_WORDS = ['林克', '沈浪', '快手', 'Kuaishou', 'CF']  # v9.6新增CF
 
 
 def sanitize_html(content: str) -> str:
