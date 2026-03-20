@@ -139,41 +139,132 @@ echo "  ✅ 日报索引已更新 (共${REPORT_COUNT}篇)"
 
 # ===== 4. 更新主页 index.html =====
 echo ""
-echo "📋 Step 3: 更新首页"
-# 更新日历数据
-if ! grep -q "'$MONTH'.*$DAY" index.html; then
-    # 日历reportsData中追加日期
-    sed -i '' "s|'$MONTH': \[\\([^]]*\\)\]|'$MONTH': [\\1, $DAY]|" index.html
-    echo "  ✅ 日历数据已添加 $DAY"
+echo "📋 Step 3: 更新首页（日历+最新日报描述）"
+
+# 4a. 更新日历数组
+if ! grep -q "'$MONTH'.*\b$DAY\b" index.html; then
+    python3 - << PYEOF
+import re, sys
+with open('index.html', 'r', encoding='utf-8') as f:
+    content = f.read()
+# 在当月数组末尾追加日期
+pattern = r"('$MONTH': \[)([^\]]+)(\])"
+def add_day(m):
+    existing = m.group(2).strip().rstrip(',')
+    return m.group(1) + existing + ', $DAY' + m.group(3)
+new_content = re.sub(pattern, add_day, content)
+# 同时更新注释中的最新日期
+new_content = re.sub(r'最新: \d{4}-\d{2}-\d{2}', '最新: $DATE', new_content)
+with open('index.html', 'w', encoding='utf-8') as f:
+    f.write(new_content)
+print('  ✅ 日历数据已添加 $DAY，注释已更新为 $DATE')
+PYEOF
 else
     echo "  ⏭️ 日历数据已包含 $DAY"
 fi
 
-# ===== 5. Git提交+推送 =====
+# 4b. 更新最新日报的 list-item 链接+标题+描述
+# 从JSON提取描述（取heat_trend.summary前100字，或overview[0].headline的前N个用·拼接）
+DESC=$(python3 - << PYEOF
+import json, re
+try:
+    with open('data/daily-content-$DATE.json', 'r', encoding='utf-8') as f:
+        data = json.load(f)
+    ht = data.get('heat_trend', {})
+    summary = ht.get('summary', '')
+    # 截取前100字，去除HTML标签
+    summary = re.sub(r'<[^>]+>', '', summary)
+    # 取highlights作为·分隔描述
+    wl = data.get('watch_list', [])
+    overviews = data.get('overview', [])
+    parts = []
+    for ov in overviews[:4]:
+        hl = ov.get('headline', '')
+        if hl:
+            clean = re.sub(r'<[^>]+>', '', hl)[:20]
+            parts.append(clean)
+    desc = ' · '.join(parts) if parts else summary[:80]
+    print(desc)
+except Exception as e:
+    print('今日AI行业动态汇总')
+PYEOF
+)
+
+python3 - << PYEOF
+import re
+with open('index.html', 'r', encoding='utf-8') as f:
+    content = f.read()
+
+# 更新 list-item href
+content = re.sub(
+    r'href="01-daily-reports/\d{4}-\d{2}/\d{4}-\d{2}-\d{2}\.html"(\s+target="_blank"\s+class="list-item")',
+    'href="01-daily-reports/$MONTH/$DATE.html"\g<1>',
+    content
+)
+# 更新 list-item-title 日期（从DATE变量解析中文格式）
+from datetime import datetime
+d = datetime.strptime('$DATE', '%Y-%m-%d')
+date_cn = f'{d.year}年{d.month}月{d.day}日'
+content = re.sub(
+    r'\d{4}年\d{1,2}月\d{1,2}日( AI日报)',
+    date_cn + r'\1',
+    content
+)
+# 更新 list-item-desc
+content = re.sub(
+    r'(<div class="list-item-desc">)[^<]*(</div>)',
+    r'\g<1>${DESC}\g<2>',
+    content
+)
+with open('index.html', 'w', encoding='utf-8') as f:
+    f.write(content)
+print('  ✅ 首页最新日报卡片已更新')
+PYEOF
+
+# 4c. 验证首页关键字段
+echo "  📋 验证首页："
+grep -o "list-item-desc\">.[^<]*" index.html | head -1 | cut -c1-80
+grep -o "'$MONTH': \[[^\]]*\]" index.html | head -1
+
+# ===== 5. 先同步public版（因为public/index.html需要被commit进去） =====
 echo ""
-echo "📋 Step 4: Git提交推送"
+echo "📋 Step 4: 同步公开版（先于commit，确保public/index.html纳入提交）"
+python3 scripts/sync_to_public.py --full --force 2>&1 | tail -5
+# 强制敏感词二次核查（不依赖sync_to_public自检）
+SENSITIVE_COUNT=$(grep -rl "沈浪\|林克\|快手\|Kuaishou" public/ 2>/dev/null | wc -l | tr -d ' ')
+if [ "$SENSITIVE_COUNT" -gt 0 ]; then
+    echo "  ❌ 警告: public/目录中有 ${SENSITIVE_COUNT} 个文件含敏感词！请检查脱敏逻辑"
+    grep -rl "沈浪\|林克\|快手\|Kuaishou" public/ | head -5
+else
+    echo "  ✅ 敏感词验证通过（0处残留）"
+fi
+
+# ===== 6. Git提交+推送（包含public/index.html） =====
+echo ""
+echo "📋 Step 5: Git提交推送（含public目录）"
 git add -A
 if git diff --cached --quiet; then
     echo "  ⏭️ 无变更需要提交"
 else
     git commit -m "feat: AI日报 $DATE 部署（自动化）"
     git push origin main
-    echo "  ✅ 已推送到GitHub"
+    echo "  ✅ 已推送到GitHub（含public/index.html）"
 fi
 
-# ===== 6. 同步公开版+外部版 =====
+# ===== 7. 同步外部版 =====
 echo ""
-echo "📋 Step 5: 同步公开版+外部版"
-python3 scripts/sync_to_public.py --full --force 2>&1 | tail -5
+echo "📋 Step 6: 同步外部版（ai-insight-public）"
 echo "---"
-python3 scripts/sync_to_external.py 2>&1 | tail -5
+python3 scripts/sync_to_external.py --full --verify 2>&1 | tail -8
 
-# ===== 7. 验证 =====
+# ===== 8. 验证 =====
 echo ""
-echo "📋 Step 6: 部署验证"
+echo "📋 Step 7: 部署验证"
 echo "  日报HTML:  $(wc -l < "01-daily-reports/$MONTH/$DATE-v3.html" | tr -d ' ') 行"
-echo "  公开版:    $(ls -la "public/01-daily-reports/$MONTH/$DATE.html" 2>/dev/null | awk '{print $5}') bytes"
-echo "  首页日历:  $(grep "'$MONTH'" index.html | head -1 | tr -d ' ')"
+echo "  明日关注:  $(grep -c '值得关注' "01-daily-reports/$MONTH/$DATE-v3.html") 个板块标题"
+echo "  明日内容:  $(grep -o '• [^<]*' "01-daily-reports/$MONTH/$DATE-v3.html" | wc -l | tr -d ' ') 条条目"
+echo "  public敏感词: ${SENSITIVE_COUNT} 处"
+echo "  首页日历:  $(grep -o "'$MONTH': \[[^\]]*\]" index.html | head -1)"
 
 echo ""
 echo "=================================================="
