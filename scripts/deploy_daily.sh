@@ -267,7 +267,12 @@ else
     git commit -m "feat: AI日报 $DATE 部署（自动化）"
     echo "  ⏳ 推送到GitHub（通常需 20-60s，超时上限120s）..."
     PUSH_START=$SECONDS
-    if timeout 120 git push origin main; then
+    # macOS 无内置 timeout 命令，用 python3 实现超时控制
+    if python3 -c "
+import subprocess, sys
+r = subprocess.run(['git','push','origin','main'], timeout=120)
+sys.exit(r.returncode)
+" 2>&1; then
         echo "  ✅ 已推送到GitHub (耗时$((SECONDS - PUSH_START))s，含public/index.html)"
     else
         echo "  ❌ git push 超时或失败（超过120s），请检查网络后手动 git push"
