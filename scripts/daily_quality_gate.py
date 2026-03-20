@@ -214,13 +214,18 @@ def check_link_validity(date_str: str) -> CheckResult:
                     req = urllib.request.Request(url, method='HEAD')
                     req.add_header('User-Agent', 'Mozilla/5.0 (AI-Insight QualityGate/9.8)')
                     resp = urllib.request.urlopen(req, timeout=10)
-                    return (True, f"{title}({resp.status})" if resp.status >= 400 else None)
+                    # v9.8修复: 4xx/5xx状态码应视为不可达（原来返回(True,label)但label从不被用）
+                    if resp.status >= 400:
+                        return (False, f"{title}(HTTP {resp.status})")
+                    return (True, None)
                 except Exception:
                     try:
                         req = urllib.request.Request(url)
                         req.add_header('User-Agent', 'Mozilla/5.0 (AI-Insight QualityGate/9.8)')
                         resp = urllib.request.urlopen(req, timeout=10)
-                        return (True, f"{title}({resp.status})" if resp.status >= 400 else None)
+                        if resp.status >= 400:
+                            return (False, f"{title}(HTTP {resp.status})")
+                        return (True, None)
                     except Exception:
                         return (False, f"{title}(不可达)")
             
@@ -788,9 +793,14 @@ def check_source_diversity(date_str: str) -> CheckResult:
             url = str(item.get("url", "") or "")
             source = str(item.get("source", "") or "")
             
-            # 直接引用：URL指向微信
-            if "mp.weixin.qq.com" in url or "weixin.sogou.com" in url:
+            # 直接引用：URL指向微信（搜狗搜索URL是合规的永久链接，计入直接引用）
+            # v9.8修复: 原来用 mp.weixin.qq.com 计数与 check_closed_platform_urls 产生逻辑矛盾
+            # 正确做法：用 weixin.sogou.com/weixin? (合规搜索URL) 或 source含微信 来统计微信覆盖
+            if "weixin.sogou.com/weixin" in url or "weixin.sogou.com/weixin?" in url:
                 weixin_direct += 1
+            elif "mp.weixin.qq.com" in url:
+                # mp.weixin是临时链接，由check_closed_platform_urls阻断，但不计入微信覆盖
+                pass
             # 交叉引用：source字段提到微信但URL不是微信
             elif "微信" in source or "公众号" in source:
                 weixin_crossref += 1
@@ -882,7 +892,8 @@ def check_source_diversity(date_str: str) -> CheckResult:
             f"{coverage_msg}, Top域名: {domain_summary}"
         )
     except Exception as e:
-        return CheckResult("信息源多样性", False, f"检查失败: {e}", severity="warning")
+        # v9.8修复: 函数文档明确为ERROR级，except不应降级为warning
+        return CheckResult("信息源多样性", False, f"检查失败: {e}")
 
 
 def check_html_links(date_str: str) -> CheckResult:
@@ -1143,12 +1154,12 @@ def check_date_tampering(date_str: str) -> CheckResult:
             issues.append(f"可疑日期模式: {examples}")
         
         if issues:
-            severity = "error" if snapshot_mismatch else "error"
+            # v9.8修复: 原三元表达式两侧相同("error" if x else "error")，无实际区分意义
             return CheckResult(
                 "日期篡改", False,
                 " | ".join(issues),
                 fixable=False,
-                severity=severity
+                severity="error"
             )
         
         # 通过信息
@@ -1371,7 +1382,7 @@ def check_xhs_note_validity(date_str: str) -> CheckResult:
         return CheckResult("小红书noteId", False, f"检查失败: {e}")
 
 
-def run_all_checks(date_str: str) -> Tuple[List[CheckResult], int, int]:
+def run_all_checks(date_str: str) -> Tuple[List[CheckResult], int, int, int]:
     """运行所有检查 — v9.8: 预加载JSON，所有检查函数通过_SHARED_DATA复用，避免14次重复解析"""
     global _SHARED_DATA
     
@@ -1412,18 +1423,21 @@ def run_all_checks(date_str: str) -> Tuple[List[CheckResult], int, int]:
     failed = 0
     warnings = 0
     
-    for check_func in checks:
-        result = check_func(date_str)
-        results.append(result)
-        if result.passed:
-            passed += 1
-        elif result.severity == "warning":
-            warnings += 1
-        else:
-            failed += 1
+    # v9.8修复: try/finally 确保即使 check 函数意外抛出异常，_SHARED_DATA 也会被清理
+    try:
+        for check_func in checks:
+            result = check_func(date_str)
+            results.append(result)
+            if result.passed:
+                passed += 1
+            elif result.severity == "warning":
+                warnings += 1
+            else:
+                failed += 1
+    finally:
+        # 检查完毕，清理共享数据（防状态泄露）
+        _SHARED_DATA = None
     
-    # 检查完毕，清理共享数据（防状态泄露）
-    _SHARED_DATA = None
     return results, passed, failed, warnings
 
 

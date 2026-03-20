@@ -268,10 +268,18 @@ else
     echo "  ⏳ 推送到GitHub（通常需 20-60s，超时上限120s）..."
     PUSH_START=$SECONDS
     # macOS 无内置 timeout 命令，用 python3 实现超时控制
+    # v9.8修复: 捕获 TimeoutExpired 并 kill 子进程，防止僵尸 git push 进程占用连接
     if python3 -c "
 import subprocess, sys
-r = subprocess.run(['git','push','origin','main'], timeout=120)
-sys.exit(r.returncode)
+try:
+    r = subprocess.run(['git','push','origin','main'], timeout=120)
+    sys.exit(r.returncode)
+except subprocess.TimeoutExpired as e:
+    if e.process:
+        e.process.kill()
+        e.process.wait()
+    print('git push timeout after 120s', file=sys.stderr)
+    sys.exit(124)
 " 2>&1; then
         echo "  ✅ 已推送到GitHub (耗时$((SECONDS - PUSH_START))s，含public/index.html)"
     else
