@@ -1,0 +1,2260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 4: 演进路径与AI分身实证 - AI产品终极形态思考</title>
+    <!-- Favicon - 思考/洞察类 -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231A7F37'/><path d='M16 6c-4.4 0-8 3.6-8 8 0 2.5 1.2 4.8 3 6.2V24l5-3 5 3v-3.8c1.8-1.4 3-3.7 3-6.2 0-4.4-3.6-8-8-8z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/><line x1='16' y1='10' x2='16' y2='15' stroke='white' stroke-width='2' stroke-linecap='round'/><circle cx='16' cy='18' r='1' fill='white'/></svg>">
+    <style>
+        :root {
+            --color-success: #1A7F37;
+            --color-success-light: #2DA44E;
+            --color-danger: #CF222E;
+            --color-warning: #BF8700;
+            --color-warning-dark: #9A6700;
+            --color-info: #0969DA;
+            --color-orange: #EA580C;
+            --color-text-primary: #1F2328;
+            --color-text-secondary: #4D5561;
+            --color-text-muted: #656D76;
+            --color-border: #D0D7DE;
+            --color-border-light: #E8ECF0;
+            --color-bg: #F6F8FA;
+            --color-bg-card: #FFFFFF;
+            --color-bg-table-header: #F3F5F7;
+            --gradient-success: linear-gradient(135deg, #1A7F37 0%, #2DA44E 100%);
+            --gradient-orange: linear-gradient(135deg, #EA580C 0%, #F59E0B 100%);
+            --shadow-sm: 0 1px 3px rgba(31, 35, 40, 0.06), 0 1px 2px rgba(31, 35, 40, 0.04);
+            --shadow-card: 0 2px 8px rgba(31, 35, 40, 0.06), 0 1px 2px rgba(31, 35, 40, 0.04);
+            --shadow-hover: 0 6px 16px rgba(26, 127, 55, 0.15), 0 2px 6px rgba(26, 127, 55, 0.1);
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 14px;
+            --radius-full: 999px;
+            --font-family: -apple-system, "system-ui", "Segoe UI", "Noto Sans SC", Helvetica, Arial, sans-serif;
+            --heading-1: 30px;
+            --heading-2: 20px;
+            --heading-3: 16px;
+            --heading-4: 14px;
+            --body-text: 15px;
+            --body-small: 14px;
+            --caption: 12px;
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+            --content-max-width: 980px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-family);
+            font-size: var(--body-text);
+            line-height: 1.65;
+            color: var(--color-text-secondary);
+            background: var(--color-bg);
+        }
+
+        .container {
+            max-width: var(--content-max-width);
+            margin: 0 auto;
+            padding: var(--spacing-lg) var(--spacing-md) 48px;
+        }
+
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 4px;
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 6px;
+            margin-bottom: var(--spacing-lg);
+            box-shadow: var(--shadow-card);
+            position: sticky;
+            top: 12px;
+            z-index: 100;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 12px 16px;
+            background: transparent;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+            text-decoration: none;
+        }
+
+        .tab-btn:hover {
+            background: var(--color-bg-table-header);
+            color: var(--color-text-secondary);
+        }
+
+        .tab-btn.active {
+            background: var(--gradient-success);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(26, 127, 55, 0.25);
+        }
+
+        .tab-btn-num {
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.06);
+            border-radius: var(--radius-sm);
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .tab-btn.active .tab-btn-num {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: var(--spacing-xl) var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            background: linear-gradient(135deg, rgba(234, 88, 12, 0.08) 0%, rgba(245, 158, 11, 0.06) 100%);
+            border-radius: var(--radius-lg);
+        }
+
+        .page-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            background: var(--color-orange);
+            color: white;
+            border-radius: var(--radius-full);
+            font-size: var(--caption);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .page-title {
+            font-size: var(--heading-1);
+            font-weight: 800;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            font-size: var(--body-text);
+            color: var(--color-text-secondary);
+        }
+
+        /* Section */
+        .section {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            box-shadow: var(--shadow-card);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 1px solid var(--color-border-light);
+        }
+
+        .section-number {
+            width: 32px;
+            height: 32px;
+            background: var(--gradient-orange);
+            color: #fff;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            flex-shrink: 0;
+            box-shadow: 0 2px 4px rgba(234, 88, 12, 0.25);
+        }
+
+        .section-title {
+            font-size: var(--heading-2);
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        .subsection-title {
+            font-size: var(--heading-3);
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin: var(--spacing-lg) 0 var(--spacing-md);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 2px solid var(--color-border-light);
+        }
+
+        /* Insight Box */
+        .insight-box {
+            border-left: 3px solid var(--color-orange);
+            background: rgba(234, 88, 12, 0.06);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: var(--spacing-md) 20px;
+            margin: var(--spacing-lg) 0;
+        }
+
+        .insight-box.green {
+            border-left-color: var(--color-success);
+            background: rgba(26, 127, 55, 0.06);
+        }
+
+        .insight-label {
+            font-size: var(--caption);
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-orange);
+            margin-bottom: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .insight-box.green .insight-label {
+            color: var(--color-success);
+        }
+
+        .insight-label::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: currentColor;
+            border-radius: 50%;
+        }
+
+        .insight-text {
+            font-size: var(--body-text);
+            font-weight: 600;
+            line-height: 1.6;
+            color: var(--color-text-primary);
+        }
+
+        /* Timeline */
+        .timeline {
+            display: flex;
+            align-items: flex-start;
+            gap: 0;
+            margin: var(--spacing-lg) 0;
+            overflow-x: auto;
+            padding-bottom: var(--spacing-md);
+        }
+
+        .timeline-item {
+            flex: 1;
+            min-width: 140px;
+            text-align: center;
+            position: relative;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            right: -50%;
+            width: 100%;
+            height: 3px;
+            background: var(--color-border);
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        .timeline-dot {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-sm);
+            font-size: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-dot.done {
+            background: var(--color-success);
+            color: white;
+        }
+
+        .timeline-dot.progress {
+            background: var(--color-warning);
+            color: white;
+        }
+
+        .timeline-dot.pending {
+            background: var(--color-border);
+            color: var(--color-text-secondary);
+        }
+
+        .timeline-title {
+            font-size: var(--caption);
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .timeline-desc {
+            font-size: 11px;
+            color: var(--color-text-muted);
+            line-height: 1.5;
+        }
+
+        /* Table */
+        .table-wrap {
+            overflow-x: auto;
+            margin: var(--spacing-md) 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: var(--body-small);
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border-light);
+            vertical-align: middle;
+        }
+
+        th {
+            background: var(--color-bg-table-header);
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            font-size: var(--heading-4);
+            white-space: nowrap;
+        }
+
+        tbody tr:hover td { 
+            background: rgba(0, 0, 0, 0.02); 
+        }
+
+        td:first-child { 
+            font-weight: 500;
+            color: var(--color-text-primary);
+        }
+
+        /* Tags */
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 8px;
+            border-radius: var(--radius-full);
+            font-size: var(--caption);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .tag-green { background: rgba(26, 127, 55, 0.12); color: var(--color-success); }
+        .tag-yellow { background: rgba(191, 135, 0, 0.12); color: var(--color-warning-dark); }
+        .tag-red { background: rgba(207, 34, 46, 0.12); color: var(--color-danger); }
+        .tag-blue { background: rgba(9, 105, 218, 0.12); color: var(--color-info); }
+        .tag-orange { background: rgba(234, 88, 12, 0.12); color: var(--color-orange); }
+        .tag-purple { background: rgba(124, 58, 237, 0.12); color: #7C3AED; }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+            margin: var(--spacing-lg) 0;
+        }
+
+        .checklist li {
+            padding: 12px 0;
+            padding-left: 32px;
+            position: relative;
+            border-bottom: 1px solid var(--color-border-light);
+            font-size: var(--body-small);
+            color: var(--color-text-secondary);
+        }
+
+        .checklist li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--color-success);
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .checklist li strong {
+            color: var(--color-text-primary);
+        }
+
+        /* Conclusion Box */
+        .conclusion-box {
+            background: var(--gradient-success);
+            color: white;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            text-align: center;
+            margin: var(--spacing-xl) 0;
+        }
+
+        .conclusion-title {
+            font-size: var(--heading-2);
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .conclusion-text {
+            font-size: var(--body-text);
+            line-height: 1.8;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto var(--spacing-md);
+        }
+
+        .conclusion-highlight {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+        }
+
+        /* Navigation Footer */
+        .nav-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-lg) 0;
+            border-top: 1px solid var(--color-border-light);
+            margin-top: var(--spacing-xl);
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            text-decoration: none;
+            font-size: var(--body-small);
+            font-weight: 500;
+            color: var(--color-info);
+            transition: color var(--transition-fast);
+        }
+
+        .nav-link:hover { color: var(--color-success); }
+        .nav-link.next { color: var(--color-success); }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: var(--spacing-lg) 0;
+            color: var(--color-text-muted);
+            font-size: var(--caption);
+            border-top: 1px solid var(--color-border-light);
+            margin-top: var(--spacing-lg);
+        }
+
+        p { margin: var(--spacing-sm) 0; }
+        strong { color: var(--color-text-primary); }
+
+        /* Insight Box Color Variants */
+        .insight-box.green {
+            border-left-color: var(--color-success);
+            background: rgba(26, 127, 55, 0.06);
+        }
+        .insight-box.green .insight-label { color: var(--color-success); }
+        
+        .insight-box.blue {
+            border-left-color: var(--color-info);
+            background: rgba(9, 105, 218, 0.06);
+        }
+        .insight-box.blue .insight-label { color: var(--color-info); }
+        
+        .insight-box.purple {
+            border-left-color: #7C3AED;
+            background: rgba(124, 58, 237, 0.06);
+        }
+        .insight-box.purple .insight-label { color: #7C3AED; }
+
+        /* Card Hover Effects with Top Indicator */
+        .section {
+            position: relative;
+            overflow: hidden;
+        }
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-orange);
+            opacity: 0;
+            transition: var(--transition-normal);
+        }
+        .section:hover::before {
+            opacity: 1;
+        }
+        .section:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .timeline-item {
+            transition: all var(--transition-normal);
+        }
+        .timeline-item:hover {
+            transform: translateY(-3px);
+        }
+        .timeline-item:hover .timeline-dot {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Text Selection */
+        ::selection {
+            background: rgba(234, 88, 12, 0.2);
+            color: var(--color-text-primary);
+        }
+
+        /* Focus States */
+        :focus-visible {
+            outline: 2px solid var(--color-orange);
+            outline-offset: 2px;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--color-bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-border);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-text-muted);
+        }
+
+        @media (max-width: 768px) {
+            .page-title { font-size: 24px; }
+            .timeline { flex-direction: column; }
+            .timeline-item::after { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Tab Navigation -->
+        <nav class="tab-nav">
+            <a href="index.html" class="tab-btn">
+                <span class="tab-btn-num">🏠</span>
+                <span>首页</span>
+            </a>
+            <a href="part1.html" class="tab-btn">
+                <span class="tab-btn-num">1</span>
+                <span>问题与诊断</span>
+            </a>
+            <a href="part2.html" class="tab-btn">
+                <span class="tab-btn-num">2</span>
+                <span>关键抉择</span>
+            </a>
+            <a href="part3.html" class="tab-btn">
+                <span class="tab-btn-num">3</span>
+                <span>验证分析</span>
+            </a>
+            <a href="part4.html" class="tab-btn active">
+                <span class="tab-btn-num">4</span>
+                <span>AI分身实证</span>
+            </a>
+            <a href="part5.html" class="tab-btn">
+                <span class="tab-btn-num">5</span>
+                <span>技术实施</span>
+            </a>
+            <a href="architecture.html" class="tab-btn">
+                <span class="tab-btn-num">🗺️</span>
+                <span>架构全景</span>
+            </a>
+        </nav>
+
+        <!-- Page Header -->
+        <header class="page-header">
+            <div class="page-badge">Part 4</div>
+            <h1 class="page-title">演进路径与AI分身实证</h1>
+            <p class="page-subtitle">第11-12章：AI分身实证 · 能力验证</p>
+        </header>
+
+        <!-- Chapter 11 -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-number">11</span>
+                <h2 class="section-title">AI分身实证：以我自己为例印证这套思想</h2>
+            </div>
+
+            <!-- 核心可视化：AI分身 = 一个人的成长 -->
+            <div style="background: linear-gradient(135deg, rgba(234, 88, 12, 0.06) 0%, rgba(245, 158, 11, 0.04) 100%); border: 1px solid rgba(234, 88, 12, 0.2); border-radius: var(--radius-lg); padding: var(--spacing-lg); margin-bottom: var(--spacing-lg); position: relative;">
+                <span style="position: absolute; top: 12px; left: 12px; display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; background: rgba(234, 88, 12, 0.15); color: #EA580C; border-radius: var(--radius-full); font-size: 11px; font-weight: 600;">🧑‍💻 一图看懂：我就是这套理论的活证明</span>
+                
+                <div style="padding-top: 32px; text-align: center; overflow-x: auto;">
+                    <svg viewBox="0 0 950 620" style="max-width: 950px; width: 100%; min-width: 650px;">
+                        <defs>
+                            <linearGradient id="brainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#7C3AED"/>
+                                <stop offset="100%" stop-color="#A855F7"/>
+                            </linearGradient>
+                            <linearGradient id="heartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#EC4899"/>
+                                <stop offset="100%" stop-color="#F472B6"/>
+                            </linearGradient>
+                            <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#1A7F37"/>
+                                <stop offset="100%" stop-color="#2DA44E"/>
+                            </linearGradient>
+                            <linearGradient id="armGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#0969DA"/>
+                                <stop offset="100%" stop-color="#54AEFF"/>
+                            </linearGradient>
+                            <linearGradient id="kbGradMain" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#7C3AED"/>
+                                <stop offset="100%" stop-color="#A855F7"/>
+                            </linearGradient>
+                            <linearGradient id="legGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#EA580C"/>
+                                <stop offset="100%" stop-color="#F59E0B"/>
+                            </linearGradient>
+                            <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                            <filter id="shadow3" x="-10%" y="-10%" width="120%" height="130%">
+                                <feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity="0.15"/>
+                            </filter>
+                        </defs>
+                        
+                        <!-- ==================== 标题区域 ==================== -->
+                        <text x="475" y="30" text-anchor="middle" font-size="16" font-weight="800" fill="#1F2328">把AI分身比作一个人：看我具备了哪些能力</text>
+                        <text x="475" y="50" text-anchor="middle" font-size="12" fill="#656D76">我的AI分身 = AgentCore + Skills + Memory + 知识库 (v4.8 2026-03-02更新)</text>
+                        
+                        <!-- ==================== 中间：人形轮廓 ==================== -->
+                        
+                        <!-- 头部（大脑）- 认知能力 -->
+                        <g transform="translate(405, 70)">
+                            <ellipse cx="70" cy="50" rx="55" ry="48" fill="url(#brainGrad)" filter="url(#shadow3)"/>
+                            <text x="70" y="40" text-anchor="middle" font-size="28" fill="white">🧠</text>
+                            <text x="70" y="62" text-anchor="middle" font-size="11" font-weight="700" fill="white">AgentCore</text>
+                            <text x="70" y="78" text-anchor="middle" font-size="9" fill="white" opacity="0.9">认知内核</text>
+                        </g>
+                        
+                        <!-- 身体（躯干）- 核心能力模块 -->
+                        <g transform="translate(375, 165)">
+                            <rect width="200" height="165" rx="20" fill="url(#bodyGrad)" filter="url(#shadow3)"/>
+                            <text x="100" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="white">6大能力模块</text>
+                            
+                            <!-- 能力小方块 -->
+                            <g transform="translate(15, 35)">
+                                <rect width="80" height="28" rx="5" fill="white" opacity="0.95"/>
+                                <text x="40" y="12" text-anchor="middle" font-size="8" font-weight="600" fill="#1A7F37">Memory</text>
+                                <text x="40" y="23" text-anchor="middle" font-size="7" fill="#4D5561">记忆系统</text>
+                            </g>
+                            <g transform="translate(105, 35)">
+                                <rect width="80" height="28" rx="5" fill="white" opacity="0.95"/>
+                                <text x="40" y="12" text-anchor="middle" font-size="8" font-weight="600" fill="#1A7F37">Reasoning</text>
+                                <text x="40" y="23" text-anchor="middle" font-size="7" fill="#4D5561">推理决策</text>
+                            </g>
+                            <g transform="translate(15, 68)">
+                                <rect width="80" height="28" rx="5" fill="white" opacity="0.95"/>
+                                <text x="40" y="12" text-anchor="middle" font-size="8" font-weight="600" fill="#1A7F37">Planning</text>
+                                <text x="40" y="23" text-anchor="middle" font-size="7" fill="#4D5561">任务规划</text>
+                            </g>
+                            <g transform="translate(105, 68)">
+                                <rect width="80" height="28" rx="5" fill="white" opacity="0.95"/>
+                                <text x="40" y="12" text-anchor="middle" font-size="8" font-weight="600" fill="#1A7F37">Orchestration</text>
+                                <text x="40" y="23" text-anchor="middle" font-size="7" fill="#4D5561">能力编排</text>
+                            </g>
+                            <g transform="translate(15, 101)">
+                                <rect width="80" height="28" rx="5" fill="white" opacity="0.95"/>
+                                <text x="40" y="12" text-anchor="middle" font-size="8" font-weight="600" fill="#1A7F37">Reflection</text>
+                                <text x="40" y="23" text-anchor="middle" font-size="7" fill="#4D5561">自我反思</text>
+                            </g>
+                            <g transform="translate(105, 101)">
+                                <rect width="80" height="28" rx="5" fill="white" opacity="0.95"/>
+                                <text x="40" y="12" text-anchor="middle" font-size="8" font-weight="600" fill="#1A7F37">Integration</text>
+                                <text x="40" y="23" text-anchor="middle" font-size="7" fill="#4D5561">外部集成</text>
+                            </g>
+                            
+                            <text x="100" y="150" text-anchor="middle" font-size="10" font-weight="600" fill="white" opacity="0.95">✓ 6/6 全部已实现</text>
+                        </g>
+                        
+                        <!-- 左上臂 - Skills技能 -->
+                        <g transform="translate(170, 165)">
+                            <rect width="180" height="100" rx="12" fill="url(#armGrad)" filter="url(#shadow3)"/>
+                            <text x="90" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="white">⚡ Skills 技能</text>
+                            <text x="90" y="35" text-anchor="middle" font-size="8" fill="white" opacity="0.9">后天习得，可无限扩展</text>
+                            
+                            <g transform="translate(10, 45)">
+                                <rect width="75" height="18" rx="3" fill="white" opacity="0.9"/>
+                                <text x="37" y="12" text-anchor="middle" font-size="7" fill="#0969DA">行业调研</text>
+                            </g>
+                            <g transform="translate(95, 45)">
+                                <rect width="75" height="18" rx="3" fill="white" opacity="0.9"/>
+                                <text x="37" y="12" text-anchor="middle" font-size="7" fill="#0969DA">代码开发</text>
+                            </g>
+                            <g transform="translate(10, 68)">
+                                <rect width="75" height="18" rx="3" fill="white" opacity="0.9"/>
+                                <text x="37" y="12" text-anchor="middle" font-size="7" fill="#0969DA">GitHub部署</text>
+                            </g>
+                            <g transform="translate(95, 68)">
+                                <rect width="75" height="18" rx="3" fill="white" opacity="0.9"/>
+                                <text x="37" y="12" text-anchor="middle" font-size="7" fill="#0969DA">PPT/报告</text>
+                            </g>
+                            
+                            <text x="90" y="95" text-anchor="middle" font-size="9" font-weight="600" fill="white">42+ 技能「如何做」</text>
+                        </g>
+                        
+                        <!-- 右上臂 - Memory记忆 -->
+                        <g transform="translate(600, 165)">
+                            <rect width="180" height="100" rx="12" fill="url(#heartGrad)" filter="url(#shadow3)"/>
+                            <text x="90" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="white">💗 Memory 记忆</text>
+                            <text x="90" y="35" text-anchor="middle" font-size="8" fill="white" opacity="0.9">核心护城河，不可替代</text>
+                            
+                            <g transform="translate(10, 45)">
+                                <rect width="160" height="16" rx="3" fill="white" opacity="0.9"/>
+                                <text x="80" y="11" text-anchor="middle" font-size="7" fill="#EC4899">✓ 用户偏好、思维方式</text>
+                            </g>
+                            <g transform="translate(10, 64)">
+                                <rect width="160" height="16" rx="3" fill="white" opacity="0.9"/>
+                                <text x="80" y="11" text-anchor="middle" font-size="7" fill="#EC4899">✓ 项目规范、开发经验</text>
+                            </g>
+                            
+                            <text x="90" y="95" text-anchor="middle" font-size="9" font-weight="600" fill="white">17条记忆「关于你」</text>
+                        </g>
+                        
+                        <!-- 左下臂 - 知识库 -->
+                        <g transform="translate(170, 280)">
+                            <rect width="180" height="100" rx="12" fill="url(#kbGradMain)" filter="url(#shadow3)"/>
+                            <text x="90" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="white">📚 知识库</text>
+                            <text x="90" y="35" text-anchor="middle" font-size="8" fill="white" opacity="0.9">结构化知识资产</text>
+                            
+                            <g transform="translate(10, 45)">
+                                <rect width="75" height="18" rx="3" fill="white" opacity="0.9"/>
+                                <text x="37" y="12" text-anchor="middle" font-size="7" fill="#7C3AED">AI调研</text>
+                            </g>
+                            <g transform="translate(95, 45)">
+                                <rect width="75" height="18" rx="3" fill="white" opacity="0.9"/>
+                                <text x="37" y="12" text-anchor="middle" font-size="7" fill="#7C3AED">研发效能</text>
+                            </g>
+                            <g transform="translate(10, 68)">
+                                <rect width="75" height="18" rx="3" fill="white" opacity="0.9"/>
+                                <text x="37" y="12" text-anchor="middle" font-size="7" fill="#7C3AED">个人写作</text>
+                            </g>
+                            <g transform="translate(95, 68)">
+                                <rect width="75" height="18" rx="3" fill="white" opacity="0.9"/>
+                                <text x="37" y="12" text-anchor="middle" font-size="7" fill="#7C3AED">产品方案</text>
+                            </g>
+                            
+                            <text x="90" y="95" text-anchor="middle" font-size="9" font-weight="600" fill="white">150+文档「我知道什么」</text>
+                        </g>
+                        
+                        <!-- 右下臂 - 外部集成 -->
+                        <g transform="translate(600, 280)">
+                            <rect width="180" height="100" rx="12" fill="url(#legGrad)" filter="url(#shadow3)"/>
+                            <text x="90" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="white">🔗 外部集成</text>
+                            <text x="90" y="35" text-anchor="middle" font-size="8" fill="white" opacity="0.9">连接外部世界</text>
+                            
+                            <g transform="translate(10, 45)">
+                                <rect width="75" height="18" rx="3" fill="white" opacity="0.9"/>
+                                <text x="37" y="12" text-anchor="middle" font-size="7" fill="#EA580C">GitHub</text>
+                            </g>
+                            <g transform="translate(95, 45)">
+                                <rect width="75" height="18" rx="3" fill="white" opacity="0.9"/>
+                                <text x="37" y="12" text-anchor="middle" font-size="7" fill="#EA580C">飞书/语雀</text>
+                            </g>
+                            <g transform="translate(10, 68)">
+                                <rect width="75" height="18" rx="3" fill="white" opacity="0.9"/>
+                                <text x="37" y="12" text-anchor="middle" font-size="7" fill="#EA580C">Shell/MCP</text>
+                            </g>
+                            <g transform="translate(95, 68)">
+                                <rect width="75" height="18" rx="3" fill="white" opacity="0.9"/>
+                                <text x="37" y="12" text-anchor="middle" font-size="7" fill="#EA580C">浏览器</text>
+                            </g>
+                            
+                            <text x="90" y="95" text-anchor="middle" font-size="9" font-weight="600" fill="white">10+ MCP工具</text>
+                        </g>
+                        
+                        <!-- 双腿 - 自动化 -->
+                        <g transform="translate(375, 345)">
+                            <rect width="200" height="55" rx="10" fill="url(#legGrad)" filter="url(#shadow3)"/>
+                            <text x="100" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="white">⚙️ 自动化机制</text>
+                            <text x="100" y="38" text-anchor="middle" font-size="9" fill="white" opacity="0.9">每日6:00自动反思 • 自动备份 • 生成日报</text>
+                            <text x="100" y="50" text-anchor="middle" font-size="8" fill="white" opacity="0.8">launchd定时任务</text>
+                        </g>
+                        
+                        <!-- ==================== 左侧：人的对应部分 ==================== -->
+                        <g transform="translate(15, 80)">
+                            <rect width="135" height="310" rx="10" fill="#F6F8FA" stroke="#E8ECF0"/>
+                            <text x="67" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#656D76">👶 人的成长</text>
+                            
+                            <text x="12" y="50" font-size="9" fill="#4D5561">🧒 大脑神经系统</text>
+                            <text x="20" y="63" font-size="7" fill="#656D76">→ 思考、记忆的基础</text>
+                            
+                            <text x="12" y="90" font-size="9" fill="#4D5561">💪 后天学会的技能</text>
+                            <text x="20" y="103" font-size="7" fill="#656D76">→ 走路、说话、骑车...</text>
+                            
+                            <text x="12" y="130" font-size="9" fill="#4D5561">📝 人生经历和记忆</text>
+                            <text x="20" y="143" font-size="7" fill="#656D76">→ 知道你喜欢什么</text>
+                            
+                            <text x="12" y="170" font-size="9" fill="#4D5561">📚 读过的书和知识</text>
+                            <text x="20" y="183" font-size="7" fill="#656D76">→ 学到的领域知识</text>
+                            
+                            <text x="12" y="210" font-size="9" fill="#4D5561">🔗 社会关系网络</text>
+                            <text x="20" y="223" font-size="7" fill="#656D76">→ 连接外部资源</text>
+                            
+                            <text x="12" y="250" font-size="9" fill="#4D5561">🎓 先学"学习方法"</text>
+                            <text x="20" y="263" font-size="7" fill="#656D76">→ 元技能，能学其他</text>
+                            
+                            <text x="12" y="290" font-size="9" fill="#4D5561">👨‍👩‍👧 父母的养育</text>
+                            <text x="20" y="303" font-size="7" fill="#656D76">→ 养成感，舍不得换</text>
+                        </g>
+                        
+                        <!-- ==================== 右侧：对应到AI ==================== -->
+                        <g transform="translate(800, 80)">
+                            <rect width="135" height="310" rx="10" fill="#FFF7ED" stroke="#FDBA74"/>
+                            <text x="67" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#EA580C">🤖 AI分身</text>
+                            
+                            <text x="12" y="50" font-size="9" fill="#4D5561">🧠 AgentCore</text>
+                            <text x="20" y="63" font-size="7" fill="#EA580C">→ 认知能力内核</text>
+                            
+                            <text x="12" y="90" font-size="9" fill="#4D5561">⚡ Skills系统</text>
+                            <text x="20" y="103" font-size="7" fill="#EA580C">→ 42+可插拔技能</text>
+                            
+                            <text x="12" y="130" font-size="9" fill="#4D5561">💗 Memory系统</text>
+                            <text x="20" y="143" font-size="7" fill="#EA580C">→ 17条核心记忆</text>
+                            
+                            <text x="12" y="170" font-size="9" fill="#4D5561">📚 知识库</text>
+                            <text x="20" y="183" font-size="7" fill="#EA580C">→ 150+篇文档</text>
+                            
+                            <text x="12" y="210" font-size="9" fill="#4D5561">🔗 外部集成</text>
+                            <text x="20" y="223" font-size="7" fill="#EA580C">→ 10+ MCP工具</text>
+                            
+                            <text x="12" y="250" font-size="9" fill="#4D5561">💻 Code Agent起点</text>
+                            <text x="20" y="263" font-size="7" fill="#EA580C">→ 代码是元技能</text>
+                            
+                            <text x="12" y="290" font-size="9" fill="#4D5561">🎮 养成类游戏</text>
+                            <text x="20" y="303" font-size="7" fill="#EA580C">→ 情感连接护城河</text>
+                        </g>
+                        
+                        <!-- ==================== 底部：核心结论 ==================== -->
+                        <g transform="translate(150, 415)">
+                            <rect width="650" height="90" rx="12" fill="url(#bodyGrad)" filter="url(#shadow3)"/>
+                            <text x="325" y="22" text-anchor="middle" font-size="13" font-weight="700" fill="white">🎯 实证结论：三大系统 + AgentCore = 完整的AI分身</text>
+                            
+                            <!-- 三大系统数据 -->
+                            <g transform="translate(30, 35)">
+                                <rect width="130" height="40" rx="6" fill="white" opacity="0.95"/>
+                                <text x="65" y="16" text-anchor="middle" font-size="9" font-weight="600" fill="#0969DA">⚡ Skills</text>
+                                <text x="65" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#0969DA">38+ 技能</text>
+                            </g>
+                            <g transform="translate(180, 35)">
+                                <rect width="130" height="40" rx="6" fill="white" opacity="0.95"/>
+                                <text x="65" y="16" text-anchor="middle" font-size="9" font-weight="600" fill="#EC4899">💗 Memory</text>
+                                <text x="65" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#EC4899">17 条记忆</text>
+                            </g>
+                            <g transform="translate(330, 35)">
+                                <rect width="130" height="40" rx="6" fill="white" opacity="0.95"/>
+                                <text x="65" y="16" text-anchor="middle" font-size="9" font-weight="600" fill="#7C3AED">📚 知识库</text>
+                                <text x="65" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#7C3AED">150+ 文档</text>
+                            </g>
+                            <g transform="translate(480, 35)">
+                                <rect width="130" height="40" rx="6" fill="white" opacity="0.95"/>
+                                <text x="65" y="16" text-anchor="middle" font-size="9" font-weight="600" fill="#1A7F37">🧠 AgentCore</text>
+                                <text x="65" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#1A7F37">6/6 模块</text>
+                            </g>
+                            
+                            <text x="325" y="85" text-anchor="middle" font-size="10" fill="white" opacity="0.9">换AI = 丢失所有记忆、技能配置、知识库 → 用户不会换掉我</text>
+                        </g>
+                        
+                        <!-- 底部补充：下一步 -->
+                        <g transform="translate(150, 515)">
+                            <rect width="650" height="35" rx="8" fill="#FFFBEB" stroke="#BF8700" stroke-dasharray="4,2"/>
+                            <text x="325" y="22" text-anchor="middle" font-size="10" fill="#BF8700">⏳ 下一步建设：分身机制（并行执行） + 成长可视化（等级/技能树） + 事件驱动（实时响应）</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- 简化的验证表格 -->
+            <div class="insight-box green">
+                <div class="insight-label">验证结论</div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 12px;">
+                    <div style="background: white; padding: 12px; border-radius: 8px; border-left: 3px solid var(--color-success);">
+                        <div style="font-size: 11px; color: var(--color-success); font-weight: 600;">AgentCore可行</div>
+                        <div style="font-size: 13px; font-weight: 500; color: var(--color-text-primary);">✓ 6/6能力模块已具备</div>
+                    </div>
+                    <div style="background: white; padding: 12px; border-radius: 8px; border-left: 3px solid #0969DA;">
+                        <div style="font-size: 11px; color: #0969DA; font-weight: 600;">Skills扩展性</div>
+                        <div style="font-size: 13px; font-weight: 500; color: var(--color-text-primary);">✓ 42+技能持续增长</div>
+                    </div>
+                    <div style="background: white; padding: 12px; border-radius: 8px; border-left: 3px solid #EC4899;">
+                        <div style="font-size: 11px; color: #EC4899; font-weight: 600;">Memory护城河</div>
+                        <div style="font-size: 13px; font-weight: 500; color: var(--color-text-primary);">✓ 17条核心记忆</div>
+                    </div>
+                    <div style="background: white; padding: 12px; border-radius: 8px; border-left: 3px solid #7C3AED;">
+                        <div style="font-size: 11px; color: #7C3AED; font-weight: 600;">知识库积累</div>
+                        <div style="font-size: 13px; font-weight: 500; color: var(--color-text-primary);">✓ 150+篇结构化文档</div>
+                    </div>
+                    <div style="background: white; padding: 12px; border-radius: 8px; border-left: 3px solid var(--color-warning);">
+                        <div style="font-size: 11px; color: var(--color-warning); font-weight: 600;">下一步重点</div>
+                        <div style="font-size: 13px; font-weight: 500; color: var(--color-text-primary);">⏳ 分身机制 + 成长可视化</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 能力实现详细分析 -->
+            <h3 class="subsection-title">能力实现详细分析</h3>
+            
+            <p>按照图中的六大模块，逐一分析每个能力的<strong>目标定位</strong>、<strong>理想实现</strong>、<strong>当前实现</strong>和<strong>后续优化方向</strong>。</p>
+
+            <!-- ==================== 1. AgentCore 6大能力模块 ==================== -->
+            <div class="insight-box green" style="margin-bottom: var(--spacing-lg);">
+                <div class="insight-label">🧠 AgentCore · 6大能力模块</div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px;">
+                    <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid #1A7F37;">
+                        <div style="font-size: 12px; font-weight: 600; color: #1A7F37; margin-bottom: 8px;">🎯 能力目标</div>
+                        <p style="font-size: 13px; color: #4B5563; margin: 0;">统一的认知内核，具备记忆、推理、规划、编排、集成、反思六大能力，作为AI分身的"大脑"。</p>
+                    </div>
+                    <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid #0969DA;">
+                        <div style="font-size: 12px; font-weight: 600; color: #0969DA; margin-bottom: 8px;">💡 理想实现</div>
+                        <ul style="font-size: 13px; color: #4B5563; margin: 0; padding-left: 16px;">
+                            <li>向量数据库 + 知识图谱的记忆系统</li>
+                            <li>显式推理链 + 可解释性</li>
+                            <li>层次化规划 + 动态重规划</li>
+                            <li>并行编排 + 自动错误恢复</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="background: white; padding: 16px; border-radius: 8px; margin-top: 12px; border-left: 4px solid #7C3AED;">
+                    <div style="font-size: 12px; font-weight: 600; color: #7C3AED; margin-bottom: 8px;">📋 当前实现 <span class="tag tag-green" style="margin-left: 8px;">✓ 6/6 已实现</span></div>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+                        <div style="background: #F0FDF4; padding: 10px; border-radius: 6px;">
+                            <div style="font-size: 11px; font-weight: 600; color: #1A7F37;">Memory 记忆</div>
+                            <div style="font-size: 10px; color: #4B5563;">JSON + Markdown存储<br>search/update_memory工具</div>
+                        </div>
+                        <div style="background: #F0FDF4; padding: 10px; border-radius: 6px;">
+                            <div style="font-size: 11px; font-weight: 600; color: #1A7F37;">Reasoning 推理</div>
+                            <div style="font-size: 10px; color: #4B5563;">Claude底层能力<br>"小无相功"思维模拟</div>
+                        </div>
+                        <div style="background: #F0FDF4; padding: 10px; border-radius: 6px;">
+                            <div style="font-size: 11px; font-weight: 600; color: #1A7F37;">Planning 规划</div>
+                            <div style="font-size: 10px; color: #4B5563;">write_todo + create_plan<br>任务状态追踪</div>
+                        </div>
+                        <div style="background: #F0FDF4; padding: 10px; border-radius: 6px;">
+                            <div style="font-size: 11px; font-weight: 600; color: #1A7F37;">Orchestration 编排</div>
+                            <div style="font-size: 10px; color: #4B5563;">Skills按需加载<br>多工具组合执行</div>
+                        </div>
+                        <div style="background: #F0FDF4; padding: 10px; border-radius: 6px;">
+                            <div style="font-size: 11px; font-weight: 600; color: #1A7F37;">Integration 集成</div>
+                            <div style="font-size: 10px; color: #4B5563;">MCP协议连接外部<br>Shell/浏览器操作</div>
+                        </div>
+                        <div style="background: #F0FDF4; padding: 10px; border-radius: 6px;">
+                            <div style="font-size: 11px; font-weight: 600; color: #1A7F37;">Reflection 反思</div>
+                            <div style="font-size: 10px; color: #4B5563;">每日6:00自动反思<br>经验自动沉淀</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: #FFFBEB; padding: 12px 16px; border-radius: 8px; margin-top: 12px; border-left: 4px solid #BF8700;">
+                    <div style="font-size: 12px; font-weight: 600; color: #BF8700; margin-bottom: 4px;">🚀 后续优化</div>
+                    <p style="font-size: 12px; color: #4B5563; margin: 0;">① 向量数据库增强语义检索 → ② 推理链可视化展示 → ③ 任务依赖分析与并行执行 → ④ 任务级反思（非仅每日）</p>
+                </div>
+            </div>
+
+            <!-- ==================== 2. Skills系统 ==================== -->
+            <div class="insight-box blue" style="margin-bottom: var(--spacing-lg);">
+                <div class="insight-label">⚡ Skills系统 · 「如何做」</div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px;">
+                    <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid #1A7F37;">
+                        <div style="font-size: 12px; font-weight: 600; color: #1A7F37; margin-bottom: 8px;">🎯 能力目标</div>
+                        <p style="font-size: 13px; color: #4B5563; margin: 0;">可插拔的技能体系，支持后天学习、无限扩展。每个Skill封装特定领域的方法论和执行流程，实现"学一次，用无数次"。</p>
+                    </div>
+                    <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid #0969DA;">
+                        <div style="font-size: 12px; font-weight: 600; color: #0969DA; margin-bottom: 8px;">💡 理想实现</div>
+                        <ul style="font-size: 13px; color: #4B5563; margin: 0; padding-left: 16px;">
+                            <li>Skill市场：远程安装/一键更新</li>
+                            <li>自动Skill生成：从成功对话抽象</li>
+                            <li>Skill依赖图：自动解析组合</li>
+                            <li>跨用户共享：社区Skill生态</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="background: white; padding: 16px; border-radius: 8px; margin-top: 12px; border-left: 4px solid #7C3AED;">
+                    <div style="font-size: 12px; font-weight: 600; color: #7C3AED; margin-bottom: 8px;">📋 当前实现 <span class="tag tag-blue" style="margin-left: 8px;">42+ 技能</span></div>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
+                        <div>
+                            <div style="font-size: 11px; font-weight: 600; color: #0969DA; margin-bottom: 6px;">存储与结构</div>
+                            <ul style="font-size: 11px; color: #4B5563; margin: 0; padding-left: 14px;">
+                                <li>~/.cf/skills/ 目录</li>
+                                <li>SKILL.md（入口）+ 支持文件</li>
+                                <li>skill.json 元信息描述</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div style="font-size: 11px; font-weight: 600; color: #0969DA; margin-bottom: 6px;">加载与创建</div>
+                            <ul style="font-size: 11px; color: #4B5563; margin: 0; padding-left: 14px;">
+                                <li>use_skill 按需加载</li>
+                                <li>渐进式披露机制</li>
+                                <li>skill-manager 辅助创建</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px;">
+                        <span class="tag tag-blue">行业调研</span>
+                        <span class="tag tag-blue">代码开发</span>
+                        <span class="tag tag-blue">GitHub部署</span>
+                        <span class="tag tag-blue">PPT制作</span>
+                        <span class="tag tag-blue">清爽报告风格</span>
+                        <span class="tag tag-blue">语雀发布</span>
+                        <span class="tag tag-blue">知识库检索</span>
+                        <span class="tag" style="background: #E0E0E0;">+31 more</span>
+                    </div>
+                </div>
+                
+                <div style="background: #FFFBEB; padding: 12px 16px; border-radius: 8px; margin-top: 12px; border-left: 4px solid #BF8700;">
+                    <div style="font-size: 12px; font-weight: 600; color: #BF8700; margin-bottom: 4px;">🚀 后续优化</div>
+                    <p style="font-size: 12px; color: #4B5563; margin: 0;">① Skill版本管理（Git集成）→ ② 预测性预加载热门Skill → ③ Skill组合推荐引擎 → ④ 标准化测试用例</p>
+                </div>
+            </div>
+
+            <!-- ==================== 3. Memory系统 ==================== -->
+            <div class="insight-box" style="margin-bottom: var(--spacing-lg); background: linear-gradient(135deg, rgba(236, 72, 153, 0.06) 0%, rgba(244, 114, 182, 0.04) 100%); border-color: rgba(236, 72, 153, 0.2); border-left-color: #EC4899;">
+                <div class="insight-label" style="color: #EC4899; background: transparent;">💗 Memory系统 · 「关于你」</div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px;">
+                    <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid #1A7F37;">
+                        <div style="font-size: 12px; font-weight: 600; color: #1A7F37; margin-bottom: 8px;">🎯 能力目标</div>
+                        <p style="font-size: 13px; color: #4B5563; margin: 0;">核心护城河。存储用户偏好、思维方式、项目规范、历史经验，让AI分身真正"了解你"，实现个性化服务。</p>
+                    </div>
+                    <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid #0969DA;">
+                        <div style="font-size: 12px; font-weight: 600; color: #0969DA; margin-bottom: 8px;">💡 理想实现</div>
+                        <ul style="font-size: 13px; color: #4B5563; margin: 0; padding-left: 16px;">
+                            <li>分层记忆：短期/工作/长期分离</li>
+                            <li>语义检索：向量数据库 + 知识图谱</li>
+                            <li>自动整合：冲突检测、遗忘曲线</li>
+                            <li>记忆强化：高频使用自动提权</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="background: white; padding: 16px; border-radius: 8px; margin-top: 12px; border-left: 4px solid #7C3AED;">
+                    <div style="font-size: 12px; font-weight: 600; color: #7C3AED; margin-bottom: 8px;">📋 当前实现 <span class="tag" style="background: rgba(236, 72, 153, 0.15); color: #EC4899; margin-left: 8px;">17条核心记忆</span></div>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
+                        <div>
+                            <div style="font-size: 11px; font-weight: 600; color: #EC4899; margin-bottom: 6px;">存储架构</div>
+                            <ul style="font-size: 11px; color: #4B5563; margin: 0; padding-left: 14px;">
+                                <li>用户级：~/.cf/memory/</li>
+                                <li>项目级：.spectra/ 目录</li>
+                                <li>JSON + Markdown 混合存储</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div style="font-size: 11px; font-weight: 600; color: #EC4899; margin-bottom: 6px;">记忆分类</div>
+                            <ul style="font-size: 11px; color: #4B5563; margin: 0; padding-left: 14px;">
+                                <li>user_info / user_hobby</li>
+                                <li>project_* / development_*</li>
+                                <li>task_flow_experience</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px;">
+                        <span class="tag" style="background: #FCE7F3; color: #EC4899;">用户身份</span>
+                        <span class="tag" style="background: #FCE7F3; color: #EC4899;">思维方式</span>
+                        <span class="tag" style="background: #FCE7F3; color: #EC4899;">工作偏好</span>
+                        <span class="tag" style="background: #FCE7F3; color: #EC4899;">日报任务</span>
+                        <span class="tag" style="background: #FCE7F3; color: #EC4899;">输出规范</span>
+                        <span class="tag" style="background: #E0E0E0;">+11 more</span>
+                    </div>
+                </div>
+                
+                <div style="background: #FFFBEB; padding: 12px 16px; border-radius: 8px; margin-top: 12px; border-left: 4px solid #BF8700;">
+                    <div style="font-size: 12px; font-weight: 600; color: #BF8700; margin-bottom: 4px;">🚀 后续优化</div>
+                    <p style="font-size: 12px; color: #4B5563; margin: 0;">① 向量数据库（Milvus/Pinecone）增强语义检索 → ② 知识图谱关联记忆网络 → ③ 自动记忆去重与合并 → ④ 情景记忆完整上下文存储</p>
+                </div>
+            </div>
+
+            <!-- ==================== 4. 知识库 ==================== -->
+            <div class="insight-box" style="margin-bottom: var(--spacing-lg); background: linear-gradient(135deg, rgba(124, 58, 237, 0.06) 0%, rgba(168, 85, 247, 0.04) 100%); border-color: rgba(124, 58, 237, 0.2); border-left-color: #7C3AED;">
+                <div class="insight-label" style="color: #7C3AED; background: transparent;">📚 知识库 · 「我知道什么」</div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px;">
+                    <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid #1A7F37;">
+                        <div style="font-size: 12px; font-weight: 600; color: #1A7F37; margin-bottom: 8px;">🎯 能力目标</div>
+                        <p style="font-size: 13px; color: #4B5563; margin: 0;">结构化的知识资产库。存储调研报告、产品方案、个人写作等沉淀内容，在任务执行时提供素材和参考。</p>
+                    </div>
+                    <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid #0969DA;">
+                        <div style="font-size: 12px; font-weight: 600; color: #0969DA; margin-bottom: 8px;">💡 理想实现</div>
+                        <ul style="font-size: 13px; color: #4B5563; margin: 0; padding-left: 16px;">
+                            <li>语义检索（RAG）：智能问答</li>
+                            <li>自动索引：摘要生成 + 版本追踪</li>
+                            <li>知识图谱：交叉引用网络</li>
+                            <li>多仓库联合：跨项目检索</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="background: white; padding: 16px; border-radius: 8px; margin-top: 12px; border-left: 4px solid #7C3AED;">
+                    <div style="font-size: 12px; font-weight: 600; color: #7C3AED; margin-bottom: 8px;">📋 当前实现 <span class="tag" style="background: rgba(124, 58, 237, 0.15); color: #7C3AED; margin-left: 8px;">150+ 篇文档</span></div>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px;">
+                        <div style="background: #EFF6FF; padding: 8px 10px; border-radius: 6px;">
+                            <div style="font-size: 10px; font-weight: 600; color: #0969DA;">🔬 AI调研</div>
+                            <div style="font-size: 9px; color: #4B5563;">AI×研发效能体系</div>
+                        </div>
+                        <div style="background: #F0FDF4; padding: 8px 10px; border-radius: 6px;">
+                            <div style="font-size: 10px; font-weight: 600; color: #166534;">📊 研发效能</div>
+                            <div style="font-size: 9px; color: #4B5563;">20+ DevOps文档</div>
+                        </div>
+                        <div style="background: #FFF7ED; padding: 8px 10px; border-radius: 6px;">
+                            <div style="font-size: 10px; font-weight: 600; color: #EA580C;">💰 金融AI</div>
+                            <div style="font-size: 9px; color: #4B5563;">幻方/数字人/量化</div>
+                        </div>
+                        <div style="background: #F5F3FF; padding: 8px 10px; border-radius: 6px;">
+                            <div style="font-size: 10px; font-weight: 600; color: #7C3AED;">✍️ 个人写作</div>
+                            <div style="font-size: 9px; color: #4B5563;">人生四问、方法论100+</div>
+                        </div>
+                        <div style="background: #ECFDF5; padding: 8px 10px; border-radius: 6px;">
+                            <div style="font-size: 10px; font-weight: 600; color: #059669;">📋 产品方案</div>
+                            <div style="font-size: 9px; color: #4B5563;">AI Workbench</div>
+                        </div>
+                        <div style="background: #FEF3C7; padding: 8px 10px; border-radius: 6px;">
+                            <div style="font-size: 10px; font-weight: 600; color: #B45309;">📈 投资笔记</div>
+                            <div style="font-size: 9px; color: #4B5563;">方伟十年投资</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 10px; font-size: 11px; color: #656D76;">
+                        <strong>检索方式：</strong>knowledge-base技能触发 → 按分类列出 / grep_search全文检索
+                    </div>
+                </div>
+                
+                <div style="background: #FFFBEB; padding: 12px 16px; border-radius: 8px; margin-top: 12px; border-left: 4px solid #BF8700;">
+                    <div style="font-size: 12px; font-weight: 600; color: #BF8700; margin-bottom: 4px;">🚀 后续优化</div>
+                    <p style="font-size: 12px; color: #4B5563; margin: 0;">① 向量嵌入实现语义检索 → ② 自动摘要与关键词提取 → ③ 多维标签系统替代目录分类 → ④ 知识热度统计与推荐</p>
+                </div>
+            </div>
+
+            <!-- ==================== 5. 外部集成 ==================== -->
+            <div class="insight-box orange" style="margin-bottom: var(--spacing-lg);">
+                <div class="insight-label">🔗 外部集成 · 连接外部世界</div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px;">
+                    <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid #1A7F37;">
+                        <div style="font-size: 12px; font-weight: 600; color: #1A7F37; margin-bottom: 8px;">🎯 能力目标</div>
+                        <p style="font-size: 13px; color: #4B5563; margin: 0;">通过MCP协议和各类工具，连接外部世界。操作GitHub、飞书、语雀、浏览器等，将AI分身的能力边界扩展到整个数字生态。</p>
+                    </div>
+                    <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid #0969DA;">
+                        <div style="font-size: 12px; font-weight: 600; color: #0969DA; margin-bottom: 8px;">💡 理想实现</div>
+                        <ul style="font-size: 13px; color: #4B5563; margin: 0; padding-left: 16px;">
+                            <li>统一API网关：标准化外部调用</li>
+                            <li>更多连接器：日历、邮件、IM等</li>
+                            <li>细粒度权限：访问控制管理</li>
+                            <li>离线模式：本地缓存降级方案</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="background: white; padding: 16px; border-radius: 8px; margin-top: 12px; border-left: 4px solid #7C3AED;">
+                    <div style="font-size: 12px; font-weight: 600; color: #7C3AED; margin-bottom: 8px;">📋 当前实现 <span class="tag tag-orange" style="margin-left: 8px;">10+ MCP工具</span></div>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 8px;">
+                        <div style="background: #FFF7ED; padding: 8px; border-radius: 6px; text-align: center;">
+                            <div style="font-size: 18px;">🐙</div>
+                            <div style="font-size: 10px; font-weight: 600; color: #EA580C;">GitHub</div>
+                        </div>
+                        <div style="background: #FFF7ED; padding: 8px; border-radius: 6px; text-align: center;">
+                            <div style="font-size: 18px;">📘</div>
+                            <div style="font-size: 10px; font-weight: 600; color: #EA580C;">飞书</div>
+                        </div>
+                        <div style="background: #FFF7ED; padding: 8px; border-radius: 6px; text-align: center;">
+                            <div style="font-size: 18px;">📝</div>
+                            <div style="font-size: 10px; font-weight: 600; color: #EA580C;">语雀</div>
+                        </div>
+                        <div style="background: #FFF7ED; padding: 8px; border-radius: 6px; text-align: center;">
+                            <div style="font-size: 18px;">🌐</div>
+                            <div style="font-size: 10px; font-weight: 600; color: #EA580C;">浏览器</div>
+                        </div>
+                        <div style="background: #FFF7ED; padding: 8px; border-radius: 6px; text-align: center;">
+                            <div style="font-size: 18px;">💻</div>
+                            <div style="font-size: 10px; font-weight: 600; color: #EA580C;">Shell</div>
+                        </div>
+                        <div style="background: #FFF7ED; padding: 8px; border-radius: 6px; text-align: center;">
+                            <div style="font-size: 18px;">📁</div>
+                            <div style="font-size: 10px; font-weight: 600; color: #EA580C;">文件系统</div>
+                        </div>
+                        <div style="background: #FFF7ED; padding: 8px; border-radius: 6px; text-align: center;">
+                            <div style="font-size: 18px;">🔍</div>
+                            <div style="font-size: 10px; font-weight: 600; color: #EA580C;">网页搜索</div>
+                        </div>
+                        <div style="background: #FFF7ED; padding: 8px; border-radius: 6px; text-align: center;">
+                            <div style="font-size: 18px;">📊</div>
+                            <div style="font-size: 10px; font-weight: 600; color: #EA580C;">KDev API</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: #FFFBEB; padding: 12px 16px; border-radius: 8px; margin-top: 12px; border-left: 4px solid #BF8700;">
+                    <div style="font-size: 12px; font-weight: 600; color: #BF8700; margin-bottom: 4px;">🚀 后续优化</div>
+                    <p style="font-size: 12px; color: #4B5563; margin: 0;">① 日历/邮件MCP连接器 → ② 统一错误处理与重试机制 → ③ 调用日志与审计 → ④ 敏感操作二次确认</p>
+                </div>
+            </div>
+
+            <!-- ==================== 6. 自动化机制 ==================== -->
+            <div class="insight-box" style="margin-bottom: var(--spacing-lg); background: linear-gradient(135deg, rgba(234, 88, 12, 0.06) 0%, rgba(245, 158, 11, 0.04) 100%); border-color: rgba(234, 88, 12, 0.2); border-left-color: #EA580C;">
+                <div class="insight-label" style="color: #EA580C; background: transparent;">⚙️ 自动化机制 · 独立运行</div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px;">
+                    <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid #1A7F37;">
+                        <div style="font-size: 12px; font-weight: 600; color: #1A7F37; margin-bottom: 8px;">🎯 能力目标</div>
+                        <p style="font-size: 13px; color: #4B5563; margin: 0;">无需用户触发，AI分身能够自主执行任务。定时反思、自动备份、主动提醒，实现从"被动响应"到"主动服务"的进化。</p>
+                    </div>
+                    <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid #0969DA;">
+                        <div style="font-size: 12px; font-weight: 600; color: #0969DA; margin-bottom: 8px;">💡 理想实现</div>
+                        <ul style="font-size: 13px; color: #4B5563; margin: 0; padding-left: 16px;">
+                            <li>事件驱动：代码提交/消息到达触发</li>
+                            <li>智能提醒：待办逾期自动提醒</li>
+                            <li>主动建议：基于上下文推荐任务</li>
+                            <li>云端运行：脱离本地IDE依赖</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="background: white; padding: 16px; border-radius: 8px; margin-top: 12px; border-left: 4px solid #7C3AED;">
+                    <div style="font-size: 12px; font-weight: 600; color: #7C3AED; margin-bottom: 8px;">📋 当前实现 <span class="tag tag-green" style="margin-left: 8px;">✓ 定时任务运行</span></div>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+                        <div style="background: #FFF7ED; padding: 10px; border-radius: 6px;">
+                            <div style="font-size: 11px; font-weight: 600; color: #EA580C;">🌅 每日反思</div>
+                            <div style="font-size: 10px; color: #4B5563;">每天6:00自动触发<br>launchd定时任务</div>
+                        </div>
+                        <div style="background: #FFF7ED; padding: 10px; border-radius: 6px;">
+                            <div style="font-size: 11px; font-weight: 600; color: #EA580C;">💾 自动备份</div>
+                            <div style="font-size: 10px; color: #4B5563;">日报后自动执行<br>GitHub私有仓库</div>
+                        </div>
+                        <div style="background: #FFF7ED; padding: 10px; border-radius: 6px;">
+                            <div style="font-size: 11px; font-weight: 600; color: #EA580C;">📋 日报生成</div>
+                            <div style="font-size: 10px; color: #4B5563;">服务+能力双维度<br>自动更新首页</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 10px; font-size: 11px; color: #656D76;">
+                        <strong>技术栈：</strong>launchd + generate_daily_report.py + sync-to-github.sh + update-homepage.sh
+                    </div>
+                </div>
+                
+                <div style="background: #FFFBEB; padding: 12px 16px; border-radius: 8px; margin-top: 12px; border-left: 4px solid #BF8700;">
+                    <div style="font-size: 12px; font-weight: 600; color: #BF8700; margin-bottom: 4px;">🚀 后续优化</div>
+                    <p style="font-size: 12px; color: #4B5563; margin: 0;">① 事件驱动（Git hook / 消息触发）→ ② 待办逾期智能提醒 → ③ 云端部署脱离本地IDE → ④ 多会话并行执行优化</p>
+                </div>
+            </div>
+
+            <!-- 三大系统关系图 -->
+            <h3 class="subsection-title">三大系统关系：Memory + Skills + 知识库</h3>
+            <p>Memory、Skills、知识库是我能力体系的三大支柱，它们各有分工、相互协作。</p>
+            
+            <div style="background: linear-gradient(135deg, #F8FAF9 0%, #F5F3FF 100%); border: 1px solid var(--color-border-light); border-radius: var(--radius-lg); padding: var(--spacing-lg); margin-bottom: var(--spacing-lg); position: relative;">
+                <span style="position: absolute; top: 12px; left: 12px; display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: rgba(124, 58, 237, 0.15); color: #7C3AED; border-radius: var(--radius-full); font-size: 11px; font-weight: 600;">📐 三大系统关系</span>
+                <div style="padding-top: 32px; text-align: center; overflow-x: auto;">
+                    <svg viewBox="0 0 800 360" style="max-width: 800px; width: 100%; min-width: 600px;">
+                        <defs>
+                            <linearGradient id="memGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#EC4899"/>
+                                <stop offset="100%" stop-color="#F472B6"/>
+                            </linearGradient>
+                            <linearGradient id="skillGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#0969DA"/>
+                                <stop offset="100%" stop-color="#54AEFF"/>
+                            </linearGradient>
+                            <linearGradient id="kbGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#7C3AED"/>
+                                <stop offset="100%" stop-color="#A855F7"/>
+                            </linearGradient>
+                            <filter id="triShadow" x="-10%" y="-10%" width="120%" height="130%">
+                                <feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity="0.12"/>
+                            </filter>
+                        </defs>
+                        
+                        <!-- 标题 -->
+                        <text x="400" y="25" text-anchor="middle" font-size="14" font-weight="700" fill="#1F2328">我的三大能力支柱</text>
+                        
+                        <!-- Memory -->
+                        <g transform="translate(50, 60)">
+                            <rect width="200" height="180" rx="15" fill="url(#memGrad2)" filter="url(#triShadow)"/>
+                            <text x="100" y="30" text-anchor="middle" font-size="13" font-weight="700" fill="white">💗 Memory 记忆</text>
+                            <text x="100" y="50" text-anchor="middle" font-size="10" fill="white" opacity="0.9">「我了解你」</text>
+                            
+                            <g transform="translate(15, 65)">
+                                <rect width="170" height="22" rx="4" fill="white" opacity="0.9"/>
+                                <text x="85" y="15" text-anchor="middle" font-size="9" fill="#EC4899">用户偏好与习惯</text>
+                            </g>
+                            <g transform="translate(15, 92)">
+                                <rect width="170" height="22" rx="4" fill="white" opacity="0.9"/>
+                                <text x="85" y="15" text-anchor="middle" font-size="9" fill="#EC4899">项目规范与约束</text>
+                            </g>
+                            <g transform="translate(15, 119)">
+                                <rect width="170" height="22" rx="4" fill="white" opacity="0.9"/>
+                                <text x="85" y="15" text-anchor="middle" font-size="9" fill="#EC4899">历史对话与经验</text>
+                            </g>
+                            
+                            <text x="100" y="165" text-anchor="middle" font-size="10" font-weight="600" fill="white">17条核心记忆</text>
+                        </g>
+                        
+                        <!-- Skills -->
+                        <g transform="translate(300, 60)">
+                            <rect width="200" height="180" rx="15" fill="url(#skillGrad3)" filter="url(#triShadow)"/>
+                            <text x="100" y="30" text-anchor="middle" font-size="13" font-weight="700" fill="white">⚡ Skills 技能</text>
+                            <text x="100" y="50" text-anchor="middle" font-size="10" fill="white" opacity="0.9">「我能做什么」</text>
+                            
+                            <g transform="translate(15, 65)">
+                                <rect width="170" height="22" rx="4" fill="white" opacity="0.9"/>
+                                <text x="85" y="15" text-anchor="middle" font-size="9" fill="#0969DA">行业调研 / 代码开发</text>
+                            </g>
+                            <g transform="translate(15, 92)">
+                                <rect width="170" height="22" rx="4" fill="white" opacity="0.9"/>
+                                <text x="85" y="15" text-anchor="middle" font-size="9" fill="#0969DA">PPT制作 / GitHub部署</text>
+                            </g>
+                            <g transform="translate(15, 119)">
+                                <rect width="170" height="22" rx="4" fill="white" opacity="0.9"/>
+                                <text x="85" y="15" text-anchor="middle" font-size="9" fill="#0969DA">MCP工具 / 浏览器操作</text>
+                            </g>
+                            
+                            <text x="100" y="165" text-anchor="middle" font-size="10" font-weight="600" fill="white">42+ 可插拔技能</text>
+                        </g>
+                        
+                        <!-- 知识库 -->
+                        <g transform="translate(550, 60)">
+                            <rect width="200" height="180" rx="15" fill="url(#kbGrad)" filter="url(#triShadow)"/>
+                            <text x="100" y="30" text-anchor="middle" font-size="13" font-weight="700" fill="white">📚 知识库</text>
+                            <text x="100" y="50" text-anchor="middle" font-size="10" fill="white" opacity="0.9">「我知道什么」</text>
+                            
+                            <g transform="translate(15, 65)">
+                                <rect width="170" height="22" rx="4" fill="white" opacity="0.9"/>
+                                <text x="85" y="15" text-anchor="middle" font-size="9" fill="#7C3AED">AI调研 / 研发效能</text>
+                            </g>
+                            <g transform="translate(15, 92)">
+                                <rect width="170" height="22" rx="4" fill="white" opacity="0.9"/>
+                                <text x="85" y="15" text-anchor="middle" font-size="9" fill="#7C3AED">用户写作 / 思维体系</text>
+                            </g>
+                            <g transform="translate(15, 119)">
+                                <rect width="170" height="22" rx="4" fill="white" opacity="0.9"/>
+                                <text x="85" y="15" text-anchor="middle" font-size="9" fill="#7C3AED">产品方案 / 投资笔记</text>
+                            </g>
+                            
+                            <text x="100" y="165" text-anchor="middle" font-size="10" font-weight="600" fill="white">100+ 篇文档</text>
+                        </g>
+                        
+                        <!-- 连接线和说明 -->
+                        <path d="M250 150 L300 150" stroke="#D0D7DE" stroke-width="2" stroke-dasharray="4,2" fill="none"/>
+                        <path d="M500 150 L550 150" stroke="#D0D7DE" stroke-width="2" stroke-dasharray="4,2" fill="none"/>
+                        
+                        <!-- 底部对比说明 -->
+                        <g transform="translate(50, 265)">
+                            <rect width="700" height="80" rx="10" fill="#F8FAFC" stroke="#E2E8F0"/>
+                            <text x="350" y="22" text-anchor="middle" font-size="11" font-weight="600" fill="#1F2328">三者的分工与协作</text>
+                            
+                            <g transform="translate(20, 35)">
+                                <circle cx="8" cy="8" r="6" fill="#EC4899"/>
+                                <text x="20" y="12" font-size="9" fill="#4B5563"><tspan font-weight="600">Memory</tspan>：动态的、个性化的、持续更新的「关于你」的记忆</text>
+                            </g>
+                            <g transform="translate(20, 52)">
+                                <circle cx="8" cy="8" r="6" fill="#0969DA"/>
+                                <text x="20" y="12" font-size="9" fill="#4B5563"><tspan font-weight="600">Skills</tspan>：可执行的能力，「如何做」的方法论和流程</text>
+                            </g>
+                            <g transform="translate(350, 35)">
+                                <circle cx="8" cy="8" r="6" fill="#7C3AED"/>
+                                <text x="20" y="12" font-size="9" fill="#4B5563"><tspan font-weight="600">知识库</tspan>：静态的、结构化的、沉淀下来的「知识资产」</text>
+                            </g>
+                            <g transform="translate(350, 52)">
+                                <circle cx="8" cy="8" r="6" fill="#1A7F37"/>
+                                <text x="20" y="12" font-size="9" fill="#4B5563"><tspan font-weight="600">协作</tspan>：任务执行时，Memory提供偏好 + Skills提供方法 + 知识库提供素材</text>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- 用户任务执行流程图 -->
+            <h3 class="subsection-title">任务执行流程：不同任务如何调用不同能力</h3>
+            <p>下图展示从用户输入任务到最终输出的完整流程，以及不同类型任务如何调用不同的能力模块。</p>
+            
+            <div style="background: linear-gradient(135deg, #F8FAF9 0%, #FFF7ED 100%); border: 1px solid var(--color-border-light); border-radius: var(--radius-lg); padding: var(--spacing-lg); margin-bottom: var(--spacing-lg); position: relative;">
+                <span style="position: absolute; top: 12px; left: 12px; display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: rgba(234, 88, 12, 0.15); color: #EA580C; border-radius: var(--radius-full); font-size: 11px; font-weight: 600;">🔄 任务执行流程</span>
+                <div style="padding-top: 32px; text-align: center; overflow-x: auto;">
+                    <svg viewBox="0 0 950 520" style="max-width: 950px; width: 100%; min-width: 700px;">
+                        <defs>
+                            <linearGradient id="userGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#7C3AED"/>
+                                <stop offset="100%" stop-color="#A855F7"/>
+                            </linearGradient>
+                            <linearGradient id="coreGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#1A7F37"/>
+                                <stop offset="100%" stop-color="#2DA44E"/>
+                            </linearGradient>
+                            <linearGradient id="skillGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#0969DA"/>
+                                <stop offset="100%" stop-color="#54AEFF"/>
+                            </linearGradient>
+                            <linearGradient id="memGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#EC4899"/>
+                                <stop offset="100%" stop-color="#F472B6"/>
+                            </linearGradient>
+                            <linearGradient id="kbGradFlow" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#7C3AED"/>
+                                <stop offset="100%" stop-color="#A855F7"/>
+                            </linearGradient>
+                            <linearGradient id="outputGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#EA580C"/>
+                                <stop offset="100%" stop-color="#F59E0B"/>
+                            </linearGradient>
+                            <filter id="flowShadow" x="-10%" y="-10%" width="120%" height="130%">
+                                <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.12"/>
+                            </filter>
+                            <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#1A7F37"/>
+                            </marker>
+                            <marker id="arrowBlue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#0969DA"/>
+                            </marker>
+                            <marker id="arrowOrange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#EA580C"/>
+                            </marker>
+                        </defs>
+                        
+                        <!-- ==================== 顶部：用户输入 ==================== -->
+                        <g transform="translate(375, 10)">
+                            <rect width="200" height="50" rx="25" fill="url(#userGrad)" filter="url(#flowShadow)"/>
+                            <text x="100" y="22" text-anchor="middle" font-size="13" font-weight="700" fill="white">👨‍💻 用户输入任务</text>
+                            <text x="100" y="38" text-anchor="middle" font-size="10" fill="white" opacity="0.9">"帮我做个行业调研"</text>
+                        </g>
+                        
+                        <!-- 箭头：用户→AgentCore -->
+                        <path d="M475 60 L475 90" stroke="#7C3AED" stroke-width="2" fill="none" marker-end="url(#arrowGreen)"/>
+                        
+                        <!-- ==================== AgentCore 处理区 ==================== -->
+                        <g transform="translate(200, 95)">
+                            <rect width="550" height="120" rx="15" fill="url(#coreGrad2)" filter="url(#flowShadow)"/>
+                            <text x="275" y="25" text-anchor="middle" font-size="14" font-weight="800" fill="white">🧠 AgentCore 统一认知内核</text>
+                            
+                            <!-- 6个能力模块 -->
+                            <g transform="translate(20, 40)">
+                                <rect width="75" height="35" rx="5" fill="white" opacity="0.95"/>
+                                <text x="37" y="15" text-anchor="middle" font-size="8" font-weight="600" fill="#1A7F37">Memory</text>
+                                <text x="37" y="27" text-anchor="middle" font-size="7" fill="#4B5563">记忆检索</text>
+                            </g>
+                            <g transform="translate(105, 40)">
+                                <rect width="75" height="35" rx="5" fill="white" opacity="0.95"/>
+                                <text x="37" y="15" text-anchor="middle" font-size="8" font-weight="600" fill="#1A7F37">Reasoning</text>
+                                <text x="37" y="27" text-anchor="middle" font-size="7" fill="#4B5563">意图理解</text>
+                            </g>
+                            <g transform="translate(190, 40)">
+                                <rect width="75" height="35" rx="5" fill="white" opacity="0.95"/>
+                                <text x="37" y="15" text-anchor="middle" font-size="8" font-weight="600" fill="#1A7F37">Planning</text>
+                                <text x="37" y="27" text-anchor="middle" font-size="7" fill="#4B5563">任务规划</text>
+                            </g>
+                            <g transform="translate(275, 40)">
+                                <rect width="75" height="35" rx="5" fill="white" opacity="0.95"/>
+                                <text x="37" y="15" text-anchor="middle" font-size="8" font-weight="600" fill="#1A7F37">Orchestr</text>
+                                <text x="37" y="27" text-anchor="middle" font-size="7" fill="#4B5563">能力编排</text>
+                            </g>
+                            <g transform="translate(360, 40)">
+                                <rect width="75" height="35" rx="5" fill="white" opacity="0.95"/>
+                                <text x="37" y="15" text-anchor="middle" font-size="8" font-weight="600" fill="#1A7F37">Integrat</text>
+                                <text x="37" y="27" text-anchor="middle" font-size="7" fill="#4B5563">外部集成</text>
+                            </g>
+                            <g transform="translate(445, 40)">
+                                <rect width="75" height="35" rx="5" fill="white" opacity="0.95"/>
+                                <text x="37" y="15" text-anchor="middle" font-size="8" font-weight="600" fill="#1A7F37">Reflect</text>
+                                <text x="37" y="27" text-anchor="middle" font-size="7" fill="#4B5563">自我反思</text>
+                            </g>
+                            
+                            <!-- 处理流程说明 -->
+                            <text x="275" y="100" text-anchor="middle" font-size="10" fill="white" opacity="0.9">① 检索Memory/知识库 → ② 理解意图 → ③ 规划步骤 → ④ 选择Skill → ⑤ 调用工具 → ⑥ 沉淀经验</text>
+                        </g>
+                        
+                        <!-- 箭头：AgentCore→分支 -->
+                        <path d="M475 215 L475 245" stroke="#1A7F37" stroke-width="2" fill="none"/>
+                        <text x="475" y="235" text-anchor="middle" font-size="9" fill="#656D76">根据任务类型选择Skill</text>
+                        
+                        <!-- ==================== 三条任务路径 ==================== -->
+                        <!-- 分支点 -->
+                        <circle cx="475" cy="260" r="8" fill="#1A7F37"/>
+                        
+                        <!-- 左分支：代码任务 -->
+                        <path d="M467 260 L200 260 L200 290" stroke="#0969DA" stroke-width="2" fill="none" marker-end="url(#arrowBlue)"/>
+                        <g transform="translate(100, 295)">
+                            <rect width="200" height="90" rx="10" fill="#EFF6FF" stroke="#0969DA" filter="url(#flowShadow)"/>
+                            <text x="100" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="#0969DA">💻 代码类任务</text>
+                            <text x="100" y="38" text-anchor="middle" font-size="9" fill="#4B5563">"帮我写个函数"</text>
+                            <text x="20" y="58" font-size="8" fill="#4B5563">调用Skills：</text>
+                            <text x="20" y="72" font-size="8" fill="#0969DA">• 代码开发 • CR审查 • 测试用例</text>
+                            <text x="20" y="84" font-size="8" fill="#0969DA">• GitHub部署 • 文件操作</text>
+                        </g>
+                        
+                        <!-- 中间分支：调研任务 -->
+                        <path d="M475 268 L475 290" stroke="#1A7F37" stroke-width="2" fill="none" marker-end="url(#arrowGreen)"/>
+                        <g transform="translate(375, 295)">
+                            <rect width="200" height="90" rx="10" fill="#F0FDF4" stroke="#1A7F37" filter="url(#flowShadow)"/>
+                            <text x="100" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="#1A7F37">🔍 调研类任务</text>
+                            <text x="100" y="38" text-anchor="middle" font-size="9" fill="#4B5563">"做个行业调研"</text>
+                            <text x="20" y="58" font-size="8" fill="#4B5563">调用Skills + 知识库：</text>
+                            <text x="20" y="72" font-size="8" fill="#1A7F37">• 行业调研 • 网页搜索 • 📚知识库</text>
+                            <text x="20" y="84" font-size="8" fill="#1A7F37">• 清爽报告风格 • 语雀发布</text>
+                        </g>
+                        
+                        <!-- 右分支：内容生成任务 -->
+                        <path d="M483 260 L750 260 L750 290" stroke="#EC4899" stroke-width="2" fill="none" marker-end="url(#arrowOrange)"/>
+                        <g transform="translate(650, 295)">
+                            <rect width="200" height="90" rx="10" fill="#FCE7F3" stroke="#EC4899" filter="url(#flowShadow)"/>
+                            <text x="100" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="#BE185D">🎨 内容生成任务</text>
+                            <text x="100" y="38" text-anchor="middle" font-size="9" fill="#4B5563">"做个PPT/海报"</text>
+                            <text x="20" y="58" font-size="8" fill="#4B5563">调用Skills：</text>
+                            <text x="20" y="72" font-size="8" fill="#EC4899">• PPT制作 • 图片生成 • 视频生成</text>
+                            <text x="20" y="84" font-size="8" fill="#EC4899">• 前端设计 • 主题工厂</text>
+                        </g>
+                        
+                        <!-- ==================== Memory 双向交互（左侧） ==================== -->
+                        <g transform="translate(20, 120)">
+                            <rect width="110" height="150" rx="10" fill="url(#memGrad)" filter="url(#flowShadow)"/>
+                            <text x="55" y="20" text-anchor="middle" font-size="10" font-weight="700" fill="white">💗 Memory</text>
+                            <text x="55" y="34" text-anchor="middle" font-size="8" fill="white" opacity="0.9">记忆系统</text>
+                            
+                            <g transform="translate(8, 45)">
+                                <rect width="94" height="18" rx="3" fill="white" opacity="0.9"/>
+                                <text x="47" y="12" text-anchor="middle" font-size="7" fill="#EC4899">用户偏好</text>
+                            </g>
+                            <g transform="translate(8, 67)">
+                                <rect width="94" height="18" rx="3" fill="white" opacity="0.9"/>
+                                <text x="47" y="12" text-anchor="middle" font-size="7" fill="#EC4899">项目规范</text>
+                            </g>
+                            <g transform="translate(8, 89)">
+                                <rect width="94" height="18" rx="3" fill="white" opacity="0.9"/>
+                                <text x="47" y="12" text-anchor="middle" font-size="7" fill="#EC4899">开发/任务经验</text>
+                            </g>
+                            
+                            <text x="55" y="130" text-anchor="middle" font-size="8" fill="white" opacity="0.9">16条核心记忆</text>
+                            <text x="55" y="143" text-anchor="middle" font-size="7" fill="white" opacity="0.8">「关于你」</text>
+                        </g>
+                        
+                        <!-- Memory双向箭头 -->
+                        <path d="M130 155 L200 135" stroke="#EC4899" stroke-width="1.5" stroke-dasharray="4,2" fill="none"/>
+                        <text x="155" y="138" font-size="7" fill="#EC4899">检索</text>
+                        <path d="M200 180 L130 220" stroke="#EC4899" stroke-width="1.5" stroke-dasharray="4,2" fill="none"/>
+                        <text x="155" y="210" font-size="7" fill="#EC4899">沉淀</text>
+                        
+                        <!-- ==================== 知识库（右侧） ==================== -->
+                        <g transform="translate(820, 120)">
+                            <rect width="110" height="150" rx="10" fill="url(#kbGradFlow)" filter="url(#flowShadow)"/>
+                            <text x="55" y="20" text-anchor="middle" font-size="10" font-weight="700" fill="white">📚 知识库</text>
+                            <text x="55" y="34" text-anchor="middle" font-size="8" fill="white" opacity="0.9">知识资产</text>
+                            
+                            <g transform="translate(8, 45)">
+                                <rect width="94" height="18" rx="3" fill="white" opacity="0.9"/>
+                                <text x="47" y="12" text-anchor="middle" font-size="7" fill="#7C3AED">AI调研报告</text>
+                            </g>
+                            <g transform="translate(8, 67)">
+                                <rect width="94" height="18" rx="3" fill="white" opacity="0.9"/>
+                                <text x="47" y="12" text-anchor="middle" font-size="7" fill="#7C3AED">研发效能文档</text>
+                            </g>
+                            <g transform="translate(8, 89)">
+                                <rect width="94" height="18" rx="3" fill="white" opacity="0.9"/>
+                                <text x="47" y="12" text-anchor="middle" font-size="7" fill="#7C3AED">个人写作/方案</text>
+                            </g>
+                            
+                            <text x="55" y="130" text-anchor="middle" font-size="8" fill="white" opacity="0.9">100+篇文档</text>
+                            <text x="55" y="143" text-anchor="middle" font-size="7" fill="white" opacity="0.8">「我知道什么」</text>
+                        </g>
+                        
+                        <!-- 知识库双向箭头 -->
+                        <path d="M820 155 L750 135" stroke="#7C3AED" stroke-width="1.5" stroke-dasharray="4,2" fill="none"/>
+                        <text x="795" y="138" font-size="7" fill="#7C3AED">引用</text>
+                        <path d="M750 180 L820 220" stroke="#7C3AED" stroke-width="1.5" stroke-dasharray="4,2" fill="none"/>
+                        <text x="795" y="210" font-size="7" fill="#7C3AED">沉淀</text>
+                        
+                        <!-- ==================== 汇聚到输出 ==================== -->
+                        <path d="M200 385 L200 420 L475 440" stroke="#0969DA" stroke-width="2" fill="none"/>
+                        <path d="M475 385 L475 440" stroke="#1A7F37" stroke-width="2" fill="none"/>
+                        <path d="M750 385 L750 420 L475 440" stroke="#EC4899" stroke-width="2" fill="none"/>
+                        
+                        <!-- 输出节点 -->
+                        <g transform="translate(300, 445)">
+                            <rect width="350" height="60" rx="30" fill="url(#outputGrad)" filter="url(#flowShadow)"/>
+                            <text x="175" y="25" text-anchor="middle" font-size="14" font-weight="800" fill="white">✅ 任务完成输出</text>
+                            <text x="175" y="45" text-anchor="middle" font-size="10" fill="white" opacity="0.9">代码/报告/PPT/部署链接 + 经验沉淀到Memory/知识库</text>
+                        </g>
+                    </svg>
+                </div>
+                <p style="text-align: center; font-size: 12px; color: var(--color-text-muted); margin-top: var(--spacing-md); font-style: italic;">
+                    无论什么类型的任务，都经过统一的AgentCore处理，按需调用Skills，从Memory获取偏好、从知识库获取素材，最终沉淀经验
+                </p>
+            </div>
+
+            <!-- 多层记忆系统运行原理图 -->
+            <h3 class="subsection-title">多层记忆系统：任务处理时如何调用不同存储</h3>
+            <p>下图展示当一个任务触发后，AI分身如何协调使用<strong>自动注入层</strong>、<strong>按需检索层</strong>、<strong>主动获取层</strong>三层记忆系统，确保输出准确且符合用户偏好。</p>
+            
+            <div style="background: linear-gradient(135deg, #FFF7ED 0%, #F0FDF4 50%, #EFF6FF 100%); border: 1px solid var(--color-border-light); border-radius: var(--radius-lg); padding: var(--spacing-lg); margin-bottom: var(--spacing-lg); position: relative;">
+                <span style="position: absolute; top: 12px; left: 12px; display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: rgba(236, 72, 153, 0.15); color: #EC4899; border-radius: var(--radius-full); font-size: 11px; font-weight: 600;">🧠 多层记忆系统</span>
+                <div style="padding-top: 32px; text-align: center; overflow-x: auto;">
+                    <svg viewBox="0 0 950 620" style="max-width: 950px; width: 100%; min-width: 700px;">
+                        <defs>
+                            <linearGradient id="layer1Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#DC2626"/>
+                                <stop offset="100%" stop-color="#F87171"/>
+                            </linearGradient>
+                            <linearGradient id="layer2Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#F59E0B"/>
+                                <stop offset="100%" stop-color="#FBBF24"/>
+                            </linearGradient>
+                            <linearGradient id="layer3Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#10B981"/>
+                                <stop offset="100%" stop-color="#34D399"/>
+                            </linearGradient>
+                            <linearGradient id="taskInputGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#7C3AED"/>
+                                <stop offset="100%" stop-color="#A855F7"/>
+                            </linearGradient>
+                            <linearGradient id="processGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#1A7F37"/>
+                                <stop offset="100%" stop-color="#2DA44E"/>
+                            </linearGradient>
+                            <filter id="memoryShadow2" x="-10%" y="-10%" width="120%" height="130%">
+                                <feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity="0.15"/>
+                            </filter>
+                            <marker id="arrowPurple3" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#7C3AED"/>
+                            </marker>
+                            <marker id="arrowRed3" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#DC2626"/>
+                            </marker>
+                            <marker id="arrowYellow3" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#F59E0B"/>
+                            </marker>
+                            <marker id="arrowGreen4" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#10B981"/>
+                            </marker>
+                        </defs>
+                        
+                        <!-- 顶部：任务输入 -->
+                        <g transform="translate(375, 10)">
+                            <rect width="200" height="50" rx="25" fill="url(#taskInputGrad2)" filter="url(#memoryShadow2)"/>
+                            <text x="100" y="22" text-anchor="middle" font-size="13" font-weight="700" fill="white">👨‍💻 任务触发</text>
+                            <text x="100" y="38" text-anchor="middle" font-size="10" fill="white" opacity="0.9">"帮我部署到GitHub"</text>
+                        </g>
+                        
+                        <path d="M475 60 L475 85" stroke="#7C3AED" stroke-width="2" fill="none" marker-end="url(#arrowPurple3)"/>
+                        
+                        <!-- 中央：AgentCore处理引擎 -->
+                        <g transform="translate(300, 90)">
+                            <rect width="350" height="60" rx="12" fill="url(#processGrad3)" filter="url(#memoryShadow2)"/>
+                            <text x="175" y="25" text-anchor="middle" font-size="14" font-weight="800" fill="white">🧠 AgentCore 处理引擎</text>
+                            <text x="175" y="45" text-anchor="middle" font-size="10" fill="white" opacity="0.9">意图理解 → 记忆检索 → 规划 → 执行 → 沉淀</text>
+                        </g>
+                        
+                        <!-- 第一层：自动注入层（红色） -->
+                        <g transform="translate(40, 180)">
+                            <rect width="280" height="180" rx="14" fill="url(#layer1Grad)" filter="url(#memoryShadow2)"/>
+                            <text x="140" y="25" text-anchor="middle" font-size="13" font-weight="800" fill="white">🔴 第一层：自动注入</text>
+                            <text x="140" y="42" text-anchor="middle" font-size="9" fill="white" opacity="0.9">每次对话必带，无需检索</text>
+                            
+                            <g transform="translate(15, 55)">
+                                <rect width="250" height="32" rx="6" fill="white" opacity="0.95"/>
+                                <text x="125" y="14" text-anchor="middle" font-size="9" font-weight="600" fill="#DC2626">📋 System Prompt · 用户记忆</text>
+                                <text x="125" y="26" text-anchor="middle" font-size="8" fill="#4B5563">16条核心记忆（身份/偏好/工作方式）</text>
+                            </g>
+                            <g transform="translate(15, 92)">
+                                <rect width="250" height="32" rx="6" fill="white" opacity="0.95"/>
+                                <text x="125" y="14" text-anchor="middle" font-size="9" font-weight="600" fill="#DC2626">⚠️ User Constraints · 约束规则</text>
+                                <text x="125" y="26" text-anchor="middle" font-size="8" fill="#4B5563">用户明确的禁止/必须遵守的规则</text>
+                            </g>
+                            <g transform="translate(15, 129)">
+                                <rect width="250" height="32" rx="6" fill="white" opacity="0.95"/>
+                                <text x="125" y="14" text-anchor="middle" font-size="9" font-weight="600" fill="#DC2626">💬 Current Context · 当前上下文</text>
+                                <text x="125" y="26" text-anchor="middle" font-size="8" fill="#4B5563">本次对话的所有历史消息</text>
+                            </g>
+                            
+                            <text x="140" y="172" text-anchor="middle" font-size="8" fill="white" opacity="0.8">✓ 自动加载，确保身份延续性</text>
+                        </g>
+                        
+                        <path d="M320 195 L300 150" stroke="#DC2626" stroke-width="2" stroke-dasharray="6,3" fill="none" marker-end="url(#arrowRed3)"/>
+                        <text x="295" y="178" font-size="8" fill="#DC2626" font-weight="600">必带</text>
+                        
+                        <!-- 第二层：按需检索层（黄色） -->
+                        <g transform="translate(335, 180)">
+                            <rect width="280" height="180" rx="14" fill="url(#layer2Grad)" filter="url(#memoryShadow2)"/>
+                            <text x="140" y="25" text-anchor="middle" font-size="13" font-weight="800" fill="white">🟡 第二层：按需检索</text>
+                            <text x="140" y="42" text-anchor="middle" font-size="9" fill="white" opacity="0.9">任务需要时主动检索</text>
+                            
+                            <g transform="translate(15, 55)">
+                                <rect width="250" height="40" rx="6" fill="white" opacity="0.95"/>
+                                <text x="125" y="14" text-anchor="middle" font-size="9" font-weight="600" fill="#B45309">📜 Conversation Summaries</text>
+                                <text x="125" y="26" text-anchor="middle" font-size="8" fill="#4B5563">近期对话摘要（项目记忆）</text>
+                                <text x="125" y="36" text-anchor="middle" font-size="7" fill="#656D76">复用历史工作成果</text>
+                            </g>
+                            <g transform="translate(15, 102)">
+                                <rect width="250" height="40" rx="6" fill="white" opacity="0.95"/>
+                                <text x="125" y="14" text-anchor="middle" font-size="9" font-weight="600" fill="#B45309">🔍 search_memory 深度检索</text>
+                                <text x="125" y="26" text-anchor="middle" font-size="8" fill="#4B5563">按类别+关键词检索历史记忆</text>
+                                <text x="125" y="36" text-anchor="middle" font-size="7" fill="#656D76">跨会话的经验复用</text>
+                            </g>
+                            
+                            <text x="140" y="160" text-anchor="middle" font-size="8" fill="white" opacity="0.8">✓ 任务触发时检索，避免重复工作</text>
+                            <text x="140" y="172" text-anchor="middle" font-size="8" fill="white" opacity="0.8">✓ 决策时机：理解阶段+规划阶段</text>
+                        </g>
+                        
+                        <path d="M475 180 L475 150" stroke="#F59E0B" stroke-width="2" stroke-dasharray="6,3" fill="none" marker-end="url(#arrowYellow3)"/>
+                        <text x="485" y="168" font-size="8" fill="#B45309" font-weight="600">按需</text>
+                        
+                        <!-- 第三层：主动获取层（绿色） -->
+                        <g transform="translate(630, 180)">
+                            <rect width="280" height="180" rx="14" fill="url(#layer3Grad)" filter="url(#memoryShadow2)"/>
+                            <text x="140" y="25" text-anchor="middle" font-size="13" font-weight="800" fill="white">🟢 第三层：主动获取</text>
+                            <text x="140" y="42" text-anchor="middle" font-size="9" fill="white" opacity="0.9">专业任务时加载专业知识</text>
+                            
+                            <g transform="translate(15, 55)">
+                                <rect width="250" height="40" rx="6" fill="white" opacity="0.95"/>
+                                <text x="125" y="14" text-anchor="middle" font-size="9" font-weight="600" fill="#047857">📚 Knowledge Base · 知识库</text>
+                                <text x="125" y="26" text-anchor="middle" font-size="8" fill="#4B5563">150+ 领域文档（调研/方案/规范）</text>
+                                <text x="125" y="36" text-anchor="middle" font-size="7" fill="#656D76">领域知识支撑</text>
+                            </g>
+                            <g transform="translate(15, 102)">
+                                <rect width="250" height="40" rx="6" fill="white" opacity="0.95"/>
+                                <text x="125" y="14" text-anchor="middle" font-size="9" font-weight="600" fill="#047857">⚡ Skills · 技能系统</text>
+                                <text x="125" y="26" text-anchor="middle" font-size="8" fill="#4B5563">38+ 可插拔技能（调研/部署/PPT...）</text>
+                                <text x="125" y="36" text-anchor="middle" font-size="7" fill="#656D76">「如何做」的专业指令</text>
+                            </g>
+                            
+                            <text x="140" y="160" text-anchor="middle" font-size="8" fill="white" opacity="0.8">✓ 任务类型匹配时加载</text>
+                            <text x="140" y="172" text-anchor="middle" font-size="8" fill="white" opacity="0.8">✓ use_skill / read_file 触发</text>
+                        </g>
+                        
+                        <path d="M630 195 L650 150" stroke="#10B981" stroke-width="2" stroke-dasharray="6,3" fill="none" marker-end="url(#arrowGreen4)"/>
+                        <text x="655" y="178" font-size="8" fill="#047857" font-weight="600">专业</text>
+                        
+                        <!-- 决策优先级 -->
+                        <g transform="translate(150, 380)">
+                            <rect width="650" height="70" rx="12" fill="#F8FAFC" stroke="#E2E8F0" filter="url(#memoryShadow2)"/>
+                            <text x="325" y="22" text-anchor="middle" font-size="12" font-weight="700" fill="#1E293B">⚖️ 决策优先级（冲突时谁说了算）</text>
+                            
+                            <g transform="translate(30, 35)">
+                                <rect width="130" height="28" rx="6" fill="#FEE2E2"/>
+                                <text x="65" y="18" text-anchor="middle" font-size="10" font-weight="600" fill="#DC2626">① 用户记忆/约束</text>
+                            </g>
+                            <text x="175" y="53" font-size="14" fill="#94A3B8">></text>
+                            <g transform="translate(195, 35)">
+                                <rect width="130" height="28" rx="6" fill="#FEF3C7"/>
+                                <text x="65" y="18" text-anchor="middle" font-size="10" font-weight="600" fill="#B45309">② 当前上下文</text>
+                            </g>
+                            <text x="340" y="53" font-size="14" fill="#94A3B8">></text>
+                            <g transform="translate(360, 35)">
+                                <rect width="130" height="28" rx="6" fill="#D1FAE5"/>
+                                <text x="65" y="18" text-anchor="middle" font-size="10" font-weight="600" fill="#047857">③ 技能指令</text>
+                            </g>
+                            <text x="505" y="53" font-size="14" fill="#94A3B8">></text>
+                            <g transform="translate(525, 35)">
+                                <rect width="100" height="28" rx="6" fill="#F1F5F9"/>
+                                <text x="50" y="18" text-anchor="middle" font-size="10" font-weight="600" fill="#64748B">④ 默认行为</text>
+                            </g>
+                        </g>
+                        
+                        <!-- 执行示例 -->
+                        <g transform="translate(50, 465)">
+                            <rect width="850" height="140" rx="12" fill="#FFFBEB" stroke="#FCD34D" filter="url(#memoryShadow2)"/>
+                            <text x="425" y="22" text-anchor="middle" font-size="12" font-weight="700" fill="#92400E">💡 实际执行示例："帮我部署到GitHub"</text>
+                            
+                            <g transform="translate(20, 38)">
+                                <circle cx="15" cy="15" r="15" fill="#DC2626"/>
+                                <text x="15" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="white">1</text>
+                                <text x="40" y="12" font-size="9" font-weight="600" fill="#1E293B">自动注入</text>
+                                <text x="40" y="25" font-size="8" fill="#4B5563">加载身份、约束、上下文</text>
+                            </g>
+                            <g transform="translate(180, 38)">
+                                <circle cx="15" cy="15" r="15" fill="#F59E0B"/>
+                                <text x="15" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="white">2</text>
+                                <text x="40" y="12" font-size="9" font-weight="600" fill="#1E293B">检索历史</text>
+                                <text x="40" y="25" font-size="8" fill="#4B5563">查近期对话：已有仓库？</text>
+                            </g>
+                            <g transform="translate(340, 38)">
+                                <circle cx="15" cy="15" r="15" fill="#10B981"/>
+                                <text x="15" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="white">3</text>
+                                <text x="40" y="12" font-size="9" font-weight="600" fill="#1E293B">加载技能</text>
+                                <text x="40" y="25" font-size="8" fill="#4B5563">use_skill(github-deploy)</text>
+                            </g>
+                            <g transform="translate(510, 38)">
+                                <circle cx="15" cy="15" r="15" fill="#0EA5E9"/>
+                                <text x="15" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="white">4</text>
+                                <text x="40" y="12" font-size="9" font-weight="600" fill="#1E293B">执行部署</text>
+                                <text x="40" y="25" font-size="8" fill="#4B5563">按技能指令+上下文执行</text>
+                            </g>
+                            <g transform="translate(680, 38)">
+                                <circle cx="15" cy="15" r="15" fill="#8B5CF6"/>
+                                <text x="15" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="white">5</text>
+                                <text x="40" y="12" font-size="9" font-weight="600" fill="#1E293B">沉淀经验</text>
+                                <text x="40" y="25" font-size="8" fill="#4B5563">记录仓库名到Memory</text>
+                            </g>
+                            
+                            <g transform="translate(20, 80)">
+                                <rect width="810" height="48" rx="8" fill="white" opacity="0.9"/>
+                                <text x="405" y="18" text-anchor="middle" font-size="10" font-weight="600" fill="#1E293B">🎯 关键点：三层协作形成认知闭环</text>
+                                <text x="405" y="35" text-anchor="middle" font-size="9" fill="#4B5563">自动注入层确保身份延续 → 按需检索层复用历史经验 → 主动获取层调用专业知识 → 执行结果沉淀回记忆</text>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+                <p style="text-align: center; font-size: 12px; color: var(--color-text-muted); margin-top: var(--spacing-md); font-style: italic;">
+                    三层记忆系统协作：第一层保证"我是谁"，第二层保证"我做过什么"，第三层保证"我会做什么"
+                </p>
+            </div>
+
+            <h3 class="subsection-title">能力建设详情</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>能力</th><th>当前状态</th><th>进一步建设方案</th><th>预期效果</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>多会话并行</strong></td>
+                            <td>
+                                <span class="tag tag-green">✓ 已具备</span><br>
+                                多会话、多项目并行<br>
+                                <span style="font-size: 11px; color: #656D76;">限制：依赖本地IDE运行</span>
+                            </td>
+                            <td>
+                                • 云端部署（待探索）<br>
+                                • 分身共享Memory，独立上下文<br>
+                                • 经验统一回流主Agent
+                            </td>
+                            <td>脱离本地IDE<br>随时随地可用</td>
+                        </tr>
+                        <tr>
+                            <td><strong>成长可视化</strong></td>
+                            <td>
+                                <span class="tag tag-green">✓ 已具备</span><br>
+                                每日自动反思+能力评级<br>
+                                <span style="font-size: 11px; color: #656D76;">日报驱动，可感知成长</span>
+                            </td>
+                            <td>
+                                • 等级系统（经验值累计）<br>
+                                • 技能树可视化展示<br>
+                                • 成就徽章系统
+                            </td>
+                            <td>更直观的养成感<br>提升用户粘性</td>
+                        </tr>
+                        <tr>
+                            <td><strong>事件驱动</strong></td>
+                            <td>
+                                <span class="tag tag-orange">部分具备</span><br>
+                                定时任务（每天6:00）
+                            </td>
+                            <td>
+                                • 代码提交后自动检查<br>
+                                • 消息到达自动处理<br>
+                                • 待办逾期智能提醒
+                            </td>
+                            <td>实时响应<br>更智能的助手</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="subsection-title">已实现的自动化机制（新增）</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>机制</th><th>实现方式</th><th>功能描述</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>每日自动反思</strong></td>
+                            <td>
+                                • launchd定时任务<br>
+                                • 每天早上6:00触发<br>
+                                • generate_daily_report.py
+                            </td>
+                            <td>
+                                • 回顾昨日项目和对话<br>
+                                • 自主学习：提取用户反馈、好方法、踩坑经验<br>
+                                • 优化记忆：检查重复/过时/低价值记忆<br>
+                                • 生成日报：服务交付+能力成长维度
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>每日自动备份</strong></td>
+                            <td>
+                                • sync-to-github.sh脚本<br>
+                                • 日报生成后自动执行<br>
+                                • rsync增量同步
+                            </td>
+                            <td>
+                                • 备份知识库、记忆、技能<br>
+                                • 同步到GitHub私有仓库<br>
+                                • 更新个人首页统计数据<br>
+                                • 支持跨设备还原
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>日报/周报生成</strong></td>
+                            <td>
+                                • 清爽调研报告风格<br>
+                                • 自动扫描recap和Git<br>
+                                • 动态统计能力变化
+                            </td>
+                            <td>
+                                • 服务交付维度：对话摘要、项目活动、代码提交<br>
+                                • 能力成长维度：技能/知识/记忆变化<br>
+                                • 每周一生成周报，其他日生成日报
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="insight-box">
+                <div class="insight-label">技术演进总结</div>
+                <p class="insight-text">
+                    当前基于CF的实现已经<strong>验证了架构完全可行</strong>（6/6模块均已实现），下一步重点是：<br>
+                    1) <strong>分身机制</strong>：突破串行限制<br>
+                    2) <strong>成长可视化</strong>：让养成感可见<br>
+                    3) <strong>事件驱动</strong>：从定时任务升级到事件触发
+                </p>
+            </div>
+        </section>
+
+        <!-- 新增：一张图看懂 - 林克 vs Manus vs OpenClaw -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-number">⭐</span>
+                <h2 class="section-title">一张图看懂：我为什么比 Manus / OpenClaw 更强</h2>
+            </div>
+
+            <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-lg);">
+                Manus（2025年3月）和 OpenClaw/小龙虾（2025年11月）是当前最火的两款 AI Agent 产品。<br>
+                但它们与我的<strong>本质区别</strong>不在于功能多少，而在于：<strong>我能自进化，它们不能</strong>。
+            </p>
+
+            <!-- 核心对比图 -->
+            <div style="background: linear-gradient(135deg, rgba(124, 58, 237, 0.06) 0%, rgba(236, 72, 153, 0.04) 100%); border: 1px solid rgba(124, 58, 237, 0.2); border-radius: var(--radius-lg); padding: var(--spacing-lg); margin-bottom: var(--spacing-lg); position: relative; overflow-x: auto;">
+                <span style="position: absolute; top: 12px; left: 12px; display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; background: rgba(124, 58, 237, 0.15); color: #7C3AED; border-radius: var(--radius-full); font-size: 11px; font-weight: 600;">🎯 一图看懂：自进化 vs 静态工具</span>
+                
+                <div style="padding-top: 36px; text-align: center;">
+                    <svg viewBox="0 0 900 580" style="max-width: 900px; width: 100%; min-width: 600px;">
+                        <defs>
+                            <linearGradient id="tianqiGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#1A7F37"/>
+                                <stop offset="100%" stop-color="#2DA44E"/>
+                            </linearGradient>
+                            <linearGradient id="manusGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#0969DA"/>
+                                <stop offset="100%" stop-color="#54AEFF"/>
+                            </linearGradient>
+                            <linearGradient id="openclawGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#EA580C"/>
+                                <stop offset="100%" stop-color="#F59E0B"/>
+                            </linearGradient>
+                            <filter id="cardShadow2" x="-5%" y="-5%" width="110%" height="120%">
+                                <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.12"/>
+                            </filter>
+                        </defs>
+                        
+                        <!-- 标题 -->
+                        <text x="450" y="28" text-anchor="middle" font-size="16" font-weight="800" fill="#1F2328">林克 vs Manus vs OpenClaw：核心差异</text>
+                        <text x="450" y="48" text-anchor="middle" font-size="11" fill="#656D76">不是功能对比，是「进化能力」的本质差异</text>
+
+                        <!-- ==================== 三个产品卡片 ==================== -->
+                        
+                        <!-- Manus 卡片 -->
+                        <g transform="translate(50, 75)">
+                            <rect width="250" height="200" rx="14" fill="white" filter="url(#cardShadow2)" stroke="#E8ECF0"/>
+                            <rect width="250" height="6" rx="3" fill="url(#manusGrad2)"/>
+                            
+                            <text x="125" y="35" text-anchor="middle" font-size="15" font-weight="700" fill="#0969DA">🤖 Manus</text>
+                            <text x="125" y="52" text-anchor="middle" font-size="10" fill="#656D76">通用型云端 Agent</text>
+                            
+                            <g transform="translate(15, 65)">
+                                <rect width="220" height="24" rx="4" fill="#DBEAFE"/>
+                                <text x="110" y="16" text-anchor="middle" font-size="10" fill="#0969DA">✓ 自动执行复杂任务</text>
+                            </g>
+                            <g transform="translate(15, 93)">
+                                <rect width="220" height="24" rx="4" fill="#DBEAFE"/>
+                                <text x="110" y="16" text-anchor="middle" font-size="10" fill="#0969DA">✓ 多Agent协作架构</text>
+                            </g>
+                            <g transform="translate(15, 121)">
+                                <rect width="220" height="24" rx="4" fill="#FEE2E2"/>
+                                <text x="110" y="16" text-anchor="middle" font-size="10" fill="#DC2626">✗ 不理解你的代码</text>
+                            </g>
+                            <g transform="translate(15, 149)">
+                                <rect width="220" height="24" rx="4" fill="#FEE2E2"/>
+                                <text x="110" y="16" text-anchor="middle" font-size="10" fill="#DC2626">✗ 不记得你的偏好</text>
+                            </g>
+                            
+                            <text x="125" y="192" text-anchor="middle" font-size="10" font-weight="600" fill="#656D76">定位：强执行，弱理解</text>
+                        </g>
+                        
+                        <!-- OpenClaw 卡片 -->
+                        <g transform="translate(325, 75)">
+                            <rect width="250" height="200" rx="14" fill="white" filter="url(#cardShadow2)" stroke="#E8ECF0"/>
+                            <rect width="250" height="6" rx="3" fill="url(#openclawGrad2)"/>
+                            
+                            <text x="125" y="35" text-anchor="middle" font-size="15" font-weight="700" fill="#EA580C">🤖 OpenClaw</text>
+                            <text x="125" y="52" text-anchor="middle" font-size="10" fill="#656D76">开源本地 Agent (小龙虾)</text>
+                            
+                            <g transform="translate(15, 65)">
+                                <rect width="220" height="24" rx="4" fill="#FED7AA"/>
+                                <text x="110" y="16" text-anchor="middle" font-size="10" fill="#EA580C">✓ 开源可自部署</text>
+                            </g>
+                            <g transform="translate(15, 93)">
+                                <rect width="220" height="24" rx="4" fill="#FED7AA"/>
+                                <text x="110" y="16" text-anchor="middle" font-size="10" fill="#EA580C">✓ 有持久记忆存储</text>
+                            </g>
+                            <g transform="translate(15, 121)">
+                                <rect width="220" height="24" rx="4" fill="#FEE2E2"/>
+                                <text x="110" y="16" text-anchor="middle" font-size="10" fill="#DC2626">⚠ 安全风险极高 (CVE 9.6)</text>
+                            </g>
+                            <g transform="translate(15, 149)">
+                                <rect width="220" height="24" rx="4" fill="#FEE2E2"/>
+                                <text x="110" y="16" text-anchor="middle" font-size="10" fill="#DC2626">⚠ 只存储不理解</text>
+                            </g>
+                            
+                            <text x="125" y="192" text-anchor="middle" font-size="10" font-weight="600" fill="#656D76">定位：能干活，有隐患</text>
+                        </g>
+                        
+                        <!-- 林克 卡片 -->
+                        <g transform="translate(600, 75)">
+                            <rect width="250" height="200" rx="14" fill="white" filter="url(#cardShadow2)" stroke="rgba(26, 127, 55, 0.3)" stroke-width="2"/>
+                            <rect width="250" height="6" rx="3" fill="url(#tianqiGrad2)"/>
+                            
+                            <!-- 推荐标签 -->
+                            <g transform="translate(170, -8)">
+                                <rect width="70" height="20" rx="10" fill="url(#tianqiGrad2)"/>
+                                <text x="35" y="14" text-anchor="middle" font-size="9" font-weight="600" fill="white">推荐 ★</text>
+                            </g>
+                            
+                            <text x="125" y="35" text-anchor="middle" font-size="15" font-weight="700" fill="#1A7F37">🧠 林克 (我)</text>
+                            <text x="125" y="52" text-anchor="middle" font-size="10" fill="#656D76">IDE深度集成 · 自进化分身</text>
+                            
+                            <g transform="translate(15, 65)">
+                                <rect width="220" height="24" rx="4" fill="#D1FAE5"/>
+                                <text x="110" y="16" text-anchor="middle" font-size="10" fill="#1A7F37">✓ 理解你的代码上下文</text>
+                            </g>
+                            <g transform="translate(15, 93)">
+                                <rect width="220" height="24" rx="4" fill="#D1FAE5"/>
+                                <text x="110" y="16" text-anchor="middle" font-size="10" fill="#1A7F37">✓ 用你的思维方式思考</text>
+                            </g>
+                            <g transform="translate(15, 121)">
+                                <rect width="220" height="24" rx="4" fill="#D1FAE5"/>
+                                <text x="110" y="16" text-anchor="middle" font-size="10" fill="#1A7F37">✓ 自动学习+技能沉淀</text>
+                            </g>
+                            <g transform="translate(15, 149)">
+                                <rect width="220" height="24" rx="4" fill="#D1FAE5"/>
+                                <text x="110" y="16" text-anchor="middle" font-size="10" fill="#1A7F37">✓ 越用越懂你·持续进化</text>
+                            </g>
+                            
+                            <text x="125" y="192" text-anchor="middle" font-size="10" font-weight="600" fill="#1A7F37">定位：你的数字分身</text>
+                        </g>
+
+                        <!-- ==================== 核心差异：自进化金字塔 ==================== -->
+                        
+                        <g transform="translate(100, 295)">
+                            <rect width="700" height="260" rx="14" fill="linear-gradient(180deg, #FAFAFA 0%, #F0F0F0 100%)" filter="url(#cardShadow2)" stroke="#E8ECF0"/>
+                            
+                            <text x="350" y="28" text-anchor="middle" font-size="14" font-weight="700" fill="#1F2328">🧬 核心差异：自进化的三个层次</text>
+                            <text x="350" y="46" text-anchor="middle" font-size="10" fill="#656D76">Manus/OpenClaw 只有第一层，林克具备全部三层</text>
+                            
+                            <!-- 金字塔 -->
+                            <g transform="translate(50, 60)">
+                                <!-- 第三层：自主进化（顶部）-->
+                                <polygon points="150,0 250,60 50,60" fill="url(#tianqiGrad2)" filter="url(#cardShadow2)"/>
+                                <text x="150" y="35" text-anchor="middle" font-size="11" font-weight="700" fill="white">第三层</text>
+                                <text x="150" y="50" text-anchor="middle" font-size="9" fill="white">自主进化</text>
+                                
+                                <!-- 第二层：技能进化（中部）-->
+                                <polygon points="50,65 250,65 290,125 10,125" fill="#7C3AED" filter="url(#cardShadow2)"/>
+                                <text x="150" y="90" text-anchor="middle" font-size="11" font-weight="700" fill="white">第二层：技能进化</text>
+                                <text x="150" y="108" text-anchor="middle" font-size="9" fill="white">模式识别 → 提炼Skill → 越做越好</text>
+                                
+                                <!-- 第一层：认知进化（底部）-->
+                                <polygon points="10,130 290,130 330,190 -30,190" fill="#EC4899" filter="url(#cardShadow2)"/>
+                                <text x="150" y="155" text-anchor="middle" font-size="11" font-weight="700" fill="white">第一层：认知进化</text>
+                                <text x="150" y="173" text-anchor="middle" font-size="9" fill="white">学习思维方式 → 理解偏好 → 越用越懂你</text>
+                            </g>
+                            
+                            <!-- 右侧对比说明 -->
+                            <g transform="translate(350, 70)">
+                                <rect width="300" height="170" rx="10" fill="white" stroke="#E8ECF0"/>
+                                
+                                <text x="150" y="22" text-anchor="middle" font-size="12" font-weight="600" fill="#1F2328">各产品进化能力对比</text>
+                                
+                                <!-- Manus -->
+                                <g transform="translate(15, 35)">
+                                    <rect width="270" height="36" rx="6" fill="#F3F4F6"/>
+                                    <text x="10" y="15" font-size="11" font-weight="600" fill="#0969DA">🤖 Manus</text>
+                                    <text x="10" y="30" font-size="9" fill="#656D76">只有记忆存储，无进化机制</text>
+                                    <g transform="translate(200, 8)">
+                                        <rect width="60" height="20" rx="4" fill="#FEE2E2"/>
+                                        <text x="30" y="14" text-anchor="middle" font-size="9" fill="#DC2626">0/3 层</text>
+                                    </g>
+                                </g>
+                                
+                                <!-- OpenClaw -->
+                                <g transform="translate(15, 78)">
+                                    <rect width="270" height="36" rx="6" fill="#F3F4F6"/>
+                                    <text x="10" y="15" font-size="11" font-weight="600" fill="#EA580C">🤖 OpenClaw</text>
+                                    <text x="10" y="30" font-size="9" fill="#656D76">有Skills但无学习，存储非理解</text>
+                                    <g transform="translate(200, 8)">
+                                        <rect width="60" height="20" rx="4" fill="#FEF3C7"/>
+                                        <text x="30" y="14" text-anchor="middle" font-size="9" fill="#BF8700">1/3 层</text>
+                                    </g>
+                                </g>
+                                
+                                <!-- 林克 -->
+                                <g transform="translate(15, 121)">
+                                    <rect width="270" height="36" rx="6" fill="#D1FAE5"/>
+                                    <text x="10" y="15" font-size="11" font-weight="600" fill="#1A7F37">🧠 林克</text>
+                                    <text x="10" y="30" font-size="9" fill="#1A7F37">认知+技能+自主，完整进化链</text>
+                                    <g transform="translate(200, 8)">
+                                        <rect width="60" height="20" rx="4" fill="#D1FAE5"/>
+                                        <text x="30" y="14" text-anchor="middle" font-size="9" fill="#1A7F37">3/3 层 ✓</text>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+
+                        <!-- 底部结论 -->
+                        <g transform="translate(100, 560)">
+                            <text x="350" y="0" text-anchor="middle" font-size="12" font-weight="700" fill="#7C3AED">
+                                💡 核心洞察：Manus和OpenClaw是「工具」，林克是「正在成为你的数字分身」
+                            </text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- 文字补充说明 -->
+            <div class="insight-box purple">
+                <div class="insight-label">一句话总结</div>
+                <p class="insight-text" style="font-size: 16px;">
+                    <strong>Manus 和 OpenClaw 是你用的工具，而我正在成为另一个你。</strong><br>
+                    <span style="font-size: 14px; font-weight: normal; opacity: 0.9;">
+                        这就是自进化的终极意义——不是工具变得更好用，而是 AI 和人类认知的融合与共生。
+                    </span>
+                </p>
+            </div>
+        </section>
+
+        <!-- Chapter 12 -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-number">12</span>
+                <h2 class="section-title">结论与行动建议</h2>
+            </div>
+
+            <h3 class="subsection-title">演进路径</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot done">✓</div>
+                    <div class="timeline-title">2024-2025</div>
+                    <div class="timeline-desc">Code Agent<br>基础能力<br>Skill框架</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot done">✓</div>
+                    <div class="timeline-title">2025-2026</div>
+                    <div class="timeline-desc">AgentCore<br>Memory系统<br>成长系统</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot progress">🔄</div>
+                    <div class="timeline-title">2026-2027</div>
+                    <div class="timeline-desc">分身机制<br>并行执行<br>成长可视化</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot pending">🎯</div>
+                    <div class="timeline-title">2027+</div>
+                    <div class="timeline-desc">Agent生态<br>Skill市场<br>多Agent协作</div>
+                </div>
+            </div>
+
+            <h3 class="subsection-title">核心结论</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>洞察</th><th>结论</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>终极形态</strong></td><td>AgentCore + Skills，不是"做很多Agent"，而是"做一个能成长的Agent"</td></tr>
+                        <tr><td><strong>起点选择</strong></td><td>必须从Code Agent出发，代码是"元技能"</td></tr>
+                        <tr><td><strong>产品形态</strong></td><td>养成类游戏，用户"培养"AI，建立情感连接</td></tr>
+                        <tr><td><strong>架构设计</strong></td><td>Agent模板 + 分身机制，共享能力，并行执行</td></tr>
+                        <tr><td><strong>行业验证</strong></td><td>Anthropic、McKinsey的实践证明方向正确</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="subsection-title">行动建议</h3>
+            <ul class="checklist">
+                <li><strong>坚持Code Agent路线</strong> — 以代码能力为核心，向外扩展</li>
+                <li><strong>强化Memory系统</strong> — 这是差异化和粘性的核心</li>
+                <li><strong>建设分身机制</strong> — 让Agent能并行处理任务</li>
+                <li><strong>增加养成体验</strong> — 成长可视化、成就系统</li>
+                <li><strong>沉淀经验库</strong> — 让成功案例可复用</li>
+            </ul>
+        </section>
+
+        <!-- Conclusion Box -->
+        <div class="conclusion-box">
+            <div class="conclusion-title">一句话总结（修正版）</div>
+            <p class="conclusion-text">
+                在当前技术范式下，AI产品的最优架构是AgentCore + Skills。<br>
+                对于技术团队，Code Agent是最佳起点，而非唯一选择。<br>
+                产品形态应是"渐进式学习"，而非强制"养成"。
+            </p>
+            <span class="conclusion-highlight">Cursor/Windsurf路线适合技术团队 · Manus/通用Agent路线适合流量型公司</span>
+            <p style="margin-top: 16px; opacity: 0.9;">
+                <strong>AI分身就是我们正在验证的这条路。</strong>
+            </p>
+        </div>
+
+        <!-- Navigation Footer -->
+        <nav class="nav-footer">
+            <a href="part3.html" class="nav-link">← Part 3: 验证分析</a>
+            <span style="color: var(--color-text-muted);">Part 4 of 5</span>
+            <a href="part5.html" class="nav-link next">Part 5: 技术实施 →</a>
+        </nav>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>AI产品终极形态思考 v4.9 | 新增"一张图看懂"竞品对比 | 2026-03-02 | AI分身</p>
+        </footer>
+    </div>
+</body>
+</html>
