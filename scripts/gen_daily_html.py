@@ -90,7 +90,7 @@ def render_news_item(item: dict) -> str:
                 </div>'''
 
     # 详细模式：有核心发现/关键数据/影响判断
-    d = item["details"]
+    d = item.get("details") or {}
     label_class = "china" if item.get("tag") == "cn" else ""
     chip_class = " china" if item.get("tag") == "cn" else ""
 
@@ -118,7 +118,7 @@ def render_news_item(item: dict) -> str:
                     <div class="news-detail">
                         <div class="news-detail-row">
                             <span class="news-detail-label {label_class}">核心发现</span>
-                            <span class="news-detail-value">{d['finding']}</span>
+                            <span class="news-detail-value">{d.get('finding', '')}</span>
                         </div>{chips_html}
                         <div class="news-detail-row">
                             <span class="news-detail-label {label_class}">影响判断</span>
@@ -216,14 +216,15 @@ def render_heat_trend(heat: dict) -> str:
     """渲染热度趋势卡片"""
     rows = []
     medals = ["🥇", "🥈", "🥉", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣"]
-    for i, t in enumerate(heat["topics"]):
+    # v9.8修复: 超出 medals 列表长度时用数字代替，防止 IndexError
+    for i, t in enumerate(heat.get("topics", [])):
         fills = int(t.get("score", 7))
         empties = 10 - fills
         bar = '<span class="heat-bar-fill"></span>' * fills + '<span class="heat-bar-empty"></span>' * empties
         trend_class = t.get("trend_class", "up")
         trend_label = t.get("trend_label", "📈 攀升")
         rows.append(f'''                        <tr>
-                            <td>{medals[i]}</td>
+                            <td>{medals[i] if i < len(medals) else str(i + 1)}</td>
                             <td><strong>{t['name']}</strong></td>
                             <td><div class="heat-bar">{bar}</div></td>
                             <td>{t['days']}天</td>
@@ -235,7 +236,7 @@ def render_heat_trend(heat: dict) -> str:
         <div class="heat-card">
             <div class="heat-header">
                 <div class="heat-header-label">🔥 热度趋势</div>
-                <div class="heat-header-title">{heat['title']}</div>
+                <div class="heat-header-title">{heat.get('title', '')}</div>
             </div>
             <div class="heat-body">
                 <table class="heat-table">
@@ -244,7 +245,7 @@ def render_heat_trend(heat: dict) -> str:
 {chr(10).join(rows)}
                     </tbody>
                 </table>
-                <p>{heat['summary']}</p>
+                <p>{heat.get('summary', '')}</p>
             </div>
         </div>'''
 
@@ -359,7 +360,8 @@ def render_preview(events: list) -> str:
 
 def generate_html(data: dict) -> str:
     """从JSON数据生成完整HTML"""
-    date_str = data["date"]
+    # v9.8修复: 直接 key 访问改为 .get() 防护，避免JSON格式异常时整体崩溃
+    date_str = data.get("date") or data.get("date_str") or ""
     date_obj = datetime.strptime(date_str, "%Y-%m-%d")
     weekday = WEEKDAYS[date_obj.weekday()]
     month_str = date_obj.strftime("%Y-%m")
