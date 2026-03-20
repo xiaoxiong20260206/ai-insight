@@ -171,7 +171,7 @@ def check_link_validity(date_str: str) -> CheckResult:
         import random
         from concurrent.futures import ThreadPoolExecutor, as_completed as cf_as_completed
         
-        data = json.loads(json_path.read_text(encoding="utf-8"))
+        data = _load_data(date_str) or json.loads(json_path.read_text(encoding="utf-8"))
         invalid_count = 0
         invalid_examples = []
         all_urls = []
