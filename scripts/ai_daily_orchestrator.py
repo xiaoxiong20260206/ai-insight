@@ -158,11 +158,15 @@ def run_url_spot_check(date: str) -> bool:
     """Step 2.7脚本化: URL真实性抽检 + 封闭平台链接合规
     
     在finalize (Step 3+4) 之前自动执行:
-    1. 随机抽检3个URL的HTTP可达性
+    1. 随机抽检3个URL的HTTP可达性（v9.8: 并发化，串行60s→并发15s）
     2. 检查禁止的封闭平台链接模式
+    3. 检查结果写入 state/url_check_cache.json，供 quality_gate check_link_validity 复用
     
     v1.1新增 — 将Skill文档中的Step 2.7从"Agent手动执行"改为"自动强制执行"
+    v9.8改进 — ThreadPoolExecutor并发抽检 + 结果缓存消除质量门重复HTTP请求
     """
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    
     json_path = PROJECT_DIR / "data" / f"daily-content-{date}.json"
     if not json_path.exists():
         print(f"  ❌ JSON不存在")
@@ -203,33 +207,60 @@ def run_url_spot_check(date: str) -> bool:
                 print(f"  ❌ 禁止链接: {f}")
             issues.append(f"{len(forbidden)}个禁止的封闭平台链接")
         
-        # 2. URL抽检 (最多3个)
+        # 2. URL抽检 — v9.8: 并发化（原串行最坏60s → 并发最坏15s）
+        url_check_results = {}  # url -> True/False/None
         if all_urls:
             sample = random.sample(all_urls, min(3, len(all_urls)))
-            unreachable = []
-            for url, title in sample:
+            
+            def _check_one_url(url_title_pair):
+                url, title = url_title_pair
                 try:
                     req = urllib.request.Request(url, method='HEAD')
                     req.add_header('User-Agent', 'Mozilla/5.0 (AI-Insight Orchestrator/1.1)')
                     resp = urllib.request.urlopen(req, timeout=10)
                     if resp.status >= 400:
-                        unreachable.append(f"{title}({resp.status})")
+                        return (url, False, f"{title}({resp.status})")
+                    return (url, True, title)
                 except Exception:
                     try:
                         req = urllib.request.Request(url)
                         req.add_header('User-Agent', 'Mozilla/5.0 (AI-Insight Orchestrator/1.1)')
                         resp = urllib.request.urlopen(req, timeout=10)
                         if resp.status >= 400:
-                            unreachable.append(f"{title}({resp.status})")
+                            return (url, False, f"{title}({resp.status})")
+                        return (url, True, title)
                     except Exception:
-                        unreachable.append(f"{title}(不可达)")
+                        return (url, False, f"{title}(不可达)")
+            
+            unreachable = []
+            with ThreadPoolExecutor(max_workers=3) as executor:
+                futures = {executor.submit(_check_one_url, pair): pair for pair in sample}
+                for future in as_completed(futures, timeout=20):
+                    try:
+                        url, ok, label = future.result()
+                        url_check_results[url] = ok
+                        if not ok:
+                            unreachable.append(label)
+                    except Exception:
+                        pass
             
             if unreachable:
                 for u in unreachable:
                     print(f"  ⚠️ 抽检不可达: {u}")
                 issues.append(f"{len(unreachable)}/{len(sample)}个抽检URL不可达")
             else:
-                print(f"  ✅ URL抽检通过 ({len(sample)}个均可达)")
+                print(f"  ✅ URL抽检通过 ({len(sample)}个并发检查均可达)")
+        
+        # 3. 写入缓存供 quality_gate check_link_validity 复用（消除重复HTTP请求）
+        cache = {
+            "date": date,
+            "created": datetime.now().isoformat(),
+            "forbidden": forbidden,
+            "url_check_results": url_check_results,
+            "sample_count": len(url_check_results),
+        }
+        cache_path = state_dir(date) / "url_check_cache.json"
+        cache_path.write_text(json.dumps(cache, ensure_ascii=False, indent=2))
         
         if issues:
             # 封闭平台链接是硬性失败，URL不可达是警告
@@ -242,7 +273,6 @@ def run_url_spot_check(date: str) -> bool:
     except Exception as e:
         print(f"  ❌ URL抽检异常: {e}")
         return False
-    # v9.7修复：删除死代码 `return raw`（raw未在此作用域定义，此行永不可达）
 
 # ── 命令: status ──────────────────────────────────────────
 def cmd_status(date: str):
@@ -347,9 +377,9 @@ def cmd_resume(date: str):
     for rel_path, desc in key_files:
         p = PROJECT_DIR / rel_path
         if p.exists():
-            size = p.stat().st_size
-            lines = len(p.read_text(encoding="utf-8").splitlines()) if size < 500000 else "?"
-            print(f"  ✅ {desc}: {rel_path} ({lines}行)")
+            size_kb = p.stat().st_size // 1024
+            size_display = f"{size_kb}KB" if size_kb >= 1 else f"{p.stat().st_size}B"
+            print(f"  ✅ {desc}: {rel_path} ({size_display})")
         else:
             print(f"  ❌ {desc}: {rel_path} (不存在)")
     
@@ -499,16 +529,39 @@ def cmd_finalize(date: str) -> bool:
         mark_step(date, "deploy", "failed", error="部署失败")
         return False
 
-    # --- Step 4.5: 外部版同步 (v9.5: 失败阻断) ---
-    sync_ok = run_external_sync()
+    # --- Step 4.5 + 4.6: 外部版同步 & 林克首页 — v9.8: 并行化（两者完全独立）---
+    print("\n  ⚡ Step 4.5+4.6: 外部版同步 & 林克首页同步（并行执行）...")
+    from concurrent.futures import ThreadPoolExecutor as _TPE, as_completed as _ac
+    
+    sync_ok = False
+    home_ok = True  # 首页同步不阻断
+    
+    with _TPE(max_workers=2) as _executor:
+        fut_sync = _executor.submit(run_external_sync)
+        fut_home = _executor.submit(run_link_homepage_sync)
+        
+        # 等待两者完成（最长等 sync_to_external 的 timeout）
+        for fut in _ac([fut_sync, fut_home], timeout=200):
+            try:
+                fut.result()
+            except Exception as _e:
+                print(f"  ⚠️ 并行任务异常: {_e}")
+        
+        try:
+            sync_ok = fut_sync.result()
+        except Exception as _e:
+            print(f"  ❌ 外部版同步异常: {_e}")
+            sync_ok = False
+        try:
+            home_ok = fut_home.result()
+        except Exception:
+            home_ok = True  # 不阻断
+    
     if not sync_ok:
         mark_step(date, "deploy", "failed", error="外部版同步失败")
         print("\n🚫 外部版同步失败，finalize 中止。")
         print("   请先解决外部版仓库问题，然后重新运行 finalize。")
         return False
-
-    # --- Step 4.6: 林克首页联动更新 (v9.5 新增) ---
-    run_link_homepage_sync()  # 不阻断，只是联动
 
     mark_step(date, "deploy", "completed")
     print("  ✅ Step 4 完成")
