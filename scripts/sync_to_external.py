@@ -149,6 +149,12 @@ def git_push() -> bool:
                 os.chdir(PROJECT_ROOT)
                 sync_all()
                 os.chdir(EXTERNAL_REPO)
+            else:
+                # pull 失败但非冲突（网络超时/refs错误/认证失败等）—— 必须阻断
+                print(f"❌ git pull --rebase 失败（非冲突原因），中止推送")
+                print(f"   stdout: {pull_result.stdout[:200]}")
+                print(f"   stderr: {pull_result.stderr[:200]}")
+                return False
         
         # git add
         subprocess.run(["git", "add", "-A"], check=True, capture_output=True)
