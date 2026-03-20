@@ -548,7 +548,7 @@ def main():
     <style>body{{font-family:-apple-system,system-ui,sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh;background:#F8FAFB;color:#57534E}}a{{color:#059669}}</style>
 </head>
 <body>
-    <p>正在跳转至 <a href="{date_str}-v3.html">AI 日报 {date_str} (v3.1)</a>...</p>
+    <p>正在跳转至 <a href="{date_str}-v3.html">AI 日报 {date_str} (v3.2)</a>...</p>
 </body>
 </html>
 ''', encoding="utf-8")

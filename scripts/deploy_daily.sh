@@ -120,7 +120,7 @@ if [ ! -f "$REDIRECT" ]; then
     <style>body{font-family:-apple-system,system-ui,sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh;background:#F8FAFB;color:#57534E}a{color:#059669}</style>
 </head>
 <body>
-    <p>正在跳转至 <a href="$DATE-v3.html">AI 日报 $DATE (v3.1)</a>...</p>
+    <p>正在跳转至 <a href="$DATE-v3.html">AI 日报 $DATE (v3.2)</a>...</p>
 </body>
 </html>
 EOF
