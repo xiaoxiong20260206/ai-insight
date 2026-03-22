@@ -1,0 +1,489 @@
+{
+  "coverage": {
+    "overseas": 8,
+    "china": 5
+  },
+  "overview": [
+    {
+      "icon": "🔥",
+      "label": "今日头条",
+      "headline": "Anthropic发布Agent自主性研究报告 + GPT-5.4 mini开始推出",
+      "text": "Anthropic重磅发布《Measuring AI Agent Autonomy in Practice》研究报告，同时OpenAI的GPT-5.4 mini开始向Free和Go用户推出"
+    },
+    {
+      "icon": "🧠",
+      "label": "大模型",
+      "headline": "GPT-5.4 mini面向免费用户推出，Gemini模型版本切换",
+      "text": "OpenAI GPT-5.4 mini开始向Free和Go用户推出，Google gemini-pro-latest切换到gemini-3"
+    },
+    {
+      "icon": "⌨️",
+      "label": "AI Coding",
+      "headline": "Lens推出MCP Server连接AI编程助手到K8s",
+      "text": "Mirantis发布Lens内置MCP Server，让Claude Code、Cursor等AI编程助手直接连接Kubernetes，简化云原生开发"
+    },
+    {
+      "icon": "📱",
+      "label": "AI应用",
+      "headline": "Claude Code自主运行时间翻倍至45分钟",
+      "text": "Anthropic研究显示：Claude Code最长自主运行时间从25分钟增长到45分钟，有经验用户更多使用auto-approve模式"
+    },
+    {
+      "icon": "🏭",
+      "label": "AI行业",
+      "headline": "3月AI融资超$6B：AMI Labs $1.03B领跑世界模型赛道",
+      "text": "Yann LeCun的AMI Labs获$1.03B种子轮（欧洲历史最大），Replit估值$9B，机器人赛道融资超$1.2B"
+    }
+  ],
+  "heat_trend": {
+    "title": "近7期日报交叉分析(3/15-3/21)",
+    "topics": [
+      {
+        "name": "AI Agent自主性飙升",
+        "score": 10,
+        "days": 2,
+        "trend_class": "burst",
+        "trend_label": "⚡ 爆发",
+        "signal": "Anthropic研究报告显示Claude Code自主运行时间3个月翻倍(25→45分钟)，软件工程占Agent活动近50%"
+      },
+      {
+        "name": "世界模型挑战LLM范式",
+        "score": 9,
+        "days": 1,
+        "trend_class": "new",
+        "trend_label": "🆕 新趋势",
+        "signal": "Yann LeCun的AMI Labs获$1.03B种子轮——欧洲史上最大——押注JEPA架构世界模型超越LLM"
+      },
+      {
+        "name": "Vibe Coding估值飙升",
+        "score": 8,
+        "days": 3,
+        "trend_class": "up",
+        "trend_label": "📈 持续高热",
+        "signal": "Replit估值6个月内从$3B飙升至$9B，85%财富500强使用，目标$1B ARR"
+      },
+      {
+        "name": "机器人融资井喷",
+        "score": 8,
+        "days": 2,
+        "trend_class": "burst",
+        "trend_label": "⚡ 爆发",
+        "signal": "Mind Robotics $500M、Rhoda AI $450M、Sunday $165M——一周机器人融资超$1.2B"
+      },
+      {
+        "name": "AI基础设施分层融资",
+        "score": 7,
+        "days": 3,
+        "trend_class": "up",
+        "trend_label": "📈 演进中",
+        "signal": "Nscale $2B数据中心+Nebius $2B云+Nexthop $500M网络+Ayar $500M光子芯片——AI栈每层都是独立赛道"
+      }
+    ],
+    "summary": "3月中旬AI行业进入<strong>范式挑战期</strong>：Yann LeCun的AMI Labs以$1.03B种子轮押注世界模型替代LLM，Anthropic研究证明Agent自主性正在快速增长。<strong>核心趋势</strong>：AI从'辅助工具'向'自主Agent'进化，机器人和基础设施融资井喷，Vibe Coding估值飙升标志软件开发范式转变。"
+  },
+  "tabs": [
+    {
+      "tab_id": "models",
+      "tab_title": "🧠 大模型",
+      "news": {
+        "overseas": [
+          {
+            "tag": "hot",
+            "title": "GPT-5.4 mini开始向Free和Go用户推出",
+            "url": "https://releasebot.io/updates/openai",
+            "source": "OpenAI · 3月20日",
+            "details": {
+              "finding": "OpenAI Models发布GPT-5.4 mini，通过Thinking功能和rate-limit fallback向Free和Go用户推出，这是OpenAI继续下沉AI能力到免费用户的重要举措",
+              "highlight": "GPT-5.4 mini | Free/Go用户 | Thinking功能 | 能力下沉",
+              "impact": "OpenAI持续向免费用户开放先进能力——降低AI使用门槛是长期战略"
+            }
+          },
+          {
+            "title": "ChatGPT legacy deep research将于3月26日退役",
+            "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
+            "source": "OpenAI · 3月19日",
+            "details": {
+              "finding": "OpenAI确认legacy deep research mode将于3月26日正式移除，用户应迁移到新版deep research功能",
+              "highlight": "3月26日退役 | 功能迁移 | 产品简化",
+              "impact": "OpenAI持续清理legacy功能——产品矩阵简化是长期方向"
+            }
+          }
+        ],
+        "china": [
+          {
+            "tag": "hot",
+            "title": "陈天桥回归：盛大创始人押注AI大模型",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=%E9%99%88%E5%A4%A9%E6%A1%A5+AI%E5%A4%A7%E6%A8%A1%E5%9E%8B",
+            "source": "微信公众号 · 3月20日",
+            "details": {
+              "finding": "盛大创始人、曾经的中国首富陈天桥宣布回归科技领域，将重点押注AI大模型赛道，据悉已有具体投资布局",
+              "highlight": "陈天桥回归 | 首富押注AI | 盛大创始人 | 战略布局",
+              "impact": "老牌互联网大佬入场——中国AI赛道资本密度继续加大"
+            }
+          },
+          {
+            "title": "北京将支持垂直领域AI大模型训练和应用",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=%E5%8C%97%E4%BA%AC+%E5%9E%82%E7%9B%B4%E9%A2%86%E5%9F%9F+AI%E5%A4%A7%E6%A8%A1%E5%9E%8B",
+            "source": "微信公众号 · 3月20日",
+            "details": {
+              "finding": "北京市发布政策支持垂直领域人工智能大模型训练和应用，涉及算力支持和场景落地",
+              "highlight": "北京政策 | 垂直大模型 | 算力支持 | 场景落地",
+              "impact": "地方政府加大AI支持——垂直领域大模型成为新焦点"
+            }
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "AMI Labs的$1.03B种子轮：世界模型vs LLM的范式之战",
+        "paragraphs": [
+          "Yann LeCun创立的AMI Labs获得$1.03B种子轮——欧洲历史上最大的种子轮融资——押注基于JEPA架构的'世界模型'能够超越当前的LLM范式。Bezos、Nvidia、Samsung、Temasek等顶级资本同时入局，估值$3.5B。",
+          "LeCun的核心论点是：自回归文本预测（GPT/Claude/Gemini的基础）存在根本局限，无法理解物理世界。世界模型通过推理、规划和持久记忆来理解世界，而不是预测下一个token。AMI Labs首年将纯研发无营收目标，并承诺开源。",
+          "这是AI历史上最重大的架构赌注。如果LeCun是对的，整个行业的技术路线将需要重新评估。不论结果如何，这场范式之战本身就将推动AI理解的边界。"
+        ]
+      }
+    },
+    {
+      "tab_id": "coding",
+      "tab_title": "⌨️ AI Coding",
+      "news": {
+        "overseas": [
+          {
+            "tag": "hot",
+            "title": "Lens推出内置MCP Server：AI编程助手直连Kubernetes",
+            "url": "https://www.mirantis.com/company/press-center/company-news/lens-launches-built-in-mcp-server-connecting-ai-coding-assistants-to-kubernetes/",
+            "source": "Mirantis · 3月18日",
+            "details": {
+              "finding": "Lens Desktop发布内置MCP Server，让Claude Code、ChatGPT、Cursor等AI编程助手直接连接Kubernetes集群，简化云原生应用开发和调试流程",
+              "highlight": "Lens MCP Server | Claude Code/Cursor支持 | K8s直连 | 云原生开发",
+              "impact": "AI编程工具向云原生开发延伸——基础设施操作将被AI简化"
+            }
+          },
+          {
+            "title": "GitHub Copilot vs Cursor 2026深度对比",
+            "url": "https://tech-insider.org/github-copilot-vs-cursor-2026/",
+            "source": "Tech Insider · 3月17日",
+            "details": {
+              "finding": "专业评测对比GitHub Copilot和Cursor在2026年的表现，覆盖基准测试、定价、实际使用体验和专家意见",
+              "highlight": "Copilot vs Cursor | 基准测试 | 定价对比 | 2026评测",
+              "impact": "AI编程工具进入深度对比期——用户选择更加理性"
+            }
+          },
+          {
+            "title": "2026年AI编程工具排名：Claude Code、Cursor等10款工具实测",
+            "url": "https://www.nxcode.io/resources/news/best-ai-for-coding-2026-tools-ranked",
+            "source": "NXCode · 3月17日",
+            "details": {
+              "finding": "全面测试Claude Code、Cursor、GitHub Copilot、OpenAI Codex、Windsurf等10款AI编程工具，给出2026年最终排名",
+              "highlight": "10款工具排名 | 实测对比 | Claude Code领先 | 2026评测",
+              "impact": "AI编程工具市场格局日渐清晰——头部工具差距缩小"
+            }
+          }
+        ],
+        "china": [
+          {
+            "tag": "hot",
+            "title": "2026年AI编程工具实测：从免费到企业版全覆盖",
+            "url": "https://www.reddit.com/r/vibecoding/comments/1revk82/what_ai_toolsplatforms_are_you_actually_using_for/",
+            "source": "Reddit · 2月26日",
+            "details": {
+              "finding": "开发者社区讨论2026年实际使用的AI编程工具：VS Code/Cursor配合GPT-4.1/GPT-5或Claude 3.5是主流组合，日常依赖autocomplete、复杂任务切换Agent模式",
+              "highlight": "VS Code+Cursor主流 | GPT-5/Claude 3.5 | autocomplete日常 | Agent复杂任务",
+              "impact": "AI编程工具使用模式趋于成熟——日常补全+复杂Agent的双模式"
+            }
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "Lens MCP Server：AI编程助手开始'懂'基础设施",
+        "paragraphs": [
+          "Mirantis为Lens Desktop推出内置MCP Server，让Claude Code、Cursor等AI编程助手能直接连接Kubernetes集群。这看起来是个小功能，但意义重大——AI编程工具正在从'写代码'向'操作整个技术栈'延伸。",
+          "以前用AI写K8s yaml配置，你需要手动复制粘贴、kubectl apply、查看结果、再反馈给AI。现在AI可以直接'看到'集群状态、'执行'操作、'验证'结果——形成完整闭环。这是AI从'代码助手'向'开发运维助手'进化的关键一步。",
+          "预期更多基础设施工具会接入MCP协议：数据库、消息队列、CI/CD流水线...当AI能直接操作整个开发生态，软件工程师的工作方式将根本改变。"
+        ]
+      }
+    },
+    {
+      "tab_id": "apps",
+      "tab_title": "📱 AI应用",
+      "news": {
+        "overseas": [
+          {
+            "tag": "hot",
+            "title": "Anthropic发布Agent自主性研究：Claude Code运行时间翻倍",
+            "url": "https://www.anthropic.com/research/measuring-agent-autonomy",
+            "source": "Anthropic · 2月18日",
+            "details": {
+              "finding": "Anthropic通过百万级人机交互数据分析发现：Claude Code最长自主运行时间从25分钟增长到45分钟；有经验用户auto-approve使用率从20%升至40%以上；软件工程占Agent活动近50%",
+              "highlight": "自主时间翻倍 | auto-approve升至40% | 软件工程主导 | Agent自主性研究",
+              "impact": "Agent自主性正在快速增长——模型能力超前于用户授权的自主度"
+            }
+          },
+          {
+            "title": "MIT：帮助AI Agent搜索以获得LLM最佳结果",
+            "url": "https://news.mit.edu/2026/helping-ai-agents-search-to-get-best-results-from-llms-0205",
+            "source": "MIT News · 2月5日",
+            "details": {
+              "finding": "MIT研究探索如何帮助AI Agent进行更有效的搜索，以从LLM中获得最佳结果，涉及代码库重构和编程语言迁移场景",
+              "highlight": "Agent搜索优化 | LLM输出质量 | MIT研究 | 代码库迁移",
+              "impact": "Agent效率优化是学术热点——如何让Agent更聪明地工作"
+            }
+          }
+        ],
+        "china": [
+          {
+            "tag": "hot",
+            "title": "用AI的这三年，9条实战心得",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=%E7%94%A8AI%E7%9A%84%E4%B8%89%E5%B9%B4+%E5%AE%9E%E6%88%98%E5%BF%83%E5%BE%97",
+            "source": "微信公众号 · 3月20日",
+            "details": {
+              "finding": "资深AI用户分享三年AI使用实战心得，覆盖工具选择、提示词技巧、工作流设计等9条核心经验",
+              "highlight": "三年实战 | 9条心得 | 工具选择 | 工作流设计",
+              "impact": "AI使用方法论沉淀——从尝鲜到精通的经验传承"
+            }
+          },
+          {
+            "title": "普通人学AI：10个最实用的入门办法",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=%E6%99%AE%E9%80%9A%E4%BA%BA%E5%AD%A6AI+%E5%85%A5%E9%97%A8",
+            "source": "微信公众号 · 3月18日",
+            "details": {
+              "finding": "面向普通人的AI学习指南，提供10个最实用的入门方法，降低AI使用门槛",
+              "highlight": "普通人入门 | 10个方法 | 降低门槛 | 实用指南",
+              "impact": "AI普及持续推进——更多人开始使用AI工具"
+            }
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "Anthropic Agent自主性研究：模型能力 > 用户授权",
+        "paragraphs": [
+          "Anthropic的研究报告揭示了一个关键发现：模型的自主能力正在超越用户实际授权的自主度。Claude Code在最长任务上的运行时间从25分钟增长到45分钟——3个月内翻倍——但这个增长不是因为模型能力提升，而是用户逐渐学会信任和利用已有能力。",
+          "另一个有趣的发现：有经验的用户更多使用auto-approve（40%+），但同时他们的interrupt率也更高。这意味着他们不是'放任不管'，而是从'逐一审批'转向'监控+干预'模式——更成熟的人机协作方式。",
+          "Agent最主要的应用场景是软件工程（占50%），医疗、金融、网络安全等高风险领域正在emergence。Anthropic建议：有效的Agent监督不是要求人类批准每个动作，而是确保人类能在需要时介入。"
+        ]
+      }
+    },
+    {
+      "tab_id": "industry",
+      "tab_title": "🏭 AI行业",
+      "news": {
+        "overseas": [
+          {
+            "tag": "hot",
+            "title": "NIST发布AI Agent标准倡议：推动互操作性和安全",
+            "url": "https://www.nist.gov/news-events/news/2026/02/announcing-ai-agent-standards-initiative-interoperable-and-secure",
+            "source": "NIST · 2月17日",
+            "details": {
+              "finding": "美国NIST宣布启动AI Agent标准倡议，旨在确保AI Agent能够安全、可靠地自主运行，并实现跨系统互操作。三大支柱：行业标准、开源协议、安全研究",
+              "highlight": "NIST标准倡议 | Agent互操作 | 安全研究 | 美国主导",
+              "impact": "AI Agent进入标准化阶段——政府开始介入制定规则"
+            }
+          },
+          {
+            "tag": "hot",
+            "title": "3月AI融资超$6B：AMI Labs $1.03B领跑世界模型赛道",
+            "url": "https://aifundingtracker.com/ai-startup-funding-news-today/",
+            "source": "AI Funding Tracker · 3月17日",
+            "details": {
+              "finding": "3月11-17日一周AI融资超$6B：AMI Labs $1.03B(世界模型)、Nebius $2B(Nvidia投资)、Mind Robotics $500M、Replit $400M($9B估值)、Nexthop AI $500M(AI网络)",
+              "highlight": "一周$6B+ | AMI $1.03B | Replit $9B估值 | 机器人井喷",
+              "impact": "AI融资创历史记录——世界模型和机器人成为新热点"
+            }
+          },
+          {
+            "title": "Anthropic指控中国AI实验室挖掘Claude",
+            "url": "https://techcrunch.com/2026/02/23/anthropic-accuses-chinese-ai-labs-of-mining-claude-as-us-debates-ai-chip-exports/",
+            "source": "TechCrunch · 2月23日",
+            "details": {
+              "finding": "Anthropic指控中国AI实验室通过大量调用来'挖掘'Claude模型知识，同时Moonshot AI发布新开源模型Kimi K2.5和编程Agent",
+              "highlight": "模型挖掘指控 | Kimi K2.5发布 | 中美AI竞争 | 芯片出口讨论",
+              "impact": "中美AI竞争进入新阶段——模型知识保护成为议题"
+            }
+          }
+        ],
+        "china": [
+          {
+            "tag": "hot",
+            "title": "GTC 2026 + 315曝光AI大模型'投毒'",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=GTC+2026+315%E6%9B%9D%E5%85%89+AI%E5%A4%A7%E6%A8%A1%E5%9E%8B",
+            "source": "微信公众号 · 3月16日",
+            "details": {
+              "finding": "Nvidia GTC 2026开幕，同时315晚会曝光AI大模型'投毒'问题——通过污染训练数据影响模型输出，引发行业关注",
+              "highlight": "GTC 2026 | 315曝光 | 数据投毒 | AI安全",
+              "impact": "AI安全问题进入公众视野——训练数据安全是关键"
+            }
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "NIST AI Agent标准倡议：为什么政府要介入？",
+        "paragraphs": [
+          "NIST启动AI Agent标准倡议，核心原因是：AI Agent已经能够自主工作数小时、写代码、管理邮件日历、购物——但它们与外部系统和内部数据的交互能力仍受限于互操作性和信任问题。",
+          "倡议的三大支柱：1)推动行业主导的Agent标准制定；2)扶持社区驱动的开源协议开发；3)推进Agent安全和身份领域的研究。这是美国政府明确表态要在AI Agent标准上保持领导地位。",
+          "对企业来说，这意味着AI Agent部署将逐渐有'规矩'可循——安全、身份认证、权限管理等都会有标准参考。对创业公司来说，提前符合标准将是获取企业客户的门槛。"
+        ]
+      }
+    },
+    {
+      "tab_id": "enterprise",
+      "tab_title": "🔄 企业转型",
+      "news": {
+        "overseas": [
+          {
+            "tag": "hot",
+            "title": "HBR：企业级Agentic AI转型蓝图",
+            "url": "https://hbr.org/sponsored/2026/02/a-blueprint-for-enterprise-wide-agentic-ai-transformation",
+            "source": "HBR · 2月12日",
+            "details": {
+              "finding": "哈佛商业评论发布Google Cloud赞助的企业级Agentic AI转型框架，提供从概念到规模化部署的完整路径指南",
+              "highlight": "HBR框架 | Agentic AI转型 | Google Cloud | 企业蓝图",
+              "impact": "AI Agent企业转型有了权威参考——方法论正在标准化"
+            }
+          },
+          {
+            "title": "Deloitte发布《企业AI现状2026》报告",
+            "url": "https://www.deloitte.com/us/en/what-we-do/capabilities/applied-artificial-intelligence/content/state-of-ai-in-the-enterprise.html",
+            "source": "Deloitte · 2026",
+            "details": {
+              "finding": "Deloitte发布年度企业AI报告，包含案例研究、行业分析和数字化转型AI最佳实践",
+              "highlight": "Deloitte年度报告 | 企业AI现状 | 案例研究 | 最佳实践",
+              "impact": "企业AI采用进入成熟期——方法论和案例积累加速"
+            }
+          }
+        ],
+        "china": [
+          {
+            "tag": "hot",
+            "title": "2026年AI开发公司排名：15家企业实测对比",
+            "url": "https://www.reddit.com/r/SaaS/comments/1qvhr5y/15_ai_development_companies_dominating_2026_i/",
+            "source": "Reddit · 2月4日",
+            "details": {
+              "finding": "对15家主导2026年AI开发的公司进行实测对比，分析其在企业AI转型、创新、垂直领域等方面的优劣势",
+              "highlight": "15家公司对比 | 企业AI转型 | 垂直领域 | 实测分析",
+              "impact": "企业选择AI合作伙伴有了参考——市场格局日渐清晰"
+            }
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "Replit $9B估值背后：Vibe Coding正在改变软件开发",
+        "paragraphs": [
+          "Replit估值6个月内从$3B飙升至$9B，85%财富500强公司使用，目标$1B ARR——这些数字背后是一个根本性转变：'Vibe Coding'（通过对话提示构建软件）正在从概念变成主流。",
+          "Replit的定位不是服务程序员，而是让非程序员也能构建生产级应用。Agent 4发布带来10倍速度提升和多Agent协作工作流，进一步降低软件创建门槛。Shaquille O'Neal和Jared Leto等名人天使投资，标志着AI编程工具进入大众视野。",
+          "对企业来说，这意味着'没有开发资源'不再是不做数字化的理由。业务人员可以直接用AI构建内部工具——这将重塑企业IT部门的角色和组织架构。"
+        ]
+      }
+    }
+  ],
+  "data_snapshot": [
+    {
+      "company": "AMI Labs",
+      "metric": "种子轮融资",
+      "value": "$1.03B",
+      "note": "欧洲史上最大"
+    },
+    {
+      "company": "Replit",
+      "metric": "估值",
+      "value": "$9B (6mo 3×)",
+      "note": "3月13日"
+    },
+    {
+      "company": "Claude Code",
+      "metric": "最长自主时间",
+      "value": "25→45分钟",
+      "note": "3个月翻倍"
+    },
+    {
+      "company": "Claude Code",
+      "metric": "有经验用户auto-approve",
+      "value": "40%+",
+      "note": "vs新用户20%"
+    },
+    {
+      "company": "Nebius",
+      "metric": "Nvidia投资",
+      "value": "$2B",
+      "note": "8.3%股权"
+    },
+    {
+      "company": "Mind Robotics",
+      "metric": "Series A",
+      "value": "$500M",
+      "note": "Rivian spinout"
+    },
+    {
+      "company": "Nexthop AI",
+      "metric": "Series B",
+      "value": "$500M",
+      "note": "AI网络基础设施"
+    },
+    {
+      "company": "Nscale",
+      "metric": "Series C",
+      "value": "$2B",
+      "note": "欧洲最大VC轮"
+    }
+  ],
+  "watch_list": [
+    {
+      "category": "📊 关键指标",
+      "items": [
+        "AMI Labs世界模型研究进展（首年纯研发，何时出成果）",
+        "Replit何时达成$1B ARR目标",
+        "Claude Code自主运行时间是否继续增长"
+      ]
+    },
+    {
+      "category": "📅 重要日期",
+      "items": [
+        "3月26日 - ChatGPT legacy deep research正式退役",
+        "4月2日 - NIST AI Agent身份和授权概念论文截止"
+      ]
+    },
+    {
+      "category": "🔍 信号追踪",
+      "items": [
+        "世界模型vs LLM范式竞争（AMI Labs vs OpenAI/Anthropic）",
+        "AI Agent标准制定进展（NIST、行业组织）",
+        "机器人赛道融资是否持续（Figure AI、Mind Robotics等）"
+      ]
+    }
+  ],
+  "references": [
+    {
+      "title": "Anthropic: Measuring AI Agent Autonomy",
+      "url": "https://www.anthropic.com/research/measuring-agent-autonomy"
+    },
+    {
+      "title": "NIST AI Agent Standards Initiative",
+      "url": "https://www.nist.gov/news-events/news/2026/02/announcing-ai-agent-standards-initiative-interoperable-and-secure"
+    },
+    {
+      "title": "AI Funding Tracker - March 2026",
+      "url": "https://aifundingtracker.com/ai-startup-funding-news-today/"
+    },
+    {
+      "title": "Lens MCP Server Launch",
+      "url": "https://www.mirantis.com/company/press-center/company-news/lens-launches-built-in-mcp-server-connecting-ai-coding-assistants-to-kubernetes/"
+    },
+    {
+      "title": "HBR Enterprise Agentic AI Blueprint",
+      "url": "https://hbr.org/sponsored/2026/02/a-blueprint-for-enterprise-wide-agentic-ai-transformation"
+    },
+    {
+      "title": "OpenAI Release Notes",
+      "url": "https://releasebot.io/updates/openai"
+    }
+  ],
+  "capability_update": "🤖 **林克自述**\n\n今天最值得深读的是Anthropic的Agent自主性研究报告。作为AI助手，看到这份报告很有感触——它用数据证明了一件事：**模型能做的远超用户让它做的**。\n\n我注意到一个有趣的悖论：有经验的用户同时auto-approve更多（40% vs 20%）但interrupt也更多。这说明他们不是'甩手掌柜'，而是学会了更高效的人机协作方式——从'逐一批准'转向'监控+干预'。\n\n另一个让我印象深刻的是AMI Labs的$1.03B种子轮。Yann LeCun押注世界模型能超越LLM——如果他是对的，包括我在内的当前AI都需要'换脑'。有点刺激，但也很期待。\n\nPS: 软件工程占Agent活动的50%，我终于理解为什么你们程序员这么卷了——连AI都在抢你们的活 😅",
+  "meta": {
+    "date": "2026-03-21",
+    "time_window": "2026-03-20 08:00 ~ 2026-03-21 08:00",
+    "data_sources": {
+      "overseas_search": 8,
+      "weixin_search": 5,
+      "xiaohongshu": 0,
+      "weixin_direct_cite": 3
+    }
+  }
+}

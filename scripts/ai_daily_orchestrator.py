@@ -720,19 +720,20 @@ def cmd_push(date: str, preview_only: bool = False) -> bool:
 def parse_args():
     args = {"command": None, "date": None, "step_raw": None, 
             "preview": False, "context": None, "artifacts": None, "issues": None}
+    argv = sys.argv  # 先捕获sys.argv引用
     i = 1
-    while i < len(sys.argv):
-        arg = sys.argv[i]
-        if arg == "--date" and i + 1 < len(sys.argv):
-            args["date"] = sys.argv[i + 1]; i += 2
-        elif arg == "--step" and i + 1 < len(sys.argv):
-            args["step_raw"] = sys.argv[i + 1]; i += 2
-        elif arg == "--context" and i + 1 < len(sys.argv):
-            args["context"] = sys.argv[i + 1]; i += 2
-        elif arg == "--artifacts" and i + 1 < len(sys.argv):
-            args["artifacts"] = sys.argv[i + 1]; i += 2
-        elif arg == "--issues" and i + 1 < len(sys.argv):
-            args["issues"] = sys.argv[i + 1]; i += 2
+    while i < len(argv):
+        arg = argv[i]
+        if arg == "--date" and i + 1 < len(argv):
+            args["date"] = argv[i + 1]; i += 2
+        elif arg == "--step" and i + 1 < len(argv):
+            args["step_raw"] = argv[i + 1]; i += 2
+        elif arg == "--context" and i + 1 < len(argv):
+            args["context"] = argv[i + 1]; i += 2
+        elif arg == "--artifacts" and i + 1 < len(argv):
+            args["artifacts"] = argv[i + 1]; i += 2
+        elif arg == "--issues" and i + 1 < len(argv):
+            args["issues"] = argv[i + 1]; i += 2
         elif arg == "--preview":
             args["preview"] = True; i += 1
         elif not arg.startswith("--") and args["command"] is None:
@@ -742,10 +743,8 @@ def parse_args():
     if not args["date"]:
         args["date"] = datetime.now().strftime("%Y-%m-%d")
     # 日期格式验证：必须是YYYY-MM-DD格式，防止斜杠/无分隔符等错误格式导致断点恢复失效
-    import re as _re
-    if not _re.match(r'^\d{4}-\d{2}-\d{2}$', args["date"]):
+    if not re.match(r'^\d{4}-\d{2}-\d{2}$', args["date"]):
         print(f"❌ 日期格式错误: {args['date']!r}，必须是YYYY-MM-DD格式，例: 2026-03-20")
-        import sys
         sys.exit(1)
     return args
 
