@@ -56,24 +56,6 @@ except:
     else
         echo "  ⚠️ Source快照不存在 — 建议通过orchestrator complete --step 2 创建"
     fi
-
-# ===== 0c. 内部版首页完整性自检（v9.10新增 — 经验#55防护） =====
-# 防止内部版index.html被脱敏版覆盖（跨会话续接时曾发生：公开版反写内部版，林克=0）
-LINK_COUNT=$(grep -c "林克" index.html 2>/dev/null || echo "0")
-if [ "$LINK_COUNT" -eq 0 ]; then
-    echo ""
-    echo "  ❌ [WARNING] 内部版首页index.html中未检测到'林克'字样（当前: ${LINK_COUNT}处）"
-    echo "     疑似内部版被脱敏版覆盖！请确认:"
-    echo "       1. 从最近正确commit恢复: git checkout bcb0937 -- index.html"
-    echo "       2. 或手动检查: grep -n '林克' index.html"
-    echo "     跳过检查: SKIP_INDEX_CHECK=1 $0 $DATE"
-    if [ "${SKIP_INDEX_CHECK:-0}" != "1" ] && [ "${FORCE_DEPLOY:-0}" != "1" ]; then
-        exit 1
-    fi
-    echo "     ⚠️ 已跳过首页内容检查，继续部署..."
-else
-    echo "  ✅ 内部版首页内容正常（林克: ${LINK_COUNT}处）"
-fi
 else
     echo "  ⚠️ 未找到orchestrator状态文件($STATE_FILE)"
     echo "     建议通过 orchestrator 执行完整流程"
@@ -82,6 +64,26 @@ else
         exit 1
     fi
     echo "     ⚠️ FORCE_DEPLOY=1 已设置，跳过检查..."
+fi
+
+# ===== 0c. 内部版首页完整性自检（v9.10新增 — 独立步骤，任何路径都执行）=====
+# 防止内部版index.html被脱敏版覆盖（跨会话续接时曾发生：公开版反写内部版，林克=0）
+# ⚠️ 必须在0a/0b之外独立执行：FORCE_DEPLOY=1时0a的else分支跳过后也必须检查
+echo ""
+echo "🔍 Step 0c: 内部版首页完整性自检"
+LINK_COUNT=$(grep -c "林克" index.html 2>/dev/null || echo "0")
+if [ "$LINK_COUNT" -eq 0 ]; then
+    echo "  ❌ [WARNING] 内部版首页index.html中未检测到'林克'字样（当前: ${LINK_COUNT}处）"
+    echo "     疑似内部版被脱敏版覆盖！请确认:"
+    echo "       1. 从最近正确commit恢复: git log --oneline -5 然后 git checkout <SHA> -- index.html"
+    echo "       2. 或手动检查: grep -n '林克' index.html"
+    echo "     跳过检查: SKIP_INDEX_CHECK=1 $0 $DATE"
+    if [ "${SKIP_INDEX_CHECK:-0}" != "1" ] && [ "${FORCE_DEPLOY:-0}" != "1" ]; then
+        exit 1
+    fi
+    echo "     ⚠️ 已跳过首页内容检查，继续部署..."
+else
+    echo "  ✅ 内部版首页内容正常（林克: ${LINK_COUNT}处）"
 fi
 
 # ===== 0b. 质量门检查（阻断式，不通过则禁止部署） =====
@@ -319,11 +321,27 @@ fi
 # ===== 8. 验证 =====
 echo ""
 echo "📋 Step 7: 部署验证"
-echo "  日报HTML:  $(wc -l < "01-daily-reports/$MONTH/$DATE-v3.html" | tr -d ' ') 行"
+echo "  内部日报(v3):  $(wc -l < "01-daily-reports/$MONTH/$DATE-v3.html" | tr -d ' ') 行"
 echo "  明日关注:  $(grep -c '值得关注' "01-daily-reports/$MONTH/$DATE-v3.html") 个板块标题"
 echo "  明日内容:  $(grep -o '• [^<]*' "01-daily-reports/$MONTH/$DATE-v3.html" | wc -l | tr -d ' ') 条条目"
 echo "  public敏感词: ${SENSITIVE_COUNT} 处"
-echo "  首页日历:  $(grep -o "'$MONTH': \[[^\]]*\]" index.html | head -1)"
+echo "  内部首页日历:  $(grep -o "'$MONTH': \[[^\]]*\]" index.html | head -1)"
+# 验证public/内部日报是否存在（经验#56：手动sync漏force导致旧版本残留）
+if [ -f "public/01-daily-reports/$MONTH/$DATE.html" ]; then
+    echo "  外部日报(public):  $(wc -l < "public/01-daily-reports/$MONTH/$DATE.html" | tr -d ' ') 行"
+else
+    echo "  ❌ 外部日报(public): 文件不存在！public/01-daily-reports/$MONTH/$DATE.html 未生成"
+fi
+# 验证外部仓库是否存在该日期日报（可选检查，不阻断）
+if [ -d "../ai-insight-public/01-daily-reports/$MONTH" ]; then
+    if [ -f "../ai-insight-public/01-daily-reports/$MONTH/$DATE.html" ]; then
+        echo "  外部仓库日报:  $(wc -l < "../ai-insight-public/01-daily-reports/$MONTH/$DATE.html" | tr -d ' ') 行"
+    else
+        echo "  ⚠️ 外部仓库日报: 文件不存在（外部sync尚未完成或被skipped）"
+    fi
+else
+    echo "  ⚠️ 外部仓库目录不存在（外部sync尚未完成）"
+fi
 
 echo ""
 echo "=================================================="
