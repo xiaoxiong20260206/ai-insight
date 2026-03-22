@@ -566,9 +566,76 @@ def cmd_finalize(date: str) -> bool:
     mark_step(date, "deploy", "completed")
     print("  ✅ Step 4 完成")
 
+    # ===== 4位置终态摘要（v9.10新增：用户不必从截断的部署日志里自己找） =====
+    _show_4_positions_summary(date)
+
     print(f"\n✅ Finalize 完成！下一步: KIM推送")
     print(f"   python3 scripts/send_ai_daily.py --preview")
     return True
+
+def _show_4_positions_summary(date: str) -> None:
+    """
+    finalize完成后显示4位置同步状态摘要（v9.10新增）
+    
+    用户在orchestrator路径下无需从截断的部署日志里自己找验证结果。
+    4位置：①内部日报 ②内部首页 ③外部日报(public) ④外部仓库日报
+    """
+    import os
+    month = date[:7]
+    all_ok = True
+    
+    print("\n📊 4位置同步状态摘要:")
+    
+    # ① 内部日报
+    p1 = PROJECT_DIR / "01-daily-reports" / month / f"{date}-v3.html"
+    if p1.exists():
+        kb = p1.stat().st_size // 1000
+        print(f"  ① 内部日报:    ✅ {kb}KB")
+    else:
+        print(f"  ① 内部日报:    ❌ 文件不存在 ({p1.name})")
+        all_ok = False
+    
+    # ② 内部首页
+    p2 = PROJECT_DIR / "index.html"
+    if p2.exists():
+        content = p2.read_text(encoding="utf-8")
+        has_date = date in content
+        has_link = "林克" in content
+        status = "✅" if (has_date and has_link) else "⚠️"
+        detail = f"日期{'✅' if has_date else '❌'} 林克{'✅' if has_link else '❌(疑似污染)'}"
+        print(f"  ② 内部首页:    {status} {detail}")
+        if not (has_date and has_link):
+            all_ok = False
+    else:
+        print(f"  ② 内部首页:    ❌ index.html 不存在")
+        all_ok = False
+    
+    # ③ 外部日报 (public/)
+    p3 = PROJECT_DIR / "public" / "01-daily-reports" / month / f"{date}.html"
+    if p3.exists():
+        kb = p3.stat().st_size // 1000
+        print(f"  ③ 外部日报(public): ✅ {kb}KB")
+    else:
+        print(f"  ③ 外部日报(public): ❌ 不存在（需 sync_to_public --full --force）")
+        all_ok = False
+    
+    # ④ 外部仓库日报
+    p4 = PROJECT_DIR.parent / "ai-insight-public" / "01-daily-reports" / month / f"{date}.html"
+    if p4.exists():
+        kb = p4.stat().st_size // 1000
+        print(f"  ④ 外部仓库日报: ✅ {kb}KB")
+    elif (PROJECT_DIR.parent / "ai-insight-public").exists():
+        print(f"  ④ 外部仓库日报: ❌ 仓库存在但文件不存在（需 sync_to_external --full --verify）")
+        all_ok = False
+    else:
+        print(f"  ④ 外部仓库日报: ⚠️ 外部仓库目录不存在（先 git clone ai-insight-public）")
+        all_ok = False
+    
+    if all_ok:
+        print("  ✅ 全部4个位置已同步，可以推送KIM了！")
+    else:
+        print("  ⚠️ 有位置未同步，请按上方提示手动修复")
+
 
 def run_quality_gate(date: str) -> bool:
     """运行质量门检查"""
@@ -618,8 +685,9 @@ def run_deploy(date: str) -> bool:
         )
         if result.returncode == 0:
             print(f"  ✅ 部署完成")
-            # 显示部署结果的最后几行
-            for line in result.stdout.strip().split("\n")[-5:]:
+            # 显示部署结果的最后15行（覆盖 Step 7 全部4位置验证内容）
+            # ⚠️ v9.10修复: -5太少，Step 7的4位置验证（约10行）全被截断，用户看不到
+            for line in result.stdout.strip().split("\n")[-15:]:
                 print(f"    {line}")
             return True
         else:
