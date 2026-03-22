@@ -115,8 +115,11 @@ REPLACEMENTS = [
     (r'🌱</span> 每日学习，每日精进中！我是AI，同时也能越来越理解AI本身。',
      '🌱</span> 每日更新，持续追踪AI行业动态。'),
     
-    # ===== 公司相关 =====
-    (r'快手', '某公司'),
+    # ===== 公司相关（v2.1修复：只替换林克身份标记中的快手，不替换新闻正文中的平台名）=====
+    # ⭐ 经验#57防护：避免新闻正文中「抖音/快手/腾讯」被误伤，只替换独立出现的「快手」
+    # 新闻正文中的快手（作为平台名被列举）不需要脱敏，是新闻事实描述
+    (r'快手AI研究院', 'XX公司AI研究院'),  # 快手机构名
+    (r'快手技术', 'XX公司技术'),           # 快手技术团队名
     (r'Kuaishou', 'Company'),
 ]
 
@@ -266,7 +269,7 @@ def sync_reports_index(force: bool = False):
 
 
 def sync_index(force: bool = False):
-    """同步根首页"""
+    """同步根首页（v2.1新增：内部版被污染检测）"""
     src = PROJECT_ROOT / "index.html"
     dst = PUBLIC_DIR / "index.html"
     
@@ -274,7 +277,18 @@ def sync_index(force: bool = False):
         print("❌ 内部版首页不存在")
         return False
     
+    # ⭐ v2.1: 内部版首页被污染检测（经验#55防护）
+    # 内部版 index.html 应包含「林克」字样，若不包含说明可能被脱敏版覆盖
     content = src.read_text(encoding="utf-8")
+    link_count = content.count('林克')
+    if link_count == 0:
+        print("⚠️ [WARNING] 内部版首页中未找到'林克'字样，疑似被脱敏版覆盖！")
+        print("   请检查: grep -c '林克' index.html")
+        print("   如果确认是污染，从最近正确commit恢复: git checkout bcb0937 -- index.html")
+        print("   继续同步（将复制当前内容）...")
+    else:
+        print(f"✅ 内部版首页内容正常（林克: {link_count}处），开始脱敏同步...")
+    
     sanitized = sanitize_html(content)
     dst.write_text(sanitized, encoding="utf-8")
     print("✅ 已同步首页: index.html")

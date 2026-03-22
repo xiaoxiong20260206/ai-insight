@@ -56,6 +56,24 @@ except:
     else
         echo "  ⚠️ Source快照不存在 — 建议通过orchestrator complete --step 2 创建"
     fi
+
+# ===== 0c. 内部版首页完整性自检（v9.10新增 — 经验#55防护） =====
+# 防止内部版index.html被脱敏版覆盖（跨会话续接时曾发生：公开版反写内部版，林克=0）
+LINK_COUNT=$(grep -c "林克" index.html 2>/dev/null || echo "0")
+if [ "$LINK_COUNT" -eq 0 ]; then
+    echo ""
+    echo "  ❌ [WARNING] 内部版首页index.html中未检测到'林克'字样（当前: ${LINK_COUNT}处）"
+    echo "     疑似内部版被脱敏版覆盖！请确认:"
+    echo "       1. 从最近正确commit恢复: git checkout bcb0937 -- index.html"
+    echo "       2. 或手动检查: grep -n '林克' index.html"
+    echo "     跳过检查: SKIP_INDEX_CHECK=1 $0 $DATE"
+    if [ "${SKIP_INDEX_CHECK:-0}" != "1" ] && [ "${FORCE_DEPLOY:-0}" != "1" ]; then
+        exit 1
+    fi
+    echo "     ⚠️ 已跳过首页内容检查，继续部署..."
+else
+    echo "  ✅ 内部版首页内容正常（林克: ${LINK_COUNT}处）"
+fi
 else
     echo "  ⚠️ 未找到orchestrator状态文件($STATE_FILE)"
     echo "     建议通过 orchestrator 执行完整流程"
