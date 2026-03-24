@@ -458,8 +458,8 @@ def generate_html(data: dict) -> str:
         # 兼容 deep_focus 和 focus 两种字段名
         df_data = tab_data.get("deep_focus") or tab_data.get("focus")
         deep_focus_html = render_deep_focus(df_data, tab_data.get("theme", "")) if df_data else ""
-        # pattern insight is optional
-        pi_html = tab_data.get("pattern_insight_html", "")
+        # ⚠️ pattern_insight_html 必填 (v9.14) — 每期必须有规律洞察，不允许为空
+        pi_html = tab_data.get("pattern_insight_html", "") or tab_data.get("pattern_insight", "")
 
         tab_panels.append(f'''
         <article id="{tid}" class="tab-panel{active}">
@@ -621,6 +621,14 @@ def main():
     # 4. 验证热度趋势
     if "heat-trend" not in html and "热度趋势" not in html:
         warnings.append("⚠️ [警告] 热度趋势板块未渲染 — 检查heat_trend字段")
+
+    # 5. 验证深度聚焦 (v9.14 — 每个tab必须有)
+    if "deep-focus-card" not in html and "deep-focus-header" not in html:
+        warnings.append("❌ [关键] 深度聚焦(deep_focus)未渲染 — 每个tab必须有deep_focus字段，请检查JSON数据")
+
+    # 6. 验证规律洞察 (v9.14 — 每个tab必须有)
+    if "pi-card" not in html:
+        warnings.append("❌ [关键] 规律洞察(pattern_insight_html)未渲染 — 每个tab必须有pattern_insight_html字段，请检查JSON数据")
 
     if warnings:
         print()

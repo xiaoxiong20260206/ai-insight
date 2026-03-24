@@ -9,12 +9,14 @@ AI日报质量门脚本 (Quality Gate)
   python scripts/daily_quality_gate.py 2026-03-11         # 检查指定日期
   python scripts/daily_quality_gate.py 2026-03-11 --fix   # 检查并尝试修复部分问题
 
-检查项 (19项):
+检查项 (21项):
   1. JSON数据文件存在性
   2. 中文引号检测
   3. 链接有效性 (禁止#占位符 + URL真实性抽检)
   4. 内容非空检查
   5. ⭐ [v6.0新增] 林克自述(capability_update)必填检查
+  5.2 ⭐ [v9.14新增] 深度聚焦(deep_focus)每tab必填检查 — 教训:2026-03-24整周缺失连续6天用户才发现
+  5.3 ⭐ [v9.14新增] 规律洞察(pattern_insight_html)每tab必填检查 — 同上
   6. ⭐ [v9.0新增] 板块均衡检查 (防大事件隧道视野)
   7. ⭐ [v8.3新增] 内容量检查 (防止修复时内容缩水 — 经验37)
   8. ⭐ [v2.0新增] 时效性验证 (发布日期在时间窗口内)
@@ -31,7 +33,13 @@ AI日报质量门脚本 (Quality Gate)
   19. 外部版同步检查
 
 作者: 林克 (沈浪的AI分身)
-版本: v10.1.0 (2026-03-20)
+版本: v10.2.0 (2026-03-24)
+
+v10.2更新 (深度聚焦+规律洞察门控 — 经验#58 2026-03-24):
+- 新增check_deep_focus: 每tab的deep_focus必填(含title+3段paragraphs+takeaway)
+- 新增check_pattern_insight: 每tab的pattern_insight_html必填(长度≥200字符+含pi-card)
+- 教训: 2026-03-24日报整周缺失这两个字段，连续6天用户才发现
+- 检查项从19项增加到21项
 
 v10.1更新 (小红书搜索策略调整 — v9.8):
 - check_source_diversity: 小红书检查从ERROR降级为WARNING
@@ -320,6 +328,123 @@ def check_capability_update(date_str: str) -> CheckResult:
         return CheckResult("林克自述", True, f"已填写({len(capability_update)}字符)")
     except Exception as e:
         return CheckResult("林克自述", False, f"检查失败: {e}")
+
+
+def check_deep_focus(date_str: str) -> CheckResult:
+    """检查4.2: [v9.14新增] 深度聚焦(deep_focus)完整性检查
+    
+    规则:
+    - 每个tab必须包含deep_focus字段
+    - deep_focus必须有title、paragraphs(≥3段)、takeaway
+    - 教训: 2026-03-24日报整周缺失此字段，连续6天用户才发现
+    """
+    json_path = DATA_PATH / f"daily-content-{date_str}.json"
+    if not json_path.exists():
+        return CheckResult("深度聚焦", False, "JSON文件不存在")
+    
+    try:
+        data = _load_data(date_str) or json.loads(json_path.read_text(encoding="utf-8"))
+        tabs = data.get("tabs", [])
+        
+        if not tabs:
+            return CheckResult("深度聚焦", False, "tabs为空，无法检查deep_focus")
+        
+        missing = []
+        incomplete = []
+        tab_names = ["大模型", "AI Coding", "AI 应用", "AI 行业", "企业转型"]
+        
+        for i, tab in enumerate(tabs):
+            name = tab_names[i] if i < len(tab_names) else f"Tab{i}"
+            df = tab.get("deep_focus") or tab.get("focus")
+            
+            if not df:
+                missing.append(name)
+                continue
+            
+            # 检查内部结构
+            issues = []
+            if not df.get("title"):
+                issues.append("缺title")
+            paragraphs = df.get("paragraphs", [])
+            if len(paragraphs) < 3:
+                issues.append(f"段落不足{len(paragraphs)}/3")
+            if not df.get("takeaway"):
+                issues.append("缺takeaway")
+            
+            if issues:
+                incomplete.append(f"{name}({','.join(issues)})")
+        
+        if missing:
+            return CheckResult(
+                "深度聚焦", False,
+                f"以下板块缺少deep_focus字段: {', '.join(missing)}。每个tab必须有深度聚焦。",
+                severity="error"
+            )
+        
+        if incomplete:
+            return CheckResult(
+                "深度聚焦", False,
+                f"以下板块deep_focus结构不完整: {', '.join(incomplete)}。需title+3段paragraphs+takeaway。",
+                severity="warning"
+            )
+        
+        return CheckResult("深度聚焦", True, f"全部{len(tabs)}个tab均有完整deep_focus")
+    except Exception as e:
+        return CheckResult("深度聚焦", False, f"检查失败: {e}")
+
+
+def check_pattern_insight(date_str: str) -> CheckResult:
+    """检查4.3: [v9.14新增] 规律洞察(pattern_insight_html)完整性检查
+    
+    规则:
+    - 每个tab必须包含pattern_insight_html字段
+    - 内容必须是有效的HTML（长度>200字符）
+    - 必须包含pi-card类的div
+    - 教训: 2026-03-24日报整周缺失此字段，连续6天用户才发现
+    """
+    json_path = DATA_PATH / f"daily-content-{date_str}.json"
+    if not json_path.exists():
+        return CheckResult("规律洞察", False, "JSON文件不存在")
+    
+    try:
+        data = _load_data(date_str) or json.loads(json_path.read_text(encoding="utf-8"))
+        tabs = data.get("tabs", [])
+        
+        if not tabs:
+            return CheckResult("规律洞察", False, "tabs为空，无法检查pattern_insight_html")
+        
+        missing = []
+        too_short = []
+        tab_names = ["大模型", "AI Coding", "AI 应用", "AI 行业", "企业转型"]
+        
+        for i, tab in enumerate(tabs):
+            name = tab_names[i] if i < len(tab_names) else f"Tab{i}"
+            pi_html = tab.get("pattern_insight_html", "") or tab.get("pattern_insight", "")
+            
+            if not pi_html:
+                missing.append(name)
+            elif len(pi_html) < 200:
+                too_short.append(f"{name}({len(pi_html)}字符)")
+            elif "pi-card" not in pi_html:
+                too_short.append(f"{name}(缺pi-card结构)")
+        
+        if missing:
+            return CheckResult(
+                "规律洞察", False,
+                f"以下板块缺少pattern_insight_html字段: {', '.join(missing)}。每个tab必须有规律洞察。",
+                severity="error"
+            )
+        
+        if too_short:
+            return CheckResult(
+                "规律洞察", False,
+                f"以下板块pattern_insight_html内容异常: {', '.join(too_short)}。需包含完整pi-card HTML。",
+                severity="warning"
+            )
+        
+        return CheckResult("规律洞察", True, f"全部{len(tabs)}个tab均有完整pattern_insight_html")
+    except Exception as e:
+        return CheckResult("规律洞察", False, f"检查失败: {e}")
 
 
 def check_tab_balance(date_str: str) -> CheckResult:
@@ -1417,6 +1542,8 @@ def run_all_checks(date_str: str) -> Tuple[List[CheckResult], int, int, int]:
         check_link_validity,
         check_content_nonempty,
         check_capability_update,     # v6.0新增 - 林克自述必填检查
+        check_deep_focus,            # v9.14新增 - 深度聚焦必填(防整期缺失)
+        check_pattern_insight,       # v9.14新增 - 规律洞察必填(防整期缺失)
         check_tab_balance,           # v9.0新增 - 板块均衡(防大事件隧道视野)
         check_content_volume,        # v8.3新增 - 内容量检查(防修复缩水)
         check_date_window,           # v2.0新增
