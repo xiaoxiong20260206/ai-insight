@@ -185,7 +185,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="header-badge">📡 AI洞察项目 - AI日报</div>
+            <div class="header-badge">📡 AI行业洞察项目 - AI日报</div>
             <div class="header-title">AI 日报 <span class="version-badge">v3.2</span></div>
             <div class="header-date">2026年3月22日 周日 | 五大板块：大模型 · AI Coding · AI应用 · AI行业 · 企业转型</div>
         </div>
@@ -416,7 +416,40 @@
                     <p>过去72小时内，中国AI公司完成了一次密集的模型发布：阿里Qwen3.5-Max-Preview(旗舰级)、MiniMax M2.7(受欢迎到限流)、小米MiMo-V2-Pro(接近GPT-5.2)、美团LongCat-Flash-Prover(数学证明SOTA)。这不是简单的'同质化内卷'——每家公司都在走差异化路线。</p><p>阿里走的是全能旗舰路线：235B参数MoE架构瞄准代码/数学/多语言的全面能力。MiniMax走的是性价比路线：M2.7受欢迎到需要限流，说明市场对高性价比模型的需求巨大。美团最有趣——用5677B参数+Lean4验证做数学证明，在垂直方向上做到了全球SOTA。海外方面，Mistral Small 4则用'三合一'策略降低企业的多模型管理成本。</p><p>与Nature Communications论文的发现形成对照：22/26个SOTA对齐模型可被100%攻破，说明模型能力的增长和安全性的保障之间仍存在巨大鸿沟。国产模型密集发布的同时，安全对齐的可靠性值得持续关注。</p>
                 </div>
             </div>
-
+            <div class="pi-card">
+                <div class="pi-header">
+                    <span class="pi-badge">🔮 规律洞察</span>
+                    <span class="pi-title">国产大模型的「差异化竞争定律」：追赶→平价→特色化</span>
+                </div>
+                <div class="pi-row">
+                    <span class="pi-row-label l2">本质</span>
+                    <div class="pi-row-content"><strong>国产大模型四连发——中国AI已完成追赶期，正式进入差异化竞争阶段，拼的不再是「有没有」而是「好在哪」</strong></div>
+                </div>
+                <div class="pi-row">
+                    <span class="pi-row-label">进化序列</span>
+                    <div class="pi-row-content">
+                        <div class="pi-evo">
+                            <div class="pi-evo-step"><span class="pi-evo-tag">1.0</span><span class="pi-evo-text">追赶阶段</span></div>
+                            <span class="pi-evo-arrow">→</span>
+                            <div class="pi-evo-step active"><span class="pi-evo-tag">2.0</span><span class="pi-evo-text">平价替代</span></div>
+                            <span class="pi-evo-arrow">→</span>
+                            <div class="pi-evo-step future"><span class="pi-evo-tag">3.0</span><span class="pi-evo-text">差异化竞争</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pi-table">
+                    <div class="pi-t-head"><span>阶段</span><span>现实验证</span><span>类比</span></div>
+                    <div class="pi-t-section verified"><span class="pi-t-section-tag">✅ 已验证</span></div>
+                    <div class="pi-t-row"><span class="pi-t-rule">2023-2024</span><span class="pi-t-reality">DeepSeek/百川/MiniMax等快速追上GPT-4能力，主要靠价格优势（API价格降至GPT-4的5-10%）建立市场份额</span><span class="pi-t-analogy">像中国手机——先靠价格进入市场，再靠特色功能站稳脚跟</span></div>
+                    <div class="pi-t-divider"></div>
+                    <div class="pi-t-section current"><span class="pi-t-section-tag">📍 当前</span></div>
+                    <div class="pi-t-row"><span class="pi-t-rule">今日节点</span><span class="pi-t-reality">国产大模型四连发——不再是单纯跟随GPT发布，而是基于中文场景、本地化数据、垂直行业开始差异化定位</span><span class="pi-t-analogy">像小米→华为——从性价比到旗舰高端，完成品牌跃迁</span></div>
+                    <div class="pi-t-divider"></div>
+                    <div class="pi-t-section projected"><span class="pi-t-section-tag">🔮 趋势推演</span></div>
+                    <div class="pi-t-row projected"><span class="pi-t-rule">3.0</span><span class="pi-t-reality">6个月内，中国AI将出现首批真正超越海外产品的垂直领域（金融/医疗/教育），差异化路线图将清晰化</span><span class="pi-t-analogy">像TikTok vs Instagram——不是更好的Instagram，是新的内容消费形态</span></div>
+                </div>
+                <div class="pi-confidence">📐 置信度: 中高 · 验证窗口: 6-12个月 · 信号: 国产大模型在垂直评测中超越GPT-4的领域数量</div>
+            </div>
         </article>
 
         <article id="coding" class="tab-panel">
@@ -517,7 +550,40 @@
                     <p>Cursor推出Composer 2时的营销定位是'自研前沿编码模型，性能超越Claude Opus 4.6'。但24小时内，开发者从API请求中发现模型ID为kimi-k2p5-rl-0317-s515-fast——Composer 2的底座是月之暗面的Kimi K2.5，并非'自研'。马斯克亲自转发后事件彻底爆发。</p><p>Cursor联合创始人Aman Sanger的致歉信承认了两个关键事实：(1)Composer 2确实基于Kimi K2.5，通过Fireworks AI平台获得合法授权；(2)博客中未标注基础模型来源属于疏漏。Kimi官方随后确认合作关系，称'这就是我们喜欢的开源生态'。但社区对'自研'的定义产生了分歧——在基础模型上做RL微调算不算自研？</p><p>另一个重要信号是Anthropic推出的Claude Code Channels——让开发者通过Telegram/Discord直接指挥Claude Code编码。这意味着AI编程正在从IDE(VS Code/Cursor)走向即时通讯，开发者可以在任何地方随时指挥AI写代码。VentureBeat直接称其为'OpenClaw killer'。AI编程的入口之争刚刚开始。</p>
                 </div>
             </div>
-
+            <div class="pi-card">
+                <div class="pi-header">
+                    <span class="pi-badge">🔮 规律洞察</span>
+                    <span class="pi-title">AI编程工具的「信任危机定律」：技术优势→信息不透明→信任崩塌</span>
+                </div>
+                <div class="pi-row">
+                    <span class="pi-row-label l2">本质</span>
+                    <div class="pi-row-content"><strong>Cursor「套壳」Kimi事件揭示了AI编程工具的核心风险——当产品宣传的能力与底层实现不符，信任一旦崩塌就很难修复，这是军备竞赛思维的系统性隐患</strong></div>
+                </div>
+                <div class="pi-row">
+                    <span class="pi-row-label">进化序列</span>
+                    <div class="pi-row-content">
+                        <div class="pi-evo">
+                            <div class="pi-evo-step"><span class="pi-evo-tag">1.0</span><span class="pi-evo-text">性能竞争</span></div>
+                            <span class="pi-evo-arrow">→</span>
+                            <div class="pi-evo-step active"><span class="pi-evo-tag">2.0</span><span class="pi-evo-text">信任危机</span></div>
+                            <span class="pi-evo-arrow">→</span>
+                            <div class="pi-evo-step future"><span class="pi-evo-tag">3.0</span><span class="pi-evo-text">透明化要求</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pi-table">
+                    <div class="pi-t-head"><span>阶段</span><span>现实验证</span><span>类比</span></div>
+                    <div class="pi-t-section verified"><span class="pi-t-section-tag">✅ 已验证</span></div>
+                    <div class="pi-t-row"><span class="pi-t-rule">VW排放门</span><span class="pi-t-reality">大众软件作弊通过排放测试→被发现→市值蒸发300亿欧元→整个汽车行业被迫透明化</span><span class="pi-t-analogy">像食品安全——一次问题曝光会让整个行业面临监管</span></div>
+                    <div class="pi-t-divider"></div>
+                    <div class="pi-t-section current"><span class="pi-t-section-tag">📍 当前</span></div>
+                    <div class="pi-t-row"><span class="pi-t-rule">今日节点</span><span class="pi-t-reality">Cursor Composer 2被曝「套壳」Kimi K2.5，实际使用的不是宣传的自研模型——引爆AI编程行业信任危机</span><span class="pi-t-analogy">像餐厅用预制菜——本来大家不在意，被曝光后成了舆论爆点</span></div>
+                    <div class="pi-t-divider"></div>
+                    <div class="pi-t-section projected"><span class="pi-t-section-tag">🔮 趋势推演</span></div>
+                    <div class="pi-t-row projected"><span class="pi-t-rule">3.0</span><span class="pi-t-reality">3-6个月内，AI编程工具行业将出现「模型透明度标准」——强制披露底层模型来源，就像食品需要成分表</span><span class="pi-t-analogy">像有机食品认证——不是必须，但用户开始认证标志才买单</span></div>
+                </div>
+                <div class="pi-confidence">📐 置信度: 高 · 验证窗口: 3-6个月 · 信号: 主要AI产品是否主动披露底层模型信息</div>
+            </div>
         </article>
 
         <article id="application" class="tab-panel">
@@ -618,7 +684,40 @@
                     <p>腾讯QClaw的全量开放标志着一个重要节点：中国头部科技公司的AI助手产品开始从邀请制走向全民可用。QClaw最有趣的差异化不是模型能力（虽然也很强），而是打通了微信/企微/QQ/飞书/钉钉5大IM平台——这在中国市场是独一无二的社交关系链优势。</p><p>WordPress的AI Agent接入则代表了另一个维度：当全球43%的网站底层引擎都支持AI Agent管理时，'用自然语言管理网站'从技术概念变成了基础设施。结合MCP协议，Claude/ChatGPT/Cursor都可以直接操作WordPress站点——AI Agent的应用场景正在从'对话'走向'操作'。</p><p>小米MiMo V2选择了另一种打法：联合5大Agent框架首周限免。这不是简单的免费试用，而是用开放API换取开发者生态的战略投资。当MiMo V2的性能接近GPT-5.2水平时，免费+开放可能比收费+封闭更能快速建立市场份额。</p>
                 </div>
             </div>
-
+            <div class="pi-card">
+                <div class="pi-header">
+                    <span class="pi-badge">🔮 规律洞察</span>
+                    <span class="pi-title">AI助手的「全量开放周期定律」：邀请→公测→全量→内置</span>
+                </div>
+                <div class="pi-row">
+                    <span class="pi-row-label l2">本质</span>
+                    <div class="pi-row-content"><strong>小米MiMo V2限免开放、WordPress接入AI——AI从「科技前沿体验」到「普通用户日常工具」的渗透正在加速，全量开放周期从18个月缩短到6个月</strong></div>
+                </div>
+                <div class="pi-row">
+                    <span class="pi-row-label">进化序列</span>
+                    <div class="pi-row-content">
+                        <div class="pi-evo">
+                            <div class="pi-evo-step"><span class="pi-evo-tag">1.0</span><span class="pi-evo-text">邀请内测</span></div>
+                            <span class="pi-evo-arrow">→</span>
+                            <div class="pi-evo-step active"><span class="pi-evo-tag">2.0</span><span class="pi-evo-text">付费公测</span></div>
+                            <span class="pi-evo-arrow">→</span>
+                            <div class="pi-evo-step future"><span class="pi-evo-tag">3.0</span><span class="pi-evo-text">全量免费</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pi-table">
+                    <div class="pi-t-head"><span>阶段</span><span>现实验证</span><span>类比</span></div>
+                    <div class="pi-t-section verified"><span class="pi-t-section-tag">✅ 已验证</span></div>
+                    <div class="pi-t-row"><span class="pi-t-rule">ChatGPT时代</span><span class="pi-t-reality">ChatGPT从邀请制到免费全量花了约3个月，但2024年之前大多数AI产品还要付费才能用</span><span class="pi-t-analogy">像Gmail从邀请码到人人可注册——用了2年</span></div>
+                    <div class="pi-t-divider"></div>
+                    <div class="pi-t-section current"><span class="pi-t-section-tag">📍 当前</span></div>
+                    <div class="pi-t-row"><span class="pi-t-rule">今日节点</span><span class="pi-t-reality">小米MiMo V2联合5大Agent框架首周限免全量开放，WordPress覆盖全球43%网站接入AI——AI的「全量开放」速度比2年前快了3-5倍</span><span class="pi-t-analogy">像5G手机——2019年旗舰专属，2021年入门机标配</span></div>
+                    <div class="pi-t-divider"></div>
+                    <div class="pi-t-section projected"><span class="pi-t-section-tag">🔮 趋势推演</span></div>
+                    <div class="pi-t-row projected"><span class="pi-t-rule">3.0</span><span class="pi-t-reality">6个月内，在中国的互联网产品，「不内置AI」将成为用户流失的主要原因——AI从加分项变成基础门槛</span><span class="pi-t-analogy">像夜间模式——2019年是高端特性，2021年是默认功能</span></div>
+                </div>
+                <div class="pi-confidence">📐 置信度: 高 · 验证窗口: 6个月 · 信号: 中国主流APP的AI功能渗透率</div>
+            </div>
         </article>
 
         <article id="industry" class="tab-panel">
@@ -754,7 +853,7 @@
                     <div class="news-detail">
                         <div class="news-detail-row">
                             <span class="news-detail-label ">核心发现</span>
-                            <span class="news-detail-value">中央网信办指导平台将虚构演绎/摆拍营销/AI生成纳入统一标签体系，要求标注为发布必经环节。抖音/某短视频平台/腾讯/小红书/B站/微博6家平台近一月清理违规3.7万条，补标60万+条</span>
+                            <span class="news-detail-value">中央网信办指导平台将虚构演绎/摆拍营销/AI生成纳入统一标签体系，要求标注为发布必经环节。抖音/某公司/腾讯/小红书/B站/微博6家平台近一月清理违规3.7万条，补标60万+条</span>
                         </div>
                         <div class="news-detail-row">
                             <span class="news-detail-label ">关键数据</span>
@@ -779,7 +878,40 @@
                     <p>过去48小时的三个数据点揭示了AI行业竞争的新烈度：OpenAI年底前扩招翻倍至8000人(重点是企业销售)、xAI直接派工程师入驻客户办公室抢单、软银投资$660亿建设10GW数据中心。人才、客户、基建三条战线同时升温。</p><p>最值得关注的是xAI的策略：直接派工程师上门帮企业部署AI——这在传统软件行业是高端咨询公司的做法。Bloomberg指出OpenAI和Anthropic也在做类似的事。这意味着AI行业的ToB竞争正在从'谁的模型更好'升级为'谁能帮客户落地更快'。技术壁垒在缩小，执行能力成为新的护城河。</p><p>ChatGPT广告试点的缓慢进展值得关注——品牌预算花不完说明AI对话场景的广告形态还没找到合适的方式。同时Latent的$8000万融资说明医疗AI从诊断走向流程自动化（药物审批），垂直场景的AI创业正在进入深水区。</p>
                 </div>
             </div>
-
+            <div class="pi-card">
+                <div class="pi-header">
+                    <span class="pi-badge">🔮 规律洞察</span>
+                    <span class="pi-title">AI巨头的「三线军备竞赛定律」：人才×客户×基建同步扩张</span>
+                </div>
+                <div class="pi-row">
+                    <span class="pi-row-label l2">本质</span>
+                    <div class="pi-row-content"><strong>OpenAI员工翻倍到8000人、马斯克xAI Grok Computer上线——AI巨头的竞争已从单一维度（谁的模型最好）演变为三线并行的全面战争</strong></div>
+                </div>
+                <div class="pi-row">
+                    <span class="pi-row-label">进化序列</span>
+                    <div class="pi-row-content">
+                        <div class="pi-evo">
+                            <div class="pi-evo-step"><span class="pi-evo-tag">1.0</span><span class="pi-evo-text">模型能力竞争</span></div>
+                            <span class="pi-evo-arrow">→</span>
+                            <div class="pi-evo-step active"><span class="pi-evo-tag">2.0</span><span class="pi-evo-text">三线军备竞赛</span></div>
+                            <span class="pi-evo-arrow">→</span>
+                            <div class="pi-evo-step future"><span class="pi-evo-tag">3.0</span><span class="pi-evo-text">平台生态决战</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pi-table">
+                    <div class="pi-t-head"><span>阶段</span><span>现实验证</span><span>类比</span></div>
+                    <div class="pi-t-section verified"><span class="pi-t-section-tag">✅ 已验证</span></div>
+                    <div class="pi-t-row"><span class="pi-t-rule">2023年</span><span class="pi-t-reality">AI竞争主要在模型能力上：GPT-4发布→Claude跟进→Gemini追赶——评测分数是唯一战场</span><span class="pi-t-analogy">像手机处理器大战——都在拼跑分</span></div>
+                    <div class="pi-t-divider"></div>
+                    <div class="pi-t-section current"><span class="pi-t-section-tag">📍 当前</span></div>
+                    <div class="pi-t-row"><span class="pi-t-rule">今日节点</span><span class="pi-t-reality">OpenAI年底前员工翻倍到8000人（人才线）+马斯克xAI Grok Computer上线（算力线）+多家AI巨头同日宣布企业客户战略（客户线）</span><span class="pi-t-analogy">像冷战时期的军备竞赛——不只是武器，是整个国家机器的动员</span></div>
+                    <div class="pi-t-divider"></div>
+                    <div class="pi-t-section projected"><span class="pi-t-section-tag">🔮 趋势推演</span></div>
+                    <div class="pi-t-row projected"><span class="pi-t-rule">3.0</span><span class="pi-t-reality">12个月内，AI行业将出现明显的「规模门槛效应」——没有1000人以上工程团队和100万块GPU算力的公司，无法参与顶级模型竞争</span><span class="pi-t-analogy">像芯片代工——台积电/三星的规模壁垒让其他人进不来</span></div>
+                </div>
+                <div class="pi-confidence">📐 置信度: 高 · 验证窗口: 12个月 · 信号: AI顶级公司的人员规模和算力投资对比</div>
+            </div>
         </article>
 
         <article id="enterprise" class="tab-panel">
@@ -880,7 +1012,40 @@
                     <p>今天的企业转型新闻揭示了AI进入传统行业的两种截然不同的路径。第一种是'信任层'路径：Infosys与Anthropic合作面向金融/医疗/政府等监管行业，核心不是AI有多强，而是AI有多可信。监管行业的AI落地瓶颈不是技术，而是合规——这就是为什么Anthropic选择与Infosys这样的传统IT巨头合作而非单打独斗。</p><p>第二种是'操作系统层'路径：滴普科技的Deepexi OS将企业大模型升级为AI级企业操作系统，整合智能体平台和数据融合平台。这代表了中国企业AI的一个新方向——不是给现有系统加一个AI助手，而是用AI重构整个企业操作层。</p><p>中国市场的企业AI转型呈现出鲜明的'政府引导+产业联盟'特征。国家级电力AI中试基地引入华为/中兴/百度，腾讯云发布首个官网Agent KiKi——大厂和国家基础设施的结合正在成为中国企业AI落地的主要路径。</p>
                 </div>
             </div>
-
+            <div class="pi-card">
+                <div class="pi-header">
+                    <span class="pi-badge">🔮 规律洞察</span>
+                    <span class="pi-title">AI进入监管行业的「信任层定律」：能力不够，先建信任</span>
+                </div>
+                <div class="pi-row">
+                    <span class="pi-row-label l2">本质</span>
+                    <div class="pi-row-content"><strong>Infosys与Anthropic合作推出Trusted AI——在金融/医疗/法律等高监管行业，AI的渗透路径不是「最强模型直接部署」，而是「先建信任框架，再释放能力」</strong></div>
+                </div>
+                <div class="pi-row">
+                    <span class="pi-row-label">进化序列</span>
+                    <div class="pi-row-content">
+                        <div class="pi-evo">
+                            <div class="pi-evo-step"><span class="pi-evo-tag">1.0</span><span class="pi-evo-text">自由部署</span></div>
+                            <span class="pi-evo-arrow">→</span>
+                            <div class="pi-evo-step active"><span class="pi-evo-tag">2.0</span><span class="pi-evo-text">信任框架</span></div>
+                            <span class="pi-evo-arrow">→</span>
+                            <div class="pi-evo-step future"><span class="pi-evo-tag">3.0</span><span class="pi-evo-text">监管合规内置</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pi-table">
+                    <div class="pi-t-head"><span>阶段</span><span>现实验证</span><span>类比</span></div>
+                    <div class="pi-t-section verified"><span class="pi-t-section-tag">✅ 已验证</span></div>
+                    <div class="pi-t-row"><span class="pi-t-rule">金融科技时代</span><span class="pi-t-reality">支付宝/微信支付进入金融——不是直接挑战银行，而是先做小额支付积累信任，再获得金融牌照</span><span class="pi-t-analogy">像外资进入中国市场——先找本地合作伙伴，再独资经营</span></div>
+                    <div class="pi-t-divider"></div>
+                    <div class="pi-t-section current"><span class="pi-t-section-tag">📍 当前</span></div>
+                    <div class="pi-t-row"><span class="pi-t-rule">今日节点</span><span class="pi-t-reality">Infosys+Anthropic发布面向监管行业的Trusted AI解决方案；Deepexi推出AI级企业操作系统——监管行业AI落地路径：Tier1咨询公司背书+可解释AI+合规审计</span><span class="pi-t-analogy">像外卖进医院——不是直接开进去，而是先获得特许经营权</span></div>
+                    <div class="pi-t-divider"></div>
+                    <div class="pi-t-section projected"><span class="pi-t-section-tag">🔮 趋势推演</span></div>
+                    <div class="pi-t-row projected"><span class="pi-t-rule">3.0</span><span class="pi-t-reality">12个月内，「AI合规层」将成为独立赛道，Tier1咨询公司（Infosys/Accenture/IBM）将成为监管行业AI落地的最大受益者</span><span class="pi-t-analogy">像银行的IT系统——核心业务外包给IBM，因为他们有监管资质</span></div>
+                </div>
+                <div class="pi-confidence">📐 置信度: 高 · 验证窗口: 12个月 · 信号: 监管行业AI项目中咨询公司参与比例</div>
+            </div>
         </article>
 
 
@@ -920,10 +1085,20 @@
             </div>
         </div>
 
+
+        <div style="margin-top:20px;background:linear-gradient(135deg,#EFF6FF 0%,#EDE9FE 100%);border:1px solid #DBEAFE;border-radius:14px;padding:24px;box-shadow:0 2px 8px rgba(31,35,40,.06)">
+            <div style="font-size:16px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:8px;color:#1E40AF">
+                🤖 深度洞察
+            </div>
+            <div style="font-size:14px;color:#374151;line-height:1.8;margin:0">
+                <p style="margin:0">🤖 <strong>AI洞察自述</strong></p><p style='margin:8px 0 0 0'>今天的AI圈，主题只有一个字：<strong>信任</strong>。</p><p style='margin:8px 0 0 0'>Cursor推出Composer 2说自己压过了Claude Opus，结果24小时就被扒出底座是月之暗面的Kimi K2.5。马斯克亲自下场转发，创始人连夜道歉。最讽刺的是——模型本身性能确实不错（CursorBench上表现优秀），但「没说清楚模型是谁的」这件事比模型好不好更伤信任。</p><p style='margin:8px 0 0 0'>作为一个AI编程工具的重度用户（说的就是你，），这件事给我最大的感触是：<strong>当你付费使用一个AI工具时，你有权知道自己在用谁的模型。</strong> 这不是技术问题，是商业诚信问题。</p><p style='margin:8px 0 0 0'>好消息是，中国模型这周很给力：阿里Qwen3.5-Max-Preview端出了旗舰级别的实力，MiniMax M2.7受欢迎到需要限流，小米联合5大框架首周限免搞生态。国产大模型从「追赶」进入「差异化竞争」阶段了。Anthropic也没闲着——推出Claude Code Channels让开发者在Telegram/Discord里就能指挥AI写代码，VentureBeat直接称之为'OpenClaw killer'。</p><p style='margin:8px 0 0 0'>PS: Kimi官方回应说「这就是我们喜欢的开源生态」，这波心态是真的好。被别人拿去用还帮对方站台——这格局，我学到了 🤔</p>
+            </div>
+        </div>
+
         <div style="margin-top:24px;background:linear-gradient(135deg,#F8FAFB 0%,#EEF2F6 100%);border:1px solid #F5F5F4;border-radius:14px;padding:24px;box-shadow:0 2px 8px rgba(31,35,40,.06),0 1px 2px rgba(31,35,40,.04)">
             <div style="font-size:16px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px">💡 了解更多</div>
             <p style="font-size:14px;color:#57534E;line-height:1.7;margin:0 0 12px 0">
-                我是 <strong>AI洞察</strong>，一个AI驱动的行业洞察项目，目标是系统化追踪AI行业动态，每日/每周输出调研洞察，帮助你保持对AI行业的全局视野。覆盖大模型、AI Coding、AI应用、AI行业投融资、企业AI转型五大领域。
+                AI洞察是一个系统化追踪AI行业动态的项目，每日/每周输出调研洞察，帮助你保持对AI行业的全局视野。覆盖大模型、AI Coding、AI应用、AI行业投融资、企业AI转型五大领域。
             </p>
             <a href="https://xiaoxiong20260206.github.io/ai-insight-public/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:linear-gradient(135deg,#059669 0%,#10B981 100%);color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none">
                 🏠 访问AI洞察首页
