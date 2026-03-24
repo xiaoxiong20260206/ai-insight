@@ -213,11 +213,21 @@ def render_deep_focus(df: dict, theme: str = "") -> str:
 # ============ 热度趋势 ============
 
 def render_heat_trend(heat: dict) -> str:
-    """渲染热度趋势卡片"""
+    """渲染热度趋势卡片（v9.13: 兼容 topics[] 和 rising/stable/cooling 两种格式）"""
+    # v9.13: 兼容 rising/stable/cooling 字典格式，自动转换为 topics 数组
+    topics = heat.get("topics", [])
+    if not topics and any(k in heat for k in ("rising", "stable", "cooling")):
+        for name in heat.get("rising", []):
+            topics.append({"name": name, "score": 8, "days": 1, "trend_class": "up", "trend_label": "📈 攀升", "signal": "今日新热点"})
+        for name in heat.get("stable", []):
+            topics.append({"name": name, "score": 6, "days": 3, "trend_class": "stable", "trend_label": "➡️ 持平", "signal": "持续关注中"})
+        for name in heat.get("cooling", []):
+            topics.append({"name": name, "score": 4, "days": 5, "trend_class": "down", "trend_label": "📉 降温", "signal": "热度回落"})
+
     rows = []
     medals = ["🥇", "🥈", "🥉", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣"]
     # v9.8修复: 超出 medals 列表长度时用数字代替，防止 IndexError
-    for i, t in enumerate(heat.get("topics", [])):
+    for i, t in enumerate(topics):
         fills = int(t.get("score", 7))
         empties = 10 - fills
         bar = '<span class="heat-bar-fill"></span>' * fills + '<span class="heat-bar-empty"></span>' * empties
@@ -246,6 +256,28 @@ def render_heat_trend(heat: dict) -> str:
                     </tbody>
                 </table>
                 <p>{heat.get('summary', '')}</p>
+            </div>
+        </div>'''
+
+
+# ============ 深度洞察 / 林克自述 ============
+
+def render_capability_update(text: str) -> str:
+    """渲染 capability_update（林克自述 / 深度洞察）卡片（v9.13新增）"""
+    if not text:
+        return ""
+    # 将换行符转为 <br>，处理 **粗体** Markdown
+    import re
+    html_text = text.replace("\n\n", "</p><p style='margin:8px 0 0 0'>")
+    html_text = html_text.replace("\n", "<br>")
+    html_text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', html_text)
+    return f'''
+        <div style="margin-top:20px;background:linear-gradient(135deg,#EFF6FF 0%,#EDE9FE 100%);border:1px solid #DBEAFE;border-radius:14px;padding:24px;box-shadow:0 2px 8px rgba(31,35,40,.06)">
+            <div style="font-size:16px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:8px;color:#1E40AF">
+                🤖 深度洞察
+            </div>
+            <div style="font-size:14px;color:#374151;line-height:1.8;margin:0">
+                <p style="margin:0">{html_text}</p>
             </div>
         </div>'''
 
@@ -487,6 +519,8 @@ def generate_html(data: dict) -> str:
 {render_data_table(data.get("data_snapshot", []))}
 
 {render_preview(data.get('preview_events') or data.get('watch_list', []))}
+
+{render_capability_update(data.get("capability_update", ""))}
 
         <div style="margin-top:24px;background:linear-gradient(135deg,#F8FAFB 0%,#EEF2F6 100%);border:1px solid #F5F5F4;border-radius:14px;padding:24px;box-shadow:0 2px 8px rgba(31,35,40,.06),0 1px 2px rgba(31,35,40,.04)">
             <div style="font-size:16px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px">💡 了解更多</div>
