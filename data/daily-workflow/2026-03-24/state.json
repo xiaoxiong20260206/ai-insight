@@ -13,16 +13,18 @@
     },
     "validate": {
       "status": "completed",
-      "timestamp": "08:50:16",
+      "timestamp": "11:59:55",
       "context": "质量门: 12/19通过 3警告(去重误判/URL网络波动/HTML未生成) 4可修复失败(HTML/6处联动/外部同步均为文件生成问题非内容问题); 内容验证: 5板块12条新闻无真实重复(已用独立脚本验证); overseas=10 weixin_direct_cite=2 capability_update=338字符; 4个❌全是自动化部署步骤而非内容质量问题; HTML已通过gen_daily_html.py独立生成(37834chars 469lines 渲染完整性✅)"
     },
     "deploy": {
-      "status": "pending"
+      "status": "failed",
+      "timestamp": "11:59:56",
+      "error": "部署失败"
     },
     "push": {
       "status": "pending"
     }
   },
   "created": "2026-03-24T08:40:26.883885",
-  "updated": "2026-03-24T08:50:16.090227"
+  "updated": "2026-03-24T11:59:56.717851"
 }
