@@ -594,12 +594,13 @@ def main():
     # ============ 关键板块渲染完整性验证 ============
     warnings = []
 
+    import re as _re  # 后置完整性检查公共 import（v9.13 fix: 移至块外避免 UnboundLocalError）
+
     # 1. 验证"明日/下周值得关注"板块是否渲染（有内容）
     if "明日/下周值得关注" not in html:
         warnings.append("❌ [关键] '明日/下周值得关注'板块未渲染 — 检查watch_list/preview_events字段格式")
     else:
         # 检查板块内是否有实际条目内容
-        import re as _re
         section_match = _re.search(r"明日/下周值得关注(.*?)(?:了解更多|</div>\s*</div>\s*<div style=\"margin-top:24px)", html, _re.DOTALL)
         if section_match and len(section_match.group(1)) < 100:
             warnings.append("⚠️ [警告] '明日/下周值得关注'板块内容疑似为空，请检查渲染输出")
