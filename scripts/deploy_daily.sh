@@ -89,13 +89,15 @@ fi
 # ===== 0b. 质量门检查（阻断式，不通过则禁止部署） =====
 echo ""
 echo "🔍 Step 0b: 质量门检查（阻断式）"
-GATE_RESULT=$(python3 scripts/daily_quality_gate.py "$DATE" 2>&1)
-echo "$GATE_RESULT"
+python3 scripts/daily_quality_gate.py "$DATE" 2>&1 | tee /tmp/gate_result_deploy.txt
+GATE_RESULT=$(cat /tmp/gate_result_deploy.txt)
 
 # 检查是否通过（只有全部通过或仅有warning级别的失败才放行）
+# v2.1修复: 使用 tee+文件读取替代$()子shell，防止shell管道截断
+# HARD_FAIL检测: 只匹配具体失败条目，排除末尾总结行"❌ 质量门未通过 (N项失败)"
 if echo "$GATE_RESULT" | grep -q "❌ 质量门未通过"; then
-    # 检查是否所有失败项都是warning级别（可放行）
-    HARD_FAIL=$(echo "$GATE_RESULT" | grep "^❌" | grep -v "⚠️" | head -1)
+    # 排除末尾总结行，只看具体的"^❌ XX: ..."失败条目（含"可修复"标注的也算HARD_FAIL）
+    HARD_FAIL=$(echo "$GATE_RESULT" | grep "^❌" | grep -v "质量门未通过" | grep -v "⚠️" | head -1)
     if [ -n "$HARD_FAIL" ]; then
         echo ""
         echo "🚫 质量门硬性失败，部署已阻断。请先修复问题后重试。"
