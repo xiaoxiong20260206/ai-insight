@@ -205,10 +205,26 @@ def sync_all_reports(force: bool = False):
         if not month_dir.is_dir() or month_dir.name.startswith('.'):
             continue
         
+        # 同步 .md 文件（v2.3新增：.md含「林克自述」章节，必须脱敏）
+        for md_file in sorted(month_dir.glob("*.md")):
+            if md_file.stem.endswith('-v3'):  # 内部版专有文件，跳过
+                continue
+            dst_md = PUBLIC_REPORTS / month_dir.name / md_file.name
+            if dst_md.exists() and not force:
+                continue
+            dst_md.parent.mkdir(parents=True, exist_ok=True)
+            content = md_file.read_text(encoding="utf-8")
+            sanitized = sanitize_html(content)
+            dst_md.write_text(sanitized, encoding="utf-8")
+        
         for html_file in sorted(month_dir.glob("*.html")):
             if html_file.name == "index.html":
                 continue
             if "test" in html_file.name:
+                continue
+            # ⭐ v2.3修复：明确跳过 -v3.html（内部版文件，由 sync_report 读取后脱敏输出为不带v3的文件）
+            # 无需直接复制 -v3.html 进 public/，sync_report(date_str) 会主动读取并脱敏
+            if html_file.stem.endswith('-v3'):
                 continue
             
             # 周报文件
