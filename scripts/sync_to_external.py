@@ -67,7 +67,10 @@ def sync_all() -> bool:
         return False
     
     # 复制所有内容 (保持目录结构, 排除隐藏文件/目录)
+    # ⭐ v2.2修复：明确过滤 -v3.html 文件（内部版专有文件，不应出现在外部仓库）
+    # 根因经验：public/ 目录中若存在 -v3.html，会触发外部仓库的敏感词检测失败
     copied_count = 0
+    skipped_v3 = 0
     for src_path in PUBLIC_DIR.rglob("*"):
         if not src_path.is_file():
             continue
@@ -76,11 +79,18 @@ def sync_all() -> bool:
         if any(part.startswith('.') for part in rel_path.parts):
             continue
         
+        # 过滤 -v3.html 文件（内部版，不对外公开）
+        if src_path.stem.endswith('-v3') and src_path.suffix == '.html':
+            skipped_v3 += 1
+            continue
+        
         dst_path = EXTERNAL_REPO / rel_path
         dst_path.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(src_path, dst_path)
         copied_count += 1
     
+    if skipped_v3 > 0:
+        print(f"  ⏭️ 已过滤 {skipped_v3} 个内部版 -v3.html 文件")
     print(f"✅ 已复制 {copied_count} 个文件")
     return True
 
