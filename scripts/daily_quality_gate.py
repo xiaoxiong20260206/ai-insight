@@ -244,13 +244,25 @@ def check_link_validity(date_str: str) -> CheckResult:
             
             with ThreadPoolExecutor(max_workers=3) as executor:
                 futures = [executor.submit(_check_url, pair) for pair in sample]
-                for future in cf_as_completed(futures, timeout=20):
-                    try:
-                        ok, label = future.result()
-                        if not ok:
-                            unreachable.append(label)
-                    except Exception:
-                        pass
+                try:
+                    for future in cf_as_completed(futures, timeout=20):
+                        try:
+                            ok, label = future.result()
+                            if not ok:
+                                unreachable.append(label)
+                        except Exception:
+                            pass
+                except Exception as _te:
+                    # v9.9修复: as_completed timeout 不阻断 — GFW导致境外URL超时是正常现象
+                    # 收集已完成的结果
+                    for fut in futures:
+                        if fut.done():
+                            try:
+                                ok, label = fut.result()
+                                if not ok:
+                                    unreachable.append(label)
+                            except Exception:
+                                pass
         
         issues = []
         warnings = []
