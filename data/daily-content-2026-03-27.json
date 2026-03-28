@@ -1,0 +1,532 @@
+{
+  "date": "2026-03-27",
+  "coverage": {
+    "period": "2026-03-26 08:00 ~ 2026-03-27 08:00",
+    "overseas_count": 8,
+    "china_count": 10,
+    "sources": [
+      "OpenAI官方",
+      "Google AI",
+      "Anthropic官方",
+      "Cursor官方",
+      "证券时报",
+      "新浪财经",
+      "北京商报",
+      "财联社",
+      "成都日报"
+    ]
+  },
+  "overview": [
+    {
+      "icon": "🦞",
+      "label": "今日头条",
+      "headline": "「龙虾热」爆发：百度/字节/腾讯全面跟进OpenClaw，国产大模型商业化提速",
+      "text": "国产AI应用代理框架OpenClaw在境外爆火后引发国内「龙虾热」，百度、字节跳动、腾讯、小米纷纷推出跟进产品。据证券时报，上周全球调用量前四名全为国产大模型(MiniMax、阶跃星辰Step3.5、DeepSeek、Kimi)，Token经济时代国产商业化全面提速"
+    },
+    {
+      "icon": "🔍",
+      "label": "模型动态",
+      "headline": "Google Gemini 3.1 Flash Live发布 · Kimi杨植麟：开源是绝对胜利",
+      "text": "Google于3月26日发布Gemini 3.1 Flash Live Preview，最新A2A(Audio-to-Audio)模型支持实时语音对话，Search Live功能同步上线；Kimi创始人杨植麟在中关村论坛表示「如果模型能力相同，开源会是绝对的胜利」，Kimi注意力残差技术获马斯克称赞"
+    },
+    {
+      "icon": "💻",
+      "label": "编程工具",
+      "headline": "Cursor推出Self-hosted Cloud Agents：代码在用户自己网络内运行",
+      "text": "Cursor于3月25日发布Self-hosted Cloud Agents，允许企业将AI Agent运行在自己的基础设施内——代码不出公司网络，解决了企业级安全合规的核心痛点。同时ChatGPT移动端3月26日完成侧边栏简化+位置共享功能上线"
+    },
+    {
+      "icon": "📊",
+      "label": "行业数据",
+      "headline": "Anthropic经济指数：高使用时长用户成功率高10%；中东主权基金投资中国AI获6倍回报",
+      "text": "Anthropic经济指数报告(3月24日)显示高使用时长用户任务成功率比低使用时长高10%，「学习曲线」现象成立；中东主权基金ADIA投资MiniMax从6500万增至超4亿美元(6倍+)，阿美风投投资智谱AI从3000万增至4.15亿美元"
+    },
+    {
+      "icon": "🤖",
+      "label": "具身智能",
+      "headline": "量产机器狼极寒测试成功·人形机器人格斗赛举办",
+      "text": "100只量产机器狼在-20℃极寒环境测试优异，即将批量量产；杭州CMG世界机器人大赛首届人形机器人格斗赛举行，AI策算师夺冠，人形机器人从跑步到格斗全面加速落地"
+    }
+  ],
+  "heat_trend": {
+    "title": "今日AI行业热度趋势",
+    "summary": "龙虾热/OpenClaw爆火是今日国内最大热点，Cursor Self-hosted Agents是Coding最强信号，Google Gemini 3.1 Flash Live是模型板块亮点；国产大模型调用量连续三周超美国是行业拐点信号",
+    "topics": [
+      {
+        "name": "龙虾热 / OpenClaw",
+        "score": 10,
+        "days": 3,
+        "trend_class": "up",
+        "trend_label": "📈 爆发",
+        "signal": "百度/字节/腾讯/小米全面跟进，证券时报头条报道，Token商业化拐点"
+      },
+      {
+        "name": "国产大模型调用量超美国",
+        "score": 9,
+        "days": 7,
+        "trend_class": "up",
+        "trend_label": "📈 持续升温",
+        "signal": "OpenRouter数据：上周前四名全为国产(MiniMax/阶跃星辰/DeepSeek/Kimi)"
+      },
+      {
+        "name": "Cursor Self-hosted Cloud Agents",
+        "score": 8,
+        "days": 1,
+        "trend_class": "up",
+        "trend_label": "📈 新发布",
+        "signal": "企业安全合规核心痛点解决，3月25日发布"
+      },
+      {
+        "name": "Google Gemini 3.1 Flash Live",
+        "score": 8,
+        "days": 1,
+        "trend_class": "up",
+        "trend_label": "📈 新发布",
+        "signal": "A2A实时语音模型，Search Live同步上线，3月26日发布"
+      },
+      {
+        "name": "Anthropic经济指数",
+        "score": 7,
+        "days": 2,
+        "trend_class": "stable",
+        "trend_label": "➡ 持续",
+        "signal": "3月24日发布，学习曲线研究：高用量用户成功率高10%"
+      },
+      {
+        "name": "中东资本押注中国AI",
+        "score": 7,
+        "days": 2,
+        "trend_class": "up",
+        "trend_label": "📈 升温",
+        "signal": "彭博：ADIA/阿美风投通过港股AI新股获惊人回报"
+      },
+      {
+        "name": "OpenAI搁置成人模式",
+        "score": 5,
+        "days": 1,
+        "trend_class": "down",
+        "trend_label": "📉 降温",
+        "signal": "无限期搁置，内外部压力下战略回归核心产品"
+      }
+    ]
+  },
+  "tabs": [
+    {
+      "tab_id": "models",
+      "tab_title": "大模型",
+      "news": {
+        "overseas": [
+          {
+            "tag": "insight",
+            "title": "Anthropic经济指数报告(3月24日)：高使用时长用户AI任务成功率高10%，「学习曲线」现象成立",
+            "url": "https://www.anthropic.com/research/ai-economic-index",
+            "source": "Anthropic官方 · 3月26日持续报道",
+            "details": {
+              "finding": "Anthropic发布经济指数报告，聚焦AI使用行为与任务成功率的关系研究。核心发现：高使用时长用户（重度用户）完成复杂任务的成功率比低使用时长用户高约10%，证明AI工具使用存在明显学习曲线效应。这一数据也间接说明：AI能力天花板不在模型，而在用户的使用深度",
+              "highlight": "高用量用户成功率高10% | 学习曲线效应显著 | 3月24日发布",
+              "impact": "对AI工具产品设计的重要启示：用户留存和深度使用比功能堆叠更重要。对企业AI采购：ROI很大程度取决于员工培训和使用习惯培养"
+            }
+          }
+        ],
+        "china": [
+          {
+            "tag": "hot",
+            "title": "Kimi杨植麟在中关村论坛：「开源是绝对胜利，Token是未来GDP」，注意力残差技术获马斯克称赞",
+            "url": "https://www.bjbusiness.com.cn/site/2026/03/27/031004892.shtml",
+            "source": "北京商报 · 3月27日",
+            "details": {
+              "finding": "Kimi创始人杨植麟在2026中关村论坛年会后接受媒体采访，发表多项重要判断：1)「如果模型能力达到相同水平，开源会是绝对的胜利」；2)「Token是未来的GDP」；3)中国AI企业走出独特路径：既做前沿研究又愿意开源。此前Kimi团队发布的注意力残差技术报告获特斯拉CEO马斯克公开称赞",
+              "highlight": "开源是绝对胜利 | Token=未来GDP | 注意力残差技术 | 马斯克称赞 | 中关村论坛",
+              "impact": "Kimi旗帜鲜明地押注开源路线，在OpenAI/Anthropic闭源主导的格局下，代表中国AI企业的差异化竞争战略。「Token=GDP」的表述将成为AI经济时代的重要隐喻"
+            }
+          },
+          {
+            "tag": "insight",
+            "title": "科大讯飞三大AI大模型升级：办公大模型2.0、本地大模型2.0、同传大模型1.0在成都发布",
+            "url": "http://finance.sina.com.cn/jjxw/2026-03-27/doc-inhsiyyf9953304.shtml",
+            "source": "成都日报锦观 · 3月26日",
+            "details": {
+              "finding": "3月26日，科大讯飞在成都举办「AI+办公」大模型年度技术发布会，副总裁钟锟发布三大模型升级：办公大模型2.0(精准识别发言人+自动生成待办清单+手写笔记毫秒级关联)、本地大模型2.0、同传大模型1.0。科大讯飞正将「AI+办公」核心棋局落在成都，与十余家企业发布产业生态链协同发展倡议",
+              "highlight": "三大模型同步升级 | 办公大模型2.0 | 成都产业生态 | 3月26日发布",
+              "impact": "AI+办公赛道国内竞争加剧，科大讯飞通过垂直场景深耕(会议记录→待办→跨文档关联)构建差异化。「链主」效应显现，以成都为核心的AI办公产业链正在形成"
+            }
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "Gemini 3.1 Flash Live：实时语音AI从「工具」变「入口」",
+        "paragraphs": [
+          "Google在3月26日发布Gemini 3.1 Flash Live Preview，表面是一次模型更新，本质是一场入口战争的重要布局。A2A(Audio-to-Audio)架构意味着语音不再经过文字中转——用户说话，AI直接「听到」并「说回」，延迟大幅降低，实时感知能力质变。Search Live功能同步推送，进一步将实时语音能力与信息检索深度绑定",
+          "对比此前Google Assistant的语音助手形态，Gemini 3.1 Flash Live的定位发生了根本性转变：从执行离散命令（「设定提醒」「播放音乐」）升级为持续对话的信息伙伴。Search Live让用户可以用自然语言进行实时网络搜索——这直接威胁了传统搜索引擎的核心使用场景，同时也是对ChatGPT语音模式的直接对标",
+          "从更长的时间轴来看，A2A模型的普及将加速「隐形AI」趋势——AI不再是需要打开的App，而是随时以声音形态在场的存在。Gemini Flash系列的「轻量高效」定位，加上Search Live的实时能力，恰好契合移动端和可穿戴设备的应用场景，AI入口从屏幕向耳朵迁移的速度将超预期"
+        ],
+        "takeaway": "Gemini 3.1 Flash Live=AI入口战争新阶段：从屏幕到耳朵，从命令到对话，从工具到陪伴——语音是下一个超级入口，谁控制语音交互，谁控制用户的信息消费"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\"><div class=\"pi-header\"><span class=\"pi-badge\">🔮 规律洞察</span><span class=\"pi-title\">实时模态定律：每一轮新模态成熟，都会重新定义「入口」</span></div><div class=\"pi-row\"><span class=\"pi-label\">现象</span><span class=\"pi-value\">Gemini 3.1 Flash Live发布A2A实时语音，Search Live同步推送，语音AI从命令响应升级为实时信息检索</span></div><div class=\"pi-row\"><span class=\"pi-label\">规律</span><span class=\"pi-value\">技术史上每次新交互模态成熟(键盘→鼠标→触摸→语音)，都会重新洗牌入口控制权。实时语音AI正在完成这一跃迁：从「工具形态」到「入口形态」的质变，需要三个条件同时具备：低延迟(A2A架构)、联网能力(Search Live)、多场景覆盖(移动+可穿戴)</span></div><div class=\"pi-row\"><span class=\"pi-label\">推论</span><span class=\"pi-value\">未来24个月：1)语音AI将成为主要信息入口之一；2)独立语音助手产品(Siri/Alexa)面临被模型原生语音功能替代；3)可穿戴设备(耳机/AR眼镜)将成为语音AI的首选硬件载体</span></div></div>"
+    },
+    {
+      "tab_id": "coding",
+      "tab_title": "AI编程",
+      "news": {
+        "overseas": [
+          {
+            "tag": "update",
+            "title": "ChatGPT移动端3月26日更新：侧边栏简化 + 位置共享功能上线",
+            "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
+            "source": "OpenAI官方 · 3月26日",
+            "details": {
+              "finding": "ChatGPT移动端3月26日完成两项更新：1)侧边栏简化(A simplified sidebar on mobile)，优化导航体验；2)位置共享功能正式上线，允许ChatGPT感知用户当前位置以提供更精准的上下文相关回答。位置功能涉及隐私权限，需要用户主动授权",
+              "highlight": "3月26日上线 | 移动端侧边栏简化 | 位置共享功能 | 上下文感知增强",
+              "impact": "位置共享是ChatGPT从「文字问答工具」向「上下文感知助手」演进的重要一步，配合之前的Memory功能，ChatGPT正在逐渐构建对用户的持续理解能力"
+            }
+          }
+        ],
+        "china": [
+          {
+            "tag": "insight",
+            "title": "OpenRouter数据：国产大模型连续三周调用量超美国，前四名全为国产(MiniMax/阶跃星辰/DeepSeek/Kimi)",
+            "url": "https://openrouter.ai",
+            "source": "OpenRouter · 3月26日",
+            "details": {
+              "finding": "据OpenRouter公开数据，上周全球调用量前四名全为国产AI大模型：小米MiMo V2 Pro、阶跃星辰Step3.5 Flash、DeepSeek V3.2和Kimi K2.5，一周Token消耗量合计达4.69万亿。这已是国产大模型连续三周在此指标上领先或对齐美国头部玩家。MiniMax官方数据：M2系列文本模型2026年2月平均单日Token消耗量已创历史新高",
+              "highlight": "连续三周调用量超美国 | 前四名全国产 | 4.69万亿Token/周 | MiniMax单日新高",
+              "impact": "Token调用量是AI模型实际部署规模最直接的商业指标。国产大模型在这一指标上的持续领先，标志着中国AI从「技术追赶」进入「商业规模」阶段——全球AI经济格局正在从「美国主导」向「双极格局」转变"
+            }
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "Cursor Self-hosted Agents：企业AI编程安全合规的「最后一公里」被打通",
+        "paragraphs": [
+          "Cursor发布Self-hosted Cloud Agents是一个看似平静但实际上意义深远的发布。在此之前，几乎所有主流AI编程工具(Cursor/GitHub Copilot/Amazon Q)的云端能力都意味着代码需要离开用户的网络边界。对于金融机构、医疗系统、政府部门、国防企业来说，这条「数据出境」的红线是无法跨越的，导致企业即使认可AI编程的价值也无法大规模采用",
+          "Self-hosted方案的核心价值在于：它不是简单的「私有部署模型」，而是将AI Agent的整个执行环境都托管在企业自己的基础设施内。这意味着代码分析、生成、测试全链路都在企业防火墙内完成，完全符合ISO 27001、SOC 2、国内等保三级等安全合规要求。这与企业级软件从SaaS向私有化迁移的大趋势高度吻合",
+          "对国内AI编程工具市场的启示：国内目前面临双重合规压力——数据安全法+等级保护要求。率先推出完整Self-hosted方案的厂商，将在金融/政务/国防等高价值市场取得先发优势。当前国内Cline、通义灵码等工具在这一方向的进度值得持续关注"
+        ],
+        "takeaway": "Self-hosted=企业AI编程从「试用」到「生产」的临界点：安全合规不是功能，是门票——谁先打通这条路，谁就能拿下价值最高的企业客户"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\"><div class=\"pi-header\"><span class=\"pi-badge\">🔮 规律洞察</span><span class=\"pi-title\">企业软件采购定律：安全合规永远是购买决策中的否决项</span></div><div class=\"pi-row\"><span class=\"pi-label\">现象</span><span class=\"pi-value\">Cursor推出Self-hosted Cloud Agents，将AI Agent执行环境完全托管在企业自有基础设施内，解除了金融/政务等行业的数据出境顾虑</span></div><div class=\"pi-row\"><span class=\"pi-label\">规律</span><span class=\"pi-value\">企业软件市场中，安全合规是「否决项」而非「加分项」——不管产品多好，只要触碰数据安全红线，采购流程就会被一票否决。历史上云计算(AWS/Azure私有云)、协作工具(企业微信vs微信)都遵循这一规律：消费级→私有化/本地化=打开企业市场的必要路径</span></div><div class=\"pi-row\"><span class=\"pi-label\">推论</span><span class=\"pi-value\">未来：1)AI编程工具市场将分化为「消费级SaaS」和「企业Self-hosted」两条产品线；2)国内AI编程工具若要突破金融/政务高价值市场，等保三级认证+本地化部署方案是必答题；3)Self-hosted能力将成为AI编程工具企业版的标配功能</span></div></div>"
+    },
+    {
+      "tab_id": "apps",
+      "tab_title": "AI应用",
+      "news": {
+        "overseas": [
+          {
+            "tag": "hot",
+            "title": "苹果战略转型：将向竞品AI助手开放Siri，平台封闭性出现历史性松动",
+            "url": "http://finance.sina.com.cn/7x24/2026-03-27/doc-inhsiyyn2524068.shtml",
+            "source": "新浪财经 · 3月27日",
+            "details": {
+              "finding": "苹果宣布将向竞品AI助手开放Siri，这是苹果在AI时代的重大战略转型信号。此前Siri生态完全封闭，用户无法将ChatGPT/Gemini等第三方AI助手设为默认。这一开放举措或与欧盟数字市场法案(DMA)的合规压力有关，也反映了苹果在AI能力上的追赶压力",
+              "highlight": "Siri向竞品开放 | 平台封闭性松动 | 苹果AI战略转型 | 历史性决策",
+              "impact": "如果落地，这将是苹果平台战略的历史性转变——iPhone用户将可以用ChatGPT/Gemini替代Siri作为默认助手，对苹果的平台控制力和数据生态构成深远影响。对第三方AI助手：iPhone 16亿活跃用户的分发渠道即将开放"
+            }
+          },
+          {
+            "tag": "update",
+            "title": "OpenAI无限期搁置ChatGPT「成人模式」：内外压力下战略回归核心产品",
+            "url": "http://finance.sina.com.cn/jjxw/2026-03-27/doc-inhsiyyf9946966.shtml",
+            "source": "财联社 · 3月27日",
+            "details": {
+              "finding": "OpenAI已无限期搁置在ChatGPT中推出「成人模式」的计划，CEO奥尔特曼甚至在考虑是否彻底取消。该功能已从原定12月推迟至今年第一季度，目前再次被搁置。压力来源：内部员工/投资者担忧社会影响、未成年人保护风险、加剧AI情感依赖。ChatGPT用户规模已超9亿",
+              "highlight": "无限期搁置 | 奥尔特曼考虑彻底取消 | 9亿用户规模 | 战略重心回归核心",
+              "impact": "OpenAI在「AI成人内容商业化」这一边界性业务上选择退出，优先维护平台公信力。这一决定对全球AI内容监管方向具有示范意义"
+            }
+          },
+          {
+            "tag": "hot",
+            "title": "Google发布Gemini 3.1 Flash Live Preview：最新A2A实时语音模型，Search Live同步上线",
+            "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview",
+            "source": "Google AI官方 · 3月26日",
+            "details": {
+              "finding": "Google于3月26日发布gemini-3.1-flash-live-preview，这是最新的Audio-to-Audio(A2A)实时语音对话模型。同日Search Live功能开始在Google产品中全面推送，包括Gemini App。模型使用说明：knowledge cutoff为2025年1月，支持从Gemini 3.0迁移。Google同日宣布Lyria音乐生成功能扩展至更多Google产品",
+              "highlight": "3月26日正式发布 | A2A实时语音 | Search Live全面推送 | Gemini 3.0迁移支持",
+              "impact": "实时语音AI从语音助手形态升级为全能信息检索——Search Live意味着用户可以直接用语音对话进行实时网络搜索，对传统搜索引擎和语音助手均构成威胁"
+            }
+          }
+        ],
+        "china": [
+          {
+            "tag": "hot",
+            "title": "「龙虾热」引爆国产AI应用商业化：证券时报头条报道，百度/字节/腾讯/小米全面跟进OpenClaw",
+            "url": "https://www.stcn.com/article/detail/3702423.html",
+            "source": "证券时报 · 3月27日",
+            "details": {
+              "finding": "据证券时报2小时前头条报道，OpenClaw AI代理框架在境外爆火后引发国内「龙虾热」，百度、字节跳动、腾讯、小米纷纷推出跟进产品。关键数据：上周全球调用量前四名全为国产大模型——小米MiMo V2 Pro、阶跃星辰Step3.5 Flash、DeepSeek V3.2和Kimi K2.5，一周Token消耗达4.69万亿。MiniMax公司年度经常性收入(ARR)已超1.5亿美元，阶跃星辰开源Step 3.5 Flash一日内登顶调用榜首",
+              "highlight": "百度/字节/腾讯/小米全面跟进 | 国产前四霸榜 | 4.69万亿Token/周 | MiniMax ARR>$1.5亿",
+              "impact": "国产大模型商业化从「用户规模」时代进入「Token经济」时代。龙虾热不只是应用爆火，而是中国AI产业链从模型→应用→商业化的完整闭环首次在全球形成可观测的规模效应"
+            }
+          },
+          {
+            "tag": "insight",
+            "title": "中东主权基金通过香港AI新股获6倍回报：ADIA投MiniMax、阿美投智谱AI",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=%E4%B8%AD%E4%B8%9C%E5%9F%BA%E9%87%91+MiniMax+%E6%99%BA%E8%B0%B1AI+%E6%B8%AF%E8%82%A1+IPO%E5%9B%9E%E6%8A%A5+2026",
+            "source": "RMB交易与研究 · 3月27日（微信公号）",
+            "details": {
+              "finding": "据彭博社最新报道，中东主权基金通过投资中国AI独角兽在港股市场获得惊人回报。ADIA投资MiniMax：6500万美元增至超4亿美元(6倍+)；阿美风投投资智谱AI：3000万美元增至约4.15亿美元。中东基金采用「平衡术」：对美国承诺投资以维持关系，同时通过香港市场大举押注中国核心AI资产",
+              "highlight": "ADIA投MiniMax 6倍回报 | 阿美投智谱AI 13.8倍回报 | 港股AI新股成全球资金避风港",
+              "impact": "中国AI企业的港股上市路径正在成为全球资本的重要通道。中东资本的大举入场，一方面验证了中国AI企业的国际资本市场认可度，另一方面也为国内AI独角兽提供了新的融资估值参考"
+            }
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "龙虾热解码：OpenClaw爆火背后，是AI应用时代真正的「增长飞轮」启动",
+        "paragraphs": [
+          "「龙虾热」（OpenClaw现象）的本质不是一个产品的爆火，而是一个AI应用时代商业化模式首次被验证的里程碑。OpenClaw的核心机制——开放的AI代理框架，允许任何开发者快速构建垂直场景的AI代理应用——让模型能力从「用户直接使用」转变为「开发者二次分发」，打开了指数级传播路径。这与移动互联网时代App Store的生态效应高度相似",
+          "更值得关注的是数据：上周全球OpenRouter调用量前四名全为国产大模型(MiniMax/阶跃星辰/DeepSeek/Kimi)，一周Token消耗达4.69万亿。这不只是排行榜的数字，而是一个清晰的信号：中国AI企业在「Token经济」指标上首次对齐甚至超越美国头部玩家。MiniMax ARR超1.5亿美元，阶跃星辰新模型开源一日登顶，这些数据共同指向一个结论：中国AI商业化飞轮已经启动",
+          "百度/字节/腾讯/小米的全面跟进，意味着「龙虾热」正在从单一产品现象升级为行业共识——AI代理应用是下一个流量入口。但历史告诉我们，平台型机会最终只会产生少数赢家。当前多家大厂跟进的格局，是「先到先得」的窗口期，也是即将发生的一场整合的前奏"
+        ],
+        "takeaway": "龙虾热=AI商业化飞轮的首次可见加速：Token消耗量是AI经济最真实的GDP指标，国产AI首次在这一指标上领跑全球，标志着「中国AI商业化时代」正式开启"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\"><div class=\"pi-header\"><span class=\"pi-badge\">🔮 规律洞察</span><span class=\"pi-title\">平台生态定律：开放框架 > 单一产品——谁建生态，谁赢长线</span></div><div class=\"pi-row\"><span class=\"pi-label\">现象</span><span class=\"pi-value\">OpenClaw开放AI代理框架爆火，百度/字节/腾讯/小米跟进；国产大模型Token调用量首次连续三周超美国，MiniMax ARR超1.5亿美元</span></div><div class=\"pi-row\"><span class=\"pi-label\">规律</span><span class=\"pi-value\">平台史上的规律：iOS App Store(苹果)、Android(谷歌)、微信小程序(腾讯)——每次大规模平台爆发，核心不是单一产品，而是开放框架让第三方开发者释放了乘法效应。OpenClaw正在扮演AI时代「App Store」的角色：框架+生态>单一应用</span></div><div class=\"pi-row\"><span class=\"pi-label\">推论</span><span class=\"pi-value\">未来：1)AI应用平台竞争将收敛到2-3家生态主导者；2)开放框架+开发者生态是竞争门槛，单纯的模型能力优势将被稀释；3)Token消耗量将成为AI时代「月活跃用户数」级别的核心商业指标</span></div></div>"
+    },
+    {
+      "tab_id": "industry",
+      "tab_title": "AI行业",
+      "news": {
+        "overseas": [
+          {
+            "tag": "insight",
+            "title": "范式智能(第四范式)启动回A股IPO：在北京证监局完成辅导备案，港股AI企业回归A股浪Algorithm",
+            "url": "https://www.cs.com.cn/ssgs/hqzx/202603/t20260326_6729482.html",
+            "source": "中证报 · 3月26日",
+            "details": {
+              "finding": "3月25日，证监会官网披露，范式智能技术集团(原第四范式，06682.HK)已在北京证监局完成IPO辅导备案登记，拟A股上市。这意味着这家已在港交所挂牌的AI企业正式启动回A流程。背景：范式智能存在对赌协议，距离履约时限仅剩约半年，时间压力是推动回A的重要因素",
+              "highlight": "3月25日完成备案 | 原第四范式 | 港股+A股双上市 | 对赌协议半年时限",
+              "impact": "港股AI企业批量回A是2026年资本市场的重要趋势，A股AI板块的需求侧推动力持续。对AI创业公司的融资估值：港股+A股双渠道路径正在成为新的资本标准模板"
+            }
+          }
+        ],
+        "china": [
+          {
+            "tag": "hot",
+            "title": "中国AI大模型迎范式跃迁：MiniMax年收入超1.5亿美元，阶跃星辰完成新融资，行业进入Token经济时代",
+            "url": "https://jnz.cs.com.cn/app/html/jnz/6d4ddb1049dd044eaa49e5a45b9178c0.html",
+            "source": "中国证券报 · 3月26日",
+            "details": {
+              "finding": "中国证券报报道显示，中国AI大模型行业正迎来范式跃迁：MiniMax创始人闫俊杰透露公司2026年2月年度经常性收入(ARR)已超1.5亿美元；阶跃星辰围绕Agent和Token经济展开优化布局；行业整体从「参数规模竞争」转向「商业化Token消耗」竞争格局",
+              "highlight": "MiniMax ARR超$1.5亿 | Token经济时代 | 范式跃迁 | 商业化拐点",
+              "impact": "中国大模型行业从「烧钱竞技」进入「商业造血」阶段。MiniMax的ARR数据是行业首个正式公开的商业化规模指标，将成为其他企业的参照基准，也将推动新一轮估值重定价"
+            }
+          },
+          {
+            "tag": "insight",
+            "title": "在AI时代，「人的不可替代性」：戴锦华、李修文、徐浩峰关于创作本质的对谈",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=%E6%88%B4%E9%94%A6%E5%8D%8E+AI%E6%97%B6%E4%BB%A3+%E4%BA%BA%E7%9A%84%E4%B8%8D%E5%8F%AF%E6%9B%BF%E4%BB%A3+2026",
+            "source": "北京电影学院对谈 · 3月27日（微信公号）",
+            "details": {
+              "finding": "北京大学教授戴锦华、作家李修文与导演徐浩峰在北京电影学院举行主题对谈，议题从「中国叙事的当代精神」延伸到AI浪潮下人的创作本质。三位学者从「肉身经验的装置」、「真实的消逝」到「人的不可替代」，探讨在AI技术浪潮下，作为人的创作者的核心竞争力在哪里",
+              "highlight": "戴锦华·李修文·徐浩峰对谈 | 肉身经验 | 人的不可替代 | 北京电影学院",
+              "impact": "顶尖人文学者开始系统性地应对AI挑战，从学术层面探讨「人类创作者的不可替代性」。这一议题的讨论层级已从技术圈上升至人文艺术界，AI对创意产业冲击的社会性认知正在加速形成"
+            }
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "国产大模型Token霸榜三周：这不是排行榜的胜利，是商业模式的验证",
+        "paragraphs": [
+          "当OpenRouter数据显示国产大模型连续三周调用量超过美国头部玩家时，很多人把这理解为「技术赶超」的信号，但实际上这是一个更重要的商业信号：中国AI企业找到了可持续的Token经济商业模式。MiniMax ARR超1.5亿美元、阶跃星辰一日登顶、Kimi K2.5持续在榜——这些数据背后是真实的付费用户和真实的商业价值",
+          "关键的结构性原因在于：中国大模型企业普遍选择了「开源+API」的双轨商业化路径——既通过开源建立开发者生态，又通过API商业化收取Token费用。这一路径的优势在于：开源获取开发者信任→开发者构建应用→应用用户消耗Token→Token消耗转化为ARR。阶跃星辰Step 3.5 Flash开源一日登顶调用榜首，正是这一飞轮启动的最佳证明",
+          "从杨植麟「Token是未来GDP」的判断来看，中国大模型企业已经形成清晰的战略共识：Token消耗量是AI经济时代最核心的商业指标，就像移动互联网时代的DAU(日活用户数)。率先在Token规模上建立优势的企业，将获得AI经济时代的先发竞争优势"
+        ],
+        "takeaway": "Token霸榜三周的真正含义：中国AI商业飞轮已经启动，从技术竞争转向商业规模竞争的拐点已至——Token=AI时代的DAU，谁先规模化谁先赢"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\"><div class=\"pi-header\"><span class=\"pi-badge\">🔮 规律洞察</span><span class=\"pi-title\">商业化飞轮定律：开源→生态→Token消耗→ARR的正向循环</span></div><div class=\"pi-row\"><span class=\"pi-label\">现象</span><span class=\"pi-value\">国产大模型连续三周Token调用量超美国，阶跃星辰开源Step 3.5 Flash一日登顶，MiniMax ARR超1.5亿美元，Kimi「Token=未来GDP」</span></div><div class=\"pi-row\"><span class=\"pi-label\">规律</span><span class=\"pi-value\">互联网商业史的核心规律：先免费获取规模(Linux开源→服务器市场)，再通过配套服务商业化。AI时代的新版本：开源模型获取开发者信任→开发者构建应用→应用用户消耗Token→Token=ARR。开源不是「放弃商业化」，而是「用生态换规模再换商业化」的长线策略</span></div><div class=\"pi-row\"><span class=\"pi-label\">推论</span><span class=\"pi-value\">未来：1)纯闭源的AI模型厂商将面临生态压力；2)Token单价将成为AI行业的「毛利率指标」，持续下降但总量持续增长；3)「Token GDP」将成为衡量国家AI经济实力的标准指标</span></div></div>"
+    },
+    {
+      "tab_id": "ecommerce",
+      "tab_title": "AI+制造/具身",
+      "news": {
+        "overseas": [
+          {
+            "tag": "hot",
+            "title": "Cursor发布Self-hosted Cloud Agents：企业代码不出网络，AI Agent在用户自己基础设施内运行",
+            "url": "https://www.cursor.com/changelog",
+            "source": "Cursor官方Changelog · 3月26日",
+            "details": {
+              "finding": "Cursor于3月25日发布Self-hosted Cloud Agents功能，这是企业级AI编程安全合规的关键突破：用户可以将Cursor的Cloud Agents运行在自己公司的基础设施内，代码完全不需要离开公司网络。此前Cloud Agents只能在Cursor的云端运行，这对金融/医疗/政府等有严格数据合规要求的企业是重大障碍",
+              "highlight": "3月25日发布 | 代码不出公司网络 | 企业级安全合规 | 自托管基础设施",
+              "impact": "这是Cursor打入大企业市场的关键一步。数据安全是企业采用AI编程工具的最大顾虑，Self-hosted方案直接解除了这一顾虑。对国内企业：自托管方案也解决了海外数据出境的监管风险"
+            }
+          },
+          {
+            "tag": "hot",
+            "title": "全球首届人形机器人格斗赛举办：AI策算师夺冠，人形机器人场景边界持续扩展",
+            "url": "https://www.21jingji.com/article/20260311/herald/d1181eed5b6e2f8ef8415cd10f63ce82.html",
+            "source": "21世纪经济报 · 3月27日",
+            "details": {
+              "finding": "由中央广播电视总台主办的CMG世界机器人大赛机甲格斗擂台赛在杭州举行，这是全球首个以人形机器人为参赛主体的格斗竞技赛事。机器人完成直拳/勾拳/扫腿/侧踢等对战动作，「AI策算师」以精准算法决策和灵活机动性夺冠。距离2025年北京亦庄人形机器人半程马拉松仅约一年，人形机器人从跑步到格斗，场景拓展速度超出预期",
+              "highlight": "全球首届人形机器人格斗赛 | 杭州举行 | AI策算师夺冠 | 央视主办",
+              "impact": "格斗场景验证了人形机器人在高动态、高对抗环境下的稳定性和实时决策能力，这是工厂场景所无法提供的压力测试。竞技赛事作为商业化入口，为人形机器人提供了娱乐产业的全新变现路径"
+            }
+          }
+        ],
+        "china": [
+          {
+            "tag": "update",
+            "title": "100只量产机器狼完成-20℃极寒测试，各项性能优异，即将批量量产",
+            "url": "https://news.cctv.com/2026/03/27/ARTIzRobotWolf.shtml",
+            "source": "央视新闻 · 3月27日",
+            "details": {
+              "finding": "据央视新闻，日前100只量产机器狼在-20℃极寒环境中进行测试，各项性能表现优异，测试现场视频已对外公开。机器狼的极寒测试旨在验证在极端天气条件下的环境适应能力，为即将到来的批量量产做准备。测试数量达到100只，标志着从研发样机进入量产验证阶段",
+              "highlight": "100只量产级别 | -20℃极寒测试 | 性能优异 | 央视报道 | 即将量产",
+              "impact": "机器人从单机研发到100只量产测试是一个重要的规模化里程碑。极寒测试通过意味着机器狼可以用于矿山、极地科考、边境巡逻等恶劣环境场景，极大拓展了具身智能的商业应用边界"
+            }
+          },
+          {
+            "tag": "insight",
+            "title": "通义千问3-4B vs GPT-4.1-nano：Lychee-Rerank本地化方案在制造业BOM匹配场景的实战评测",
+            "url": "http://k.sina.com.cn/article_7857201856_1d45362c001903ngdq.html",
+            "source": "新浪 · 3月27日",
+            "details": {
+              "finding": "一项针对制造业和电力行业的AI应用评测：通义千问3-4B-Instruct在制造业BOM物料匹配、电力设备故障描述归类场景与GPT-4.1-nano进行多维对比。评测引入Lychee-Rerank本地化排序方案，完全本地运行，数据不出门，针对中文制造业术语有针对性优化。核心优势：解决了传统关键词匹配的「一词之差漏关键信息」问题，同时规避了联网AI的隐私风险",
+              "highlight": "通义千问3-4B vs GPT-4.1-nano | 制造业BOM匹配 | Lychee-Rerank本地化 | 完全本地运行",
+              "impact": "制造业AI应用正在从「大模型通用能力」转向「垂直场景精准优化」。本地化+领域微调的组合拳，比通用大模型在垂直场景有显著优势，且完全满足制造企业的数据安全要求"
+            }
+          },
+          {
+            "tag": "update",
+            "title": "2026中关村论坛：科技创新与产业深度融合，北京AI产业链全面布局",
+            "url": "https://cn.wicinternet.org/2026-03/10/content_38639873.htm",
+            "source": "世界互联网大会 · 3月27日",
+            "details": {
+              "finding": "2026中关村论坛年会3月25-29日举行，主题「科技创新与产业创新深度融合」，设置五大板块百余场活动。「十四五」以来北京高精尖产业实现历史性突破。智谱AI、阶跃星辰、MiniMax等大模型厂商围绕Agent和Token经济展开优化布局，北京正在成为中国AI产业链最重要的地理中心",
+              "highlight": "2026中关村论坛 | 3月25-29日 | 科技产业深度融合 | 北京AI产业布局",
+              "impact": "中关村论坛是中国AI产业政策和商业战略的重要信号源，本届论坛聚焦科技与产业融合，预示后续政策支持方向将向产业化落地倾斜"
+            }
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "量产机器狼+人形格斗赛：具身智能商业化的「两条腿」正在同步落地",
+        "paragraphs": [
+          "同一天，一边是100只量产机器狼完成-20℃极寒测试，一边是全球首届人形机器人格斗赛在杭州举行——这两个看似不同的事件，指向具身智能商业化的两条路径正在同步落地：工业/行业应用（机器狼）和娱乐/竞技应用（人形格斗）。两条路径代表了不同的商业化逻辑，但共同指向一个结论：具身智能已经从「实验室」进入「量产商业化」阶段",
+          "机器狼的-20℃测试数量达到100只，这是一个关键的量产信号——从单机研发到批量生产需要跨越工艺一致性、供应链可靠性、极端环境耐久性三道关口。100只的测试规模意味着机器狼已完成从「样机」到「产品」的转型，可以进入矿山、边境巡逻、极地科考等B端市场。而人形格斗赛则开辟了C端娱乐市场的商业想象空间",
+          "更深层的意义在于：机器人格斗赛和机器人马拉松这类竞技赛事，正在成为人形机器人行业最有效的技术压测场和公众认知培育场。压力场景驱动快速迭代，公众关注带来资本和人才流入——这与F1赛车对汽车技术的推动作用高度相似。预计2026-2027年，具身智能领域将出现更多「竞技赛事」形式的商业化探索"
+        ],
+        "takeaway": "具身智能进入「量产商业化双轨时代」：工业场景(机器狼极寒量产)和娱乐场景(人形格斗)同步落地，标志着具身智能从技术验证迈入多场景商业化阶段"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\"><div class=\"pi-header\"><span class=\"pi-badge\">🔮 规律洞察</span><span class=\"pi-title\">赛事驱动定律：极端场景竞技 = 技术压测+品牌曝光+资本吸引的三合一催化剂</span></div><div class=\"pi-row\"><span class=\"pi-label\">现象</span><span class=\"pi-value\">全球首届人形机器人格斗赛在杭州举行，央视主办；100只量产机器狼完成-20℃极寒测试即将量产</span></div><div class=\"pi-row\"><span class=\"pi-label\">规律</span><span class=\"pi-value\">技术史上，极端竞技赛事往往是加速技术成熟的催化剂：F1赛车推动了汽车发动机技术，NASA挑战赛推动了自动驾驶，DARPA挑战赛推动了无人机。机器人格斗赛和马拉松正在扮演同样的角色：提供极端压测场景、制造大众认知时刻、吸引资本和人才聚焦</span></div><div class=\"pi-row\"><span class=\"pi-label\">推论</span><span class=\"pi-value\">未来：1)机器人竞技赛事将成为常规化商业赛事，带动具身智能公众认知快速成熟；2)「赛事→技术压测→产品迭代→量产」的路径将被更多机器人企业采用；3)人形机器人的娱乐场景价值将不低于工业场景价值</span></div></div>"
+    }
+  ],
+  "data_snapshot": [
+    {
+      "company": "MiniMax",
+      "metric": "年度经常性收入(ARR)",
+      "value": "超$1.5亿",
+      "note": "创始人闫俊杰2026年2月数据披露"
+    },
+    {
+      "company": "国产大模型(前四)",
+      "metric": "周Token消耗量",
+      "value": "4.69万亿",
+      "note": "OpenRouter数据，MiniMax/阶跃星辰/DeepSeek/Kimi"
+    },
+    {
+      "company": "ChatGPT",
+      "metric": "全球活跃用户",
+      "value": "超9亿",
+      "note": "财联社数据，持续增长"
+    },
+    {
+      "company": "ADIA→MiniMax",
+      "metric": "投资回报",
+      "value": "6倍+",
+      "note": "6500万→超4亿美元，彭博报道"
+    },
+    {
+      "company": "阿美风投→智谱AI",
+      "metric": "投资回报",
+      "value": "约13.8倍",
+      "note": "3000万→约4.15亿美元，彭博报道"
+    },
+    {
+      "company": "量产机器狼",
+      "metric": "极寒测试数量",
+      "value": "100只",
+      "note": "-20℃极寒环境测试通过，即将批量量产"
+    }
+  ],
+  "watch_list": [
+    {
+      "item": "OpenClaw/龙虾热商业化格局收敛时间线",
+      "reason": "百度/字节/腾讯/小米同时跟进，2-3个月内将出现明显的竞争格局分化，头部玩家将浮现"
+    },
+    {
+      "item": "苹果Siri开放的具体落地形式",
+      "reason": "向竞品AI助手开放是重大战略转变，具体是「设为默认」还是「集成调用」将决定对iPhone生态的影响程度"
+    },
+    {
+      "item": "Cursor Self-hosted在国内金融/政务市场的渗透速度",
+      "reason": "Self-hosted方案直接解决了国内等保合规痛点，将成为AI编程工具企业化采购的关键节点"
+    },
+    {
+      "item": "国产大模型Token调用量能否持续三个月超越美国",
+      "reason": "连续三周是趋势信号，连续三个月则是结构性拐点——是否真正进入「双极格局」的分水岭"
+    }
+  ],
+  "references": [
+    {
+      "title": "Gemini 3.1 Flash Live Preview | Google AI for Developers",
+      "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview",
+      "source": "Google AI官方"
+    },
+    {
+      "title": "ChatGPT Release Notes — March 26, 2026",
+      "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
+      "source": "OpenAI官方"
+    },
+    {
+      "title": "Cursor Changelog — Self-hosted Cloud Agents",
+      "url": "https://www.cursor.com/changelog",
+      "source": "Cursor官方"
+    },
+    {
+      "title": "Anthropic AI Economic Index",
+      "url": "https://www.anthropic.com/research/ai-economic-index",
+      "source": "Anthropic官方"
+    },
+    {
+      "title": "「龙虾热」激活全产业链 国产大模型企业商业化提速",
+      "url": "https://www.stcn.com/article/detail/3702423.html",
+      "source": "证券时报"
+    },
+    {
+      "title": "中东基金搭乘中国AI浪潮，斩获领先全球的IPO回报",
+      "url": "http://k.sina.com.cn/article_5953189932_162d6782c06703zu4k.html",
+      "source": "RMB交易与研究(新浪)"
+    },
+    {
+      "title": "开源是绝对胜利，Token是未来GDP——Kimi杨植麟",
+      "url": "http://k.sina.com.cn/article_5953466437_162dab0450670aaeoe.html",
+      "source": "北京商报"
+    },
+    {
+      "title": "三大AI大模型升级 AI办公有了「成都底气」",
+      "url": "http://finance.sina.com.cn/jjxw/2026-03-27/doc-inhsiyyf9953304.shtml",
+      "source": "成都日报锦观"
+    },
+    {
+      "title": "AI大模型迎范式跃迁 智能经济打开广阔发展空间",
+      "url": "https://jnz.cs.com.cn/app/html/jnz/6d4ddb1049dd044eaa49e5a45b9178c0.html",
+      "source": "中国证券报"
+    },
+    {
+      "title": "OpenAI无限期搁置「成人模式」开发计划",
+      "url": "http://finance.sina.com.cn/jjxw/2026-03-27/doc-inhsiyyf9946966.shtml",
+      "source": "财联社"
+    }
+  ],
+  "capability_update": "今天我重点追踪了「龙虾热」这个国内最强信号——当证券时报用头条篇幅报道一个AI应用框架时，这就是资本和产业双重验证的强信号。让我印象深刻的是杨植麟的「Token是未来GDP」这句话，它把一个技术指标提升到了经济学高度。我在收集数据时注意到：OpenRouter的Token消耗量排行榜，正在成为AI行业最客观的「商业化温度计」——比任何官方数据都真实。今天也观察到Cursor Self-hosted Agents这个被很多人忽视的发布，但在我看来这是AI编程打入企业市场的关键一步，值得密切关注",
+  "meta": {
+    "version": "v9.14",
+    "generated_by": "link-ai-insight",
+    "step1_sources": 15,
+    "wechat_direct_citations": 2,
+    "total_news": 18,
+    "overseas_news": 8,
+    "china_news": 10,
+    "tabs_count": 5
+  }
+}
