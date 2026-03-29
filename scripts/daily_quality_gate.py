@@ -621,7 +621,7 @@ def check_board_classification(date_str: str) -> CheckResult:
         board_keywords = {
             0: {  # 大模型
                 "name": "大模型",
-                "positive": ["模型", "benchmark", "训练", "推理", "蒸馏", "CVPR", "NeurIPS", "ICML", "ICLR",
+                "positive": ["模型", "benchmark", "训练", "推理", "蒸馏", "CVPR", "NeurIPS", "ICML", "ICLR", "Economic Index", "学习曲线", "Learning Curve",
                             "参数", "token", "多模态", "视觉", "3D", "扩散", "生成", "开源模型",
                             "Foundation Model", "架构", "注意力", "Transformer"],
                 "negative": ["融资", "收购", "估值", "军事", "法规", "IDE", "代码补全", "Cursor",
@@ -649,7 +649,7 @@ def check_board_classification(date_str: str) -> CheckResult:
                 "positive": ["融资", "投资", "估值", "收购", "IPO", "算力", "数据中心", "芯片",
                             "GTC", "会议", "峰会", "圆桌", "开源生态", "人事", "离职", "创业",
                             "出货", "交付", "里程碑", "产能", "工厂扩建", "订单"],
-                "negative": ["军事", "法规", "监管", "安全警示"]
+                "negative": ["军事落地", "军事合规", "法规", "监管", "安全警示"]
             },
             4: {  # 企业AI转型
                 "name": "企业AI转型",
