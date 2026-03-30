@@ -8,13 +8,22 @@
 
 set -euo pipefail
 
-DATE="${1:?用法: $0 <YYYY-MM-DD>}"
+DATE="${1:?用法: $0 <YYYY-MM-DD> [--historical]}"
 MONTH=$(echo "$DATE" | cut -d- -f1-2)
 DAY=$(echo "$DATE" | cut -d- -f3 | sed 's/^0//')
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$PROJECT_DIR"
 
-echo "🚀 AI日报一键部署: $DATE"
+# --historical 旗标：补跑历史日报时设置，自动豁免"6处联动首页指向"检查
+# 因为首页应永远指向最新日报，而非历史日报，质量门对历史日报的此项检查是设计误判
+HISTORICAL=0
+for arg in "$@"; do
+    if [ "$arg" = "--historical" ]; then
+        HISTORICAL=1
+    fi
+done
+
+echo "🚀 AI日报一键部署: $DATE$([ $HISTORICAL -eq 1 ] && echo ' [历史补跑模式]' || true)"
 echo "=================================================="
 
 # ===== 0a. Orchestrator状态验证（v1.1新增） =====
@@ -94,9 +103,15 @@ GATE_RESULT=$(cat /tmp/gate_result_deploy.txt)
 # 检查是否通过（只有全部通过或仅有warning级别的失败才放行）
 # v2.1修复: 使用 tee+文件读取替代$()子shell，防止shell管道截断
 # HARD_FAIL检测: 只匹配具体失败条目，排除末尾总结行"❌ 质量门未通过 (N项失败)"
+# v2.2修复: --historical 模式下额外豁免"6处联动"失败（历史日报首页指向最新日期是正确行为）
 if echo "$GATE_RESULT" | grep -q "❌ 质量门未通过"; then
     # 排除末尾总结行，只看具体的"^❌ XX: ..."失败条目（排除"可修复"标注的fixable项）
     HARD_FAIL=$(echo "$GATE_RESULT" | grep "^❌" | grep -v "质量门未通过" | grep -v "⚠️" | grep -v "(可修复)" | head -1 || true)
+    # --historical 模式：额外豁免"6处联动"失败（首页始终指向最新日报，不应指向历史日报）
+    if [ $HISTORICAL -eq 1 ] && [ -n "$HARD_FAIL" ] && echo "$HARD_FAIL" | grep -q "6处联动"; then
+        echo "  ⚠️ [历史补跑模式] 豁免 6处联动 检查（首页指向最新日报是正确行为）"
+        HARD_FAIL=""
+    fi
     if [ -n "$HARD_FAIL" ]; then
         echo ""
         echo "🚫 质量门硬性失败，部署已阻断。请先修复问题后重试。"
