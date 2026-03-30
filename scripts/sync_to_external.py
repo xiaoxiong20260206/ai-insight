@@ -63,7 +63,7 @@ def sync_all() -> bool:
     
     if not EXTERNAL_REPO.exists():
         print(f"❌ 外部仓库不存在: {EXTERNAL_REPO}")
-        print(f"   请先克隆: git clone https://github.com/xiaoxiong20260206/ai-insight-public.git ../ai-insight-public")
+        print(f"   请先克隆: git clone https://github.com/my-ai-research-lab/ai-insight-public.git ../ai-insight-public")
         return False
     
     # 复制所有内容 (保持目录结构, 排除隐藏文件/目录)
@@ -191,7 +191,7 @@ def git_push() -> bool:
             ["git", "push", "origin", "main"],
             check=True, capture_output=True
         )
-        print("✅ 已推送到 xiaoxiong20260206/ai-insight-public")
+        print("✅ 已推送到 my-ai-research-lab/ai-insight-public")
         
         return True
         
@@ -253,7 +253,7 @@ def main():
     print()
     print("=" * 50)
     print("📊 同步完成!")
-    print(f"🔗 外部版本: https://xiaoxiong20260206.github.io/ai-insight-public/")
+    print(f"🔗 外部版本: https://my-ai-research-lab.github.io/ai-insight-public/")
 
 
 if __name__ == "__main__":
