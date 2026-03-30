@@ -139,10 +139,26 @@ def clean_stale_files() -> int:
     return deleted
 
 
+EXPECTED_REMOTE = "github.com/my-ai-research-lab/ai-insight-public"
+
+
 def git_push() -> bool:
     """提交并推送到外部仓库"""
     try:
         os.chdir(EXTERNAL_REPO)
+
+        # ⭐ v2.3新增：推送前验证 remote 是否指向正确仓库（防止推错账号）
+        remote_result = subprocess.run(
+            ["git", "remote", "get-url", "origin"],
+            capture_output=True, text=True
+        )
+        actual_remote = remote_result.stdout.strip()
+        if EXPECTED_REMOTE not in actual_remote:
+            print(f"❌ [ABORT] remote 验证失败！")
+            print(f"   期望包含: {EXPECTED_REMOTE}")
+            print(f"   实际 remote: {actual_remote}")
+            print(f"   请执行: git -C {EXTERNAL_REPO} remote set-url origin https://github.com/my-ai-research-lab/ai-insight-public.git")
+            return False
         
         # 先 pull --rebase 避免冲突
         pull_result = subprocess.run(
