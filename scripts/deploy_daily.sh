@@ -88,7 +88,7 @@ fi
 # ===== 0b. 质量门检查（阻断式，不通过则禁止部署） =====
 echo ""
 echo "🔍 Step 0b: 质量门检查（阻断式）"
-{ python3 scripts/daily_quality_gate.py "$DATE" 2>&1 || true; } | tee /tmp/gate_result_deploy.txt
+{ python3 scripts/daily_quality_gate.py "$DATE" 2>&1 || true; } | tee /tmp/gate_result_deploy.txt || true
 GATE_RESULT=$(cat /tmp/gate_result_deploy.txt)
 
 # 检查是否通过（只有全部通过或仅有warning级别的失败才放行）
@@ -96,7 +96,7 @@ GATE_RESULT=$(cat /tmp/gate_result_deploy.txt)
 # HARD_FAIL检测: 只匹配具体失败条目，排除末尾总结行"❌ 质量门未通过 (N项失败)"
 if echo "$GATE_RESULT" | grep -q "❌ 质量门未通过"; then
     # 排除末尾总结行，只看具体的"^❌ XX: ..."失败条目（排除"可修复"标注的fixable项）
-    HARD_FAIL=$(echo "$GATE_RESULT" | grep "^❌" | grep -v "质量门未通过" | grep -v "⚠️" | grep -v "(可修复)" | head -1)
+    HARD_FAIL=$(echo "$GATE_RESULT" | grep "^❌" | grep -v "质量门未通过" | grep -v "⚠️" | grep -v "(可修复)" | head -1 || true)
     if [ -n "$HARD_FAIL" ]; then
         echo ""
         echo "🚫 质量门硬性失败，部署已阻断。请先修复问题后重试。"
@@ -228,20 +228,24 @@ except Exception as e:
 PYEOF
 )
 
-python3 - << PYEOF
-import re
+AI_DATE="$DATE" AI_MONTH="$MONTH" AI_DESC="$DESC" python3 - << 'PYEOF'
+import re, os
+date_str = os.environ['AI_DATE']
+month_str = os.environ['AI_MONTH']
+desc = os.environ['AI_DESC']
+
 with open('index.html', 'r', encoding='utf-8') as f:
     content = f.read()
 
 # 更新 list-item href
 content = re.sub(
     r'href="01-daily-reports/\d{4}-\d{2}/\d{4}-\d{2}-\d{2}\.html"(\s+target="_blank"\s+class="list-item")',
-    'href="01-daily-reports/$MONTH/$DATE.html"\g<1>',
+    f'href="01-daily-reports/{month_str}/{date_str}.html"\\1',
     content
 )
 # 更新 list-item-title 日期（从DATE变量解析中文格式）
 from datetime import datetime
-d = datetime.strptime('$DATE', '%Y-%m-%d')
+d = datetime.strptime(date_str, '%Y-%m-%d')
 date_cn = f'{d.year}年{d.month}月{d.day}日'
 content = re.sub(
     r'\d{4}年\d{1,2}月\d{1,2}日( AI日报)',
@@ -251,7 +255,7 @@ content = re.sub(
 # 更新 list-item-desc
 content = re.sub(
     r'(<div class="list-item-desc">)[^<]*(</div>)',
-    r'\g<1>${DESC}\g<2>',
+    lambda m: m.group(1) + desc + m.group(2),
     content
 )
 with open('index.html', 'w', encoding='utf-8') as f:
