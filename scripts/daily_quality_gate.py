@@ -1150,9 +1150,10 @@ def check_six_locations(date_str: str) -> CheckResult:
 
 
 def check_external_sync(date_str: str) -> CheckResult:
-    """检查9: 外部版同步检查"""
+    """检查9: 外部版同步检查（v2.1: 新增外部首页日期校验，防止 index.html 遗漏，经验#63）"""
     date_obj = datetime.strptime(date_str, "%Y-%m-%d")
     month_str = date_obj.strftime("%Y-%m")
+    day_num = str(date_obj.day)  # e.g. "31"
     
     # 检查public目录
     public_html = PUBLIC_PATH / "01-daily-reports" / month_str / f"{date_str}.html"
@@ -1173,6 +1174,27 @@ def check_external_sync(date_str: str) -> CheckResult:
     if not EXTERNAL_PATH.exists():
         if public_html.exists():
             return CheckResult("外部同步", True, "public/已同步 (外部仓库不存在)")
+    
+    # v2.1新增：校验外部仓库 index.html 首页内容是否已更新到当日
+    # 防止 sync_to_external.py 中途失败只同步了日报文件、未更新首页的漏检情况（经验#63）
+    external_index = EXTERNAL_PATH / "index.html"
+    if external_index.exists():
+        index_content = external_index.read_text(encoding="utf-8")
+        index_issues = []
+        # 检查1：日历数组是否包含当日日期
+        import re as _re
+        cal_match = _re.search(rf"'{_re.escape(month_str)}':\s*\[([^\]]+)\]", index_content)
+        if cal_match:
+            days_in_cal = [d.strip() for d in cal_match.group(1).split(",")]
+            if day_num not in days_in_cal:
+                index_issues.append(f"外部首页日历缺少{day_num}日")
+        else:
+            index_issues.append(f"外部首页日历缺少{month_str}月条目")
+        # 检查2：最新日报链接是否指向当日
+        if f"{date_str}.html" not in index_content:
+            index_issues.append("外部首页链接未指向当日日报")
+        if index_issues:
+            return CheckResult("外部同步", False, "public/+外部仓库均已同步, 但 " + "; ".join(index_issues), fixable=True)
     
     return CheckResult("外部同步", True, "public/+外部仓库均已同步")
 
