@@ -160,6 +160,17 @@ def git_push() -> bool:
             print(f"   请执行: git -C {EXTERNAL_REPO} remote set-url origin https://github.com/my-ai-research-lab/ai-insight-public.git")
             return False
         
+        # v2.2修复(经验#63): pull --rebase 前先 stash，防止 unstaged changes 中断同步
+        # 若有本地未提交变更（如上次 sync 中途失败留下的文件），直接 pull 会报：
+        # "cannot pull with rebase: You have unstaged changes" → 走非冲突分支 return False
+        stash_result = subprocess.run(
+            ["git", "stash"],
+            capture_output=True, text=True
+        )
+        has_stash = "No local changes to save" not in stash_result.stdout
+        if has_stash:
+            print(f"  ℹ️  已暂存本地变更（stash），pull 后自动恢复")
+
         # 先 pull --rebase 避免冲突
         pull_result = subprocess.run(
             ["git", "pull", "--rebase", "origin", "main"],
@@ -177,10 +188,19 @@ def git_push() -> bool:
                 os.chdir(EXTERNAL_REPO)
             else:
                 # pull 失败但非冲突（网络超时/refs错误/认证失败等）—— 必须阻断
+                # 先恢复 stash，避免内容丢失
+                if has_stash:
+                    subprocess.run(["git", "stash", "pop"], capture_output=True)
                 print(f"❌ git pull --rebase 失败（非冲突原因），中止推送")
                 print(f"   stdout: {pull_result.stdout[:200]}")
                 print(f"   stderr: {pull_result.stderr[:200]}")
                 return False
+        
+        # pull 成功后恢复 stash（stash 的内容会被 git add -A 统一提交）
+        if has_stash:
+            pop_result = subprocess.run(["git", "stash", "pop"], capture_output=True, text=True)
+            if pop_result.returncode != 0:
+                print(f"  ⚠️  stash pop 失败（可能已有同名文件），继续执行: {pop_result.stderr[:100]}")
         
         # git add
         subprocess.run(["git", "add", "-A"], check=True, capture_output=True)
