@@ -178,39 +178,43 @@ echo ""
 echo "📋 Step 3: 更新首页（日历+最新日报描述）"
 
 # 4a. 更新日历数组
-if ! grep -q "'$MONTH'.*\b$DAY\b" index.html; then
-    python3 - << 'PYEOF'
-import re, sys
+# v2.1修复: 通过环境变量传参（AI_MONTH/AI_DAY/AI_DATE），避免 << 'PYEOF' 单引号 heredoc
+# 中 shell 变量不展开导致字面量 '$MONTH': [$DAY] 被写入 index.html 的 bug（经验#63）
+if ! grep -qE "'$MONTH':.*\b$DAY\b" index.html; then
+    AI_MONTH="$MONTH" AI_DAY="$DAY" AI_DATE="$DATE" python3 - << 'PYEOF'
+import re, sys, os
+month_str = os.environ['AI_MONTH']   # e.g. "2026-03"
+day_str   = os.environ['AI_DAY']     # e.g. "31"
+date_str  = os.environ['AI_DATE']    # e.g. "2026-03-31"
 with open('index.html', 'r', encoding='utf-8') as f:
     content = f.read()
 # 在当月数组末尾追加日期（若当月数组已存在）
-pattern = r"('$MONTH': \[)([^\]]+)(\])"
+pattern = r"('" + re.escape(month_str) + r"': \[)([^\]]+)(\])"
 if re.search(pattern, content):
     def add_day(m):
         existing = m.group(2).strip().rstrip(',')
-        return m.group(1) + existing + ', $DAY' + m.group(3)
+        return m.group(1) + existing + ', ' + day_str + m.group(3)
     new_content = re.sub(pattern, add_day, content)
 else:
     # 新月第一天：在上一个月数组后插入新月条目
-    prev_month_pattern = r"(const reportsData = \{[^}]*?)'(\d{4}-\d{2})': \[([^\]]*)\](\s*\})"
-    if re.search(r"'$MONTH'", content):
+    if re.search(r"'" + re.escape(month_str) + r"'", content):
         print('  ⚠️  当月数组已存在但未匹配，请手动检查')
         sys.exit(1)
     # 在 reportsData 第一个月条目前插入新月
     new_content = re.sub(
         r"(const reportsData = \{)\s*\n(\s*')",
-        r"\1\n            '$MONTH': [$DAY],  // $MONTH日报日期 (最新: $DATE)\n\2",
+        r"\1\n            '" + month_str + r"': [" + day_str + r"],  // " + month_str + r"日报日期 (最新: " + date_str + r")\n\2",
         content
     )
     if new_content == content:
         print('  ❌ 无法自动插入新月日历数组，请手动更新 index.html')
         sys.exit(1)
-    print('  ✅ 新月 $MONTH 日历数组已创建，第一条日期: $DAY')
+    print(f'  ✅ 新月 {month_str} 日历数组已创建，第一条日期: {day_str}')
 # 同时更新注释中的最新日期
-new_content = re.sub(r'最新: \d{4}-\d{2}-\d{2}', '最新: $DATE', new_content)
+new_content = re.sub(r'最新: \d{4}-\d{2}-\d{2}', '最新: ' + date_str, new_content)
 with open('index.html', 'w', encoding='utf-8') as f:
     f.write(new_content)
-print('  ✅ 日历数据已添加 $DAY，注释已更新为 $DATE')
+print(f'  ✅ 日历数据已添加 {day_str}，注释已更新为 {date_str}')
 PYEOF
 else
     echo "  ⏭️ 日历数据已包含 $DAY"
