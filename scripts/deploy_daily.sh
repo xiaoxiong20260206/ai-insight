@@ -220,6 +220,28 @@ else
     echo "  ⏭️ 日历数据已包含 $DAY"
 fi
 
+# 4a-guard. 防退化检查：确认 currentMonth 使用动态 todayMonth，而非硬编码数字
+# 经验#62 (2026-04-02): currentMonth 曾被硬编码为 3，月份变更后日历默认停在旧月
+if grep -qE "let currentMonth\s*=\s*[0-9]" index.html; then
+    echo "  ❌ [ABORT] index.html 中 currentMonth 被硬编码为数字！请改为使用 todayMonth（动态）"
+    echo "     错误行: $(grep -n 'let currentMonth' index.html | head -3)"
+    if [ "${SKIP_GATE:-0}" != "1" ]; then
+        exit 1
+    fi
+    echo "  ⚠️ SKIP_GATE=1 已设置，跳过此检查..."
+else
+    echo "  ✅ currentMonth 已动态化（非硬编码）"
+fi
+# 同时检查是否有未替换的 \$MONTH 模板变量残留（经验#63）
+if grep -qE "'\\\\\\$MONTH'" index.html 2>/dev/null || grep -q "'\$MONTH'" index.html 2>/dev/null; then
+    echo "  ❌ [ABORT] index.html 中存在未替换的 '\$MONTH' 模板变量！"
+    if [ "${SKIP_GATE:-0}" != "1" ]; then
+        exit 1
+    fi
+else
+    echo "  ✅ 无未替换的 \$MONTH 模板变量残留"
+fi
+
 # 4b. 更新最新日报的 list-item 链接+标题+描述
 # 从JSON提取描述（取heat_trend.summary前100字，或overview[0].headline的前N个用·拼接）
 DESC=$(python3 - << PYEOF
