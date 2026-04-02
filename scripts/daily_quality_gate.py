@@ -1143,10 +1143,19 @@ def check_six_locations(date_str: str) -> CheckResult:
         date_cn = f"{date_obj.year}年{date_obj.month}月{date_obj.day}日"
         if date_cn not in content:
             issues.append(f"首页最新日报标题未更新（应含{date_cn}）")
+        # 2d. 经验#62 (2026-04-02): 日历初始月份动态化检查
+        # currentMonth/currentYear 不应被硬编码为数字，必须使用 todayMonth/todayYear
+        if _re.search(r'let currentMonth\s*=\s*\d+', content):
+            issues.append("首页日历 currentMonth 被硬编码为数字（应使用 todayMonth 动态值）")
+        if _re.search(r'let currentYear\s*=\s*\d{4}', content):
+            issues.append("首页日历 currentYear 被硬编码为年份数字（应使用 todayYear 动态值）")
+        # 2e. 经验#62: 检查未替换的 $MONTH/$DAY/$DATE 模板变量残留（经验#63 遗留物）
+        if _re.search(r"'\\\$MONTH'|'\$MONTH'", content):
+            issues.append("首页 reportsData 中存在未替换的 '$MONTH' 模板变量")
     
     if issues:
         return CheckResult("6处联动", False, ", ".join(issues), fixable=True)
-    return CheckResult("6处联动", True, "首页日历+链接+标题均已更新")
+    return CheckResult("6处联动", True, "首页日历+链接+标题均已更新（含动态月份检查）")
 
 
 def check_external_sync(date_str: str) -> CheckResult:
