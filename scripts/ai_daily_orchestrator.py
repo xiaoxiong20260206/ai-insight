@@ -781,26 +781,26 @@ def run_link_homepage_sync() -> bool:
         return True  # 不阻断
 
 # ── 命令: push (Step 5) ──────────────────────────────────
-def cmd_push(date: str, preview_only: bool = False) -> bool:
-    """KIM推送"""
-    args = ["python3", str(SCRIPT_DIR / "send_ai_daily.py"), date]
-    if preview_only:
-        args.append("--preview")
+def cmd_push(date: str, preview_only: bool = True) -> bool:
+    """KIM推送（默认 preview_only=True，即私发给 shenlang，不发群）
+    AI 日报统一走 --preview 模式（私发）；如需群发需显式传入 preview_only=False。
+    """
+    # 2026-04-02 修复：日报 Step5 统一私发（--preview），禁止默认群发
+    # 根因：之前 preview_only=False 导致直接群发，违反 Skill 规范
+    args = ["python3", str(SCRIPT_DIR / "send_ai_daily.py"), date, "--preview"]
 
-    print(f"\n📤 KIM{'预览' if preview_only else '推送'}: {date}")
+    print(f"\n📤 KIM私发（--preview → shenlang）: {date}")
     try:
         result = subprocess.run(
             args, capture_output=True, text=True, timeout=120, cwd=str(PROJECT_DIR)
         )
         if result.returncode == 0:
             print(result.stdout[-300:] if len(result.stdout) > 300 else result.stdout)
-            if not preview_only:
-                mark_step(date, "push", "completed")
+            mark_step(date, "push", "completed")
             return True
         else:
             print(f"  ❌ 推送失败: {result.stderr[:200]}")
-            if not preview_only:
-                mark_step(date, "push", "failed", error=f"exit={result.returncode}")
+            mark_step(date, "push", "failed", error=f"exit={result.returncode}")
             return False
     except Exception as e:
         print(f"  ❌ 推送异常: {e}")
