@@ -285,14 +285,14 @@ PYEOF
 # 4c. 验证首页关键字段
 echo "  📋 验证首页："
 grep -o "list-item-desc\">.[^<]*" index.html | head -1 | cut -c1-80
-grep -o "'$MONTH': \[[^\]]*\]" index.html | head -1
+grep -o "'$MONTH': \[[^\]]*\]" index.html | head -1 || true
 
 # ===== 5. 先同步public版（因为public/index.html需要被commit进去） =====
 echo ""
 echo "📋 Step 4: 同步公开版（先于commit，确保public/index.html纳入提交）"
 python3 scripts/sync_to_public.py --full --force
 # 强制敏感词二次核查（不依赖sync_to_public自检）—— 发现残留直接abort，禁止继续推送
-SENSITIVE_COUNT=$(grep -rl "沈浪\|林克\|快手\|Kuaishou\|CF" public/ 2>/dev/null | wc -l | tr -d ' ')
+SENSITIVE_COUNT=$( (grep -rl "沈浪\|林克\|快手\|Kuaishou\|CF" public/ 2>/dev/null || true) | wc -l | tr -d ' ')
 if [ "$SENSITIVE_COUNT" -gt 0 ]; then
     echo "  ❌ [ABORT] public/目录中有 ${SENSITIVE_COUNT} 个文件含敏感词，禁止继续推送！"
     grep -rl "沈浪\|林克\|快手\|Kuaishou\|CF" public/ | head -5
