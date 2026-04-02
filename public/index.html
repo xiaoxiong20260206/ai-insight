@@ -3160,10 +3160,7 @@
         // 已有日报的数据（格式: YYYY-MM-DD）
         const reportsData = {
             '2026-04': [1, 2],  // 2026-04日报日期 (最新: 2026-04-02)
-            '$MONTH': [$DAY],  // $MONTH日报日期 (最新: $DATE)
-            '$MONTH': [$DAY],  // $MONTH日报日期 (最新: $DATE)
-            '$MONTH': [$DAY],  // $MONTH日报日期 (最新: $DATE)
-            '2026-03': [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],  // 3月有日报的日期 (最新: $DATE)
+            '2026-03': [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],  // 3月有日报的日期 (最新: 2026-04-02)
             '2026-02': [28],          // 2月示例
         };
         
@@ -3172,15 +3169,15 @@
             '2026-03': {8: 'weekly-2026-W10', 15: 'weekly-2026-W11', 22: 'weekly-2026-W12', 29: 'weekly-2026-W13'}  // 3月8日W10, 15日W11, 22日W12, 29日W13最后一天
         };
         
-        // 当前显示的月份
-        let currentYear = 2026;
-        let currentMonth = 3; // 1-12
-        
+        // 当前显示的月份（默认为今天所在月份）
         // 今天的日期
         const today = new Date();
         const todayYear = today.getFullYear();
         const todayMonth = today.getMonth() + 1;
         const todayDay = today.getDate();
+        
+        let currentYear = todayYear;
+        let currentMonth = todayMonth; // 1-12
         
         // 渲染日历
         function renderCalendar() {
