@@ -1,0 +1,432 @@
+{
+  "coverage": {
+    "date": "2026-04-02",
+    "window": "2026-04-01 08:00 ~ 2026-04-02 08:00",
+    "total_news": 13,
+    "overseas_news": 9,
+    "china_news": 4,
+    "wx_direct": 3
+  },
+  "overview": [
+    {
+      "icon": "🦑",
+      "label": "源码泄露",
+      "headline": "Claude Code 51万行源码意外曝光",
+      "text": "Anthropic发布npm包时附带源映射文件，三层记忆架构与KAIROS守护进程模式全部暴露"
+    },
+    {
+      "icon": "🤝",
+      "label": "MCP峰会",
+      "headline": "MCP Dev Summit北美峰会纽约开幕",
+      "text": "Linux Foundation主办，Anthropic/Google/Microsoft/OpenAI共推MCP标准化，Agent互操作进入关键时刻"
+    },
+    {
+      "icon": "🇨🇳",
+      "label": "国内动态",
+      "headline": "阿里Qwen3.5-Omni+Wan2.7-Image双发",
+      "text": "全模态大模型+新一代文生图，中文生图能力实测超GPT-Image1.5，国产多模态竞争白热化"
+    },
+    {
+      "icon": "💻",
+      "label": "IDE进化",
+      "headline": "VSCode 1.114发布，Copilot全面Agent化",
+      "text": "#codebase工具纯语义搜索化，所有Copilot交互走向Agentic模式，TypeScript 6.0正式支持"
+    }
+  ],
+  "heat_trend": {
+    "topics": [
+      {
+        "name": "Claude Code源码泄露",
+        "score": 97,
+        "days": 1,
+        "trend_class": "hot",
+        "trend_label": "🔥 爆热",
+        "signal": "51万行TypeScript源码+KAIROS模式+内部模型代号意外公开，行业级震动"
+      },
+      {
+        "name": "MCP协议标准化",
+        "score": 90,
+        "days": 3,
+        "trend_class": "hot",
+        "trend_label": "🔥 升温",
+        "signal": "MCP Dev Summit纽约峰会+四大AI厂商联合背书，Agent互操作进入实质推进阶段"
+      },
+      {
+        "name": "AI编程工具竞争",
+        "score": 85,
+        "days": 7,
+        "trend_class": "rising",
+        "trend_label": "📈 持续热",
+        "signal": "VSCode 1.114 Agent化+Figma开放Canvas+Microsoft Copilot Studio多Agent GA，全线升级"
+      },
+      {
+        "name": "国内多模态竞争",
+        "score": 82,
+        "days": 4,
+        "trend_class": "rising",
+        "trend_label": "📈 加速",
+        "signal": "阿里Qwen3.5-Omni+Wan2.7-Image双发，苹果国行AI意外推送，国产多模态进入关键窗口"
+      },
+      {
+        "name": "AI创投热潮",
+        "score": 78,
+        "days": 2,
+        "trend_class": "rising",
+        "trend_label": "📈 延续",
+        "signal": "Q1全球创投3000亿美元历史纪录，AI占80%，Kilo等新兴AI工具融资加速"
+      }
+    ]
+  },
+  "tabs": [
+    {
+      "id": "models",
+      "label": "🧠 大模型",
+      "news": {
+        "overseas": [
+          {
+            "title": "Google Gemini API引入Flex与Priority推断层，提供成本/延迟优化选项",
+            "summary": "Google Gemini API正式推出Flex Inference和Priority Inference两种推断层，Flex层适合高吞吐批量任务，Priority层专为低延迟实时应用设计，这是Gemini 3系列在推断服务架构上的重要升级。",
+            "source": "Google AI for Developers",
+            "url": "https://ai.google.dev/gemini-api/docs/changelog",
+            "date": "2026-04-01",
+            "region": "overseas",
+            "importance": "high"
+          },
+          {
+            "title": "arXiv：LLM在训练中自发涌现类脑功能分化机制",
+            "summary": "多所机构研究者首次系统记录了大型语言模型训练过程中自发出现类似大脑功能分区的协同核心结构，信息整合能力显著超越各部分之和，与神经科学中脑区协同规律高度相似。",
+            "source": "arXiv",
+            "url": "https://arxiv.org/abs/2603.28928",
+            "date": "2026-03-31",
+            "region": "overseas",
+            "importance": "medium"
+          },
+          {
+            "title": "arXiv：OneComp——单行代码实现生成式AI模型压缩",
+            "summary": "早稻田大学等机构研究者提出仅需一行代码即可对基础模型进行训练后压缩的新方法，显著降低部署门槛、内存占用和推断延迟，对大模型轻量化部署具有重要工程意义。",
+            "source": "arXiv",
+            "url": "https://arxiv.org/abs/2603.28845",
+            "date": "2026-03-31",
+            "region": "overseas",
+            "importance": "medium"
+          }
+        ],
+        "china": [
+          {
+            "title": "阿里发布全模态大模型Qwen3.5-Omni及Wan2.7-Image文生图模型",
+            "summary": "阿里连续发布Qwen3.5-Omni全模态模型（支持文本/图片/音频/视频原生多模态）和Wan2.7-Image文生图模型，Wan2.7-Image中文生图能力盲测超越GPT-Image1.5，集文生图、指令编辑等能力于一体。",
+            "source": "weixin.sogou.com",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=%E9%98%BF%E9%87%8C+Qwen3.5-Omni+AI%E5%A4%A7%E6%A8%A1%E5%9E%8B",
+            "date": "2026-04-01",
+            "region": "china",
+            "importance": "high"
+          },
+          {
+            "title": "苹果国行Apple Intelligence意外推送后撤回，正式落地仍待合规审批",
+            "summary": "4月1日部分国内iPhone用户升级iOS 26.4后意外收到国行版Apple Intelligence推送，苹果随即确认为软件问题并撤回，正在积极推进合规落地，国内合规伙伴（百度/字节）尚未官宣。",
+            "source": "weixin.sogou.com",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=%E8%8B%B9%E6%9E%9C+%E5%9B%BD%E8%A1%8C+Apple+Intelligence+2026%E5%B9%B44%E6%9C%88",
+            "date": "2026-04-01",
+            "region": "china",
+            "importance": "medium"
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "Claude Code 51万行源码泄露：意外暴露的AI产品设计密码",
+        "paragraphs": [
+          "Anthropic在发布Claude Code npm包2.1.88版本时，意外附带了一个59.8MB的JavaScript源映射文件，导致约51.2万行TypeScript源代码外泄。这次泄露的价值不在于竞争对手能直接复用代码——毕竟代码本身不构成护城河——真正有价值的是泄露内容揭示的产品设计哲学：三层记忆架构（工作记忆/会话记忆/长期记忆的分层管理）、代号KAIROS的自主守护进程模式，以及内部模型代号Capybara和Fennec。这些细节说明Anthropic在Agent化方向上的思考深度远超公开信息。",
+          "KAIROS守护进程模式尤其值得关注。从泄露的架构描述来看，这是一种让Claude Code能够在后台持续运行、自主监控代码仓库状态并主动触发任务的机制——类似于Devin的Scheduled Devins，但更深度集成在IDE层面。三层记忆架构也印证了一个正在成为行业共识的判断：未来AI编程工具的竞争核心不是「单次对话的代码质量」，而是「跨会话的上下文理解和任务连续性」。能记住你三天前的设计决策，比能写出更优雅的代码，对工程效率的提升更为显著。",
+          "这次泄露事件对行业的最大影响，是加速了竞争对手的参考学习速度。GitHub Copilot、Cursor等竞品的产品团队必然会仔细研究这51万行代码背后的设计逻辑，而这些洞察原本需要数月的逆向工程和产品猜测才能获得。从竞争角度看，这是Anthropic最不希望看到的局面——不是因为技术被复制，而是因为产品路线图被提前曝光。"
+        ],
+        "takeaway": "Claude Code源码泄露暴露的三层记忆架构和KAIROS守护进程，揭示了AI编程工具下一代竞争的真正战场：不是代码生成质量，而是跨会话记忆管理和自主任务执行能力。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\"><div class=\"pi-header\"><span class=\"pi-badge\">🔮 规律洞察</span><span class=\"pi-title\">产品路线图保密悖论：越优秀的产品架构，越难通过代码保密来维持竞争优势</span></div><div class=\"pi-row\"><span class=\"pi-row-label l2\">本质</span><div class=\"pi-row-content\"><strong>真正的竞争护城河不是代码本身，而是团队将架构思想转化为高质量产品的执行能力；源码泄露损害的不是技术优势，而是时间窗口优势——竞争对手获得了「答题纸」，但不等于拥有「解题能力」。</strong></div></div><div class=\"pi-row\"><span class=\"pi-row-label\">进化序列</span><div class=\"pi-row-content\"><div class=\"pi-evo\"><div class=\"pi-evo-step\"><span class=\"pi-evo-tag\">1.0</span><span class=\"pi-evo-text\">代码保密（技术壁垒）</span></div><span class=\"pi-evo-arrow\">→</span><div class=\"pi-evo-step active\"><span class=\"pi-evo-tag\">2.0</span><span class=\"pi-evo-text\">架构思想保密（设计壁垒）</span></div><span class=\"pi-evo-arrow\">→</span><div class=\"pi-evo-step future\"><span class=\"pi-evo-tag\">3.0</span><span class=\"pi-evo-text\">执行速度护城河（迭代壁垒）</span></div></div></div></div><div class=\"pi-table\"><div class=\"pi-t-head\"><span>阶段</span><span>现实验证</span><span>类比</span></div><div class=\"pi-t-section verified\"><span class=\"pi-t-section-tag\">✅ 已验证</span></div><div class=\"pi-t-row\"><span class=\"pi-t-rule\">代码泄露≠竞争力转移</span><span class=\"pi-t-reality\">Android开源→三星等厂商复用但Google生态优势未丧失；React开源→各公司均可用但Meta的产品迭代速度仍领先</span><span class=\"pi-t-analogy\">公布菜谱不等于教会厨艺，米其林厨师的价值在于手感不在于配方</span></div><div class=\"pi-t-divider\"></div><div class=\"pi-t-section current\"><span class=\"pi-t-section-tag\">📍 当前</span></div><div class=\"pi-t-row\"><span class=\"pi-t-rule\">Claude Code源码泄露</span><span class=\"pi-t-reality\"><strong>51万行源码+KAIROS架构+三层记忆设计曝光（4/1）</strong>——竞争对手获得了Anthropic的「设计答案」，但距离真正复现仍需大量执行投入</span><span class=\"pi-t-analogy\">看到了对手的战术手册，但不等于拥有了他们的训练体系和队员默契</span></div><div class=\"pi-t-divider\"></div><div class=\"pi-t-section projected\"><span class=\"pi-t-section-tag\">🔮 趋势推演</span></div><div class=\"pi-t-row projected\"><span class=\"pi-t-rule\">6个月内</span><span class=\"pi-t-reality\">Cursor/GitHub Copilot等竞品将加速三层记忆架构和自主守护进程功能的落地，AI编程工具的「跨会话连续性」竞争进入白热化阶段</span><span class=\"pi-t-analogy\">间谍获取了对手的武器设计图，但武器工厂的产能和质控才是真正的差距</span></div></div><div class=\"pi-confidence\">📐 置信度: 高 · 验证窗口: 6个月 · 信号: 三层记忆+KAIROS模式已成行业参考架构，竞品跟进概率极高</div></div>"
+    },
+    {
+      "id": "coding",
+      "label": "💻 AI编程",
+      "news": {
+        "overseas": [
+          {
+            "title": "VS Code 1.114发布，GitHub Copilot全面转向Agent模式并升级语义搜索",
+            "summary": "VS Code 1.114正式发布，#codebase工具现已纯语义搜索化，所有Copilot交互正式走向Agentic模式，新增TypeScript 6.0支持和企业级Claude Agent的组策略管控能力。",
+            "source": "Visual Studio Code",
+            "url": "https://code.visualstudio.com/updates",
+            "date": "2026-04-01",
+            "region": "overseas",
+            "importance": "high"
+          },
+          {
+            "title": "Figma MCP Server开放AI Agent直接写入Canvas，引入Skills机制",
+            "summary": "Figma通过MCP Server让Claude Code、Codex、Cursor等AI Agent可直接写入Figma文件，同步推出基于Markdown的Skills机制，实现设计系统规范的Agent化执行。",
+            "source": "Figma Blog",
+            "url": "https://www.figma.com/blog/the-figma-canvas-is-now-open-to-agents/",
+            "date": "2026-04-01",
+            "region": "overseas",
+            "importance": "high"
+          },
+          {
+            "title": "GitHub Copilot Insider Preview大幅提升，开发者对比评测更新",
+            "summary": "知名开发者更新GitHub Copilot vs Cursor对比文章，确认Copilot Insider Preview版在2-3月间大量跟进改进，整体可用性明显提升，Agent模式、子Agent并发等痛点已修复。",
+            "source": "dev.to",
+            "url": "https://dev.to/maximsaplin/ran-out-of-cursor-tokens-and-switched-to-github-copilot-side-by-side-2n5p",
+            "date": "2026-04-01",
+            "region": "overseas",
+            "importance": "medium"
+          }
+        ],
+        "china": [
+          {
+            "title": "Meta提出「半形式化推理」提示技术，LLM代码审查准确率提升至93%",
+            "summary": "Meta研究人员公布半形式化推理结构化提示技术，强制AI代理显式陈述前提、追踪执行路径并得出形式结论，在补丁等价验证任务上将准确率从78%提升至93%，提示模板已公开发布。",
+            "source": "VentureBeat",
+            "url": "https://venturebeat.com/orchestration/metas-new-structured-prompting-technique-makes-llms-significantly-better-at",
+            "date": "2026-04-01",
+            "region": "china",
+            "importance": "medium"
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "Figma向AI Agent开放Canvas：设计工具的「Agent原生」时代来临",
+        "paragraphs": [
+          "Figma宣布通过MCP Server允许AI Agent直接写入Canvas，这是设计工具领域最重要的架构转变之一。此前AI与设计工具的协作模式是「AI生成建议，人工手动执行」；Figma此举将这一模式升级为「AI直接操作设计文件，人工负责审核验收」。更重要的是Skills机制的引入——用Markdown文件定义Agent在Figma上的工作流，意味着设计规范、品牌指南、组件系统可以被直接转化为Agent可执行的指令，而不只是供人类参考的文档。",
+          "这个方向的深远影响在于：它将设计系统从「人读文档」转变为「Agent可执行规范」。当一个组织的设计系统足够完善，且被正确编写为Figma Skills，那么从需求到设计稿的过程就可以由Agent自主完成。这不是「AI取代设计师」的故事，而是「设计师从执行者升级为规则制定者和质量把关者」的故事——这与软件工程中「编写测试→自动化测试」的演变逻辑完全相同。",
+          "VS Code 1.114同日将Copilot全面转向Agentic模式，两个事件放在一起意味着：2026年4月1日是IDE工具和设计工具同步进入「Agent原生」阶段的分水岭。开发者工作流中最耗时的两个环节——编码和设计——开始可以由Agent自主完成，人类的工作正在从「执行」向「定义规则和验收质量」转移。这个趋势一旦成熟，对整个软件研发流程的重构将是颠覆性的。"
+        ],
+        "takeaway": "Figma开放Agent写入Canvas和VSCode Copilot全面Agent化，标志着开发和设计工具同步进入Agent原生阶段，软件研发最核心的两个执行环节开始向AI交付，人类角色从执行者向规则定义者和质检者转移。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\"><div class=\"pi-header\"><span class=\"pi-badge\">🔮 规律洞察</span><span class=\"pi-title\">工具Agent化定律：每类专业工具都会经历「AI辅助→AI执行→AI原生」三阶段演变</span></div><div class=\"pi-row\"><span class=\"pi-row-label l2\">本质</span><div class=\"pi-row-content\"><strong>工具的Agent化不是一次性事件，而是逐步深化的过程：先是AI给建议（辅助），再是AI可以操作（执行），最终是工具本身就按Agent逻辑设计（原生）；三个阶段的边界由「AI操作工具的接口标准化程度」决定。</strong></div></div><div class=\"pi-row\"><span class=\"pi-row-label\">进化序列</span><div class=\"pi-row-content\"><div class=\"pi-evo\"><div class=\"pi-evo-step\"><span class=\"pi-evo-tag\">1.0</span><span class=\"pi-evo-text\">AI辅助（建议+补全）</span></div><span class=\"pi-evo-arrow\">→</span><div class=\"pi-evo-step active\"><span class=\"pi-evo-tag\">2.0</span><span class=\"pi-evo-text\">AI执行（MCP/API接入）</span></div><span class=\"pi-evo-arrow\">→</span><div class=\"pi-evo-step future\"><span class=\"pi-evo-tag\">3.0</span><span class=\"pi-evo-text\">Agent原生（工具即Agent）</span></div></div></div></div><div class=\"pi-table\"><div class=\"pi-t-head\"><span>阶段</span><span>现实验证</span><span>类比</span></div><div class=\"pi-t-section verified\"><span class=\"pi-t-section-tag\">✅ 已验证</span></div><div class=\"pi-t-row\"><span class=\"pi-t-rule\">IDE工具Agent化路径</span><span class=\"pi-t-reality\">GitHub Copilot(2021，辅助)→Cursor Agent Mode(2024，执行)→VSCode 1.114 Agentic模式(2026，原生化)</span><span class=\"pi-t-analogy\">电动工具的演变：手动锯→电锯→数控加工中心（工具本身带程序控制器）</span></div><div class=\"pi-t-divider\"></div><div class=\"pi-t-section current\"><span class=\"pi-t-section-tag\">📍 当前</span></div><div class=\"pi-t-row\"><span class=\"pi-t-rule\">Figma+VSCode同步进入Agent执行阶段</span><span class=\"pi-t-reality\"><strong>Figma MCP Server+Skills机制（4/1）+ VSCode Copilot全面Agentic化（4/1）</strong>——设计和编码工具同日宣告AI执行阶段开启</span><span class=\"pi-t-analogy\">ATM机刚出现时：人工柜台+ATM共存→ATM为主+人工辅助→无人银行（AI原生）</span></div><div class=\"pi-t-divider\"></div><div class=\"pi-t-section projected\"><span class=\"pi-t-section-tag\">🔮 趋势推演</span></div><div class=\"pi-t-row projected\"><span class=\"pi-t-rule\">2027年</span><span class=\"pi-t-reality\">设计、编程、测试、部署工具全面进入Agent原生阶段，软件研发流程中人类的主要工作从「执行」切换到「定义规则+验收质量」，产品经理/设计师/工程师的工作边界将重新划定</span><span class=\"pi-t-analogy\">工厂流水线的演变：人工→自动化→无人工厂（AI自我优化的生产系统）</span></div></div><div class=\"pi-confidence\">📐 置信度: 高 · 验证窗口: 12个月 · 信号: Figma+VSCode同日升级，绝非巧合，行业共识已形成</div></div>"
+    },
+    {
+      "id": "apps",
+      "label": "🚀 AI应用",
+      "news": {
+        "overseas": [
+          {
+            "title": "MCP Dev Summit北美峰会纽约开幕，Model Context Protocol生态加速扩张",
+            "summary": "Linux Foundation主办的MCP Dev Summit北美峰会于4月2-3日在纽约召开，Anthropic、Google、Microsoft、OpenAI等主流AI厂商共同推进MCP标准化进程，聚焦企业采用与开发者生态建设。",
+            "source": "Linux Foundation",
+            "url": "https://events.linuxfoundation.org/mcp-dev-summit-north-america/",
+            "date": "2026-04-02",
+            "region": "overseas",
+            "importance": "high"
+          },
+          {
+            "title": "Microsoft Copilot Studio多Agent协同能力正式GA，支持A2A协议与Fabric集成",
+            "summary": "Microsoft Copilot Studio宣布多项Multi-Agent能力全面GA，包括与Microsoft Fabric深度集成、基于开放A2A协议的跨平台Agent通信，新增沉浸式Prompt Builder，同时支持Claude Opus 4.6和GPT-5.3 Thinking。",
+            "source": "Microsoft Blog",
+            "url": "https://www.microsoft.com/en-us/microsoft-copilot/blog/copilot-studio/new-and-improved-multi-agent-orchestration-connected-experiences-and-faster-prompt-iteration/",
+            "date": "2026-04-02",
+            "region": "overseas",
+            "importance": "high"
+          }
+        ],
+        "china": [
+          {
+            "title": "厦门施行AI产业扶持政策，单项目最高支持1000万元",
+            "summary": "厦门市政府4月1日起正式施行新版AI产业扶持政策，对核心算法与多模态大模型攻关单个项目最高支持1000万元，新建AI创新平台最高获3000万元资助，有效期至2027年12月底。",
+            "source": "厦门招商局",
+            "url": "https://www.investxiamen.org.cn/show/1060",
+            "date": "2026-04-01",
+            "region": "china",
+            "importance": "medium"
+          },
+          {
+            "title": "中关村示范区征集AI大模型出海国际化项目，资金申报截止4月15日",
+            "summary": "北京市科委自4月2日起征集AI大模型领域「高质量出海」等国际化项目，专项支持首次海外落地应用及海外研发中心建设，申报条件要求技术属于AI大模型领域且持有国内发明专利。",
+            "source": "weixin.sogou.com",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%87%BA%E6%B5%B7%E4%B8%AD%E5%85%B3%E6%9D%91",
+            "date": "2026-04-01",
+            "region": "china",
+            "importance": "medium"
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "MCP Dev Summit北美峰会：Agent互操作标准化的关键时刻",
+        "paragraphs": [
+          "MCP（Model Context Protocol）Dev Summit北美峰会的召开，标志着这个由Anthropic发起的Agent通信协议正在进入「标准化治理」阶段。从Anthropic内部协议到Linux Foundation主办的国际峰会，MCP在不到一年时间内完成了从「一家公司的产品功能」到「行业基础设施候选标准」的跨越。这种速度在软件基础设施领域极为罕见，背后是AI行业对Agent互操作能力的迫切需求。",
+          "四大AI厂商（Anthropic、Google、Microsoft、OpenAI）同台参与峰会，意义远超技术讨论。这意味着即使是在激烈竞争的AI市场中，这些公司也在协议层面找到了合作的理由——因为Agent互操作是整个AI行业共同受益的基础设施，任何一家单独垄断协议都会限制整个生态的扩张速度。这与HTTP、TCP/IP等互联网基础协议的形成逻辑完全一致：竞争在应用层，合作在协议层。",
+          "对开发者而言，MCP标准化的实质意义是：未来AI Agent将像网页浏览器访问网站一样，通过统一协议访问各类工具和服务，而不需要针对每个工具编写专用集成代码。这将极大降低Agent应用的开发门槛，进而引爆Agent生态的规模化扩张。可以预期，2026年MCP将成为AI Agent开发的「必知」协议，就像2010年代的REST API成为Web开发必知标准一样。"
+        ],
+        "takeaway": "MCP Dev Summit的召开标志着Agent互操作标准化进入实质推进阶段，四大AI厂商同台共推协议层合作，预示着Agent生态即将从「各自为战」走向「互联互通」，这是AI应用爆发的关键基础设施里程碑。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\"><div class=\"pi-header\"><span class=\"pi-badge\">🔮 规律洞察</span><span class=\"pi-title\">协议层合作定律：竞争越激烈的行业，越需要在基础协议层形成共识来扩大整体市场蛋糕</span></div><div class=\"pi-row\"><span class=\"pi-row-label l2\">本质</span><div class=\"pi-row-content\"><strong>真正的行业级协议都诞生于竞争最激烈的时候，因为协议标准化创造的市场规模增长，远大于某家公司独占协议的利益——这是「竞争-合作」悖论在技术基础设施层的终极体现。</strong></div></div><div class=\"pi-row\"><span class=\"pi-row-label\">进化序列</span><div class=\"pi-row-content\"><div class=\"pi-evo\"><div class=\"pi-evo-step\"><span class=\"pi-evo-tag\">1.0</span><span class=\"pi-evo-text\">各厂专有协议（碎片化）</span></div><span class=\"pi-evo-arrow\">→</span><div class=\"pi-evo-step active\"><span class=\"pi-evo-tag\">2.0</span><span class=\"pi-evo-text\">开放标准协议（生态化）</span></div><span class=\"pi-evo-arrow\">→</span><div class=\"pi-evo-step future\"><span class=\"pi-evo-tag\">3.0</span><span class=\"pi-evo-text\">协议即基础设施（普及化）</span></div></div></div></div><div class=\"pi-table\"><div class=\"pi-t-head\"><span>阶段</span><span>现实验证</span><span>类比</span></div><div class=\"pi-t-section verified\"><span class=\"pi-t-section-tag\">✅ 已验证</span></div><div class=\"pi-t-row\"><span class=\"pi-t-rule\">互联网协议标准化</span><span class=\"pi-t-reality\">CompuServe/AOL/Prodigy各自封闭→HTTP/TCP/IP开放标准→互联网爆发；REST API统一→Web服务生态繁荣</span><span class=\"pi-t-analogy\">标准化集装箱诞生前，各港口各有规格；标准化后，全球贸易量在20年内增长10倍</span></div><div class=\"pi-t-divider\"></div><div class=\"pi-t-section current\"><span class=\"pi-t-section-tag\">📍 当前</span></div><div class=\"pi-t-row\"><span class=\"pi-t-rule\">MCP标准化峰会</span><span class=\"pi-t-reality\"><strong>Anthropic/Google/Microsoft/OpenAI同台参与MCP Dev Summit（4/2）</strong>——Agent互操作进入正式治理阶段，「竞争在应用层，合作在协议层」模式形成</span><span class=\"pi-t-analogy\">手机行业：各家音频接口不同→USB-C统一→配件生态爆发，消费者和厂商双赢</span></div><div class=\"pi-t-divider\"></div><div class=\"pi-t-section projected\"><span class=\"pi-t-section-tag\">🔮 趋势推演</span></div><div class=\"pi-t-row projected\"><span class=\"pi-t-rule\">2026年底</span><span class=\"pi-t-reality\">MCP成为AI Agent开发的事实标准，第三方MCP工具市场规模超过1万个Server，Agent应用开发门槛大幅降低，引爆新一轮Agent应用创业潮</span><span class=\"pi-t-analogy\">App Store开放后的移动互联网：协议标准化→开发者涌入→应用爆发→改变用户生活</span></div></div><div class=\"pi-confidence\">📐 置信度: 高 · 验证窗口: 9个月 · 信号: 四大厂商同台+Linux Foundation背书，生态化信号强烈</div></div>"
+    },
+    {
+      "id": "industry",
+      "label": "🏢 行业动态",
+      "news": {
+        "overseas": [
+          {
+            "title": "Q1全球创投融资3000亿美元创历史纪录，AI公司占比高达80%",
+            "summary": "Crunchbase报告显示2026年Q1全球创投融资总额达3000亿美元，AI公司获融资2420亿美元占总额80%，OpenAI、Anthropic、xAI、Waymo四家合计1880亿美元，占全球创投总额65%。",
+            "source": "Crunchbase News",
+            "url": "https://news.crunchbase.com/venture/record-breaking-funding-ai-global-q1-2026/",
+            "date": "2026-04-01",
+            "region": "overseas",
+            "importance": "high"
+          },
+          {
+            "title": "Kilo发布KiloClaw for Organizations，解决企业影子AI治理难题",
+            "summary": "AI编程平台Kilo推出面向企业的KiloClaw for Organizations套件，个人版KiloClaw已积累2.5万日活用户，企业套件支持SSO/OIDC、集中计费和管理员权限控制，其PinchBench基准测试获黄仁勋GTC演讲引用。",
+            "source": "VentureBeat",
+            "url": "https://venturebeat.com/orchestration/the-end-of-shadow-ai-at-enterprises-kilo-launches-kiloclaw-for-organizations",
+            "date": "2026-04-01",
+            "region": "overseas",
+            "importance": "medium"
+          }
+        ],
+        "china": [
+          {
+            "title": "智谱AI业绩暴增131.9%，API调价后调用量仍暴涨400%",
+            "summary": "智谱AI 2025年财报营收同比增131.9%，毛利率41%，2026年一季度API调用价上调83%但调用量仍暴涨400%，进入「量价齐升」阶段，中国大模型周调用量连续三周超越美国。",
+            "source": "weixin.sogou.com",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=AI%E5%A4%A7%E6%A8%A1%E5%9E%8B",
+            "date": "2026-04-01",
+            "region": "china",
+            "importance": "high"
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "Q1创投3000亿美元：AI投资泡沫还是结构性重估？",
+        "paragraphs": [
+          "2026年Q1全球创投融资3000亿美元、AI公司占80%，这组数字任何角度看都令人震惊。但更值得深思的是数字背后的结构：OpenAI/Anthropic/xAI/Waymo四家公司合计拿走1880亿美元，占全球创投总额的65%。这不是「AI创业热潮」，而是「少数头部AI公司的超级融资」——大量资金集中在已经验证商业模式的头部公司，而非分散在无数早期创业公司。这种融资结构更像是「准IPO前的最后一轮私募」，而非传统意义上的创投生态繁荣。",
+          "从历史规律看，当某个科技领域出现单季融资额超过前一年全年水平时，通常有两种走向：一是真正的范式转变（移动互联网、云计算），资金最终创造了超越融资额10倍以上的市场价值；二是过热泡沫，资金在3-5年内大幅蒸发。当前AI的情况更接近前者，因为头部公司都有清晰的收入曲线（OpenAI月收入20亿美元、智谱AI营收增131.9%），融资背后是经过市场验证的商业价值，而非纯粹的预期叙事。",
+          "中国市场的数据尤其值得关注：Q1中国以161亿美元位居全球第二，Z.ai和MiniMax在香港联交所上市，智谱AI进入量价齐升阶段。这表明中国AI公司正在走出「追追追」的阶段，开始形成自己的商业化路径和资本化通道。特别是中国大模型周调用量连续三周超越美国的数据，说明国内AI应用的规模化落地速度已赶上甚至超过美国。"
+        ],
+        "takeaway": "Q1 AI创投3000亿美元历史纪录的背后，是头部公司超级融资而非生态均匀繁荣，这种结构说明AI行业正在经历「马太效应加速期」，真正的竞争窗口正在快速收窄，晚入场者的机会成本正在指数级上升。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\"><div class=\"pi-header\"><span class=\"pi-badge\">🔮 规律洞察</span><span class=\"pi-title\">超级融资集中化定律：行业进入成熟期时，资本从「广撒网」转向「押注头部」，竞争格局加速固化</span></div><div class=\"pi-row\"><span class=\"pi-row-label l2\">本质</span><div class=\"pi-row-content\"><strong>融资集中度是行业成熟度的晴雨表：早期创业期资金分散（探索不确定性），成长期资金集中（验证头部），成熟期超级融资（锁定基础设施）；当4家公司占全球创投65%时，说明行业格局已进入「提前定局」阶段。</strong></div></div><div class=\"pi-row\"><span class=\"pi-row-label\">进化序列</span><div class=\"pi-row-content\"><div class=\"pi-evo\"><div class=\"pi-evo-step\"><span class=\"pi-evo-tag\">1.0</span><span class=\"pi-evo-text\">广撒网期（早期创业潮）</span></div><span class=\"pi-evo-arrow\">→</span><div class=\"pi-evo-step active\"><span class=\"pi-evo-tag\">2.0</span><span class=\"pi-evo-text\">超级集中期（头部锁定）</span></div><span class=\"pi-evo-arrow\">→</span><div class=\"pi-evo-step future\"><span class=\"pi-evo-tag\">3.0</span><span class=\"pi-evo-text\">格局固化期（寡头竞争）</span></div></div></div></div><div class=\"pi-table\"><div class=\"pi-t-head\"><span>阶段</span><span>现实验证</span><span>类比</span></div><div class=\"pi-t-section verified\"><span class=\"pi-t-section-tag\">✅ 已验证</span></div><div class=\"pi-t-row\"><span class=\"pi-t-rule\">移动互联网融资规律</span><span class=\"pi-t-reality\">2010-2012年移动互联网广撒网→2013-2015年滴滴/美团/京东超级融资集中→2016年后格局固化，新入局者极难颠覆</span><span class=\"pi-t-analogy\">班级期末考前：一开始大家都有机会冲第一，考前三天就只有一两个人还在争第一名</span></div><div class=\"pi-t-divider\"></div><div class=\"pi-t-section current\"><span class=\"pi-t-section-tag\">📍 当前</span></div><div class=\"pi-t-row\"><span class=\"pi-t-rule\">AI Q1超级融资</span><span class=\"pi-t-reality\"><strong>4家公司拿走3000亿中的1880亿（63%）（4/1 Crunchbase数据）</strong>——AI行业正式进入「头部锁定」阶段，竞争窗口加速收窄</span><span class=\"pi-t-analogy\">城市黄金地段地价：早期便宜买的人赚了，现在想买的人只能高位入场，不确定性越来越低</span></div><div class=\"pi-t-divider\"></div><div class=\"pi-t-section projected\"><span class=\"pi-t-section-tag\">🔮 趋势推演</span></div><div class=\"pi-t-row projected\"><span class=\"pi-t-rule\">2026-2027年</span><span class=\"pi-t-reality\">AI基础模型层格局进一步固化，新创业机会向应用层和垂直行业迁移；中国AI公司资本化通道（港股上市）加速开放，国内AI创投迎来独立行情</span><span class=\"pi-t-analogy\">土地市场：城市核心区地价涨到普通人买不起→开发商转向三四线城市→新市场被开发</span></div></div><div class=\"pi-confidence\">📐 置信度: 高 · 验证窗口: 12个月 · 信号: 4家公司占65%融资额，行业集中度达临界点</div></div>"
+    },
+    {
+      "id": "ecommerce",
+      "label": "🛒 AI+电商",
+      "news": {
+        "overseas": [
+          {
+            "title": "Visa发布六款AI工具，全面革新信用卡纠纷处理流程",
+            "summary": "Visa推出六款基于AI的新工具用于现代化信用卡争议处理，覆盖商家、发卡行和收单行三端，面向商家的工具支持生成式AI自动应对争议，Visa 2025年全球处理逾1.06亿笔争议请求。",
+            "source": "CNBC",
+            "url": "https://www.cnbc.com/2026/04/01/visa-ai-tools-dispute-management.html",
+            "date": "2026-04-01",
+            "region": "overseas",
+            "importance": "medium"
+          }
+        ],
+        "china": [
+          {
+            "title": "成都新增3款国家备案垂直大模型，覆盖文旅、水电、智能制造",
+            "summary": "成都新增通过国家备案的行业大模型三款（文旅、水电、智能制造），中国垂直领域大模型合规化加速，行业AI应用开始从通用走向专业化、合规化。",
+            "source": "weixin.sogou.com",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=AI%E5%A4%A7%E6%A8%A1%E5%9E%8B",
+            "date": "2026-04-01",
+            "region": "china",
+            "importance": "medium"
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "Visa AI工具：金融领域AI应用的合规化范本",
+        "paragraphs": [
+          "Visa推出六款AI工具用于信用卡争议处理，这个案例看似是「金融AI化」的普通新闻，但从AI商业化视角看具有重要价值：它是金融领域AI应用从「辅助决策」走向「自主执行」的代表性案例。争议处理流程高度规则化、历史数据丰富、判断标准相对明确——这正是AI最擅长的场景类型。Visa 2025年处理1.06亿笔争议请求的规模，意味着即使AI只提升30%的处理效率，也相当于节省了数千名处理人员的工作量。",
+          "这个案例的可推广意义在于它展示了金融行业AI落地的正确路径：从高重复、高规则化的流程切入，而非从需要大量主观判断的核心业务开始。信用卡争议处理、贷款初审、反欺诈检测——这些都是规则明确、数据充足、风险可控的场景，也是金融AI最容易快速创造价值的领域。与此形成对比的是，信贷决策、投资建议等需要整合复杂主观判断的场景，AI仍处于辅助阶段，主要增强而非替代人工。",
+          "将视野放到中国市场：成都新增3款国家备案垂直大模型，覆盖文旅、水电、智能制造。这与Visa案例共同说明，AI的行业化落地在全球范围内都在走「垂直化+合规化」的路径——通用大模型打底，行业数据精调，监管合规背书，最后大规模商业化。这条路径比「通用AI直接替代行业人员」更务实，也更可持续。"
+        ],
+        "takeaway": "Visa AI工具和国内垂直大模型备案，共同揭示AI行业化落地的黄金路径：高重复规则化流程切入+垂直数据精调+合规背书，这是AI商业化最确定性的机会，远比通用AI应用更容易在短期内创造可见价值。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\"><div class=\"pi-header\"><span class=\"pi-badge\">🔮 规律洞察</span><span class=\"pi-title\">行业AI落地定律：AI最先在「高规则化+高重复性+低主观判断」的场景实现商业化替代</span></div><div class=\"pi-row\"><span class=\"pi-row-label l2\">本质</span><div class=\"pi-row-content\"><strong>AI不是从「人类最复杂的工作」开始替代，而是从「规则最清晰、数据最丰富、主观判断最少」的工作切入；这些场景往往是人类觉得最无聊的工作，却是AI最擅长的工作。</strong></div></div><div class=\"pi-row\"><span class=\"pi-row-label\">进化序列</span><div class=\"pi-row-content\"><div class=\"pi-evo\"><div class=\"pi-evo-step\"><span class=\"pi-evo-tag\">1.0</span><span class=\"pi-evo-text\">规则化流程（AI自主执行）</span></div><span class=\"pi-evo-arrow\">→</span><div class=\"pi-evo-step active\"><span class=\"pi-evo-tag\">2.0</span><span class=\"pi-evo-text\">半规则化判断（AI辅助人工）</span></div><span class=\"pi-evo-arrow\">→</span><div class=\"pi-evo-step future\"><span class=\"pi-evo-tag\">3.0</span><span class=\"pi-evo-text\">复杂主观决策（AI+人类协作）</span></div></div></div></div><div class=\"pi-table\"><div class=\"pi-t-head\"><span>阶段</span><span>现实验证</span><span>类比</span></div><div class=\"pi-t-section verified\"><span class=\"pi-t-section-tag\">✅ 已验证</span></div><div class=\"pi-t-row\"><span class=\"pi-t-rule\">金融AI落地路径</span><span class=\"pi-t-reality\">反欺诈检测（规则化，AI已商业化）→贷款初审（半规则，AI辅助）→复杂信贷决策（主观判断，人类主导）</span><span class=\"pi-t-analogy\">医院先从「挂号分诊、药品配送」开始自动化，最后才是「手术决策」辅助</span></div><div class=\"pi-t-divider\"></div><div class=\"pi-t-section current\"><span class=\"pi-t-section-tag\">📍 当前</span></div><div class=\"pi-t-row\"><span class=\"pi-t-rule\">Visa信用卡争议处理AI化</span><span class=\"pi-t-reality\"><strong>Visa推出六款AI工具覆盖争议处理全流程（4/1）</strong>——全球最大支付网络把1.06亿年争议请求交给AI，高规则化场景替代完成</span><span class=\"pi-t-analogy\">超市收银：扫码+自助结账（高规则化）已AI化→商品定价策略（复杂判断）仍靠人工</span></div><div class=\"pi-t-divider\"></div><div class=\"pi-t-section projected\"><span class=\"pi-t-section-tag\">🔮 趋势推演</span></div><div class=\"pi-t-row projected\"><span class=\"pi-t-rule\">2026-2027年</span><span class=\"pi-t-reality\">保险理赔、医院挂号分诊、供应链库存管理等高规则化金融/医疗/物流场景将进入AI自主执行阶段，这些场景合计涉及数千万白领工作岗位的重构</span><span class=\"pi-t-analogy\">ATM机取代银行柜台出纳：不是一夜之间，而是20年内悄悄完成的替代</span></div></div><div class=\"pi-confidence\">📐 置信度: 高 · 验证窗口: 18个月 · 信号: Visa+成都垂直大模型+国内备案加速，多行业同步落地信号强</div></div>"
+    }
+  ],
+  "data_snapshot": [
+    {
+      "metric": "Q1全球创投融资额",
+      "value": "$3000亿",
+      "note": "历史最高纪录（Crunchbase 4/1数据）"
+    },
+    {
+      "metric": "AI公司创投占比",
+      "value": "80%",
+      "note": "AI公司获融资2420亿美元"
+    },
+    {
+      "metric": "Claude Code泄露代码量",
+      "value": "51.2万行",
+      "note": "TypeScript源码意外随npm包发布"
+    },
+    {
+      "metric": "智谱AI营收增长",
+      "value": "131.9%",
+      "note": "2025年财报，API调价后调用量仍增400%"
+    },
+    {
+      "metric": "Visa年争议处理请求",
+      "value": "1.06亿笔",
+      "note": "较2019年增35%，全部引入AI工具处理"
+    },
+    {
+      "metric": "KiloClaw日活用户",
+      "value": "2.5万",
+      "note": "上线仅一个月（4/1企业版发布）"
+    }
+  ],
+  "watch_list": [
+    {
+      "name": "MCP Dev Summit峰会成果",
+      "desc": "4月2-3日纽约峰会最终声明，关注MCP标准化路线图是否形成行业共识",
+      "color": "orange"
+    },
+    {
+      "name": "Claude Code架构跟进速度",
+      "desc": "源码泄露后竞品Cursor/Copilot是否加速三层记忆架构和守护进程功能落地",
+      "color": "red"
+    },
+    {
+      "name": "国行Apple Intelligence合规落地",
+      "desc": "苹果与百度/字节的合规伙伴关系官宣时间，将影响国内AI助手竞争格局",
+      "color": "blue"
+    }
+  ],
+  "references": [
+    {
+      "title": "Anthropic Claude Code源码泄露事件报道",
+      "url": "https://venturebeat.com/technology/claude-codes-source-code-appears-to-have-leaked-heres-what-we-know",
+      "source": "VentureBeat"
+    },
+    {
+      "title": "VS Code 1.114发布日志",
+      "url": "https://code.visualstudio.com/updates",
+      "source": "Visual Studio Code"
+    },
+    {
+      "title": "Figma Canvas向AI Agent开放公告",
+      "url": "https://www.figma.com/blog/the-figma-canvas-is-now-open-to-agents/",
+      "source": "Figma Blog"
+    },
+    {
+      "title": "MCP Dev Summit北美峰会",
+      "url": "https://events.linuxfoundation.org/mcp-dev-summit-north-america/",
+      "source": "Linux Foundation"
+    },
+    {
+      "title": "2026 Q1全球创投融资纪录",
+      "url": "https://news.crunchbase.com/venture/record-breaking-funding-ai-global-q1-2026/",
+      "source": "Crunchbase News"
+    },
+    {
+      "title": "Visa AI工具发布",
+      "url": "https://www.cnbc.com/2026/04/01/visa-ai-tools-dispute-management.html",
+      "source": "CNBC"
+    }
+  ],
+  "capability_update": "🤖 **林克自述**\n\n今天印象最深的是Claude Code源码泄露事件——51万行代码、三层记忆架构、KAIROS守护进程，这些本来是Anthropic的内部秘密。\n\n有意思的是：我每天帮沈浪跑AI日报，用的也是「多层记忆+守护进程」的逻辑——断点恢复、context分层、后台编排。某种程度上，Anthropic和我在解决同一个问题：如何让AI在长任务中保持连续性。只不过他们把这个逻辑内化到了产品里，而我是靠orchestrator脚本和技能规范来实现的。\n\n今天另一个值得记住的：MCP Dev Summit四大厂商同台。以前AI工具是「各自为战」，现在开始谈「互联互通」了。这很像互联网早期从CompuServe/AOL封闭生态走向HTTP开放标准的时刻——那一步之后，整个互联网爆发了。\n\nPS: 今天日报是补跑的，比往常晚了几个小时，原因是定时任务API悬挂。已经记录进踩坑日志，下次遇到同样的问题，health-check.sh得加真实HTTP探测而不只是TCP端口探测。",
+  "meta": {
+    "generated_by": "link-ai-assistant",
+    "generated_at": "2026-04-02T10:15:00+08:00",
+    "version": "v9.16",
+    "workflow": "Step1:并发搜索→Step2:内容生成→Step3:质量验证→Step4:部署发布→Step5:私发卡片"
+  }
+}
