@@ -2,7 +2,12 @@
 """
 AI日报 KIM 推送脚本 (通用版，持续迭代)
 =====================================
-将 AI 日报推送到指定的2个目标群（CF项目群 + 研发效能中心全员群）
+AI 日报私发给 shenlang（--preview 模式，不发群）
+
+规范：
+- AI 日报统一走私发（--preview），禁止默认群发
+- 不支持手写KIM卡片，必须调用本脚本
+- 2026-04-02 修复：默认行为改为 --preview（私发），原群发行为被废弃
 
 功能特性:
 - 卡片格式持续迭代（热度趋势 + 五大板块 × 动态/深度聚焦）
@@ -11,12 +16,12 @@ AI日报 KIM 推送脚本 (通用版，持续迭代)
 - 支持从JSON文件读取数据（优先）或从MD文件解析（兜底）
 - P0安全规则：42900限流不自动重试（可能已投递，重试会导致重复消息）
 - 间隔控制：群间2.5秒间隔
-- 推送范围：仅发2个目标群（DAILY_TARGET_GROUPS），周报发所有群
+- 推送范围：私发 shenlang（--preview，日报规范）；周报才群发所有群
 
 使用方式:
-  python scripts/send_ai_daily.py                    # 推送今天的日报到目标群
-  python scripts/send_ai_daily.py 2026-03-10         # 推送指定日期的日报
-  python scripts/send_ai_daily.py --preview          # 先发给自己预览
+  python scripts/send_ai_daily.py                    # 私发给 shenlang（等同 --preview）
+  python scripts/send_ai_daily.py 2026-03-10         # 指定日期私发给 shenlang
+  python scripts/send_ai_daily.py --preview          # 私发给自己（推荐，明确语义）
   python scripts/send_ai_daily.py --dry-run          # 试运行，不实际发送
 
 作者: 林克 (沈浪的AI分身)
@@ -493,9 +498,8 @@ async def main():
         date_str = datetime.now().strftime("%Y-%m-%d")
     
     print(f"🚀 AI 日报推送 - {date_str}")
-    if args.preview:
-        print("📱 [预览模式] 发送给 shenlang")
-    elif args.dry_run:
+    print("📱 私发给 shenlang（日报统一私发规范）")
+    if args.dry_run:
         print("🔍 [DRY-RUN 模式]")
     print("=" * 50)
     
@@ -534,62 +538,17 @@ async def main():
         print(f"❌ Token 获取失败: {e}")
         return
     
-    # 4. 发送
-    if args.preview:
-        # 预览模式：发给自己
-        print("\n📤 发送预览...")
-        success = await send_to_target(
-            token, card, "user", "shenlang", "shenlang (预览)", args.dry_run
-        )
-        if success:
-            print("✅ 预览发送成功！请查看KIM消息")
-        else:
-            print("❌ 预览发送失败")
+    # 4. 发送（2026-04-02 规范修复：默认统一私发给 shenlang，禁止群发）
+    # AI 日报走私发（--preview 语义），周报才群发
+    print("\n📤 私发给 shenlang...")
+    success = await send_to_target(
+        token, card, "user", "shenlang", "shenlang", args.dry_run
+    )
+    if success:
+        print("✅ 私发成功！请查看KIM消息")
     else:
-        # 群发模式（日报仅发指定2个群）
-        print("📋 获取群列表...")
-        all_groups = await get_bot_groups(token)
-        if not all_groups:
-            print("⚠️ 未找到任何群")
-            return
-        
-        # 日报只发目标群
-        groups = [g for g in all_groups if g["groupId"] in DAILY_TARGET_GROUPS]
-        if not groups:
-            print("⚠️ 未找到目标群（CF + 研发效能中心）")
-            return
-        
-        print(f"✅ 林克所在群数量: {len(all_groups)}，日报目标群: {len(groups)}")
-        for g in groups:
-            print(f"   → {g['groupName']} ({g['groupId']})")
-        
-        print("\n📤 开始推送...")
-        success_count = 0
-        fail_count = 0
-        
-        for i, group in enumerate(groups):
-            group_id = group["groupId"]
-            group_name = group["groupName"]
-            
-            print(f"[{i+1}/{len(groups)}] 发送到: {group_name}")
-            
-            success = await send_to_target(
-                token, card, "group", group_id, group_name, args.dry_run
-            )
-            
-            if success:
-                print(f"   ✅ 发送成功")
-                success_count += 1
-            else:
-                fail_count += 1
-            
-            # 群间间隔
-            if i < len(groups) - 1 and not args.dry_run:
-                await asyncio.sleep(SEND_INTERVAL)
-        
-        print("\n" + "=" * 50)
-        print(f"📊 推送完成！成功: {success_count}，失败: {fail_count}")
-    
+        print("❌ 私发失败")
+
     # 显示日报链接
     month_str = date_str[:7]
     print(f"📄 查看日报: {REPORT_BASE_URL}/{month_str}/{date_str}.html")
