@@ -140,6 +140,9 @@ def clean_stale_files() -> int:
 
 
 EXPECTED_REMOTE = "github.com/my-ai-research-lab/ai-insight-public"
+MIRROR_REMOTE_NAME = "mirror"  # xiaoxiong20260206/ai-insight-public
+MIRROR_REMOTE_URL = "https://github.com/xiaoxiong20260206/ai-insight-public.git"
+MIRROR_EXPECTED = "github.com/xiaoxiong20260206/ai-insight-public"
 
 
 def git_push() -> bool:
@@ -228,7 +231,11 @@ def git_push() -> bool:
             check=True, capture_output=True
         )
         print("✅ 已推送到 my-ai-research-lab/ai-insight-public")
-        
+
+        # ⭐ v2.4新增：同步推送到 mirror 仓库（xiaoxiong20260206/ai-insight-public）
+        # 保持双仓库内容一致，xiaoxiong20260206.github.io/ai-insight-public/ 同步更新
+        _push_to_mirror()
+
         return True
         
     except subprocess.CalledProcessError as e:
@@ -239,6 +246,44 @@ def git_push() -> bool:
         return False
     finally:
         os.chdir(PROJECT_ROOT)
+
+
+def _push_to_mirror() -> None:
+    """
+    将当前提交同步推送到 mirror remote（xiaoxiong20260206/ai-insight-public）
+    v2.4新增：保持双仓库内容一致，失败只 WARN 不阻断主流程
+    """
+    try:
+        # 检查 mirror remote 是否已配置
+        check = subprocess.run(
+            ["git", "remote", "get-url", MIRROR_REMOTE_NAME],
+            capture_output=True, text=True
+        )
+        if check.returncode != 0:
+            # mirror remote 不存在，自动添加
+            print(f"  ℹ️  mirror remote 不存在，自动添加: {MIRROR_REMOTE_URL}")
+            subprocess.run(
+                ["git", "remote", "add", MIRROR_REMOTE_NAME, MIRROR_REMOTE_URL],
+                check=True, capture_output=True
+            )
+        else:
+            actual = check.stdout.strip()
+            if MIRROR_EXPECTED not in actual:
+                print(f"  ⚠️  [WARN] mirror remote 指向异常: {actual}，跳过镜像推送")
+                return
+
+        # 推送到 mirror
+        push_result = subprocess.run(
+            ["git", "push", MIRROR_REMOTE_NAME, "main"],
+            capture_output=True, text=True
+        )
+        if push_result.returncode == 0:
+            print("✅ 已同步推送到 xiaoxiong20260206/ai-insight-public (mirror)")
+        else:
+            stderr = push_result.stderr.strip()
+            print(f"  ⚠️  [WARN] mirror 推送失败（不影响主流程）: {stderr[:200]}")
+    except Exception as e:
+        print(f"  ⚠️  [WARN] mirror 推送异常（不影响主流程）: {e}")
 
 
 def main():
@@ -289,7 +334,8 @@ def main():
     print()
     print("=" * 50)
     print("📊 同步完成!")
-    print(f"🔗 外部版本: https://my-ai-research-lab.github.io/ai-insight-public/")
+    print(f"🔗 外部版本 (my-ai-research-lab): https://my-ai-research-lab.github.io/ai-insight-public/")
+    print(f"🔗 外部版本 (xiaoxiong20260206): https://xiaoxiong20260206.github.io/ai-insight-public/")
 
 
 if __name__ == "__main__":
