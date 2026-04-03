@@ -354,11 +354,15 @@ except subprocess.TimeoutExpired as e:
     fi
 fi
 
-# ===== 7. 同步外部版（如果被orchestrator调用则跳过，由orchestrator统一执行） =====
+# ===== 7. 同步外部版（ai-insight-public） =====
+# ⭐ 修复(2026-04-03经验): SKIP_GATE=1 不应跳过外部同步！
+# SKIP_GATE 仅用于绕过质量门，外部版同步始终需要执行。
+# 旧逻辑误将 SKIP_GATE=1 等同于"由orchestrator调用，跳过外部同步"，
+# 导致每次强制部署后 ai-insight-public 不更新。
 echo ""
 echo "📋 Step 6: 同步外部版（ai-insight-public）"
-if [ "${SKIP_GATE:-0}" = "1" ]; then
-    echo "  ⏭️ 由orchestrator调用，外部版同步由orchestrator负责，此处跳过（防双重同步）"
+if [ "${SKIP_EXTERNAL:-0}" = "1" ]; then
+    echo "  ⏭️ SKIP_EXTERNAL=1，跳过外部版同步（由调用方明确控制）"
 else
     echo "---"
     python3 scripts/sync_to_external.py --full --verify
