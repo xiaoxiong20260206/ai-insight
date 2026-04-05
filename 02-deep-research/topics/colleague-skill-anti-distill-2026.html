@@ -7,7 +7,10 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23533483'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='white'>⚗</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,400&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="dns-prefetch" href="https://INTERNAL_CDN">
+<!-- 精简字重：DM Sans 仅加载 400/700，Noto SC 仅加载 400，JetBrains 仅加载 400 -->
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,700;1,9..40,400&family=Noto+Sans+SC:wght@400&family=JetBrains+Mono:wght@400&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,700;1,9..40,400&family=Noto+Sans+SC:wght@400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet"></noscript>
 <style>
 /* ================================================
    DESIGN SYSTEM TOKENS — v4.3 (DM Sans + 叙事混合)
@@ -77,7 +80,8 @@ body {
     font-family: var(--font-family);
     background: var(--color-bg);
     background-image: var(--gradient-mesh);
-    background-attachment: fixed;
+    /* background-attachment:fixed 禁止 GPU 光栅化，改用伪元素固定背景 */
+    background-attachment: scroll;
     color: var(--color-text-primary);
     line-height: 1.6;
     overflow-x: hidden;
@@ -190,11 +194,15 @@ code {
    ================================================ */
 .nav-wrap {
     background: var(--glass-bg);
-    backdrop-filter: var(--glass-blur);
-    -webkit-backdrop-filter: var(--glass-blur);
+    /* 降低 blur 半径：24px→8px，减少 GPU 合成层开销 */
+    backdrop-filter: blur(8px) saturate(1.6);
+    -webkit-backdrop-filter: blur(8px) saturate(1.6);
     border-bottom: var(--glass-border);
     box-shadow: var(--glass-shadow);
     position: sticky; top: 0; z-index: 100;
+    /* 提升为合成层，避免滚动时重绘背景 */
+    will-change: transform;
+    transform: translateZ(0);
 }
 .nav-inner {
     max-width: var(--content-max-width);
@@ -297,6 +305,7 @@ code {
     transition: all var(--transition-normal);
 }
 .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.card { will-change: transform; }
 .card-h {
     font-size: 15px; font-weight: 700;
     color: var(--color-text-primary);
@@ -336,6 +345,7 @@ code {
 .sc.danger::before { background: var(--color-danger); }
 .sc.purple::before { background: var(--color-purple); }
 .sc:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.sc { will-change: transform; }
 .sc-num {
     font-size: 32px; font-weight: 800; line-height: 1.1;
     background: var(--gradient-success);
@@ -599,11 +609,13 @@ code {
 
 /* ── 动画入场 ── */
 .animate-on-scroll {
-    opacity:0; transform:translateY(20px);
-    transition: opacity 400ms cubic-bezier(0.4,0,0.2,1), transform 400ms cubic-bezier(0.34,1.56,0.64,1);
+    opacity:0; transform:translateY(16px);
+    /* 仅动画 opacity 和 transform，避免触发 layout/paint */
+    transition: opacity 350ms cubic-bezier(0.4,0,0.2,1), transform 350ms cubic-bezier(0.34,1.4,0.64,1);
+    will-change: opacity, transform;
 }
-.animate-on-scroll.visible { opacity:1; transform:translateY(0); }
-@media(prefers-reduced-motion:reduce){ .animate-on-scroll{ transition:none; opacity:1; transform:none; } }
+.animate-on-scroll.visible { opacity:1; transform:translateY(0); will-change: auto; }
+@media(prefers-reduced-motion:reduce){ .animate-on-scroll{ transition:none; opacity:1; transform:none; will-change:auto; } }
 </style>
 </head>
 <body>
@@ -660,7 +672,7 @@ code {
     </div>
 
     <div class="chapter-img animate-on-scroll">
-        <img src="https://INTERNAL_CDN/kc/files/a/design-ai/poify/d3e95b6ecb92faa035b0477da.jpg" alt="职场知识战争全景：同事炼化 vs 反蒸馏" loading="lazy" />
+        <img src="https://INTERNAL_CDN/kc/files/a/design-ai/poify/d3e95b6ecb92faa035b0477da.jpg" alt="职场知识战争全景：同事炼化 vs 反蒸馏" loading="lazy" width="940" height="529" decoding="async" />
         <div class="chapter-img-cap">章节配图：职场知识战争全景 — 矛（同事炼化）与盾（反蒸馏）的正面交锋</div>
     </div>
 
@@ -801,7 +813,7 @@ code {
     </div>
 
     <div class="chapter-img animate-on-scroll">
-        <img src="https://INTERNAL_CDN/kc/files/a/design-ai/poify/9b14999ec9d1f863fa02beef6.jpg" alt="七层蒸馏流水线：人→Skill" loading="lazy" />
+        <img src="https://INTERNAL_CDN/kc/files/a/design-ai/poify/9b14999ec9d1f863fa02beef6.jpg" alt="七层蒸馏流水线：人→Skill" loading="lazy" width="940" height="529" decoding="async" />
         <div class="chapter-img-cap">章节配图：七层蒸馏管道 — 把人的知识「Token化」为 AI 可调用的 Skill</div>
     </div>
 
@@ -1094,7 +1106,7 @@ code {
     </div>
 
     <div class="chapter-img animate-on-scroll">
-        <img src="https://INTERNAL_CDN/kc/files/a/design-ai/poify/d3e95b6ecb92faa035b0477db.jpg" alt="三大反蒸馏防御策略矩阵" loading="lazy" />
+        <img src="https://INTERNAL_CDN/kc/files/a/design-ai/poify/d3e95b6ecb92faa035b0477db.jpg" alt="三大反蒸馏防御策略矩阵" loading="lazy" width="940" height="529" decoding="async" />
         <div class="chapter-img-cap">章节配图：三大反制防御矩阵 — 情境嵌套、悖论驱动、身体化叙事</div>
     </div>
 
@@ -1339,7 +1351,7 @@ code {
     </div>
 
     <div class="chapter-img animate-on-scroll">
-        <img src="https://INTERNAL_CDN/kc/files/a/design-ai/poify/9b14999ec9d1f863fa02beef7.jpg" alt="知识流动性与依附性四象限矩阵" loading="lazy" />
+        <img src="https://INTERNAL_CDN/kc/files/a/design-ai/poify/9b14999ec9d1f863fa02beef7.jpg" alt="知识流动性与依附性四象限矩阵" loading="lazy" width="940" height="529" decoding="async" />
         <div class="chapter-img-cap">章节配图：知识流动性 × 依附性矩阵 — 护城河在哪里？</div>
     </div>
 
@@ -1512,7 +1524,7 @@ code {
     </div>
 
     <div class="chapter-img animate-on-scroll">
-        <img src="https://INTERNAL_CDN/kc/files/a/design-ai/poify/d3e95b6ecb92faa035b0477dc.jpg" alt="AI时代人类知识护城河：核心圆圈模型" loading="lazy" />
+        <img src="https://INTERNAL_CDN/kc/files/a/design-ai/poify/d3e95b6ecb92faa035b0477dc.jpg" alt="AI时代人类知识护城河：核心圆圈模型" loading="lazy" width="940" height="529" decoding="async" />
         <div class="chapter-img-cap">章节配图：人类知识的最后护城河 — 那10%，值得你今天开始培养</div>
     </div>
 
@@ -1702,22 +1714,30 @@ function switchTab(id, btn) {
     window.scrollTo({ top: pg.offsetTop - 60, behavior: 'smooth' });
 }
 
-// IntersectionObserver — 滚动入场（60ms 错开）
-function initAnimations() {
-    const items = document.querySelectorAll('.animate-on-scroll:not(.visible)');
-    if (!items.length) return;
-    const observer = new IntersectionObserver((entries) => {
-        let delay = 0;
+// IntersectionObserver — 滚动入场（共享单一 observer，避免每次 Tab 切换重建）
+let _animObserver = null;
+function getAnimObserver() {
+    if (_animObserver) return _animObserver;
+    let delay = 0; let delayTimer = null;
+    _animObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const el = entry.target;
-                setTimeout(() => el.classList.add('visible'), delay);
-                delay += 60;
-                observer.unobserve(el);
+                const d = delay;
+                delay += 50;
+                // 批量延迟后重置，避免无限累积
+                clearTimeout(delayTimer);
+                delayTimer = setTimeout(() => { delay = 0; }, 600);
+                setTimeout(() => { el.classList.add('visible'); }, d);
+                _animObserver.unobserve(el);
             }
         });
-    }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
-    items.forEach(el => observer.observe(el));
+    }, { threshold: 0.06, rootMargin: '0px 0px -20px 0px' });
+    return _animObserver;
+}
+function initAnimations() {
+    const obs = getAnimObserver();
+    document.querySelectorAll('.animate-on-scroll:not(.visible)').forEach(el => obs.observe(el));
 }
 
 // 进度条动画
@@ -1736,10 +1756,20 @@ function initProgressBars() {
     bars.forEach(bar => observer.observe(bar));
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+// 使用 requestIdleCallback 延迟非关键初始化，不阻塞首屏渲染
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', onReady);
+} else {
+    onReady();
+}
+function onReady() {
     initAnimations();
-    initProgressBars();
-});
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => initProgressBars(), { timeout: 2000 });
+    } else {
+        setTimeout(initProgressBars, 200);
+    }
+}
 </script>
 </body>
 </html>
