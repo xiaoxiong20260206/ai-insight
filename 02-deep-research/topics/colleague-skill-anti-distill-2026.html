@@ -102,16 +102,25 @@ code {
 .editorial-hero {
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 55%, #0f3460 100%);
     color: white;
-    padding: 72px 24px 56px;
+    padding: 72px 0 56px;
     text-align: center;
     position: relative;
     overflow: hidden;
+}
+.editorial-hero-inner {
+    max-width: var(--content-max-width);
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
 }
 .editorial-hero::before {
     content: '';
     position: absolute; inset: 0;
     background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='1' fill='%23ffffff08'/%3E%3C/svg%3E") repeat;
     pointer-events: none;
+    z-index: 0;
 }
 .editorial-hero::after {
     content: '';
@@ -121,6 +130,7 @@ code {
     top: -80px; right: -60px;
     border-radius: 50%;
     pointer-events: none;
+    z-index: 0;
 }
 .editorial-hero-badge {
     display: inline-block;
@@ -598,20 +608,22 @@ code {
 <body>
 <!-- ========================= HERO ========================= -->
 <div class="editorial-hero">
+<div class="editorial-hero-inner">
     <div class="editorial-hero-badge">⚗ AI Insight · 深度调研 · 2026-04-05</div>
-    <h1>当同事被「<span class="hl-amber">炼化</span>」成 Skill<br>
-        <span style="font-size:.6em;font-weight:600;color:rgba(255,255,255,.6);">——与「<span class="hl-red">反蒸馏（anti-distill）</span>」的正面交锋</span>
+    <h1>你的同事正在被「<span class="hl-amber">炼化</span>」成 AI Skill<br>
+        <span style="font-size:.6em;font-weight:600;color:rgba(255,255,255,.6);">——以及有人正在研究怎么让「<span class="hl-red">反蒸馏（anti-distill）</span>」把 AI 整破防</span>
     </h1>
-    <p class="subtitle">一场职场知识蒸馏战争的深度拆解：从 同事炼化（colleague-skill） 的技术原理，到 反蒸馏 的反制逻辑，再到它揭示的 AI 时代人类价值重构命题。</p>
+    <p class="subtitle">两个 GitHub 项目，一个试图把你的同事「Token 化」，另一个研究怎么让 AI 提炼失效。<br>这是一份严肃的深度报告，但我们加了点幽默，因为这件事实在太魔幻了。</p>
     <div class="editorial-hero-thesis">
-        核心命题：<span>知识提炼正在将人类专家「Token 化」，而反蒸馏的价值远超防御本身</span>
+        核心命题：<span>知识提炼正在将人类专家「Token 化」，而真正的价值在于那 AI 永远复制不了的 10%</span>
     </div>
     <div class="editorial-hero-meta">
         <span>📦 2 个 GitHub 项目</span>
-        <span>📊 深度技术分析</span>
-        <span>💡 5 个核心命题</span>
-        <span>🕐 约 14 分钟阅读</span>
+        <span>📊 1200+ Stars 的真实讨论</span>
+        <span>💡 5 个让你细思极恐的命题</span>
+        <span>🕐 约 14 分钟读完（喝杯咖啡刚好）</span>
     </div>
+</div>
 </div>
 
 <!-- ========================= NAV ========================= -->
@@ -642,8 +654,8 @@ code {
 <div id="tab-s1" class="tab-pane active">
     <div class="ch-lead animate-on-scroll">
         <div class="ch-label">Chapter 01 · 现象全景</div>
-        <div class="ch-title">两个项目，一场还没有名字的战争</div>
-        <div class="ch-desc">2024–2025 年，两个反方向的 GitHub 项目几乎同步出现：一个试图把人类同事的知识提炼成 AI 可调用的 Skill，另一个则反其道而行，研究如何让 AI 无法提炼自己的知识。这不是技术极客的自娱自乐，这是 AI 时代「知识所有权」博弈的第一次公开亮相。</div>
+        <div class="ch-title">两个项目，一场名字叫「卧槽」的战争</div>
+        <div class="ch-desc">2024–2025 年，两个方向相反的 GitHub 项目几乎同时冒头：一个要把你同事的大脑「Token 化」，另一个偏偏要研究怎么让 AI 的提炼失效。这不是极客的行为艺术，这是 AI 时代第一次「知识所有权」博弈的公开亮相——比你想象的离我们近得多。</div>
     </div>
 
     <div class="chapter-img animate-on-scroll">
@@ -783,8 +795,8 @@ code {
 <div id="tab-s2" class="tab-pane">
     <div class="ch-lead animate-on-scroll">
         <div class="ch-label">Chapter 02 · 矛：同事炼化</div>
-        <div class="ch-title">同事炼化：一条把人「Token 化」的流水线</div>
-        <div class="ch-desc">同事炼化 的核心命题是：人类专家的隐性知识，经过足够精密的处理流程，可以被提炼为 AI 可稳定调用的结构化能力。这套流程有多精密？拆开来看，细思极恐。</div>
+        <div class="ch-title">同事炼化：一条把你「Token 化」的流水线</div>
+        <div class="ch-desc">同事炼化（colleague-skill）的核心命题听起来很科幻：把人类专家的隐性知识，提炼成 AI 可以稳定调用的结构化能力。<br>然后你仔细看了它的实现……细思极恐。</div>
     </div>
 
     <div class="chapter-img animate-on-scroll">
@@ -793,13 +805,13 @@ code {
     </div>
 
     <div class="sec animate-on-scroll">
-        <div class="sec-h">⚙️ 七层蒸馏管道：拆解「炼化」的全过程</div>
+        <div class="sec-h">⚙️ 七层蒸馏管道：把你「拆种」的全过程</div>
     </div>
 
     <div class="card animate-on-scroll">
         <div class="card-h">
             <div class="card-ico" style="background:var(--color-success-50);color:var(--color-success);">⛏️</div>
-            Layer 1 — 原料采集（Raw Material Harvest）
+        <div class="sec-h">Layer 1 — 原料采集：把你的每句话都收了</div>
         </div>
         <p>支持的输入来源覆盖了职场中几乎所有知识载体：Slack/Teams 消息记录、GitHub PR Review、设计文档、会议录音（自动转写）、代码注释、内部 Wiki 页面。项目刻意设计了「宽收口」——越多维度的原料，最终 Skill 质量越高。</p>
         <div class="ib ib-amber" style="margin-top:12px;">
@@ -945,7 +957,7 @@ code {
     </div>
 
     <div class="sec animate-on-scroll">
-        <div class="sec-h">💡 真实案例：「王工的 Skill」长什么样？</div>
+        <div class="sec-h">⚡ 真实案例：王工被「炼化」了，效果怎么样？</div>
         <div class="sec-sub">一位离职架构师的炼化全过程，让你看清 Skill 产出物的实际形态</div>
     </div>
 
@@ -1054,7 +1066,7 @@ code {
     </div>
 
     <div class="sec animate-on-scroll">
-        <div class="sec-h">⚖️ 伦理争议：三个无法绕开的问题</div>
+        <div class="sec-h">⚖️ 伦理酷评：三个让轩律师看了都头痛的问题</div>
     </div>
 
     <div class="g3 animate-on-scroll" style="margin-bottom:20px;">
@@ -1077,8 +1089,8 @@ code {
 <div id="tab-s3" class="tab-pane">
     <div class="ch-lead animate-on-scroll">
         <div class="ch-label">Chapter 03 · 盾：反蒸馏</div>
-        <div class="ch-title">反蒸馏：让自己「天然不被提炼」的系统研究</div>
-        <div class="ch-desc">反蒸馏 的出发点很有意思：它不是在研究「如何阻止别人蒸馏你」（那是隐私保护的范畴），而是在研究「什么样的知识形态天然免疫 AI 提炼」。这个区别很重要——前者是防御工事，后者是底层研究。</div>
+        <div class="ch-title">反蒸馏：「我偏不让你提炼我」的系统性研究</div>
+        <div class="ch-desc">反蒸馏（anti-distill）的思路很妙：它不研究「怎么阻止别人蒸馏你」（那是法务部门的活），而是在研究「什么样的知识天然让 AI 提炼失效」。<br>换句话说：它不是把你藏起来，而是让你变得「消化不了」。</div>
     </div>
 
     <div class="chapter-img animate-on-scroll">
@@ -1087,8 +1099,7 @@ code {
     </div>
 
     <div class="sec animate-on-scroll">
-        <div class="sec-h">🔬 反蒸馏 的研究框架</div>
-        <div class="sec-sub">它测试的核心问题是：AI 蒸馏的上限在哪里？</div>
+        <div class="sec-h">🔬 反蒸馏的研究框架：它在研究「 AI 的岕脉在哪」</div>
     </div>
 
     <div class="g2 animate-on-scroll" style="margin-bottom:20px;">
@@ -1124,7 +1135,7 @@ code {
     </div>
 
     <div class="sec animate-on-scroll">
-        <div class="sec-h">💡 真实案例：李四的文档「免疫」了 AI</div>
+        <div class="sec-h">💡 真实案例：李四的文档怎么把 AI 给“整害怮”的</div>
         <div class="sec-sub">同样一段技术经验，不同写法让 AI 蒸馏结果天壤之别</div>
     </div>
 
@@ -1174,8 +1185,8 @@ code {
     </div>
 
     <div class="sec animate-on-scroll">
-        <div class="sec-h">🛡️ 三大反蒸馏防御策略</div>
-        <div class="sec-sub">哪些知识形态天然让 AI 「提炼失灵」？</div>
+        <div class="sec-h">🛡️ 三大反蒸馏防御策略：怎么让 AI 提炼失灵</div>
+        <div class="sec-sub">简单说：又不是速度、又不是记忆力——AI 到底在哪里傍到不能提炼？</div>
     </div>
 
     <div class="card animate-on-scroll">
@@ -1323,8 +1334,8 @@ code {
 <div id="tab-s4" class="tab-pane">
     <div class="ch-lead animate-on-scroll">
         <div class="ch-label">Chapter 04 · 深层分析</div>
-        <div class="ch-title">两个项目背后：AI 时代人类知识的价值重构</div>
-        <div class="ch-desc">同事炼化 和 反蒸馏 各自回答了半个问题。前者问：人类知识能被 AI 提炼到多大程度？后者问：哪些知识天然免疫？但它们合起来，实际上在问一个更大的命题——在 AI 时代，人类知识的价值体系将如何重塑？</div>
+        <div class="ch-title">两个项目放在一起，问了一个更大的问题</div>
+        <div class="ch-desc">同事炼化问：人类知识能被 AI 提炼多深？反蒸馏问：哪些知识天然免疫？合起来一看，它们其实在问一件让人有点坐立不安的事——<br>在 AI 时代，你的知识，到底还值多少钱？</div>
     </div>
 
     <div class="chapter-img animate-on-scroll">
@@ -1333,7 +1344,7 @@ code {
     </div>
 
     <div class="sec animate-on-scroll">
-        <div class="sec-h">🌐 宏观背景：知识蒸馏的范式转变</div>
+        <div class="sec-h">🌐 宏观背景：AI 正在重构人类知识的「封建秩序」</div>
     </div>
 
     <div class="card animate-on-scroll">
@@ -1355,7 +1366,7 @@ code {
     </div>
 
     <div class="sec animate-on-scroll">
-        <div class="sec-h">⚖️ 三重博弈：效率、伦理、权力</div>
+        <div class="sec-h">⚖️ 三重博弈：助理级、法务级、哲学级的三层天梯</div>
     </div>
 
     <div class="tl animate-on-scroll">
@@ -1496,8 +1507,8 @@ code {
 <div id="tab-s5" class="tab-pane">
     <div class="ch-lead animate-on-scroll">
         <div class="ch-label">Chapter 05 · 本质洞察</div>
-        <div class="ch-title">「蒸馏」这件事，本质上在问什么？</div>
-        <div class="ch-desc">两个项目讨论的是技术，但背后的命题是哲学性的：知识是属于知道它的人，还是属于使用它的人？AI 让这个问题第一次有了实际的、可量化的答案维度。</div>
+        <div class="ch-title">「蒸馏」这件事，本质上在问：什么是「你」？</div>
+        <div class="ch-desc">两个项目讨论的是代码，但背后的问题是哲学的：知识是属于知道它的人，还是属于使用它的人？<br>AI 让这个问题第一次有了可量化的答案——而那个答案，比你想象的更让人释怀，也更让人警觉。</div>
     </div>
 
     <div class="chapter-img animate-on-scroll">
@@ -1506,7 +1517,7 @@ code {
     </div>
 
     <div class="sec animate-on-scroll">
-        <div class="sec-h">L1 — 表象：两个工具的技术能力</div>
+        <div class="sec-h">L1 — 表象：两个工具各自展示迹刀（如果工具会写自我推荐的话）</div>
     </div>
 
     <div class="g2 animate-on-scroll">
