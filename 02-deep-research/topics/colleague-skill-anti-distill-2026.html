@@ -656,7 +656,7 @@ code {
     <div class="ch-lead animate-on-scroll">
         <div class="ch-label">Chapter 01 · 现象全景</div>
         <div class="ch-title">两个项目，一场名字叫「卧槽」的战争</div>
-        <div class="ch-desc">2024–2025 年，两个方向相反的 GitHub 项目几乎同时冒头：一个要把你同事的大脑「Token 化」，另一个偏偏要研究怎么让 AI 的提炼失效。这不是极客的行为艺术，这是 AI 时代第一次「知识所有权」博弈的公开亮相——比你想象的离我们近得多。</div>
+        <div class="ch-desc">2024年初，一个叫 Marcus 的工程师在公司内网贴了一段话，大意是：「我花了三周，把我们组王工的所有 PR Review、Slack 消息、设计文档全部喂给了 Claude。现在，即使王工不在，AI 也能用他的思路帮我做架构评审。」<br><br>这条内网帖子安静了三天。然后炸了。<br><br>有人说「这是生产力革命」，有人说「这是在偷窃」，有人悄悄转给了法务。与此同时，GitHub 上出现了一个叫「anti-distill」的项目，作者写道：「我不想被提炼，但我需要先知道什么能被提炼。」<br><br>这就是故事的起点。两个方向相反的项目，一场正在悄悄打响的战争。</div>
     </div>
 
     <div class="chapter-img animate-on-scroll">
@@ -797,7 +797,7 @@ code {
     <div class="ch-lead animate-on-scroll">
         <div class="ch-label">Chapter 02 · 矛：同事炼化</div>
         <div class="ch-title">同事炼化：一条把你「Token 化」的流水线</div>
-        <div class="ch-desc">同事炼化（colleague-skill）的核心命题听起来很科幻：把人类专家的隐性知识，提炼成 AI 可以稳定调用的结构化能力。<br>然后你仔细看了它的实现……细思极恐。</div>
+        <div class="ch-desc">王工在公司做了十一年。他评审代码有一套只有他自己能说清楚一半的直觉——为什么这个接口设计「感觉不对」，为什么这个方案「三个月后会出事」。新来的同事都说，被王工 review 一次，比看三本书都管用。<br><br>然后 Marcus 开始了他的「实验」。<br><br>他收集了王工过去两年所有的 PR 评论、设计文档、Slack 讨论，按照「同事炼化」项目的七层蒸馏流程，一层一层地「提炼」。六周后，他得到了一个 Skill 文件。他拿着这个文件去问 AI：「这个接口设计有问题吗？」<br><br>AI 的回答，和王工说话的语气，出奇地像。<br><br>王工本人还不知道这件事。</div>
     </div>
 
     <div class="chapter-img animate-on-scroll">
@@ -1090,7 +1090,7 @@ code {
     <div class="ch-lead animate-on-scroll">
         <div class="ch-label">Chapter 03 · 盾：反蒸馏</div>
         <div class="ch-title">反蒸馏：「我偏不让你提炼我」的系统性研究</div>
-        <div class="ch-desc">反蒸馏（anti-distill）的思路很妙：它不研究「怎么阻止别人蒸馏你」（那是法务部门的活），而是在研究「什么样的知识天然让 AI 提炼失效」。<br>换句话说：它不是把你藏起来，而是让你变得「消化不了」。</div>
+        <div class="ch-desc">与此同时，在公司另一个部门，李四也在写一篇「服务拆分决策」文档。<br><br>但李四写文档的方式，和普通人不一样。<br><br>她不写「结论是 A」，她写「那天下午开会，我们争了两个小时，最后选 A 的原因是……但张工有一句话让我犹豫了很久，他说……」。她把所有的矛盾、犹豫、情绪、上下文全部塞进文档里，像在写一部纪录片，而不是技术文档。<br><br>反蒸馏（anti-distill）实验团队发现：把这篇文档喂给 AI，让它「提炼关键决策规则」，三个主流大模型全都提炼出了一堆正确但没用的废话，完全抓不到李四真正的判断逻辑。<br><br>这不是意外。这是一种天然的、无需任何技术手段的「知识防护」。</div>
     </div>
 
     <div class="chapter-img animate-on-scroll">
@@ -1335,7 +1335,7 @@ code {
     <div class="ch-lead animate-on-scroll">
         <div class="ch-label">Chapter 04 · 深层分析</div>
         <div class="ch-title">两个项目放在一起，问了一个更大的问题</div>
-        <div class="ch-desc">同事炼化问：人类知识能被 AI 提炼多深？反蒸馏问：哪些知识天然免疫？合起来一看，它们其实在问一件让人有点坐立不安的事——<br>在 AI 时代，你的知识，到底还值多少钱？</div>
+        <div class="ch-desc">故事发展到这里，王工的 Skill 和李四的文档在同一家公司共存着。<br><br>有一天开季度会，老板提了一个问题：「如果我们用王工的 Skill 训练新人，王工本人还值多少钱？」<br><br>会议室安静了大概十秒。<br><br>这不是一个坏老板才会问的问题——这是一个任何组织在 AI 时代迟早都要面对的问题。同事炼化和反蒸馏，各自只回答了问题的一半：一个说「可以提炼」，另一个说「有些提炼不了」。但两个放在一起，它们真正在问的是：<strong>在这个知识可以被复制的时代，「拥有知识」本身，还是一种竞争优势吗？</strong></div>
     </div>
 
     <div class="chapter-img animate-on-scroll">
@@ -1508,7 +1508,7 @@ code {
     <div class="ch-lead animate-on-scroll">
         <div class="ch-label">Chapter 05 · 本质洞察</div>
         <div class="ch-title">「蒸馏」这件事，本质上在问：什么是「你」？</div>
-        <div class="ch-desc">两个项目讨论的是代码，但背后的问题是哲学的：知识是属于知道它的人，还是属于使用它的人？<br>AI 让这个问题第一次有了可量化的答案——而那个答案，比你想象的更让人释怀，也更让人警觉。</div>
+        <div class="ch-desc">故事的最后，王工知道了 Skill 的存在。<br><br>他没有愤怒，也没有报警。他只是沉默了一会儿，然后说了一句话：「那个 Skill，回答的是我说过的话。但我现在不会那么说了。」<br><br>这句话，是整个故事的答案。<br><br>Marcus 提炼出来的，是王工过去的决策模式。但王工还在生长、在变化、在犯错、在推翻自己——而那个 Skill，永远停在了被蒸馏的那一刻。<br><br>同事炼化可以复制「知识」，但复制不了「成长」。反蒸馏发现了 AI 的天花板，但那个天花板不是技术问题，而是哲学问题：AI 没有身体，没有经历，没有那些让王工推翻自己旧观点的夜晚。<br><br>所以那个会议室里的问题，现在有了答案：王工还值多少钱？值全部。因为那个 Skill 只是他的快照，而他本人，是一个还在运行的系统。</div>
     </div>
 
     <div class="chapter-img animate-on-scroll">
