@@ -674,73 +674,8 @@ code {
         <div class="ch-desc">先说一个真实场景。<br><br>一名工程师在修复一个复杂系统 bug，整个过程用的是公司的 AI 工具（接入了 Microsoft Copilot）。等他修好之后，他意识到：这个 AI 工具不只是帮他解决了问题，还把他<strong>整个思考过程</strong>都记录下来了——他尝试了哪些方向、为什么放弃、最终怎么判断的。这些内容，以「员工知识资产」的名义，存进了公司的系统。他完全不知情。<br><br>这不是孤例。2025 年，一家叫 <strong>Tanka</strong> 的公司发布了产品 <strong>Relay</strong>，专门帮企业「在核心员工离职前，把他们的经验复制下来」。接入 Slack 消息、邮件、会议记录——不只学「他说了什么」，还学「他为什么这么说」。合法，可订阅。<br><br>这就是「<strong>蒸馏</strong>」。就像提炼香水精华一样，把一个人几年积累的经验提炼出核心，装进 AI。这件事，正在你身边发生。</div>
     </div>
 
-    <!-- 章节插图：蒸馏发生的逻辑 -->
-    <div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;background:var(--color-bg-card);border:1px solid var(--color-border);">
-        <svg viewBox="0 0 840 220" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:auto;" aria-label="职场知识蒸馏流程">
-            <defs>
-                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1"/>
-                    <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1"/>
-                </linearGradient>
-                <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1"/>
-                    <stop offset="100%" style="stop-color:#ef4444;stop-opacity:1"/>
-                </linearGradient>
-                <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" style="stop-color:#10b981;stop-opacity:1"/>
-                    <stop offset="100%" style="stop-color:#059669;stop-opacity:1"/>
-                </linearGradient>
-            </defs>
-            <!-- 背景 -->
-            <rect width="840" height="220" fill="#0f172a"/>
-            <!-- 节点1: 你的经验 -->
-            <rect x="40" y="70" width="140" height="80" rx="10" fill="url(#grad1)" opacity="0.9"/>
-            <text x="110" y="102" text-anchor="middle" fill="white" font-size="13" font-family="system-ui,sans-serif" font-weight="600">你的经验</text>
-            <text x="110" y="120" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="11" font-family="system-ui,sans-serif">Slack / 文档 / Review</text>
-            <text x="110" y="136" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="11" font-family="system-ui,sans-serif">会议 / 代码</text>
-            <!-- 箭头1 -->
-            <path d="M185 110 L230 110" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
-            <text x="207" y="103" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="system-ui,sans-serif">输入</text>
-            <!-- 节点2: 蒸馏引擎 -->
-            <rect x="235" y="55" width="150" height="110" rx="10" fill="#1e293b" stroke="#6366f1" stroke-width="1.5"/>
-            <text x="310" y="87" text-anchor="middle" fill="#a5b4fc" font-size="12" font-family="system-ui,sans-serif" font-weight="600">🤖 蒸馏引擎</text>
-            <text x="310" y="107" text-anchor="middle" fill="#64748b" font-size="10" font-family="system-ui,sans-serif">提取决策模式</text>
-            <text x="310" y="122" text-anchor="middle" fill="#64748b" font-size="10" font-family="system-ui,sans-serif">分析表达风格</text>
-            <text x="310" y="137" text-anchor="middle" fill="#64748b" font-size="10" font-family="system-ui,sans-serif">归纳偏好规则</text>
-            <!-- 箭头2 -->
-            <path d="M390 110 L430 110" stroke="#475569" stroke-width="2" marker-end="url(#arr2)"/>
-            <text x="410" y="103" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="system-ui,sans-serif">输出</text>
-            <!-- 节点3: 可复制部分 -->
-            <rect x="435" y="60" width="140" height="65" rx="8" fill="url(#grad2)" opacity="0.85"/>
-            <text x="505" y="87" text-anchor="middle" fill="white" font-size="12" font-family="system-ui,sans-serif" font-weight="600">🔴 可被提炼</text>
-            <text x="505" y="104" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="10" font-family="system-ui,sans-serif">规则 / 风格 / 流程</text>
-            <text x="505" y="118" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="10" font-family="system-ui,sans-serif">AI 复制率 75–91%</text>
-            <!-- 节点4: 无法复制部分 -->
-            <rect x="435" y="140" width="140" height="45" rx="8" fill="url(#grad3)" opacity="0.85"/>
-            <text x="505" y="162" text-anchor="middle" fill="white" font-size="12" font-family="system-ui,sans-serif" font-weight="600">🟢 学不走的</text>
-            <text x="505" y="178" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="10" font-family="system-ui,sans-serif">直觉 / 关系 / 价值观 &lt;35%</text>
-            <!-- 箭头3 -->
-            <path d="M580 92 L625 92" stroke="#475569" stroke-width="2" marker-end="url(#arr3)"/>
-            <!-- 节点5: AI分身 -->
-            <rect x="630" y="60" width="150" height="65" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
-            <text x="705" y="85" text-anchor="middle" fill="#fbbf24" font-size="12" font-family="system-ui,sans-serif" font-weight="600">💡 AI 分身</text>
-            <text x="705" y="103" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="system-ui,sans-serif">可随时「请教」的</text>
-            <text x="705" y="117" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="system-ui,sans-serif">同事数字副本</text>
-            <!-- 说明 -->
-            <text x="420" y="205" text-anchor="middle" fill="#475569" font-size="11" font-family="system-ui,sans-serif">职场「蒸馏」正在发生：从人的经验到 AI 可调用的能力 | 数据来源：colleague-skill 项目实测</text>
-            <!-- 箭头 marker -->
-            <defs>
-                <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-                    <path d="M0,0 L0,6 L8,3 z" fill="#475569"/>
-                </marker>
-                <marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-                    <path d="M0,0 L0,6 L8,3 z" fill="#475569"/>
-                </marker>
-                <marker id="arr3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-                    <path d="M0,0 L0,6 L8,3 z" fill="#475569"/>
-                </marker>
-            </defs>
-        </svg>
+    <div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
+        <img src="https://INTERNAL_CDN/kc/files/a/design-ai/poify/37a783b800515c54346306826.jpg" alt="职场知识蒸馏正在发生" style="display:block;width:100%;height:auto;border-radius:12px;" loading="lazy" />
     </div>
 
     <div class="sec animate-on-scroll">
@@ -821,44 +756,8 @@ code {
         <div class="ch-desc">答案可能让你不舒服：<strong>没有几步，只需要「原材料够多」。</strong><br><br>如果有人把你过去三年的工作记录都喂给 AI，它能复制你的几成？让我们用普通人能听懂的方式看看这件事是怎么做到的。</div>
     </div>
 
-    <!-- 章节插图：三步蒸馏流程 -->
-    <div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;background:var(--color-bg-card);border:1px solid var(--color-border);">
-        <svg viewBox="0 0 840 200" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:auto;" aria-label="三步蒸馏流程">
-            <rect width="840" height="200" fill="#0f172a"/>
-            <!-- 步骤条 -->
-            <!-- Step 1 -->
-            <rect x="60" y="50" width="180" height="90" rx="10" fill="#1e293b" stroke="#6366f1" stroke-width="1.5"/>
-            <circle cx="100" cy="75" r="14" fill="#6366f1"/>
-            <text x="100" y="80" text-anchor="middle" fill="white" font-size="12" font-weight="700" font-family="system-ui,sans-serif">1</text>
-            <text x="150" y="75" text-anchor="middle" fill="#a5b4fc" font-size="12" font-weight="600" font-family="system-ui,sans-serif">收集原料</text>
-            <text x="150" y="93" text-anchor="middle" fill="#64748b" font-size="10" font-family="system-ui,sans-serif">Slack 2800+ 条</text>
-            <text x="150" y="107" text-anchor="middle" fill="#64748b" font-size="10" font-family="system-ui,sans-serif">PR Review 400+ 次</text>
-            <text x="150" y="121" text-anchor="middle" fill="#64748b" font-size="10" font-family="system-ui,sans-serif">设计文档 38 份</text>
-            <!-- 箭头 -->
-            <path d="M245 95 L285 95" stroke="#334155" stroke-width="2.5" stroke-dasharray="4,3"/>
-            <polygon points="285,90 295,95 285,100" fill="#334155"/>
-            <!-- Step 2 -->
-            <rect x="300" y="50" width="200" height="90" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
-            <circle cx="340" cy="75" r="14" fill="#f59e0b"/>
-            <text x="340" y="80" text-anchor="middle" fill="white" font-size="12" font-weight="700" font-family="system-ui,sans-serif">2</text>
-            <text x="400" y="75" text-anchor="middle" fill="#fbbf24" font-size="12" font-weight="600" font-family="system-ui,sans-serif">提炼决策模式</text>
-            <text x="400" y="93" text-anchor="middle" fill="#64748b" font-size="10" font-family="system-ui,sans-serif">性能 vs 可维护性 偏好</text>
-            <text x="400" y="107" text-anchor="middle" fill="#64748b" font-size="10" font-family="system-ui,sans-serif">什么情况必须写文档</text>
-            <text x="400" y="121" text-anchor="middle" fill="#64748b" font-size="10" font-family="system-ui,sans-serif">对哪类方案持保留意见</text>
-            <!-- 箭头 -->
-            <path d="M505 95 L545 95" stroke="#334155" stroke-width="2.5" stroke-dasharray="4,3"/>
-            <polygon points="545,90 555,95 545,100" fill="#334155"/>
-            <!-- Step 3 -->
-            <rect x="560" y="50" width="200" height="90" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
-            <circle cx="600" cy="75" r="14" fill="#10b981"/>
-            <text x="600" y="80" text-anchor="middle" fill="white" font-size="12" font-weight="700" font-family="system-ui,sans-serif">3</text>
-            <text x="660" y="75" text-anchor="middle" fill="#34d399" font-size="12" font-weight="600" font-family="system-ui,sans-serif">封装 AI 分身</text>
-            <text x="660" y="93" text-anchor="middle" fill="#64748b" font-size="10" font-family="system-ui,sans-serif">「张哥会怎么看？」</text>
-            <text x="660" y="107" text-anchor="middle" fill="#64748b" font-size="10" font-family="system-ui,sans-serif">离职后仍可「请教」</text>
-            <text x="660" y="121" text-anchor="middle" fill="#64748b" font-size="10" font-family="system-ui,sans-serif">知识永久留存</text>
-            <!-- 底部说明 -->
-            <text x="420" y="175" text-anchor="middle" fill="#334155" font-size="11" font-family="system-ui,sans-serif">以 Tanka.ai Relay 产品为参考 · 数据来自真实企业接入案例</text>
-        </svg>
+    <div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
+        <img src="https://INTERNAL_CDN/kc/files/a/design-ai/poify/502d64f84714dca1466a8d726.jpg" alt="知识蒸馏七层流水线" style="display:block;width:100%;height:auto;border-radius:12px;" loading="lazy" />
     </div>
 
     <div class="sec animate-on-scroll">
@@ -946,6 +845,10 @@ code {
         <div class="ch-desc">有一个反直觉的发现：<strong>让 AI 学不会你的秘诀，不一定靠藏，靠的是「怎么写」。</strong><br><br>同一套经验，换一种写法，AI 的提炼成功率可以从 91% 降到 33%。</div>
     </div>
 
+
+    <div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
+        <img src="https://INTERNAL_CDN/kc/files/a/design-ai/poify/502d64f84714dca1466a8d727.jpg" alt="反蒸馏三层防御策略" style="display:block;width:100%;height:auto;border-radius:12px;" loading="lazy" />
+    </div>
     <div class="sec animate-on-scroll">
         <div class="sec-h">🧪 一个让人惊讶的实验对比</div>
     </div>
@@ -1018,6 +921,10 @@ code {
         <div class="ch-desc">这才是这篇文章想问你的问题。<br><br>「蒸馏」这件事正在发生，没有人能阻止它。问题是：面对这件事，你的姿态是什么？</div>
     </div>
 
+
+    <div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
+        <img src="https://INTERNAL_CDN/kc/files/a/design-ai/poify/37a783b800515c54346306827.jpg" alt="消极防御还是积极拥抱？岔路口的选择" style="display:block;width:100%;height:auto;border-radius:12px;" loading="lazy" />
+    </div>
     <div class="sec animate-on-scroll">
         <div class="sec-h">选择 A：消极防御</div>
         <div class="sec-sub">「我不写太多，不留记录，让 AI 没有原料可提炼」</div>
@@ -1092,6 +999,10 @@ code {
         <div class="ch-desc">不需要焦虑，不需要辞职，不需要学一堆新东西。<br><br>「积极拥抱」落地到行动层面，其实很简单。这里有三件事，今天就能开始做。</div>
     </div>
 
+
+    <div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
+        <img src="https://INTERNAL_CDN/kc/files/a/design-ai/poify/37a783b800515c54346306828.jpg" alt="今天就能开始的三个行动习惯" style="display:block;width:100%;height:auto;border-radius:12px;" loading="lazy" />
+    </div>
     <div class="insight-g animate-on-scroll">
         <div class="insight-card" style="border-top:3px solid var(--color-success);">
             <div class="ic-num">习惯 01 · 今晚就能做</div>
@@ -1169,10 +1080,6 @@ code {
     </div>
 </div>
 
-</div><!-- end .pg -->
-
-
-
 <!-- ====== Tab 6：两个实用工具 ====== -->
 <div id="tab-s6" class="tab-pane">
     <div class="ch-lead animate-on-scroll">
@@ -1181,6 +1088,10 @@ code {
         <div class="ch-desc">前五章解释了「为什么」，这章给你「怎么做」的工具。<br><br>这两个工具是配套的：一个用来<strong>主动沉淀自己的经验</strong>，一个用来<strong>控制哪部分对外共享</strong>。合起来用，才是真正的知识资产管理。</div>
     </div>
 
+
+    <div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
+        <img src="https://INTERNAL_CDN/kc/files/a/design-ai/poify/37a783b800515c54346306829.jpg" alt="create-colleague 和 anti-distill 两个实用工具" style="display:block;width:100%;height:auto;border-radius:12px;" loading="lazy" />
+    </div>
     <!-- ====== 工具一 ====== -->
     <div class="sec animate-on-scroll">
         <div class="sec-h">🧪 工具一：create-colleague</div>
