@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- 性能优化：主动声明页面颜色，避免白屏闪烁 -->
 <meta name="theme-color" content="#F8FAFB">
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%235046e5'/><path d='M7 22.5V11l3.5 5.5 3.5-7 4 6 3.5-5.5L25 22.5H7z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/></svg>">
 <!-- 启用 Chrome 资源优先级提示 -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Claude Code 源码核心思想深度调研</title>
@@ -118,125 +120,162 @@ code {
 }
 
 /* ════════════════════════════════════════
-   HEADER
+   HEADER — 清爽浅色风格 v4.3
 ════════════════════════════════════════ */
 .hd {
-  background: linear-gradient(150deg, #0f1629 0%, #1e2a52 55%, #0f1629 100%);
-  padding: 60px 40px 52px;
+  background: var(--bg);
+  /* 顶部色条 */
+  border-top: 3px solid transparent;
+  border-image: linear-gradient(90deg, #5046e5 0%, #059669 50%, #7C3AED 100%) 1;
+  padding: 52px 40px 48px;
   position: relative;
   overflow: hidden;
 }
+/* Mesh 光晕装饰 */
 .hd::before, .hd::after {
   content: '';
   position: absolute;
   border-radius: 50%;
   pointer-events: none;
+  z-index: 0;
 }
 .hd::before {
-  width: 320px; height: 320px;
-  background: radial-gradient(circle, rgba(80,70,229,.2), transparent 70%);
-  top: -80px; right: -40px;
+  width: 480px; height: 480px;
+  background: radial-gradient(circle, rgba(80,70,229,0.06), transparent 65%);
+  top: -160px; right: -80px;
 }
 .hd::after {
-  width: 200px; height: 200px;
-  background: radial-gradient(circle, rgba(124,58,237,.15), transparent 70%);
-  bottom: -60px; left: 8%;
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(5,150,105,0.05), transparent 65%);
+  bottom: -100px; left: 5%;
 }
-.hd-inner { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; }
+.hd-inner { position: relative; z-index: 1; max-width: 980px; margin: 0 auto; }
 .hd-eyebrow {
   display: inline-flex; align-items: center; gap: 7px;
-  background: rgba(80,70,229,.22);
-  border: 1px solid rgba(99,91,255,.35);
-  color: #a5b4fc;
+  background: linear-gradient(135deg, #ECFDF5, #EFF6FF);
+  border: 1px solid rgba(80,70,229,0.18);
+  color: #5046e5;
   padding: 4px 13px;
   border-radius: 20px;
-  font-size: 12px; font-weight: 700;
-  letter-spacing: .6px;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: .7px;
+  text-transform: uppercase;
   margin-bottom: 20px;
+  box-shadow: 0 1px 4px rgba(80,70,229,0.10);
 }
 .hd h1 {
   font-size: 38px; font-weight: 800;
-  color: #fff;
-  letter-spacing: -0.04em;
-  line-height: 1.18;
+  background: linear-gradient(135deg, #5046e5 0%, #059669 50%, #7C3AED 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
   margin-bottom: 14px;
   font-family: var(--font);
+  text-wrap: balance;
 }
-.hd h1 em { color: #818cf8; font-style: normal; }
+.hd h1 em {
+  -webkit-text-fill-color: transparent;
+  background: linear-gradient(135deg, #059669, #7C3AED);
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-style: normal;
+}
 .hd-desc {
-  color: rgba(255,255,255,.6);
-  font-size: 16px;
+  color: var(--text-2);
+  font-size: 15.5px;
   max-width: 680px;
-  line-height: 1.65;
-  margin-bottom: 28px;
+  line-height: 1.7;
+  margin-bottom: 26px;
+  font-family: var(--font-cn);
 }
 .hd-thesis {
   display: inline-block;
-  background: linear-gradient(135deg, rgba(80,70,229,.28), rgba(124,58,237,.22));
-  border: 1px solid rgba(99,91,255,.4);
+  background: linear-gradient(135deg, rgba(80,70,229,0.07), rgba(5,150,105,0.05));
+  border: 1px solid rgba(80,70,229,0.18);
+  border-left: 3px solid #5046e5;
   border-radius: var(--r-sm);
   padding: 10px 18px;
-  color: #c7d2fe;
+  color: var(--text-1);
   font-size: 14px; font-weight: 600;
   margin-bottom: 26px;
+  line-height: 1.6;
 }
-.hd-thesis span { color: #818cf8; }
+.hd-thesis span { color: #5046e5; font-weight: 700; }
 .hd-meta {
-  display: flex; flex-wrap: wrap; gap: 18px;
-  color: rgba(255,255,255,.45);
-  font-size: 13px;
+  display: flex; flex-wrap: wrap; gap: 14px;
+  color: var(--text-3);
+  font-size: 12.5px;
 }
 
 /* ════════════════════════════════════════
-   NAV
+   NAV — 清爽风格：浮动圆角卡片导航
 ════════════════════════════════════════ */
 .nav-wrap {
-  background: rgba(255,255,255,0.95);
-  /* backdrop-filter 已移除：高成本合成操作，用纯色背景替代，视觉差异微小 */
-  border-bottom: 1px solid rgba(0,0,0,0.08);
-  position: sticky; top: 0; z-index: 100;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  /* will-change 提升导航栏到独立合成层，避免滚动影响其他元素重绘 */
+  background: transparent;
+  position: sticky; top: 10px; z-index: 100;
+  padding: 0 20px;
+  /* will-change 提升导航栏到独立合成层 */
   will-change: transform;
 }
 .nav-inner {
-  max-width: 1080px; margin: 0 auto;
-  padding: 0 20px;
-  display: flex; gap: 0;
+  max-width: 980px; margin: 0 auto;
+  background: rgba(255,255,255,0.95);
+  border: 1px solid rgba(255,255,255,0.9);
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,1);
+  padding: 5px 8px;
+  display: flex; gap: 2px;
   overflow-x: auto;
   scrollbar-width: none;
 }
 .nav-inner::-webkit-scrollbar { display: none; }
 .nav-btn {
   display: flex; align-items: center; gap: 6px;
-  padding: 14px 17px;
+  padding: 8px 14px;
   color: var(--text-3);
   font-size: 13px; font-weight: 500;
   white-space: nowrap;
-  border-bottom: 2px solid transparent;
+  border-radius: 9px;
+  border: none;
   cursor: pointer;
-  transition: color .2s, border-color .2s;
-  background: none; border-top: none; border-left: none; border-right: none;
+  transition: color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+  background: transparent;
+  flex-shrink: 0;
 }
-.nav-btn:hover { color: var(--accent); }
-.nav-btn.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 700; }
+.nav-btn:hover {
+  color: var(--accent);
+  background: rgba(80,70,229,0.06);
+}
+.nav-btn.active {
+  color: #fff;
+  background: linear-gradient(135deg, #5046e5, #7C3AED);
+  box-shadow: 0 2px 10px rgba(80,70,229,0.30);
+  font-weight: 700;
+}
 .nav-step {
   width: 18px; height: 18px; border-radius: 50%;
-  background: var(--surface-2);
+  background: rgba(0,0,0,0.06);
   font-size: 10px; font-weight: 800;
   display: flex; align-items: center; justify-content: center;
   color: var(--text-3);
-  transition: background .2s, color .2s;
+  transition: background 0.18s, color 0.18s;
+  flex-shrink: 0;
 }
 .nav-btn.active .nav-step {
-  background: var(--accent);
+  background: rgba(255,255,255,0.22);
   color: #fff;
+}
+@media(max-width: 720px) {
+  .nav-wrap { padding: 0 12px; top: 6px; }
+  .nav-btn { padding: 7px 10px; font-size: 12px; }
 }
 
 /* ════════════════════════════════════════
    PAGE LAYOUT
 ════════════════════════════════════════ */
-.pg { max-width: 1080px; margin: 0 auto; padding: 38px 20px 80px; }
+.pg { max-width: 980px; margin: 0 auto; padding: 32px 20px 80px; }
 .tab-pane { display: none; }
 .tab-pane.active { display: block; }
 /* content-visibility：隐藏 tab 跳过子树的布局和绘制，大幅降低初始渲染成本 */
@@ -305,7 +344,7 @@ code {
 @media(max-width: 720px) {
   .g2, .g3, .g4 { grid-template-columns: 1fr; }
   .hd { padding: 36px 18px 32px; }
-  .hd h1 { font-size: 24px; }
+  .hd h1 { font-size: 26px; }
   .hd-desc { font-size: 14px; }
 }
 
@@ -518,6 +557,23 @@ code {
 /* ── knum ── */
 .kn { font-weight: 800; color: var(--accent); }
 
+/* ════════════════════════════════════════
+   滚动入场动画 — 清爽风格 v4.0
+════════════════════════════════════════ */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 400ms cubic-bezier(0.4, 0, 0.2, 1),
+              transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-on-scroll { transition: none; opacity: 1; transform: none; }
+}
+
 /* ── Tab 7 specific ── */
 .cmp7 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .cmp7-card {
@@ -620,7 +676,7 @@ code {
 ════════════════════ -->
 <div id="tab-s1" class="tab-pane active">
 
-  <div class="ch-lead">
+  <div class="ch-lead animate-on-scroll">
     <div class="ch-label">第 1 章 · 故事入口</div>
     <div class="ch-title">这到底是什么？</div>
     <div class="ch-desc">
@@ -634,7 +690,7 @@ code {
     <div class="sec-h">🔢 核心数字</div>
     <div class="sec-sub">三个数字定义这次泄露的规模与价值</div>
   </div>
-  <div class="g3">
+  <div class="g3 animate-on-scroll">
     <div class="sc"><div class="sc-num">512K</div><div class="sc-label">TypeScript 源码行数</div><div class="sc-note">1906个文件 · 59.8MB</div></div>
     <div class="sc"><div class="sc-num">$2.5B</div><div class="sc-label">Claude Code 年化 ARR</div><div class="sc-note">2026年初以来翻倍</div></div>
     <div class="sc"><div class="sc-num">43</div><div class="sc-label">内置工具数量</div><div class="sc-note">50+ 斜杠命令</div></div>
@@ -648,7 +704,7 @@ code {
     <div class="sec-sub">3分钟读懂完整经过</div>
   </div>
 
-  <div class="card">
+  <div class="card animate-on-scroll">
     <div class="tl">
       <div class="tl-item">
         <div class="tl-dot"></div>
@@ -704,7 +760,7 @@ code {
     </div>
   </div>
 
-  <div class="card" style="padding:0;overflow:hidden">
+  <div class="card animate-on-scroll" style="padding:0;overflow:hidden">
     <table class="tbl">
       <thead>
         <tr><th>章节</th><th>叙事定位</th><th>核心问题</th><th>关键概念</th></tr>
@@ -758,7 +814,7 @@ code {
     <div class="sec-sub">本报告融合了中英文多平台一手分析，所有洞察均有来源标注</div>
   </div>
 
-  <div class="card" style="padding:0;overflow:hidden">
+  <div class="card animate-on-scroll" style="padding:0;overflow:hidden">
     <table class="tbl">
       <thead>
         <tr><th>来源</th><th>类型</th><th>主要覆盖维度</th><th>可信度</th></tr>
@@ -2258,6 +2314,43 @@ function switchTab(id, btn) {
   btn.classList.add('active');
   // 使用 requestAnimationFrame 推迟滚动，避免与 DOM 更新争抢主线程
   requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  // 切换 tab 后触发新 tab 内的滚动动画
+  requestAnimationFrame(() => triggerVisibleAnimations());
+}
+
+// 滚动入场动画 — IntersectionObserver + Stagger
+function initScrollAnimations() {
+  const targets = document.querySelectorAll('.animate-on-scroll');
+  if (!targets.length) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.06, rootMargin: '0px 0px -24px 0px' });
+  targets.forEach((el, i) => {
+    el.style.transitionDelay = (i % 8 * 55) + 'ms'; // Stagger 55ms，每组最多8个重置
+    observer.observe(el);
+  });
+}
+
+// 切换 tab 后立即触发当前可视区内的动画（避免需要滚动才触发）
+function triggerVisibleAnimations() {
+  document.querySelectorAll('.animate-on-scroll:not(.visible)').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      el.classList.add('visible');
+    }
+  });
+}
+
+// DOM 加载完成后初始化
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initScrollAnimations);
+} else {
+  initScrollAnimations();
 }
 </script>
 </body>
