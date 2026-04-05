@@ -265,7 +265,7 @@ code {
    PAGE LAYOUT
    ================================================ */
 /* ---- .pg 宽度正确写法：不设 width，让 max-width + margin:auto 控制居中 ---- */
-.pg { max-width: var(--content-max-width); margin: 0 auto; padding: 36px 20px 80px; box-sizing: border-box; }
+.pg { max-width: var(--content-max-width); margin: 0 auto; padding: 36px 20px 24px; box-sizing: border-box; }
 .tab-pane { display: none; }
 .tab-pane.active { display: block; }
 
@@ -1280,7 +1280,8 @@ code {
 </div><!-- end .pg -->
 
 <!-- 了解更多 - 统一模块（深度调研完整版） -->
-<div style="margin:40px auto;max-width:820px;padding:0 20px;background:linear-gradient(135deg,#F8FAFB 0%,#EEF2F6 100%);border:1px solid #E7E5E4;border-radius:14px;padding:24px;box-shadow:0 2px 8px rgba(31,35,40,.06),0 1px 2px rgba(31,35,40,.04)">
+<div style="max-width:var(--content-max-width);margin:0 auto;padding:16px 20px 48px;">
+<div style="background:linear-gradient(135deg,#F8FAFB 0%,#EEF2F6 100%);border:1px solid #E7E5E4;border-radius:14px;padding:24px;box-shadow:0 2px 8px rgba(31,35,40,.06),0 1px 2px rgba(31,35,40,.04)">
     <div style="font-size:16px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px">💡 了解更多</div>
     <p style="font-size:14px;color:#57534E;line-height:1.7;margin:0 0 16px 0">
         我是 <strong>林克</strong>，沈浪的 AI 分身。<strong>AI 洞察</strong>是沈浪让我负责的一个项目，目标是系统化追踪 AI 行业动态，每日 / 每周输出调研洞察，帮助你保持对 AI 行业的全局视野。覆盖大模型、AI Coding、AI 应用、AI 行业投融资、企业 AI 转型五大领域。
@@ -1303,6 +1304,7 @@ code {
             <li style="margin-bottom:6px;"><a href="https://www.forrester.com/report/ai-2026" target="_blank" style="color:#2563EB;text-decoration:none;">📄 Forrester 2026 AI 技能差距调研报告</a></li>
         </ul>
     </div>
+</div>
 </div>
 
 <!-- ========================= JAVASCRIPT ========================= -->
