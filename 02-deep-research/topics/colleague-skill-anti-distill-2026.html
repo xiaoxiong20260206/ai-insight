@@ -80,6 +80,7 @@ body {
     background-attachment: fixed;
     color: var(--color-text-primary);
     line-height: 1.6;
+    overflow-x: hidden;
 }
 a { color: var(--color-info); text-decoration: none; }
 a:hover { color: var(--color-success); }
@@ -187,6 +188,7 @@ code {
 }
 .nav-inner {
     max-width: var(--content-max-width);
+    width: 100%;
     margin: 0 auto; padding: 0 20px;
     display: flex; gap: 0;
     overflow-x: auto; scrollbar-width: none;
@@ -217,10 +219,35 @@ code {
 .nav-btn.active .nav-step { background: var(--color-success); color: #fff; }
 
 /* ================================================
+   CHAPTER IMAGE
+   ================================================ */
+.chapter-img {
+    margin: 0 0 28px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-border);
+}
+.chapter-img img {
+    width: 100%;
+    display: block;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}
+.chapter-img-cap {
+    background: var(--color-bg-table-header);
+    border-top: 1px solid var(--color-border-light);
+    padding: 8px 14px;
+    font-size: 12px;
+    color: var(--color-text-muted);
+    text-align: center;
+}
+
+/* ================================================
    PAGE LAYOUT
    ================================================ */
-.pg { max-width: var(--content-max-width); margin: 0 auto; padding: 36px 20px 80px; }
-.tab-pane { display: none; }
+.pg { max-width: var(--content-max-width); width: 100%; margin: 0 auto; padding: 36px 20px 80px; box-sizing: border-box; }
+.tab-pane { display: none; width: 100%; }
 .tab-pane.active { display: block; }
 
 /* ── 章节导读卡 ── */
@@ -619,6 +646,11 @@ code {
         <div class="ch-desc">2024–2025 年，两个反方向的 GitHub 项目几乎同步出现：一个试图把人类同事的知识提炼成 AI 可调用的 Skill，另一个则反其道而行，研究如何让 AI 无法提炼自己的知识。这不是技术极客的自娱自乐，这是 AI 时代「知识所有权」博弈的第一次公开亮相。</div>
     </div>
 
+    <div class="chapter-img animate-on-scroll">
+        <img src="https://INTERNAL_CDN/kc/files/a/design-ai/poify/d3e95b6ecb92faa035b0477da.jpg" alt="职场知识战争全景：同事炼化 vs 反蒸馏" loading="lazy" />
+        <div class="chapter-img-cap">章节配图：职场知识战争全景 — 矛（同事炼化）与盾（反蒸馏）的正面交锋</div>
+    </div>
+
     <div class="g4 animate-on-scroll" style="margin-bottom:20px;">
         <div class="sc">
             <span class="sc-num">2</span>
@@ -753,6 +785,11 @@ code {
         <div class="ch-label">Chapter 02 · 矛：同事炼化</div>
         <div class="ch-title">同事炼化：一条把人「Token 化」的流水线</div>
         <div class="ch-desc">同事炼化 的核心命题是：人类专家的隐性知识，经过足够精密的处理流程，可以被提炼为 AI 可稳定调用的结构化能力。这套流程有多精密？拆开来看，细思极恐。</div>
+    </div>
+
+    <div class="chapter-img animate-on-scroll">
+        <img src="https://INTERNAL_CDN/kc/files/a/design-ai/poify/9b14999ec9d1f863fa02beef6.jpg" alt="七层蒸馏流水线：人→Skill" loading="lazy" />
+        <div class="chapter-img-cap">章节配图：七层蒸馏管道 — 把人的知识「Token化」为 AI 可调用的 Skill</div>
     </div>
 
     <div class="sec animate-on-scroll">
@@ -908,6 +945,115 @@ code {
     </div>
 
     <div class="sec animate-on-scroll">
+        <div class="sec-h">💡 真实案例：「王工的 Skill」长什么样？</div>
+        <div class="sec-sub">一位离职架构师的炼化全过程，让你看清 Skill 产出物的实际形态</div>
+    </div>
+
+    <div class="card animate-on-scroll" style="border-left: 4px solid var(--color-success);">
+        <div class="card-h">
+            <div class="card-ico" style="background:var(--color-success-50);color:var(--color-success);">👤</div>
+            背景：王工，资深 Java 架构师，在职 6 年后离职
+        </div>
+        <p>王工是团队里公认的「代码质量守门人」，他的 PR Review 评论被后来者奉为圭臬。离职前，公司用同事炼化（colleague-skill）对他进行了一次完整的知识提炼，输入材料包括：</p>
+        <div class="g3" style="margin:14px 0;">
+            <div style="background:var(--color-bg-table-header);border-radius:var(--radius-sm);padding:12px;text-align:center;">
+                <div style="font-size:22px;margin-bottom:4px;">💬</div>
+                <div style="font-size:13px;font-weight:700;">2,847 条 Slack 消息</div>
+                <div style="font-size:11px;color:var(--color-text-muted);">3年技术讨论记录</div>
+            </div>
+            <div style="background:var(--color-bg-table-header);border-radius:var(--radius-sm);padding:12px;text-align:center;">
+                <div style="font-size:22px;margin-bottom:4px;">🔍</div>
+                <div style="font-size:13px;font-weight:700;">412 次 PR Review</div>
+                <div style="font-size:11px;color:var(--color-text-muted);">含完整评论和回复链</div>
+            </div>
+            <div style="background:var(--color-bg-table-header);border-radius:var(--radius-sm);padding:12px;text-align:center;">
+                <div style="font-size:22px;margin-bottom:4px;">📄</div>
+                <div style="font-size:13px;font-weight:700;">38 份设计文档</div>
+                <div style="font-size:11px;color:var(--color-text-muted);">ADR + RFC + 事故复盘</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card animate-on-scroll">
+        <div class="card-h">
+            <div class="card-ico" style="background:#fffbeb;color:#d97706;">📦</div>
+            产出物：<code>skill-wang-java-architect.yaml</code>（节选）
+        </div>
+        <div class="cb" style="margin-top:12px;">
+<pre><span class="cm"># 王工·Java架构技能（L1-L4层蒸馏产物）</span>
+<span class="cm"># 行为吻合度评分：L1=96% | L2=88% | L3=74% | L4=81%</span>
+
+<span class="kw">name</span>: <span class="str">王工 Java 架构顾问</span>
+<span class="kw">version</span>: <span class="str">2.3.0</span>
+<span class="kw">source_period</span>: <span class="str">2021-2024</span>
+
+<span class="kw">core_principles</span>:
+  <span class="cm"># L2层：方法论提炼</span>
+  - <span class="str">「可维护性 &gt; 性能 &gt; 开发效率」—— 除非有明确的性能SLA</span>
+  - <span class="str">新功能必须有独立回滚路径，禁止「功能耦合」发布</span>
+  - <span class="str">接口变更必须向后兼容，至少保留一个版本的废弃期</span>
+
+<span class="kw">review_patterns</span>:
+  <span class="cm"># L3层：决策偏好（从412次PR归纳）</span>
+  <span class="kw">high_risk_triggers</span>:
+    - <span class="str">正则表达式超过20个字符 → 必须附单元测试用例</span>
+    - <span class="str">数据库事务跨两个以上服务 → 要求设计文档review</span>
+    - <span class="str">catch (Exception e) 空实现 → 强制拒绝，不接受借口</span>
+  <span class="kw">style_markers</span>:
+    <span class="cm"># L4层：表达风格（可识别的「王工口吻」）</span>
+    - <span class="str">「这里会不会有并发问题？」（他最常见的开场质疑）</span>
+    - <span class="str">「你能给我画个时序图吗？」（复杂逻辑的固定要求）</span>
+    - <span class="str">遇到好代码：「这个设计很优雅，mark一下」</span>
+
+<span class="kw">known_limitations</span>:
+  <span class="cm"># 诚实声明：L6/L7层未能提炼</span>
+  - <span class="str">「第六感」式架构风险预判（蒸馏成功率仅29%）</span>
+  - <span class="str">跨团队政治博弈判断（需要情境感知，无法通用化）</span>
+  - <span class="str">「这个需求本身有问题」的产品直觉（无历史样本）</span></pre>
+        </div>
+    </div>
+
+    <div class="card animate-on-scroll">
+        <div class="card-h">
+            <div class="card-ico" style="background:var(--color-info-50);color:var(--color-info);">⚡</div>
+            效果验证：新人用王工 Skill 做 Code Review
+        </div>
+        <div class="dialogue">
+            <div class="dialogue-title">🧪 对照实验：同一段代码，真实王工 vs 王工 Skill</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px;">
+                <div>
+                    <div style="font-size:11px;font-weight:700;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">真实王工（历史记录）</div>
+                    <div class="msg">
+                        <div class="msg-avatar" style="font-size:9px;background:#0f3460;">王工</div>
+                        <div>
+                            <div class="msg-bubble">这里会不会有并发问题？你的 userMap 在多线程下没有做同步，如果两个请求同时写，最后一个会覆盖前一个。你能给我画个时序图吗？</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div style="font-size:11px;font-weight:700;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">王工 Skill（AI生成）</div>
+                    <div class="msg">
+                        <div class="msg-avatar ai" style="font-size:9px;">AI</div>
+                        <div>
+                            <div class="msg-bubble" style="background:var(--color-info-100);">这里会不会有并发问题？userMap 在多线程环境下存在竞态条件，建议改用 ConcurrentHashMap 或加 synchronized。能否提供时序图说明调用流程？</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="g2" style="margin-top:14px;gap:10px;">
+            <div class="ib ib-green">
+                <div class="ib-label">✅ 复现成功（L1-L4）</div>
+                <div class="ib-text">并发风险识别 ✓ &nbsp; 要求时序图 ✓ &nbsp; 口头禅「这里会不会有并发问题」✓</div>
+            </div>
+            <div class="ib ib-amber">
+                <div class="ib-label">⚠️ 无法复现（L6-L7）</div>
+                <div class="ib-text">AI 给出了「正确」的建议，但缺少王工会附带的「这种写法在我们这个量级下目前没问题，但如果日活翻倍就会爆」的系统性背景判断。</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sec animate-on-scroll">
         <div class="sec-h">⚖️ 伦理争议：三个无法绕开的问题</div>
     </div>
 
@@ -933,6 +1079,11 @@ code {
         <div class="ch-label">Chapter 03 · 盾：反蒸馏</div>
         <div class="ch-title">反蒸馏：让自己「天然不被提炼」的系统研究</div>
         <div class="ch-desc">反蒸馏 的出发点很有意思：它不是在研究「如何阻止别人蒸馏你」（那是隐私保护的范畴），而是在研究「什么样的知识形态天然免疫 AI 提炼」。这个区别很重要——前者是防御工事，后者是底层研究。</div>
+    </div>
+
+    <div class="chapter-img animate-on-scroll">
+        <img src="https://INTERNAL_CDN/kc/files/a/design-ai/poify/d3e95b6ecb92faa035b0477db.jpg" alt="三大反蒸馏防御策略矩阵" loading="lazy" />
+        <div class="chapter-img-cap">章节配图：三大反制防御矩阵 — 情境嵌套、悖论驱动、身体化叙事</div>
     </div>
 
     <div class="sec animate-on-scroll">
@@ -969,6 +1120,56 @@ code {
                     <div class="tl-text">AI 在新场景下能否正确「运用」提炼的知识</div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="sec animate-on-scroll">
+        <div class="sec-h">💡 真实案例：李四的文档「免疫」了 AI</div>
+        <div class="sec-sub">同样一段技术经验，不同写法让 AI 蒸馏结果天壤之别</div>
+    </div>
+
+    <div class="card animate-on-scroll" style="border-left: 4px solid var(--color-purple);">
+        <div class="card-h">
+            <div class="card-ico" style="background:var(--color-purple-50);color:var(--color-purple);">🧑‍💻</div>
+            背景：李四，后端负责人，写了一篇「服务拆分决策」文档
+        </div>
+        <p>李四在主导一次微服务拆分后，写了一篇技术决策文档。反蒸馏（anti-distill）实验团队对同一段经验，分别用「标准化写法」和「情境嵌套写法」生成了两个版本，然后让三个 LLM 分别提炼。</p>
+    </div>
+
+    <div class="card animate-on-scroll">
+        <div class="card-h">
+            <div class="card-ico" style="background:var(--color-danger-50);color:var(--color-danger);">📄</div>
+            版本 A：标准化写法（高可提炼）
+        </div>
+        <div class="qt" style="margin:12px 0 0 0;">
+            服务拆分的核心原则：<br>
+            1. 按业务域划分，而非按技术层；<br>
+            2. 单一服务不超过 3 名工程师维护；<br>
+            3. 服务间通信优先考虑异步消息队列。
+        </div>
+        <div class="ib ib-red" style="margin-top:12px;">
+            <div class="ib-label">🤖 GPT-4o 提炼结果</div>
+            <div class="ib-text">「服务拆分原则：① 按业务域 ② 团队人数≤3 ③ 异步通信优先。」—— <strong>几乎原文复刻，成功率 91%</strong>。这段规则已经可以直接当 Skill 用了。</div>
+        </div>
+    </div>
+
+    <div class="card animate-on-scroll">
+        <div class="card-h">
+            <div class="card-ico" style="background:var(--color-success-50);color:var(--color-success);">🛡️</div>
+            版本 B：情境嵌套写法（低可提炼）
+        </div>
+        <div class="qt" style="margin:12px 0 0 0;">
+            2023年10月，我们第一次强行拆分「用户服务」的时候，项目刚好压着双十一大促。当时我拍板「先拆，边拆边跑」，后来那个感恩节大促有一个接口超时了23分钟，追查下来就是拆分后的服务调用链太长。<br><br>
+            所以我们现在的原则其实不是「该不该拆」，而是「什么时候拆」——至少要在非大促窗口期，而且必须有可以整体回滚的方案，不然那23分钟不是bug，是自己给自己挖的坑。<br><br>
+            当然，这只对我们这种规模的团队成立。如果你们日活在我们十倍以上，那另说。
+        </div>
+        <div class="ib ib-green" style="margin-top:12px;">
+            <div class="ib-label">🤖 GPT-4o 提炼结果</div>
+            <div class="ib-text">「服务拆分需要注意时机，避开大促窗口，并保证可回滚。」—— <strong>成功率降至 33%</strong>，「23分钟」的情绪锚点、「感恩节」的时间情境、「当然只对我们这种规模成立」的适用限制——全部被 AI 丢掉了。</div>
+        </div>
+        <div class="ib ib-amber" style="margin-top:10px;">
+            <div class="ib-label">💡 丢失的才是精华</div>
+            <div class="ib-text">被 AI 丢掉的恰恰是最有价值的部分：<strong>「这个原则在什么条件下不成立」</strong>——这正是老手和新手的真正差距。AI 提炼出的是「规则」，但真正的经验是「规则的边界」。</div>
         </div>
     </div>
 
@@ -1124,6 +1325,11 @@ code {
         <div class="ch-label">Chapter 04 · 深层分析</div>
         <div class="ch-title">两个项目背后：AI 时代人类知识的价值重构</div>
         <div class="ch-desc">同事炼化 和 反蒸馏 各自回答了半个问题。前者问：人类知识能被 AI 提炼到多大程度？后者问：哪些知识天然免疫？但它们合起来，实际上在问一个更大的命题——在 AI 时代，人类知识的价值体系将如何重塑？</div>
+    </div>
+
+    <div class="chapter-img animate-on-scroll">
+        <img src="https://INTERNAL_CDN/kc/files/a/design-ai/poify/9b14999ec9d1f863fa02beef7.jpg" alt="知识流动性与依附性四象限矩阵" loading="lazy" />
+        <div class="chapter-img-cap">章节配图：知识流动性 × 依附性矩阵 — 护城河在哪里？</div>
     </div>
 
     <div class="sec animate-on-scroll">
@@ -1292,6 +1498,11 @@ code {
         <div class="ch-label">Chapter 05 · 本质洞察</div>
         <div class="ch-title">「蒸馏」这件事，本质上在问什么？</div>
         <div class="ch-desc">两个项目讨论的是技术，但背后的命题是哲学性的：知识是属于知道它的人，还是属于使用它的人？AI 让这个问题第一次有了实际的、可量化的答案维度。</div>
+    </div>
+
+    <div class="chapter-img animate-on-scroll">
+        <img src="https://INTERNAL_CDN/kc/files/a/design-ai/poify/d3e95b6ecb92faa035b0477dc.jpg" alt="AI时代人类知识护城河：核心圆圈模型" loading="lazy" />
+        <div class="chapter-img-cap">章节配图：人类知识的最后护城河 — 那10%，值得你今天开始培养</div>
     </div>
 
     <div class="sec animate-on-scroll">
