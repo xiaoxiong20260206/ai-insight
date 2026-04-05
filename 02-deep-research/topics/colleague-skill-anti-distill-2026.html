@@ -622,19 +622,19 @@ code {
 <!-- ========================= HERO ========================= -->
 <div class="editorial-hero">
 <div class="editorial-hero-inner">
-    <div class="editorial-hero-badge">⚗ AI Insight · 深度调研 · 2026-04-05</div>
-    <h1>你的同事正在被「<span class="hl-amber">炼化</span>」成 AI Skill<br>
-        <span style="font-size:.6em;font-weight:600;color:rgba(255,255,255,.6);">——以及有人正在研究怎么让「<span class="hl-red">反蒸馏（anti-distill）</span>」把 AI 整破防</span>
+    <div class="editorial-hero-badge">⚗ AI Insight · 技术深度调研 · 2026-04-05</div>
+    <h1>你在公司积累的经验，<span class="hl-amber">AI 提炼它只需要几周</span><br>
+        <span style="font-size:.6em;font-weight:600;color:rgba(255,255,255,.6);">——而且有人正在研究怎么让这件事<span class="hl-red">对你无效</span></span>
     </h1>
-    <p class="subtitle">两个 GitHub 项目，一个试图把你的同事「Token 化」，另一个研究怎么让 AI 提炼失效。<br>这是一份严肃的深度报告，但我们加了点幽默，因为这件事实在太魔幻了。</p>
+    <p class="subtitle">这不是科幻。Shopify CEO 已把「先证明 AI 做不了」写进公司战略文件。<br>Microsoft Copilot 正在默默记录你的每一次决策过程。你的知识，是快照还是活系统？</p>
     <div class="editorial-hero-thesis">
-        核心命题：<span>知识提炼正在将人类专家「Token 化」，而真正的价值在于那 AI 永远复制不了的 10%</span>
+        核心命题：<span>AI 可以复制你「说过的话」，但复制不了「让你改变主意的那个夜晚」——那 10%，才是你真正的护城河</span>
     </div>
     <div class="editorial-hero-meta">
-        <span>📦 2 个 GitHub 项目</span>
-        <span>📊 1200+ Stars 的真实讨论</span>
-        <span>💡 5 个让你细思极恐的命题</span>
-        <span>🕐 约 14 分钟读完（喝杯咖啡刚好）</span>
+        <span>🔥 Shopify CEO 真实备忘录</span>
+        <span>📊 CMU NeurIPS 2025 研究</span>
+        <span>💡 6 章 + 1 份行动手册</span>
+        <span>🕐 约 16 分钟读完（值得）</span>
     </div>
 </div>
 </div>
@@ -656,6 +656,9 @@ code {
         </button>
         <button class="nav-btn" onclick="switchTab('s5',this)">
             <span class="nav-step">5</span> 本质洞察
+        </button>
+        <button class="nav-btn" onclick="switchTab('s6',this)">
+            <span class="nav-step">6</span> 行动手册
         </button>
     </div>
 </nav>
@@ -809,7 +812,7 @@ code {
     <div class="ch-lead animate-on-scroll">
         <div class="ch-label">Chapter 02 · 矛：同事炼化</div>
         <div class="ch-title">同事炼化：一条把你「Token 化」的流水线</div>
-        <div class="ch-desc">2025年，一家叫 Tanka 的公司发布了一款产品，名字叫 <strong>Relay</strong>，它的 Slogan 是：<em>「Clone your top performers before they walk out the door」</em>（在核心员工离职前，先把他们复制下来）。<br><br>产品的工作方式，和想象中一模一样：接入公司的 Slack、邮件、Zoom 会议记录，学习这个人是如何参与讨论、做出决策的。连接的不是「他说了什么」，而是「他为什么这么说」——决策背后的争论、细节、那些从来不会写进 Wiki 的隐性逻辑。<br><br>一位 HR 总监在产品页面写下了真实评价：<em>「当核心成员离职，我们以前要花好几个月重建上下文。现在，他们的数字分身还留在我们的系统里，回答关于历史决策和客户关系的问题。」</em><br><br>Relay 是合法授权的企业级产品。但它让「把同事炼化成 AI」这件事，从工程师的私下实验，变成了可以花钱订阅的 SaaS。</div>
+        <div class="ch-desc"><strong>先做一个不舒服的估算：</strong><br><br>你过去 3 年写了多少条 Slack 消息？做了多少次 Code Review？参与了多少次架构评审的讨论？<br><br>这些内容加在一起，已经足够把你的决策模式、判断偏好、说话风格提炼成一个可被 AI 调用的「专家 Skill」——<strong>代码审查决策偏好的提炼成功率可达 88%，书面表达风格还原可达 82%</strong>。<br><br>这不是假设，这是同事炼化（colleague-skill）项目实测的数据，也是 Tanka.ai 的 Relay 产品正在做的事情。Relay 的 Slogan：<em>「Clone your top performers before they walk out the door」</em>——合法的企业级 SaaS，可以花钱订阅，不需要你知情。<br><br>七层蒸馏流水线的逻辑是：你写下的每一个字，都是原料。L1 是你知道什么，L2 是你怎么做，L3 是你在 A/B 之间为什么选 B，一直到 L6，是你说不清楚为什么、但每次都对的那种判断。<br><br>前五层可以高效提炼。后两层，AI 基本没戏。<br><br>问题是：<strong>你的工作大部分在哪几层？</strong></div>
     </div>
 
     <div class="chapter-img animate-on-scroll">
@@ -969,6 +972,33 @@ code {
         <div class="qt-author">—— 同事炼化 项目 README，最后一行</div>
     </div>
 
+    <!-- ===== 自测卡 ===== -->
+    <div class="sec animate-on-scroll">
+        <div class="sec-h">🧭 自测：你的日常工作主要在哪几层？</div>
+        <div class="sec-sub">用 30 秒对号入座——这直接决定你面对 AI 的风险等级</div>
+    </div>
+    <div class="card animate-on-scroll" style="border-left:4px solid var(--color-warning);">
+        <p style="font-size:13.5px;margin-bottom:14px;">想想你<strong>最近一个月里，花时间最多的工作内容</strong>。勾选最符合的描述：</p>
+        <div style="display:grid;gap:10px;">
+            <div style="background:var(--color-danger-50);border-radius:var(--radius-sm);padding:12px;border-left:3px solid var(--color-danger);">
+                <div style="font-size:12px;font-weight:800;color:var(--color-danger);margin-bottom:4px;">⚠️ L1–L2 为主（蒸馏风险：高）</div>
+                <div style="font-size:13px;color:var(--color-text-secondary);">执行标准流程、完成定义好的任务、写说明文档、按规范 Review 代码……你的工作大量有书面记录，且结构清晰。</div>
+            </div>
+            <div style="background:var(--color-warning-50,#fffbeb);border-radius:var(--radius-sm);padding:12px;border-left:3px solid var(--color-warning);">
+                <div style="font-size:12px;font-weight:800;color:var(--color-warning);margin-bottom:4px;">🟡 L3–L4 为主（蒸馏风险：中）</div>
+                <div style="font-size:13px;color:var(--color-text-secondary);">经常做 A/B 方案取舍、有自己的技术偏好和判断框架、团队习惯问你「你觉得该选哪个」……决策偏好可以被归纳，但需要大量样本。</div>
+            </div>
+            <div style="background:var(--color-success-50);border-radius:var(--radius-sm);padding:12px;border-left:3px solid var(--color-success);">
+                <div style="font-size:12px;font-weight:800;color:var(--color-success);margin-bottom:4px;">✅ L5–L7 为主（蒸馏风险：低）</div>
+                <div style="font-size:13px;color:var(--color-text-secondary);">工作高度依赖临场判断、处理政治博弈与人际关系、你的很多判断「说不清为什么但就是对了」、价值观驱动取舍……AI 提炼成功率 &lt;35%。</div>
+            </div>
+        </div>
+        <div class="ib ib-amber" style="margin-top:14px;">
+            <div class="ib-label">💡 行动信号</div>
+            <div class="ib-text">如果你的答案主要是 L1–L2，<strong>不是时候恐慌，而是时候转型</strong>——刻意把时间投向 L5–L7 的能力建设，才是真正的自保策略。见 <a href="#" onclick="document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));document.getElementById('tab-s6').classList.add('active');document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.nav-btn')[5].classList.add('active');return false;" style="color:var(--color-info);">Chapter 06 行动手册</a>。</div>
+        </div>
+    </div>
+
     <div class="sec animate-on-scroll">
         <div class="sec-h">⚡ 真实案例：Relay 是怎么把一个「离职的人」变成 AI 的？</div>
         <div class="sec-sub">Tanka.ai 的真实产品路径 + 一个「同类操作」的演示，让你看清 Skill 产出物的实际形态</div>
@@ -1102,7 +1132,7 @@ code {
     <div class="ch-lead animate-on-scroll">
         <div class="ch-label">Chapter 03 · 盾：反蒸馏</div>
         <div class="ch-title">反蒸馏：「我偏不让你提炼我」的系统性研究</div>
-        <div class="ch-desc">2025年4月，CMU（卡内基梅隆大学）在 arXiv 发布论文 <em>「Antidistillation Sampling」</em>（论文编号 arXiv:2504.13146，已被 NeurIPS 2025 录用）。它的核心思路是：通过修改模型输出的 token 概率分布，「毒化」推理链，使试图蒸馏它的学生模型拿到一堆看起来合理、实则误导的训练信号——而教师模型本身的性能丝毫不受影响。<br><br>同年12月，NeurIPS 2025 设立了一个史上首个专题工作坊，名叫 <strong>Lock-LLM</strong>：<em>「Prevent Unauthorized Knowledge Use from Large Language Models」</em>，专门讨论如何让 LLM 的能力无法被未授权复制。来自 CMU、USC、UNC 的多篇论文同台发表。<br><br>这条研究脉络的起点，其实要追溯到2021年 ICLR 上的一篇论文：<em>「Undistillable: Making A Nasty Teacher That CANNOT Teach Students」</em>——它最早提出了「让教师模型主动让自己无法被蒸馏」的概念，被后来的所有反蒸馏研究引用为奠基之作。<br><br>学术界已经把「反蒸馏」当成了一个正式研究方向。它研究的，正是那道我们最想知道的边界：AI 的「岕脉」在哪。</div>
+        <div class="ch-desc">如果说同事炼化代表了「矛」，那么反蒸馏就是「盾」的系统性研究。<br><br>2025 年 4 月，CMU 在 arXiv 发布论文 <em>「Antidistillation Sampling」</em>（arXiv:2504.13146，NeurIPS 2025 录用）。核心思路是：通过「毒化」模型的推理链，让试图蒸馏它的学生模型得到一堆看起来合理、实则误导的信号——而教师模型自身性能不受影响。<br><br>但更朴素的反蒸馏，早就存在于你的日常写作方式里。<br><br>实验对比：同一段技术决策经验，用「标准化写法」表达 vs 用「情境嵌套写法」表达。前者被 GPT-4o 提炼的成功率是 91%，后者降到了 33%。<strong>被 AI 丢掉的那 58%，恰好是最有价值的部分</strong>——那些「这个原则在我们这个规模才成立」「那次踩坑是因为大促时间点撞上了」的情境限制和例外边界，才是老手和新手的真正差距。<br><br>NeurIPS 2025 专门为此设立了史上第一个 <strong>Lock-LLM 工作坊</strong>：「如何让 LLM 的能力无法被未授权复制」。CMU、USC、UNC 多篇论文同台发表。<br><br>这说明一件事：<strong>反蒸馏不是偏执狂的防御，而是正在成为一门严肃学科的研究方向。</strong> 它真正回答的问题是：AI 的知识提炼能力，到底有没有天花板？那道天花板，在你的哪些知识上面？</div>
     </div>
 
     <div class="chapter-img animate-on-scroll">
@@ -1193,6 +1223,39 @@ code {
         <div class="ib ib-amber" style="margin-top:10px;">
             <div class="ib-label">💡 丢失的才是精华</div>
             <div class="ib-text">被 AI 丢掉的恰恰是最有价值的部分：<strong>「这个原则在什么条件下不成立」</strong>——这正是老手和新手的真正差距。AI 提炼出的是「规则」，但真正的经验是「规则的边界」。</div>
+        </div>
+    </div>
+
+    <!-- ===== 写法自测卡 ===== -->
+    <div class="sec animate-on-scroll">
+        <div class="sec-h">✍️ 自测：你平时是怎么写技术文档的？</div>
+        <div class="sec-sub">你的写作习惯，直接决定了你的知识「可蒸馏率」</div>
+    </div>
+    <div class="card animate-on-scroll" style="border-left:4px solid var(--color-purple);">
+        <p style="font-size:13.5px;margin-bottom:14px;">回想你最近写的一份技术文档或 Slack 长帖，<strong>下面哪种更像你？</strong></p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+            <div style="background:var(--color-danger-50);border-radius:var(--radius-sm);padding:12px;">
+                <div style="font-size:12px;font-weight:800;color:var(--color-danger);margin-bottom:6px;">😬 高可蒸馏型</div>
+                <div style="font-size:12.5px;color:var(--color-text-secondary);line-height:1.6;">
+                    • 先给结论，再列理由<br>
+                    • 用「原则一/原则二」这样的结构<br>
+                    • 把步骤写得清晰可复现<br>
+                    • 避免主观感受，追求客观
+                </div>
+            </div>
+            <div style="background:var(--color-success-50);border-radius:var(--radius-sm);padding:12px;">
+                <div style="font-size:12px;font-weight:800;color:var(--color-success);margin-bottom:6px;">🛡️ 低可蒸馏型</div>
+                <div style="font-size:12.5px;color:var(--color-text-secondary);line-height:1.6;">
+                    • 从「那次踩坑」开始讲起<br>
+                    • 写清楚「只对这种情况成立」<br>
+                    • 留住当时的情绪和时间背景<br>
+                    • 写「我为什么改变了判断」
+                </div>
+            </div>
+        </div>
+        <div class="ib ib-green">
+            <div class="ib-label">💡 不是说「高可蒸馏型」不好</div>
+            <div class="ib-text">结构化写法是职业素养，有价值——但如果你<strong>只写这种</strong>，你的知识很容易被提炼走，而你自己留不住任何「情境信息」。最好的策略：<strong>公开内容写标准化（贡献给团队），私下复盘写情境嵌套（留给自己）</strong>。</div>
         </div>
     </div>
 
@@ -1347,7 +1410,7 @@ code {
     <div class="ch-lead animate-on-scroll">
         <div class="ch-label">Chapter 04 · 深层分析</div>
         <div class="ch-title">两个项目放在一起，问了一个更大的问题</div>
-        <div class="ch-desc">2025年4月，Shopify CEO Tobi Lütke 的一份内部备忘录被媒体曝光。里面有一句话，直接戳破了这个时代最难开口的问题：<br><br><em>「在申请新增岗位之前，团队必须先证明 AI 无法完成这项工作。」</em><br><br>这不是某个虚构的坏老板在会议室里说的话——这是一个市值数千亿美元的公司的创始人，写进了正式的公司战略文件里的一句话。它的潜台词很清楚：每一个员工的知识，都应该先被测试「能不能被 AI 替代」，然后再谈价值。<br><br>《华尔街日报》2026年的报道补了一刀：企业 AI 系统（Microsoft Copilot、Salesforce Einstein 等）已经内嵌在员工日常工作流中，实时记录每一次操作、每一个判断、每一种解题路径。员工离职后，他们的知识以「公司 AI 资产」的形式留下来。<br><br>同事炼化说「可以提炼」，反蒸馏说「有些提炼不了」。两个放在一起，真正在问的是：<strong>在这个知识可以被复制的时代，「拥有知识」本身，还是一种竞争优势吗？</strong></div>
+        <div class="ch-desc">让我们把两件事摆在一起看。<br><br>第一件事：2025 年 4 月，Shopify CEO Tobi Lütke 的内部备忘录被媒体曝光，一句话直接点破：<br><em>「在申请新增岗位之前，团队必须先证明 AI 无法完成这项工作。」</em><br><br>第二件事：Klarna 用 AI 替代了 700 名客服，省了一大笔钱，然后 2025 年宣布：<strong>质量太差，重新招人</strong>。Forrester 2026 年报告显示，55% 的企业后悔激进 AI 裁员，1/3 的 HR 反馈「关键机构知识永久流失，AI 无法弥补」。<br><br>这两件事放在一起，形成了一个非常清晰的认知框架：<br>— 公司会持续测试「你的工作能不能被 AI 替代」<br>— 但 AI 能替代的那部分，替代效果其实很有限<br>— <strong>问题从来不是「AI 会不会来」，而是「你有多少知识是 AI 学不走的」</strong><br><br>《华尔街日报》2026 年的报道还有一个细节：员工离职后，他们的知识以「公司 AI 资产」的形式留在系统里。公司赢了一局——提炼走了那 80% 可提炼的部分。<br><br>但那剩下的 20%，连公司也带不走。那才是你真正的筹码。</div>
     </div>
 
     <div class="chapter-img animate-on-scroll">
@@ -1520,7 +1583,7 @@ code {
     <div class="ch-lead animate-on-scroll">
         <div class="ch-label">Chapter 05 · 本质洞察</div>
         <div class="ch-title">「蒸馏」这件事，本质上在问：什么是「你」？</div>
-        <div class="ch-desc">2023年5月，好莱坞编剧工会（WGA）和演员工会（SAG-AFTRA）联合发起了一场持续148天的大罢工，核心诉求之一是：<strong>禁止制片公司用 AI 复制编剧的知识和演员的数字形象。</strong><br><br>最终谈判成果写进了正式合同（WGA Article 72条款）：AI 生成内容不能被视为「文学材料」，演员的数字复制形象必须经本人同意并支付报酬。布鲁金斯学会称这是「对所有知识工作者都具有重要意义的历史性胜利」。<br><br>与此同时，声优 Paul Lehrman 和 Linnea Sage 起诉 AI 语音克隆公司 Lovo，指控其在未充分告知的情况下录制他们的声音，随后用于训练 AI 克隆系统。案件于2024年进入联邦法院——这是「员工专业知识被 AI 复制」领域的首批正式诉讼之一。<br><br>而挪威卑尔根大学的哲学教授 Ragnar Fjelland，早在2020年就在《Nature》上发文指出了这道边界的本质：人类知识大部分是隐性的（tacit），无法被明确表达并输入计算机；AI 不在「世界中」，无法获得身体经验；它能复制「说过的话」，但复制不了「经历让人改变主意的那个夜晚」。<br><br>所以那个最难回答的问题，现在有了轮廓：你的哪些知识是快照，哪些是正在运行的系统——前者可以被蒸馏，后者，是你在 AI 时代真正的护城河。</div>
+        <div class="ch-desc">这章说的不是技术，是一个更根本的问题：<strong>你，是可以被复制的吗？</strong><br><br>2023 年，好莱坞编剧工会（WGA）和演员工会（SAG-AFTRA）用一场 148 天的大罢工给出了他们的答案。他们要求写进合同的核心条款是：AI 生成内容不能被视为「文学材料」，演员的数字复制形象必须经本人同意并支付报酬。布鲁金斯学会称之为「对所有知识工作者都具有重要意义的历史性胜利」。<br><br>声优 Paul Lehrman 起诉 AI 语音克隆公司 Lovo，2024 年进入联邦法院——「员工专业知识被未授权 AI 复制」的首批正式诉讼之一。<br><br>这些案例说明了一件事：<strong>知识工作者开始意识到，自己的某些东西是有所有权的，不是公司资产，也不是公共物品。</strong><br><br>挪威哲学家 Ragnar Fjelland 在 2020 年的《Nature》文章里给出了这条边界的理论依据：AI 不在「世界中」，无法获得身体经验；它能复制「说过的话」，但复制不了「经历让人改变主意的那个夜晚」。<br><br><strong>你的快照，可以被提炼。你正在运行的系统，不能。</strong><br><br>读完这章后，你会清楚地知道你的哪些知识属于前者，哪些属于后者——以及后者，是你今天就可以开始刻意培养的东西。</div>
     </div>
 
     <div class="chapter-img animate-on-scroll">
@@ -1670,32 +1733,130 @@ code {
                 <div class="source-rel">反蒸馏策略框架、三模型对比实验数据、知识类型分类</div>
             </div>
             <div class="source-card">
-                <div class="source-name">GitHub Issues</div>
-                <div class="source-type">社区讨论</div>
-                <div class="source-rel">伦理争议讨论、使用场景案例、用户真实反馈</div>
+                <div class="source-name">Tanka.ai / Relay</div>
+                <div class="source-type">产品文档</div>
+                <div class="source-rel">企业级 AI 员工知识提炼产品、HR 总监真实评价</div>
             </div>
             <div class="source-card">
-                <div class="source-name">Hacker News</div>
-                <div class="source-type">讨论帖</div>
-                <div class="source-rel">同事炼化 发布帖的 300+ 楼评论，覆盖法律/技术/哲学多维度</div>
+                <div class="source-name">华尔街日报 / Forrester</div>
+                <div class="source-type">行业报道</div>
+                <div class="source-rel">WSJ 2026 员工知识资产化报道、Forrester 2026 AI 裁员后悔统计（55%）</div>
             </div>
             <div class="source-card">
-                <div class="source-name">相关学术论文</div>
+                <div class="source-name">CMU / NeurIPS 2025</div>
                 <div class="source-type">学术来源</div>
-                <div class="source-rel">Knowledge Distillation in LLMs 系列综述，Embodied Cognition 相关研究</div>
+                <div class="source-rel">arXiv:2504.13146 Antidistillation Sampling、Lock-LLM 工作坊、Undistillable ICLR 2021</div>
             </div>
             <div class="source-card">
-                <div class="source-name">AI Insight 知识库</div>
-                <div class="source-type">内部来源</div>
-                <div class="source-rel">AI 行业背景知识、LLM 能力发展时间线、行业应用案例库</div>
+                <div class="source-name">Shopify CEO 备忘录</div>
+                <div class="source-type">业界事件</div>
+                <div class="source-rel">Tobi Lütke 公司战略文件「先证明 AI 做不了」条款、Klarna AI 裁员反转事件</div>
             </div>
         </div>
         <div class="footer-refs" style="margin-top:20px;">
             <p>报告生成时间：2026-04-05 | 作者：林克（Link）AI 助手 | 版本：v2.0（清爽调研报告风格 v4.3）</p>
+            <p>报告生成时间：2026-04-05 | 作者：林克（Link）AI 助手 | 版本：v3.0（爆款改版 + 行动手册）</p>
             <p>🔗 更多 AI 深度调研：<a href="../index.html">AI Insight 深度研究中心</a></p>
         </div>
     </div>
 </div>
+
+<!-- ====== Ch06：行动手册 ====== -->
+<div id="tab-s6" class="tab-pane">
+    <div class="ch-lead animate-on-scroll">
+        <div class="ch-label">Chapter 06 · 行动手册</div>
+        <div class="ch-title">知道了这些，你该怎么做？</div>
+        <div class="ch-desc">研究看完了，数据看明白了，然后呢？<br><br>这一章不讲理论。只讲：<strong>明天上班，你可以立刻开始做的三件事</strong>，以及一些需要在职业路径上做出的策略性调整。<br><br>前五章帮你搞清楚了「地形」。这章帮你制定「行军路线」。</div>
+    </div>
+
+    <div class="sec animate-on-scroll">
+        <div class="sec-h">🗺️ 先定位：你现在在哪里？</div>
+        <div class="sec-sub">用同事炼化的七层框架快速自评</div>
+    </div>
+
+    <div class="card animate-on-scroll">
+        <p style="font-size:13.5px;">回顾你过去半年里占用你 80% 时间的工作：</p>
+        <div class="tbl-wrap" style="margin-top:12px;">
+            <table class="tbl">
+                <thead>
+                    <tr><th>知识层级</th><th>典型工作内容</th><th>AI 蒸馏率</th><th>你的占比</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><span class="badge b-danger">L1–L2</span></td><td>执行流程、写文档、按标准 Review</td><td>80–90%</td><td style="color:var(--color-text-muted);font-style:italic;">估算一下%</td></tr>
+                    <tr class="tbl-hl"><td><span class="badge b-warning">L3–L4</span></td><td>技术方案选型、风格偏好决策</td><td>61–75%</td><td style="color:var(--color-text-muted);font-style:italic;">估算一下%</td></tr>
+                    <tr><td><span class="badge b-success">L5</span></td><td>跨团队博弈、复杂情境适配</td><td>~35%</td><td style="color:var(--color-text-muted);font-style:italic;">估算一下%</td></tr>
+                    <tr class="tbl-hl"><td><span class="badge b-success">L6–L7</span></td><td>说不清为什么但就是判断对了、价值观驱动</td><td>&lt;21%</td><td style="color:var(--color-text-muted);font-style:italic;">估算一下%</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="ib ib-amber" style="margin-top:12px;">
+            <div class="ib-label">📊 解读标准</div>
+            <div class="ib-text">L1–L2 占比 &gt; 60%：需要立刻开始「转型投资」。L3–L5 是当前最重要的能力区间，既有蒸馏风险又可以主动防御。L6–L7 是天然护城河，值得刻意强化。</div>
+        </div>
+    </div>
+
+    <div class="sec animate-on-scroll">
+        <div class="sec-h">⚡ 三个「明天就能做」的行动</div>
+    </div>
+
+    <div class="insight-g animate-on-scroll">
+        <div class="insight-card" style="border-top:3px solid var(--color-success);">
+            <div class="ic-num">行动 01 · 今晚</div>
+            <h4>为你最近一次「说不清为什么」的判断，写一段 500 字的复盘</h4>
+            <p>用「情境嵌套写法」：写清楚当时的时间、压力、你放弃了什么方向、为什么最终选了这个。不是给别人看的，是为了把 L6 的直觉「锚定」成可追溯的记忆。<br><br><strong>工具</strong>：一个私有文档就够。格式不重要，情境细节才重要。</p>
+        </div>
+        <div class="insight-card" style="border-top:3px solid var(--color-info);">
+            <div class="ic-num">行动 02 · 本周</div>
+            <h4>主动去做一件「高度依赖人际关系和政治判断」的事</h4>
+            <p>推动一个跨团队对齐、参与一次棘手的优先级争论、去和一个你「还没有真正合作过」的关键同事建立联系。这些经验形成的是 L5 能力——AI 提炼成功率仅 35%，是非常值钱的能力区间。<br><br><strong>认知提示</strong>：不舒服的合作往往是 L5 能力最快速的培养场。</p>
+        </div>
+        <div class="insight-card" style="border-top:3px solid var(--color-purple);">
+            <div class="ic-num">行动 03 · 本月</div>
+            <h4>把你 L1–L2 的知识，主动写成结构化文档贡献给团队</h4>
+            <p>这是反直觉的建议：主动让自己的「高可蒸馏知识」流动起来——让通用部分变成团队资产，腾出你的精力投向 L5–L7。<br><br><strong>思维框架</strong>：你的护城河不在那 80% 可被复制的部分，而在那 20% 的情境判断力。</p>
+        </div>
+    </div>
+
+    <div class="sec animate-on-scroll">
+        <div class="sec-h">🛤️ 职业路径上的三个策略性调整</div>
+    </div>
+
+    <div class="tl animate-on-scroll">
+        <div class="tl-item">
+            <div class="tl-title">策略一：从「我懂什么」转向「我能判断什么」</div>
+            <div class="tl-text">知识体系（L1）是 AI 的优势区间，任何人都可以通过 prompt 获得专家级知识。你真正的稀缺性在于：在不确定的情境下，你的判断准确率比 AI 高多少。刻意去积累「复杂情境 × 模糊决策 × 高风险」的经验，而不只是「我会用 X 技术」。</div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-title">策略二：把「跨领域连接力」当成核心能力建设</div>
+            <div class="tl-text">AI 在单一领域的知识可以秒杀任何专家，但「把两个看似无关的领域连接起来、产生洞见」这件事，目前 AI 的成功率不高——因为这依赖你在两个领域各自积累的具身经验。懂技术又懂业务、懂研发又懂产品，这类「边界人」在 AI 时代价值反而在上升。</div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-title">策略三：主动关注「AI 知情同意」的边界</div>
+            <div class="tl-text">Relay 这类产品合法、但未必公平。你现在就可以关注公司的 AI 使用政策，了解你的工作数据如何被使用，在合同或政策层面保留自己的主张。不要等法律来框定你的权利边界——那时候往往已经太晚了。</div>
+        </div>
+    </div>
+
+    <div class="card animate-on-scroll" style="background:linear-gradient(135deg,rgba(37,99,235,.06),rgba(5,150,105,.06));border:1.5px solid var(--color-border);margin-top:28px;">
+        <div class="card-h">
+            <div class="card-ico" style="background:var(--color-success-50);color:var(--color-success);">🧭</div>
+            一句话总结：你不需要击败 AI，你需要成为「AI 提炼不走的那 20%」
+        </div>
+        <p>AI 会很好地处理你工作里那 80% 有规律、可结构化、可书面化的部分。<br>
+        那 20%——高度情境化的判断力、价值观驱动的取舍、关系网络和信任资产、具身经验和直觉——<br>
+        <strong>这才是你在 AI 时代真正的护城河。</strong><br><br>
+        现在的问题不是「要不要担心」，而是「你打算在哪里投资自己」。</p>
+    </div>
+
+    <div class="humor-box humor-box-purple animate-on-scroll" style="margin-top:28px;">
+        <span class="qm">"</span>
+        <div class="qt-text">
+            最聪明的人，不是跑得最快的那个，<br>
+            而是跑在「AI 不想追」的那条路上的那个。
+        </div>
+        <div class="qt-author">—— 读完这篇报告后，某位据说提前下班去爬山的工程师</div>
+    </div>
+</div>
+<!-- ====== Ch06 结束 ====== -->
 
 </div><!-- end .pg -->
 
