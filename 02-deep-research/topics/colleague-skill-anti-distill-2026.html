@@ -229,7 +229,7 @@ code {
 .nav-btn.active .nav-step { background: var(--color-success); color: #fff; }
 
 /* ================================================
-   CHAPTER IMAGE
+   CHAPTER IMAGE — 随 .pg 的 padding 自然缩进，不设 width:100%
    ================================================ */
 .chapter-img {
     margin: 0 0 28px;
@@ -239,8 +239,8 @@ code {
     border: 1px solid var(--color-border);
 }
 .chapter-img img {
-    width: 100%;
     display: block;
+    width: 100%;
     aspect-ratio: 16/9;
     object-fit: cover;
 }
@@ -256,8 +256,9 @@ code {
 /* ================================================
    PAGE LAYOUT
    ================================================ */
-.pg { max-width: var(--content-max-width); width: 100%; margin: 0 auto; padding: 36px 20px 80px; box-sizing: border-box; }
-.tab-pane { display: none; width: 100%; }
+/* ---- .pg 宽度正确写法：不设 width，让 max-width + margin:auto 控制居中 ---- */
+.pg { max-width: var(--content-max-width); margin: 0 auto; padding: 36px 20px 80px; box-sizing: border-box; }
+.tab-pane { display: none; }
 .tab-pane.active { display: block; }
 
 /* ── 章节导读卡 ── */
@@ -1083,7 +1084,6 @@ code {
             <p style="font-size:13.5px;">被蒸馏后的 Skill 如果做出与本人价值观相悖的决策建议，责任归谁？「我的 AI 副本说的话，算我说的吗？」目前完全没有答案。</p>
         </div>
     </div>
-</div>
 </div>
 <!-- ===================== TAB 3：盾 — 反蒸馏 ===================== -->
 <div id="tab-s3" class="tab-pane">
