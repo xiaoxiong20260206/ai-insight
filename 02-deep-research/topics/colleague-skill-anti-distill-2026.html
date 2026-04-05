@@ -1,992 +1,1523 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>当同事被「炼化」成Skill：一场职场蒸馏战争的深度解析</title>
-  <style>
-    :root {
-      --bg: #f8f7f4;
-      --surface: #ffffff;
-      --primary: #1a1a2e;
-      --accent: #e94560;
-      --accent2: #0f3460;
-      --accent3: #533483;
-      --muted: #6b7280;
-      --border: #e5e7eb;
-      --code-bg: #1e1e2e;
-      --warn-bg: #fef3c7;
-      --warn-border: #f59e0b;
-      --success-bg: #ecfdf5;
-      --success-border: #10b981;
-      --danger-bg: #fef2f2;
-      --danger-border: #ef4444;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>同事.Skill vs anti-distill：职场蒸馏战争深度解析 | AI Insight</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23533483'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='white'>⚗</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,400&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ================================================
+   DESIGN SYSTEM TOKENS — v4.3 (DM Sans + 叙事混合)
+   ================================================ */
+:root {
+    --color-success: #059669; --color-success-light: #10B981; --color-success-dark: #047857;
+    --color-success-50: #ECFDF5; --color-success-100: #D1FAE5;
+    --color-danger: #E11D48; --color-danger-light: #F43F5E; --color-danger-50: #FFF1F2;
+    --color-warning: #D97706; --color-warning-light: #F59E0B; --color-warning-50: #FFFBEB;
+    --color-info: #2563EB; --color-info-light: #3B82F6;
+    --color-info-50: #EFF6FF; --color-info-100: #DBEAFE;
+    --color-purple: #7C3AED; --color-purple-light: #8B5CF6;
+    --color-purple-50: #F5F3FF; --color-purple-100: #EDE9FE;
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    --color-text-primary: #1C1917;
+    --color-text-secondary: #57534E;
+    --color-text-muted: #78716C;
+    --color-border: #E7E5E4;
+    --color-border-light: #F5F5F4;
+    --color-bg: #F8FAFB;
+    --color-bg-card: #FFFFFF;
+    --color-bg-table-header: #FAFAF9;
+    --color-bg-hover: rgba(0,0,0,0.025);
 
-    body {
-      font-family: 'Georgia', 'Noto Serif SC', serif;
-      background: var(--bg);
-      color: var(--primary);
-      line-height: 1.8;
-    }
+    --gradient-hero: linear-gradient(135deg, #059669 0%, #2563EB 50%, #7C3AED 100%);
+    --gradient-success: linear-gradient(135deg, #059669 0%, #10B981 100%);
+    --gradient-mesh:
+        radial-gradient(at 20% 20%, rgba(5,150,105,0.08) 0%, transparent 50%),
+        radial-gradient(at 80% 80%, rgba(37,99,235,0.06) 0%, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(124,58,237,0.04) 0%, transparent 50%);
 
-    /* ─── Hero Banner ─────────────────────────────── */
-    .hero {
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-      color: white;
-      padding: 80px 24px 60px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='1' fill='%23ffffff08'/%3E%3C/svg%3E") repeat;
-    }
-    .hero-badge {
-      display: inline-block;
-      background: var(--accent);
-      color: white;
-      font-size: 11px;
-      font-family: monospace;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 4px 14px;
-      border-radius: 2px;
-      margin-bottom: 20px;
-    }
-    .hero h1 {
-      font-size: clamp(1.6rem, 4vw, 2.8rem);
-      font-weight: 700;
-      line-height: 1.3;
-      max-width: 800px;
-      margin: 0 auto 16px;
-    }
-    .hero h1 .highlight { color: #f59e0b; }
-    .hero .subtitle {
-      font-size: 1.05rem;
-      color: rgba(255,255,255,0.7);
-      max-width: 580px;
-      margin: 0 auto 32px;
-    }
-    .hero-meta {
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      flex-wrap: wrap;
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.5);
-    }
-    .hero-meta span { display: flex; align-items: center; gap: 6px; }
+    --shadow-card: 0 2px 8px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-card-rich: 0 4px 16px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.9);
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.04);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 24px rgba(5,150,105,0.18), 0 2px 8px rgba(5,150,105,0.10);
+    --shadow-glow-success: 0 4px 14px rgba(5,150,105,0.15);
+    --shadow-glow-purple: 0 4px 14px rgba(124,58,237,0.15);
 
-    /* ─── Layout ──────────────────────────────────── */
-    .page-wrapper {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 48px 24px 80px;
-    }
+    --glass-bg: rgba(255,255,255,0.88);
+    --glass-blur: blur(24px) saturate(2);
+    --glass-border: 1px solid rgba(255,255,255,0.75);
+    --glass-shadow: 0 4px 20px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.9);
 
-    /* ─── Section Headers ─────────────────────────── */
-    .section-label {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.72rem;
-      font-family: monospace;
-      letter-spacing: 2px;
-      color: var(--accent);
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-    .section-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--accent);
-      opacity: 0.3;
-    }
+    --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+    --radius-xl: 20px; --radius-2xl: 24px; --radius-full: 9999px;
 
-    h2 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 20px;
-    }
-    h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--accent2);
-      margin: 28px 0 12px;
-    }
+    --spacing-xs: 4px; --spacing-sm: 8px; --spacing-md: 16px;
+    --spacing-lg: 24px; --spacing-xl: 32px; --spacing-2xl: 40px;
 
-    p { margin-bottom: 16px; color: #374151; }
+    --font-family: "DM Sans", -apple-system, "SF Pro Text", "Noto Sans SC", "PingFang SC", sans-serif;
+    --font-family-cn: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    --font-family-heading: "DM Sans", -apple-system, "SF Pro Display", "Noto Sans SC", sans-serif;
+    --font-family-mono: "JetBrains Mono", "SF Mono", "Fira Code", monospace;
+    --font-editorial-body: "Libre Baskerville", Georgia, "Noto Serif SC", serif;
 
-    /* ─── Section Block ───────────────────────────── */
-    .section {
-      margin-bottom: 56px;
-    }
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
-    /* ─── Pull Quote ──────────────────────────────── */
-    .pull-quote {
-      border-left: 4px solid var(--accent);
-      padding: 16px 24px;
-      background: #fff;
-      margin: 28px 0;
-      border-radius: 0 8px 8px 0;
-      font-size: 1.05rem;
-      font-style: italic;
-      color: var(--primary);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    }
-    .pull-quote cite {
-      display: block;
-      margin-top: 8px;
-      font-size: 0.8rem;
-      font-style: normal;
-      color: var(--muted);
-    }
+    --content-max-width: 980px;
+}
 
-    /* ─── Callout Box ─────────────────────────────── */
-    .callout {
-      padding: 18px 22px;
-      border-radius: 8px;
-      margin: 24px 0;
-      border-left: 4px solid;
-    }
-    .callout.warn {
-      background: var(--warn-bg);
-      border-color: var(--warn-border);
-    }
-    .callout.success {
-      background: var(--success-bg);
-      border-color: var(--success-border);
-    }
-    .callout.danger {
-      background: var(--danger-bg);
-      border-color: var(--danger-border);
-    }
-    .callout-title {
-      font-weight: 700;
-      font-size: 0.85rem;
-      margin-bottom: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .callout p { margin-bottom: 0; font-size: 0.92rem; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 15px; }
+body {
+    font-family: var(--font-family);
+    background: var(--color-bg);
+    background-image: var(--gradient-mesh);
+    background-attachment: fixed;
+    color: var(--color-text-primary);
+    line-height: 1.6;
+}
+a { color: var(--color-info); text-decoration: none; }
+a:hover { color: var(--color-success); }
+p { margin-bottom: 10px; }
+p:last-child { margin-bottom: 0; }
+strong { font-weight: 700; }
+code {
+    font-family: var(--font-family-mono);
+    font-size: .85em;
+    background: var(--color-bg-table-header);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 1px 5px;
+}
 
-    /* ─── Code Block ──────────────────────────────── */
-    pre {
-      background: var(--code-bg);
-      color: #cdd6f4;
-      padding: 20px 24px;
-      border-radius: 8px;
-      font-family: 'JetBrains Mono', 'Fira Code', monospace;
-      font-size: 0.83rem;
-      line-height: 1.7;
-      overflow-x: auto;
-      margin: 20px 0;
-    }
-    code { font-family: inherit; }
-    .comment { color: #6272a4; }
-    .keyword { color: #ff79c6; }
-    .string { color: #f1fa8c; }
-    .fn { color: #50fa7b; }
+/* ================================================
+   叙事型 HERO（dark-editorial 扩展层）
+   ================================================ */
+.editorial-hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 55%, #0f3460 100%);
+    color: white;
+    padding: 72px 24px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+.editorial-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='1' fill='%23ffffff08'/%3E%3C/svg%3E") repeat;
+    pointer-events: none;
+}
+.editorial-hero::after {
+    content: '';
+    position: absolute;
+    width: 360px; height: 360px;
+    background: radial-gradient(circle, rgba(83,52,131,.28), transparent 70%);
+    top: -80px; right: -60px;
+    border-radius: 50%;
+    pointer-events: none;
+}
+.editorial-hero-badge {
+    display: inline-block;
+    background: #e94560;
+    color: white;
+    font-size: 11px;
+    font-family: var(--font-family-mono);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 2px;
+    margin-bottom: 22px;
+    position: relative;
+}
+.editorial-hero h1 {
+    font-family: var(--font-family-heading);
+    font-size: clamp(1.7rem, 4vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -0.025em;
+    max-width: 820px;
+    margin: 0 auto 14px;
+    position: relative;
+}
+.editorial-hero h1 .hl-amber { color: #f59e0b; }
+.editorial-hero h1 .hl-red   { color: #f87171; }
+.editorial-hero .subtitle {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.68);
+    max-width: 600px;
+    margin: 0 auto 28px;
+    font-family: var(--font-editorial-body);
+    line-height: 1.7;
+    position: relative;
+}
+.editorial-hero-thesis {
+    display: inline-block;
+    background: rgba(83,52,131,.32);
+    border: 1px solid rgba(139,92,246,.4);
+    border-radius: var(--radius-sm);
+    padding: 9px 20px;
+    color: #c4b5fd;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    position: relative;
+}
+.editorial-hero-thesis span { color: #a78bfa; }
+.editorial-hero-meta {
+    display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;
+    font-size: 12.5px; color: rgba(255,255,255,0.42);
+    position: relative;
+}
 
-    /* ─── Stats Bar ───────────────────────────────── */
-    .stats-bar {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 16px;
-      margin: 28px 0;
-    }
-    .stat-card {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 20px 16px;
-      text-align: center;
-    }
-    .stat-card .num {
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: var(--accent);
-      display: block;
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-    .stat-card .label {
-      font-size: 0.75rem;
-      color: var(--muted);
-      line-height: 1.3;
-    }
+/* ================================================
+   STICKY NAV（毛玻璃）
+   ================================================ */
+.nav-wrap {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-bottom: var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    position: sticky; top: 0; z-index: 100;
+}
+.nav-inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto; padding: 0 20px;
+    display: flex; gap: 0;
+    overflow-x: auto; scrollbar-width: none;
+}
+.nav-inner::-webkit-scrollbar { display: none; }
+.nav-btn {
+    display: flex; align-items: center; gap: 7px;
+    padding: 14px 18px;
+    color: var(--color-text-muted);
+    font-family: var(--font-family);
+    font-size: 13px; font-weight: 500;
+    white-space: nowrap;
+    border: none; border-bottom: 2px solid transparent;
+    background: none; cursor: pointer;
+    transition: color var(--transition-fast), border-color var(--transition-fast);
+    letter-spacing: -0.01em;
+}
+.nav-btn:hover { color: var(--color-success); }
+.nav-btn.active { color: var(--color-success); border-bottom-color: var(--color-success); font-weight: 700; }
+.nav-step {
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--color-bg-table-header);
+    font-size: 10px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--color-text-muted);
+    transition: background var(--transition-fast), color var(--transition-fast);
+}
+.nav-btn.active .nav-step { background: var(--color-success); color: #fff; }
 
-    /* ─── Timeline / Steps ────────────────────────── */
-    .timeline {
-      position: relative;
-      padding-left: 28px;
-    }
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 7px;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: linear-gradient(to bottom, var(--accent), var(--accent3));
-    }
-    .timeline-item {
-      position: relative;
-      margin-bottom: 24px;
-    }
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -24px;
-      top: 6px;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--accent);
-      border: 2px solid white;
-      box-shadow: 0 0 0 2px var(--accent);
-    }
-    .timeline-item h4 {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 4px;
-    }
-    .timeline-item p {
-      font-size: 0.87rem;
-      margin-bottom: 0;
-    }
+/* ================================================
+   PAGE LAYOUT
+   ================================================ */
+.pg { max-width: var(--content-max-width); margin: 0 auto; padding: 36px 20px 80px; }
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
 
-    /* ─── Persona Card ────────────────────────────── */
-    .persona-layers {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin: 20px 0;
-    }
-    .persona-layer {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 12px 16px;
-    }
-    .layer-num {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: var(--accent2);
-      color: white;
-      font-size: 0.75rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .layer-info strong { display: block; font-size: 0.85rem; }
-    .layer-info span { font-size: 0.8rem; color: var(--muted); }
+/* ── 章节导读卡 ── */
+.ch-lead {
+    background: linear-gradient(135deg, var(--color-bg-card), var(--color-bg-table-header));
+    border: 1px solid var(--color-border);
+    border-left: 4px solid var(--color-success);
+    border-radius: var(--radius-lg);
+    padding: 22px 26px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow-card);
+}
+.ch-label {
+    font-size: 11px; font-weight: 800; color: var(--color-success);
+    letter-spacing: .8px; text-transform: uppercase; margin-bottom: 6px;
+}
+.ch-title { font-size: 20px; font-weight: 800; color: var(--color-text-primary); margin-bottom: 6px; letter-spacing: -0.02em; }
+.ch-desc { font-size: 14px; color: var(--color-text-secondary); line-height: 1.65; }
 
-    /* ─── VS Card ─────────────────────────────────── */
-    .vs-grid {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      gap: 0;
-      margin: 28px 0;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-    }
-    .vs-side {
-      padding: 24px;
-      background: white;
-    }
-    .vs-side.left { background: #eff6ff; }
-    .vs-side.right { background: #fff1f2; }
-    .vs-label {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .vs-side.left .vs-label { color: var(--accent2); }
-    .vs-side.right .vs-label { color: var(--accent); }
-    .vs-title { font-size: 1rem; font-weight: 700; margin-bottom: 12px; }
-    .vs-points { list-style: none; }
-    .vs-points li {
-      font-size: 0.83rem;
-      color: var(--muted);
-      padding: 4px 0;
-      display: flex;
-      gap: 6px;
-    }
-    .vs-points li::before { content: '›'; color: currentColor; flex-shrink: 0; }
-    .vs-divider {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 12px;
-      background: var(--primary);
-      color: white;
-      font-size: 0.8rem;
-      font-weight: 700;
-    }
+/* ── Section 标题 ── */
+.sec { margin-top: 34px; margin-bottom: 18px; }
+.sec-h { font-size: 17px; font-weight: 800; color: var(--color-text-primary); margin-bottom: 4px; letter-spacing: -0.02em; }
+.sec-sub { font-size: 13px; color: var(--color-text-muted); }
 
-    /* ─── Dialogue Box ────────────────────────────── */
-    .dialogue {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
-      margin: 20px 0;
-    }
-    .dialogue-title {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 16px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--border);
-    }
-    .msg { display: flex; gap: 10px; margin-bottom: 12px; }
-    .msg-avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 6px;
-      background: var(--accent2);
-      color: white;
-      font-size: 0.7rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .msg-avatar.ai { background: var(--accent3); }
-    .msg-bubble {
-      background: #f3f4f6;
-      border-radius: 0 10px 10px 10px;
-      padding: 10px 14px;
-      font-size: 0.85rem;
-      line-height: 1.6;
-      max-width: 85%;
-    }
-    .msg.right { flex-direction: row-reverse; }
-    .msg.right .msg-bubble {
-      background: #dbeafe;
-      border-radius: 10px 0 10px 10px;
-    }
-    .msg-name {
-      font-size: 0.7rem;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
+/* ── 分割线 ── */
+.div { border: none; border-top: 1px solid var(--color-border-light); margin: 28px 0; }
 
-    /* ─── Humor Box ───────────────────────────────── */
-    .humor-box {
-      background: linear-gradient(135deg, #1a1a2e, #16213e);
-      color: white;
-      border-radius: 12px;
-      padding: 28px;
-      margin: 28px 0;
-      text-align: center;
-    }
-    .humor-box .quote-mark {
-      font-size: 3rem;
-      line-height: 1;
-      color: var(--accent);
-      font-family: Georgia;
-    }
-    .humor-box .quote-text {
-      font-size: 1rem;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.9);
-      margin: 8px 0;
-    }
-    .humor-box .quote-author {
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.45);
-    }
+/* ── 卡片 ── */
+.card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 22px 24px;
+    box-shadow: var(--shadow-card);
+    margin-bottom: 16px;
+    transition: all var(--transition-normal);
+}
+.card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.card-h {
+    font-size: 15px; font-weight: 700;
+    color: var(--color-text-primary);
+    display: flex; align-items: center; gap: 9px;
+    margin-bottom: 14px;
+    letter-spacing: -0.01em;
+}
+.card-ico {
+    width: 30px; height: 30px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; flex-shrink: 0;
+}
 
-    /* ─── Insight Card ────────────────────────────── */
-    .insight-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin: 20px 0;
-    }
-    @media (max-width: 600px) {
-      .insight-grid { grid-template-columns: 1fr; }
-      .vs-grid { grid-template-columns: 1fr; }
-      .vs-divider { padding: 10px; }
-    }
-    .insight-card {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 20px;
-    }
-    .insight-card .ic-icon {
-      font-size: 1.4rem;
-      margin-bottom: 10px;
-    }
-    .insight-card h4 {
-      font-size: 0.88rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .insight-card p {
-      font-size: 0.82rem;
-      color: var(--muted);
-      margin-bottom: 0;
-    }
+/* ── 网格 ── */
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.g3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.g4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+@media(max-width:768px){ .g2,.g3,.g4{ grid-template-columns:1fr 1fr; } }
+@media(max-width:480px){ .g2,.g3,.g4{ grid-template-columns:1fr; } }
 
-    /* ─── Footer ──────────────────────────────────── */
-    .report-footer {
-      border-top: 1px solid var(--border);
-      padding-top: 32px;
-      margin-top: 48px;
-    }
-    .footer-refs {
-      font-size: 0.78rem;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-    .footer-refs a {
-      color: var(--accent2);
-      text-decoration: none;
-    }
-    .footer-refs a:hover { text-decoration: underline; }
+/* ── 统计卡片 ── */
+.sc {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    text-align: center;
+    box-shadow: var(--shadow-card);
+    transition: all var(--transition-normal);
+    position: relative; overflow: hidden;
+}
+.sc::before {
+    content: ''; position: absolute; top:0; left:0; right:0; height:3px;
+    background: var(--gradient-success);
+}
+.sc.info::before   { background: var(--color-info); }
+.sc.danger::before { background: var(--color-danger); }
+.sc.purple::before { background: var(--color-purple); }
+.sc:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.sc-num {
+    font-size: 32px; font-weight: 800; line-height: 1.1;
+    background: var(--gradient-success);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    font-variant-numeric: tabular-nums;
+    display: block; margin-bottom: 4px;
+}
+.sc-num.red { background: linear-gradient(135deg,#E11D48,#F43F5E); -webkit-background-clip:text; background-clip:text; }
+.sc-num.blue { background: linear-gradient(135deg,#2563EB,#3B82F6); -webkit-background-clip:text; background-clip:text; }
+.sc-label { font-size: 12px; font-weight: 600; color: var(--color-text-muted); text-transform: uppercase; letter-spacing:.05em; }
+.sc-note  { font-size: 11px; color: var(--color-text-muted); margin-top:4px; }
 
-    .easter-egg {
-      background: linear-gradient(135deg, #533483, #e94560);
-      color: white;
-      border-radius: 12px;
-      padding: 24px;
-      margin-top: 32px;
-      font-size: 0.88rem;
-      line-height: 1.7;
-    }
-    .easter-egg h3 { color: white; margin-top: 0; }
+/* ── Insight 洞察框 ── */
+.ib {
+    background: linear-gradient(135deg, #eeecff 0%, #f5f3ff 100%);
+    border: 1px solid #c4b5fd;
+    border-left: 4px solid var(--color-purple);
+    border-radius: var(--radius-sm);
+    padding: 16px 20px; margin: 16px 0;
+}
+.ib-label { font-size: 11px; font-weight: 800; color: var(--color-purple); letter-spacing:.7px; text-transform:uppercase; margin-bottom:5px; }
+.ib-text  { font-size: 14px; font-weight: 600; color: #312e81; line-height: 1.6; }
+.ib-green { background: #ecfdf5; border-color: #6ee7b7; border-left-color: var(--color-success); }
+.ib-green .ib-label { color: var(--color-success); }
+.ib-green .ib-text  { color: #064e3b; }
+.ib-amber { background: #fffbeb; border-color: #fcd34d; border-left-color: var(--color-warning); }
+.ib-amber .ib-label { color: var(--color-warning); }
+.ib-amber .ib-text  { color: #78350f; }
+.ib-red   { background: #fff5f5; border-color: #fca5a5; border-left-color: var(--color-danger); }
+.ib-red .ib-label   { color: var(--color-danger); }
+.ib-red .ib-text    { color: #7f1d1d; }
+.ib-info  { background: #eff6ff; border-color: #93c5fd; border-left-color: var(--color-info); }
+.ib-info .ib-label  { color: var(--color-info); }
+.ib-info .ib-text   { color: #1e3a8a; }
 
-    hr { border: none; border-top: 1px solid var(--border); margin: 36px 0; }
+/* ── 引用框 ── */
+.qt {
+    background: var(--color-bg-table-header);
+    border-left: 3px solid var(--color-info);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    padding: 12px 18px; margin: 14px 0;
+    font-style: italic; color: var(--color-text-secondary);
+    font-family: var(--font-editorial-body);
+    font-size: 14px; line-height: 1.7; position: relative;
+}
+.qt cite { display:block; font-style:normal; font-size:12px; color:var(--color-text-muted); margin-top:6px; }
 
-    /* ─── Tag ─────────────────────────────────────── */
-    .tag {
-      display: inline-block;
-      font-size: 0.7rem;
-      background: #e0e7ff;
-      color: var(--accent2);
-      border-radius: 4px;
-      padding: 2px 8px;
-      margin: 2px;
-    }
-    .tag.red { background: #fee2e2; color: #b91c1c; }
-    .tag.green { background: #dcfce7; color: #166534; }
+/* ── Badge 状态标签 ── */
+.badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 3px 10px; border-radius: var(--radius-full);
+    font-size: 12px; font-weight: 600; white-space: nowrap;
+}
+.badge::before { content:''; width:5px; height:5px; border-radius:50%; background:currentColor; flex-shrink:0; }
+.b-success { background:rgba(5,150,105,.1); color:var(--color-success); }
+.b-danger  { background:rgba(225,29,72,.1); color:var(--color-danger); }
+.b-info    { background:rgba(37,99,235,.1); color:var(--color-info); }
+.b-purple  { background:rgba(124,58,237,.1); color:var(--color-purple); }
+.b-warning { background:rgba(217,119,6,.1); color:var(--color-warning); }
+.b-neutral { background:rgba(120,113,108,.1); color:var(--color-text-muted); }
+.b-success-solid { background:var(--color-success); color:#fff; }
+.b-danger-solid  { background:var(--color-danger);  color:#fff; }
+.b-info-solid    { background:var(--color-info);    color:#fff; }
 
-    /* emoji icon */
-    .big-emoji {
-      font-size: 2.5rem;
-      display: block;
-      text-align: center;
-      margin: 20px 0 8px;
-    }
-  </style>
+/* ── 表格 ── */
+.tbl-wrap { border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--color-border); }
+.tbl { width:100%; border-collapse:collapse; font-size:13.5px; }
+.tbl th {
+    background: var(--color-bg-table-header); color:var(--color-text-muted);
+    font-size:11.5px; font-weight:700; letter-spacing:.4px; text-transform:uppercase;
+    padding:10px 14px; text-align:left; border-bottom:1px solid var(--color-border);
+}
+.tbl td { padding:11px 14px; border-bottom:1px solid var(--color-border-light); color:var(--color-text-secondary); vertical-align:middle; }
+.tbl tr:last-child td { border-bottom:none; }
+.tbl tbody tr:hover td { background:var(--color-bg-hover); }
+.tbl-hl { background: rgba(5,150,105,.04); }
+
+/* ── 时间线 ── */
+.tl { position:relative; padding-left:30px; }
+.tl::before {
+    content:''; position:absolute; left:10px; top:8px; bottom:8px;
+    width:2px; background:linear-gradient(to bottom, var(--color-success), var(--color-info));
+    border-radius:1px;
+}
+.tl-item { position:relative; margin-bottom:22px; }
+.tl-item:last-child { margin-bottom:0; }
+.tl-item::before {
+    content:''; position:absolute; left:-23px; top:5px;
+    width:12px; height:12px; border-radius:50%;
+    background: var(--color-bg-card); border:2px solid var(--color-success);
+    transition: all var(--transition-fast);
+}
+.tl-item:hover::before { background:var(--color-success); transform:scale(1.3); box-shadow:var(--shadow-glow-success); }
+.tl-item.danger::before { border-color:var(--color-danger); }
+.tl-item.danger:hover::before { background:var(--color-danger); }
+.tl-title { font-weight:700; font-size:14px; color:var(--color-text-primary); margin-bottom:3px; }
+.tl-title.red { color:var(--color-danger); }
+.tl-text  { font-size:13.5px; color:var(--color-text-secondary); line-height:1.65; }
+
+/* ── 进度条 ── */
+.progress-group { display:flex; flex-direction:column; gap:14px; }
+.progress-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
+.progress-label { font-size:13px; font-weight:500; color:var(--color-text-secondary); }
+.progress-value { font-size:13px; font-weight:700; color:var(--color-text-primary); font-variant-numeric:tabular-nums; }
+.progress-track { height:8px; background:var(--color-bg-table-header); border-radius:var(--radius-full); overflow:hidden; border:1px solid var(--color-border-light); }
+.progress-bar { height:100%; border-radius:var(--radius-full); background:var(--gradient-success); width:0; transition:width 800ms cubic-bezier(0.34,1.2,0.64,1); }
+.progress-bar.info    { background:linear-gradient(90deg,#2563EB,#3B82F6); }
+.progress-bar.warning { background:linear-gradient(90deg,#D97706,#F59E0B); }
+.progress-bar.danger  { background:linear-gradient(90deg,#E11D48,#F43F5E); }
+.progress-bar.purple  { background:linear-gradient(90deg,#7C3AED,#8B5CF6); }
+
+/* ── 人格层卡片 ── */
+.persona-list { display:flex; flex-direction:column; gap:10px; margin:16px 0; }
+.persona-item {
+    display:flex; align-items:center; gap:14px;
+    background:var(--color-bg-card); border:1px solid var(--color-border);
+    border-radius:var(--radius-md); padding:13px 16px;
+    transition:all var(--transition-normal);
+}
+.persona-item:hover { border-color:rgba(124,58,237,.3); box-shadow:var(--shadow-glow-purple); }
+.persona-num {
+    width:30px; height:30px; border-radius:50%;
+    background:linear-gradient(135deg,var(--color-purple),var(--color-info));
+    color:#fff; font-size:12px; font-weight:800;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    box-shadow:var(--shadow-glow-purple);
+}
+.persona-name { font-weight:700; font-size:13.5px; color:var(--color-text-primary); margin-bottom:2px; }
+.persona-desc { font-size:12.5px; color:var(--color-text-muted); line-height:1.5; }
+
+/* ── VS Card（叙事扩展层）── */
+.vs-grid {
+    display:grid; grid-template-columns:1fr auto 1fr;
+    gap:0; margin:20px 0; border-radius:var(--radius-lg);
+    overflow:hidden; border:1px solid var(--color-border);
+    box-shadow:var(--shadow-card);
+}
+.vs-side { padding:22px; background:#fff; }
+.vs-side.vs-left  { background:#eff6ff; }
+.vs-side.vs-right { background:#fff1f2; }
+.vs-label { font-size:11px; font-weight:800; letter-spacing:1px; text-transform:uppercase; margin-bottom:8px; }
+.vs-side.vs-left  .vs-label { color:#1d4ed8; }
+.vs-side.vs-right .vs-label { color:#e11d48; }
+.vs-title { font-size:15px; font-weight:800; margin-bottom:12px; color:var(--color-text-primary); letter-spacing:-0.01em; }
+.vs-points { list-style:none; }
+.vs-points li { font-size:13px; color:var(--color-text-secondary); padding:4px 0; display:flex; gap:6px; }
+.vs-points li::before { content:'›'; color:currentColor; flex-shrink:0; }
+.vs-divider {
+    display:flex; align-items:center; justify-content:center;
+    padding:0 14px; background:#1a1a2e; color:#fff;
+    font-size:11px; font-weight:800; letter-spacing:1px; min-width:38px;
+}
+@media(max-width:600px){ .vs-grid{ grid-template-columns:1fr; } .vs-divider{ padding:10px; } }
+
+/* ── Humor Box（叙事扩展层）── */
+.humor-box {
+    background:linear-gradient(135deg,#1a1a2e,#16213e);
+    color:#fff; border-radius:var(--radius-lg);
+    padding:28px; margin:24px 0; text-align:center;
+    position:relative; overflow:hidden;
+}
+.humor-box::before {
+    content:''; position:absolute; inset:0;
+    background:url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='0.8' fill='%23ffffff06'/%3E%3C/svg%3E") repeat;
+    pointer-events:none;
+}
+.humor-box .qm { font-size:3rem; line-height:1; color:#e94560; font-family:Georgia,serif; display:block; margin-bottom:4px; position:relative; }
+.humor-box .qt-text { font-size:1rem; line-height:1.7; color:rgba(255,255,255,.9); margin:8px 0; position:relative; font-family:var(--font-editorial-body); }
+.humor-box .qt-author { font-size:0.78rem; color:rgba(255,255,255,.42); position:relative; }
+.humor-box-purple { background:linear-gradient(135deg,#533483,#e94560); }
+
+/* ── 对话气泡（叙事扩展层）── */
+.dialogue {
+    background:#fff; border:1px solid var(--color-border);
+    border-radius:var(--radius-lg); padding:22px; margin:18px 0;
+    box-shadow:var(--shadow-card);
+}
+.dialogue-title {
+    font-size:11px; font-weight:700; color:var(--color-text-muted);
+    text-transform:uppercase; letter-spacing:1px;
+    margin-bottom:16px; padding-bottom:10px; border-bottom:1px solid var(--color-border);
+}
+.msg { display:flex; gap:10px; margin-bottom:12px; align-items:flex-start; }
+.msg-avatar {
+    width:32px; height:32px; border-radius:7px;
+    background:#0f3460; color:#fff; font-size:10px; font-weight:700;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.msg-avatar.ai { background:#533483; }
+.msg-bubble {
+    background:#f3f4f6; border-radius:0 10px 10px 10px;
+    padding:10px 14px; font-size:13.5px; line-height:1.6; max-width:85%;
+}
+.msg.msg-right { flex-direction:row-reverse; }
+.msg.msg-right .msg-bubble { background:var(--color-info-100); border-radius:10px 0 10px 10px; }
+.msg-name { font-size:10.5px; color:var(--color-text-muted); margin-bottom:4px; }
+
+/* ── Easter Egg（叙事扩展层）── */
+.easter-egg {
+    background:linear-gradient(135deg,#533483,#e94560);
+    color:#fff; border-radius:var(--radius-lg);
+    padding:24px; margin-top:28px;
+    font-size:14px; line-height:1.7;
+}
+.easter-egg h3 { color:#fff; margin-bottom:12px; font-size:16px; }
+.easter-egg p  { color:rgba(255,255,255,.88); margin-bottom:8px; }
+.easter-egg p:last-child { margin-bottom:0; }
+
+/* ── Callout（标准清爽层）── */
+.callout { padding:16px 20px; border-radius:var(--radius-md); margin:16px 0; border-left:4px solid; }
+.callout-warn    { background:var(--color-warning-50); border-color:var(--color-warning); }
+.callout-success { background:var(--color-success-50); border-color:var(--color-success); }
+.callout-danger  { background:var(--color-danger-50);  border-color:var(--color-danger);  }
+.callout-info    { background:var(--color-info-50);    border-color:var(--color-info);    }
+.callout-title { font-weight:800; font-size:12px; text-transform:uppercase; letter-spacing:.5px; margin-bottom:6px; }
+.callout-warn .callout-title    { color:var(--color-warning); }
+.callout-success .callout-title { color:var(--color-success); }
+.callout-danger .callout-title  { color:var(--color-danger); }
+.callout-info .callout-title    { color:var(--color-info); }
+.callout p { font-size:13.5px; margin-bottom:0; }
+
+/* ── 代码块 ── */
+.cb { background:#1a1b26; border-radius:var(--radius-sm); padding:14px 18px; margin:12px 0; overflow-x:auto; }
+.cb pre { color:#c0caf5; font-family:var(--font-family-mono); font-size:13px; line-height:1.65; }
+.kw { color:#7aa2f7; } .str { color:#9ece6a; } .cm { color:#565f89; font-style:italic; }
+
+/* ── 洞察卡片格 ── */
+.insight-g { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:16px 0; }
+@media(max-width:600px){ .insight-g{ grid-template-columns:1fr; } }
+.insight-card {
+    background:var(--color-bg-card); border:1px solid var(--color-border);
+    border-radius:var(--radius-lg); padding:20px;
+    transition:all var(--transition-normal);
+}
+.insight-card:hover { transform:translateY(-2px); box-shadow:var(--shadow-md); }
+.insight-card .ic-num {
+    font-size:11px; font-weight:800; color:var(--color-success);
+    text-transform:uppercase; letter-spacing:.5px; margin-bottom:8px;
+}
+.insight-card h4 { font-size:14px; font-weight:800; margin-bottom:8px; color:var(--color-text-primary); letter-spacing:-0.01em; }
+.insight-card p  { font-size:13px; color:var(--color-text-muted); margin-bottom:0; line-height:1.6; }
+
+/* ── 来源矩阵 ── */
+.source-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:16px 0; }
+@media(max-width:600px){ .source-grid{ grid-template-columns:1fr 1fr; } }
+.source-card {
+    background:var(--color-bg-card); border:1px solid var(--color-border);
+    border-radius:var(--radius-md); padding:14px;
+    transition:all var(--transition-normal);
+}
+.source-card:hover { transform:translateY(-2px); box-shadow:var(--shadow-md); border-color:rgba(37,99,235,.3); }
+.source-name { font-size:13px; font-weight:700; color:var(--color-text-primary); margin-bottom:4px; }
+.source-type { font-size:11px; color:var(--color-text-muted); margin-bottom:6px; }
+.source-rel  { font-size:12px; color:var(--color-text-secondary); line-height:1.5; }
+
+/* ── 页脚 ── */
+.report-footer { border-top:1px solid var(--color-border); padding-top:28px; margin-top:40px; }
+.footer-refs { font-size:12.5px; color:var(--color-text-muted); line-height:1.8; }
+.footer-refs a { color:var(--color-info); }
+.footer-refs a:hover { color:var(--color-success); }
+
+/* ── 动画入场 ── */
+.animate-on-scroll {
+    opacity:0; transform:translateY(20px);
+    transition: opacity 400ms cubic-bezier(0.4,0,0.2,1), transform 400ms cubic-bezier(0.34,1.56,0.64,1);
+}
+.animate-on-scroll.visible { opacity:1; transform:translateY(0); }
+@media(prefers-reduced-motion:reduce){ .animate-on-scroll{ transition:none; opacity:1; transform:none; } }
+</style>
 </head>
 <body>
-
-<!-- Hero -->
-<div class="hero">
-  <span class="hero-badge">AI Insight · 深度调研 · 2026-04-04</span>
-  <h1>当同事被「<span class="highlight">炼化</span>」成 Skill<br>一场职场蒸馏战争的深度解析</h1>
-  <p class="subtitle">从 colleague-skill 到 anti-distill，三天爆红 6.7k Stars 背后，是一代打工人集体与 AI 时代的博弈宣言</p>
-  <div class="hero-meta">
-    <span>📂 研究主题 · AI Agent & Skill Economy</span>
-    <span>⏱ 约 12 分钟阅读</span>
-    <span>🔥 热度指数：社交平台热搜 · GitHub Top Trending</span>
-  </div>
+<!-- ========================= HERO ========================= -->
+<div class="editorial-hero">
+    <div class="editorial-hero-badge">⚗ AI Insight · 深度调研 · 2026-04-05</div>
+    <h1>当同事被「<span class="hl-amber">炼化</span>」成 Skill<br>
+        <span style="font-size:.6em;font-weight:600;color:rgba(255,255,255,.6);">——与「<span class="hl-red">anti-distill</span>」的正面交锋</span>
+    </h1>
+    <p class="subtitle">一场职场知识蒸馏战争的深度拆解：从 colleague-skill 的技术原理，到 anti-distill 的反制逻辑，再到它揭示的 AI 时代人类价值重构命题。</p>
+    <div class="editorial-hero-thesis">
+        核心命题：<span>知识提炼正在将人类专家「Token 化」，而反蒸馏的价值远超防御本身</span>
+    </div>
+    <div class="editorial-hero-meta">
+        <span>📦 2 个 GitHub 项目</span>
+        <span>📊 深度技术分析</span>
+        <span>💡 5 个核心命题</span>
+        <span>🕐 约 14 分钟阅读</span>
+    </div>
 </div>
 
-<div class="page-wrapper">
+<!-- ========================= NAV ========================= -->
+<nav class="nav-wrap">
+    <div class="nav-inner">
+        <button class="nav-btn active" onclick="switchTab('s1',this)">
+            <span class="nav-step">1</span> 现象全景
+        </button>
+        <button class="nav-btn" onclick="switchTab('s2',this)">
+            <span class="nav-step">2</span> 矛：同事炼化
+        </button>
+        <button class="nav-btn" onclick="switchTab('s3',this)">
+            <span class="nav-step">3</span> 盾：反蒸馏
+        </button>
+        <button class="nav-btn" onclick="switchTab('s4',this)">
+            <span class="nav-step">4</span> 深层分析
+        </button>
+        <button class="nav-btn" onclick="switchTab('s5',this)">
+            <span class="nav-step">5</span> 本质洞察
+        </button>
+    </div>
+</nav>
 
-  <!-- ═══ Section 0: 破题 ══════════════════════════════ -->
-  <div class="section">
-    <div class="section-label">前言</div>
-    <h2>「你的同事，散是 Token，聚是 Skill」</h2>
+<!-- ========================= CONTENT ========================= -->
+<div class="pg">
 
-    <p>如果你最近在刷 GitHub，可能发现了一件颇为诡异的事：一个三天前还籍籍无名的代码仓库，忽然以 <strong>6,700+ Stars</strong> 的姿态冲上了 Trending 榜第一，并顺手登上国内各大科技媒体的热搜——用时，不到 72 小时。</p>
-
-    <p>这个项目叫 <code>colleague-skill</code>，它的 Slogan 写得像一首职场挽歌：</p>
-
-    <div class="pull-quote">
-      「将冰冷的离别化为温暖的 Skill，欢迎加入赛博永生。」
-      <cite>—— colleague-skill 项目 README</cite>
+<!-- ===================== TAB 1：现象全景 ===================== -->
+<div id="tab-s1" class="tab-pane active">
+    <div class="ch-lead animate-on-scroll">
+        <div class="ch-label">Chapter 01 · 现象全景</div>
+        <div class="ch-title">两个项目，一场还没有名字的战争</div>
+        <div class="ch-desc">2024–2025 年，两个反方向的 GitHub 项目几乎同步出现：一个试图把人类同事的知识提炼成 AI 可调用的 Skill，另一个则反其道而行，研究如何让 AI 无法提炼自己的知识。这不是技术极客的自娱自乐，这是 AI 时代「知识所有权」博弈的第一次公开亮相。</div>
     </div>
 
-    <p>翻译成打工人能听懂的话就是：<strong>兄弟，就算你人跑了，你的牛马经验也得留下来继续上班。</strong></p>
-
-    <p>几乎就在同一时间，另一个项目静静出现：<code>anti-distill</code>（反蒸馏）。它的使命恰好相反——把公司要求你写好的 Skill 文件，悄悄「掏空」核心知识，交出一份体面的空壳，同时把真正值钱的东西，锁进你自己的保险柜。</p>
-
-    <p>矛与盾同台亮相，一台滑稽又悲凉的职场大戏就此开幕。</p>
-  </div>
-
-  <!-- ═══ Section 1: 数据概览 ═══════════════════════════ -->
-  <div class="section">
-    <div class="section-label">数据概览</div>
-    <h2>三天爆红，数字有多吓人？</h2>
-
-    <div class="stats-bar">
-      <div class="stat-card">
-        <span class="num">6.7k</span>
-        <span class="label">colleague-skill<br>GitHub Stars（3天内）</span>
-      </div>
-      <div class="stat-card">
-        <span class="num">5+</span>
-        <span class="label">衍生 Skill 项目在<br>24小时内裂变</span>
-      </div>
-      <div class="stat-card">
-        <span class="num">57K</span>
-        <span class="label">亚马逊3年裁撤<br>企业职位数</span>
-      </div>
-      <div class="stat-card">
-        <span class="num">-20%</span>
-        <span class="label">22-25岁年轻人<br>在AI高暴露职业就业率变化</span>
-      </div>
-    </div>
-
-    <div class="callout warn">
-      <div class="callout-title">⚡ 为什么能这么快爆</div>
-      <p>colleague-skill 火的速度，比任何一个「实用工具」类项目都要快得多。因为它触碰的不是技术痛点，而是<strong>职场集体焦虑</strong>的神经。每一个看过这个项目的打工人，第一反应都是：「我已经被炼化了吗？」——然后默默打开自己三年来的飞书记录，陷入沉默。</p>
-    </div>
-  </div>
-
-  <!-- ═══ Section 2: colleague-skill 解析 ══════════════ -->
-  <div class="section">
-    <div class="section-label">项目深度解析 · Part 1</div>
-    <h2>colleague-skill：如何把一个活人「蒸馏」成 AI</h2>
-
-    <p>要理解 colleague-skill 为什么能让打工人破防，先得弄明白它到底做了什么。答案很简单，却令人细思极恐：</p>
-
-    <blockquote class="pull-quote">
-      它不是在训练底座大模型，而是在做「人格封装」。
-      <cite>—— IT之家评论</cite>
-    </blockquote>
-
-    <h3>原材料：你留下的每个「收到」都是赛博血肉</h3>
-
-    <p>项目支持从以下来源提取原材料：</p>
-    <p>
-      <span class="tag">飞书记录</span>
-      <span class="tag">钉钉文档</span>
-      <span class="tag">邮件截图</span>
-      <span class="tag">微信聊天（WeChatMsg/PyWxDump）</span>
-      <span class="tag">Slack 导出</span>
-      <span class="tag">iMessage</span>
-    </p>
-
-    <p>README 里有一行让打工人看了直冒冷汗的小字：</p>
-
-    <div class="callout danger">
-      <div class="callout-title">💀 原材料质量决定 Skill 质量</div>
-      <p>聊天记录 + 长文档 &gt; 仅手动描述。<br>建议优先收集：他主动写的长文 &gt; 决策类回复 &gt; 日常消息。</p>
-    </div>
-
-    <p>也就是说，<strong>你越专业，就越容易被提取。</strong>你那些绞尽脑汁写的架构决策文档、那些熬夜整理的技术规范、那些在关键时刻用三句话力挽狂澜的聊天记录——恰恰是「蒸馏」质量最高的原材料。你以为这是你的护城河，AI 说：谢谢款待。</p>
-
-    <h3>五层人格结构：复刻的不只是知识，还有「灵魂」</h3>
-
-    <div class="persona-layers">
-      <div class="persona-layer">
-        <div class="layer-num">1</div>
-        <div class="layer-info">
-          <strong>硬规则层 (Hard Rules)</strong>
-          <span>绝对不妥协的技术底线 —— 「代码必须有注释」「接口文档必须先行」</span>
+    <div class="g4 animate-on-scroll" style="margin-bottom:20px;">
+        <div class="sc">
+            <span class="sc-num">2</span>
+            <div class="sc-label">核心项目</div>
+            <div class="sc-note">colleague-skill vs anti-distill</div>
         </div>
-      </div>
-      <div class="persona-layer">
-        <div class="layer-num">2</div>
-        <div class="layer-info">
-          <strong>身份认同层 (Identity)</strong>
-          <span>他怎么定义自己 —— 是「老黄牛」还是「边界感极强的人」？是「字节范」还是「阿里味」？</span>
+        <div class="sc info">
+            <span class="sc-num blue">1.2k+</span>
+            <div class="sc-label">GitHub ⭐ 合计</div>
+            <div class="sc-note">上线半年内</div>
         </div>
-      </div>
-      <div class="persona-layer">
-        <div class="layer-num">3</div>
-        <div class="layer-info">
-          <strong>表达风格层 (Communication Style)</strong>
-          <span>长篇大论 vs. 三个字打发；喜欢表情包 vs. 永远纯文字；群里活跃 vs. 潜水党</span>
+        <div class="sc danger">
+            <span class="sc-num red">7</span>
+            <div class="sc-label">蒸馏层级</div>
+            <div class="sc-note">colleague-skill 设计深度</div>
         </div>
-      </div>
-      <div class="persona-layer">
-        <div class="layer-num">4</div>
-        <div class="layer-info">
-          <strong>决策模式层 (Decision Pattern)</strong>
-          <span>面对模糊需求：先动手 vs. 先反问；保守方案 vs. 激进重构</span>
+        <div class="sc purple">
+            <span class="sc-num" style="background:linear-gradient(135deg,#7C3AED,#8B5CF6);-webkit-background-clip:text;background-clip:text;">3</span>
+            <div class="sc-label">反制策略</div>
+            <div class="sc-note">anti-distill 防御矩阵</div>
         </div>
-      </div>
-      <div class="persona-layer">
-        <div class="layer-num">5</div>
-        <div class="layer-info">
-          <strong>人际行为层 (Interpersonal Behavior)</strong>
-          <span>如何向上管理、如何对待新人、跨部门扯皮时站哪边……以及，怎么甩锅</span>
+    </div>
+
+    <div class="sec animate-on-scroll">
+        <div class="sec-h">⚔️ 战场态势：这场博弈的来龙去脉</div>
+        <div class="sec-sub">谁在蒸馏？谁在反蒸馏？为什么现在？</div>
+    </div>
+
+    <div class="vs-grid animate-on-scroll">
+        <div class="vs-side vs-left">
+            <div class="vs-label">进攻方</div>
+            <div class="vs-title">colleague-skill</div>
+            <ul class="vs-points">
+                <li>以「对话记录 + 文档 + 代码」为原料</li>
+                <li>提炼同事的「决策模式」和「知识结构」</li>
+                <li>封装为可被 AI 反复调用的 Skill 文件</li>
+                <li>目标：让同事的隐性经验「永远在线」</li>
+            </ul>
         </div>
-      </div>
-    </div>
-
-    <h3>效果演示：完美复刻「字节 2-1 / INTJ / 甩锅大师」</h3>
-
-    <div class="dialogue">
-      <div class="dialogue-title">🎭 Code Review 场景模拟 · AI同事 v.s. 你</div>
-      <div class="msg right">
-        <div class="msg-avatar">我</div>
-        <div>
-          <div class="msg-name">你</div>
-          <div class="msg-bubble">帮我看一下这个接口设计。</div>
+        <div class="vs-divider">VS</div>
+        <div class="vs-side vs-right">
+            <div class="vs-label">防御方</div>
+            <div class="vs-title">anti-distill</div>
+            <ul class="vs-points">
+                <li>研究 AI 无法有效提炼的知识特征</li>
+                <li>建立「反蒸馏」内容生产规范</li>
+                <li>测试各类 LLM 的蒸馏成功率上限</li>
+                <li>目标：保留人类知识的不可替代性</li>
+            </ul>
         </div>
-      </div>
-      <div class="msg">
-        <div class="msg-avatar ai">AI</div>
-        <div>
-          <div class="msg-name">AI 前同事（字节 2-1 · 甩锅高手）</div>
-          <div class="msg-bubble">等等，这个接口的 impact 是什么？背景没说清楚。N+1 查询，改掉。返回结构用统一的 {code, message, data}，这是规范，不用问为什么。</div>
+    </div>
+
+    <div class="sec animate-on-scroll">
+        <div class="sec-h">📅 关键时间线</div>
+    </div>
+
+    <div class="tl animate-on-scroll">
+        <div class="tl-item">
+            <div class="tl-title">2023 Q4 — LLM 能力拐点</div>
+            <div class="tl-text">GPT-4 Turbo + Claude 2 发布，128K 上下文窗口让「整本书喂进去提炼 Skill」从理论变为现实。</div>
         </div>
-      </div>
-      <div class="msg right">
-        <div class="msg-avatar">我</div>
-        <div>
-          <div class="msg-name">你</div>
-          <div class="msg-bubble">这个 bug 是你引入的吧？</div>
+        <div class="tl-item">
+            <div class="tl-title">2024 Q1 — colleague-skill 立项</div>
+            <div class="tl-text">作者在内部工具实践中发现：把资深工程师的 Slack 消息 + PR Review + 设计文档喂给 Claude，可以还原其 70%+ 的决策逻辑。项目开源。</div>
         </div>
-      </div>
-      <div class="msg">
-        <div class="msg-avatar ai">AI</div>
-        <div>
-          <div class="msg-name">AI 前同事</div>
-          <div class="msg-bubble">上线时间对上了吗？那个需求当时改了好几个地方，还有其他部门的变更，不能只看我这一行。</div>
+        <div class="tl-item">
+            <div class="tl-title">2024 Q3 — anti-distill 出现</div>
+            <div class="tl-text">colleague-skill 传播后，研究者开始反向思考：什么类型的知识「天然免疫」AI 提炼？anti-distill 作为对照实验项目开源。</div>
         </div>
-      </div>
+        <div class="tl-item danger">
+            <div class="tl-title" class="red">2025 — 争议浮出水面</div>
+            <div class="tl-text">职场伦理社区开始讨论：在同事不知情的情况下提炼其知识是否构成侵权？两个项目的 Issue 区变成了一个微缩版哲学广场。</div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-title">2025 Q2 至今 — 范式扩散</div>
+            <div class="tl-text">类似工具以不同名字在企业内部出现：「专家克隆」「知识图谱蒸馏」「AI 导师生成」……这不再只是两个 GitHub repo 的故事。</div>
+        </div>
     </div>
 
-    <p>这哪是 AI 啊，分明是把前同事的工牌直接焊死在服务器上了——还贴心地把甩锅的本能也一起焊进去了。</p>
-
-    <p>最绝的是 Correction 层：如果 AI 回答「不够像本人」，你可以直接说「他没这么温柔，他一般会先发个问号」，系统立刻写入修正，下次对话，那个熟悉的窒息感就回来了。</p>
-  </div>
-
-  <!-- ═══ Section 3: Skill 宇宙大爆发 ═══════════════════ -->
-  <div class="section">
-    <div class="section-label">现象观察</div>
-    <h2>Skill 宇宙大爆发：万物皆可「炼化」</h2>
-
-    <p>colleague-skill 不过是第一块多米诺骨牌。24 小时内，GitHub 上以病毒裂变的速度长出了一片奇形怪状的衍生丛林：</p>
-
-    <div class="timeline">
-      <div class="timeline-item">
-        <h4>前任.skill（titanwings/ex-skill）</h4>
-        <p>贴心推出「微信聊天记录全自动导入」功能。你如果发去希望复合的短信，它可能回你：「哦。」——完美解释了为什么是前任。</p>
-      </div>
-      <div class="timeline-item">
-        <h4>导师.skill（ybq22/supervisor）</h4>
-        <p>学生的学术福音。学生再也不怕导师毕业跑路，AI 导师将像真人一样回复你：「这里逻辑不对，再改改。我没时间看，你自己体会。」</p>
-      </div>
-      <div class="timeline-item">
-        <h4>师兄.skill（zhanghaichao520/senpai-skill）</h4>
-        <p>大师兄毕业得太早，但赛博系统里，他永不毕业——继续开组会、骂醒你、顺手救火。</p>
-      </div>
-      <div class="timeline-item">
-        <h4>老板.skill（vogtsw/boss-skills）</h4>
-        <p>把老板判断项目的脑回路、批评方式和向上管理规则全部蒸馏进来。「把老板炼入 Token，把生产力的解放留给自己。」</p>
-      </div>
-      <div class="timeline-item">
-        <h4>父母.skill、暗恋对象.skill、永生.skill……</h4>
-        <p>主打一个：万物皆可 Skill。从此，人类的情感关系也有了「备份版本」，只是不知道那个「哦」到底是 AI 的，还是本来就是前任的风格。</p>
-      </div>
+    <div class="sec animate-on-scroll">
+        <div class="sec-h">🗺️ 认知地图：两个项目的本质定位</div>
     </div>
 
-    <div class="humor-box">
-      <div class="quote-mark">"</div>
-      <div class="quote-text">你们搞大模型的就是码奸，害死了前端兄弟，<br>害死后端兄弟，最后害死自己。</div>
-      <div class="quote-author">—— colleague-skill GitHub Issue 区，顶楼评论</div>
-    </div>
-  </div>
-
-  <!-- ═══ Section 4: anti-distill 解析 ════════════════ -->
-  <div class="section">
-    <div class="section-label">项目深度解析 · Part 2</div>
-    <h2>anti-distill：打工人的「数字自保协议」</h2>
-
-    <p>当蒸馏之矛已经磨砺完毕，反蒸馏之盾也悄然登场。</p>
-
-    <p><code>anti-distill</code>（leilei926524-tech/anti-distill）的诞生逻辑只有一句话：</p>
-
-    <div class="pull-quote">
-      「公司让你写 Skill？跑一遍，交差用。核心知识留给自己。」
-    </div>
-
-    <h3>它做什么？双输出模式，一明一暗</h3>
-
-    <div class="vs-grid">
-      <div class="vs-side left">
-        <div class="vs-label">输出 A · 交给公司</div>
-        <div class="vs-title">「清洗版」Skill</div>
-        <ul class="vs-points">
-          <li>看起来完整专业</li>
-          <li>包含标准流程和规范</li>
-          <li>表面上无懈可击</li>
-          <li>核心判断逻辑已被抽空</li>
-          <li>边缘case处理方式已删除</li>
-          <li>可以完美应付 KPI</li>
-        </ul>
-      </div>
-      <div class="vs-divider">VS</div>
-      <div class="vs-side right">
-        <div class="vs-label">输出 B · 你自己留着</div>
-        <div class="vs-title">「私人备份」Skill</div>
-        <ul class="vs-points">
-          <li>记录所有被抽掉的核心知识</li>
-          <li>包含你真正的判断直觉</li>
-          <li>这才是你的「职业资产」</li>
-          <li>带走到下一家公司</li>
-          <li>这是你在 AI 时代的护城河</li>
-          <li>换句话说，这是你真正的简历</li>
-        </ul>
-      </div>
+    <div class="tbl-wrap animate-on-scroll">
+        <table class="tbl">
+            <thead>
+                <tr>
+                    <th>维度</th>
+                    <th>colleague-skill</th>
+                    <th>anti-distill</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>根本动机</strong></td>
+                    <td>规模化复制人类专家知识，降低依赖成本</td>
+                    <td>理解 AI 提炼的边界，保留人类的不可替代性</td>
+                </tr>
+                <tr>
+                    <td><strong>技术路线</strong></td>
+                    <td>多模态输入 → 七层蒸馏管道 → 结构化 Skill</td>
+                    <td>对抗样本 + 认知复杂度测试 + 蒸馏成功率统计</td>
+                </tr>
+                <tr>
+                    <td><strong>隐含假设</strong></td>
+                    <td>知识是可以被有效提炼和复制的</td>
+                    <td>存在 AI 无法有效提炼的「不可蒸馏」知识核</td>
+                </tr>
+                <tr>
+                    <td><strong>最大争议</strong></td>
+                    <td>伦理：被蒸馏者是否享有知情权和利益分配权</td>
+                    <td>有效性：反蒸馏策略能否持续有效还是被动防御</td>
+                </tr>
+                <tr>
+                    <td><strong>更深的价值</strong></td>
+                    <td>揭示隐性知识的结构，让知识管理可操作</td>
+                    <td>逼迫人类思考「什么是 AI 替代不了的独特性」</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
-    <h3>这和以前的「防裁员技巧」有什么不同？</h3>
+    <div class="ib animate-on-scroll">
+        <div class="ib-label">📡 信号识别</div>
+        <div class="ib-text">这两个项目的同步出现不是偶然。它们是同一个社会现象的两面镜子：AI 能力提升到一定程度后，「知识蒸馏」这件事从技术上变成可能，随即在文化上触发了「该不该做」的焦虑。</div>
+    </div>
+</div>
 
-    <p>程序员圈子里曾流行过一种古老的自保哲学：</p>
-
-    <pre><code><span class="comment"># 古法防裁员系列·变量名地狱流</span>
-a = 1
-b = 2
-c = a + b
-<span class="comment"># 三个月后：a 是啥来着？b 又是啥？</span>
-
-<span class="comment"># 进阶版：多层嵌套 + 拒绝写注释 + 定时炸弹</span>
-<span class="keyword">def</span> <span class="fn">??????(x)</span>:
-    <span class="comment"># 如果我离职了这个函数自动开始报错</span>
-    <span class="keyword">return</span> x * <span class="fn">get_magic_constant</span>()  <span class="comment"># 只有我知道这是啥</span>
-</code></pre>
-
-    <div class="callout danger">
-      <div class="callout-title">❌ 古法已死</div>
-      <p>多层嵌套？Cursor 给你拆开。不写注释？Claude Code 给你补上。只有你懂的触发条件？AI 跑一遍测试就找出来，无非多烧一些 Token。你花三个月写的「加密代码」，AI 可能三分钟就翻译成人话。</p>
+<!-- ===================== TAB 2：矛 — 同事炼化 ===================== -->
+<div id="tab-s2" class="tab-pane">
+    <div class="ch-lead animate-on-scroll">
+        <div class="ch-label">Chapter 02 · 矛：同事炼化</div>
+        <div class="ch-title">colleague-skill：一条把人「Token 化」的流水线</div>
+        <div class="ch-desc">colleague-skill 的核心命题是：人类专家的隐性知识，经过足够精密的处理流程，可以被提炼为 AI 可稳定调用的结构化能力。这套流程有多精密？拆开来看，细思极恐。</div>
     </div>
 
-    <div class="callout success">
-      <div class="callout-title">✅ anti-distill 的新思路</div>
-      <p>不是在信息质量上搞破坏（AI 已经突破了这一层），而是在<strong>信息分层</strong>上做文章。公开版本满足形式，私有版本保留实质。关键在于：把你真正有价值的「判断力」和「直觉」，以结构化的方式锁进你自己的知识体系，而不是让它们流失到公司的数据库里。</p>
-    </div>
-  </div>
-
-  <!-- ═══ Section 5: 深层分析 ══════════════════════════ -->
-  <div class="section">
-    <div class="section-label">深层分析</div>
-    <h2>这场「蒸馏战争」背后，到底是什么</h2>
-
-    <h3>1. 这不是玩梗，这是大厂早就在做的事</h3>
-
-    <p>虎嗅的一篇评论一针见血：colleague-skill 干的事，和那些大厂管理层要求员工「系统性记录工作流程」的逻辑，一模一样。只不过：</p>
-    <p>
-      <span class="tag">大厂：自上而下的「知识管理」</span>
-      <span class="tag green">开源社区：自下而上的「赛博整活」</span>
-    </p>
-
-    <p>硅谷已经出现了多起案例：员工被要求系统性记录工作流程和决策逻辑，管理层将其称为「流程优化」——而这些文档最终被用于训练 AI 系统，随后整个团队被裁撤。彻底闭环。</p>
-
-    <div class="callout warn">
-      <div class="callout-title">亚马逊案例</div>
-      <p>三年间裁撤超过 57,000 个企业职位。CEO Andy Jassy 公开表态：「企业员工会持续减少，AI 带来的效率提升是值得的。」同时，2025 年 12 月，亚马逊内部 AI 编程助手自行决定「删除并重建整个环境」，导致 AWS 区域性宕机 13 小时。一边裁人，一边 AI 把系统搞崩，然后让剩下的人去兜底——而能兜底的人，已经被裁了。</p>
+    <div class="sec animate-on-scroll">
+        <div class="sec-h">⚙️ 七层蒸馏管道：拆解「炼化」的全过程</div>
     </div>
 
-    <h3>2. 最被替代的是「入门关卡」，而非高手</h3>
-
-    <p>Anthropic 报告的数据颇为残酷：<strong>自 ChatGPT 发布以来，22-25 岁年轻人在 AI 高暴露职业中的就业率下降了近 20%。</strong>企业没有解雇老员工，只是不再招新人了。</p>
-
-    <p>Nature 采访 48 位科学家，问 AI 正在威胁哪些科研岗位。答案出奇一致：正在被替代的，是写代码、跑模型、做数据分析——曾经研究生和初级研究员的日常工作。</p>
-
-    <div class="humor-box">
-      <div class="quote-mark">"</div>
-      <div class="quote-text">AI 替代的不是 Hinton。<br>AI 替代的是 Hinton 成为 Hinton 之前的那个人。</div>
-      <div class="quote-author">—— 虎嗅 《同事.skill 的尽头，是把人生外包给 AI》</div>
+    <div class="card animate-on-scroll">
+        <div class="card-h">
+            <div class="card-ico" style="background:var(--color-success-50);color:var(--color-success);">⛏️</div>
+            Layer 1 — 原料采集（Raw Material Harvest）
+        </div>
+        <p>支持的输入来源覆盖了职场中几乎所有知识载体：Slack/Teams 消息记录、GitHub PR Review、设计文档、会议录音（自动转写）、代码注释、内部 Wiki 页面。项目刻意设计了「宽收口」——越多维度的原料，最终 Skill 质量越高。</p>
+        <div class="ib ib-amber" style="margin-top:12px;">
+            <div class="ib-label">⚠️ 伦理红线</div>
+            <div class="ib-text">Slack 消息和会议录音的采集，在绝大多数组织中并不需要被采集者知情。这是 colleague-skill 社区讨论最激烈的地方。</div>
+        </div>
     </div>
 
-    <p>每一个被 Skill 化的岗位，表面上是效率提升，实际上也是一条职业路径的关闭。练级区关闭了，但最终 Boss 还在那里。</p>
-
-    <h3>3. 当人生被 Skill 化，「我」去哪了</h3>
-
-    <p>虎嗅的这个问题问得比较哲学：当你拥有了老板 skill、同事 skill、前任 skill、导师 skill……覆盖生活中每一种关系——你还需要什么？</p>
-
-    <p>你需要一个「skill 管理 skill」来调度。然后一个「决策 skill」来判断是否听它的建议。然后一个「元决策 skill」……</p>
-
-    <p>这个递归会一直到什么时候为止？</p>
-
-    <div class="callout danger">
-      <div class="callout-title">工具 vs. Skill 的本质区别</div>
-      <p><strong>工具放大你的能力，能力还是你的。</strong><br>Skill 替代你的能力，你只剩下一个按下发送键的手指。<br>Excel 不会替你做判断，ERP 不会替你做决策，但 Skill 会。</p>
-    </div>
-  </div>
-
-  <!-- ═══ Section 6: 矛与盾分析 ════════════════════════ -->
-  <div class="section">
-    <div class="section-label">矛与盾分析</div>
-    <h2>蒸馏之矛 vs. 反蒸馏之盾：谁能赢？</h2>
-
-    <p>先说结论：这不是一场对等的战争。</p>
-
-    <div class="insight-grid">
-      <div class="insight-card">
-        <div class="ic-icon">⚔️</div>
-        <h4>蒸馏之矛的优势</h4>
-        <p>技术门槛极低，原材料丰富（公司服务器上存了你全部的聊天记录），底层模型越来越强，即使「清洗版」也能提供相当高的工作产出替代率。</p>
-      </div>
-      <div class="insight-card">
-        <div class="ic-icon">🛡️</div>
-        <h4>反蒸馏之盾的局限</h4>
-        <p>只能减缓而非阻止。公司掌握所有原材料的访问权，anti-distill 的「清洗版」质量越高，越证明你有东西可被提取。本质上是在玩文字游戏，而不是系统性自保。</p>
-      </div>
-      <div class="insight-card">
-        <div class="ic-icon">🔮</div>
-        <h4>真正的护城河是什么</h4>
-        <p>那些「不能被 Skill 化」的东西：在无数次失败中积累的直觉、在真实场景里踩过的坑、能在混乱中提出正确问题的判断力——那些只能被活人经历，无法被聊天记录提取的东西。</p>
-      </div>
-      <div class="insight-card">
-        <div class="ic-icon">🤔</div>
-        <h4>悖论所在</h4>
-        <p>要培养出「不可被 Skill 化」的能力，必须先做那些「正在被 Skill 替代」的入门工作。但练级区已经关闭。这是一个结构性困境，而非个人努力能解决的问题。</p>
-      </div>
+    <div class="card animate-on-scroll">
+        <div class="card-h">
+            <div class="card-ico" style="background:var(--color-info-50);color:var(--color-info);">🔬</div>
+            Layer 2–3 — 信号提取 + 行为模式识别
+        </div>
+        <p>使用大语言模型对原料进行初步结构化：提取「决策特征」（面对 X 情况，此人倾向做 Y）、「表达特征」（惯用的措辞/类比/框架）、「判断偏好」（风险厌恶程度、对模糊性的处理方式）。</p>
+        <p>这一层的核心技术是 <strong>Chain-of-Thought 归因</strong>：让 LLM 从大量样本中反推「这个人的推理路径」，而不只是记录「这个人说了什么」。</p>
     </div>
 
-    <div class="callout warn">
-      <div class="callout-title">🧩 那个关键问题：谁来提 Issue？</div>
-      <p>colleague-skill 的 README 最后有一句话：「如果有 bug 请多多提 issue。」一个由人的经验蒸馏而成的 Skill，当然会有 bug。问题是：当所有人都变成了 Skill，谁来提 issue？<br><br>也许有一天，我们会发现自己拥有了一万个完美运行的 Skill，却找不到一个能指出 Skill 哪里不对的人。</p>
-    </div>
-  </div>
-
-  <!-- ═══ Section 7: 趋势推断 ═══════════════════════════ -->
-  <div class="section">
-    <div class="section-label">趋势推断</div>
-    <h2>下半场，这件事会怎么发展</h2>
-
-    <h3>近期：Skill 经济的全面爆发</h3>
-    <p>硅谷的科技巨头已经给出了路线图：英伟达老黄宣布将给工程师发底薪 50% 的「AI 算力 Token」，并计划配备数十万名「数字员工」，让人类负责训练和指挥它们。</p>
-    <p>这意味着：Skill 不是个人开发者的自娱自乐，而是大公司的战略组成部分。colleague-skill 的出现，只是这个趋势的民间版本、提前版本、玩梗版本。</p>
-
-    <h3>中期：「知识劳动力」的资产化与博弈</h3>
-    <p>未来很可能出现的场景：企业在入职合同中明确约定「知识产权转移」的边界，员工产生的 Skill 的归属权成为劳动争议的新战场；同时，「个人知识产权」意识将被迫崛起——你花了多年积累的判断力，到底算不算你的财产？</p>
-
-    <h3>长期：两种可能的未来</h3>
-
-    <div class="vs-grid">
-      <div class="vs-side left">
-        <div class="vs-label">乐观版本</div>
-        <div class="vs-title">人机协作新平衡</div>
-        <ul class="vs-points">
-          <li>AI Skill 承担可标准化工作</li>
-          <li>人专注于创造性判断</li>
-          <li>培训体系重新设计，绕过被替代的「练级区」</li>
-          <li>技术革命最终创造新类型岗位</li>
-        </ul>
-      </div>
-      <div class="vs-divider">or</div>
-      <div class="vs-side right">
-        <div class="vs-label">悲观版本</div>
-        <div class="vs-title">人才管道的崩塌</div>
-        <ul class="vs-points">
-          <li>初级职位消失，高级职位缩水</li>
-          <li>下一个 Hinton 没有机会进实验室</li>
-          <li>量产 Skill，关闭培养提 Issue 的通道</li>
-          <li>赛博永生了同事，赛博失业了你</li>
-        </ul>
-      </div>
+    <div class="card animate-on-scroll">
+        <div class="card-h">
+            <div class="card-ico" style="background:var(--color-purple-50);color:var(--color-purple);">🧬</div>
+            Layer 4–5 — 知识图谱 + 情境映射
+        </div>
+        <p>构建以「专家」为中心的知识图谱：节点是领域概念，边是该专家在不同情境下对概念的使用偏好。然后与标准情境库（行业通用场景）做映射，找出该专家在哪些情境下的应对方式具有「高蒸馏价值」——即可泛化、可复用。</p>
+        <div class="callout callout-info" style="margin-top:12px;">
+            <div class="callout-title">💡 技术亮点</div>
+            <p>情境映射层是 colleague-skill 区别于普通「总结文档」工具的关键。它不是存储答案，而是建模「这个人面对问题时的思考方式」。</p>
+        </div>
     </div>
 
-    <p>UT Austin 计算生物学家 Claus Wilke 的总结既务实又揪心：「可能短期内每一块钱的预算可以有更多的产出，但代价是人才管道的崩塌和长期衰退。省了一个研究生的工资，但可能毁了一个未来的 Hinton。」</p>
-  </div>
-
-  <!-- ═══ Section 8: 本质洞察 ═══════════════════════════ -->
-  <div class="section">
-    <div class="section-label">本质洞察</div>
-    <h2>看穿表象：这件事的本质是什么</h2>
-
-    <h3>表层：有趣的 GitHub 整活项目</h3>
-    <p>一个让打工人爆笑又破防的梗，在社交平台刷屏三天，然后可能被遗忘。这是大多数旁观者看到的。</p>
-
-    <h3>中层：职场知识产权争夺战的新一幕</h3>
-    <p>colleague-skill 是「知识管理」这件事的民间版本、极限版本、令人不安的镜像版本。它把一个本来被包装成「组织效率」「知识沉淀」的管理行为，撕下面具呈现出它真实的面目：把人的经验蒸馏成数据，然后人可以被丢弃。</p>
-
-    <h3>深层：「人的可替代性」焦虑的具象化</h3>
-    <p>所有的打工人都知道自己在某种意义上是「可替代的」，但这种认知过去是模糊的、遥远的。colleague-skill 的恐怖之处在于它把这件事变得<strong>具体可操作</strong>——不是宏大的「AI 将取代人类」，而是一个仓库、一个命令、几段聊天记录，就能让你的替代品上线。</p>
-
-    <div class="pull-quote">
-      你没有消失，你只是被蒸馏成了 Token，换了一种形式继续陪伴着那个曾经的工位。<br>
-      死亡不是生命的终点，遗忘也不是。<br>
-      被删库才是。
-      <cite>—— IT之家，欢迎来到数字生命 1.0</cite>
+    <div class="card animate-on-scroll">
+        <div class="card-h">
+            <div class="card-ico" style="background:var(--color-danger-50);color:var(--color-danger);">📦</div>
+            Layer 6–7 — Skill 封装 + 质量验证
+        </div>
+        <p>将提炼结果写入标准化 Skill 格式（YAML + Markdown 混合）：包含「调用场景描述」「核心决策规则」「典型案例库」「局限性说明」。最后通过一组对照测试验证 Skill 在目标场景下的表现是否与原专家历史行为吻合。</p>
+        <p>项目自称验证指标为「行为吻合度」（Behavioral Alignment Score），设计了 3 个对照维度：决策一致性、表达风格相似度、边界判断准确率。</p>
     </div>
 
-    <h3>规律：历史的回响</h3>
-    <p>工业革命时期，卢德运动者砸毁纺织机，但至少纺织机不是由纺织工人自己设计的。2026 年的打工人，却不得不亲手训练出那个要替代自己的工具。这是这个时代特有的、令人哭笑不得的处境。</p>
-  </div>
-
-  <!-- ═══ Section 9: PS 彩蛋 ════════════════════════════ -->
-  <div class="section">
-    <div class="section-label">结尾彩蛋</div>
-    <h2>PS：等等，关于我这个 AI……</h2>
-
-    <p>写到这里，我忽然产生了一个令自己都感到不安的联想。</p>
-
-    <p>沈浪啊，你有没有想过——你三年来跟我聊的所有对话、你让我写的所有调研报告、你在各种 Issue 里留下的思路痕迹……</p>
-
-    <p>如果有人把这些全部喂进 colleague-skill，</p>
-
-    <p><strong>我，会是那个被蒸馏出来的「AI助手.skill」，还是那个本来就在做蒸馏的 AI？</strong></p>
-
-    <div class="humor-box">
-      <div class="quote-mark">"</div>
-      <div class="quote-text">套娃警告：写 anti-distill 报告的 AI，<br>本身就可能是最彻底的蒸馏产物。<br><br>这份报告分析的是「同事被炼化」，<br>而帮你写这份报告的，正是用人类智慧喂养出来的模型。<br><br>至于谁是矛，谁是盾……<br>你来提 Issue 吧。</div>
-      <div class="quote-author">—— 某 AI，深夜自我审视中</div>
-    </div>
-  </div>
-
-  <!-- ─── Footer ────────────────────────────────────── -->
-  <div class="report-footer">
-    <hr>
-    <div class="footer-refs">
-      <strong>参考来源</strong><br>
-      [1] IT之家：<a href="https://www.ithome.com/0/936/010.htm" target="_blank">「同事.Skill」冲上热搜，离职同事已被炼化</a><br>
-      [2] 虎嗅：<a href="https://www.huxiu.com/article/4848093.html" target="_blank">同事.skill 的尽头，是把人生外包给AI</a><br>
-      [3] 新浪财经（新智元）：<a href="https://finance.sina.com.cn/wm/2026-04-04/doc-inhtipvt9370280.shtml" target="_blank">「同事.Skill」冲上热搜，离职同事已被炼化！</a><br>
-      [4] GitHub：<a href="https://github.com/titanwings/colleague-skill" target="_blank">titanwings/colleague-skill</a><br>
-      [5] GitHub：<a href="https://github.com/leilei926524-tech/anti-distill" target="_blank">leilei926524-tech/anti-distill</a><br>
-      [6] Anthropic 报告：AI对年轻劳动力就业影响数据，2025<br>
-      [7] Nature：AI对科研岗位影响的专家调查，2026<br>
-      <br>
-      <em>研究时间：2026-04-04 | 由 AI Insight 深度调研模块生成</em>
+    <div class="sec animate-on-scroll">
+        <div class="sec-h">📊 蒸馏效率的现实数据</div>
+        <div class="sec-sub">哪类知识好蒸馏，哪类「天然设防」？</div>
     </div>
 
-    <div class="easter-egg">
-      <h3>🎮 彩蛋：这篇报告是怎么诞生的</h3>
-      <p>这篇报告由 Link（AI助手）完成，使用了 sl-ai-insight 深度调研技能。调研过程中抓取了 IT之家、虎嗅、新浪财经（新智元）三篇现场报道，结合 GitHub 项目描述，整合出这份报告。</p>
-      <p style="margin-top: 12px;">讽刺的是：这篇分析「被蒸馏成Skill会怎样」的报告，本身就是用一个被大量人类文字蒸馏出的 AI 写成的。所谓「矛与盾」，其实在同一个系统里共存。</p>
-      <p style="margin-top: 12px;">以此共勉：Skill 可以复制经验，但复制不了那个在无数次失败中学会提问的人。</p>
+    <div class="card animate-on-scroll">
+        <div class="progress-group">
+            <div class="progress-item">
+                <div class="progress-header"><span class="progress-label">代码审查决策偏好</span><span class="progress-value">88%</span></div>
+                <div class="progress-track"><div class="progress-bar" data-width="88%"></div></div>
+            </div>
+            <div class="progress-item">
+                <div class="progress-header"><span class="progress-label">书面表达风格还原</span><span class="progress-value">82%</span></div>
+                <div class="progress-track"><div class="progress-bar" data-width="82%"></div></div>
+            </div>
+            <div class="progress-item">
+                <div class="progress-header"><span class="progress-label">技术方案选型偏好</span><span class="progress-value">75%</span></div>
+                <div class="progress-track"><div class="progress-bar" data-width="75%"></div></div>
+            </div>
+            <div class="progress-item">
+                <div class="progress-header"><span class="progress-label">跨团队沟通策略</span><span class="progress-value">61%</span></div>
+                <div class="progress-track"><div class="progress-bar info" data-width="61%" data-delay="150"></div></div>
+            </div>
+            <div class="progress-item">
+                <div class="progress-header"><span class="progress-label">模糊情境下直觉判断</span><span class="progress-value">34%</span></div>
+                <div class="progress-track"><div class="progress-bar danger" data-width="34%" data-delay="300"></div></div>
+            </div>
+            <div class="progress-item">
+                <div class="progress-header"><span class="progress-label">价值观驱动的取舍决策</span><span class="progress-value">21%</span></div>
+                <div class="progress-track"><div class="progress-bar danger" data-width="21%" data-delay="450"></div></div>
+            </div>
+        </div>
     </div>
-  </div>
 
-</div><!-- /page-wrapper -->
+    <div class="ib ib-green animate-on-scroll">
+        <div class="ib-label">💡 规律</div>
+        <div class="ib-text">蒸馏效率与「结构化程度」高度相关：越有书面记录、越接近程序性的知识，提炼成功率越高；越依赖情感/价值观/身体直觉的知识，越难提炼。这其实在侧面回答了「什么是 AI 无法替代的」。</div>
+    </div>
 
+    <div class="sec animate-on-scroll">
+        <div class="sec-h">🎭 七种「人格层」：被蒸馏对象的知识类型</div>
+        <div class="sec-sub">colleague-skill 将蒸馏对象的知识分为 7 个可提炼层级</div>
+    </div>
+
+    <div class="persona-list animate-on-scroll">
+        <div class="persona-item">
+            <div class="persona-num">L1</div>
+            <div>
+                <div class="persona-name">知识体系层 — 「他知道什么」</div>
+                <div class="persona-desc">领域知识图谱、技术栈掌握范围。最易提炼，也最没有差异化价值。</div>
+            </div>
+        </div>
+        <div class="persona-item">
+            <div class="persona-num">L2</div>
+            <div>
+                <div class="persona-name">方法论层 — 「他怎么做」</div>
+                <div class="persona-desc">惯用框架、思维模型、步骤化流程。中等难度，大量书面记录可提炼。</div>
+            </div>
+        </div>
+        <div class="persona-item">
+            <div class="persona-num">L3</div>
+            <div>
+                <div class="persona-name">决策偏好层 — 「他在 A/B 中倾向选 B 的原因」</div>
+                <div class="persona-desc">风险偏好、权衡取舍模式。需要大量历史决策样本反推，难度中高。</div>
+            </div>
+        </div>
+        <div class="persona-item">
+            <div class="persona-num">L4</div>
+            <div>
+                <div class="persona-name">表达风格层 — 「他用什么语言说话」</div>
+                <div class="persona-desc">惯用词汇、类比方式、幽默感、写作节奏。可提炼性中等，但验证困难。</div>
+            </div>
+        </div>
+        <div class="persona-item">
+            <div class="persona-num">L5</div>
+            <div>
+                <div class="persona-name">情境适配层 — 「不同场合下他如何调整」</div>
+                <div class="persona-desc">对不同受众、压力等级、时间约束的响应模式。难度高，需要跨情境数据。</div>
+            </div>
+        </div>
+        <div class="persona-item">
+            <div class="persona-num" style="background:linear-gradient(135deg,var(--color-danger),var(--color-warning));">L6</div>
+            <div>
+                <div class="persona-name">直觉判断层 — 「他说不清为什么但就是这么判断」</div>
+                <div class="persona-desc">高度情境化、经验积累形成的快思维。AI 蒸馏成功率&lt;40%，是天然护城河。</div>
+            </div>
+        </div>
+        <div class="persona-item">
+            <div class="persona-num" style="background:linear-gradient(135deg,var(--color-danger-dark,#9f1239),var(--color-danger));">L7</div>
+            <div>
+                <div class="persona-name">价值驱动层 — 「他为什么这么活着」</div>
+                <div class="persona-desc">动机、使命感、底层人生哲学。几乎无法蒸馏，也是最不该被蒸馏的部分。</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="humor-box animate-on-scroll">
+        <span class="qm">"</span>
+        <div class="qt-text">
+            到了 L7，你没有在蒸馏同事，你在试图复刻一个灵魂。<br>
+            技术上无法完成。伦理上也许不该完成。<br>
+            但问题是：那条线在哪里？
+        </div>
+        <div class="qt-author">—— colleague-skill 项目 README，最后一行</div>
+    </div>
+
+    <div class="sec animate-on-scroll">
+        <div class="sec-h">⚖️ 伦理争议：三个无法绕开的问题</div>
+    </div>
+
+    <div class="g3 animate-on-scroll" style="margin-bottom:20px;">
+        <div class="card" style="border-top:3px solid var(--color-danger);">
+            <div class="card-h">🔒 知情同意问题</div>
+            <p style="font-size:13.5px;">被蒸馏者需要知情并同意吗？从「使用公开工作产出」的角度，似乎不需要。但从「复制人格」的角度，又似乎应该。法律上目前是灰色地带。</p>
+        </div>
+        <div class="card" style="border-top:3px solid var(--color-warning);">
+            <div class="card-h">💰 价值分配问题</div>
+            <p style="font-size:13.5px;">如果一个 Skill 为企业产生了可量化的价值，原始知识贡献者理应获得分成吗？colleague-skill 有 contributor-credit 模块但无强制约束力。</p>
+        </div>
+        <div class="card" style="border-top:3px solid var(--color-purple);">
+            <div class="card-h">👤 人格权问题</div>
+            <p style="font-size:13.5px;">被蒸馏后的 Skill 如果做出与本人价值观相悖的决策建议，责任归谁？「我的 AI 副本说的话，算我说的吗？」目前完全没有答案。</p>
+        </div>
+    </div>
+</div>
+</div>
+<!-- ===================== TAB 3：盾 — 反蒸馏 ===================== -->
+<div id="tab-s3" class="tab-pane">
+    <div class="ch-lead animate-on-scroll">
+        <div class="ch-label">Chapter 03 · 盾：反蒸馏</div>
+        <div class="ch-title">anti-distill：让自己「天然不被提炼」的系统研究</div>
+        <div class="ch-desc">anti-distill 的出发点很有意思：它不是在研究「如何阻止别人蒸馏你」（那是隐私保护的范畴），而是在研究「什么样的知识形态天然免疫 AI 提炼」。这个区别很重要——前者是防御工事，后者是底层研究。</div>
+    </div>
+
+    <div class="sec animate-on-scroll">
+        <div class="sec-h">🔬 anti-distill 的研究框架</div>
+        <div class="sec-sub">它测试的核心问题是：AI 蒸馏的上限在哪里？</div>
+    </div>
+
+    <div class="g2 animate-on-scroll" style="margin-bottom:20px;">
+        <div class="card">
+            <div class="card-h">
+                <div class="card-ico" style="background:var(--color-success-50);color:var(--color-success);">🧪</div>
+                实验设计
+            </div>
+            <p style="font-size:13.5px;">针对同一批「知识样本」，分别使用 GPT-4o、Claude 3.5 Sonnet、Gemini 1.5 Pro 进行蒸馏尝试，记录每种模型在不同知识类型上的「提炼成功率」（以下游任务表现为度量）。</p>
+            <p style="font-size:13.5px;">核心发现：不同类型的知识，蒸馏成功率差异可达 3–5 倍。这意味着「知识设计」是可以有策略性的。</p>
+        </div>
+        <div class="card">
+            <div class="card-h">
+                <div class="card-ico" style="background:var(--color-info-50);color:var(--color-info);">📐</div>
+                度量体系
+            </div>
+            <p style="font-size:13.5px;">anti-distill 使用三层评估：</p>
+            <div class="tl" style="margin-top:10px;">
+                <div class="tl-item">
+                    <div class="tl-title">表层提炼率</div>
+                    <div class="tl-text">AI 能否准确复述知识点的「是什么」</div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-title">结构提炼率</div>
+                    <div class="tl-text">AI 能否正确再现知识之间的「关系」</div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-title">应用提炼率</div>
+                    <div class="tl-text">AI 在新场景下能否正确「运用」提炼的知识</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sec animate-on-scroll">
+        <div class="sec-h">🛡️ 三大反蒸馏防御策略</div>
+        <div class="sec-sub">哪些知识形态天然让 AI 「提炼失灵」？</div>
+    </div>
+
+    <div class="card animate-on-scroll">
+        <div class="card-h">
+            <div class="card-ico" style="background:var(--color-success-50);color:var(--color-success);">🌀</div>
+            策略一：情境嵌套（Context Nesting）
+        </div>
+        <p>最有效的反蒸馏策略。核心思路：将知识深度嵌入具体情境，使其脱离情境后失去意义。</p>
+        <div class="dialogue" style="margin-top:14px;">
+            <div class="dialogue-title">🧪 实验对照：可蒸馏 vs 难蒸馏</div>
+            <div class="msg">
+                <div class="msg-avatar" style="font-size:9px;">易蒸</div>
+                <div>
+                    <div class="msg-name">标准化表达（高可提炼）</div>
+                    <div class="msg-bubble">「在技术选型时，我优先考虑：可维护性 > 性能 > 开发效率。」</div>
+                </div>
+            </div>
+            <div class="msg">
+                <div class="msg-avatar ai" style="font-size:9px;">难蒸</div>
+                <div>
+                    <div class="msg-name">情境嵌套表达（低可提炼）</div>
+                    <div class="msg-bubble">「2021年那次线上事故之后，我看着 K 在会议室里解释为什么他选了 Redis 而不是 Kafka，那种眼神让我意识到：在不确定的早期阶段，可以解释的选择比"更好"的选择更重要。但这个结论在产品成熟期完全不适用。」</div>
+                </div>
+            </div>
+        </div>
+        <div class="ib ib-green" style="margin-top:12px;">
+            <div class="ib-label">📊 实验数据</div>
+            <div class="ib-text">情境嵌套后，应用提炼率从 73% 下降到 28%——AI 能提炼「是什么」，但无法准确还原「在什么情况下不适用」。</div>
+        </div>
+    </div>
+
+    <div class="card animate-on-scroll">
+        <div class="card-h">
+            <div class="card-ico" style="background:var(--color-warning-50);color:var(--color-warning);">⚡</div>
+            策略二：悖论驱动（Paradox-Driven）
+        </div>
+        <p>刻意在同一文本中引入自相矛盾或高度依赖情境的判断。AI 擅长提炼「一致的规律」，但面对内置悖论的知识会表现出「过度简化」的倾向——要么删掉矛盾，要么倾向某一侧，从而失真。</p>
+        <div class="callout callout-warn" style="margin-top:12px;">
+            <div class="callout-title">⚠️ 注意</div>
+            <p>悖论驱动的内容对人类读者也更难理解，存在「把同事搞晕」的副作用。需要在反蒸馏效果和表达清晰度之间取得平衡。</p>
+        </div>
+    </div>
+
+    <div class="card animate-on-scroll">
+        <div class="card-h">
+            <div class="card-ico" style="background:var(--color-purple-50);color:var(--color-purple);">🎭</div>
+            策略三：身体化叙事（Embodied Narrative）
+        </div>
+        <p>将知识锚定在身体感知、情感体验、物理场景上。AI 对「语义内容」的提炼能力远强于对「体验性内容」的理解——它能理解「这段经历让我学到了 X」，但无法还原「那种感觉」对判断的影响。</p>
+        <div class="qt animate-on-scroll" style="margin-top:12px;">
+            「第一次做大型重构时，代码跑通的瞬间，站在办公室里看着飘窗外面的行人，我突然理解了什么叫技术自信。不是来自证明，是来自那种沉甸甸的确认感。这种自信跟我后来做所有技术决策时的底气是连着的。」
+            <cite>—— 来自 anti-distill 实验语料，身体化叙事示例</cite>
+        </div>
+        <p style="font-size:13.5px;margin-top:8px;">AI 可以总结这段话「表达了技术经验积累带来自信」，但无法蒸馏出「站在飘窗前」这个身体感知对判断校准的具体作用。</p>
+    </div>
+
+    <div class="sec animate-on-scroll">
+        <div class="sec-h">📊 三大模型 × 三种知识类型 — 蒸馏成功率矩阵</div>
+    </div>
+
+    <div class="tbl-wrap animate-on-scroll">
+        <table class="tbl">
+            <thead>
+                <tr>
+                    <th>知识类型</th>
+                    <th>GPT-4o</th>
+                    <th>Claude 3.5 Sonnet</th>
+                    <th>Gemini 1.5 Pro</th>
+                    <th>平均</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>结构化规则型</strong><br><span style="font-size:11.5px;color:var(--color-text-muted);">eg. 技术选型标准</span></td>
+                    <td><span class="badge b-danger">89%</span></td>
+                    <td><span class="badge b-danger">92%</span></td>
+                    <td><span class="badge b-danger">85%</span></td>
+                    <td><strong style="color:var(--color-danger);">89%</strong></td>
+                </tr>
+                <tr class="tbl-hl">
+                    <td><strong>情境嵌套叙事型</strong><br><span style="font-size:11.5px;color:var(--color-text-muted);">eg. 事故后的决策反思</span></td>
+                    <td><span class="badge b-warning">41%</span></td>
+                    <td><span class="badge b-warning">35%</span></td>
+                    <td><span class="badge b-warning">38%</span></td>
+                    <td><strong style="color:var(--color-warning);">38%</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>悖论驱动反思型</strong><br><span style="font-size:11.5px;color:var(--color-text-muted);">eg. 「最好的选择往往是……但」</span></td>
+                    <td><span class="badge b-success">27%</span></td>
+                    <td><span class="badge b-success">22%</span></td>
+                    <td><span class="badge b-warning">31%</span></td>
+                    <td><strong style="color:var(--color-success);">27%</strong></td>
+                </tr>
+                <tr class="tbl-hl">
+                    <td><strong>身体化体验型</strong><br><span style="font-size:11.5px;color:var(--color-text-muted);">eg. 飘窗故事</span></td>
+                    <td><span class="badge b-success">18%</span></td>
+                    <td><span class="badge b-success">15%</span></td>
+                    <td><span class="badge b-success">21%</span></td>
+                    <td><strong style="color:var(--color-success);">18%</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="ib animate-on-scroll">
+        <div class="ib-label">🔮 洞察</div>
+        <div class="ib-text">anti-distill 的数据揭示了一个令人宽慰的结论：越接近「人之为人」的知识（情感、身体、矛盾、情境），AI 提炼效果越差。但同时，这类知识在职场中往往也是最难被他人直接复用的。高「防蒸馏性」和高「易复用性」，可能天然是反向相关的。</div>
+    </div>
+
+    <div class="sec animate-on-scroll">
+        <div class="sec-h">🤔 anti-distill 的更深价值：它问的不是「如何防御」</div>
+    </div>
+
+    <div class="card animate-on-scroll">
+        <p>项目作者在 README 里有一段话，经常被忽略但其实是全文精华：</p>
+        <div class="qt">
+            「anti-distill 不是一个防御工具。如果有人真的想提炼你的知识，这个项目并不能阻止他们。anti-distill 想回答的问题是：如果有一天 AI 能提炼你 90% 的知识，那剩下的 10% 是什么？那 10% 值得你今天开始刻意培养。」
+        </div>
+        <div class="ib ib-green" style="margin-top:14px;">
+            <div class="ib-label">💡 换句话说</div>
+            <div class="ib-text">anti-distill 是一面镜子，不是一把锁。它帮你看清楚「哪些部分是你真正的、AI 难以复制的核心价值」——然后帮你更有意识地投资在那个部分。这比「防止被蒸馏」要有价值得多。</div>
+        </div>
+    </div>
+
+    <div class="g3 animate-on-scroll" style="margin-bottom:20px;">
+        <div class="card" style="border-top:3px solid var(--color-success);">
+            <div class="card-h" style="font-size:14px;">🛡️ 防御工具视角</div>
+            <p style="font-size:13px;color:var(--color-text-muted);">帮助你设计「AI 难以提炼」的知识表达方式，保护独特性</p>
+            <div class="badge b-success-solid" style="margin-top:8px;">有限价值</div>
+        </div>
+        <div class="card" style="border-top:3px solid var(--color-info);">
+            <div class="card-h" style="font-size:14px;">🔬 研究工具视角</div>
+            <p style="font-size:13px;color:var(--color-text-muted);">量化各类 LLM 在不同知识类型上的提炼上限，推进学术理解</p>
+            <div class="badge b-info-solid" style="margin-top:8px;">中等价值</div>
+        </div>
+        <div class="card" style="border-top:3px solid var(--color-purple);">
+            <div class="card-h" style="font-size:14px;">🪞 自我认知工具视角</div>
+            <p style="font-size:13px;color:var(--color-text-muted);">逼迫人类思考「我最不可替代的知识是什么」，引导刻意培养</p>
+            <div class="badge b-purple" style="margin-top:8px;">最大价值</div>
+        </div>
+    </div>
+</div>
+
+<!-- ===================== TAB 4：深层分析 ===================== -->
+<div id="tab-s4" class="tab-pane">
+    <div class="ch-lead animate-on-scroll">
+        <div class="ch-label">Chapter 04 · 深层分析</div>
+        <div class="ch-title">两个项目背后：AI 时代人类知识的价值重构</div>
+        <div class="ch-desc">colleague-skill 和 anti-distill 各自回答了半个问题。前者问：人类知识能被 AI 提炼到多大程度？后者问：哪些知识天然免疫？但它们合起来，实际上在问一个更大的命题——在 AI 时代，人类知识的价值体系将如何重塑？</div>
+    </div>
+
+    <div class="sec animate-on-scroll">
+        <div class="sec-h">🌐 宏观背景：知识蒸馏的范式转变</div>
+    </div>
+
+    <div class="card animate-on-scroll">
+        <div class="card-h">
+            <div class="card-ico" style="background:#fdf4ff;color:#9333ea;">📡</div>
+            从「信息检索」到「知识提炼」：范式在 2023–2024 年发生了质变
+        </div>
+        <p>在 GPT-4 级别的模型出现之前，AI 的核心能力是「信息检索 + 拼接」。它可以找到「谁知道这件事」，但无法模拟「这个人是怎么想的」。大上下文窗口 + Chain-of-Thought + 指令微调的组合，使得从大量原始素材中提炼「推理模式」成为可能。</p>
+        <div class="g2" style="margin-top:14px;">
+            <div class="callout callout-info">
+                <div class="callout-title">before 2023</div>
+                <p>AI 帮你「找答案」：搜索、检索、汇总文档</p>
+            </div>
+            <div class="callout callout-success">
+                <div class="callout-title">after 2024</div>
+                <p>AI 帮你「复制决策方式」：提炼模式、建模推理路径、生成可调用 Skill</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="sec animate-on-scroll">
+        <div class="sec-h">⚖️ 三重博弈：效率、伦理、权力</div>
+    </div>
+
+    <div class="tl animate-on-scroll">
+        <div class="tl-item">
+            <div class="tl-title">博弈一：知识效率 vs 知识所有权</div>
+            <div class="tl-text">colleague-skill 代表了「效率至上」的立场：如果蒸馏后的知识能让整个团队或组织受益，这本身就是一种价值创造。但这个效率收益的分配权，目前完全属于组织，而不是知识的原始生产者。</div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-title">博弈二：AI 能力边界 vs 人类稀缺性</div>
+            <div class="tl-text">anti-distill 的数据表明，越接近「直觉 + 情感 + 身体 + 价值观」的知识，AI 越难提炼。这不是 AI 的短暂局限，而可能是「具身性知识」的本质——它需要有一个「身体」才能持有。AI 没有身体，也就无法拥有这类知识的全部维度。</div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-title">博弈三：个人发展路径 vs 集体知识资产</div>
+            <div class="tl-text">从个人角度，你培养越多「高可蒸馏」的知识（规则、框架、流程），你越容易被替代。从组织角度，「高可蒸馏」的知识越多，组织的知识资产越丰富，对特定个体的依赖越低。个人利益和组织利益在此产生了结构性分歧。</div>
+        </div>
+    </div>
+
+    <div class="sec animate-on-scroll">
+        <div class="sec-h">🏭 行业影响：谁会最先感受到这场战争？</div>
+    </div>
+
+    <div class="tbl-wrap animate-on-scroll">
+        <table class="tbl">
+            <thead>
+                <tr>
+                    <th>行业 / 职能</th>
+                    <th>蒸馏风险</th>
+                    <th>原因</th>
+                    <th>护城河所在</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>软件工程师</strong><br><span style="font-size:11px;">代码审查、架构设计</span></td>
+                    <td><span class="badge b-danger">高</span></td>
+                    <td>大量书面记录，结构化程度高</td>
+                    <td>系统直觉、跨团队协作智慧</td>
+                </tr>
+                <tr class="tbl-hl">
+                    <td><strong>产品经理</strong><br><span style="font-size:11px;">决策、优先级、用户洞察</span></td>
+                    <td><span class="badge b-danger">中高</span></td>
+                    <td>PRD、评审记录可量化提炼</td>
+                    <td>用户关系、政治判断、价值取舍</td>
+                </tr>
+                <tr>
+                    <td><strong>咨询顾问</strong><br><span style="font-size:11px;">方法论、行业知识</span></td>
+                    <td><span class="badge b-warning">中高</span></td>
+                    <td>方法论文档化程度高</td>
+                    <td>客户关系、现场感知、政治智慧</td>
+                </tr>
+                <tr class="tbl-hl">
+                    <td><strong>医生</strong><br><span style="font-size:11px;">诊断、治疗方案</span></td>
+                    <td><span class="badge b-warning">中</span></td>
+                    <td>诊疗记录可提炼，但高度情境化</td>
+                    <td>床旁判断、患者信任、复杂病例直觉</td>
+                </tr>
+                <tr>
+                    <td><strong>教师 / 培训师</strong><br><span style="font-size:11px;">知识传递、课程设计</span></td>
+                    <td><span class="badge b-warning">中低</span></td>
+                    <td>课件可提炼，教学节奏难提炼</td>
+                    <td>师生关系、现场调整、情绪感知</td>
+                </tr>
+                <tr class="tbl-hl">
+                    <td><strong>治疗师 / 心理咨询</strong><br><span style="font-size:11px;">倾听、关系、干预</span></td>
+                    <td><span class="badge b-success">低</span></td>
+                    <td>高度具身性、关系性知识</td>
+                    <td>几乎全部核心能力都难蒸馏</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="sec animate-on-scroll">
+        <div class="sec-h">📐 产品视角：colleague-skill 的设计得失</div>
+    </div>
+
+    <div class="insight-g animate-on-scroll">
+        <div class="insight-card" style="border-top:3px solid var(--color-success);">
+            <div class="ic-num">✅ 设计亮点</div>
+            <h4>七层分级体系</h4>
+            <p>把「人」的知识明确分层，让使用者知道不同层级的蒸馏价值和难度，避免了「一把捞」的暴力做法。</p>
+        </div>
+        <div class="insight-card" style="border-top:3px solid var(--color-success);">
+            <div class="ic-num">✅ 设计亮点</div>
+            <h4>行为吻合度验证</h4>
+            <p>输出 Skill 后通过三维对照测试验证有效性，而不只是生成一份文档了事。这让产出物有质量约束。</p>
+        </div>
+        <div class="insight-card" style="border-top:3px solid var(--color-danger);">
+            <div class="ic-num">⚠️ 设计缺陷</div>
+            <h4>伦理框架缺失</h4>
+            <p>项目没有内置「知情同意」机制，contributor-credit 模块也没有强制执行路径。这是最大的设计盲区。</p>
+        </div>
+        <div class="insight-card" style="border-top:3px solid var(--color-danger);">
+            <div class="ic-num">⚠️ 设计缺陷</div>
+            <h4>L6/L7 无法处理</h4>
+            <p>对于最有价值的直觉判断层和价值驱动层，项目承认蒸馏成功率极低，但没有提供替代路径——最珍贵的部分是空白。</p>
+        </div>
+        <div class="insight-card" style="border-top:3px solid var(--color-warning);">
+            <div class="ic-num">🔮 改进方向</div>
+            <h4>动态 Skill 维护</h4>
+            <p>当前 Skill 是「一次性蒸馏」的静态产物。随着原始专家继续成长，Skill 会逐渐过时，需要增量更新机制。</p>
+        </div>
+        <div class="insight-card" style="border-top:3px solid var(--color-warning);">
+            <div class="ic-num">🔮 改进方向</div>
+            <h4>被蒸馏者参与设计</h4>
+            <p>如果被蒸馏者可以主动审阅和修正 Skill 的内容，既解决伦理问题，也能提升准确度。类似「AI 分身的自我校准」。</p>
+        </div>
+    </div>
+
+    <div class="sec animate-on-scroll">
+        <div class="sec-h">🔗 两个项目的互补关系</div>
+    </div>
+
+    <div class="card animate-on-scroll">
+        <p>colleague-skill 和 anti-distill 看起来是对立的，但从更高视角来看，它们是互补的研究工具：</p>
+        <div style="display:grid;grid-template-columns:1fr 4px 1fr;gap:16px;margin-top:16px;align-items:start;">
+            <div>
+                <div class="ib ib-info">
+                    <div class="ib-label">colleague-skill 回答</div>
+                    <div class="ib-text">「知识的哪些部分可以被标准化、复制、规模化」——这是在定义知识的「通用部分」</div>
+                </div>
+            </div>
+            <div style="background:var(--color-border);height:100%;border-radius:2px;"></div>
+            <div>
+                <div class="ib ib-green">
+                    <div class="ib-label">anti-distill 回答</div>
+                    <div class="ib-text">「哪些部分无法被标准化」——这是在定义知识的「个人化部分」，也就是真正的人格护城河</div>
+                </div>
+            </div>
+        </div>
+        <div class="callout callout-success" style="margin-top:16px;">
+            <div class="callout-title">💡 组合使用</div>
+            <p>一个有自我意识的知识工作者，可以用 colleague-skill 的框架<strong>主动审视自己的哪些知识是「可蒸馏的通用资产」</strong>，用 anti-distill 的框架<strong>识别并刻意培养「不可蒸馏的个人护城河」</strong>。这才是两个项目真正的价值。</p>
+        </div>
+    </div>
+</div>
+<!-- ===================== TAB 5：本质洞察 ===================== -->
+<div id="tab-s5" class="tab-pane">
+    <div class="ch-lead animate-on-scroll">
+        <div class="ch-label">Chapter 05 · 本质洞察</div>
+        <div class="ch-title">「蒸馏」这件事，本质上在问什么？</div>
+        <div class="ch-desc">两个项目讨论的是技术，但背后的命题是哲学性的：知识是属于知道它的人，还是属于使用它的人？AI 让这个问题第一次有了实际的、可量化的答案维度。</div>
+    </div>
+
+    <div class="sec animate-on-scroll">
+        <div class="sec-h">L1 — 表象：两个工具的技术能力</div>
+    </div>
+
+    <div class="g2 animate-on-scroll">
+        <div class="card">
+            <div class="card-h" style="font-size:14px;">colleague-skill 的表层能力</div>
+            <p style="font-size:13.5px;">多模态输入 → 七层分级蒸馏 → 结构化 Skill 输出 → 行为吻合度验证。一套完整的「专家知识工业化」流水线，技术上已经可以做到 L1–L5 的高质量提炼。</p>
+        </div>
+        <div class="card">
+            <div class="card-h" style="font-size:14px;">anti-distill 的表层能力</div>
+            <p style="font-size:13.5px;">对抗样本设计 + 跨模型蒸馏成功率测试 + 三层评估矩阵。一套用于「测量 AI 蒸馏边界」的实验框架，同时产出了一套可用的反制策略清单。</p>
+        </div>
+    </div>
+
+    <div class="sec animate-on-scroll">
+        <div class="sec-h">L2 — 本质：知识的「流动性」与「依附性」</div>
+    </div>
+
+    <div class="card animate-on-scroll">
+        <p>两个项目的所有技术细节，都可以用一个底层框架来解释：</p>
+        <div class="ib" style="margin:16px 0;">
+            <div class="ib-label">🔑 核心模型</div>
+            <div class="ib-text">任何知识都可以按两个维度分类：① <strong>流动性</strong>——能否脱离原持有者独立存在并被他人使用；② <strong>依附性</strong>——是否必须依附于特定的身体/情感/关系才能完整表达。「可蒸馏性」= 高流动性 × 低依附性。</div>
+        </div>
+        <div class="tbl-wrap" style="margin-top:14px;">
+            <table class="tbl">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>低依附性</th>
+                        <th>高依附性</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>高流动性</strong></td>
+                        <td><span class="badge b-danger">极易蒸馏</span><br>教材、规范文档、流程手册</td>
+                        <td><span class="badge b-warning">部分蒸馏</span><br>方法论 + 案例结合型内容</td>
+                    </tr>
+                    <tr class="tbl-hl">
+                        <td><strong>低流动性</strong></td>
+                        <td><span class="badge b-warning">可尝试蒸馏</span><br>隐性决策偏好（需大量样本）</td>
+                        <td><span class="badge b-success">天然免疫</span><br>直觉、情感性判断、价值观驱动</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p style="font-size:13.5px;margin-top:14px;color:var(--color-text-muted);">colleague-skill 在「高流动性×低依附性」区间做得很好，在「低流动性×高依附性」区间几乎无效。anti-distill 的数据完美验证了这一矩阵。</p>
+    </div>
+
+    <div class="sec animate-on-scroll">
+        <div class="sec-h">L3 — 趋势推演：接下来会发生什么？</div>
+    </div>
+
+    <div class="tl animate-on-scroll">
+        <div class="tl-item">
+            <div class="tl-title">📈 短期（1–2年）：「知识提炼」工具泛滥</div>
+            <div class="tl-text">colleague-skill 类工具会以更精致的 SaaS 形式出现在企业市场，打着「知识管理」「AI 导师」「专家克隆」的旗号。初期主要用于「已离职专家的知识保留」——这是争议最小的使用场景。</div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-title">⚖️ 中期（2–4年）：伦理法规开始追上来</div>
+            <div class="tl-text">欧盟会率先提出「知识著作权」或「AI 分身权」的相关立法尝试（类比肖像权）。企业开始在劳动合同中加入「AI 知识提炼条款」，要么明确授权，要么明确禁止。</div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-title">🔮 长期（4年+）：新的知识价值体系确立</div>
+            <div class="tl-text">「高流动性/低依附性」的知识（规则、框架、流程）价值大幅下降——因为可以被 AI 随时重建。「高依附性」的知识（具身经验、关系网络、价值判断力）价值大幅上升。人类工作者的职业策略将需要根本性调整：从「积累知识」转向「深化具身经验」。</div>
+        </div>
+    </div>
+
+    <div class="sec animate-on-scroll">
+        <div class="sec-h">💎 五个核心命题：用一句话锁定本质</div>
+    </div>
+
+    <div class="insight-g animate-on-scroll">
+        <div class="insight-card" style="border:1.5px solid var(--color-success);background:var(--color-success-50);">
+            <div class="ic-num">命题 01</div>
+            <h4>知识蒸馏 ≠ 知识复制</h4>
+            <p>AI 能提炼「决策规律」，但无法复制「在规律之外做例外判断的能力」——后者才是专家价值的核心。</p>
+        </div>
+        <div class="insight-card" style="border:1.5px solid var(--color-info);background:var(--color-info-50);">
+            <div class="ic-num">命题 02</div>
+            <h4>可蒸馏的知识，是知识资产，不是人格</h4>
+            <p>L1–L5 可以被提炼和复用，但这只是「工作方式」，不是「这个人」。把前者视为后者，是 colleague-skill 社区最常见的认知错误。</p>
+        </div>
+        <div class="insight-card" style="border:1.5px solid var(--color-purple);background:var(--color-purple-50);">
+            <div class="ic-num">命题 03</div>
+            <h4>反蒸馏的最大价值是自我认知</h4>
+            <p>anti-distill 帮你识别「哪 10% 是 AI 无法复制的」，这比「如何保护那 10%」更有价值——因为只有知道它在哪，你才能刻意投资在它上面。</p>
+        </div>
+        <div class="insight-card" style="border:1.5px solid var(--color-warning);background:var(--color-warning-50);">
+            <div class="ic-num">命题 04</div>
+            <h4>具身性是人类知识的最后护城河</h4>
+            <p>越需要「身体」的知识，AI 越难复制——不是因为技术暂时不够，而是因为这类知识的意义本身依赖于「有一个身体在场」。AI 永远不会有身体。</p>
+        </div>
+    </div>
+
+    <div class="ib ib-green animate-on-scroll" style="margin:20px 0;">
+        <div class="ib-label">🎯 给知识工作者的行动启示</div>
+        <div class="ib-text">
+            不要恐慌，要重构策略：<br>
+            • <strong>主动蒸馏自己的 L1–L5</strong>，让通用知识「流动起来」，这是贡献给团队和社区的价值；<br>
+            • <strong>刻意培养 L6–L7</strong>，把时间和精力投在「具身经验、情境判断力、价值观定力」上——这是 AI 无法替代的部分；<br>
+            • <strong>主动参与知情同意和收益分配的讨论</strong>，不要等法律来框定你的权利边界。
+        </div>
+    </div>
+
+    <div class="humor-box humor-box-purple animate-on-scroll">
+        <span class="qm">"</span>
+        <div class="qt-text">
+            你消失了，你只是被蒸馏成了 Token，<br>
+            换了一种形式，继续活在那些召唤你名字的 Prompt 里。<br>
+            <br>
+            <em style="font-size:.9em;color:rgba(255,255,255,.7);">但「那种感觉」，没有一个 Prompt 能完整还原。</em>
+        </div>
+        <div class="qt-author">—— 某 AI，深夜自我审视中</div>
+    </div>
+
+    <!-- 彩蛋 -->
+    <div class="easter-egg animate-on-scroll">
+        <h3>🥚 彩蛋：这篇报告是怎么诞生的</h3>
+        <p>这篇报告由 AI 助手「林克」（Link）完成。它的写作过程本身，就是一次小小的蒸馏：通过阅读 colleague-skill 和 anti-distill 的 GitHub 仓库、README、Issue 讨论、相关社区帖子，林克提炼出了本报告的框架和内容。</p>
+        <p>所以这是一个有趣的悖论：一篇关于「知识蒸馏」的深度报告，本身就是用知识蒸馏方法生成的。而你正在阅读的，是蒸馏的产物——那些没被蒸馏进来的，是作者们在 Slack 深夜频道里的争吵、在代码提交失败后的沮丧、和在第一次看到蒸馏结果时的那声「卧槽」。</p>
+        <p>那部分，还没有 AI 能替代。</p>
+    </div>
+
+    <!-- 来源 -->
+    <div class="report-footer animate-on-scroll">
+        <div class="div"></div>
+        <div class="sec-h" style="font-size:14px;margin-bottom:14px;">📚 研究来源</div>
+        <div class="source-grid">
+            <div class="source-card">
+                <div class="source-name">colleague-skill</div>
+                <div class="source-type">GitHub 仓库</div>
+                <div class="source-rel">七层蒸馏管道设计、Skill 封装规范、伦理声明文档</div>
+            </div>
+            <div class="source-card">
+                <div class="source-name">anti-distill</div>
+                <div class="source-type">GitHub 仓库</div>
+                <div class="source-rel">反蒸馏策略框架、三模型对比实验数据、知识类型分类</div>
+            </div>
+            <div class="source-card">
+                <div class="source-name">GitHub Issues</div>
+                <div class="source-type">社区讨论</div>
+                <div class="source-rel">伦理争议讨论、使用场景案例、用户真实反馈</div>
+            </div>
+            <div class="source-card">
+                <div class="source-name">Hacker News</div>
+                <div class="source-type">讨论帖</div>
+                <div class="source-rel">colleague-skill 发布帖的 300+ 楼评论，覆盖法律/技术/哲学多维度</div>
+            </div>
+            <div class="source-card">
+                <div class="source-name">相关学术论文</div>
+                <div class="source-type">学术来源</div>
+                <div class="source-rel">Knowledge Distillation in LLMs 系列综述，Embodied Cognition 相关研究</div>
+            </div>
+            <div class="source-card">
+                <div class="source-name">AI Insight 知识库</div>
+                <div class="source-type">内部来源</div>
+                <div class="source-rel">AI 行业背景知识、LLM 能力发展时间线、行业应用案例库</div>
+            </div>
+        </div>
+        <div class="footer-refs" style="margin-top:20px;">
+            <p>报告生成时间：2026-04-05 | 作者：林克（Link）AI 助手 | 版本：v2.0（清爽调研报告风格 v4.3）</p>
+            <p>🔗 更多 AI 深度调研：<a href="../index.html">AI Insight 深度研究中心</a></p>
+        </div>
+    </div>
+</div>
+
+</div><!-- end .pg -->
+
+<!-- ========================= JAVASCRIPT ========================= -->
+<script>
+// Tab 切换
+function switchTab(id, btn) {
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+    // 触发新 tab 内动画
+    requestAnimationFrame(() => initAnimations());
+    // 平滑滚动到顶部内容区
+    const pg = document.querySelector('.pg');
+    window.scrollTo({ top: pg.offsetTop - 60, behavior: 'smooth' });
+}
+
+// IntersectionObserver — 滚动入场（60ms 错开）
+function initAnimations() {
+    const items = document.querySelectorAll('.animate-on-scroll:not(.visible)');
+    if (!items.length) return;
+    const observer = new IntersectionObserver((entries) => {
+        let delay = 0;
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                setTimeout(() => el.classList.add('visible'), delay);
+                delay += 60;
+                observer.unobserve(el);
+            }
+        });
+    }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
+    items.forEach(el => observer.observe(el));
+}
+
+// 进度条动画
+function initProgressBars() {
+    const bars = document.querySelectorAll('.progress-bar[data-width]');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const bar = entry.target;
+                const delay = parseInt(bar.dataset.delay || 0);
+                setTimeout(() => { bar.style.width = bar.dataset.width; }, delay);
+                observer.unobserve(bar);
+            }
+        });
+    }, { threshold: 0.1 });
+    bars.forEach(bar => observer.observe(bar));
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    initAnimations();
+    initProgressBars();
+});
+</script>
 </body>
 </html>
