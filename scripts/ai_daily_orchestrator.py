@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """
-ai_daily_orchestrator.py — AI日报工作流状态机 v1.3
+ai_daily_orchestrator.py — AI日报工作流状态机 v1.4
 
 编排AI日报的完整流程，追踪状态和上下文，支持跨会话断点恢复。
 设计原则: 脚本做苦力，Agent做决策，上下文不丢失。
 
-v1.3更新 (2026-03-15):
+v1.4更新 (2026-04-06):
+  - P2-2 修复: get_next_action 中 in_progress 超时检测（>60min 自动 reset 为 pending）
+  - 修复场景: finalize 阶段 Step 3/4 写 in_progress 后中途被 kill，系统永久卡死
   - Step 2 complete时前置执行URL抽检（早发现早修复，减少finalize阶段返工）
   - 来自skill-dojo技能修炼P0改进项
 
@@ -488,6 +490,24 @@ def get_next_action(date: str) -> dict:
     for key in STEP_ORDER:
         step = STEPS[key]
         s = state["steps"][key]
+
+        # v1.4 修复（P2-2）: in_progress 超时检测
+        # 场景：finalize 阶段 Step 3/4 写入 in_progress 后中途被 kill，
+        #        get_next_action 不处理 in_progress 导致状态永久卡死
+        # 策略：若 in_progress 超过 60 分钟仍未完成，自动 reset 为 pending 触发重跑
+        if s["status"] == "in_progress":
+            completed_at = s.get("completed_at") or s.get("started_at")
+            if completed_at:
+                try:
+                    from datetime import datetime, timedelta
+                    started = datetime.fromisoformat(completed_at.replace("Z", "+00:00")) if "T" in completed_at else datetime.now()
+                    if (datetime.now() - started.replace(tzinfo=None)) > timedelta(minutes=60):
+                        print(f"  🔧 [自动修复] {step['name']} in_progress 超时(>60min)，reset 为 pending")
+                        mark_step(date, key, "pending", context="[自动修复] in_progress 超时 reset")
+                        state = load_state(date)
+                        s = state["steps"][key]
+                except Exception:
+                    pass
 
         if s["status"] in ("pending", "failed"):
             is_retry = s["status"] == "failed"
