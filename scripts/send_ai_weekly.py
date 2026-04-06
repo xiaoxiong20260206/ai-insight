@@ -30,8 +30,8 @@ from pathlib import Path
 # 添加 scripts 目录到路径
 sys.path.insert(0, str(Path(__file__).parent))
 from kim_client import (
-    KimConfig, get_access_token, get_bot_groups,
-    send_to_user, send_to_group_with_retry, send_to_all_groups
+    KimConfig, get_access_token,
+    send_to_user, send_to_all_groups
 )
 
 

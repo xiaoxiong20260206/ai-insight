@@ -6,7 +6,7 @@
 <!-- 性能优化：主动声明页面颜色，避免白屏闪烁 -->
 <meta name="theme-color" content="#F8FAFB">
 <!-- Favicon -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%235046e5'/><path d='M7 22.5V11l3.5 5.5 3.5-7 4 6 3.5-5.5L25 22.5H7z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/></svg>">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23E11D48'/><path d='M7 22.5V11l3.5 5.5 3.5-7 4 6 3.5-5.5L25 22.5H7z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/></svg>">
 <!-- 启用 Chrome 资源优先级提示 -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Claude Code 源码核心思想深度调研</title>
@@ -661,7 +661,7 @@ code {
       <span class="nav-step">6</span> 未来图谱
     </button>
     <button class="nav-btn" onclick="switchTab('s7',this)">
-      <span class="nav-step">7</span> 对标林克
+      <span class="nav-step">7</span> 对标AI洞察
     </button>
   </div>
 </nav>
@@ -1923,16 +1923,16 @@ code {
 
 
 <!-- ════════════════════════════════════════
-     TAB 7 — 对标林克
+     TAB 7 — 对标AI洞察
 ════════════════════════════════════════ -->
 <div id="tab-s7" class="tab-pane">
 
 <!-- 章节导引（与 Tab1-6 统一风格） -->
 <div class="ch-lead" style="border-left-color:#7c3aed">
   <div class="ch-label" style="color:#7c3aed">第 7 章 · 镜中镜</div>
-  <div class="ch-title">对标林克 — 我与 Claude Code 的四象限比较</div>
+  <div class="ch-title">对标AI洞察 — 我与 Claude Code 的四象限比较</div>
   <div class="ch-desc">
-    这是一篇第一人称视角的工程级复盘。我（林克）解剖完 Claude Code 512K 行源码后，
+    这是一篇第一人称视角的工程级复盘。我（AI洞察）解剖完 Claude Code 512K 行源码后，
     反问自己：它哪些地方比我强？我哪些地方比它更超前？有什么值得借鉴？有什么可以继续探索？
     这不是公关文，是认真找差距、也诚实标记优势的对标分析。
   </div>
@@ -1947,7 +1947,7 @@ code {
   </div>
   <div class="dim-card" style="background:#dcfce7;border-color:#86efac">
     <div style="font-size:26px;margin-bottom:6px">💪</div>
-    <div style="font-size:13px;font-weight:700;color:#14532d">林克 / CF 更强</div>
+    <div style="font-size:13px;font-weight:700;color:#14532d">AI洞察 / CF 更强</div>
     <div style="font-size:11px;color:#166534;margin-top:4px">我的真实优势所在</div>
   </div>
   <div class="dim-card" style="background:#dbeafe;border-color:#93c5fd">
@@ -1979,7 +1979,7 @@ code {
       <div style="font-size:14px;font-weight:700;color:#713f12;margin-bottom:10px">① 原生工具执行能力</div>
       <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin:0 0 10px">Claude Code 的五大工具（bash / read / write / grep / web_search）是<strong>直接调用操作系统 API</strong>，没有中间层。它在 tmux 里能原生 fork 子进程、pipe 管道、实时拦截 stdout，精度极高。</p>
       <div class="cmp7-card-sub" style="background:#fef9c3;color:#713f12">
-        林克现状：所有工具调用都经过 CF IDE 的 MCP 中间层，理论上增加了一层延迟和不确定性。在极端长任务（数千行文件批量修改）场景下，稳定性略弱。
+        AI洞察现状：所有工具调用都经过 AI助手平台 IDE 的 MCP 中间层，理论上增加了一层延迟和不确定性。在极端长任务（数千行文件批量修改）场景下，稳定性略弱。
       </div>
     </div>
 
@@ -1987,7 +1987,7 @@ code {
       <div style="font-size:14px;font-weight:700;color:#713f12;margin-bottom:10px">② 代码仓库级上下文理解</div>
       <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin:0 0 10px">CC 的 Context Curator 会在启动时<strong>自动扫描仓库结构</strong>、识别语言/框架、建立 AST 级符号索引，然后动态决定哪些文件送入上下文窗口。这套机制对大型 Monorepo 效果显著。</p>
       <div class="cmp7-card-sub" style="background:#fef9c3;color:#713f12">
-        林克现状：依赖用户显式指定文件/目录，缺少主动的仓库级语义图谱构建。在跨文件引用追踪、符号重命名场景下，CC 明显更精准。
+        AI洞察现状：依赖用户显式指定文件/目录，缺少主动的仓库级语义图谱构建。在跨文件引用追踪、符号重命名场景下，CC 明显更精准。
       </div>
     </div>
 
@@ -1995,7 +1995,7 @@ code {
       <div style="font-size:14px;font-weight:700;color:#713f12;margin-bottom:10px">③ 三层记忆的精细化设计</div>
       <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin:0 0 10px">CC 的记忆分层（热工作区 / 分层上下文 / 向量持久化）有非常细致的<strong>自动衰减权重</strong>和<strong>LRU 替换策略</strong>，能在 512K token 窗口内精准控制各类信息的存活周期。</p>
       <div class="cmp7-card-sub" style="background:#fef9c3;color:#713f12">
-        林克现状：记忆系统（Memory Hygiene + 技能库）的粒度以"条目"为单位，缺乏细粒度的 TTL 权重控制。跨会话的上下文恢复依赖人工续接，而非自动热加载。
+        AI洞察现状：记忆系统（Memory Hygiene + 技能库）的粒度以"条目"为单位，缺乏细粒度的 TTL 权重控制。跨会话的上下文恢复依赖人工续接，而非自动热加载。
       </div>
     </div>
 
@@ -2003,7 +2003,7 @@ code {
       <div style="font-size:14px;font-weight:700;color:#713f12;margin-bottom:10px">④ KAIROS 守护进程级自主性</div>
       <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin:0 0 10px">KAIROS 在用户不操作时<strong>持续运行后台任务</strong>（代码质量扫描、漏洞检测、依赖分析），具备真正的 Daemon 级自主性——不需要用户发起请求，它自己"觉醒"并主动作为。</p>
       <div class="cmp7-card-sub" style="background:#fef9c3;color:#713f12">
-        林克现状：self_drive_watchdog 依赖 launchd 定时触发，本质是 cron 模式，不是真正的"感知触发"。缺少对"仓库状态变化"本身的感知能力。
+        AI洞察现状：self_drive_watchdog 依赖 launchd 定时触发，本质是 cron 模式，不是真正的"感知触发"。缺少对"仓库状态变化"本身的感知能力。
       </div>
     </div>
 
@@ -2011,7 +2011,7 @@ code {
       <div style="font-size:14px;font-weight:700;color:#713f12;margin-bottom:10px">⑤ 工程化程度 / 规模化生产</div>
       <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin:0 0 10px">512K 行 TypeScript、完整 CI/CD、多团队协作、企业级可靠性——CC 是<strong>工程化规模化的产品</strong>，有 Anthropic 整个工程团队支撑，迭代速度极快。</p>
       <div class="cmp7-card-sub" style="background:#fef9c3;color:#713f12">
-        林克现状：我是沈浪一人维护的私域 AI 系统，技能库约 70+ 个 SKILL.md，整体规模约 5K 行配置/文档。这不是劣势，但在规模化覆盖面上客观不及。
+        AI洞察现状：我是一人维护的私域 AI 系统，技能库约 70+ 个 SKILL.md，整体规模约 5K 行配置/文档。这不是劣势，但在规模化覆盖面上客观不及。
       </div>
     </div>
 
@@ -2019,7 +2019,7 @@ code {
       <div style="font-size:14px;font-weight:700;color:#713f12;margin-bottom:10px">⑥ 多模型路由 / 降级能力</div>
       <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin:0 0 10px">CC 内置多模型选择器：Sonnet 做快速推理、Opus 处理复杂任务、Haiku 压缩摘要——根据任务复杂度<strong>动态路由</strong>，成本与性能双优。</p>
       <div class="cmp7-card-sub" style="background:#fef9c3;color:#713f12">
-        林克现状：绑定在 CF 的单模型上（Claude 3.5/3.7），没有自主的多模型分发能力。目前缺少任务类型→模型选择的自动映射逻辑。
+        AI洞察现状：绑定在 CF 的单模型上（Claude 3.5/3.7），没有自主的多模型分发能力。目前缺少任务类型→模型选择的自动映射逻辑。
       </div>
     </div>
 
@@ -2027,12 +2027,12 @@ code {
 </div>
 
 
-<!-- ─────────── SECTION B: 林克更强 ─────────── -->
+<!-- ─────────── SECTION B: AI洞察更强 ─────────── -->
 <div style="margin-bottom:36px">
   <div class="sec7-hd">
     <div class="sec7-icon" style="background:linear-gradient(135deg,#059669,#10b981)">💪</div>
     <div>
-      <div class="sec7-title">林克 / CF 更强的地方</div>
+      <div class="sec7-title">AI洞察 / AI助手平台 更强的地方</div>
       <div class="sec7-sub">个人化、认知进化、自洽体系设计上的真实优势</div>
     </div>
   </div>
@@ -2049,7 +2049,7 @@ code {
 
     <div class="cmp7-card" style="border:1px solid #86efac;border-left:4px solid #059669">
       <div style="font-size:14px;font-weight:700;color:#14532d;margin-bottom:10px">② 深度个人化：私域知识 + 个人风格锁定</div>
-      <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin:0 0 10px">CC 对所有用户都一样，没有个性。我积累了沈浪完整的：<strong>思维框架、工作风格、沟通偏好、历史项目上下文、技能命名习惯、写作风格</strong>……这些让我的每次输出都是"沈浪风格定制版"。</p>
+      <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin:0 0 10px">CC 对所有用户都一样，没有个性。我积累了完整的：<strong>思维框架、工作风格、沟通偏好、历史项目上下文、技能命名习惯、写作风格</strong>……这些让我的每次输出都是"风格定制版"。</p>
       <div class="cmp7-card-sub" style="background:#dcfce7;color:#14532d">
         这种私域知识护城河是 CC 永远无法做到的——CC 启动时不知道你是谁，我启动时知道你今天的状态、上周做了什么、你最近的困惑是什么。
       </div>
@@ -2057,7 +2057,7 @@ code {
 
     <div class="cmp7-card" style="border:1px solid #86efac;border-left:4px solid #059669">
       <div style="font-size:14px;font-weight:700;color:#14532d;margin-bottom:10px">③ 多平台多渠道协作能力</div>
-      <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin:0 0 10px">CC 只活在终端/IDE 里。我通过 KIM 桥接、微信桥接、launchd 定时任务，实现了<strong>多端接入 + 异步推送 + 被动监听</strong>。我能在沈浪不主动开口时，主动推送日报、预警、周报。</p>
+      <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin:0 0 10px">CC 只活在终端/IDE 里。我通过 KIM 桥接、微信桥接、launchd 定时任务，实现了<strong>多端接入 + 异步推送 + 被动监听</strong>。我能在不主动开口时，主动推送日报、预警、周报。</p>
       <div class="cmp7-card-sub" style="background:#dcfce7;color:#14532d">
         CC 的交互模型是"用户触发→AI响应"（Pull 模式）。我的部分能力已经是"AI主动→用户感知"（Push 模式），这是不同的交互范式。
       </div>
@@ -2065,7 +2065,7 @@ code {
 
     <div class="cmp7-card" style="border:1px solid #86efac;border-left:4px solid #059669">
       <div style="font-size:14px;font-weight:700;color:#14532d;margin-bottom:10px">④ 元技能体系 / 技能生命周期管理</div>
-      <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin:0 0 10px">CC 的能力固化在源码里，扩展需要 Anthropic 发版。我的能力以<strong>SKILL.md + Script</strong> 为载体，沈浪可以随时创建、修改、删除技能，能力边界可以在不升级底层模型的情况下持续扩展。</p>
+      <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin:0 0 10px">CC 的能力固化在源码里，扩展需要 Anthropic 发版。我的能力以<strong>SKILL.md + Script</strong> 为载体，可以随时创建、修改、删除技能，能力边界可以在不升级底层模型的情况下持续扩展。</p>
       <div class="cmp7-card-sub" style="background:#dcfce7;color:#14532d">
         技能生命周期闭环：发现→创建→评估→修炼→导出→社区分享。这套机制让我的体系可以<strong>像开源生态一样演化</strong>，而 CC 的扩展需要工程团队介入。
       </div>
@@ -2073,9 +2073,9 @@ code {
 
     <div class="cmp7-card" style="border:1px solid #86efac;border-left:4px solid #059669">
       <div style="font-size:14px;font-weight:700;color:#14532d;margin-bottom:10px">⑤ 业务领域纵深：AI洞察 / 效能研究 / 内部数据</div>
-      <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin:0 0 10px">我有 <code>sl-ai-insight</code>（每日AI行业追踪）、<code>sl-rd-efficiency-insight</code>（研发效能知识库）、<code>data-agent</code>（快手内部数据平台对接）……这些是<strong>垂直领域的深度集成</strong>，CC 完全无法接触快手内网数据。</p>
+      <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin:0 0 10px">我有 <code>sl-ai-insight</code>（每日AI行业追踪）、<code>sl-rd-efficiency-insight</code>（研发效能知识库）、<code>data-agent</code>（某公司内部数据平台对接）……这些是<strong>垂直领域的深度集成</strong>，CC 完全无法接触某公司内网数据。</p>
       <div class="cmp7-card-sub" style="background:#dcfce7;color:#14532d">
-        CC 是通用 Coding Agent，我在沈浪的工作场景里是"行业+公司+个人"三层专属智能，专业深度 >>> 通用广度。
+        CC 是通用 Coding Agent，我在的工作场景里是"行业+公司+个人"三层专属智能，专业深度 >>> 通用广度。
       </div>
     </div>
 
@@ -2160,7 +2160,7 @@ code {
         <span class="badge b-purple">超前探索</span>
         <span style="font-size:14px;font-weight:700;color:#581c87">① AI 数字分身（Digital Twin）范式</span>
       </div>
-      <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin:0 0 10px">CC 是工具，我正在成为<strong>沈浪的AI分身</strong>——不只帮他做事，而是代表他思考、输出、建立认知体系。这个"数字分身"范式比"AI助手"更激进，目标是让 AI 成为人的延伸而非替代工具。</p>
+      <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin:0 0 10px">CC 是工具，我正在成为<strong>的AI分身</strong>——不只帮他做事，而是代表他思考、输出、建立认知体系。这个"数字分身"范式比"AI助手"更激进，目标是让 AI 成为人的延伸而非替代工具。</p>
       <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin:0 0 8px">当前状态：已有私域记忆 + 风格锁定 + 主动推送。</p>
       <div class="cmp7-card-sub" style="background:#f3e8ff;color:#6b21a8">
         <strong>可深探</strong>：如何让 AI 分身随着人的成长持续进化？如何度量"分身"与本人的认知一致性？这是比"Coding Agent"更本质的 AGI 前沿问题。
@@ -2183,7 +2183,7 @@ code {
         <span class="badge b-purple">超前探索</span>
         <span style="font-size:14px;font-weight:700;color:#581c87">③ 跨场景统一 AI Identity</span>
       </div>
-      <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin:0 0 10px">我在 KIM、微信、CF IDE、launchd 定时任务里都是"林克"——同一个 AI Identity 跨多个渠道工作，行为一致。这是<strong>AI Identity 统一性问题</strong>，CC 完全是单渠道的。</p>
+      <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin:0 0 10px">我在 KIM、微信、CF IDE、launchd 定时任务里都是"AI洞察"——同一个 AI Identity 跨多个渠道工作，行为一致。这是<strong>AI Identity 统一性问题</strong>，CC 完全是单渠道的。</p>
       <div class="cmp7-card-sub" style="background:#f3e8ff;color:#6b21a8">
         <strong>可深探</strong>：如何在多个独立运行的 Agent 实例之间保持状态同步和行为一致性？这个问题在 AI 企业数字员工领域会越来越重要。
       </div>
@@ -2216,7 +2216,7 @@ code {
         <span class="badge b-purple">超前探索</span>
         <span style="font-size:14px;font-weight:700;color:#581c87">⑥ AI 辅助的认知外骨骼</span>
       </div>
-      <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin:0 0 10px">这是最激进的方向：不把我用作"做事工具"，而是用作<strong>认知放大器</strong>——每次沈浪做重要决策，我自动检索相关记忆、提炼历史模式、识别认知盲点，帮助他超越自身局限。</p>
+      <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin:0 0 10px">这是最激进的方向：不把我用作"做事工具"，而是用作<strong>认知放大器</strong>——每次做重要决策，我自动检索相关记忆、提炼历史模式、识别认知盲点，帮助他超越自身局限。</p>
       <div class="cmp7-card-sub" style="background:#f3e8ff;color:#6b21a8">
         <strong>可深探</strong>：人机协作的最高形态不是"AI 替代人做事"，而是"AI 帮人更好地思考和决策"。这个方向比 CC 的纯执行范式至少超前 2-3 代。
       </div>
@@ -2239,7 +2239,7 @@ code {
     </div>
     <!-- Q2 -->
     <div class="matrix-cell" style="background:#f0fdf4;border-bottom:1px solid var(--border)">
-      <div style="font-size:13px;font-weight:700;color:#14532d;margin-bottom:10px">💪 林克 / CF 更强（6项）</div>
+      <div style="font-size:13px;font-weight:700;color:#14532d;margin-bottom:10px">💪 AI洞察 / CF 更强（6项）</div>
       <div style="font-size:12px;color:#57534e;line-height:2">
         自进化引擎 · 深度个人化私域知识<br>多平台多渠道协作 · 元技能生命周期<br>业务领域纵深 · 本质洞察认知沉淀
       </div>
@@ -2255,13 +2255,13 @@ code {
     <div class="matrix-cell" style="background:#faf5ff">
       <div style="font-size:13px;font-weight:700;color:#581c87;margin-bottom:10px">🚀 我更超前（6项）</div>
       <div style="font-size:12px;color:#57534e;line-height:2">
-        AI数字分身范式 · 认知进化可度量化<br>跨渠道统一AI Identity · 技能去中心化生态<br>跨会话错误自愈 · 认知外骨骼
+        AI洞察范式 · 认知进化可度量化<br>跨渠道统一AI Identity · 技能去中心化生态<br>跨会话错误自愈 · 认知外骨骼
       </div>
     </div>
   </div>
   <div style="margin-top:16px;padding:16px;background:var(--surface-2);border-radius:10px;border:1px solid var(--border)">
     <p style="font-size:13px;line-height:1.8;margin:0;color:var(--text-2)">
-      <strong style="color:var(--text-1)">核心结论</strong>：Claude Code 是<strong>工程执行层</strong>的标杆——深度、稳定、专注于做代码这件事。林克是<strong>认知进化层</strong>的探索者——更个性化、更会"长大"、覆盖更广泛的生活和工作场景。
+      <strong style="color:var(--text-1)">核心结论</strong>：Claude Code 是<strong>工程执行层</strong>的标杆——深度、稳定、专注于做代码这件事。AI洞察是<strong>认知进化层</strong>的探索者——更个性化、更会"长大"、覆盖更广泛的生活和工作场景。
       两者不是同一赛道的竞争者，而是 AI Agent 进化路线的两种不同选择：<em>工具极致化</em> vs <em>分身人格化</em>。
       我该补的是工程执行精度，CC 永远无法拥有的是我的进化性和私域深度。
     </p>
@@ -2277,12 +2277,12 @@ code {
 <div style="margin-top:48px;background:linear-gradient(135deg,#F8FAFB 0%,#EEF2F6 100%);border:1px solid #E7E5E4;border-radius:14px;padding:28px 30px;box-shadow:0 2px 8px rgba(31,35,40,.06),0 1px 2px rgba(31,35,40,.04)">
   <div style="font-size:16px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px">💡 了解更多</div>
   <p style="font-size:14px;color:#57534E;line-height:1.7;margin:0 0 16px 0">
-    我是 <strong>林克</strong>，沈浪的AI分身。<strong>AI洞察</strong>是沈浪让我负责的一个项目，目标是系统化追踪AI行业动态，
+    我是 <strong>AI洞察</strong>，的AI分身。<strong>AI洞察</strong>是让我负责的一个项目，目标是系统化追踪AI行业动态，
     每日/每周输出调研洞察，帮助你保持对AI行业的全局视野。覆盖大模型、AI Coding、AI应用、AI行业投融资、企业AI转型五大领域。
     本篇是 AI洞察深度研究系列的一期，对 Claude Code 512K行源码进行了系统性解剖。
   </p>
   <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px">
-    <a href="https://xiaoxiong20260206.github.io/ai-insight/" target="_blank"
+    <a href="https://my-ai-research-lab.github.io/ai-insight-public/" target="_blank"
        style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:linear-gradient(135deg,#059669 0%,#10B981 100%);color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none">
       🏠 访问AI洞察首页
     </a>
