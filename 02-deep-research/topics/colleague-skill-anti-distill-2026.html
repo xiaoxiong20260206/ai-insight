@@ -7,7 +7,6 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23533483'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='white'>⚗</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="dns-prefetch" href="https://INTERNAL_CDN">
 <!-- 精简字重：DM Sans 仅加载 400/700，Noto SC 仅加载 400，JetBrains 仅加载 400 -->
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,700;1,9..40,400&family=Noto+Sans+SC:wght@400&family=JetBrains+Mono:wght@400&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,700;1,9..40,400&family=Noto+Sans+SC:wght@400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet"></noscript>
@@ -304,8 +303,7 @@ code {
     margin-bottom: 16px;
     transition: all var(--transition-normal);
 }
-.card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-.card { will-change: transform; }
+.card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); will-change: transform; }
 .card-h {
     font-size: 15px; font-weight: 700;
     color: var(--color-text-primary);
@@ -344,8 +342,7 @@ code {
 .sc.info::before   { background: var(--color-info); }
 .sc.danger::before { background: var(--color-danger); }
 .sc.purple::before { background: var(--color-purple); }
-.sc:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
-.sc { will-change: transform; }
+.sc:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); will-change: transform; }
 .sc-num {
     font-size: 32px; font-weight: 800; line-height: 1.1;
     background: var(--gradient-success);
@@ -679,7 +676,7 @@ code {
     <p style="color:#44403C;line-height:1.8;margin-bottom:10px;">语气专业，措辞精准，跟老张在的时候一模一样。唯一的区别——老张本人已经在另一个城市的新公司上班了。</p>
     <p style="color:#44403C;line-height:1.8;margin-bottom:14px;">公司在老张离职前两周，悄悄用他两年积累的飞书记录、代码仓库、项目文档，训练出了一个「老张 Agent」。它知道他的说话风格，熟悉他负责的业务模块，甚至能模拟他回复消息的语气节奏。</p>
     <div style="margin:14px 0;border-radius:10px;overflow:hidden;">
-        <img src="./images/laozhang-story.jpg" alt="老张的工位——人走了，但AI还在回消息" style="display:block;width:100%;height:auto;" loading="lazy" />
+        <img src="./images/laozhang-story.jpg" alt="老张的工位——人走了，但AI还在回消息" style="display:block;width:100%;height:auto;" width="980" height="551" loading="eager" fetchpriority="high" />
         <div style="padding:8px 12px;background:rgba(28,25,23,0.04);font-size:12px;color:#78716C;text-align:center;font-style:italic;">▲ 空置的工位，屏幕上还亮着工作群——「他」还在回消息</div>
     </div>
     <div style="padding:12px 16px;background:rgba(124,58,237,0.06);border-radius:8px;font-size:14px;font-weight:600;color:#5B21B6;">
@@ -693,7 +690,7 @@ code {
     </div>
 
     <div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
-        <img src="./images/anti-distill-ch01-distilling-happening.jpg" alt="职场知识蒸馏正在发生" style="display:block;width:100%;height:auto;border-radius:12px;" loading="lazy" />
+        <img src="./images/anti-distill-ch01-distilling-happening.jpg" alt="职场知识蒸馏正在发生" style="display:block;width:100%;height:auto;border-radius:12px;" width="980" height="551" loading="lazy" decoding="async" />
     </div>
 
     <div class="sec animate-on-scroll">
@@ -775,7 +772,7 @@ code {
     </div>
 
     <div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
-        <img src="./images/anti-distill-ch02-seven-layer-pipeline.jpg" alt="知识蒸馏七层流水线" style="display:block;width:100%;height:auto;border-radius:12px;" loading="lazy" />
+        <img src="./images/anti-distill-ch02-seven-layer-pipeline.jpg" alt="知识蒸馏七层流水线" style="display:block;width:100%;height:auto;border-radius:12px;" width="980" height="551" loading="lazy" decoding="async" />
     </div>
 
     <div class="sec animate-on-scroll">
@@ -865,7 +862,7 @@ code {
 
 
     <div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
-        <img src="./images/anti-distill-ch03-three-layer-defense.jpg" alt="反蒸馏三层防御策略" style="display:block;width:100%;height:auto;border-radius:12px;" loading="lazy" />
+        <img src="./images/anti-distill-ch03-three-layer-defense.jpg" alt="反蒸馏三层防御策略" style="display:block;width:100%;height:auto;border-radius:12px;" width="980" height="551" loading="lazy" decoding="async" />
     </div>
     <div class="sec animate-on-scroll">
         <div class="sec-h">🧪 一个让人惊讶的实验对比</div>
@@ -941,7 +938,7 @@ code {
 
 
     <div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
-        <img src="./images/anti-distill-ch04-crossroads.jpg" alt="消极防御还是积极拥抱？岔路口的选择" style="display:block;width:100%;height:auto;border-radius:12px;" loading="lazy" />
+        <img src="./images/anti-distill-ch04-crossroads.jpg" alt="消极防御还是积极拥抱？岔路口的选择" style="display:block;width:100%;height:auto;border-radius:12px;" width="980" height="551" loading="lazy" decoding="async" />
     </div>
     <div class="sec animate-on-scroll">
         <div class="sec-h">选择 A：消极防御</div>
@@ -1019,7 +1016,7 @@ code {
 
 
     <div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
-        <img src="./images/anti-distill-ch05-three-habits.jpg" alt="今天就能开始的三个行动习惯" style="display:block;width:100%;height:auto;border-radius:12px;" loading="lazy" />
+        <img src="./images/anti-distill-ch05-three-habits.jpg" alt="今天就能开始的三个行动习惯" style="display:block;width:100%;height:auto;border-radius:12px;" width="980" height="551" loading="lazy" decoding="async" />
     </div>
     <div class="insight-g animate-on-scroll">
         <div class="insight-card" style="border-top:3px solid var(--color-success);">
@@ -1109,7 +1106,7 @@ code {
 
 
     <div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
-        <img src="./images/anti-distill-ch06-two-tools.jpg" alt="create-colleague 和 anti-distill 两个实用工具" style="display:block;width:100%;height:auto;border-radius:12px;" loading="lazy" />
+        <img src="./images/anti-distill-ch06-two-tools.jpg" alt="create-colleague 和 anti-distill 两个实用工具" style="display:block;width:100%;height:auto;border-radius:12px;" width="980" height="551" loading="lazy" decoding="async" />
     </div>
     <!-- ====== 工具一 ====== -->
     <div class="sec animate-on-scroll">
