@@ -290,6 +290,8 @@ def run_url_spot_check(date: str) -> bool:
 
 # ── 命令: status ──────────────────────────────────────────
 def cmd_status(date: str):
+    # v1.3 自动修复：status 时也检测 Step 2 状态漂移
+    _auto_heal_step2(date)
     state = load_state(date)
     icons = {"pending": "⬜", "completed": "✅", "failed": "❌", "skipped": "⏭️"}
 
@@ -329,7 +331,10 @@ def cmd_resume(date: str):
     - 给出明确的下一步操作指令
     
     v1.2新增 (2026-03-15经验 — 跨会话上下文丢失根治方案)
+    v1.3新增 (2026-04-06) — resume时自动触发Step 2状态漂移检测修复
     """
+    # v1.3 自动修复：resume 时检测 Step 2 状态漂移
+    _auto_heal_step2(date)
     state = load_state(date)
     
     # 统计进度
@@ -434,8 +439,51 @@ def cmd_resume(date: str):
     print()
 
 # ── 命令: next ────────────────────────────────────────────
+def _auto_heal_step2(date: str) -> bool:
+    """自动修复 Step 2 状态漂移（v1.3 — 2026-04-06 修复）。
+    
+    场景：launchd 触发的 Agent 会话在完成内容生成后会话中断，
+    导致 daily-content-{date}.json 已存在但 state.json 中 step2 仍为 pending/in_progress。
+    
+    修复逻辑：
+    - 检查 daily-content-{date}.json 存在 且 包含 ≥ 3 个 tab
+    - 若 state 中 content 步骤状态不是 completed → 自动修复为 completed
+    
+    返回：True = 已自动修复，False = 无需修复或文件不存在
+    """
+    state = load_state(date)
+    if state["steps"]["content"]["status"] == "completed":
+        return False  # 已正常，无需修复
+    
+    content_file = PROJECT_DIR / f"data/daily-content-{date}.json"
+    if not content_file.exists():
+        return False
+    
+    try:
+        content = json.loads(content_file.read_text())
+        tabs = content.get("tabs", [])
+        if len(tabs) < 3:
+            return False  # 文件存在但不完整，不自动修复
+        
+        # 文件完整 → 自动修复状态
+        mark_step(date, "content", "completed",
+                  context=f"[自动修复] daily-content-{date}.json 已存在({len(tabs)}个tab)，会话断连导致状态未落盘，已自动修复",
+                  auto_healed=True)
+        print(f"  🔧 [自动修复] Step 2 状态漂移已修复：daily-content-{date}.json 存在({len(tabs)}个tab)，"
+              f"但 state 为 {state['steps']['content']['status']}，已自动标记为 completed")
+        return True
+    except Exception as e:
+        print(f"  ⚠️ Step 2 自动修复检查失败: {e}")
+        return False
+
+
 def get_next_action(date: str) -> dict:
     state = load_state(date)
+    
+    # v1.3 自动修复：检测并修复 Step 2 状态漂移（Agent会话中断未落盘）
+    if state["steps"]["content"]["status"] != "completed":
+        if _auto_heal_step2(date):
+            state = load_state(date)  # 重新加载修复后的状态
 
     for key in STEP_ORDER:
         step = STEPS[key]
