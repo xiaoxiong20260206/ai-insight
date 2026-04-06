@@ -6,7 +6,7 @@ AI产品本质深度调研 KIM 卡片推送脚本
 
 使用方式:
   python scripts/send_ai_product_essence_card.py --preview     # 发给自己预览
-  python scripts/send_ai_product_essence_card.py --to-groups   # 发到目标群
+  python scripts/send_ai_product_essence_card.py --to-groups   # 发到所有群（硬编码3个群）
 
 作者: 林克 (沈浪的AI分身)
 """
@@ -17,20 +17,15 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-try:
-    import httpx
-except ImportError:
-    print("请先安装 httpx: pip install httpx")
-    raise SystemExit(1)
-
 sys.path.insert(0, str(Path(__file__).parent))
-from kim_client import KimConfig
+from kim_client import (
+    KimConfig, get_access_token,
+    send_to_user, send_to_all_groups
+)
 
 KimConfig.validate()
 
 APP_KEY = KimConfig.APP_KEY
-SECRET_KEY = KimConfig.SECRET_KEY
-GATEWAY_URL = KimConfig.GATEWAY_URL
 
 RESEARCH_URL = (
     "https://xiaoxiong20260206.github.io/ai-insight/"
@@ -38,83 +33,10 @@ RESEARCH_URL = (
 )
 PROJECT_URL = "https://xiaoxiong20260206.github.io/ai-insight/"
 
-TARGET_GROUPS = [
-    {"groupId": "6724050835415361", "groupName": "\u300b\u5feb\u624bAI\u5458\u5de5"},
-    {"groupId": "6501852196213070", "groupName": "AI\u4ea7\u54c1\u5546\u4e1a\u5316\uff082026\u5e74\uff09"},
-]
-
-SEND_INTERVAL = 2.5
-MAX_RETRIES = 3
-RETRY_DELAY = 5
-
-
-async def get_access_token() -> str:
-    async with httpx.AsyncClient(timeout=30.0) as client:
-        resp = await client.post(
-            f"{GATEWAY_URL}/token/get",
-            headers={"Content-Type": "application/json"},
-            json={
-                "appKey": APP_KEY,
-                "secretKey": SECRET_KEY,
-                "grantType": "client_credentials",
-            },
-        )
-        result = resp.json()
-        if result.get("code") == 0:
-            return result["result"]["accessToken"]
-        raise Exception(f"Token获取失败: {result}")
-
-
-async def send_to_user(token: str, username: str, card: dict, dry_run: bool = False) -> bool:
-    if dry_run:
-        print(f"   [DRY-RUN] 将发送到用户: {username}")
-        return True
-    async with httpx.AsyncClient(timeout=30.0) as client:
-        resp = await client.post(
-            f"{GATEWAY_URL}/openapi/v2/message/send",
-            headers={"Content-Type": "application/json", "Authorization": f"Bearer {token}"},
-            json={"username": username, "msgType": "mixCard", "mixCard": card},
-        )
-        result = resp.json()
-        if result.get("code") == 0:
-            return True
-        print(f"   发送失败: {result}")
-        return False
-
-
-async def send_to_group(
-    token: str, group_id: str, group_name: str, card: dict, dry_run: bool = False
-) -> bool:
-    if dry_run:
-        print(f"   [DRY-RUN] 将发送到: {group_name} ({group_id})")
-        return True
-    for attempt in range(MAX_RETRIES):
-        try:
-            async with httpx.AsyncClient(timeout=30.0) as client:
-                resp = await client.post(
-                    f"{GATEWAY_URL}/openapi/v2/message/send",
-                    headers={
-                        "Content-Type": "application/json",
-                        "Authorization": f"Bearer {token}",
-                    },
-                    json={"groupId": group_id, "msgType": "mixCard", "mixCard": card},
-                )
-                result = resp.json()
-                if result.get("code") == 0:
-                    return True
-                if result.get("code") == 42900 and attempt < MAX_RETRIES - 1:
-                    print(f"   频率限制，{RETRY_DELAY}s后重试 ({attempt+1}/{MAX_RETRIES})")
-                    await asyncio.sleep(RETRY_DELAY)
-                    continue
-                print(f"   发送失败: {result}")
-                return False
-        except Exception as e:
-            if attempt < MAX_RETRIES - 1:
-                await asyncio.sleep(RETRY_DELAY)
-            else:
-                print(f"   发送异常: {e}")
-                return False
-    return False
+# 推送配置（统一从 KimConfig 读取，不再硬编码）
+SEND_INTERVAL = KimConfig.SEND_INTERVAL
+MAX_RETRIES = KimConfig.MAX_RETRIES
+RETRY_DELAY = KimConfig.RETRY_DELAY
 
 
 def build_card() -> dict:
@@ -225,65 +147,52 @@ def build_card() -> dict:
     }
 
 
+
 async def main():
-    parser = argparse.ArgumentParser(description="AI\u4ea7\u54c1\u672c\u8d28\u6df1\u5ea6\u8c03\u7814\u5361\u7247\u63a8\u9001")
-    parser.add_argument("--preview", action="store_true", help="\u53d1\u7ed9\u81ea\u5df1\u9884\u89c8")
-    parser.add_argument("--to-user", type=str, help="\u53d1\u9001\u5230\u6307\u5b9a\u7528\u6237")
-    parser.add_argument("--to-groups", action="store_true", help="\u53d1\u9001\u5230\u76ee\u6807\u7fa4")
-    parser.add_argument("--dry-run", action="store_true", help="\u8bd5\u8fd0\u884c")
+    parser = argparse.ArgumentParser(description="AI产品本质深度调研卡片推送")
+    parser.add_argument("--preview", action="store_true", help="发给自己预览")
+    parser.add_argument("--to-user", type=str, help="发送到指定用户")
+    parser.add_argument("--to-groups", action="store_true", help="发送到所有群（硬编码3个群）")
+    parser.add_argument("--dry-run", action="store_true", help="试运行")
     args = parser.parse_args()
 
     if args.preview:
         args.to_user = "shenlang"
     if not args.to_user and not args.to_groups:
-        print("\u8bf7\u6307\u5b9a\u53d1\u9001\u76ee\u6807: --preview \u6216 --to-groups")
+        print("请指定发送目标: --preview 或 --to-groups")
         return
 
-    print("\U0001f680 AI\u4ea7\u54c1\u672c\u8d28\u6df1\u5ea6\u8c03\u7814\u5361\u7247\u63a8\u9001")
+    print("\U0001f680 AI产品本质深度调研卡片推送")
     if args.dry_run:
-        print("   [DRY-RUN \u6a21\u5f0f]")
+        print("   [DRY-RUN 模式]")
     print("=" * 55)
 
-    print("\U0001f3a8 \u6784\u5efa\u5361\u7247...")
+    print("\U0001f3a8 构建卡片...")
     card = build_card()
-    print("\u2705 \u5361\u7247\u6784\u5efa\u5b8c\u6210")
+    print("\u2705 卡片构建完成")
 
-    print("\U0001f511 \u83b7\u53d6 Token...")
+    print("\U0001f511 获取 Token...")
     try:
         token = await get_access_token()
-        print("\u2705 Token \u83b7\u53d6\u6210\u529f")
+        print("\u2705 Token 获取成功")
     except Exception as e:
-        print(f"\u274c Token \u83b7\u53d6\u5931\u8d25: {e}")
+        print(f"\u274c Token 获取失败: {e}")
         return
 
     if args.to_user:
-        print(f"\n\U0001f4e4 \u53d1\u9001\u7ed9\u7528\u6237: {args.to_user}")
+        print(f"\n\U0001f4e4 发送给用户: {args.to_user}")
         ok = await send_to_user(token, args.to_user, card, args.dry_run)
-        print("\u2705 \u53d1\u9001\u6210\u529f\uff01\u8bf7\u68c0\u67e5 KIM \u6d88\u606f" if ok else "\u274c \u53d1\u9001\u5931\u8d25")
+        print("\u2705 发送成功！请检查 KIM 消息" if ok else "\u274c 发送失败")
 
     if args.to_groups:
-        print(f"\n\U0001f4cb \u76ee\u6807\u7fa4\uff08{len(TARGET_GROUPS)} \u4e2a\uff09:")
-        for g in TARGET_GROUPS:
-            print(f"   - {g['groupName']} ({g['groupId']})")
-        print("\n\U0001f4e4 \u5f00\u59cb\u63a8\u9001...")
-        ok_count = 0
-        fail_list = []
-        for i, g in enumerate(TARGET_GROUPS):
-            print(f"[{i+1}/{len(TARGET_GROUPS)}] \u53d1\u9001\u5230: {g['groupName']}")
-            ok = await send_to_group(token, g["groupId"], g["groupName"], card, args.dry_run)
-            if ok:
-                print("   \u2705 \u6210\u529f")
-                ok_count += 1
-            else:
-                fail_list.append(g["groupName"])
-            if i < len(TARGET_GROUPS) - 1 and not args.dry_run:
-                await asyncio.sleep(SEND_INTERVAL)
+        print("\n\U0001f4e4 推送到所有群（硬编码3个群）...")
+        success_count, fail_count = await send_to_all_groups(token, card, args.dry_run)
         print("\n" + "=" * 55)
-        print(f"\U0001f4ca \u5b8c\u6210\uff01\u6210\u529f: {ok_count}\uff0c\u5931\u8d25: {len(fail_list)}")
-        if fail_list:
-            print(f"\u26a0\ufe0f  \u5931\u8d25\u7fa4\uff08\u8bf7\u786e\u8ba4\u540e\u91cd\u53d1\uff09: {fail_list}")
+        print(f"\U0001f4ca 完成！成功: {success_count}，失败: {fail_count}")
+        if fail_count > 0:
+            print("\u26a0\ufe0f  失败群请确认后重发")
 
-    print(f"\n\U0001f4c4 \u5b8c\u6574\u62a5\u544a: {RESEARCH_URL}")
+    print(f"\n\U0001f4c4 完整报告: {RESEARCH_URL}")
 
 
 if __name__ == "__main__":
