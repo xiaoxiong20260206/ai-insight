@@ -3,8 +3,8 @@
 > **知识类型**: 市场跟踪
 > **来源**: 快手内部文档（持续更新）
 > **文档链接**: [内网文档](https://INTERNAL_DOCS/d/home/fcACiaNjbk1IsQGeFdBelTJ-6)
-> **数据截止**: 2026-03-03
-> **知识库更新时间**: 2026-03-05
+> **数据截止**: 2026-04-06
+> **知识库更新时间**: 2026-04-06 (上次: 2026-03-05)
 
 ---
 
@@ -167,3 +167,42 @@
 
 *创建时间: 2026-03-05*
 *来源: 快手内部文档《【持续更新】AI Coding市场跟踪》*
+
+---
+
+## 七、2026-04-06 更新：JetBrains 万人调查 — 工具格局剧变
+
+> **来源**: [JetBrains AI Pulse 2026-01](https://blog.jetbrains.com/research/2026/04/which-ai-coding-tools-do-developers-actually-use-at-work/) | 10,000+ 专业开发者 | 2026-04-02 发布
+
+### 7.1 工作使用率最新数据（2026年1月）
+
+| 工具 | 工作使用率 | 变化 | NPS / CSAT | 备注 |
+|------|-----------|------|------------|------|
+| **GitHub Copilot** | 29% | → 停滞 | - | 仍第一，但增长停滞 |
+| **Cursor** | 18% | 持平 | - | 并列第二 |
+| **Claude Code** | 18% | **6x (vs 2025-04)** | NPS 54 / CSAT 91% | 最高满意度 |
+| **JetBrains AI Assistant** | 9% | - | - | - |
+| **Google Antigravity** | 6% | 🆕 上线仅 2 个月 | - | 增速最快新人 |
+| **OpenAI Codex** | 3% | - | - | 桌面版数据前 |
+| **JetBrains Junie** | 5% | - | - | LLM-agnostic CLI |
+
+### 7.2 关键洞察
+
+- **Claude Code 崛起速度创纪录**：9 个月内工作使用率从 3% → 18%（6倍），用口碑碾压渠道资源
+- **工具形态迁移信号**：从 IDE 插件（Copilot）→ 独立 Agent 平台（Claude Code / Codex）
+- **NPS 是市场份额领先指标**：Claude Code NPS 54 在所有工具中最高，且已兑现为份额增长
+- **多极化格局形成**：Google Antigravity 两个月 6% 采用率，证明市场仍在快速变化
+
+### 7.3 商业化动向
+
+- **OpenAI Codex 弹性定价（2026-04-02）**：Enterprise/Business 版按量付费，从固定席位转向算力消耗计费
+  - 信号：AI 编程工具商业模式正在从「软件订阅」→「算力消耗」迁移
+  - 影响：对用量不均匀的企业团队更灵活，但引入成本不可控风险
+
+### 7.4 生态博弈新信号
+
+- **Anthropic 封杀 OpenClaw（2026-04-04）**：对通过第三方工具调用 Claude 额外收费
+  - 直接影响：数十款基于 Claude 的 Vibe Coding 工具受冲击
+  - 深层含义：AI 生态从「开放协作」走向「巨头割据」，API 层控制战打响
+  - 开发者应对：多模型策略（Model Routing）和模型无关架构成为理性选项
+
