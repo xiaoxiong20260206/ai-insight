@@ -14,7 +14,7 @@ KIM API 公共客户端模块
     from kim_client import KimConfig, get_access_token, get_bot_groups, send_to_group_with_retry, send_to_user
 
 作者: 林克 (沈浪的AI分身)
-版本: 1.0.0
+版本: 1.1.0 (2026-04-06: get_bot_groups 改为硬编码3群，移除旧API调用)
 """
 
 import asyncio
@@ -95,28 +95,23 @@ async def get_access_token() -> str:
 
 
 async def get_bot_groups(token: str) -> list:
-    """获取林克机器人所在的所有群（包含群名）"""
-    async with httpx.AsyncClient(timeout=30.0) as client:
-        resp = await client.post(
-            f"{KimConfig.GATEWAY_URL}/openapi/v2/group/bot/list",
-            headers={
-                "Content-Type": "application/json",
-                "Authorization": f"Bearer {token}"
-            },
-            json={"pageSize": 50}
-        )
-        result = resp.json()
-        if result.get("code") == 0:
-            groups = result.get("data", {}).get("groups", [])
-            return [
-                {
-                    "groupId": g.get("groupId", ""),
-                    "groupName": g.get("name", "未知群"),
-                    "memberCount": g.get("userCount", 0)
-                }
-                for g in groups
-            ]
-        return []
+    """返回林克已确认的推送群列表（硬编码）
+
+    背景：/openapi/v2/group/bot/list API 返回 404（2026-04-06 沈浪确认）
+    改为硬编码3个已确认群，如需调整请直接修改 PUSH_GROUPS 常量。
+
+    已确认群（2026-04-06 沈浪确认）：
+      - 研发效能中心全员群
+      - 【AI生产力】MyFlicker产研
+      - 【L5项目】研发线AI-Ready
+    """
+    # token 参数保留以维持接口兼容性
+    _ = token
+    return [
+        {"groupId": "3705455482343722", "groupName": "研发效能中心全员群"},
+        {"groupId": "6724050835415361", "groupName": "【AI生产力】MyFlicker产研"},
+        {"groupId": "6646213728505891", "groupName": "【L5项目】研发线AI-Ready"},
+    ]
 
 
 async def send_to_user(

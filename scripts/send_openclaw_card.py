@@ -18,21 +18,17 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-try:
-    import httpx
-except ImportError:
-    print("Please install httpx: pip install httpx")
-    raise SystemExit(1)
-
 # 使用公共模块加载凭证
 sys.path.insert(0, str(Path(__file__).parent))
-from kim_client import KimConfig
+from kim_client import (
+    KimConfig, get_access_token,
+    send_to_user, send_to_all_groups
+)
 
 KimConfig.validate()
 
 # ============ 配置 ============
 APP_KEY = KimConfig.APP_KEY
-SECRET_KEY = KimConfig.SECRET_KEY
 GATEWAY_URL = KimConfig.GATEWAY_URL
 
 # OpenClaw 深度调研链接
@@ -40,90 +36,13 @@ RESEARCH_URL = "https://xiaoxiong20260206.github.io/ai-insight/02-deep-research/
 PROJECT_URL = "https://xiaoxiong20260206.github.io/ai-insight/"
 
 # 推送配置
-SEND_INTERVAL = 2.5
-MAX_RETRIES = 3
-RETRY_DELAY = 5
+SEND_INTERVAL = KimConfig.SEND_INTERVAL
+MAX_RETRIES = KimConfig.MAX_RETRIES
+RETRY_DELAY = KimConfig.RETRY_DELAY
 
 # Chinese quotes as variables to avoid encoding issues
 LQ = '\u201c'  # left double quotation mark
 RQ = '\u201d'  # right double quotation mark
-
-
-# ============ API 调用 ============
-async def get_access_token() -> str:
-    async with httpx.AsyncClient(timeout=30.0) as client:
-        resp = await client.post(
-            f"{GATEWAY_URL}/token/get",
-            headers={"Content-Type": "application/json"},
-            json={"appKey": APP_KEY, "secretKey": SECRET_KEY, "grantType": "client_credentials"}
-        )
-        result = resp.json()
-        if result.get("code") == 0:
-            return result["result"]["accessToken"]
-        raise Exception(f"Token failed: {result}")
-
-
-async def get_bot_groups(token: str) -> list:
-    async with httpx.AsyncClient(timeout=30.0) as client:
-        resp = await client.post(
-            f"{GATEWAY_URL}/openapi/v2/group/bot/list",
-            headers={"Content-Type": "application/json", "Authorization": f"Bearer {token}"},
-            json={"pageSize": 50}
-        )
-        result = resp.json()
-        if result.get("code") == 0:
-            groups = result.get("data", {}).get("groups", [])
-            return [{"groupId": g.get("groupId", ""), "groupName": g.get("name", "unknown"), "memberCount": g.get("userCount", 0)} for g in groups]
-        return []
-
-
-async def send_to_user(token: str, username: str, card: dict, dry_run: bool = False) -> bool:
-    if dry_run:
-        print(f"   [DRY-RUN] user: {username}")
-        return True
-    async with httpx.AsyncClient(timeout=30.0) as client:
-        resp = await client.post(
-            f"{GATEWAY_URL}/openapi/v2/message/send",
-            headers={"Content-Type": "application/json", "Authorization": f"Bearer {token}"},
-            json={"username": username, "msgType": "mixCard", "mixCard": card}
-        )
-        result = resp.json()
-        if result.get("code") == 0:
-            return True
-        print(f"   FAIL: {result}")
-        return False
-
-
-async def send_to_group_with_retry(token: str, group_id: str, group_name: str, card: dict, dry_run: bool = False) -> bool:
-    if dry_run:
-        print(f"   [DRY-RUN] group: {group_name} ({group_id})")
-        return True
-    for attempt in range(MAX_RETRIES):
-        try:
-            async with httpx.AsyncClient(timeout=30.0) as client:
-                resp = await client.post(
-                    f"{GATEWAY_URL}/openapi/v2/message/send",
-                    headers={"Content-Type": "application/json", "Authorization": f"Bearer {token}"},
-                    json={"groupId": group_id, "msgType": "mixCard", "mixCard": card}
-                )
-                result = resp.json()
-                if result.get("code") == 0:
-                    return True
-                if result.get("code") == 42900:
-                    if attempt < MAX_RETRIES - 1:
-                        print(f"   Rate limited, retry in {RETRY_DELAY}s ({attempt + 1}/{MAX_RETRIES})")
-                        await asyncio.sleep(RETRY_DELAY)
-                        continue
-                print(f"   FAIL: {result}")
-                return False
-        except Exception as e:
-            if attempt < MAX_RETRIES - 1:
-                print(f"   Error, retry in {RETRY_DELAY}s: {e}")
-                await asyncio.sleep(RETRY_DELAY)
-            else:
-                print(f"   FAIL: {e}")
-                return False
-    return False
 
 
 # ============ 卡片构建 ============
@@ -299,30 +218,8 @@ async def main():
             print('Send FAIL')
 
     if args.to_groups:
-        print('\nGetting group list...')
-        groups = await get_bot_groups(token)
-        if not groups:
-            print('No groups found')
-            return
-        print(f'Groups count: {len(groups)}')
-
-        print('\nPushing to all groups...')
-        success_count = 0
-        fail_count = 0
-
-        for i, group in enumerate(groups):
-            group_id = group['groupId']
-            group_name = group['groupName']
-            print(f'[{i+1}/{len(groups)}] {group_name}')
-            success = await send_to_group_with_retry(token, group_id, group_name, card, args.dry_run)
-            if success:
-                print(f'   OK')
-                success_count += 1
-            else:
-                fail_count += 1
-            if i < len(groups) - 1 and not args.dry_run:
-                await asyncio.sleep(SEND_INTERVAL)
-
+        print('\nPushing to all groups (hardcoded 3 groups)...')
+        success_count, fail_count = await send_to_all_groups(token, card, args.dry_run)
         print('\n' + '=' * 50)
         print(f'Done! Success: {success_count}, Fail: {fail_count}')
 

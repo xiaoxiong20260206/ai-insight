@@ -29,7 +29,7 @@ cp scripts/.env.template scripts/.env
 - `--dry-run` 试运行，不实际发送
 
 **日报专属参数**:
-- 无参数时直接推送到所有群（历史兼容）
+- 无参数时私发给 shenlang（日报规范：统一私发，不群发）
 
 ### 🔄 同步脚本
 

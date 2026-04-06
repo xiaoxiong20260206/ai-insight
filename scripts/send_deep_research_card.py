@@ -26,156 +26,26 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
-try:
-    import httpx
-except ImportError:
-    print("❌ 请先安装 httpx: pip install httpx")
-    raise SystemExit(1)
-
 # 使用公共模块加载凭证
 sys.path.insert(0, str(Path(__file__).parent))
-from kim_client import KimConfig
+from kim_client import (
+    KimConfig, get_access_token,
+    send_to_user, send_to_all_groups
+)
 
 KimConfig.validate()
 
 # ============ 配置 ============
 APP_KEY = KimConfig.APP_KEY
-SECRET_KEY = KimConfig.SECRET_KEY
-GATEWAY_URL = KimConfig.GATEWAY_URL
 
 # 深度调研链接
 RESEARCH_URL = "https://xiaoxiong20260206.github.io/ai-insight/02-deep-research/trends/ai-leaders-2026.html"
 PROJECT_URL = "https://xiaoxiong20260206.github.io/ai-insight/"
 
-# 推送配置
-SEND_INTERVAL = 2.5  # 群间发送间隔(秒)
-MAX_RETRIES = 3
-RETRY_DELAY = 5
-
-
-# ============ API 调用 ============
-async def get_access_token() -> str:
-    """获取林克应用的 Access Token"""
-    async with httpx.AsyncClient(timeout=30.0) as client:
-        resp = await client.post(
-            f"{GATEWAY_URL}/token/get",
-            headers={"Content-Type": "application/json"},
-            json={
-                "appKey": APP_KEY,
-                "secretKey": SECRET_KEY,
-                "grantType": "client_credentials"
-            }
-        )
-        result = resp.json()
-        if result.get("code") == 0:
-            return result["result"]["accessToken"]
-        raise Exception(f"Token获取失败: {result}")
-
-
-async def get_bot_groups(token: str) -> list:
-    """获取林克机器人所在的所有群"""
-    async with httpx.AsyncClient(timeout=30.0) as client:
-        resp = await client.post(
-            f"{GATEWAY_URL}/openapi/v2/group/bot/list",
-            headers={
-                "Content-Type": "application/json",
-                "Authorization": f"Bearer {token}"
-            },
-            json={"pageSize": 50}
-        )
-        result = resp.json()
-        if result.get("code") == 0:
-            groups = result.get("data", {}).get("groups", [])
-            return [
-                {
-                    "groupId": g.get("groupId", ""),
-                    "groupName": g.get("name", "未知群"),
-                    "memberCount": g.get("userCount", 0)
-                }
-                for g in groups
-            ]
-        return []
-
-
-async def send_to_user(token: str, username: str, card: dict, dry_run: bool = False) -> bool:
-    """发送消息到个人"""
-    if dry_run:
-        print(f"   🔍 [DRY-RUN] 将发送到用户: {username}")
-        return True
-    
-    async with httpx.AsyncClient(timeout=30.0) as client:
-        resp = await client.post(
-            f"{GATEWAY_URL}/openapi/v2/message/send",
-            headers={
-                "Content-Type": "application/json",
-                "Authorization": f"Bearer {token}"
-            },
-            json={
-                "username": username,
-                "msgType": "mixCard",
-                "mixCard": card
-            }
-        )
-        result = resp.json()
-        if result.get("code") == 0:
-            return True
-        print(f"   ❌ 发送失败: {result}")
-        return False
-
-
-async def send_to_group_with_retry(
-    token: str,
-    group_id: str,
-    group_name: str,
-    card: dict,
-    dry_run: bool = False
-) -> bool:
-    """发送消息到群，带重试机制"""
-    if dry_run:
-        print(f"   🔍 [DRY-RUN] 将发送到: {group_name} ({group_id})")
-        return True
-    
-    for attempt in range(MAX_RETRIES):
-        try:
-            async with httpx.AsyncClient(timeout=30.0) as client:
-                resp = await client.post(
-                    f"{GATEWAY_URL}/openapi/v2/message/send",
-                    headers={
-                        "Content-Type": "application/json",
-                        "Authorization": f"Bearer {token}"
-                    },
-                    json={
-                        "groupId": group_id,
-                        "msgType": "mixCard",
-                        "mixCard": card
-                    }
-                )
-                result = resp.json()
-                
-                if result.get("code") == 0:
-                    return True
-                
-                if result.get("code") == 42900:
-                    if attempt < MAX_RETRIES - 1:
-                        print(f"   ⏳ 频率限制，{RETRY_DELAY}秒后重试 ({attempt + 1}/{MAX_RETRIES})")
-                        await asyncio.sleep(RETRY_DELAY)
-                        continue
-                    else:
-                        print(f"   ❌ 重试{MAX_RETRIES}次仍失败: {result}")
-                        return False
-                else:
-                    print(f"   ❌ 发送失败: {result}")
-                    return False
-                    
-        except Exception as e:
-            if attempt < MAX_RETRIES - 1:
-                print(f"   ⏳ 发送异常，{RETRY_DELAY}秒后重试: {e}")
-                await asyncio.sleep(RETRY_DELAY)
-            else:
-                print(f"   ❌ 发送异常: {e}")
-                return False
-    
-    return False
+# 推送配置（统一从 KimConfig 读取）
+SEND_INTERVAL = KimConfig.SEND_INTERVAL
+MAX_RETRIES = KimConfig.MAX_RETRIES
+RETRY_DELAY = KimConfig.RETRY_DELAY
 
 
 # ============ 卡片构建 ============
@@ -338,37 +208,8 @@ async def main():
             print("❌ 发送失败")
     
     if args.to_groups:
-        # 发送到所有群
-        print("\n📋 获取群列表...")
-        groups = await get_bot_groups(token)
-        if not groups:
-            print("⚠️ 未找到任何群")
-            return
-        print(f"✅ 林克所在群数量: {len(groups)}")
-        
-        print("\n📤 开始推送到所有群...")
-        success_count = 0
-        fail_count = 0
-        
-        for i, group in enumerate(groups):
-            group_id = group["groupId"]
-            group_name = group["groupName"]
-            
-            print(f"[{i+1}/{len(groups)}] 发送到: {group_name}")
-            
-            success = await send_to_group_with_retry(
-                token, group_id, group_name, card, args.dry_run
-            )
-            
-            if success:
-                print(f"   ✅ 发送成功")
-                success_count += 1
-            else:
-                fail_count += 1
-            
-            if i < len(groups) - 1 and not args.dry_run:
-                await asyncio.sleep(SEND_INTERVAL)
-        
+        # 发送到所有群（使用 kim_client.send_to_all_groups）
+        success_count, fail_count = await send_to_all_groups(token, card, args.dry_run)
         print("\n" + "=" * 50)
         print(f"📊 推送完成！成功: {success_count}，失败: {fail_count}")
     

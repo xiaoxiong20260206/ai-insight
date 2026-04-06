@@ -22,7 +22,7 @@ fi
 
 # 执行周报推送
 cd "$PROJECT_DIR"
-python3 scripts/send_ai_weekly.py --to-user shenlang >> "$LOG_FILE" 2>&1
+python3 scripts/send_ai_weekly.py --to-groups >> "$LOG_FILE" 2>&1
 
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] AI周报定时任务完成" >> "$LOG_FILE" 2>&1
 echo "========================================" >> "$LOG_FILE" 2>&1

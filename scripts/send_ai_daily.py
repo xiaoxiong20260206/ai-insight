@@ -44,13 +44,12 @@ except ImportError:
 
 # 使用公共模块加载凭证
 sys.path.insert(0, str(Path(__file__).parent))
-from kim_client import KimConfig
+from kim_client import KimConfig, get_access_token
 
 KimConfig.validate()
 
 # ============ 配置 ============
 APP_KEY = KimConfig.APP_KEY
-SECRET_KEY = KimConfig.SECRET_KEY
 GATEWAY_URL = KimConfig.GATEWAY_URL
 
 # 日报路径 (相对于项目根目录)
@@ -61,15 +60,9 @@ REPORT_BASE_URL = "https://xiaoxiong20260206.github.io/ai-insight/01-daily-repor
 PROJECT_URL = "https://xiaoxiong20260206.github.io/ai-insight/"
 
 # 推送配置
-SEND_INTERVAL = 2.5  # 群间发送间隔(秒)，避免频率限制
-MAX_RETRIES = 3      # 最大重试次数
-RETRY_DELAY = 5
-
-# 日报推送目标群（仅推送到这2个群，周报才推所有群）
-DAILY_TARGET_GROUPS = {
-    "6501852196213070",  # 【项目】CF（2026年）
-    "3705455482343722",  # 研发效能中心全员群
-}  # set 类型，O(1) 查找
+SEND_INTERVAL = KimConfig.SEND_INTERVAL  # 群间发送间隔(秒)
+MAX_RETRIES = KimConfig.MAX_RETRIES      # 最大重试次数
+RETRY_DELAY = KimConfig.RETRY_DELAY
 
 # 常量
 LQ = "\u201c"  # 中文左引号
@@ -77,49 +70,7 @@ RQ = "\u201d"  # 中文右引号
 WEEKDAYS = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
 
 
-# ============ API 调用 ============
-async def get_access_token() -> str:
-    """获取林克应用的 Access Token"""
-    async with httpx.AsyncClient(timeout=30.0) as client:
-        resp = await client.post(
-            f"{GATEWAY_URL}/token/get",
-            headers={"Content-Type": "application/json"},
-            json={
-                "appKey": APP_KEY,
-                "secretKey": SECRET_KEY,
-                "grantType": "client_credentials"
-            }
-        )
-        result = resp.json()
-        if result.get("code") == 0:
-            return result["result"]["accessToken"]
-        raise Exception(f"Token获取失败: {result}")
-
-
-async def get_bot_groups(token: str) -> list:
-    """获取林克机器人所在的所有群（包含群名）"""
-    async with httpx.AsyncClient(timeout=30.0) as client:
-        resp = await client.post(
-            f"{GATEWAY_URL}/openapi/v2/group/bot/list",
-            headers={
-                "Content-Type": "application/json",
-                "Authorization": f"Bearer {token}"
-            },
-            json={"pageSize": 50}
-        )
-        result = resp.json()
-        if result.get("code") == 0:
-            groups = result.get("data", {}).get("groups", [])
-            enriched_groups = []
-            for group in groups:
-                enriched_groups.append({
-                    "groupId": group.get("groupId", ""),
-                    "groupName": group.get("name", "未知群"),
-                    "memberCount": group.get("userCount", 0)
-                })
-            return enriched_groups
-        return []
-
+# ============ API 调用（Token获取已统一到 kim_client.get_access_token）============
 
 async def send_to_target(
     token: str,

@@ -1,29 +1,36 @@
 #!/usr/bin/env python3
-"""发送 Claude Code 深度调研 KIM 卡片 — 私发沈浪预览"""
+"""
+Claude Code 深度调研 KIM 卡片推送脚本
+=====================================
+将 Claude Code 深度调研卡片推送到 KIM（私发预览 / 群发）
+
+使用方式:
+  python3 scripts/send_claude_code_research_card.py --preview      # 私发沈浪预览
+  python3 scripts/send_claude_code_research_card.py --to-groups    # 群发（硬编码3个群）
+  python3 scripts/send_claude_code_research_card.py --dry-run      # 试运行
+
+作者: 林克 (沈浪的AI分身)
+"""
 
 import asyncio
-import httpx
+import argparse
+import sys
 from datetime import datetime
+from pathlib import Path
 
-APP_KEY = "30b847d3-9fe4-4598-ac29-0b9a113eb991"
-SECRET_KEY = "openApp298f3ef63db4ec3e7909ad4e9"
-GATEWAY_URL = "https://INTERNAL_GATEWAY"
+sys.path.insert(0, str(Path(__file__).parent))
+from kim_client import (
+    KimConfig, get_access_token,
+    send_to_user, send_to_all_groups
+)
+
+KimConfig.validate()
+
+APP_KEY = KimConfig.APP_KEY
 
 RESEARCH_URL = "https://xiaoxiong20260206.github.io/ai-insight/02-deep-research/topics/claude-code-source-analysis.html"
 HOMEPAGE_URL = "https://xiaoxiong20260206.github.io/ai-insight/"
 KIM_DOC_URL  = "https://INTERNAL_DOCS/d/home/fcACLzJsWsUleOZk0PAkdFrRP"
-
-async def get_token() -> str:
-    async with httpx.AsyncClient(timeout=30.0) as client:
-        resp = await client.post(
-            f"{GATEWAY_URL}/token/get",
-            headers={"Content-Type": "application/json"},
-            json={"appKey": APP_KEY, "secretKey": SECRET_KEY, "grantType": "client_credentials"}
-        )
-        result = resp.json()
-        if result.get("code") == 0:
-            return result["result"]["accessToken"]
-        raise Exception(f"Token 获取失败: {result}")
 
 
 def build_card() -> dict:
@@ -113,83 +120,56 @@ def build_card() -> dict:
     }
 
 
-async def send_preview():
-    """私发给沈浪预览"""
-    token = await get_token()
-    card  = build_card()
 
-    async with httpx.AsyncClient(timeout=30.0) as client:
-        resp = await client.post(
-            f"{GATEWAY_URL}/openapi/v2/message/send",
-            headers={"Authorization": f"Bearer {token}",
-                     "Content-Type": "application/json"},
-            json={"username": "shenlang", "msgType": "mixCard", "mixCard": card}
-        )
-        result = resp.json()
+async def main():
+    parser = argparse.ArgumentParser(description="Claude Code 深度调研卡片推送")
+    parser.add_argument("--preview", action="store_true", help="私发给自己预览")
+    parser.add_argument("--to-user", type=str, help="发送到指定用户")
+    parser.add_argument("--to-groups", action="store_true", help="群发（硬编码3个群）")
+    parser.add_argument("--dry-run", action="store_true", help="试运行，不实际发送")
+    args = parser.parse_args()
 
-    if result.get("code") == 0:
-        print("✅ 已私发给沈浪（预览模式）")
-        print(f"📄 KIM Doc 文章：{KIM_DOC_URL}")
-        print(f"🌐 HTML 报告  ：{RESEARCH_URL}")
-    else:
-        print(f"❌ 发送失败：{result}")
-
-
-async def send_to_groups():
-    """发送到林克所在的所有群"""
-    token = await get_token()
-
-    # 获取群列表
-    async with httpx.AsyncClient(timeout=30.0) as client:
-        resp = await client.get(
-            f"{GATEWAY_URL}/openapi/v2/group/bot/list",
-            headers={"Authorization": f"Bearer {token}"}
-        )
-        groups_result = resp.json()
-
-    if groups_result.get("code") != 0:
-        print(f"❌ 获取群列表失败：{groups_result}")
+    if args.preview:
+        args.to_user = "shenlang"
+    if not args.to_user and not args.to_groups:
+        print("请指定发送目标: --preview 或 --to-groups")
         return
 
-    groups = groups_result.get("result", {}).get("groupList", [])
-    print(f"📋 共发现 {len(groups)} 个群，开始推送...")
+    print("\U0001f50d Claude Code 深度调研卡片推送")
+    if args.dry_run:
+        print("   [DRY-RUN 模式]")
+    print("=" * 55)
 
+    print("\U0001f3a8 构建卡片...")
     card = build_card()
-    success, failed = [], []
+    print("\u2705 卡片构建完成")
 
-    for g in groups:
-        gid   = g.get("groupId") or g.get("id")
-        gname = g.get("groupName") or g.get("name", gid)
-        async with httpx.AsyncClient(timeout=30.0) as client:
-            resp = await client.post(
-                f"{GATEWAY_URL}/openapi/v2/message/send",
-                headers={"Authorization": f"Bearer {token}",
-                         "Content-Type": "application/json"},
-                json={"groupId": gid, "msgType": "mixCard", "mixCard": card}
-            )
-            result = resp.json()
+    print("\U0001f511 获取 Token...")
+    try:
+        token = await get_access_token()
+        print("\u2705 Token 获取成功")
+    except Exception as e:
+        print(f"\u274c Token 获取失败: {e}")
+        return
 
-        if result.get("code") == 0:
-            success.append(gname)
-            print(f"  ✅ {gname}")
+    if args.to_user:
+        print(f"\n\U0001f4e4 发送给用户: {args.to_user}")
+        ok = await send_to_user(token, args.to_user, card, args.dry_run)
+        if ok:
+            print("\u2705 已私发成功！请检查 KIM 消息")
+            print(f"\U0001f4c4 KIM Doc 文章：{KIM_DOC_URL}")
+            print(f"\U0001f310 HTML 报告  ：{RESEARCH_URL}")
         else:
-            failed.append({"name": gname, "error": result.get("code")})
-            print(f"  ❌ {gname} — 错误码: {result.get('code')}")
-        await asyncio.sleep(1.0)
+            print("\u274c 发送失败")
 
-    print(f"\n📊 完成！成功: {len(success)} 个群 | 失败: {len(failed)} 个群")
-    if failed:
-        print("失败群列表（请用户确认后决定是否重发）：")
-        for f in failed:
-            print(f"  - {f['name']}（错误码: {f['error']}）")
+    if args.to_groups:
+        print("\n\U0001f4e4 群发到所有群（硬编码3个群）...")
+        success_count, fail_count = await send_to_all_groups(token, card, args.dry_run)
+        print("\n" + "=" * 55)
+        print(f"\U0001f4ca 完成！成功: {success_count}，失败: {fail_count}")
+        if fail_count > 0:
+            print("\u26a0\ufe0f  失败群请确认后重发")
 
 
 if __name__ == "__main__":
-    import sys
-    mode = sys.argv[1] if len(sys.argv) > 1 else "--preview"
-    if mode == "--preview":
-        asyncio.run(send_preview())
-    elif mode == "--to-groups":
-        asyncio.run(send_to_groups())
-    else:
-        print("用法: python3 send_claude_code_research_card.py [--preview | --to-groups]")
+    asyncio.run(main())
