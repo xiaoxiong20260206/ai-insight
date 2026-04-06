@@ -589,6 +589,310 @@
             border-radius: 2px;
         }
         
+        /* ============ 深度调研时间轴 ============ */
+        /* 研究区域顶部工具栏 */
+        .research-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+            padding-bottom: var(--spacing-lg);
+            border-bottom: 1px solid var(--color-border-light);
+        }
+        
+        .research-stats {
+            display: flex;
+            gap: var(--spacing-sm);
+            flex-wrap: wrap;
+        }
+        
+        .research-stat-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 12px;
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+        }
+
+        /* 类别图例 */
+        .cat-legend {
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .cat-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+            border: 1px solid transparent;
+            transition: all var(--transition-fast);
+        }
+        
+        .cat-legend-item:hover,
+        .cat-legend-item.active {
+            background: var(--color-bg-card);
+            border-color: var(--color-border);
+        }
+        
+        .cat-legend-item.active {
+            font-weight: 600;
+        }
+        
+        .cat-legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        
+        /* 时间轴主体 */
+        .timeline-container {
+            position: relative;
+            padding-left: 0;
+        }
+        
+        /* 时间轴左侧垂直线 */
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 56px;
+            top: 28px;
+            bottom: 40px;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--color-success), rgba(5,150,105,0.1));
+            border-radius: 2px;
+        }
+        
+        /* 月份节点 */
+        .timeline-month {
+            margin-bottom: var(--spacing-2xl);
+        }
+        
+        .timeline-month-header {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin-bottom: var(--spacing-md);
+            position: relative;
+        }
+        
+        /* 月份标签 */
+        .timeline-month-label {
+            width: 48px;
+            text-align: center;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--color-success-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            line-height: 1.3;
+        }
+        
+        /* 时间轴节点圆点 */
+        .timeline-dot-wrapper {
+            width: 24px;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .timeline-dot-outer {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--color-bg-card);
+            border: 2px solid var(--color-success);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .timeline-dot-inner {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--color-success);
+        }
+        
+        /* 月份描述文字 */
+        .timeline-month-info {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            flex: 1;
+            padding-left: var(--spacing-sm);
+        }
+        
+        .timeline-month-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+        
+        .timeline-month-count {
+            font-size: 11px;
+            padding: 2px 8px;
+            background: var(--color-success-50);
+            color: var(--color-success-dark);
+            border-radius: var(--radius-full);
+            font-weight: 600;
+        }
+        
+        /* 卡片网格区域 */
+        .timeline-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-left: 80px; /* 与时间轴线对齐后向右偏移 */
+        }
+        
+        @media (max-width: 900px) {
+            .timeline-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .timeline-cards {
+                grid-template-columns: 1fr;
+                margin-left: 0;
+            }
+            .timeline-container::before {
+                display: none;
+            }
+        }
+        
+        /* 时间轴卡片样式 */
+        .timeline-card {
+            display: block;
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-md);
+            padding: 12px 14px;
+            transition: all var(--transition-normal);
+            border-left-width: 3px;
+            text-decoration: none;
+            position: relative;
+        }
+        
+        .timeline-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        /* 按类别的左边框颜色 */
+        .timeline-card.cat-trend {
+            border-left-color: var(--color-info);
+        }
+        .timeline-card.cat-trend:hover {
+            border-color: var(--color-info);
+            border-left-color: var(--color-info);
+            background: rgba(37,99,235,0.02);
+        }
+        
+        .timeline-card.cat-company {
+            border-left-color: var(--color-warning);
+        }
+        .timeline-card.cat-company:hover {
+            border-color: var(--color-warning);
+            border-left-color: var(--color-warning);
+            background: rgba(217,119,6,0.02);
+        }
+        
+        .timeline-card.cat-topic {
+            border-left-color: var(--color-success);
+        }
+        .timeline-card.cat-topic:hover {
+            border-color: var(--color-success);
+            border-left-color: var(--color-success);
+            background: rgba(5,150,105,0.02);
+        }
+        
+        .timeline-card.cat-people {
+            border-left-color: var(--color-purple);
+        }
+        .timeline-card.cat-people:hover {
+            border-color: var(--color-purple);
+            border-left-color: var(--color-purple);
+            background: rgba(124,58,237,0.02);
+        }
+        
+        /* 卡片内容 */
+        .tc-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+        
+        .tc-icon {
+            font-size: 16px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        
+        .tc-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            line-height: 1.4;
+            flex: 1;
+        }
+        
+        .tc-tag {
+            display: inline-flex;
+            padding: 1px 6px;
+            border-radius: var(--radius-full);
+            font-size: 10px;
+            font-weight: 500;
+            flex-shrink: 0;
+        }
+        
+        .tc-tag.trend { background: rgba(37,99,235,0.12); color: var(--color-info); }
+        .tc-tag.company { background: rgba(217,119,6,0.12); color: var(--color-warning); }
+        .tc-tag.topic { background: rgba(5,150,105,0.12); color: var(--color-success-dark); }
+        .tc-tag.people { background: rgba(124,58,237,0.12); color: var(--color-purple); }
+        
+        .tc-desc {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .tc-meta {
+            margin-top: 6px;
+            font-size: 11px;
+            color: var(--color-text-muted);
+        }
+        
+        /* 隐藏状态（筛选用）*/
+        .timeline-card.tc-hidden {
+            display: none;
+        }
+        
+        .timeline-month.tm-empty {
+            display: none;
+        }
+        
         /* ============ Tracking Table ============ */
         .tracking-table {
             width: 100%;
@@ -1994,215 +2298,267 @@
                     <div class="section-icon">🔬</div>
                     <div>
                         <h2 class="section-title">深度调研</h2>
-                        <p class="section-desc">AI行业深度分析、公司调研、专题研究</p>
+                        <p class="section-desc">AI行业深度分析、公司调研、专题研究 · 按时间轴沉淀知识</p>
                     </div>
                 </div>
                 
-                <!-- 趋势洞察 -->
-                <div class="category-section">
-                    <h3 class="category-title">趋势洞察</h3>
-                    <div class="content-grid">
-                        <a href="02-deep-research/topics/claude-code-source-analysis.html" target="_blank" class="content-card">
-                            <div class="content-card-header">
-                                <span class="content-card-icon">⚡</span>
-                                <span class="content-card-title">Claude Code源码深度调研</span>
-                                <span class="content-card-tag green">NEW</span>
-                            </div>
-                            <div class="content-card-desc">从512K行TypeScript意外泄露中，系统解剖AI Agent工程设计本质——五层架构、认知代理哲学、KAIROS自主守护进程与6条可迁移原则</div>
-                            <div class="content-card-meta">📅 2026-04-05 · 工程调研</div>
-                        </a>
-
-                        <a href="02-deep-research/topics/kimi-attention-residuals-2026.html" target="_blank" class="content-card">
-                            <div class="content-card-header">
-                                <span class="content-card-icon">🔬</span>
-                                <span class="content-card-title">Kimi注意力残差深度调研</span>
-                                <span class="content-card-tag blue">架构</span>
-                            </div>
-                            <div class="content-card-desc">Kimi团队动了AI圈11年未变的残差连接，马斯克/Karpathy点赞——技术本质、决策启示与本质洞察（1.25×算力等效）</div>
-                            <div class="content-card-meta">📅 2026-03-24 · 架构研究</div>
-                        </a>
-
-                        <a href="02-deep-research/topics/feishu-aily-deep-research.html" target="_blank" class="content-card">
-                            <div class="content-card-header">
-                                <span class="content-card-icon">🤖</span>
-                                <span class="content-card-title">飞书Aily深度调研</span>
-                                <span class="content-card-tag blue">产品</span>
-                            </div>
-                            <div class="content-card-desc">企业级AI Agent平台的崛起：从通用助手到业务中枢——产品架构、M3升级、客户案例与计费模式全景解析</div>
-                            <div class="content-card-meta">📅 2026-03-19 · 产品调研</div>
-                        </a>
-
-                        <a href="02-deep-research/topics/enterprise-agent-platforms-2026.html" target="_blank" class="content-card">
-                            <div class="content-card-header">
-                                <span class="content-card-icon">⚖️</span>
-                                <span class="content-card-title">2026年企业级AI Agent平台横评</span>
-                                <span class="content-card-tag orange">横评</span>
-                            </div>
-                            <div class="content-card-desc">钉钉悟空 · 飞书Aily · 智谱AutoClaw · 字节ByteClaw — 四大企业级AI Agent平台深度横评，本质洞察：信任基础设施竞争</div>
-                            <div class="content-card-meta">📅 2026-03-19 · 专题研究</div>
-                        </a>
-                        
-                        <a href="02-deep-research/topics/ai-product-transformation-2026.html" target="_blank" class="content-card">
-                            <div class="content-card-header">
-                                <span class="content-card-icon">🚀</span>
-                                <span class="content-card-title">AI时代产品人的生存与进化</span>
-                                <span class="content-card-tag green">NEW</span>
-                            </div>
-                            <div class="content-card-desc">从PM到全栈构建者：PM五大原型与三层投入框架深度解析</div>
-                            <div class="content-card-meta">📅 2026-03-05</div>
-                        </a>
-
-                        <a href="02-deep-research/topics/ai-essence-insight/index.html" target="_blank" class="content-card">
-                            <div class="content-card-header">
-                                <span class="content-card-icon">🔮</span>
-                                <span class="content-card-title">AI领域本质洞察报告</span>
-                                <span class="content-card-tag green">NEW</span>
-                            </div>
-                            <div class="content-card-desc">五层闭环框架：技术栈×应用领域×关键玩家×生态视角，16个洞察对象 · v4.1</div>
-                            <div class="content-card-meta">📅 2026-03-14 · 🔮 本质洞察</div>
-                        </a>
-
-                        <a href="02-deep-research/trends/ai-leaders-2026.html" target="_blank" class="content-card">
-                            <div class="content-card-header">
-                                <span class="content-card-icon">📈</span>
-                                <span class="content-card-title">AI大神深度分享解读</span>
-                                <span class="content-card-tag green">趋势</span>
-                            </div>
-                            <div class="content-card-desc">9位AI领域思想领袖的核心观点提炼与趋势预判</div>
-                        </a>
-
-                        <a href="02-deep-research/people/naval-ai-2026/" target="_blank" class="content-card">
-                            <div class="content-card-header">
-                                <span class="content-card-icon">🏍️</span>
-                                <span class="content-card-title">纳瓦尔AI观点深度解读</span>
-                                <span class="content-card-tag green">NEW</span>
-                            </div>
-                            <div class="content-card-desc">思维的摩托车 · 7个核心专题深度解读：Vibe Coding革命+抽象层泄漏+平均无需求+创业者心态</div>
-                            <div class="content-card-meta">📅 2026-03-10 · 👤 人物追踪</div>
-                        </a>
-
-                        <a href="02-deep-research/trends/barry-zhang-anthropic.html" target="_blank" class="content-card">
-                            <div class="content-card-header">
-                                <span class="content-card-icon">🧠</span>
-                                <span class="content-card-title">Barry Zhang思想体系</span>
-                                <span class="content-card-tag blue">人物</span>
-                            </div>
-                            <div class="content-card-desc">Anthropic Applied AI负责人的Agent设计哲学</div>
-                        </a>
+                <!-- 工具栏：统计 + 图例/筛选 -->
+                <div class="research-toolbar">
+                    <div class="research-stats">
+                        <span class="research-stat-badge">📊 21篇报告</span>
+                        <span class="research-stat-badge">🗓️ 跨2个月</span>
+                        <span class="research-stat-badge">持续更新中</span>
+                    </div>
+                    <div class="cat-legend" id="catLegend">
+                        <span class="cat-legend-item active" data-cat="all">
+                            <span class="cat-legend-dot" style="background:#94a3b8"></span>全部
+                        </span>
+                        <span class="cat-legend-item" data-cat="trend">
+                            <span class="cat-legend-dot" style="background:var(--color-info)"></span>趋势洞察
+                        </span>
+                        <span class="cat-legend-item" data-cat="company">
+                            <span class="cat-legend-dot" style="background:var(--color-warning)"></span>公司调研
+                        </span>
+                        <span class="cat-legend-item" data-cat="topic">
+                            <span class="cat-legend-dot" style="background:var(--color-success)"></span>专题调研
+                        </span>
+                        <span class="cat-legend-item" data-cat="people">
+                            <span class="cat-legend-dot" style="background:var(--color-purple)"></span>人物追踪
+                        </span>
                     </div>
                 </div>
                 
-                <!-- 公司调研 -->
-                <div class="category-section">
-                    <h3 class="category-title">公司调研</h3>
-                    <div class="content-grid">
-                        <a href="02-deep-research/companies/bytedance-ai-guide/" target="_blank" class="content-card">
-                            <div class="content-card-header">
-                                <span class="content-card-icon">🏢</span>
-                                <span class="content-card-title">字节AI开挂指南</span>
-                                <span class="content-card-tag orange">公司</span>
+                <!-- 时间轴 -->
+                <div class="timeline-container">
+                    
+                    <!-- 2026年4月 -->
+                    <div class="timeline-month" data-month="2026-04">
+                        <div class="timeline-month-header">
+                            <div class="timeline-month-label">4月<br>2026</div>
+                            <div class="timeline-dot-wrapper">
+                                <div class="timeline-dot-outer"><div class="timeline-dot-inner"></div></div>
                             </div>
-                            <div class="content-card-desc">字节跳动AI能力全景解析，5大专题深度剖析</div>
-                        </a>
+                            <div class="timeline-month-info">
+                                <span class="timeline-month-title">2026年4月</span>
+                                <span class="timeline-month-count">1篇</span>
+                            </div>
+                        </div>
+                        <div class="timeline-cards">
+                            <a href="02-deep-research/topics/claude-code-source-analysis.html" target="_blank" class="timeline-card cat-trend">
+                                <div class="tc-header">
+                                    <span class="tc-icon">⚡</span>
+                                    <span class="tc-title">Claude Code源码深度调研</span>
+                                    <span class="tc-tag trend">趋势</span>
+                                </div>
+                                <div class="tc-desc">从512K行TypeScript意外泄露中，系统解剖AI Agent工程设计本质——五层架构、认知代理哲学与6条可迁移原则</div>
+                                <div class="tc-meta">📅 2026-04-05 · 工程调研</div>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                
-                <!-- 专题调研 -->
-                <div class="category-section">
-                    <h3 class="category-title">专题调研</h3>
-                    <div class="content-grid">
-                        <a href="02-deep-research/topics/agent-skill-design-patterns.html" target="_blank" class="content-card">
-                            <div class="content-card-header">
-                                <span class="content-card-icon">🧩</span>
-                                <span class="content-card-title">Agent Skill 设计模式：让AI稳定输出的5种内容架构</span>
-                                <span class="content-card-tag green">NEW</span>
+                    
+                    <!-- 2026年3月 -->
+                    <div class="timeline-month" data-month="2026-03">
+                        <div class="timeline-month-header">
+                            <div class="timeline-month-label">3月<br>2026</div>
+                            <div class="timeline-dot-wrapper">
+                                <div class="timeline-dot-outer"><div class="timeline-dot-inner"></div></div>
                             </div>
-                            <div class="content-card-desc">Google ADK团队总结的5种SKILL.md内容模式：Tool Wrapper/Generator/Reviewer/Inversion/Pipeline，及AI洞察体系的落地实践</div>
-                            <div class="content-card-meta">📅 2026-03-24 · 🧩 Agent Skill设计</div>
-                        </a>
-
-                        <a href="02-deep-research/topics/ai-product-essence-2026.html" target="_blank" class="content-card">
-                            <div class="content-card-header">
-                                <span class="content-card-icon">🧠</span>
-                                <span class="content-card-title">99%的AI产品都做错了</span>
-                                <span class="content-card-tag green">NEW</span>
+                            <div class="timeline-month-info">
+                                <span class="timeline-month-title">2026年3月</span>
+                                <span class="timeline-month-count">16篇</span>
                             </div>
-                            <div class="content-card-desc">用"买工具"的思维做"招员工"的事：六大错误解析+五维评分框架+四阶段建设路径，AI产品本质深度研究</div>
-                            <div class="content-card-meta">📅 2026-03-22 · 🧠 AI产品本质</div>
-                        </a>
-
-                        <a href="02-deep-research/topics/dingtalk-wukong-deep-research-2026.html" target="_blank" class="content-card">
-                            <div class="content-card-header">
-                                <span class="content-card-icon">🐵</span>
-                                <span class="content-card-title">钉钉悟空：企业级AI Agent的正确打开方式</span>
-                                <span class="content-card-tag green">深度</span>
-                            </div>
-                            <div class="content-card-desc">"笼中龙虾"背后的产品哲学：不是给AI加功能，而是重新定义"谁来操作系统"——六层安全架构+CLI化重写，这才是AI产品该有的建设方式</div>
-                            <div class="content-card-meta">📅 2026-03-18 · 🐵 含官网核心能力展示</div>
-                        </a>
-                        
-                        <a href="02-deep-research/topics/pine-ai-native-team.html" target="_blank" class="content-card">
-                            <div class="content-card-header">
-                                <span class="content-card-icon">🌲</span>
-                                <span class="content-card-title">Pine AI创业实践与AI原生开发范式</span>
-                                <span class="content-card-tag green">NEW</span>
-                            </div>
-                            <div class="content-card-desc">20人团队做出50人产出：从《人月神话》概念完整性到AI原生团队方法论拆解</div>
-                            <div class="content-card-meta">📅 2026-03-12 · 🤖 AI原生团队</div>
-                        </a>
-
-                        <a href="02-deep-research/topics/ai-coding-assistant-research/index.html" target="_blank" class="content-card">
-                            <div class="content-card-header">
-                                <span class="content-card-icon">💻</span>
-                                <span class="content-card-title">AI Coding产品深度调研</span>
-                                <span class="content-card-tag green">NEW</span>
-                            </div>
-                            <div class="content-card-desc">聚焦Claude Code：优势劣势拆解 + 八维评估框架 + 海外/国内头部产品对比与选型建议</div>
-                            <div class="content-card-meta">📅 2026-03-09 · 🔧 AI Coding</div>
-                        </a>
-                        
-                        <a href="02-deep-research/topics/openclaw-deep-research-2026.html" target="_blank" class="content-card">
-                            <div class="content-card-header">
-                                <span class="content-card-icon">🦞</span>
-                                <span class="content-card-title">OpenClaw深度调研</span>
-                                <span class="content-card-tag green">NEW</span>
-                            </div>
-                            <div class="content-card-desc">当AI长出"手脚"：信息全景+五层本质洞察，一文看透小龙虾的过去、现在与未来</div>
-                            <div class="content-card-meta">📅 2026-03-06 · 🔮 含本质洞察</div>
-                        </a>
-                        <a href="02-deep-research/topics/ai-agent-guide/" target="_blank" class="content-card">
-                            <div class="content-card-header">
-                                <span class="content-card-icon">🤖</span>
-                                <span class="content-card-title">AI Agent落地指南</span>
-                                <span class="content-card-tag green">专题</span>
-                            </div>
-                            <div class="content-card-desc">面向产品经理的AI Agent团队落地完整指南，4章节</div>
-                        </a>
-                        <a href="02-deep-research/topics/ai-studio/" target="_blank" class="content-card">
-                            <div class="content-card-header">
-                                <span class="content-card-icon">⚙️</span>
-                                <span class="content-card-title">企业AI工程师产品体系</span>
-                                <span class="content-card-tag green">专题</span>
-                            </div>
-                            <div class="content-card-desc">从场景分析到产品设计到架构设计的完整方法论</div>
-                        </a>
-                        <a href="02-deep-research/topics/ai-tools-analysis/" target="_blank" class="content-card">
-                            <div class="content-card-header">
-                                <span class="content-card-icon">🛠️</span>
-                                <span class="content-card-title">AI工具场景分析</span>
-                                <span class="content-card-tag blue">分析</span>
-                            </div>
-                            <div class="content-card-desc">AI工程师48个工作任务+9种Agent映射分析</div>
-                        </a>
-                        <a href="02-deep-research/topics/ai-financial/" target="_blank" class="content-card">
-                            <div class="content-card-header">
-                                <span class="content-card-icon">💹</span>
-                                <span class="content-card-title">AI金融应用调研</span>
-                                <span class="content-card-tag orange">调研</span>
-                            </div>
-                            <div class="content-card-desc">幻方量化调研、金融数字人产品架构设计</div>
-                        </a>
+                        </div>
+                        <div class="timeline-cards">
+                            <!-- 趋势洞察类 -->
+                            <a href="02-deep-research/topics/kimi-attention-residuals-2026.html" target="_blank" class="timeline-card cat-trend">
+                                <div class="tc-header">
+                                    <span class="tc-icon">🔬</span>
+                                    <span class="tc-title">Kimi注意力残差深度调研</span>
+                                    <span class="tc-tag trend">趋势</span>
+                                </div>
+                                <div class="tc-desc">Kimi团队动了AI圈11年未变的残差连接——技术本质与决策启示（1.25×算力等效）</div>
+                                <div class="tc-meta">📅 2026-03-24 · 架构研究</div>
+                            </a>
+                            <a href="02-deep-research/topics/feishu-aily-deep-research.html" target="_blank" class="timeline-card cat-trend">
+                                <div class="tc-header">
+                                    <span class="tc-icon">🤖</span>
+                                    <span class="tc-title">飞书Aily深度调研</span>
+                                    <span class="tc-tag trend">趋势</span>
+                                </div>
+                                <div class="tc-desc">企业级AI Agent平台的崛起：从通用助手到业务中枢，M3升级与客户案例全景解析</div>
+                                <div class="tc-meta">📅 2026-03-19 · 产品调研</div>
+                            </a>
+                            <a href="02-deep-research/topics/enterprise-agent-platforms-2026.html" target="_blank" class="timeline-card cat-trend">
+                                <div class="tc-header">
+                                    <span class="tc-icon">⚖️</span>
+                                    <span class="tc-title">2026年企业级AI Agent平台横评</span>
+                                    <span class="tc-tag trend">趋势</span>
+                                </div>
+                                <div class="tc-desc">钉钉悟空·飞书Aily·智谱AutoClaw·字节ByteClaw — 四大平台深度横评，本质：信任基础设施竞争</div>
+                                <div class="tc-meta">📅 2026-03-19 · 专题研究</div>
+                            </a>
+                            <a href="02-deep-research/topics/ai-essence-insight/index.html" target="_blank" class="timeline-card cat-trend">
+                                <div class="tc-header">
+                                    <span class="tc-icon">🔮</span>
+                                    <span class="tc-title">AI领域本质洞察报告</span>
+                                    <span class="tc-tag trend">趋势</span>
+                                </div>
+                                <div class="tc-desc">五层闭环框架：技术栈×应用领域×关键玩家×生态视角，16个洞察对象 · v4.1</div>
+                                <div class="tc-meta">📅 2026-03-14 · 🔮 本质洞察</div>
+                            </a>
+                            <a href="02-deep-research/topics/ai-product-transformation-2026.html" target="_blank" class="timeline-card cat-trend">
+                                <div class="tc-header">
+                                    <span class="tc-icon">🚀</span>
+                                    <span class="tc-title">AI时代产品人的生存与进化</span>
+                                    <span class="tc-tag trend">趋势</span>
+                                </div>
+                                <div class="tc-desc">从PM到全栈构建者：PM五大原型与三层投入框架深度解析</div>
+                                <div class="tc-meta">📅 2026-03-05</div>
+                            </a>
+                            <a href="02-deep-research/trends/ai-leaders-2026.html" target="_blank" class="timeline-card cat-trend">
+                                <div class="tc-header">
+                                    <span class="tc-icon">📈</span>
+                                    <span class="tc-title">AI大神深度分享解读</span>
+                                    <span class="tc-tag trend">趋势</span>
+                                </div>
+                                <div class="tc-desc">9位AI领域思想领袖的核心观点提炼与趋势预判</div>
+                            </a>
+                            
+                            <!-- 公司调研类 -->
+                            <a href="02-deep-research/companies/bytedance-ai-guide/" target="_blank" class="timeline-card cat-company">
+                                <div class="tc-header">
+                                    <span class="tc-icon">🏢</span>
+                                    <span class="tc-title">字节AI开挂指南</span>
+                                    <span class="tc-tag company">公司</span>
+                                </div>
+                                <div class="tc-desc">字节跳动AI能力全景解析，5大专题深度剖析：AI历史、Agent基础设施、产品矩阵、安全实践、金融洞察</div>
+                            </a>
+                            
+                            <!-- 专题调研类 -->
+                            <a href="02-deep-research/topics/agent-skill-design-patterns.html" target="_blank" class="timeline-card cat-topic">
+                                <div class="tc-header">
+                                    <span class="tc-icon">🧩</span>
+                                    <span class="tc-title">Agent Skill 设计模式</span>
+                                    <span class="tc-tag topic">专题</span>
+                                </div>
+                                <div class="tc-desc">Google ADK团队总结的5种SKILL.md内容模式：Tool Wrapper/Generator/Reviewer/Inversion/Pipeline</div>
+                                <div class="tc-meta">📅 2026-03-24 · Agent设计</div>
+                            </a>
+                            <a href="02-deep-research/topics/ai-product-essence-2026.html" target="_blank" class="timeline-card cat-topic">
+                                <div class="tc-header">
+                                    <span class="tc-icon">🧠</span>
+                                    <span class="tc-title">99%的AI产品都做错了</span>
+                                    <span class="tc-tag topic">专题</span>
+                                </div>
+                                <div class="tc-desc">用"买工具"的思维做"招员工"的事：六大错误解析+五维评分框架+四阶段建设路径</div>
+                                <div class="tc-meta">📅 2026-03-22 · AI产品本质</div>
+                            </a>
+                            <a href="02-deep-research/topics/dingtalk-wukong-deep-research-2026.html" target="_blank" class="timeline-card cat-topic">
+                                <div class="tc-header">
+                                    <span class="tc-icon">🐵</span>
+                                    <span class="tc-title">钉钉悟空：企业AI Agent正确打开方式</span>
+                                    <span class="tc-tag topic">专题</span>
+                                </div>
+                                <div class="tc-desc">"笼中龙虾"背后的产品哲学：六层安全架构+CLI化重写——AI产品该有的建设方式</div>
+                                <div class="tc-meta">📅 2026-03-18</div>
+                            </a>
+                            <a href="02-deep-research/topics/pine-ai-native-team.html" target="_blank" class="timeline-card cat-topic">
+                                <div class="tc-header">
+                                    <span class="tc-icon">🌲</span>
+                                    <span class="tc-title">Pine AI原生团队实践</span>
+                                    <span class="tc-tag topic">专题</span>
+                                </div>
+                                <div class="tc-desc">20人团队做出50人产出：从《人月神话》到AI原生团队方法论拆解</div>
+                                <div class="tc-meta">📅 2026-03-12 · AI原生团队</div>
+                            </a>
+                            <a href="02-deep-research/topics/ai-coding-assistant-research/index.html" target="_blank" class="timeline-card cat-topic">
+                                <div class="tc-header">
+                                    <span class="tc-icon">💻</span>
+                                    <span class="tc-title">AI Coding产品深度调研</span>
+                                    <span class="tc-tag topic">专题</span>
+                                </div>
+                                <div class="tc-desc">聚焦Claude Code：优劣拆解+八维评估框架+海外/国内头部产品对比与选型建议</div>
+                                <div class="tc-meta">📅 2026-03-09 · AI Coding</div>
+                            </a>
+                            <a href="02-deep-research/topics/openclaw-deep-research-2026.html" target="_blank" class="timeline-card cat-topic">
+                                <div class="tc-header">
+                                    <span class="tc-icon">🦞</span>
+                                    <span class="tc-title">OpenClaw深度调研</span>
+                                    <span class="tc-tag topic">专题</span>
+                                </div>
+                                <div class="tc-desc">当AI长出"手脚"：信息全景+五层本质洞察，一文看透小龙虾的过去、现在与未来</div>
+                                <div class="tc-meta">📅 2026-03-06 · 含本质洞察</div>
+                            </a>
+                            
+                            <!-- 人物追踪类 -->
+                            <a href="02-deep-research/people/naval-ai-2026/" target="_blank" class="timeline-card cat-people">
+                                <div class="tc-header">
+                                    <span class="tc-icon">🏍️</span>
+                                    <span class="tc-title">纳瓦尔AI观点深度解读</span>
+                                    <span class="tc-tag people">人物</span>
+                                </div>
+                                <div class="tc-desc">思维的摩托车 · 7个核心专题深度解读：Vibe Coding革命+抽象层泄漏+平均无需求+创业者心态</div>
+                                <div class="tc-meta">📅 2026-03-10 · 人物追踪</div>
+                            </a>
+                            <a href="02-deep-research/trends/barry-zhang-anthropic.html" target="_blank" class="timeline-card cat-people">
+                                <div class="tc-header">
+                                    <span class="tc-icon">🧠</span>
+                                    <span class="tc-title">Barry Zhang思想体系</span>
+                                    <span class="tc-tag people">人物</span>
+                                </div>
+                                <div class="tc-desc">Anthropic Applied AI负责人的Agent设计哲学：Skills范式、工具调用原则与认知框架</div>
+                            </a>
+                        </div>
                     </div>
+                    
+                    <!-- 更早期 -->
+                    <div class="timeline-month" data-month="earlier">
+                        <div class="timeline-month-header">
+                            <div class="timeline-month-label" style="font-size:10px;">更早</div>
+                            <div class="timeline-dot-wrapper">
+                                <div class="timeline-dot-outer" style="border-color:var(--color-border);"><div class="timeline-dot-inner" style="background:var(--color-border)"></div></div>
+                            </div>
+                            <div class="timeline-month-info">
+                                <span class="timeline-month-title" style="color:var(--color-text-secondary)">早期积累</span>
+                                <span class="timeline-month-count">4篇</span>
+                            </div>
+                        </div>
+                        <div class="timeline-cards">
+                            <a href="02-deep-research/topics/ai-agent-guide/" target="_blank" class="timeline-card cat-topic">
+                                <div class="tc-header">
+                                    <span class="tc-icon">🤖</span>
+                                    <span class="tc-title">AI Agent落地指南</span>
+                                    <span class="tc-tag topic">专题</span>
+                                </div>
+                                <div class="tc-desc">面向产品经理的AI Agent团队落地完整指南，4章节深度讲解</div>
+                            </a>
+                            <a href="02-deep-research/topics/ai-studio/" target="_blank" class="timeline-card cat-topic">
+                                <div class="tc-header">
+                                    <span class="tc-icon">⚙️</span>
+                                    <span class="tc-title">企业AI工程师产品体系</span>
+                                    <span class="tc-tag topic">专题</span>
+                                </div>
+                                <div class="tc-desc">从场景分析到产品设计到架构设计的完整方法论</div>
+                            </a>
+                            <a href="02-deep-research/topics/ai-tools-analysis/" target="_blank" class="timeline-card cat-topic">
+                                <div class="tc-header">
+                                    <span class="tc-icon">🛠️</span>
+                                    <span class="tc-title">AI工具场景分析</span>
+                                    <span class="tc-tag topic">专题</span>
+                                </div>
+                                <div class="tc-desc">AI工程师48个工作任务+9种Agent映射分析</div>
+                            </a>
+                            <a href="02-deep-research/topics/ai-financial/" target="_blank" class="timeline-card cat-topic">
+                                <div class="tc-header">
+                                    <span class="tc-icon">💹</span>
+                                    <span class="tc-title">AI金融应用调研</span>
+                                    <span class="tc-tag topic">专题</span>
+                                </div>
+                                <div class="tc-desc">幻方量化调研、金融数字人产品架构设计</div>
+                            </a>
+                        </div>
+                    </div>
+                    
                 </div>
             </section>
         </article>
@@ -3308,6 +3664,47 @@
                 dim.setAttribute('data-expanded', 'false');
             });
         }
+        
+        // ============ 深度调研时间轴筛选 ============
+        (function initTimelineFilter() {
+            const legend = document.getElementById('catLegend');
+            if (!legend) return;
+            
+            legend.addEventListener('click', function(e) {
+                const item = e.target.closest('.cat-legend-item');
+                if (!item) return;
+                
+                const cat = item.dataset.cat;
+                
+                // 更新图例状态
+                legend.querySelectorAll('.cat-legend-item').forEach(el => el.classList.remove('active'));
+                item.classList.add('active');
+                
+                // 筛选卡片
+                document.querySelectorAll('.timeline-card').forEach(card => {
+                    if (cat === 'all' || card.classList.contains('cat-' + cat)) {
+                        card.classList.remove('tc-hidden');
+                    } else {
+                        card.classList.add('tc-hidden');
+                    }
+                });
+                
+                // 隐藏无可见卡片的月份节点
+                document.querySelectorAll('.timeline-month').forEach(month => {
+                    const visibleCards = month.querySelectorAll('.timeline-card:not(.tc-hidden)');
+                    if (visibleCards.length === 0) {
+                        month.classList.add('tm-empty');
+                    } else {
+                        month.classList.remove('tm-empty');
+                        // 更新月份的报告数量角标
+                        const countBadge = month.querySelector('.timeline-month-count');
+                        if (countBadge) {
+                            countBadge.textContent = visibleCards.length + '篇';
+                        }
+                    }
+                });
+            });
+        })();
     </script>
 </body>
 </html>
