@@ -430,6 +430,58 @@ def verify_sanitization() -> tuple:
     return is_clean, violations
 
 
+def verify_consistency():
+    """v2.6新增: 验证内部版和public版的深度调研文件一致性
+    
+    教训: 2026-04-06 meta-skill-system-2026.html 被直接推送到外部仓库，
+    绕过脱敏管道，导致外部版有内部版没有的文件。
+    
+    检查规则:
+    1. public/ 中不应存在内部版没有的文件（反向泄漏检测）
+    2. 内部版的HTML文件应在public/中都有对应（正向完整性检测）
+    """
+    internal_dr = PROJECT_ROOT / "02-deep-research"
+    public_dr = PUBLIC_DIR / "02-deep-research"
+    
+    if not internal_dr.exists() or not public_dr.exists():
+        return True, []
+    
+    issues = []
+    
+    # 收集内部版和public版的HTML文件（相对路径）
+    internal_htmls = set()
+    for f in internal_dr.rglob("*.html"):
+        if any(part in f.parts for part in EXCLUDE_PATH_PARTS):
+            continue
+        internal_htmls.add(str(f.relative_to(internal_dr)))
+    
+    public_htmls = set()
+    for f in public_dr.rglob("*.html"):
+        if any(part in f.parts for part in EXCLUDE_PATH_PARTS):
+            continue
+        public_htmls.add(str(f.relative_to(public_dr)))
+    
+    # 检查1: public有但内部版没有的文件（反向泄漏）
+    orphan_in_public = public_htmls - internal_htmls
+    for f in sorted(orphan_in_public):
+        issues.append({
+            "type": "orphan_public",
+            "file": f,
+            "message": f"⚠️ public/ 中存在但内部版没有的文件: {f} (可能是绕过管道直接推送的)"
+        })
+    
+    # 检查2: 内部版有但public没有的文件（遗漏同步）
+    missing_in_public = internal_htmls - public_htmls
+    for f in sorted(missing_in_public):
+        issues.append({
+            "type": "missing_public",
+            "file": f,
+            "message": f"ℹ️ 内部版有但 public/ 没有的文件: {f}"
+        })
+    
+    return len(issues) == 0, issues
+
+
 def print_sync_summary(counts: dict):
     """打印同步汇总"""
     print()
@@ -540,6 +592,34 @@ def main():
             if len(violations) > 20:
                 print(f"   ... 还有 {len(violations) - 20} 处")
             sys.exit(1)
+        
+        # v2.6新增: 一致性验证
+        print()
+        print("🔍 一致性验证（内部版 vs public/）...")
+        print("-" * 50)
+        is_consistent, consistency_issues = verify_consistency()
+        
+        if is_consistent:
+            print("✅ 内部版与 public/ 深度调研文件完全一致。")
+        else:
+            orphan_count = sum(1 for i in consistency_issues if i["type"] == "orphan_public")
+            missing_count = sum(1 for i in consistency_issues if i["type"] == "missing_public")
+            
+            if orphan_count > 0:
+                print(f"⚠️ 发现 {orphan_count} 个反向泄漏文件（public/有但内部版没有）:")
+                for i in consistency_issues:
+                    if i["type"] == "orphan_public":
+                        print(f"   {i['message']}")
+            
+            if missing_count > 0:
+                print(f"ℹ️ 发现 {missing_count} 个未同步文件（内部版有但public/没有）:")
+                for i in consistency_issues:
+                    if i["type"] == "missing_public":
+                        print(f"   {i['message']}")
+            
+            if orphan_count > 0:
+                print("\n⛔ 一致性验证失败！请检查是否有文件绕过脱敏管道。")
+                sys.exit(1)
 
 
 if __name__ == "__main__":
