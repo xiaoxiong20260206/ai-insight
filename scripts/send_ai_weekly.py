@@ -251,6 +251,28 @@ async def main():
     if report_data.get("url"):
         print(f"\n📄 周报链接: {report_data['url']}")
 
+    # ⭐ 步骤5: 自动更新首页联动（经验#71 — 2026-04-07 防止周报首页漏更新）
+    # 每次推送完成后，无论 --preview / --to-groups，都自动更新两版首页
+    if not args.dry_run:
+        print("\n🔄 自动更新首页联动（weeklyReportsData + 入口卡片）...")
+        try:
+            import subprocess
+            result = subprocess.run(
+                ["python3", str(Path(__file__).parent / "update_weekly_index.py"),
+                 f"{year}-W{week_num:02d}"],
+                capture_output=True, text=True,
+                cwd=str(Path(__file__).parent.parent)
+            )
+            if result.returncode == 0:
+                for line in result.stdout.strip().splitlines():
+                    print(f"  {line}")
+            else:
+                print(f"  ⚠️  首页更新失败，请手动运行：python3 scripts/update_weekly_index.py {year}-W{week_num:02d}")
+                if result.stderr:
+                    print(f"     stderr: {result.stderr[:200]}")
+        except Exception as e:
+            print(f"  ⚠️  首页更新异常: {e}，请手动运行：python3 scripts/update_weekly_index.py")
+
 
 if __name__ == "__main__":
     asyncio.run(main())
