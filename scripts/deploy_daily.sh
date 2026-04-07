@@ -359,13 +359,48 @@ fi
 # SKIP_GATE 仅用于绕过质量门，外部版同步始终需要执行。
 # 旧逻辑误将 SKIP_GATE=1 等同于"由orchestrator调用，跳过外部同步"，
 # 导致每次强制部署后 ai-insight-public 不更新。
+# ⭐ 修复(2026-04-07经验#70): 加前置 git 仓库健康检查，失败立即阻断（不静默跳过）
 echo ""
 echo "📋 Step 6: 同步外部版（ai-insight-public）"
 if [ "${SKIP_EXTERNAL:-0}" = "1" ]; then
     echo "  ⏭️ SKIP_EXTERNAL=1，跳过外部版同步（由调用方明确控制）"
 else
+    # 前置健康检查：确认 ai-insight-public 是有效 git 仓库
+    EXTERNAL_REPO_DIR="$(dirname "$PROJECT_DIR")/ai-insight-public"
+    if [ ! -d "$EXTERNAL_REPO_DIR/.git" ]; then
+        echo "  ❌ [ABORT] 外部仓库 .git 目录不存在: $EXTERNAL_REPO_DIR/.git"
+        echo "     部署已阻断，请先修复外部仓库。"
+        exit 1
+    fi
+    # 检查 .git 是否完整（HEAD 文件必须存在，否则是空壳）
+    if [ ! -f "$EXTERNAL_REPO_DIR/.git/HEAD" ] || [ ! -f "$EXTERNAL_REPO_DIR/.git/config" ]; then
+        echo "  ❌ [ABORT] 外部仓库 .git 目录损坏（缺少 HEAD 或 config）"
+        # 自动检查是否有 .git_disabled 备份
+        if [ -f "$EXTERNAL_REPO_DIR/.git_disabled/HEAD" ]; then
+            echo "  🔧 发现 .git_disabled 备份，正在自动恢复..."
+            rm -rf "$EXTERNAL_REPO_DIR/.git"
+            mv "$EXTERNAL_REPO_DIR/.git_disabled" "$EXTERNAL_REPO_DIR/.git"
+            echo "  ✅ .git 已从 .git_disabled 恢复，继续同步..."
+        else
+            echo "     未找到 .git_disabled 备份，请手动修复或重新克隆："
+            echo "     git clone https://github.com/my-ai-research-lab/ai-insight-public.git $EXTERNAL_REPO_DIR"
+            exit 1
+        fi
+    fi
+    # 用 git rev-parse 做终态验证
+    if ! git -C "$EXTERNAL_REPO_DIR" rev-parse --git-dir > /dev/null 2>&1; then
+        echo "  ❌ [ABORT] 外部仓库 git 状态异常（rev-parse 失败），部署已阻断"
+        exit 1
+    fi
+    echo "  ✅ 外部仓库 git 健康检查通过"
     echo "---"
-    python3 scripts/sync_to_external.py --full --verify
+    # 执行同步，捕获退出码，失败时阻断（而非静默继续）
+    if ! python3 scripts/sync_to_external.py --full --verify; then
+        echo ""
+        echo "  ❌ [ABORT] 外部版同步失败！部署已阻断，请修复后重试。"
+        echo "     手动修复：python3 scripts/sync_to_external.py --full --verify"
+        exit 1
+    fi
 fi
 
 # ===== 8. 验证 =====
@@ -376,26 +411,42 @@ echo "  明日关注:  $(grep -c '值得关注' "01-daily-reports/$MONTH/$DATE-v
 echo "  明日内容:  $(grep -o '• [^<]*' "01-daily-reports/$MONTH/$DATE-v3.html" | wc -l | tr -d ' ') 条条目"
 echo "  public敏感词: ${SENSITIVE_COUNT} 处"
 echo "  内部首页日历:  $(grep -o "'$MONTH': \[[^\]]*\]" index.html | head -1)"
-# 验证public/内部日报是否存在（经验#56：手动sync漏force导致旧版本残留）
+
+# 验证 public/ 内部日报是否存在（经验#56：手动sync漏force导致旧版本残留）
+DEPLOY_FAIL=0
 if [ -f "public/01-daily-reports/$MONTH/$DATE.html" ]; then
     echo "  外部日报(public):  $(wc -l < "public/01-daily-reports/$MONTH/$DATE.html" | tr -d ' ') 行"
 else
     echo "  ❌ 外部日报(public): 文件不存在！public/01-daily-reports/$MONTH/$DATE.html 未生成"
+    DEPLOY_FAIL=1
 fi
-# 验证外部仓库是否存在该日期日报（可选检查，不阻断）
-if [ -d "../ai-insight-public/01-daily-reports/$MONTH" ]; then
-    if [ -f "../ai-insight-public/01-daily-reports/$MONTH/$DATE.html" ]; then
-        echo "  外部仓库日报:  $(wc -l < "../ai-insight-public/01-daily-reports/$MONTH/$DATE.html" | tr -d ' ') 行"
+
+# 验证外部仓库是否存在该日期日报（⭐ v2.0: 从 warn 升级为硬性阻断）
+if [ "${SKIP_EXTERNAL:-0}" != "1" ]; then
+    EXTERNAL_REPO_DIR="$(dirname "$PROJECT_DIR")/ai-insight-public"
+    if [ -d "$EXTERNAL_REPO_DIR/01-daily-reports/$MONTH" ]; then
+        if [ -f "$EXTERNAL_REPO_DIR/01-daily-reports/$MONTH/$DATE.html" ]; then
+            echo "  外部仓库日报:  $(wc -l < "$EXTERNAL_REPO_DIR/01-daily-reports/$MONTH/$DATE.html" | tr -d ' ') 行"
+        else
+            echo "  ❌ [VERIFY FAIL] 外部仓库日报文件不存在: $DATE.html"
+            echo "     这意味着外部同步虽然执行了，但文件未正确写入外部仓库！"
+            DEPLOY_FAIL=1
+        fi
     else
-        echo "  ⚠️ 外部仓库日报: 文件不存在（外部sync尚未完成或被skipped）"
+        echo "  ❌ [VERIFY FAIL] 外部仓库目录不存在: $EXTERNAL_REPO_DIR/01-daily-reports/$MONTH"
+        DEPLOY_FAIL=1
     fi
-else
-    echo "  ⚠️ 外部仓库目录不存在（外部sync尚未完成）"
 fi
 
 echo ""
 echo "=================================================="
-echo "✅ 部署完成！"
-echo "  📄 日报: https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/$MONTH/$DATE.html"
-echo "  🏠 首页: https://xiaoxiong20260206.github.io/ai-insight/"
+if [ "$DEPLOY_FAIL" -eq 0 ]; then
+    echo "✅ 部署完成！"
+    echo "  📄 日报: https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/$MONTH/$DATE.html"
+    echo "  🏠 首页: https://xiaoxiong20260206.github.io/ai-insight/"
+else
+    echo "❌ 部署验证失败！请查看上方的 ❌ 条目并手动修复。"
+    echo "   外部同步手动补跑: python3 scripts/sync_to_external.py --full --verify"
+    exit 1
+fi
 echo ""
