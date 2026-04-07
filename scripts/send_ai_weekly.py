@@ -253,8 +253,11 @@ async def main():
 
     # ⭐ 步骤5: 自动更新首页联动（经验#71 — 2026-04-07 防止周报首页漏更新）
     # 每次推送完成后，无论 --preview / --to-groups，都自动更新两版首页
+    # update_weekly_index.py 内部会顺序执行：
+    #   ① 更新 index.html + public/index.html 的 weeklyReportsData + 入口卡片
+    #   ② sync_to_public.py --all --force --with-index（把周报 HTML 同步到 public/）
     if not args.dry_run:
-        print("\n🔄 自动更新首页联动（weeklyReportsData + 入口卡片）...")
+        print("\n🔄 步骤5: 自动更新首页联动（weeklyReportsData + 入口卡片 + public/ 同步）...")
         try:
             import subprocess
             result = subprocess.run(
@@ -272,6 +275,53 @@ async def main():
                     print(f"     stderr: {result.stderr[:200]}")
         except Exception as e:
             print(f"  ⚠️  首页更新异常: {e}，请手动运行：python3 scripts/update_weekly_index.py")
+
+    # ⭐ 步骤6: 外部版同步（经验#71加固 — 确保内外部周报+首页同步）
+    # 将 public/ 完整同步到 ai-insight-public 外部仓库，包含：
+    #   - 周报 HTML 文件
+    #   - 脱敏后的首页（index.html）
+    #   - 所有日报文件
+    # 注意：不使用 capture_output，让输出直接可见，便于排查
+    if not args.dry_run:
+        print("\n🔄 步骤6: 同步外部版（ai-insight-public）...")
+        try:
+            import subprocess
+            sync_result = subprocess.run(
+                ["python3", str(Path(__file__).parent / "sync_to_external.py"),
+                 "--full", "--verify"],
+                cwd=str(Path(__file__).parent.parent)
+            )
+            if sync_result.returncode == 0:
+                print("  ✅ 外部版同步完成（ai-insight-public 已更新）")
+            else:
+                print("  ❌ 外部版同步失败！周报内容已发送，但外部仓库未更新。")
+                print("     请手动执行：python3 scripts/sync_to_external.py --full --verify")
+        except Exception as e:
+            print(f"  ⚠️  外部版同步异常: {e}")
+            print(f"     请手动执行：python3 scripts/sync_to_external.py --full --verify")
+
+    # 输出四链接（P0交付门控）
+    if not args.dry_run:
+        week_tag = f"{year}-W{week_num:02d}"
+        # 确定周报所在月份目录
+        month_str = None
+        for month_dir in sorted(DAILY_REPORTS_PATH.iterdir()):
+            if not month_dir.is_dir():
+                continue
+            if (month_dir / f"weekly-{week_tag}.html").exists():
+                month_str = month_dir.name
+                break
+        if month_str:
+            internal_url = f"https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/{month_str}/weekly-{week_tag}.html"
+            external_url = f"https://my-ai-research-lab.github.io/ai-insight-public/01-daily-reports/{month_str}/weekly-{week_tag}.html"
+            print(f"""
+📋 {week_tag} 周报已完成 ✅
+
+🔗 内部版周报：{internal_url}
+🌐 外部版周报：{external_url}
+🏠 内部版首页：https://xiaoxiong20260206.github.io/ai-insight/
+🌐 外部版首页：https://my-ai-research-lab.github.io/ai-insight-public/
+""")
 
 
 if __name__ == "__main__":

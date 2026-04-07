@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """
-周报首页联动更新脚本 v1.0
+周报首页联动更新脚本 v1.1
 ============================
 周报发布后自动更新两版首页（内部版 index.html + 外部版 public/index.html）的：
   1. weeklyReportsData JS 数据（日历上的"有周报"标识）
   2. 周报入口卡片（href + 标题 + 描述）
+  3. [v1.1 新增] sync_to_public.py --all --force --with-index（同步周报 HTML 到 public/）
 
 问题背景（经验#71 — 2026-04-07）:
   W14 周报已生成并部署，但两版首页均未更新，导致：
@@ -286,7 +287,27 @@ def run(week_str: str = None, dry_run: bool = False) -> bool:
     print()
     if any_changed and not dry_run:
         print("✅ 首页联动更新完成！")
-        print("   后续步骤: git add index.html public/index.html && git commit && git push")
+        
+        # ⭐ 新增：同步周报 HTML 到 public/ 目录（经验#71加固）
+        # 确保 public/ 里有周报 HTML，供 sync_to_external.py 推送到外部仓库
+        print()
+        print("📝 同步周报 HTML 到 public/ 目录...")
+        import subprocess, sys
+        sync_pub_result = subprocess.run(
+            [sys.executable, str(PROJECT_ROOT / "scripts" / "sync_to_public.py"),
+             "--all", "--force", "--with-index"],
+            cwd=str(PROJECT_ROOT)
+        )
+        if sync_pub_result.returncode == 0:
+            print("  ✅ public/ 同步完成（周报 HTML + 首页均已写入 public/）")
+        else:
+            print("  ⚠️  public/ 同步失败，请手动执行：")
+            print("      python3 scripts/sync_to_public.py --all --force --with-index")
+        
+        print()
+        print("   后续步骤（由调用方 send_ai_weekly.py 自动执行）:")
+        print(f"     git add . && git commit -m '📊 周报首页联动 {year}-W{week_num:02d}'")
+        print(f"     python3 scripts/sync_to_external.py --full --verify")
     elif not any_changed:
         print("✅ 两版首页均已是最新，无需更新")
     
