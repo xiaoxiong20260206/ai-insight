@@ -295,7 +295,7 @@
          Hero（固定在最上方，不随 Tab 切换）
     ═══════════════════════════════════════════ -->
     <div class="hero">
-        <div class="hero-eyebrow">⚡ 元技能体系 v4.0 &nbsp;·&nbsp; 2026-04-06 更新</div>
+        <div class="hero-eyebrow">⚡ 元技能体系 v5.0 &nbsp;·&nbsp; 2026-04-07 更新</div>
         <h1>让你<em>越练越强</em>的系统，<br>背后遵循的是同一条自然规律</h1>
         <p class="hero-lead">
             顶级运动员和普通人的差距，不在天赋，在有没有一套让自己越练越强的系统。<br>
@@ -304,7 +304,7 @@
         </p>
         <div class="hero-meta">
             <span>📖 先看规律，再看实现</span>
-            <span>🧠 22 个元技能组件</span>
+            <span>🧠 16 个元技能 + 22 个绑定</span>
             <span>🔄 每日自动运转</span>
             <span>📋 90+ 次真实踩坑沉淀</span>
         </div>
@@ -318,7 +318,7 @@
         </div>
         <div class="stat">
             <div class="stat-ico ico-b">🧠</div>
-            <div><div class="stat-val">22</div><div class="stat-lbl">元技能组件</div></div>
+            <div><div class="stat-val">16</div><div class="stat-lbl">元技能组件</div></div>
         </div>
         <div class="stat">
             <div class="stat-ico ico-g">🔄</div>
@@ -420,7 +420,7 @@
                     <div style="width:40px;height:40px;background:linear-gradient(135deg,#FFE4E6,#FECDD3);border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">💡</div>
                     <div>
                         <div style="font-weight:700;color:var(--c-text);font-size:14px;margin-bottom:3px;">⑤ 隐藏设计 &nbsp;<span style="font-weight:400;color:var(--c-text-3);font-size:12px;">最有意思的部分</span></div>
-                        <div style="font-size:13px;color:var(--c-text-2);">6个反直觉设计决策，理解为什么这样设计而不是那样设计</div>
+                        <div style="font-size:13px;color:var(--c-text-2);">7个反直觉设计决策，理解为什么这样设计而不是那样设计</div>
                     </div>
                     <div style="margin-left:auto;color:var(--c-text-3);font-size:18px;">›</div>
                 </div>
@@ -444,8 +444,9 @@
             </div>
             <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
                 <div style="text-align:center;padding:20px 12px;border:1px solid var(--c-border-l);border-radius:var(--r-lg);background:linear-gradient(135deg,#F5F3FF,#fff);">
-                    <div style="font-size:32px;font-weight:800;color:var(--c-purple);line-height:1;">22</div>
+                    <div style="font-size:32px;font-weight:800;color:var(--c-purple);line-height:1;">16</div>
                     <div style="font-size:12px;color:var(--c-text-3);margin-top:6px;">元技能组件</div>
+                    <div style="font-size:11px;color:var(--c-text-3);margin-top:3px;">全部完备4字段 frontmatter</div>
                 </div>
                 <div style="text-align:center;padding:20px 12px;border:1px solid var(--c-border-l);border-radius:var(--r-lg);background:linear-gradient(135deg,#ECFDF5,#fff);">
                     <div style="font-size:32px;font-weight:800;color:var(--c-green);line-height:1;">90+</div>
@@ -454,6 +455,7 @@
                 <div style="text-align:center;padding:20px 12px;border:1px solid var(--c-border-l);border-radius:var(--r-lg);background:linear-gradient(135deg,#EFF6FF,#fff);">
                     <div style="font-size:32px;font-weight:800;color:var(--c-blue);line-height:1;">5:00</div>
                     <div style="font-size:12px;color:var(--c-text-3);margin-top:6px;">每天自动运转</div>
+                    <div style="font-size:11px;color:var(--c-text-3);margin-top:3px;">launchd 定时 + 20 个 plist</div>
                 </div>
             </div>
         </div>
@@ -976,8 +978,8 @@
                         <div class="eng-lbl el-a">执行层<br>保障</div>
                         <div class="eng-cells">
                             <div class="ecell core">
-                                <div class="cn">⭐ meta-execution v2.15 — 系统心脏</div>
-                                <div class="cd">P-1续接 → P1启动 → 执行中 → P0交付自审 → P2触发复盘（v2.15: 强制2项必查+3项自律）</div>
+                                <div class="cn">⭐ meta-execution v2.16 — 系统心脏</div>
+                                <div class="cd">P-1续接 → P1启动 → 执行中 → P0交付自审 → P2触发复盘（v2.16: frontmatter规范补全+绑定标准C1-C8统一+22活跃绑定）</div>
                             </div>
                             <div class="ecell" style="border-color:var(--c-amber);background:var(--c-amber-50);">
                                 <div class="cn" style="color:var(--c-amber);">🆕 boundary-sense</div>
@@ -1246,7 +1248,7 @@
             <div class="sec-head">
                 <div class="sec-ico">💡</div>
                 <div>
-                    <div class="sec-title">六个反直觉的设计决策（v4.0 新增第6条）</div>
+                    <div style="font-size:15px;font-weight:700;color:var(--c-text)">六个反直觉的设计决策（v4.0 新增第6条）</div>
                     <div class="sec-sub">理解这些决策背后的逻辑，才能理解这套体系为什么这么设计而不是那么设计</div>
                 </div>
             </div>
@@ -1391,6 +1393,35 @@
                             <span class="tag t-green">感知↔决策分离</span>
                             <span class="tag t-blue">信号驱动架构</span>
                             <span class="tag t-purple">v4.0 新增</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- v5.0 新增 第7条 -->
+                <div style="border:2px solid var(--c-blue-100);border-radius:var(--r-lg);overflow:hidden;background:linear-gradient(135deg,#EFF6FF,#fff);">
+                    <div style="padding:16px 20px 12px;border-bottom:1px solid var(--c-blue-100);display:flex;align-items:center;gap:10px;">
+                        <div style="width:32px;height:32px;background:linear-gradient(135deg,#1D4ED8,#2563EB);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:14px;flex-shrink:0;">7</div>
+                        <div>
+                            <div style="font-size:15px;font-weight:700;color:var(--c-text);">规范要用结构约束，而不是文字规则</div>
+                            <div style="font-size:12px;color:var(--c-text-3);">v5.0 新增 — 16个元技能全部补齐4字段 frontmatter，C1-C8绑定标准三文件对齐</div>
+                        </div>
+                    </div>
+                    <div style="padding:14px 20px;">
+                        <div style="font-size:13px;color:var(--c-text-2);line-height:1.75;">
+                            在这套体系完善过程中，发现一个反直觉问题：「每个技能必须标注 trigger_mode 和 layer」这条规范，
+                            如果只写在文档里，就变成了一条<strong style="color:var(--c-text)">「知道但做不到」的文字规则</strong>。
+                            62.5% 的元技能（10/16）缺少这些字段，就是证明。<br><br>
+                            解决方案不是把文字规则写得更显眼，而是：<strong style="color:var(--c-text)">把规范写进结构里</strong>。
+                            为所有 16 个技能统一补齐 4 个 frontmatter 字段（trigger_mode / layer / dimension / requires_meta_execution），
+                            同时把绑定标准从 C1-C5 扩展到 C1-C8 并同步到 binding-list.md、scoring-and-tracking.md、SKILL.md 三处。<br><br>
+                            类比：与其在代码规范文档里写「函数必须有返回值类型」，不如直接用 TypeScript 的类型系统强制它。
+                            <strong style="color:var(--c-text)">结构约束比文字规则的执行成本低两个数量级。</strong>
+                        </div>
+                        <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
+                            <span class="tag t-blue">结构约束 &gt; 文字规则</span>
+                            <span class="tag t-purple">frontmatter 标准化</span>
+                            <span class="tag t-green">C1-C8 三文件对齐</span>
+                            <span class="tag t-slate">v5.0 新增</span>
                         </div>
                     </div>
                 </div>
