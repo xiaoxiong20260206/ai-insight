@@ -145,9 +145,61 @@ MIRROR_REMOTE_URL = "https://github.com/xiaoxiong20260206/ai-insight-public.git"
 MIRROR_EXPECTED = "github.com/xiaoxiong20260206/ai-insight-public"
 
 
+def is_valid_git_repo(repo_path: Path) -> bool:
+    """
+    前置检查：验证目录是有效的 git 仓库（.git 目录完整且包含 HEAD）
+    
+    v2.5 新增（经验#70 — 2026-04-07：.git 目录被损坏成空壳导致外部推送静默失败）
+    根因：.git/ 仅含 AUTO_MERGE 一个文件时，git 命令全部失败，但调用方捕获不到，
+    sync_to_external 报"remote 验证失败"并 return False，deploy_daily 不阻断，
+    用户看到"部署完成"但外部仓库实际未更新。
+    
+    修复策略：在任何 git 操作前先做此前置检查，失败时输出清晰诊断和修复命令。
+    """
+    git_dir = repo_path / ".git"
+    if not git_dir.exists():
+        print(f"❌ [GIT INTEGRITY] .git 目录不存在: {git_dir}")
+        print(f"   请克隆仓库: git clone https://github.com/my-ai-research-lab/ai-insight-public.git {repo_path}")
+        return False
+    
+    # .git 可能是文件（submodule）或目录，只检查目录形式
+    if git_dir.is_dir():
+        head_file = git_dir / "HEAD"
+        config_file = git_dir / "config"
+        if not head_file.exists() or not config_file.exists():
+            print(f"❌ [GIT INTEGRITY] .git 目录损坏（缺少 HEAD 或 config）: {git_dir}")
+            # 检查是否存在 .git_disabled 备份
+            disabled = repo_path / ".git_disabled"
+            if disabled.exists() and (disabled / "HEAD").exists():
+                print(f"   发现 .git_disabled 备份，正在自动恢复...")
+                import shutil
+                shutil.rmtree(str(git_dir))
+                disabled.rename(git_dir)
+                print(f"   ✅ 已从 .git_disabled 恢复 .git 目录，请重新运行部署命令")
+            else:
+                print(f"   未找到 .git_disabled 备份，请手动修复或重新克隆仓库")
+            return False
+    
+    # 用 git rev-parse 做最终验证
+    result = subprocess.run(
+        ["git", "-C", str(repo_path), "rev-parse", "--git-dir"],
+        capture_output=True, text=True
+    )
+    if result.returncode != 0:
+        print(f"❌ [GIT INTEGRITY] git rev-parse 失败，仓库状态异常: {repo_path}")
+        print(f"   stderr: {result.stderr.strip()}")
+        return False
+    
+    return True
+
+
 def git_push() -> bool:
     """提交并推送到外部仓库"""
     try:
+        # ⭐ v2.5新增：前置检查外部仓库 git 完整性（防 .git 空壳导致静默失败）
+        if not is_valid_git_repo(EXTERNAL_REPO):
+            return False
+
         os.chdir(EXTERNAL_REPO)
 
         # ⭐ v2.3新增：推送前验证 remote 是否指向正确仓库（防止推错账号）
