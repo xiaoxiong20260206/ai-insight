@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>飞书 vs 钉钉：原生AI能力深度对比 | AI洞察</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%232563EB'/><text x='6' y='23' font-size='18' fill='white'>⚡</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,400&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-to-content" href="#main-content">跳到主内容</a>
+
+<div class="layout-wrapper">
+    <!-- 侧边栏导航 -->
+    <nav class="sidebar-nav" role="tablist" aria-label="章节导航" aria-orientation="vertical">
+        <button class="sidebar-collapse-btn" onclick="var w=this.closest('.layout-wrapper');w.classList.toggle('sidebar-collapsed');this.textContent=w.classList.contains('sidebar-collapsed')?'»':'«'" title="折叠/展开导航">«</button>
+        <div class="sidebar-doc-title">飞书 vs 钉钉 AI 对比</div>
+        <button class="nav-btn active" data-tab="tab-overview" role="tab" aria-selected="true" tabindex="0">00 概览</button>
+        <button class="nav-btn" data-tab="tab-feishu" role="tab" aria-selected="false" tabindex="-1">01 飞书AI全景</button>
+        <button class="nav-btn nav-level-2" data-tab="tab-feishu" data-scroll="feishu-aily" role="tab" aria-selected="false" tabindex="-1">· Aily平台</button>
+        <button class="nav-btn nav-level-2" data-tab="tab-feishu" data-scroll="feishu-bitable" role="tab" aria-selected="false" tabindex="-1">· 多维表格AI</button>
+        <button class="nav-btn nav-level-2" data-tab="tab-feishu" data-scroll="feishu-meeting" role="tab" aria-selected="false" tabindex="-1">· 智能会议</button>
+        <button class="nav-btn" data-tab="tab-dingtalk" role="tab" aria-selected="false" tabindex="-1">02 钉钉AI全景</button>
+        <button class="nav-btn nav-level-2" data-tab="tab-dingtalk" data-scroll="dingtalk-agentos" role="tab" aria-selected="false" tabindex="-1">· Agent OS</button>
+        <button class="nav-btn nav-level-2" data-tab="tab-dingtalk" data-scroll="dingtalk-wukong" role="tab" aria-selected="false" tabindex="-1">· 悟空Agent</button>
+        <button class="nav-btn nav-level-2" data-tab="tab-dingtalk" data-scroll="dingtalk-hardware" role="tab" aria-selected="false" tabindex="-1">· AI硬件</button>
+        <button class="nav-btn" data-tab="tab-compare" role="tab" aria-selected="false" tabindex="-1">03 能力矩阵对比</button>
+        <button class="nav-btn" data-tab="tab-insight" role="tab" aria-selected="false" tabindex="-1">04 深度洞察</button>
+        <button class="nav-btn nav-level-2" data-tab="tab-insight" data-scroll="insight-essence" role="tab" aria-selected="false" tabindex="-1">· 本质</button>
+        <button class="nav-btn nav-level-2" data-tab="tab-insight" data-scroll="insight-trend" role="tab" aria-selected="false" tabindex="-1">· 趋势推演</button>
+        <button class="nav-btn" data-tab="tab-more" role="tab" aria-selected="false" tabindex="-1">05 了解更多</button>
+    </nav>
+
+    <!-- 主内容区 -->
+    <main class="content-area" id="main-content">
+
+        <!-- 报告头部 -->
+        <header class="header animate-on-scroll">
+            <div class="header-meta">
+                <span class="header-tag">AI洞察 · 深度调研</span>
+                <span class="header-date">2025年12月</span>
+            </div>
+            <h1 class="header-title">飞书 vs 钉钉</h1>
+            <p class="header-subtitle">原生AI能力深度对比分析</p>
+            <p class="header-desc">从"嵌入AI"到"构建Agent OS"，中国企业协作软件的两条AI-Native路径正在深刻重塑企业工作方式。本报告从产品能力、技术架构、商业策略三个维度，全面解析飞书与钉钉在2025年的AI能力格局与战略走向。</p>
+            <div class="header-tags">
+                <span class="tag tag-blue">飞书/Lark</span>
+                <span class="tag tag-orange">钉钉/DingTalk</span>
+                <span class="tag tag-purple">AI-Native</span>
+                <span class="tag tag-green">企业协作</span>
+            </div>
+        </header>
+
+        <!-- 核心统计 -->
+        <div class="stats-grid animate-on-scroll">
+            <div class="stat-card info">
+                <div class="stat-value info">2亿+</div>
+                <div class="stat-label">钉钉月活用户</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value success">3000万</div>
+                <div class="stat-label">飞书月活用户</div>
+            </div>
+            <div class="stat-card warning">
+                <div class="stat-value warning">30亿元</div>
+                <div class="stat-label">钉钉2025年订阅收入</div>
+            </div>
+            <div class="stat-card purple">
+                <div class="stat-value purple">78%</div>
+                <div class="stat-label">飞书用户满意度</div>
+            </div>
+        </div>
+
+        <!-- Tab 00: 概览 -->
+        <div id="tab-overview" class="tab-content" role="tabpanel" aria-labelledby="nav-overview">
+
+            <!-- 概览SVG图 -->
+            <div class="section animate-on-scroll">
+                <div class="section-header">
+                    <span class="section-number">00</span>
+                    <h2>两条AI-Native路径全景图</h2>
+                </div>
+                <svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:320px;display:block;">
+                    <defs>
+                        <linearGradient id="feishuGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#059669;stop-opacity:1"/>
+                            <stop offset="100%" style="stop-color:#2563EB;stop-opacity:1"/>
+                        </linearGradient>
+                        <linearGradient id="dingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#D97706;stop-opacity:1"/>
+                            <stop offset="100%" style="stop-color:#E11D48;stop-opacity:1"/>
+                        </linearGradient>
+                    </defs>
+                    <!-- 飞书侧 -->
+                    <rect x="20" y="30" width="360" height="260" rx="16" fill="rgba(5,150,105,0.05)" stroke="#059669" stroke-width="1.5" stroke-dasharray="6,3"/>
+                    <text x="200" y="62" text-anchor="middle" font-size="16" font-weight="700" fill="#059669" font-family="DM Sans, sans-serif">飞书 · AI in Product</text>
+                    <text x="200" y="82" text-anchor="middle" font-size="11" fill="#57534E" font-family="Noto Sans SC, sans-serif">策略：AI深嵌每个工具模块</text>
+                    <!-- 飞书模块 -->
+                    <rect x="40" y="100" width="140" height="44" rx="8" fill="url(#feishuGrad)" opacity="0.9"/>
+                    <text x="110" y="125" text-anchor="middle" font-size="12" fill="white" font-weight="600">Aily 智能伙伴平台</text>
+                    <rect x="200" y="100" width="140" height="44" rx="8" fill="#2563EB" opacity="0.85"/>
+                    <text x="270" y="125" text-anchor="middle" font-size="12" fill="white" font-weight="600">多维表格 AI</text>
+                    <rect x="40" y="158" width="140" height="44" rx="8" fill="#059669" opacity="0.85"/>
+                    <text x="110" y="183" text-anchor="middle" font-size="12" fill="white" font-weight="600">智能会议纪要</text>
+                    <rect x="200" y="158" width="140" height="44" rx="8" fill="#7C3AED" opacity="0.85"/>
+                    <text x="270" y="183" text-anchor="middle" font-size="12" fill="white" font-weight="600">知识库 AI 问答</text>
+                    <rect x="40" y="216" width="300" height="44" rx="8" fill="rgba(37,99,235,0.12)" stroke="#2563EB" stroke-width="1"/>
+                    <text x="190" y="241" text-anchor="middle" font-size="12" fill="#2563EB" font-weight="600">字节豆包 / DeepSeek / GLM / Moonshot / Claude</text>
+                    <!-- 钉钉侧 -->
+                    <rect x="420" y="30" width="360" height="260" rx="16" fill="rgba(217,119,6,0.05)" stroke="#D97706" stroke-width="1.5" stroke-dasharray="6,3"/>
+                    <text x="600" y="62" text-anchor="middle" font-size="16" font-weight="700" fill="#D97706" font-family="DM Sans, sans-serif">钉钉 · Product for AI</text>
+                    <text x="600" y="82" text-anchor="middle" font-size="11" fill="#57534E" font-family="Noto Sans SC, sans-serif">策略：以 Agent OS 承载所有 AI Agent</text>
+                    <!-- 钉钉模块 -->
+                    <rect x="440" y="100" width="320" height="44" rx="8" fill="url(#dingGrad)" opacity="0.9"/>
+                    <text x="600" y="125" text-anchor="middle" font-size="12" fill="white" font-weight="700">Agent OS — 全球首个工作智能操作系统</text>
+                    <rect x="440" y="158" width="140" height="44" rx="8" fill="#D97706" opacity="0.85"/>
+                    <text x="510" y="183" text-anchor="middle" font-size="12" fill="white" font-weight="600">悟空 Agent</text>
+                    <rect x="600" y="158" width="140" height="44" rx="8" fill="#E11D48" opacity="0.85"/>
+                    <text x="670" y="183" text-anchor="middle" font-size="12" fill="white" font-weight="600">AI 听记 / AI 表格</text>
+                    <rect x="440" y="216" width="140" height="44" rx="8" fill="#D97706" opacity="0.75"/>
+                    <text x="510" y="237" text-anchor="middle" font-size="11" fill="white" font-weight="600">DingTalk A1</text>
+                    <text x="510" y="252" text-anchor="middle" font-size="10" fill="white">"耳朵"硬件</text>
+                    <rect x="600" y="216" width="140" height="44" rx="8" fill="#E11D48" opacity="0.75"/>
+                    <text x="670" y="237" text-anchor="middle" font-size="11" fill="white" font-weight="600">DingTalk Real</text>
+                    <text x="670" y="252" text-anchor="middle" font-size="10" fill="white">"身体"硬件</text>
+                </svg>
+            </div>
+
+            <!-- 战略定位对比 -->
+            <div class="section animate-on-scroll">
+                <div class="section-header">
+                    <span class="section-number">核心</span>
+                    <h2>战略定位：一张图看懂两种路径</h2>
+                </div>
+                <div class="vs-grid">
+                    <div class="vs-card feishu-card">
+                        <div class="vs-label">飞书</div>
+                        <div class="vs-title">AI in Product</div>
+                        <div class="vs-subtitle">把 AI 嵌进每个工具</div>
+                        <ul class="vs-list">
+                            <li>字节跳动基因：效率工具精打细磨</li>
+                            <li>目标客户：科技/互联网/新消费</li>
+                            <li>核心壁垒：数据飞轮（多维表格积累的结构化数据）</li>
+                            <li>AI形态：模块级AI能力逐步渗透</li>
+                            <li>硬件策略：开放生态（不自研）</li>
+                        </ul>
+                        <div class="vs-score">用户满意度 <span class="score-val feishu">78%</span></div>
+                    </div>
+                    <div class="vs-divider">VS</div>
+                    <div class="vs-card dingtalk-card">
+                        <div class="vs-label">钉钉</div>
+                        <div class="vs-title">Product for AI</div>
+                        <div class="vs-subtitle">把产品重构成 Agent 平台</div>
+                        <ul class="vs-list">
+                            <li>阿里巴巴基因：线上线下打通、行业深耕</li>
+                            <li>目标客户：制造/物流/政企/传统行业</li>
+                            <li>核心壁垒：软硬件绑定（设备数据采集闭环）</li>
+                            <li>AI形态：Agent OS作为底座统一调度</li>
+                            <li>硬件策略：全栈自研（A1录音+Real执行器）</li>
+                        </ul>
+                        <div class="vs-score">订阅收入 <span class="score-val dingtalk">30亿元</span></div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /tab-overview -->
+
+        <!-- Tab 01: 飞书AI全景 -->
+        <div id="tab-feishu" class="tab-content" role="tabpanel" aria-labelledby="nav-feishu" style="display:none;">
+
+            <div class="section animate-on-scroll" id="feishu-aily">
+                <div class="section-header">
+                    <span class="section-number">01</span>
+                    <h2>Aily 智能伙伴平台</h2>
+                </div>
+                <p class="section-desc">飞书于2024年推出 Aily 平台，定位为企业级 AI 开发与运行平台，支持企业自定义 AI 智能体、连接内外部知识，是飞书 AI 战略的核心载体。</p>
+                <div class="feature-grid">
+                    <div class="feature-card animate-on-scroll">
+                        <div class="feature-icon" style="background:rgba(5,150,105,0.1);color:#059669;">🤖</div>
+                        <div class="feature-name">AI 技能编排</div>
+                        <div class="feature-desc">Prompt IDE + 多步骤工作流，支持条件分支、循环逻辑，构建复杂业务AI链路</div>
+                    </div>
+                    <div class="feature-card animate-on-scroll">
+                        <div class="feature-icon" style="background:rgba(37,99,235,0.1);color:#2563EB;">🧠</div>
+                        <div class="feature-name">多模型管理</div>
+                        <div class="feature-desc">支持豆包、DeepSeek R1、GLM-4、Moonshot、Claude 等5+主流大模型，企业可自选底座</div>
+                    </div>
+                    <div class="feature-card animate-on-scroll">
+                        <div class="feature-icon" style="background:rgba(124,58,237,0.1);color:#7C3AED;">📚</div>
+                        <div class="feature-name">知识处理引擎</div>
+                        <div class="feature-desc">支持飞书云文档、知识库及 PDF/PPT/Excel/Word 等多格式私有知识入库</div>
+                    </div>
+                    <div class="feature-card animate-on-scroll">
+                        <div class="feature-icon" style="background:rgba(217,119,6,0.1);color:#D97706;">⚡</div>
+                        <div class="feature-name">效果调优系统</div>
+                        <div class="feature-desc">内置 Prompt 评估、A/B 对比测试、效果分析看板，支持持续迭代优化</div>
+                    </div>
+                    <div class="feature-card animate-on-scroll">
+                        <div class="feature-icon" style="background:rgba(225,29,72,0.1);color:#E11D48;">🔗</div>
+                        <div class="feature-name">应用连接器</div>
+                        <div class="feature-desc">通过飞书审批、飞书OA等系统连接企业内部数据，AI可读写业务数据触发流程</div>
+                    </div>
+                    <div class="feature-card animate-on-scroll">
+                        <div class="feature-icon" style="background:rgba(37,99,235,0.1);color:#2563EB;">💬</div>
+                        <div class="feature-name">aily 工作助手</div>
+                        <div class="feature-desc">通用企业AI伙伴，深度融入消息、会议、文档工作流，支持"任务模式"自主执行复杂任务</div>
+                    </div>
+                </div>
+                <div class="insight-box">
+                    <div class="insight-icon">💡</div>
+                    <div class="insight-content">
+                        <strong>飞书Aily的本质定位</strong>：不是AI助手，而是企业AI的"研发+运行"一体化平台。它试图解决的问题是：企业如何将自身业务知识和 AI 能力深度融合，而非简单调用外部大模型。
+                    </div>
+                </div>
+            </div>
+
+            <div class="section animate-on-scroll" id="feishu-bitable">
+                <div class="section-header">
+                    <span class="section-number">·</span>
+                    <h2>多维表格 AI：数据飞轮的核心引擎</h2>
+                </div>
+                <p class="section-desc">飞书多维表格（Bitable）是飞书差异化的核心产品，也是飞书 AI 最深度渗透的场景。2024-2025年完成全面 AI 升级，融合豆包、DeepSeek R1等大模型。</p>
+                <div class="timeline">
+                    <div class="timeline-item animate-on-scroll">
+                        <div class="timeline-dot success"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">AI 字段捷径</div>
+                            <div class="timeline-desc">在表格字段中直接调用AI能力：内容总结、情感分析、数据提取、自动分类。对每行数据批量AI处理，效率提升10x+</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item animate-on-scroll">
+                        <div class="timeline-dot info"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">自动化 AI 节点</div>
+                            <div class="timeline-desc">在自动化流水线中插入AI处理节点，实现"触发→AI判断→分支执行"的智能工作流，无需代码</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item animate-on-scroll">
+                        <div class="timeline-dot purple"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">智能问答 & AI公式生成</div>
+                            <div class="timeline-desc">用自然语言提问数据表，AI自动生成查询公式、数据分析报告。非技术人员也能深度使用表格</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item animate-on-scroll">
+                        <div class="timeline-dot warning"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">三方AI字段集成</div>
+                            <div class="timeline-desc">允许企业接入自有大模型或第三方AI服务作为字段处理引擎，开放接口灵活扩展</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section animate-on-scroll" id="feishu-meeting">
+                <div class="section-header">
+                    <span class="section-number">·</span>
+                    <h2>智能会议纪要：落地效果最显著的AI能力</h2>
+                </div>
+                <div class="case-grid">
+                    <div class="case-card animate-on-scroll">
+                        <div class="case-metric">16万→63万份</div>
+                        <div class="case-label">小鹏汽车年度AI会议纪要增长</div>
+                        <div class="case-company">小鹏汽车</div>
+                    </div>
+                    <div class="case-card animate-on-scroll">
+                        <div class="case-metric">19种语言</div>
+                        <div class="case-label">飞书妙记实时翻译支持数量</div>
+                        <div class="case-company">跨境企业常用</div>
+                    </div>
+                    <div class="case-card animate-on-scroll">
+                        <div class="case-metric">方言识别</div>
+                        <div class="case-label">支持粤语/闽南语等方言 ASR</div>
+                        <div class="case-company">国内企业场景</div>
+                    </div>
+                </div>
+                <div class="feature-row">
+                    <span class="feature-badge success">实时转录与总结</span>
+                    <span class="feature-badge info">自动提炼待办事项</span>
+                    <span class="feature-badge purple">可视化纪要结构</span>
+                    <span class="feature-badge warning">多端同步共享</span>
+                </div>
+            </div>
+
+        </div><!-- /tab-feishu -->
+
+        <!-- Tab 02: 钉钉AI全景 -->
+        <div id="tab-dingtalk" class="tab-content" role="tabpanel" aria-labelledby="nav-dingtalk" style="display:none;">
+
+            <div class="section animate-on-scroll" id="dingtalk-agentos">
+                <div class="section-header">
+                    <span class="section-number">02</span>
+                    <h2>Agent OS：全球首个工作智能操作系统</h2>
+                </div>
+                <p class="section-desc">2025年12月23日，钉钉正式发布 Agent OS——定位为"让 AI Agent 真正干活"的企业级操作系统底座，是钉钉向"Product for AI"转型的核心宣言。</p>
+                <div class="bento-grid">
+                    <div class="bento-card bento-large animate-on-scroll" style="--bento-accent:#D97706;">
+                        <div class="bento-title">Agent OS 架构</div>
+                        <div class="bento-desc">钉钉 Agent OS 的核心是"运行和协同 AI Agent"，以 Agent 为主体，能主动理解企业意图并自主执行任务。包含四大组件：</div>
+                        <div class="bento-tags">
+                            <span>钉钉ONE（信息流）</span>
+                            <span>AI搜问（企业搜索）</span>
+                            <span>悟空（通用Agent）</span>
+                            <span>DingTalk Real（执行硬件）</span>
+                        </div>
+                    </div>
+                    <div class="bento-card animate-on-scroll" style="--bento-accent:#E11D48;">
+                        <div class="bento-title">AI Fusion</div>
+                        <div class="bento-desc">支持50+大模型接入，包括通义、DeepSeek R1、GPT-4等，企业可自由切换底座模型</div>
+                    </div>
+                    <div class="bento-card animate-on-scroll" style="--bento-accent:#059669;">
+                        <div class="bento-title">钉钉ONE</div>
+                        <div class="bento-desc">Agent驱动的工作信息流，从"被动接收消息"变为"主动推送决策建议"</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section animate-on-scroll" id="dingtalk-wukong">
+                <div class="section-header">
+                    <span class="section-number">·</span>
+                    <h2>悟空 Agent：从"问答"到"干活"的跨越</h2>
+                </div>
+                <div class="comparison-table-wrap">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>能力维度</th>
+                                <th>传统AI助手（问答型）</th>
+                                <th class="highlight-col">悟空 Agent（执行型）</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>任务理解</td>
+                                <td>单次对话，无记忆</td>
+                                <td class="highlight-col">✅ 多轮规划，上下文持久</td>
+                            </tr>
+                            <tr>
+                                <td>执行能力</td>
+                                <td>只能回答，不能操作系统</td>
+                                <td class="highlight-col">✅ 可读写钉钉数据、触发审批</td>
+                            </tr>
+                            <tr>
+                                <td>工具调用</td>
+                                <td>不支持</td>
+                                <td class="highlight-col">✅ 调用日历/文档/表格/外部API</td>
+                            </tr>
+                            <tr>
+                                <td>自主性</td>
+                                <td>完全被动</td>
+                                <td class="highlight-col">✅ 可主动提醒、定时执行任务</td>
+                            </tr>
+                            <tr>
+                                <td>适用场景</td>
+                                <td>简单问答</td>
+                                <td class="highlight-col">✅ 商旅代订、报表生成、审批协助</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="callout callout-info">
+                    <div class="callout-icon">ℹ️</div>
+                    <div class="callout-content"><strong>典型案例</strong>：悟空出差助手将商旅预订从"手动操作15步"降至"一句话描述+AI自动完成"，且聚焦"帮企业省钱"，已服务牧原集团、森马、宁德时代等制造业龙头。</div>
+                </div>
+            </div>
+
+            <div class="section animate-on-scroll" id="dingtalk-hardware">
+                <div class="section-header">
+                    <span class="section-number">·</span>
+                    <h2>AI硬件：钉钉独家战略资产</h2>
+                </div>
+                <p class="section-desc">钉钉是三大企业协作平台中<strong>唯一大规模投入AI硬件</strong>的玩家。飞书采取开放生态（不自研），企微依托手机+摄像头。</p>
+                <div class="hardware-grid">
+                    <div class="hardware-card animate-on-scroll" style="border-color:#D97706;">
+                        <div class="hw-badge" style="background:#D97706;">AI的耳朵</div>
+                        <div class="hw-name">DingTalk A1</div>
+                        <div class="hw-desc">卡片式随身AI录音设备，2025年9月发布，登上天猫/抖音录音笔热销榜第一。集成AI会议纪要、实时翻译、声纹识别。</div>
+                        <div class="hw-specs">
+                            <span>45小时续航</span>
+                            <span>64GB存储</span>
+                            <span>团队版可聚合多人数据</span>
+                        </div>
+                    </div>
+                    <div class="hardware-card animate-on-scroll" style="border-color:#E11D48;">
+                        <div class="hw-badge" style="background:#E11D48;">AI的身体</div>
+                        <div class="hw-name">DingTalk Real</div>
+                        <div class="hw-desc">企业级Agent OS执行终端，2025年12月发布。可访问内外网，在权限管控下读写企业数据，支持Agent全程执行任务，物理断电作为终极安全保障。</div>
+                        <div class="hw-specs">
+                            <span>内网部署</span>
+                            <span>数据不出墙</span>
+                            <span>月租199元（初期）</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="callout callout-warning">
+                    <div class="callout-icon">⚠️</div>
+                    <div class="callout-content"><strong>软硬一体的双刃剑</strong>：硬件可以构建更高的护城河（数据采集入口+平台切换成本），但同时面临软硬两条线并行的巨大资源压力，软件体验可能被硬件拖累。</div>
+                </div>
+            </div>
+
+        </div><!-- /tab-dingtalk -->
+
+        <!-- Tab 03: 能力矩阵对比 -->
+        <div id="tab-compare" class="tab-content" role="tabpanel" aria-labelledby="nav-compare" style="display:none;">
+
+            <div class="section animate-on-scroll">
+                <div class="section-header">
+                    <span class="section-number">03</span>
+                    <h2>AI能力矩阵：场景维度全面对比</h2>
+                </div>
+                <!-- 能力矩阵概览SVG -->
+                <svg viewBox="0 0 780 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:200px;display:block;margin-bottom:20px;">
+                    <text x="390" y="24" text-anchor="middle" font-size="13" fill="#57534E" font-family="Noto Sans SC,sans-serif">各场景AI能力成熟度对比（1-5星）</text>
+                    <!-- 场景标签 -->
+                    <text x="80" y="55" text-anchor="middle" font-size="11" fill="#78716C">文档AI</text>
+                    <text x="200" y="55" text-anchor="middle" font-size="11" fill="#78716C">会议AI</text>
+                    <text x="320" y="55" text-anchor="middle" font-size="11" fill="#78716C">表格AI</text>
+                    <text x="440" y="55" text-anchor="middle" font-size="11" fill="#78716C">搜索AI</text>
+                    <text x="560" y="55" text-anchor="middle" font-size="11" fill="#78716C">Agent能力</text>
+                    <text x="680" y="55" text-anchor="middle" font-size="11" fill="#78716C">AI硬件</text>
+                    <!-- 飞书条形 -->
+                    <rect x="40" y="65" width="80" height="18" rx="4" fill="#059669" opacity="0.85"/>
+                    <text x="125" y="79" font-size="10" fill="#059669" font-weight="600">★★★★☆ 飞书</text>
+                    <rect x="160" y="65" width="90" height="18" rx="4" fill="#059669" opacity="0.85"/>
+                    <text x="255" y="79" font-size="10" fill="#059669" font-weight="600">★★★★★</text>
+                    <rect x="280" y="65" width="96" height="18" rx="4" fill="#059669" opacity="0.85"/>
+                    <text x="380" y="79" font-size="10" fill="#059669" font-weight="600">★★★★★</text>
+                    <rect x="400" y="65" width="72" height="18" rx="4" fill="#059669" opacity="0.85"/>
+                    <text x="477" y="79" font-size="10" fill="#059669" font-weight="600">★★★☆☆</text>
+                    <rect x="520" y="65" width="72" height="18" rx="4" fill="#059669" opacity="0.85"/>
+                    <text x="597" y="79" font-size="10" fill="#059669" font-weight="600">★★★☆☆</text>
+                    <rect x="640" y="65" width="36" height="18" rx="4" fill="#059669" opacity="0.85"/>
+                    <text x="681" y="79" font-size="10" fill="#059669" font-weight="600">★☆☆☆☆</text>
+                    <!-- 钉钉条形 -->
+                    <rect x="40" y="92" width="72" height="18" rx="4" fill="#D97706" opacity="0.85"/>
+                    <text x="117" y="106" font-size="10" fill="#D97706" font-weight="600">★★★☆☆ 钉钉</text>
+                    <rect x="160" y="92" width="72" height="18" rx="4" fill="#D97706" opacity="0.85"/>
+                    <text x="237" y="106" font-size="10" fill="#D97706" font-weight="600">★★★☆☆</text>
+                    <rect x="280" y="92" width="72" height="18" rx="4" fill="#D97706" opacity="0.85"/>
+                    <text x="357" y="106" font-size="10" fill="#D97706" font-weight="600">★★★☆☆</text>
+                    <rect x="400" y="92" width="90" height="18" rx="4" fill="#D97706" opacity="0.85"/>
+                    <text x="495" y="106" font-size="10" fill="#D97706" font-weight="600">★★★★☆</text>
+                    <rect x="520" y="92" width="96" height="18" rx="4" fill="#D97706" opacity="0.85"/>
+                    <text x="621" y="106" font-size="10" fill="#D97706" font-weight="600">★★★★★</text>
+                    <rect x="640" y="92" width="90" height="18" rx="4" fill="#D97706" opacity="0.85"/>
+                    <text x="735" y="106" font-size="10" fill="#D97706" font-weight="600">★★★★☆</text>
+                </svg>
+
+                <div class="comparison-table-wrap">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>能力维度</th>
+                                <th style="color:#059669;">🟢 飞书</th>
+                                <th style="color:#D97706;">🟡 钉钉</th>
+                                <th>综合评判</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>文档AI</strong></td>
+                                <td>Doc AI + 知识库问答，多模型支持</td>
+                                <td>文档AI功能基础，2023年发布</td>
+                                <td><span class="badge-feishu">飞书领先</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>会议AI</strong></td>
+                                <td>妙记（19语言+方言）+ 实时总结+待办提取</td>
+                                <td>AI听记（36场景模板，2025.8发布）</td>
+                                <td><span class="badge-feishu">飞书微弱领先</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>表格AI</strong></td>
+                                <td>多维表格AI字段+自动化节点+智能公式</td>
+                                <td>AI表格（100+字段Agent，2025.8）</td>
+                                <td><span class="badge-feishu">飞书领先</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>搜索AI</strong></td>
+                                <td>知识库问答（企业权限内+实时联网）</td>
+                                <td>AI搜问（企业级AI搜索，50+模型）</td>
+                                <td><span class="badge-dingtalk">钉钉更强</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Agent能力</strong></td>
+                                <td>Aily平台（开发型）+ aily助手（通用）</td>
+                                <td>悟空Agent（执行型）+ Agent OS底座</td>
+                                <td><span class="badge-dingtalk">钉钉更强</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>多模型支持</strong></td>
+                                <td>5家（豆包/DeepSeek/GLM/Moonshot/Claude）</td>
+                                <td>6家（通义/DeepSeek R1/GPT等）+ AI Fusion 50+</td>
+                                <td><span class="badge-dingtalk">钉钉略多</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>AI硬件</strong></td>
+                                <td>AI录音豆（第三方合作，非自研）</td>
+                                <td>A1（录音）+ Real（执行器）全栈自研</td>
+                                <td><span class="badge-dingtalk">钉钉独家优势</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>开放生态</strong></td>
+                                <td>开放Aily平台供企业二次开发</td>
+                                <td>Agent OS开放Agent开发框架</td>
+                                <td><span class="badge-tie">各有所长</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>用户体验</strong></td>
+                                <td>用户满意度78%，界面精致</td>
+                                <td>用户满意度65%，功能繁多</td>
+                                <td><span class="badge-feishu">飞书体验更优</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 进度条对比 -->
+            <div class="section animate-on-scroll">
+                <div class="section-header">
+                    <span class="section-number">·</span>
+                    <h2>关键指标：市场&产品综合评分</h2>
+                </div>
+                <div class="progress-compare">
+                    <div class="progress-item animate-on-scroll">
+                        <div class="progress-label">月活用户规模</div>
+                        <div class="progress-bars">
+                            <div class="progress-bar-row">
+                                <span class="bar-brand feishu-brand">飞书</span>
+                                <div class="bar-track"><div class="bar-fill feishu-fill" style="width:15%" role="progressbar" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div></div>
+                                <span class="bar-val">3000万</span>
+                            </div>
+                            <div class="progress-bar-row">
+                                <span class="bar-brand dingtalk-brand">钉钉</span>
+                                <div class="bar-track"><div class="bar-fill dingtalk-fill" style="width:100%" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div>
+                                <span class="bar-val">2亿+</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress-item animate-on-scroll">
+                        <div class="progress-label">用户满意度</div>
+                        <div class="progress-bars">
+                            <div class="progress-bar-row">
+                                <span class="bar-brand feishu-brand">飞书</span>
+                                <div class="bar-track"><div class="bar-fill feishu-fill" style="width:78%" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div></div>
+                                <span class="bar-val">78%</span>
+                            </div>
+                            <div class="progress-bar-row">
+                                <span class="bar-brand dingtalk-brand">钉钉</span>
+                                <div class="bar-track"><div class="bar-fill dingtalk-fill" style="width:65%" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div></div>
+                                <span class="bar-val">65%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress-item animate-on-scroll">
+                        <div class="progress-label">Agent能力成熟度</div>
+                        <div class="progress-bars">
+                            <div class="progress-bar-row">
+                                <span class="bar-brand feishu-brand">飞书</span>
+                                <div class="bar-track"><div class="bar-fill feishu-fill" style="width:55%" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div></div>
+                                <span class="bar-val">Aily平台（开发型）</span>
+                            </div>
+                            <div class="progress-bar-row">
+                                <span class="bar-brand dingtalk-brand">钉钉</span>
+                                <div class="bar-track"><div class="bar-fill dingtalk-fill" style="width:85%" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div></div>
+                                <span class="bar-val">悟空+Agent OS（执行型）</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /tab-compare -->
+
+        <!-- Tab 04: 深度洞察 -->
+        <div id="tab-insight" class="tab-content" role="tabpanel" aria-labelledby="nav-insight" style="display:none;">
+
+            <div class="section animate-on-scroll" id="insight-essence">
+                <div class="section-header">
+                    <span class="section-number">04</span>
+                    <h2>本质洞察：两种 AI-Native 的底层逻辑</h2>
+                </div>
+
+                <div class="insight-level">
+                    <div class="insight-level-header">
+                        <span class="level-badge level-1">表象</span>
+                        <span class="level-title">都在做AI，功能看起来差不多</span>
+                    </div>
+                    <div class="insight-level-content">两者都有AI会议纪要、AI文档、AI搜索……看似功能趋同，市场上也常被放在一起比较。但这只是表象。</div>
+                </div>
+
+                <div class="insight-level">
+                    <div class="insight-level-header">
+                        <span class="level-badge level-2">本质</span>
+                        <span class="level-title">完全不同的 AI 哲学</span>
+                    </div>
+                    <div class="insight-level-content">
+                        <p><strong>飞书 = "AI in Product"（AI 嵌入产品）</strong>：字节跳动的基因是做极致的工具产品，所以飞书的路径是把 AI 嵌进每一个产品模块，让每个工具变得更智能。它的护城河是<strong>用户在工具中积累的结构化数据</strong>（尤其是多维表格），数据越多，AI越有价值。</p>
+                        <p style="margin-top:12px;"><strong>钉钉 = "Product for AI"（产品为 AI 而生）</strong>：阿里的基因是平台生态+线上线下打通，所以钉钉的路径是把整个产品重构成一个 Agent 运行平台，Agent 是一等公民，原有工具（文档/表格/会议）变成 Agent 的"感知器官"和"执行工具"。它的护城河是<strong>软硬件协同构成的 AI 入口</strong>，硬件提高物理世界的数据采集能力和平台切换成本。</p>
+                    </div>
+                </div>
+
+                <div class="insight-level">
+                    <div class="insight-level-header">
+                        <span class="level-badge level-3">规律</span>
+                        <span class="level-title">背后是"工具升级"与"平台重构"两种范式的竞争</span>
+                    </div>
+                    <div class="insight-level-content">
+                        这不只是飞书和钉钉的差异，这是企业软件AI时代的两种普遍范式之争。类比自然界：飞书像进化中的「现有物种器官升级」（原有工具加上AI神经），钉钉像「新物种降临」（构建新的生命体系，旧工具成为器官）。<br><br>
+                        <strong>历史规律告诉我们</strong>：每一次平台级变革（操作系统、移动互联网、云），原有工具的升级路径最终都会被新平台的底层重构超越——但这个过程需要时间，且新范式必须在实际场景中打赢。
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="section animate-on-scroll" id="insight-trend">
+                <div class="section-header">
+                    <span class="section-number">·</span>
+                    <h2>趋势推演：未来2年的竞争走向</h2>
+                </div>
+
+                <div class="trend-grid">
+                    <div class="trend-card animate-on-scroll" style="--trend-color:#2563EB;">
+                        <div class="trend-icon">🔬</div>
+                        <div class="trend-title">飞书的赢法</div>
+                        <div class="trend-desc">在科技/互联网/新消费等"白领工具型"场景持续深化数据飞轮，多维表格积累的结构化企业知识将成为其Aily平台最大的竞争壁垒。飞书需在用户满意度领先的基础上，快速将Agent能力从"开发型"转为"执行型"。</div>
+                        <div class="trend-risk">⚠️ 风险：规模增长天花板明显（3000万 vs 2亿），大客户获取需加速</div>
+                    </div>
+                    <div class="trend-card animate-on-scroll" style="--trend-color:#D97706;">
+                        <div class="trend-icon">⚙️</div>
+                        <div class="trend-title">钉钉的赢法</div>
+                        <div class="trend-desc">在制造/物流/政企等"重运营行业"场景深化软硬一体的AI执行能力，Agent OS作为底座承载行业级垂直Agent。DingTalk Real一旦在制造车间、政务大厅等场景规模化落地，将建立难以复制的物理世界护城河。</div>
+                        <div class="trend-risk">⚠️ 风险：软硬并行资源消耗大，硬件体验短板可能拖累软件品牌</div>
+                    </div>
+                    <div class="trend-card animate-on-scroll" style="--trend-color:#7C3AED;">
+                        <div class="trend-icon">🌐</div>
+                        <div class="trend-title">行业整体走向</div>
+                        <div class="trend-desc">2026-2027年，企业协作软件的竞争将从"AI功能数量"转向"AI任务完成率"。谁能让企业员工用AI真正"少做事/做完事"，谁就能在ARR增长上突破瓶颈。这意味着Agent执行能力（工具调用+结果验证+异常处理）将成为下一轮核心战场。</div>
+                        <div class="trend-risk">🔮 预判：钉钉Agent OS在制造业率先跑出标杆案例，飞书Aily在互联网企业率先规模化</div>
+                    </div>
+                </div>
+
+                <div class="insight-box">
+                    <div class="insight-icon">🔭</div>
+                    <div class="insight-content">
+                        <strong>一句话判断</strong>：飞书和钉钉不是在竞争同一块市场，而是在分别构建两个不同AI时代的企业操作系统——一个面向知识工作者的智能工具集，一个面向传统行业的物理-数字融合平台。短期看功能，长期看谁的"飞轮"转得快。
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /tab-insight -->
+
+        <!-- Tab 05: 了解更多 -->
+        <div id="tab-more" class="tab-content" role="tabpanel" aria-labelledby="nav-more" style="display:none;">
+            <div class="section animate-on-scroll">
+                <div class="section-header">
+                    <span class="section-number">05</span>
+                    <h2>了解更多</h2>
+                </div>
+                <div class="more-grid">
+                    <a class="more-card" href="https://www.feishu.cn/en/product/feishuai" target="_blank">
+                        <div class="more-tag" style="background:rgba(5,150,105,0.1);color:#059669;">飞书官方</div>
+                        <div class="more-title">Feishu AI 产品页面</div>
+                        <div class="more-desc">飞书AI全产品介绍，含Aily、多维表格AI、会议纪要等定价方案</div>
+                    </a>
+                    <a class="more-card" href="https://m.c114.com.cn/w16-1302806.html" target="_blank">
+                        <div class="more-tag" style="background:rgba(217,119,6,0.1);color:#D97706;">钉钉动态</div>
+                        <div class="more-title">钉钉 Agent OS 发布报道</div>
+                        <div class="more-desc">C114通信网：钉钉发布全球首个工作智能操作系统Agent OS详细介绍</div>
+                    </a>
+                    <a class="more-card" href="https://eu.36kr.com/en/p/3618659812508677" target="_blank">
+                        <div class="more-tag" style="background:rgba(225,29,72,0.1);color:#E11D48;">深度分析</div>
+                        <div class="more-title">钉钉软硬一体双轨战略分析</div>
+                        <div class="more-desc">36氪：DingTalk A1+Real软硬一体战略深度分析，含竞争格局对比</div>
+                    </a>
+                    <a class="more-card" href="https://www.feishu.cn/content/article/7576921890476788922" target="_blank">
+                        <div class="more-tag" style="background:rgba(124,58,237,0.1);color:#7C3AED;">产品详解</div>
+                        <div class="more-title">飞书Aily企业智能体应用</div>
+                        <div class="more-desc">飞书官方：Aily平台企业智能体应用详解，含知识自定义、形象定制等功能</div>
+                    </a>
+                    <a class="more-card" href="https://www.jetservices.com.cn/blogs/feishu-vs-dingtalk-vs-wecom-best-collaboration-tools-in-china/" target="_blank">
+                        <div class="more-tag" style="background:rgba(37,99,235,0.1);color:#2563EB;">三方对比</div>
+                        <div class="more-title">飞书 vs 钉钉 vs 企微综合对比</div>
+                        <div class="more-desc">第三方机构：2025年三大中国企业协作工具全面横评</div>
+                    </a>
+                    <a class="more-card" href="https://zhuanlan.zhihu.com/p/1986920128751890752" target="_blank">
+                        <div class="more-tag" style="background:rgba(217,119,6,0.1);color:#D97706;">深度解读</div>
+                        <div class="more-title">钉钉Agent OS知乎解读</div>
+                        <div class="more-desc">知乎：钉钉发布AI工作操作系统Agent OS，开启人机协同新范式深度解读</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 报告元信息 -->
+            <div class="section animate-on-scroll" style="background:rgba(5,150,105,0.03);">
+                <div class="report-meta">
+                    <div class="meta-title">🔬 报告生产说明</div>
+                    <p>本报告由 AI 洞察平台（林克）基于 <strong>多源公开信息搜索 + 深度调研方法论</strong> 自动生成，信息截止至 2025年12月。数据来源包括：飞书/钉钉官方产品页面、36氪、量子位、中国信通院、QuestMobile、知乎等权威媒体及分析机构。</p>
+                    <p style="margin-top:8px;">部分市场数据（月活、满意度、订阅收入）来源于行业调研报告，如需精确数据请参阅原始来源。</p>
+                    <div class="meta-tags">
+                        <span>AI洞察</span><span>深度调研 v2.6</span><span>2025.12</span>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /tab-more -->
+
+    </main>
+</div><!-- /layout-wrapper -->
+
+<script src="app.js"></script>
+</body>
+</html>
