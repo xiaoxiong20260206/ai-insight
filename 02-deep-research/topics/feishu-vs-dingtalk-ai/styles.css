@@ -112,29 +112,35 @@ body {
     pointer-events: none;
 }
 
-/* 折叠按钮 */
+/* 折叠按钮 — 固定在视口左侧，不随侧边栏消失 */
 .sidebar-collapse-btn {
-    position: absolute;
-    top: 16px;
-    right: 8px;
+    position: fixed;
+    top: 14px;
+    left: calc(var(--sidebar-width) - 12px);
     width: 24px;
     height: 24px;
     border: 1px solid var(--color-border);
     background: var(--color-surface);
-    border-radius: var(--radius-sm);
+    border-radius: 50%;
     cursor: pointer;
     font-size: 11px;
     color: var(--color-text-muted);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all .15s;
-    z-index: 101;
+    transition: left .25s ease, background .15s, color .15s, box-shadow .15s;
+    z-index: 200;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+}
+.sidebar-nav.sidebar-collapsed ~ * .sidebar-collapse-btn,
+.sidebar-collapse-btn.collapsed-pos {
+    left: 4px;
 }
 .sidebar-collapse-btn:hover {
-    background: var(--color-bg);
-    color: var(--color-text);
-    border-color: var(--color-text-subtle);
+    background: var(--color-info);
+    color: white;
+    border-color: var(--color-info);
+    box-shadow: 0 2px 8px rgba(37,99,235,0.25);
 }
 
 /* 文档标题 */
