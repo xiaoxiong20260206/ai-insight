@@ -237,12 +237,19 @@ body {
 
 /* ============================================================
    右侧主内容区
-   flex:0 1 + margin auto → 在剩余空间里居中，两侧等宽留白
+   content-area 撑满剩余空间，content-inner 居中限宽
 ============================================================ */
 .content-area {
-    flex: 0 1 var(--content-max);
+    flex: 1;
     min-width: 0;
-    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--color-bg);
+}
+.content-inner {
+    width: 100%;
+    max-width: var(--content-max);
     padding: 48px var(--content-pad) 120px;
 }
 @media (max-width: 1100px) {
@@ -250,7 +257,7 @@ body {
 }
 @media (max-width: 900px) {
     :root { --content-pad: 28px; }
-    .content-area { padding-top: 36px; }
+    .content-inner { padding-top: 36px; }
 }
 
 /* ============================================================
@@ -279,8 +286,10 @@ body {
     }
     .content-area {
         flex: 1;
-        margin: 0;
-        padding: 56px 16px 80px;
+        align-items: stretch;
+    }
+    .content-inner {
+        padding: 52px 16px 80px;
     }
 }
 
@@ -1373,6 +1382,7 @@ body {
     .sidebar-nav,
     .sidebar-collapse-btn,
     .scroll-to-top { display: none; }
-    .content-area { padding: 0; max-width: 100%; }
+    .content-area { display: block; }
+    .content-inner { padding: 0; max-width: 100%; }
     .animate-on-scroll { opacity: 1 !important; transform: none !important; }
 }
