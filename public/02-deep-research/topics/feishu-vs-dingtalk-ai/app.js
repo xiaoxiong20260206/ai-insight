@@ -1,115 +1,196 @@
-/* ===== app.js · 飞书 vs 钉钉 AI对比报告 ===== */
-(function() {
-    'use strict';
+/* ============================================================
+   飞书 vs 钉钉 深度对比报告 — 长页面交互逻辑 v2.0
+   功能：
+   1. 平滑锚点滚动（含 header offset 补偿）
+   2. Scroll Spy — 滚动时高亮左侧目录
+   3. 阅读进度条
+   4. 回到顶部按钮
+   5. 侧边栏折叠/展开
+   6. 入场动画（IntersectionObserver，含降级）
+   7. 进度条动画启动（首次进入视口时触发 width）
+   ============================================================ */
 
-    /* ---- Tab 切换 ---- */
-    const navBtns = document.querySelectorAll('.nav-btn[data-tab]');
-    const tabPanels = document.querySelectorAll('.tab-content');
+(function () {
+    "use strict";
 
-    function switchTab(targetTabId) {
-        tabPanels.forEach(p => { p.style.display = 'none'; });
-        navBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+    /* ---- 常量 ---- */
+    const HEADER_OFFSET      = 72;   // 顶部保留高度（px）
+    const SPY_OFFSET         = 110;  // Scroll Spy 触发偏移
+    const SCROLL_TOP_THRESH  = 280;
 
-        const panel = document.getElementById(targetTabId);
-        if (panel) {
-            panel.style.display = 'block';
-            // 触发进入视口的动画
-            setTimeout(() => {
-                panel.querySelectorAll('.animate-on-scroll').forEach(el => {
-                    observer.observe(el);
-                });
-            }, 10);
-        }
+    /* ---- DOM 引用 ---- */
+    const sidebar      = document.getElementById("sidebar");
+    const collapseBtn  = document.getElementById("collapseBtn");
+    const scrollTopBtn = document.getElementById("scrollToTop");
+    const progressBar  = document.getElementById("readingProgress");
 
-        navBtns.forEach(b => {
-            if (b.getAttribute('data-tab') === targetTabId) {
-                b.classList.add('active');
-                b.setAttribute('aria-selected', 'true');
-            }
-        });
-    }
+    const tocLinks = Array.from(document.querySelectorAll(".toc-link"));
+    const anchorIds = tocLinks
+        .map(a => a.getAttribute("href"))
+        .filter(h => h && h.startsWith("#"))
+        .map(h => h.slice(1));
+    const anchorEls = anchorIds
+        .map(id => document.getElementById(id))
+        .filter(Boolean);
 
-    navBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const targetTab = btn.getAttribute('data-tab');
-            const scrollTarget = btn.getAttribute('data-scroll');
-            switchTab(targetTab);
-            if (scrollTarget) {
-                setTimeout(() => {
-                    const el = document.getElementById(scrollTarget);
-                    if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-                }, 80);
-            }
+    /* ===========================================================
+       1. 平滑锚点滚动
+    =========================================================== */
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener("click", e => {
+            const targetId = link.getAttribute("href").slice(1);
+            const target = document.getElementById(targetId);
+            if (!target) return;
+            e.preventDefault();
+            const top = target.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
+            window.scrollTo({ top, behavior: "smooth" });
         });
     });
 
-    /* ---- 键盘导航（左右键切换Tab）---- */
-    const tabIds = ['tab-overview', 'tab-feishu', 'tab-dingtalk', 'tab-compare', 'tab-insight', 'tab-more'];
-    document.querySelector('.sidebar-nav').addEventListener('keydown', e => {
-        const current = [...navBtns].find(b => b.classList.contains('active'));
-        if (!current) return;
-        const idx = tabIds.indexOf(current.getAttribute('data-tab'));
-        if (e.key === 'ArrowDown' && idx < tabIds.length - 1) {
-            e.preventDefault();
-            switchTab(tabIds[idx + 1]);
-        } else if (e.key === 'ArrowUp' && idx > 0) {
-            e.preventDefault();
-            switchTab(tabIds[idx - 1]);
+    /* ===========================================================
+       2. Scroll Spy
+    =========================================================== */
+    function getActiveId() {
+        const scrollY = window.scrollY + SPY_OFFSET;
+        let activeId = anchorIds[0];
+        for (const el of anchorEls) {
+            if (el.offsetTop <= scrollY) {
+                activeId = el.id;
+            } else {
+                break;
+            }
         }
-    });
+        return activeId;
+    }
 
-    /* ---- IntersectionObserver 滚动进入动画 ---- */
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, i) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.classList.add('is-visible');
-                }, i * 60);
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-
-    function observeVisible() {
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            // 只观察当前可见Tab中的元素
-            const panel = el.closest('.tab-content');
-            if (!panel || panel.style.display !== 'none') {
-                observer.observe(el);
-            }
+    function updateTocHighlight() {
+        const activeId = getActiveId();
+        tocLinks.forEach(link => {
+            const href = link.getAttribute("href");
+            const isActive = href === "#" + activeId;
+            link.classList.toggle("toc-active", isActive);
+            if (isActive) ensureVisible(link);
         });
     }
 
-    // 首次加载
-    observeVisible();
+    function ensureVisible(el) {
+        if (!sidebar) return;
+        const elTop    = el.offsetTop;
+        const elBottom = elTop + el.offsetHeight;
+        const sTop     = sidebar.scrollTop;
+        const sBottom  = sTop + sidebar.clientHeight;
+        if (elTop < sTop + 60) {
+            sidebar.scrollTo({ top: elTop - 60, behavior: "smooth" });
+        } else if (elBottom > sBottom - 80) {
+            sidebar.scrollTo({ top: elBottom - sidebar.clientHeight + 80, behavior: "smooth" });
+        }
+    }
 
-    /* ---- 进度条动画（在对比Tab首次显示时触发）---- */
-    let progressAnimated = false;
-    function animateProgressBars() {
-        if (progressAnimated) return;
-        progressAnimated = true;
-        document.querySelectorAll('.bar-fill').forEach(bar => {
-            const targetWidth = bar.style.width;
-            bar.style.width = '0';
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    bar.style.width = targetWidth;
-                });
+    /* ===========================================================
+       3. 阅读进度条
+    =========================================================== */
+    function updateProgress() {
+        if (!progressBar) return;
+        const scrolled = window.scrollY;
+        const total    = document.documentElement.scrollHeight - window.innerHeight;
+        const pct      = total > 0 ? Math.min(100, (scrolled / total) * 100) : 0;
+        progressBar.style.width = pct.toFixed(1) + "%";
+    }
+
+    /* ===========================================================
+       4. 回到顶部按钮
+    =========================================================== */
+    function updateScrollTopBtn() {
+        if (!scrollTopBtn) return;
+        scrollTopBtn.classList.toggle("visible", window.scrollY > SCROLL_TOP_THRESH);
+    }
+
+    scrollTopBtn && scrollTopBtn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    /* ===========================================================
+       5. 侧边栏折叠/展开
+    =========================================================== */
+    collapseBtn && collapseBtn.addEventListener("click", () => {
+        const isCollapsed = sidebar.classList.toggle("sidebar-collapsed");
+        collapseBtn.textContent    = isCollapsed ? "»" : "«";
+        collapseBtn.title          = isCollapsed ? "展开导航" : "折叠导航";
+        collapseBtn.setAttribute("aria-label", isCollapsed ? "展开导航" : "折叠导航");
+        collapseBtn.classList.toggle("collapsed-pos", isCollapsed);
+    });
+
+    /* ===========================================================
+       6. 入场动画
+       降级：若 IntersectionObserver 不支持，直接显示所有元素
+    =========================================================== */
+    const animEls = document.querySelectorAll(".animate-on-scroll");
+
+    if (!("IntersectionObserver" in window)) {
+        // 降级：立即全部显示
+        animEls.forEach(el => el.classList.add("visible"));
+    } else {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    observer.unobserve(entry.target);
+                }
             });
+        }, { threshold: 0.06, rootMargin: "0px 0px -30px 0px" });
+
+        animEls.forEach(el => observer.observe(el));
+    }
+
+    /* ===========================================================
+       7. 进度条 width 动画（初次进视口时触发）
+       让 .bar-fill 的 width 从 0 → 目标值，产生动效
+    =========================================================== */
+    const barFills = document.querySelectorAll(".bar-fill");
+    if ("IntersectionObserver" in window && barFills.length) {
+        const barObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // 从 style 的 data-width 恢复（若存在），否则用当前 style.width
+                    const el = entry.target;
+                    const w  = el.dataset.targetWidth || el.style.width || "0%";
+                    // 先归零，再延时触发，产生动画
+                    el.style.width = "0%";
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => { el.style.width = w; });
+                    });
+                    barObserver.unobserve(el);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        barFills.forEach(el => {
+            // 存储目标宽度
+            el.dataset.targetWidth = el.style.width || "0%";
+            el.style.width = "0%"; // 初始归零
+            barObserver.observe(el);
         });
     }
 
-    // 监听Tab切换到对比页时动画
-    const compareBtn = document.querySelector('[data-tab="tab-compare"]');
-    if (compareBtn) {
-        const originalClick = compareBtn.onclick;
-        compareBtn.addEventListener('click', () => {
-            setTimeout(animateProgressBars, 300);
-        });
-    }
+    /* ===========================================================
+       8. 统一 scroll 监听（rAF 节流）
+    =========================================================== */
+    let ticking = false;
+    window.addEventListener("scroll", () => {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                updateTocHighlight();
+                updateProgress();
+                updateScrollTopBtn();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
 
-    /* ---- 默认显示第一个Tab ---- */
-    // 已在HTML中默认显示 tab-overview，通过CSS style=display:none 隐藏其余
-    document.getElementById('tab-overview').style.display = 'block';
+    /* ---- 初始化 ---- */
+    updateTocHighlight();
+    updateProgress();
+    updateScrollTopBtn();
 
 })();
