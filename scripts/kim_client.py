@@ -178,13 +178,11 @@ async def send_to_group_with_retry(
                     return True
 
                 if result.get("code") == 42900:
-                    if attempt < KimConfig.MAX_RETRIES - 1:
-                        print(f"   Rate limited, retry in {KimConfig.RETRY_DELAY}s ({attempt + 1}/{KimConfig.MAX_RETRIES})")
-                        await asyncio.sleep(KimConfig.RETRY_DELAY)
-                        continue
-                    else:
-                        print(f"   Retried {KimConfig.MAX_RETRIES} times, still failed: {result}")
-                        return False
+                    # ⭐ v2.1 修复(2026-04-07): 42900限流不重试，与 send_ai_daily.py 的P0安全规则对齐
+                    # 根因：原来仍然重试，违反了 send_ai_daily.py 明确注释的"P0安全规则：42900不自动重试"
+                    # 42900 表示服务器主动限流，重试只会加剧限流，必须直接返回失败让调用方决策
+                    print(f"   ⛔ [P0安全规则] 42900限流，不重试，直接返回失败")
+                    return False
                 else:
                     print(f"   Failed: {result}")
                     return False

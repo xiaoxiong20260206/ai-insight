@@ -377,7 +377,10 @@ def main():
     
     # 步骤 3: 复制文件
     if not sync_all():
-        return
+        # v2.6 修复(2026-04-07): 原为 return（退出码0），deploy_daily.sh 无法感知失败
+        # 必须以非零退出码退出，确保调用方（deploy_daily.sh/orchestrator）能捕获同步失败
+        print("❌ [ABORT] sync_all() 失败，外部文件同步中止")
+        sys.exit(1)
     
     # 步骤 4: Git 推送
     if not args.no_push:
