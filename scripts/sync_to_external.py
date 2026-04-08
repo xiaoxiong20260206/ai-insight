@@ -22,10 +22,12 @@ v2.1 变更 (2026-03-09):
 """
 
 import argparse
+import fcntl
 import os
 import shutil
 import subprocess
 import sys
+import time
 from datetime import datetime
 from pathlib import Path
 
@@ -175,10 +177,14 @@ def is_valid_git_repo(repo_path: Path) -> bool:
                 import shutil
                 shutil.rmtree(str(git_dir))
                 disabled.rename(git_dir)
-                print(f"   ✅ 已从 .git_disabled 恢复 .git 目录，请重新运行部署命令")
+                print(f"   ✅ 已从 .git_disabled 恢复 .git 目录，继续执行推送...")
+                # ⭐ v2.6修复（经验#71）：恢复后不能 return False！
+                # 旧逻辑 return False 导致推送中止，下次仍然失败；
+                # 恢复完成后应继续走 git rev-parse 验证，通过则 return True。
+                # 不在此处 return，继续向下执行 rev-parse 验证
             else:
                 print(f"   未找到 .git_disabled 备份，请手动修复或重新克隆仓库")
-            return False
+                return False
     
     # 用 git rev-parse 做最终验证
     result = subprocess.run(
@@ -361,8 +367,43 @@ def main():
     print(f"📁 源目录: {PUBLIC_DIR}")
     print(f"📁 目标仓库: {EXTERNAL_REPO}")
     print()
+
+    # ⭐ v2.7新增（经验#72）：进程级并发锁，防止多个 launchd 定时任务同时操作同一 git 仓库
+    # 根因：AI日报(8:00) 和 phase4/deploy_daily(5:00) 都会触发本脚本，
+    #        若前一个进程还在 git pull/add/commit 时被后一个中断，.git 会进入损坏状态
+    LOCK_FILE = "/tmp/ai-insight-external-sync.lock"
+    lock_fd = open(LOCK_FILE, "w")
+    try:
+        # 非阻塞加锁：如果已被另一进程占用，立即退出（避免无限等待）
+        fcntl.flock(lock_fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        lock_fd.write(f"{os.getpid()}\n")
+        lock_fd.flush()
+        print(f"🔒 进程锁已获取 (PID={os.getpid()})")
+    except OSError:
+        # 读取当前占用锁的 PID
+        try:
+            with open(LOCK_FILE) as f:
+                other_pid = f.read().strip()
+        except Exception:
+            other_pid = "unknown"
+        print(f"⏭️  [SKIP] 另一个 sync_to_external.py 进程正在运行 (PID={other_pid})，本次跳过")
+        print(f"   若需强制执行，请先确认另一进程已结束: kill {other_pid}")
+        lock_fd.close()
+        sys.exit(0)  # 正常退出（不是错误），让调用方继续
     
-    # 步骤 1: 全量脱敏（可选）
+    try:
+        _run_main_logic(args)
+    finally:
+        fcntl.flock(lock_fd, fcntl.LOCK_UN)
+        lock_fd.close()
+        try:
+            os.remove(LOCK_FILE)
+        except Exception:
+            pass
+
+
+def _run_main_logic(args) -> None:
+    """主逻辑（从 main 拆出，确保 finally 中解锁时逻辑干净）"""
     if args.full:
         if not run_sync_to_public(args.verify):
             sys.exit(1)
