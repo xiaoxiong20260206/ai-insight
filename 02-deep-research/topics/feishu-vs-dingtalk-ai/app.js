@@ -128,6 +128,13 @@
         const isCollapsed = sidebar.classList.toggle("sidebar-collapsed");
         collapseBtn.textContent = isCollapsed ? "»" : "«";
         collapseBtn.title = isCollapsed ? "展开导航" : "折叠导航";
+        collapseBtn.setAttribute("aria-label", isCollapsed ? "展开导航" : "折叠导航");
+        // 切换按钮位置：展开时在侧边栏右边沿，折叠时贴左侧
+        if (isCollapsed) {
+            collapseBtn.classList.add("collapsed-pos");
+        } else {
+            collapseBtn.classList.remove("collapsed-pos");
+        }
     });
 
     /* ===========================================================
