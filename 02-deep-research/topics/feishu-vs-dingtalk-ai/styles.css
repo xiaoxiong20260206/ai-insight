@@ -38,7 +38,7 @@
 
     /* 侧边栏 & 内容宽度 */
     --sidebar-width: 228px;
-    --content-max:   840px;
+    --content-max:   1100px;
     --content-pad:   56px;
 }
 
@@ -246,7 +246,7 @@ body {
     /* 最大可读宽度 */
     max-width: var(--content-max);
 }
-@media (max-width: 1200px) {
+@media (max-width: 1400px) {
     .content-area { max-width: 100%; }
 }
 @media (max-width: 1100px) {
@@ -331,7 +331,7 @@ body {
     font-size: 14px;
     color: var(--color-text-muted);
     line-height: 1.8;
-    max-width: 100%;
+    max-width: 760px;
     margin-bottom: 16px;
 }
 .doc-tags {
@@ -438,6 +438,7 @@ body {
     color: var(--color-text-sec);
     line-height: 1.8;
     margin-bottom: 18px;
+    max-width: 820px;
 }
 
 /* ============================================================
