@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 大模型能力全景报告 | AI 洞察</title>
+    <meta name="description" content="深度对比 GPT-5、Claude 4、Gemini Ultra 2、Kimi k2 等主流大模型，从推理、代码、多模态、Agent 四维度展开全景分析。">
+    <meta property="og:title" content="2026 大模型能力全景报告">
+    <meta property="og:description" content="主流大模型四维深度对比：推理 · 代码 · 多模态 · Agent">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%237C3AED'/><text x='5' y='23' font-size='19' fill='white'>🧠</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <noscript><style>.animate-on-scroll{opacity:1!important;transform:none!important;}</style></noscript>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-to-content" href="#main-content">跳到主内容</a>
+
+<!-- 左侧 TOC 导航 -->
+<div class="layout-wrapper">
+    <nav class="sidebar-nav" id="sidebar" aria-label="目录导航">
+        <div class="sidebar-doc-title">🧠 大模型全景报告</div>
+        <div class="toc-section">
+            <div class="toc-group-label">目录</div>
+            <a href="#overview"    class="toc-link">01 全景概述</a>
+            <a href="#reasoning"   class="toc-link">02 推理能力</a>
+            <a href="#coding"      class="toc-link">03 代码能力</a>
+            <a href="#multimodal"  class="toc-link">04 多模态</a>
+            <a href="#agent"       class="toc-link">05 Agent 能力</a>
+            <a href="#moat"        class="toc-link">06 护城河分析</a>
+            <a href="#insight"     class="toc-link">07 洞察与预判</a>
+        </div>
+        <div class="reading-progress-wrap">
+            <div class="reading-progress-label">阅读进度</div>
+            <div class="reading-progress-track">
+                <div class="reading-progress-fill" id="readingProgress"></div>
+            </div>
+        </div>
+    </nav>
+
+    <button class="sidebar-collapse-btn" id="collapseBtn" title="折叠导航" aria-label="折叠导航">«</button>
+
+    <main class="content-area" id="main-content">
+        <div class="content-inner">
+
+            <!-- Hero Header -->
+            <header class="doc-header animate-on-scroll">
+                <div class="header-badge">深度报告 · 2026 Q2</div>
+                <h1 class="header-title">2026 大模型能力全景报告</h1>
+                <p class="header-subtitle">深度对比 GPT-5 · Claude 4 · Gemini Ultra 2 · Kimi k2<br>从推理、代码、多模态、Agent 四维度展开全景分析</p>
+                <div class="header-meta">
+                    <span>📅 2026-04-08</span>
+                    <span>·</span>
+                    <span>📖 约 15 分钟阅读</span>
+                    <span>·</span>
+                    <span>🔬 虚构数据·仅供风格演示</span>
+                </div>
+            </header>
+
+            <!-- 核心数据格 -->
+            <div class="doc-chapter-label">00 · 核心数据快览</div>
+            <div class="stats-grid animate-on-scroll">
+                <div class="stat-card stat-purple">
+                    <div class="stat-value">6</div>
+                    <div class="stat-label">主流模型</div>
+                </div>
+                <div class="stat-card stat-info">
+                    <div class="stat-value">42+</div>
+                    <div class="stat-label">评测基准</div>
+                </div>
+                <div class="stat-card stat-success">
+                    <div class="stat-value">4</div>
+                    <div class="stat-label">能力维度</div>
+                </div>
+                <div class="stat-card stat-warning">
+                    <div class="stat-value">2026</div>
+                    <div class="stat-label">报告年份</div>
+                </div>
+            </div>
+
+            <!-- 01 全景概述 -->
+            <section id="overview">
+                <div class="doc-chapter-label">01 · 全景概述</div>
+                <h2 class="section-title animate-on-scroll">市场格局：「四国演义」进入白热化</h2>
+
+                <!-- SVG 概览图 -->
+                <div class="section-svg animate-on-scroll">
+                    <svg viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+                        <defs>
+                            <linearGradient id="gp" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#7C3AED;stop-opacity:0.15"/>
+                                <stop offset="100%" style="stop-color:#7C3AED;stop-opacity:0.03"/>
+                            </linearGradient>
+                            <linearGradient id="gc" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#059669;stop-opacity:0.15"/>
+                                <stop offset="100%" style="stop-color:#059669;stop-opacity:0.03"/>
+                            </linearGradient>
+                        </defs>
+                        <!-- 时间轴 -->
+                        <line x1="60" y1="100" x2="740" y2="100" stroke="#E7E5E4" stroke-width="2"/>
+                        <!-- 节点 -->
+                        <circle cx="160" cy="100" r="8" fill="#7C3AED"/>
+                        <circle cx="300" cy="100" r="8" fill="#2563EB"/>
+                        <circle cx="440" cy="100" r="8" fill="#059669"/>
+                        <circle cx="580" cy="100" r="8" fill="#D97706"/>
+                        <circle cx="680" cy="100" r="8" fill="#E11D48"/>
+                        <!-- 标签 -->
+                        <text x="160" y="75" text-anchor="middle" font-size="12" fill="#7C3AED" font-weight="700">GPT-5</text>
+                        <text x="160" y="88" text-anchor="middle" font-size="10" fill="#A8A29E">2025-10</text>
+                        <text x="300" y="75" text-anchor="middle" font-size="12" fill="#2563EB" font-weight="700">Gemini U2</text>
+                        <text x="300" y="88" text-anchor="middle" font-size="10" fill="#A8A29E">2025-12</text>
+                        <text x="440" y="120" text-anchor="middle" font-size="12" fill="#059669" font-weight="700">Claude 4</text>
+                        <text x="440" y="133" text-anchor="middle" font-size="10" fill="#A8A29E">2026-01</text>
+                        <text x="580" y="75" text-anchor="middle" font-size="12" fill="#D97706" font-weight="700">Kimi k2</text>
+                        <text x="580" y="88" text-anchor="middle" font-size="10" fill="#A8A29E">2026-03</text>
+                        <text x="680" y="120" text-anchor="middle" font-size="12" fill="#E11D48" font-weight="700">Qwen3</text>
+                        <text x="680" y="133" text-anchor="middle" font-size="10" fill="#A8A29E">2026-04</text>
+                        <!-- 箭头 -->
+                        <polygon points="740,96 752,100 740,104" fill="#E7E5E4"/>
+                        <text x="760" y="104" font-size="11" fill="#A8A29E">时间</text>
+                    </svg>
+                </div>
+
+                <div class="callout callout-info animate-on-scroll">
+                    <strong>核心判断</strong>：2026 年大模型竞争已从「能不能用」演变为「谁更适合场景」，通用能力趋于收敛，差异化在于 Agent 自主性与垂直场景适配能力。
+                </div>
+
+                <div class="feature-grid animate-on-scroll">
+                    <div class="feature-card">
+                        <div class="feature-icon" style="background:rgba(124,58,237,0.1);color:#7C3AED">🧠</div>
+                        <div class="feature-title">推理能力</div>
+                        <div class="feature-desc">GPT-5 在数学/逻辑推理保持优势，Claude 4 凭借「深度思考」模式追平差距</div>
+                    </div>
+                    <div class="feature-card" style="transition-delay:.06s">
+                        <div class="feature-icon" style="background:rgba(37,99,235,0.1);color:#2563EB">💻</div>
+                        <div class="feature-title">代码能力</div>
+                        <div class="feature-desc">Claude 4 在代码生成与调试场景获得开发者社区最高满意度（92%）</div>
+                    </div>
+                    <div class="feature-card" style="transition-delay:.12s">
+                        <div class="feature-icon" style="background:rgba(5,150,105,0.1);color:#059669">🎨</div>
+                        <div class="feature-title">多模态</div>
+                        <div class="feature-desc">Gemini Ultra 2 凭借 Google 多年多模态积累，在视觉理解场景领先约 8%</div>
+                    </div>
+                    <div class="feature-card" style="transition-delay:.18s">
+                        <div class="feature-icon" style="background:rgba(217,119,6,0.1);color:#D97706">🤖</div>
+                        <div class="feature-title">Agent 能力</div>
+                        <div class="feature-desc">Kimi k2 以 200K 超长上下文 + 工具调用成功率 87% 在 Agent 赛道异军突起</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 02 推理能力 -->
+            <section id="reasoning">
+                <div class="doc-chapter-label">02 · 推理能力</div>
+                <h2 class="section-title animate-on-scroll">推理基准：数学 &amp; 逻辑双轨对比</h2>
+
+                <div class="progress-compare animate-on-scroll">
+                    <div class="compare-item">
+                        <div class="compare-label">
+                            <span class="model-tag" style="background:rgba(124,58,237,0.1);color:#7C3AED">GPT-5</span>
+                            <span class="compare-score">96.2</span>
+                        </div>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width:96.2%;background:linear-gradient(90deg,#7C3AED,#9F67F7)"></div>
+                        </div>
+                    </div>
+                    <div class="compare-item">
+                        <div class="compare-label">
+                            <span class="model-tag" style="background:rgba(5,150,105,0.1);color:#059669">Claude 4</span>
+                            <span class="compare-score">94.8</span>
+                        </div>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width:94.8%;background:linear-gradient(90deg,#059669,#10B981)"></div>
+                        </div>
+                    </div>
+                    <div class="compare-item">
+                        <div class="compare-label">
+                            <span class="model-tag" style="background:rgba(37,99,235,0.1);color:#2563EB">Gemini U2</span>
+                            <span class="compare-score">91.5</span>
+                        </div>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width:91.5%;background:linear-gradient(90deg,#2563EB,#3B82F6)"></div>
+                        </div>
+                    </div>
+                    <div class="compare-item">
+                        <div class="compare-label">
+                            <span class="model-tag" style="background:rgba(217,119,6,0.1);color:#D97706">Kimi k2</span>
+                            <span class="compare-score">88.3</span>
+                        </div>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width:88.3%;background:linear-gradient(90deg,#D97706,#F59E0B)"></div>
+                        </div>
+                    </div>
+                    <div class="compare-item">
+                        <div class="compare-label">
+                            <span class="model-tag" style="background:rgba(225,29,72,0.1);color:#E11D48">Qwen3</span>
+                            <span class="compare-score">86.1</span>
+                        </div>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width:86.1%;background:linear-gradient(90deg,#E11D48,#F43F5E)"></div>
+                        </div>
+                    </div>
+                </div>
+                <p class="chart-caption">↑ MATH-500 基准分数（100分制，虚构数据）</p>
+
+                <div class="callout callout-success animate-on-scroll">
+                    <strong>关键洞察</strong>：推理能力差距正在快速收敛——GPT-5 与 Claude 4 之差从 2025Q3 的 8 分缩窄至 1.4 分。下一轮竞争点将从「推理准确率」转移至「推理速度 × 成本」。
+                </div>
+            </section>
+
+            <!-- 03 代码能力 -->
+            <section id="coding">
+                <div class="doc-chapter-label">03 · 代码能力</div>
+                <h2 class="section-title animate-on-scroll">代码：开发者票选最佳助手</h2>
+
+                <div class="bento-grid animate-on-scroll">
+                    <div class="bento-card bento-large" style="border-top:3px solid #059669">
+                        <div class="bento-badge" style="background:rgba(5,150,105,0.1);color:#059669">🏆 综合冠军</div>
+                        <div class="bento-title">Claude 4</div>
+                        <div class="bento-value" style="color:#059669">92%</div>
+                        <div class="bento-desc">开发者满意度，在 HumanEval+、SWE-bench 双基准领跑。擅长大型代码库理解与重构，支持 200K token 上下文分析整个项目。</div>
+                    </div>
+                    <div class="bento-card" style="border-top:3px solid #7C3AED">
+                        <div class="bento-badge" style="background:rgba(124,58,237,0.1);color:#7C3AED">🥈 速度王</div>
+                        <div class="bento-title">GPT-5</div>
+                        <div class="bento-value" style="color:#7C3AED">89%</div>
+                        <div class="bento-desc">代码补全延迟最低，适合实时 IDE 集成场景</div>
+                    </div>
+                    <div class="bento-card" style="border-top:3px solid #2563EB">
+                        <div class="bento-badge" style="background:rgba(37,99,235,0.1);color:#2563EB">🥉 全栈</div>
+                        <div class="bento-title">Gemini U2</div>
+                        <div class="bento-value" style="color:#2563EB">84%</div>
+                        <div class="bento-desc">原生集成 Google Cloud，Terraform/GCP 配置最强</div>
+                    </div>
+                    <div class="bento-card" style="border-top:3px solid #D97706">
+                        <div class="bento-badge" style="background:rgba(217,119,6,0.1);color:#D97706">🌟 黑马</div>
+                        <div class="bento-title">Kimi k2</div>
+                        <div class="bento-value" style="color:#D97706">81%</div>
+                        <div class="bento-desc">中文注释 + 代码混合理解领域第一</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 04 多模态 -->
+            <section id="multimodal">
+                <div class="doc-chapter-label">04 · 多模态</div>
+                <h2 class="section-title animate-on-scroll">多模态：视觉理解的战场</h2>
+
+                <div class="vs-grid animate-on-scroll">
+                    <div class="vs-card" style="border-top:3px solid #2563EB">
+                        <div class="vs-card-header">
+                            <span class="model-tag" style="background:rgba(37,99,235,0.1);color:#2563EB">Gemini Ultra 2</span>
+                        </div>
+                        <ul class="vs-list">
+                            <li>✅ 原生多模态架构，视觉理解 MMBench 92.4</li>
+                            <li>✅ 支持视频理解（最长 2 小时）</li>
+                            <li>✅ 图表解析准确率业界最高</li>
+                            <li>⚠️ 中文 OCR 在复杂排版场景略逊</li>
+                        </ul>
+                    </div>
+                    <div class="vs-divider">VS</div>
+                    <div class="vs-card" style="border-top:3px solid #7C3AED">
+                        <div class="vs-card-header">
+                            <span class="model-tag" style="background:rgba(124,58,237,0.1);color:#7C3AED">GPT-5</span>
+                        </div>
+                        <ul class="vs-list">
+                            <li>✅ DALL·E 4 原生集成，图像生成质量顶级</li>
+                            <li>✅ 视觉-文字交互最自然（OpenAI 生态）</li>
+                            <li>⚠️ 视频理解能力弱（最长 5 分钟）</li>
+                            <li>⚠️ 多模态延迟高于 Gemini 约 40%</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="callout callout-warning animate-on-scroll">
+                    <strong>注意</strong>：多模态能力评测标准化程度低，同一模型在不同数据集上差异可达 15%+。建议以自己的实际业务数据集做验证，而非只看公开 Benchmark。
+                </div>
+            </section>
+
+            <!-- 05 Agent 能力 -->
+            <section id="agent">
+                <div class="doc-chapter-label">05 · Agent 能力</div>
+                <h2 class="section-title animate-on-scroll">Agent：下一个主战场</h2>
+
+                <div class="timeline animate-on-scroll">
+                    <div class="timeline-item">
+                        <div class="timeline-dot" style="background:#D97706"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">Kimi k2 工具调用成功率 87%</div>
+                            <div class="timeline-desc">200K 上下文 + 实时搜索 + 代码执行三合一，在复杂 Agent 任务中表现最稳定</div>
+                            <span class="timeline-tag" style="background:rgba(217,119,6,0.1);color:#D97706">🥇 Agent 综合第一</span>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot" style="background:#059669"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">Claude 4 Computer Use 2.0</div>
+                            <div class="timeline-desc">屏幕操控准确率从 72% 提升至 85%，端到端自动化任务成功率大幅提升</div>
+                            <span class="timeline-tag" style="background:rgba(5,150,105,0.1);color:#059669">🥈 桌面 Agent 最强</span>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot" style="background:#7C3AED"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">GPT-5 Actions 生态</div>
+                            <div class="timeline-desc">10,000+ 原生 Action 连接，插件生态最丰富，但工具调用成功率（82%）不及 Kimi</div>
+                            <span class="timeline-tag" style="background:rgba(124,58,237,0.1);color:#7C3AED">🥉 生态最广</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 06 护城河 -->
+            <section id="moat">
+                <div class="doc-chapter-label">06 · 护城河分析</div>
+                <h2 class="section-title animate-on-scroll">各模型护城河深度评估</h2>
+
+                <div class="moat-grid animate-on-scroll">
+                    <div class="moat-section">
+                        <div class="moat-header" style="background:rgba(124,58,237,0.05);border-bottom:1px solid rgba(124,58,237,0.12)">
+                            <span style="color:#7C3AED;font-weight:700">GPT-5 / OpenAI</span>
+                        </div>
+                        <div class="moat-item">
+                            <div class="moat-depth depth-highest">极深</div>
+                            <div class="moat-name">开发者生态护城河</div>
+                            <div class="moat-desc">ChatGPT 亿级用户 + API 1.2M 活跃开发者，切换成本极高</div>
+                        </div>
+                        <div class="moat-item">
+                            <div class="moat-depth depth-high">深</div>
+                            <div class="moat-name">企业级信任</div>
+                            <div class="moat-desc">Microsoft 365 深度集成，Fortune 500 渗透率 68%</div>
+                        </div>
+                        <div class="moat-item">
+                            <div class="moat-depth depth-mid">中</div>
+                            <div class="moat-name">多模态壁垒</div>
+                            <div class="moat-desc">DALL·E 4 领先，但视频理解被 Gemini 压制</div>
+                        </div>
+                    </div>
+                    <div class="moat-section">
+                        <div class="moat-header" style="background:rgba(5,150,105,0.05);border-bottom:1px solid rgba(5,150,105,0.12)">
+                            <span style="color:#059669;font-weight:700">Claude 4 / Anthropic</span>
+                        </div>
+                        <div class="moat-item">
+                            <div class="moat-depth depth-highest">极深</div>
+                            <div class="moat-name">开发者口碑</div>
+                            <div class="moat-desc">代码满意度 92%，GitHub Copilot 替代首选，口耳相传</div>
+                        </div>
+                        <div class="moat-item">
+                            <div class="moat-depth depth-high">深</div>
+                            <div class="moat-name">安全可信</div>
+                            <div class="moat-desc">Constitutional AI，政府/金融客户首选（合规性最高）</div>
+                        </div>
+                        <div class="moat-item">
+                            <div class="moat-depth depth-low">浅</div>
+                            <div class="moat-name">消费者渗透</div>
+                            <div class="moat-desc">B2C 远弱于 OpenAI，claude.ai 日活 2000 万 vs ChatGPT 2 亿</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="moat-verdict animate-on-scroll">
+                    <div class="verdict-icon">💡</div>
+                    <div>综合来看，<strong>OpenAI 护城河最宽</strong>（生态×消费者），<strong>Anthropic 护城河最深</strong>（技术×信任），<strong>Google 护城河最硬</strong>（基础设施×数据）。三者形成「宽、深、硬」的不同战略定位，短期内难以被单一对手同时击穿。</div>
+                </div>
+            </section>
+
+            <!-- 07 洞察 -->
+            <section id="insight">
+                <div class="doc-chapter-label">07 · 洞察与预判</div>
+                <h2 class="section-title animate-on-scroll">三层洞察：从现象到本质</h2>
+
+                <div class="insight-hero animate-on-scroll">
+                    <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#7C3AED;margin-bottom:8px">核心论点</div>
+                    <div style="font-size:17px;font-weight:700;color:#1C1917;line-height:1.5">大模型竞争已从「通用能力」转向「场景-生态-信任」三角，纯粹的 Benchmark 领先不再构成可持续优势</div>
+                </div>
+
+                <div class="insight-level animate-on-scroll">
+                    <div class="insight-level-header">
+                        <span class="level-badge level-1">L1 现象层</span>
+                        <span style="font-weight:600;color:#1C1917">Benchmark 趋于收敛</span>
+                    </div>
+                    <div class="insight-level-body">
+                        <p>主流模型在 MMLU、HumanEval 等标准基准上的差距从 2025 年的 10-15 分收窄至 2-5 分。「谁是最强模型」的问题正在失去意义，因为不同任务答案不同。</p>
+                    </div>
+                </div>
+
+                <div class="insight-level animate-on-scroll">
+                    <div class="insight-level-header">
+                        <span class="level-badge level-2">L2 机制层</span>
+                        <span style="font-weight:600;color:#1C1917">数据红利耗尽，架构创新主导差异</span>
+                    </div>
+                    <div class="insight-level-body">
+                        <p>预训练数据规模已触及公开互联网天花板。下一轮差距来源于：合成数据质量、强化学习路径（RLHF vs Constitutional AI）、以及推理时算法（思维链 vs 并行采样）。</p>
+                    </div>
+                </div>
+
+                <div class="insight-level animate-on-scroll">
+                    <div class="insight-level-header">
+                        <span class="level-badge level-3">L3 本质层</span>
+                        <span style="font-weight:600;color:#1C1917">真正的壁垒是「生态锁定 × 信任积累」</span>
+                    </div>
+                    <div class="insight-level-body">
+                        <p>模型能力可以被追赶（训练时间缩短至 3-6 个月），但生态不能。当 10,000 个工具、数百万开发者、数千个企业工作流都依赖某个模型的 API 规范，切换成本以指数级上升。</p>
+                    </div>
+                </div>
+
+                <div class="callout callout-purple animate-on-scroll">
+                    <strong>2026 下半年预判</strong>：Agent 将成为新的分水岭。能完成「10 步以上多工具自主任务」的模型会产生极强的用户黏性——因为用户会把重要工作流「托付」给它，而托付之后很难迁移。Kimi k2 和 Claude 4 在这个维度已建立早期优势。
+                </div>
+
+                <!-- Easter Egg -->
+                <div class="easter-egg animate-on-scroll">
+                    <div class="easter-title">🥚 彩蛋：本文是怎么生成的</div>
+                    <p>这是一篇用于验证「清爽调研报告 v5.0 样式规范」的演示报告，数据全部为虚构，请勿引用。核心技术：AI助手平台 + 清爽调研报告 Skill v5.0，从零到页面约 8 分钟。</p>
+                    <p>真实报告的严肃程度 ≫ 本文，但版式与组件是完全一致的——这就是「风格技能」的价值：内容可变，风格稳定可复用。</p>
+                </div>
+            </section>
+
+        </div><!-- /.content-inner -->
+    </main>
+</div><!-- /.layout-wrapper -->
+
+<button class="scroll-to-top" id="scrollToTop" title="回到顶部" aria-label="回到顶部">↑</button>
+
+<script src="app.js" defer></script>
+</body>
+</html>
