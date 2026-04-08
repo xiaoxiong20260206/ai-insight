@@ -29,7 +29,9 @@
         <button class="nav-btn nav-level-2" data-tab="tab-dingtalk" data-scroll="dingtalk-hardware" role="tab" aria-selected="false" tabindex="-1">· AI硬件</button>
         <button class="nav-btn" data-tab="tab-compare" role="tab" aria-selected="false" tabindex="-1">03 能力矩阵对比</button>
         <button class="nav-btn" data-tab="tab-insight" role="tab" aria-selected="false" tabindex="-1">04 深度洞察</button>
-        <button class="nav-btn nav-level-2" data-tab="tab-insight" data-scroll="insight-essence" role="tab" aria-selected="false" tabindex="-1">· 本质</button>
+        <button class="nav-btn nav-level-2" data-tab="tab-insight" data-scroll="insight-l1" role="tab" aria-selected="false" tabindex="-1">· L1-L4 本质分析</button>
+        <button class="nav-btn nav-level-2" data-tab="tab-insight" data-scroll="insight-moat" role="tab" aria-selected="false" tabindex="-1">· 护城河拆解</button>
+        <button class="nav-btn nav-level-2" data-tab="tab-insight" data-scroll="insight-risk" role="tab" aria-selected="false" tabindex="-1">· 核心风险</button>
         <button class="nav-btn nav-level-2" data-tab="tab-insight" data-scroll="insight-trend" role="tab" aria-selected="false" tabindex="-1">· 趋势推演</button>
         <button class="nav-btn" data-tab="tab-more" role="tab" aria-selected="false" tabindex="-1">05 了解更多</button>
     </nav>
@@ -579,75 +581,307 @@
         <!-- Tab 04: 深度洞察 -->
         <div id="tab-insight" class="tab-content" role="tabpanel" aria-labelledby="nav-insight" style="display:none;">
 
+            <!-- 洞察导读 -->
+            <div class="insight-hero animate-on-scroll">
+                <div class="insight-hero-label">深度洞察 · 4层分析框架</div>
+                <div class="insight-hero-title">表象之下，是两种截然不同的 AI 时代哲学</div>
+                <div class="insight-hero-desc">功能层面的趋同只是假象。飞书与钉钉的根本差异，在于对"企业AI化"这件事的底层假设完全相反——一个认为AI是工具的进化，一个认为AI是范式的颠覆。</div>
+                <div class="insight-nav-pills">
+                    <a href="#insight-l1" class="pill active-pill">L1 表象</a>
+                    <a href="#insight-l2" class="pill">L2 本质</a>
+                    <a href="#insight-l3" class="pill">L3 规律</a>
+                    <a href="#insight-l4" class="pill">L4 类比</a>
+                    <a href="#insight-moat" class="pill">护城河分析</a>
+                    <a href="#insight-risk" class="pill">核心风险</a>
+                    <a href="#insight-trend" class="pill">趋势推演</a>
+                </div>
+            </div>
+
+            <!-- L1：表象 -->
             <div class="section animate-on-scroll" id="insight-essence">
                 <div class="section-header">
-                    <span class="section-number">04</span>
-                    <h2>本质洞察：两种 AI-Native 的底层逻辑</h2>
+                    <span class="section-number insight-num-l1">L1</span>
+                    <h2>表象：功能趋同的幻觉</h2>
                 </div>
-
-                <div class="insight-level">
+                <div id="insight-l1" class="insight-level">
                     <div class="insight-level-header">
                         <span class="level-badge level-1">表象</span>
                         <span class="level-title">都在做AI，功能看起来差不多</span>
                     </div>
-                    <div class="insight-level-content">两者都有AI会议纪要、AI文档、AI搜索……看似功能趋同，市场上也常被放在一起比较。但这只是表象。</div>
+                    <div class="insight-level-content">
+                        <p>两者都有AI会议纪要、AI文档、AI表格、AI搜索……2025年的产品路线图惊人地相似。媒体和分析师也常常把它们并排比较，暗示这是同质化竞争。</p>
+                        <p style="margin-top:10px;">但这种比较犯了一个根本性错误：<strong>用功能清单来评判战略意图</strong>。就像因为都有引擎就说自行车和飞机是同类产品。</p>
+                    </div>
                 </div>
 
-                <div class="insight-level">
+                <!-- L2：本质 -->
+                <div id="insight-l2" class="insight-level" style="margin-top:16px;">
                     <div class="insight-level-header">
                         <span class="level-badge level-2">本质</span>
-                        <span class="level-title">完全不同的 AI 哲学</span>
+                        <span class="level-title">完全相反的 AI 哲学假设</span>
                     </div>
                     <div class="insight-level-content">
-                        <p><strong>飞书 = "AI in Product"（AI 嵌入产品）</strong>：字节跳动的基因是做极致的工具产品，所以飞书的路径是把 AI 嵌进每一个产品模块，让每个工具变得更智能。它的护城河是<strong>用户在工具中积累的结构化数据</strong>（尤其是多维表格），数据越多，AI越有价值。</p>
-                        <p style="margin-top:12px;"><strong>钉钉 = "Product for AI"（产品为 AI 而生）</strong>：阿里的基因是平台生态+线上线下打通，所以钉钉的路径是把整个产品重构成一个 Agent 运行平台，Agent 是一等公民，原有工具（文档/表格/会议）变成 Agent 的"感知器官"和"执行工具"。它的护城河是<strong>软硬件协同构成的 AI 入口</strong>，硬件提高物理世界的数据采集能力和平台切换成本。</p>
+                        <div class="philosophy-grid">
+                            <div class="philosophy-card feishu-phil">
+                                <div class="phil-brand">飞书的假设</div>
+                                <div class="phil-quote">"AI 是更好的工具，工具越好，人越高效"</div>
+                                <div class="phil-body">
+                                    <p>字节跳动的产品基因是做<strong>极致工具</strong>——抖音算法是极致推荐工具，飞书是极致协作工具。飞书的 AI 路径延续这一基因：把 AI 嵌进每个产品模块，让文档更聪明、表格更强大、会议更高效。</p>
+                                    <p style="margin-top:10px;">它的底层假设是：<strong>工作方式不变，AI 提升每一环节的效率</strong>。人仍然是主体，AI 是辅助器。</p>
+                                    <p style="margin-top:10px;">护城河来源：多维表格积累的结构化企业知识 → 数据飞轮越转越快，AI 越来越准确。</p>
+                                </div>
+                            </div>
+                            <div class="philosophy-card dingtalk-phil">
+                                <div class="phil-brand">钉钉的假设</div>
+                                <div class="phil-quote">"AI 是新的工作主体，工具变成 Agent 的器官"</div>
+                                <div class="phil-body">
+                                    <p>阿里巴巴的基因是做<strong>生态平台</strong>——淘宝是商业平台，钉钉是企业数字化平台。钉钉的 AI 路径是把整个产品重构成 Agent 运行底座，Agent 是一等公民，文档/表格/会议变成 Agent 的感知和执行接口。</p>
+                                    <p style="margin-top:10px;">它的底层假设是：<strong>工作方式将被颠覆，AI Agent 成为新的"员工"</strong>。人是决策者，Agent 是执行者。</p>
+                                    <p style="margin-top:10px;">护城河来源：软硬件协同的 AI 数据入口 → 硬件捕获物理世界数据 + 提高切换成本。</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="insight-level">
+                <!-- L3：规律 -->
+                <div id="insight-l3" class="insight-level" style="margin-top:16px;">
                     <div class="insight-level-header">
                         <span class="level-badge level-3">规律</span>
-                        <span class="level-title">背后是"工具升级"与"平台重构"两种范式的竞争</span>
+                        <span class="level-title">"工具升级" vs "平台重构"——企业软件史上的永恒之争</span>
                     </div>
                     <div class="insight-level-content">
-                        这不只是飞书和钉钉的差异，这是企业软件AI时代的两种普遍范式之争。类比自然界：飞书像进化中的「现有物种器官升级」（原有工具加上AI神经），钉钉像「新物种降临」（构建新的生命体系，旧工具成为器官）。<br><br>
-                        <strong>历史规律告诉我们</strong>：每一次平台级变革（操作系统、移动互联网、云），原有工具的升级路径最终都会被新平台的底层重构超越——但这个过程需要时间，且新范式必须在实际场景中打赢。
+                        <p>这不是飞书和钉钉独有的故事。每一次技术浪潮都会出现这两种竞争范式：</p>
+                        <div class="history-table animate-on-scroll">
+                            <div class="history-row history-header">
+                                <div>时代</div>
+                                <div>工具升级派</div>
+                                <div>平台重构派</div>
+                                <div>结果</div>
+                            </div>
+                            <div class="history-row">
+                                <div>PC互联网</div>
+                                <div>Office加强版（WPS早期）</div>
+                                <div>Google Docs（云原生重构）</div>
+                                <div class="result-cell">重构派长期胜出</div>
+                            </div>
+                            <div class="history-row">
+                                <div>移动互联网</div>
+                                <div>移动版桌面软件</div>
+                                <div>微信/钉钉（移动原生）</div>
+                                <div class="result-cell">重构派胜出</div>
+                            </div>
+                            <div class="history-row">
+                                <div>企业SaaS</div>
+                                <div>ERP/CRM加功能</div>
+                                <div>Salesforce（云原生平台）</div>
+                                <div class="result-cell">重构派胜出</div>
+                            </div>
+                            <div class="history-row highlight-row">
+                                <div>AI时代（现在）</div>
+                                <div>飞书（AI in Product）</div>
+                                <div>钉钉（Agent OS）</div>
+                                <div class="result-cell result-unknown">结果未定？</div>
+                            </div>
+                        </div>
+                        <p style="margin-top:14px;"><strong>历史规律倾向于平台重构派</strong>，但有一个关键前提：新平台必须在真实场景中打赢，且切换成本必须足够低。钉钉的 Agent OS 面临的最大挑战，正是这一点——制造车间的 DingTalk Real 能否真正替代人工，决定了这条路是革命还是概念。</p>
                     </div>
                 </div>
 
+                <!-- L4：类比 -->
+                <div id="insight-l4" class="insight-level" style="margin-top:16px;">
+                    <div class="insight-level-header">
+                        <span class="level-badge level-4">类比</span>
+                        <span class="level-title">智人 vs 智械：两种进化路径的生物学类比</span>
+                    </div>
+                    <div class="insight-level-content">
+                        <p>用生物进化来理解这场竞争会更直观：</p>
+                        <div class="analogy-grid">
+                            <div class="analogy-card">
+                                <div class="analogy-icon">🧬</div>
+                                <div class="analogy-title">飞书 = 智人进化路径</div>
+                                <div class="analogy-desc">在原有物种（人类工作者）的基础上，通过基因改良（AI工具嵌入）提升每个器官（文档/表格/会议）的能力。进化是渐进的、可预期的，现有物种仍然是主体。</div>
+                                <div class="analogy-strength">优势：改造成本低，用户接受度高，立竿见影</div>
+                                <div class="analogy-weakness">风险：天花板明显——改良到极致的人类也比不过真正的机器</div>
+                            </div>
+                            <div class="analogy-card">
+                                <div class="analogy-icon">🤖</div>
+                                <div class="analogy-title">钉钉 = 新物种创造路径</div>
+                                <div class="analogy-desc">直接创造一种新物种（Agent），让它承担原本属于人类工作者的任务。旧工具变成新物种的器官，工作流从"人做+工具辅助"变成"Agent做+人审核"。</div>
+                                <div class="analogy-strength">优势：一旦跑通，效率提升是数量级的</div>
+                                <div class="analogy-weakness">风险：新物种能否在复杂企业环境中存活，是极大的不确定性</div>
+                            </div>
+                        </div>
+                        <div class="analogy-conclusion">
+                            <strong>本质结论</strong>：飞书在做"让人更好地用AI"，钉钉在做"让AI替代人做"。这不只是产品差异，是对企业AI未来的两种截然不同的押注。<br><br>
+                            PS：讽刺的是，历史上最终"替代人"的技术，往往都是从"辅助人"开始的。飞书的渐进路径，可能是通往同一目的地的不同路线。
+                        </div>
+                    </div>
+                </div>
             </div>
 
+            <!-- 护城河深度分析 -->
+            <div class="section animate-on-scroll" id="insight-moat">
+                <div class="section-header">
+                    <span class="section-number">·</span>
+                    <h2>护城河深度拆解：谁的壁垒更持久？</h2>
+                </div>
+                <div class="moat-grid">
+                    <div class="moat-section animate-on-scroll">
+                        <div class="moat-brand feishu-moat">飞书的护城河</div>
+                        <div class="moat-item">
+                            <div class="moat-name">① 结构化数据飞轮</div>
+                            <div class="moat-depth depth-high">深度：高</div>
+                            <div class="moat-desc">多维表格沉淀的企业知识库是飞书最强的壁垒。当表格里有5年的销售数据、客户画像、产品迭代记录，Aily的回答精度会远超通用大模型。<strong>数据越老越有价值，迁移成本极高。</strong></div>
+                        </div>
+                        <div class="moat-item">
+                            <div class="moat-name">② 用户体验品牌</div>
+                            <div class="moat-depth depth-mid">深度：中</div>
+                            <div class="moat-desc">78% 满意度建立的品牌口碑，让飞书在互联网/新消费行业形成"招募优秀人才就得用飞书"的隐性共识。这是软性护城河，但会随时间加深。</div>
+                        </div>
+                        <div class="moat-item">
+                            <div class="moat-name">③ 开发者生态（Aily开放）</div>
+                            <div class="moat-depth depth-low">深度：低（待验证）</div>
+                            <div class="moat-desc">Aily作为企业AI开发平台，若能吸引大量企业自建定制Agent，将形成类似Salesforce AppExchange的生态效应。但目前规模尚小。</div>
+                        </div>
+                    </div>
+                    <div class="moat-section animate-on-scroll">
+                        <div class="moat-brand dingtalk-moat">钉钉的护城河</div>
+                        <div class="moat-item">
+                            <div class="moat-name">① 软硬件绑定</div>
+                            <div class="moat-depth depth-highest">深度：极高（若成立）</div>
+                            <div class="moat-desc">DingTalk A1 + Real 构成的硬件网络一旦规模化部署，将在物理层面锁定企业。换掉钉钉就等于换掉所有设备，切换成本接近无穷大。<strong>但前提是硬件必须真正有用。</strong></div>
+                        </div>
+                        <div class="moat-item">
+                            <div class="moat-name">② 行业深度集成</div>
+                            <div class="moat-depth depth-high">深度：高</div>
+                            <div class="moat-desc">制造/物流行业的企业一旦将生产流程与钉钉Agent OS深度集成（ERP对接、设备数据打通、审批流定制），迁移需要重新开发整套数字化体系，几乎不可能。</div>
+                        </div>
+                        <div class="moat-item">
+                            <div class="moat-name">③ 规模网络效应</div>
+                            <div class="moat-depth depth-mid">深度：中</div>
+                            <div class="moat-desc">2亿+用户意味着钉钉平台上已有大量企业间协作关系（供应链协作、跨企业审批）。这些关系网络无法迁移，形成结构性锁定。</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="moat-verdict animate-on-scroll">
+                    <div class="verdict-icon">⚖️</div>
+                    <div class="verdict-content">
+                        <strong>护城河裁判</strong>：钉钉的护城河在理论上更深（软硬件绑定是最强的锁定），但实现难度也更高。飞书的护城河更确定——结构化数据飞轮已经在跑，且会随时间自动加深。<br>
+                        短期（1-2年）：飞书护城河更实在；长期（3-5年）：若钉钉硬件成功规模化，壁垒将翻倍。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 核心风险 -->
+            <div class="section animate-on-scroll" id="insight-risk">
+                <div class="section-header">
+                    <span class="section-number">·</span>
+                    <h2>各自的"阿喀琉斯之踵"</h2>
+                </div>
+                <div class="risk-grid">
+                    <div class="risk-card feishu-risk animate-on-scroll">
+                        <div class="risk-brand">飞书面临的生死考验</div>
+                        <div class="risk-item critical">
+                            <div class="risk-level">P0 · 致命风险</div>
+                            <div class="risk-name">规模天花板</div>
+                            <div class="risk-desc">3000万 MAU 在中国市场意味着飞书服务的仍是少数精英企业。如果大模型让通用工具（微软Copilot、WPS AI）的体验接近飞书，飞书的溢价优势将大幅收窄。规模不够，数据飞轮就转不快。</div>
+                        </div>
+                        <div class="risk-item high">
+                            <div class="risk-level">P1 · 高风险</div>
+                            <div class="risk-name">字节跳动的战略优先级</div>
+                            <div class="risk-desc">飞书持续亏损（~2亿美元/年），在字节内部被视为"战略投资"而非商业产品。一旦字节战略收缩或更换重心，飞书的投入力度将面临巨大不确定性。</div>
+                        </div>
+                        <div class="risk-item mid">
+                            <div class="risk-level">P2 · 中风险</div>
+                            <div class="risk-name">Agent能力缺口</div>
+                            <div class="risk-desc">飞书的Aily目前以"开发平台"为主，缺乏像悟空一样开箱即用的执行型Agent。如果企业客户更看重"直接帮我干活"而非"帮我搭平台"，飞书会失去一批客户。</div>
+                        </div>
+                    </div>
+                    <div class="risk-card dingtalk-risk animate-on-scroll">
+                        <div class="risk-brand">钉钉面临的生死考验</div>
+                        <div class="risk-item critical">
+                            <div class="risk-level">P0 · 致命风险</div>
+                            <div class="risk-name">硬件商业验证</div>
+                            <div class="risk-desc">DingTalk A1 和 Real 必须在2026年证明自己的商业价值，否则软硬一体战略将被砍掉。硬件的研发周期长、毛利率低、维修成本高，每一款都是资金黑洞。如果销量不及预期，整个战略将被迫重写。</div>
+                        </div>
+                        <div class="risk-item high">
+                            <div class="risk-level">P1 · 高风险</div>
+                            <div class="risk-name">软件体验欠债</div>
+                            <div class="risk-desc">65% 满意度暴露了钉钉长期以来"功能堆砌、体验欠债"的问题。当飞书的产品精致度成为行业标杆，钉钉吸引互联网/科技企业的难度大幅增加，只能固守传统行业。</div>
+                        </div>
+                        <div class="risk-item mid">
+                            <div class="risk-level">P2 · 中风险</div>
+                            <div class="risk-name">阿里集团战略摇摆</div>
+                            <div class="risk-desc">阿里近年持续瘦身（分拆、出售业务），钉钉的战略地位也几经调整。"独立融资"路径若推进，外部股东会要求更快的商业化，而不是长期的基础设施投入。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 趋势推演 -->
             <div class="section animate-on-scroll" id="insight-trend">
                 <div class="section-header">
                     <span class="section-number">·</span>
-                    <h2>趋势推演：未来2年的竞争走向</h2>
+                    <h2>趋势推演：2026-2027 年的三大关键节点</h2>
                 </div>
 
-                <div class="trend-grid">
-                    <div class="trend-card animate-on-scroll" style="--trend-color:#2563EB;">
+                <div class="timeline-h">
+                    <div class="timeline-h-item animate-on-scroll">
+                        <div class="tlh-year">2025 Q4<br>— 2026 Q2</div>
+                        <div class="tlh-dot"></div>
+                        <div class="tlh-content">
+                            <div class="tlh-title">Agent执行成熟度验证期</div>
+                            <div class="tlh-desc">悟空Agent是否能在制造/物流企业完成"商旅代订、费用报销"等日常任务，Aily是否能在互联网企业跑出标杆Agent应用，将决定两者的2026年融资估值和战略资源分配。</div>
+                            <div class="tlh-watch">关注指标：Agent日均任务完成数、企业续费率</div>
+                        </div>
+                    </div>
+                    <div class="timeline-h-item animate-on-scroll">
+                        <div class="tlh-year">2026 Q2<br>— 2026 Q4</div>
+                        <div class="tlh-dot"></div>
+                        <div class="tlh-content">
+                            <div class="tlh-title">硬件商业化生死战</div>
+                            <div class="tlh-desc">DingTalk Real的企业级部署规模将成为关键数据点。若实现10万台以上部署，软硬一体战略站稳；若企业普遍反映"有用但不必要"，钉钉将不得不战略收缩回纯软件。同期飞书Aily将加速推出开箱即用Agent产品对抗。</div>
+                            <div class="tlh-watch">关注指标：DingTalk Real累计部署量、复购率</div>
+                        </div>
+                    </div>
+                    <div class="timeline-h-item animate-on-scroll">
+                        <div class="tlh-year">2027</div>
+                        <div class="tlh-dot tlh-dot-purple"></div>
+                        <div class="tlh-content">
+                            <div class="tlh-title">格局分化定型</div>
+                            <div class="tlh-desc">届时市场将出现明确的行业分化：钉钉主导制造/物流/政企（重运营、离线场景），飞书主导互联网/科技/新消费（知识工作者），企微在零售/服务业凭借微信生态守住份额。三强鼎立，各自为王，而非一家通吃。</div>
+                            <div class="tlh-watch">终局判断：市场不是零和游戏，三家都能活，但都无法突破各自的行业边界</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="trend-grid" style="margin-top:20px;">
+                    <div class="trend-card animate-on-scroll" style="--trend-color:#059669;">
                         <div class="trend-icon">🔬</div>
                         <div class="trend-title">飞书的赢法</div>
-                        <div class="trend-desc">在科技/互联网/新消费等"白领工具型"场景持续深化数据飞轮，多维表格积累的结构化企业知识将成为其Aily平台最大的竞争壁垒。飞书需在用户满意度领先的基础上，快速将Agent能力从"开发型"转为"执行型"。</div>
-                        <div class="trend-risk">⚠️ 风险：规模增长天花板明显（3000万 vs 2亿），大客户获取需加速</div>
+                        <div class="trend-desc">数据飞轮+体验溢价：把多维表格数据变成Aily的专属燃料，把高满意度变成互联网行业的标准配置。同时快速补齐执行型Agent能力，不给钉钉渗透的机会。</div>
+                        <div class="trend-risk">⚠️ 核心卡点：2026年需要完成"工具平台"到"AI执行平台"的战略跨越</div>
                     </div>
                     <div class="trend-card animate-on-scroll" style="--trend-color:#D97706;">
                         <div class="trend-icon">⚙️</div>
                         <div class="trend-title">钉钉的赢法</div>
-                        <div class="trend-desc">在制造/物流/政企等"重运营行业"场景深化软硬一体的AI执行能力，Agent OS作为底座承载行业级垂直Agent。DingTalk Real一旦在制造车间、政务大厅等场景规模化落地，将建立难以复制的物理世界护城河。</div>
-                        <div class="trend-risk">⚠️ 风险：软硬并行资源消耗大，硬件体验短板可能拖累软件品牌</div>
+                        <div class="trend-desc">软硬绑定+行业纵深：以DingTalk Real在制造车间落地，把"数字化"升级为"自动化"，让Agent真正替代重复性蓝领工作。同时借AI Fusion 50+模型优势，打赢垂直行业Agent的竞标战。</div>
+                        <div class="trend-risk">⚠️ 核心卡点：硬件体验必须过关，同时软件体验欠债需要快速偿还</div>
                     </div>
                     <div class="trend-card animate-on-scroll" style="--trend-color:#7C3AED;">
                         <div class="trend-icon">🌐</div>
                         <div class="trend-title">行业整体走向</div>
-                        <div class="trend-desc">2026-2027年，企业协作软件的竞争将从"AI功能数量"转向"AI任务完成率"。谁能让企业员工用AI真正"少做事/做完事"，谁就能在ARR增长上突破瓶颈。这意味着Agent执行能力（工具调用+结果验证+异常处理）将成为下一轮核心战场。</div>
-                        <div class="trend-risk">🔮 预判：钉钉Agent OS在制造业率先跑出标杆案例，飞书Aily在互联网企业率先规模化</div>
+                        <div class="trend-desc">2026-2027年竞争焦点从"AI功能覆盖率"转向"AI任务完成率（Task Completion Rate）"。TCR将成为下一轮企业采购的核心指标——谁能让AI真正"干完事"而不是"看起来很聪明"。</div>
+                        <div class="trend-risk">🔮 大胆预判：微软Copilot for Work将在2027年成为所有平台的外部最强威胁</div>
                     </div>
                 </div>
 
-                <div class="insight-box">
+                <div class="insight-box" style="margin-top:20px;">
                     <div class="insight-icon">🔭</div>
                     <div class="insight-content">
-                        <strong>一句话判断</strong>：飞书和钉钉不是在竞争同一块市场，而是在分别构建两个不同AI时代的企业操作系统——一个面向知识工作者的智能工具集，一个面向传统行业的物理-数字融合平台。短期看功能，长期看谁的"飞轮"转得快。
+                        <strong>终极一句话</strong>：飞书和钉钉押注的不是同一个AI未来——飞书押注"AI让人类工作者效率提升10x"，钉钉押注"AI直接替代人类完成工作"。这是两场不同的赌局，而赌局的结果，将在接下来的24个月内见分晓。<br><br>
+                        <span style="font-size:12px;color:var(--color-text-muted);">PS：如果你是CTO，选飞书；如果你是COO，考虑钉钉。这不是玩笑话，而是两者战略重心最直白的体现。</span>
                     </div>
                 </div>
             </div>

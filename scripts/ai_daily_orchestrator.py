@@ -496,7 +496,9 @@ def get_next_action(date: str) -> dict:
         #        get_next_action 不处理 in_progress 导致状态永久卡死
         # 策略：若 in_progress 超过 60 分钟仍未完成，自动 reset 为 pending 触发重跑
         if s["status"] == "in_progress":
-            completed_at = s.get("completed_at") or s.get("started_at")
+            # v9.12 修复(2026-04-07): mark_step() 写入的是 "timestamp" 字段，不是 "completed_at"/"started_at"
+            # 原来只读 completed_at/started_at，两者均不存在时 completed_at=None，超时永远不触发
+            completed_at = s.get("timestamp") or s.get("completed_at") or s.get("started_at")
             if completed_at:
                 try:
                     from datetime import datetime, timedelta
@@ -765,13 +767,18 @@ def run_html_gen(date: str) -> bool:
         return False
 
 def run_deploy(date: str) -> bool:
-    """执行部署 (deploy_daily.sh 但跳过质量门，因为已经检查过)"""
+    """执行部署 (deploy_daily.sh 但跳过质量门，因为已经检查过)
+    
+    v9.11 修复(2026-04-07): 传入 SKIP_EXTERNAL=1 防止 deploy_daily.sh Step 6 再次执行
+    sync_to_external.py —— orchestrator 的 run_external_sync() 已在 Step 4.5 独立负责外部同步，
+    若两者并发执行会导致外部仓库收到两次 git push，产生竞态和重复 commit。
+    """
     try:
         result = subprocess.run(
             ["bash", str(SCRIPT_DIR / "deploy_daily.sh"), date],
             capture_output=True, text=True, timeout=300,
             cwd=str(PROJECT_DIR),
-            env={**__import__("os").environ, "SKIP_GATE": "1"}  # 已在 Step 3 检查过
+            env={**__import__("os").environ, "SKIP_GATE": "1", "SKIP_EXTERNAL": "1"}  # SKIP_GATE: 已在Step3检查；SKIP_EXTERNAL: 由orchestrator Step4.5统一同步
         )
         if result.returncode == 0:
             print(f"  ✅ 部署完成")
