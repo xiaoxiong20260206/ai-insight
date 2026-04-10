@@ -1205,6 +1205,25 @@ def check_external_sync(date_str: str) -> CheckResult:
         if index_issues:
             return CheckResult("外部同步", False, "public/+外部仓库均已同步, 但 " + "; ".join(index_issues), fixable=True)
     
+    # v2.2新增（经验#73 — 2026-04-10）：验证外部仓库最新 commit 包含今日日期
+    # 防止文件已复制到本地但 git push 静默失败的漏检
+    if EXTERNAL_PATH.exists():
+        try:
+            git_log = subprocess.run(
+                ["git", "-C", str(EXTERNAL_PATH), "log", "--oneline", "-1"],
+                capture_output=True, text=True, timeout=10
+            )
+            if git_log.returncode == 0:
+                latest_commit = git_log.stdout.strip()
+                if date_str not in latest_commit:
+                    return CheckResult(
+                        "外部同步", False,
+                        f"外部仓库文件已同步但 git 未 push（最新commit: {latest_commit[:60]}）",
+                        fixable=True
+                    )
+        except Exception:
+            pass  # git 不可用时跳过此检查，不阻断
+    
     return CheckResult("外部同步", True, "public/+外部仓库均已同步")
 
 
