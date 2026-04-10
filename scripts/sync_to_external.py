@@ -65,7 +65,7 @@ def sync_all() -> bool:
     
     if not EXTERNAL_REPO.exists():
         print(f"❌ 外部仓库不存在: {EXTERNAL_REPO}")
-        print(f"   请先克隆: git clone https://github.com/my-ai-research-lab/ai-insight-public.git ../ai-insight-public")
+        print(f"   请先克隆: git clone https://github.com/xiaoxiong20260206/ai-insight-public.git ../ai-insight-public")
         return False
     
     # 复制所有内容 (保持目录结构, 排除隐藏文件/目录)
@@ -141,8 +141,8 @@ def clean_stale_files() -> int:
     return deleted
 
 
-EXPECTED_REMOTE = "github.com/my-ai-research-lab/ai-insight-public"
-MIRROR_REMOTE_NAME = "mirror"  # xiaoxiong20260206/ai-insight-public
+EXPECTED_REMOTE = "github.com/xiaoxiong20260206/ai-insight-public"
+MIRROR_REMOTE_NAME = "mirror"  # 保留字段兼容性，不再使用
 MIRROR_REMOTE_URL = "https://github.com/xiaoxiong20260206/ai-insight-public.git"
 MIRROR_EXPECTED = "github.com/xiaoxiong20260206/ai-insight-public"
 
@@ -161,7 +161,7 @@ def is_valid_git_repo(repo_path: Path) -> bool:
     git_dir = repo_path / ".git"
     if not git_dir.exists():
         print(f"❌ [GIT INTEGRITY] .git 目录不存在: {git_dir}")
-        print(f"   请克隆仓库: git clone https://github.com/my-ai-research-lab/ai-insight-public.git {repo_path}")
+        print(f"   请克隆仓库: git clone https://github.com/xiaoxiong20260206/ai-insight-public.git {repo_path}")
         return False
     
     # .git 可能是文件（submodule）或目录，只检查目录形式
@@ -218,7 +218,7 @@ def git_push() -> bool:
             print(f"❌ [ABORT] remote 验证失败！")
             print(f"   期望包含: {EXPECTED_REMOTE}")
             print(f"   实际 remote: {actual_remote}")
-            print(f"   请执行: git -C {EXTERNAL_REPO} remote set-url origin https://github.com/my-ai-research-lab/ai-insight-public.git")
+            print(f"   请执行: git -C {EXTERNAL_REPO} remote set-url origin https://github.com/xiaoxiong20260206/ai-insight-public.git")
             return False
         
         # v2.2修复(经验#63): pull --rebase 前先 stash，防止 unstaged changes 中断同步
@@ -288,11 +288,9 @@ def git_push() -> bool:
             ["git", "push", "origin", "main"],
             check=True, capture_output=True
         )
-        print("✅ 已推送到 my-ai-research-lab/ai-insight-public")
+        print("✅ 已推送到 xiaoxiong20260206/ai-insight-public")
 
-        # ⭐ v2.4新增：同步推送到 mirror 仓库（xiaoxiong20260206/ai-insight-public）
-        # 保持双仓库内容一致，xiaoxiong20260206.github.io/ai-insight-public/ 同步更新
-        _push_to_mirror()
+        # v2.7: 双仓库逻辑已移除，origin 即为 xiaoxiong20260206/ai-insight-public
 
         return True
         
@@ -430,8 +428,7 @@ def _run_main_logic(args) -> None:
     print()
     print("=" * 50)
     print("📊 同步完成!")
-    print(f"🔗 外部版本 (my-ai-research-lab): https://my-ai-research-lab.github.io/ai-insight-public/")
-    print(f"🔗 外部版本 (xiaoxiong20260206): https://xiaoxiong20260206.github.io/ai-insight-public/")
+    print(f"🔗 外部版本: https://xiaoxiong20260206.github.io/ai-insight/")
 
 
 if __name__ == "__main__":
