@@ -383,7 +383,7 @@ else
             echo "  ✅ .git 已从 .git_disabled 恢复，继续同步..."
         else
             echo "     未找到 .git_disabled 备份，请手动修复或重新克隆："
-            echo "     git clone https://github.com/my-ai-research-lab/ai-insight-public.git $EXTERNAL_REPO_DIR"
+            echo "     git clone https://github.com/xiaoxiong20260206/ai-insight-public.git $EXTERNAL_REPO_DIR"
             exit 1
         fi
     fi

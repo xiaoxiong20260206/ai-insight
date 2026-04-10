@@ -313,14 +313,14 @@ async def main():
                 break
         if month_str:
             internal_url = f"https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/{month_str}/weekly-{week_tag}.html"
-            external_url = f"https://my-ai-research-lab.github.io/ai-insight-public/01-daily-reports/{month_str}/weekly-{week_tag}.html"
+            external_url = f"https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/{month_str}/weekly-{week_tag}.html"
             print(f"""
 📋 {week_tag} 周报已完成 ✅
 
 🔗 内部版周报：{internal_url}
 🌐 外部版周报：{external_url}
 🏠 内部版首页：https://xiaoxiong20260206.github.io/ai-insight/
-🌐 外部版首页：https://my-ai-research-lab.github.io/ai-insight-public/
+🌐 外部版首页：https://xiaoxiong20260206.github.io/ai-insight-public/
 """)
 
 

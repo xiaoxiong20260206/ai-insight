@@ -74,8 +74,8 @@ EXCLUDE_PATH_PARTS = {"node_modules", ".git", "__pycache__", ".DS_Store"}
 # 需要替换的敏感词映射
 REPLACEMENTS = [
     # ===== URL替换（最高优先级，必须在文字替换之前执行） =====
-    (r'xiaoxiong20260206\.github\.io/ai-insight/', 'my-ai-research-lab.github.io/ai-insight-public/'),
-    (r'github\.com/xiaoxiong20260206/ai-insight', 'github.com/my-ai-research-lab/ai-insight-public'),
+    (r'xiaoxiong20260206\.github\.io/ai-insight/', 'xiaoxiong20260206.github.io/ai-insight-public/'),
+    (r'github\.com/xiaoxiong20260206/ai-insight', 'github.com/xiaoxiong20260206/ai-insight-public'),
     
     # ===== 文件名重写（public版统一去掉-v3后缀） =====
     (r'(\d{4}-\d{2}-\d{2})-v3\.html', r'\1.html'),
