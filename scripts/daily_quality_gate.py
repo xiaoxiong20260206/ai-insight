@@ -1209,20 +1209,22 @@ def check_external_sync(date_str: str) -> CheckResult:
         if index_issues:
             return CheckResult("外部同步", False, "public/+外部仓库均已同步, 但 " + "; ".join(index_issues), fixable=True)
     
-    # v2.2新增（经验#73 — 2026-04-10）：验证外部仓库最新 commit 包含今日日期
+    # v2.2新增（经验#73 — 2026-04-10）：验证外部仓库最新 commit 时间 >= 被检查日期
     # 防止文件已复制到本地但 git push 静默失败的漏检
+    # v2.3修正（2026-04-11）：不检查 commit message 包含 date_str（下一天的 commit 会覆盖）
+    # 改为：检查最新 commit 的 author-date >= date_str（表明 date_str 当天或之后有 push）
     if EXTERNAL_PATH.exists():
         try:
             git_log = subprocess.run(
-                ["git", "-C", str(EXTERNAL_PATH), "log", "--oneline", "-1"],
+                ["git", "-C", str(EXTERNAL_PATH), "log", "--format=%as", "-1"],
                 capture_output=True, text=True, timeout=10
             )
             if git_log.returncode == 0:
-                latest_commit = git_log.stdout.strip()
-                if date_str not in latest_commit:
+                latest_commit_date = git_log.stdout.strip()  # 格式: 2026-04-11
+                if latest_commit_date and latest_commit_date < date_str:
                     return CheckResult(
                         "外部同步", False,
-                        f"外部仓库文件已同步但 git 未 push（最新commit: {latest_commit[:60]}）",
+                        f"外部仓库文件已同步但 git 未 push（最新commit日期: {latest_commit_date}，早于被检查日期: {date_str}）",
                         fixable=True
                     )
         except Exception:
