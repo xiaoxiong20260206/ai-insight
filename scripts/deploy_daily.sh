@@ -14,6 +14,9 @@ DAY=$(echo "$DATE" | cut -d- -f3 | sed 's/^0//')
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$PROJECT_DIR"
 
+# 从 config.py 动态读取外部仓库名称（SSoT，根治硬编码 — 经验#73）
+EXTERNAL_REPO_NAME=$(python3 -c "import sys; sys.path.insert(0,'$PROJECT_DIR/scripts'); from config import EXTERNAL_REPO_NAME; print(EXTERNAL_REPO_NAME)" 2>/dev/null || echo "ai-insight-public")
+
 # --historical 旗标：补跑历史日报时设置，自动豁免"6处联动首页指向"检查
 # 因为首页应永远指向最新日报，而非历史日报，质量门对历史日报的此项检查是设计误判
 HISTORICAL=0
@@ -366,7 +369,7 @@ if [ "${SKIP_EXTERNAL:-0}" = "1" ]; then
     echo "  ⏭️ SKIP_EXTERNAL=1，跳过外部版同步（由调用方明确控制）"
 else
     # 前置健康检查：确认 ai-insight-public 是有效 git 仓库
-    EXTERNAL_REPO_DIR="$(dirname "$PROJECT_DIR")/ai-insight-public"
+    EXTERNAL_REPO_DIR="$(dirname "$PROJECT_DIR")/$EXTERNAL_REPO_NAME"
     if [ ! -d "$EXTERNAL_REPO_DIR/.git" ]; then
         echo "  ❌ [ABORT] 外部仓库 .git 目录不存在: $EXTERNAL_REPO_DIR/.git"
         echo "     部署已阻断，请先修复外部仓库。"
@@ -383,7 +386,7 @@ else
             echo "  ✅ .git 已从 .git_disabled 恢复，继续同步..."
         else
             echo "     未找到 .git_disabled 备份，请手动修复或重新克隆："
-            echo "     git clone https://github.com/xiaoxiong20260206/ai-insight-public.git $EXTERNAL_REPO_DIR"
+            echo "     git clone https://github.com/xiaoxiong20260206/$EXTERNAL_REPO_NAME.git $EXTERNAL_REPO_DIR"
             exit 1
         fi
     fi

@@ -311,15 +311,16 @@ async def main():
                 month_str = month_dir.name
                 break
         if month_str:
-            internal_url = f"https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/{month_str}/weekly-{week_tag}.html"
-            external_url = f"https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/{month_str}/weekly-{week_tag}.html"
+            from config import EXTERNAL_PAGES_BASE
+            internal_url = f"{REPORT_BASE_URL}/{month_str}/weekly-{week_tag}.html"
+            external_url = f"{EXTERNAL_PAGES_BASE}/01-daily-reports/{month_str}/weekly-{week_tag}.html"
             print(f"""
 📋 {week_tag} 周报已完成 ✅
 
 🔗 内部版周报：{internal_url}
 🌐 外部版周报：{external_url}
-🏠 内部版首页：https://xiaoxiong20260206.github.io/ai-insight/
-🌐 外部版首页：https://xiaoxiong20260206.github.io/ai-insight-public/
+🏠 内部版首页：{PROJECT_URL}
+🌐 外部版首页：{EXTERNAL_PAGES_BASE}/
 """)
 
 

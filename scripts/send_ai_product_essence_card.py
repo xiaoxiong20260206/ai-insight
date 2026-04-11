@@ -31,7 +31,7 @@ RESEARCH_URL = (
     "https://xiaoxiong20260206.github.io/ai-insight/"
     "02-deep-research/topics/ai-product-essence-2026.html"
 )
-PROJECT_URL = "https://xiaoxiong20260206.github.io/ai-insight/"
+from config import INTERNAL_HOMEPAGE as PROJECT_URL
 
 # 推送配置（统一从 KimConfig 读取，不再硬编码）
 SEND_INTERVAL = KimConfig.SEND_INTERVAL
