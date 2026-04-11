@@ -27,7 +27,9 @@ set -uo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BASE_DIR="$(dirname "$SCRIPT_DIR")"
-EXTERNAL_REPO="$(dirname "$BASE_DIR")/ai-insight-public"
+# 从 config.py 动态读取外部仓库名称（SSoT，根治硬编码 — 经验#73）
+EXTERNAL_REPO_NAME=$(python3 -c "import sys; sys.path.insert(0,'$SCRIPT_DIR'); from config import EXTERNAL_REPO_NAME; print(EXTERNAL_REPO_NAME)" 2>/dev/null || echo "ai-insight-public")
+EXTERNAL_REPO="$(dirname "$BASE_DIR")/$EXTERNAL_REPO_NAME"
 INTERNAL_REPO="$BASE_DIR"
 
 # 颜色

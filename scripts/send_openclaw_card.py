@@ -33,7 +33,7 @@ GATEWAY_URL = KimConfig.GATEWAY_URL
 
 # OpenClaw 深度调研链接
 RESEARCH_URL = "https://xiaoxiong20260206.github.io/ai-insight/02-deep-research/topics/openclaw-deep-research-2026.html"
-PROJECT_URL = "https://xiaoxiong20260206.github.io/ai-insight/"
+from config import INTERNAL_HOMEPAGE as PROJECT_URL
 
 # 推送配置
 SEND_INTERVAL = KimConfig.SEND_INTERVAL

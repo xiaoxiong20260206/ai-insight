@@ -29,7 +29,7 @@ KimConfig.validate()
 APP_KEY = KimConfig.APP_KEY
 
 RESEARCH_URL = "https://xiaoxiong20260206.github.io/ai-insight/02-deep-research/topics/claude-code-source-analysis.html"
-HOMEPAGE_URL = "https://xiaoxiong20260206.github.io/ai-insight/"
+from config import INTERNAL_HOMEPAGE as HOMEPAGE_URL
 KIM_DOC_URL  = "https://INTERNAL_DOCS/d/home/fcACLzJsWsUleOZk0PAkdFrRP"
 
 
