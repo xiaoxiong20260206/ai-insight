@@ -87,11 +87,15 @@ from pathlib import Path
 from typing import Tuple, List, Dict, Optional
 
 # 项目根目录
-PROJECT_ROOT = Path(__file__).parent.parent
+from config import (
+    PROJECT_ROOT,
+    PUBLIC_PATH,
+    EXTERNAL_REPO as EXTERNAL_PATH,
+    EXPECTED_REMOTE,
+    EXTERNAL_CLONE_URL,
+)
 DATA_PATH = PROJECT_ROOT / "data"
 DAILY_REPORTS_PATH = PROJECT_ROOT / "01-daily-reports"
-PUBLIC_PATH = PROJECT_ROOT / "public"
-EXTERNAL_PATH = PROJECT_ROOT.parent / "ai-insight-public"
 
 # v9.8: 共享数据缓存 — run_all_checks预加载后，各检查函数通过此变量复用，避免14次重复JSON解析
 _SHARED_DATA: Optional[dict] = None

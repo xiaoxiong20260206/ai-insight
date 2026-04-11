@@ -31,11 +31,16 @@ import time
 from datetime import datetime
 from pathlib import Path
 
+from config import (
+    EXPECTED_REMOTE, EXTERNAL_CLONE_URL,
+    EXTERNAL_REPO, PUBLIC_PATH as PUBLIC_DIR,
+    EXTERNAL_GITHUB_USER, EXTERNAL_REPO_NAME,
+    PROJECT_ROOT,
+)
 
-# 路径配置
-PROJECT_ROOT = Path(__file__).parent.parent
-PUBLIC_DIR = PROJECT_ROOT / "public"
-EXTERNAL_REPO = PROJECT_ROOT.parent / "ai-insight-public"
+# ---- 兼容旧变量名 ----
+EXTERNAL_REPO = EXTERNAL_REPO  # 来自 config.py
+PUBLIC_DIR    = PUBLIC_DIR
 
 
 def run_sync_to_public(verify: bool = False) -> bool:
@@ -141,10 +146,8 @@ def clean_stale_files() -> int:
     return deleted
 
 
-EXPECTED_REMOTE = "github.com/xiaoxiong20260206/ai-insight-public"
-MIRROR_REMOTE_NAME = "mirror"  # 保留字段兼容性，不再使用
-MIRROR_REMOTE_URL = "https://github.com/xiaoxiong20260206/ai-insight-public.git"
-MIRROR_EXPECTED = "github.com/xiaoxiong20260206/ai-insight-public"
+EXPECTED_REMOTE = EXPECTED_REMOTE  # from config
+# MIRROR_REMOTE_NAME/MIRROR_REMOTE_URL: 双仓库模式已废弃（经验#73）
 
 
 def is_valid_git_repo(repo_path: Path) -> bool:
