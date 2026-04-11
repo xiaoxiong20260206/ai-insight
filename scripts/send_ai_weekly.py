@@ -37,8 +37,7 @@ from kim_client import (
 
 # 路径配置
 DAILY_REPORTS_PATH = Path(__file__).parent.parent / "01-daily-reports"
-REPORT_BASE_URL = "https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports"
-PROJECT_URL = "https://xiaoxiong20260206.github.io/ai-insight/"
+from config import REPORT_BASE_URL, INTERNAL_HOMEPAGE as PROJECT_URL
 
 
 def get_week_dates(week_str: str = None):

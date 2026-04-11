@@ -34,7 +34,17 @@ from pathlib import Path
 
 
 # 项目路径
-PROJECT_ROOT = Path(__file__).parent.parent
+sys.path.insert(0, str(Path(__file__).parent))
+from config import (
+    PROJECT_ROOT,
+    INTERNAL_PAGES_BASE,
+    EXTERNAL_PAGES_BASE,
+    INTERNAL_GITHUB_URL,
+    EXTERNAL_GITHUB_URL,
+    INTERNAL_GITHUB_USER,
+    EXTERNAL_GITHUB_USER,
+    EXTERNAL_REPO_NAME,
+)
 INTERNAL_REPORTS = PROJECT_ROOT / "01-daily-reports"
 PUBLIC_DIR = PROJECT_ROOT / "public"
 PUBLIC_REPORTS = PUBLIC_DIR / "01-daily-reports"
@@ -71,11 +81,22 @@ EXCLUDE_DIRS = {
 # 任何路径中包含这些目录名的都要排除
 EXCLUDE_PATH_PARTS = {"node_modules", ".git", "__pycache__", ".DS_Store"}
 
-# 需要替换的敏感词映射
-REPLACEMENTS = [
-    # ===== URL替换（最高优先级，必须在文字替换之前执行） =====
-    (r'xiaoxiong20260206\.github\.io/ai-insight/', 'xiaoxiong20260206.github.io/ai-insight-public/'),
-    (r'github\.com/xiaoxiong20260206/ai-insight', 'github.com/xiaoxiong20260206/ai-insight-public'),
+# 需要替换的敏感词映射（URL部分动态生成，根治硬编码根因 — 经验#73）
+def _build_url_replacements():
+    """URL 替换规则动态生成，仓库名/账号变更只改 config.py"""
+    int_base = re.escape(INTERNAL_PAGES_BASE.rstrip('/'))
+    ext_base = EXTERNAL_PAGES_BASE.rstrip('/')
+    int_gh   = re.escape(INTERNAL_GITHUB_URL)
+    ext_gh   = EXTERNAL_GITHUB_URL
+    return [
+        (rf'{int_base}/', f'{ext_base}/'),
+        (rf'{int_gh}', f'{ext_gh}'),
+    ]
+
+_URL_REPLACEMENTS = _build_url_replacements()
+
+REPLACEMENTS = _URL_REPLACEMENTS + [
+    # ===== (下方规则由 _build_url_replacements 生成，此处为其余脱敏规则) =====
     
     # ===== 文件名重写（public版统一去掉-v3后缀） =====
     (r'(\d{4}-\d{2}-\d{2})-v3\.html', r'\1.html'),

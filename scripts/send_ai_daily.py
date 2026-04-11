@@ -53,11 +53,9 @@ APP_KEY = KimConfig.APP_KEY
 GATEWAY_URL = KimConfig.GATEWAY_URL
 
 # 日报路径 (相对于项目根目录)
-PROJECT_ROOT = Path(__file__).parent.parent
+from config import PROJECT_ROOT, REPORT_BASE_URL, INTERNAL_HOMEPAGE as PROJECT_URL
 DAILY_REPORTS_PATH = PROJECT_ROOT / "01-daily-reports"
 DATA_PATH = PROJECT_ROOT / "data"
-REPORT_BASE_URL = "https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports"
-PROJECT_URL = "https://xiaoxiong20260206.github.io/ai-insight/"
 
 # 推送配置
 SEND_INTERVAL = KimConfig.SEND_INTERVAL  # 群间发送间隔(秒)

@@ -52,6 +52,10 @@ from pathlib import Path
 SCRIPT_DIR = Path(__file__).parent
 PROJECT_DIR = SCRIPT_DIR.parent
 
+# 导入 SSoT 配置
+sys.path.insert(0, str(SCRIPT_DIR))
+from config import EXTERNAL_REPO as EXTERNAL_REPO_PATH, EXTERNAL_CLONE_URL
+
 # ── Step 定义 ─────────────────────────────────────────────
 STEPS = {
     "search":   {"name": "搜索调研",   "executor": "agent",  "step_num": 1},
@@ -705,11 +709,11 @@ def _show_4_positions_summary(date: str) -> None:
         all_ok = False
     
     # ④ 外部仓库日报
-    p4 = PROJECT_DIR.parent / "ai-insight-public" / "01-daily-reports" / month / f"{date}.html"
+    p4 = EXTERNAL_REPO_PATH / "01-daily-reports" / month / f"{date}.html"
     if p4.exists():
         kb = p4.stat().st_size // 1000
         print(f"  ④ 外部仓库日报: ✅ {kb}KB")
-    elif (PROJECT_DIR.parent / "ai-insight-public").exists():
+    elif EXTERNAL_REPO_PATH.exists():
         print(f"  ④ 外部仓库日报: ❌ 仓库存在但文件不存在（需 sync_to_external --full --verify）")
         all_ok = False
     else:
@@ -812,7 +816,7 @@ def run_external_sync() -> bool:
             print(f"     错误: {result.stderr[-500:]}" if result.stderr else "")
             print("\n  💡 如果是仓库不存在，请先执行:")
             print("     cd ~/Documents/Codeflicker/个人助理_V1")
-            print("     git clone https://github.com/xiaoxiong20260206/ai-insight-public.git ai-insight-public")
+            print(f"     git clone {EXTERNAL_CLONE_URL} ai-insight-public")
             return False  # v9.5: 必须阻断，不能静默通过
     except Exception as e:
         print(f"  ❌ 外部版同步异常: {e}")
