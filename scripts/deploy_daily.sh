@@ -140,8 +140,20 @@ for f in "${REQUIRED_FILES[@]}"; do
     if [ -f "$f" ]; then
         echo "  ✅ $f"
     else
-        echo "  ❌ 缺少: $f"
-        exit 1
+        # v6.2: MD文件缺失时自动尝试从JSON生成（gen_daily_html.py不生成MD）
+        if [[ "$f" == *.md ]]; then
+            echo "  ⚠️ 缺少MD: $f，尝试自动生成..."
+            python3 scripts/gen_md_from_json.py "$DATE" 2>&1
+            if [ -f "$f" ]; then
+                echo "  ✅ MD文件已自动生成: $f"
+            else
+                echo "  ❌ 自动生成MD失败，请手动执行: python3 scripts/gen_md_from_json.py $DATE"
+                exit 1
+            fi
+        else
+            echo "  ❌ 缺少: $f"
+            exit 1
+        fi
     fi
 done
 
