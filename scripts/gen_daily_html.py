@@ -272,11 +272,9 @@ def render_capability_update(text: str) -> str:
     html_text = html_text.replace("\n", "<br>")
     html_text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', html_text)
     return f'''
-        <div style="margin-top:20px;background:linear-gradient(135deg,#EFF6FF 0%,#EDE9FE 100%);border:1px solid #DBEAFE;border-radius:14px;padding:24px;box-shadow:0 2px 8px rgba(31,35,40,.06)">
-            <div style="font-size:16px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:8px;color:#1E40AF">
-                🤖 深度洞察
-            </div>
-            <div style="font-size:14px;color:#374151;line-height:1.8;margin:0">
+        <div class="insight-block animate-on-scroll">
+            <div class="insight-block-title">🤖 深度洞察</div>
+            <div class="insight-block-body">
                 <p style="margin:0">{html_text}</p>
             </div>
         </div>'''
@@ -290,14 +288,16 @@ def render_data_table(data: list) -> str:
         for d in data
     )
     return f'''
-        <div class="section-card" style="margin-top:20px">
+        <div class="section-card">
             <div class="section-header"><span class="num">📊</span> 数据速览</div>
-            <table class="data-table">
-                <thead><tr><th>指标</th><th>数值</th><th>变化/说明</th></tr></thead>
-                <tbody>
+            <div class="data-table-wrap">
+                <table class="data-table">
+                    <thead><tr><th>指标</th><th>数值</th><th>变化/说明</th></tr></thead>
+                    <tbody>
 {rows}
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>'''
 
 
@@ -382,21 +382,19 @@ def render_preview(events: list) -> str:
     return f'''
         <div class="section-card">
             <div class="section-header"><span class="num">📌</span> 明日/下周值得关注</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div class="watch-grid">
 {chr(10).join(items)}
             </div>
         </div>'''
 
 
-# ============ 主生成函数 ============
+# ============ 主生成函数 (v4.0 — 清爽调研风格，长页面+左侧TOC) ============
 
 def generate_html(data: dict) -> str:
-    """从JSON数据生成完整HTML"""
-    # v9.8修复: 直接 key 访问改为 .get() 防护，避免JSON格式异常时整体崩溃
+    """从JSON数据生成完整HTML（清爽调研风格 v5.0 × 日报）"""
     date_str = data.get("date") or data.get("date_str") or ""
     date_obj = datetime.strptime(date_str, "%Y-%m-%d")
     weekday = WEEKDAYS[date_obj.weekday()]
-    month_str = date_obj.strftime("%Y-%m")
 
     # 读CSS/JS模板
     css_block = TEMPLATE_CSS_FILE.read_text(encoding="utf-8") if TEMPLATE_CSS_FILE.exists() else "<style></style>"
@@ -410,31 +408,34 @@ def generate_html(data: dict) -> str:
     overseas_pct = round(overseas_count / total * 100) if total else 50
     china_pct = 100 - overseas_pct
 
-    # 概览
+    # 概览卡片
     overview_items = []
     for ov in data.get("overview", []):
-        span = f' style="grid-column: span 2;"' if ov.get("span2") else ""
+        span = ' style="grid-column: span 2;"' if ov.get("span2") else ""
         label_class = f' class="{ov["label_class"]}"' if ov.get("label_class") else ""
-        overview_items.append(f'''                <div class="overview-item"{span}>
+        overview_items.append(f'''                <div class="overview-item animate-on-scroll"{span}>
                     <div class="overview-item-header"><span class="overview-item-icon">{ov['icon']}</span><span class="overview-item-label"{label_class}>{ov['label']}</span></div>
                     <div class="overview-headline">{ov['headline']}</div>
                     <div class="overview-item-text">{ov['text']}</div>
                 </div>''')
 
-    # Tab面板 — 带验证
+    # 五大板块 Sections — 从 Tab 改为锚点 Section
     tabs = data.get("tabs", [])
-    tab_names = [("🧠", "大模型", "foundation"), ("⌨️", "AI Coding", "coding"),
-                 ("📱", "AI 应用", "application"), ("🏭", "AI 行业", "industry"),
-                 ("🔄", "企业转型", "enterprise")]
+    tab_defs = [
+        ("🧠", "大模型", "llm"),
+        ("⌨️", "AI Coding", "coding"),
+        ("📱", "AI 应用", "app"),
+        ("🏭", "AI 行业", "industry"),
+        ("🔄", "企业AI转型", "enterprise"),
+    ]
 
-    # === 验证: tab数量必须为5 ===
+    # === 验证 ===
     if len(tabs) != 5:
-        print(f"  ⚠️ 警告: JSON包含{len(tabs)}个tab，期望5个。缺失的tab将渲染为空面板。")
-        print(f"     期望: {[n for _, n, _ in tab_names]}")
+        print(f"  ⚠️ 警告: JSON包含{len(tabs)}个tab，期望5个。缺失板块将渲染为空。")
+        print(f"     期望: {[n for _, n, _ in tab_defs]}")
 
-    # === 验证: 每个tab至少应有内容 ===
     empty_tabs = []
-    for i, (icon, name, tid) in enumerate(tab_names):
+    for i, (icon, name, tid) in enumerate(tab_defs):
         if i < len(tabs):
             news = tabs[i].get("news", {})
             count = len(news.get("overseas", [])) + len(news.get("china", []))
@@ -444,96 +445,154 @@ def generate_html(data: dict) -> str:
             empty_tabs.append(name)
     if empty_tabs:
         print(f"  ⚠️ 警告: 以下板块无新闻条目: {', '.join(empty_tabs)}")
-        print(f"     建议: 每个板块至少2条新闻，回到搜索步骤补充内容。")
-    tab_buttons = []
-    tab_panels = []
-    for i, (icon, name, tid) in enumerate(tab_names):
-        active = " active" if i == 0 else ""
-        selected = "true" if i == 0 else "false"
-        orange = " orange" if tid == "enterprise" else ""
-        tab_buttons.append(f'            <button class="tab-btn{orange}" role="tab" aria-selected="{selected}" data-tab="{tid}">{icon} {name}</button>')
 
+    # 生成 Section HTML
+    section_blocks = []
+    for i, (icon, name, tid) in enumerate(tab_defs):
         tab_data = tabs[i] if i < len(tabs) else {}
         section_html = render_section(tab_data.get("news", {}))
-        # 兼容 deep_focus 和 focus 两种字段名
         df_data = tab_data.get("deep_focus") or tab_data.get("focus")
         deep_focus_html = render_deep_focus(df_data, tab_data.get("theme", "")) if df_data else ""
-        # ⚠️ pattern_insight_html 必填 (v9.14) — 每期必须有规律洞察，不允许为空
         pi_html = tab_data.get("pattern_insight_html", "") or tab_data.get("pattern_insight", "")
 
-        tab_panels.append(f'''
-        <article id="{tid}" class="tab-panel{active}">
-            <div class="section-card">
-                <div class="section-header"><span class="num">1</span> 最近动态</div>
+        section_blocks.append(f'''
+            <!-- ===== {name} ===== -->
+            <section id="{tid}" class="report-section animate-on-scroll">
+                <div class="doc-chapter-label">{icon} {name}</div>
+                <div class="board-section">
+                    <div class="board-header">
+                        <span class="board-badge">1</span> 最近动态
+                    </div>
 {section_html}
-            </div>
+                </div>
 {deep_focus_html}
 {pi_html}
-        </article>''')
+            </section>''')
 
-    # 组装
+    # 数据速览 & 预览 & 深度洞察
+    data_table_html = render_data_table(data.get("data_snapshot", []))
+    preview_html = render_preview(data.get('preview_events') or data.get('watch_list', []))
+    capability_html = render_capability_update(data.get("capability_update", ""))
+
+    date_display = date_obj.strftime("%Y年%-m月%-d日")
+
     return f'''<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI 日报 - {date_str} (v3.2)</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231A7F37'/><circle cx='16' cy='14' r='6' fill='none' stroke='white' stroke-width='2'/><path d='M12 12h8M16 10v4M10 22c0-3.3 2.7-6 6-6s6 2.7 6 6' fill='none' stroke='white' stroke-width='2' stroke-linecap='round'/></svg>">
+    <title>AI 日报 · {date_str} | AI洞察</title>
+    <meta name="description" content="AI洞察日报 {date_str}：大模型、AI Coding、AI应用、AI行业、企业AI转型五大板块动态">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23059669'/><text x='6' y='23' font-size='18' fill='white'>📡</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <noscript><style>.animate-on-scroll{{opacity:1!important;transform:none!important;}}</style></noscript>
     {css_block}
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="header-badge">📡 林克的AI洞察项目 - AI日报</div>
-            <div class="header-title">AI 日报 <span class="version-badge">v3.2</span></div>
-            <div class="header-date">{date_obj.strftime("%Y年%-m月%-d日")} {weekday} | 五大板块：大模型 · AI Coding · AI应用 · AI行业 · 企业转型</div>
-        </div>
+<a class="skip-to-content" href="#main-content">跳到主内容</a>
 
-        <div class="coverage-bar">
-            <span class="label">📊 覆盖均衡</span>
-            <div class="bar">
-                <div class="bar-overseas" style="width:{overseas_pct}%"></div>
-                <div class="bar-china" style="width:{china_pct}%"></div>
-            </div>
-            <div class="stats">
-                <span class="stat-overseas">🌏 海外 {overseas_count}条</span>
-                <span class="stat-china">🇨🇳 国内 {china_count}条</span>
+<div class="layout-wrapper">
+    <!-- SIDEBAR TOC -->
+    <nav class="sidebar-nav" id="sidebar" aria-label="目录导航">
+        <div class="sidebar-doc-title">AI 日报 · {date_str}</div>
+        <div class="toc-section">
+            <div class="toc-group-label">目录</div>
+            <a href="#overview"   class="toc-link">📋 全文概览</a>
+            <a href="#heat"       class="toc-link">🔥 热度趋势</a>
+            <a href="#llm"        class="toc-link">🧠 大模型</a>
+            <a href="#coding"     class="toc-link">⌨️ AI Coding</a>
+            <a href="#app"        class="toc-link">📱 AI 应用</a>
+            <a href="#industry"   class="toc-link">🏭 AI 行业</a>
+            <a href="#enterprise" class="toc-link">🔄 企业AI转型</a>
+            <a href="#data"       class="toc-link">📊 数据速览</a>
+            <a href="#watch"      class="toc-link">📌 明日关注</a>
+        </div>
+        <div class="reading-progress-wrap">
+            <div class="reading-progress-label">阅读进度</div>
+            <div class="reading-progress-track">
+                <div class="reading-progress-fill" id="readingProgress"></div>
             </div>
         </div>
+    </nav>
+    <button class="sidebar-collapse-btn" id="collapseBtn" title="折叠导航" aria-label="折叠导航">«</button>
 
-        <div class="overview">
-            <div class="overview-title">📋 全文概览</div>
-            <div class="overview-grid five-cols">
+    <!-- MAIN CONTENT -->
+    <main class="content-area" id="main-content">
+        <div class="content-inner">
+
+            <!-- HEADER -->
+            <header class="doc-header">
+                <div class="header-badge">AI INSIGHT · DAILY REPORT</div>
+                <h1 class="header-title">AI 日报 <span class="version-badge">v4.0</span></h1>
+                <div class="header-meta">
+                    <span>📅 {date_display} {weekday}</span>
+                    <span>🌐 海外 {overseas_count}条 · 国内 {china_count}条</span>
+                    <span>📊 五大板块：大模型 · AI Coding · AI应用 · AI行业 · 企业转型</span>
+                </div>
+            </header>
+
+            <!-- COVERAGE BAR -->
+            <div class="coverage-bar animate-on-scroll">
+                <span class="label">📊 覆盖均衡</span>
+                <div class="bar">
+                    <div class="bar-overseas" style="width:{overseas_pct}%"></div>
+                    <div class="bar-china" style="width:{china_pct}%"></div>
+                </div>
+                <div class="stats">
+                    <span class="stat-overseas">🌏 海外 {overseas_count}条</span>
+                    <span class="stat-china">🇨🇳 国内 {china_count}条</span>
+                </div>
+            </div>
+
+            <!-- OVERVIEW -->
+            <section id="overview" class="report-section">
+                <div class="overview animate-on-scroll">
+                    <div class="overview-title">📋 全文概览</div>
+                    <div class="overview-grid five-cols">
 {chr(10).join(overview_items)}
-            </div>
-        </div>
+                    </div>
+                </div>
+            </section>
 
+            <!-- HEAT TREND -->
+            <section id="heat" class="report-section animate-on-scroll">
 {render_heat_trend(data.get("heat_trend", {}))}
+            </section>
 
-        <nav class="tab-nav" role="tablist">
-{chr(10).join(tab_buttons)}
-        </nav>
+            <!-- FIVE BOARDS -->
+{chr(10).join(section_blocks)}
 
-{chr(10).join(tab_panels)}
+            <!-- DATA SNAPSHOT -->
+            <section id="data" class="report-section animate-on-scroll">
+{data_table_html}
+            </section>
 
-{render_data_table(data.get("data_snapshot", []))}
+            <!-- WATCH LIST -->
+            <section id="watch" class="report-section animate-on-scroll">
+{preview_html}
+            </section>
 
-{render_preview(data.get('preview_events') or data.get('watch_list', []))}
+            <!-- CAPABILITY UPDATE / DEEP INSIGHT -->
+{capability_html}
 
-{render_capability_update(data.get("capability_update", ""))}
+            <!-- FOOTER -->
+            <footer class="doc-footer animate-on-scroll">
+                <p>
+                    我是 <strong>林克</strong>，沈浪的AI分身。
+                    <a href="https://xiaoxiong20260206.github.io/ai-insight/" target="_blank">🏠 访问AI洞察首页</a>
+                </p>
+                <p style="margin-top:6px">AI洞察 · 系统化追踪AI行业动态 · 五大板块每日更新</p>
+            </footer>
 
-        <div style="margin-top:24px;background:linear-gradient(135deg,#F8FAFB 0%,#EEF2F6 100%);border:1px solid #F5F5F4;border-radius:14px;padding:24px;box-shadow:0 2px 8px rgba(31,35,40,.06),0 1px 2px rgba(31,35,40,.04)">
-            <div style="font-size:16px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px">💡 了解更多</div>
-            <p style="font-size:14px;color:#57534E;line-height:1.7;margin:0 0 12px 0">
-                我是 <strong>林克</strong>，沈浪的AI分身。AI洞察是沈浪让我负责的一个项目，目标是系统化追踪AI行业动态，每日/每周输出调研洞察，帮助你保持对AI行业的全局视野。覆盖大模型、AI Coding、AI应用、AI行业投融资、企业AI转型五大领域。
-            </p>
-            <a href="https://xiaoxiong20260206.github.io/ai-insight/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:linear-gradient(135deg,#059669 0%,#10B981 100%);color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none">
-                🏠 访问AI洞察首页
-            </a>
         </div>
-    </div>
+    </main>
+</div>
 
-    {js_block}
+<button class="scroll-to-top" id="scrollToTop" aria-label="回到顶部">↑</button>
+
+{js_block}
 </body>
 </html>
 '''
