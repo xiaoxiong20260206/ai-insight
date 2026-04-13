@@ -69,10 +69,18 @@ def get_week_dates(week_str: str = None):
 
 def read_weekly_report(year: int, week_num: int) -> dict:
     """
-    尝试读取已生成的周报文件
+    尝试读取已生成的周报文件（必须同时存在 md + html）
 
     Returns:
-        {"found": bool, "content": str, "url": str}
+        {
+            "found": bool,
+            "content": str,
+            "url": str,
+            "has_html": bool,
+            "md_path": str,
+            "html_path": str,
+            "month": str
+        }
     """
     # 查找周报文件
     for month_dir in sorted(DAILY_REPORTS_PATH.iterdir()):
@@ -83,10 +91,26 @@ def read_weekly_report(year: int, week_num: int) -> dict:
         if weekly_md.exists():
             content = weekly_md.read_text(encoding="utf-8")
             month_str = month_dir.name
-            url = f"{REPORT_BASE_URL}/{month_str}/weekly-{year}-W{week_num:02d}.html"
-            return {"found": True, "content": content, "url": url, "has_html": weekly_html.exists()}
+            url = (REPORT_BASE_URL + f"/{month_str}/weekly-{year}-W{week_num:02d}.html").replace("\n", "").replace("\r", "")
+            return {
+                "found": weekly_html.exists(),
+                "content": content,
+                "url": url,
+                "has_html": weekly_html.exists(),
+                "md_path": str(weekly_md),
+                "html_path": str(weekly_html),
+                "month": month_str,
+            }
 
-    return {"found": False, "content": "", "url": "", "has_html": False}
+    return {
+        "found": False,
+        "content": "",
+        "url": "",
+        "has_html": False,
+        "md_path": "",
+        "html_path": "",
+        "month": "",
+    }
 
 
 def build_weekly_card(year: int, week_num: int, start_date, end_date, report_data: dict) -> dict:
@@ -184,6 +208,7 @@ async def main():
     parser.add_argument("--preview", action="store_true", help="发给自己预览")
     parser.add_argument("--to-user", type=str, help="发送到指定用户（用户名）")
     parser.add_argument("--to-groups", action="store_true", help="发送到所有群")
+    parser.add_argument("--confirm", action="store_true", help="确认执行高风险操作（例如群发）")
     parser.add_argument("--dry-run", action="store_true", help="试运行，不实际发送")
     args = parser.parse_args()
 
@@ -210,14 +235,20 @@ async def main():
         print("   [DRY-RUN mode]")
     print("=" * 50)
 
-    # 1. 读取周报
+    # 1. 读取周报（硬门控：周报未生成时禁止推送）
     print("📖 读取周报内容...")
     report_data = read_weekly_report(year, week_num)
-    if report_data["found"]:
-        print(f"   Found: weekly-{year}-W{week_num:02d}.md")
-    else:
-        print(f"   Warning: weekly-{year}-W{week_num:02d}.md not found")
-        print(f"   Will send placeholder card")
+    if not report_data["md_path"]:
+        print(f"   ❌ 缺少周报Markdown：weekly-{year}-W{week_num:02d}.md")
+        print("   已阻断推送（不发送卡片、不更新首页、不同步外部版）")
+        return 2
+    if not report_data["has_html"]:
+        print(f"   ❌ 缺少周报HTML：weekly-{year}-W{week_num:02d}.html")
+        print(f"   md存在: {report_data['md_path']}")
+        print("   已阻断推送（不发送卡片、不更新首页、不同步外部版）")
+        return 3
+
+    print(f"   ✅ Found: weekly-{year}-W{week_num:02d}.md/html")
 
     # 2. 构建卡片
     print("🎨 构建周报卡片...")
@@ -243,6 +274,10 @@ async def main():
             print("   Send FAIL")
 
     if args.to_groups:
+        # HARD GATE: never send to groups unless explicitly confirmed
+        if not args.confirm:
+            print("\n⛔ 已阻断群发：请先用 --to-user 预览并确认无误，然后使用 --confirm --to-groups")
+            return 4
         print("\n📤 发送到所有群...")
         success_count, fail_count = await send_to_all_groups(token, card, args.dry_run)
         print(f"\n📊 Done! Success: {success_count}, Fail: {fail_count}")
@@ -325,4 +360,4 @@ async def main():
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    sys.exit(asyncio.run(main()) or 0)
