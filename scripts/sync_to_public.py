@@ -156,6 +156,27 @@ def sanitize_html(content: str) -> str:
     return result
 
 
+def preserve_block(generated_content: str, existing_content: str, start_marker: str, end_marker: str):
+    """保留目标文件中的手工维护区块，避免同步覆盖。"""
+    generated_start = generated_content.find(start_marker)
+    generated_end = generated_content.find(end_marker)
+    existing_start = existing_content.find(start_marker)
+    existing_end = existing_content.find(end_marker)
+
+    if min(generated_start, generated_end, existing_start, existing_end) == -1:
+        return generated_content, False
+    if generated_start >= generated_end or existing_start >= existing_end:
+        return generated_content, False
+
+    preserved_block = existing_content[existing_start:existing_end]
+    merged_content = (
+        generated_content[:generated_start]
+        + preserved_block
+        + generated_content[generated_end:]
+    )
+    return merged_content, True
+
+
 def sync_report(date_str: str, force: bool = False) -> bool:
     """同步单个日报到公开版本"""
     date_obj = datetime.strptime(date_str, "%Y-%m-%d")
@@ -306,7 +327,7 @@ def sync_reports_index(force: bool = False):
 
 
 def sync_index(force: bool = False):
-    """同步根首页（v2.1新增：内部版被污染检测）"""
+    """同步根首页（v2.1新增：内部版被污染检测 + 手工区块保护）"""
     src = PROJECT_ROOT / "index.html"
     dst = PUBLIC_DIR / "index.html"
     
@@ -327,6 +348,16 @@ def sync_index(force: bool = False):
         print(f"✅ 内部版首页内容正常（林克: {link_count}处），开始脱敏同步...")
     
     sanitized = sanitize_html(content)
+    if dst.exists():
+        existing_public = dst.read_text(encoding="utf-8")
+        sanitized, preserved = preserve_block(
+            sanitized,
+            existing_public,
+            "<!-- 2. 深度调研 -->",
+            "<!-- 3. 追踪体系 -->",
+        )
+        if preserved:
+            print("🛡️ 已保留公开版手工维护的深度调研区块")
     dst.write_text(sanitized, encoding="utf-8")
     print("✅ 已同步首页: index.html")
     return True
