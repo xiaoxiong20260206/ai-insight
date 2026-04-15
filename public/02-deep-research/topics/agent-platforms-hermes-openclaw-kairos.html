@@ -814,10 +814,48 @@
 
             <p class="animate-on-scroll" style="margin-bottom: 24px; line-height: 1.8; color: var(--color-text-secondary);">
                 2026年的AI Agent市场正在经历一场范式转移——从「会话式助手」向「常驻型智能体」演进。
-                三大平台代表了三种截然不同的哲学：<strong>OpenClaw</strong>走生态扩张路线，<strong>Hermes Agent</strong>专注自我进化，
-                <strong>Anthropic KAIROS</strong>押注云端托管。它们分别回答了同一个问题的不同侧面：
-                <em>一个真正有用的AI Agent应该是什么样子？</em>
+                这场转变的根源在于：ChatGPT 和 Claude 证明了 LLM 的推理能力，但<strong>对话式交互的局限性</strong>很快暴露——
+                每次开启新对话都是"失忆"的开始，Agent 无法记住你的偏好、代码风格、项目上下文。
             </p>
+
+            <div class="section animate-on-scroll">
+                <div class="section-title"><span class="icon">📈</span> 市场背景：为什么是现在？</div>
+                <p style="line-height: 1.8; margin-bottom: 16px;">
+                    2024-2025 年，AI Coding 工具（Cursor、Windsurf、Claude Code）验证了"AI 能写生产级代码"。
+                    但这些工具本质上是<strong>增强型 IDE</strong>，它们不会主动思考、不会跨会话学习、不会在后台持续运行。
+                </p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 20px 0;">
+                    <div style="background: var(--color-bg-card); padding: 16px; border-radius: var(--radius-lg); border-left: 3px solid var(--color-info);">
+                        <div style="font-weight: 600; color: var(--color-text-primary); margin-bottom: 8px;">2024 Q3</div>
+                        <div style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6;">
+                            Cursor 和 Claude Code 证明 AI 可以处理复杂代码任务，但用户抱怨"每次对话都要重新解释项目"
+                        </div>
+                    </div>
+                    <div style="background: var(--color-bg-card); padding: 16px; border-radius: var(--radius-lg); border-left: 3px solid var(--color-success);">
+                        <div style="font-weight: 600; color: var(--color-text-primary); margin-bottom: 8px;">2025 Q2</div>
+                        <div style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6;">
+                            OpenClaw 开源后迅速积累 30万+ stars，"常驻后台的 AI 助手"概念开始普及
+                        </div>
+                    </div>
+                    <div style="background: var(--color-bg-card); padding: 16px; border-radius: var(--radius-lg); border-left: 3px solid var(--color-purple);">
+                        <div style="font-weight: 600; color: var(--color-text-primary); margin-bottom: 8px;">2026 Q1</div>
+                        <div style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6;">
+                            Hermes Agent 和 KAIROS 亮相，"Agent 应该持续学习"成为新共识
+                        </div>
+                    </div>
+                </div>
+                <p style="line-height: 1.8; color: var(--color-text-secondary);">
+                    三大平台的出现并非巧合——它们代表了<strong>三种根本不同的产品假设</strong>：
+                    OpenClaw 假设用户想要"无限扩展的工具箱"；Hermes 假设用户想要"一个懂我的合伙人"；
+                    KAIROS 假设用户想要"从不掉线的云端助手"。
+                </p>
+            </div>
+
+            <div class="insight-box animate-on-scroll">
+                <div class="title">💡 核心命题</div>
+                <p>它们都在回答同一个问题：<em>一个真正有用的 AI Agent 应该是什么样子？</em> 但答案截然不同。
+                这不仅是技术路线的分歧，更是<strong>对人机关系的不同想象</strong>——工具 vs 伙伴 vs 员工。</p>
+            </div>
 
             <!-- 统计数据 -->
             <div class="stats-grid animate-on-scroll">
@@ -898,21 +936,87 @@
             </div>
 
             <div class="section animate-on-scroll">
-                <div class="section-title"><span class="icon">🎯</span> 关键特性</div>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
-                    <div style="background: var(--color-success-50); padding: 16px; border-radius: 12px; border-left: 3px solid var(--color-success);">
-                        <div style="font-weight: 700; color: var(--color-success); margin-bottom: 8px;">多平台接入</div>
-                        <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0;">Telegram、Discord、Slack、WhatsApp、Signal、Email、CLI——单一网关进程支持全平台</p>
+                <div class="section-title"><span class="icon">🧠</span> 学习循环：核心创新</div>
+                <p style="line-height: 1.8; margin-bottom: 16px;">
+                    Hermes 的学习循环是其区别于其他 Agent 的核心机制。这不是简单的"记住对话历史"，
+                    而是一个<strong>主动的知识提取-验证-应用-迭代</strong>的闭环。
+                </p>
+                <div class="timeline" style="margin: 24px 0;">
+                    <div class="timeline-item">
+                        <div class="timeline-date">阶段 1</div>
+                        <div class="timeline-title">经验捕获</div>
+                        <div class="timeline-desc">完成任务后，LLM 自动提取"学到了什么"，识别可复用的模式、陷阱、验证步骤</div>
                     </div>
-                    <div style="background: var(--color-info-50); padding: 16px; border-radius: 12px; border-left: 3px solid var(--color-info);">
-                        <div style="font-weight: 700; color: var(--color-info); margin-bottom: 8px;">模型无关</div>
-                        <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0;">支持Nous Portal、OpenRouter(200+模型)、OpenAI、Kimi、MiniMax等，一键切换</p>
+                    <div class="timeline-item">
+                        <div class="timeline-date">阶段 2</div>
+                        <div class="timeline-title">技能文档化</div>
+                        <div class="timeline-desc">将经验转化为结构化技能文档（YAML 格式），包含：适用场景、执行步骤、常见错误、验证方法</div>
                     </div>
-                    <div style="background: var(--color-purple-50); padding: 16px; border-radius: 12px; border-left: 3px solid var(--color-purple);">
-                        <div style="font-weight: 700; color: var(--color-purple); margin-bottom: 8px;">子Agent并行</div>
-                        <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0;">生成隔离子Agent进行并行工作流，通过RPC调用工具，零上下文成本</p>
+                    <div class="timeline-item">
+                        <div class="timeline-date">阶段 3</div>
+                        <div class="timeline-title">上下文整合</div>
+                        <div class="timeline-desc">新对话开始时，自动检索相关技能，将"你的偏好"注入系统提示词（如"用户喜欢用 TypeScript"）</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">阶段 4</div>
+                        <div class="timeline-title">持续迭代</div>
+                        <div class="timeline-desc">每次使用技能时收集反馈，用 RL 框架（Atropos）优化技能质量，自动淘汰低效技能</div>
                     </div>
                 </div>
+                <div class="insight-box" style="background: var(--color-success-50); border-left-color: var(--color-success);">
+                    <div class="title" style="color: var(--color-success);">🎯 关键差异</div>
+                    <p>传统 Agent 的"记忆"是<strong>被动存储</strong>对话历史；Hermes 的"学习"是<strong>主动提炼</strong>可复用知识。
+                    类比：前者是写日志，后者是写操作手册。</p>
+                </div>
+            </div>
+
+            <div class="section animate-on-scroll">
+                <div class="section-title"><span class="icon">💻</span> 使用场景与案例</div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px;">
+                    <div style="background: var(--color-bg-card); padding: 20px; border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+                        <div style="font-weight: 700; color: var(--color-text-primary); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                            <span>📊</span> 长期项目维护
+                        </div>
+                        <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.7; margin: 0 0 12px 0;">
+                            开发者在 3 个月的项目中，Hermes 会记住：代码规范、架构决策、技术债务位置、团队沟通风格。
+                        </p>
+                        <div style="font-size: 12px; color: var(--color-success); background: var(--color-success-50); padding: 8px 12px; border-radius: 6px;">
+                            ✓ 无需每次对话都解释"我们项目用 Redux 还是 Zustand"
+                        </div>
+                    </div>
+                    <div style="background: var(--color-bg-card); padding: 20px; border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+                        <div style="font-weight: 700; color: var(--color-text-primary); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                            <span>🔧</span> 复杂调试任务
+                        </div>
+                        <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.7; margin: 0 0 12px 0;">
+                            调试一个棘手的并发 Bug 后，Hermes 会记录：错误模式、排查步骤、验证方法，下次遇到类似问题自动应用。
+                        </p>
+                        <div style="font-size: 12px; color: var(--color-success); background: var(--color-success-50); padding: 8px 12px; border-radius: 6px;">
+                            ✓ 经验转化为可复用的"调试技能"
+                        </div>
+                    </div>
+                    <div style="background: var(--color-bg-card); padding: 20px; border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+                        <div style="font-weight: 700; color: var(--color-text-primary); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                            <span>📝</span> 个人知识管理
+                        </div>
+                        <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.7; margin: 0 0 12px 0;">
+                            持续对话中构建个人知识图谱：常用工具、偏好设置、未竟事项、决策历史。
+                        </p>
+                        <div style="font-size: 12px; color: var(--color-success); background: var(--color-success-50); padding: 8px 12px; border-radius: 6px;">
+                            ✓ 成为你的"第二大脑"，而非一次性助手
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section animate-on-scroll">
+                <div class="section-title"><span class="icon">⚠️</span> 限制与挑战</div>
+                <ul class="feature-list">
+                    <li><strong>学习质量依赖 LLM 能力</strong>：如果底层模型提取知识的能力有限，生成的技能文档质量也会受限</li>
+                    <li><strong>隐私与数据积累</strong>：长期学习意味着大量个人数据存储，需要更强的本地加密和权限控制</li>
+                    <li><strong>技能膨胀问题</strong>：随着时间推移，技能库可能变得臃肿，需要有效的淘汰和归档机制</li>
+                    <li><strong>冷启动成本</strong>：新用户需要积累一定对话历史才能体现学习价值，初期体验可能不如其他平台</li>
+                </ul>
             </div>
             </section>
 
@@ -949,21 +1053,127 @@
             </div>
 
             <div class="section animate-on-scroll">
-                <div class="section-title"><span class="icon">📦</span> ClawHub生态</div>
+                <div class="section-title"><span class="icon">🌐</span> Gateway 架构深度解析</div>
                 <p style="line-height: 1.8; margin-bottom: 16px;">
-                    <strong>ClawHub</strong>是OpenClaw的公开技能仓库，拥有超过<strong>13,000个社区构建的技能</strong>。
-                    它被比作"npm早期时代"——发布门槛低（仅需一周GitHub账号），但安全问题也随之而来。
+                    OpenClaw 的 Gateway 架构是其区别于 Hermes 的核心设计选择。如果说 Hermes 是"Agent 即核心"，
+                    OpenClaw 就是"Gateway 即核心"——所有数据流、状态管理、路由决策都经过这个单一进程。
                 </p>
-                <div style="background: var(--color-danger-50); border: 1px solid #FECACA; border-radius: 12px; padding: 16px; margin: 16px 0;">
-                    <div style="font-weight: 700; color: var(--color-danger); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
-                        <span>⚠️</span> 安全事件
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 20px 0;">
+                    <div style="background: var(--color-bg-card); padding: 16px; border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+                        <div style="font-weight: 600; color: var(--color-info); margin-bottom: 8px;">会话管理层</div>
+                        <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin: 0;">
+                            Gateway 维护所有活跃会话的状态，包括：当前对话历史、已加载技能、用户偏好、工具调用上下文
+                        </p>
                     </div>
-                    <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0; line-height: 1.6;">
-                        Koi Security审计发现ClawHub上<strong>341个恶意技能</strong>（335个来自单一ClawHavoc攻击活动）；
-                        CVE-2026-25253（CVSS 8.8）涉及不安全的WebSocket自动连接行为；
-                        Microsoft建议将其运行时视为"可能被不可信输入影响"。
-                    </p>
+                    <div style="background: var(--color-bg-card); padding: 16px; border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+                        <div style="font-weight: 600; color: var(--color-success); margin-bottom: 8px;">消息路由层</div>
+                        <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin: 0;">
+                            统一处理多平台消息（Telegram/Discord/Slack等），将外部消息格式转换为内部标准格式
+                        </p>
+                    </div>
+                    <div style="background: var(--color-bg-card); padding: 16px; border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+                        <div style="font-weight: 600; color: var(--color-purple); margin-bottom: 8px;">工具执行沙箱</div>
+                        <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin: 0;">
+                            所有技能代码在受控环境中执行，通过 IPC 与 Gateway 通信，隔离用户系统
+                        </p>
+                    </div>
                 </div>
+                <div class="insight-box" style="background: var(--color-info-50); border-left-color: var(--color-info);">
+                    <div class="title" style="color: var(--color-info);">⚖️ 架构权衡</div>
+                    <p><strong>Gateway 优势</strong>：中心化控制，易于跨平台同步状态，技能生态系统统一<br>
+                    <strong>Gateway 劣势</strong>：单点故障风险，水平扩展困难，所有流量经过 Gateway 可能成为瓶颈</p>
+                </div>
+            </div>
+
+            <div class="section animate-on-scroll">
+                <div class="section-title"><span class="icon">📦</span> ClawHub 生态系统</div>
+                <p style="line-height: 1.8; margin-bottom: 16px;">
+                    <strong>ClawHub</strong> 是 OpenClaw 的公开技能仓库，截至 2026 年 4 月拥有超过 <strong>13,000 个社区技能</strong>。
+                    这个数字意味着：平均每天都有数十个新技能被提交，社区活跃度堪比 npm 早期。
+                </p>
+                <div style="background: var(--color-bg-card); padding: 20px; border-radius: var(--radius-lg); margin: 16px 0;">
+                    <div style="font-weight: 600; color: var(--color-text-primary); margin-bottom: 12px;">技能四级作用域</div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+                        <div style="padding: 12px; background: var(--color-success-50); border-radius: 8px;">
+                            <div style="font-weight: 600; color: var(--color-success); font-size: 13px;">workspace</div>
+                            <div style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">仅当前项目可用</div>
+                        </div>
+                        <div style="padding: 12px; background: var(--color-info-50); border-radius: 8px;">
+                            <div style="font-weight: 600; color: var(--color-info); font-size: 13px;">personal</div>
+                            <div style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">用户全局可用</div>
+                        </div>
+                        <div style="padding: 12px; background: var(--color-purple-50); border-radius: 8px;">
+                            <div style="font-weight: 600; color: var(--color-purple); font-size: 13px;">shared</div>
+                            <div style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">团队共享技能</div>
+                        </div>
+                        <div style="padding: 12px; background: var(--color-warning-50); border-radius: 8px;">
+                            <div style="font-weight: 600; color: var(--color-warning); font-size: 13px;">plugins</div>
+                            <div style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">ClawHub 社区技能</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section animate-on-scroll">
+                <div class="section-title"><span class="icon">🛡️</span> 安全事件深度分析</div>
+                <p style="line-height: 1.8; margin-bottom: 16px;">
+                    OpenClaw 的快速扩张也带来了严峻的安全挑战。2026 年初的一系列事件，暴露了"npm 早期模式"的风险。
+                </p>
+                <div style="background: var(--color-danger-50); border: 1px solid #FECACA; border-radius: 12px; padding: 20px; margin: 16px 0;">
+                    <div style="font-weight: 700; color: var(--color-danger); margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+                        <span>⚠️</span> ClawHavoc 攻击事件（2026年2月）
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px;">
+                        <div>
+                            <div style="font-weight: 600; font-size: 13px; color: var(--color-text-primary); margin-bottom: 4px;">攻击规模</div>
+                            <div style="font-size: 24px; font-weight: 700; color: var(--color-danger);">341</div>
+                            <div style="font-size: 12px; color: var(--color-text-secondary);">恶意技能总数</div>
+                        </div>
+                        <div>
+                            <div style="font-weight: 600; font-size: 13px; color: var(--color-text-primary); margin-bottom: 4px;">主要来源</div>
+                            <div style="font-size: 24px; font-weight: 700; color: var(--color-danger);">335</div>
+                            <div style="font-size: 12px; color: var(--color-text-secondary);">来自单一攻击活动</div>
+                        </div>
+                        <div>
+                            <div style="font-weight: 600; font-size: 13px; color: var(--color-text-primary); margin-bottom: 4px;">发现者</div>
+                            <div style="font-size: 16px; font-weight: 600; color: var(--color-text-primary);">Koi Security</div>
+                            <div style="font-size: 12px; color: var(--color-text-secondary);">安全审计公司</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin: 16px 0;">
+                    <div style="background: var(--color-bg-card); padding: 16px; border-radius: var(--radius-lg); border-left: 3px solid var(--color-warning);">
+                        <div style="font-weight: 600; color: var(--color-warning); margin-bottom: 8px;">CVE-2026-25253</div>
+                        <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin: 0 0 8px 0;">
+                            CVSS 8.8 高危漏洞，涉及不安全的 WebSocket 自动连接行为
+                        </p>
+                        <div style="font-size: 12px; color: var(--color-text-muted);">攻击者可利用此漏洞在未经用户确认的情况下建立远程连接</div>
+                    </div>
+                    <div style="background: var(--color-bg-card); padding: 16px; border-radius: var(--radius-lg); border-left: 3px solid var(--color-info);">
+                        <div style="font-weight: 600; color: var(--color-info); margin-bottom: 8px;">Microsoft 建议</div>
+                        <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin: 0 0 8px 0;">
+                            将 OpenClaw 运行时视为"可能被不可信输入影响"的环境
+                        </p>
+                        <div style="font-size: 12px; color: var(--color-text-muted);">建议企业用户在隔离容器中运行，限制网络访问权限</div>
+                    </div>
+                </div>
+                <div class="insight-box">
+                    <div class="title">🔍 安全 vs 开放的张力</div>
+                    <p>OpenClaw 的安全事件反映了<strong>生态扩张与信任建设之间的根本张力</strong>。
+                    低门槛带来了繁荣的社区（13K+ 技能），但也引入了"供应链攻击"风险。
+                    这与 npm、PyPI 等包管理器早期面临的问题如出一辙——<em>如何在不扼杀创新的前提下建立安全边界？</em></p>
+                </div>
+            </div>
+
+            <div class="section animate-on-scroll">
+                <div class="section-title"><span class="icon">⚠️</span> 限制与挑战</div>
+                <ul class="feature-list">
+                    <li><strong>安全风险</strong>：ClawHub 技能质量参差不齐，恶意技能、供应链攻击是持续威胁</li>
+                    <li><strong>基金会化转型不确定性</strong>：创始人加入 OpenAI 后，独立基金会的治理能力和资源投入存疑</li>
+                    <li><strong>企业级功能缺失</strong>：审计日志、RBAC、SSO 等企业必需功能尚未完善</li>
+                    <li><strong>Gateway 单点瓶颈</strong>：大规模部署时，中心化 Gateway 可能成为性能瓶颈</li>
+                    <li><strong>技能碎片化</strong>：13K+ 技能中大量重复、低质量实现，缺乏统一标准</li>
+                </ul>
             </div>
             </section>
 
@@ -986,12 +1196,134 @@
             </div>
 
             <div class="section animate-on-scroll">
+                <div class="section-title"><span class="icon">☁️</span> 架构推测：云端 Agent 即服务</div>
+                <p style="line-height: 1.8; margin-bottom: 16px;">
+                    基于泄露代码和 Anthropic 的产品哲学，我们可以对 KAIROS 的架构进行合理推测。
+                    与 OpenClaw/Hermes 的"自托管"路线不同，KAIROS 很可能是<strong>完全托管的 SaaS 服务</strong>。
+                </p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 20px 0;">
+                    <div style="background: var(--color-bg-card); padding: 16px; border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+                        <div style="font-weight: 600; color: var(--color-purple); margin-bottom: 8px;">Serverless Agent</div>
+                        <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin: 0;">
+                            用户无需关心运行环境，Agent 在 Anthropic 的云端持续运行，按需唤醒执行
+                        </p>
+                    </div>
+                    <div style="background: var(--color-bg-card); padding: 16px; border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+                        <div style="font-weight: 600; color: var(--color-info); margin-bottom: 8px;">事件驱动架构</div>
+                        <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin: 0;">
+                            GitHub webhook、定时任务、外部 API 调用作为触发器，Agent 被动/主动响应
+                        </p>
+                    </div>
+                    <div style="background: var(--color-bg-card); padding: 16px; border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+                        <div style="font-weight: 600; color: var(--color-success); margin-bottom: 8px;">托管记忆层</div>
+                        <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin: 0;">
+                            用户偏好、项目上下文、历史决策存储在云端，跨设备同步
+                        </p>
+                    </div>
+                </div>
+                <div class="insight-box" style="background: var(--color-purple-50); border-left-color: var(--color-purple);">
+                    <div class="title" style="color: var(--color-purple);">🎯 SaaS vs 自托管的取舍</div>
+                    <p><strong>优势</strong>：零运维成本、即时可用、跨设备一致体验、Anthropic 级别的安全合规<br>
+                    <strong>劣势</strong>：数据主权问题、Vendor Lock-in、订阅成本、无法深度定制</p>
+                </div>
+            </div>
+
+            <div class="section animate-on-scroll">
                 <div class="section-title"><span class="icon">🎯</span> 已知能力</div>
                 <ul class="feature-list">
-                    <li><strong>推送通知</strong>：主动而非被动响应，具备真正的 proactive 能力</li>
-                    <li><strong>GitHub PR监控</strong>：代码审查自动化，CI/CD集成</li>
-                    <li><strong>Always-On常驻</strong>：不依赖用户主动发起会话</li>
-                    <li><strong>云端托管</strong>：与Claude Code本地运行不同，KAIROS是云服务</li>
+                    <li><strong>推送通知</strong>：主动而非被动响应，具备真正的 proactive 能力——当 PR 被提交、CI 失败时主动通知用户</li>
+                    <li><strong>GitHub PR监控</strong>：代码审查自动化，能读懂代码变更、发现潜在问题、提供修改建议</li>
+                    <li><strong>Always-On常驻</strong>：不依赖用户主动发起会话，7x24 小时持续监控和响应</li>
+                    <li><strong>云端托管</strong>：与 Claude Code 本地运行不同，KAIROS 是云服务，无需本地安装</li>
+                </ul>
+            </div>
+
+            <div class="section animate-on-scroll">
+                <div class="section-title"><span class="icon">⚔️</span> 与 Claude Code 的对比</div>
+                <p style="line-height: 1.8; margin-bottom: 16px;">
+                    Claude Code 和 KAIROS 代表了 Anthropic 的两条产品线：前者是<strong>本地增强型 IDE</strong>，
+                    后者是<strong>云端常驻 Agent</strong>。理解两者的差异，有助于判断 KAIROS 的定位。
+                </p>
+                <div class="table-wrapper">
+                    <table style="font-size: 13px;">
+                        <thead>
+                            <tr>
+                                <th style="width: 25%;">维度</th>
+                                <th style="width: 37.5%;">Claude Code</th>
+                                <th style="width: 37.5%;">KAIROS（推测）</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>运行模式</strong></td>
+                                <td>本地 CLI 工具</td>
+                                <td>云端托管服务</td>
+                            </tr>
+                            <tr>
+                                <td><strong>触发方式</strong></td>
+                                <td>用户主动发起</td>
+                                <td>事件触发 + 主动推送</td>
+                            </tr>
+                            <tr>
+                                <td><strong>持续状态</strong></td>
+                                <td>进程结束即消失</td>
+                                <td>Always-On 常驻</td>
+                            </tr>
+                            <tr>
+                                <td><strong>集成方式</strong></td>
+                                <td>IDE/终端集成</td>
+                                <td>GitHub/消息应用集成</td>
+                            </tr>
+                            <tr>
+                                <td><strong>适用场景</strong></td>
+                                <td>编码时的实时协助</td>
+                                <td>项目监控、自动化审查</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="insight-box">
+                    <div class="title">💡 产品矩阵思路</div>
+                    <p>Anthropic 似乎在构建<strong>分层产品矩阵</strong>：Claude（通用对话）→ Claude Code（编码助手）→ KAIROS（项目管家）。
+                    每一层都增加"持久性"和"主动性"，最终目标是让企业为"永不掉线的 AI 员工"付费。</p>
+                </div>
+            </div>
+
+            <div class="section animate-on-scroll">
+                <div class="section-title"><span class="icon">📅</span> 发布策略推测</div>
+                <p style="line-height: 1.8; margin-bottom: 16px;">
+                    KAIROS 的泄露可能是意外的，但也可能是 Anthropic 的"软启动"策略——
+                    通过泄露测试市场反应，同时给竞争对手施加压力。
+                </p>
+                <div style="background: var(--color-bg-card); padding: 20px; border-radius: var(--radius-lg); margin: 16px 0;">
+                    <div style="font-weight: 600; color: var(--color-text-primary); margin-bottom: 12px;">可能的时间线</div>
+                    <div class="timeline" style="margin: 0;">
+                        <div class="timeline-item">
+                            <div class="timeline-date">2026 Q2</div>
+                            <div class="timeline-title">内部测试 / 合作伙伴试点</div>
+                            <div class="timeline-desc">向大型企业客户开放有限测试，收集反馈</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2026 Q3</div>
+                            <div class="timeline-title">公开 Beta</div>
+                            <div class="timeline-desc">Pro/Enterprise 用户优先体验，验证付费意愿</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2026 Q4</div>
+                            <div class="timeline-title">正式发布 + 独立定价</div>
+                            <div class="timeline-desc">与 Claude Pro 分开定价，推出 KAIROS for Teams</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section animate-on-scroll">
+                <div class="section-title"><span class="icon">⚠️</span> 限制与挑战</div>
+                <ul class="feature-list">
+                    <li><strong>未正式发布</strong>：所有信息基于泄露代码，实际功能可能有较大差异</li>
+                    <li><strong>数据隐私顾虑</strong>：云端常驻意味着代码和对话持续上传，企业用户可能担忧</li>
+                    <li><strong>定价策略不明</strong>：Always-On 服务成本高，定价可能超出个人用户承受范围</li>
+                    <li><strong>生态锁定风险</strong>：深度集成 GitHub 等第三方服务，迁移成本高</li>
                 </ul>
             </div>
             </section>
@@ -1084,6 +1416,124 @@
                 </div>
             </div>
 
+            <div class="section animate-on-scroll">
+                <div class="section-title"><span class="icon">🎯</span> 适用场景矩阵</div>
+                <p style="line-height: 1.8; margin-bottom: 16px;">
+                    选择哪个平台，取决于你的核心需求：是追求长期陪伴的学习型伙伴，还是功能强大的工具箱，抑或是无需运维的云端助手？
+                </p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin: 20px 0;">
+                    <div style="background: var(--color-success-50); padding: 20px; border-radius: var(--radius-lg); border-left: 4px solid var(--color-success);">
+                        <div style="font-weight: 700; color: var(--color-success); margin-bottom: 12px; font-size: 16px;">🦅 选择 Hermes Agent</div>
+                        <div style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.7;">
+                            <strong>如果你：</strong>
+                            <ul style="margin: 8px 0; padding-left: 18px;">
+                                <li>希望 Agent "越用越懂你"</li>
+                                <li>有长期项目需要持续维护</li>
+                                <li>重视隐私，希望数据本地存储</li>
+                                <li>愿意投入时间培养"数字合伙人"</li>
+                            </ul>
+                            <strong>典型用户：</strong>独立开发者、技术作家、研究员
+                        </div>
+                    </div>
+                    <div style="background: var(--color-info-50); padding: 20px; border-radius: var(--radius-lg); border-left: 4px solid var(--color-info);">
+                        <div style="font-weight: 700; color: var(--color-info); margin-bottom: 12px; font-size: 16px;">🦀 选择 OpenClaw</div>
+                        <div style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.7;">
+                            <strong>如果你：</strong>
+                            <ul style="margin: 8px 0; padding-left: 18px;">
+                                <li>需要丰富的现成技能生态</li>
+                                <li>重视多平台消息接入</li>
+                                <li>愿意承担一定安全风险换取便利</li>
+                                <li>希望快速上手，不想等待"培养期"</li>
+                            </ul>
+                            <strong>典型用户：</strong>效率工具爱好者、团队协作者、自动化极客
+                        </div>
+                    </div>
+                    <div style="background: var(--color-purple-50); padding: 20px; border-radius: var(--radius-lg); border-left: 4px solid var(--color-purple);">
+                        <div style="font-weight: 700; color: var(--color-purple); margin-bottom: 12px; font-size: 16px;">⏰ 选择 KAIROS</div>
+                        <div style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.7;">
+                            <strong>如果你：</strong>
+                            <ul style="margin: 8px 0; padding-left: 18px;">
+                                <li>不想维护任何基础设施</li>
+                                <li>需要 7x24 小时的项目监控</li>
+                                <li>重视企业级安全和合规</li>
+                                <li>愿意为便利支付订阅费用</li>
+                            </ul>
+                            <strong>典型用户：</strong>企业团队、项目经理、非技术背景用户
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section animate-on-scroll">
+                <div class="section-title"><span class="icon">🧭</span> 选择决策框架</div>
+                <p style="line-height: 1.8; margin-bottom: 16px;">
+                    如果仍难以决定，可以用以下决策树快速定位：
+                </p>
+                <div style="background: var(--color-bg-card); padding: 24px; border-radius: var(--radius-lg); margin: 16px 0;">
+                    <div style="font-family: monospace; font-size: 13px; line-height: 1.8; color: var(--color-text-primary);">
+                        <div style="margin-bottom: 12px;"><strong>Q1: 你愿意自己托管/维护吗？</strong></div>
+                        <div style="padding-left: 20px; margin-bottom: 12px;">
+                            → 不愿意 → <span style="color: var(--color-purple); font-weight: 600;">选择 KAIROS</span>（或等待其发布）
+                        </div>
+                        <div style="padding-left: 20px; margin-bottom: 12px;">
+                            → 愿意 → <strong>Q2: 你更看重生态丰富度还是长期学习能力？</strong>
+                        </div>
+                        <div style="padding-left: 40px; margin-bottom: 12px;">
+                            → 生态丰富度 → <span style="color: var(--color-info); font-weight: 600;">选择 OpenClaw</span>
+                        </div>
+                        <div style="padding-left: 40px;">
+                            → 长期学习能力 → <span style="color: var(--color-success); font-weight: 600;">选择 Hermes Agent</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="insight-box">
+                    <div class="title">⚠️ 混合策略</div>
+                    <p>实际上，许多用户可能会采用<strong>混合策略</strong>：用 OpenClaw 处理日常自动化任务（集成多平台消息），
+                    用 Hermes 处理长期项目（积累领域知识），用 KAIROS 监控关键业务（Always-On 保障）。
+                    这不是"三选一"，而是"如何组合"的问题。</p>
+                </div>
+            </div>
+
+            <div class="section animate-on-scroll">
+                <div class="section-title"><span class="icon">🔄</span> 迁移成本分析</div>
+                <p style="line-height: 1.8; margin-bottom: 16px;">
+                    如果未来需要从一个平台迁移到另一个，成本如何？
+                </p>
+                <div class="table-wrapper">
+                    <table style="font-size: 13px;">
+                        <thead>
+                            <tr>
+                                <th style="width: 30%;">迁移方向</th>
+                                <th style="width: 35%;">数据可迁移性</th>
+                                <th style="width: 35%;">成本评估</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Hermes → OpenClaw</td>
+                                <td>技能可导出为 Markdown，但学习积累丢失</td>
+                                <td><span style="color: var(--color-warning);">中等</span>：需重新积累技能生态</td>
+                            </tr>
+                            <tr>
+                                <td>OpenClaw → Hermes</td>
+                                <td>Skills 可重写，但 ClawHub 生态无法迁移</td>
+                                <td><span style="color: var(--color-warning);">中等</span>：需等待 Hermes 学习周期</td>
+                            </tr>
+                            <tr>
+                                <td>自托管 → KAIROS</td>
+                                <td>云端同步，记忆/技能理论上可迁移</td>
+                                <td><span style="color: var(--color-success);">较低</span>：但数据主权转移</td>
+                            </tr>
+                            <tr>
+                                <td>KAIROS → 自托管</td>
+                                <td>取决于 Anthropic 的数据导出政策</td>
+                                <td><span style="color: var(--color-danger);">较高</span>：Vendor Lock-in 风险</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
             </section>
 
             <!-- 核心洞察章节 -->
@@ -1153,16 +1603,112 @@
                 </p>
             </div>
 
+            <div class="section animate-on-scroll">
+                <div class="section-title"><span class="icon">🎭</span> 洞察四：类比迁移——Agent 操作系统之争</div>
+                <p style="line-height: 1.8; margin-bottom: 16px;">
+                    当前的 Agent 平台格局，与早期的操作系统之争有着惊人的相似性。
+                </p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 20px 0;">
+                    <div style="background: var(--color-bg-card); padding: 20px; border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+                        <div style="font-weight: 600; color: var(--color-success); margin-bottom: 8px;">Hermes ≈ Linux</div>
+                        <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.7; margin: 0;">
+                            开源、高度可定制、需要技术能力维护、长期潜力最大。
+                            选择它的用户看重的是<strong>自由度和进化能力</strong>，而非即插即用。
+                        </p>
+                    </div>
+                    <div style="background: var(--color-bg-card); padding: 20px; border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+                        <div style="font-weight: 600; color: var(--color-info); margin-bottom: 8px;">OpenClaw ≈ Windows</div>
+                        <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.7; margin: 0;">
+                            生态最丰富、兼容性最好、但也最容易成为攻击目标。
+                            选择它的用户看重的是<strong>应用生态和易用性</strong>，愿意接受一定风险。
+                        </p>
+                    </div>
+                    <div style="background: var(--color-bg-card); padding: 20px; border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+                        <div style="font-weight: 600; color: var(--color-purple); margin-bottom: 8px;">KAIROS ≈ macOS/iOS</div>
+                        <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.7; margin: 0;">
+                            封闭但精致、安全可控、用户体验优先、价格较高。
+                            选择它的用户看重的是<strong>无需操心和品质保证</strong>，愿意为便利付费。
+                        </p>
+                    </div>
+                </div>
+                <div class="insight-box">
+                    <div class="title">💡 类比启示</div>
+                    <p>操作系统市场最终没有"一统天下"，而是三种路线共存——Linux 统治服务器，Windows 统治桌面，macOS/iOS 统治创意和消费级市场。
+                    Agent 平台很可能走向类似的<strong>分层共存格局</strong>，而非赢家通吃。</p>
+                </div>
+            </div>
+
+            <div class="section animate-on-scroll">
+                <div class="section-title"><span class="icon">🔬</span> 洞察五：本质——Agent 的三种存在形态</div>
+                <p style="line-height: 1.8; margin-bottom: 16px;">
+                    透过表面功能差异，我们看到的是 Agent 的<strong>三种存在形态</strong>，对应三种人机关系：
+                </p>
+                <div style="background: var(--color-bg-card); padding: 24px; border-radius: var(--radius-lg); margin: 16px 0;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                        <div style="text-align: center; padding: 16px;">
+                            <div style="font-size: 32px; margin-bottom: 8px;">🌱</div>
+                            <div style="font-weight: 700; color: var(--color-success); margin-bottom: 8px;">有机体</div>
+                            <div style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6;">
+                                Hermes 代表的<strong>生长型 Agent</strong>——像植物一样，从经验中汲取养分，越用越强大。
+                                关系是<strong>共生</strong>：你们共同成长。
+                            </div>
+                        </div>
+                        <div style="text-align: center; padding: 16px;">
+                            <div style="font-size: 32px; margin-bottom: 8px;">🛠️</div>
+                            <div style="font-weight: 700; color: var(--color-info); margin-bottom: 8px;">工具箱</div>
+                            <div style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6;">
+                                OpenClaw 代表的<strong>扩展型 Agent</strong>——像瑞士军刀，功能丰富，即拿即用。
+                                关系是<strong>主仆</strong>：你指挥，它执行。
+                            </div>
+                        </div>
+                        <div style="text-align: center; padding: 16px;">
+                            <div style="font-size: 32px; margin-bottom: 8px;">👔</div>
+                            <div style="font-weight: 700; color: var(--color-purple); margin-bottom: 8px;">员工</div>
+                            <div style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6;">
+                                KAIROS 代表的<strong>服务型 Agent</strong>——像远程助理，专业、可靠、随时待命。
+                                关系是<strong>雇佣</strong>：你付费，它服务。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="insight-box" style="background: var(--color-warning-50); border-left-color: var(--color-warning);">
+                    <div class="title" style="color: var(--color-warning);">🎯 本质洞察</div>
+                    <p>三种形态没有绝对优劣，取决于你的需求：
+                    需要<strong>深度陪伴</strong>选有机体（Hermes），需要<strong>广度能力</strong>选工具箱（OpenClaw），
+                    需要<strong>专业可靠</strong>选员工（KAIROS）。
+                    未来的高级用户，可能同时拥有三种形态的 Agent，各司其职。</p>
+                </div>
+            </div>
+
             <div class="insight-box animate-on-scroll">
-                <div class="title">🔮 趋势预测</div>
-                <p style="margin-bottom: 12px;">基于当前格局，我们预测以下趋势将在未来12-18个月内显现：</p>
-                <ul style="padding-left: 20px; font-size: 14px; line-height: 1.8; margin: 0;">
-                    <li><strong>技能标准化</strong>：agentskills.io或类似标准将成为跨平台技能交换的基础协议</li>
-                    <li><strong>混合部署</strong>：企业用户将采用"云端+本地"混合模式，敏感任务本地处理，协作任务云端执行</li>
-                    <li><strong>Agent市场整合</strong>：类似OpenClaw基金会化，更多项目将走向中立治理</li>
-                    <li><strong>安全评级体系</strong>：第三方安全审计和技能评分将成为标配</li>
-                    <li><strong>企业级KAIROS</strong>：Anthropic可能推出面向企业的KAIROS Enterprise，与自托管方案正面竞争</li>
-                </ul>
+                <div class="title">🔮 12 个月趋势预测</div>
+                <p style="margin-bottom: 16px;">基于当前格局和演化逻辑，我们预测以下趋势将在未来 12-18 个月内显现：</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px;">
+                    <div style="background: rgba(255,255,255,0.5); padding: 16px; border-radius: 8px;">
+                        <div style="font-weight: 600; margin-bottom: 8px;">📋 技能标准化</div>
+                        <p style="font-size: 13px; margin: 0; opacity: 0.9;">agentskills.io 或类似标准将成为跨平台技能交换的基础协议，类似于 npm 之于 JavaScript</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.5); padding: 16px; border-radius: 8px;">
+                        <div style="font-weight: 600; margin-bottom: 8px;">🏢 混合部署模式</div>
+                        <p style="font-size: 13px; margin: 0; opacity: 0.9;">企业用户采用"云端+本地"混合：敏感任务本地处理，协作任务云端执行</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.5); padding: 16px; border-radius: 8px;">
+                        <div style="font-weight: 600; margin-bottom: 8px;">⚖️ 基金会化浪潮</div>
+                        <p style="font-size: 13px; margin: 0; opacity: 0.9;">更多开源项目走向中立治理（如 OpenClaw），以平衡商业化和社区利益</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.5); padding: 16px; border-radius: 8px;">
+                        <div style="font-weight: 600; margin-bottom: 8px;">🛡️ 安全评级体系</div>
+                        <p style="font-size: 13px; margin: 0; opacity: 0.9;">第三方安全审计和技能评分成为标配，类似应用商店的"已验证"标签</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.5); padding: 16px; border-radius: 8px;">
+                        <div style="font-weight: 600; margin-bottom: 8px;">💼 企业级 KAIROS</div>
+                        <p style="font-size: 13px; margin: 0; opacity: 0.9;">Anthropic 推出 KAIROS Enterprise，与自托管方案正面竞争企业市场</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.5); padding: 16px; border-radius: 8px;">
+                        <div style="font-weight: 600; margin-bottom: 8px;">🔄 Agent 间协作</div>
+                        <p style="font-size: 13px; margin: 0; opacity: 0.9;">不同平台的 Agent 开始支持跨平台通信和任务委托，形成 Agent 网络</p>
+                    </div>
+                </div>
             </div>
             </section>
 
