@@ -434,6 +434,7 @@
         .platform-card {
             background: var(--color-bg-card);
             border: 1px solid var(--color-border);
+            border-top: 3px solid var(--color-border);
             border-radius: var(--radius-lg);
             padding: 20px;
             transition: all var(--transition-normal);
@@ -442,16 +443,9 @@
             box-shadow: var(--shadow-md);
             transform: translateY(-3px);
         }
-        .platform-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 3px;
-            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-        }
-        .platform-card.emerald { border-top: 3px solid var(--color-success); }
-        .platform-card.blue    { border-top: 3px solid var(--color-info); }
-        .platform-card.violet  { border-top: 3px solid var(--color-purple); }
+        .platform-card.emerald { border-top-color: var(--color-success); }
+        .platform-card.blue    { border-top-color: var(--color-info); }
+        .platform-card.violet  { border-top-color: var(--color-purple); }
         .platform-card .name {
             font-size: 16px;
             font-weight: 700;
