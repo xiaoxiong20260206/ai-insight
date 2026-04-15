@@ -1190,13 +1190,16 @@
     const progressBar = document.getElementById("readingProgress");
     const scrollTopBtn = document.getElementById("scrollToTop");
 
-    // 平滑锚点滚动
+    // 平滑锚点滚动 + 点击时高亮 TOC
     document.querySelectorAll('a[href^="#"]').forEach(link => {
         link.addEventListener("click", e => {
             const target = document.getElementById(link.getAttribute("href").slice(1));
             if (!target) return;
             e.preventDefault();
             window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET, behavior: "smooth" });
+            // 点击时立即高亮对应 TOC 链接
+            tocLinks.forEach(l => l.classList.remove("toc-active"));
+            link.classList.add("toc-active");
         });
     });
 
