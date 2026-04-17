@@ -1,0 +1,166 @@
+{
+  "projectId": "INTERNAL_PROJECT_ID",
+  "tables": [
+    {
+      "$id": "INTERNAL_COLLECTION_ID",
+      "name": "AI洞察日报订阅用户",
+      "description": "存储订阅AI洞察日报的快手员工信息",
+      "enabled": true,
+      "attributes": [
+        {
+          "key": "username",
+          "type": "string",
+          "size": 255,
+          "required": true,
+          "array": false,
+          "default": null,
+          "description": "快手用户名（如 'shenlang'）"
+        },
+        {
+          "key": "employee_name",
+          "type": "string",
+          "size": 255,
+          "required": false,
+          "array": false,
+          "default": null,
+          "description": "员工姓名（用于展示）"
+        },
+        {
+          "key": "subscribed_at",
+          "type": "datetime",
+          "required": true,
+          "array": false,
+          "default": null,
+          "description": "订阅时间"
+        },
+        {
+          "key": "is_active",
+          "type": "boolean",
+          "required": true,
+          "array": false,
+          "default": true,
+          "description": "是否活跃订阅"
+        },
+        {
+          "key": "preferences",
+          "type": "string",
+          "size": 2000,
+          "required": false,
+          "array": false,
+          "default": null,
+          "description": "订阅偏好（JSON格式）"
+        }
+      ],
+      "indexes": [
+        {
+          "key": "idx_username",
+          "type": "unique",
+          "status": "available",
+          "attributes": ["username"],
+          "orders": ["ASC"]
+        },
+        {
+          "key": "idx_is_active",
+          "type": "key",
+          "status": "available",
+          "attributes": ["is_active"],
+          "orders": ["ASC"]
+        },
+        {
+          "key": "idx_subscribed_at",
+          "type": "key",
+          "status": "available",
+          "attributes": ["subscribed_at"],
+          "orders": ["DESC"]
+        }
+      ],
+      "permissions": {
+        "read": ["role:all"],
+        "create": ["role:all"],
+        "update": ["role:all"],
+        "delete": ["role:all"]
+      }
+    },
+    {
+      "$id": "send_logs",
+      "name": "AI洞察日报发送记录",
+      "description": "记录日报发送状态，用于监控和排查",
+      "enabled": true,
+      "attributes": [
+        {
+          "key": "date",
+          "type": "string",
+          "size": 10,
+          "required": true,
+          "array": false,
+          "default": null,
+          "description": "日报日期（YYYY-MM-DD）"
+        },
+        {
+          "key": "username",
+          "type": "string",
+          "size": 255,
+          "required": true,
+          "array": false,
+          "default": null,
+          "description": "接收用户名"
+        },
+        {
+          "key": "status",
+          "type": "string",
+          "size": 50,
+          "required": true,
+          "array": false,
+          "default": null,
+          "description": "发送状态（success/failed）"
+        },
+        {
+          "key": "sent_at",
+          "type": "datetime",
+          "required": true,
+          "array": false,
+          "default": null,
+          "description": "发送时间"
+        },
+        {
+          "key": "error_message",
+          "type": "string",
+          "size": 2000,
+          "required": false,
+          "array": false,
+          "default": null,
+          "description": "错误信息（如果有）"
+        }
+      ],
+      "indexes": [
+        {
+          "key": "idx_date_username",
+          "type": "unique",
+          "status": "available",
+          "attributes": ["date", "username"],
+          "orders": ["DESC", "ASC"]
+        },
+        {
+          "key": "idx_status",
+          "type": "key",
+          "status": "available",
+          "attributes": ["status"],
+          "orders": ["ASC"]
+        },
+        {
+          "key": "idx_sent_at",
+          "type": "key",
+          "status": "available",
+          "attributes": ["sent_at"],
+          "orders": ["DESC"]
+        }
+      ],
+      "permissions": {
+        "read": ["role:admin"],
+        "create": ["role:admin"],
+        "update": ["role:admin"],
+        "delete": ["role:admin"]
+      }
+    }
+  ]
+}

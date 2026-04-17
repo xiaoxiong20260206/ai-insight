@@ -129,6 +129,68 @@ async def send_to_target(
     return False
 
 
+async def send_to_subscribers(token: str, card: dict, date_str: str, dry_run: bool = False) -> None:
+    """发送日报给所有订阅用户"""
+    try:
+        # 动态导入订阅管理器（避免循环导入）
+        from subscription_manager import SubscriptionManager
+        
+        manager = SubscriptionManager()
+        subscribers = await manager.list_subscribers(active_only=True)
+        
+        if not subscribers:
+            print("\n📭 暂无订阅用户，跳过群发")
+            return
+        
+        print(f"\n📤 发送给订阅用户（共{len(subscribers)}人）...")
+        print("=" * 50)
+        
+        success_count = 0
+        failed_count = 0
+        
+        for i, subscriber in enumerate(subscribers, 1):
+            username = subscriber.get("username")
+            employee_name = subscriber.get("employee_name", "")
+            name_display = f"（{employee_name}）" if employee_name else ""
+            
+            print(f"\n[{i}/{len(subscribers)}] 发送给 {username}{name_display}...")
+            
+            try:
+                success = await send_to_target(
+                    token, card, "user", username, username, dry_run
+                )
+                
+                if success:
+                    await manager.log_send_status(date_str, username, "success")
+                    success_count += 1
+                    print(f"   ✅ 发送成功")
+                else:
+                    await manager.log_send_status(date_str, username, "failed", "发送失败")
+                    failed_count += 1
+                    print(f"   ❌ 发送失败")
+                
+                # 间隔控制（防止频率限制）
+                if i < len(subscribers):
+                    await asyncio.sleep(SEND_INTERVAL)
+            
+            except Exception as e:
+                await manager.log_send_status(date_str, username, "failed", str(e))
+                failed_count += 1
+                print(f"   ❌ 发送异常: {e}")
+        
+        # 汇总统计
+        print("\n" + "=" * 50)
+        print(f"📊 发送完成统计:")
+        print(f"   ✅ 成功: {success_count}")
+        print(f"   ❌ 失败: {failed_count}")
+        print(f"   📧 总计: {len(subscribers)}")
+    
+    except ImportError:
+        print("\n⚠️ 订阅管理模块未安装，跳过订阅用户发送")
+    except Exception as e:
+        print(f"\n❌ 发送给订阅用户失败: {e}")
+
+
 # ============ 预检（P0强制，v4.2新增） ============
 def pre_check(date_str: str) -> tuple:
     """
@@ -487,16 +549,18 @@ async def main():
         print(f"❌ Token 获取失败: {e}")
         return
     
-    # 4. 发送（2026-04-02 规范修复：默认统一私发给 shenlang，禁止群发）
-    # AI 日报走私发（--preview 语义），周报才群发
+    # 4. 发送给管理员（shenlang）
     print("\n📤 私发给 shenlang...")
     success = await send_to_target(
         token, card, "user", "shenlang", "shenlang", args.dry_run
     )
     if success:
-        print("✅ 私发成功！请查看KIM消息")
+        print("✅ 私发给 shenlang 成功！")
     else:
         print("❌ 私发失败")
+    
+    # 5. 发送给订阅用户
+    await send_to_subscribers(token, card, date_str, args.dry_run)
 
     # 显示日报链接
     month_str = date_str[:7]
