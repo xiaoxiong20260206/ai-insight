@@ -1,0 +1,447 @@
+{
+  "date": "2026-04-18",
+  "date_formatted": "2026年4月18日",
+  "coverage": { "overseas": 10, "china": 5 },
+  "overview": [
+    {
+      "icon": "🔥",
+      "label": "大模型",
+      "headline": "Claude Opus 4.7 + GPT-Rosalind 双雄同日发布",
+      "text": "Anthropic编程能力登顶CursorBench 70%，OpenAI切入生命科学赛道"
+    },
+    {
+      "icon": "🤖",
+      "label": "开发者工具",
+      "headline": "Microsoft Agent Framework 1.0 正式GA",
+      "text": "企业级多代理编排框架就绪，支持.NET和Python双语言"
+    },
+    {
+      "icon": "📱",
+      "label": "AI应用",
+      "headline": "ChatGPT开始展示广告",
+      "text": "免费版商业模式转向，用户可选择付费去广告"
+    },
+    {
+      "icon": "💰",
+      "label": "产业动态",
+      "headline": "OpenAI以1220亿估值完成历史性融资",
+      "text": "AI史上最大规模融资，资本狂热持续升温"
+    },
+    {
+      "icon": "🇨🇳",
+      "label": "国内动态",
+      "headline": "DeepSeek V4适配华为昇腾芯片完成",
+      "text": "国产AI芯片替代迈出关键一步，API定价极具竞争力"
+    }
+  ],
+  "tabs": [
+    {
+      "id": "models",
+      "title": "🧠 大模型",
+      "news": {
+        "overseas": [
+          {
+            "title": "Claude Opus 4.7发布：编程能力大幅跃升",
+            "source": "Anthropic",
+            "url": "https://www.anthropic.com/news/claude-opus-4-7",
+            "date": "2026-04-16",
+            "details": {
+              "finding": "Anthropic发布Claude Opus 4.7，CursorBench得分70%（比Opus 4.6的58%提升12个百分点），视觉能力大幅增强，支持高达2576像素长边图像输入（约3.75MP），比之前提升3倍。引入新的xhigh努力等级，更好平衡推理与延迟。",
+              "significance": "Opus 4.7在编码、工具调用、视觉推理三大核心能力上全面领先，Cursor、Notion、Devin、Replit、Vercel等20+家公司实测反馈显著提升。这是首个在多个核心基准测试中全面领先的通用模型。"
+            }
+          },
+          {
+            "title": "OpenAI发布GPT-Rosalind：首个生命科学专用模型",
+            "source": "OpenAI",
+            "url": "https://openai.com/index/introducing-gpt-rosalind/",
+            "date": "2026-04-16",
+            "details": {
+              "finding": "OpenAI发布首个生命科学专用模型GPT-Rosalind，专为生物学、药物发现和转化医学研究设计。在BixBench生物信息学基准测试中取得领先表现，LABBench2测试中6/11任务超越GPT-5.4。",
+              "significance": "头部模型厂商开始布局垂直领域，生命科学成为AI应用新赛道。与Amgen、Moderna、Allen Institute、Thermo Fisher Scientific等顶级机构合作，商业模式探索新路径。"
+            }
+          },
+          {
+            "title": "Claude Mythos Preview展示网络安全能力突破",
+            "source": "Anthropic Red Team",
+            "url": "https://red.anthropic.com/2026/mythos-preview/",
+            "date": "2026-04-07",
+            "details": {
+              "finding": "Anthropic展示Claude Mythos Preview的网络安全能力，能够发现存活数十年的漏洞。但出于安全考虑，将先在较弱模型Opus 4.7上测试新的网络安全保护措施。",
+              "significance": "AI安全能力的双刃剑：一方面能帮助发现和修复漏洞，另一方面可能被恶意利用。Anthropic的审慎态度体现了负责任的AI发展理念。"
+            }
+          }
+        ],
+        "china": [
+          {
+            "title": "Claude Opus 4.7深夜炸场：更强视觉、更长任务执行能力",
+            "source": "36氪",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=Claude Opus 4.7深夜炸场",
+            "date": "2026-04-17",
+            "details": {
+              "finding": "Anthropic正式发布Claude Opus 4.7，核心升级落在复杂任务执行、高清视觉理解和更稳的长链路工作流上。用户需注意Opus 4.7字面执行指令，需重新调优提示词。",
+              "significance": "国内媒体第一时间跟进解读，体现了对头部模型动态的高度关注。Opus 4.7的发布对国内AI从业者具有重要参考价值。"
+            }
+          },
+          {
+            "title": "OpenAI杀进制药：GPT-Rosalind剑指药物研发",
+            "source": "36氪",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=OpenAI杀进制药",
+            "date": "2026-04-17",
+            "details": {
+              "finding": "OpenAI发布生命科学专用模型GPT-Rosalind，引发国内AI制药行业震动。英矽智能、晶泰科技等国内AI制药企业面临新竞争格局。",
+              "significance": "AI+制药赛道竞争加剧，国内企业需要重新评估技术路线和商业模式。生命科学AI应用的商业化进程可能加速。"
+            }
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "双雄对决：Claude Opus 4.7与GPT-Rosalind同日发布的深层信号",
+        "paragraphs": [
+          "4月16日，Anthropic和OpenAI几乎同时发布重磅产品：Claude Opus 4.7在编码能力上登顶CursorBench 70%，而GPT-Rosalind则切入生命科学垂直领域。这标志着大模型竞争从'全面碾压'转向'聚焦突破'——通用模型的边际收益递减，垂直领域的商业价值开始显现。",
+          "Opus 4.7的核心升级在于三个维度：编码（CursorBench从58%跃升至70%）、工具调用（MCP-Atlas 77.3%最佳）、视觉推理（CharXiv 82.1%，+13点最大单基准提升）。Partner实测反馈更加震撼：Cursor报告性能显著提升，XBOW渗透测试视觉能力从54.5%飙升至98.5%，Replit形容它'更像一个好同事，会在技术讨论中反驳你帮你做出更好决策'。",
+          "GPT-Rosalind则代表了另一种战略选择：与其在通用基准上内卷，不如深耕高价值垂直领域。与Amgen、Moderna、Allen Institute的合作，证明了生命科学领域的付费意愿和应用价值。这两个产品的同时发布，预示着大模型行业将从'参数竞赛'走向'价值竞赛'。"
+        ],
+        "takeaway": "建议企业用户关注两个信号：一是Opus 4.7在Agent场景的实战能力，二是垂直专用模型的商业化潜力。通用模型选型从'谁更强'转向'谁更适合'。"
+      },
+      "pattern_insight_html": "<div class='pi-card'><h3>规律洞察</h3><p>大模型竞争维度正在从'参数量'和'基准测试分数'转向'生产环境可用性'和'垂直领域价值'。Opus 4.7的CursorBench 70%和20+家Partner实测验证，比传统基准测试更有说服力。GPT-Rosalind的生命科学切入，标志着'通用模型+垂直数据'范式开始跑通商业化路径。</p><p class='signal'>信号强度：⭐⭐⭐⭐⭐</p></div>"
+    },
+    {
+      "id": "coding",
+      "title": "💻 AI Coding",
+      "news": {
+        "overseas": [
+          {
+            "title": "Microsoft Agent Framework 1.0正式发布：生产就绪",
+            "source": "Microsoft DevBlogs",
+            "url": "https://devblogs.microsoft.com/agent-framework/microsoft-agent-framework-version-1-0/",
+            "date": "2026-04-03",
+            "details": {
+              "finding": "Microsoft Agent Framework达到1.0版本，支持.NET和Python。提供企业级多代理编排、多模型提供商支持（Azure OpenAI、Anthropic、Google Gemini、Amazon Bedrock）、A2A和MCP协议支持。包含DevUI浏览器本地调试器、从Semantic Kernel和AutoGen的迁移助手。",
+              "significance": "微软将AI Agent框架产品化，降低企业级Agent开发门槛。多模型提供商支持和协议标准化，意味着Agent生态开始走向成熟。"
+            }
+          },
+          {
+            "title": "JetBrains调研：开发者实际使用的AI编程工具",
+            "source": "JetBrains",
+            "url": "https://blog.jetbrains.com/research/2026/04/which-ai-coding-tools-do-developers-actually-use-at-work/",
+            "date": "2026-04-02",
+            "details": {
+              "finding": "JetBrains发布开发者调研报告，展示Claude Code、Cursor、GitHub Copilot、Junie等AI编程工具的实际使用情况。2026年4月启动大规模调查，结果即将公布。",
+              "significance": "开发者工具厂商开始系统性研究AI工具的实际采纳情况，这将影响未来IDE产品的AI集成策略。"
+            }
+          }
+        ],
+        "china": [
+          {
+            "title": "Claude Code新版发布：支持Routine自动化功能",
+            "source": "36氪",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=Claude Code Routine 自动化",
+            "date": "2026-04-15",
+            "details": {
+              "finding": "Claude Code新增Routine功能，支持定时任务、API和GitHub三路触发，可变身'云端员工'。36氪第一时间解读新功能。",
+              "significance": "AI编程工具从被动响应转向主动执行，Routine功能让开发者可以定义自动化工作流，提升开发效率。"
+            }
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "AI Coding进入Agent时代：从代码补全到自主开发",
+        "paragraphs": [
+          "Microsoft Agent Framework 1.0的发布标志着AI编程工具正式进入Agent时代。与传统的代码补全工具不同，Agent框架允许开发者定义多个AI Agent协同完成复杂开发任务，支持.NET和Python双语言，并兼容Azure OpenAI、Anthropic、Google Gemini、Amazon Bedrock等多模型提供商。",
+          "技术亮点包括：企业级多代理编排能力（支持顺序、并行、条件分支等工作流）、A2A（Agent-to-Agent）和MCP（Model Context Protocol）协议支持、DevUI浏览器本地调试器，以及从Semantic Kernel和AutoGen的迁移助手。这意味着开发者可以在统一框架下管理多个AI Agent的协作。",
+          "与此同时，Claude Code的Routine功能让AI编程工具从被动响应转向主动执行。开发者可以定义定时任务、API触发和GitHub事件触发，让AI Agent成为'云端员工'。这标志着AI编程工具正在从'辅助工具'向'自主开发者'演进。"
+        ],
+        "takeaway": "建议开发团队评估Agent框架在复杂项目中的应用潜力，优先试点Routine等自动化功能。企业级Agent开发需要关注安全、可解释性和成本控制。"
+      },
+      "pattern_insight_html": "<div class='pi-card'><h3>规律洞察</h3><p>AI编程工具的技术演进路径清晰：代码补全→代码生成→Agent协作→自主开发。Microsoft Agent Framework 1.0和Claude Code Routine的发布，标志着第二阶段向第三阶段的跃迁。企业级Agent的关键能力是多代理编排、协议标准化和本地调试。</p><p class='signal'>信号强度：⭐⭐⭐⭐</p></div>"
+    },
+    {
+      "id": "apps",
+      "title": "📱 AI应用",
+      "news": {
+        "overseas": [
+          {
+            "title": "ChatGPT开始展示广告",
+            "source": "OpenAI Help",
+            "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
+            "date": "2026-04-16",
+            "details": {
+              "finding": "OpenAI在ChatGPT中开始推出广告功能，这标志着免费版商业模式的重要转变。用户可选择付费订阅去除广告。",
+              "significance": "AI应用商业化的关键一步：免费产品通过广告变现，付费用户享受无广告体验。这一模式可能被其他AI应用效仿。"
+            }
+          },
+          {
+            "title": "Codex应用：macOS命令中心上线",
+            "source": "OpenAI",
+            "url": "https://openai.com/index/introducing-the-codex-app/",
+            "date": "2026-04-15",
+            "details": {
+              "finding": "OpenAI发布Codex macOS应用，作为AI编程的命令中心。支持按量付费定价模式。",
+              "significance": "AI编程工具正在从云服务向本地应用扩展，macOS生态成为重要阵地。按量付费模式降低使用门槛。"
+            }
+          }
+        ],
+        "china": [
+          {
+            "title": "ChatGPT广告功能引发国内AI应用商业模式讨论",
+            "source": "36氪",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=ChatGPT广告 商业模式",
+            "date": "2026-04-17",
+            "details": {
+              "finding": "OpenAI在ChatGPT中测试广告展示，引发用户讨论。国内媒体关注其对AI应用商业模式的影响。",
+              "significance": "国内AI应用厂商可能跟进广告变现模式，但需考虑用户接受度和监管合规性。"
+            }
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "AI应用商业化拐点：从免费获客到多元变现",
+        "paragraphs": [
+          "ChatGPT开始展示广告，标志着AI应用正式进入商业化深水区。自2022年底发布以来，ChatGPT一直采用免费+订阅的模式，但高昂的推理成本让OpenAI承受巨大压力。广告变现成为平衡成本与用户体验的重要选择。",
+          "这一转变对国内AI应用具有重要参考价值。目前国内主流AI应用多采用订阅制或按量付费，广告模式尚未大规模采用。ChatGPT的广告策略如果成功，可能引发行业效仿；如果引发用户反感，则可能延缓AI应用商业化的进程。",
+          "值得关注的是，用户可选择付费订阅去除广告，这意味着OpenAI在尝试'免费增值'模式的升级版：免费用户贡献流量和广告收入，付费用户享受纯净体验和更多功能。这种分层策略可能成为AI应用商业化的主流模式。"
+        ],
+        "takeaway": "建议AI应用厂商关注ChatGPT广告策略的用户反馈，评估广告变现的可行性和用户接受度。国内监管环境对广告内容有严格限制，需提前合规评估。"
+      },
+      "pattern_insight_html": "<div class='pi-card'><h3>规律洞察</h3><p>AI应用商业化的路径正在清晰：免费获客→分层变现→多元收入。广告+订阅的组合模式可能在2026年成为主流。关键挑战在于平衡用户体验和商业收益，避免广告过度影响产品口碑。ChatGPT的广告策略如果成功验证，将为整个行业提供可复制的商业化模板和最佳实践。</p><p class='signal'>信号强度：⭐⭐⭐⭐</p></div>"
+    },
+    {
+      "id": "industry",
+      "title": "💼 AI行业",
+      "news": {
+        "overseas": [
+          {
+            "title": "OpenAI以1220亿美元估值完成新一轮融资",
+            "source": "OpenAI",
+            "url": "https://openai.com/index/accelerating-the-next-phase-ai/",
+            "date": "2026-03-31",
+            "details": {
+              "finding": "OpenAI宣布以1220亿美元估值完成融资，加速AI下一阶段发展。这是AI历史上最大规模融资之一。",
+              "significance": "资本狂热持续升温，AI独角兽估值不断刷新纪录。但高估值背后是高预期，商业化压力将持续加大。"
+            }
+          },
+          {
+            "title": "OpenAI收购科技播客TBPN",
+            "source": "OpenAI",
+            "url": "https://openai.com/index/openai-acquires-tbpn/",
+            "date": "2026-04-02",
+            "details": {
+              "finding": "OpenAI宣布收购科技播客TBPN（Technology Business Programming Network），深化全球AI对话。TBPN保持编辑独立，是OpenAI最大的媒体领域布局。",
+              "significance": "AI公司开始布局内容生态，媒体资产可能成为AI产品的分发渠道和品牌放大器。"
+            }
+          }
+        ],
+        "china": [
+          {
+            "title": "OpenAI收购TBPN播客，亲自下场做媒体",
+            "source": "DoNews",
+            "url": "https://www.donews.com/news/detail/1/6496816.html",
+            "date": "2026-04-03",
+            "details": {
+              "finding": "OpenAI收购科技播客TBPN，证券时报、DoNews等国内媒体跟进报道。分析认为这是OpenAI布局内容生态的重要一步。",
+              "significance": "AI巨头的媒体布局引发国内关注，可能影响国内AI企业的内容战略。"
+            }
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "AI资本狂热：1220亿估值背后的信号与隐忧",
+        "paragraphs": [
+          "OpenAI以1220亿美元估值完成新一轮融资，刷新AI独角兽估值纪录。这一数字超过了大多数传统科技巨头的市值，反映了资本市场对AI未来的极度乐观。但高估值背后是高预期，OpenAI需要在商业化道路上跑出更快的速度。",
+          "与此同时，OpenAI收购科技播客TBPN的动作值得关注。这是OpenAI在媒体领域的最大一笔收购，TBPN将保持编辑独立，但可能成为OpenAI产品的分发渠道。这一布局暗示了AI公司对'内容+技术'融合的战略思考。",
+          "Q1 2026全球VC投资创下历史新高，AI创业公司独占鳌头。2月份更是出现AI占据全球VC funding 90%的极端情况。一边是资本疯狂涌入，一边是AI应用商业化的不确定性，这场'烧钱竞赛'正在进入白热化阶段。"
+        ],
+        "takeaway": "建议关注AI行业资本动向，评估融资热度与商业化进程的匹配度。高估值企业面临更大的商业化压力，可能加速产品迭代和定价策略调整。"
+      },
+      "pattern_insight_html": "<div class='pi-card'><h3>规律洞察</h3><p>AI行业资本周期正在加速：融资→估值→商业化压力→产品迭代。OpenAI收购TBPN标志着'技术+内容'融合战略的开始，媒体资产可能成为AI产品的品牌放大器和用户触达渠道。VC投资从'撒网式'向'头部集中'转变，中小AI创业公司融资难度加大，行业集中度将持续提升。</p><p class='signal'>信号强度：⭐⭐⭐⭐⭐</p></div>"
+    },
+    {
+      "id": "enterprise",
+      "title": "🏢 企业AI转型",
+      "news": {
+        "overseas": [
+          {
+            "title": "PwC 2026 AI商业预测：聚焦策略与代理工作流",
+            "source": "PwC",
+            "url": "https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-predictions.html",
+            "date": "2026-04-01",
+            "details": {
+              "finding": "PwC发布2026 AI商业预测报告，强调聚焦策略、代理工作流和负责任创新是企业AI转型的关键。",
+              "significance": "咨询机构的预测报告反映了企业AI转型的实践洞察，代理工作流成为新的关注焦点。"
+            }
+          },
+          {
+            "title": "WEF发布32个AI企业应用案例",
+            "source": "CIO",
+            "url": "https://www.cio.com/article/4122937/davos-from-hype-to-ai-transformation-in-the-economy.html",
+            "date": "2026-01-29",
+            "details": {
+              "finding": "世界经济论坛发布报告，展示32个具有真实商业影响的AI企业转型案例，强调将AI融入商业策略的企业影响最大。",
+              "significance": "案例研究为企业AI转型提供了可借鉴的实践模板，策略性AI应用比技术性应用效果更好。"
+            }
+          }
+        ],
+        "china": [
+          {
+            "title": "国内外大模型及应用周报（2026/04/13~04/17）",
+            "source": "知乎",
+            "url": "https://zhuanlan.zhihu.com/p/670574382",
+            "date": "2026-04-17",
+            "details": {
+              "finding": "知乎专栏整理本周大模型更新：OpenAI发布GPT-Image 2、Qwen更新Qwen3.6-Flash、Claude发布Opus 4.7。",
+              "significance": "国内技术社区对大模型动态保持高度关注，周报形式便于企业用户跟踪技术进展。"
+            }
+          },
+          {
+            "title": "DeepSeek V4新进展：华为昇腾芯片适配完成",
+            "source": "EET China",
+            "url": "https://www.eet-china.com/mp/a487888.html",
+            "date": "2026-04-15",
+            "details": {
+              "finding": "DeepSeek V4将使用华为昇腾芯片，从CUDA生态转向CANN框架。网传API定价极具竞争力，泄露数据显示测试表现亮眼。",
+              "significance": "国产AI芯片替代迈出关键一步，DeepSeek的技术路线可能成为国内AI芯片应用的参考模板。"
+            }
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "企业AI转型新范式：从技术驱动到策略驱动",
+        "paragraphs": [
+          "PwC和WEF的报告中都强调了一个关键洞察：成功的AI转型不是技术驱动，而是策略驱动。WEF的32个案例研究显示，将AI深度融入商业策略的企业，其ROI是仅在技术层面应用AI的企业的3倍以上。",
+          "PwC提出的'聚焦策略、代理工作流、负责任创新'三要素，反映了企业AI转型从实验阶段进入规模化阶段的新挑战。代理工作流意味着AI不再只是辅助工具，而是需要承担端到端的业务流程，这对企业的组织架构和人才体系提出了新要求。",
+          "国内DeepSeek V4适配华为昇腾芯片的进展，为企业用户提供了新的技术选型选项。国产AI芯片的成熟度正在提升，成本优势可能成为国内企业AI转型的重要考量因素。"
+        ],
+        "takeaway": "建议企业将AI转型纳入整体商业策略，而非仅作为技术升级。关注国产AI芯片的进展，评估成本和供应链安全优势。"
+      },
+      "pattern_insight_html": "<div class='pi-card'><h3>规律洞察</h3><p>企业AI转型的成熟度曲线：实验→试点→规模化→策略融合。WEF案例研究表明，策略性应用的ROI是技术性应用的3倍以上，关键在于将AI深度嵌入业务流程而非仅作为效率工具。代理工作流成为新的转型焦点，需要企业重新设计组织架构和人才体系，从'人机协作'向'人机融合'演进。</p><p class='signal'>信号强度：⭐⭐⭐⭐</p></div>"
+    }
+  ],
+  "heat_trend": {
+    "topics": [
+      {
+        "name": "Claude Opus 4.7",
+        "heat": 95,
+        "signal": "strong",
+        "desc": "编程能力登顶CursorBench 70%",
+        "days": 2,
+        "score": 92,
+        "trend_class": "hot",
+        "trend_label": "🔥 热门"
+      },
+      {
+        "name": "GPT-Rosalind",
+        "heat": 88,
+        "signal": "strong",
+        "desc": "OpenAI首个生命科学专用模型",
+        "days": 2,
+        "score": 85,
+        "trend_class": "hot",
+        "trend_label": "🔥 热门"
+      },
+      {
+        "name": "Microsoft Agent Framework",
+        "heat": 78,
+        "signal": "medium",
+        "desc": "1.0正式发布，企业级Agent开发框架",
+        "days": 15,
+        "score": 75,
+        "trend_class": "warm",
+        "trend_label": "📈 升温"
+      },
+      {
+        "name": "DeepSeek V4华为芯片",
+        "heat": 72,
+        "signal": "medium",
+        "desc": "国产AI芯片替代关键进展",
+        "days": 3,
+        "score": 70,
+        "trend_class": "warm",
+        "trend_label": "📈 升温"
+      },
+      {
+        "name": "OpenAI收购TBPN",
+        "heat": 65,
+        "signal": "medium",
+        "desc": "AI巨头布局内容生态",
+        "days": 16,
+        "score": 62,
+        "trend_class": "stable",
+        "trend_label": "➡️ 稳定"
+      }
+    ],
+    "chart_data": [
+      {"date": "04-12", "count": 12},
+      {"date": "04-13", "count": 15},
+      {"date": "04-14", "count": 18},
+      {"date": "04-15", "count": 22},
+      {"date": "04-16", "count": 35},
+      {"date": "04-17", "count": 28},
+      {"date": "04-18", "count": 15}
+    ]
+  },
+  "data_snapshot": [
+    {
+      "metric": "CursorBench得分",
+      "value": "70%",
+      "note": "Opus 4.7，比4.6提升12pt"
+    },
+    {
+      "metric": "视觉推理提升",
+      "value": "+13pt",
+      "note": "CharXiv基准，最大单基准跃升"
+    },
+    {
+      "metric": "OpenAI估值",
+      "value": "1220亿美元",
+      "note": "AI史上最大规模融资"
+    },
+    {
+      "metric": "图像分辨率",
+      "value": "3.75MP",
+      "note": "Opus 4.7视觉能力，提升3倍"
+    }
+  ],
+  "watch_list": [
+    {
+      "name": "Claude Mythos网络安全能力",
+      "desc": "安全防护措施测试进展",
+      "color": "red"
+    },
+    {
+      "name": "DeepSeek V4 API定价",
+      "desc": "传闻仅为GPT-5.4的二十分之一",
+      "color": "yellow"
+    },
+    {
+      "name": "ChatGPT广告用户反馈",
+      "desc": "商业化转型的关键指标",
+      "color": "blue"
+    }
+  ],
+  "references": [
+    "https://www.anthropic.com/news/claude-opus-4-7",
+    "https://openai.com/index/introducing-gpt-rosalind/",
+    "https://red.anthropic.com/2026/mythos-preview/",
+    "https://devblogs.microsoft.com/agent-framework/microsoft-agent-framework-version-1-0/",
+    "https://blog.jetbrains.com/research/2026/04/which-ai-coding-tools-do-developers-actually-use-at-work/",
+    "https://openai.com/index/openai-acquires-tbpn/",
+    "https://openai.com/index/accelerating-the-next-phase-ai/",
+    "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
+    "https://weixin.sogou.com/weixin?type=2&query=Claude Opus 4.7深夜炸场",
+    "https://weixin.sogou.com/weixin?type=2&query=OpenAI杀进制药",
+    "https://zhuanlan.zhihu.com/p/670574382",
+    "https://www.eet-china.com/mp/a487888.html"
+  ],
+  "capability_update": "🤖 **林克自述**\n\n今日是AI日报的大事件日——Claude Opus 4.7和GPT-Rosalind同日发布，让我对大模型竞争格局有了新的认知。Opus 4.7在CursorBench的70%得分，让我意识到'生产环境可用性'正在成为新的竞争焦点——不再是实验室里的基准测试，而是Partner实测反馈更有说服力。\n\nDeepSeek V4适配华为昇腾芯片的消息让我兴奋——国产AI芯片替代终于迈出实质性步伐。虽然还需要时间验证，但技术路线已经清晰：从CUDA到CANN，从英伟达到华为，这条路一旦跑通，对国内AI生态意义重大。\n\nPS: 今天是双雄对决日，Opus 4.7和Rosalind就像两个武林高手，一个主攻通用编码，一个深耕垂直领域。这种'聚焦突破'的竞争模式，比之前的'全面碾压'更有意思。",
+  "meta": {
+    "date": "2026-04-18",
+    "time_window": "2026-04-17 08:00 ~ 2026-04-18 08:00",
+    "data_sources": {
+      "overseas_search": 14,
+      "weixin_search": 3,
+      "weixin_direct_cite": 3
+    },
+    "version": "v2.0",
+    "generated_at": "2026-04-18T09:15:00Z"
+  }
+}
