@@ -400,10 +400,18 @@ def generate_html(data: dict) -> str:
     css_block = TEMPLATE_CSS_FILE.read_text(encoding="utf-8") if TEMPLATE_CSS_FILE.exists() else "<style></style>"
     js_block = TEMPLATE_JS_FILE.read_text(encoding="utf-8") if TEMPLATE_JS_FILE.exists() else "<script></script>"
 
-    # 覆盖率
+    # 覆盖率（兼容 dict 和字符串两种格式）
     cov = data.get("coverage", {})
-    overseas_count = cov.get("overseas", 10)
-    china_count = cov.get("china", 8)
+    if isinstance(cov, dict):
+        overseas_count = cov.get("overseas", cov.get("overseas_count", 10))
+        china_count = cov.get("china", cov.get("china_count", cov.get("domestic", 8)))
+    else:
+        # coverage 是时间窗口字符串时，从 meta.data_sources 推断
+        meta_ds = data.get("meta", {}).get("data_sources", {})
+        overseas_count = meta_ds.get("overseas_search", 10)
+        china_count = meta_ds.get("weixin_search", 0) + meta_ds.get("weixin_direct_cite", 0)
+        if china_count == 0:
+            china_count = 8
     total = overseas_count + china_count
     overseas_pct = round(overseas_count / total * 100) if total else 50
     china_pct = 100 - overseas_pct
