@@ -1,6 +1,6 @@
-# AI 周报 · 2026年第16周（04/14 - 04/19）
+# AI 周报 · 2026年第16周（04/13 - 04/19）
 
-> 涵盖5期日报 · 覆盖80+条AI资讯 · 本周是Anthropic的超级周，Claude双版本迭代、AI Agent产品全面爆发
+> 涵盖6期日报 · 覆盖80+条AI资讯 · 本周是Anthropic的超级周，Claude双版本迭代、AI Agent产品全面爆发
 
 ---
 
@@ -188,11 +188,11 @@ AI应用正在进入"跨工具协作"时代。Claude Design、Claude in PowerPoi
 
 | 日期 | 链接 | 核心内容 |
 |------|------|----------|
-| 04/14（周一） | [2026-04-14](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-04/2026-04-14-v3.html) | Anthropic算力合作+Claude生态1亿 / AI编程App爆增84% / Agent Cloud / AI治理危机 |
-| 04/15（周二） | [2026-04-15](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-04/2026-04-15-v3.html) | GPT-5 Turbo速度3倍 / Copilot月活5000万 / Claude Code全栈Agent |
-| 04/16（周三） | [2026-04-16](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-04/2026-04-16-v3.html) | Claude Opus 4.6百万上下文 / Cursor 3 Agent中心 / Q1融资2970亿 |
-| 04/17（周四） | [2026-04-17](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-04/2026-04-17-v3.html) | Claude Opus 4.7 SWE-bench领跑 / Agent产品元年 / 算力涨价潮 |
-| 04/19（周六） | [2026-04-19](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-04/2026-04-19-v3.html) | Claude Design设计革命 / π0.7机器人GPT-3时刻 / Meta裁8000+黄仁勋+200万岗位 |
+| 04/13（周一） | [2026-04-13](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-04/2026-04-13-v3.html) | Anthropic算力合作+Claude生态1亿 / AI编程App爆增84% / Agent Cloud / AI治理危机 |
+| 04/14（周二） | [2026-04-14](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-04/2026-04-14-v3.html) | GPT-5 Turbo速度3倍 / Copilot月活5000万 / Claude Code全栈Agent |
+| 04/15（周三） | [2026-04-15](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-04/2026-04-15-v3.html) | Claude Opus 4.6百万上下文 / Cursor 3 Agent中心 / Q1融资2970亿 |
+| 04/16（周四） | [2026-04-16](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-04/2026-04-16-v3.html) | Claude Opus 4.7 SWE-bench领跑 / Agent产品元年 / 算力涨价潮 |
+| 04/17（周五） | [2026-04-17](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-04/2026-04-17-v3.html) | Claude Design设计革命 / π0.7机器人GPT-3时刻 / Meta裁8000+黄仁勋+200万岗位 |
 
 ---
 
