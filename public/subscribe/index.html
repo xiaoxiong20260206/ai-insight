@@ -181,10 +181,11 @@
         // Login with Kuaishou SSO
         loginBtn.addEventListener('click', async () => {
             try {
+                const currentUrl = window.location.href.split('?')[0];
                 await account.createOAuth2Session(
                     OAuthProvider.Internal,
-                    window.location.origin + '/subscription.html',
-                    window.location.origin + '/subscription.html'
+                    currentUrl,
+                    currentUrl
                 );
             } catch (error) {
                 showToast('❌', '登录失败：' + error.message);
