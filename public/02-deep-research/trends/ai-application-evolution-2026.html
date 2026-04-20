@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI应用能力演进路线：从工具到自主体生态 · AI洞察AI洞察</title>
+<title>AI应用能力演进路线：从工具到社会组织 · AI洞察AI洞察</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232563EB'/><text y='24' x='4' font-size='20'>🔬</text></svg>">
 <style>
   :root {
-    --blue:#2563EB; --violet:#7C3AED; --emerald:#059669; --amber:#D97706; --rose:#E11D48;
+    --blue:#2563EB; --violet:#7C3AED; --emerald:#059669; --amber:#D97706; --rose:#E11D48; --slate:#64748B;
     --bg:#F8FAFC; --surface:#fff; --border:#E2E8F0; --text:#1E293B; --muted:#64748B;
     --content-max-width:860px;
     --mesh:radial-gradient(ellipse at 20% 50%,rgba(37,99,235,.07) 0%,transparent 60%),
@@ -41,6 +41,7 @@
   .bd-emerald{background:#D1FAE5;color:#065F46}
   .bd-amber{background:#FEF3C7;color:#92400E}
   .bd-rose{background:#FFE4E6;color:#9F1239}
+  .bd-slate{background:#F1F5F9;color:#475569}
 
   /* hero */
   .hero{background:linear-gradient(135deg,#1E3A5F 0%,#1a237e 50%,#0D1B40 100%);border-radius:20px;padding:40px 40px 36px;color:#fff;margin-bottom:28px;position:relative;overflow:hidden}
@@ -66,6 +67,21 @@
   .kf-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px;line-height:1.4}
   .kf-body{font-size:13px;color:#374151;line-height:1.65}
 
+  /* three-eras */
+  .eras-box{background:linear-gradient(135deg,#F8FAFC 0%,#EEF2F6 100%);border:1px solid var(--border);border-radius:16px;padding:28px 32px;margin:24px 0}
+  .eras-title{font-size:18px;font-weight:800;color:var(--text);margin-bottom:20px;text-align:center}
+  .eras-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .era-card{background:#fff;border-radius:12px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+  .era-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+  .era-range{font-size:11px;font-weight:700;background:#DBEAFE;color:#1D4ED8;padding:3px 8px;border-radius:4px}
+  .era-name{font-size:15px;font-weight:700;color:var(--text)}
+  .era-desc{font-size:13px;color:#374151;line-height:1.65;margin-bottom:10px}
+  .era-stages{font-size:12px;color:var(--muted)}
+  .era-stages strong{color:var(--text)}
+  .era-divider{display:flex;align-items:center;justify-content:center;margin:16px 0}
+  .era-divider-line{flex:1;height:1px;background:linear-gradient(to right,transparent,#CBD5E1,transparent)}
+  .era-divider-icon{font-size:20px;padding:0 12px}
+
   /* rule cards */
   h3.sub{font-size:17px;font-weight:700;color:var(--text);margin:28px 0 12px;display:flex;align-items:center;gap:8px}
   .rule-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:22px;position:relative;overflow:hidden}
@@ -89,7 +105,7 @@
 
   /* timeline */
   .timeline{display:flex;flex-direction:column;position:relative;margin:20px 0}
-  .timeline::before{content:'';position:absolute;left:28px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,#DBEAFE,#EDE9FE,#D1FAE5,#FEF3C7,#FFE4E6,#F1F5F9)}
+  .timeline::before{content:'';position:absolute;left:28px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,#2563EB,#7C3AED,#059669,#D97706,#E11D48,#94A3B8)}
   .tl-item{display:flex;gap:20px;position:relative;padding-bottom:24px}
   .tl-item:last-child{padding-bottom:0}
   .tl-dot{width:58px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:4px;z-index:1}
@@ -106,7 +122,7 @@
   .ch-emerald{background:#D1FAE5;color:#065F46}
   .ch-amber{background:#FEF3C7;color:#92400E}
   .ch-rose{background:#FFE4E6;color:#9F1239}
-  .ch-gray{background:#F1F5F9;color:#64748B}
+  .ch-slate{background:#F1F5F9;color:#475569}
   .tl-desc{font-size:14px;color:#374151;line-height:1.7;margin-bottom:10px}
   .tl-matrix{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}
   .mc{background:#F8FAFC;border-radius:8px;padding:8px 10px}
@@ -116,6 +132,9 @@
   .ptag{display:inline-flex;align-items:center;gap:4px;background:#F1F5F9;border:1px solid #E2E8F0;border-radius:6px;padding:4px 10px;font-size:12px;color:#475569;font-weight:500}
   .trigger-rule{display:flex;align-items:center;gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid #F1F5F9;font-size:12px;color:var(--muted)}
   .trigger-rule strong{color:var(--blue)}
+
+  /* turning point badge */
+  .turning-badge{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#D97706 0%,#F59E0B 100%);color:#fff;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;margin-left:8px}
 
   /* insight box */
   .insight-box{background:linear-gradient(135deg,#1E3A5F 0%,#1a237e 100%);border-radius:16px;padding:28px 32px;color:#fff;margin:24px 0}
@@ -190,12 +209,12 @@
   @media(max-width:768px){
     .layout{flex-direction:column;padding:20px 16px}
     .toc-sidebar{width:100%;position:relative;top:0}
-    .kf-grid{grid-template-columns:1fr}
-    .tl-matrix,.three-conds,.pred-grid{grid-template-columns:1fr 1fr}
+    .kf-grid,.eras-grid,.three-conds,.pred-grid{grid-template-columns:1fr}
+    .tl-matrix{grid-template-columns:1fr 1fr}
   }
   @media(max-width:480px){
     .hero{padding:28px 22px}.hero h1{font-size:22px}
-    .three-conds,.pred-grid{grid-template-columns:1fr}
+    .tl-matrix,.three-conds,.pred-grid{grid-template-columns:1fr}
   }
 </style>
 </head>
@@ -206,17 +225,19 @@
 <aside class="toc-sidebar">
   <div class="toc-header">目录</div>
   <a class="toc-link" href="#findings">核心结论</a>
+  <a class="toc-link" href="#eras">三大时代</a>
   <a class="toc-link" href="#laws">三大演进规律</a>
   <a class="toc-link h3" href="#r1">R1 — 能打分的先走</a>
   <a class="toc-link h3" href="#r2">R2 — 协议出现即跃迁</a>
   <a class="toc-link h3" href="#r3">R3 — Review速度是上限</a>
-  <a class="toc-link" href="#stages">六阶段演进图谱</a>
+  <a class="toc-link" href="#stages">七阶段演进图谱</a>
   <a class="toc-link h3" href="#s1">1.0 工具时代</a>
   <a class="toc-link h3" href="#s2">2.0 副驾驶时代</a>
   <a class="toc-link h3" href="#s3">3.0 单一智体</a>
-  <a class="toc-link h3" href="#s4">4.0 Agentic Team</a>
-  <a class="toc-link h3" href="#s5">5.0 Agent生态系统</a>
-  <a class="toc-link h3" href="#s6">6.0 自主经济</a>
+  <a class="toc-link h3" href="#s4">4.0 Agentic能力</a>
+  <a class="toc-link h3" href="#s5">5.0 Agentic Team</a>
+  <a class="toc-link h3" href="#s6">6.0 Agent生态</a>
+  <a class="toc-link h3" href="#s7">7.0 自主经济</a>
   <a class="toc-link" href="#insight">本质洞察</a>
   <a class="toc-link" href="#contradiction">反直觉：多Agent陷阱</a>
   <a class="toc-link" href="#prediction">趋势推演</a>
@@ -230,18 +251,18 @@
 <!-- ═══ HERO ═══ -->
 <div class="hero">
   <div class="hero-tag">🔬 深度调研 · 趋势洞察</div>
-  <h1>AI 应用能力演进路线<br>从"工具"到"自主体生态"，你现在在哪里？</h1>
+  <h1>AI 应用能力演进路线<br>从"工具"到"社会组织"，你现在在哪里？</h1>
   <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.45);margin-bottom:10px">读完本文，你能做到：</div>
   <ul class="hero-gains">
-    <li>准确判断你当前的 AI 应用处于哪个演进阶段</li>
-    <li>知道每个阶段跃迁的真实触发条件——不是"模型更聪明了"这种废话</li>
+    <li>准确定位你当前的 AI 应用处于哪个演进阶段</li>
+    <li>理解每个阶段跃迁的真实触发条件——不是"模型更聪明了"</li>
     <li>避开多 Agent 的反直觉陷阱，做出更稳的架构决策</li>
   </ul>
   <div class="hero-method">方法：先提炼3条规律假设 → 用 Anthropic / OpenAI / Google / Simon Willison 一手资料交叉验证 → 基于规律推演未来</div>
   <div class="hero-meta">
     <div class="hero-badge">📅 2026年4月</div>
     <div class="hero-badge">🧠 3条已验证规律</div>
-    <div class="hero-badge">🎯 6阶段完整图谱</div>
+    <div class="hero-badge">🎯 7阶段完整图谱</div>
     <div class="hero-badge">⚡ 1个反直觉发现</div>
   </div>
 </div>
@@ -258,8 +279,8 @@
     </div>
     <div class="kf-card kf-amber">
       <div class="kf-eyebrow">📍 当前位置</div>
-      <div class="kf-title">2025 年业界处于"Agentic Team"爬坡期</div>
-      <div class="kf-body">结构化多 Agent（Orchestrator-Workers 模式）正在企业快速渗透。Gartner 预测：Agent 企业渗透率从 &lt;5%（2025）→ 40%（2026）。A2A 协议（2025/04）是这个阶段到来的信号。</div>
+      <div class="kf-title">2025 年业界正在跨越"Agentic能力"门槛</div>
+      <div class="kf-body">AI 产品从"工具"跨向"像人"。Gartner 预测：Agentic 应用渗透率从 &lt;5%（2025）→ 40%（2026）。A2A 协议（2025/04）是这个阶段到来的信号——AI 开始有跨系统自主协调能力。</div>
     </div>
     <div class="kf-card kf-emerald">
       <div class="kf-eyebrow">🔮 下一个爆发点</div>
@@ -267,6 +288,45 @@
       <div class="kf-body">自动化的三个前提正同时成熟：<strong>量化指标</strong>（企业数字化）× <strong>协调协议</strong>（A2A）× <strong>信任机制</strong>（AI 信誉体系）。三者交汇处，就是下一波 Agent 应用的爆发区。</div>
     </div>
   </div>
+</section>
+
+<!-- ═══ THREE ERAS ═══ -->
+<section id="eras">
+  <div class="section-title">🗺️ 三大时代 <span class="badge bd-slate">高层划分</span></div>
+  <p style="font-size:14px;color:var(--muted);margin-bottom:8px">七阶段背后有一个更高层次的划分——理解了这个，你就明白为什么 4.0 是转折点。</p>
+
+  <div class="eras-box">
+    <div class="eras-title">AI 产品的三次身份跃迁</div>
+    <div class="eras-grid">
+      <div class="era-card">
+        <div class="era-header">
+          <span class="era-range">1.0 – 3.0</span>
+          <span class="era-name">🔧 工具时代</span>
+        </div>
+        <div class="era-desc">AI 是"能力增强器"——帮人做得更快、更好，但人仍然是决策核心。每次进步都是"工具更强了"，不是"工具更像人了"。</div>
+        <div class="era-stages"><strong>阶段：</strong>工具 → 副驾驶 → 单一智体</div>
+      </div>
+      <div class="era-card" style="border:2px solid #D97706;box-shadow:0 0 20px rgba(217,119,6,.15)">
+        <div class="era-header">
+          <span class="era-range" style="background:#FEF3C7;color:#92400E">4.0</span>
+          <span class="era-name">⚡ 转折点</span>
+          <span class="turning-badge">🎯 关键</span>
+        </div>
+        <div class="era-desc">AI 产品开始<strong>更像人</strong>——能跨系统自主协调，人只设目标不介入过程。这是从"工具"到"智能体"的质变。</div>
+        <div class="era-stages"><strong>阶段：</strong>Agentic 能力</div>
+      </div>
+      <div class="era-card">
+        <div class="era-header">
+          <span class="era-range" style="background:#EDE9FE;color:#6D28D9">5.0 – 7.0</span>
+          <span class="era-name">🌐 社会组织时代</span>
+        </div>
+        <div class="era-desc">AI 开始<strong>更像社会组织</strong>——多 Agent 协作形成"小团队"，跨组织互联形成"市场"，最终成为经济参与者。人只做战略层决策。</div>
+        <div class="era-stages"><strong>阶段：</strong>Agentic Team → Agent 生态 → 自主经济</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout"><strong>核心洞察：</strong>1.0-3.0 是"让工具更强"，4.0 是"让 AI 像人"，5.0-7.0 是"让 AI 像社会组织"。三个时代的本质差异，不是技术更先进，而是<strong>AI 的身份属性发生了根本变化</strong>。</div>
 </section>
 
 <!-- ═══ THREE LAWS ═══ -->
@@ -323,7 +383,7 @@
         <span class="ev-ico">✅</span>
         <span><span class="ev-src">时间线精确验证：</span>
           MCP 出现（2024，工具层）→ 单 Agent 阶段加速；
-          A2A 出现（2025/04，Agent 互认层）→ 多 Agent 协作开始爬坡；
+          A2A 出现（2025/04，Agent 互认层）→ Agentic 能力阶段到来；
           AP2 出现（2025/09，商业交换层）→ Agent 生态系统雏形。
           三层协议按规律预测的顺序依次出现，误差不超过半年。
         </span>
@@ -369,9 +429,9 @@
   </div>
 </section>
 
-<!-- ═══ SIX STAGES ═══ -->
+<!-- ═══ SEVEN STAGES ═══ -->
 <section id="stages">
-  <div class="section-title">🗺️ 六阶段演进图谱 <span class="badge bd-emerald">完整版</span></div>
+  <div class="section-title">🗺️ 七阶段演进图谱 <span class="badge bd-emerald">完整版</span></div>
   <p style="font-size:14px;color:var(--muted);margin-bottom:8px">每个阶段不是凭空出现的——是 R1/R2/R3 中某个条件成熟后的必然结果。</p>
   <div class="callout"><strong>看法：</strong>阶段不代表产品迭代路线图，而是描述<em>当前业界整体处在哪个位置</em>。同一时期可以有不同阶段的产品共存。</div>
 
@@ -386,7 +446,7 @@
       <div class="tl-body">
         <div class="tl-head">
           <div class="tl-title">🔧 工具时代（Tool Era）</div>
-          <div class="chips"><span class="chip ch-blue">2010–2022</span><span class="chip ch-gray">已过</span></div>
+          <div class="chips"><span class="chip ch-blue">2010–2022</span><span class="chip ch-slate">已过</span></div>
         </div>
         <div class="tl-desc">AI 作为独立工具嵌入特定场景。人做所有决策，AI 只执行单一指令。没有"对话"，只有"调用"。</div>
         <div class="tl-matrix">
@@ -451,8 +511,37 @@
       </div>
       <div class="tl-body">
         <div class="tl-head">
+          <div class="tl-title">⚡ Agentic 能力 <span class="turning-badge">🎯 转折点</span></div>
+          <div class="chips"><span class="chip ch-amber">2025</span><span class="chip ch-amber">跨越门槛 · 当前</span></div>
+        </div>
+        <div class="tl-desc">
+          <strong>这是 AI 产品开始更像人的转折点。</strong>单一 Agent 获得跨系统自主协调能力——能调用外部系统的其他 Agent，能跨会话维持状态，能在异常时自己调整策略。人类从"监督者"退化为"目标定义者"，只设目标不介入过程。
+        </div>
+        <div class="callout">
+          <strong>核心差异：Agent vs Agentic</strong><br>
+          <strong>Agent（3.0）：</strong>能完成一件事，人监督每一步<br>
+          <strong>Agentic（4.0）：</strong>能跨系统协调完成一件事，人只看结果
+        </div>
+        <div class="tl-matrix">
+          <div class="mc"><div class="mc-lbl">认知外包层</div><div class="mc-val">执行 + 跨系统协调</div></div>
+          <div class="mc"><div class="mc-lbl">人类角色</div><div class="mc-val">目标定义者</div></div>
+          <div class="mc"><div class="mc-lbl">连接协议</div><div class="mc-val">A2A（Agent 互认）</div></div>
+        </div>
+        <div class="products"><span class="ptag">☁️ Codex Cloud 并行沙箱</span><span class="ptag">🔗 Google A2A</span><span class="ptag">🤝 SAP Joule 跨系统</span></div>
+        <div class="trigger-rule">⚡ 触发规律：<strong>R2</strong> — A2A 协议（2025/04）让 Agent 能发现并调用其他 Agent；<strong>R3</strong> — 审查对象从"每一步"变成"最终结果"</div>
+      </div>
+    </div>
+
+    <!-- S5 -->
+    <div class="tl-item" id="s5">
+      <div class="tl-dot">
+        <div class="tl-circle" style="background:#E11D48"></div>
+        <div class="tl-num">5.0</div>
+      </div>
+      <div class="tl-body">
+        <div class="tl-head">
           <div class="tl-title">👥 Agentic Team（结构化多智体）</div>
-          <div class="chips"><span class="chip ch-amber">2025–2026</span><span class="chip ch-amber">爬坡期 · 当前</span></div>
+          <div class="chips"><span class="chip ch-rose">2025–2026</span><span class="chip ch-rose">爬坡期</span></div>
         </div>
         <div class="tl-desc">
           多个 Agent 在明确角色分工下协同。核心模式是 <strong>Orchestrator-Workers</strong>：一个调度者把任务分配给若干执行者，结果可审计可追溯。
@@ -465,24 +554,24 @@
         </div>
         <div class="tl-matrix">
           <div class="mc"><div class="mc-lbl">认知外包层</div><div class="mc-val">执行 + 跨域协调</div></div>
-          <div class="mc"><div class="mc-lbl">人类角色</div><div class="mc-val">目标定义者</div></div>
-          <div class="mc"><div class="mc-lbl">连接协议</div><div class="mc-val">A2A（Agent 互认）</div></div>
+          <div class="mc"><div class="mc-lbl">人类角色</div><div class="mc-val">意图提供者</div></div>
+          <div class="mc"><div class="mc-lbl">连接协议</div><div class="mc-val">A2A + 任务编排</div></div>
         </div>
-        <div class="products"><span class="ptag">🔀 LangGraph</span><span class="ptag">🌀 CrewAI</span><span class="ptag">☁️ Codex Cloud 并行沙箱</span><span class="ptag">🏢 Salesforce Agentforce</span></div>
-        <div class="trigger-rule">⚡ 触发规律：<strong>R2</strong> — A2A 协议（2025/04）降低多 Agent 互联成本；<strong>R3</strong> — 人类从"逐步审查"开始退化为"目标级审查"</div>
+        <div class="products"><span class="ptag">🔀 LangGraph</span><span class="ptag">🌀 CrewAI</span><span class="ptag">🏢 Salesforce Agentforce</span></div>
+        <div class="trigger-rule">⚡ 触发规律：<strong>R2</strong> — A2A 协议成熟，多 Agent 协作成本降低；<strong>R3</strong> — 团队级审查机制建立</div>
       </div>
     </div>
 
-    <!-- S5 -->
-    <div class="tl-item" id="s5">
+    <!-- S6 -->
+    <div class="tl-item" id="s6">
       <div class="tl-dot">
-        <div class="tl-circle" style="background:#E11D48"></div>
-        <div class="tl-num">5.0</div>
+        <div class="tl-circle" style="background:#7C3AED"></div>
+        <div class="tl-num">6.0</div>
       </div>
       <div class="tl-body">
         <div class="tl-head">
           <div class="tl-title">🌐 Agent 生态系统（Ecosystem）</div>
-          <div class="chips"><span class="chip ch-rose">2026–2028</span><span class="chip ch-rose">协议建设期</span></div>
+          <div class="chips"><span class="chip ch-violet">2026–2028</span><span class="chip ch-violet">协议建设期</span></div>
         </div>
         <div class="tl-desc">不同厂商的 Agent 通过开放协议<strong>跨组织互联</strong>。Agent 通过 Agent Card 自动发现彼此能力，长任务跨系统持续执行，形成"智体市场"。关键基础设施正在 2025 年快速成型。</div>
         <div class="tl-matrix">
@@ -490,21 +579,21 @@
           <div class="mc"><div class="mc-lbl">人类角色</div><div class="mc-val">意图提供者</div></div>
           <div class="mc"><div class="mc-lbl">连接协议</div><div class="mc-val">A2A + AP2 + 信誉系统</div></div>
         </div>
-        <div class="products"><span class="ptag">🔗 Google A2A</span><span class="ptag">💳 AP2 支付协议</span><span class="ptag">🤝 SAP Joule 跨系统</span></div>
+        <div class="products"><span class="ptag">💳 AP2 支付协议</span><span class="ptag">🏦 Agent 市场</span></div>
         <div class="trigger-rule">⚡ 触发规律：<strong>R2</strong> — AP2 商业交换协议（2025/09）出现；<strong>R3</strong> — AI 信誉体系初步建立，减少逐次审查必要性</div>
       </div>
     </div>
 
-    <!-- S6 -->
-    <div class="tl-item" id="s6">
+    <!-- S7 -->
+    <div class="tl-item" id="s7">
       <div class="tl-dot">
         <div class="tl-circle" style="background:#94A3B8"></div>
-        <div class="tl-num">6.0</div>
+        <div class="tl-num">7.0</div>
       </div>
       <div class="tl-body">
         <div class="tl-head">
           <div class="tl-title">♾️ 自主经济（Autonomous Economy）</div>
-          <div class="chips"><span class="chip ch-gray">2028+</span><span class="chip ch-gray">远期推演</span></div>
+          <div class="chips"><span class="chip ch-slate">2028+</span><span class="chip ch-slate">远期推演</span></div>
         </div>
         <div class="tl-desc">Agent 作为经济参与者，自主签约、买卖服务、谈判合同。人类退化为战略目标制定者，不再参与执行层。</div>
         <div class="tl-matrix">
@@ -526,7 +615,7 @@
     <h3>🔭 三条规律背后的同一件事</h3>
     <div class="ins-row">
       <div class="ins-lbl">表面现象</div>
-      <div class="ins-text">AI 从工具 → 助手 → 单 Agent → 多 Agent → 生态系统，能力在"越来越自主"地演进</div>
+      <div class="ins-text">AI 从工具 → 助手 → Agent → Agentic → 团队 → 生态 → 经济，能力在"越来越自主"地演进</div>
     </div>
     <div class="ins-row">
       <div class="ins-lbl">本质规律</div>
@@ -618,28 +707,28 @@
   <p style="font-size:14px;color:var(--muted);margin-bottom:16px">基于三大规律外推，不是主观想象——每条趋势都能指向具体的规律依据。</p>
   <div class="pred-grid">
     <div class="pred-card pc-blue">
+      <div class="pred-yr">2025</div>
+      <div class="pred-title">跨越 Agentic 门槛</div>
+      <div class="pred-desc">A2A 协议普及，AI 产品从"工具"质变为"自主体"。企业开始部署跨系统自主协调的 Agentic 应用。</div>
+      <div class="pred-signal">📊 Gartner：Agentic 渗透率 &lt;5%（2025初）→ 40%（2026）</div>
+    </div>
+    <div class="pred-card pc-amber">
       <div class="pred-yr">2025–2026</div>
-      <div class="pred-title">Agentic Team 爆发</div>
-      <div class="pred-desc">A2A 协议铺设基础设施，Orchestrator-Workers 模式在企业内部快速普及。</div>
-      <div class="pred-signal">📊 Gartner：Agent 渗透率 &lt;5%（2025）→ 40%（2026）；SAP Joule、Salesforce Agentforce 已生产部署</div>
+      <div class="pred-title">Agentic Team 快速爆发</div>
+      <div class="pred-desc">Orchestrator-Workers 模式成为企业标配。LangGraph/CrewAI 等框架快速普及。</div>
+      <div class="pred-signal">📊 SAP Joule、Salesforce Agentforce 已生产部署</div>
     </div>
     <div class="pred-card pc-violet">
       <div class="pred-yr">2026–2027</div>
       <div class="pred-title">AI 信誉体系初步建立</div>
-      <div class="pred-desc">为突破 R3 的审查带宽瓶颈，Agent 需要累积可核查的信任记录。类比 Stripe 信誉 / OAuth 授权——Agent 信誉成为新基础设施层。</div>
-      <div class="pred-signal">📊 AP2 已引入 Agent 身份认证；A2A 安全模型对标 OpenAPI 规范</div>
+      <div class="pred-desc">为突破 R3 的审查带宽瓶颈，Agent 需要累积可核查的信任记录。Agent 信誉成为新基础设施层。</div>
+      <div class="pred-signal">📊 AP2 已引入 Agent 身份认证；A2A 安全模型对标 OpenAPI</div>
     </div>
     <div class="pred-card pc-emerald">
       <div class="pred-yr">2027–2028</div>
       <div class="pred-title">情境化认知开始突破</div>
-      <div class="pred-desc">当 GDPval 等知识工作评测接近专家水平，"隐性约束/组织语境"理解能力提升，之前需要"拍脑袋"的软性任务开始可自动化。</div>
+      <div class="pred-desc">当 GDPval 等知识工作评测接近专家水平，"隐性约束/组织语境"理解能力提升，更多软性任务开始可自动化。</div>
       <div class="pred-signal">📊 GPT-5.2 GDPval 70.9%，距"全面专家水平"约差 25%</div>
-    </div>
-    <div class="pred-card pc-amber">
-      <div class="pred-yr">2028+</div>
-      <div class="pred-title">跨组织 Agent 协作成常态</div>
-      <div class="pred-desc">不同公司的 Agent 通过 A2A/AP2 互相签约、交付服务、结算费用。第一批"AI 原生供应链"在金融/SaaS 率先出现。</div>
-      <div class="pred-signal">📊 Supertab 已演示 Agent 自主支付；LangChain 已接入 A2A</div>
     </div>
   </div>
 </section>
