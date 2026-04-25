@@ -20,7 +20,7 @@
                 <p class="text-gray-500">每天早上09:00，林克会准时为您推送AI行业最新动态</p>
             </div>
 
-            <!-- Login/Register Section -->
+            <!-- Auth Section -->
             <div id="authSection" class="fade-in">
                 <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6 mb-6">
                     <h2 class="text-lg font-semibold text-blue-800 mb-3">👋 欢迎订阅</h2>
@@ -119,6 +119,8 @@
         </div>
     </div>
 
+    <!-- Appwrite SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@18.0.0/sdk.js"></script>
     <script>
         // Configuration
         const APPWRITE_ENDPOINT = 'https://INTERNAL_SERVICE_ENDPOINT/v1';
@@ -126,51 +128,10 @@
         const DATABASE_ID = 'INTERNAL_DATABASE_ID';
         const COLLECTION_ID = 'INTERNAL_COLLECTION_ID';
 
-        // Appwrite SDK (minimal implementation)
-        class AppwriteClient {
-            constructor() {
-                this.endpoint = APPWRITE_ENDPOINT;
-                this.project = APPWRITE_PROJECT;
-            }
-
-            async request(method, path, body = null) {
-                const headers = {
-                    'Content-Type': 'application/json',
-                    'X-Appwrite-Project': this.project
-                };
-
-                const options = { method, headers };
-                if (body) options.body = JSON.stringify(body);
-
-                const response = await fetch(`${this.endpoint}${path}`, options);
-                if (!response.ok) {
-                    const error = await response.json();
-                    throw new Error(error.message || 'Request failed');
-                }
-                return response.json();
-            }
-
-            async listDocuments(queries = []) {
-                return this.request('POST', `/databases/${DATABASE_ID}/collections/${COLLECTION_ID}/documents`, {
-                    queries
-                });
-            }
-
-            async createDocument(data) {
-                return this.request('POST', `/databases/${DATABASE_ID}/collections/${COLLECTION_ID}/documents`, {
-                    documentId: 'unique()',
-                    data
-                });
-            }
-
-            async updateDocument(documentId, data) {
-                return this.request('PATCH', `/databases/${DATABASE_ID}/collections/${COLLECTION_ID}/documents/${documentId}`, {
-                    data
-                });
-            }
-        }
-
-        const appwrite = new AppwriteClient();
+        // Initialize Appwrite
+        const client = new Appwrite.Client();
+        client.setEndpoint(APPWRITE_ENDPOINT).setProject(APPWRITE_PROJECT);
+        const db = new Appwrite.Databases(client);
 
         // Elements
         const authSection = document.getElementById('authSection');
@@ -182,48 +143,18 @@
         const subscribedAtDisplay = document.getElementById('subscribedAtDisplay');
         const statusBadge = document.getElementById('statusBadge');
 
-        // Get username from URL or localStorage
+        // Get stored username
         function getCurrentUsername() {
-            // Check URL params first (for OAuth callback)
-            const urlParams = new URLSearchParams(window.location.search);
-            const user = urlParams.get('user');
-            if (user) {
-                localStorage.setItem('ai_insight_user', user);
-                window.history.replaceState({}, document.title, window.location.pathname);
-                return user;
-            }
-            // Check localStorage
             return localStorage.getItem('ai_insight_user');
         }
 
-        // Check subscription status
-        async function checkSubscription(username) {
-            if (!username) return false;
-            
-            try {
-                const result = await appwrite.listDocuments([
-                    `where("username", "==", "${username}")`,
-                    'limit(1)'
-                ]);
-                
-                if (result.documents && result.documents.length > 0) {
-                    const doc = result.documents[0];
-                    return {
-                        exists: true,
-                        isActive: doc.is_active,
-                        subscribedAt: doc.subscribed_at,
-                        documentId: doc.$id
-                    };
-                }
-                return { exists: false };
-            } catch (error) {
-                console.error('Check subscription error:', error);
-                return { exists: false, error: error.message };
-            }
+        // Save username
+        function saveUsername(username) {
+            localStorage.setItem('ai_insight_user', username);
         }
 
         // Show subscription section
-        async function showSubscriptionSection(status) {
+        function showSubscriptionSection(status) {
             authSection.classList.add('hidden');
             subscriptionSection.classList.remove('hidden');
             
@@ -234,7 +165,12 @@
                 subscribedAtDisplay.textContent = new Date(status.subscribedAt).toLocaleDateString('zh-CN');
             }
             
-            if (status && status.exists && status.isActive) {
+            updateStatusUI(status);
+        }
+
+        // Update status badge
+        function updateStatusUI(status) {
+            if (status && status.isActive) {
                 statusBadge.textContent = '已订阅';
                 statusBadge.className = 'px-4 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800';
                 unsubscribeBtn.textContent = '取消订阅';
@@ -254,36 +190,75 @@
             employeeIdInput.value = '';
         }
 
+        // Check subscription status
+        async function checkSubscription(username) {
+            if (!username) return null;
+            
+            try {
+                // Use listDocuments with query filter
+                const result = await db.listDocuments(
+                    DATABASE_ID,
+                    COLLECTION_ID,
+                    [
+                        Appwrite.Query.equal('username', username),
+                        Appwrite.Query.limit(1)
+                    ]
+                );
+                
+                if (result.documents && result.documents.length > 0) {
+                    const doc = result.documents[0];
+                    return {
+                        exists: true,
+                        isActive: doc.is_active,
+                        subscribedAt: doc.subscribed_at,
+                        documentId: doc.$id
+                    };
+                }
+                return { exists: false };
+            } catch (error) {
+                console.error('Check subscription error:', error);
+                return { exists: false, error: error.message };
+            }
+        }
+
         // Subscribe
         async function subscribe(username) {
             try {
-                // Check if already exists
                 const status = await checkSubscription(username);
                 
                 if (status.exists) {
-                    // Update existing
-                    await appwrite.updateDocument(status.documentId, {
-                        is_active: true,
-                        subscribed_at: new Date().toISOString()
-                    });
-                    showToast('✅', '订阅已更新！每天09:00接收日报');
+                    // Update existing document
+                    await db.updateDocument(
+                        DATABASE_ID,
+                        COLLECTION_ID,
+                        status.documentId,
+                        {
+                            is_active: true,
+                            subscribed_at: new Date().toISOString()
+                        }
+                    );
+                    showToast('✅', '订阅已更新！');
                 } else {
-                    // Create new
-                    await appwrite.createDocument({
-                        username: username,
-                        employee_name: username,
-                        subscribed_at: new Date().toISOString(),
-                        is_active: true,
-                        preferences: '{}'
-                    });
-                    showToast('✅', '订阅成功！每天09:00接收日报');
+                    // Create new document
+                    await db.createDocument(
+                        DATABASE_ID,
+                        COLLECTION_ID,
+                        'unique()',
+                        {
+                            username: username,
+                            employee_name: username,
+                            subscribed_at: new Date().toISOString(),
+                            is_active: true,
+                            preferences: '{}'
+                        }
+                    );
+                    showToast('✅', '订阅成功！');
                 }
                 
-                // Save username
-                localStorage.setItem('ai_insight_user', username);
+                saveUsername(username);
                 
-                // Show subscription section
-                await showSubscriptionSection({ exists: true, isActive: true, subscribedAt: new Date().toISOString() });
+                const newStatus = await checkSubscription(username);
+                showSubscriptionSection(newStatus);
                 
             } catch (error) {
                 console.error('Subscribe error:', error);
@@ -295,7 +270,7 @@
         async function unsubscribe() {
             const username = getCurrentUsername();
             if (!username) {
-                showToast('❌', '请先输入您的工号');
+                showToast('❌', '请先输入工号');
                 return;
             }
             
@@ -303,15 +278,16 @@
                 const status = await checkSubscription(username);
                 
                 if (status.exists) {
-                    await appwrite.updateDocument(status.documentId, {
-                        is_active: false
-                    });
+                    await db.updateDocument(
+                        DATABASE_ID,
+                        COLLECTION_ID,
+                        status.documentId,
+                        {
+                            is_active: false
+                        }
+                    );
                     
-                    statusBadge.textContent = '已取消';
-                    statusBadge.className = 'px-4 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800';
-                    unsubscribeBtn.textContent = '重新订阅';
-                    unsubscribeBtn.className = 'w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-green-600 hover:to-emerald-700 transition-all shadow-lg';
-                    
+                    updateStatusUI({ isActive: false });
                     showToast('✅', '已取消订阅');
                 }
             } catch (error) {
@@ -345,7 +321,7 @@
                 return;
             }
             
-            // Clean username (remove @internal.company if present)
+            // Clean username
             const cleanUsername = username.replace('@internal.company', '').trim();
             
             if (cleanUsername.length < 2) {
@@ -362,7 +338,7 @@
             subscribeBtn.textContent = '立即订阅';
         });
 
-        // Enter key to subscribe
+        // Enter key
         employeeIdInput.addEventListener('keypress', async (e) => {
             if (e.key === 'Enter') {
                 subscribeBtn.click();
@@ -379,7 +355,7 @@
             }
         });
 
-        // Initialize
+        // Initialize - check if user already subscribed
         (async function init() {
             const username = getCurrentUsername();
             if (username) {
