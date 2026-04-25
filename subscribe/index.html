@@ -90,7 +90,7 @@
     </script>
 
     <script type="module">
-        import { Client, Account, Databases, Query, OAuthProvider } from 'https://cdn.jsdelivr.net/npm/appwrite@24.2.0/dist/esm/sdk.js';
+        import { Client, Account, Databases, Query } from 'https://cdn.jsdelivr.net/npm/appwrite@24.2.0/dist/esm/sdk.js';
 
         // Appwrite Configuration
         const client = new Client()
@@ -190,8 +190,9 @@
         loginBtn.addEventListener('click', async () => {
             try {
                 const currentUrl = window.location.href.split('?')[0];
+                // Use string provider name for Appwrite
                 await account.createOAuth2Session(
-                    OAuthProvider.Internal,
+                    'kuaishou',  // Provider name as string
                     currentUrl,
                     currentUrl
                 );
