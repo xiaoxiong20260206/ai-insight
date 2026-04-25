@@ -38,9 +38,9 @@ KimConfig.validate()
 # ============ 配置 ============
 APP_KEY = KimConfig.APP_KEY
 
-# 深度调研链接
-RESEARCH_URL = "https://xiaoxiong20260206.github.io/ai-insight/02-deep-research/trends/ai-leaders-2026.html"
-from config import INTERNAL_HOMEPAGE as PROJECT_URL
+# 深度调研链接（⚠️ 必须使用外部公开版 ai-insight-public，否则群成员访问404）
+RESEARCH_URL = "https://xiaoxiong20260206.github.io/ai-insight-public/02-deep-research/trends/ai-leaders-2026.html"
+from config import EXTERNAL_HOMEPAGE as PROJECT_URL
 
 # 推送配置（统一从 KimConfig 读取）
 SEND_INTERVAL = KimConfig.SEND_INTERVAL
