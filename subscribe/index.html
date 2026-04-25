@@ -119,13 +119,21 @@
         </div>
     </div>
 
-    <!-- Appwrite SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/appwrite@18.0.0/sdk.js"></script>
-    <script>
+    <!-- Appwrite SDK via ESM -->
+    <script type="importmap">
+    {
+        "imports": {
+            "appwrite": "https://esm.sh/appwrite@18.0.0"
+        }
+    }
+    </script>
+    <script type="module">
+        import { Client, Databases, Query } from 'appwrite';
+
         // Debug: 确认SDK加载
-        console.log('Appwrite SDK loaded:', typeof Appwrite !== 'undefined');
-        console.log('Appwrite.Client:', typeof Appwrite?.Client !== 'undefined');
-        console.log('Appwrite.Databases:', typeof Appwrite?.Databases !== 'undefined');
+        console.log('✅ Appwrite SDK loaded via ESM');
+        console.log('Client:', typeof Client);
+        console.log('Databases:', typeof Databases);
 
         // Configuration
         const APPWRITE_ENDPOINT = 'https://INTERNAL_SERVICE_ENDPOINT/v1';
@@ -136,9 +144,9 @@
         // Initialize Appwrite
         let client, db;
         try {
-            client = new Appwrite.Client();
+            client = new Client();
             client.setEndpoint(APPWRITE_ENDPOINT).setProject(APPWRITE_PROJECT);
-            db = new Appwrite.Databases(client);
+            db = new Databases(client);
             console.log('✅ Appwrite initialized successfully');
         } catch (e) {
             console.error('❌ Appwrite init failed:', e);
@@ -212,8 +220,8 @@
                     DATABASE_ID,
                     COLLECTION_ID,
                     [
-                        Appwrite.Query.equal('username', username),
-                        Appwrite.Query.limit(1)
+                        Query.equal('username', username),
+                        Query.limit(1)
                     ]
                 );
                 
