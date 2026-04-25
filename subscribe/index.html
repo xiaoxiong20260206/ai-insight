@@ -122,6 +122,11 @@
     <!-- Appwrite SDK -->
     <script src="https://cdn.jsdelivr.net/npm/appwrite@18.0.0/sdk.js"></script>
     <script>
+        // Debug: 确认SDK加载
+        console.log('Appwrite SDK loaded:', typeof Appwrite !== 'undefined');
+        console.log('Appwrite.Client:', typeof Appwrite?.Client !== 'undefined');
+        console.log('Appwrite.Databases:', typeof Appwrite?.Databases !== 'undefined');
+
         // Configuration
         const APPWRITE_ENDPOINT = 'https://INTERNAL_SERVICE_ENDPOINT/v1';
         const APPWRITE_PROJECT = 'INTERNAL_PROJECT_ID';
@@ -129,9 +134,15 @@
         const COLLECTION_ID = 'INTERNAL_COLLECTION_ID';
 
         // Initialize Appwrite
-        const client = new Appwrite.Client();
-        client.setEndpoint(APPWRITE_ENDPOINT).setProject(APPWRITE_PROJECT);
-        const db = new Appwrite.Databases(client);
+        let client, db;
+        try {
+            client = new Appwrite.Client();
+            client.setEndpoint(APPWRITE_ENDPOINT).setProject(APPWRITE_PROJECT);
+            db = new Appwrite.Databases(client);
+            console.log('✅ Appwrite initialized successfully');
+        } catch (e) {
+            console.error('❌ Appwrite init failed:', e);
+        }
 
         // Elements
         const authSection = document.getElementById('authSection');
@@ -192,10 +203,11 @@
 
         // Check subscription status
         async function checkSubscription(username) {
-            if (!username) return null;
+            if (!username || !db) return null;
+            
+            console.log('🔍 Checking subscription for:', username);
             
             try {
-                // Use listDocuments with query filter
                 const result = await db.listDocuments(
                     DATABASE_ID,
                     COLLECTION_ID,
@@ -204,6 +216,8 @@
                         Appwrite.Query.limit(1)
                     ]
                 );
+                
+                console.log('📋 Query result:', result);
                 
                 if (result.documents && result.documents.length > 0) {
                     const doc = result.documents[0];
@@ -216,18 +230,27 @@
                 }
                 return { exists: false };
             } catch (error) {
-                console.error('Check subscription error:', error);
+                console.error('❌ Check subscription error:', error);
                 return { exists: false, error: error.message };
             }
         }
 
         // Subscribe
         async function subscribe(username) {
+            console.log('📝 Subscribing:', username);
+            
+            if (!db) {
+                showToast('❌', 'Appwrite未初始化');
+                return;
+            }
+            
             try {
                 const status = await checkSubscription(username);
+                console.log('📊 Current status:', status);
                 
                 if (status.exists) {
                     // Update existing document
+                    console.log('🔄 Updating existing document:', status.documentId);
                     await db.updateDocument(
                         DATABASE_ID,
                         COLLECTION_ID,
@@ -240,6 +263,7 @@
                     showToast('✅', '订阅已更新！');
                 } else {
                     // Create new document
+                    console.log('➕ Creating new document');
                     await db.createDocument(
                         DATABASE_ID,
                         COLLECTION_ID,
@@ -261,7 +285,7 @@
                 showSubscriptionSection(newStatus);
                 
             } catch (error) {
-                console.error('Subscribe error:', error);
+                console.error('❌ Subscribe error:', error);
                 showToast('❌', '订阅失败：' + error.message);
             }
         }
@@ -291,7 +315,7 @@
                     showToast('✅', '已取消订阅');
                 }
             } catch (error) {
-                console.error('Unsubscribe error:', error);
+                console.error('❌ Unsubscribe error:', error);
                 showToast('❌', '操作失败：' + error.message);
             }
         }
@@ -314,6 +338,8 @@
 
         // Event listeners
         subscribeBtn.addEventListener('click', async () => {
+            console.log('🔘 Subscribe button clicked');
+            
             const username = employeeIdInput.value.trim().toLowerCase();
             
             if (!username) {
@@ -341,11 +367,13 @@
         // Enter key
         employeeIdInput.addEventListener('keypress', async (e) => {
             if (e.key === 'Enter') {
+                console.log('⌨️ Enter pressed');
                 subscribeBtn.click();
             }
         });
 
         unsubscribeBtn.addEventListener('click', async () => {
+            console.log('🔘 Unsubscribe button clicked');
             const currentStatus = await checkSubscription(getCurrentUsername());
             
             if (currentStatus.exists && currentStatus.isActive) {
@@ -357,8 +385,10 @@
 
         // Initialize - check if user already subscribed
         (async function init() {
+            console.log('🚀 Initializing subscription page');
             const username = getCurrentUsername();
             if (username) {
+                console.log('👤 Found stored username:', username);
                 const status = await checkSubscription(username);
                 if (status.exists) {
                     showSubscriptionSection(status);
