@@ -5,66 +5,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI洞察日报订阅</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .fade-in { animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
 </head>
-<body class="bg-gray-50 min-h-screen">
+<body class="bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen">
     <div class="container mx-auto px-4 py-8 max-w-2xl">
-        <div class="bg-white rounded-lg shadow-md p-8">
+        <div class="bg-white rounded-2xl shadow-xl p-8">
             <!-- Header -->
             <div class="text-center mb-8">
-                <h1 class="text-3xl font-bold text-gray-800 mb-2">📡 AI洞察日报订阅</h1>
-                <p class="text-gray-600">每天早上09:00，林克会准时为您推送AI行业最新动态</p>
+                <div class="text-5xl mb-4">📡</div>
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">AI洞察日报订阅</h1>
+                <p class="text-gray-500">每天早上09:00，林克会准时为您推送AI行业最新动态</p>
             </div>
 
-            <!-- Login Section -->
-            <div id="loginSection">
-                <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
-                    <h2 class="text-lg font-semibold text-blue-800 mb-3">🔐 快手SSO登录</h2>
-                    <p class="text-blue-700 mb-4">请先登录快手账号，订阅功能仅限快手内部员工使用</p>
-                    <button id="loginBtn" class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-                        登录快手SSO
-                    </button>
+            <!-- Login/Register Section -->
+            <div id="authSection" class="fade-in">
+                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6 mb-6">
+                    <h2 class="text-lg font-semibold text-blue-800 mb-3">👋 欢迎订阅</h2>
+                    <p class="text-blue-700 mb-4 text-sm">请输入您的快手内部工号或邮箱前缀进行订阅</p>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">快手工号 / 邮箱</label>
+                            <input type="text" id="employeeId" 
+                                placeholder="例如：shenlang 或 shenlang@internal.company"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                            >
+                        </div>
+                        <button id="subscribeBtn" 
+                            class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                            立即订阅
+                        </button>
+                    </div>
+                    
+                    <p class="text-xs text-gray-500 mt-4 text-center">
+                        💡 订阅后，每日09:00会自动通过KIM发送日报给您
+                    </p>
                 </div>
             </div>
 
             <!-- Subscription Section (Hidden by default) -->
-            <div id="subscriptionSection" class="hidden">
-                <div class="bg-green-50 border border-green-200 rounded-lg p-6 mb-6">
+            <div id="subscriptionSection" class="hidden fade-in">
+                <div class="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-xl p-6 mb-6">
                     <div class="flex items-center justify-between mb-4">
-                        <h2 class="text-lg font-semibold text-green-800">✅ 当前订阅状态</h2>
-                        <span id="statusBadge" class="px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                        <h2 class="text-lg font-semibold text-green-800">✅ 订阅成功</h2>
+                        <span id="statusBadge" class="px-4 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
                             已订阅
                         </span>
                     </div>
-                    <div class="text-green-700">
-                        <p class="mb-2">👤 用户名：<span id="usernameDisplay" class="font-medium"></span></p>
-                        <p>📅 订阅时间：<span id="subscribedAtDisplay" class="font-medium"></span></p>
+                    <div class="text-green-700 space-y-2">
+                        <p class="flex items-center">
+                            <span class="mr-2">👤</span> 
+                            用户：<span id="usernameDisplay" class="font-semibold"></span>
+                        </p>
+                        <p class="flex items-center">
+                            <span class="mr-2">📅</span> 
+                            订阅时间：<span id="subscribedAtDisplay" class="font-semibold"></span>
+                        </p>
+                    </div>
+                    
+                    <div class="mt-4 p-3 bg-white rounded-lg border border-green-200">
+                        <p class="text-sm text-green-700">🎉 订阅成功！每天早上09:00，林克会通过KIM给您发送AI日报</p>
                     </div>
                 </div>
 
-                <div class="space-y-4">
-                    <button id="unsubscribeBtn" class="w-full bg-red-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+                <div class="space-y-3">
+                    <button id="unsubscribeBtn" class="w-full bg-gradient-to-r from-red-500 to-rose-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-red-600 hover:to-rose-700 transition-all shadow-lg">
                         取消订阅
-                    </button>
-                    
-                    <button id="logoutBtn" class="w-full bg-gray-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-gray-700 transition-colors">
-                        退出登录
                     </button>
                 </div>
             </div>
 
             <!-- Info Section -->
             <div class="mt-8 border-t pt-6">
-                <h3 class="text-lg font-semibold text-gray-800 mb-3">💡 关于AI洞察日报</h3>
-                <ul class="space-y-2 text-gray-700">
-                    <li>✅ 每天精选15条AI行业动态（海外12条 + 国内3条）</li>
-                    <li>✅ 五大板块：大模型、Agent产品、产业动态、国内动态、开发者工具</li>
-                    <li>✅ 深度聚焦：每板块附带专业分析与趋势洞察</li>
-                    <li>✅ 林克自述：AI助手的自我进化感悟</li>
-                </ul>
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">💡 关于AI洞察日报</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="flex items-start text-gray-700">
+                        <span class="text-green-500 mr-2">✓</span>
+                        <span class="text-sm">每天精选15条AI行业动态</span>
+                    </div>
+                    <div class="flex items-start text-gray-700">
+                        <span class="text-green-500 mr-2">✓</span>
+                        <span class="text-sm">五大板块：大模型、Agent、工具等</span>
+                    </div>
+                    <div class="flex items-start text-gray-700">
+                        <span class="text-green-500 mr-2">✓</span>
+                        <span class="text-sm">深度聚焦：每板块专业分析</span>
+                    </div>
+                    <div class="flex items-start text-gray-700">
+                        <span class="text-green-500 mr-2">✓</span>
+                        <span class="text-sm">林克自述：AI助手的进化感悟</span>
+                    </div>
+                </div>
             </div>
 
             <!-- Footer -->
-            <div class="mt-8 text-center text-gray-500 text-sm">
+            <div class="mt-8 text-center text-gray-400 text-sm">
                 <p>Powered by 林克（沈浪的AI分身）</p>
                 <p class="mt-1">
                     <a href="https://xiaoxiong20260206.github.io/ai-insight/" class="text-blue-600 hover:underline">查看往期日报</a>
@@ -74,205 +112,211 @@
     </div>
 
     <!-- Toast Notification -->
-    <div id="toast" class="fixed top-4 right-4 bg-white rounded-lg shadow-lg p-4 max-w-sm transform translate-x-full transition-transform duration-300">
+    <div id="toast" class="fixed top-4 right-4 bg-white rounded-xl shadow-2xl p-4 max-w-sm transform translate-x-full transition-transform duration-300 z-50">
         <div class="flex items-center">
             <span id="toastIcon" class="text-2xl mr-3"></span>
-            <p id="toastMessage" class="text-gray-800"></p>
+            <p id="toastMessage" class="text-gray-800 font-medium"></p>
         </div>
     </div>
 
-    <script type="importmap">
-    {
-        "imports": {
-            "json-bigint": "https://esm.sh/json-bigint@1.0.0"
-        }
-    }
-    </script>
-
-    <script type="module">
-        import { Client, Account, Databases, Query } from 'https://cdn.jsdelivr.net/npm/appwrite@24.2.0/dist/esm/sdk.js';
-
-        // Appwrite Configuration
-        const client = new Client()
-            .setEndpoint('https://INTERNAL_SERVICE_ENDPOINT/v1')
-            .setProject('INTERNAL_PROJECT_ID');
-
-        const account = new Account(client);
-        const db = new Databases(client);
-
+    <script>
+        // Configuration
+        const APPWRITE_ENDPOINT = 'https://INTERNAL_SERVICE_ENDPOINT/v1';
+        const APPWRITE_PROJECT = 'INTERNAL_PROJECT_ID';
         const DATABASE_ID = 'INTERNAL_DATABASE_ID';
         const COLLECTION_ID = 'INTERNAL_COLLECTION_ID';
 
+        // Appwrite SDK (minimal implementation)
+        class AppwriteClient {
+            constructor() {
+                this.endpoint = APPWRITE_ENDPOINT;
+                this.project = APPWRITE_PROJECT;
+            }
+
+            async request(method, path, body = null) {
+                const headers = {
+                    'Content-Type': 'application/json',
+                    'X-Appwrite-Project': this.project
+                };
+
+                const options = { method, headers };
+                if (body) options.body = JSON.stringify(body);
+
+                const response = await fetch(`${this.endpoint}${path}`, options);
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.message || 'Request failed');
+                }
+                return response.json();
+            }
+
+            async listDocuments(queries = []) {
+                return this.request('POST', `/databases/${DATABASE_ID}/collections/${COLLECTION_ID}/documents`, {
+                    queries
+                });
+            }
+
+            async createDocument(data) {
+                return this.request('POST', `/databases/${DATABASE_ID}/collections/${COLLECTION_ID}/documents`, {
+                    documentId: 'unique()',
+                    data
+                });
+            }
+
+            async updateDocument(documentId, data) {
+                return this.request('PATCH', `/databases/${DATABASE_ID}/collections/${COLLECTION_ID}/documents/${documentId}`, {
+                    data
+                });
+            }
+        }
+
+        const appwrite = new AppwriteClient();
+
         // Elements
-        const loginSection = document.getElementById('loginSection');
+        const authSection = document.getElementById('authSection');
         const subscriptionSection = document.getElementById('subscriptionSection');
-        const loginBtn = document.getElementById('loginBtn');
+        const employeeIdInput = document.getElementById('employeeId');
+        const subscribeBtn = document.getElementById('subscribeBtn');
         const unsubscribeBtn = document.getElementById('unsubscribeBtn');
-        const logoutBtn = document.getElementById('logoutBtn');
         const usernameDisplay = document.getElementById('usernameDisplay');
         const subscribedAtDisplay = document.getElementById('subscribedAtDisplay');
         const statusBadge = document.getElementById('statusBadge');
 
-        // Check if returning from OAuth
-        async function handleOAuthCallback() {
-            try {
-                // Handle token exchange
-                const urlParams = new URLSearchParams(window.location.search);
-                const secret = urlParams.get('secret');
-                const userId = urlParams.get('userId');
+        // Get username from URL or localStorage
+        function getCurrentUsername() {
+            // Check URL params first (for OAuth callback)
+            const urlParams = new URLSearchParams(window.location.search);
+            const user = urlParams.get('user');
+            if (user) {
+                localStorage.setItem('ai_insight_user', user);
+                window.history.replaceState({}, document.title, window.location.pathname);
+                return user;
+            }
+            // Check localStorage
+            return localStorage.getItem('ai_insight_user');
+        }
 
-                if (secret && userId) {
-                    await account.createSession(userId, secret);
-                    // Clean URL
-                    window.history.replaceState({}, document.title, window.location.pathname);
+        // Check subscription status
+        async function checkSubscription(username) {
+            if (!username) return false;
+            
+            try {
+                const result = await appwrite.listDocuments([
+                    `where("username", "==", "${username}")`,
+                    'limit(1)'
+                ]);
+                
+                if (result.documents && result.documents.length > 0) {
+                    const doc = result.documents[0];
+                    return {
+                        exists: true,
+                        isActive: doc.is_active,
+                        subscribedAt: doc.subscribed_at,
+                        documentId: doc.$id
+                    };
                 }
+                return { exists: false };
             } catch (error) {
-                console.error('OAuth callback error:', error);
+                console.error('Check subscription error:', error);
+                return { exists: false, error: error.message };
             }
-        }
-
-        // Check current session
-        async function checkSession() {
-            try {
-                const user = await account.get();
-                showSubscriptionSection(user);
-            } catch (error) {
-                showLoginSection();
-            }
-        }
-
-        // Show login section
-        function showLoginSection() {
-            loginSection.classList.remove('hidden');
-            subscriptionSection.classList.add('hidden');
         }
 
         // Show subscription section
-        async function showSubscriptionSection(user) {
-            loginSection.classList.add('hidden');
+        async function showSubscriptionSection(status) {
+            authSection.classList.add('hidden');
             subscriptionSection.classList.remove('hidden');
-
-            // Get subscription status
-            try {
-                const result = await db.listRows(
-                    DATABASE_ID,
-                    COLLECTION_ID,
-                    [
-                        Query.equal('username', user.name),
-                        Query.limit(1)
-                    ]
-                );
-
-                const rows = result.rows || [];
-                
-                if (rows.length > 0) {
-                    const sub = rows[0];
-                    usernameDisplay.textContent = user.name;
-                    subscribedAtDisplay.textContent = new Date(sub.subscribed_at).toLocaleDateString('zh-CN');
-                    
-                    if (!sub.is_active) {
-                        statusBadge.textContent = '已取消';
-                        statusBadge.className = 'px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800';
-                        unsubscribeBtn.textContent = '重新订阅';
-                        unsubscribeBtn.className = 'w-full bg-green-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-700 transition-colors';
-                    }
-                } else {
-                    // Auto subscribe on first login
-                    await subscribe(user);
-                }
-            } catch (error) {
-                console.error('Error fetching subscription:', error);
-                showToast('❌', '获取订阅状态失败');
+            
+            const username = getCurrentUsername();
+            usernameDisplay.textContent = username;
+            
+            if (status && status.subscribedAt) {
+                subscribedAtDisplay.textContent = new Date(status.subscribedAt).toLocaleDateString('zh-CN');
+            }
+            
+            if (status && status.exists && status.isActive) {
+                statusBadge.textContent = '已订阅';
+                statusBadge.className = 'px-4 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800';
+                unsubscribeBtn.textContent = '取消订阅';
+                unsubscribeBtn.className = 'w-full bg-gradient-to-r from-red-500 to-rose-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-red-600 hover:to-rose-700 transition-all shadow-lg';
+            } else {
+                statusBadge.textContent = '未订阅';
+                statusBadge.className = 'px-4 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800';
+                unsubscribeBtn.textContent = '重新订阅';
+                unsubscribeBtn.className = 'w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-green-600 hover:to-emerald-700 transition-all shadow-lg';
             }
         }
 
-        // Login with Kuaishou SSO
-        loginBtn.addEventListener('click', async () => {
+        // Show auth section
+        function showAuthSection() {
+            authSection.classList.remove('hidden');
+            subscriptionSection.classList.add('hidden');
+            employeeIdInput.value = '';
+        }
+
+        // Subscribe
+        async function subscribe(username) {
             try {
-                const currentUrl = window.location.href.split('?')[0];
-                // Use string provider name for Appwrite
-                await account.createOAuth2Session(
-                    'kuaishou',  // Provider name as string
-                    currentUrl,
-                    currentUrl
-                );
-            } catch (error) {
-                showToast('❌', '登录失败：' + error.message);
-            }
-        });
-
-        // Unsubscribe
-        unsubscribeBtn.addEventListener('click', async () => {
-            try {
-                const user = await account.get();
-                const result = await db.listRows(
-                    DATABASE_ID,
-                    COLLECTION_ID,
-                    [Query.equal('username', user.name), Query.limit(1)]
-                );
-
-                if (result.rows.length > 0) {
-                    const sub = result.rows[0];
-                    const isActive = sub.is_active;
-                    
-                    await db.updateRow(
-                        DATABASE_ID,
-                        COLLECTION_ID,
-                        sub.$id,
-                        { is_active: !isActive }
-                    );
-
-                    if (isActive) {
-                        showToast('✅', '已取消订阅');
-                        statusBadge.textContent = '已取消';
-                        statusBadge.className = 'px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800';
-                        unsubscribeBtn.textContent = '重新订阅';
-                        unsubscribeBtn.className = 'w-full bg-green-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-700 transition-colors';
-                    } else {
-                        showToast('✅', '订阅成功');
-                        statusBadge.textContent = '已订阅';
-                        statusBadge.className = 'px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800';
-                        unsubscribeBtn.textContent = '取消订阅';
-                        unsubscribeBtn.className = 'w-full bg-red-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-red-700 transition-colors';
-                    }
-                }
-            } catch (error) {
-                showToast('❌', '操作失败：' + error.message);
-            }
-        });
-
-        // Logout
-        logoutBtn.addEventListener('click', async () => {
-            try {
-                await account.deleteSession('current');
-                showLoginSection();
-                showToast('✅', '已退出登录');
-            } catch (error) {
-                showToast('❌', '退出失败');
-            }
-        });
-
-        // Subscribe helper
-        async function subscribe(user) {
-            try {
-                await db.createRow(
-                    DATABASE_ID,
-                    COLLECTION_ID,
-                    'unique()',
-                    {
-                        username: user.name,
-                        employee_name: user.name,
+                // Check if already exists
+                const status = await checkSubscription(username);
+                
+                if (status.exists) {
+                    // Update existing
+                    await appwrite.updateDocument(status.documentId, {
+                        is_active: true,
+                        subscribed_at: new Date().toISOString()
+                    });
+                    showToast('✅', '订阅已更新！每天09:00接收日报');
+                } else {
+                    // Create new
+                    await appwrite.createDocument({
+                        username: username,
+                        employee_name: username,
                         subscribed_at: new Date().toISOString(),
                         is_active: true,
                         preferences: '{}'
-                    }
-                );
+                    });
+                    showToast('✅', '订阅成功！每天09:00接收日报');
+                }
                 
-                usernameDisplay.textContent = user.name;
-                subscribedAtDisplay.textContent = new Date().toLocaleDateString('zh-CN');
-                showToast('✅', '订阅成功！每天09:00会收到林克推送的AI日报');
+                // Save username
+                localStorage.setItem('ai_insight_user', username);
+                
+                // Show subscription section
+                await showSubscriptionSection({ exists: true, isActive: true, subscribedAt: new Date().toISOString() });
+                
             } catch (error) {
                 console.error('Subscribe error:', error);
+                showToast('❌', '订阅失败：' + error.message);
+            }
+        }
+
+        // Unsubscribe
+        async function unsubscribe() {
+            const username = getCurrentUsername();
+            if (!username) {
+                showToast('❌', '请先输入您的工号');
+                return;
+            }
+            
+            try {
+                const status = await checkSubscription(username);
+                
+                if (status.exists) {
+                    await appwrite.updateDocument(status.documentId, {
+                        is_active: false
+                    });
+                    
+                    statusBadge.textContent = '已取消';
+                    statusBadge.className = 'px-4 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800';
+                    unsubscribeBtn.textContent = '重新订阅';
+                    unsubscribeBtn.className = 'w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-green-600 hover:to-emerald-700 transition-all shadow-lg';
+                    
+                    showToast('✅', '已取消订阅');
+                }
+            } catch (error) {
+                console.error('Unsubscribe error:', error);
+                showToast('❌', '操作失败：' + error.message);
             }
         }
 
@@ -292,9 +336,59 @@
             }, 3000);
         }
 
+        // Event listeners
+        subscribeBtn.addEventListener('click', async () => {
+            const username = employeeIdInput.value.trim().toLowerCase();
+            
+            if (!username) {
+                showToast('⚠️', '请输入您的工号或邮箱');
+                return;
+            }
+            
+            // Clean username (remove @internal.company if present)
+            const cleanUsername = username.replace('@internal.company', '').trim();
+            
+            if (cleanUsername.length < 2) {
+                showToast('⚠️', '请输入有效的工号');
+                return;
+            }
+            
+            subscribeBtn.disabled = true;
+            subscribeBtn.textContent = '订阅中...';
+            
+            await subscribe(cleanUsername);
+            
+            subscribeBtn.disabled = false;
+            subscribeBtn.textContent = '立即订阅';
+        });
+
+        // Enter key to subscribe
+        employeeIdInput.addEventListener('keypress', async (e) => {
+            if (e.key === 'Enter') {
+                subscribeBtn.click();
+            }
+        });
+
+        unsubscribeBtn.addEventListener('click', async () => {
+            const currentStatus = await checkSubscription(getCurrentUsername());
+            
+            if (currentStatus.exists && currentStatus.isActive) {
+                await unsubscribe();
+            } else {
+                await subscribe(getCurrentUsername());
+            }
+        });
+
         // Initialize
-        handleOAuthCallback();
-        checkSession();
+        (async function init() {
+            const username = getCurrentUsername();
+            if (username) {
+                const status = await checkSubscription(username);
+                if (status.exists) {
+                    showSubscriptionSection(status);
+                }
+            }
+        })();
     </script>
 </body>
 </html>
