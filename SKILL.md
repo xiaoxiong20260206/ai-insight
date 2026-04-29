@@ -273,8 +273,13 @@ python3 scripts/ai_daily_orchestrator.py finalize --date 2026-03-15
 ### 触发词
 "AI周报"、"生成AI周报"、"推送AI周报"
 
-### 快速执行
+### 快速执行（双路径）
 ```bash
+# 路径A（推荐）：mixCard 通过 message 工具
+python3 scripts/build_insight_mixcard.py weekly --date YYYY-Www --output /tmp/card.json
+# 然后用 message(channel=kim, kimMixCard=<card>, ...) 发送
+
+# 路径B（旧版）：直连 KIM API（需要凭证）
 python3 scripts/send_ai_weekly.py --preview   # 先预览
 python3 scripts/send_ai_weekly.py --to-groups # 确认后发群
 ```
@@ -307,6 +312,15 @@ python3 scripts/send_ai_weekly.py --to-groups # 确认后发群
 - HTML使用清爽调研报告风格
 - 首页深度调研Tab必须更新入口卡片
 - 底部"了解更多"使用统一模板
+### KIM推送（双路径）
+```bash
+# 路径A（推荐）：mixCard 通过 message 工具
+python3 scripts/build_insight_mixcard.py research --slug <slug> --output /tmp/card.json
+# 然后用 message(channel=kim, kimMixCard=<card>, ...) 发送
+
+# 路径B（旧版）：直连 KIM API
+python3 scripts/send_deep_research_card.py
+```
 - KIM推送使用标准深度调研卡片模板（含分享背景+核心发现+双按钮）
 
 详见 `references/deep-research.md`（含 Step 7 KIM推送完整模板）
@@ -529,10 +543,11 @@ python3 scripts/fetch_arxiv.py --days 1 --json --output data/arxiv-daily.json
 | 脚本 | 用途 | 命令 |
 |------|------|------|
 | `ai_daily_orchestrator.py` | **日报编排(状态+finalize+push) v1.1** | `python3 scripts/ai_daily_orchestrator.py status` |
-| `build_daily_mixcard.py` | **日报mixCard JSON生成(v10.3新增)** | `python3 scripts/build_daily_mixcard.py YYYY-MM-DD --output /tmp/card.json` |
+| `build_insight_mixcard.py` | **AI洞察 mixCard 统一生成器(v10.3新增)** | `python3 scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/card.json` |
+| `build_daily_mixcard.py` | 日报mixCard生成(已被build_insight_mixcard替代) | `python3 scripts/build_daily_mixcard.py YYYY-MM-DD --output /tmp/card.json` |
 | `send_ai_daily.py` | 日报KIM推送(仅发2个目标群) | `python3 scripts/send_ai_daily.py [日期]` |
-| `send_ai_weekly.py` | 周报KIM推送(发所有群) | `python3 scripts/send_ai_weekly.py` |
-| `send_deep_research_card.py` | 深度调研KIM推送 | `python3 scripts/send_deep_research_card.py` |
+| `send_ai_weekly.py` | 周报KIM推送(路径B:直连API) | `python3 scripts/send_ai_weekly.py` |
+| `send_deep_research_card.py` | 深度调研KIM推送(路径B:直连API) | `python3 scripts/send_deep_research_card.py` |
 | `daily_quality_gate.py` | **日报质量门(19项检查) v10.0** | `python3 scripts/daily_quality_gate.py` |
 | `gen_daily_json.py` | 生成JSON数据 | `python3 scripts/gen_daily_json.py` |
 | `gen_daily_html.py` | 生成日报HTML页面 | `python3 scripts/gen_daily_html.py` |
