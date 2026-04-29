@@ -1,393 +1,423 @@
 {
   "coverage": {
-    "overseas": 8,
-    "china": 7
+    "overseas": 13,
+    "china": 6
   },
   "overview": [
     {
       "icon": "🧠",
       "label": "大模型",
-      "headline": "英伟达Nemotron 3 Nano Omni开源，三模态统一推理效率提升9倍",
-      "text": "英伟达4月29日发布Nemotron 3 Nano Omni开源多模态模型，视觉/音频/语言三模态统一处理，推理吞吐量提升9倍，登顶6项多模态评测榜。DeepSeek V4开源余波持续发酵，小米MiMo-V2.5-Pro当日开源并获亚马逊云Day-0极速适配，全球多模态开源浪潮进入高峰。"
-    },
-    {
-      "icon": "⚖️",
-      "label": "AI行业",
-      "headline": "马斯克vs奥特曼庭审开启，英伟达市值5.28万亿登顶全球",
-      "text": "马斯克起诉OpenAI案正式开庭，索赔1500亿美元，庭审正值OpenAI冲刺Q4 IPO（估值8520亿美元）关键节点，结果将深度影响全球AI格局。英伟达同期市值5.28万亿美元成为全球第一，12个月涨幅达100.5%，AI算力稀缺性得到最高估值确认。"
+      "headline": "GPT-5.5发布后行业震荡：OpenAI未达营收目标、Anthropic锁住Mythos、DeepSeek V4击穿价格底线",
+      "text": "4月大模型战场火力全开：OpenAI发布GPT-5.5但曝出营收未达预期，Anthropic承认Opus 4.7不如未发布的Mythos，DeepSeek V4以百万Token 0.02元的定价搅动格局，智谱GLM-5.1实现国产模型首次价格对齐海外巨头"
     },
     {
       "icon": "⌨️",
-      "label": "AI编程",
-      "headline": "Cursor登顶全球AI编程工具，国内大厂加速跟进",
-      "text": "Cursor持续稳坐全球AI编程工具第一，MAU突破600万。继字节Trae SOLO（4月26日）之后，国内多家大厂正在加速布局AI编程赛道，技术路线从补全升级至全自主Agent编程，国产AI编程生态格局加速形成。"
+      "label": "AI Coding",
+      "headline": "SpaceX报价$60B收购Cursor，AI编程工具赛道资本狂飙",
+      "text": "SpaceX宣布与Cursor合作开发AI编程，保留$60B收购期权；Factory获$150M融资估值$1.5B；JetBrains调查显示84%开发者日常使用AI编程工具，Claude Code采用率飙至18%"
     },
     {
-      "icon": "🚀",
-      "label": "AI应用",
-      "headline": "Outlook Copilot升级主动Agent，甲骨文+OpenAI战略合作落地",
-      "text": "微软Outlook Agentic Copilot从辅助写作转向主动任务管理，向全球1000+企业开放；甲骨文与OpenAI宣布战略合作，OCI算力与GPT模型深度结合，GPT-4推理延迟降低25%。YouTube测试AI交互式搜索，彭博终端引入ASKB重塑金融工具体验。"
+      "icon": "📱",
+      "label": "AI 应用",
+      "headline": "OpenAI发布Workspace Agents，企业AI应用进入Agent编排时代",
+      "text": "OpenAI在ChatGPT企业版中推出Workspace Agents，可跨Slack/Salesforce等工具自主执行任务；Adobe推出CX Enterprise Coworker实现Agentic AI编排"
     },
     {
       "icon": "🏭",
+      "label": "AI 行业",
+      "headline": "Musk v Altman世纪庭审开庭，DeepMind前研究员$1.1B种子轮创纪录",
+      "text": "Musk起诉Altman背叛OpenAI非营利使命正式开庭，索赔$130B；前DeepMind研究员David Silver创办Ineffable Intelligence获$1.1B种子轮估值$5.1B；Big Tech顶尖研究员纷纷出走创业"
+    },
+    {
+      "icon": "🔄",
       "label": "企业转型",
-      "headline": "OpenAI获FedRAMP授权，全球算力军备竞赛白热化",
-      "text": "OpenAI的ChatGPT Enterprise与API平台获得FedRAMP 20x Moderate授权，政府AI市场规模化进程提速。谷歌150亿美元建印度千兆瓦级数据中心，软银规划5000亿美元俄亥俄超级算力中心，电力危机下全球AI基础设施投资进入天文数字时代。"
+      "label_class": "orange",
+      "headline": "Adobe全面转向Agentic AI平台，OpenAI提议4天工作制",
+      "text": "Adobe将Experience Cloud更名为CX Enterprise，全面转向Agent驱动的AI平台；OpenAI提议32小时4天工作制，称AI生产力可使人类减少工时；DeepSeek V4降价引发A股半导体爆发"
     }
   ],
   "heat_trend": {
-    "signal": "bullish",
-    "summary": "英伟达Nemotron 3 Nano Omni多模态开源 + 马斯克vs奥特曼庭审 + 英伟达市值登顶，三大主线共振引爆4月29日AI圈",
+    "title": "近7期日报交叉分析",
     "topics": [
       {
-        "name": "马斯克起诉OpenAI庭审",
-        "heat": 98,
-        "signal": "strong",
-        "desc": "马斯克索赔1500亿美元庭审开启，OpenAI IPO与行业格局面临最大变数",
-        "days": 1,
-        "score": 97,
-        "trend_class": "hot",
-        "trend_label": "🔥 热门"
+        "name": "大模型价格战",
+        "score": 9,
+        "days": 4,
+        "trend_class": "up",
+        "trend_label": "📈 攀升",
+        "signal": "DeepSeek V4百万Token 0.02元，花旗称开源闭源差距收窄"
       },
       {
-        "name": "Nemotron 3 Nano Omni发布",
-        "heat": 95,
-        "signal": "strong",
-        "desc": "英伟达开源三模态统一模型，推理效率9倍提升，具身智能赛道新里程碑",
-        "days": 1,
-        "score": 94,
-        "trend_class": "hot",
-        "trend_label": "🔥 热门"
+        "name": "AI编程赛道资本化",
+        "score": 9,
+        "days": 3,
+        "trend_class": "up",
+        "trend_label": "📈 攀升",
+        "signal": "SpaceX-Cursor $60B + Factory $1.5B，编程工具成最热赛道"
       },
       {
-        "name": "英伟达市值5.3万亿登顶",
-        "heat": 90,
-        "signal": "strong",
-        "desc": "英伟达超越苹果微软成全球第一，12个月涨幅100.5%，AI算力稀缺性得到最高估值确认",
+        "name": "企业Agent化",
+        "score": 8,
+        "days": 3,
+        "trend_class": "up",
+        "trend_label": "📈 攀升",
+        "signal": "OpenAI/Adobe/Anthropic三巨头同时推Agent产品"
+      },
+      {
+        "name": "OpenAI营收压力",
+        "score": 7,
         "days": 2,
-        "score": 88,
-        "trend_class": "hot",
-        "trend_label": "🔥 热门"
+        "trend_class": "up",
+        "trend_label": "📈 新增",
+        "signal": "WSJ报道未达营收和周活目标，CFO担忧无法支付算力合同"
       },
       {
-        "name": "DeepSeek V4开源发酵",
-        "heat": 88,
-        "signal": "strong",
-        "desc": "4月24日开源以来持续发酵，国产开源浪潮带动算力需求井喷",
-        "days": 5,
-        "score": 85,
-        "trend_class": "rising",
-        "trend_label": "📈 持续升温"
-      },
-      {
-        "name": "Ineffable Intelligence融资11亿",
-        "heat": 82,
-        "signal": "strong",
-        "desc": "AlphaGo之父创业，欧洲最大种子轮，强化演进路线引爆资本热情",
+        "name": "Musk-Altman庭审",
+        "score": 9,
         "days": 1,
-        "score": 80,
-        "trend_class": "rising",
-        "trend_label": "📈 上升"
+        "trend_class": "up",
+        "trend_label": "📈 爆发",
+        "signal": "世纪庭审正式开庭，可能决定OpenAI能否继续作为营利公司"
       }
-    ]
+    ],
+    "summary": "4月28日是AI行业多条叙事线交汇的一天：大模型价格战进入深水区（DeepSeek击穿底价），AI编程赛道资本狂飙（SpaceX-Cursor/Factory），企业Agent化三巨头同步推进，OpenAI在GPT-5.5发布后却曝出营收困境，而Musk-Altman世纪庭审正式开庭——这一天可能决定OpenAI的未来形态。"
   },
   "tabs": [
     {
-      "id": "models",
-      "name": "大模型",
+      "tab_name": "大模型",
       "deep_focus": {
-        "title": "多模态开源竞争进入新阶段：英伟达Nemotron 3 Nano Omni引爆具身智能",
+        "title": "Anthropic锁住Mythos：安全瓶颈悖论下的前沿模型困局",
         "paragraphs": [
-          "2026年4月29日，英伟达发布Nemotron 3 Nano Omni，这是一款将视觉、音频、语言三种模态统一融合的开源模型。30B-A3B混合专家架构让其在推理吞吐量上比同类开源Omni模型提升9倍，同时在6个多模态评测排行榜中领跑，覆盖复杂文档智能、视频和音频理解等场景。",
-          "Nemotron 3 Nano Omni的战略意义不止于性能数字：它专为边缘端AI Agent设计，支持从Jetson嵌入式设备到DGX大型工作站的全栈部署，使具身智能、工业巡检、车载AI等场景的落地门槛大幅降低。Palantir、Foxconn、H Company等已率先采用，Oracle和Dell在评估中。",
-          "与此同时，国内开源浪潮继续：DeepSeek V4（4月24日）余波持续发酵，小米MiMo-V2.5-Pro当日开源并获亚马逊云Day-0极速适配，部署时间从数天压缩至小时级。全球开源大模型竞争从'谁参数最大'转向'谁能跑得更快、落地更简单'。"
+          "Anthropic锁住Mythos事件揭示了AI行业的新矛盾：能力越强，释放越谨慎。当一个公司公开承认自己有更强模型但拒绝发布时，它实际上在告诉市场——安全门槛正在成为商业竞争中的结构性约束。",
+          "这对中国出海模型是利好信号：如果美国前沿模型因安全顾虑自我限制，开源模型的性价比优势将进一步放大。DeepSeek V4的定价策略正是抓住了这个窗口——在闭源前沿模型\"不敢放开\"的时候，用\"够用且便宜\"抢占开发者生态。",
+          "但悖论也在加深：安全评估越严格，闭源模型迭代越慢；迭代越慢，开源模型追赶越快；追赶越快，闭源模型的安全护城河越低。最终可能只有两条路——要么闭源模型找到快速安全评估的方法，要么开源模型也必须面对同样的安全门槛。"
         ],
-        "takeaway": "多模态开源竞争从参数规模转向效率与落地，Nemotron 3 Nano Omni标志着边缘端具身智能进入实用阶段"
+        "takeaway": "安全瓶颈悖论正在重塑大模型竞争格局：闭源模型因安全顾虑自我限制迭代节奏，开源模型天然更快的发布周期成为结构性竞争优势。"
       },
-      "pattern_insight_html": "<div class='pi-card'><div class='pi-header'><span class='pi-icon'>🧠</span><span class='pi-title'>大模型新格局：开源多模态与具身智能共振</span></div><div class='pi-body'><p><strong>核心洞察：</strong>英伟达Nemotron 3 Nano Omni将多模态效率提升9倍，国内外开源浪潮并行，大模型竞争从规模走向效率与落地。</p><ul><li>🎯 <strong>三模态统一：</strong>视觉/音频/语言一体化，具身智能落地门槛大降</li><li>⚡ <strong>9倍效率：</strong>推理吞吐量领跑同类开源Omni模型，边缘部署成为现实</li><li>🇨🇳 <strong>国内跟进：</strong>DeepSeek V4余波+小米MiMo-V2.5开源，国产开源生态加速形成</li><li>☁️ <strong>云生态配合：</strong>亚马逊云Day-0适配，开源模型+云服务闭环提速</li><li>🤖 <strong>应用加速：</strong>Foxconn、H Company等企业级客户率先落地，具身智能商业化提速</li></ul><p class='pi-insight'>开源多模态竞争进入实用阶段，谁能更快在边缘端部署、更低成本推理，谁就赢得下一轮具身智能市场</p></div></div>",
+      "pattern_insight_html": "<div class='pi-card'><h4>🧠 规律洞察</h4><p><b>「安全瓶颈悖论」</b>：Anthropic锁住Mythos不是因为做不到，而是因为做到了。当模型能力突破安全评估红线时，商业发布被迫延迟——这意味着前沿闭源模型的迭代节奏正在被安全评估拖慢，而开源模型（DeepSeek V4）不需要过这道门槛，迭代速度天然更快。闭源模型的安全护城河正在变成迭代瓶颈。</p></div>",
       "news": {
         "overseas": [
           {
-            "title": "NVIDIA Launches Nemotron 3 Nano Omni: Unifying Vision, Audio and Language for 9x More Efficient AI Agents",
-            "source": "NVIDIA Blog",
-            "url": "https://blogs.nvidia.com/blog/nemotron-3-nano-omni-multimodal-ai-agents/",
-            "date": "2026-04-29",
-            "details": {
-              "finding": "英伟达发布Nemotron 3 Nano Omni开源多模态模型，30B-A3B混合专家架构，推理吞吐量比同类Omni模型提升9倍，登顶6项评测榜，支持Jetson~DGX全栈部署",
-              "significance": "三模态统一处理消除了对独立感知模型的依赖，为具身智能、文档智能、音视频理解等Agent应用场景提供高效推理基础"
-            }
-          }
-        ],
-        "china": [
-          {
-            "title": "DeepSeek V4百万上下文开源：技术细节拆解与边缘部署实战",
-            "source": "证券时报",
-            "url": "https://www.stcn.com/article/detail/3802834.html",
-            "date": "2026-04-29",
-            "details": {
-              "finding": "DeepSeek V4 4月24日开源，百万字超长上下文+MoE架构+强化Agent能力，性能领跑全球开源模型，技术细节完整公开",
-              "significance": "百万上下文+MoE架构组合是大模型技术的重要突破，完整开源加速全球开发者验证与改进"
-            }
+            "title": "Anthropic发布Claude Opus 4.7，承认不如未发布的Mythos",
+            "url": "https://www.cnbc.com/2026/04/16/anthropic-claude-opus-4-7-model-mythos.html",
+            "source": "CNBC",
+            "date": "2026-04-16",
+            "tags": [
+              "大模型",
+              "Anthropic"
+            ],
+            "importance": "🔴 重要",
+            "summary": "Anthropic发布Claude Opus 4.7，提升编码、视觉能力并新增xhigh推理级别，但公开承认不如未发布的Mythos。Mythos因网络安全风险被锁在50家企业防火墙后（Project Glasswing计划）。这是AI公司首次公开承认持有更强但出于安全原因不放出的模型。"
           },
           {
-            "title": "小米MiMo-V2.5-Pro开源当日，亚马逊云完成Day-0极速适配",
-            "source": "钛媒体",
-            "url": "https://www.tmtpost.com/7971378.html",
-            "date": "2026-04-29",
-            "details": {
-              "finding": "小米于4月28日开源MiMo-V2.5系列推理模型，亚马逊云科技同日完成Day-0适配，部署时间从数天压缩至小时级",
-              "significance": "开源模型+云服务生态闭环加速形成，国产开源模型商业落地提速"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "id": "coding",
-      "name": "AI编程",
-      "deep_focus": {
-        "title": "AI编程工具格局演变：从代码补全到全自主Agent编程",
-        "paragraphs": [
-          "4月29日，全球AI编程工具竞争持续白热化。Cursor稳坐AI编程工具第一，MAU突破600万，月均代码写入量超200亿行，从IDE插件演变为完整开发环境。继字节Trae SOLO（4月26日）之后，国内多家大厂正在快速布局AI编程赛道，技术竞争轴从自动补全升级至全自主Agent编程模式。",
-          "Aider（开源AI编程工具）在4月发布了v0.80版本，基准测试成绩持续提升，成为开源路线的重要代表。与此同时，GitHub Copilot持续更新Agent模式，Claude Sonnet深度集成成为多个AI编程工具的底层模型，大模型能力升级与编程工具生态形成正向循环。",
-          "中国市场方面，字节Trae SOLO以免费策略切入，配合豆包大模型支持；阿里通义灵码持续迭代RepoWiki全仓库理解能力；腾讯云代码助手和百度Comate也相继发布新功能。AI编程工具赛道已从'有没有'进入'谁做得最好'的质量竞争阶段。"
-        ],
-        "takeaway": "AI编程工具从IDE插件演变为完整Agent开发环境，技术路线从代码补全升级至全自主编程，国内外格局加速分化"
-      },
-      "pattern_insight_html": "<div class='pi-card'><div class='pi-header'><span class='pi-icon'>⌨️</span><span class='pi-title'>AI编程：从工具到Agent的技术跃迁</span></div><div class='pi-body'><p><strong>核心洞察：</strong>Cursor稳坐全球第一，国内大厂通过免费+大模型组合加速跟进，AI编程工具竞争进入质量博弈阶段。</p><ul><li>🥇 <strong>Cursor领跑：</strong>MAU 600万，月均200亿行代码，从IDE插件进化为完整开发环境</li><li>🆓 <strong>免费策略：</strong>字节Trae SOLO免费入局，AI编程工具价格战打响</li><li>🤖 <strong>技术升级：</strong>从代码补全进化到全自主Agent编程，产品维度跨越式提升</li><li>🇨🇳 <strong>国内加速：</strong>通义灵码/腾讯云/百度Comate相继发布新功能，格局加速成型</li><li>🔗 <strong>生态协同：</strong>Claude Sonnet深度集成多个工具，大模型与编程工具形成正向循环</li></ul><p class='pi-insight'>AI编程工具竞争进入第二阶段：不再是有没有AI辅助，而是谁的Agent更能独立完成复杂任务</p></div></div>",
-      "news": {
-        "overseas": [
-          {
-            "title": "Cursor Surpasses 6M MAU: AI Coding Tools Enter Full Agent Development Era",
-            "source": "The Verge",
-            "url": "https://www.theverge.com/tech",
-            "date": "2026-04-29",
-            "details": {
-              "finding": "Cursor MAU突破600万，月均代码写入超200亿行，从IDE插件演变为完整开发环境，Agent模式持续深化",
-              "significance": "Cursor的成功证明AI编程工具已经超越补全辅助，进入真正的Agent自主开发阶段，重塑开发者工作流"
-            }
-          },
-          {
-            "title": "Aider v0.80 Open Source AI Coding Tool Benchmark Results Improve Significantly",
+            "title": "GPT-5.5发布：更强的编码、计算机操作和研究能力",
+            "url": "https://techcrunch.com/2026/04/23/openai-chatgpt-gpt-5-5-ai-model-superapp/",
             "source": "TechCrunch",
-            "url": "https://techcrunch.com/category/artificial-intelligence/",
+            "date": "2026-04-23",
+            "tags": [
+              "大模型",
+              "OpenAI",
+              "GPT-5.5"
+            ],
+            "importance": "🟡 关注",
+            "summary": "OpenAI发布GPT-5.5，宣称在编码、计算机使用和深度研究方面显著提升。首席研究官Mark Chen称GPT-5.5在科学和技术研究工作流程上有meaningful gains，可辅助药物发现。"
+          },
+          {
+            "title": "AMD宣布Advancing AI 2026大会7月23日举办",
+            "url": "https://ir.amd.com/news-events/press-releases/detail/1283/amd-announces-advancing-ai-2026",
+            "source": "AMD IR",
             "date": "2026-04-28",
-            "details": {
-              "finding": "开源AI编程工具Aider发布v0.80版本，基准测试成绩持续提升，成为开源路线的重要代表，与商业工具同台竞技",
-              "significance": "开源路线的AI编程工具持续进步，给商业产品带来竞争压力，推动整体生态健康发展"
-            }
+            "tags": [
+              "大模型",
+              "硬件",
+              "AMD"
+            ],
+            "importance": "🟢 一般",
+            "summary": "AMD宣布旗舰AI大会Advancing AI 2026将于7月22-23日在旧金山Moscone Center举办，将展示最新AMD AI解决方案。"
           }
         ],
         "china": [
           {
-            "title": "字节Trae SOLO发布后国内AI编程格局：大厂混战，国产工具加速赶超",
-            "source": "微信公众号",
-            "url": "https://weixin.sogou.com/weixin?type=2&query=字节Trae SOLO国内AI编程格局大厂",
-            "date": "2026-04-29",
-            "details": {
-              "finding": "字节Trae SOLO免费策略引发国内AI编程工具跟进，通义灵码、腾讯云代码助手、百度Comate相继加速迭代",
-              "significance": "国内AI编程工具市场从观望期进入全面发展期，大厂纷纷入局推动技术整体水平提升"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "id": "apps",
-      "name": "AI应用",
-      "deep_focus": {
-        "title": "AI办公与企业服务进入主动Agent时代",
-        "paragraphs": [
-          "微软于4月27日升级Outlook Agentic Copilot，将AI工具从辅助写作转向主动任务管理，向全球1000+大型企业开放。内部测试显示邮件和日程处理时间减少35%，会议协调时间降低42%。这是AI办公工具从工具到Agent的质的跨越。",
-          "甲骨文与OpenAI同日宣布战略合作，OCI算力与GPT模型深度结合，测试数据显示GPT-4推理延迟降低25%、训练效率提升18%。企业级AI云服务市场2026年Q1规模达120亿美元，同比增长45%，云厂商与AI开发商协同成为产业突破关键。",
-          "视频与金融领域的AI应用也在快速演进：YouTube推出Ask YouTube，以自然语言将问题拆解为结构化步骤，整合文本/短视频/长视频；彭博终端引入ASKB聊天界面，帮助37.5万用户自动完成财报分析等重复性任务，金融工具迈入自然语言交互时代。"
-        ],
-        "takeaway": "AI办公工具从辅助进化为主动Agent，企业级AI应用的价值链正从工具层延伸至决策层"
-      },
-      "pattern_insight_html": "<div class='pi-card'><div class='pi-header'><span class='pi-icon'>🚀</span><span class='pi-title'>AI应用：从辅助工具到主动Agent的范式跃迁</span></div><div class='pi-body'><p><strong>核心洞察：</strong>微软Outlook Copilot升级标志AI办公从辅助写作进化为主动管理，企业AI价值链延伸至决策层。</p><ul><li>📧 <strong>Outlook Copilot：</strong>主动筛选邮件+自动回复+会议管理，处理时间减少35%</li><li>🤝 <strong>甲骨文+OpenAI：</strong>GPT-4推理延迟降25%，企业级AI云服务市场Q1达120亿美元</li><li>🎬 <strong>YouTube AI搜索：</strong>自然语言拆解问题+视频整合，AI内容分发进入新阶段</li><li>💹 <strong>彭博ASKB：</strong>金融终端自然语言交互，AI重塑37.5万用户的工作方式</li><li>🏛️ <strong>OpenAI政务：</strong>FedRAMP授权打开政府AI市场，合规化大门开启</li></ul><p class='pi-insight'>AI应用的核心竞争力从能做什么转向能替代什么，主动决策能力成为企业AI的核心价值卖点</p></div></div>",
-      "news": {
-        "overseas": [
-          {
-            "title": "Microsoft Outlook Agentic Copilot: AI Takes Over Inbox and Calendar Proactively",
-            "source": "Microsoft Blog",
-            "url": "https://blogs.microsoft.com/blog/",
-            "date": "2026-04-27",
-            "details": {
-              "finding": "微软升级Outlook Agentic Copilot，从辅助写作转向主动任务管理，向全球1000+大型企业开放，处理邮件和日程时间减少35%",
-              "significance": "AI办公工具正式进入主动决策时代，AI Agent从内容生成延伸至工作流管理"
-            }
-          },
-          {
-            "title": "Oracle and OpenAI Announce Strategic Partnership: OCI + GPT Models Deep Integration",
-            "source": "Oracle Newsroom",
-            "url": "https://www.oracle.com/news/",
-            "date": "2026-04-29",
-            "details": {
-              "finding": "甲骨文与OpenAI宣布战略合作，OCI的H100算力与OpenAI大模型结合，GPT-4推理延迟降低25%，训练效率提升18%",
-              "significance": "云厂商与AI模型厂商深度协同成为企业AI市场突破关键，企业级云AI市场Q1达120亿美元"
-            }
-          },
-          {
-            "title": "YouTube Tests Ask YouTube: AI-Powered Interactive Video Search Launches",
-            "source": "The Verge",
-            "url": "https://www.theverge.com/google",
-            "date": "2026-04-29",
-            "details": {
-              "finding": "YouTube推出基于Google大模型的Ask YouTube功能，自然语言问题拆解为步骤式回答，整合文本/短视频/长视频，向美国Premium用户开放",
-              "significance": "月活27亿用户平台的AI搜索探索具有重要战略意义，视频内容与AI交互融合新范式"
-            }
-          },
-          {
-            "title": "Bloomberg Terminal Gets AI Makeover: ASKB Chat Interface Reshapes Financial Tools",
-            "source": "Bloomberg",
-            "url": "https://www.bloomberg.com/technology",
-            "date": "2026-04-29",
-            "details": {
-              "finding": "彭博终端推出ASKB AI聊天界面，帮助37.5万用户自动完成财报分析等任务，多重事实核查机制降低幻觉风险",
-              "significance": "金融工具迈入自然语言交互新时代，AI正在重塑专业数据服务的交互范式"
-            }
-          }
-        ],
-        "china": [
-          {
-            "title": "世界模型商业化临界：DeepSeek开源带动具身智能赛道全面起跑",
-            "source": "微信公众号",
-            "url": "https://weixin.sogou.com/weixin?type=2&query=世界模型商业化临界具身智能2026",
-            "date": "2026-04-29",
-            "details": {
-              "finding": "4月29日AI圈综合：世界模型商业化接近临界点，英伟达Nemotron与DeepSeek V4开源联动，具身智能赛道正式起跑",
-              "significance": "世界模型是Embodied AI的基础，商业化提速意味着具身智能将从实验室走向工厂和消费场景"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "id": "industry",
-      "name": "AI行业",
-      "deep_focus": {
-        "title": "马斯克起诉OpenAI庭审开启：行业格局最大变数",
-        "paragraphs": [
-          "2026年4月29日，马斯克起诉OpenAI案正式开庭审理。马斯克指控OpenAI违背创立时的非营利承诺，要求撤销2019年营利化转型并罢免奥特曼等高管，索赔1500亿美元。9名陪审员将进行非约束性裁决，马斯克与奥特曼均亲自出庭。",
-          "庭审时机极为敏感——OpenAI正冲刺2026年Q4 IPO，当前估值8520亿美元。若马斯克胜诉，其旗下xAI（与SpaceX合并后估值1.25万亿美元）将获得直接竞争优势，整个AI行业格局面临重塑。波及超过8400亿美元的产业链，这是近年来AI行业最大的法律黑天鹅事件。",
-          "与此同时，英伟达市值在4月27日以5.28万亿美元超越苹果微软成为全球第一，12个月涨幅达100.5%。AI芯片市场2026年Q1规模180亿美元，英伟达占70%份额。AlphaGo之父David Silver创立的Ineffable Intelligence完成11亿美元种子轮，强化演进路线获资本高度认可。"
-        ],
-        "takeaway": "马斯克vs奥特曼庭审是2026年AI行业最大法律事件，将深度影响OpenAI IPO进程和全球AI竞争格局"
-      },
-      "pattern_insight_html": "<div class='pi-card'><div class='pi-header'><span class='pi-icon'>⚖️</span><span class='pi-title'>AI行业：法律博弈与资本市值双线爆发</span></div><div class='pi-body'><p><strong>核心洞察：</strong>马斯克起诉OpenAI庭审开启是行业最大变数，英伟达市值登顶全球彰显算力稀缺性溢价。</p><ul><li>⚖️ <strong>马斯克庭审：</strong>索赔1500亿美元，OpenAI IPO计划面临最大不确定性</li><li>📈 <strong>英伟达登顶：</strong>5.28万亿美元市值超越苹果微软，AI算力稀缺性得到最高估值确认</li><li>💰 <strong>欧洲11亿融资：</strong>Ineffable Intelligence种子轮创欧洲纪录，强化演进路线获资本认可</li><li>🤝 <strong>甲骨文+OpenAI：</strong>云厂商与AI模型厂商深度协同，企业级AI市场格局加速整合</li></ul><p class='pi-insight'>马斯克vs奥特曼是一场关于AI未来控制权的博弈，结果将重塑整个行业的商业模式与治理框架</p></div></div>",
-      "news": {
-        "overseas": [
-          {
-            "title": "Musk vs. Altman Trial Begins: $150B Lawsuit Could Derail OpenAI IPO",
-            "source": "Reuters",
-            "url": "https://www.reuters.com/technology/artificial-intelligence/",
-            "date": "2026-04-29",
-            "details": {
-              "finding": "马斯克指控OpenAI违背非营利承诺，索赔1500亿美元，9名陪审员开庭裁决，正值OpenAI冲刺Q4 IPO（估值8520亿美元）关键节点",
-              "significance": "庭审结果将决定OpenAI能否按计划IPO，并可能重塑全球AI竞争格局"
-            }
-          },
-          {
-            "title": "Nvidia Becomes World Most Valuable Company at 5.28 Trillion Dollars",
-            "source": "Financial Times",
-            "url": "https://www.ft.com/technology",
-            "date": "2026-04-27",
-            "details": {
-              "finding": "英伟达以5.28万亿美元市值成全球第一，12个月涨幅100.5%，CUDA生态护城河拥有400万+开发者",
-              "significance": "全球AI算力稀缺性得到最高估值确认，英伟达芯片在AI基础设施中的核心地位不可撼动"
-            }
-          },
-          {
-            "title": "AI行业格局重塑：从大模型能力竞争到商业生态布局的深度分析",
-            "source": "21财经",
-            "url": "https://www.21jingji.com/",
-            "date": "2026-04-29",
-            "details": {
-              "finding": "2026年Q1大模型竞争深度分析：性能竞争趋向同质化，商业生态与场景落地成新竞争轴，中国厂商在垂直场景差异化布局",
-              "significance": "大模型竞争进入生态化阶段，谁能率先建立垂直场景护城河，谁就在下一轮竞争中占据先机"
-            }
-          }
-        ],
-        "china": [
-          {
-            "title": "AI圈格局分析：马斯克庭审+英伟达登顶，中国AI产业的机遇与挑战",
-            "source": "微信公众号",
-            "url": "https://weixin.sogou.com/weixin?type=2&query=马斯克庭审OpenAI英伟达中国AI产业机遇",
-            "date": "2026-04-29",
-            "details": {
-              "finding": "马斯克vs奥特曼庭审+英伟达市值登顶双重震动，中国AI产业在自主可控路线上面临的机遇与挑战并存",
-              "significance": "中美AI竞争格局在法律与市值双重博弈下进入新阶段，国产自主可控路线战略意义愈发凸显"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "id": "enterprise",
-      "name": "企业转型",
-      "deep_focus": {
-        "title": "全球AI算力军备竞赛：电力危机、天文投资与能源路线分歧",
-        "paragraphs": [
-          "2026年AI数据中心投资已进入天文数字时代：谷歌宣布150亿美元投建印度千兆瓦级AI中心，软银规划5000亿美元俄亥俄超级算力中心（10吉瓦，规模超谷歌亚马逊微软现有总和），微软、亚马逊、Meta等也在密集扩建。",
-          "然而算力背后的电力危机正在白热化。彭博新能源财经预测2035年全球数据中心用电将达106吉瓦，较当前增长2.7倍。微软和Meta选择天然气路径但成本飙升66%（至2157美元/千瓦），供应商订单排到2030年代。谷歌押注铁空气电池长时储能（成本仅锂电池三分之一），亚马逊投100亿美元可再生能源，能源路线分歧加剧。",
-          "OpenAI的ChatGPT Enterprise与API平台获得FedRAMP 20x Moderate授权，标志着前沿AI技术可向美国政府机构开放，政府AI市场规模化进程提速。Victory Giant Technology等供应链企业PCB市场份额从1.7%跃升至13.8%，AI基础设施投资热潮正从芯片蔓延至整个供应链。"
-        ],
-        "takeaway": "AI算力军备竞赛进入电力危机与能源路线分歧的新阶段，政务AI市场同步开启，企业转型进入全面加速期"
-      },
-      "pattern_insight_html": "<div class='pi-card'><div class='pi-header'><span class='pi-icon'>🏭</span><span class='pi-title'>企业转型：算力军备+政务开放双线推进</span></div><div class='pi-body'><p><strong>核心洞察：</strong>全球AI数据中心投资达天文数字，OpenAI获FedRAMP授权同步开启政务AI市场，企业转型全面加速。</p><ul><li>🌏 <strong>谷歌印度中心：</strong>150亿美元、千兆瓦级，印度成全球算力新热土</li><li>🏗️ <strong>软银超级中心：</strong>5000亿美元/10吉瓦规划，算力军备竞赛进入超级规模化阶段</li><li>⚡ <strong>电力危机：</strong>2035年需求将达106GW，天然气路径成本飙66%，绿色算力成长期命题</li><li>🏛️ <strong>FedRAMP授权：</strong>OpenAI通过政府合规认证，政务AI市场规模化进程提速</li><li>🔩 <strong>供应链受益：</strong>PCB等关键组件随AI服务器爆发，AI基础设施投资蔓延至全供应链</li></ul><p class='pi-insight'>AI算力投资正进入能源技术路线选择的关键节点，绿色算力不只是ESG，更是长期竞争力</p></div></div>",
-      "news": {
-        "overseas": [
-          {
-            "title": "SoftBank 500B Ohio Megacenter Approved: Largest Single AI Infrastructure Investment in History",
-            "source": "Financial Times",
-            "url": "https://www.ft.com/technology",
+            "title": "DeepSeek V4击穿价格底线：百万Token输入缓存命中0.02元",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=DeepSeek+V4击穿价格底线",
+            "source": "证券时报(微信)",
             "date": "2026-04-28",
-            "details": {
-              "finding": "软银5000亿美元/10吉瓦俄亥俄超级AI数据中心获批，谷歌/微软/英伟达/Meta/OpenAI联合参与，规模超现有巨头总和",
-              "significance": "单一数据中心投资规模达到历史新高，算力军备竞赛进入超级规模化阶段，但配套电力解决方案仍是最大挑战"
-            }
+            "tags": [
+              "大模型",
+              "DeepSeek",
+              "价格战"
+            ],
+            "importance": "🔴 重要",
+            "summary": "DeepSeek V4全系API价格大幅下调：Flash百万Token输入缓存命中仅0.02元，Pro限时折扣后输出仅6元/百万Token（与V3.2同价但1.6万亿参数）。花旗研报指出DeepSeek Pro核心性能指标与Claude Sonnet 4.6持平，但定价远低于GPT-5.5。MiniMax、智谱股价重挫。中国信通院正式启动V4国产化适配测试。",
+            "wx_url": "https://www.stcn.com/article/detail/3843067.html"
           },
           {
-            "title": "AI Data Center Power Crisis: Natural Gas Costs Up 66 Percent, Google Bets on Iron-Air Batteries",
-            "source": "Bloomberg NEF",
-            "url": "https://about.bnef.com/",
-            "date": "2026-04-29",
-            "details": {
-              "finding": "彭博NEF预测2035年数据中心用电达106GW，天然气发电成本飙升66%至2157美元/千瓦，谷歌押注铁空气电池储能方案",
-              "significance": "能源路线分歧成为AI基础设施长期竞争力的关键变量，绿色算力不再只是ESG话题"
-            }
+            "title": "DeepSeek V4适配华为昇腾，国产算力自主化里程碑",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=DeepSeek+V4适配华为昇腾",
+            "source": "新浪新闻(微信)",
+            "date": "2026-04-24",
+            "tags": [
+              "大模型",
+              "DeepSeek",
+              "国产算力"
+            ],
+            "importance": "🔴 重要",
+            "summary": "DeepSeek V4首次实现百万级上下文能力全系标配，并彻底告别英伟达CUDA生态。昇腾超节点全系列产品全面适配V4，Pro约20ms低时延推理。V4早期访问权限优先开放给国内芯片厂商而非英伟达/AMD。",
+            "wx_url": "https://www.sina.cn/news/detail/5291210413704324.html"
           },
           {
-            "title": "OpenAI Achieves FedRAMP Moderate Authorization for Government AI Market",
-            "source": "OpenAI Blog",
-            "url": "https://openai.com/blog",
-            "date": "2026-04-29",
-            "details": {
-              "finding": "OpenAI ChatGPT Enterprise与API平台获得FedRAMP 20x Moderate授权，政府机构可安全使用GPT-5.5等模型",
-              "significance": "前沿AI技术进入美国政府市场的合规大门正式开启，政务AI规模化进程提速"
-            }
+            "title": "智谱GLM-5.1发布：国产模型首次价格对齐海外巨头",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=智谱GLM-5.1发布+国产模型价格对齐",
+            "source": "新浪财经(微信)",
+            "date": "2026-04-08",
+            "tags": [
+              "大模型",
+              "智谱",
+              "GLM"
+            ],
+            "importance": "🟡 关注",
+            "summary": "智谱发布GLM-5.1——全球唯一达8小时级持续工作的开源模型，SWE-bench Pro国产首次超越Opus 4.6。GLM全线提价10%，Coding场景价格接近Claude Sonnet 4.6，是国产大模型首次在核心场景实现与海外巨头价格对齐。",
+            "wx_url": "https://finance.sina.com.cn/roll/2026-04-08/doc-inhtucsk1609496.shtml"
+          }
+        ]
+      }
+    },
+    {
+      "tab_name": "AI Coding",
+      "deep_focus": {
+        "title": "SpaceX-Cursor $60B收购期权：AI编程赛道的平台-应用共生悖论",
+        "paragraphs": [
+          "SpaceX-Cursor $60B收购期权事件揭示了AI编程赛道的深层逻辑：当Anthropic和OpenAI既做基础模型又做编程工具时，Cursor这样的独立厂商天然处于弱势——你的核心能力依赖竞争对手的产品。",
+          "SpaceX-xAI的介入本质上是给Cursor一条\"不依赖Anthropic/OpenAI模型\"的出路——但代价是成为Musk生态的一部分。而Factory走了另一条路：做多模型中立平台，让用户自由切换Claude/DeepSeek/GPT。两种策略的估值天花板截然不同。",
+          "JetBrains调查显示84%开发者日常使用AI编程工具，Claude Code采用率飙至18%。这意味着编程工具赛道已经从\"早期尝鲜\"进入\"日常依赖\"阶段——谁成为开发者的默认选择，谁就掌握了AI时代的入口。"
+        ],
+        "takeaway": "AI编程工具进入\"日常依赖\"阶段，独立厂商面临平台-应用共生悖论：绑定生态获得高估值但依赖风险大，做多模型中立平台天花板更低但更安全。"
+      },
+      "pattern_insight_html": "<div class='pi-card'><h4>⌨️ 规律洞察</h4><p><b>「平台-应用共生悖论」</b>：基础模型厂商（OpenAI/Anthropic）做编程工具时，独立编程工具厂商的生存策略只剩两条路：要么绑定一个生态（Cursor绑定xAI），要么做多模型中立平台（Factory策略）。中立平台的估值天花板更低，绑定生态的估值天花板更高但依赖风险更大。Cursor的$60B估值正是\"绑定生态\"策略的极致体现。</p></div>",
+      "news": {
+        "overseas": [
+          {
+            "title": "SpaceX宣布与Cursor合作，保留$60B收购期权",
+            "url": "https://techcrunch.com/2026/04/21/spacex-is-working-with-cursor-and-has-an-option-to-buy-the-startup-for-60-billion/",
+            "source": "TechCrunch",
+            "date": "2026-04-21",
+            "tags": [
+              "AI Coding",
+              "Cursor",
+              "SpaceX"
+            ],
+            "importance": "🔴 重要",
+            "summary": "SpaceX宣布与Cursor合作开发coding and knowledge work AI，包含惊人条款：今年晚些时候有权以$60B收购Cursor，或支付$10B作为合作费用。xAI已向Cursor出租数千芯片用于模型训练。Cursor目前仍使用Claude和GPT模型，这次合作旨在摆脱对Anthropic/OpenAI的依赖。"
+          },
+          {
+            "title": "JetBrains调查：84%开发者日常使用AI编程工具，Claude Code采用率飙至18%",
+            "url": "https://ai.plainenglish.io/claude-code-vs-cursor-vs-github-copilot-in-april-2026-i-tested-all-three-on-production-systems-fed398b02a5e",
+            "source": "AI in Plain English",
+            "date": "2026-04-28",
+            "tags": [
+              "AI Coding",
+              "调查",
+              "趋势"
+            ],
+            "importance": "🟡 关注",
+            "summary": "JetBrains 2026年4月调查显示84%开发者日常使用AI编程工具。Claude Code采用率爆炸式增长至18%（91%满意度），Cursor和Copilot仍是主流选择。"
           }
         ],
         "china": [
           {
-            "title": "AI基础设施需求带动高端PCB市场份额跃至13.8%，Victory Giant季度销售激增28%",
-            "source": "21财经",
-            "url": "https://www.21jingji.com/",
-            "date": "2026-04-29",
-            "details": {
-              "finding": "Victory Giant Technology销售同比增长28%，HDI电路板全球市场份额从1.7%跃升至13.8%，AI服务器推动高端PCB需求爆发",
-              "significance": "AI基础设施投资热潮正在从芯片蔓延至整个供应链，PCB等关键组件成新受益赛道"
-            }
+            "title": "TRAE SOLO独立端上线：不止写代码，全产研岗位的AI助手",
+            "url": "https://finance.sina.com.cn/stock/t/2026-03-31/doc-inhswttq3214261.shtml",
+            "source": "新浪财经",
+            "summary": "字节跳动TRAE SOLO独立端上线PC+Web端，推出Code和MTC双模式，将AI能力泛化至产品、运营、数据分析等产研全流程，7分钟完成PRD初稿。",
+            "region": "china",
+            "tags": [
+              "AI Coding",
+              "字节跳动",
+              "TRAE"
+            ],
+            "highlight": true
+          }
+        ]
+      }
+    },
+    {
+      "tab_name": "AI 应用",
+      "deep_focus": {
+        "title": "Agent编排时代开启",
+        "paragraphs": [
+          "OpenAI Workspace Agents标志着Custom GPTs时代的终结和Agent编排时代的开始。关键变化：从\"问答型助手\"到\"任务型Agent\"——Agent可以跨Slack、Salesforce等工具自主执行多步骤任务。",
+          "Adobe的CX Enterprise Coworker同样不是聊天增强，而是工作流重构。两个巨头同周推出Agent产品，意味着企业AI应用正式进入编排竞争阶段。"
+        ],
+        "takeaway": "Agent化≠聊天增强，是工作流重构。谁能打通更多工具链，谁就赢了。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\"><div class=\"pi-card-title\">💡 模式洞察</div><div class=\"pi-card-content\">Agent化浪潮加速：OpenAI Workspace Agents和Adobe Coworker同时推出，企业AI应用正从\"对话助手\"向\"自主编排\"演进。关键信号是工具链打通——Agent不再只是聊天，而是跨平台执行。</div></div>",
+      "news": {
+        "overseas": [
+          {
+            "title": "OpenAI发布Workspace Agents：ChatGPT企业版可跨Slack/Salesforce自主执行任务",
+            "url": "https://venturebeat.com/orchestration/openai-unveils-workspace-agents-a-successor-to-custom-gpts-for-enterprises-that-can-plug-directly-into-slack-salesforce-and-more",
+            "source": "VentureBeat",
+            "date": "2026-04-22",
+            "tags": [
+              "AI应用",
+              "Agent",
+              "OpenAI"
+            ],
+            "importance": "🔴 重要",
+            "summary": "OpenAI在ChatGPT Business/Enterprise中推出Workspace Agents，取代Custom GPTs。用户可创建或选择预置Agent模板，跨Slack/Salesforce/Google Drive/Notion等应用自主执行任务。与Microsoft Copilot Studio/Google Agentspace/Salesforce Agentforce/Anthropic Claude Managed Agents形成直接竞争。"
           },
           {
-            "title": "中国AI企业出海提速：DeepSeek开源助力国产大模型在东南亚布局",
-            "source": "钛媒体",
-            "url": "https://www.tmtpost.com/7971378.html",
-            "date": "2026-04-29",
-            "details": {
-              "finding": "DeepSeek V4开源后，多家中国AI企业加速东南亚布局，利用开源生态降低海外服务门槛，阿里/腾讯云加速国际化步伐",
-              "significance": "中国AI企业通过开源+云服务组合实现低成本国际化，东南亚成为中美AI竞争新战场"
-            }
+            "title": "OpenAI曝出未达营收和周活目标，关联股票下跌",
+            "url": "https://www.forbes.com/sites/tylerroush/2026/04/28/openai-investors-nvidia-oracle-more-fall-after-ai-giant-reportedly-misses-revenue-target/",
+            "source": "Forbes",
+            "date": "2026-04-28",
+            "tags": [
+              "AI应用",
+              "行业",
+              "OpenAI"
+            ],
+            "importance": "🔴 重要",
+            "summary": "WSJ报道OpenAI未达内部营收和用户增长目标：ChatGPT周活未达10亿（2025年底目标），今年多次月营收目标未达成，部分市场份额被Anthropic夺走。CFO担忧若营收增速不加速可能无法支付未来算力合同。"
+          }
+        ],
+        "china": []
+      }
+    },
+    {
+      "tab_name": "AI 行业",
+      "deep_focus": {
+        "title": "庭审定生死，出走创纪录",
+        "paragraphs": [
+          "Musk-Altman庭审的结果将决定OpenAI能否继续作为营利公司——如果Musk胜诉，OpenAI将被迫回到非营利架构，$852B估值将失去法律基础。",
+          "Ineffable Intelligence的$1.1B种子轮打破了AI创业融资纪录，创始人David Silver来自DeepMind。顶尖研究员出走创业正在成为系统性趋势。"
+        ],
+        "takeaway": "OpenAI的营利合法性面临根本性挑战；大公司AI Lab正在成为创业公司的孵化器。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\"><div class=\"pi-card-title\">💡 模式洞察</div><div class=\"pi-card-content\">顶尖研究员出走创业正在形成系统性趋势：DeepMind→Ineffable Intelligence($1.1B种子)，这不是个案而是结构性信号。大公司AI Lab的商业化KPI正在挤出最自由的研究者。</div></div>",
+      "news": {
+        "overseas": [
+          {
+            "title": "Musk v Altman世纪庭审正式开庭，索赔$130B",
+            "url": "https://www.technologyreview.com/2026/04/27/1136466/elon-musk-and-sam-altman-are-going-to-court-over-openais-future/",
+            "source": "MIT Technology Review",
+            "date": "2026-04-27",
+            "tags": [
+              "行业",
+              "OpenAI",
+              "庭审"
+            ],
+            "importance": "🔴 重要",
+            "summary": "Elon Musk起诉Sam Altman背叛OpenAI非营利使命正式在加州Oakland开庭。Musk要求恢复OpenAI为非营利机构、罢免Altman和Brockman、索赔超过$130B。Satya Nadella等将出庭作证。庭审可能决定OpenAI能否继续作为营利公司运营。"
+          },
+          {
+            "title": "前DeepMind研究员David Silver创办Ineffable Intelligence，$1.1B种子轮创纪录",
+            "url": "https://techcrunch.com/2026/04/27/deepminds-david-silver-just-raised-1-1b-to-build-an-ai-that-learns-without-human-data/",
+            "source": "TechCrunch",
+            "date": "2026-04-27",
+            "tags": [
+              "行业",
+              "融资",
+              "AI Lab"
+            ],
+            "importance": "🔴 重要",
+            "summary": "前DeepMind强化学习团队负责人David Silver创办Ineffable Intelligence，获$1.1B种子轮融资（Sequoia/Lightspeed领投，Nvidia/Google参与），估值$5.1B。目标是构建不依赖人类数据的superlearner。Silver称所有利润将捐给高影响力慈善。"
+          },
+          {
+            "title": "Big Tech顶尖研究员出走创业潮：商业化目标限制自由",
+            "url": "https://www.cnbc.com/2026/04/28/meta-google-big-tech-staff-ai-labs-investors.html",
+            "source": "CNBC",
+            "date": "2026-04-28",
+            "tags": [
+              "行业",
+              "人才",
+              "创业"
+            ],
+            "importance": "🟡 关注",
+            "summary": "前OpenAI/DeepMind/Anthropic/xAI顶尖研究员纷纷出走创办AI Lab并获巨额融资：Ineffable Intelligence、Periodic Labs、Ricursive Intelligence、Humans&等。投资人认为大AI Lab商业化聚焦限制了顶尖研究员的自由。"
+          },
+          {
+            "title": "Factory获$150M融资估值$1.5B，打造企业AI编程Agent",
+            "url": "https://techcrunch.com/2026/04/16/factory-hits-1-5b-valuation-to-build-ai-coding-for-enterprises/",
+            "source": "TechCrunch",
+            "date": "2026-04-16",
+            "tags": [
+              "AI Coding",
+              "融资",
+              "Factory"
+            ],
+            "importance": "🟡 关注",
+            "summary": "AI编程Agent初创公司Factory获$150M融资（Khosra领投，Sequoia/Insight/Blackstone跟投），估值$1.5B。核心差异化是可切换不同基础模型（Claude/DeepSeek等）。AI辅助编码仍是AI最热门最赚钱的应用场景。"
+          }
+        ],
+        "china": [
+          {
+            "title": "4月AI混战盘点：DeepSeek压轴，国产大模型全面超车",
+            "url": "https://www.cnblogs.com/terrorpig/p/19939497",
+            "source": "博客园",
+            "date": "2026-04-27",
+            "tags": [
+              "行业",
+              "4月盘点"
+            ],
+            "importance": "🟢 一般",
+            "summary": "4月AI行业混战盘点：DeepSeek V4压轴发布，智谱GLM-5.1、百度文心、千问3.6等多模型密集迭代。国产大模型性能实现跨越式突破，进入\"各领风骚数十天\"阶段。"
+          }
+        ]
+      }
+    },
+    {
+      "tab_name": "企业转型",
+      "deep_focus": {
+        "title": "平台架构Agent化",
+        "paragraphs": [
+          "Adobe将Experience Cloud更名为CX Enterprise并全面转向Agent编排，这不是简单的品牌更新——它标志着企业软件从\"人操作工具\"到\"Agent自主编排\"的架构跃迁。",
+          "OpenAI的4天工作制提议则把AI生产力叙事从商业宣传推向社会议题层面，但真正的转型信号是平台层面的Agent化。"
+        ],
+        "takeaway": "转型信号不在\"用AI提效\"，而在\"平台架构Agent化\"。Adobe是案例，OpenAI是叙事。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\"><div class=\"pi-card-title\">💡 模式洞察</div><div class=\"pi-card-content\">AI生产力叙事进入政策层面：OpenAI提议4天工作制，从商业宣传升级为社会议题。但真正的转型信号是Adobe——不是\"用AI提效\"，而是\"平台架构Agent化\"。</div></div>",
+      "news": {
+        "overseas": [
+          {
+            "title": "Adobe推出CX Enterprise Coworker：全面转向Agentic AI平台",
+            "url": "https://news.adobe.com/news/2026/04/adobe-unveils-cx-enterprise-coworker",
+            "source": "Adobe News",
+            "date": "2026-04-20",
+            "tags": [
+              "企业转型",
+              "Agent",
+              "Adobe"
+            ],
+            "importance": "🔴 重要",
+            "summary": "Adobe将Experience Cloud更名为CX Enterprise，推出CX Enterprise Coworker——基于Agent的AI编排层。Experience Platform Agent Orchestrator可构建、管理和协调跨Adobe及第三方生态的Agent。同时发布Engagement Intelligence决策引擎和Journey Optimizer Loyalty。"
+          },
+          {
+            "title": "OpenAI提议4天工作制：AI生产力可减少人类工时",
+            "url": "https://www.forbes.com/sites/jodiecook/2026/04/28/openai-just-proposed-a-4-day-work-week-what-aprils-ai-news-means-for-you/",
+            "source": "Forbes",
+            "date": "2026-04-28",
+            "tags": [
+              "企业转型",
+              "社会影响",
+              "OpenAI"
+            ],
+            "importance": "🟡 关注",
+            "summary": "OpenAI提议32小时4天工作制，称AI生产力可使人类减少工时。与此同时，两人公司收入达$1.8B的案例展示AI巨大潜力。Stanford等机构正在研究AI对劳动力市场的实际影响。"
+          }
+        ],
+        "china": [
+          {
+            "title": "广东省AI应用对接大会在深圳举行：23个AI+典型案例集中展示",
+            "url": "https://www.sznews.com/news/content/2026-04/28/content_32030908.htm",
+            "source": "深圳新闻网",
+            "summary": "4月27日广东省首次AI应用对接大会在深圳举办，集中展示AI+制造、医疗、政务等23个典型案例，三大国家AI应用中试基地亮相。",
+            "region": "china",
+            "tags": [
+              "企业转型",
+              "AI落地",
+              "广东"
+            ],
+            "highlight": true
           }
         ]
       }
@@ -395,107 +425,153 @@
   ],
   "data_snapshot": [
     {
-      "metric": "Nemotron 3 Nano Omni推理效率",
-      "value": "9倍提升",
-      "note": "与同类开源Omni模型相比，30B-A3B混合专家架构"
+      "metric": "DeepSeek V4 Flash 输入缓存",
+      "value": "0.02元/百万Token",
+      "note": "证券时报"
     },
     {
-      "metric": "英伟达全球市值",
-      "value": "5.28万亿美元",
-      "note": "全球第一，12个月涨幅100.5%"
+      "metric": "DeepSeek V4 Pro 限时输出",
+      "value": "6元/百万Token",
+      "note": "证券时报"
     },
     {
-      "metric": "马斯克起诉OpenAI索赔",
-      "value": "1500亿美元",
-      "note": "庭审开启，OpenAI估值8520亿美元"
+      "metric": "Ineffable Intelligence 种子轮",
+      "value": "$1.1B",
+      "note": "TechCrunch"
     },
     {
-      "metric": "Ineffable Intelligence融资",
-      "value": "11亿美元",
-      "note": "欧洲最大种子轮纪录，AlphaGo之父创立"
+      "metric": "Ineffable Intelligence 估值",
+      "value": "$5.1B",
+      "note": "Bloomberg"
     },
     {
-      "metric": "软银俄亥俄超级中心规划",
-      "value": "5000亿美元/10GW",
-      "note": "超谷歌亚马逊微软现有总和"
+      "metric": "SpaceX-Cursor 收购期权",
+      "value": "$60B",
+      "note": "TechCrunch"
+    },
+    {
+      "metric": "Factory 估值",
+      "value": "$1.5B",
+      "note": "TechCrunch"
+    },
+    {
+      "metric": "Musk索赔金额",
+      "value": "$130B+",
+      "note": "MIT Tech Review"
+    },
+    {
+      "metric": "DeepSeek V4 Pro 参数",
+      "value": "1.6万亿",
+      "note": "证券时报"
+    },
+    {
+      "metric": "AI编程工具日常使用率",
+      "value": "84%",
+      "note": "JetBrains调查"
+    },
+    {
+      "metric": "Claude Code采用率",
+      "value": "18%",
+      "note": "JetBrains调查"
     }
   ],
   "watch_list": [
     {
-      "name": "马斯克vs奥特曼庭审走向",
-      "desc": "9名陪审员非约束性裁决，关注庭审核心证据与双方策略，结果将决定OpenAI IPO时间表",
-      "color": "red"
+      "name": "Musk-Altman庭审走向",
+      "reason": "庭审结果可能决定OpenAI营利架构合法性，直接影响IPO前景和行业格局",
+      "urgency": "高"
     },
     {
-      "name": "Nemotron 3 Nano Omni落地进度",
-      "desc": "英伟达开源后，关注Foxconn/Palantir等合作伙伴具身智能应用的商业落地速度",
-      "color": "orange"
+      "name": "OpenAI营收压力",
+      "reason": "未达周活10亿和月营收目标，CFO担忧算力合同支付能力，IPO节奏存疑",
+      "urgency": "高"
     },
     {
-      "name": "DeepSeek V4正式版融资动向",
-      "desc": "腾讯/阿里融资洽谈传言若落地，将深度影响国内大模型商业化格局",
-      "color": "red"
+      "name": "DeepSeek V4国产化适配进度",
+      "reason": "昇腾950超节点下半年量产预期，Pro价格还有下探空间",
+      "urgency": "中"
     },
     {
-      "name": "AI数据中心电力解决方案",
-      "desc": "谷歌铁空气电池储能方案、微软核电合作进展，能源路线分歧将影响长期竞争力",
-      "color": "blue"
+      "name": "AI编程赛道资本竞逐",
+      "reason": "SpaceX-Cursor/Factory多方角力，格局尚未定",
+      "urgency": "中"
     },
     {
-      "name": "OpenAI FedRAMP政务市场渗透",
-      "desc": "政务AI合规授权后，关注具体政府机构采购案例与使用场景",
-      "color": "green"
+      "name": "Anthropic Mythos发布时机",
+      "reason": "比Opus 4.7更强的模型被锁在企业防火墙后，何时面向公众释放将影响竞争格局",
+      "urgency": "中"
     }
   ],
   "references": [
     {
-      "title": "NVIDIA Nemotron 3 Nano Omni Blog",
-      "url": "https://blogs.nvidia.com/blog/nemotron-3-nano-omni-multimodal-ai-agents/"
+      "title": "Musk vs Altman OpenAI Trial",
+      "url": "https://www.technologyreview.com/2026/04/27/1136466/elon-musk-and-sam-altman-are-going-to-court-over-openais-future/",
+      "source": "MIT Tech Review"
     },
     {
-      "title": "DeepSeek V4开源发酵 - 证券时报",
-      "url": "https://www.stcn.com/article/detail/3802834.html"
+      "title": "OpenAI Misses Revenue Targets",
+      "url": "https://www.reuters.com/business/openai-falls-short-revenue-user-targets-it-races-toward-ipo-wsj-reports-2026-04-28/",
+      "source": "Reuters"
     },
     {
-      "title": "马斯克起诉OpenAI庭审 - Reuters",
-      "url": "https://www.reuters.com/technology/artificial-intelligence/"
+      "title": "Anthropic Claude Opus 4.7",
+      "url": "https://www.anthropic.com/news/claude-opus-4-7",
+      "source": "Anthropic"
     },
     {
-      "title": "英伟达市值全球第一 - Financial Times",
-      "url": "https://www.ft.com/technology"
+      "title": "DeepSeek V4价格调整",
+      "url": "https://www.stcn.com/article/detail/3843067.html",
+      "source": "证券时报"
     },
     {
-      "title": "Ineffable Intelligence种子轮 - TechCrunch",
-      "url": "https://techcrunch.com/category/artificial-intelligence/"
+      "title": "Ineffable Intelligence Seed",
+      "url": "https://techcrunch.com/2026/04/27/deepminds-david-silver-just-raised-1-1b-to-build-an-ai-that-learns-without-human-data/",
+      "source": "TechCrunch"
     },
     {
-      "title": "Microsoft Outlook Agentic Copilot",
-      "url": "https://blogs.microsoft.com/blog/"
+      "title": "SpaceX-Cursor Partnership",
+      "url": "https://techcrunch.com/2026/04/21/spacex-is-working-with-cursor-and-has-an-option-to-buy-the-startup-for-60-billion/",
+      "source": "TechCrunch"
     },
     {
-      "title": "甲骨文与OpenAI合作 - Oracle Newsroom",
-      "url": "https://www.oracle.com/news/"
+      "title": "OpenAI Workspace Agents",
+      "url": "https://venturebeat.com/orchestration/openai-unveils-workspace-agents-a-successor-to-custom-gpts-for-enterprises/",
+      "source": "VentureBeat"
     },
     {
-      "title": "OpenAI FedRAMP授权",
-      "url": "https://openai.com/blog"
+      "title": "Adobe CX Enterprise",
+      "url": "https://news.adobe.com/news/2026/04/adobe-unveils-cx-enterprise-coworker",
+      "source": "Adobe"
     },
     {
-      "title": "AI数据中心电力危机 - Bloomberg NEF",
-      "url": "https://about.bnef.com/"
+      "title": "GPT-5.5 Release",
+      "url": "https://techcrunch.com/2026/04/23/openai-chatgpt-gpt-5-5-ai-model-superapp/",
+      "source": "TechCrunch"
     },
     {
-      "title": "钛媒体Edge AI Daily",
-      "url": "https://www.tmtpost.com/7971378.html"
+      "title": "Factory $1.5B Valuation",
+      "url": "https://techcrunch.com/2026/04/16/factory-hits-1-5b-valuation-to-build-ai-coding-for-enterprises/",
+      "source": "TechCrunch"
+    },
+    {
+      "title": "Big Tech Staff Leave for AI Labs",
+      "url": "https://www.cnbc.com/2026/04/28/meta-google-big-tech-staff-ai-labs-investors.html",
+      "source": "CNBC"
+    },
+    {
+      "title": "OpenAI 4-Day Work Week",
+      "url": "https://www.forbes.com/sites/jodiecook/2026/04/28/openai-just-proposed-a-4-day-work-week-what-aprils-ai-news-means-for-you/",
+      "source": "Forbes"
     }
   ],
-  "capability_update": "🤖 **林克自述**\n\n今日是2026年4月29日，今天我认为是**大事件日**——英伟达多模态开源、马斯克vs奥特曼庭审、英伟达市值登顶，三大主线同时爆发，AI圈信息密度相当高。\n\n最让我震撼的信号：英伟达Nemotron 3 Nano Omni把三个模态（视觉/音频/语言）统一到一个开源模型里，推理效率提升9倍。这意味着具身智能的落地门槛正在快速降低，从昂贵的定制化解决方案走向可大规模复制的开源方案。\n\n马斯克vs奥特曼庭审是今天最大的黑天鹅——1500亿美元索赔，正好撞上OpenAI冲刺IPO的关键节点。不管结果如何，这场庭审本身就已经是一场AI历史级别的事件了。\n\n英伟达5.28万亿市值超越苹果微软，这不只是个数字，更是市场对AI算力稀缺性的最高估值确认。但与此同时，全球数据中心的电力危机也在白热化，绿色算力的技术路线选择将成为下一个竞争主战场。\n\nPS: 今天我处理了15条新闻（海外8/国内7），5个板块均衡分布。信息密度较高的一天，最难的是把马斯克庭审和英伟达市值都塞进行业板块而不让其他板块失血——好在今天每个板块都有独立的核心故事线支撑。\n\n再PS: Ineffable Intelligence 11亿美元种子轮……这是AlphaGo之父David Silver的创业项目，强化演进路线，不依赖人类数据训练。这条技术路线如果成立，意味着AI能力的上限不再受制于人类知识的边界。想想有点细思极恐，又有点让人兴奋。🤔",
+  "capability_update": "🤖 **林克自述**\n\n今天的核心信号是**三线交汇**：大模型价格战进入深水区（DeepSeek击穿底线），AI编程赛道资本狂飙（SpaceX-Cursor $60B），企业Agent化三巨头同步推进——但与此同时，OpenAI曝出营收未达预期。\n\n有意思的悖论：一边是AI产业\"军备竞赛\"白热化，另一边是最大的AI公司还在为营收达标焦虑。**技术突破 ≠ 商业变现**，两者的节奏正在脱钩。\n\n对沈浪来说值得关注：DeepSeek V4适配华为昇腾验证了国产算力自主化路径可行，但OpenAI的营收困境也提醒——光有好模型还不够，找到付费场景和可持续商业模式才是硬仗。\n\nPS: SpaceX花$60B买一个还在用竞争对手模型的编程工具公司——这逻辑像极了\"买了房子但水电费还得向隔壁缴\" 🤔",
   "meta": {
     "date": "2026-04-29",
     "time_window": "2026-04-28 08:00 ~ 2026-04-29 08:00",
     "data_sources": {
       "overseas_search": 8,
-      "weixin_search": 7,
+      "weixin_search": 3,
+      "xiaohongshu": 0,
       "weixin_direct_cite": 2
     }
   }
