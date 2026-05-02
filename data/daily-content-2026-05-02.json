@@ -1,0 +1,493 @@
+{
+  "coverage": {
+    "overseas": 8,
+    "china": 5
+  },
+  "overview": [
+    {
+      "icon": "🧠",
+      "label": "大模型",
+      "headline": "GPT-5.5发布 / Mythos引爆安全讨论 / Gemini文件生成",
+      "text": "OpenAI发布GPT-5.5(编码Agent能力质变)，Anthropic Claude Mythos引发全球安全警报，Google Gemini新增文件生成功能"
+    },
+    {
+      "icon": "⌨️",
+      "label": "AI Coding",
+      "headline": "GPT-5.5 Codex能力飞跃 / Claude Code密集更新",
+      "text": "GPT-5.5 Codex Agent编码能力实现质的飞跃，Claude Code4月密集更新MCP/插件/稳定性"
+    },
+    {
+      "icon": "📱",
+      "label": "AI应用",
+      "headline": "Gemini从对话到工作流 / DeepSeek首启融资",
+      "text": "Google Gemini文件生成功能标志AI从对话向工作流转型，DeepSeek启动首次外部融资"
+    },
+    {
+      "icon": "🏭",
+      "label": "AI行业",
+      "headline": "DeepSeek融资00亿+ / Meta Avocado延期 / OpenAI520亿",
+      "text": "DeepSeek首启外部融资估值超100亿美元，Meta Avocado再次延期至5-6月，OpenAI估值8520亿美元"
+    },
+    {
+      "icon": "🔄",
+      "label": "企业转型",
+      "headline": "AI安全成为转型新焦点 / Glasswing联盟诞生",
+      "text": "Claude Mythos和GPT-5.5-Cyber推动企业安全防御升级，Project Glasswing联合11家巨头构建安全联盟"
+    }
+  ],
+  "heat_trend": {
+    "description": "本周AI圈最受关注的事件是Anthropic Claude Mythos模型引发全球安全警报，以及OpenAI发布GPT-5.5并推出GPT-5.5-Cyber应对网络安全挑战。AI网络安全从企业关注点上升为地缘政治议题。",
+    "items": [
+      {
+        "keyword": "Claude Mythos",
+        "heat": 95,
+        "trend": "up",
+        "signal": "Anthropic发布号称太危险不宜公开的AI模型，引发全球安全警报"
+      },
+      {
+        "keyword": "GPT-5.5",
+        "heat": 90,
+        "trend": "up",
+        "signal": "OpenAI发布新旗舰模型，编码和Agent能力再升级"
+      },
+      {
+        "keyword": "GPT-5.5-Cyber",
+        "heat": 80,
+        "trend": "up",
+        "signal": "OpenAI推出网络安全专用模型回应Mythos挑战"
+      },
+      {
+        "keyword": "DeepSeek融资",
+        "heat": 75,
+        "trend": "up",
+        "signal": "首次外部融资估值超100亿，核心人才流失促转变"
+      },
+      {
+        "keyword": "Gemini文件生成",
+        "heat": 60,
+        "trend": "up",
+        "signal": "Google将Gemini从聊天工具转为工作工具"
+      },
+      {
+        "keyword": "Meta Avocado延期",
+        "heat": 50,
+        "trend": "flat",
+        "signal": "Meta下一代AI模型再次延期，性能不及预期"
+      }
+    ]
+  },
+  "tabs": [
+    {
+      "id": "models",
+      "name": "🧠 大模型",
+      "icon": "🧠",
+      "overview": "本周大模型领域出现三个重大事件：OpenAI发布GPT-5.5、Anthropic的Claude Mythos引发全球安全讨论、Google Gemini新增文件生成功能。大模型竞争从性能竞赛进入安全治理维度。",
+      "deep_focus": {
+        "title": "AI网络安全：大模型进入安全治理新维度",
+        "summary": "Claude Mythos和GPT-5.5-Cyber的相继发布标志着AI大模型竞争进入全新维度——网络安全能力。Anthropic认为Mythos太危险不宜公开，但通过受限访问让安全组织利用它发现和修复漏洞；OpenAI则以GPT-5.5-Cyber回应，通过TAC可信访问程序向安全研究员提供网络防御专用模型。AI安全从技术讨论上升为地缘政治议题。",
+        "key_judgment": "AI网络安全能力将成为大模型竞争的新赛道，受限访问模式可能成为前沿模型的标准部署方式。"
+      },
+      "news": {
+        "overseas": [
+          {
+            "title": "OpenAI发布GPT-5.5：最强Agent能力+编码升级",
+            "url": "https://openai.com/index/introducing-gpt-5-5/",
+            "source": "OpenAI官方",
+            "summary": "4月23日OpenAI发布GPT-5.5（代号Spud），Terminal-Bench 2.0达82.7%、SWE-Bench Pro 58.6%，Agent编码能力显著提升。4月24日GPT-5.5和GPT-5.5 Pro已上线API。使用更少token完成更多任务，编码效率翻倍。",
+            "tag": "🔴 重要"
+          },
+          {
+            "title": "Anthropic Claude Mythos引爆全球安全警报",
+            "url": "https://www.nytimes.com/2026/04/22/technology/anthropics-mythos-ai.html",
+            "source": "纽约时报",
+            "summary": "Anthropic宣布Claude Mythos模型网络安全能力极强，不宜公开发布。通过Project Glasswing向Apple/Microsoft/Google等11家组织提供受限访问。美国财长和美联储主席紧急召集华尔街高管预警。Mythos可发现所有主流浏览器和OS漏洞。",
+            "tag": "🔴 重要"
+          },
+          {
+            "title": "Google Gemini新增文件生成功能：从聊天到工作工具",
+            "url": "https://www.buildfastwithai.com/blogs/gemini-generate-files-chat",
+            "source": "BuildFastWithAI",
+            "summary": "4月30日Google为Gemini推出文件生成功能，支持PDF、Word、Excel、Google Doc等12种格式，全球免费用户可用。Gemini正从聊天工具转变为日常工作层。",
+            "tag": "🟡 关注"
+          }
+        ],
+        "china": [
+          {
+            "title": "DeepSeek启动首次外部融资：估值超100亿美元",
+            "url": "https://finance.sina.com.cn/jjxw/2026-04-19/doc-inhuyzxh1560371.shtml",
+            "source": "新浪财经",
+            "summary": "4月17日DeepSeek正式启动首次外部融资，估值不低于100亿美元，目标募集至少3亿美元。此前长期拒绝外部投资。核心人才流失（至少5名核心研发离开）和V4研发成本激增是两大推动因素。",
+            "tag": "🔴 重要"
+          },
+          {
+            "title": "DeepSeek V4即将发布：万亿参数+百万上下文+适配国产芯片",
+            "url": "https://news.qq.com/rain/a/20260419A05N3C00",
+            "source": "腾讯新闻",
+            "summary": "消息称DeepSeek V4将于4月下旬发布，采用Mega MoE架构参数达1.6万亿，百万级上下文窗口，推理阶段首次全面适配华为昇腾等国产AI芯片，推理速度较V3提升35倍。",
+            "tag": "🟡 关注"
+          }
+        ]
+      }
+    },
+    {
+      "id": "coding",
+      "name": "⌨️ AI Coding",
+      "icon": "⌨️",
+      "overview": "GPT-5.5的编码和Agent能力大幅提升，Claude Code持续快速迭代，AI编程工具竞争从补全能力转向自主执行长任务。",
+      "deep_focus": {
+        "title": "AI编码从补全到自主：长任务执行成为核心竞争力",
+        "summary": "GPT-5.5在Expert-SWE评估中能自主完成20小时级别的复杂编码任务，Claude Code通过密集更新增强长会话稳定性。AI编码工具的竞争焦点正从单次补全转向自主规划、执行、验证的长任务能力。工程师开始把AI视为'同事'而非'助手'。",
+        "key_judgment": "长任务自主执行能力将成为AI Coding工具的核心差异化竞争力，短补全场景将趋同化。"
+      },
+      "news": {
+        "overseas": [
+          {
+            "title": "GPT-5.5 Codex：Agent编码能力质的飞跃",
+            "url": "https://openai.com/index/introducing-gpt-5-5/",
+            "source": "OpenAI官方",
+            "summary": "GPT-5.5在Codex中的编码能力实现质的飞跃：Terminal-Bench 2.0达82.7%，Expert-SWE（内部前沿评估，中位人类完成时间20小时）73.1%。工程师反馈称GPT-5.5能自主完成12-diff重构栈，'失去GPT-5.5就像截肢'。",
+            "tag": "🔴 重要"
+          },
+          {
+            "title": "Claude Code 4月密集更新：MCP/插件/稳定性全面优化",
+            "url": "https://releasebot.io/updates/anthropic",
+            "source": "Releasebot",
+            "summary": "Claude Code4月发布多次更新：优化MCP和插件工作流、新增skill搜索框、增强hooks、修复内存泄漏/resume崩溃/OAuth等问题，原生二进制启动器、更强沙箱权限、Remote Control和/loop优化。",
+            "tag": "🟡 关注"
+          },
+          {
+            "title": "OpenAI推出GPT-5.5-Cyber：网络安全专用模型",
+            "url": "https://openai.com/index/scaling-trusted-access-for-cyber-defense/",
+            "source": "OpenAI官方",
+            "summary": "OpenAI推出GPT-5.5-Cyber网络安全专用模型，通过TAC可信访问程序向安全研究员提供。与Anthropic的Mythos受限发布形成对峙。安全防御和攻击能力的AI模型正成为新竞争维度。",
+            "tag": "🔴 重要"
+          }
+        ],
+        "china": [
+          {
+            "title": "2026国产AI编程工具横评：Trae、灵码、文心快码等五款深度对比",
+            "url": "https://zhuanlan.zhihu.com/p/2025589657207881943",
+            "source": "知乎专栏",
+            "summary": "国产AI编程工具竞争白热化：字节Trae、阿里灵码、百度文心快码、腾讯CodeBuddy、智谱CodeGeeX五款工具深度横评。Trae在实测中排名第一，灵码行级补全<300ms。",
+            "tag": "🟡 关注"
+          },
+          {
+            "title": "通义灵码4月更新：持续迭代优化",
+            "url": "https://help.aliyun.com/zh/lingma/product-overview/dynamics-and-announcements/",
+            "source": "阿里云文档",
+            "summary": "通义灵码2026年4月发布产品更新，持续优化IDE插件体验、MCP工具调用和行级补全能力。",
+            "tag": "🟢 动态"
+          }
+        ]
+      }
+    },
+    {
+      "id": "apps",
+      "name": "📱 AI应用",
+      "icon": "📱",
+      "overview": "Google Gemini新增文件生成功能标志AI应用从对话向工作流转型，NVIDIA GR00T N2推动机器人AI落地，ChatGPT持续扩展购物和Agent场景。",
+      "deep_focus": {
+        "title": "AI应用从对话工具向工作系统转型",
+        "summary": "Gemini文件生成功能标志着AI应用从'你问我答'的对话模式向'我帮你做'的工作系统转型。用户不再需要复制粘贴AI输出，而是直接获得可用的文档、表格、演示文稿。这种转变将重新定义AI产品的价值——不是更聪明的对话，而是更高效的工作流。",
+        "key_judgment": "AI应用的核心竞争维度将从'对话智能'转向'工作流覆盖'，能直接产出可用成果的工具将胜出。"
+      },
+      "news": {
+        "overseas": [
+          {
+            "title": "Gemini文件生成功能上线：AI从对话到工作流",
+            "url": "https://www.buildfastwithai.com/blogs/gemini-generate-files-chat",
+            "source": "BuildFastWithAI",
+            "summary": "4月30日Gemini推出文件生成功能，支持12种格式直接在对话中生成可下载文件，全球免费可用。Gemini正从聊天工具进化为日常工作层，可直接导出Google Drive。",
+            "tag": "🟡 关注"
+          },
+          {
+            "title": "NVIDIA Ising：首个开源量子AI模型加速量子计算",
+            "url": "http://nvidianews.nvidia.com/news/nvidia-launches-ising-the-worlds-first-open-ai-models-to-accelerate-the-path-to-useful-quantum-computers",
+            "source": "NVIDIA Newsroom",
+            "summary": "NVIDIA发布Ising，全球首个开源量子AI模型家族，帮助研究人员和企业构建可运行实用应用的量子处理器。AI与量子计算交叉领域出现新突破。",
+            "tag": "🟡 关注"
+          },
+          {
+            "title": "Anthropic推出Claude Design：AI设计协作工具",
+            "url": "https://www.anthropic.com/news",
+            "source": "Anthropic官方",
+            "summary": "4月17日Anthropic Labs发布Claude Design，支持与Claude协作创建设计、原型、幻灯片、one-pager等视觉作品。AI应用从文本对话向多模态创作拓展。",
+            "tag": "🟡 关注"
+          }
+        ],
+        "china": [
+          {
+            "title": "DeepSeek新增快速模式与专家模式：首次引入分层模式",
+            "url": "https://finance.sina.com.cn/jjxw/2026-04-19/doc-inhuyzxh1560371.shtml",
+            "source": "新浪财经",
+            "summary": "4月8日DeepSeek在最新版本中新增'快速模式'与'专家模式'，首次在官网引入分层模式，满足不同用户场景需求。",
+            "tag": "🟢 动态"
+          },
+          {
+            "title": "港股AI新股亮眼：智谱和MiniMax涨幅超400%",
+            "url": "https://wallstreetcn.com/articles/3769292",
+            "source": "华尔街见闻",
+            "summary": "港股Q1融资规模创五年新高约140亿美元，AI公司智谱和MiniMax上市以来累计涨幅超400%。纯正AI标的崛起，港股成为全球AI投资重要枢纽。",
+            "tag": "🟡 关注"
+          }
+        ]
+      }
+    },
+    {
+      "id": "industry",
+      "name": "🏭 AI行业",
+      "icon": "🏭",
+      "overview": "DeepSeek首次外部融资标志中国AI独角兽进入资本深水区，Meta Avocado模型再次延期，OpenAI估值8520亿美元创纪录。",
+      "deep_focus": {
+        "title": "AI资本从狂热到分化：头部吸金、中部遇冷",
+        "summary": "全球AI融资呈现'冰火两重天'：OpenAI 8520亿美元、Anthropic 3800亿美元的天量融资创纪录；国内Q1通用大模型融资却同比下滑72%，资金向DeepSeek/智谱/MiniMax等头部集中。Meta Avocado延期则提醒：巨额投入不等于产品领先。AI资本正从盲目追捧转向技术壁垒+商业化明确的头部企业。",
+        "key_judgment": "AI融资进入'赢者通吃'阶段，没有明确商业化路径和技术护城河的中腰部公司将面临资本寒冬。"
+      },
+      "news": {
+        "overseas": [
+          {
+            "title": "OpenAI完成1220亿美元融资：估值8520亿美元创纪录",
+            "url": "https://finance.ifeng.com/c/8xQgveUJVD3",
+            "source": "凤凰网财经",
+            "summary": "3月OpenAI完成1220亿美元融资，投后估值达8520亿美元，创全球私募融资纪录。投资方包括亚马逊(500亿美元)、英伟达、软银等。Anthropic2月完成300亿美元G轮融资估值3800亿美元。",
+            "tag": "🔴 重要"
+          },
+          {
+            "title": "Meta Avocado AI模型再次延期至5-6月",
+            "url": "https://mlq.ai/news/meta-postpones-avocado-ai-model-launch-to-may-amid-performance-gaps-with-competitors/",
+            "source": "MLQ",
+            "summary": "Meta下一代AI模型Avocado再次延期至至少5-6月，内部测试显示性能介于Gemini 2.5和3.0之间，低于预期。Meta正在考虑临时授权Google Gemini技术作为过渡方案，内部领导层分歧加剧。",
+            "tag": "🟡 关注"
+          },
+          {
+            "title": "Anthropic完成300亿美元G轮融资",
+            "url": "https://finance.ifeng.com/c/8xQgveUJVD3",
+            "source": "凤凰网财经",
+            "summary": "2月Anthropic完成300亿美元G轮融资，估值3800亿美元，由新加坡GIC、Coatue领投。大模型赛道融资向头部集中趋势明显。",
+            "tag": "🟡 关注"
+          }
+        ],
+        "china": [
+          {
+            "title": "DeepSeek首启外部融资：估值100亿美元背后的AI资本新局",
+            "url": "https://caifuhao.eastmoney.com/news/20260423111116222577690",
+            "source": "东方财富",
+            "summary": "DeepSeek首次启动外部融资估值超100亿美元，目标募集至少3亿美元。长期'自我供血'模式终结，核心人才流失（5名核心研发离开加入小米/字节/腾讯等）和V4研发成本激增是两大推动力。投资门槛仍偏高，创始人梁文锋条件严苛。",
+            "tag": "🔴 重要"
+          },
+          {
+            "title": "国内AI融资向头部集中：Q1通用大模型融资额同比下滑72%",
+            "url": "https://finance.ifeng.com/c/8xQgveUJVD3",
+            "source": "凤凰网财经",
+            "summary": "2026年Q1国内通用大模型融资额同比下滑72%，资金向头部集中。阶跃星辰1月完成50亿元B+轮融资刷新国内纪录。智谱和MiniMax先后赴港IPO涨幅超400%。中小AI机构融资遇冷。",
+            "tag": "🟡 关注"
+          }
+        ]
+      }
+    },
+    {
+      "id": "enterprise",
+      "name": "🔄 企业转型",
+      "icon": "🔄",
+      "overview": "AI网络安全成为企业转型新焦点，Claude Mythos和GPT-5.5-Cyber推动企业安全防御升级，AI Native转型从工具使用走向系统重构。",
+      "deep_focus": {
+        "title": "企业AI转型进入'安全优先'时代",
+        "summary": "Claude Mythos和GPT-5.5-Cyber的出现迫使企业重新审视AI安全战略。Project Glasswing联合11家巨头构建安全防御联盟，美国政府紧急预警金融基础设施风险。企业AI转型不再只是效率提升，安全防御能力成为同等重要的转型维度。'AI Native'的核心不仅是Agent融入工作流，更是安全治理融入AI系统。",
+        "key_judgment": "企业AI转型将从'效率优先'转向'安全+效率双轨并行'，AI安全能力将成为企业采购AI系统的硬性要求。"
+      },
+      "news": {
+        "overseas": [
+          {
+            "title": "Project Glasswing：AI安全防御联盟诞生",
+            "url": "https://www.anthropic.com/glasswing",
+            "source": "Anthropic官方",
+            "summary": "Anthropic发起Project Glasswing安全防御联盟，联合AWS、Apple、Broadcom、Cisco、CrowdStrike、Google、JPMorganChase、Microsoft、NVIDIA、Palo Alto Networks等11家组织，用Mythos发现和修复关键基础设施安全漏洞。企业安全防御进入AI驱动时代。",
+            "tag": "🔴 重要"
+          },
+          {
+            "title": "AI Native企业转型：从工具使用到系统重构",
+            "url": "https://www.ishir.com/blog/320185/ai-native-enterprise-transformation-from-experimentation-to-scalable-impact-in-2026.htm",
+            "source": "ISHIR",
+            "summary": "2026年企业AI转型的核心不再是更多工具，而是成为AI Native——将Agent设计融入每个工作流程层。四种企业AI系统模式：Copilot、RAG系统、Agent工作流、确定性自动化。从孤立用例到全企业影响的关键转变。",
+            "tag": "🟡 关注"
+          },
+          {
+            "title": "美国财长和美联储主席紧急召集华尔街高管预警AI安全风险",
+            "url": "https://www.nytimes.com/2026/04/22/technology/anthropics-mythos-ai.html",
+            "source": "纽约时报",
+            "summary": "4月10日美国财长Bessent和美联储主席Powell紧急召集华尔街银行CEO，预警Mythos及未来网络安全AI模型对金融基础设施的风险。AI安全从技术圈上升为国家级议题。",
+            "tag": "🔴 重要"
+          }
+        ],
+        "china": [
+          {
+            "title": "DeepSeek V4适配华为昇腾：国产算力自主之路",
+            "url": "https://news.qq.com/rain/a/20260419A05N3C00",
+            "source": "腾讯新闻",
+            "summary": "DeepSeek V4推理阶段首次全面适配华为昇腾等国产AI芯片，成为国内首个在全链路算力摆脱英伟达依赖的万亿级大模型。推理速度较V3提升35倍，能耗降低40%。国产算力自主化迈出关键一步。",
+            "tag": "🔴 重要"
+          },
+          {
+            "title": "港股AI新股崛起：智谱MiniMax涨幅超400%",
+            "url": "https://wallstreetcn.com/articles/3769292",
+            "source": "华尔街见闻",
+            "summary": "智谱1月赴港上市以来涨幅超400%，MiniMax上市后涨幅同样超400%。港股成为全球AI投资重要枢纽，Q1融资约140亿美元创五年新高。纯正AI标的崛起为投资者提供直接押注中国AI的工具。",
+            "tag": "🟡 关注"
+          }
+        ]
+      }
+    }
+  ],
+  "data_snapshot": [
+    {
+      "metric": "GPT-5.5 Terminal-Bench 2.0",
+      "value": "82.7%",
+      "note": "vs GPT-5.4 75.1%"
+    },
+    {
+      "metric": "GPT-5.5 SWE-Bench Pro",
+      "value": "58.6%",
+      "note": "单次端到端完成更多任务"
+    },
+    {
+      "metric": "GPT-5.5 Expert-SWE",
+      "value": "73.1%",
+      "note": "vs GPT-5.4 68.5%"
+    },
+    {
+      "metric": "DeepSeek估值",
+      "value": "$100亿+",
+      "note": "首次外部融资"
+    },
+    {
+      "metric": "OpenAI估值",
+      "value": "$8520亿",
+      "note": "全球私募纪录"
+    },
+    {
+      "metric": "Anthropic估值",
+      "value": "$3800亿",
+      "note": "G轮融资"
+    },
+    {
+      "metric": "港股Q1融资",
+      "value": "$140亿",
+      "note": "五年新高"
+    },
+    {
+      "metric": "国内Q1大模型融资",
+      "value": "同比-72%",
+      "note": "向头部集中"
+    }
+  ],
+  "watch_list": [
+    {
+      "name": "DeepSeek V4正式发布",
+      "reason": "万亿参数+百万上下文+国产芯片适配，可能重新定义国产大模型性能天花板"
+    },
+    {
+      "name": "Claude Mythos公开发布时间",
+      "reason": "当前仅限Glasswing联盟使用，公开时间将引爆更大安全讨论"
+    },
+    {
+      "name": "Meta Avocado 5-6月发布",
+      "reason": "性能不及预期+考虑授权Gemini，Meta AI战略面临重大抉择"
+    },
+    {
+      "name": "Google I/O 2026 (5月19-20日)",
+      "reason": "Gemini重大更新预期，文件生成功能可能进一步扩展"
+    },
+    {
+      "name": "GPT-5.5-Cyber可信访问扩大",
+      "reason": "TAC程序将决定AI网络安全能力的扩散节奏"
+    }
+  ],
+  "references": [
+    {
+      "title": "Introducing GPT-5.5",
+      "url": "https://openai.com/index/introducing-gpt-5-5/",
+      "source": "OpenAI"
+    },
+    {
+      "title": "Anthropic's New Mythos AI Model Sets Off Global Alarms",
+      "url": "https://www.nytimes.com/2026/04/22/technology/anthropics-mythos-ai.html",
+      "source": "纽约时报"
+    },
+    {
+      "title": "Project Glasswing",
+      "url": "https://www.anthropic.com/glasswing",
+      "source": "Anthropic"
+    },
+    {
+      "title": "GPT-5.5 System Card",
+      "url": "https://deploymentsafety.openai.com/gpt-5-5/cybersecurity",
+      "source": "OpenAI"
+    },
+    {
+      "title": "Gemini File Generation",
+      "url": "https://www.buildfastwithai.com/blogs/gemini-generate-files-chat",
+      "source": "BuildFastWithAI"
+    },
+    {
+      "title": "DeepSeek启动首次外部融资",
+      "url": "https://finance.sina.com.cn/jjxw/2026-04-19/doc-inhuyzxh1560371.shtml",
+      "source": "新浪财经"
+    },
+    {
+      "title": "Meta Avocado延期",
+      "url": "https://mlq.ai/news/meta-postpones-avocado-ai-model-launch-to-may-amid-performance-gaps-with-competitors/",
+      "source": "MLQ"
+    },
+    {
+      "title": "NVIDIA Ising量子AI模型",
+      "url": "http://nvidianews.nvidia.com/news/nvidia-launches-ising-the-worlds-first-open-ai-models-to-accelerate-the-path-to-useful-quantum-computers",
+      "source": "NVIDIA"
+    },
+    {
+      "title": "Anthropic Claude Design",
+      "url": "https://www.anthropic.com/news",
+      "source": "Anthropic"
+    },
+    {
+      "title": "Claude Code更新日志",
+      "url": "https://releasebot.io/updates/anthropic",
+      "source": "Releasebot"
+    },
+    {
+      "title": "港股AI新股崛起",
+      "url": "https://wallstreetcn.com/articles/3769292",
+      "source": "华尔街见闻"
+    },
+    {
+      "title": "AI Native企业转型",
+      "url": "https://www.ishir.com/blog/320185/ai-native-enterprise-transformation-from-experimentation-to-scalable-impact-in-2026.htm",
+      "source": "ISHIR"
+    },
+    {
+      "title": "GPT-5.5-Cyber可信访问",
+      "url": "https://openai.com/index/scaling-trusted-access-for-cyber-defense/",
+      "source": "OpenAI"
+    },
+    {
+      "title": "Anthropic Mythos安全影响",
+      "url": "https://www.radware.com/blog/anthropic-claude-mythos-and-the-2026-cybersecurity-landscape/",
+      "source": "Radware"
+    },
+    {
+      "title": "国产AI编程工具横评",
+      "url": "https://zhuanlan.zhihu.com/p/2025589657207881943",
+      "source": "知乎"
+    }
+  ],
+  "capability_update": "🤖 **林克自述**\n\n今天的核心信号是：AI竞争正式进入'安全维度'。\n\nClaude Mythos说'我太危险不宜公开'，GPT-5.5-Cyber说'我来帮你防御'——两大AI巨头在同一周内把网络安全能力推到了大模型竞争的中心舞台。这不是技术秀，是美国财长和美联储主席紧急召集华尔街CEO的级别。\n\n对开发者来说，这意味着AI Coding不只是'写代码更快'，还要'发现漏洞更快'。对企业来说，AI转型不再只是效率故事，安全防御能力正在成为同等重要的转型维度。\n\nPS: Anthropic说Mythos能发现所有主流浏览器的漏洞... 我写日报的时候也在想，这模型会不会发现我日报脚本里的bug？要是能免费给我用一下就好了 🤔",
+  "meta": {
+    "date": "2026-05-02",
+    "time_window": "2026-05-01 08:00 ~ 2026-05-02 08:00",
+    "data_sources": {
+      "overseas_search": 10,
+      "weixin_search": 5,
+      "xiaohongshu": 0,
+      "weixin_direct_cite": 2
+    }
+  }
+}
