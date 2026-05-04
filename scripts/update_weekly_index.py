@@ -11,7 +11,7 @@
   W14 周报已生成并部署，但两版首页均未更新，导致：
   - 日历上 4.5 没有"有周报"标识
   - 首页入口卡片仍指向 W13
-  根因：send_ai_weekly.py 没有任何首页更新逻辑，靠人工记忆必然遗漏。
+  根因：旧版推送脚本已被废弃，改用 build_insight_mixcard.py + message 工具，靠人工记忆必然遗漏。
 
 使用方式:
   python3 scripts/update_weekly_index.py               # 自动检测最新周报并更新
@@ -305,7 +305,7 @@ def run(week_str: str = None, dry_run: bool = False) -> bool:
             print("      python3 scripts/sync_to_public.py --all --force --with-index")
         
         print()
-        print("   后续步骤（由调用方 send_ai_weekly.py 自动执行）:")
+        print("   后续步骤（由调用方（Agent message 工具发送后手动同步）执行）:")
         print(f"     git add . && git commit -m '📊 周报首页联动 {year}-W{week_num:02d}'")
         print(f"     python3 scripts/sync_to_external.py --full --verify")
     elif not any_changed:

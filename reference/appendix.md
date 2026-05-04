@@ -5,8 +5,8 @@
 | 脚本 | 用途 | 命令 |
 |------|------|------|
 | `ai_daily_orchestrator.py` | **日报编排(状态+finalize+push) v1.1** | `python3 scripts/ai_daily_orchestrator.py status` |
-| `send_ai_daily.py` | 日报KIM推送(仅发2个目标群) | `python3 scripts/send_ai_daily.py [日期]` |
-| `send_ai_weekly.py` | 周报KIM推送(发所有群) | `python3 scripts/send_ai_weekly.py` |
+| `build_insight_mixcard.py` | 统一mixCard生成(日报/周报/调研/产品) | `python3 scripts/build_insight_mixcard.py daily --date YYYY-MM-DD` |
+| `build_insight_mixcard.py weekly` | 周报mixCard生成 | `python3 scripts/build_insight_mixcard.py weekly --date YYYY-Www` |
 | `send_deep_research_card.py` | 深度调研KIM推送 | `python3 scripts/send_deep_research_card.py` |
 | `daily_quality_gate.py` | **日报质量门(19项检查) v10.0** | `python3 scripts/daily_quality_gate.py` |
 | `gen_daily_json.py` | 生成JSON数据 | `python3 scripts/gen_daily_json.py` |
@@ -67,11 +67,11 @@
 | **48** | **⭐首页联动更新不完整(v9.6)** | **deploy_daily.sh只更新了stat-value数字，遗漏：①日历数组未追加新日期②list-item-desc描述文本未更新。根因：6处联动无检查清单，脚本覆盖范围与实际需求不一致。修复：deploy_daily.sh新增Python片段自动提取JSON摘要填写list-item-desc，日历数组用Python regex替换** |
 | **49** | **⭐public/index.html漏commit(v9.6)** | **sync_to_public.py更新了public/index.html，但deploy流程里git add -A在sync之前执行，导致public/index.html修改没被纳入当次commit。根因：git提交顺序：先commit后sync，sync的结果丢失。修复：deploy_daily.sh重排顺序——sync在git commit之前执行，保证所有文件变更统一提交** |
 | **50** | **⭐管道吞掉脚本失败(v9.7)** | **deploy_daily.sh中`cmd \| tail -5`写法导致set -e不触发：管道右侧tail成功则整行成功，即使cmd失败也不报错。特别危险：sync_to_public失败(脱敏未完成)后继续git commit+push，将敏感信息推送到公开仓库。修复：去掉管道，直接调用命令；加set -o pipefail；敏感词发现后exit 1硬阻断** |
-| **51** | **⭐KIM卡片URL硬编码内部文件名(v9.7)** | **send_ai_daily.py中report_url硬编码`{date}-v3.html`，但公开版经sync_to_public脱敏后文件名变为`{date}.html`（去掉-v3后缀），导致KIM卡片"查看完整日报"按钮404。修复：URL改为`{date}.html`** |
+| **51** | **⭐KIM卡片URL硬编码内部文件名(v9.7)** | **旧版send_ai_daily.py中report_url硬编码（脚本已废弃）`{date}-v3.html`，但公开版经sync_to_public脱敏后文件名变为`{date}.html`（去掉-v3后缀），导致KIM卡片"查看完整日报"按钮404。修复：URL改为`{date}.html`** |
 | **52** | **⭐脱敏规则与实际内容不匹配(v9.7)** | **sync_to_public.py第91行规则期望`（沈浪的AI分身）`，但index.html实际文本是`（基于CF打造的AI数字分身）`，精确字符串匹配失败，导致CF残留在公开版。SENSITIVE_WORDS也没包含CF，verify无法检出。修复：用更宽松的正则匹配anchor标签，SENSITIVE_WORDS加CF** |
 | **53** | **⭐orchestrator+deploy_daily.sh双重sync(v9.7)** | **deploy_daily.sh Step 6调用sync_to_external，orchestrator finalize又调用run_external_sync()，两次同步。修复：deploy_daily.sh检测SKIP_GATE=1环境变量（orchestrator调用时设置），如果存在则跳过Step 6，由orchestrator统一负责外部同步，消除双重同步** |
 | **54** | **⭐6处联动门控被绕过(v9.9)** | **finalize报「6处联动失败」，Agent选择「先推了再说」只做git push就标记完成，首页/索引页/外部版全没更新。根因：门控存在但被人为选择性忽略。修复：新增P0红线——6处联动失败=阻断禁止绕过，标记完成前必须验证质量门显示✅** |
-| **55** | **⭐KIM推送重复发送(v10.0)** | **连续执行两次send_ai_daily.py（先--preview再正式发送），导致同一日报私发两次。根因：--preview仅为语义标记，与无参数行为完全相同。修复：更新workflow.md明确只执行一次，新增P0红线禁止重复发送** |
+| **55** | **⭐KIM推送重复发送(v10.0)** | **连续执行两次旧版send_ai_daily.py（已废弃）（先--preview再正式发送），导致同一日报私发两次。根因：--preview仅为语义标记，与无参数行为完全相同。修复：更新workflow.md明确只执行一次，新增P0红线禁止重复发送** |
 | **56** | **⭐订阅页面OAuth失败(v10.2)** | **Appwrite 前端云不支持快手 OAuth Provider，调用 `createOAuth2Session('kuaishou', ...)` 报错 `Missing required parameter: "provider"`。替代方案：使用工号输入模式，绕过 OAuth 依赖，直接写入订阅表** |
 | **57** | **⭐深度调研KIM卡片URL用内部版导致404(2026-04-25)** | **Step7 KIM卡片按钮1链接使用内部版 `ai-insight/` 路径，但外部群成员访问404。根因：脚本里写了内部URL，但外部仓库是 `ai-insight-public/`。修复：KIM卡片按钮URL必须统一改为 `ai-insight-public/`，并在私发预览时点击按钮验证200后再群发** |
 | **58** | **⭐深度调研只推外部版漏推内部版(2026-04-25)** | **sync_to_external.py 只把文件推送到 `ai-insight-public` 仓库，但 `AI-Insight` 主仓库（`ai-insight.git`）的 HTML 文件和 index.html 卡片变更没有 `git add+commit+push`，导致内部版 GitHub Pages（`ai-insight/`）404。两个仓库都需要提交：① `git push` 内部版主仓库；② `sync_to_external.py` 推外部版，缺一不可。记忆口诀：sync推外部，push推内部。另外 sync_to_public.py 不支持 `--deep-research` 等参数（会报 unrecognized arguments），深度调研文件需手动 cp 到 public/ 再运行无参数版** |

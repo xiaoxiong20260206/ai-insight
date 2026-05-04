@@ -19,18 +19,18 @@ python3 scripts/ai_daily_orchestrator.py resume
 
 **2026-03-14教训**: 手写了v2.0水平的简陋卡片推到群，缺失热度趋势、分类标签、深度聚焦、视觉层次。
 
-**send_ai_daily.py 的 build_card_v35 函数包含170行卡片构建逻辑，手写不可能达到同等质量。永远使用脚本，永远不要手写。**
+**build_insight_mixcard.py 的 build_daily 函数包含完整卡片构建逻辑，手写不可能达到同等质量。永远使用脚本，永远不要手写。**
 
 **注意**: 卡片包含热度趋势+动态+深度聚焦，规律洞察仅在网页版呈现。
 
 ## 3. KIM推送必须用 mixCard，禁止纯文本降级（v10.3 经验61）
 
-**2026-04-29教训**: 容器重建后 KIM_APP_KEY/SECRET_KEY 丢失，send_ai_daily.py 无法运行。Agent 退而求其次用 message 工具发了纯文本，完全丢失卡片结构。
+**2026-04-29教训**: 容器重建后 KIM_APP_KEY/SECRET_KEY 丢失，send_ai_daily.py 无法运行（已废弃，改用 build_insight_mixcard.py）。Agent 退而求其次用 message 工具发了纯文本，完全丢失卡片结构。
 
 **强制规则**: 
 - 凭证缺失时不是降级为纯文本，而是走 mixCard 路径：
   ```bash
-  python3 scripts/build_daily_mixcard.py YYYY-MM-DD --output /tmp/card.json
+  python3 scripts/build_insight_mixcard.py daily --date YYYY-MM-DD YYYY-MM-DD --output /tmp/card.json
   # 然后用 message(channel=kim, kimMixCard=<card>, ...) 发送
   ```
 - **任何情况下日报推送必须包含完整的 block 结构**（header/subtitle/heat/sec1~5/capability/footer/buttons）
@@ -38,14 +38,14 @@ python3 scripts/ai_daily_orchestrator.py resume
 
 ## 4. KIM推送只执行一次（v10.0 经验55）
 
-**2026-04-22教训**: 连续执行了两次 send_ai_daily.py（先 `--preview` 再正式发送），导致同一日报重复发送给用户。
+**2026-04-22教训**: 连续执行了两次旧版send_ai_daily.py（已废弃）（先 `--preview` 再正式发送），导致同一日报重复发送给用户。
 
 **根因**: `--preview` 参数仅为语义标记，与无参数行为完全相同。
 
 **强制规则**:
 ```bash
 # 正确：只执行一次
-python3 scripts/send_ai_daily.py YYYY-MM-DD  # 或 --preview，二选一
+# ⚠️ 旧版已废弃 | Work模式唯一路径: python3 scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/card.json --with-summary
 
 # 错误：执行两次 = 发送两次
 ```

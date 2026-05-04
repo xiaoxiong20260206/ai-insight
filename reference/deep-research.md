@@ -736,7 +736,7 @@ DEFAULT_DEEP_RESEARCH_GROUPS = [
 ```python
 import sys
 sys.path.insert(0, 'scripts')
-from kim_client import KimConfig, get_access_token, send_to_user, send_to_group_with_retry
+# 旧版: from kim_client import ...（已废弃，Work模式用 build_insight_mixcard.py + message 工具）
 import asyncio
 
 async def send_deep_research_card(card: dict):

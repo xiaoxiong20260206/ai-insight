@@ -17,7 +17,7 @@
 #   6. 检查 step2-completed.flag
 #   7. use_subagent("daily-deploy-agent", task="执行AI日报部署验证, DATE={DATE}")
 #   8. 检查 deployment-completed.flag
-#   9. 主会话执行 Step 5: python3 scripts/send_ai_daily.py {DATE} --preview
+#   9. 主会话执行 Step 5: python3 scripts/build_insight_mixcard.py daily --date {DATE} --output /tmp/card.json --with-summary
 #
 # 直接执行此脚本（调试/日志用途）：
 #   bash scripts/daily_agent_runner.sh [YYYY-MM-DD]
@@ -143,7 +143,7 @@ echo -e "  )"
 echo -e "  → 等待完成，确认 deployment-completed.flag 存在\n"
 
 echo -e "${CYAN}【Step 5】主会话执行（禁止委托给 Subagent）${RESET}"
-echo -e "  python3 scripts/send_ai_daily.py ${DATE} --preview"
+echo -e "  python3 scripts/build_insight_mixcard.py daily --date ${DATE} --output /tmp/card.json --with-summary"
 echo -e "  → 输出四链接（私发 KIM + 四链接自检）\n"
 
 echo -e "${BOLD}══════════════════════════════════════════════════${RESET}"

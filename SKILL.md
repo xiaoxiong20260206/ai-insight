@@ -160,7 +160,7 @@ python3 scripts/ai_daily_orchestrator.py finalize --date 2026-03-15
 
 ### ⛔ P0红线: KIM卡片必须用脚本生成
 > **2026-03-14教训**: 手写了v2.0水平的简陋卡片推到群，缺失热度趋势、
-> 分类标签、深度聚焦、视觉层次。`send_ai_daily.py` 的 
+> 分类标签、深度聚焦、视觉层次。`build_insight_mixcard.py` 的 
 > `build_card_v35` 函数包含170行卡片构建逻辑，手写不可能达到同等质量。
 > **永远使用脚本，永远不要手写。**
 >
@@ -168,20 +168,20 @@ python3 scripts/ai_daily_orchestrator.py finalize --date 2026-03-15
 
 ### ⛔ P0红线: KIM推送必须用 mixCard，禁止纯文本降级（v10.3 经验61）
 > **2026-04-29教训**: 容器重建后 KIM_APP_KEY/SECRET_KEY 丢失，
-> send_ai_daily.py 无法运行。Agent 退而求其次用 message 工具发了纯文本，
+> send_ai_daily.py 无法运行（⚠️此脚本已归档废弃，Work模式用 build_insight_mixcard.py）。Agent 退而求其次用 message 工具发了纯文本，
 > 完全丢失卡片结构（热度趋势/5板块/深度聚焦/林克自述/双按钮）。
 >
 > **强制规则**: 
 > - 凭证缺失时不是降级为纯文本，而是走 mixCard 路径：
 >   ```bash
->   python3 scripts/build_daily_mixcard.py YYYY-MM-DD --output /tmp/card.json
+>   python3 scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/card.json
 >   # 然后用 message(channel=kim, kimMixCard=<card>, ...) 发送
 >   ```
 > - **任何情况下日报推送必须包含完整的 block 结构**（header/subtitle/heat/sec1~5/capability/footer/buttons）
 > - 两条路径（直连API vs message工具）必须保持卡片 JSON 结构一致
 
 ### ⛔ P0红线: KIM推送只执行一次（v10.0 经验55）
-> **2026-04-22教训**: 连续执行了两次 send_ai_daily.py（先 `--preview` 再正式发送），
+> **2026-04-22教训**: 连续执行了两次 send_ai_daily.py（⚠️此脚本已归档废弃）（先 `--preview` 再正式发送），
 > 导致同一日报重复发送给用户。
 >
 > **根因**: `--preview` 参数仅为语义标记，与无参数行为完全相同（都是私发给 shenlang）。
@@ -190,11 +190,11 @@ python3 scripts/ai_daily_orchestrator.py finalize --date 2026-03-15
 > **强制规则**:
 > ```bash
 > # 正确：只执行一次
-> python3 scripts/send_ai_daily.py YYYY-MM-DD  # 或 --preview，二选一
+> python3 scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/card.json --with-summary # 生成卡片JSON，然后用message工具发送
 >
 > # 错误：执行两次
-> python3 scripts/send_ai_daily.py YYYY-MM-DD --preview  # 第一次
-> python3 scripts/send_ai_daily.py YYYY-MM-DD           # 第二次（重复！）
+> python3 scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/card.json # 第一次生成
+> # ❌ 禁止重复发送！mixCard 只生成一次（旧版 send_ai_daily 已废弃）
 > ```
 
 ### ⛔ P0红线: 质量门失败=回到步骤重做，禁止修改数据 (v7.0 经验36)
@@ -280,8 +280,8 @@ python3 scripts/build_insight_mixcard.py weekly --date YYYY-Www --output /tmp/ca
 # 然后用 message(channel=kim, kimMixCard=<card>, ...) 发送
 
 # 路径B（旧版）：直连 KIM API（需要凭证）
-python3 scripts/send_ai_weekly.py --preview   # 先预览
-python3 scripts/send_ai_weekly.py --to-groups # 确认后发群
+python3 scripts/build_insight_mixcard.py weekly --date YYYY-Www --output /tmp/card.json --with-summary # 先预览
+message(channel=kim, kimMixCard=<card>, ...)  # 确认后发群
 ```
 
 ### P0规则
@@ -544,9 +544,7 @@ python3 scripts/fetch_arxiv.py --days 1 --json --output data/arxiv-daily.json
 |------|------|------|
 | `ai_daily_orchestrator.py` | **日报编排(状态+finalize+push) v1.1** | `python3 scripts/ai_daily_orchestrator.py status` |
 | `build_insight_mixcard.py` | **AI洞察 mixCard 统一生成器(v10.3新增)** | `python3 scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/card.json` |
-| `build_daily_mixcard.py` | 日报mixCard生成(已被build_insight_mixcard替代) | `python3 scripts/build_daily_mixcard.py YYYY-MM-DD --output /tmp/card.json` |
-| `send_ai_daily.py` | 日报KIM推送(仅发2个目标群) | `python3 scripts/send_ai_daily.py [日期]` |
-| `send_ai_weekly.py` | 周报KIM推送(路径B:直连API) | `python3 scripts/send_ai_weekly.py` |
+| `build_insight_mixcard.py` | 日报mixCard生成(已被build_insight_mixcard替代) | `python3 scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/card.json` |
 | `send_deep_research_card.py` | 深度调研KIM推送(路径B:直连API) | `python3 scripts/send_deep_research_card.py` |
 | `daily_quality_gate.py` | **日报质量门(19项检查) v10.0** | `python3 scripts/daily_quality_gate.py` |
 | `gen_daily_json.py` | 生成JSON数据 | `python3 scripts/gen_daily_json.py` |
@@ -607,17 +605,17 @@ python3 scripts/fetch_arxiv.py --days 1 --json --output data/arxiv-daily.json
 | **48** | **⭐首页联动更新不完整(v9.6)** | **deploy_daily.sh只更新了stat-value数字，遗漏：①日历数组未追加新日期②list-item-desc描述文本未更新。根因：6处联动无检查清单，脚本覆盖范围与实际需求不一致。修复：deploy_daily.sh新增Python片段自动提取JSON摘要填写list-item-desc，日历数组用Python regex替换** |
 | **49** | **⭐public/index.html漏commit(v9.6)** | **sync_to_public.py更新了public/index.html，但deploy流程里git add -A在sync之前执行，导致public/index.html修改没被纳入当次commit。根因：git提交顺序：先commit后sync，sync的结果丢失。修复：deploy_daily.sh重排顺序——sync在git commit之前执行，保证所有文件变更统一提交** |
 | **50** | **⭐管道吞掉脚本失败(v9.7)** | **deploy_daily.sh中`cmd \| tail -5`写法导致set -e不触发：管道右侧tail成功则整行成功，即使cmd失败也不报错。特别危险：sync_to_public失败(脱敏未完成)后继续git commit+push，将敏感信息推送到公开仓库。修复：去掉管道，直接调用命令；加set -o pipefail；敏感词发现后exit 1硬阻断** |
-| **51** | **⭐KIM卡片URL硬编码内部文件名(v9.7)** | **send_ai_daily.py中report_url硬编码`{date}-v3.html`，但公开版经sync_to_public脱敏后文件名变为`{date}.html`（去掉-v3后缀），导致KIM卡片"查看完整日报"按钮404。修复：URL改为`{date}.html`** |
+| **51** | **⭐KIM卡片URL硬编码内部文件名(v9.7)** | **旧版send_ai_daily.py中report_url硬编码（已废弃）`{date}-v3.html`，但公开版经sync_to_public脱敏后文件名变为`{date}.html`（去掉-v3后缀），导致KIM卡片"查看完整日报"按钮404。修复：URL改为`{date}.html`** |
 | **52** | **⭐脱敏规则与实际内容不匹配(v9.7)** | **sync_to_public.py第91行规则期望`（沈浪的AI分身）`，但index.html实际文本是`（基于CF打造的AI数字分身）`，精确字符串匹配失败，导致CF残留在公开版。SENSITIVE_WORDS也没包含CF，verify无法检出。修复：用更宽松的正则匹配anchor标签，SENSITIVE_WORDS加CF** |
 | **53** | **⭐orchestrator+deploy_daily.sh双重sync(v9.7)** | **deploy_daily.sh Step 6调用sync_to_external，orchestrator finalize又调用run_external_sync()，两次同步。修复：deploy_daily.sh检测SKIP_GATE=1环境变量（orchestrator调用时设置），如果存在则跳过Step 6，由orchestrator统一负责外部同步，消除双重同步** |
 | **54** | **⭐6处联动门控被绕过(v9.9)** | **finalize报「6处联动失败」，Agent选择「先推了再说」只做git push就标记完成，首页/索引页/外部版全没更新。根因：门控存在但被人为选择性忽略。修复：新增P0红线——6处联动失败=阻断禁止绕过，标记完成前必须验证质量门显示✅** |
-| **55** | **⭐KIM推送重复发送(v10.0)** | **连续执行两次send_ai_daily.py（先--preview再正式发送），导致同一日报私发两次。根因：--preview仅为语义标记，与无参数行为完全相同。修复：更新workflow.md明确只执行一次，新增P0红线禁止重复发送** |
+| **55** | **⭐KIM推送重复发送(v10.0)** | **连续执行两次旧版send_ai_daily.py（已废弃）（先--preview再正式发送），导致同一日报私发两次。根因：--preview仅为语义标记，与无参数行为完全相同。修复：更新workflow.md明确只执行一次，新增P0红线禁止重复发送** |
 | **56** | **⭐订阅页面OAuth失败(v10.2)** | **Appwrite 前端云不支持快手 OAuth Provider，调用 `createOAuth2Session('kuaishou', ...)` 报错 `Missing required parameter: "provider"`。替代方案：使用工号输入模式，绕过 OAuth 依赖，直接写入订阅表** |
 | **57** | **⭐深度调研KIM卡片URL用内部版导致404(2026-04-25)** | **Step7 KIM卡片按钮1链接使用内部版 `ai-insight/` 路径，但外部群成员访问404。根因：脚本里写了内部URL，但外部仓库是 `ai-insight-public/`。修复：KIM卡片按钮URL必须统一改为 `ai-insight-public/`，并在私发预览时点击按钮验证200后再群发** |
 | **58** | **⭐深度调研只推外部版漏推内部版(2026-04-25)** | **sync_to_external.py 只把文件推送到 `ai-insight-public` 仓库，但 `AI-Insight` 主仓库（`ai-insight.git`）的 HTML 文件和 index.html 卡片变更没有 `git add+commit+push`，导致内部版 GitHub Pages（`ai-insight/`）404。两个仓库都需要提交：① `git push` 内部版主仓库；② `sync_to_external.py` 推外部版，缺一不可。记忆口诀：sync推外部，push推内部。另外 sync_to_public.py 不支持 `--deep-research` 等参数（会报 unrecognized arguments），深度调研文件需手动 cp 到 public/ 再运行无参数版** |
 | **59** | **⭐三版首页卡片各自独立，无一自动同步(2026-04-25)** | **Step 6 在 AI-Insight/index.html 新增卡片后，public/index.html 和 ai-insight-public/index.html 均不会自动更新。根因：sync_to_public.py 有 preserve_block 机制保留公开版深度调研区块（新卡片不传播），ai-insight-public 是独立仓库也不会自动跟随。修复：Step 5.5 新增四端首页卡片门控检查——用 grep 验证三份 index.html 均包含新报告 slug，缺一不可** |
 | **60** | **⭐微信搜狗占位符链接不可达(2026-04-27)** | **Subagent在微信搜索API返回空时，生成了`weixin.sogou.com/weixin?type=2&query=...`格式的搜索链接作为占位符。但这些是搜索页面链接，不是文章链接，预检判定为不可达。根因：Subagent未正确处理微信API空结果。修复：将搜狗搜索链接替换为空URL（source标注微信即可）。与#34不同：#34是搜索策略问题，本次是占位符格式问题** |
-| **61** | **⭐KIM日报推送退化为纯文本(2026-04-29)** | **容器重建后 KIM_APP_KEY/SECRET_KEY 丢失，send_ai_daily.py 无法直连 KIM API。Agent 退而求其次用 message 工具发了纯文本消息，但纯文本丢失了卡片结构（热度趋势/5板块/深度聚焦/林克自述/双按钮）。根因：没有 mixCard 降级路径，缺少"必须用卡片"的硬约束。修复：新增 `scripts/build_daily_mixcard.py` 生成 mixCard JSON；workflow.md Step 5 新增两种推送路径（路径A: message+kimMixCard，路径B: send_ai_daily.py），两路径必须保持 block 结构一致；新增 P0 红线禁止纯文本推送** |
+| **61** | **⭐KIM日报推送退化为纯文本(2026-04-29)** | **容器重建后 KIM_APP_KEY/SECRET_KEY 丢失，send_ai_daily.py 无法直连 KIM API。Agent 退而求其次用 message 工具发了纯文本消息，但纯文本丢失了卡片结构（热度趋势/5板块/深度聚焦/林克自述/双按钮）。根因：没有 mixCard 降级路径，缺少"必须用卡片"的硬约束。修复：统一入口改为 `scripts/build_insight_mixcard.py`（日报/周报/调研/产品），Work模式唯一路径A: message+kimMixCard，路径B(KIM直连)已废弃；新增 P0 红线禁止纯文本推送** |
 
 完整分析详见 `references/lessons-learned.md`
 

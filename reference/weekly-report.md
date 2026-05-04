@@ -216,7 +216,7 @@ python3 scripts/build_insight_mixcard.py weekly --date YYYY-Www --output /tmp/ca
 ```
 > ⚠️ 旧版路径B（`send_ai_weekly.py --preview`）需要 KIM 凭证，Work 模式下不可用。如 Code 模式下有凭证可用：
 > ```bash
-> python3 scripts/send_ai_weekly.py YYYY-WXX --preview
+> ⚠️ python3 scripts/send_ai_weekly.py YYYY-WXX --preview  （此脚本已归档废弃，仅Code模式下有KIM凭证时可用）
 > ```
 
 **🔴 强制规则**：
@@ -284,7 +284,7 @@ python3 scripts/build_insight_mixcard.py weekly --date YYYY-Www --output /tmp/ca
 ### 用户回复「发群」或「确认」后，执行：
 
 ```bash
-python3 scripts/send_ai_weekly.py YYYY-WXX --confirm --to-groups
+# 用 message 工具 + kimMixCard 发送到各群（需逐群发送）
 ```
 
 ### 发送到单个群的完整流程
@@ -299,12 +299,12 @@ python3 scripts/send_ai_weekly.py YYYY-WXX --confirm --to-groups
 
 **Step 6.2**: 用 dry-run 测试
 ```bash
-python3 scripts/send_ai_weekly.py YYYY-WXX --dry-run --to-group 6646213728505891
+# 测试: 确认卡片内容正确后再逐群发送
 ```
 
 **Step 6.3**: 确认参数正确后，执行发送
 ```bash
-python3 scripts/send_ai_weekly.py YYYY-WXX --confirm --to-group 6646213728505891
+message(channel=kim, target=群ID, kimMixCard=<card>, ...)  # 发送到指定群
 ```
 
 **Step 6.4**: 如果API返回错误
