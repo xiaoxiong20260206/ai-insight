@@ -5,7 +5,7 @@ AI洞察 mixCard JSON 统一生成器
 为所有 AI洞察 KIM 推送场景生成 mixCard JSON，供 MyFlicker message 工具 + kimMixCard 参数使用。
 
 覆盖场景:
-1. AI日报 (daily)     — build_daily_mixcard.py 的逻辑已合并
+1. AI日报 (daily)     — 统一入口（旧版 build_daily_mixcard.py 已归档废弃）
 2. AI周报 (weekly)    — 从周报 MD 内容提取 Top5 + 洞察
 3. 深度调研 (research) — 独立专题卡片（需传入参数）
 4. 产品本质 (product)  — 独立专题卡片（需传入参数）

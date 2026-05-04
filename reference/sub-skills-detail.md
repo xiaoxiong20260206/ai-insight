@@ -105,14 +105,14 @@ python3 scripts/ai_daily_orchestrator.py finalize --date 2026-03-15
 
 ### ⛔ P0红线: KIM卡片必须用脚本生成
 > **2026-03-14教训**: 手写了v2.0水平的简陋卡片推到群，缺失热度趋势、
-> 分类标签、深度聚焦、视觉层次。`send_ai_daily.py` 的 
+> 分类标签、深度聚焦、视觉层次。`build_insight_mixcard.py` 的 
 > `build_card_v35` 函数包含170行卡片构建逻辑，手写不可能达到同等质量。
 > **永远使用脚本，永远不要手写。**
 >
 > **注意**: 卡片包含热度趋势+动态+深度聚焦，规律洞察仅在网页版呈现。
 
 ### ⛔ P0红线: KIM推送只执行一次（v10.0 经验55）
-> **2026-04-22教训**: 连续执行了两次 send_ai_daily.py（先 `--preview` 再正式发送），
+> **2026-04-22教训**: 连续执行了两次旧版send_ai_daily.py（已废弃）（先 `--preview` 再正式发送），
 > 导致同一日报重复发送给用户。
 >
 > **根因**: `--preview` 参数仅为语义标记，与无参数行为完全相同（都是私发给 shenlang）。
@@ -121,11 +121,11 @@ python3 scripts/ai_daily_orchestrator.py finalize --date 2026-03-15
 > **强制规则**:
 > ```bash
 > # 正确：只执行一次
-> python3 scripts/send_ai_daily.py YYYY-MM-DD  # 或 --preview，二选一
+> python3 scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/card.json --with-summary
 >
 > # 错误：执行两次
-> python3 scripts/send_ai_daily.py YYYY-MM-DD --preview  # 第一次
-> python3 scripts/send_ai_daily.py YYYY-MM-DD           # 第二次（重复！）
+> python3 scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/card.json # 生成卡片
+> # ❌ 禁止重复发送！旧版 send_ai_daily 已废弃
 > ```
 
 ### ⛔ P0红线: 质量门失败=回到步骤重做，禁止修改数据 (v7.0 经验36)
@@ -206,8 +206,8 @@ python3 scripts/ai_daily_orchestrator.py finalize --date 2026-03-15
 
 ### 快速执行
 ```bash
-python3 scripts/send_ai_weekly.py --preview   # 先预览
-python3 scripts/send_ai_weekly.py --to-groups # 确认后发群
+python3 scripts/build_insight_mixcard.py weekly --date YYYY-Www --output /tmp/card.json --with-summary # 先预览
+message(channel=kim, kimMixCard=<card>, ...)  # 确认后发群
 ```
 
 ### P0规则

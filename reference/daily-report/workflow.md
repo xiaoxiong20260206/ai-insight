@@ -481,5 +481,5 @@ config: `{"forward": true, "forwardType": 3, "wideSelfAdaptive": true}`, `update
 | `ai_daily_orchestrator.py finalize --fix` | 质量门+部署 |
 | `daily_quality_gate.py YYYY-MM-DD` | 运行19项检查 |
 | `gen_daily_html.py YYYY-MM-DD` | 生成HTML |
-| `send_ai_daily.py YYYY-MM-DD --preview` | 预览KIM卡片 |
+| `build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/card.json` | 生成mixCard JSON |
 | `deploy_daily.sh YYYY-MM-DD` | 一键部署 |
