@@ -142,6 +142,11 @@ REPLACEMENTS = _URL_REPLACEMENTS + [
     # v2.1曾尝试「只替换机构名」，但与 SENSITIVE_WORDS 检查不一致，会导致部署 abort
     (r'快手', '某公司'),
     (r'Kuaishou', 'Company'),
+    
+    # ===== 外部版首页订阅按钮自动剥离（v10.4 经验62）=====
+    # 外部版是公开页面，订阅功能需要内部认证，不提供此能力
+    # 匹配 header 区域内订阅按钮 div（含 <a href="./subscribe/">）
+    (r'<div\s+style="margin-top:\s*24px;\s*text-align:\s*center;">\s*<a\s+href="./subscribe/"[^>]*>.*?</a>\s*</div>', ''),
 ]
 
 # 敏感词验证列表（脱敏后不应出现的词）

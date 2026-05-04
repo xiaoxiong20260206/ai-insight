@@ -8,6 +8,8 @@
     <style>
         .fade-in { animation: fadeIn 0.3s ease-in; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .pulse { animation: pulse 2s ease-in-out infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
     </style>
 </head>
 <body class="bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen">
@@ -17,64 +19,88 @@
             <div class="text-center mb-8">
                 <div class="text-5xl mb-4">📡</div>
                 <h1 class="text-3xl font-bold text-gray-800 mb-2">AI洞察日报订阅</h1>
-                <p class="text-gray-500">每天早上09:00，林克会准时为您推送AI行业最新动态</p>
+                <p class="text-gray-500">每天早上09:00，MyFlicker会准时为您推送AI行业最新动态</p>
             </div>
 
-            <!-- Auth Section -->
-            <div id="authSection" class="fade-in">
+            <!-- Subscribe Section -->
+            <div id="subscribeSection" class="fade-in">
                 <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6 mb-6">
                     <h2 class="text-lg font-semibold text-blue-800 mb-3">👋 欢迎订阅</h2>
-                    <p class="text-blue-700 mb-4 text-sm">请输入您的快手内部工号或邮箱前缀进行订阅</p>
+                    <p class="text-blue-700 mb-4 text-sm">订阅方式：在 KIM 上给 MyFlicker 消息号发送订阅指令</p>
                     
+                    <!-- Step-by-step Guide -->
                     <div class="space-y-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">快手工号 / 邮箱</label>
-                            <input type="text" id="employeeId" 
-                                placeholder="例如：shenlang 或 shenlang@internal.company"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
-                            >
+                        <div class="bg-white rounded-lg p-4 border border-blue-100">
+                            <h3 class="font-semibold text-gray-700 mb-3">📱 订阅步骤</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-start">
+                                    <span class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-semibold text-sm mr-3">1</span>
+                                    <div>
+                                        <p class="text-gray-700">在 KIM 中搜索并打开 <strong class="text-blue-600">MyFlicker</strong> 消息号</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <span class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-semibold text-sm mr-3">2</span>
+                                    <div>
+                                        <p class="text-gray-700">发送订阅指令（直接复制以下内容）：</p>
+                                        <div class="mt-2 bg-gray-50 rounded-lg p-3 border border-gray-200 group relative">
+                                            <code id="subscribeCommand" class="text-sm text-gray-800 break-all">订阅AI日报</code>
+                                            <button onclick="copyCommand()" 
+                                                class="absolute top-2 right-2 px-2 py-1 bg-blue-500 text-white rounded text-xs hover:bg-blue-600 transition-all opacity-0 group-hover:opacity-100">
+                                                复制
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <span class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-semibold text-sm mr-3">3</span>
+                                    <div>
+                                        <p class="text-gray-700">MyFlicker 会自动确认订阅，次日09:00开始收到日报推送 ✅</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <button id="subscribeBtn" 
-                            class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-                            立即订阅
-                        </button>
+
+                        <!-- Quick Custom Command -->
+                        <div class="bg-white rounded-lg p-4 border border-blue-100">
+                            <h3 class="font-semibold text-gray-700 mb-2">✨ 自定义订阅指令</h3>
+                            <p class="text-sm text-gray-500 mb-3">填入你的快手工号，生成专属订阅指令：</p>
+                            <div class="flex gap-2">
+                                <input type="text" id="employeeId" 
+                                    placeholder="例如：zhangsan"
+                                    class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all text-sm"
+                                >
+                                <button onclick="generateCommand()" 
+                                    class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-all text-sm">
+                                    生成
+                                </button>
+                            </div>
+                            <div id="customCommandBox" class="hidden mt-3 bg-green-50 rounded-lg p-3 border border-green-200 group relative">
+                                <code id="customCommand" class="text-sm text-green-800 break-all"></code>
+                                <button onclick="copyCustomCommand()" 
+                                    class="absolute top-2 right-2 px-2 py-1 bg-green-500 text-white rounded text-xs hover:bg-green-600 transition-all">
+                                    复制
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Cancel Subscription -->
+                        <div class="bg-white rounded-lg p-4 border border-gray-100">
+                            <h3 class="font-semibold text-gray-700 mb-2">🚫 取消订阅</h3>
+                            <p class="text-sm text-gray-500 mb-2">在 KIM 上给 MyFlicker 发送：</p>
+                            <div class="bg-gray-50 rounded-lg p-3 border border-gray-200 group relative">
+                                <code class="text-sm text-gray-800">取消订阅AI日报</code>
+                                <button onclick="copyCancelCommand()" 
+                                    class="absolute top-2 right-2 px-2 py-1 bg-gray-400 text-white rounded text-xs hover:bg-gray-500 transition-all opacity-0 group-hover:opacity-100">
+                                    复制
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     
                     <p class="text-xs text-gray-500 mt-4 text-center">
-                        💡 订阅后，每日09:00会自动通过KIM发送日报给您
+                        💡 订阅后，每日09:00会自动通过KIM发送日报MixCard给您
                     </p>
-                </div>
-            </div>
-
-            <!-- Subscription Section (Hidden by default) -->
-            <div id="subscriptionSection" class="hidden fade-in">
-                <div class="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-xl p-6 mb-6">
-                    <div class="flex items-center justify-between mb-4">
-                        <h2 class="text-lg font-semibold text-green-800">✅ 订阅成功</h2>
-                        <span id="statusBadge" class="px-4 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                            已订阅
-                        </span>
-                    </div>
-                    <div class="text-green-700 space-y-2">
-                        <p class="flex items-center">
-                            <span class="mr-2">👤</span> 
-                            用户：<span id="usernameDisplay" class="font-semibold"></span>
-                        </p>
-                        <p class="flex items-center">
-                            <span class="mr-2">📅</span> 
-                            订阅时间：<span id="subscribedAtDisplay" class="font-semibold"></span>
-                        </p>
-                    </div>
-                    
-                    <div class="mt-4 p-3 bg-white rounded-lg border border-green-200">
-                        <p class="text-sm text-green-700">🎉 订阅成功！每天早上09:00，林克会通过KIM给您发送AI日报</p>
-                    </div>
-                </div>
-
-                <div class="space-y-3">
-                    <button id="unsubscribeBtn" class="w-full bg-gradient-to-r from-red-500 to-rose-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-red-600 hover:to-rose-700 transition-all shadow-lg">
-                        取消订阅
-                    </button>
                 </div>
             </div>
 
@@ -101,9 +127,16 @@
                 </div>
             </div>
 
+            <!-- Current Subscribers Count -->
+            <div class="mt-6 bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 rounded-xl p-4 text-center">
+                <p class="text-emerald-700 text-sm">
+                    🎉 已有 <span id="subscriberCount" class="font-semibold pulse">1</span>+ 位快手同学订阅AI洞察日报
+                </p>
+            </div>
+
             <!-- Footer -->
             <div class="mt-8 text-center text-gray-400 text-sm">
-                <p>Powered by 林克（沈浪的AI分身）</p>
+                <p>Powered by MyFlicker ❤️‍🔥（沈浪的AI工作伙伴）</p>
                 <p class="mt-1">
                     <a href="https://xiaoxiong20260206.github.io/ai-insight/" class="text-blue-600 hover:underline">查看往期日报</a>
                 </p>
@@ -119,290 +152,50 @@
         </div>
     </div>
 
-    <!-- Appwrite SDK via ESM -->
-    <script type="importmap">
-    {
-        "imports": {
-            "appwrite": "https://esm.sh/appwrite@18.0.0"
-        }
-    }
-    </script>
-    <script type="module">
-        import { Client, Databases, Query } from 'appwrite';
-
-        // Debug: 确认SDK加载
-        console.log('✅ Appwrite SDK loaded via ESM');
-        console.log('Client:', typeof Client);
-        console.log('Databases:', typeof Databases);
-
-        // Configuration
-        const APPWRITE_ENDPOINT = 'https://INTERNAL_SERVICE_ENDPOINT/v1';
-        const APPWRITE_PROJECT = 'INTERNAL_PROJECT_ID';
-        const DATABASE_ID = 'INTERNAL_DATABASE_ID';
-        const COLLECTION_ID = 'INTERNAL_COLLECTION_ID';
-
-        // Initialize Appwrite
-        let client, db;
-        try {
-            client = new Client();
-            client.setEndpoint(APPWRITE_ENDPOINT).setProject(APPWRITE_PROJECT);
-            db = new Databases(client);
-            console.log('✅ Appwrite initialized successfully');
-        } catch (e) {
-            console.error('❌ Appwrite init failed:', e);
-        }
-
-        // Elements
-        const authSection = document.getElementById('authSection');
-        const subscriptionSection = document.getElementById('subscriptionSection');
-        const employeeIdInput = document.getElementById('employeeId');
-        const subscribeBtn = document.getElementById('subscribeBtn');
-        const unsubscribeBtn = document.getElementById('unsubscribeBtn');
-        const usernameDisplay = document.getElementById('usernameDisplay');
-        const subscribedAtDisplay = document.getElementById('subscribedAtDisplay');
-        const statusBadge = document.getElementById('statusBadge');
-
-        // Get stored username
-        function getCurrentUsername() {
-            return localStorage.getItem('ai_insight_user');
-        }
-
-        // Save username
-        function saveUsername(username) {
-            localStorage.setItem('ai_insight_user', username);
-        }
-
-        // Show subscription section
-        function showSubscriptionSection(status) {
-            authSection.classList.add('hidden');
-            subscriptionSection.classList.remove('hidden');
-            
-            const username = getCurrentUsername();
-            usernameDisplay.textContent = username;
-            
-            if (status && status.subscribedAt) {
-                subscribedAtDisplay.textContent = new Date(status.subscribedAt).toLocaleDateString('zh-CN');
-            }
-            
-            updateStatusUI(status);
-        }
-
-        // Update status badge
-        function updateStatusUI(status) {
-            if (status && status.isActive) {
-                statusBadge.textContent = '已订阅';
-                statusBadge.className = 'px-4 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800';
-                unsubscribeBtn.textContent = '取消订阅';
-                unsubscribeBtn.className = 'w-full bg-gradient-to-r from-red-500 to-rose-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-red-600 hover:to-rose-700 transition-all shadow-lg';
-            } else {
-                statusBadge.textContent = '未订阅';
-                statusBadge.className = 'px-4 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800';
-                unsubscribeBtn.textContent = '重新订阅';
-                unsubscribeBtn.className = 'w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-green-600 hover:to-emerald-700 transition-all shadow-lg';
-            }
-        }
-
-        // Show auth section
-        function showAuthSection() {
-            authSection.classList.remove('hidden');
-            subscriptionSection.classList.add('hidden');
-            employeeIdInput.value = '';
-        }
-
-        // Check subscription status
-        async function checkSubscription(username) {
-            if (!username || !db) return null;
-            
-            console.log('🔍 Checking subscription for:', username);
-            
-            try {
-                const result = await db.listDocuments(
-                    DATABASE_ID,
-                    COLLECTION_ID,
-                    [
-                        Query.equal('username', username),
-                        Query.limit(1)
-                    ]
-                );
-                
-                console.log('📋 Query result:', result);
-                
-                if (result.documents && result.documents.length > 0) {
-                    const doc = result.documents[0];
-                    return {
-                        exists: true,
-                        isActive: doc.is_active,
-                        subscribedAt: doc.subscribed_at,
-                        documentId: doc.$id
-                    };
-                }
-                return { exists: false };
-            } catch (error) {
-                console.error('❌ Check subscription error:', error);
-                return { exists: false, error: error.message };
-            }
-        }
-
-        // Subscribe
-        async function subscribe(username) {
-            console.log('📝 Subscribing:', username);
-            
-            if (!db) {
-                showToast('❌', 'Appwrite未初始化');
-                return;
-            }
-            
-            try {
-                const status = await checkSubscription(username);
-                console.log('📊 Current status:', status);
-                
-                if (status.exists) {
-                    // Update existing document
-                    console.log('🔄 Updating existing document:', status.documentId);
-                    await db.updateDocument(
-                        DATABASE_ID,
-                        COLLECTION_ID,
-                        status.documentId,
-                        {
-                            is_active: true,
-                            subscribed_at: new Date().toISOString()
-                        }
-                    );
-                    showToast('✅', '订阅已更新！');
-                } else {
-                    // Create new document
-                    console.log('➕ Creating new document');
-                    await db.createDocument(
-                        DATABASE_ID,
-                        COLLECTION_ID,
-                        'unique()',
-                        {
-                            username: username,
-                            employee_name: username,
-                            subscribed_at: new Date().toISOString(),
-                            is_active: true,
-                            preferences: '{}'
-                        }
-                    );
-                    showToast('✅', '订阅成功！');
-                }
-                
-                saveUsername(username);
-                
-                const newStatus = await checkSubscription(username);
-                showSubscriptionSection(newStatus);
-                
-            } catch (error) {
-                console.error('❌ Subscribe error:', error);
-                showToast('❌', '订阅失败：' + error.message);
-            }
-        }
-
-        // Unsubscribe
-        async function unsubscribe() {
-            const username = getCurrentUsername();
-            if (!username) {
-                showToast('❌', '请先输入工号');
-                return;
-            }
-            
-            try {
-                const status = await checkSubscription(username);
-                
-                if (status.exists) {
-                    await db.updateDocument(
-                        DATABASE_ID,
-                        COLLECTION_ID,
-                        status.documentId,
-                        {
-                            is_active: false
-                        }
-                    );
-                    
-                    updateStatusUI({ isActive: false });
-                    showToast('✅', '已取消订阅');
-                }
-            } catch (error) {
-                console.error('❌ Unsubscribe error:', error);
-                showToast('❌', '操作失败：' + error.message);
-            }
-        }
-
+    <script>
         // Toast notification
         function showToast(icon, message) {
             const toast = document.getElementById('toast');
             const toastIcon = document.getElementById('toastIcon');
             const toastMessage = document.getElementById('toastMessage');
-
             toastIcon.textContent = icon;
             toastMessage.textContent = message;
-
             toast.classList.remove('translate-x-full');
-
-            setTimeout(() => {
-                toast.classList.add('translate-x-full');
-            }, 3000);
+            setTimeout(() => { toast.classList.add('translate-x-full'); }, 2500);
         }
 
-        // Event listeners
-        subscribeBtn.addEventListener('click', async () => {
-            console.log('🔘 Subscribe button clicked');
-            
-            const username = employeeIdInput.value.trim().toLowerCase();
-            
-            if (!username) {
-                showToast('⚠️', '请输入您的工号或邮箱');
+        // Copy commands
+        function copyCommand() {
+            navigator.clipboard.writeText('订阅AI日报').then(() => showToast('✅', '已复制订阅指令'));
+        }
+        function copyCustomCommand() {
+            const cmd = document.getElementById('customCommand').textContent;
+            navigator.clipboard.writeText(cmd).then(() => showToast('✅', '已复制自定义订阅指令'));
+        }
+        function copyCancelCommand() {
+            navigator.clipboard.writeText('取消订阅AI日报').then(() => showToast('✅', '已复制取消订阅指令'));
+        }
+
+        // Generate custom command
+        function generateCommand() {
+            const id = document.getElementById('employeeId').value.trim().toLowerCase();
+            if (!id) {
+                showToast('⚠️', '请输入您的快手工号');
                 return;
             }
-            
-            // Clean username
-            const cleanUsername = username.replace('@internal.company', '').trim();
-            
-            if (cleanUsername.length < 2) {
+            const cleanId = id.replace('@internal.company', '').trim();
+            if (cleanId.length < 2) {
                 showToast('⚠️', '请输入有效的工号');
                 return;
             }
-            
-            subscribeBtn.disabled = true;
-            subscribeBtn.textContent = '订阅中...';
-            
-            await subscribe(cleanUsername);
-            
-            subscribeBtn.disabled = false;
-            subscribeBtn.textContent = '立即订阅';
-        });
+            document.getElementById('customCommand').textContent = `订阅AI日报 工号:${cleanId}`;
+            document.getElementById('customCommandBox').classList.remove('hidden');
+        }
 
-        // Enter key
-        employeeIdInput.addEventListener('keypress', async (e) => {
-            if (e.key === 'Enter') {
-                console.log('⌨️ Enter pressed');
-                subscribeBtn.click();
-            }
+        // Enter key for employeeId
+        document.getElementById('employeeId').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') generateCommand();
         });
-
-        unsubscribeBtn.addEventListener('click', async () => {
-            console.log('🔘 Unsubscribe button clicked');
-            const currentStatus = await checkSubscription(getCurrentUsername());
-            
-            if (currentStatus.exists && currentStatus.isActive) {
-                await unsubscribe();
-            } else {
-                await subscribe(getCurrentUsername());
-            }
-        });
-
-        // Initialize - check if user already subscribed
-        (async function init() {
-            console.log('🚀 Initializing subscription page');
-            const username = getCurrentUsername();
-            if (username) {
-                console.log('👤 Found stored username:', username);
-                const status = await checkSubscription(username);
-                if (status.exists) {
-                    showSubscriptionSection(status);
-                }
-            }
-        })();
     </script>
 </body>
 </html>
