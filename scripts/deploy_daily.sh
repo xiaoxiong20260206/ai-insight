@@ -183,9 +183,9 @@ echo "📋 Step 2: 更新日报索引页"
 REPORT_INDEX="01-daily-reports/index.html"
 # 更新统计数字
 REPORT_COUNT=$(ls -1 01-daily-reports/$MONTH/*-v3.html 2>/dev/null | wc -l | tr -d ' ')
-sed -i '' "s|<div class=\"stat-value\">[0-9]*</div><div class=\"stat-label\">日报|<div class=\"stat-value\">$REPORT_COUNT</div><div class=\"stat-label\">日报|" "$REPORT_INDEX"
+sed -i "s|<div class=\"stat-value\">[0-9]*</div><div class=\"stat-label\">日报|<div class=\"stat-value\">$REPORT_COUNT</div><div class=\"stat-label\">日报|" "$REPORT_INDEX"
 # 更新最新日期
-sed -i '' "s|<div class=\"stat-value\">[0-9-]*</div><div class=\"stat-label\">最新|<div class=\"stat-value\">$DATE</div><div class=\"stat-label\">最新|" "$REPORT_INDEX"
+sed -i "s|<div class=\"stat-value\">[0-9-]*</div><div class=\"stat-label\">最新|<div class=\"stat-value\">$DATE</div><div class=\"stat-label\">最新|" "$REPORT_INDEX"
 echo "  ✅ 日报索引已更新 (共${REPORT_COUNT}篇)"
 
 # ===== 4. 更新主页 index.html =====
