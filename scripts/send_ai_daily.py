@@ -470,12 +470,7 @@ def build_card_v35(date_str: str, data: Dict) -> dict:
         })
         blocks.append({"blockId": "div_cap", "type": "divider"})
     
-    # 页脚和按钮
-    blocks.append({
-        "blockId": "footer",
-        "type": "content",
-        "text": {"type": "kimMd", "content": "*林克（沈浪的AI分身）· AI洞察*"},
-    })
+    # 按钮
     blocks.append({
         "blockId": "buttons",
         "type": "action",
