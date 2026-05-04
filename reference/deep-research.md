@@ -432,8 +432,8 @@ curl -s -o /dev/null -w "%{http_code}" \
 
 | 仓库 | 路径 | GitHub Pages | 职责 |
 |---|---|---|---|
-| `ai-insight.git` | `个人助理_V1/AI-Insight/` | `xiaoxiong20260206.github.io/ai-insight/` | 内部完整版（含林克字样） |
-| `ai-insight-public.git` | `个人助理_V1/ai-insight-public/` | `xiaoxiong20260206.github.io/ai-insight-public/` | 外部脱敏版（KIM卡片链接用这个） |
+| `ai-insight.git` | `workspace/user-skills/sl-ai-insight/` | `xiaoxiong20260206.github.io/ai-insight/` | 内部完整版（含林克字样） |
+| `ai-insight-public.git` | `workspace/user-skills/ai-insight-public/` | `xiaoxiong20260206.github.io/ai-insight-public/` | 外部脱敏版（KIM卡片链接用这个） |
 
 **Step 5.5 + Step 6 完成后必须同时提交两个仓库**：
 
