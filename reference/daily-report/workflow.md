@@ -416,8 +416,25 @@ config: `{"forward": true, "forwardType": 3, "wideSelfAdaptive": true}`, `update
 ### 推送范围说明
 | 类型 | 推送范围 | 备注 |
 |------|---------|------|
-| AI日报 | 私发给 shenlang | 订阅用户列表目前无法获取，跳过群发 |
+| AI日报 | shenlang + 所有活跃订阅者 | 读取 `data/subscribers.json`，逐一私发 MixCard |
 | AI周报 | 所有群 | 周报才群发 |
+
+### 订阅者推送流程（Step 5.5 — 日报专属）
+> 订阅数据存储在 `data/subscribers.json`，由 MyFlicker 通过 KIM 消息自动管理。
+
+```bash
+# 1. 读取订阅列表
+cat data/subscribers.json | python3 -c "
+import json, sys
+data = json.load(sys.stdin)
+active = [s for s in data['subscribers'] if s['is_active'] and s['username'] != 'shenlang']
+for s in active:
+    print(f'{s[\"username\"]}|{s.get(\"kwaiUserId\", \"\")}')
+"
+# 2. 对每个订阅者，使用 message 工具发送同一份 MixCard（复用 Step 5 生成的 card.json）
+#    message(channel="kim", target="username:XXX", kimMixCard=<card>, message=<summary>)
+# 3. 记录推送结果
+```
 
 ### ✅ Step 5 Checklist
 - [ ] 使用路径 A（统一生成器 build_insight_mixcard.py）
