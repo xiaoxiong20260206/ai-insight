@@ -114,8 +114,8 @@ def build_card(date_str: str, data: dict) -> dict:
             if focus_title:
                 lines.append(f"💡 **深度聚焦** — {focus_title}")
             if focus_summary:
-                if len(focus_summary) > 100:
-                    focus_summary = focus_summary[:100] + "..."
+                if len(focus_summary) > 200:
+                    focus_summary = focus_summary[:200] + "..."
                 lines.append(f"→ {focus_summary}")
             if takeaway:
                 lines.append(f"**关键判断**：{takeaway}")
