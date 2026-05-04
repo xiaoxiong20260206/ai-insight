@@ -376,32 +376,27 @@ git push origin main
 - ❌ **禁止重复发送**: 只需调用一次
 - ❌ **禁止纯文本推送**: 必须使用 mixCard 卡片，不得用普通 message 代替
 
-### 两种推送路径（二选一）
+### 推送路径（Work模式唯一路径）
 
-#### 路径 A（推荐）: mixCard 通过 message 工具发送
-**适用场景**: 运行环境没有 KIM_APP_KEY/SECRET_KEY，或通过 MyFlicker Agent 发送
+> ⚠️ **Work模式说明**: 运行环境无 KIM_APP_KEY/SECRET_KEY 环境变量，旧版直连 KIM API（路径B）**不可用**。必须使用路径 A。
+
+#### 路径 A（唯一可用）: mixCard 通过 message 工具发送
 
 ```bash
-# 1. 生成 mixCard JSON
-python3 scripts/build_daily_mixcard.py YYYY-MM-DD --output /tmp/card.json
+# 1. 生成 mixCard JSON（推荐用统一生成器）
+python3 scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/card.json --with-summary
 
-# 2. 读取 card.json 内容，作为 message 工具的 kimMixCard 参数
+# 2. 读取 card.json + summary，作为 message 工具的参数
 #    Agent 调用:
 #    message(
 #        channel="kim",
 #        target="username:shenlang",
-#        kimMixCard=<card.json 的 JSON 对象>,
-#        message="📡 AI 日报 YYYY-MM-DD | 海外X条 · 国内Y条 · 5板块全覆盖"
+#        kimMixCard=<card.json 中 card 字段的 JSON 对象>,
+#        message=<card.json 中 summary 字段>
 #    )
 ```
 
-#### 路径 B: 旧版直连 KIM API
-**适用场景**: 运行环境配置了 KIM_APP_KEY/SECRET_KEY
-
-```bash
-# 执行一次即可（--preview 与无参数效果相同，实际都私发给 shenlang）
-python3 scripts/send_ai_daily.py YYYY-MM-DD
-```
+> 旧版脚本 `build_daily_mixcard.py` 和 `send_ai_daily.py` 已被统一脚本 `build_insight_mixcard.py` 替代，不再推荐使用。
 
 ### ⚠️ 卡片结构锚定（两路径必须一致）
 卡片必须包含以下 blocks，顺序不得颠倒：
@@ -425,9 +420,8 @@ config: `{"forward": true, "forwardType": 3, "wideSelfAdaptive": true}`, `update
 | AI周报 | 所有群 | 周报才群发 |
 
 ### ✅ Step 5 Checklist
-- [ ] 选择路径 A 或 B（推荐 A，更稳定）
-- [ ] 路径 A：生成 mixCard JSON → 通过 message + kimMixCard 发送
-- [ ] 路径 B：执行 send_ai_daily.py（一次即可）
+- [ ] 使用路径 A（统一生成器 build_insight_mixcard.py）
+- [ ] 生成 mixCard JSON → 通过 message + kimMixCard 发送
 - [ ] 在 KIM 中确认收到卡片，**验证包含热度趋势+5板块+深度聚焦+林克自述+双按钮**
 - [ ] 标记完成：`python3 scripts/ai_daily_orchestrator.py complete --step 5`
 
