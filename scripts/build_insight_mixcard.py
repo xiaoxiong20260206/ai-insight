@@ -225,9 +225,10 @@ def build_weekly(week_id: str) -> dict:
             found = True
             break
 
-    # 提取 Top 5 和周度洞察
+    # 提取 Top 5、周度洞察、林克的洞察
     top5_text = ""
     insight_text = ""
+    link_insight_text = ""
     if found and content:
         top5_match = re.search(r"## .*Top 5.*?\n((?:[\s\S]*?))\n## ", content)
         if top5_match:
@@ -237,6 +238,12 @@ def build_weekly(week_id: str) -> dict:
         if insight_match:
             insight_text = insight_match.group(1).strip()
             insight_text = re.sub(r'\n---\s*$', '', insight_text)
+        # 林克的洞察 — 在周度洞察之后、日报索引之前
+        link_match = re.search(r"## 🔥 林克的洞察\n((?:[\s\S]*?))\n## ", content)
+        if not link_match:
+            link_match = re.search(r"## 🔥 林克的洞察\n((?:[\s\S]*?))(?:\n---|\n\*)", content)
+        if link_match:
+            link_insight_text = link_match.group(1).strip()
 
     if not top5_text:
         top5_text = "(周报尚未生成，请先生成周报后再推送)"
@@ -253,8 +260,10 @@ def build_weekly(week_id: str) -> dict:
         blocks.append(_divider("div1"))
         blocks.append(_content("insight", f"🔥 **周度洞察**\n\n{insight_text}"))
 
-    blocks.append(_divider("div_footer"))
-    blocks.append(_footer("周报"))
+    if link_insight_text:
+        blocks.append(_divider("div_link"))
+        blocks.append(_content("link_insight", f"🔥 **林克的洞察**\n\n{link_insight_text}"))
+
     blocks.append(_buttons("📄 查看完整周报 >>", weekly_url))
 
     return {"config": CARD_CONFIG, "updateMulti": 1, "blocks": blocks}
