@@ -560,8 +560,9 @@ def _agent_instruction(key: str, date: str, is_retry: bool) -> str:
         prefix = "重试" if is_retry else "执行"
         return (
             f"{prefix}KIM推送 ({date})。"
-            "先预览: python3 scripts/send_ai_daily.py --preview\n"
-            "确认后发群: python3 scripts/send_ai_daily.py\n"
+            "先预览: python3 scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/card.json --with-summary\n"
+            "预览: python3 scripts/build_insight_mixcard.py daily --date <DATE> --output /tmp/card.json --with-summary\n"
+            "然后读取 card.json，用 message(channel=kim, kimMixCard=<card>, ...) 发送\n"
             "完成后执行: python3 scripts/ai_daily_orchestrator.py complete --step 5"
         )
     return ""
@@ -659,7 +660,7 @@ def cmd_finalize(date: str) -> bool:
     _show_4_positions_summary(date)
 
     print(f"\n✅ Finalize 完成！下一步: KIM推送")
-    print(f"   python3 scripts/send_ai_daily.py --preview")
+    print(f"   python3 scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/card.json --with-summary")
     return True
 
 def _show_4_positions_summary(date: str) -> None:
@@ -861,20 +862,25 @@ def run_link_homepage_sync() -> bool:
 
 # ── 命令: push (Step 5) ──────────────────────────────────
 def cmd_push(date: str, preview_only: bool = True) -> bool:
-    """KIM推送（默认 preview_only=True，即私发给 shenlang，不发群）
-    AI 日报统一走 --preview 模式（私发）；如需群发需显式传入 preview_only=False。
+    """KIM推送（Work模式：生成 mixCard JSON，由 Agent 通过 message 工具发送）
+    旧版 send_ai_daily.py 需要 KIM_APP_KEY/SECRET_KEY，Work模式不可用。
+    新版流程：生成 mixCard JSON → Agent 读取并调用 message(kimMixCard=...) 发送。
     """
-    # 2026-04-02 修复：日报 Step5 统一私发（--preview），禁止默认群发
-    # 根因：之前 preview_only=False 导致直接群发，违反 Skill 规范
-    args = ["python3", str(SCRIPT_DIR / "send_ai_daily.py"), date, "--preview"]
+    # 生成 mixCard JSON 文件
+    card_path = PROJECT_DIR / "data" / f"card-{date}.json"
+    args = ["python3", str(SCRIPT_DIR / "build_insight_mixcard.py"), "daily",
+            "--date", date, "--output", str(card_path), "--with-summary"]
 
-    print(f"\n📤 KIM私发（--preview → shenlang）: {date}")
+    print(f"\n📤 生成 mixCard JSON: {date}")
     try:
         result = subprocess.run(
-            args, capture_output=True, text=True, timeout=120, cwd=str(PROJECT_DIR)
+            args, capture_output=True, text=True, timeout=30, cwd=str(PROJECT_DIR)
         )
         if result.returncode == 0:
             print(result.stdout[-300:] if len(result.stdout) > 300 else result.stdout)
+            print(f"\n  ⚠️ 下一步：读取 {card_path}，用 message(channel=kim, kimMixCard=<card>, ...) 发送")
+            mark_step(date, "push", "completed")
+            return True
             mark_step(date, "push", "completed")
             return True
         else:

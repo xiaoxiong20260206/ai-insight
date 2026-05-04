@@ -18,8 +18,8 @@ cp scripts/.env.template scripts/.env
 
 | 脚本 | 用途 | 使用方式 |
 |------|------|---------|
-| `send_ai_daily.py` | AI日报推送到KIM群 | `python3 scripts/send_ai_daily.py [日期] [--preview] [--dry-run]` |
-| `send_ai_weekly.py` | AI周报推送到KIM | `python3 scripts/send_ai_weekly.py [--preview] [--to-groups]` |
+| `build_insight_mixcard.py` | 统一mixCard生成器(日报/周报/调研/产品) | `python3 scripts/build_insight_mixcard.py daily --date YYYY-MM-DD` |
+| `send_ai_daily.py` ⚠️已废弃 | 日报KIM直连推送(需KIM凭证) | `python3 scripts/send_ai_daily.py [日期] --preview` |
 | `send_deep_research_card.py` | 深度调研专题推送 | `python3 scripts/send_deep_research_card.py [--preview] [--to-groups]` |
 | `send_openclaw_card.py` | OpenClaw深度洞察推送 | `python3 scripts/send_openclaw_card.py --to-user shenlang` |
 
@@ -43,7 +43,7 @@ cp scripts/.env.template scripts/.env
 | 脚本 | 用途 | 使用方式 |
 |------|------|---------|
 | `fix_deep_research_footers.py` | 深度调研报告底部统一修复 | `python3 scripts/fix_deep_research_footers.py` |
-| `kim_client.py` | KIM API 公共客户端模块 | (被其他脚本导入使用) |
+| `kim_client.py` ⚠️已废弃 | KIM API 公共客户端模块(需KIM凭证) | (被旧版脚本导入) |
 
 ### ⏰ 定时任务
 
@@ -58,7 +58,7 @@ cp scripts/.env.template scripts/.env
 ```
 MyFlicker cron (每日08:00)
   → workspace/user-skills/sl-ai-insight/scripts/run-ai-daily-report.sh  (统一入口)
-    → python3 send_ai_daily.py                 (推送)
+    → build_insight_mixcard.py + message工具     (推送)
 ```
 - 所有定时任务由 MyFlicker cron 统一管理（Work模式）
 - 日志输出到 workspace/user-skills/sl-ai-insight/data/logs/
@@ -86,11 +86,11 @@ pip install httpx
 ```
 scripts/
 ├── README.md                              # 本文件
-├── kim_client.py                          # KIM API 公共客户端模块
+├── kim_client.py                          # ⚠️已废弃 - KIM API 公共客户端模块
 ├── .env.template                          # 凭证配置模板
 ├── .env                                   # 实际凭证 (不入Git)
-├── send_ai_daily.py                       # 日报推送（持续迭代，支持JSON/MD双数据源）
-├── send_ai_weekly.py                      # 周报推送
+├── send_ai_daily.py                       # ⚠️已废弃 - 日报推送（需KIM凭证）
+├── send_ai_weekly.py                      # ⚠️已废弃 - 周报推送（需KIM凭证）
 ├── send_deep_research_card.py             # 深度调研推送
 ├── send_openclaw_card.py                  # OpenClaw推送
 ├── gen_daily_html.py                      # 日报HTML生成器
