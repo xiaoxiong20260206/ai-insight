@@ -167,12 +167,6 @@ def build_weekly_card(year: int, week_num: int, start_date, end_date, report_dat
         ])
 
     blocks.extend([
-        {"blockId": "div_footer", "type": "divider"},
-        {
-            "blockId": "footer",
-            "type": "content",
-            "text": {"type": "kimMd", "content": "*林克（沈浪的AI分身）· AI洞察 · 周报*"}
-        },
         {
             "blockId": "buttons",
             "type": "action",
