@@ -155,7 +155,7 @@ section_stats = {
 
 ### 文件路径
 ```
-../AI-Insight/01-daily-reports/YYYY-MM/
+01-daily-reports/YYYY-MM/
 ├── weekly-YYYY-WXX.md       # Markdown版本（先生成）
 └── weekly-YYYY-WXX.html    # HTML版本（必须生成，>50KB）
 ```
@@ -205,19 +205,19 @@ wc -c 01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html
 
 ---
 
-## Step 4: 执行 --preview（仅一次）
+## Step 4: 执行 --preview（仅一次，Work模式唯一路径）
+
+> ⚠️ **Work模式说明**: 运行环境无 KIM_APP_KEY/SECRET_KEY，旧版直连 KIM API（路径B）**不可用**。
 
 ```bash
-### 路径A（推荐）：mixCard 通过 message 工具
-```bash
-python3 scripts/build_insight_mixcard.py weekly --date YYYY-Www --output /tmp/card.json
-# 然后用 message(channel=kim, kimMixCard=<card>, ...) 发送
+# 生成 mixCard JSON（统一生成器）
+python3 scripts/build_insight_mixcard.py weekly --date YYYY-Www --output /tmp/card.json --with-summary
+# 然后读取 /tmp/card.json，用 message(channel=kim, kimMixCard=<card>, ...) 发送给 shenlang 预览
 ```
-
-### 路径B（旧版）：直连 KIM API
-```bash
-python3 scripts/send_ai_weekly.py YYYY-WXX --preview
-```
+> ⚠️ 旧版路径B（`send_ai_weekly.py --preview`）需要 KIM 凭证，Work 模式下不可用。如 Code 模式下有凭证可用：
+> ```bash
+> python3 scripts/send_ai_weekly.py YYYY-WXX --preview
+> ```
 
 **🔴 强制规则**：
 - **只执行一次**

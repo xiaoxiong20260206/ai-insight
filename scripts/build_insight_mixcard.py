@@ -210,10 +210,11 @@ def build_weekly(week_id: str) -> dict:
     sunday = monday + timedelta(days=6)
     date_range = f"{monday.strftime('%m/%d')}-{sunday.strftime('%m/%d')}"
 
-    # 查找周报文件
+    # 查找周报文件（动态搜索月目录，不硬编码月份）
     weekly_patterns = [
+        PROJECT_ROOT / "01-daily-reports" / monday.strftime("%Y-%m") / f"weekly-{year}-W{week_num:02d}.md",
+        PROJECT_ROOT / "01-daily-reports" / sunday.strftime("%Y-%m") / f"weekly-{year}-W{week_num:02d}.md",
         PROJECT_ROOT / "01-daily-reports" / f"weekly-{year}-W{week_num:02d}.md",
-        PROJECT_ROOT / "01-daily-reports" / "2026-04" / f"weekly-{year}-W{week_num:02d}.md",
     ]
 
     content = ""
@@ -248,10 +249,13 @@ def build_weekly(week_id: str) -> dict:
     if not top5_text:
         top5_text = "(周报尚未生成，请先生成周报后再推送)"
 
-    weekly_url = f"{REPORT_BASE_URL}/weekly-{year}-W{week_num:02d}.html"
+    # 周报 URL：使用周日的月份目录（周报通常存在周日所在月份）
+    month_str = sunday.strftime("%Y-%m")
+    weekly_url = f"{REPORT_BASE_URL}/{month_str}/weekly-{year}-W{week_num:02d}.html"
 
     blocks = [
         _content("header", f"# 📊 AI 周报（{year}年第{week_num}周，{date_range}）"),
+        _content("subtitle", f"📅 {date_range} | Top 5 事件 + 周度洞察 + 林克的洞察"),
         _divider("div0"),
         _content("top5", f"🏆 **Top 5 本周最重要**\n\n{top5_text}"),
     ]
@@ -264,6 +268,7 @@ def build_weekly(week_id: str) -> dict:
         blocks.append(_divider("div_link"))
         blocks.append(_content("link_insight", f"🔥 **林克的洞察**\n\n{link_insight_text}"))
 
+    blocks.append(_footer("周报"))
     blocks.append(_buttons("📄 查看完整周报 >>", weekly_url))
 
     return {"config": CARD_CONFIG, "updateMulti": 1, "blocks": blocks}
