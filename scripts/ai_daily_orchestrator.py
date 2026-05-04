@@ -815,7 +815,7 @@ def run_external_sync() -> bool:
             print(f"     输出: {result.stdout[-500:]}" if result.stdout else "")
             print(f"     错误: {result.stderr[-500:]}" if result.stderr else "")
             print("\n  💡 如果是仓库不存在，请先执行:")
-            print("     cd ~/Documents/Codeflicker/个人助理_V1")
+            print("     cd /data/aime/48b01692-87fe-48a1-860d-a6ab789801e6/workspace/user-skills/sl-ai-insight")
             print(f"     git clone {EXTERNAL_CLONE_URL} ai-insight-public")
             return False  # v9.5: 必须阻断，不能静默通过
     except Exception as e:
