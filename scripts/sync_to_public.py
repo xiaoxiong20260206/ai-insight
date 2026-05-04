@@ -146,7 +146,7 @@ REPLACEMENTS = _URL_REPLACEMENTS + [
     # ===== 外部版首页订阅按钮自动剥离（v10.4 经验62）=====
     # 外部版是公开页面，订阅功能需要内部认证，不提供此能力
     # 匹配 header 区域内订阅按钮 div（含 <a href="./subscribe/">）
-    (r'<div\s+style="margin-top:\s*24px;\s*text-align:\s*center;">\s*<a\s+href="./subscribe/"[^>]*>.*?</a>\s*</div>', ''),
+    (r'<div style="margin-top: 24px; text-align: center;">[\s\S]*?订阅AI日报[\s\S]*?</div>', ''),
 ]
 
 # 敏感词验证列表（脱敏后不应出现的词）

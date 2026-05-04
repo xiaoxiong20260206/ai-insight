@@ -205,3 +205,54 @@ python命令 → 确认用python3
 脚本报错 → 读错误信息→定位根因→尝试替代方案→最多3次
 质量门失败 → 回步骤重做，禁止绕过
 ```
+---
+
+## 18. Work模式唯一推送路径（v10.6 — 经验#102/#103/#105）
+
+**2026-05-04教训**: Work模式容器无KIM_APP_KEY/SECRET_KEY，旧版KIM直连脚本（send_ai_daily.py等）完全不可用。workflow写"二选一"导致Agent浪费时间尝试必失败的路径B。
+
+**强制规则**：
+```bash
+# Work模式唯一推送路径（禁止"二选一"误导）
+python3 scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/card.json --with-summary
+# 然后读取 card.json，用 message(channel=kim, kimMixCard=<card>) 发送
+
+# ❌ 禁止尝试 send_ai_daily.py（无凭证=必失败）
+# ❌ 禁止纯文本降级（丢失卡片结构）
+# ❌ 禁止维护多个 mixCard 生成脚本（唯一入口: build_insight_mixcard.py）
+```
+
+**废弃脚本清单**（已归档 `_archive/deprecated-work-mode/`）：
+- send_ai_daily.py, send_ai_weekly.py, send_*_card.py（6个KIM直连推送脚本）
+- build_daily_mixcard.py（被build_insight_mixcard.py替代）
+- kim_client.py, subscription_api.py, subscription_manager.py（需KIM凭证）
+- com.cf.*.plist, run-ai-*-report.sh（macOS launchd配置）
+
+---
+
+## 19. mixCard卡片结构锚定（v10.6 — 经验#98/#99/#100/#101）
+
+**2026-05-04教训**: 周报卡片缺footer/subtitle，URL指向错误路径404，文件查找硬编码月份找不到。
+
+**强制规则**：
+```
+卡片结构锚定（所有场景 daily/weekly/research/product 必须遵守）：
+1. header    — 标题（日期/周号）
+2. subtitle  — 概览行（条数/板块覆盖/关键词）
+3. content   — 各内容block（sec1-5 / top5 / insight等）
+4. footer    — 签名行 "*林克（沈浪的AI分身）· AI洞察 · XX*"
+5. buttons   — 双按钮（查看完整内容 + 了解AI洞察项目）
+6. 各block之间用 divider 分隔
+
+缺失任何一项 = 阻断，禁止推送
+```
+
+**URL验证规则**：
+- 按钮 URL 必须与实际文件路径一致
+- 周报 URL 使用月份目录路径（非扁平路径）
+- 生成后必须 `curl -I` 验证 HTTP 200
+
+**深度聚焦截断规则**：
+- summary 截断上限 ≥ 200字（100字只保留30%内容，不可接受）
+- takeaway（关键判断）永远不截断
+- 周报文件查找必须动态计算月份（禁止硬编码）
