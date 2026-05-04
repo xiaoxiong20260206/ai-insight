@@ -619,6 +619,16 @@ python3 scripts/fetch_arxiv.py --days 1 --json --output data/arxiv-daily.json
 | **59** | **⭐三版首页卡片各自独立，无一自动同步(2026-04-25)** | **Step 6 在 AI-Insight/index.html 新增卡片后，public/index.html 和 ai-insight-public/index.html 均不会自动更新。根因：sync_to_public.py 有 preserve_block 机制保留公开版深度调研区块（新卡片不传播），ai-insight-public 是独立仓库也不会自动跟随。修复：Step 5.5 新增四端首页卡片门控检查——用 grep 验证三份 index.html 均包含新报告 slug，缺一不可** |
 | **60** | **⭐微信搜狗占位符链接不可达(2026-04-27)** | **Subagent在微信搜索API返回空时，生成了`weixin.sogou.com/weixin?type=2&query=...`格式的搜索链接作为占位符。但这些是搜索页面链接，不是文章链接，预检判定为不可达。根因：Subagent未正确处理微信API空结果。修复：将搜狗搜索链接替换为空URL（source标注微信即可）。与#34不同：#34是搜索策略问题，本次是占位符格式问题** |
 | **61** | **⭐KIM日报推送退化为纯文本(2026-04-29)** | **容器重建后 KIM_APP_KEY/SECRET_KEY 丢失，send_ai_daily.py 无法直连 KIM API。Agent 退而求其次用 message 工具发了纯文本消息，但纯文本丢失了卡片结构（热度趋势/5板块/深度聚焦/林克自述/双按钮）。根因：没有 mixCard 降级路径，缺少"必须用卡片"的硬约束。修复：统一入口改为 `scripts/build_insight_mixcard.py`（日报/周报/调研/产品），Work模式唯一路径A: message+kimMixCard，路径B(KIM直连)已废弃；新增 P0 红线禁止纯文本推送** |
+
+| **97** | **⭐Work模式路径迁移：rebase覆盖修复(2026-05-04)** | **从Code模式切到Work模式后，13文件旧路径引用修复。git rebase解决冲突时选了origin/main版本，3个文件（SKILL.md/deep-research.md/orchestrator.py）修复被回退。修复：rebase后必须二次验证全部修改未被覆盖；技能目录升级为完整git仓库；旧仓库删除** |
+| **98** | **⭐周报mixCard缺footer/subtitle→卡片不完整(2026-05-04)** | **build_insight_mixcard.py build_weekly()遗漏footer和subtitle block。日报有完整结构但周报只有header+top5+insight+buttons。修复：所有卡片必须包含header→subtitle→content→footer→buttons完整结构，缺一=阻断** |
+| **99** | **⭐周报卡片URL指向扁平路径→404(2026-05-04)** | **weekly_url用扁平路径01-daily-reports/weekly-2026-W18.html，但实际文件在01-daily-reports/2026-05/。修复：URL改为使用周日月份目录；生成后必须验证HTTP 200** |
+| **100** | **⭐周报文件查找硬编码月份→后续周报找不到(2026-05-04)** | **weekly_patterns只搜索2026-04目录，W18在2026-05/找不到。修复：改为按周一/周日月份动态搜索，保留根目录fallback** |
+| **101** | **⭐深度聚焦截断100字→只保留30%内容(2026-05-04)** | **summary截断上限100字符，实际内容269-347字，只保留约30%。关键论证被砍。修复：截断上限100→200字，takeaway永远不截断** |
+| **102** | **⭐Work模式无KIM凭证→路径B误导(2026-05-04)** | **workflow写二选一但路径B(KIM直连)需凭证，Work模式无凭证=路径B必失败。Agent浪费时间试错。修复：标注Work模式唯一路径A；6个KIM直连脚本归档；全量文档标注⚠️已废弃** |
+| **103** | **⭐两套mixcard脚本并存→改错文件(2026-05-04)** | **build_daily_mixcard.py和build_insight_mixcard.py功能重叠。与#94同根因。修复：build_daily_mixcard归档，build_insight_mixcard成为唯一入口；15个Work模式无用脚本全部归档** |
+| **104** | **⭐deploy_daily.sh sed -i '' macOS语法→Linux报错(2026-05-04)** | **sed -i ''是macOS语法，Linux要求sed -i。修复：sed -i ''→sed -i** |
+| **105** | **⭐orchestrator cmd_push调用已废弃脚本(2026-05-04)** | **cmd_push()调用send_ai_daily.py --preview，该脚本已归档。修复：改为调用build_insight_mixcard.py生成mixCard JSON；废弃脚本时必须同步更新所有引用方** |
 | **62** | **⭐外部版订阅按钮每次需手动删除(2026-05-04)** | **用户要求去掉外部版首页订阅按钮，手动编辑了 index.html 并 push。但每次 sync_to_public 同步时，内部版首页的订阅按钮会被带到外部版，下次又得手动删。根因：脱敏脚本只处理敏感词替换，不处理结构性内容差异（如订阅按钮这种"内部版有、外部版不该有"的区块）。修复：sync_to_public.py REPLACEMENTS 新增正则规则，自动删除 header 区域内订阅按钮 div，从"人工手动"升级为"脚本自动化"** |
 
 完整分析详见 `references/lessons-learned.md`
