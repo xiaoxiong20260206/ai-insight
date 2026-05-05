@@ -375,6 +375,7 @@ git push origin main
 - ❌ **禁止简化卡片**: 不得省略热度趋势、深度聚焦、林克自述、双按钮
 - ❌ **禁止重复发送**: 只需调用一次
 - ❌ **禁止纯文本推送**: 必须使用 mixCard 卡片，不得用普通 message 代替
+- ❌ **禁止日报群发**: 日报只私发给订阅者，群发是周报的权限
 
 ### 推送路径（Work模式唯一路径）
 
@@ -413,11 +414,19 @@ python3 scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/c
 
 config: `{"forward": true, "forwardType": 3, "wideSelfAdaptive": true}`, `updateMulti: 1`
 
-### 推送范围说明
+### 推送范围说明（⛔P0 — 日报严禁群发）
+
+> **2026-05-05教训**: 日报被错误群发到3个群，违反"日报只私发、周报才群发"的基本规则。根因：周报推送刚做完群发操作，切换到日报时惯性沿用群发逻辑。
+
 | 类型 | 推送范围 | 备注 |
 |------|---------|------|
-| AI日报 | shenlang + 所有活跃订阅者 | 读取 `data/subscribers.json`，逐一私发 MixCard |
+| **AI日报** | **shenlang + 所有活跃订阅者** | **逐一私发 MixCard，⛔严禁群发** |
 | AI周报 | 所有群 | 周报才群发 |
+
+**⛔ P0红线: 日报只私发，绝不群发**
+- 日报目标受众是订阅者个体，不是群聊
+- 任何情况下日报推送都只走私聊（`target="username:XXX"`）
+- 群发日报 = P0违规，即使内容完整也是错的
 
 ### 订阅者推送流程（Step 5.5 — 日报专属）
 > 订阅数据存储在 `data/subscribers.json`，由 MyFlicker 通过 KIM 消息自动管理。
@@ -466,7 +475,7 @@ for s in active:
 | 质量验证 | ✅ 19项检查通过 |
 | HTML生成 | ✅ MD+HTML+JSON |
 | 部署更新 | ✅ 6处联动完成 |
-| KIM推送 | ✅ 预览确认 → 正式发群 |
+| KIM推送 | ✅ 私发shenlang+订阅者（日报不群发） |
 | Git提交 | ✅ 已push |
 
 📄 日报: https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/YYYY-MM/YYYY-MM-DD.html

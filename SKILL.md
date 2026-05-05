@@ -259,7 +259,7 @@ python3 scripts/ai_daily_orchestrator.py finalize --date 2026-03-15
 - **微信覆盖(v6.0)**: ≥2条直接引用微信文章（URL用公开转载或搜狗搜索URL，禁止mp.weixin临时链接），双轨搜索（账号+话题）
 - **小红书(v9.8)**: 默认不搜索，仅当用户明确要求时才执行
 - **6处联动**: MD+HTML+跳转页+索引+首页+JSON
-- **推送范围**: 日报仅发2个群（CF项目群 + 研发效能中心全员群），周报发所有群
+- **推送范围**: ⛔**日报只私发shenlang+订阅者，严禁群发。周报才群发所有群**
 
 ### 详细文档
 - 执行流程: `references/daily-report/workflow.md`
@@ -629,7 +629,8 @@ python3 scripts/fetch_arxiv.py --days 1 --json --output data/arxiv-daily.json
 | **103** | **⭐两套mixcard脚本并存→改错文件(2026-05-04)** | **build_daily_mixcard.py和build_insight_mixcard.py功能重叠。与#94同根因。修复：build_daily_mixcard归档，build_insight_mixcard成为唯一入口；15个Work模式无用脚本全部归档** |
 | **104** | **⭐deploy_daily.sh sed -i '' macOS语法→Linux报错(2026-05-04)** | **sed -i ''是macOS语法，Linux要求sed -i。修复：sed -i ''→sed -i** |
 | **105** | **⭐orchestrator cmd_push调用已废弃脚本(2026-05-04)** | **cmd_push()调用send_ai_daily.py --preview，该脚本已归档。修复：改为调用build_insight_mixcard.py生成mixCard JSON；废弃脚本时必须同步更新所有引用方** |
-| **62** | **⭐外部版订阅按钮每次需手动删除(2026-05-04)** | **用户要求去掉外部版首页订阅按钮，手动编辑了 index.html 并 push。但每次 sync_to_public 同步时，内部版首页的订阅按钮会被带到外部版，下次又得手动删。根因：脱敏脚本只处理敏感词替换，不处理结构性内容差异（如订阅按钮这种"内部版有、外部版不该有"的区块）。修复：sync_to_public.py REPLACEMENTS 新增正则规则，自动删除 header 区域内订阅按钮 div，从"人工手动"升级为"脚本自动化"** |
+| **62** | **⭐外部版订阅按钮每次需手动删除(2026-05-04)** | **sync脚本新增正则自动删除，不再手动** |
+| **111** | **⭐日报误群发(2026-05-05)** | **日报只私发订阅者，周报才群发。刚做完周报群发后切日报惯性沿用=最危险模式** |
 
 完整分析详见 `references/lessons-learned.md`
 
