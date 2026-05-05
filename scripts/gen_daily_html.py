@@ -128,17 +128,30 @@ def render_news_item(item: dict) -> str:
                 </div>'''
 
 
-def render_section(section: dict) -> str:
-    """渲染一个板块的所有新闻"""
+def render_section(section) -> str:
+    """渲染一个板块的所有新闻（兼容 {overseas:[], china:[]} 和 flat list 两种格式）"""
     parts = []
-    if section.get("overseas"):
-        parts.append('                <div class="sub-header">🌏 海外</div>')
-        for item in section["overseas"]:
-            parts.append(render_news_item(item))
-    if section.get("china"):
-        parts.append('                <div class="sub-header">🇨🇳 国内</div>')
-        for item in section["china"]:
-            parts.append(render_news_item(item))
+    if isinstance(section, list):
+        # 扁平列表格式，按 region 分组
+        overseas = [item for item in section if item.get("region") != "china"]
+        china = [item for item in section if item.get("region") == "china"]
+        if overseas:
+            parts.append('                <div class="sub-header">🌏 海外</div>')
+            for item in overseas:
+                parts.append(render_news_item(item))
+        if china:
+            parts.append('                <div class="sub-header">🇨🇳 国内</div>')
+            for item in china:
+                parts.append(render_news_item(item))
+    elif isinstance(section, dict):
+        if section.get("overseas"):
+            parts.append('                <div class="sub-header">🌏 海外</div>')
+            for item in section["overseas"]:
+                parts.append(render_news_item(item))
+        if section.get("china"):
+            parts.append('                <div class="sub-header">🇨🇳 国内</div>')
+            for item in section["china"]:
+                parts.append(render_news_item(item))
     return "\n".join(parts)
 
 
@@ -284,7 +297,7 @@ def render_capability_update(text: str) -> str:
 
 def render_data_table(data: list) -> str:
     rows = "\n".join(
-        f'                    <tr><td>{d["metric"]}</td><td><strong>{d["value"]}</strong></td><td>{d["note"]}</td></tr>'
+        f'                    <tr><td>{d["metric"]}</td><td><strong>{d["value"]}</strong></td><td>{d.get("note", d.get("context", ""))}</td></tr>'
         for d in data
     )
     return f'''
@@ -419,12 +432,17 @@ def generate_html(data: dict) -> str:
     # 概览卡片
     overview_items = []
     for ov in data.get("overview", []):
+        # 兼容两种schema: {icon,label,headline,text} 和 {tab,emoji,summary}
+        icon = ov.get('icon', ov.get('emoji', '📌'))
+        label = ov.get('label', ov.get('tab', ''))
+        headline = ov.get('headline', '')
+        text = ov.get('text', ov.get('summary', ''))
         span = ' style="grid-column: span 2;"' if ov.get("span2") else ""
         label_class = f' class="{ov["label_class"]}"' if ov.get("label_class") else ""
         overview_items.append(f'''                <div class="overview-item animate-on-scroll"{span}>
-                    <div class="overview-item-header"><span class="overview-item-icon">{ov['icon']}</span><span class="overview-item-label"{label_class}>{ov['label']}</span></div>
-                    <div class="overview-headline">{ov['headline']}</div>
-                    <div class="overview-item-text">{ov['text']}</div>
+                    <div class="overview-item-header"><span class="overview-item-icon">{icon}</span><span class="overview-item-label"{label_class}>{label}</span></div>
+                    <div class="overview-headline">{headline}</div>
+                    <div class="overview-item-text">{text}</div>
                 </div>''')
 
     # 五大板块 Sections — 从 Tab 改为锚点 Section
@@ -446,7 +464,11 @@ def generate_html(data: dict) -> str:
     for i, (icon, name, tid) in enumerate(tab_defs):
         if i < len(tabs):
             news = tabs[i].get("news", {})
-            count = len(news.get("overseas", [])) + len(news.get("china", []))
+            # 兼容两种schema: {overseas:[], china:[]} 或 flat list
+            if isinstance(news, list):
+                count = len(news)
+            else:
+                count = len(news.get("overseas", [])) + len(news.get("china", []))
             if count == 0:
                 empty_tabs.append(name)
         else:
