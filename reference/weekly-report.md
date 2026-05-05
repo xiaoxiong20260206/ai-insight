@@ -1,8 +1,8 @@
 # AI周报生成完整流程 (v2.2 硬性门控版)
 
-> **版本**: v3.0 (Work模式唯一推送路径 + mixCard结构锚定 + footer/subtitle补全 + URL月份目录 + 文件动态查找)
-> **更新时间**: 2026-04-27
-> **变更说明**: v2.2 新增：(1) --preview 脚本自动级联 sync+push 说明；(2) HTML不足50KB时的内容补充策略；(3) 踩坑 #81 记录
+> **版本**: v3.1 (MixCard推送P0红线 + 卡片结构≠MD全文 + fail loud原则 + space:groupId格式 + 踩坑#106-#110)
+> **更新时间**: 2026-05-05
+> **变更说明**: v3.1 新增：(1) MixCard推送7条P0红线（#106-#110教训）；(2) 卡片内容结构与MD全文分离原则；(3) 群发必须space:前缀；(4) 禁止手动构造JSON；(5) 禁止传message字段；(6) fail loud原则
 
 ---
 
@@ -291,31 +291,50 @@ python3 scripts/build_insight_mixcard.py weekly --date YYYY-Www --output /tmp/ca
 
 如果用户只要求发送某个群：
 
-**Step 6.1**: 确认群信息
-```
-群名：【L5项目】研发线AI-Ready
-群ID：6646213728505891
-```
-
-**Step 6.2**: 用 dry-run 测试
+**Step 6.1**: 用脚本生成 MixCard JSON
 ```bash
-# 测试: 确认卡片内容正确后再逐群发送
+python3 scripts/build_insight_mixcard.py weekly --date YYYY-Www --output /tmp/card.json
 ```
 
-**Step 6.3**: 确认参数正确后，执行发送
-```bash
-message(channel=kim, target=群ID, kimMixCard=<card>, ...)  # 发送到指定群
+**Step 6.2**: 读取 JSON，逐群发送
+
+> 🔴 **MixCard 推送 P0 红线（#106-#110 教训汇总）**：
+>
+> 1. **target 格式**：群聊必须用 `target: "space:<groupId>"`，禁止直接传 groupId 数字
+> 2. **禁止手动构造 kimMixCard JSON**：必须用脚本生成文件 → `read` 读取 → 传入 `kimMixCard` 参数。手动内联 = 格式错 = 空卡片
+> 3. **不传 `message` 字段**：发 MixCard 时只传 `kimMixCard` + `target` + `channel`，不传 `message`（否则会泄露为卡片顶部/底部额外文案，或触发 `{{message}}` 占位符泄露）
+> 4. **卡片内容结构 ≠ MD 全文**：Top 5 卡片版 = 标题 + 影响一句话 + 1条核心链接（禁止3段正文+3条来源全搬进卡片）；洞察卡片版 = 一句话结论 + 1条支撑链接
+> 5. **卡片必须以"本周关键词"定调句开头**，30秒入口不可省
+> 6. **林克洞察独立提取**，确保不被正则截断
+> 7. **找不到源文件时报错退出**，禁止静默降级为空内容兜底卡片（空卡片比报错更危险）
+
+```python
+# 示例：逐群发送（伪代码，Agent 实际用 message 工具）
+import json
+with open("/tmp/card.json") as f:
+    card = json.load(f)
+
+groups = [
+    ("研发效能中心全员群", "space:3705455482343722"),
+    ("【AI生产力】MyFlicker产研", "space:6724050835415361"),
+    ("【L5项目】研发线AI-Ready", "space:6646213728505891"),
+]
+for name, target in groups:
+    message(channel="kim", target=target, kimMixCard=card)
+    # 注意：不传 message 参数！
 ```
 
-**Step 6.4**: 如果API返回错误
+**Step 6.3**: 如果 API 返回错误
 - ❌ **不要立即重试**
 - ✅ 去群里确认是否已收到
 - ✅ 如果已收到，向用户报告"已发送"
 - ✅ 如果未收到，再考虑重试
 
 ### 禁止行为
-- ❌ 禁止API错误后立即重试（会导致重复发送）
-- ❌ 禁止用Python内联代码发送（必须用脚本）
+- ❌ 禁止 API 错误后立即重试（会导致重复发送）
+- ❌ 禁止手动内联编写 kimMixCard JSON（必须用脚本生成文件）
+- ❌ 禁止发 MixCard 时传 `message` 字段（会导致 `{{message}}` 泄露或额外文案）
+- ❌ 禁止用 `target: "<groupId>"` 发群（必须 `target: "space:<groupId>"`）
 
 ### ✅ Step 6 退出条件
 
@@ -432,6 +451,11 @@ echo "④ 外部仓库周报: $([ -f "../ai-insight-public/01-daily-reports/$MON
 | 79 | 日报索引缺失 | Step 2 完整性检查 |
 | 80 | 执行前未召回踩坑 | Step -1 强制召回 |
 | 81 | preview后重复sync | --preview 已自动完成 sync+push，Step 7 只需验证不需重跑 |
+| 106 | MixCard {{message}} 占位符泄露为明文 | 发 MixCard 时不传 message 字段；卡片 kimMd 内容中禁止 {{message}} 占位符 |
+| 107 | 群发用 groupId 直传 vs space:前缀格式不一致 | KIM 发群必须用 `target: "space:<groupId>"`，禁止直接传 groupId |
+| 108 | 手动构造 kimMixCard JSON 对象格式错误 | 禁止手动内联编写，必须用脚本生成文件 → read → 传入 |
+| 109 | PROJECT_ROOT 指向错误目录 → 找不到文件 → 空内容兜底卡片 | 动态检测项目根目录（检查 01-daily-reports/），找不到文件报错退出而非静默兜底 |
+| 110 | 卡片内容直接复用 MD 全文 → 10屏纯文本无锚点 | 卡片版结论先行+精简有锚；Top5=标题+1句话+1链接；洞察=结论+1链接 |
 
 ---
 
