@@ -123,9 +123,21 @@ def build_daily(date_str: str) -> dict:
         name = section_names[i]
         icon = section_icons[i]
         news_data = tab.get("news", {}) or {}
-        overseas_news = news_data.get("overseas", []) or []
-        china_news = news_data.get("china", []) or []
+        # 兼容两种schema: {overseas:[], china:[]} 或 flat list
+        if isinstance(news_data, list):
+            overseas_news = [n for n in news_data if n.get("region") != "china"]
+            china_news = [n for n in news_data if n.get("region") == "china"]
+        else:
+            overseas_news = news_data.get("overseas", []) or []
+            china_news = news_data.get("china", []) or []
         focus = tab.get("deep_focus") or tab.get("focus") or {}
+        # 扁平列表模式下，从新闻项中提取第一个有 deep_focus 的
+        if not focus and isinstance(news_data, list):
+            for n in news_data:
+                df = n.get("deep_focus")
+                if df:
+                    focus = df
+                    break
         if isinstance(focus, str):
             focus = {"summary": focus}
 
@@ -149,7 +161,7 @@ def build_daily(date_str: str) -> dict:
         focus_summary = focus.get("summary", "")
         if not focus_summary and focus.get("paragraphs"):
             focus_summary = " ".join(focus["paragraphs"])
-        takeaway = focus.get("takeaway", "")
+        takeaway = focus.get("takeaway", "") or focus.get("key_takeaway", "")
 
         if focus_title or focus_summary:
             lines.append("")
