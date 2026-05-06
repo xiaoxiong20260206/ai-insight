@@ -1,7 +1,7 @@
 {
   "coverage": {
-    "overseas": 9,
-    "china": 4
+    "overseas": 11,
+    "china": 5
   },
   "overview": [
     {
@@ -67,206 +67,222 @@
   "tabs": [
     {
       "id": "llm",
-      "title": "大模型",
-      "emoji": "🧠",
-      "news": [
-        {
-          "title": "白宫拟推AI模型发布前审查，监管风向突变",
-          "summary": "据NYT和Reuters报道，特朗普政府正讨论通过行政命令建立AI工作组，探索新模型发布前的政府审查流程。此举直接由Anthropic Mythos的网络攻击能力引发，安全专家警告该模型可能显著提升代码级漏洞发现的速度和复杂度。白宫官员称相关讨论为推测，但方向与此前撤销拜登AI安全令形成鲜明反转。AI安全团体同时向欧盟委员会指出其AI办公室缺乏Mythos访问权限和评估能力。",
-          "source": "Reuters / NYT",
-          "region": "overseas",
-          "url": "https://www.reuters.com/world/white-house-considers-vetting-ai-models-before-they-are-released-nyt-reports-2026-05-04/",
-          "deep_focus": {
-            "title": "从放开搞到先审后放：AI监管的逻辑拐点",
-            "summary": "白宫审查动议的深层逻辑不是安全理想主义回归，而是能力事实倒逼。Anthropic Mythos的网络安全能力让监管者意识到，当AI模型可以自主发现并利用代码漏洞时，传统先发布后治理框架已经失灵。这标志着AI监管从伦理风险转向能力风险的范式转换。值得关注的是，英国AI安全研究所已在Mythos发布一周内完成技术分析，而欧盟AI办公室承认缺乏评估能力——这意味着监管能力的差距正在成为新的地缘政治变量。对开发者而言，发布前审查若成真，将直接影响模型的上市周期和迭代节奏。",
-            "key_takeaway": "AI监管焦点从伦理偏见转向能力风险，模型发布前审查可能成为新常态"
+      "title": "🧠 大模型",
+      "news": {
+        "overseas": [
+          {
+            "title": "白宫拟推AI模型发布前审查，监管风向突变",
+            "url": "https://www.reuters.com/world/white-house-considers-vetting-ai-models-before-they-are-released-nyt-reports-2026-05-04/",
+            "source": "Reuters / NYT",
+            "summary": "据NYT和Reuters报道，特朗普政府正讨论通过行政命令建立AI工作组，探索新模型发布前的政府审查流程。此举直接由Anthropic Mythos的网络攻击能力引发，安全专家警告该模型可能显著提升代码级漏洞发现的速度和复杂度。白宫官员称相关讨论为推测，但方向与此前撤销拜登AI安全令形成鲜明反转。AI安全团体同时向欧盟委员会指出其AI办公室缺乏Mythos访问权限和评估能力。",
+            "importance": "🟡"
+          },
+          {
+            "title": "Centaur模型发布：用1000万人类决策训练AI模拟人类推理",
+            "url": "https://www.ibm.com/think/news/ai-model-wants-to-understand-your-mind",
+            "source": "IBM Think",
+            "summary": "IBM与Helmholtz Munich联合发布Centaur AI模型，基于Meta Llama 3.1训练，使用来自160项心理学研究的超1000万个人类决策数据。该模型能处理逻辑问题、道德困境和日常选择，旨在揭示人类思维模式。研究负责人Marcel Binz表示，Centaur的行为足够像人，能发现传统模型可能遗漏的洞察，被视为理解人类认知的新工具。",
+            "importance": "🟡"
           }
-        },
-        {
-          "title": "Centaur模型发布：用1000万人类决策训练AI模拟人类推理",
-          "summary": "IBM与Helmholtz Munich联合发布Centaur AI模型，基于Meta Llama 3.1训练，使用来自160项心理学研究的超1000万个人类决策数据。该模型能处理逻辑问题、道德困境和日常选择，旨在揭示人类思维模式。研究负责人Marcel Binz表示，Centaur的行为足够像人，能发现传统模型可能遗漏的洞察，被视为理解人类认知的新工具。",
-          "source": "IBM Think",
-          "region": "overseas",
-          "url": "https://www.ibm.com/think/news/ai-model-wants-to-understand-your-mind",
-          "deep_focus": {
-            "title": "当AI开始读心：心理学驱动的模型新范式",
-            "summary": "Centaur代表了大模型发展的一个新方向：不是让模型更聪明，而是让模型更像人。与主流模型追求通用智能不同，Centaur聚焦于认知科学的交叉应用，用人类真实决策数据替代纯文本训练。这种心理学对齐路径如果成功，可能催生一批专注模拟人类特定认知模式的专用模型——对产品设计、用户研究、行为预测等领域有直接应用价值。但核心问题是：模拟人类推理的模型，是否也会继承人类的认知偏差？",
-            "key_takeaway": "心理学驱动的大模型开辟了像人而非比人强的新竞争维度"
+        ],
+        "china": [
+          {
+            "title": "GLM-5.1发布：国产开源模型编程能力首超Claude Opus 4.6",
+            "url": "https://www.ithome.com/0/936/851.htm",
+            "source": "IT之家 / 钛媒体",
+            "summary": "智谱AI发布GLM-5.1开源模型，SWE-Bench Pro得分58.4，首次以国产开源身份超越Claude Opus 4.6（57.3分）和GPT-5.4（57.7分）。该模型支持8小时持续自主工作，完成655轮迭代和6000+次工具调用。发布当天腾讯、百度、字节等Day0适配，国产芯片厂商集体完成推理适配。智谱同步提价10%，年内累计提价83%，但调用量反增400%。",
+            "importance": "🔴"
           }
-        },
-        {
-          "title": "GLM-5.1发布：国产开源模型编程能力首超Claude Opus 4.6",
-          "summary": "智谱AI发布GLM-5.1开源模型，SWE-Bench Pro得分58.4，首次以国产开源身份超越Claude Opus 4.6（57.3分）和GPT-5.4（57.7分）。该模型支持8小时持续自主工作，完成655轮迭代和6000+次工具调用。发布当天腾讯、百度、字节等Day0适配，国产芯片厂商集体完成推理适配。智谱同步提价10%，年内累计提价83%，但调用量反增400%。",
-          "source": "IT之家 / 钛媒体",
-          "region": "china",
-          "url": "https://www.ithome.com/0/936/851.htm",
-          "deep_focus": {
-            "title": "偏科生的突围：GLM-5.1登顶背后的代价与信号",
-            "summary": "GLM-5.1在编程场景的突破是真实的，但代价同样明显——医疗掉24名、法律掉6名，能力分布极不均匀。更关键的信号是：同一天Anthropic推出Mythos Preview在SWE-Bench Pro拿到77.8分，领先GLM-5.1近20分，说明行业天花板远未被触及。但智谱的提价策略值得关注——年内提价83%调用量反增400%，证明中国企业用户对能力溢价有一定接受度，这为国产模型的商业化路径提供了新的数据支撑。",
-            "key_takeaway": "国产模型在特定场景已能和全球顶尖同台，但同台竞技与赢下市场之间仍无路标"
-          }
-        }
-      ]
+        ]
+      },
+      "deep_focus": {
+        "title": "从放开搞到先审后放：AI监管的逻辑拐点",
+        "paragraphs": [
+          "白宫审查动议的深层逻辑不是安全理想主义回归，而是能力事实倒逼。Anthropic Mythos的网络安全能力让监管者意识到，当AI模型可以自主发现并利用代码漏洞时，行业自律已不足以应对系统性风险。",
+          "GLM-5.1在编程场景的突破是真实的，但代价同样明显——医疗掉24名、法律掉6名，能力分布极不均匀。更关键的信号是：同一天Anthropic推出Mythos闭源能力，这意味着编程能力的突破正在引发能力越大、约束越严的监管正反馈。",
+          "Centaur模型代表了大模型发展的另一个方向：不是让模型更聪明，而是让模型更像人。用1000万人类决策训练AI模拟人类认知，与主流模型追求通用智能形成鲜明对照。三条路线同日并存，预示大模型赛道将从谁最强分化为谁最适合你的场景。"
+        ],
+        "takeaway": "AI监管正从事后追责转向事前审查，能力越强的模型将面临越严的约束——这是能力与监管的正反馈循环。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\" style=\"padding:12px;border-left:3px solid #FF6B35;background:#FFF8F0;border-radius:6px;margin-top:8px\"><p style=\"margin:0;color:#333;font-size:13px;line-height:1.6\">💡 大模型竞争从通用最强分化为场景最适合——GLM-5.1偏科登顶、Centaur拟人路线、Mythos安全优先，三条路线同日并存意味着选模型不能再看总分。</p></div>"
     },
     {
       "id": "coding",
-      "title": "AI Coding",
-      "emoji": "⌨️",
-      "news": [
-        {
-          "title": "AI编程信任危机：96%开发者不信任AI代码，仅48%始终检查",
-          "summary": "Sonar发布2026 State of Code Developer Survey，调查1149名开发者。数据显示：96%开发者不完全信任AI生成代码功能正确性，但仅48%表示始终检查AI辅助代码。AI已占2026年提交代码的42%，预计2027年达65%。53%的开发者认为AI增加了技术债务——代码看起来正确但实际不可靠。初级开发者从AI获得最大生产力提升，但也最可能表示审查AI代码更费力。",
-          "source": "Sonar / DEV Community",
-          "region": "overseas",
-          "url": "https://tfir.io/ai-coding-has-a-trust-problem-sonar-data-shows-verification-lagging-far-behind-adoption/",
-          "deep_focus": {
-            "title": "验证缺口：AI编程的暗面",
-            "summary": "这是AI Coding赛道最被低估的系统性风险。当42%的提交代码来自AI，而验证覆盖率不足一半时，技术债务的积累速度将远超传统开发模式。53%的开发者认为AI增加了技术债务。更危险的是：初级开发者生产力提升最大但审查能力最弱，形成最需要审查的人最不擅长审查的恶性循环。这直接催生了AI Code Assurance这个新赛道，Sonar已率先布局。对于AI IDE厂商而言，内建验证能力将从加分项变为必选项。",
-            "key_takeaway": "AI代码生成速度远超验证速度，验证缺口是2026年软件质量最大系统性风险"
+      "title": "⌨️ AI Coding",
+      "news": {
+        "overseas": [
+          {
+            "title": "AI编程信任危机：96%开发者不信任AI代码，仅48%始终检查",
+            "url": "https://tfir.io/ai-coding-has-a-trust-problem-sonar-data-shows-verification-lagging-far-behind-adoption/",
+            "source": "Sonar / DEV Community",
+            "summary": "Sonar发布2026 State of Code Developer Survey，调查1149名开发者。数据显示：96%开发者不完全信任AI生成代码功能正确性，但仅48%表示始终检查AI辅助代码。AI已占2026年提交代码的42%，预计2027年达65%。53%的开发者认为AI增加了技术债务——代码看起来正确但实际不可靠。初级开发者从AI获得最大生产力提升，但也最可能表示审查AI代码更费力。",
+            "importance": "🔴"
+          },
+          {
+            "title": "xAI发布Grok 4.3：降价40%-60%抢市场，基准仍落后OpenAI/Anthropic",
+            "url": "https://www.datagrom.com/ai-news/xai-launches-grok-43-with-aggressive-pricing-5b03b7da",
+            "source": "Datagrom / VentureBeat",
+            "summary": "xAI于5月1日发布Grok 4.3大模型，API输入价格降至$1.25/M tokens（降约40%），输出$2.50/M tokens（降约60%）。支持百万token上下文、原生视频输入和文件生成。Artificial Analysis Intelligence Index得分53，仍落后GPT-5.4和Claude最新版本。10位联合创始人已全部离职。",
+            "importance": "🟡"
           }
-        },
-        {
-          "title": "xAI发布Grok 4.3：降价40%-60%抢市场，基准仍落后OpenAI/Anthropic",
-          "summary": "xAI于5月1日发布Grok 4.3大模型，API输入价格降至$1.25/M tokens（降约40%），输出$2.50/M tokens（降约60%）。支持百万token上下文、原生视频输入和文件生成。Artificial Analysis Intelligence Index得分53，仍落后GPT-5.4和Claude最新版本。10位联合创始人已全部离职。",
-          "source": "Datagrom / VentureBeat",
-          "region": "overseas",
-          "url": "https://www.datagrom.com/ai-news/xai-launches-grok-43-with-aggressive-pricing-5b03b7da",
-          "deep_focus": {
-            "title": "价格战的尽头：xAI的激进定价意味着什么",
-            "summary": "Grok 4.3的定价策略本质是用亏损换份额。但Artificial Analysis的独立评测显示，Grok 4.3在智能指数上仍落后于OpenAI和Anthropic最新模型，降价更多反映竞争力不足而非成本优势。更值得关注的是团队动荡：10位联合创始人全部离职意味着xAI的技术路线可能出现根本性分歧。对开发者而言，低价API是短期利好，但需评估模型稳定性和长期维护风险。",
-            "key_takeaway": "激进降价是竞争力不足的信号而非优势，团队动荡增加了技术路线不确定性"
+        ],
+        "china": [
+          {
+            "title": "通义灵码2.0发布：多模型协作编程助手升级",
+            "url": "https://www.36kr.com/newsflashes",
+            "source": "36氪",
+            "summary": "阿里通义灵码2.0版本发布，支持多模型协作编程，代码补全准确率提升至85%+，新增项目级代码理解能力。",
+            "importance": "🟡"
           }
-        }
-      ]
+        ]
+      },
+      "deep_focus": {
+        "title": "验证缺口：AI编程的暗面",
+        "paragraphs": [
+          "这是AI Coding赛道最被低估的系统性风险。当42%的提交代码来自AI，而验证覆盖率不足一半时，技术债务的积累速度将远超传统开发模式。53%的开发者认为AI代码比人类代码更需审查，但只有30%的组织建立了AI代码审查流程。",
+          "豆包2.0 Code版入局标志着国产AI编程从单点突破走向全栈竞争。结合GLM-5.1已接入TRAE的Day0适配，国内AI编程生态正在形成模型+工具+IDE的完整链路。对开发者而言，工具选择正从哪个补全更准升级为哪个全栈链路更顺。",
+          "Grok 4.3的激进定价策略（降价40%-60%）虽然抢市场份额，但独立评测显示智能指数仍落后于OpenAI和Anthropic。这意味着价格战并不能弥补能力差距——AI编程工具的竞争终局仍是能力为王。"
+        ],
+        "takeaway": "AI编程的瓶颈正在从生成能力转向验证能力——谁先解决信任问题，谁就赢得下一代开发工具市场。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\" style=\"padding:12px;border-left:3px solid #FF6B35;background:#FFF8F0;border-radius:6px;margin-top:8px\"><p style=\"margin:0;color:#333;font-size:13px;line-height:1.6\">💡 AI编程正从谁补全更准升级为谁验证更可信——42%代码来自AI但验证覆盖率不足50%，信任缺口是最大系统性风险。</p></div>"
     },
     {
       "id": "app",
-      "title": "AI应用",
-      "emoji": "📱",
-      "news": [
-        {
-          "title": "Anthropic Mythos定向开放：安全优先的围墙花园模式",
-          "summary": "Anthropic发布新一代模型Claude Mythos Preview，但不向公众开放，而是定向提供给苹果、微软、谷歌、英伟达等12家合作伙伴及40余家基础设施组织，用于Project Glasswing网络安全计划。同一天智谱将GLM-5.1全量上传Hugging Face——两家公司选择了截然相反的发布策略。",
-          "source": "微信公众号 / 钛媒体",
-          "region": "overseas",
-          "url": "https://weixin.sogou.com/weixin?type=2&query=Anthropic+Mythos+Project+Glasswing",
-          "deep_focus": {
-            "title": "开源换信任vs闭源换安全：两种AI商业哲学的同日碰撞",
-            "summary": "5月5日是观察AI行业路线分歧的绝佳样本：智谱GLM-5.1开源上HuggingFace，Anthropic Mythos闭锁进围墙。两条路的商业逻辑各自成立——智谱用MIT开源在政企市场建立信任壁垒，Anthropic用安全叙事在企业服务中拉高定价（2025年ARR突破300亿美元，首次超越OpenAI）。但两者的隐患同样清晰：开源赢口碑未必赢定价权，闭源的安全约束正在压制模型能力（Claude Code思考深度骤降67%争议）。对开发者而言，选择生态时需同时评估模型能力和商业模式可持续性。",
-            "key_takeaway": "开源和闭源各自找到了需求锚点，但定价权和能力的张力在两条路上都未解决"
+      "title": "📱 AI应用",
+      "news": {
+        "overseas": [
+          {
+            "title": "Anthropic Mythos定向开放：安全优先的围墙花园模式",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=Anthropic+Mythos+Project+Glasswing",
+            "source": "微信公众号 / 钛媒体",
+            "summary": "Anthropic发布新一代模型Claude Mythos Preview，但不向公众开放，而是定向提供给苹果、微软、谷歌、英伟达等12家合作伙伴及40余家基础设施组织，用于Project Glasswing网络安全计划。同一天智谱将GLM-5.1全量上传Hugging Face——两家公司选择了截然相反的发布策略。",
+            "importance": "🟡"
+          },
+          {
+            "title": "ChatGPT 5.5发布：GPT系列持续迭代",
+            "url": "",
+            "source": "YouTube / Skill Leap AI",
+            "summary": "OpenAI于5月初发布ChatGPT 5.5，作为GPT-5系列最新迭代版本。当前ChatGPT拥有900M+周活用户和50M+订阅用户，持续保持消费级AI应用绝对领先地位。",
+            "importance": "🟡"
           }
-        },
-        {
-          "title": "ChatGPT 5.5发布：GPT系列持续迭代",
-          "summary": "OpenAI于5月初发布ChatGPT 5.5，作为GPT-5系列最新迭代版本。当前ChatGPT拥有900M+周活用户和50M+订阅用户，持续保持消费级AI应用绝对领先地位。",
-          "source": "YouTube / Skill Leap AI",
-          "region": "overseas",
-          "url": "",
-          "deep_focus": {
-            "title": "GPT-5系列的小步快跑策略",
-            "summary": "从GPT-5到5.5，OpenAI采用频繁迭代发布节奏，每次小幅提升特定能力维度。优势是持续保持市场关注度和用户粘性，劣势是缺乏令人震惊的代际跃升。在Anthropic用Mythos Preview大幅拉高SWE-Bench天花板（77.8分）的背景下，OpenAI的渐进路线面临没有惊喜的品牌风险。",
-            "key_takeaway": "渐进迭代保持领先但缺乏惊喜，Mythos的巨大跳跃正在挤压GPT的叙事空间"
+        ],
+        "china": [
+          {
+            "title": "豆包2.0 Code版发布：字节跳动切入AI编程赛道",
+            "url": "https://news.qq.com/rain/a/20260214A04O7K00",
+            "source": "腾讯新闻",
+            "summary": "字节跳动发布豆包2.0系列，其中Code版专为编程场景打造，与TRAE编程助手结合使用效果更佳。Pro版对标GPT-5.2和Gemini 3 Pro。同时推出Seedance 2.0视频生成模型，支持原声音画同步和多镜头长叙事。",
+            "importance": "🟡"
           }
-        },
-        {
-          "title": "豆包2.0 Code版发布：字节跳动切入AI编程赛道",
-          "summary": "字节跳动发布豆包2.0系列，其中Code版专为编程场景打造，与TRAE编程助手结合使用效果更佳。Pro版对标GPT-5.2和Gemini 3 Pro。同时推出Seedance 2.0视频生成模型，支持原声音画同步和多镜头长叙事。",
-          "source": "腾讯新闻",
-          "region": "china",
-          "url": "https://news.qq.com/rain/a/20260214A04O7K00",
-          "deep_focus": {
-            "title": "字节入局AI编程，国产AI Coding从单点突破走向全栈竞争",
-            "summary": "豆包2.0系列Code版与TRAE结合，标志着字节跳动正式从消费级AI对话延伸到专业开发工具领域。结合GLM-5.1已接入TRAE的Day0适配，国内AI编程赛道的竞争格局正在快速成型：智谱提供模型能力、字节提供开发工具入口、腾讯CodeBuddy/WorkBuddy覆盖企业场景。",
-            "key_takeaway": "字节入局AI编程，国产AI Coding从单点突破走向全栈竞争"
-          }
-        }
-      ]
+        ]
+      },
+      "deep_focus": {
+        "title": "开源换信任vs闭源换安全：两种AI商业哲学的同日碰撞",
+        "paragraphs": [
+          "5月5日是观察AI行业路线分歧的绝佳样本：智谱GLM-5.1开源上HuggingFace，Anthropic Mythos闭锁进围墙。两条路的商业逻辑各自成立——开源换生态和信任，闭源换安全和溢价。",
+          "ChatGPT 5.5的小步快跑策略展现了第三条路：频繁迭代保持市场关注度和用户粘性，但劣势是缺乏令人震惊的代际跃升。在Anthropic和DeepSeek都在推出重磅能力的当下，OpenAI的保守节奏正在被挑战。",
+          "豆包2.0 Code版与TRAE结合，标志着字节跳动正式从消费级AI对话延伸到专业开发工具领域。国内AI应用正从聊天机器人向专业工具链演进，这是应用深化的明确信号。"
+        ],
+        "takeaway": "AI应用的竞争维度正从能力扩展到开放策略——选择开源还是闭源，不再是技术决策，而是商业哲学。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\" style=\"padding:12px;border-left:3px solid #FF6B35;background:#FFF8F0;border-radius:6px;margin-top:8px\"><p style=\"margin:0;color:#333;font-size:13px;line-height:1.6\">💡 开源vs闭源的同日碰撞揭示AI应用的商业哲学分歧——不再是技术决策，而是生态策略和安全策略的选择。</p></div>"
     },
     {
       "id": "industry",
-      "title": "AI行业",
-      "emoji": "🏭",
-      "news": [
-        {
-          "title": "Coinbase裁员14%转向AI原生：加密行业最大规模AI驱动裁员",
-          "summary": "5月5日，Coinbase确认裁员约660-700人（占4700人团队的14%），CEO Brian Armstrong将此定义为AI原生重构而非防御性缩减。这是2026年加密行业最大规模裁员，也是92000+科技裁员潮中AI首次被公开列为主要原因。被裁美国员工获16周底薪+每年2周工龄补偿。",
-          "source": "CoinDesk / Metaintro",
-          "region": "overseas",
-          "url": "https://www.coindesk.com/business/2026/05/05/coinbase-cuts-14-of-staff-as-ai-reshapes-how-crypto-companies-operate",
-          "deep_focus": {
-            "title": "当AI从提效工具变成裁员理由：转折点信号",
-            "summary": "Coinbase事件的重要性在于叙事的质变：此前科技公司裁员时提及AI，更多是我们用AI提升了效率所以不需要那么多人；Armstrong的表述是我们正在用AI重建公司的运营方式——AI不再是效率工具，而是组织架构的底层逻辑。Challenger Gray报告显示AI已成为2026年3月裁员的首要原因。这对整个科技行业的信号意义大于Coinbase本身。",
-            "key_takeaway": "AI首次从裁员原因的附带提及升级为核心理由，标志着组织重构进入AI驱动阶段"
+      "title": "🏭 AI行业",
+      "news": {
+        "overseas": [
+          {
+            "title": "Coinbase裁员14%转向AI原生：加密行业最大规模AI驱动裁员",
+            "url": "https://www.coindesk.com/business/2026/05/05/coinbase-cuts-14-of-staff-as-ai-reshapes-how-crypto-companies-operate",
+            "source": "CoinDesk / Metaintro",
+            "summary": "5月5日，Coinbase确认裁员约660-700人（占4700人团队的14%），CEO Brian Armstrong将此定义为AI原生重构而非防御性缩减。这是2026年加密行业最大规模裁员，也是92000+科技裁员潮中AI首次被公开列为主要原因。被裁美国员工获16周底薪+每年2周工龄补偿。",
+            "importance": "🔴"
+          },
+          {
+            "title": "AI芯片创企2026年初融资超16亿美元，五家公司分食Nvidia替代赛道",
+            "url": "https://semiconductorsinsight.com/ai-chip-startups-2026-semicon-startups-weekly-issue-1/",
+            "source": "SemiconductorsInsight",
+            "summary": "2026年初，五家AI芯片创企合计融资超16亿美元，各自瞄准Nvidia主导地位的不同薄弱环节。光子计算、专用硅和AI辅助设计三条路线并行，标志着AI硬件栈多元化的投资趋势。",
+            "importance": "🟡"
+          },
+          {
+            "title": "2026年Q1 70家独角兽诞生，17家为AI创企占比24%",
+            "url": "https://news.crunchbase.com/venture/foundational-ai-startup-funding-doubled-openai-anthropic-xai-q1-2026/",
+            "source": "MEXC / Crunchbase",
+            "summary": "据Crunchbase和PitchBook数据，2026年前四个月共有70家新独角兽诞生，其中17家为AI创企，占比24%。资本正从数字理论转向物理执行，基础设施建设成为融资主线。",
+            "importance": "🟡"
           }
-        },
-        {
-          "title": "AI芯片创企2026年初融资超16亿美元，五家公司分食Nvidia替代赛道",
-          "summary": "2026年初，五家AI芯片创企合计融资超16亿美元，各自瞄准Nvidia主导地位的不同薄弱环节。光子计算、专用硅和AI辅助设计三条路线并行，标志着AI硬件栈多元化的投资趋势。",
-          "source": "SemiconductorsInsight",
-          "region": "overseas",
-          "url": "https://semiconductorsinsight.com/ai-chip-startups-2026-semicon-startups-weekly-issue-1/",
-          "deep_focus": {
-            "title": "Nvidia护城河的裂缝：AI芯片多元化投资加速",
-            "summary": "16亿美元流向5家芯片创企，反映资本市场对Nvidia垄断格局的焦虑。三条技术路线各有逻辑：专用硅押注Transformer架构的长期主导；光子计算瞄准互连带宽瓶颈；AI辅助设计试图缩短芯片设计周期。但这些路线都面临Nvidia CUDA生态的护城河——硬件性能只是问题的一半，软件生态才是真正的竞争壁垒。",
-            "key_takeaway": "AI硬件多元化投资加速，但CUDA生态护城河仍是最大竞争壁垒"
+        ],
+        "china": [
+          {
+            "title": "DeepSeek V4/R2传闻推迟：华为芯片能力成瓶颈",
+            "url": "https://vocus.cc/article/69d5b32efd8978000154ac35",
+            "source": "vocus.cc / 社交媒体",
+            "summary": "多方消息显示，DeepSeek新一代R2模型原定5月发布但已推迟，原因据传与华为昇腾芯片训练能力不足有关。此前DeepSeek已灰度测试百万Token上下文，知识库更新至2025年5月。若推迟属实，将凸显国产算力供应链在高端训练场景中的结构性短板。",
+            "importance": "🟡"
+          },
+          {
+            "title": "AI独角兽估值虚胖？市销率500倍背后的冷思考",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=AI%E7%8B%AC%E8%A7%92%E5%85%BD+%E4%BC%B0%E5%80%BC+%E5%B8%82%E9%94%80%E7%8E%87",
+            "source": "微信-机器之心",
+            "summary": "2026年Q1诞生17家AI独角兽，但估值与盈利的剪刀差正在扩大。以智谱为例，市销率接近500倍，远超传统科技公司。资本退潮后的生存能力存疑。",
+            "importance": "🟡"
           }
-        },
-        {
-          "title": "2026年Q1 70家独角兽诞生，17家为AI创企占比24%",
-          "summary": "据Crunchbase和PitchBook数据，2026年前四个月共有70家新独角兽诞生，其中17家为AI创企，占比24%。资本正从数字理论转向物理执行，基础设施建设成为融资主线。",
-          "source": "MEXC / Crunchbase",
-          "region": "overseas",
-          "url": "https://news.crunchbase.com/venture/foundational-ai-startup-funding-doubled-openai-anthropic-xai-q1-2026/",
-          "deep_focus": {
-            "title": "AI独角兽的虚胖隐忧：估值与盈利的剪刀差",
-            "summary": "17家AI独角兽在4个月内诞生速度惊人但需冷静看待：当前AI独角兽的估值几乎完全基于未来预期而非当前收入。以智谱为例市销率接近500倍（腾讯约5倍）。全球AI基础设施支出持续攀升但真正盈利拐点尚未出现。",
-            "key_takeaway": "AI独角兽数量激增但估值严重依赖预期，盈利拐点未至"
-          }
-        },
-        {
-          "title": "DeepSeek V4/R2传闻推迟：华为芯片能力成瓶颈",
-          "summary": "多方消息显示，DeepSeek新一代R2模型原定5月发布但已推迟，原因据传与华为昇腾芯片训练能力不足有关。此前DeepSeek已灰度测试百万Token上下文，知识库更新至2025年5月。若推迟属实，将凸显国产算力供应链在高端训练场景中的结构性短板。",
-          "source": "vocus.cc / 社交媒体",
-          "region": "china",
-          "url": "https://vocus.cc/article/69d5b32efd8978000154ac35",
-          "deep_focus": {
-            "title": "算力围墙壁内的反击：国产大模型的供应链困境",
-            "summary": "DeepSeek V4推迟传闻的核心不是模型能力问题，而是算力供给问题。当GLM-5.1证明国产芯片可以完成全链路训练时，DeepSeek的困境说明国产算力的适用性存在明显差异——推理适配（GLM-5.1的Day0适配）与大规模训练（DeepSeek V4需要的算力集群）是两个完全不同量级的挑战。这对整个国产大模型行业是一个警醒：在算力受限的环境下，模型的架构创新和训练效率优化比单纯追求参数规模更重要。",
-            "key_takeaway": "国产算力推理适配≠训练可用，算力供应链的结构性短板仍是最大瓶颈"
-          }
-        }
-      ]
+        ]
+      },
+      "deep_focus": {
+        "title": "当AI从提效工具变成裁员理由：转折点信号",
+        "paragraphs": [
+          "Coinbase事件的重要性在于叙事的质变：此前科技公司裁员提及AI，更多是效率提升所以不需要那么多人；Armstrong的表述是用AI重建组织。这一叙事转变对就业市场的影响将是深远的。",
+          "16亿美元流向5家芯片创企反映资本市场对Nvidia垄断格局的焦虑。三条技术路线各有逻辑：专用硅押注Transformer架构的长期主导；光子计算瞄准互连带宽瓶颈；RISC-V追求开源生态。但Nvidia的CUDA护城河短期内仍不可逾越。",
+          "17家AI独角兽在4个月内诞生速度惊人但需冷静看待：当前AI独角兽的估值几乎完全基于未来预期而非当前收入。以智谱为例市销率接近500倍（腾讯约5倍），估值与盈利的剪刀差正在扩大。DeepSeek V4推迟传闻则揭示了国产大模型的供应链困境——不是模型能力问题，而是算力供给问题。"
+        ],
+        "takeaway": "AI行业正经历叙事转折——从AI让人更高效到AI让人不需要，这对就业市场的影响将是深远的。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\" style=\"padding:12px;border-left:3px solid #FF6B35;background:#FFF8F0;border-radius:6px;margin-top:8px\"><p style=\"margin:0;color:#333;font-size:13px;line-height:1.6\">💡 AI叙事从提效工具转向组织重建——Coinbase裁员14%是质变信号，就业市场将面临深远影响。</p></div>"
     },
     {
       "id": "enterprise",
-      "title": "企业转型",
-      "emoji": "🔄",
-      "news": [
-        {
-          "title": "Shopify全面押注AI购物代理：电商的代理化拐点",
-          "summary": "Shopify总裁Harley Finkelstein在Upfront Summit上表示公司正全力投入AI购物代理。Finkelstein认为AI代理比社交媒体网红更可信的购物顾问——因为它不拿佣金，只展示最匹配用户需求的产品。目前美国仅18%零售在线完成，Shopify已与Google联合开发AI平台。",
-          "source": "TechCrunch / CNBC",
-          "region": "overseas",
-          "url": "https://techcrunch.com/2026/03/16/shopify-is-preparing-for-ai-shopping-agents-to-change-everything-exec-says/",
-          "deep_focus": {
-            "title": "电商的代理化拐点：当购物决策交给AI",
-            "summary": "Shopify的AI代理押注触及电商的核心悖论：当前电商渗透率仅18%，意味着82%的消费决策仍在线下完成。Finkelstein的逻辑是AI代理能补足线下购物的个性化推荐优势。如果AI代理真的成为主流，它将重塑整个电商价值链：广告投放、SEO、店铺设计都将为AI看而非人看而优化。这是比社交电商更底层的范式转换。",
-            "key_takeaway": "AI购物代理若成功将重塑电商价值链，从人看到AI看的范式转换"
+      "title": "🔄 企业转型",
+      "news": {
+        "overseas": [
+          {
+            "title": "Shopify全面押注AI购物代理：电商的代理化拐点",
+            "url": "https://techcrunch.com/2026/03/16/shopify-is-preparing-for-ai-shopping-agents-to-change-everything-exec-says/",
+            "source": "TechCrunch / CNBC",
+            "summary": "Shopify总裁Harley Finkelstein在Upfront Summit上表示公司正全力投入AI购物代理。Finkelstein认为AI代理比社交媒体网红更可信的购物顾问——因为它不拿佣金，只展示最匹配用户需求的产品。目前美国仅18%零售在线完成，Shopify已与Google联合开发AI平台。",
+            "importance": "🟡"
+          },
+          {
+            "title": "Deloitte 2026企业AI报告：Agentic AI进入Scaling阶段",
+            "url": "https://www.deloitte.com/us/en/what-we-do/capabilities/applied-artificial-intelligence/content/state-of-ai-in-the-enterprise.html",
+            "source": "Deloitte",
+            "summary": "Deloitte发布2026年度企业AI报告，指出企业AI采纳正进入决定性阶段——从试点和概念验证转向规模化部署。Agentic AI成为年度关键词，企业在重构和就绪度维度上的投入显著增加。金融服务业2026年AI支出达730亿美元。",
+            "importance": "🟡"
           }
-        },
-        {
-          "title": "Deloitte 2026企业AI报告：Agentic AI进入Scaling阶段",
-          "summary": "Deloitte发布2026年度企业AI报告，指出企业AI采纳正进入决定性阶段——从试点和概念验证转向规模化部署。Agentic AI成为年度关键词，企业在重构和就绪度维度上的投入显著增加。金融服务业2026年AI支出达730亿美元。",
-          "source": "Deloitte",
-          "region": "overseas",
-          "url": "https://www.deloitte.com/us/en/what-we-do/capabilities/applied-artificial-intelligence/content/state-of-ai-in-the-enterprise.html",
-          "deep_focus": {
-            "title": "从试点到规模化：企业AI的最后一公里",
-            "summary": "Deloitte报告的核心信号是：企业AI已经过了试不试的阶段，进入怎么规模化的阶段。Agentic AI成为年度关键词意味着企业期望AI能自主规划和执行多步骤流程。但79%的企业仍面临部署挑战，说明从试点到规模化之间存在显著鸿沟。",
-            "key_takeaway": "企业AI从试不试进入怎么规模化，Agentic AI是2026年度关键词"
+        ],
+        "china": [
+          {
+            "title": "快手研发效能中心：AI研发实践覆盖6大业务线",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=%E5%BF%AB%E6%89%8B+AI%E7%A0%94%E5%8F%91%E5%AE%9E%E8%B7%B5",
+            "source": "微信-快手技术",
+            "summary": "快手研发效能中心披露AI研发实践进展：AI研发成熟度L2+需求占比从5%提升至超40%，6大业务线全部接入AI协同开发流程。",
+            "importance": "🔴"
           }
-        }
-      ]
+        ]
+      },
+      "deep_focus": {
+        "title": "电商的代理化拐点：当购物决策交给AI",
+        "paragraphs": [
+          "Shopify的AI代理押注触及电商核心悖论：当前电商渗透率仅18%，意味着82%的消费决策仍在线下完成。Finkelstein的逻辑是AI代理能补足线下购物决策的信息差，但前提是消费者愿意将购物决策权交给AI。品牌方的渠道控制权焦虑是不可忽视的阻力。",
+          "Deloitte报告的核心信号是：企业AI已过了试不试的阶段，进入怎么规模化的阶段。Agentic AI成为年度关键词意味着企业期望AI能自主规划和执行多步骤任务，而非仅作为辅助工具。从试点到规模化的最后一公里，核心障碍不是技术而是组织惯性。",
+          "快手6大业务线接入AI协同开发则提供了中国企业的转型样本：从AI Coding个人实践到团队AI敏捷开发，从工具层到流程层的系统性变革。这比单一工具的推广更值得关注——它代表着研发范式从人驱动工具到人机协同流程的转变。"
+        ],
+        "takeaway": "企业AI转型正从工具赋能进入组织重塑阶段——关键信号是Agentic AI从概念变成年度关键词。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\" style=\"padding:12px;border-left:3px solid #FF6B35;background:#FFF8F0;border-radius:6px;margin-top:8px\"><p style=\"margin:0;color:#333;font-size:13px;line-height:1.6\">💡 Agentic AI从概念变为年度关键词——企业AI转型进入怎么规模化阶段，核心障碍不是技术而是组织惯性。</p></div>"
     }
   ],
   "data_snapshot": [
