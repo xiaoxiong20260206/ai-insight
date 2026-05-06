@@ -1,8 +1,8 @@
 # AI周报生成完整流程 (v2.2 硬性门控版)
 
-> **版本**: v3.1 (MixCard推送P0红线 + 卡片结构≠MD全文 + fail loud原则 + space:groupId格式 + 踩坑#106-#110)
-> **更新时间**: 2026-05-05
-> **变更说明**: v3.1 新增：(1) MixCard推送7条P0红线（#106-#110教训）；(2) 卡片内容结构与MD全文分离原则；(3) 群发必须space:前缀；(4) 禁止手动构造JSON；(5) 禁止传message字段；(6) fail loud原则
+> **版本**: v3.2 (超链接强制要求 + MixCard推送P0红线 + 卡片结构≠MD全文 + fail loud原则 + space:groupId格式 + 踩坑#106-#111)
+> **更新时间**: 2026-05-06
+> **变更说明**: v3.2 新增：(1) 周报HTML必须携带来源超链接（Top 5 卡片+各板块表格），与日报HTML和KIM卡片保持一致；(2) Step 1 新增URL提取步骤；(3) 踩坑#111
 
 ---
 
@@ -112,6 +112,7 @@ print(f"W{week_num} = {monday.strftime('%Y-%m-%d')}（周一）到 {sunday.strft
 - [ ] 周一日期确认正确
 - [ ] 周日日期确认正确
 - [ ] 所有日报文件已定位
+- [ ] **已从日报JSON提取每条新闻的 `url` 字段**（超链接来源，Step 2/3 必须使用）
 
 ---
 
@@ -148,6 +149,8 @@ section_stats = {
 - [ ] 周度洞察已提炼（至少2条）
 - [ ] 日报索引已完整列出（周一到周日）
 - [ ] 周报MD已生成
+- [ ] **MD中所有事件表格的"事件"列和"来源"列都有 `[文字](URL)` 超链接**（URL来自Step 1提取的日报JSON `url` 字段）
+- [ ] **Top 5 每条的"来源"行都有 `[来源名](URL)` 超链接**
 
 ---
 
@@ -160,12 +163,17 @@ section_stats = {
 └── weekly-YYYY-WXX.html    # HTML版本（必须生成，>50KB）
 ```
 
-### HTML规范（v2.0）
+### HTML规范（v3.0）
 
 - 使用清爽调研风格 v5.0
 - 左侧TOC + 右侧内容区
 - 各章节为锚点Section
 - 日期格式统一：`2026-04-13 周一`
+- **🔴 超链接强制要求（v3.0新增）**：与日报HTML和KIM卡片一致，周报HTML必须携带来源超链接：
+  - **Top 5 卡片**：`news-card-source` 行改为 `<div class="news-card-source">📎 <a href="URL" target="_blank">来源名</a> · 日期</div>`
+  - **各板块事件表格**：事件 `<td>` 改为 `<td><a href="URL" target="_blank">事件描述</a></td>`；来源 `<td>` 改为 `<td><a href="URL" target="_blank">来源名</a></td>`
+  - URL 来自 Step 1 从日报JSON提取的 `url` 字段
+  - 无 URL 的条目（如行业报告、综合统计）可不加链接，但事件描述保持纯文字
 
 ### 验证命令
 
@@ -202,6 +210,8 @@ wc -c 01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html
 - [ ] HTML文件已生成
 - [ ] 文件大小 > 50KB（用 `wc -c` 验证，确保 > 50000）
 - [ ] 浏览器打开无样式错误
+- [ ] **Top 5 卡片的 source 行有 `<a href>` 链接**（与日报HTML格式一致）
+- [ ] **各板块事件表格的事件列和来源列有 `<a href>` 链接**
 
 ---
 
@@ -427,6 +437,8 @@ echo "④ 外部仓库周报: $([ -f "../ai-insight-public/01-daily-reports/$MON
 ### 技术质量
 - [ ] HTML文件存在且 > 50KB
 - [ ] 所有链接可达（无404）
+- [ ] **Top 5 卡片有来源超链接**（`<a href>` 格式）
+- [ ] **各板块事件表格的事件列和来源列有超链接**
 - [ ] 内部版首页git push成功
 - [ ] 外部版同步成功（verify通过）
 - [ ] 四位置验证全部通过
@@ -456,6 +468,7 @@ echo "④ 外部仓库周报: $([ -f "../ai-insight-public/01-daily-reports/$MON
 | 108 | 手动构造 kimMixCard JSON 对象格式错误 | 禁止手动内联编写，必须用脚本生成文件 → read → 传入 |
 | 109 | PROJECT_ROOT 指向错误目录 → 找不到文件 → 空内容兜底卡片 | 动态检测项目根目录（检查 01-daily-reports/），找不到文件报错退出而非静默兜底 |
 | 110 | 卡片内容直接复用 MD 全文 → 10屏纯文本无锚点 | 卡片版结论先行+精简有锚；Top5=标题+1句话+1链接；洞察=结论+1链接 |
+| 111 | 周报HTML无来源超链接 → 事件表格纯文字，与日报HTML/KIM卡片不一致 | Step 1提取URL → Step 2 MD带链接 → Step 3 HTML `<a href>` 链接；Top 5卡片source行+各板块表格事件/来源列 |
 
 ---
 
