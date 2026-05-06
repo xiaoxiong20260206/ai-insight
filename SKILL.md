@@ -289,6 +289,7 @@ message(channel=kim, kimMixCard=<card>, ...)  # 确认后发群
 - 首页日历+周报入口卡片必须更新
 - 自审环节不可省略
 - **推送范围: 所有群**（区别于日报只发2个群）
+- **🔴 超链接强制要求（v3.2 新增）**: 周报HTML版必须与日报HTML、KIM卡片保持一致——Top 5卡片source行和各板块事件表格的事件列、来源列都必须包含 `<a href="URL" target="_blank">` 来源超链接，URL从日报JSON的 `url` 字段提取。纯文字 = 不合格
 
 详见 `references/weekly-report.md`
 
@@ -555,6 +556,7 @@ python3 scripts/fetch_arxiv.py --days 1 --json --output data/arxiv-daily.json
 | `deploy_daily.sh` | 日报一键部署(**含orchestrator状态验证**) | `bash scripts/deploy_daily.sh` |
 | `sync_to_external.py` | 外部版同步 | `python3 scripts/sync_to_external.py --full --verify` |
 | `update_tracking.py` | 追踪体系同步 | `python3 scripts/update_tracking.py` |
+| `inject_weekly_links.py` | **周报HTML超链接注入(补救工具) v1.0** | `python3 scripts/inject_weekly_links.py weekly-YYYY-Www` |
 | `fetch_arxiv.py` | **arXiv学术论文监控(v9.3新增)** | `python3 scripts/fetch_arxiv.py --days 1` |
 
 ---
@@ -631,6 +633,7 @@ python3 scripts/fetch_arxiv.py --days 1 --json --output data/arxiv-daily.json
 | **105** | **⭐orchestrator cmd_push调用已废弃脚本(2026-05-04)** | **cmd_push()调用send_ai_daily.py --preview，该脚本已归档。修复：改为调用build_insight_mixcard.py生成mixCard JSON；废弃脚本时必须同步更新所有引用方** |
 | **62** | **⭐外部版订阅按钮每次需手动删除(2026-05-04)** | **sync脚本新增正则自动删除，不再手动** |
 | **111** | **⭐日报误群发(2026-05-05)** | **日报只私发订阅者，周报才群发。刚做完周报群发后切日报惯性沿用=最危险模式** |
+| **112** | **⭐周报HTML无来源超链接(2026-05-06)** | **周报HTML事件表格和Top 5卡片全是纯文字，与日报HTML/KIM卡片不一致（日报每条新闻都有可点击链接）。修复：Step 1提取日报JSON url字段→Step 2 MD带链接→Step 3 HTML `<a href>` 链接；Top 5卡片source行+各板块表格事件/来源列** |
 
 完整分析详见 `references/lessons-learned.md`
 
