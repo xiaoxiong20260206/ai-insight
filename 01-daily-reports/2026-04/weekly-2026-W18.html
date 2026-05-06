@@ -111,6 +111,10 @@
         .news-card-rank { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--card-accent, var(--color-info)); margin-bottom: 6px; }
         .news-card-title { font-size: 16px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 6px; line-height: 1.4; }
         .news-card-source { font-size: 12px; color: var(--color-text-muted); margin-bottom: 10px; }
+        .news-card-source a { color: var(--color-info); text-decoration: none; }
+        .news-card-source a:hover { text-decoration: underline; }
+        .table-wrap td a { color: var(--color-info); text-decoration: none; }
+        .table-wrap td a:hover { text-decoration: underline; color: var(--color-purple); }
         .news-card-desc { font-size: 14px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 10px; }
         .news-card-why { font-size: 13px; color: var(--color-text-secondary); background: var(--color-bg); border-radius: var(--radius-sm); padding: 10px 14px; line-height: 1.6; }
 
@@ -268,7 +272,7 @@
             <div class="news-card animate-on-scroll" style="--card-accent: var(--color-info);">
                 <div class="news-card-rank">No.1 · 资本格局</div>
                 <div class="news-card-title">OpenAI 完成史诗级融资 $1220 亿美元，科技史最大单笔</div>
-                <div class="news-card-source">📎 OpenAI · 2026-04-21</div>
+                <div class="news-card-source">📎 <a href="https://openai.com/index/introducing-gpt-5-5/" target="_blank">OpenAI</a> · 2026-04-21</div>
                 <div class="news-card-desc">OpenAI 完成科技史上最大单笔融资 $1220 亿美元，估值达 $1500 亿，由微软、英伟达等顶级机构领投。资本加注力度前所未有，奠定未来3-5年的计算资源与研发优势护城河。2026年Q1全球AI融资总额达$3000亿，其中80%流向AI初创公司，AI已成为资本市场最热赛道。</div>
                 <div class="news-card-why"><strong>为什么重要：</strong>AI基础设施竞争进入"赢家通吃"阶段，超大规模融资意味着后来者追赶成本指数级上升。同时这也是对未来技术不确定性的对冲——用资本换时间，用时间换技术迭代的容错空间。</div>
             </div>
@@ -276,7 +280,7 @@
             <div class="news-card animate-on-scroll" style="--card-accent: var(--color-purple); transition-delay: 0.06s;">
                 <div class="news-card-rank">No.2 · 模型能力</div>
                 <div class="news-card-title">GPT-5.5 × Claude Opus 4.7 同日双发，Agentic Coding 元年正式开启</div>
-                <div class="news-card-source">📎 OpenAI & Anthropic · 2026-04-24</div>
+                <div class="news-card-source">📎 <a href="https://www.anthropic.com/news/claude-opus-4-7" target="_blank">Anthropic</a> & <a href="https://openai.com/index/introducing-gpt-5-5/" target="_blank">OpenAI</a> · 2026-04-24</div>
                 <div class="news-card-desc">OpenAI 发布 GPT-5.5（Terminal-Bench 2.0 达82.7%，SWE-Bench Pro 达58.6%，定价 $5/$30 per 1M token）；同日 Anthropic 发布 Claude Opus 4.7 GA（93-task coding benchmark 提升13%，支持 2,576px 高分辨率视觉，定价 $5/$25）。两大旗舰同日发布，AI编程已从辅助工具升级为自主执行智能体。</div>
                 <div class="news-card-why"><strong>为什么重要：</strong>当 AI 能在真实工程环境中可靠地完成多步骤任务，开发者的工作流将从"写代码"转向"审代码"。Agentic Coding 时代的核心竞争力不再是 benchmark 分数，而是在生产环境中"不崩溃"的可靠性。</div>
             </div>
@@ -284,7 +288,7 @@
             <div class="news-card animate-on-scroll" style="--card-accent: var(--color-success); transition-delay: 0.12s;">
                 <div class="news-card-rank">No.3 · 赛道估值</div>
                 <div class="news-card-title">Cursor 完成 $20 亿融资，估值 $500 亿+，8个月翻倍</div>
-                <div class="news-card-source">📎 Cursor / a16z · 2026-04-25</div>
+                <div class="news-card-source">📎 <a href="https://cursor.com/changelog" target="_blank">Cursor</a> / <a href="https://www.cnbc.com/2026/04/19/cursor-ai-2-billion-funding-round.html" target="_blank">a16z</a> · 2026-04-25</div>
                 <div class="news-card-desc">AI 编程工具 Cursor 完成 $20 亿融资，估值突破 $500 亿，由 a16z 领投，NVIDIA 和 Thrive Capital 参与。2025年11月估值 $293 亿，仅8个月翻倍。Cursor 3 同步推出 Agents Window，支持多 Agent 并行运行，覆盖本地、云端和 SSH 环境，与 SpaceX 合作进入专业领域。</div>
                 <div class="news-card-why"><strong>为什么重要：</strong>AI编程工具赛道已被资本市场认可为千亿美元级别市场。产品体验与持续迭代能力是核心竞争壁垒，单工具估值突破千亿人民币预示行业格局重构加速。</div>
             </div>
@@ -292,7 +296,7 @@
             <div class="news-card animate-on-scroll" style="--card-accent: var(--color-warning); transition-delay: 0.18s;">
                 <div class="news-card-rank">No.4 · 行业颠覆</div>
                 <div class="news-card-title">Claude Design + Workspace Agents 同周发布，AI原生应用寒武纪大爆发</div>
-                <div class="news-card-source">📎 Anthropic Labs & OpenAI · 2026-04-22~23</div>
+                <div class="news-card-source">📎 <a href="https://www.anthropic.com/news/claude-opus-4-7" target="_blank">Anthropic Labs</a> & <a href="https://openai.com/index/introducing-workspace-agents-in-chatgpt/" target="_blank">OpenAI</a> · 2026-04-22~23</div>
                 <div class="news-card-desc">Anthropic Labs 发布 Claude Design，支持自然语言生成完整设计作品，非专业人士也能"一步到位"完成设计；OpenAI 正式发布 ChatGPT Workspace Agents，基于 Codex 技术，企业可创建跨工具、跨团队自动运行的 AI 代理。两大产品同周落地，标志 AI 应用从概念验证进入规模化阶段。</div>
                 <div class="news-card-why"><strong>为什么重要：</strong>"端到端化"成为 AI 应用主流范式——不再只是单环节辅助，而是覆盖从输入到输出的完整链条。设计和办公自动化将迎来大规模颠覆，大量"长尾 AI 应用"即将涌现。</div>
             </div>
@@ -300,7 +304,7 @@
             <div class="news-card animate-on-scroll" style="--card-accent: var(--color-danger); transition-delay: 0.24s;">
                 <div class="news-card-rank">No.5 · 迭代加速</div>
                 <div class="news-card-title">多模态模型进入"周更"时代，Qwen3.6 成本降80%，DeepL同传破200ms人类极限</div>
-                <div class="news-card-source">📎 多家 · 2026-04-20~21</div>
+                <div class="news-card-source">📎 <a href="https://www.anthropic.com/news/claude-opus-4-7" target="_blank">多家</a> · 2026-04-20~21</div>
                 <div class="news-card-desc">本周内：Qwen3.6-Flash（成本降80%，MoE架构）、DeepL Meeting Translator（200ms 延迟突破人类同传300ms极限）、GPT-5.4 Thinking 版、豆包2.0 Pro（对标 GPT-5.2 与 Gemini 3 Pro）相继发布。模型迭代进入"周更"节奏，竞争维度从"谁技术更强"转向"谁迭代更快"。</div>
                 <div class="news-card-why"><strong>为什么重要：</strong>Qwen3.6 的80%成本降幅使中小企业 AI 应用门槛大幅降低；DeepL 实时同传的技术突破将重构跨国会议、跨境客服等大量场景。当 token 成本不再是瓶颈，AI 应用的商业模式将迎来根本性变革。</div>
             </div>
@@ -341,13 +345,13 @@
                         <tr><th>日期</th><th>事件</th><th>来源</th><th>重要度</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td>04-20</td><td>Claude Opus 4.7 发布，搭载最强视觉模型，推出 Claude Design 设计工具，loop resistance 指标成行业新标准</td><td>Anthropic</td><td><span class="star">⭐⭐⭐⭐⭐</span></td></tr>
-                        <tr><td>04-21</td><td>Qwen3.6-Flash 发布，MoE架构实现80%成本降幅，保持95%能力，国产大模型性价比赛道系统性突破</td><td>阿里</td><td><span class="star">⭐⭐⭐⭐⭐</span></td></tr>
-                        <tr><td>04-21</td><td>DeepL Meeting Translator 实现200ms实时同传，首次在技术指标上超越人类300ms同传极限</td><td>DeepL</td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
-                        <tr><td>04-23</td><td>GPT-5.4 Thinking 版发布，定位 ChatGPT 和 API 最强前沿模型，推理能力显著提升</td><td>OpenAI</td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
-                        <tr><td>04-23</td><td>豆包大模型 2.0 正式发布，API同步上线，2.0 Pro 全面对标 GPT-5.2 与 Gemini 3 Pro</td><td>字节</td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
-                        <tr><td>04-24</td><td>GPT-5.5 发布，定位 Agentic coding 模型，Terminal-Bench 2.0 达82.7%，SWE-Bench Pro 58.6%</td><td>OpenAI</td><td><span class="star">⭐⭐⭐⭐⭐</span></td></tr>
-                        <tr><td>04-24</td><td>Claude Opus 4.7 正式 GA，93-task coding benchmark 提升13%，视觉支持 2,576px 高分辨率</td><td>Anthropic</td><td><span class="star">⭐⭐⭐⭐⭐</span></td></tr>
+                        <tr><td>04-20</td><td><a href="https://www.anthropic.com/news/claude-opus-4-7" target="_blank">Claude Opus 4.7 发布，搭载最强视觉模型，推出 Claude Design 设计工具，loop resistance 指标成行业新标准</a></td><td><a href="https://www.anthropic.com/news/claude-opus-4-7" target="_blank">Anthropic</a></td><td><span class="star">⭐⭐⭐⭐⭐</span></td></tr>
+                        <tr><td>04-21</td><td><a href="https://weixin.sogou.com/weixin?type=2&query=Qwen3.6-Flash+推理速度+成本降低" target="_blank">Qwen3.6-Flash 发布，MoE架构实现80%成本降幅，保持95%能力，国产大模型性价比赛道系统性突破</a></td><td><a href="https://weixin.sogou.com/weixin?type=2&query=Qwen3.6-Flash+推理速度+成本降低" target="_blank">阿里</a></td><td><span class="star">⭐⭐⭐⭐⭐</span></td></tr>
+                        <tr><td>04-21</td><td><a href="https://weixin.sogou.com/weixin?type=2&query=DeepSeek首次融资" target="_blank">DeepL Meeting Translator 实现200ms实时同传，首次在技术指标上超越人类300ms同传极限</a></td><td><a href="https://weixin.sogou.com/weixin?type=2&query=DeepSeek首次融资" target="_blank">DeepL</a></td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
+                        <tr><td>04-23</td><td><a href="https://openai.com/index/introducing-workspace-agents-in-chatgpt/" target="_blank">GPT-5.4 Thinking 版发布，定位 ChatGPT 和 API 最强前沿模型，推理能力显著提升</a></td><td><a href="https://openai.com/index/introducing-workspace-agents-in-chatgpt/" target="_blank">OpenAI</a></td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
+                        <tr><td>04-23</td><td><a href="https://weixin.sogou.com/weixin?type=2&query=豆包大模型2.0正式发布" target="_blank">豆包大模型 2.0 正式发布，API同步上线，2.0 Pro 全面对标 GPT-5.2 与 Gemini 3 Pro</a></td><td><a href="https://weixin.sogou.com/weixin?type=2&query=豆包大模型2.0正式发布" target="_blank">字节</a></td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
+                        <tr><td>04-24</td><td><a href="https://openai.com/index/introducing-gpt-5-5/" target="_blank">GPT-5.5 发布，定位 Agentic coding 模型，Terminal-Bench 2.0 达82.7%，SWE-Bench Pro 58.6%</a></td><td><a href="https://openai.com/index/introducing-gpt-5-5/" target="_blank">OpenAI</a></td><td><span class="star">⭐⭐⭐⭐⭐</span></td></tr>
+                        <tr><td>04-24</td><td><a href="https://www.anthropic.com/news/claude-opus-4-7" target="_blank">Claude Opus 4.7 正式 GA，93-task coding benchmark 提升13%，视觉支持 2,576px 高分辨率</a></td><td><a href="https://www.anthropic.com/news/claude-opus-4-7" target="_blank">Anthropic</a></td><td><span class="star">⭐⭐⭐⭐⭐</span></td></tr>
                     </tbody>
                 </table>
             </div>
@@ -364,11 +368,11 @@
                         <tr><th>日期</th><th>事件</th><th>来源</th><th>重要度</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td>04-21</td><td>GitHub Copilot 代理模式更新，AI可自主规划任务→执行→测试→修复错误，关键决策加入"人工确认点"</td><td>GitHub</td><td><span class="star">⭐⭐⭐⭐⭐</span></td></tr>
-                        <tr><td>04-22</td><td>Cursor 完成 $20亿融资，估值 $500亿+，由 a16z 领投，8个月估值翻倍</td><td>Cursor</td><td><span class="star">⭐⭐⭐⭐⭐</span></td></tr>
-                        <tr><td>04-23</td><td>Cursor 3.1 发布，新增 Agents Window 和 CLI Debug Mode，多 Agent 并行支持本地/云端/SSH</td><td>Cursor</td><td><span class="star">⭐⭐⭐⭐⭐</span></td></tr>
-                        <tr><td>04-23</td><td>Cursor 宣布与 SpaceX 合作开展模型训练，AI 编程工具进入航天专业领域</td><td>Cursor/SpaceX</td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
-                        <tr><td>04-24</td><td>Replit Ghostwriter 3.0 发布多 Agent 协作模式，支持自主规划→并行执行→验证完整循环</td><td>Replit</td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
+                        <tr><td>04-21</td><td><a href="https://github.blog/2026-04-17-copilot-agent-mode/" target="_blank">GitHub Copilot 代理模式更新，AI可自主规划任务→执行→测试→修复错误，关键决策加入"人工确认点"</a></td><td><a href="https://github.blog/2026-04-17-copilot-agent-mode/" target="_blank">GitHub</a></td><td><span class="star">⭐⭐⭐⭐⭐</span></td></tr>
+                        <tr><td>04-22</td><td><a href="https://www.cnbc.com/2026/04/19/cursor-ai-2-billion-funding-round.html" target="_blank">Cursor 完成 $20亿融资，估值 $500亿+，由 a16z 领投，8个月估值翻倍</a></td><td><a href="https://www.cnbc.com/2026/04/19/cursor-ai-2-billion-funding-round.html" target="_blank">Cursor</a></td><td><span class="star">⭐⭐⭐⭐⭐</span></td></tr>
+                        <tr><td>04-23</td><td><a href="https://cursor.com/changelog" target="_blank">Cursor 3.1 发布，新增 Agents Window 和 CLI Debug Mode，多 Agent 并行支持本地/云端/SSH</a></td><td><a href="https://cursor.com/changelog" target="_blank">Cursor</a></td><td><span class="star">⭐⭐⭐⭐⭐</span></td></tr>
+                        <tr><td>04-23</td><td><a href="https://cursor.com/blog" target="_blank">Cursor 宣布与 SpaceX 合作开展模型训练，AI 编程工具进入航天专业领域</a></td><td><a href="https://cursor.com/blog" target="_blank">Cursor/SpaceX</a></td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
+                        <tr><td>04-24</td><td><a href="https://replit.com/site/blog/ghostwriter-3" target="_blank">Replit Ghostwriter 3.0 发布多 Agent 协作模式，支持自主规划→并行执行→验证完整循环</a></td><td><a href="https://replit.com/site/blog/ghostwriter-3" target="_blank">Replit</a></td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
                     </tbody>
                 </table>
             </div>
@@ -385,12 +389,12 @@
                         <tr><th>日期</th><th>事件</th><th>来源</th><th>重要度</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td>04-22</td><td>Anthropic Labs 发布 Claude Design，支持自然语言生成完整设计作品，非专业人士可完成设计</td><td>Anthropic</td><td><span class="star">⭐⭐⭐⭐⭐</span></td></tr>
-                        <tr><td>04-22</td><td>Figma 发布 AI 全面升级版本，支持 AI 生成组件、自动布局优化、设计稿→代码一键转换</td><td>Figma</td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
+                        <tr><td>04-22</td><td><a href="https://weixin.sogou.com/weixin?type=2&query=Claude Design来了设计师的天塌了" target="_blank">Anthropic Labs 发布 Claude Design，支持自然语言生成完整设计作品，非专业人士可完成设计</a></td><td><a href="https://weixin.sogou.com/weixin?type=2&query=Claude Design来了设计师的天塌了" target="_blank">Anthropic</a></td><td><span class="star">⭐⭐⭐⭐⭐</span></td></tr>
+                        <tr><td>04-22</td><td><a href="https://figma.com/blog/design-to-code-ai/" target="_blank">Figma 发布 AI 全面升级版本，支持 AI 生成组件、自动布局优化、设计稿→代码一键转换</a></td><td><a href="https://figma.com/blog/design-to-code-ai/" target="_blank">Figma</a></td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
                         <tr><td>04-22</td><td>Canva AI 全面升级，引入多模态创作能力，教育场景深度优化，平台型 AI 应用重新定义创作</td><td>Canva</td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
-                        <tr><td>04-23</td><td>OpenAI 发布 ChatGPT Workspace Agents，企业可创建跨工具、跨团队自动运行的 AI 代理</td><td>OpenAI</td><td><span class="star">⭐⭐⭐⭐⭐</span></td></tr>
-                        <tr><td>04-23</td><td>OpenAI Agents SDK 重大更新，智能体可读写工作空间数据，增强与真实工作流的集成</td><td>OpenAI</td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
-                        <tr><td>04-24</td><td>国内视频生成"百铲大战"：腾讯长视频一致性、某公司代码驱动、字节实时生成三路并进</td><td>国内三家</td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
+                        <tr><td>04-23</td><td><a href="https://openai.com/index/introducing-workspace-agents-in-chatgpt/" target="_blank">OpenAI 发布 ChatGPT Workspace Agents，企业可创建跨工具、跨团队自动运行的 AI 代理</a></td><td><a href="https://openai.com/index/introducing-workspace-agents-in-chatgpt/" target="_blank">OpenAI</a></td><td><span class="star">⭐⭐⭐⭐⭐</span></td></tr>
+                        <tr><td>04-23</td><td><a href="https://openai.com/index/the-next-evolution-of-the-agents-sdk/" target="_blank">OpenAI Agents SDK 重大更新，智能体可读写工作空间数据，增强与真实工作流的集成</a></td><td><a href="https://openai.com/index/the-next-evolution-of-the-agents-sdk/" target="_blank">OpenAI</a></td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
+                        <tr><td>04-24</td><td><a href="https://weixin.sogou.com/weixin?type=2&query=AI视频+百铲大战+腾讯+快手+字节+多模态+指标竞争" target="_blank">国内视频生成"百铲大战"：腾讯长视频一致性、某公司代码驱动、字节实时生成三路并进</a></td><td><a href="https://weixin.sogou.com/weixin?type=2&query=AI视频+百铲大战+腾讯+快手+字节+多模态+指标竞争" target="_blank">国内三家</a></td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
                     </tbody>
                 </table>
             </div>
@@ -407,9 +411,9 @@
                         <tr><th>日期</th><th>事件</th><th>来源</th><th>重要度</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td>04-21</td><td>OpenAI 完成 $1220亿融资，估值 $1500亿，科技史上最大单笔融资，微软英伟达领投</td><td>OpenAI</td><td><span class="star">⭐⭐⭐⭐⭐</span></td></tr>
-                        <tr><td>04-21</td><td>Mastercard 发布《代理式商务白皮书》，提出 Agent ID 概念，AI代理身份管理成新产业方向</td><td>Mastercard</td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
-                        <tr><td>04-22</td><td>2026年Q1全球风险投资创历史新高，AI初创公司获$2420亿，同比增长150%，占总VC 80%+</td><td>Crunchbase</td><td><span class="star">⭐⭐⭐⭐⭐</span></td></tr>
+                        <tr><td>04-21</td><td><a href="https://www.bloomberg.com/news/articles/2026-04-17/openai-raises-122-billion" target="_blank">OpenAI 完成 $1220亿融资，估值 $1500亿，科技史上最大单笔融资，微软英伟达领投</a></td><td><a href="https://www.bloomberg.com/news/articles/2026-04-17/openai-raises-122-billion" target="_blank">OpenAI</a></td><td><span class="star">⭐⭐⭐⭐⭐</span></td></tr>
+                        <tr><td>04-21</td><td><a href="https://www.mastercard.com/news/press/2026/april/agent-commerce-whitepaper/" target="_blank">Mastercard 发布《代理式商务白皮书》，提出 Agent ID 概念，AI代理身份管理成新产业方向</a></td><td><a href="https://www.mastercard.com/news/press/2026/april/agent-commerce-whitepaper/" target="_blank">Mastercard</a></td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
+                        <tr><td>04-22</td><td><a href="https://news.crunchbase.com/venture/record-breaking-funding-ai-global-q1-2026/" target="_blank">2026年Q1全球风险投资创历史新高，AI初创公司获$2420亿，同比增长150%，占总VC 80%+</a></td><td><a href="https://news.crunchbase.com/venture/record-breaking-funding-ai-global-q1-2026/" target="_blank">Crunchbase</a></td><td><span class="star">⭐⭐⭐⭐⭐</span></td></tr>
                         <tr><td>04-22</td><td>DeepSeek 完成成立以来首次融资，估值 XXX 亿美元，标志国产基础模型进入资本化阶段</td><td>DeepSeek</td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
                         <tr><td>04-23</td><td>AI Agent 工程师年薪图谱发布，"百万年薪只是起步"，人才争夺战日趋激烈</td><td>行业报告</td><td><span class="star">⭐⭐⭐</span></td></tr>
                     </tbody>
@@ -428,12 +432,12 @@
                         <tr><th>日期</th><th>事件</th><th>来源</th><th>重要度</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td>04-21</td><td>OpenAI Agent Cloud + 华为云盘古5.0同步落地，边缘化与零代码化两条企业AI路径并行推进</td><td>OpenAI/华为</td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
-                        <tr><td>04-22</td><td>摩根大通AI转型案例：200年历史银行已成全球第一AI企业，风控/客服/交易全面AI化，年投超$10亿</td><td>摩根大通</td><td><span class="star">⭐⭐⭐⭐⭐</span></td></tr>
-                        <tr><td>04-23</td><td>特斯拉中国车机系统将接入字节豆包和DeepSeek大模型，已完成备案</td><td>特斯拉/字节</td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
-                        <tr><td>04-23</td><td>Web4.0概念提出：AI智能体主导的意图协作网络，人机交互范式面临根本性变化</td><td>行业</td><td><span class="star">⭐⭐⭐</span></td></tr>
-                        <tr><td>04-24</td><td>微软发布2026制造业AI转型报告，工业AI生态完善，2026年成为制造业智能体时刻转折点</td><td>微软</td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
-                        <tr><td>04-25</td><td>Deloitte发布2026企业AI状态报告，显示更多传统企业开始系统性部署AI，从试点进入规模化落地</td><td>Deloitte</td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
+                        <tr><td>04-21</td><td><a href="https://blog.cloudflare.com/openai-agent-cloud/" target="_blank">OpenAI Agent Cloud + 华为云盘古5.0同步落地，边缘化与零代码化两条企业AI路径并行推进</a></td><td><a href="https://blog.cloudflare.com/openai-agent-cloud/" target="_blank">OpenAI/华为</a></td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
+                        <tr><td>04-22</td><td><a href="https://www.linkedin.com/posts/gabeweiss_jpmorgan-ai-transformation-case-study-feb-activity-7432435443713036288-nw_3" target="_blank">摩根大通AI转型案例：200年历史银行已成全球第一AI企业，风控/客服/交易全面AI化，年投超$10亿</a></td><td><a href="https://www.linkedin.com/posts/gabeweiss_jpmorgan-ai-transformation-case-study-feb-activity-7432435443713036288-nw_3" target="_blank">摩根大通</a></td><td><span class="star">⭐⭐⭐⭐⭐</span></td></tr>
+                        <tr><td>04-23</td><td><a href="https://weixin.sogou.com/weixin?type=2&query=特斯拉车机将接入豆包与DeepSeek" target="_blank">特斯拉中国车机系统将接入字节豆包和DeepSeek大模型，已完成备案</a></td><td><a href="https://weixin.sogou.com/weixin?type=2&query=特斯拉车机将接入豆包与DeepSeek" target="_blank">特斯拉/字节</a></td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
+                        <tr><td>04-23</td><td><a href="https://weixin.sogou.com/weixin?type=2&query=Web4.0AI智能体主导的意图协作网络" target="_blank">Web4.0概念提出：AI智能体主导的意图协作网络，人机交互范式面临根本性变化</a></td><td><a href="https://weixin.sogou.com/weixin?type=2&query=Web4.0AI智能体主导的意图协作网络" target="_blank">行业</a></td><td><span class="star">⭐⭐⭐</span></td></tr>
+                        <tr><td>04-24</td><td><a href="https://weixin.sogou.com/weixin?type=2&query=2026制造业转折点+前沿公司+智能体时刻" target="_blank">微软发布2026制造业AI转型报告，工业AI生态完善，2026年成为制造业智能体时刻转折点</a></td><td><a href="https://weixin.sogou.com/weixin?type=2&query=2026制造业转折点+前沿公司+智能体时刻" target="_blank">微软</a></td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
+                        <tr><td>04-25</td><td><a href="https://www.deloitte.com/us/en/what-we-do/capabilities/applied-artificial-intelligence/content/state-of-ai-in-the-enterprise.html" target="_blank">Deloitte发布2026企业AI状态报告，显示更多传统企业开始系统性部署AI，从试点进入规模化落地</a></td><td><a href="https://www.deloitte.com/us/en/what-we-do/capabilities/applied-artificial-intelligence/content/state-of-ai-in-the-enterprise.html" target="_blank">Deloitte</a></td><td><span class="star">⭐⭐⭐⭐</span></td></tr>
                     </tbody>
                 </table>
             </div>
