@@ -51,8 +51,4 @@ PUBLIC_PATH   = PROJECT_ROOT / "public"
 EXPECTED_REMOTE = f"github.com/{EXTERNAL_GITHUB_USER}/{EXTERNAL_REPO_NAME}"
 EXTERNAL_CLONE_URL = f"{EXTERNAL_GITHUB_URL}.git"
 
-# ============================================================
-# 5. Appwrite 配置（订阅系统使用）
-# ============================================================
-APPWRITE_ENDPOINT = "https://INTERNAL_SERVICE_ENDPOINT/v1"
-APPWRITE_PROJECT_ID = "INTERNAL_PROJECT_ID"  # 订阅系统专用 project
+
