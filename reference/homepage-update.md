@@ -139,7 +139,7 @@ function toggleCollapsible(header) {
 | **追踪公司** | `03-tracking-registry/companies/index.md` | 追踪名单更新时 | 140+ |
 | **信息源** | `03-tracking-registry/sources/index.md` | 追踪名单更新时 | 200+ |
 | **深度调研** | `02-deep-research/` 目录文件数 | 新增调研报告时 | — |
-| **知识文档** | `04-knowledge-base/` 目录文件数 | 新增知识文档时 | — |
+| **知识文档** | `04-knowledge-base/` (→ `knowledge/packages/ai-insight/`) 目录文件数 | 新增知识文档时 | — |
 
 ```html
 <div class="stats-grid">

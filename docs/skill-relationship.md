@@ -15,7 +15,7 @@
 | 日报产出 | `01-daily-reports/` | 所有日报归档 |
 | 深度调研 | `02-deep-research/` | 所有调研文档 |
 | 追踪体系 | `03-tracking-registry/` | 人物/公司/信息源清单 |
-| 知识沉淀 | `04-knowledge-base/` | 概念/最佳实践/洞察 |
+| 知识沉淀 | `04-knowledge-base/` → `knowledge/packages/ai-insight/` | 概念/最佳实践/洞察 (Knowledge Hub) |
 | 对外输出 | `05-outputs/` | 报告/演示/文章 |
 | 模板 | `templates/` | 日报/调研模板 |
 

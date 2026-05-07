@@ -14,7 +14,7 @@
   - `01-daily-reports/` - AI日报目录
   - `02-deep-research/` - 深度调研目录
   - `03-tracking-registry/` - 追踪体系目录
-  - `04-knowledge-base/` - 知识沉淀目录
+  - `04-knowledge-base/` → symlink → knowledge/packages/ai-insight/ (Knowledge Hub)
   - `05-outputs/` - 对外输出目录
   - `scripts/` - 自动化脚本目录
 

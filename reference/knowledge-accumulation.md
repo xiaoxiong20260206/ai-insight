@@ -65,11 +65,16 @@
 
 ---
 
-## 知识库结构（四大维度 + 辅助目录）
+## 知识库结构（Knowledge Hub 可插拔架构）
+
+> **物理位置**: `knowledge/packages/ai-insight/`
+> **兼容 symlink**: `04-knowledge-base/` → `knowledge/packages/ai-insight/`
+> **共享层**: 人物/公司画像可 symlink 到 `knowledge/shared/` 避免跨包重复
 
 ```
-04-knowledge-base/
-├── README.md                    # 知识库总索引
+04-knowledge-base/ → symlink → knowledge/packages/ai-insight/
+├── manifest.json                # 包元信息（Knowledge Hub 注册）
+├── README.md                    # 知识包总索引
 ├── 01-models/                   # 📊 模型维度
 │   ├── README.md                # 模型维度索引
 │   └── *.md                     # 模型相关知识文档

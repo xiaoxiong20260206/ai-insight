@@ -252,15 +252,15 @@ message(channel=kim, kimMixCard=<card>, ...)  # 确认后发群
 ### 四大维度 + 辅助目录
 | 维度 | 目录 |
 |------|------|
-| 📊 模型 | `04-knowledge-base/01-models/` |
-| 🤖 Agent | `04-knowledge-base/02-agents/` |
-| 🏢 AI企业 | `04-knowledge-base/03-ai-companies/` |
-| 🏭 企业AI | `04-knowledge-base/04-enterprise-ai/` |
-| 📝 概念 | `04-knowledge-base/concepts/` (models/agents/safety/infrastructure/coding/enterprise) |
-| 👤 人物画像 | `04-knowledge-base/entity-profiles/people/` (**22位**) |
-| 🏢 公司画像 | `04-knowledge-base/entity-profiles/companies/` (**22家**+3家在03-目录) |
-| 💡 洞察 | `04-knowledge-base/insights/` |
-| ✅ 最佳实践 | `04-knowledge-base/best-practices/` |
+| 📊 模型 | `04-knowledge-base/ (→ knowledge/packages/ai-insight/)01-models/` |
+| 🤖 Agent | `04-knowledge-base/ (→ knowledge/packages/ai-insight/)02-agents/` |
+| 🏢 AI企业 | `04-knowledge-base/ (→ knowledge/packages/ai-insight/)03-ai-companies/` |
+| 🏭 企业AI | `04-knowledge-base/ (→ knowledge/packages/ai-insight/)04-enterprise-ai/` |
+| 📝 概念 | `04-knowledge-base/ (→ knowledge/packages/ai-insight/)concepts/` (models/agents/safety/infrastructure/coding/enterprise) |
+| 👤 人物画像 | `04-knowledge-base/ (→ knowledge/packages/ai-insight/)entity-profiles/people/` (**22位**) |
+| 🏢 公司画像 | `04-knowledge-base/ (→ knowledge/packages/ai-insight/)entity-profiles/companies/` (**22家**+3家在03-目录) |
+| 💡 洞察 | `04-knowledge-base/ (→ knowledge/packages/ai-insight/)insights/` |
+| ✅ 最佳实践 | `04-knowledge-base/ (→ knowledge/packages/ai-insight/)best-practices/` |
 
 详见 `reference/knowledge-accumulation.md`
 

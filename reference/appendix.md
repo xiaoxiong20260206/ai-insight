@@ -26,7 +26,7 @@
 ├── 01-daily-reports/             # 日报 + 周报
 ├── 02-deep-research/             # 深度调研
 ├── 03-tracking-registry/         # 追踪体系
-├── 04-knowledge-base/            # 知识库
+├── 04-knowledge-base/ → symlink → knowledge/packages/ai-insight/  # Knowledge Hub
 ├── public/                       # 脱敏公开版
 ├── data/                         # 数据文件
 └── scripts/                      # 自动化脚本
