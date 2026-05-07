@@ -66,7 +66,7 @@ SYNC_DIRS = {
 # 不需要同步的目录/文件（内部专用）
 EXCLUDE_DIRS = {
     "03-tracking-registry",   # 追踪体系（首页已内嵌）
-    "04-knowledge-base",      # 知识库（不对外公开）
+    "04-knowledge-base",      # 知识库（不对外公开，symlink → knowledge/packages/ai-insight/）
     "05-outputs",             # 产出物（不对外公开）
     "templates",              # 模板文件
     "scripts",                # 脚本文件

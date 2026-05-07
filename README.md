@@ -51,7 +51,7 @@ AI-Insight/
 │   ├── companies/index.md       # 公司追踪清单
 │   └── sources/index.md         # 信息源清单
 │
-├── 04-knowledge-base/           # 知识沉淀
+├── 04-knowledge-base/ → symlink → knowledge/packages/ai-insight/  # Knowledge Hub
 │   ├── concepts/                # 概念/框架
 │   │   └── financial/           # 金融概念学习
 │   ├── best-practices/          # 最佳实践

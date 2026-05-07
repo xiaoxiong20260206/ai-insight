@@ -455,11 +455,11 @@ for s in active:
 
 ## Step 6: 知识沉淀 (P1)
 
-从 🔴 重要资讯中按板块分流沉淀:
-- 大模型 → `04-knowledge-base/01-models/`
-- AI Coding → `04-knowledge-base/02-agents/`
-- AI行业 → `04-knowledge-base/03-ai-companies/`
-- 企业转型 → `04-knowledge-base/04-enterprise-ai/`
+从 🔴 重要资讯中按板块分流沉淀（Knowledge Hub 架构，`04-knowledge-base/` 为 symlink 兼容层）:
+- 大模型 → `04-knowledge-base/01-models/`（= `knowledge/packages/ai-insight/01-models/`）
+- AI Coding → `04-knowledge-base/02-agents/`（= `knowledge/packages/ai-insight/02-agents/`）
+- AI行业 → `04-knowledge-base/03-ai-companies/`（= `knowledge/packages/ai-insight/03-ai-companies/`）
+- 企业转型 → `04-knowledge-base/04-enterprise-ai/`（= `knowledge/packages/ai-insight/04-enterprise-ai/`）
 
 ---
 
