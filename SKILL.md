@@ -1,6 +1,9 @@
 ---
 name: sl-ai-insight
-description: "AI行业洞察平台专属技能。唤醒：「AI洞察」「AI日报」「AI周报」「跑一下日报」「AI有什么动态」「AI深度调研」。不唤醒：研发效能用sl-rd-efficiency-insight。"
+description: AI行业洞察平台专属技能。唤醒：「AI洞察」「AI日报」「AI周报」「跑一下日报」「AI有什么动态」「AI深度调研」。不唤醒：研发效能用sl-rd-efficiency-insight。
+export:
+  policy: never
+  reason: 快手AI洞察项目，公司绑定+个人定制
 ---
 
 # sl-ai-insight — AI行业洞察
