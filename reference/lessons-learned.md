@@ -720,3 +720,23 @@ W18 周报卡片直接复用 MD 全文内容，Top 5 每条展开3段正文+3条
 
 ### 核心教训
 > **部署≠发布。文件 push 了不代表用户能看到正确的入口。首页和索引是用户找到内容的唯一路径，它们必须和内容同步更新——否则产出了等于没产出。**
+
+---
+
+## 2026-05-08: 内部站 Pages 404 根因与修复（教训 #114）
+
+- **现象**: 05-07/05-08 日报在内部站（ai-insight）404，外部站（ai-insight-public）200
+- **根因链**:
+  1. GitHub Pages native deployment 的 `Upload artifact` 步骤持续失败（3次）
+  2. peaceiris/actions-gh-pages workflow 成功部署了 gh-pages 分支内容
+  3. 但 `public/01-daily-reports/` 里只有跳转页 `.html`（指向 `-v3.html`），没有完整版
+  4. 完整版 `-v3.html` 只在仓库根目录的 `01-daily-reports/` 里，不在 `public/` 里
+  5. Pages 只部署 `public/` 目录 → 跳转页部署成功但跳转目标 404
+- **修复**:
+  1. 删除 `public/` 里所有 `-v3.html`（含内网敏感信息，不应在 public/ 中）
+  2. 确保 `sync_to_public.py` 正确生成脱敏完整版 `.html`（不带 -v3 后缀）
+  3. 手动触发 gh-pages 重建
+  4. orchestrator v9.12 新增 Pages 可达性验证（finalize 后 curl 验证 + 失败自动重建）
+- **关键认知**: `public/` 目录的双重角色——既是内部站 Pages 部署源，又是外部版同步源。v3 文件不能进 public/（敏感词泄露），但 public/ 的日报 HTML 必须是完整版（不是跳转页）
+- **⛔ 红线**: `public/` 里禁止存在 `-v3.html` 文件（敏感词泄露 + Pages 跳转死链）；`public/` 里的日报 `.html` 必须是脱敏完整版（≥50KB，不是跳转页）
+- **⛔ 红线**: finalize 后必须验证 Pages 可达性（curl 200），失败时自动触发重建最多3次
