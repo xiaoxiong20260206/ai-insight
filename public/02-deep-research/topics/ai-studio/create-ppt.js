@@ -196,7 +196,7 @@ const steps = [
     icon: "⚙️", 
     title: "技术架构设计", 
     desc: "设计研发Agent Infra\n6层分层设计\n支撑产品落地",
-    color: "8B5AI助手平台6",
+    color: "8B5CF6",
     highlights: ["6层架构分层设计", "能力层核心原子", "Multi-Agent编排"]
   }
 ];
@@ -299,7 +299,7 @@ const analysisStats = [
   { value: "48", label: "总工作任务", color: "3B82F6" },
   { value: "25", label: "研发场景任务", color: "6366F1" },
   { value: "23", label: "非研发场景任务", color: "10B981" },
-  { value: "9", label: "Agent类型", color: "8B5AI助手平台6" }
+  { value: "9", label: "Agent类型", color: "8B5CF6" }
 ];
 
 analysisStats.forEach((stat, i) => {
@@ -463,7 +463,7 @@ touchpoints.forEach((tp, i) => {
 // Agentic理念说明
 slide5.addShape(pres.shapes.RECTANGLE, {
   x: 0.5, y: 4.55, w: 9.0, h: 0.85,
-  fill: { color: "EAI助手平台DF5" },
+  fill: { color: "ECFDF5" },
   line: { color: "10B981", width: 1 }
 });
 
@@ -482,7 +482,7 @@ slide6.background = { color: COLORS.white };
 // 顶部色条
 slide6.addShape(pres.shapes.RECTANGLE, {
   x: 0, y: 0, w: 10, h: 0.08,
-  fill: { color: "8B5AI助手平台6" }
+  fill: { color: "8B5CF6" }
 });
 
 slide6.addText("⚙️ STEP 3: Agent Infra 技术架构", {
@@ -500,7 +500,7 @@ slide6.addText("6层分层架构设计，支撑产品落地", {
 const layers = [
   { name: "产品层", desc: "IDE、Web、IM、CLI", color: "3B82F6" },
   { name: "应用层", desc: "Coding Agent、Chatbot Agent...", color: "6366F1" },
-  { name: "编排层", desc: "Multi-Agent协作、任务分解", color: "8B5AI助手平台6" },
+  { name: "编排层", desc: "Multi-Agent协作、任务分解", color: "8B5CF6" },
   { name: "实现层", desc: "统一Agent SDK", color: "A855F7" },
   { name: "能力层", desc: "工具、记忆、知识、推理", color: "C084FC" },
   { name: "基础设施层", desc: "安全、可观测、模型网关", color: "E879F9" }
@@ -534,7 +534,7 @@ layers.forEach((layer, i) => {
 slide6.addShape(pres.shapes.RECTANGLE, {
   x: 0.5, y: 5.0, w: 9.0, h: 0.5,
   fill: { color: "F3E8FF" },
-  line: { color: "8B5AI助手平台6", width: 1 }
+  line: { color: "8B5CF6", width: 1 }
 });
 
 slide6.addText("🏛️ 分层解耦：各层各司其职，产品触点与Agent逻辑解耦，灵活扩展", {
