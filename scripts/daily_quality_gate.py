@@ -528,6 +528,29 @@ def check_tab_balance(date_str: str) -> CheckResult:
                 severity="warning"
             )
         
+        # v11.0新增: 单板块超过5条 → warning (信息过载)
+        overload_tabs = []
+        for i, tab in enumerate(tabs):
+            news = tab.get("news", {})
+            count = len(news.get("overseas", [])) + len(news.get("china", []))
+            name = tab_names[i] if i < len(tab_names) else f"Tab{i}"
+            if count > 5:
+                overload_tabs.append(f"{name}({count}条)")
+        
+        if overload_tabs:
+            overload_note = f" ⚠️ 板块过载: {', '.join(overload_tabs)}(建议≤5条)"
+            if thin_tabs:
+                return CheckResult(
+                    "板块均衡", True,
+                    f"偏薄: {', '.join(thin_tabs)}(建议>=2条){overload_note}。分布: {', '.join(tab_counts)}",
+                    severity="warning"
+                )
+            return CheckResult(
+                "板块均衡", True,
+                f"分布: {', '.join(tab_counts)}{overload_note}",
+                severity="warning"
+            )
+        
         return CheckResult(
             "板块均衡", True,
             f"均衡: {', '.join(tab_counts)}"
@@ -853,14 +876,15 @@ def check_cross_day_dedup(date_str: str) -> CheckResult:
                         "tab": tab_idx
                     })
         
-        issues = []
+        issues_error = []  # 同报URL重复 → error (阻断部署)
+        issues_warning = []  # 跨天标题重复 → warning
         
-        # 2. 同报去重: 检查同一URL在不同tab中出现
+        # 2. 同报去重: 检查同一URL在不同tab中出现 (v11.0: 升为error)
         url_tabs = {}
         for ci in current_items:
             url = ci["url"]
             if url and url in url_tabs:
-                issues.append(f"同报重复: {ci['title'][:20]}...(出现在tab{url_tabs[url]}和tab{ci['tab']})")
+                issues_error.append(f"同报URL重复: {ci['title'][:20]}...(同一URL出现在不同板块)")
             elif url:
                 url_tabs[url] = ci["tab"]
         
@@ -883,34 +907,44 @@ def check_cross_day_dedup(date_str: str) -> CheckResult:
         for ci in current_items:
             title = ci["title"].strip()
             if title and title in prev_titles:
-                issues.append(f"跨天重复: {title[:25]}...")
+                issues_warning.append(f"跨天重复: {title[:25]}...")
         
         # 模糊匹配: 标题相似度 > 80% (简化版：提取关键实体比较)
         for ci in current_items:
             title = ci["title"].strip()
             for pt in prev_titles:
-                # 去掉来源和日期后比较核心内容
                 core_current = re.sub(r'[\[\]|·\d月日年]', '', title)
                 core_prev = re.sub(r'[\[\]|·\d月日年]', '', pt)
                 if len(core_current) > 10 and len(core_prev) > 10:
-                    # 简单Jaccard相似度
                     set_c = set(core_current)
                     set_p = set(core_prev)
                     intersection = set_c & set_p
                     union = set_c | set_p
                     if union and len(intersection) / len(union) > 0.75:
-                        if title not in prev_titles:  # 排除精确匹配已报告的
-                            issues.append(f"疑似旧闻: {title[:25]}...")
+                        if title not in prev_titles:
+                            issues_warning.append(f"疑似旧闻: {title[:25]}...")
                             break
         
-        if issues:
-            # 去重issues
-            unique_issues = list(dict.fromkeys(issues))
-            examples = "; ".join(unique_issues[:3])
-            suffix = f" (+{len(unique_issues)-3}条)" if len(unique_issues) > 3 else ""
+        # 同报URL重复 → error (阻断); 跨天重复 → warning
+        if issues_error:
+            unique_err = list(dict.fromkeys(issues_error))
+            examples = "; ".join(unique_err[:3])
+            suffix = f" (+{len(unique_err)-3}条)" if len(unique_err) > 3 else ""
+            warn_note = f" | 另有{len(issues_warning)}处跨天重复(warning)" if issues_warning else ""
             return CheckResult(
                 "去重", False,
-                f"⚠️ {len(unique_issues)}处重复: {examples}{suffix}",
+                f"❌ {len(unique_err)}处同报URL重复: {examples}{suffix}{warn_note}",
+                fixable=False,
+                severity="error"
+            )
+        
+        if issues_warning:
+            unique_warn = list(dict.fromkeys(issues_warning))
+            examples = "; ".join(unique_warn[:3])
+            suffix = f" (+{len(unique_warn)-3}条)" if len(unique_warn) > 3 else ""
+            return CheckResult(
+                "去重", False,
+                f"⚠️ {len(unique_warn)}处跨天重复: {examples}{suffix}",
                 fixable=False,
                 severity="warning"
             )
@@ -1024,11 +1058,11 @@ def check_source_diversity(date_str: str) -> CheckResult:
             else:
                 errors.append(f"❌ 微信覆盖为0(要求>=2条直接引用)")
         
-        # 小红书覆盖不足: 0条 → WARNING (仅提示, v9.8变更: 默认不搜索小红书)
+        # v11.0: 小红书不纳入日常，默认不搜索，覆盖0时不显示提醒
         effective_xhs = max(xhs_count, xhs_refs_in_meta)
-        xhs_warning = None
-        if effective_xhs == 0:
-            xhs_warning = "⚠️ 小红书覆盖为0(如需搜索小红书请明确说明)"
+        xhs_note = ""
+        if effective_xhs > 0:
+            xhs_note = f", 小红书{effective_xhs}"
         
         # 信息源集中度 > 40% → ERROR
         for domain, count in sorted(domain_counts.items(), key=lambda x: -x[1]):
@@ -1047,15 +1081,7 @@ def check_source_diversity(date_str: str) -> CheckResult:
         # 构建通过消息
         domain_summary = ", ".join(f"{d}({c})" for d, c in 
                                    sorted(domain_counts.items(), key=lambda x: -x[1])[:5])
-        coverage_msg = f"微信直引{weixin_direct}+交叉{weixin_crossref}, 小红书{effective_xhs}"
-        
-        # v9.8: 如果有小红书警告，但没有错误，作为WARNING返回(不阻断部署)
-        if xhs_warning and not errors:
-            return CheckResult(
-                "信息源多样性", True,  # passed=True，不阻断
-                f"{coverage_msg}, Top域名: {domain_summary}. {xhs_warning}",
-                severity="warning"
-            )
+        coverage_msg = f"微信直引{weixin_direct}+交叉{weixin_crossref}{xhs_note}"
         
         return CheckResult(
             "信息源多样性", True, 

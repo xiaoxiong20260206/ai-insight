@@ -1,23 +1,22 @@
-# AI日报搜索关键词清单 (v4.1)
+# AI日报搜索关键词清单 (v4.2)
 
-> **版本**: v4.1
-> **更新时间**: 2026-03-20
+> **版本**: v4.2
+> **更新时间**: 2026-05-09
 > **说明**: 按板块组织的搜索关键词，用于 Step 1 两层搜索（含话题热词搜索策略）
-> **v4.1变更**: 合并品牌重叠搜索，减少搜索次数 ~35次 → ~22次；固定信源改为直接 fetch_web 拉取
+> **v4.2变更**: 新增5月热词(Claude Opus 4.7/Gemini 2.5/DeepSeek V4 Pro/Vera Rubin/CodeFlicker KATE)，小红书策略改为默认不搜索(v11.0)
 
 ---
 
 ## 搜索架构
 
 ```
-L1 广扫 (必做): search_web + weixin_search + xiaohongshu search
+L1 广扫 (必做): search_web + weixin_search
 ├── 海外搜索: 每板块1-2次（v4.1: 5板块共约10次）
 ├── 国内搜索: 每板块1-2次（v4.1: 合并品牌重叠，约8次）
 ├── 微信搜索: 每板块至少1次，全局不超过10次
 │   ├── 轨道A 账号搜索: 按L1公众号名称搜索（v4.1: 2次广覆盖代替5次单板块）
 │   └── 轨道B 话题搜索: 按海外热词翻译后的中文关键词搜索 ← v4.0新增
-└── 小红书搜索: **强制搜索**国内热点和用户讨论 (P0必做，≥1条入报，质量门v9.1硬阻断)
-                v4.1: "AI最新动态"与"大模型 今天"高度重叠，合并为2次
+└── 小红书搜索: **默认不搜索**（v11.0变更：从P0强制改为默认关闭，仅当用户明确要求时才执行）
 
 L1.5 固定信源直拉 (v4.1新增): fetch_web直接拉取，跳过搜索噪音
 ├── cursor.com/changelog — AI Coding最新版本
@@ -53,6 +52,9 @@ L2 精研 (按需): 多轮 search_web + fetch_web
 | Vibe Coding | `weixin_search("Vibe Coding 编程 方法论")` |
 | GPT-5 self-learning | `weixin_search("GPT-5 自我学习 突破")` |
 | BuzzFeed AI failure | `weixin_search("BuzzFeed AI转型 失败 教训")` |
+| Claude Mythos | `weixin_search("Anthropic Mythos 安全 能力")` |
+| Vera Rubin GPU | `weixin_search("英伟达 Vera Rubin GPU 深度")` |
+| DeepSeek V4 Pro | `weixin_search("DeepSeek V4 价格 API 最新")` |
 
 ### 筛选标准
 - 有独到分析角度（非简单翻译/转载海外报道）
@@ -70,6 +72,10 @@ L2 精研 (按需): 多轮 search_web + fetch_web
 "Google Gemini news {今日日期}"
 "Meta Llama update"
 "AI model release {月份} 2026"
+"Claude Opus 4.7 Mythos news today"     # v4.2新增: 2026年5月核心模型
+"Gemini 2.5 Pro Flash update {今日日期}"  # v4.2新增
+"DeepSeek V4 Pro API news"               # v4.2新增
+"Vera Rubin GPU NVIDIA"                  # v4.2新增: 下一代算力热词
 ```
 
 ### 国内搜索
@@ -79,6 +85,7 @@ L2 精研 (按需): 多轮 search_web + fetch_web
 "字节 AI 今天"                   # v4.1合并: 豆包+Trae+字节系统一搜索
 "阿里 通义 Qwen 最新"
 "百度 文心 ERNIE 最新"           # v4.1合并: 文心一言不再单独搜，与百度AI合并
+"CodeFlicker KATE AI编程 最新"   # v4.2新增: 快手AI编程平台热词
 ```
 
 > **v4.1注意**: 字节豆包(大模型)与Trae(AI Coding)的搜索已合并为一次 `"字节 AI 今天"`，
@@ -253,16 +260,18 @@ weixin_search("数字化转型")
 
 ---
 
-## 小红书强制搜索 (P0)
+## 小红书搜索 (可选 — v11.0变更)
 
-> v4.1: 合并高度重叠的关键词，从3次减为2次
+> **v11.0变更**: 小红书搜索从P0强制改为默认关闭。仅当用户明确要求"搜索小红书"或"包含小红书"时才执行。
+> 原因：小红书搜索脚本稳定性不足，且与微信话题搜索高度重叠，ROI偏低。
 
 ```
-xiaohongshu.search("AI 今天")          # 合并原来的"AI最新动态"+"大模型 今天"
+# 仅当用户要求时执行:
+xiaohongshu.search("AI 今天")
 xiaohongshu.search("{当日热点关键词}")
 ```
 
-**要求**: 至少1条小红书来源进入日报，质量门v9.1硬阻断
+**要求**: 如用户要求搜索小红书，则至少1条小红书来源进入日报。默认不搜索时不做覆盖要求。
 
 ---
 
