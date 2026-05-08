@@ -584,7 +584,7 @@ assert path_depth >= 2, f"URL太浅({path_depth})，可能是首页: {url}"
 | check_board_classification | WARNING | **ERROR** |
 | check_region_classification | WARNING | **ERROR** |
 | check_source_diversity (微信) | WARNING | **ERROR** |
-| check_source_diversity (小红书) | 不检查 | **ERROR** (新增) |
+| check_source_diversity (小红书) | 不检查 | **v11.0: 不纳入日常，仅用户要求时搜索** (warning → skip) |
 | check_source_diversity (集中度) | WARNING | **ERROR** |
 
 ### 核心原则
@@ -620,7 +620,7 @@ python3 scripts/daily_quality_gate.py YYYY-MM-DD --fix
 # 10. ⛔ 板块分类验证 (v9.1 升级为error，分类错误阻断部署)
 # 11. ⛔ 地区分类验证 (v9.1 升级为error，地区错误阻断部署)
 # 12. 跨天去重+同报去重 (v3.0, warning)
-# 13. ⛔ 信息源多样性 — 微信>=2+小红书>=1+集中度<=40% (v9.1 升级为error)
+# 13. ⛔ 信息源多样性 — 微信>=2+集中度<=40% (v11.0: 小红书不纳入日常)
 # 14. HTML链接规范 — target=_blank (v2.0, error, 可修复)
 # 15. MD/HTML文件存在性 (error)
 # 16. 6处联动更新 (error, 可修复)

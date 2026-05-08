@@ -484,6 +484,9 @@ def generate_html(data: dict) -> str:
         df_data = tab_data.get("deep_focus") or tab_data.get("focus")
         deep_focus_html = render_deep_focus(df_data, tab_data.get("theme", "")) if df_data else ""
         pi_html = tab_data.get("pattern_insight_html", "") or tab_data.get("pattern_insight", "")
+        # v11.0: pi-card兜底 — 内容缺失或结构不完整时用默认模板
+        if not pi_html or len(pi_html) < 50 or "pi-card" not in pi_html:
+            pi_html = f'<div class="pi-card"><div class="pi-title">规律洞察</div><div class="pi-content">本板块暂无规律洞察，关注后续更新。</div></div>'
 
         section_blocks.append(f'''
             <!-- ===== {name} ===== -->
