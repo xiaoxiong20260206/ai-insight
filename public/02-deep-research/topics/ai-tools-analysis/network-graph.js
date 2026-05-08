@@ -861,7 +861,7 @@ const roleData = {
         id: 'role-marketing',
         percentage: 8,
         icon: '📣',
-        color: '#8B5CF6',
+        color: '#8B5AI助手平台6',
         scenes: {
             '内容创作': {
                 id: 'scene-content',
