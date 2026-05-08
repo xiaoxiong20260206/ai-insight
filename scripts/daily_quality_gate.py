@@ -193,16 +193,30 @@ def check_link_validity(date_str: str) -> CheckResult:
         invalid_examples = []
         all_urls = []
         
+        empty_url_count = 0
+        empty_url_examples = []
         for tab in data.get("tabs", []):
             for region in ['overseas', 'china']:
                 for item in tab.get('news', {}).get(region, []):
                     url = item.get('url', '')
-                    if url == '#' or (url and not url.startswith('http')):
+                    title_short = item.get('title', '')[:30]
+                    source = item.get('source', '')
+                    if not url or url.strip() == '':
+                        # v11.0: 微信来源的空URL是合规的（封闭平台决策树允许），其余来源的空URL是警告
+                        if '微信' not in source and '(微信)' not in source:
+                            empty_url_count += 1
+                            if len(empty_url_examples) < 3:
+                                empty_url_examples.append(f"{title_short}(空URL,非微信来源)")
+                        # 微信空URL不计入invalid，但统计数量供参考
+                    elif url == '#' or not url.startswith('http'):
                         invalid_count += 1
                         if len(invalid_examples) < 3:
-                            invalid_examples.append(f"{item.get('title', '')[:20]}→")
-                    elif url.startswith('http'):
-                        all_urls.append((url, item.get('title', '')[:30]))
+                            invalid_examples.append(f"{title_short}→")
+                    else:
+                        all_urls.append((url, title_short))
+        # 非微信来源的空URL累加到invalid
+        invalid_count += empty_url_count
+        invalid_examples.extend(empty_url_examples)
         
         # v9.8: 优先复用 orchestrator 的缓存，避免重复 HTTP 请求
         unreachable = []

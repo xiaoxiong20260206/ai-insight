@@ -606,12 +606,14 @@ python3 scripts/daily_quality_gate.py YYYY-MM-DD --fix
 # 检查项 (19项):
 # 1. JSON文件存在性 (error)
 # 2. 中文引号检测 (error, 可修复)
-# 3. 链接有效性+URL抽检 (error, 可修复)
+# 3. 链接有效性+URL抽检 [v11.0增强] (error, 可修复)
+#    - 禁止 # 占位符 + 非http链接
+#    - v11.0新增: 非微信来源空URL视为invalid (微信空URL合规)
 # 4. 内容非空 (error)
 # 5. ⭐ [v10.0新增] 林克自述(capability_update)必填检查 (error)
 # 4.5 ⭐ 板块均衡 — 5个tab每个至少有内容 (v9.0, error/warning)
 # 5. 内容量 — 防修复缩水 (v8.3, warning)
-# 6. 时效性验证 — N-1日08:00~N日08:00窗口 (v2.0, error)
+# 6. 时效性验证(v11.0多维度) — 四维检测: date字段+source日期+URL嵌入日期+标题时间锚点 (error)
 # 7. ⭐ 日期篡改检测 — 快照对比+可疑模式识别 (v8.0, error)
 # 8. ⭐ 封闭平台链接合规 — 禁mp.weixin+禁搜狗跳转 (v8.0, error)
 # 9. ⭐ 小红书noteId真实性 — ObjectId时间戳90天窗口 (v8.1, error)
