@@ -659,9 +659,87 @@ def cmd_finalize(date: str) -> bool:
     # ===== 4位置终态摘要（v9.10新增：用户不必从截断的部署日志里自己找） =====
     _show_4_positions_summary(date)
 
+    # ===== Pages 可达性验证（v9.12新增：防止部署后404） =====
+    pages_ok = _verify_pages_accessibility(date, max_retries=3, wait_seconds=90)
+    if not pages_ok:
+        print("\n⚠️ Pages 可达性验证失败，但 finalize 不阻断。")
+        print("   MixCard 按钮将指向已验证可达的站点。")
+
     print(f"\n✅ Finalize 完成！下一步: KIM推送")
     print(f"   python3 scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/card.json --with-summary")
     return True
+
+def _verify_pages_accessibility(date: str, max_retries: int = 3, wait_seconds: int = 90) -> bool:
+    """v9.12新增: 验证 GitHub Pages 上日报 HTML 可达，失败时触发重建并重试。
+    
+    根因经验 #114: Pages 部署成功但文件未渲染 → 404。
+    可能原因: (1) Pages build 被限流 (2) gh-pages 分支缺文件 (3) public/缺v3→跳转404
+    本函数: 等待部署 → curl验证 → 失败时触发空commit重建 → 重试
+    """
+    import urllib.request
+    import time
+    
+    month = date[:7]
+    # 内部站和外部站的日报URL
+    internal_url = f"https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/{month}/{date}.html"
+    external_url = f"https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/{month}/{date}.html"
+    
+    print(f"\n🔍 Pages 可达性验证: {date}")
+    print(f"   内部站: {internal_url}")
+    print(f"   外部站: {external_url}")
+    
+    for attempt in range(1, max_retries + 1):
+        # 等待 Pages 部署
+        if attempt > 1:
+            print(f"   第 {attempt} 次重试，等待 {wait_seconds}s 后验证...")
+            time.sleep(wait_seconds)
+        else:
+            print(f"   等待 {wait_seconds}s（Pages部署延迟）...")
+            time.sleep(wait_seconds)
+        
+        # 验证两个站点
+        internal_ok = False
+        external_ok = False
+        
+        try:
+            req = urllib.request.Request(internal_url, method="HEAD")
+            resp = urllib.request.urlopen(req, timeout=10)
+            internal_ok = resp.status == 200
+        except Exception:
+            internal_ok = False
+        
+        try:
+            req = urllib.request.Request(external_url, method="HEAD")
+            resp = urllib.request.urlopen(req, timeout=10)
+            external_ok = resp.status == 200
+        except Exception:
+            external_ok = False
+        
+        print(f"   内部站: {'✅ 200' if internal_ok else '❌ 404'} | 外部站: {'✅ 200' if external_ok else '❌ 404'}")
+        
+        if internal_ok and external_ok:
+            print("  ✅ Pages 可达性验证通过")
+            return True
+        
+        # 失败时触发 Pages 重建（空 commit + push）
+        if not internal_ok or not external_ok:
+            print("   ⚠️ Pages 未达，触发重建...")
+            try:
+                subprocess.run(
+                    ["git", "commit", "--allow-empty", "-m", f"pages rebuild: trigger deployment for {date}"],
+                    capture_output=True, timeout=15, cwd=str(PROJECT_DIR)
+                )
+                subprocess.run(
+                    ["git", "push", "origin", "main"],
+                    capture_output=True, timeout=30, cwd=str(PROJECT_DIR)
+                )
+                print("   ✅ 重建触发成功")
+            except Exception as e:
+                print(f"   ❌ 重建触发失败: {e}")
+    
+    print("  ❌ Pages 可达性验证失败（已重试 {} 次）".format(max_retries))
+    return False
+
 
 def _show_4_positions_summary(date: str) -> None:
     """
