@@ -212,16 +212,26 @@ def git_push() -> bool:
         os.chdir(EXTERNAL_REPO)
 
         # ⭐ v2.3新增：推送前验证 remote 是否指向正确仓库（防止推错账号）
+        # v2.4修复(#113): 同时接受 HTTPS 和 SSH 格式的 remote URL
+        #   HTTPS: https://github.com/xiaoxiong20260206/ai-insight-public.git
+        #   SSH:   git@github.com:xiaoxiong20260206/ai-insight-public.git
         remote_result = subprocess.run(
             ["git", "remote", "get-url", "origin"],
             capture_output=True, text=True
         )
         actual_remote = remote_result.stdout.strip()
-        if EXPECTED_REMOTE not in actual_remote:
+        # 提取仓库标识：无论 HTTPS(/分隔) 还是 SSH(:分隔)，都取 user/repo 部分
+        remote_repo_id = actual_remote
+        for prefix in ["https://github.com/", "git@github.com:", "ssh://git@github.com/"]:
+            if actual_remote.startswith(prefix):
+                remote_repo_id = actual_remote[len(prefix):].rstrip(".git")
+                break
+        if remote_repo_id != f"{EXTERNAL_GITHUB_USER}/{EXTERNAL_REPO_NAME}":
             print(f"❌ [ABORT] remote 验证失败！")
-            print(f"   期望包含: {EXPECTED_REMOTE}")
+            print(f"   期望仓库: {EXTERNAL_GITHUB_USER}/{EXTERNAL_REPO_NAME}")
             print(f"   实际 remote: {actual_remote}")
-            print(f"   请执行: git -C {EXTERNAL_REPO} remote set-url origin https://github.com/xiaoxiong20260206/ai-insight-public.git")
+            print(f"   解析仓库ID: {remote_repo_id}")
+            print(f"   请执行: git -C {EXTERNAL_REPO} remote set-url origin https://github.com/{EXTERNAL_GITHUB_USER}/{EXTERNAL_REPO_NAME}.git")
             return False
         
         # v2.2修复(经验#63): pull --rebase 前先 stash，防止 unstaged changes 中断同步
@@ -431,7 +441,7 @@ def _run_main_logic(args) -> None:
     print()
     print("=" * 50)
     print("📊 同步完成!")
-    print(f"🔗 外部版本: https://xiaoxiong20260206.github.io/ai-insight/")
+    print(f"🔗 外部版本: https://xiaoxiong20260206.github.io/ai-insight-public/")
 
 
 if __name__ == "__main__":
