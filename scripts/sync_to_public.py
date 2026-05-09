@@ -337,7 +337,7 @@ def sync_reports_index(force: bool = False):
 
 
 def sync_index(force: bool = False):
-    """同步根首页（v2.1新增：内部版被污染检测 + 手工区块保护）"""
+    """同步根首页（v3.0：内部版Pages保留林克身份，脱敏版单独推ai-insight-public）"""
     src = PROJECT_ROOT / "index.html"
     dst = PUBLIC_DIR / "index.html"
     
@@ -346,7 +346,6 @@ def sync_index(force: bool = False):
         return False
     
     # ⭐ v2.1: 内部版首页被污染检测（经验#55防护）
-    # 内部版 index.html 应包含「林克」字样，若不包含说明可能被脱敏版覆盖
     content = src.read_text(encoding="utf-8")
     link_count = content.count('林克')
     if link_count == 0:
@@ -355,21 +354,33 @@ def sync_index(force: bool = False):
         print("   如果确认是污染，从最近正确commit恢复: git checkout bcb0937 -- index.html")
         print("   继续同步（将复制当前内容）...")
     else:
-        print(f"✅ 内部版首页内容正常（林克: {link_count}处），开始脱敏同步...")
+        print(f"✅ 内部版首页内容正常（林克: {link_count}处），开始同步...")
     
-    sanitized = sanitize_html(content)
-    if dst.exists():
-        existing_public = dst.read_text(encoding="utf-8")
-        sanitized, preserved = preserve_block(
-            sanitized,
-            existing_public,
-            "<!-- 2. 深度调研 -->",
-            "<!-- 3. 追踪体系 -->",
-        )
-        if preserved:
-            print("🛡️ 已保留公开版手工维护的深度调研区块")
-    dst.write_text(sanitized, encoding="utf-8")
-    print("✅ 已同步首页: index.html")
+    # ⭐ v3.0: public/ 保留原始内容（含林克），用于内部版 Pages 部署
+    # 脱敏版由 ai-insight-public 仓库单独管理
+    dst.write_text(content, encoding="utf-8")
+    print("✅ 已同步首页到 public/（内部版，保留林克身份）")
+    
+    # 同时生成脱敏版到 ai-insight-public 仓库
+    external_repo = PROJECT_ROOT.parent / "ai-insight-public"
+    if external_repo.exists() and external_repo.is_dir():
+        sanitized = sanitize_html(content)
+        ext_dst = external_repo / "index.html"
+        if ext_dst.exists():
+            existing_public = ext_dst.read_text(encoding="utf-8")
+            sanitized, preserved = preserve_block(
+                sanitized,
+                existing_public,
+                "<!-- 2. 深度调研 -->",
+                "<!-- 3. 追踪体系 -->",
+            )
+            if preserved:
+                print("🛡️ 已保留外部版手工维护的深度调研区块")
+        ext_dst.write_text(sanitized, encoding="utf-8")
+        print("✅ 已同步脱敏首页到 ai-insight-public/")
+    else:
+        print("⚠️ ai-insight-public 仓库不存在，跳过脱敏版同步")
+    
     return True
 
 
