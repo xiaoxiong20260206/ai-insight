@@ -120,6 +120,11 @@ REPLACEMENTS = _URL_REPLACEMENTS + [
     (r'我是 <strong>林克</strong>，沈浪的AI分身。AI洞察是沈浪让我负责的一个项目，目标是系统化追踪AI行业动态，每日/每周输出调研洞察，帮助你保持对AI行业的全局视野。覆盖大模型、AI Coding、AI应用、AI行业投融资、企业AI转型五大领域。',
      'AI洞察是一个系统化追踪AI行业动态的项目，每日/每周输出调研洞察，帮助你保持对AI行业的全局视野。覆盖大模型、AI Coding、AI应用、AI行业投融资、企业AI转型五大领域。'),
     
+    # ===== 林克头像图片（外部版去掉头像，保留文字） =====
+    (r'<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">\s*<img src="[^"]*link-avatar-small\.webp"[^>]*>\s*<span>', '<span>'),
+    (r'<div style="text-align:center; margin-bottom:16px;">\s*<img src="link-avatar-small\.webp"[^>]*>\s*</div>', ''),
+    (r'<div style="margin-bottom:12px;">\s*<img src="link-avatar-small\.webp"[^>]*>\s*<strong>林克</strong> · 沈浪的AI分身', '<strong>AI洞察</strong>'),
+    
     # ===== 简单替换（兜底） =====
     (r'林克', 'AI洞察'),
     (r'沈浪', ''),
