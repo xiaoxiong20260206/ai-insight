@@ -15,7 +15,7 @@
             --color-success: #059669;
             --color-success-light: #10B981;
             --color-success-dark: #047857;
-            --color-success-50: #EAI助手平台DF5;
+            --color-success-50: #ECFDF5;
             --color-danger: #E11D48;
             --color-danger-light: #F43F5E;
             --color-warning: #D97706;
@@ -24,7 +24,7 @@
             --color-info-light: #3B82F6;
             --color-info-50: #EFF6FF;
             --color-purple: #7C3AED;
-            --color-purple-light: #8B5AI助手平台6;
+            --color-purple-light: #8B5CF6;
             --color-purple-50: #F5F3FF;
             
             /* 中性色（高对比度）*/
@@ -40,7 +40,7 @@
             /* 渐变色 */
             --gradient-success: linear-gradient(135deg, #059669 0%, #10B981 100%);
             --gradient-hero: linear-gradient(135deg, #059669 0%, #2563EB 50%, #7C3AED 100%);
-            --gradient-badge: linear-gradient(135deg, #EAI助手平台DF5 0%, #EFF6FF 100%);
+            --gradient-badge: linear-gradient(135deg, #ECFDF5 0%, #EFF6FF 100%);
             --gradient-highlight: linear-gradient(135deg, rgba(5,150,105,0.08) 0%, rgba(5,150,105,0.03) 100%);
             --gradient-mesh: 
                 radial-gradient(at 20% 20%, rgba(5,150,105,0.08) 0%, transparent 50%),
@@ -2079,6 +2079,7 @@
     <div class="container">
         <!-- Header -->
         <header class="header">
+            
             <div class="header-badge">
                 <span>🔬</span>
                 <span>AI行业洞察</span>
@@ -2087,7 +2088,19 @@
             <p class="header-subtitle">
                 系统化追踪AI行业动态，每日/每周输出调研洞察，帮助你保持对AI行业的全局视野
             </p>
-            
+            <div style="margin-top: 24px; text-align: center;">
+                <a href="./subscribe/"
+                   style="display: inline-flex; align-items: center; gap: 8px;
+                          background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+                          color: white; padding: 12px 28px; border-radius: 12px;
+                          text-decoration: none; font-weight: 600; font-size: 15px;
+                          box-shadow: 0 4px 14px rgba(5,150,105,0.25);
+                          transition: all 0.2s ease;">
+                    <span style="font-size: 18px;">📧</span>
+                    <span>订阅AI日报</span>
+                    <span style="font-size: 12px; opacity: 0.9;">每天08:00推送</span>
+                </a>
+            </div>
         </header>
         
         <!-- Stats -->
@@ -2163,7 +2176,7 @@
                     </div>
                     <div class="flow-arrow">→</div>
                     <div class="flow-step">
-                        <div class="flow-step-icon" style="background: linear-gradient(135deg, #7C3AED, #8B5AI助手平台6);">🔬</div>
+                        <div class="flow-step-icon" style="background: linear-gradient(135deg, #7C3AED, #8B5CF6);">🔬</div>
                         <div class="flow-step-num">STEP 3</div>
                         <div class="flow-step-title">深度调研</div>
                         <div class="flow-step-desc">从新闻到洞察——不只收集信息，更提炼规律，有论据支撑</div>
@@ -2306,7 +2319,7 @@
                 <!-- 工具栏：统计 + 图例/筛选 -->
                 <div class="research-toolbar">
                     <div class="research-stats">
-                        <span class="research-stat-badge">📊 27篇报告</span>
+                        <span class="research-stat-badge">📊 28篇报告</span>
                         <span class="research-stat-badge">🗓️ 跨2个月</span>
                         <span class="research-stat-badge">持续更新中</span>
                     </div>
@@ -2341,10 +2354,20 @@
                             </div>
                             <div class="timeline-month-info">
                                 <span class="timeline-month-title">2026年4月</span>
-                                <span class="timeline-month-count">10篇</span>
+                                <span class="timeline-month-count">11篇</span>
                             </div>
                         </div>
                         <div class="timeline-cards">
+                            <a href="02-deep-research/topics/anthropic-product-velocity.html" target="_blank" class="timeline-card cat-topic">
+                                <div class="tc-header">
+                                    <span class="tc-icon">🚀</span>
+                                    <span class="tc-title">Anthropic 产品速度密码</span>
+                                    <span class="tc-tag topic">专题</span>
+                                    <span class="tc-tag" style="background:#FEF2F2;color:#E11D48;">最新</span>
+                                </div>
+                                <div class="tc-desc">40天30+功能、模型吃掉产品、PM与工程师融合——解读 Claude Code 产品负责人 Cat Wu 的产品观与方法论</div>
+                                <div class="tc-meta">📅 2026-04-25 · Anthropic · 产品效能</div>
+                            </a>
                             <a href="02-deep-research/topics/luofuli-interview-2026-ai-paradigm-shift.html" target="_blank" class="timeline-card cat-trend">
                                 <div class="tc-header">
                                     <span class="tc-icon">🎯</span>
@@ -2355,14 +2378,14 @@
                                 <div class="tc-desc">从3.5小时播客访谈深度解读：Pre-train→Post-train竞争重心迁移、Chat→Agent范式跃迁、GPU配比从3:5:1到1:1、顶尖模型厂商"悄无声息的伏击"背后的战略逻辑</div>
                                 <div class="tc-meta">📅 2026-04-25 · AI范式 · 趋势研判</div>
                             </a>
-                            <a href="02-deep-research/topics/anthropic-product-velocity.html" target="_blank" class="timeline-card cat-topic">
+                            <a href="02-deep-research/companies/deepseek-v4-preview-2026.html" target="_blank" class="timeline-card cat-company">
                                 <div class="tc-header">
-                                    <span class="tc-icon">🚀</span>
-                                    <span class="tc-title">Anthropic 产品速度密码</span>
-                                    <span class="tc-tag topic">专题</span>
+                                    <span class="tc-icon">🔥</span>
+                                    <span class="tc-title">DeepSeek V4 Preview：开源AI新里程碑</span>
+                                    <span class="tc-tag company">公司</span>
                                 </div>
-                                <div class="tc-desc">40天30+功能、模型吃掉产品、PM与工程师融合——解读 Claude Code 产品负责人 Cat Wu 的产品观与方法论</div>
-                                <div class="tc-meta">📅 2026-04-25 · Anthropic · 产品效能</div>
+                                <div class="tc-desc">1.6万亿参数史上最大开源模型·1M上下文标配·Agent优先设计·27倍成本优势——开源进入"能力拐点"</div>
+                                <div class="tc-meta">📅 2026-04-24 · DeepSeek · 开源大模型</div>
                             </a>
                             <a href="02-deep-research/topics/agent-platforms-hermes-openclaw-kairos.html" target="_blank" class="timeline-card cat-topic">
                                 <div class="tc-header">
@@ -3544,6 +3567,8 @@
         
         <!-- Footer -->
         <footer class="footer">
+            <strong>AI洞察</strong>
+            </div>
             <div class="footer-brand">
                 <span>🔬</span>
                 <span>AI洞察 · 持续追踪 · 深度洞察</span>
