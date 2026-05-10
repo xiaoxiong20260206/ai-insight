@@ -117,7 +117,7 @@
 
 <!-- 02 Architecture -->
 <section id="architecture">
-    <hr class="section-divider">
+    
     <div class="doc-chapter-label">02 · Skills+Connectors+Subagents</div>
     <h2 class="section-title">不是AI工具，是一套组织方式</h2>
     <p class="section-desc">10个Agent模板的核心不是单个prompt，而是Anthropic称之为"reference architecture"的三层架构。</p>
@@ -164,7 +164,7 @@
 
 <!-- 03 Full Chain -->
 <section id="fullchain">
-    <hr class="section-divider">
+    
     <div class="doc-chapter-label">03 · 落地瓶颈</div>
     <h2 class="section-title">Agent的落地瓶颈不在模型，在全链路</h2>
     <p class="section-desc">Anthropic不只是在卖模型。他们做的是四层全链路。</p>
@@ -201,7 +201,7 @@
 
 <!-- 04 Benchmark -->
 <section id="benchmark">
-    <hr class="section-divider">
+    
     <div class="doc-chapter-label">04 · 成绩与警告</div>
     <h2 class="section-title">64.37%：既是成绩也是警告</h2>
     <p class="section-desc">Claude Opus 4.7在Vals AI Finance Agent benchmark上的成绩，Anthropic称之为"industry-leading"。</p>
@@ -248,31 +248,17 @@
 
 <!-- 05 Joint Venture -->
 <section id="jointventure">
-    <hr class="section-divider">
+    
     <div class="doc-chapter-label">05 · 合资公司信号</div>
     <h2 class="section-title">Blackstone+Goldman：不只是渠道合作</h2>
     <p class="section-desc">Anthropic和三家顶级PE/投行合资成立独立企业AI服务公司——这是更大的信号。</p>
-    <div class="insight-list">
-        <div class="insight-card animate-on-scroll">
-            <div class="insight-icon green">🏗️</div>
-            <div class="insight-content">
-                <div class="insight-title">合资公司模式解决实施瓶颈</div>
-                <div class="insight-body">不是卖API，而是把Anthropic工程师嵌入服务团队。AI落地的瓶颈不是技术，是实施——谁来帮企业把AI接入核心流程？</div>
-            </div>
-        </div>
-        <div class="insight-card animate-on-scroll">
-            <div class="insight-icon blue">🌱</div>
-            <div class="insight-content">
-                <div class="insight-title">Portfolio公司是天然种子客户</div>
-                <div class="insight-body">Blackstone和Goldman管理数千家公司——这些都是AI落地的潜在客户。PE提供客户+资本，Anthropic提供技术+人员。</div>
-            </div>
-        </div>
-        <div class="insight-card animate-on-scroll">
-            <div class="insight-icon purple">🔄</div>
-            <div class="insight-content">
-                <div class="insight-title">AI+SaaS的新商业形态</div>
-                <div class="insight-body">这家公司独立运营。AI公司不再只是技术供应商，而是行业数字化转型的合伙人。合资模式会扩散。</div>
-            </div>
+    <div class="callout purple animate-on-scroll">
+        <span class="callout-icon">🏗️</span>
+        <div class="callout-body">
+            <div class="callout-title">合资公司的三重意义</div>
+            <strong>1. 实施瓶颈解决</strong>：不是卖API，是把Anthropic工程师嵌入服务团队<br>
+            <strong>2. 天然种子客户</strong>：Blackstone+Goldman管理数千家portfolio公司<br>
+            <strong>3. 新商业形态</strong>：AI公司不再只是技术供应商，而是行业数字化转型的合伙人
         </div>
     </div>
     <div class="quote-block animate-on-scroll">
@@ -283,118 +269,78 @@
 
 <!-- 06 Agent Templates -->
 <section id="agents">
-    <hr class="section-divider">
+    
     <div class="doc-chapter-label">06 · 10个Agent模板清单</div>
     <h2 class="section-title">前台5个 + 后台5个</h2>
     <p class="section-desc">每个模板都是Skills+Connectors+Subagents的完整打包，不是单个prompt。</p>
-    <div class="mechanism-grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">
-        <div class="mechanism-card accent-blue animate-on-scroll">
-            <div class="mechanism-title">Pitch builder</div>
-            <div class="mechanism-body">建立目标名单、运行可比分析、起草pitchbook</div>
-            <span class="mechanism-tag">前台</span>
-        </div>
-        <div class="mechanism-card accent-blue animate-on-scroll" style="transition-delay:.04s">
-            <div class="mechanism-title">Meeting preparer</div>
-            <div class="mechanism-body">组装客户/对手方简报，协助会前准备</div>
-            <span class="mechanism-tag">前台</span>
-        </div>
-        <div class="mechanism-card accent-blue animate-on-scroll" style="transition-delay:.08s">
-            <div class="mechanism-title">Earnings reviewer</div>
-            <div class="mechanism-body">读财报逐字稿和申报文件，更新模型，标记关键变化</div>
-            <span class="mechanism-tag">前台</span>
-        </div>
-        <div class="mechanism-card accent-blue animate-on-scroll" style="transition-delay:.12s">
-            <div class="mechanism-title">Model builder</div>
-            <div class="mechanism-body">从申报资料/数据源/分析师输入建立财务模型</div>
-            <span class="mechanism-tag">前台</span>
-        </div>
-        <div class="mechanism-card accent-blue animate-on-scroll" style="transition-delay:.16s">
-            <div class="mechanism-title">Market researcher</div>
-            <div class="mechanism-body">追踪行业/发行人动态，综合新闻/文件/券商研究</div>
-            <span class="mechanism-tag">前台</span>
-        </div>
-        <div class="mechanism-card accent-green animate-on-scroll" style="transition-delay:.2s">
-            <div class="mechanism-title">Valuation reviewer</div>
-            <div class="mechanism-body">按可比公司、方法论和公司标准检查估值</div>
-            <span class="mechanism-tag">后台</span>
-        </div>
-        <div class="mechanism-card accent-green animate-on-scroll" style="transition-delay:.24s">
-            <div class="mechanism-title">GL reconciler</div>
-            <div class="mechanism-body">对账总账账户并执行NAV计算</div>
-            <span class="mechanism-tag">后台</span>
-        </div>
-        <div class="mechanism-card accent-green animate-on-scroll" style="transition-delay:.28s">
-            <div class="mechanism-title">Month-end closer</div>
-            <div class="mechanism-body">执行关账清单、准备分录、产出关账报告</div>
-            <span class="mechanism-tag">后台</span>
-        </div>
-        <div class="mechanism-card accent-green animate-on-scroll" style="transition-delay:.32s">
-            <div class="mechanism-title">Statement auditor</div>
-            <div class="mechanism-body">检查财务报表一致性、完整性和审计准备度</div>
-            <span class="mechanism-tag">后台</span>
-        </div>
-        <div class="mechanism-card accent-green animate-on-scroll" style="transition-delay:.36s">
-            <div class="mechanism-title">KYC screener</div>
-            <div class="mechanism-body">组装实体档案、审查源文件、打包合规升级案件</div>
-            <span class="mechanism-tag">后台</span>
-        </div>
+    <div class="animate-on-scroll">
+        <table class="source-table">
+            <thead><tr><th>类别</th><th>Agent模板</th><th>主要用途</th></tr></thead>
+            <tbody>
+                <tr><td><span class="badge badge-p1">前台</span></td><td>Pitch builder</td><td>建立目标名单、运行可比分析、起草pitchbook</td></tr>
+                <tr><td><span class="badge badge-p1">前台</span></td><td>Meeting preparer</td><td>组装客户/对手方简报，协助会前准备</td></tr>
+                <tr><td><span class="badge badge-p1">前台</span></td><td>Earnings reviewer</td><td>读财报逐字稿和申报文件，更新模型，标记关键变化</td></tr>
+                <tr><td><span class="badge badge-p1">前台</span></td><td>Model builder</td><td>从申报资料/数据源/分析师输入建立财务模型</td></tr>
+                <tr><td><span class="badge badge-p1">前台</span></td><td>Market researcher</td><td>追踪行业/发行人动态，综合新闻/文件/券商研究</td></tr>
+                <tr><td><span class="badge badge-p2">后台</span></td><td>Valuation reviewer</td><td>按可比公司、方法论和公司标准检查估值</td></tr>
+                <tr><td><span class="badge badge-p2">后台</span></td><td>GL reconciler</td><td>对账总账账户并执行NAV计算</td></tr>
+                <tr><td><span class="badge badge-p2">后台</span></td><td>Month-end closer</td><td>执行关账清单、准备分录、产出关账报告</td></tr>
+                <tr><td><span class="badge badge-p2">后台</span></td><td>Statement auditor</td><td>检查财务报表一致性、完整性和审计准备度</td></tr>
+                <tr><td><span class="badge badge-p2">后台</span></td><td>KYC screener</td><td>组装实体档案、审查源文件、打包合规升级案件</td></tr>
+            </tbody>
+        </table>
     </div>
 </section>
 
 <!-- 07 Essence -->
 <section id="essence">
-    <hr class="section-divider">
+    
     <div class="doc-chapter-label">07 · 本质穿透</div>
     <h2 class="section-title">沈浪视角：四层递进</h2>
-    <p class="section-desc">从表象→规律→映射→演变→预测，五层洞察。</p>
 
-    <div class="quote-block green animate-on-scroll">
-        <div class="quote-text"><strong>规律层</strong>：Agent的商业化路径 = 行业垂直模板 × 数据生态 × 治理保障<br><br>这不是"更强的chatbot"，是把一个行业的知识（Skills）× 数据（Connectors）× 流程（Subagents）打包成可部署的单元。这个三因子模型才是真正的产品形态。</div>
-    </div>
-
-    <div class="quote-block purple animate-on-scroll">
-        <div class="quote-text"><strong>映射层</strong>：这不是卖发动机，这是卖整车。<br><br>通用AI模型是发动机（强大但需要自己组装），Copilot是改装件（增强现有工具），Anthropic金融Agent模板是整车——发动机+底盘+内饰+导航+驾照一起交付。客户只需要改颜色和加装配件。</div>
+    <div class="mechanism-grid" style="grid-template-columns:1fr 1fr">
+        <div class="mechanism-card accent-green animate-on-scroll">
+            <div class="mechanism-number">L2 · 规律层</div>
+            <div class="mechanism-title">Agent商业化 = 行业模板 × 数据生态 × 治理保障</div>
+            <div class="mechanism-body">不是"更强的chatbot"，是把行业的知识（Skills）× 数据（Connectors）× 流程（Subagents）打包成可部署的单元。三因子模型才是真正的产品形态。</div>
+        </div>
+        <div class="mechanism-card accent-purple animate-on-scroll" style="transition-delay:.06s">
+            <div class="mechanism-number">L3 · 映射层</div>
+            <div class="mechanism-title">不是卖发动机，是卖整车</div>
+            <div class="mechanism-body">通用模型是发动机（需自己组装），Copilot是改装件（增强工具），Anthropic金融Agent是整车——发动机+底盘+内饰+驾照一起交付，客户只需定制化。</div>
+        </div>
     </div>
 
     <div class="timeline animate-on-scroll">
         <div class="timeline-item">
             <div class="timeline-dot green"></div>
-            <div class="timeline-label"><strong>演变层 · 短期（3-6月）</strong></div>
-            <div class="timeline-content">
-                <div class="timeline-title">法律、医疗、保险的垂直模板出现</div>
-                模板化是规模化路径。每套模板的Skills内容不同，但Connectors+Subagents架构相同。
-            </div>
+            <div class="timeline-label">L4 · 短期（3-6月）</div>
+            <div class="timeline-content"><div class="timeline-title">法律、医疗、保险垂直模板出现</div>模板化是规模化路径。Skills不同但Connectors+Subagents架构相同。</div>
         </div>
         <div class="timeline-item">
             <div class="timeline-dot"></div>
-            <div class="timeline-label"><strong>演变层 · 中期（6-18月）</strong></div>
-            <div class="timeline-content">
-                <div class="timeline-title">数据供应商角色被重新定义</div>
-                从"数据源"变成"Agent生态的一部分"。Moody's做MCP app就是信号：不再只是卖数据，而是把自己的能力嵌入Agent工作流。
-            </div>
+            <div class="timeline-label">L4 · 中期（6-18月）</div>
+            <div class="timeline-content"><div class="timeline-title">数据供应商角色重新定义</div>从"数据源"变成"Agent生态一部分"。Moody's做MCP app就是信号。</div>
         </div>
         <div class="timeline-item">
             <div class="timeline-dot purple"></div>
-            <div class="timeline-label"><strong>演变层 · 长期（18-36月）</strong></div>
-            <div class="timeline-content">
-                <div class="timeline-title">合资公司模式扩散</div>
-                OpenAI、Google都可能找行业巨头合资。AI公司不再只是技术供应商，而是行业数字化转型的合伙人。
-            </div>
+            <div class="timeline-label">L4 · 长期（18-36月）</div>
+            <div class="timeline-content"><div class="timeline-title">合资公司模式扩散</div>OpenAI/Google都可能找行业巨头合资。AI公司→行业数字化转型合伙人。</div>
         </div>
     </div>
 
     <div class="callout success animate-on-scroll">
         <span class="callout-icon">🎯</span>
         <div class="callout-body">
-            <div class="callout-title"><strong>预测层</strong>：结构性判断——不可逆，不是周期性</div>
-            AI Agent落地需要行业知识+数据接入+合规治理，这三样只有行业内的公司才有。AI公司自己做不了——合资/生态绑定是唯一路径。Anthropic先做了，其他人会跟进。
+            <div class="callout-title">L5 · 结构性判断：不可逆，不是周期性</div>
+            AI Agent落地需要行业知识+数据接入+合规治理——这三样只有行业内的公司才有。合资/生态绑定是唯一路径。
         </div>
     </div>
 </section>
 
 <!-- 08 Actions -->
 <section id="actions">
-    <hr class="section-divider">
+    
     <div class="doc-chapter-label">08 · 行动建议</div>
     <h2 class="section-title">对快手/AI生产力战役</h2>
     <p class="section-desc">基于本质穿透，给出5条具体行动建议。</p>
@@ -414,7 +360,7 @@
 
 <!-- 09 Sources -->
 <section id="sources">
-    <hr class="section-divider">
+    
     <div class="doc-chapter-label">09 · 参考来源</div>
     <h2 class="section-title">多源交叉验证</h2>
     <div class="animate-on-scroll">
