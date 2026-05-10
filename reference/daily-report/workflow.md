@@ -391,7 +391,7 @@ python3 scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/c
 #    Agent 调用:
 #    message(
 #        channel="kim",
-#        target="username:shenlang",
+#        target="username:shenlang03",
 #        kimMixCard=<card.json 中 card 字段的 JSON 对象>,
 #        message=<card.json 中 summary 字段>
 #    )
