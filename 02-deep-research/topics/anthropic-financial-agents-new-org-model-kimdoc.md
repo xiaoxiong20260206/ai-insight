@@ -108,7 +108,7 @@ Bloomberg报道：Anthropic考虑最早10月IPO，估值可能超过900亿美元
 
 **L3 映射层**：不是卖发动机，是卖整车
 
-![发动机 vs 整车](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/826feb2caab88edf84b6c0bec.jpg)
+**发动机 vs 整车类比**：通用模型是发动机（强大但需要自己组装），Copilot是改装套件（增强现有工具），Anthropic金融Agent模板是整车——发动机+底盘+内饰+驾照一起交付，客户只需做定制化调整。
 
 | 产品形态 | 类比 | 特点 |
 |---------|------|------|

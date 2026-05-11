@@ -22,6 +22,13 @@ TEMPLATE_CSS_FILE = BASE_DIR / "templates" / "daily-report-v3.css"
 TEMPLATE_JS_FILE = BASE_DIR / "templates" / "daily-report-v3.js"
 REPORT_DIR = BASE_DIR / "01-daily-reports"
 
+# ===== 清爽调研风格引用（动态读取，保持同步）=====
+# 公共CSS变量+基础样式从 qingshuang-research-style skill 引用
+# 项目定制样式从本地 templates/ 读取
+QINGSHUANG_SKILL_PATH = Path("/data/aime/48b01692-87fe-48a1-860d-a6ab789801e6/workspace/skills/qingshuang-research-style")
+QINGSHUANG_BASE_CSS = QINGSHUANG_SKILL_PATH / "references" / "base-styles.css"
+AI_INSIGHT_CUSTOM_CSS = BASE_DIR / "templates" / "ai-insight-custom.css"
+
 WEEKDAYS = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
 
 # ============ 模板提取（首次运行用） ============
@@ -409,8 +416,29 @@ def generate_html(data: dict) -> str:
     date_obj = datetime.strptime(date_str, "%Y-%m-%d")
     weekday = WEEKDAYS[date_obj.weekday()]
 
-    # 读CSS/JS模板
-    css_block = TEMPLATE_CSS_FILE.read_text(encoding="utf-8") if TEMPLATE_CSS_FILE.exists() else "<style></style>"
+    # 读CSS模板：公共层(qingshuang skill) + 定制层(本地)
+    # v5.0: 改为引用关系，清爽调研风格更新时自动同步
+    base_css = ""
+    if QINGSHUANG_BASE_CSS.exists():
+        base_css = QINGSHUANG_BASE_CSS.read_text(encoding="utf-8")
+        print(f"  ✅ CSS公共层: 从 qingshuang-research-style 引用 ({len(base_css)} chars)")
+    else:
+        # 回退：如果 qingshuang skill 不存在，使用本地备份
+        if TEMPLATE_CSS_FILE.exists():
+            base_css = TEMPLATE_CSS_FILE.read_text(encoding="utf-8")
+            print(f"  ⚠️ CSS回退: 使用本地备份 (qingshuang skill不存在)")
+        else:
+            base_css = "<style></style>"
+    
+    custom_css = ""
+    if AI_INSIGHT_CUSTOM_CSS.exists():
+        custom_css = AI_INSIGHT_CUSTOM_CSS.read_text(encoding="utf-8")
+    
+    # 合并：公共层变量+基础样式 + 定制层组件样式
+    # 提取 base-styles.css 中的 :root 变量块和基础样式
+    css_combined = f"<style>\n{base_css}\n\n/* ===== AI洞察定制层 ===== */\n{custom_css}\n</style>"
+    css_block = css_combined
+    
     js_block = TEMPLATE_JS_FILE.read_text(encoding="utf-8") if TEMPLATE_JS_FILE.exists() else "<script></script>"
 
     # 覆盖率（兼容 dict 和字符串两种格式）

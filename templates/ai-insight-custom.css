@@ -1,0 +1,175 @@
+/* ===== AI洞察定制层样式（仅日报/首页特有的组件样式） ===== */
+/* 
+ * ⚠️ 本文件只包含AI洞察项目特有的组件样式和扩展变量。
+ * CSS变量定义和基础样式从 qingshuang-research-style 动态引用。
+ * 
+ * 引用路径: ../../skills/qingshuang-research-style/references/base-styles.css
+ * 引用方式: gen_daily_html.py 和 update_homepage.py 自动合并
+ * 
+ * 改动规则:
+ * - 只改本文件（定制层）
+ * - CSS变量（颜色/间距/阴影等）改 qingshuang skill，不要在这里重复定义
+ * - 新增组件样式在本文件添加
+ */
+
+/* ===== AI洞察扩展CSS变量（公共层未覆盖的） ===== */
+:root {
+    --color-orange: #EA580C;
+    --color-success-dark: #047857;
+    --color-success-50: #ECFDF5;
+    --color-success-100: #D1FAE5;
+    --color-danger-50: #FFF1F2;
+    --color-warning-50: #FFFBEB;
+    --color-info-50: #EFF6FF;
+    --color-info-100: #DBEAFE;
+    --color-purple-50: #F5F3FF;
+    --color-purple-100: #EDE9FE;
+    --gradient-orange: linear-gradient(135deg, #EA580C 0%, #F97316 100%);
+    --gradient-china: linear-gradient(135deg, #DC2626 0%, #EF4444 100%);
+    --color-bg-hover: rgba(0,0,0,0.025);
+}
+
+/* ===== 日报特有组件 ===== */
+
+/* 最新日报卡片 */
+.latest-report-card {
+    background: linear-gradient(135deg, var(--gradient-success));
+    border-radius: var(--radius-lg);
+    padding: 16px 20px;
+    margin-bottom: 16px;
+}
+
+/* 日历视图 */
+.calendar-container {
+    max-width: 280px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+}
+
+.calendar-day.has-report {
+    background: var(--color-success-50);
+    color: var(--color-success);
+    font-weight: 600;
+}
+
+.calendar-day.has-weekly::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 3px;
+    right: 3px;
+    height: 3px;
+    background: var(--gradient-purple);
+    border-radius: 2px;
+}
+
+.calendar-day.today {
+    border: 2px solid var(--color-info);
+    border-radius: var(--radius-sm);
+}
+
+/* 周报入口卡片 */
+.weekly-report-card {
+    background: linear-gradient(135deg, #EFF6FF 0%, #F5F3FF 100%);
+    border-radius: var(--radius-lg);
+    padding: 16px 20px;
+    margin-bottom: 12px;
+}
+
+/* ===== 首页特有组件 ===== */
+
+/* Tab导航 */
+.tab-nav {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(20px) saturate(1.8);
+    position: sticky;
+    top: 12px;
+    z-index: 100;
+}
+
+.tab-btn.active {
+    color: var(--color-success);
+    border-bottom: 2px solid var(--color-success);
+}
+
+/* 统计卡片 */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.stat-card {
+    background: var(--color-bg-card);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    text-align: center;
+    box-shadow: var(--shadow-card);
+}
+
+/* 知识库维度卡片 */
+.kb-dimension {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+.kb-dimension:hover {
+    box-shadow: var(--shadow-hover);
+}
+
+.dim-header {
+    cursor: pointer;
+    padding: 12px 16px;
+}
+
+.kb-item-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+}
+
+/* 追踪体系表格 */
+.tracking-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tracking-table th {
+    background: var(--color-bg-table-header);
+    padding: 8px 12px;
+    text-align: left;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.tracking-table td {
+    padding: 6px 12px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+/* ===== 响应式 ===== */
+
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .tab-btn .tab-label {
+        display: none;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

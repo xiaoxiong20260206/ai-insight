@@ -21,6 +21,12 @@
 └──────────────┴──────────────────────────────────────┘
 ```
 
+**CSS引用关系**：
+- **日报/周报HTML**: 公共CSS变量+基础样式从 `qingshuang-research-style/references/base-styles.css` 动态引用（gen_daily_html.py 自动合并），项目定制样式从 `templates/ai-insight-custom.css` 读取
+- **首页**: CSS内联在 `<style>` 块中（2098行），修改时必须对照 `qingshuang-research-style` 最新规范同步更新CSS变量定义
+- ⚠️ 首页CSS不自动引用——因为首页CSS是高度定制化的（Tab导航/日历/统计卡片/知识库/追踪体系等），公共层和定制层已经深度耦合，无法简单拆分
+- ⚠️ 每次修改首页CSS变量时，必须同时检查 `qingshuang-research-style/references/base-styles.css` 的最新版本，确保变量名和值一致
+
 **部署链路**：
 - 内部版：`sl-ai-insight/index.html` → `sl-ai-insight/public/index.html` → `xiaoxiong20260206.github.io/ai-insight/`
 - 外部版：`sl-ai-insight/index.html` → `sanitize_html()` → `ai-insight-public/index.html` → `xiaoxiong20260206.github.io/ai-insight-public/`

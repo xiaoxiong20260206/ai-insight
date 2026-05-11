@@ -10,14 +10,13 @@
 
 ### 1.1 视觉风格
 
-所有AI洞察HTML统一使用**清爽调研风格 v5.0**：
+所有AI洞察HTML统一使用**清爽调研风格**（通过 `qingshuang-research-style` skill 引用）：
 
-- 基色：白底(#FFFFFF) + 灰文字(#57534E) + 绿强调(#059669)
-- 卡片阴影：`0 2px 8px rgba(31,35,40,.06)`
-- 圆角：14px（区块）/ 999px（按钮）
-- 渐变按钮：绿 `linear-gradient(135deg,#059669 0%,#10B981 100%)`
-- 字体：系统字体栈 `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif`
-- 最大宽度：`var(--content-max-width)` 或 `960px`
+**CSS引用关系**：
+- **公共层**：CSS变量+基础样式 → `qingshuang-research-style/references/base-styles.css`（动态读取）
+- **定制层**：AI洞察项目特有组件样式 → `templates/ai-insight-custom.css`
+- **日报生成**：`gen_daily_html.py` 自动合并公共层+定制层
+- **首页**：CSS内联在 `<style>` 中，修改时必须对照 qingshuang skill 最新规范同步更新CSS变量
 
 CSS模板：`templates/daily-report-v3.css`（日报/周报共用）
 
@@ -211,6 +210,7 @@ CSS模板：`templates/daily-report-v3.css`（日报/周报共用）
 | **MixCard按钮1URL** | `01-daily-reports/YYYY-MM/YYYY-MM-DD.html` | `01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html` | `02-deep-research/<slug>.html` |
 | **KIM Doc触发** | 不生成 | 按需 | 按需（用户明确要求时） |
 | **KIM Doc字数** | - | 3000-5000 | 8000-15000 |
+| **KIM Doc章节配图** | - | 每章节1张趋势/对比信息图 | 每章节1张论证链/架构/数据信息图 |
 | **底部模块** | 简化版(无相关资源) | 简化版(无相关资源) | 完整版(含参考来源) |
 
 ---

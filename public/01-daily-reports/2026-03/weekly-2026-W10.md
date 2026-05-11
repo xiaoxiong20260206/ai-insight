@@ -204,7 +204,7 @@
 | 3/7 | Anthropic就业研究揭示白领就业精细影响 | Anthropic | 研究 |
 | 3/8 | Block裁员近半，引"AI washing"争议 | Fortune | 事件 |
 | 3/8 | McKinsey发布"主权AI"报告 | McKinsey | 研究 |
-| 3/8 | CAI助手平台技术前线：AI原生·超级个体·组织重构 | CAI助手平台 | 讨论 |
+| 3/8 | CCF技术前线：AI原生·超级个体·组织重构 | CCF | 讨论 |
 
 ### 本周转型案例
 
