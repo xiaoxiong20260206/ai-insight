@@ -330,6 +330,8 @@
             color: var(--color-text-muted);
             transition: all var(--transition-fast);
             white-space: nowrap;
+            touch-action: manipulation;
+            min-height: 44px;
         }
         
         .tab-btn:hover {
@@ -2247,20 +2249,20 @@
         <!-- Tab Navigation -->
         <nav class="tab-nav" role="navigation">
             <button class="tab-btn active" data-tab="daily">
-                <span class="tab-btn-icon">📰</span>
-                <span class="tab-btn-text">AI日报</span>
+                <span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="12" rx="2"/><path d="M3 7l9 5 9-5"/><line x1="3" y1="15" x2="21" y2="15"/></svg></span>
+                <span class="tab-label">AI日报</span>
             </button>
             <button class="tab-btn" data-tab="research">
-                <span class="tab-btn-icon">🔬</span>
-                <span class="tab-btn-text">深度调研</span>
+                <span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="5"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v3"/><path d="M11 11h3"/></svg></span>
+                <span class="tab-label">深度调研</span>
             </button>
             <button class="tab-btn" data-tab="tracking">
-                <span class="tab-btn-icon">🎯</span>
-                <span class="tab-btn-text">追踪体系</span>
+                <span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+                <span class="tab-label">追踪体系</span>
             </button>
             <button class="tab-btn" data-tab="knowledge">
-                <span class="tab-btn-icon">📚</span>
-                <span class="tab-btn-text">知识库</span>
+                <span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+                <span class="tab-label">知识库</span>
             </button>
         </nav>
         
