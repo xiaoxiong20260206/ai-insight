@@ -64,23 +64,180 @@ tbody tr:hover{background:rgba(0,0,0,0.02)}
 .footer-refs{border-top:1px solid var(--color-border);padding-top:var(--spacing-md);margin-top:var(--spacing-md)}
 
 /* ═══ 浮动章节导航 ═══ */
-/* ═══ 清爽调研风格 · Tab 导航（毛玻璃）═══ */
-.tab-nav{display:flex;background:rgba(255,255,255,0.85);backdrop-filter:blur(20px) saturate(1.8);border:1px solid rgba(255,255,255,0.7);border-radius:var(--radius-lg);padding:5px;position:sticky;top:12px;z-index:100;box-shadow:var(--shadow-sm);flex-wrap:wrap;gap:4px}
-.tab-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;border:none;border-radius:var(--radius-md);background:transparent;color:var(--color-text-secondary);font-size:13px;font-weight:500;cursor:pointer;transition:all var(--transition-fast);touch-action:manipulation;font-family:var(--font-family);text-decoration:none}
-.tab-btn:hover{background:var(--color-success-50);color:var(--color-success)}
-.tab-btn.active{background:var(--gradient-success);color:#fff;box-shadow:var(--shadow-glow-success);font-weight:600}
-.tab-btn:focus-visible{outline:2px solid var(--color-success);outline-offset:3px;box-shadow:0 0 0 5px rgba(5,150,105,0.12)}
-.tab-icon{width:18px;height:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.tab-icon svg{width:16px;height:16px}
-.tab-label{font-size:13px}
-@media(max-width:768px){.tab-btn{padding:8px 10px}.tab-label{display:none}.tab-icon svg{width:20px;height:20px}}
 
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
-</style>
-</head>
-<body>
+        --sidebar-width: 240px;
+    --content-max: 920px;
+    --content-pad: 40px;
+}
 
-<div class="container">
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font-family);
+    background: var(--color-bg);
+    color: var(--color-text-primary);
+    line-height: 1.7;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ===== Skip to content ===== */
+.skip-to-content {
+    position: absolute;
+    left: -9999px;
+    top: 4px;
+    z-index: 9999;
+    padding: 8px 16px;
+    background: var(--color-info);
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 13px;
+}
+.skip-to-content:focus { left: 4px; }
+
+/* ===== Layout ===== */
+.layout-wrapper {
+    display: flex;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* ===== Sidebar ===== */
+.sidebar-nav {
+    width: var(--sidebar-width);
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    background: #fff;
+    border-right: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    padding: 24px 0 16px;
+    transition: transform 280ms ease, width 280ms ease;
+    z-index: 10;
+}
+.sidebar-nav.sidebar-collapsed { transform: translateX(calc(-1 * var(--sidebar-width))); }
+
+.sidebar-doc-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0 18px 12px;
+    border-bottom: 1px solid var(--color-border-light);
+    margin-bottom: 8px;
+}
+
+.toc-section { padding: 4px 0; }
+
+.toc-link {
+    display: block;
+    padding: 6px 18px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    border-right: 2px solid transparent;
+    transition: color 150ms ease, background 150ms ease, border-color 150ms ease;
+    line-height: 1.4;
+}
+.toc-link:hover { color: var(--color-info); background: var(--color-info-50); }
+.toc-link.toc-active { color: var(--color-info); border-right-color: var(--color-info); background: var(--color-info-50); font-weight: 600; }
+.toc-link.toc-sub { padding-left: 30px; font-size: 12px; color: var(--color-text-muted); }
+.toc-link.toc-sub.toc-active { color: var(--color-info); }
+
+.reading-progress-wrap {
+    margin-top: auto;
+    padding: 16px 18px 8px;
+    border-top: 1px solid var(--color-border-light);
+}
+.reading-progress-label {
+    font-size: 11px;
+    color: var(--color-text-muted);
+    margin-bottom: 6px;
+}
+.reading-progress-track {
+    height: 4px;
+    background: var(--color-border);
+    border-radius: 2px;
+    overflow: hidden;
+}
+.reading-progress-fill {
+    height: 100%;
+    background: var(--color-info);
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.1s linear;
+}
+
+/* ===== Collapse Button ===== */
+.sidebar-collapse-btn {
+    position: fixed;
+    left: calc(var(--sidebar-width) - 12px);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 48px;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 0 6px 6px 0;
+    cursor: pointer;
+    font-size: 12px;
+    color: var(--color-text-muted);
+    z-index: 20;
+    transition: left 280ms ease, background 150ms;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sidebar-collapse-btn:hover { background: var(--color-info-50); color: var(--color-info); }
+.sidebar-collapse-btn.collapsed-pos { left: 0; 
+
+
+
+    /* ===== Layout ===== */
+    .layout-wrapper { display:flex; min-height:100vh; position:relative; }
+    .content-area { flex:1; min-width:0; overflow-x:hidden; }
+    
+@media(prefers-reduced-motion:reduce){*,*::before,*::a<a class="skip-to-content" href="#main-content">跳到主内容</a>
+<div class="layout-wrapper">
+
+<nav class="sidebar-nav" id="sidebar" aria-label="目录导航">
+    <div class="sidebar-doc-title">AI洞察 · 深度调研</div>
+    <div class="toc-section">
+        <a href="#sec-01" class="toc-link">01 研究概述</a>
+        <a href="#sec-02" class="toc-link">02 三层架构</a>
+        <a href="#sec-03" class="toc-link">03 Skill 对照</a>
+        <a href="#sec-04" class="toc-link">04 全链路</a>
+        <a href="#sec-05" class="toc-link">05 Benchmark</a>
+        <a href="#sec-06" class="toc-link">06 合资信号</a>
+        <a href="#sec-07" class="toc-link">07 10个模板</a>
+        <a href="#sec-08" class="toc-link">08 M365整合</a>
+        <a href="#sec-09" class="toc-link">09 数据生态</a>
+        <a href="#sec-10" class="toc-link">10 客户证言</a>
+        <a href="#sec-11" class="toc-link">11 本质穿透</a>
+        <a href="#sec-12" class="toc-link">12 行动建议</a>
+        <a href="#sec-glossary" class="toc-link">+ 技术词汇表</a>
+        <a href="#sec-competition" class="toc-link">+ 竞争格局</a>
+    </div>
+    <div class="reading-progress-wrap">
+        <div class="reading-progress-label">阅读进度</div>
+        <div class="reading-progress-track">
+            <div class="reading-progress-fill" id="readingProgress"></div>
+        </div>
+    </div>
+</nav>
+
+<button class="sidebar-collapse-btn" id="collapseBtn" title="折叠导航" aria-label="折叠导航">«</button>
+
+<main class="content-area" id="main-content">
+<div class="content-inner" style="max-width:920px;margin:0 auto;padding:32px 40px 80px;">
+
 
 <header class="header">
 <span class="badge">深度调研 · 2026-05-10</span>
@@ -95,25 +252,7 @@ tbody tr:hover{background:rgba(0,0,0,0.02)}
 <div class="stat-card"><div class="stat-value danger">64.37%</div><div class="stat-label">Finance Benchmark</div></div>
 </div>
 
-    <!-- Tab 导航 · 清爽调研风格 -->
-    <nav class="tab-nav" id="tabNav">
-        <a class="tab-btn" href="#sec-01"><span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="5"/><path d="M21 21l-4.35-4.35"/></svg></span><span class="tab-label">概述</span></a>
-        <a class="tab-btn" href="#sec-02"><span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span><span class="tab-label">架构</span></a>
-        <a class="tab-btn" href="#sec-03"><span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="tab-label">Skill对照</span></a>
-        <a class="tab-btn" href="#sec-04"><span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span><span class="tab-label">全链路</span></a>
-        <a class="tab-btn" href="#sec-05"><span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="7" width="4" height="14" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg></span><span class="tab-label">Benchmark</span></a>
-        <a class="tab-btn" href="#sec-06"><span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></span><span class="tab-label">合资</span></a>
-        <a class="tab-btn" href="#sec-07"><span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></span><span class="tab-label">10模板</span></a>
-        <a class="tab-btn" href="#sec-08"><span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><path d="M10 6.5h4M6.5 10v4M17.5 14h-4M14 17.5v-4"/></svg></span><span class="tab-label">M365</span></a>
-        <a class="tab-btn" href="#sec-09"><span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M12 9L5 7M12 9l7-2M12 15l-7 2M12 15l7 2"/></svg></span><span class="tab-label">数据生态</span></a>
-        <a class="tab-btn" href="#sec-10"><span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="tab-label">证言</span></a>
-        <a class="tab-btn" href="#sec-11"><span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0 4 12.9V17h-8v-2.1A7 7 0 0 0 12 2z"/></svg></span><span class="tab-label">本质</span></a>
-        <a class="tab-btn" href="#sec-12"><span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span><span class="tab-label">行动</span></a>
-        <a class="tab-btn" href="#sec-glossary"><span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span class="tab-label">词汇</span></a>
-        <a class="tab-btn" href="#sec-competition"><span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="6" height="10" rx="1"/><rect x="9" y="4" width="6" height="13" rx="1"/><rect x="16" y="9" width="6" height="8" rx="1"/></svg></span><span class="tab-label">竞争</span></a>
-        
-    </nav>
-
+    
 <!-- 01 -->
 <section class="section-card" id="sec-01">
 <div class="section-header"><span class="section-number">1</span><h2>研究概述：同一天发生的三件事，不是巧合</h2></div>
@@ -603,30 +742,135 @@ tbody tr:hover{background:rgba(0,0,0,0.02)}
 </div>
 </div>
 
+</div></div><!-- /.content-inner -->
+</main><!-- /.content-area -->
+</div><!-- /.layout-wrapper -->nthropics/financial-services" target="_blank">Anthropic金融Agent marketplace</a></li>
+<li>财联社AI daily / 纵所周知101 / AI Post Hub / iThome（微信公众号）</li>
+</ul>
+</div>
 </div>
 
+</div>
+
+
+
 <script>
-(function(){
-  const tabBtns=document.querySelectorAll('.tab-btn');
-  const sections=document.querySelectorAll('.section-card[id]');
-  function setActive(){
-    const scrollY=window.scrollY+120;
-    let activeId='';
-    sections.forEach(s=>{if(s.offsetTop<=scrollY)activeId=s.id});
-    tabBtns.forEach(b=>{
-      const href=b.getAttribute('href');
-      if(href&&href.replace('#','')===activeId){b.classList.add('active')}
-      else{b.classList.remove('active')}
+(function () {
+    "use strict";
+    const HEADER_OFFSET = 72;
+    const SPY_OFFSET    = 110;
+    const sidebar       = document.getElementById("sidebar");
+    const collapseBtn   = document.getElementById("collapseBtn");
+    const progressBar   = document.getElementById("readingProgress");
+    const scrollTopBtn  = document.getElementById("scrollToTop");
+
+    // 平滑锚点
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener("click", e => {
+            const id = link.getAttribute("href").slice(1);
+            const target = document.getElementById(id);
+            if (!target) return;
+            e.preventDefault();
+            window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET, behavior: "smooth" });
+        });
     });
-  }
-  let ticking=false;
-  window.addEventListener('scroll',()=>{
-    if(!ticking){requestAnimationFrame(()=>{setActive();ticking=false});ticking=true}
-  },{passive:true});
-  // Set initial active
-  setActive();
+
+    // Scroll Spy
+    const tocLinks = Array.from(document.querySelectorAll(".toc-link"));
+    const anchorEls = tocLinks.map(a => {
+        const href = a.getAttribute("href") || "";
+        return href.startsWith("#") ? document.getElementById(href.slice(1)) : null;
+    }).filter(Boolean);
+
+    function updateTocHighlight() {
+        const scrollY = window.scrollY + SPY_OFFSET;
+        let activeEl = anchorEls[0];
+        for (const el of anchorEls) {
+            if (el && el.offsetTop <= scrollY) activeEl = el;
+            else break;
+        }
+        tocLinks.forEach(link => {
+            const href = link.getAttribute("href") || "";
+            link.classList.toggle("toc-active", activeEl && href === "#" + activeEl.id);
+        });
+    }
+
+    function updateProgress() {
+        if (!progressBar) return;
+        const total = document.documentElement.scrollHeight - window.innerHeight;
+        progressBar.style.width = (total > 0 ? Math.min(100, window.scrollY / total * 100) : 0).toFixed(1) + "%";
+    }
+
+    // 侧边栏折叠
+    if (collapseBtn) {
+        collapseBtn.addEventListener("click", () => {
+            const isCollapsed = sidebar.classList.toggle("sidebar-collapsed");
+            collapseBtn.textContent = isCollapsed ? "»" : "«";
+            collapseBtn.classList.toggle("collapsed-pos", isCollapsed);
+        });
+    }
+
+    // 回到顶部
+    if (scrollTopBtn) {
+        scrollTopBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    }
+
+    // rAF 节流
+    let ticking = false;
+    window.addEventListener("scroll", () => {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                updateTocHighlight();
+                updateProgress();
+                if (scrollTopBtn) scrollTopBtn.classList.toggle("visible", window.scrollY > 280);
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
+
+    updateTocHighlight();
+    updateProgress();
+
+    // 滚动入场动画
+    const animEls = document.querySelectorAll(".animate-on-scroll");
+    if (!("IntersectionObserver" in window)) {
+        animEls.forEach(el => el.classList.add("visible"));
+    } else {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.06, rootMargin: "0px 0px -30px 0px" });
+        animEls.forEach(el => observer.observe(el));
+    }
+
+    // 进度条视口动画
+    const barFills = document.querySelectorAll(".bar-fill");
+    if ("IntersectionObserver" in window && barFills.length) {
+        const barObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const w = el.dataset.targetWidth || el.style.width || "0%";
+                    el.style.width = "0%";
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => { el.style.width = w; });
+                    });
+                    barObserver.unobserve(el);
+                }
+            });
+        }, { threshold: 0.3 });
+        barFills.forEach(el => {
+            el.dataset.targetWidth = el.style.width || "0%";
+            el.style.width = "0%";
+            barObserver.observe(el);
+        });
+    }
 })();
 </script>
-
 </body>
 </html>
