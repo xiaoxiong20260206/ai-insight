@@ -5,8 +5,8 @@
 ### 洞察1: isolated session 环境不可靠
 - **issue**: uv命令在isolated session PATH中缺失，导致AI日报3次失败
 - **rule**: cron payload必须包含环境自检+自安装逻辑
-- **action**: ✅ 已修复日报cron；⚠️ 其他uv依赖cron也应加自检
-- **成熟度**: 🌿生长（第1次提取）
+- **action**: ✅ 已修复日报cron；✅ 已修复技能度量周统计cron
+- **成熟度**: 🌿生长（第1次提取→第2次提取修复2个cron）
 
 ### 洞察2: 域账号变更需全链路同步
 - **issue**: shenlang→shenlang03变更未同步到cron/subscribers/USER.md
@@ -17,17 +17,43 @@
 ### 洞察3: 日报MixCard结构不完整
 - **issue**: 缺少内部版链接、林克说明段、订阅按钮
 - **rule**: MixCard必须三要素齐全：内部链接+身份说明+订阅入口
-- **action**: ⏳ 待确认内部版URL和按钮形式
+- **action**: ⏳ 待确认订阅按钮形式
 - **成熟度**: 🌱萌芽（第1次提取，待验证）
 
 ### 洞察4: 重大事件进展追踪缺失
 - **issue**: DeepSeek融资用的是旧链接($200亿)，实际已到$450亿+国家大基金
 - **rule**: 搜索调研对重大事件必须做进展追踪，不只搜第一波报道
-- **action**: ⏳ 需更新日报+补充workflow进展追踪规则
-- **成熟度**: 🌱萌芽（第1次提取，待验证）
+- **action**: ✅ 05-10/05-11日报已包含最新进展
+- **成熟度**: 🌿生长（第1次提取→第2次验证生效）
 
 ### 洞察5: mixcard脚本未引用config.py SSoT
 - **issue**: INTERNAL_BASE硬编码而非从config.py import
 - **rule**: URL配置必须从config.py SSoT读取，禁止硬编码
 - **action**: ⏳ 待修复（先等内部版URL确认）
 - **成熟度**: 🌱萌芽（第1次提取）
+
+## 2026-05-11 修炼洞察
+
+### 洞察6: 数据契约不一致是自动化流程的慢性杀手
+- **issue**: build_insight_mixcard.py读`heat_trend.topics`但数据写`heat_trend.top_items`，导致heat block缺失
+- **rule**: 所有脚本间数据传递必须有明确schema约定，消费方必须兼容生产方的多种数据格式
+- **action**: ✅ 已修复脚本（兼容top_items+topics两种格式）
+- **成熟度**: 🌿生长（第1次提取→第2次代码修复生效）
+
+### 洞察7: P0降级违规——遇到技术困难时宁可延迟不可降级
+- **issue**: MixCard推送参数类型问题→改发纯文本→违反P0红线"禁止纯文本推送"
+- **rule**: P0红线是底线不是建议，遇到技术困难宁可延迟送达不可降级方案
+- **action**: ✅ 已补充到workflow P0红线
+- **成熟度**: 🌿生长（第1次提取→第2次写入skill规则）
+
+### 洞察8: 搜狗搜索依赖过度+URL截断+source篡改
+- **issue**: cron session搜索质量差：sogou占比44%超阈值+URL截断+source篡改
+- **rule**: 搜狗搜索URL只作Step B兜底，优先36kr/huxiu公开转载；搜索结果必须包含真实可访问URL
+- **action**: ✅ 已补充workflow搜索质量红线
+- **成熟度**: 🌿生长（第1次提取→第2次写入skill规则）
+
+### 洞察9: 推送可观测性盲区——delivered≠实际送达
+- **issue**: cron delivered=true但用户没收到MixCard卡片，delivery机制和session内部推送是两个独立通道
+- **rule**: 自动化推送必须有端到端验证，推送后必须验证卡片结构完整性
+- **action**: ✅ 已补充workflow推送验证规则
+- **成熟度**: 🌿生长（第1次提取→第2次写入skill规则）
