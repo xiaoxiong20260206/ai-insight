@@ -220,4 +220,4 @@ Cursor删库事故和DeepSeek V4千分之一成本看似是两件不相干的事
 
 ---
 
-*由AI洞察 AI 洞察系统生成 · AI-Insight v10.4*
+*由 AI 洞察系统生成 · AI-Insight v10.4*
