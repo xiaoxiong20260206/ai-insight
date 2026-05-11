@@ -20,17 +20,19 @@ export:
 
 | 子技能 | 触发词 | 文档 |
 |--------|--------|------|
+| 输出格式规范 | HTML/卡片/Doc格式 | `reference/output-format-spec.md` ← **公共规范，所有子技能先读此** |
 | AI日报 | AI日报/跑日报 | `reference/daily-report/` |
 | AI周报 | AI周报 | `reference/weekly-report.md` |
 | 深度调研 | AI深度调研/专题 | `reference/deep-research.md` |
 | 首页更新 | 更新首页 | `update_homepage.py --type daily/weekly` |
+| 首页规范 | 修改首页**必读** | `reference/homepage-spec.md` ← **防改坏规范** |
 | 双版本同步 | 同步公开版 | `reference/dual-version-sync.md` |
 | 国内信源 | 微信/小红书搜AI | `reference/domestic-sources.md` |
 | 学术论文监控 | arXiv/学术动态 | `reference/arxiv-monitor.md` |
 | 知识沉淀 | 沉淀AI知识 | `reference/knowledge-accumulation.md` |
 | 调研范围管理 | 添加/管理AI追踪 | `reference/scope-management.md` |
 
-> **路由原则**：找到子技能编号 → 去 reference 读详细流程 → 不要在入口文件找执行步骤。
+> **路由原则**：生成任何输出前 → 先读 `output-format-spec.md`（公共规范） → 再读对应子技能的差异化部分。
 
 ## 底层依赖
 
@@ -71,6 +73,11 @@ ls user-skills/sl-ai-insight/.git/HEAD && ssh -o ConnectTimeout=5 -T git@github.
 
 ### 6. fail loud, don't fail silent
 找不到文件时报错退出，禁止静默降级为空内容兜底卡片。
+
+### 7. 首页修改必须读 homepage-spec.md — 禁止裸复制
+- ❌ `cp index.html ai-insight-public/index.html` = 敏感词泄露
+- ✅ 必须走 `sanitize_html()` 脱敏流程
+- 详见 `reference/homepage-spec.md`
 
 ---
 
