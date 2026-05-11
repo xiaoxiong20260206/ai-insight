@@ -13,8 +13,351 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-    <noscript><style>.animate-on-scroll{opacity:1!important;transform:none!important;}</style></noscript>
-<style>.animate-on-scroll{opacity:1!important;transform:none!important;}</style>
+    <noscript></noscript>
+<noscript><style>.animate-on-scroll{opacity:1!important;transform:none!important;}</style></noscript>
+<style>
+        /* ===== CSS VARIABLES ===== */
+        :root {
+            --color-success: #059669; --color-success-light: #10B981; --color-success-dark: #047857;
+            --color-success-50: #ECFDF5; --color-success-100: #D1FAE5;
+            --color-danger: #E11D48; --color-danger-light: #F43F5E; --color-danger-50: #FFF1F2;
+            --color-warning: #D97706; --color-warning-light: #F59E0B; --color-warning-50: #FFFBEB;
+            --color-info: #2563EB; --color-info-light: #3B82F6; --color-info-50: #EFF6FF; --color-info-100: #DBEAFE;
+            --color-purple: #7C3AED; --color-purple-light: #8B5CF6; --color-purple-50: #F5F3FF; --color-purple-100: #EDE9FE;
+            --color-text-primary: #1C1917; --color-text-secondary: #57534E; --color-text-muted: #78716C;
+            --color-border: #E7E5E4; --color-border-light: #F5F5F4;
+            --color-bg: #F8FAFB; --color-bg-card: #FFFFFF; --color-bg-table-header: #FAFAF9;
+            --color-bg-hover: rgba(0,0,0,0.025);
+            --gradient-hero: linear-gradient(135deg, #059669 0%, #2563EB 50%, #7C3AED 100%);
+            --gradient-badge: linear-gradient(135deg, #ECFDF5 0%, #EFF6FF 100%);
+            --gradient-mesh:
+                radial-gradient(at 20% 20%, rgba(5,150,105,0.08) 0%, transparent 50%),
+                radial-gradient(at 80% 80%, rgba(37,99,235,0.06) 0%, transparent 50%),
+                radial-gradient(at 50% 50%, rgba(124,58,237,0.04) 0%, transparent 50%);
+            --shadow-xs: 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-card: 0 2px 8px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-card-rich: 0 4px 16px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.9);
+            --shadow-hover: 0 8px 24px rgba(5,150,105,0.18), 0 2px 8px rgba(5,150,105,0.10);
+            --shadow-float: 0 12px 32px rgba(0,0,0,0.10), 0 4px 8px rgba(0,0,0,0.06);
+            --shadow-glow-info: 0 4px 14px rgba(37,99,235,0.15);
+            --spacing-xs: 4px; --spacing-sm: 8px; --spacing-md: 16px;
+            --spacing-lg: 24px; --spacing-xl: 32px; --spacing-2xl: 40px; --spacing-3xl: 48px;
+            --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-xl: 20px; --radius-full: 9999px;
+            --font-family: "DM Sans", -apple-system, "Noto Sans SC", "PingFang SC", sans-serif;
+            --font-family-heading: "DM Sans", -apple-system, "Noto Sans SC", sans-serif;
+            --font-family-cn: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+            --font-family-mono: "JetBrains Mono", "SF Mono", "Consolas", monospace;
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+            --sidebar-width: 228px;
+            --content-max: 920px;
+            --content-pad: 56px;
+        }
+
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-family);
+            font-size: 15px;
+            line-height: 1.65;
+            letter-spacing: -0.01em;
+            color: var(--color-text-secondary);
+            background: var(--color-bg);
+            background-image: var(--gradient-mesh);
+            background-attachment: fixed;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+        ::selection { background: rgba(5,150,105,0.18); }
+        a { color: var(--color-info); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* ===== SKIP TO CONTENT ===== */
+        .skip-to-content {
+            position: absolute; top: -40px; left: 0; background: var(--color-info);
+            color: #fff; padding: 8px 16px; border-radius: 0 0 8px 0; z-index: 9999;
+            transition: top var(--transition-fast);
+        }
+        .skip-to-content:focus { top: 0; }
+
+        /* ===== LAYOUT ===== */
+        .layout-wrapper { display: flex; width: 100%; min-height: 100vh; align-items: stretch; }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar-nav {
+            width: var(--sidebar-width); flex-shrink: 0;
+            position: sticky; top: 0; height: 100vh;
+            overflow-y: auto; background: #fff;
+            border-right: 1px solid var(--color-border);
+            padding: 20px 0; z-index: 100;
+            display: flex; flex-direction: column;
+        }
+        .sidebar-nav::-webkit-scrollbar { width: 4px; }
+        .sidebar-nav::-webkit-scrollbar-track { background: transparent; }
+        .sidebar-nav::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.08); border-radius: 2px; }
+        .sidebar-doc-title {
+            font-size: 13px; font-weight: 700; color: var(--color-text-primary);
+            padding: 0 20px 16px; line-height: 1.4; font-family: var(--font-family-heading);
+        }
+        .toc-group-label {
+            font-size: 11px; font-weight: 700; color: var(--color-text-muted);
+            letter-spacing: 0.08em; text-transform: uppercase;
+            padding: 4px 20px 6px; margin-top: 8px;
+        }
+        .toc-link {
+            display: block; padding: 7px 20px; font-size: 13px; font-weight: 500;
+            color: var(--color-text-secondary); border-left: 3px solid transparent;
+            transition: all var(--transition-fast); line-height: 1.4; text-decoration: none;
+        }
+        .toc-link:hover { background: rgba(0,0,0,0.03); color: var(--color-text-primary); text-decoration: none; }
+        .toc-link.toc-active { color: var(--color-info); background: rgba(37,99,235,0.04); border-left-color: var(--color-info); font-weight: 600; }
+        .toc-link.toc-sub { padding-left: 32px; font-size: 12px; font-weight: 400; color: var(--color-text-muted); }
+        .toc-link.toc-sub.toc-active { color: var(--color-info); font-weight: 500; }
+        .toc-link:focus-visible { outline: 2px solid var(--color-info); outline-offset: -2px; }
+
+        .reading-progress-wrap { margin-top: auto; padding: 16px 20px 8px; }
+        .reading-progress-label { font-size: 11px; color: var(--color-text-muted); margin-bottom: 6px; }
+        .reading-progress-track { height: 4px; background: var(--color-border); border-radius: 2px; overflow: hidden; }
+        .reading-progress-fill { height: 100%; width: 0%; background: var(--color-info); border-radius: 2px; transition: width 0.2s ease; }
+
+        .sidebar-collapse-btn {
+            display: flex; align-items: center; justify-content: center;
+            width: 28px; height: 28px; background: transparent;
+            border: 1px solid var(--color-border); border-radius: 6px;
+            cursor: pointer; color: var(--color-text-muted); font-size: 13px;
+            position: fixed; top: 20px; left: calc(var(--sidebar-width) - 14px);
+            z-index: 101; transition: all var(--transition-fast); background: #fff;
+        }
+        .sidebar-collapse-btn:hover { background: var(--color-bg); }
+        .sidebar-collapse-btn.collapsed-pos { left: 34px; }
+
+        /* sidebar collapse */
+        .sidebar-nav.sidebar-collapsed { width: 0; padding: 0; overflow: hidden; border: none; }
+        .sidebar-nav.sidebar-collapsed ~ .sidebar-collapse-btn { left: 8px; }
+
+        /* ===== CONTENT AREA ===== */
+        .content-area {
+            flex: 1; min-width: 0;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .content-inner {
+            width: 100%; max-width: var(--content-max);
+            padding: 48px var(--content-pad) 120px;
+        }
+
+        /* ===== HEADER ===== */
+        .doc-header {
+            padding: 36px 0 32px; position: relative; margin-bottom: 32px;
+        }
+        .doc-header::after {
+            content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+            height: 3px; background: var(--gradient-hero); border-radius: 2px;
+        }
+        .header-badge {
+            display: inline-block; background: var(--gradient-badge); color: var(--color-info);
+            padding: 4px 14px; border-radius: var(--radius-full); font-size: 11px; font-weight: 600;
+            margin-bottom: 12px; border: 1px solid rgba(37,99,235,0.12); box-shadow: var(--shadow-xs);
+            letter-spacing: 0.04em;
+        }
+        .header-title {
+            font-size: 34px; font-weight: 800; letter-spacing: -0.025em;
+            background: var(--gradient-hero); -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; background-clip: text;
+            line-height: 1.2; margin-bottom: 10px; text-wrap: balance;
+        }
+        .header-meta { font-size: 13px; color: var(--color-text-muted); display: flex; gap: 16px; flex-wrap: wrap; }
+        .header-meta span { display: flex; align-items: center; gap: 4px; }
+
+        /* ===== CHAPTER LABEL ===== */
+        .doc-chapter-label {
+            display: flex; align-items: center; gap: 10px;
+            font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+            text-transform: uppercase; color: #A8A29E;
+            padding: 40px 0 12px;
+        }
+        .doc-chapter-label::after { content: ''; flex: 1; height: 1px; background: #F0EFEE; }
+
+        /* ===== SECTION ===== */
+        section { margin-bottom: 48px; }
+        section h2 {
+            font-size: 21px; font-weight: 700; color: var(--color-text-primary);
+            letter-spacing: -0.02em; margin-bottom: 16px; line-height: 1.3;
+        }
+        section h3 {
+            font-size: 16px; font-weight: 600; color: var(--color-text-primary);
+            margin: 20px 0 10px; line-height: 1.4;
+        }
+        section p { font-family: var(--font-family-cn); line-height: 1.75; margin-bottom: 12px; }
+
+        /* ===== STAT CARDS ===== */
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px; margin: 20px 0;
+        }
+        .stat-card {
+            background: var(--color-bg-card); border: 1px solid var(--color-border);
+            border-radius: var(--radius-md); padding: 16px;
+            border-top: 3px solid var(--color-border);
+            box-shadow: var(--shadow-card);
+            transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+        }
+        .stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+        .stat-info    { border-top-color: var(--color-info); }
+        .stat-success { border-top-color: var(--color-success); }
+        .stat-warning { border-top-color: var(--color-warning); }
+        .stat-purple  { border-top-color: var(--color-purple); }
+        .stat-danger  { border-top-color: var(--color-danger); }
+        .stat-value {
+            font-size: 24px; font-weight: 800; color: var(--color-text-primary);
+            font-variant-numeric: tabular-nums; line-height: 1.2; margin-bottom: 4px;
+            font-family: var(--font-family-heading);
+        }
+        .stat-label { font-size: 12px; color: var(--color-text-muted); font-weight: 500; letter-spacing: 0.02em; }
+
+        /* ===== TABLE ===== */
+        .table-wrap { overflow-x: auto; margin: 16px 0; border-radius: var(--radius-md); border: 1px solid var(--color-border); }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        thead tr { background: var(--color-bg-table-header); }
+        th {
+            padding: 10px 14px; text-align: left; font-weight: 600; font-size: 11px;
+            color: var(--color-text-muted); letter-spacing: 0.06em; text-transform: uppercase;
+            border-bottom: 1px solid var(--color-border);
+        }
+        td { padding: 10px 14px; border-bottom: 1px solid var(--color-border-light); vertical-align: top; }
+        tbody tr:last-child td { border-bottom: none; }
+        tbody tr:hover { background: var(--color-bg-hover); }
+        .star { color: var(--color-warning); }
+
+        /* ===== TOP 5 CARDS ===== */
+        .news-card {
+            background: var(--color-bg-card); border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg); padding: 20px 24px;
+            margin-bottom: 12px; box-shadow: var(--shadow-card);
+            transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+            position: relative; overflow: hidden;
+        }
+        .news-card::before {
+            content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+            width: 4px; background: var(--card-accent, var(--color-info));
+        }
+        .news-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); border-color: rgba(5,150,105,0.2); }
+        .news-card-rank {
+            font-size: 11px; font-weight: 800; color: var(--color-text-muted);
+            letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px;
+        }
+        .news-card-title { font-size: 15px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 8px; line-height: 1.4; }
+        .news-card-source { font-size: 11px; color: var(--color-text-muted); margin-bottom: 10px; }
+        .news-card-desc { font-size: 13px; font-family: var(--font-family-cn); line-height: 1.7; color: var(--color-text-secondary); margin-bottom: 10px; }
+        .news-card-why {
+            font-size: 12px; background: var(--color-info-50); border-left: 3px solid var(--color-info);
+            padding: 8px 12px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            color: var(--color-text-secondary); font-family: var(--font-family-cn); line-height: 1.6;
+        }
+        .news-card-why strong { color: var(--color-info); }
+
+        /* ===== INSIGHT CARDS ===== */
+        .insight-card {
+            background: linear-gradient(135deg, var(--color-purple-50) 0%, var(--color-info-50) 100%);
+            border: 1px solid rgba(124,58,237,0.15); border-radius: var(--radius-lg);
+            padding: 20px 24px; margin-bottom: 12px;
+            box-shadow: var(--shadow-card);
+        }
+        .insight-tag {
+            display: inline-block; font-size: 10px; font-weight: 700;
+            background: var(--color-purple); color: #fff;
+            padding: 2px 8px; border-radius: var(--radius-full); margin-bottom: 10px;
+            letter-spacing: 0.06em;
+        }
+        .insight-title { font-size: 15px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 8px; }
+        .insight-trend {
+            font-size: 12px; background: rgba(124,58,237,0.08); padding: 8px 12px;
+            border-radius: var(--radius-sm); margin-top: 10px; color: var(--color-purple);
+            font-weight: 500;
+        }
+
+        /* ===== CALLOUT ===== */
+        .callout {
+            padding: 14px 18px; border-radius: var(--radius-md); margin: 16px 0;
+            font-size: 13px; font-family: var(--font-family-cn); line-height: 1.7;
+            border-left: 4px solid;
+        }
+        .callout-info { background: var(--color-info-50); border-color: var(--color-info); color: #1e3a8a; }
+        .callout-success { background: var(--color-success-50); border-color: var(--color-success); color: #065f46; }
+        .callout-warning { background: var(--color-warning-50); border-color: var(--color-warning); color: #78350f; }
+        .callout-purple { background: var(--color-purple-50); border-color: var(--color-purple); color: #4c1d95; }
+
+        /* ===== WATCHLIST ===== */
+        .watchlist { list-style: none; margin: 0; padding: 0; }
+        .watchlist li {
+            padding: 10px 14px; background: var(--color-bg-card); border: 1px solid var(--color-border);
+            border-radius: var(--radius-md); margin-bottom: 8px;
+            font-family: var(--font-family-cn); font-size: 13px; line-height: 1.6;
+            display: flex; gap: 10px; align-items: flex-start;
+        }
+        .watchlist li::before { content: '→'; color: var(--color-info); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+        /* ===== DAILY INDEX ===== */
+        .daily-index { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin: 16px 0; }
+        .daily-item {
+            background: var(--color-bg-card); border: 1px solid var(--color-border);
+            border-radius: var(--radius-md); padding: 12px 16px;
+            transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+        }
+        .daily-item:hover { transform: translateY(-1px); box-shadow: var(--shadow-card); }
+        .daily-item-date { font-size: 12px; font-weight: 700; color: var(--color-info); margin-bottom: 4px; }
+        .daily-item-link { font-size: 13px; font-weight: 600; color: var(--color-text-primary); display: block; margin-bottom: 4px; }
+        .daily-item-kw { font-size: 11px; color: var(--color-text-muted); font-family: var(--font-family-cn); line-height: 1.5; }
+
+        /* ===== ANIMATE ===== */
+        .animate-on-scroll {
+            opacity: 0; transform: translateY(14px);
+            transition: opacity 0.42s ease, transform 0.42s ease;
+        }
+        .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+        @media (prefers-reduced-motion: reduce) {
+            .animate-on-scroll { transition: none; opacity: 1; transform: none; }
+        }
+
+        /* ===== SCROLL TO TOP ===== */
+        .scroll-to-top {
+            position: fixed; bottom: 28px; right: 28px;
+            width: 40px; height: 40px; border-radius: 50%;
+            background: var(--color-info); color: #fff; border: none;
+            cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center;
+            box-shadow: var(--shadow-glow-info); opacity: 0; pointer-events: none;
+            transition: opacity var(--transition-normal), transform var(--transition-normal);
+            z-index: 200;
+        }
+        .scroll-to-top.visible { opacity: 1; pointer-events: auto; }
+        .scroll-to-top:hover { transform: translateY(-2px); }
+
+        /* ===== FOOTER ===== */
+        .doc-footer {
+            margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--color-border);
+            font-size: 12px; color: var(--color-text-muted); text-align: center;
+            font-family: var(--font-family-cn);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .layout-wrapper { flex-direction: column; }
+            .sidebar-nav {
+                width: 100%; position: sticky; top: 0; height: auto;
+                overflow-y: visible; border-right: none; border-bottom: 1px solid var(--color-border);
+                display: flex; flex-direction: row; overflow-x: auto; padding: 4px 0;
+                -webkit-overflow-scrolling: touch;
+            }
+            .sidebar-doc-title, .toc-group-label, .reading-progress-wrap { display: none; }
+            .toc-link { flex: 0 0 auto; border-left: none; border-bottom: 2px solid transparent; white-space: nowrap; padding: 8px 14px; font-size: 12px; }
+            .toc-link.toc-active { border-left-color: transparent; border-bottom-color: var(--color-info); }
+            .toc-link.toc-sub { display: none; }
+            .sidebar-collapse-btn { display: none; }
+            .content-inner { padding: 28px 16px 80px; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .header-title { font-size: 26px; }
+        }
+    </style>
 </head>
 <body>
 <a class="skip-to-content" href="#main-content">跳到主内容</a>
@@ -95,7 +438,7 @@
                 <div class="news-card-title">Anthropic金融Agent：Skills+Connectors+Subagents三层架构定义Agent商业化标准形态</div>
                 <div class="news-card-source">📅 2026-05-05/05-10 · 📎 <a href="https://www.anthropic.com/news/enterprise-ai-services-company" target="_blank">Anthropic官方</a></div>
                 <div class="news-card-desc">Anthropic在纽约一口气释放10个金融Agent模板+Microsoft 365整合+16+金融数据connector，同一天宣布与Blackstone、H&F、Goldman Sachs合资成立15亿美元企业AI服务公司。核心架构是三层：Skills（领域知识+合规流程注入）、Connectors（受控数据接入+Moody's MCP app）、Subagents（主Agent调子模型做专家级校验）。这不是10个prompt，而是reference architecture——把行业的知识×数据×流程打包成可部署的单元。</div>
-                <div class="news-card-why"><strong>影响</strong>：Agent商业化的瓶颈不在模型能力，在"能不能安全接入企业数据和流程"。三层架构是domain-agnostic的，金融只是第一个场景。与小无相功SKILL.md体系本质上是同一套思想——架构思路被业界验证了，但执行速度要快。对快手AI生产力战役：KATE架构明确三层+研发效能10个垂直Agent模板+Connectors接入天策天玑KwaiBI。<br><br>🔗 <a href="https://xiaoxiong20260206.github.io/ai-insight-public/02-deep-research/topics/anthropic-financial-agents-new-org-model.html" target="_blank">深度调研完整版</a> · <a href="https://docs.corp.kuaishou.com/doc/fcABGDPUsCKZZp51dJ66Z8-R7" target="_blank">KIM Doc</a></div>
+                <div class="news-card-why"><strong>影响</strong>：Agent商业化的瓶颈不在模型能力，在"能不能安全接入企业数据和流程"。三层架构是domain-agnostic的，金融只是第一个场景。Agent从"通用chatbot配行业壳"走向"行业知识×数据×流程打包成可部署单元"——这是产品形态的根本性跃迁。<br><br>🔗 <a href="https://xiaoxiong20260206.github.io/ai-insight-public/02-deep-research/topics/anthropic-financial-agents-new-org-model.html" target="_blank">深度调研完整版</a> · <a href="https://docs.corp.kuaishou.com/doc/fcABGDPUsCKZZp51dJ66Z8-R7" target="_blank">KIM Doc</a></div>
             </div>
 
             <!-- Top 2 -->
@@ -139,7 +482,7 @@
             <section id="deepresearch">
             <div class="doc-chapter-label animate-on-scroll">深度调研</div>
             <h2 class="animate-on-scroll">🔍 Anthropic金融Agent——一套新组织方式</h2>
-            <div class="callout callout-purple animate-on-scroll">本周新增深度调研板块。Anthropic金融Agent三层架构是Agent商业化的标准形态——与小无相功SKILL.md体系同一思想，区别在于Anthropic把它做成了面向金融行业的商业产品。完整版见上方Top 1链接。</div>
+            <div class="callout callout-purple animate-on-scroll">本周新增深度调研板块。Anthropic金融Agent三层架构是Agent商业化的标准形态。完整版见上方Top 1链接。</div>
             
             <div class="table-wrap animate-on-scroll">
             <table>
@@ -149,18 +492,13 @@
             <tr><td style="font-weight:600;">能力</td><td>64.37% benchmark成绩 = "领先但不够自主交付"，结构化92%/月结50%</td></tr>
             <tr><td style="font-weight:600;">商业</td><td>合资公司 ≠ 卖API，= AI公司→行业数字化转型合伙人</td></tr>
             <tr><td style="font-weight:600;">产品</td><td>不是卖发动机，是卖整车——发动机+底盘+内饰+驾照一起交付</td></tr>
-            <tr><td style="font-weight:600;">对标</td><td>与小无相功SKILL.md体系同一思想，区别是面向金融商业产品vs自进化底层架构</td></tr>
+            <tr><td style="font-weight:600;">演进</td><td>三层架构的出现标志着Agent从"通用工具"走向"行业可部署单元"——与移动互联网从WAP到App的演进逻辑一致</td></tr>
             </tbody></table></div>
 
-            <div class="table-wrap animate-on-scroll" style="margin-top:20px;">
-            <table>
-            <thead><tr><th>优先级</th><th>对快手AI生产力战役的建议</th><th>依据</th></tr></thead>
-            <tbody>
-            <tr><td style="color:var(--color-danger);font-weight:700;">P0</td><td>KATE架构明确Skills+Connectors+Subagents三层</td><td>与业界主流对齐</td></tr>
-            <tr><td style="color:var(--color-warning);font-weight:700;">P1</td><td>研发效能10个垂直Agent模板（需求拆解/代码审查/测试生成等）</td><td>对标Anthropic金融10模板</td></tr>
-            <tr><td style="color:var(--color-warning);font-weight:700;">P1</td><td>Connectors接入天策+天玑+KwaiBI</td><td>数据接入是Agent落地前提</td></tr>
-            <tr><td>P2</td><td>研究合资公司模式</td><td>业务线深度参与，纯技术驱动不够</td></tr>
-            </tbody></table></div>
+            <div class="callout callout-info animate-on-scroll" style="margin-top:16px;">
+<strong>演进规律解读</strong><br><br>
+三层架构的domain-agnostic特性意味着，金融只是第一个样板间，接下来每个垂直行业都会出现类似的"行业知识×数据接入×流程委托"打包形态。Agent商业化的节奏将遵循"样板间验证→模板复制→生态绑定"的三段式演进路径——与移动互联网App生态的演进逻辑高度同构。
+            </div>
             </section>
 
             <!-- INSIGHTS -->
@@ -171,7 +509,7 @@
             <div class="insight-card animate-on-scroll">
                 <div class="insight-tag">洞察一</div>
                 <div class="insight-title">Agent商业化的标准形态出现——三层架构是行业共识而非个案</div>
-                <p style="font-family:var(--font-family-cn);line-height:1.75;font-size:13px;">Anthropic的Skills+Connectors+Subagents三层架构不是独家发明——OpenAI Symphony（session+harness+sandbox）、微软Copilot Cowork（Skills+连接器+后台编排）、Cursor Security Review都在用类似三层拆分。当三家头部公司不约而同选择同一个架构模式，说明这不是个案而是行业共识。三层架构的本质是：把Agent从"通用chatbot配行业壳"变成"行业知识×数据×流程打包成可部署单元"。对快手来说，KATE的架构方向有了明确的业界对标——Skills是《AI x 开发指南》等已有实践，Connectors是天策+天玑+KwaiBI，Subagents是CodeFlicker/Titi。三层已有雏形，缺的是"10个垂直Agent模板"的打包。</p>
+                <p style="font-family:var(--font-family-cn);line-height:1.75;font-size:13px;">Anthropic的Skills+Connectors+Subagents三层架构不是独家发明——OpenAI Symphony（session+harness+sandbox）、微软Copilot Cowork（Skills+连接器+后台编排）、Cursor Security Review都在用类似三层拆分。当三家头部公司不约而同选择同一个架构模式，说明这不是个案而是行业共识。三层架构的本质是：把Agent从"通用chatbot配行业壳"变成"行业知识×数据×流程打包成可部署单元"。这个架构的出现标志着Agent产品形态的根本性跃迁：从"卖能力"到"卖交付"——就像移动互联网从WAP到原生App，三层架构正在为Agent做同样的事。</p>
                 <div class="insight-trend">🔗 <a href="https://www.anthropic.com/news/enterprise-ai-services-company" target="_blank">Anthropic金融Agent</a> · <a href="https://openai.com/index/open-source-codex-orchestration-symphony/" target="_blank">Symphony</a> · <a href="https://blogs.microsoft.com/blog/2026/05/06/" target="_blank">Copilot Cowork</a></div>
             </div>
 
@@ -190,7 +528,7 @@
             </div>
 
             <hr style="border:none;border-top:2px solid var(--color-success);margin:32px 0;">
-            <div class="callout callout-success animate-on-scroll"><strong>发动机决定了上限，整车决定了交付</strong><br><br>这周最值得记住的不是DeepSeek 500亿融资，不是Cursor RCE漏洞，而是Anthropic金融Agent三层架构的出现。Skills+Connectors+Subagents——听起来像我们的小无相功，但Anthropic把它做成了面向金融行业的商业产品。架构思路被验证了，这是好消息。但执行速度要快——金融只是第一个场景，留给我们的时间窗口比想象中短。<br><br>64.37%的成绩是"领先但不够自主交付"——结构化92%/月结50%，与我们对AI研发成熟度L2→L3的判断完全吻合。81% VC流向AI既是信心也是风险——如果下半年商业化ROI不能兑现，2027回调潮会让2015移动互联网的泡沫故事重演。<br><br><strong>一句话建议</strong>：把KATE架构明确为三层——Skills×Connectors×Subagents。金融是Anthropic的样板间，研发效能能不能成为下一个？</div>
+            <div class="callout callout-success animate-on-scroll"><strong>发动机决定了上限，整车决定了交付</strong><br><br>这周最值得记住的不是DeepSeek 500亿融资，不是Cursor RCE漏洞，而是Anthropic金融Agent三层架构的出现。Skills+Connectors+Subagents——三层架构的出现标志着Agent产品形态的根本性跃迁：从"卖能力"到"卖交付"。就像移动互联网从WAP到原生App——WAP是通用浏览器配了个手机壳，原生App是场景×数据×交互打包成可安装单元。三层架构正在为Agent做同样的事。<br><br>64.37%的成绩揭示了一个深层规律：AI的能力边界不是均匀的，而是按任务确定性梯度分布。确定性高的任务接近可用，不确定性高的任务距离自主交付很远。这个梯度不会因为模型能力提升而消失，只会整体右移——但梯度本身是AI的固有属性。<br><br>81% VC流向AI既是信心也是风险——如果下半年商业化ROI不能兑现，2027回调潮会让2015移动互联网的泡沫故事重演。<br><br><strong>本周核心判断</strong>：Agent从"通用工具"走向"行业可部署单元"的跃迁已经确认。三层架构是标准化形态，64.37%是能力梯度规律的验证，81%资本密度是信心与风险的双重信号。2026下半年，确定性高的场景将率先规模化落地。</div>
             </section>
 
             <!-- LLM -->
@@ -478,22 +816,22 @@
 <h2 class="animate-on-scroll">🌐 宏观叙事延伸</h2>
 
 <div class="callout callout-info animate-on-scroll" style="margin-bottom:16px;">
-<strong>Anthropic金融Agent三层架构与小无相功SKILL.md体系的关系</strong><br><br>
-Skills+Connectors+Subagents三层架构与我们的SKILL.md体系本质上是同一套思想——都是把Agent的能力从"通用模型+行业壳"拆解为"领域知识×数据接入×专家委托"的可部署单元。区别在于：Anthropic把它做成了面向金融行业的商业产品（10个模板+16个connector+合资公司），我们做的是自进化Agent的底层架构。<br><br>
-这意味着：<br>
-1. 架构方向被业界验证，我们不是在做"另类实验"<br>
-2. 执行速度要快——金融只是第一个场景，法律/医疗/保险模板会直接复用<br>
-3. 对快手AI生产力战役，KATE架构明确三层有明确的业界对标<br>
-4. "发动机决定了上限，整车决定了交付"——Anthropic卖的是整车，我们的SKILL.md体系是发动机+底盘的通用框架，需要加上"10个垂直模板"的整车交付
+<strong>三层架构与Agent产品形态跃迁的演进规律</strong><br><br>
+Skills+Connectors+Subagents三层架构的出现，标志着Agent从"通用工具"走向"行业可部署单元"的根本性跃迁。这个跃迁与移动互联网从WAP到原生App的演进逻辑高度同构：<br>
+1. WAP门户 = 通用浏览器配手机壳 → Agent = 通用chatbot配行业壳<br>
+2. 原生App = 场景×数据×交互打包 → 三层架构 = 行业知识×数据接入×流程委托打包<br>
+3. App Store生态 = 模板复制+分发 → 合资公司+connector生态 = 样板间验证→模板复制→生态绑定<br><br>
+domain-agnostic特性意味着金融只是第一个样板间。样板间验证→模板复制→生态绑定，是Agent商业化的三段式演进路径。
 </div>
 
 <div class="callout callout-purple animate-on-scroll" style="margin-bottom:16px;">
-<strong>64.37% benchmark成绩与AI研发成熟度L2→L3的关系</strong><br><br>
-Anthropic金融Agent的64.37%得分细分为：结构化任务92%、财务报告62%、月结关账50%。这与我们对AI研发成熟度模型的判断完全吻合：<br>
-- L1（AI Coding）：结构化编码任务——92%准确率，接近可用<br>
-- L2（AI辅助开发）：需人审的报告类任务——62%准确率，需要人工审核修改<br>
-- L3（AI协同开发）：自主交付关账类任务——50%准确率，距离自主交付很远<br><br>
-金融行业会在L2停留相当长时间，研发效能也一样。2026年的AI Agent适合做初稿和加速，不适合做最终交付。这个判断的置信度非常高——两个独立来源（Anthropic benchmark + 我们的L2-L3模型）指向同一结论。
+<strong>64.37%揭示的能力梯度规律：AI能力边界不是均匀的</strong><br><br>
+Anthropic金融Agent的64.37%得分细分为：结构化任务92%、财务报告62%、月结关账50%。这个分布揭示了一个深层规律：<br>
+- AI的能力边界不是均匀的，而是按任务确定性梯度分布<br>
+- 确定性高的任务（分类、匹配、格式化）接近可用——92%<br>
+- 中等确定性的任务（分析、推理）需要人类兜底——62%<br>
+- 低确定性任务（综合判断、自主决策）距离自主交付很远——50%<br><br>
+关键判断：这个梯度不会因为模型能力提升而消失，只会整体右移——但梯度本身是AI的固有属性。2026年下半年的规模化落地，将率先发生在确定性高的场景，不确定性高的场景仍在等待人类兜底。
 </div>
 
 <div class="callout callout-warning animate-on-scroll" style="margin-bottom:16px;">
