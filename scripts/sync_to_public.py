@@ -183,7 +183,10 @@ REPLACEMENTS = _URL_REPLACEMENTS + [
 ]
 
 # 敏感词验证列表（脱敏后不应出现的词）
-SENSITIVE_WORDS = ['林克', '沈浪', '快手', 'Kuaishou', 'CF', 'KATE', '天策', '天玑', 'KwaiBI', 'CodeFlicker', '小无相功', 'SKILL.md', 'docs.corp.kuaishou', 'shenlang', 'KIM Doc', 'AI分身', '让我负责', 'MyFlicker', 'myflicker', 'link-avatar']  # #115: 全量脱敏
+# v12.0: public/ 是内部版Pages部署源（经验#114），"林克"等品牌内容是合法的
+# 只检查不应该出现的真正敏感词（公司内部代号、内网地址、沈浪个人信息）
+# "林克"、"AI分身"、"让我负责" 等是内部版品牌标识，不检测
+PUBLIC_SENSITIVE_WORDS = ['沈浪', '快手', 'Kuaishou', 'CodeFlicker', 'KATE', '天策', '天玑', 'KwaiBI', '小无相功', 'SKILL.md', 'docs.corp.kuaishou', 'shenlang', 'KIM Doc', 'MyFlicker', 'myflicker']  # #115: 不含"林克/AI分身/让我负责/link-avatar/CF"
 
 
 def sanitize_html(content: str) -> str:
@@ -498,7 +501,7 @@ def verify_sanitization() -> tuple:
         rel_path = f.relative_to(PUBLIC_DIR)
         
         # 检查1: 敏感词残留
-        for word in SENSITIVE_WORDS:
+        for word in PUBLIC_SENSITIVE_WORDS:
             occurrences = [(m.start(), m.group()) for m in re.finditer(re.escape(word), content)]
             if occurrences:
                 for pos, match in occurrences:
