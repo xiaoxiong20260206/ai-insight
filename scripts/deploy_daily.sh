@@ -329,7 +329,8 @@ echo ""
 echo "📋 Step 4: 同步公开版（先于commit，确保public/index.html纳入提交）"
 python3 scripts/sync_to_public.py --full --force
 # 强制敏感词二次核查（不依赖sync_to_public自检）—— 发现残留直接abort，禁止继续推送
-SENSITIVE_COUNT=$( (grep -rl "沈浪\|林克\|快手\|Kuaishou\|CF" public/ 2>/dev/null || true) | wc -l | tr -d ' ')
+# v12.0修复: grep只搜文本文件(排除图片等二进制)，图片EXIF数据不应触发敏感词
+SENSITIVE_COUNT=$( (grep -rl --include="*.html" --include="*.md" --include="*.json" --include="*.js" --include="*.css" --include="*.txt" --include="*.xml" --include="*.svg" "沈浪\|林克\|快手\|Kuaishou\|CF" public/ 2>/dev/null || true) | wc -l | tr -d ' ')
 if [ "$SENSITIVE_COUNT" -gt 0 ]; then
     echo "  ❌ [ABORT] public/目录中有 ${SENSITIVE_COUNT} 个文件含敏感词，禁止继续推送！"
     grep -rl "沈浪\|林克\|快手\|Kuaishou\|CF" public/ | head -5

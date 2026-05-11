@@ -793,7 +793,7 @@ def _show_4_positions_summary(date: str) -> None:
 
 
 def run_quality_gate(date: str, fix: bool = False) -> bool:
-    """运行质量门检查（v9.9修复: fix=True时自动修复可修复项，可修复项失败不阻断）"""
+    """运行质量门检查（v12.0: hard/soft分级 — hard失败阻断, soft失败不阻断）"""
     try:
         cmd = ["python3", str(SCRIPT_DIR / "daily_quality_gate.py"), date]
         if fix:
@@ -802,19 +802,17 @@ def run_quality_gate(date: str, fix: bool = False) -> bool:
             cmd,
             capture_output=True, text=True, timeout=120, cwd=str(PROJECT_DIR)
         )
-        print(result.stdout[-800:] if len(result.stdout) > 800 else result.stdout)
-        # 检查是否有硬性失败
-        if "❌ 质量门未通过" in result.stdout:
-            # v9.9: 区分硬性失败 vs 可修复项失败
-            # 可修复项格式: "❌ xxx: ... (可修复)"，由 --fix 后续处理
-            lines = result.stdout.split("\n")
-            hard_fails = [l for l in lines if l.startswith("❌") and "(可修复)" not in l and "⚠️" not in l and "质量门未通过" not in l]
-            if hard_fails:
-                return False
-            # 所有失败都是可修复项：不阻断，打印提示
-            if fix:
-                print("  ✅ 质量门: 所有失败均为可修复项，已自动修复")
-        return True
+        print(result.stdout[-1200:] if len(result.stdout) > 1200 else result.stdout)
+        # v12.0: 硬性失败才阻断
+        if "🚫 质量门硬性失败" in result.stdout:
+            return False
+        # 软性失败或全部通过 → 不阻断
+        if "✅ 质量门通过" in result.stdout or "⚠️" in result.stdout:
+            return True
+        # fallback: 旧格式兼容
+        if result.returncode == 0:
+            return True
+        return False
     except Exception as e:
         print(f"  ❌ 质量门执行失败: {e}")
         return False

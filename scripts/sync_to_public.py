@@ -113,6 +113,15 @@ REPLACEMENTS = _URL_REPLACEMENTS + [
     (r'由 <a href="https://github.com/xiaoxiong20260206" target="_blank">林克</a>（沈浪的AI分身）负责维护', 'AI洞察 · 持续追踪AI行业动态'),
     (r'由林克（沈浪的AI分身）每日更新', '每日更新'),
     (r'由林克 AI 洞察系统生成', '由 AI 洞察系统生成'),  # #114: 防止"由AI洞察 AI洞察系统"重复
+    (r'AI分身', 'AI洞察'),  # #115: "AI分身"也是身份暴露
+    (r'让我负责', ''),  # #115: "让我负责"暗示个人身份
+    (r'Powered by MyFlicker ❤️🔥（沈浪的AI工作伙伴）', 'Powered by ❤️🔥'),
+    (r'Powered by MyFlicker ❤️🔥', 'Powered by ❤️🔥'),
+    (r'MyFlicker', 'AI洞察'),  # #115: 平台名也暴露内部信息
+    (r'myflicker', 'ai-insight'),
+    (r'my-ai-research-lab', 'ai-insight-lab'),
+    (r'link-avatar-small\.webp', 'ai-insight-logo.webp'),
+    (r'link-avatar', 'ai-insight-logo'),  # #115: 头像文件名含内部身份
     
     # ===== 页头Badge =====
     (r'📡 林克的AI洞察项目 - AI日报', '📡 AI行业洞察 - AI日报'),
@@ -174,7 +183,7 @@ REPLACEMENTS = _URL_REPLACEMENTS + [
 ]
 
 # 敏感词验证列表（脱敏后不应出现的词）
-SENSITIVE_WORDS = ['林克', '沈浪', '快手', 'Kuaishou', 'CF', 'KATE', '天策', '天玑', 'KwaiBI', 'CodeFlicker', '小无相功', 'SKILL.md', 'docs.corp.kuaishou', 'shenlang', 'KIM Doc']  # #115: 全量脱敏新增
+SENSITIVE_WORDS = ['林克', '沈浪', '快手', 'Kuaishou', 'CF', 'KATE', '天策', '天玑', 'KwaiBI', 'CodeFlicker', '小无相功', 'SKILL.md', 'docs.corp.kuaishou', 'shenlang', 'KIM Doc', 'AI分身', '让我负责', 'MyFlicker', 'myflicker', 'link-avatar']  # #115: 全量脱敏
 
 
 def sanitize_html(content: str) -> str:

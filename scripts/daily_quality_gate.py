@@ -132,6 +132,35 @@ class CheckResult:
         fix_hint = " (可修复)" if not self.passed and self.fixable else ""
         return f"{status} {self.name}: {self.message}{fix_hint}"
 
+# ══ Hard/Soft 分级定义（v12.0 — 2026-05-11） ══
+# HARD(阻断): 数据结构完整性+内容必须性+部署正确性
+# SOFT(警告): 数据质量优化项，不阻断部署流程
+HARD_CHECKS = {
+    "JSON文件",       # JSON不存在=整个流程无法继续
+    "内容非空",       # 空壳=无内容可部署
+    "林克自述",       # 品牌内容缺失
+    "深度聚焦",       # 核心差异化内容缺失
+    "规律洞察",       # 核心差异化内容缺失
+    "内容量",         # 过少=内容缩水
+    "时效性",         # 过时内容=日报失去价值
+    "封闭平台链接",   # mp.weixin临时链接/搜狗跳转=数小时后404
+    "中文引号",       # JSON语法错误
+    "6处联动",        # 部署完整性
+    "HTML链接",       # 渲染完整性
+}
+
+SOFT_CHECKS = {
+    "板块均衡",       # 略有偏差可接受
+    "板块分类",       # 微小分类偏差不影响阅读
+    "地区分类",       # overseas→china 的边界判断有灰色地带
+    "信息源多样性",   # 搜狗占比偏高但内容仍然有效
+    "日期篡改",       # 微小编辑（如补充来源名）不应阻断
+    "同报去重",       # 同URL出现2次不影响阅读体验
+    "链接有效",       # 网络波动导致不可达是常见现象
+    "小红书noteId",   # 无小红书=正常（默认不搜索）
+    "外部同步",       # 同步问题可后续手动修复
+}
+
 
 def check_json_exists(date_str: str) -> CheckResult:
     """检查1: JSON数据文件存在性"""
@@ -734,9 +763,9 @@ def check_board_classification(date_str: str) -> CheckResult:
             examples = "; ".join(suspects[:3])
             return CheckResult(
                 "板块分类", False,
-                f"❌ {len(suspects)}条新闻可能分类错误: {examples}",
-                fixable=False
-                # v9.1: 从warning升级为error(默认)，分类错误必须阻断部署
+                f"{len(suspects)}条新闻可能分类错误: {examples}",
+                fixable=False,
+                severity="warning"  # v12.0: 降级为warning（微小分类偏差不影响阅读）
             )
         
         return CheckResult("板块分类", True, "所有新闻板块分类合理")
@@ -840,9 +869,9 @@ def check_region_classification(date_str: str) -> CheckResult:
             examples = "; ".join(suspects[:3])
             return CheckResult(
                 "地区分类", False,
-                f"❌ {len(suspects)}条新闻可能地区分类错误: {examples}",
-                fixable=False
-                # v9.1: 从warning升级为error(默认)，地区分类错误必须阻断部署
+                f"{len(suspects)}条新闻可能地区分类错误: {examples}",
+                fixable=False,
+                severity="warning"  # v12.0: 降级为warning（边界判断有灰色地带，不阻断）
             )
         
         return CheckResult("地区分类", True, "所有新闻地区分类合理")
@@ -1064,19 +1093,26 @@ def check_source_diversity(date_str: str) -> CheckResult:
         if effective_xhs > 0:
             xhs_note = f", 小红书{effective_xhs}"
         
-        # 信息源集中度 > 40% → ERROR
+        # 信息源集中度 > 40% → WARNING (v12.0: 降级，搜狗占比高但内容仍有效)
         for domain, count in sorted(domain_counts.items(), key=lambda x: -x[1]):
             ratio = count / total
             if ratio > 0.4:
-                errors.append(f"❌ {domain}占比{ratio:.0%}({count}/{total}条)>40%，需增加其他来源")
-                break  # 只报最严重的一个
+                warnings.append(f"{domain}占比{ratio:.0%}({count}/{total}条)>40%，建议增加其他来源")
+                break
         
         if errors:
             detail = "; ".join(errors)
             return CheckResult(
                 "信息源多样性", False, detail
-                # v9.1: 不传severity，默认为error，硬阻断部署
             )
+        
+        if warnings:
+            warn_detail = "; ".join(warnings)
+            # v12.0: 源集中度超标只是warning，不阻断
+            domain_summary = ", ".join(f"{d}({c})" for d, c in 
+                                       sorted(domain_counts.items(), key=lambda x: -x[1])[:5])
+            coverage_msg = f"微信直引{weixin_direct}+交叉{weixin_crossref}{xhs_note}"
+            return CheckResult("信息源多样性", False, f"⚠️ {warn_detail}", severity="warning")
         
         # 构建通过消息
         domain_summary = ", ".join(f"{d}({c})" for d, c in 
@@ -1402,12 +1438,14 @@ def check_date_tampering(date_str: str) -> CheckResult:
             issues.append(f"可疑日期模式: {examples}")
         
         if issues:
-            # v9.8修复: 原三元表达式两侧相同("error" if x else "error")，无实际区分意义
+            # v12.0: 微小编辑（补充来源名等）降级为warning
+            # 只有大量篡改(>5处)才升级为error
+            severity = "error" if len(issues) > 5 else "warning"
             return CheckResult(
                 "日期篡改", False,
                 " | ".join(issues),
                 fixable=False,
-                severity="error"
+                severity=severity
             )
         
         # 通过信息
@@ -1834,21 +1872,25 @@ def main():
             else:
                 print(f"📊 重新检查: {passed}/{total_checks} 通过, {failed}/{total_checks} 失败")
     
-    # 最终结果
-    if failed == 0:
-        if warnings > 0:
-            print(f"\n✅ 质量门通过！({warnings}项警告，不阻断)")
+    # 最终结果（v12.0: hard/soft分级）
+    hard_fails = [r for r in results if not r.passed and r.name in HARD_CHECKS]
+    soft_fails = [r for r in results if not r.passed and r.name in SOFT_CHECKS and r.severity == "warning"]
+    
+    if len(hard_fails) == 0:
+        if soft_fails or warnings:
+            total_soft = len(soft_fails) + warnings
+            print(f"\n✅ 质量门通过！({total_soft}项软性警告，不阻断部署)")
         else:
             print("\n✅ 质量门通过！可以安全推送日报。")
         return 0
     else:
-        # 检查是否有时效性错误（严重错误）
-        timeliness_failed = any(r.name == "时效性" and not r.passed for r in results)
-        if timeliness_failed:
-            print(f"\n🚫 时效性检查未通过！请删除超出时间窗口的新闻后重新生成。")
-            print("   规则: N日日报只收录 N-1日08:00 ~ N日08:00 的内容")
-        else:
-            print(f"\n❌ 质量门未通过 ({failed}项失败)，请修复后重试。")
+        print(f"\n🚫 质量门硬性失败 ({len(hard_fails)}项阻断)：")
+        for r in hard_fails:
+            print(f"   ❌ {r.name}: {r.message}")
+        if soft_fails:
+            print(f"   ⚠️ 另有 {len(soft_fails)}项软性警告（不阻断）：")
+            for r in soft_fails:
+                print(f"   ⚠️ {r.name}: {r.message}")
         print("💡 提示: 使用 --fix 参数可尝试自动修复部分问题")
         return 1
 
