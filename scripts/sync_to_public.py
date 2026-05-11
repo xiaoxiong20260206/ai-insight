@@ -149,6 +149,24 @@ REPLACEMENTS = _URL_REPLACEMENTS + [
     (r'快手', '某公司'),
     (r'Kuaishou', 'Company'),
     
+    # ===== #115: 全量脱敏新增规则（深度调研/周报中的内部工具/平台名） =====
+    (r'KATE平台', 'Agent平台'),
+    (r'KATE', 'Agent平台'),
+    (r'天策平台', '数据平台'),
+    (r'天策', '数据平台'),
+    (r'天玑平台', '数据分析平台'),
+    (r'天玑', '数据分析平台'),
+    (r'KwaiBI', 'BI平台'),
+    (r'CodeFlicker', 'AI IDE'),
+    (r'Titi', '数据Agent'),
+    (r'SKILL\.md体系', '技能体系'),
+    (r'SKILL\.md', '技能定义文件'),
+    (r'小无相功', '自进化体系'),
+    (r'KIM Doc', '内部文档'),
+    (r'docs\.corp\.kuaishou\.com[^"]*', '#internal-link'),
+    (r'shenlang03', ''),
+    (r'shenlang', ''),
+    
     # ===== 外部版首页订阅按钮自动剥离（v10.4 经验62）=====
     # 外部版是公开页面，订阅功能需要内部认证，不提供此能力
     # 匹配 header 区域内订阅按钮 div（含 <a href="./subscribe/">）
@@ -156,7 +174,7 @@ REPLACEMENTS = _URL_REPLACEMENTS + [
 ]
 
 # 敏感词验证列表（脱敏后不应出现的词）
-SENSITIVE_WORDS = ['林克', '沈浪', '快手', 'Kuaishou', 'CF']  # v9.6新增CF
+SENSITIVE_WORDS = ['林克', '沈浪', '快手', 'Kuaishou', 'CF', 'KATE', '天策', '天玑', 'KwaiBI', 'CodeFlicker', '小无相功', 'SKILL.md', 'docs.corp.kuaishou', 'shenlang', 'KIM Doc']  # #115: 全量脱敏新增
 
 
 def sanitize_html(content: str) -> str:
