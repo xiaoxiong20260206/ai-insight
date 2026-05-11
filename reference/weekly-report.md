@@ -356,16 +356,50 @@ for name, target in groups:
 
 ## Step 7: 同步首页 + 外部版 + Git推送
 
+### Step 7.1: 更新首页周报入口（P0，不可跳过）
+
+```bash
+# 自动更新内外版首页的周报入口卡片 + 日历JS数据
+python3 scripts/update_homepage_weekly.py \
+  --week YYYY-WXX \
+  --title "第XX周（MM/DD - MM/DD）" \
+  --desc "覆盖XX条资讯 · 关键事件1 · 关键事件2 · ..." \
+  --month YYYY-MM \
+  --day DD
+```
+
+**验证命令**：
+
+```bash
+for path in index.html public/index.html; do
+    echo "$path: $(grep -c 'weekly-YYYY-WXX' $path) 处引用"
+done
+# 外部版也必须验证
+echo "ai-insight-public/index.html: $(grep -c 'weekly-YYYY-WXX' ../ai-insight-public/index.html) 处引用"
+```
+
+### Step 7.2: 同步到public/ + 外部版
+
 ```bash
 # 1. 同步到public/
 cp 01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html public/01-daily-reports/YYYY-MM/
 
-# 2. 同步到外部仓库
+# 2. 同步到外部仓库（会自动处理脱敏）
 python3 scripts/sync_to_external.py --full --verify
+```
 
-# 3. Git提交推送
+### Step 7.3: Git推送
+
+```bash
+# 内部版
 git add -A
 git commit -m "📊 AI周报 YYYY-WXX"
+git push origin main
+
+# 外部版
+cd ../ai-insight-public
+git add -A
+git commit -m "📊 AI周报 YYYY-WXX (public)"
 git push origin main
 ```
 
