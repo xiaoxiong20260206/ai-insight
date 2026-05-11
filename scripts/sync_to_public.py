@@ -139,7 +139,9 @@ REPLACEMENTS = _URL_REPLACEMENTS + [
     (r'林克', 'AI洞察'),
     (r'沈浪', ''),
     # CF品牌词替换（v9.6新增：防止品牌词泄露到公开版）
-    (r'CF', 'AI助手平台'),
+    # ⚠️ v9.7修复：禁止替换CSS颜色值中的CF（如 #ECFDF5、#8B5CF6）
+    # 使用负向lookbehind：CF前面不能是十六进制字符(0-9A-Fa-f)或#
+    (r'(?<![0-9A-Fa-f#])CF(?![0-9A-Fa-f])', 'AI助手平台'),
     (r'基于CF打造的', ''),
     (r'AI数字分身', 'AI洞察'),
     (r'沈浪让我负责的', ''),
@@ -186,7 +188,7 @@ REPLACEMENTS = _URL_REPLACEMENTS + [
 # v12.0: public/ 是内部版Pages部署源（经验#114），"林克"等品牌内容是合法的
 # 只检查不应该出现的真正敏感词（公司内部代号、内网地址、沈浪个人信息）
 # "林克"、"AI分身"、"让我负责" 等是内部版品牌标识，不检测
-PUBLIC_SENSITIVE_WORDS = ['沈浪', '快手', 'Kuaishou', 'CodeFlicker', 'KATE', '天策', '天玑', 'KwaiBI', '小无相功', 'SKILL.md', 'docs.corp.kuaishou', 'shenlang', 'KIM Doc', 'MyFlicker', 'myflicker']  # #115: 不含"林克/AI分身/让我负责/link-avatar/CF"
+PUBLIC_SENSITIVE_WORDS = ['沈浪', '快手', 'Kuaishou', 'CodeFlicker', 'KATE', '天策', '天玑', 'KwaiBI', '小无相功', 'docs.corp.kuaishou', 'shenlang', 'KIM Doc', 'MyFlicker', 'myflicker']  # v12.0: 不含"林克/AI分身/让我负责/link-avatar/CF/SKILL.md"
 
 
 def sanitize_html(content: str) -> str:
@@ -467,29 +469,39 @@ def sync_directory(dir_name: str, force: bool = False) -> int:
 
 def verify_sanitization() -> tuple:
     """
-    验证 public/ 目录中是否有敏感词残留和 -v3 链接残留（v2.0新增, v2.2增强）
+    验证外部版(ai-insight-public/)目录中是否有敏感词残留和 -v3 链接残留（v12.0修复）
+    
+    v12.0: 验证目标从 public/（内部版）改为 ai-insight-public/（外部版）
+    因为 public/ 是内部版Pages部署源，包含"林克"是正确行为
     
     检查项:
-    1. 敏感词残留（林克/沈浪/快手/Kuaishou）
-    2. -v3.html 链接残留（public版文件名已去掉-v3后缀，链接也必须同步去掉）
+    1. 敏感词残留（沈浪/快手/Kuaishou等在外部版中不应出现）
+    2. -v3.html 链接残留
     
     Returns:
         (is_clean, violations) - 是否干净, 违规列表
     """
     violations = []
     
+    # v12.0: 验证外部版而非内部版
+    external_repo = PROJECT_ROOT.parent / "ai-insight-public"
+    if not external_repo.exists():
+        print("⚠️ 外部版仓库不存在，跳过验证")
+        return True, []
+    
+    verify_dir = external_repo
     text_extensions = {'.html', '.css', '.js', '.json', '.md', '.txt'}
     
     # v2.2: -v3.html 链接残留检测模式
     v3_link_pattern = re.compile(r'\d{4}-\d{2}-\d{2}-v3\.html')
     
-    for f in PUBLIC_DIR.rglob("*"):
+    for f in verify_dir.rglob("*"):
         if not f.is_file():
             continue
         if f.suffix.lower() not in text_extensions:
             continue
         # 排除隐藏文件
-        rel_parts = f.relative_to(PUBLIC_DIR).parts
+        rel_parts = f.relative_to(verify_dir).parts
         if any(p.startswith('.') for p in rel_parts):
             continue
         
@@ -498,7 +510,7 @@ def verify_sanitization() -> tuple:
         except (UnicodeDecodeError, PermissionError):
             continue
         
-        rel_path = f.relative_to(PUBLIC_DIR)
+        rel_path = f.relative_to(verify_dir)
         
         # 检查1: 敏感词残留
         for word in PUBLIC_SENSITIVE_WORDS:

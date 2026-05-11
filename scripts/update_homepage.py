@@ -160,7 +160,11 @@ def update_report_index(date_str: str) -> bool:
 
 
 def sync_public_homepage(date_str: str) -> bool:
-    """同步 public/index.html — 从内部版 copy 后更新"""
+    """同步 public/index.html — 内部版直接复制（保留林克身份）
+    
+    ⚠️ v2.0 修复：不再直接复制内部版到 ai-insight-public/，
+    必须调用 sync_to_public.py 的脱敏逻辑，否则会暴露林克/沈浪等内部信息。
+    """
     src = PROJECT_ROOT / "index.html"
     dst = PROJECT_ROOT / "public" / "index.html"
 
@@ -168,8 +172,24 @@ def sync_public_homepage(date_str: str) -> bool:
         print(f"  ❌ 内部版首页不存在")
         return False
 
-    # 从内部版复制到 public/
+    # Step 1: 内部版 → public/（保留林克身份，用于内部版 Pages）
     dst.write_text(src.read_text(encoding="utf-8"), encoding="utf-8")
+
+    # Step 2: 调用 sync_to_public.py 的脱敏逻辑 → ai-insight-public/
+    external_repo = PROJECT_ROOT.parent / "ai-insight-public"
+    if external_repo.exists() and external_repo.is_dir():
+        sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
+        try:
+            from sync_to_public import sanitize_html
+            content = src.read_text(encoding="utf-8")
+            sanitized = sanitize_html(content)
+            ext_dst = external_repo / "index.html"
+            ext_dst.write_text(sanitized, encoding="utf-8")
+            print(f"  ✅ ai-insight-public/index.html 已脱敏同步")
+        except Exception as e:
+            print(f"  ⚠️ 脱敏同步失败: {e}，请手动运行 sync_to_public.py --full --force --with-index")
+    else:
+        print(f"  ⚠️ ai-insight-public 仓库不存在，跳过脱敏版同步")
 
     # 验证 public/index.html 包含当天日期
     pub_content = dst.read_text(encoding="utf-8")
