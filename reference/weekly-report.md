@@ -503,6 +503,7 @@ echo "④ 外部仓库周报: $([ -f "../ai-insight-public/01-daily-reports/$MON
 | 109 | PROJECT_ROOT 指向错误目录 → 找不到文件 → 空内容兜底卡片 | 动态检测项目根目录（检查 01-daily-reports/），找不到文件报错退出而非静默兜底 |
 | 110 | 卡片内容直接复用 MD 全文 → 10屏纯文本无锚点 | 卡片版结论先行+精简有锚；Top5=标题+1句话+1链接；洞察=结论+1链接 |
 | 111 | 周报HTML无来源超链接 → 事件表格纯文字，与日报HTML/KIM卡片不一致 | Step 1提取URL → Step 2 MD带链接 → Step 3 HTML `<a href>` 链接；Top 5卡片source行+各板块表格事件/来源列 |
+| 112 | 周报HTML/MD包含KIM Doc链接 → 外发页面不应包含内部平台链接 | 周报生成时禁止在HTML/MD中添加 docs.corp.kuaishou.com 链接；KIM Doc链接只在KIM MixCard推送时使用（卡片内也不放，已于W19确认删除） |
 
 ---
 
