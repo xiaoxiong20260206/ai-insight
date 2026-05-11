@@ -93,21 +93,33 @@ def build_daily(date_str: str) -> dict:
     overseas = coverage.get("overseas", 0)
     china = coverage.get("china", 0)
 
-    # 热度趋势
+    # 热度趋势 — 兼容两种数据格式(v11.1 fix)
+    # 旧格式: heat_trend.topics (cron早期版本)
+    # 新格式: heat_trend.top_items (2026-05-11起cron session生成)
     heat_data = data.get("heat_trend", {}) or {}
     heat_title = heat_data.get("title", "近7期日报交叉分析")
-    topics = heat_data.get("topics", []) or []
-    trend_icons = {"up": "📈", "down": "📉", "stable": "➡️", "new": "🆕", "burst": "⚡"}
+    # 优先取top_items，fallback到topics
+    raw_items = heat_data.get("top_items", []) or heat_data.get("topics", []) or []
+    trend_icons = {"up": "📈", "down": "📉", "stable": "➡️", "new": "🆕", "burst": "⚡", "hot": "🔥"}
     rank_icons = ["🥇", "🥈", "🥉", "4️⃣", "5️⃣", "6️⃣"]
 
     heat_lines = []
-    if topics:
+    if raw_items:
         heat_lines = [f"🔥 **热度趋势**（{heat_title}）", ""]
-        for i, t in enumerate(topics[:6]):
+        for i, t in enumerate(raw_items[:6]):
             rank = rank_icons[i] if i < len(rank_icons) else f"{i+1}️⃣"
-            name = t.get("name", "")
+            # 旧格式用name+days, 新格式用title+rank+trend
+            name = t.get("name", "") or t.get("title", "")
             days = t.get("days", 0)
-            trend_icon = trend_icons.get(t.get("trend_class", "stable"), "➡️")
+            trend_class = t.get("trend_class", "") or t.get("trend", "")
+            trend_icon = trend_icons.get(trend_class, "➡️")
+            signal = t.get("signal", "")
+            if days:
+                heat_lines.append(f"- {rank} **{name}** — {days}天 {trend_icon}")
+            else:
+                heat_lines.append(f"- {rank} **{name}** {trend_icon}")
+            if signal:
+                heat_lines.append(f"  → {signal}")
             signal = t.get("signal", "")
             heat_lines.append(f"- {rank} **{name}** — {days}天 {trend_icon}")
             if signal:
