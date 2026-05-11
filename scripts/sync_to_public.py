@@ -120,7 +120,8 @@ REPLACEMENTS = _URL_REPLACEMENTS + [
     (r'MyFlicker', 'AI洞察'),  # #115: 平台名也暴露内部信息
     (r'myflicker', 'ai-insight'),
     (r'my-ai-research-lab', 'ai-insight-lab'),
-    (r'link-avatar-small\.webp', 'ai-insight-logo.webp'),
+    # link-avatar-small.webp 在外部版直接去除（下方有整块div删除规则，此行兜底）
+    (r'src="link-avatar-small\.webp"[^>]*>', 'style="display:none">'),
     (r'link-avatar', 'ai-insight-logo'),  # #115: 头像文件名含内部身份
     
     # ===== 页头Badge =====
@@ -134,6 +135,9 @@ REPLACEMENTS = _URL_REPLACEMENTS + [
     (r'<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">\s*<img src="[^"]*link-avatar-small\.webp"[^>]*>\s*<span>', '<span>'),
     (r'<div style="text-align:center; margin-bottom:16px;">\s*<img src="link-avatar-small\.webp"[^>]*>\s*</div>', ''),
     (r'<div style="margin-bottom:12px;">\s*<img src="link-avatar-small\.webp"[^>]*>\s*<strong>林克</strong> · 沈浪的AI分身', '<strong>AI洞察</strong>'),
+    # footer 中的头像图片 div（· 的AI洞察 是脱敏后的残留）
+    (r'<div style="margin-bottom:12px;">\s*<img src="ai-insight-logo\.webp"[^>]*>\s*<strong>AI洞察</strong> · 的AI洞察\s*</div>', ''),
+    (r'<div style="margin-bottom:12px;">\s*<img[^>]*ai-insight-logo[^>]*>[^<]*</div>', ''),
     
     # ===== 简单替换（兜底） =====
     (r'林克', 'AI洞察'),
