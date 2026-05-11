@@ -146,6 +146,9 @@ REPLACEMENTS = _URL_REPLACEMENTS + [
     # ⚠️ v9.7修复：禁止替换CSS颜色值中的CF（如 #ECFDF5、#8B5CF6）
     # 使用负向lookbehind：CF前面不能是十六进制字符(0-9A-Fa-f)或#
     (r'(?<![0-9A-Fa-f#])CF(?![0-9A-Fa-f])', 'AI助手平台'),
+    # ===== 外部版：去除知识库内部链接（04-knowledge-base/*.md不存在于外部版）=====
+    # 将 <a href="04-knowledge-base/...">...内容...</a> 替换为 <span class="kb-item-text">纯文本</span>
+    # 此规则为兜底，首页生成脚本中也需要处理
     (r'基于CF打造的', ''),
     (r'AI数字分身', 'AI洞察'),
     (r'沈浪让我负责的', ''),
@@ -200,6 +203,14 @@ def sanitize_html(content: str) -> str:
     result = content
     for pattern, replacement in REPLACEMENTS:
         result = re.sub(pattern, replacement, result)
+    # ===== 知识库内部链接剥离（外部版04-knowledge-base目录不存在）=====
+    # 将 <a href="04-knowledge-base/...">...</a> 替换为纯文本 span
+    def _replace_kb_link(m):
+        texts = re.findall(r'>([^<]+)<', m.group(0))
+        texts = [t.strip() for t in texts if t.strip()]
+        combined = ' '.join(texts) if texts else '知识条目'
+        return f'<span class="kb-item-text">{combined}</span>'
+    result = re.sub(r'<a\s+href="04-knowledge-base/[^"]*"[^>]*>.*?</a>', _replace_kb_link, result, flags=re.DOTALL)
     return result
 
 
