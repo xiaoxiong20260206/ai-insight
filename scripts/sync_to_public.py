@@ -149,6 +149,8 @@ REPLACEMENTS = _URL_REPLACEMENTS + [
     # ===== 外部版：去除知识库内部链接（04-knowledge-base/*.md不存在于外部版）=====
     # 将 <a href="04-knowledge-base/...">...内容...</a> 替换为 <span class="kb-item-text">纯文本</span>
     # 此规则为兜底，首页生成脚本中也需要处理
+    # ===== 外部版：Footer链接剥离（README.md/CHANGELOG.md不存在于外部版）=====
+    (r'<p style="margin-top: 8px;">\s*<a[^>]*>GitHub</a>\s*·\s*<a[^>]*>项目说明</a>\s*·\s*<a[^>]*>更新日志</a>\s*</p>', ''),
     (r'基于CF打造的', ''),
     (r'AI数字分身', 'AI洞察'),
     (r'沈浪让我负责的', ''),
