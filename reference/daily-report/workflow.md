@@ -376,6 +376,18 @@ git push origin main
 - ❌ **禁止重复发送**: 只需调用一次
 - ❌ **禁止纯文本推送**: 必须使用 mixCard 卡片，不得用普通 message 代替
 - ❌ **禁止日报群发**: 日报只私发给订阅者，群发是周报的权限
+- ❌ **禁止P0降级**: MixCard推送失败时，宁可延迟送达排查原因，不可降级到纯文本方案（2026-05-11教训）
+
+### ⚠️ 搜索质量红线（2026-05-11新增）
+- ❌ **禁止搜狗依赖过度**: sogou.com占比不得超过40%（信息源多样性#14已定义，此处强调执行纪律）
+- ❌ **禁止URL截断**: 所有新闻URL必须是完整可访问链接，搜狗搜索URL的query参数不得截断
+- ❌ **禁止source篡改**: Step 2完成后source字段不得被修改，质量门#8会做快照对比检测
+- ⚠️ **搜狗URL只作兜底**: 封闭平台链接决策树中，搜狗搜索URL仅作为Step B（找不到36kr/huxiu公开转载时的最后手段），优先找公开转载平台
+
+### ⚠️ 推送验证（2026-05-11新增）
+- 推送完成后，**必须验证MixCard卡片结构完整性**：header+subtitle+heat+sec1~5+capability+footer+buttons 全部存在
+- 如果`build_insight_mixcard.py`生成结果缺少heat block，**不要直接推送**，先检查`heat_trend`数据字段（top_items vs topics兼容性）
+- cron delivery `delivered=true` ≠ 用户实际收到卡片，主session收到announce后应关注推送结果
 
 ### 推送路径（Work模式唯一路径）
 
@@ -493,6 +505,12 @@ for s in active:
 | 林克自述缺失 | v6.0 | capability_update字段遗漏 |
 | 微信直引不足 | v9.1 | 交叉引用≠直接引用，需话题搜索补充 |
 | 小红书跳过 | v9.1 | 小红书搜索是P0必做，不是可选 |
+| 环境缺失 | 2026-05-09 | isolated session PATH不含uv，需环境自检 |
+| 域账号变更 | 2026-05-09 | 账号变更必须全链路扫描更新 |
+| 数据契约不一致 | 2026-05-11 | top_items≠topics字段名，mixcard脚本需兼容 |
+| P0降级违规 | 2026-05-11 | MixCard推送失败→宁可延迟，不可改纯文本 |
+| 搜狗依赖过度 | 2026-05-11 | sogou占比>40%=不合规，需增加其他信源 |
+| 推送可观测盲区 | 2026-05-11 | delivered≠实际送达，需端到端验证 |
 
 详细教训记录见 `lessons-learned.md`
 
