@@ -506,6 +506,7 @@ echo "④ 外部仓库周报: $([ -f "../ai-insight-public/01-daily-reports/$MON
 | 112 | 周报HTML/MD包含KIM Doc链接 → 外发页面不应包含内部平台链接 | 周报生成时禁止在HTML/MD中添加 docs.corp.kuaishou.com 链接；KIM Doc链接只在KIM MixCard推送时使用（卡片内也不放，已于W19确认删除） |
 | 113 | 外部版周报"深度调研"链接文案问题 → "完整版"暗示有内部版本 | 外部版周报中深度调研链接文案统一为"深度调研"，不加"完整版"后缀，避免暗示存在内部版本 |
 | 114 | 外部版周报含"林克/沈浪/快手"等内部身份 → 外发页面不应暴露内部人员/组织信息 | 外部版周报HTML中所有"林克"→"Link"，"沈浪"/"快手"/内部平台链接全部清除；内部版保留原署名；脱敏脚本需覆盖周报HTML（目前只处理首页） |
+| 115 | 外部版全量脱敏遗漏 → 深度调研/日报/首页/订阅页等也含敏感词 | 每次发布前必须全量扫描 public/ 和 ai-insight-public/ 下所有HTML/MD/JSON文件，确保零残留；脱敏规则15类（林克→AI洞察, 沈浪→空, 快手→某公司, KATE→Agent平台, 天策→数据平台, 天玑→数据分析平台, KwaiBI→BI平台, CodeFlicker→AI IDE, Titi→数据Agent, SKILL.md→技能定义文件, 小无相功→自进化体系, docs.corp→#internal-link, KIM Doc→内部文档, shenlang→空） |
 
 ---
 
