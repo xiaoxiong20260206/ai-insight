@@ -4,750 +4,572 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Anthropic 金融 Agent：一套新组织方式 | AI洞察深度调研</title>
-<meta name="description" content="Skills+Connectors+Subagents三层架构、整车而非发动机、64.37%成绩与警告、Blackstone+Goldman合资——深度解读Agent背后的新组织方式">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23059669'/><rect x='8' y='8' width='16' height='10' rx='2' fill='white'/><circle cx='13' cy='13' r='1.5' fill='%23059669'/><circle cx='19' cy='13' r='1.5' fill='%23059669'/><rect x='10' y='19' width='12' height='5' rx='1' fill='white'/><rect x='11' y='20' width='3' height='3' rx='.5' fill='%23059669'/></svg>">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<meta name="description" content="Skills+Connectors+Subagents三层架构、Microsoft 365整合、16+数据connector与Moody's MCP、64.37% benchmark、合资公司模式——深度解读Agent背后的新组织方式。">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23059669'/><path d='M8 22V12l4 6 4-8 4 5 4-7v14H8z' fill='none' stroke='white' stroke-width='2'/></svg>">
 <style>
-:root{--color-success:#059669;--color-success-light:#10B981;--color-success-dark:#047857;--color-success-50:#ECFDF5;--color-danger:#E11D48;--color-danger-light:#F43F5E;--color-warning:#D97706;--color-warning-light:#F59E0B;--color-warning-50:#FFFBEB;--color-info:#2563EB;--color-info-light:#3B82F6;--color-info-50:#EFF6FF;--color-purple:#7C3AED;--color-purple-light:#8B5CF6;--color-purple-50:#F5F3FF;--color-text-primary:#1C1917;--color-text-secondary:#57534E;--color-text-muted:#78716C;--color-border:#E7E5E4;--color-border-light:#F5F5F4;--color-bg:#F8FAFB;--color-bg-card:#FFFFFF;--color-bg-table-header:#FAFAF9;--gradient-success:linear-gradient(135deg,#059669 0%,#10B981 100%);--gradient-hero:linear-gradient(135deg,#059669 0%,#2563EB 50%,#7C3AED 100%);--gradient-badge:linear-gradient(135deg,#ECFDF5 0%,#EFF6FF 100%);--gradient-mesh:radial-gradient(at 20% 20%,rgba(5,150,105,0.08) 0%,transparent 50%),radial-gradient(at 80% 80%,rgba(37,99,235,0.06) 0%,transparent 50%),radial-gradient(at 50% 50%,rgba(124,58,237,0.04) 0%,transparent 50%);--shadow-xs:0 1px 2px rgba(0,0,0,0.04);--shadow-sm:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);--shadow-card:0 2px 8px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);--shadow-md:0 4px 6px -1px rgba(0,0,0,0.07),0 2px 4px -2px rgba(0,0,0,0.04);--shadow-glow-success:0 4px 14px rgba(5,150,105,0.15);--shadow-hover:0 6px 16px rgba(5,150,105,0.15),0 2px 6px rgba(5,150,105,0.1);--spacing-xs:4px;--spacing-sm:8px;--spacing-md:16px;--spacing-lg:24px;--spacing-xl:32px;--spacing-2xl:40px;--radius-sm:8px;--radius-md:12px;--radius-lg:16px;--radius-xl:20px;--radius-2xl:24px;--radius-full:9999px;--transition-fast:150ms cubic-bezier(.4,0,.2,1);--transition-normal:200ms cubic-bezier(.4,0,.2,1);--content-max-width:980px;--font-family:"Inter",-apple-system,"Noto Sans SC",sans-serif}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--color-success:#059669;--color-success-light:#10B981;--color-success-dark:#047857;--color-success-50:#ECFDF5;--color-danger:#E11D48;--color-danger-light:#F43F5E;--color-warning:#D97706;--color-warning-light:#F59E0B;--color-warning-50:#FFFBEB;--color-info:#2563EB;--color-info-light:#3B82F6;--color-info-50:#EFF6FF;--color-purple:#7C3AED;--color-purple-light:#8B5CF6;--color-purple-50:#F5F3FF;--color-text-primary:#1C1917;--color-text-secondary:#57534E;--color-text-muted:#78716C;--color-border:#E7E5E4;--color-border-light:#F5F5F4;--color-bg:#F8FAFB;--color-bg-card:#FFFFFF;--color-bg-table-header:#FAFAF9;--gradient-success:linear-gradient(135deg,#059669 0%,#10B981 100%);--gradient-hero:linear-gradient(135deg,#059669 0%,#2563EB 50%,#7C3AED 100%);--gradient-badge:linear-gradient(135deg,#ECFDF5 0%,#EFF6FF 100%);--gradient-highlight:linear-gradient(135deg,rgba(5,150,105,0.08) 0%,rgba(5,150,105,0.03) 100%);--gradient-mesh:radial-gradient(at 20% 20%,rgba(5,150,105,0.08) 0%,transparent 50%),radial-gradient(at 80% 80%,rgba(37,99,235,0.06) 0%,transparent 50%),radial-gradient(at 50% 50%,rgba(124,58,237,0.04) 0%,transparent 50%);--shadow-xs:0 1px 2px rgba(0,0,0,0.04);--shadow-sm:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);--shadow-card:0 2px 8px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);--shadow-md:0 4px 6px -1px rgba(0,0,0,0.07),0 2px 4px -2px rgba(0,0,0,0.04);--shadow-lg:0 10px 15px -3px rgba(0,0,0,0.08),0 4px 6px -4px rgba(0,0,0,0.04);--shadow-glow-success:0 4px 14px rgba(5,150,105,0.15);--shadow-hover:0 6px 16px rgba(5,150,105,0.15),0 2px 6px rgba(5,150,105,0.1);--spacing-xs:4px;--spacing-sm:8px;--spacing-md:16px;--spacing-lg:24px;--spacing-xl:32px;--spacing-2xl:40px;--radius-sm:8px;--radius-md:12px;--radius-lg:16px;--radius-xl:20px;--radius-full:9999px;--font-family:-apple-system,"SF Pro Display","system-ui","Segoe UI","Noto Sans SC",Helvetica,Arial,sans-serif;--transition-fast:150ms cubic-bezier(.4,0,.2,1);--transition-normal:200ms cubic-bezier(.4,0,.2,1);--content-max-width:980px}
+*{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:var(--font-family);font-size:15px;line-height:1.65;color:var(--color-text-secondary);background:var(--color-bg);background-image:var(--gradient-mesh);background-attachment:fixed;-webkit-font-smoothing:antialiased}
+::selection{background:rgba(5,150,105,0.2)}
 a{color:var(--color-info);text-decoration:none}a:hover{text-decoration:underline}
-.skip{position:absolute;left:-9999px;top:4px;z-index:9999;padding:8px 16px;background:var(--color-info);color:#fff;border-radius:6px;font-size:13px}.skip:focus{left:4px}
-
-/* Container */
-.container{max-width:var(--content-max-width);margin:0 auto;padding:var(--spacing-lg) var(--spacing-md)}
-
-/* Hero */
-.hero{text-align:center;padding:var(--spacing-2xl) 0 var(--spacing-lg);position:relative}
-.hero::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gradient-hero)}
-.hero-title{font-size:34px;font-weight:800;line-height:1.2;background:var(--gradient-hero);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:var(--spacing-sm)}
-.hero-subtitle{font-size:16px;color:var(--color-text-secondary);line-height:1.6;max-width:65ch;margin:0 auto var(--spacing-lg)}
-.hero-stats{display:flex;flex-wrap:wrap;gap:var(--spacing-md);justify-content:center}
-.hero-stat{text-align:center;padding:var(--spacing-sm) var(--spacing-md);background:var(--color-bg-card);border:1px solid var(--color-border);border-radius:var(--radius-md);box-shadow:var(--shadow-xs)}
-.hero-stat-val{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--color-text-primary)}
-.hero-stat-lbl{font-size:12px;color:var(--color-text-muted)}
-.hero-meta{display:flex;gap:var(--spacing-sm);justify-content:center;margin-bottom:var(--spacing-md)}
-.hero-tag{padding:4px 12px;background:var(--gradient-badge);border-radius:var(--radius-full);font-size:12px;font-weight:600;color:var(--color-success)}
-
-/* Tab Nav */
-.tab-nav{display:flex;background:rgba(255,255,255,0.85);backdrop-filter:blur(20px) saturate(1.8);border:1px solid rgba(255,255,255,0.7);border-radius:var(--radius-lg);padding:5px;position:sticky;top:12px;z-index:100;box-shadow:var(--shadow-sm);flex-wrap:wrap;gap:4px}
-.tab-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;border:none;border-radius:var(--radius-md);background:transparent;color:var(--color-text-secondary);font-size:13px;font-weight:500;cursor:pointer;transition:all var(--transition-fast);touch-action:manipulation;font-family:var(--font-family)}
-.tab-btn:hover{background:var(--color-success-50);color:var(--color-success)}
-.tab-btn.active{background:var(--gradient-success);color:#fff;box-shadow:var(--shadow-glow-success);font-weight:600}
-.tab-btn:focus-visible{outline:2px solid var(--color-success);outline-offset:3px;box-shadow:0 0 0 5px rgba(5,150,105,0.12)}
-.tab-icon{width:18px;height:18px;display:flex;align-items:center;justify-content:center}
-.tab-icon svg{width:16px;height:16px}
-.tab-label{font-size:13px}
-@media(max-width:768px){.tab-btn{padding:8px 10px}.tab-label{display:none}.tab-icon svg{width:20px;height:20px}}
-
-/* Section */
-.section{padding:var(--spacing-xl) 0 var(--spacing-lg)}
-.section-num{display:inline-flex;align-items:center;gap:var(--spacing-sm);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-text-muted);margin-bottom:var(--spacing-sm)}
-.section-num::after{content:'';flex:1;height:1px;background:var(--color-border-light);min-width:40px}
-.section-title{font-size:22px;font-weight:700;color:var(--color-text-primary);line-height:1.3;margin-bottom:var(--spacing-sm)}
-.section-desc{font-size:14px;color:var(--color-text-secondary);line-height:1.65;max-width:65ch;margin-bottom:var(--spacing-lg)}
-
-/* Overview SVG */
-.section-overview{background:linear-gradient(135deg,#F8FAF9 0%,#F3F7F5 100%);border:1px solid var(--color-border-light);border-radius:var(--radius-lg);padding:var(--spacing-lg);margin-bottom:var(--spacing-lg);position:relative}
-.section-overview-label{position:absolute;top:12px;left:12px;padding:4px 10px;background:rgba(5,150,105,0.1);color:var(--color-success);border-radius:var(--radius-full);font-size:11px;font-weight:600}
-.section-overview-content{display:flex;justify-content:center;align-items:center}
-.section-overview svg{max-width:100%;height:auto}
-
-/* Cards */
-.card{background:var(--color-bg-card);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:var(--spacing-lg);box-shadow:var(--shadow-card);transition:all var(--transition-normal)}
-.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover);border-color:var(--color-success)}
-.card:focus-visible{outline:2px solid var(--color-success);outline-offset:3px}
-.card-accent{height:3px;border-radius:2px;margin-bottom:var(--spacing-md)}
-.card-title{font-size:16px;font-weight:700;color:var(--color-text-primary);margin-bottom:var(--spacing-sm)}
-.card-body{font-size:13px;color:var(--color-text-secondary);line-height:1.65}
-.card-tag{display:inline-block;padding:3px 10px;border-radius:var(--radius-full);font-size:11px;font-weight:600}
-.tag-green{background:var(--color-success-50);color:var(--color-success)}.tag-blue{background:var(--color-info-50);color:var(--color-info)}.tag-purple{background:var(--color-purple-50);color:var(--color-purple)}.tag-amber{background:var(--color-warning-50);color:var(--color-warning)}.tag-red{background:#FEF2F2;color:var(--color-danger)}
-
-/* Grids */
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-md)}
-.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--spacing-md)}
-.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--spacing-md)}
-.grid-auto{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:var(--spacing-md)}
-@media(max-width:768px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}.grid-auto{grid-template-columns:1fr}}
-
-/* Stats */
-.stat-card{text-align:center;padding:var(--spacing-md);background:var(--color-bg-card);border:1px solid var(--color-border);border-radius:var(--radius-md);box-shadow:var(--shadow-xs);border-top:3px solid var(--stat-accent,var(--color-border));transition:all var(--transition-normal)}
-.stat-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
-.stat-accent-success{--stat-accent:var(--color-success)}.stat-accent-info{--stat-accent:var(--color-info)}.stat-accent-warning{--stat-accent:var(--color-warning)}.stat-accent-purple{--stat-accent:var(--color-purple)}.stat-accent-danger{--stat-accent:var(--color-danger)}
-.stat-val{font-size:24px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--color-text-primary);line-height:1.1}
-.stat-lbl{font-size:13px;color:var(--color-text-secondary);margin-top:4px}
-
-/* Quote */
-.quote{background:linear-gradient(135deg,#F8FAFB 0%,#EEF2F6 100%);border-left:3px solid var(--color-info);border-radius:0 var(--radius-md) var(--radius-md) 0;padding:var(--spacing-md) 20px;margin:var(--spacing-md) 0}
-.quote.green{border-left-color:var(--color-success)}.quote.purple{border-left-color:var(--color-purple)}.quote.amber{border-left-color:var(--color-warning)}.quote.danger{border-left-color:var(--color-danger)}
-.quote-text{font-size:14px;color:var(--color-text-primary);line-height:1.7;font-style:italic}
-.quote-author{font-size:12px;color:var(--color-text-muted);margin-top:var(--spacing-sm);font-style:normal;font-weight:600}
-
-/* Callout */
-.callout{border-radius:var(--radius-md);padding:var(--spacing-md);margin:var(--spacing-md) 0;display:flex;gap:var(--spacing-sm);align-items:flex-start;font-size:13px;line-height:1.65}
-.callout-icon{width:20px;height:20px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
-.callout-icon svg{width:16px;height:16px}
-.callout-title{font-weight:700;margin-bottom:4px;color:inherit}
-.callout.info{background:var(--color-info-50);border:1px solid #BFDBFE;color:#1E40AF}
-.callout.success{background:var(--color-success-50);border:1px solid #A7F3D0;color:#065F46}
-.callout.warning{background:var(--color-warning-50);border:1px solid #FDE68A;color:#92400E}
-.callout.danger{background:#FEF2F2;border:1px solid #FECACA;color:#991B1B}
-.callout.purple{background:var(--color-purple-50);border:1px solid #DDD6FE;color:#5B21B6}
-
-/* Table */
-.table{width:100%;border-collapse:collapse;font-size:13px}
-.table th{text-align:left;padding:10px 12px;background:var(--color-bg-table-header);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-bottom:1px solid var(--color-border);color:var(--color-text-muted)}
-.table td{padding:10px 12px;border-bottom:1px solid var(--color-border-light);color:var(--color-text-secondary)}
-.table tr:hover td{background:rgba(0,0,0,.018)}
-
-/* Progress */
-.progress-item{margin-bottom:var(--spacing-sm)}
-.progress-header{display:flex;justify-content:space-between;margin-bottom:4px;font-size:13px}
-.progress-name{font-weight:600;color:var(--color-text-primary)}.progress-pct{font-weight:700;color:var(--color-text-muted)}
-.progress-track{height:8px;background:var(--color-border);border-radius:4px;overflow:hidden}
-.bar-fill{height:100%;border-radius:4px;transition:width 1.2s cubic-bezier(.25,.46,.45,.94)}
-.bar-green{background:var(--gradient-success)}.bar-blue{background:linear-gradient(90deg,var(--color-info),var(--color-info-light))}.bar-purple{background:linear-gradient(90deg,var(--color-purple),var(--color-purple-light))}.bar-amber{background:linear-gradient(90deg,var(--color-warning),var(--color-warning-light))}
-
-/* Footer */
-.footer-learn{background:linear-gradient(135deg,#F8FAFB 0%,#EEF2F6 100%);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--spacing-lg);margin-top:var(--spacing-xl)}
-.footer-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--gradient-success);color:#fff;border-radius:var(--radius-full);font-size:13px;font-weight:600;text-decoration:none;transition:all var(--transition-fast)}
+.container{max-width:var(--content-max-width);margin:0 auto;padding:var(--spacing-lg) var(--spacing-md) 48px}
+.header{text-align:center;margin-bottom:var(--spacing-lg);position:relative;overflow:hidden;padding:var(--spacing-2xl) 0}
+.header::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gradient-hero)}
+.badge{display:inline-block;background:var(--gradient-badge);color:var(--color-info);padding:var(--spacing-xs) 14px;border-radius:var(--radius-full);font-size:11px;font-weight:600;margin-bottom:var(--spacing-md);border:1px solid rgba(37,99,235,0.12);box-shadow:var(--shadow-xs)}
+.main-title{font-size:34px;font-weight:800;margin-bottom:var(--spacing-sm);letter-spacing:-0.02em;background:var(--gradient-hero);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-wrap:balance}
+.subtitle{color:var(--color-text-secondary);max-width:75ch;margin:0 auto}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--spacing-md);margin-bottom:var(--spacing-lg)}
+@media(max-width:768px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+.stat-card{background:var(--color-bg-card);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:20px;text-align:center;box-shadow:var(--shadow-xs)}
+.stat-value{font-size:24px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.1}
+.stat-value.success{color:var(--color-success)}.stat-value.info{color:var(--color-info)}.stat-value.warning{color:var(--color-warning)}.stat-value.danger{color:var(--color-danger)}.stat-value.purple{color:var(--color-purple)}
+.stat-label{font-size:11px;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:.06em;margin-top:6px}
+.section-card{background:var(--color-bg-card);border-radius:var(--radius-lg);box-shadow:var(--shadow-card);padding:var(--spacing-lg);margin-bottom:var(--spacing-lg);border:1px solid rgba(231,229,228,0.9);transition:all var(--transition-normal)}
+.section-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);border-color:rgba(5,150,105,0.35)}
+.section-header{display:flex;align-items:center;gap:12px;margin-bottom:var(--spacing-md)}
+.section-number{background:var(--gradient-success);color:white;width:32px;height:32px;border-radius:var(--radius-md);font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:0 0 auto;box-shadow:var(--shadow-xs)}
+.section-header h2{font-size:18px;font-weight:700;color:var(--color-text-primary);line-height:1.3}
+.section-content{max-width:75ch}.section-content p{margin-bottom:var(--spacing-md)}
+.quote-box{background:var(--color-bg-table-header);border-left:3px solid var(--color-info);padding:var(--spacing-md) 20px;border-radius:0 var(--radius-md) var(--radius-md) 0;margin:var(--spacing-md) 0}
+.insight-box{border-left:3px solid var(--color-warning);background:rgba(191,135,0,0.06);padding:var(--spacing-md) 20px;border-radius:0 var(--radius-md) var(--radius-md) 0;margin:var(--spacing-md) 0}
+.insight-title{font-weight:700;color:#92400E;margin-bottom:var(--spacing-sm)}
+.comparison-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--spacing-md);margin:var(--spacing-md) 0}
+@media(max-width:768px){.comparison-grid{grid-template-columns:1fr}}
+.correct-path{border-left:3px solid rgba(5,150,105,0.5);background:rgba(5,150,105,0.04);border-radius:var(--radius-lg);padding:var(--spacing-lg)}
+.wrong-path{border-left:3px solid rgba(225,29,72,0.5);background:rgba(225,29,72,0.04);border-radius:var(--radius-lg);padding:var(--spacing-lg)}
+.path-title{font-weight:700;margin-bottom:var(--spacing-md)}
+.correct-path .path-title{color:var(--color-success)}.wrong-path .path-title{color:var(--color-danger)}
+.list-item{display:flex;align-items:flex-start;gap:var(--spacing-sm);margin-bottom:var(--spacing-sm)}
+.list-item.success::before{content:"✓";color:var(--color-success);font-weight:800}
+.list-item.danger::before{content:"✕";color:var(--color-danger);font-weight:800}
+table{border-collapse:collapse;width:100%;margin:var(--spacing-md) 0}
+th{background:var(--color-bg-table-header);color:var(--color-text-secondary);padding:12px 16px;font-weight:700;text-align:left;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+td{padding:12px 16px;border-bottom:1px solid var(--color-border-light)}
+tbody tr:hover{background:rgba(0,0,0,0.02)}
+.text-bold{font-weight:800;color:var(--color-text-primary)}.text-success{color:var(--color-success)}.text-danger{color:var(--color-danger)}.text-warning{color:var(--color-warning)}.text-highlight{border-bottom:2px solid var(--color-danger)}
+.status{display:inline-flex;padding:2px 8px;border-radius:var(--radius-full);font-size:11px;font-weight:700;white-space:nowrap}
+.status-success{background:rgba(5,150,105,0.12);color:var(--color-success)}.status-warning{background:rgba(217,119,6,0.12);color:var(--color-warning)}.status-danger{background:rgba(225,29,72,0.12);color:var(--color-danger)}.status-info{background:rgba(37,99,235,0.12);color:var(--color-info)}.status-purple{background:rgba(124,58,237,0.12);color:var(--color-purple)}
+.mini-svg{display:flex;justify-content:center;margin:var(--spacing-md) 0 var(--spacing-lg);padding:var(--spacing-md);border:1px solid var(--color-border-light);border-radius:var(--radius-lg);background:var(--gradient-highlight);overflow:auto}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--spacing-md);margin:var(--spacing-md) 0}
+@media(max-width:768px){.grid-2{grid-template-columns:1fr}}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--spacing-md);margin:var(--spacing-md) 0}
+@media(max-width:768px){.grid-3{grid-template-columns:1fr}}
+.sub-card{background:var(--color-bg-card);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:var(--spacing-md);margin-bottom:var(--spacing-md);border-top:3px solid var(--color-success);box-shadow:var(--shadow-xs)}
+.sub-card .sub-card-title{font-size:15px;font-weight:700;color:var(--color-text-primary);margin-bottom:var(--spacing-sm)}
+.sub-card p{font-size:14px;line-height:1.65;color:var(--color-text-secondary);margin-bottom:var(--spacing-sm)}
+.footer-learn{background:linear-gradient(135deg,#F8FAFB 0%,#EEF2F6 100%);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--spacing-lg);margin-top:var(--spacing-xl);box-shadow:var(--shadow-card)}
+.footer-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--gradient-success);color:#fff;border-radius:var(--radius-full);font-size:13px;font-weight:700;text-decoration:none;transition:all var(--transition-fast);margin-top:var(--spacing-sm)}
 .footer-btn:hover{box-shadow:var(--shadow-glow-success);transform:translateY(-1px)}
 .footer-refs{border-top:1px solid var(--color-border);padding-top:var(--spacing-md);margin-top:var(--spacing-md)}
-
-/* Reduced motion */
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
-
-/* Mobile */
-@media(max-width:480px){.hero-title{font-size:24px}.hero-subtitle{font-size:14px}.container{padding:var(--spacing-md) var(--spacing-sm)}.section-overview{padding:var(--spacing-sm)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
-<a class="skip" href="#sec-overview">跳到主内容</a>
-
 <div class="container">
-<!-- Hero -->
-<header class="hero" id="top">
-<div class="hero-meta">
-<span class="hero-tag">深度调研</span>
-<span class="hero-tag">AI Agent</span>
-<span class="hero-tag">Anthropic</span>
-<span class="hero-tag">2026-05-10</span>
-</div>
-<h1 class="hero-title">Anthropic 金融 Agent：一套新组织方式</h1>
-<p class="hero-subtitle">Skills+Connectors+Subagents三层架构、整车而非发动机、64.37%的成绩与警告、Blackstone+Goldman合资——深度解读Agent背后的新组织方式，以及对某公司AI生产力战役的行动建议。</p>
-<div class="hero-stats">
-<div class="stat-card stat-accent-success"><div class="stat-val">$30B+</div><div class="stat-lbl">Anthropic 2026年收入</div></div>
-<div class="stat-card stat-accent-info"><div class="stat-val">10</div><div class="stat-lbl">金融Agent模板</div></div>
-<div class="stat-card stat-accent-purple"><div class="stat-val">16+</div><div class="stat-lbl">数据connector</div></div>
-<div class="stat-card stat-accent-danger"><div class="stat-val">$900B</div><div class="stat-lbl">IPO估值预期</div></div>
-</div>
+
+<header class="header">
+<span class="badge">深度调研 · 2026-05-10</span>
+<h1 class="main-title">Anthropic 金融 Agent：一套新组织方式</h1>
+<p class="subtitle">10个金融Agent模板不是"又一个AI功能"，而是一套可复制的组织方式：<span class="text-bold">Skills × Connectors × Subagents</span>。配合Microsoft 365的工作流嵌入、16+金融数据生态与Moody's MCP app，以及"users stay in the loop"的治理哲学，Anthropic在金融行业交付的不是发动机，而是整车。</p>
 </header>
 
-<!-- Tab Nav -->
-<nav class="tab-nav" id="tabNav">
-<button class="tab-btn active" data-tab="overview">
-<span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="5"/><path d="M11 8v3M11 11h3"/><path d="M21 21l-4.35-4.35"/></svg></span>
-<span class="tab-label">概述</span>
-</button>
-<button class="tab-btn" data-tab="architecture">
-<span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>
-<span class="tab-label">架构</span>
-</button>
-<button class="tab-btn" data-tab="fullchain">
-<span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
-<span class="tab-label">全链路</span>
-</button>
-<button class="tab-btn" data-tab="benchmark">
-<span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="7" width="4" height="14" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg></span>
-<span class="tab-label">Benchmark</span>
-</button>
-<button class="tab-btn" data-tab="jointventure">
-<span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></span>
-<span class="tab-label">合资公司</span>
-</button>
-<button class="tab-btn" data-tab="agents">
-<span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></span>
-<span class="tab-label">10模板</span>
-</button>
-<button class="tab-btn" data-tab="m365">
-<span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><path d="M10 6.5h4M6.5 10v4M17.5 14h-4M14 17.5v-4"/></svg></span>
-<span class="tab-label">M365</span>
-</button>
-<button class="tab-btn" data-tab="ecosystem">
-<span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M12 9L5 7M12 9l7-2M12 15l-7 2M12 15l7 2"/></svg></span>
-<span class="tab-label">数据生态</span>
-</button>
-<button class="tab-btn" data-tab="testimonials">
-<span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-<span class="tab-label">客户证言</span>
-</button>
-<button class="tab-btn" data-tab="competition">
-<span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="6" height="10" rx="1"/><rect x="9" y="4" width="6" height="13" rx="1"/><rect x="16" y="9" width="6" height="8" rx="1"/></svg></span>
-<span class="tab-label">竞争格局</span>
-</button>
-<button class="tab-btn" data-tab="essence">
-<span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0 4 12.9V17h-8v-2.1A7 7 0 0 0 12 2z"/></svg></span>
-<span class="tab-label">本质穿透</span>
-</button>
-<button class="tab-btn" data-tab="actions">
-<span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
-<span class="tab-label">行动建议</span>
-</button>
-</nav>
+<div class="stats-grid">
+<div class="stat-card"><div class="stat-value success">$30B+</div><div class="stat-label">2026年收入（预估）</div></div>
+<div class="stat-card"><div class="stat-value info">10</div><div class="stat-label">Agent模板</div></div>
+<div class="stat-card"><div class="stat-value purple">16+</div><div class="stat-label">数据Connector</div></div>
+<div class="stat-card"><div class="stat-value danger">64.37%</div><div class="stat-label">Finance Benchmark</div></div>
+</div>
 
-<!-- 01 Overview -->
-<section class="section" id="sec-overview">
-<div class="section-num">01 · 研究概述</div>
-<h2 class="section-title">这不是"又一个新功能"</h2>
-<div class="section-overview">
-<span class="section-overview-label">章节概览</span>
-<div class="section-overview-content">
-<svg viewBox="0 0 500 160" style="max-width:500px">
-<defs><linearGradient id="cg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#10B981"/></linearGradient></defs>
-<g transform="translate(200,55)"><rect width="100" height="50" rx="25" fill="url(#cg)"/><text x="50" y="32" text-anchor="middle" font-size="14" font-weight="600" fill="white">Agent新组织</text></g>
-<path d="M200 80 Q150 80 130 50" stroke="#D0D7DE" stroke-width="2" fill="none"/>
-<path d="M200 80 Q150 80 130 110" stroke="#D0D7DE" stroke-width="2" fill="none"/>
-<path d="M300 80 Q350 80 370 40" stroke="#D0D7DE" stroke-width="2" fill="none"/>
-<path d="M300 80 Q350 80 370 80" stroke="#D0D7DE" stroke-width="2" fill="none"/>
-<path d="M300 80 Q350 80 370 120" stroke="#D0D7DE" stroke-width="2" fill="none"/>
-<g transform="translate(30,25)"><rect width="100" height="36" rx="6" fill="#F0FDF4" stroke="#059669"/><text x="50" y="23" text-anchor="middle" font-size="12" font-weight="500" fill="#059669">三层架构</text></g>
-<g transform="translate(30,95)"><rect width="100" height="36" rx="6" fill="#F0FDF4" stroke="#059669"/><text x="50" y="23" text-anchor="middle" font-size="12" font-weight="500" fill="#059669">合资公司</text></g>
-<g transform="translate(370,15)"><rect width="100" height="36" rx="6" fill="#EFF6FF" stroke="#2563EB"/><text x="50" y="23" text-anchor="middle" font-size="12" font-weight="500" fill="#2563EB">64%benchmark</text></g>
-<g transform="translate(370,65)"><rect width="100" height="36" rx="6" fill="#EFF6FF" stroke="#2563EB"/><text x="50" y="23" text-anchor="middle" font-size="12" font-weight="500" fill="#2563EB">全链路瓶颈</text></g>
-<g transform="translate(370,110)"><rect width="100" height="36" rx="6" fill="#F5F3FF" stroke="#7C3AED"/><text x="50" y="23" text-anchor="middle" font-size="12" font-weight="500" fill="#7C3AED">行动建议</text></g>
+<!-- 01 -->
+<section class="section-card" id="sec-01">
+<div class="section-header"><span class="section-number">1</span><h2>研究概述：同一天发生的三件事，不是巧合</h2></div>
+<div class="section-content">
+
+<p>如果只把它当作"又一组prompt"，你会错过核心信号。这不是Anthropic第一次做行业模板——但这次不同的是：他们把Agent从聊天工具推向<span class="text-bold">可部署的组织单元</span>。每个模板不是10个prompt，而是reference architecture——Skills+Connectors+Subagents的完整打包，金融公司可以把风控政策、审批流程直接注入。</p>
+<p>同日还宣布了合资公司的成立——与Blackstone、Hellman & Friedman、Goldman Sachs一起，把Anthropic工程师嵌入服务团队。Dario Amodei现场宣布2026年预计收入超30亿美元（去年9亿→30亿，3倍增长）。Jamie Dimon亲自站台，说JPMorgan用Claude Code 20分钟完成了dashboard。这不是一场发布会，是一份<span class="text-bold">Agent商业化路线图</span>。</p>
+<p>2026年5月，Anthropic在金融服务领域做了三件看似是功能更新的事：发布<span class="text-bold">10个金融Agent模板</span>（reference architecture）、把Claude深度嵌入<span class="text-bold">Microsoft 365</span>（Excel/PPT/Word/Outlook）、扩展金融数据生态（16+ Connectors + Moody's MCP app）。同日还宣布了第四件事：和Blackstone、Hellman & Friedman、Goldman Sachs合资成立企业AI服务公司。</p>
+<p>Dario Amodei现场宣布2026年预计收入超30亿美元（去年9亿→30亿，3倍增长）。Jamie Dimon亲自站台，说JPMorgan用Claude Code 20分钟完成了dashboard。</p>
+<div class="mini-svg">
+<svg viewBox="0 0 520 140" width="520" height="140" aria-label="三件事同日发生">
+<defs><linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#2563EB"/></linearGradient></defs>
+<rect x="10" y="15" width="500" height="110" rx="14" fill="#fff" stroke="#E7E5E4"/>
+<rect x="10" y="15" width="500" height="4" rx="2" fill="url(#g1)"/>
+<rect x="30" y="45" width="140" height="60" rx="10" fill="#ECFDF5" stroke="#059669"/>
+<text x="100" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="#059669">10 Templates</text>
+<text x="100" y="90" text-anchor="middle" font-size="10" fill="#57534E">Reference Architecture</text>
+<rect x="190" y="45" width="140" height="60" rx="10" fill="#EFF6FF" stroke="#2563EB"/>
+<text x="260" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="#2563EB">Microsoft 365</text>
+<text x="260" y="90" text-anchor="middle" font-size="10" fill="#57534E">Workflow Embed</text>
+<rect x="350" y="45" width="140" height="60" rx="10" fill="#F5F3FF" stroke="#7C3AED"/>
+<text x="420" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="#7C3AED">Data Ecosystem</text>
+<text x="420" y="90" text-anchor="middle" font-size="10" fill="#57534E">Connectors + MCP</text>
 </svg>
 </div>
-</div>
-<p class="section-desc">2026年5月5日，Anthropic在纽约发布：10个金融AI Agent模板、Microsoft 365深度整合、金融数据生态扩展。同日宣布与Blackstone、H&F、Goldman Sachs合资成立企业AI服务公司。Dario Amodei宣布2026年收入超30亿美元。Jamie Dimon亲自站台。</p>
-<div class="callout info">
-<div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1E40AF" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></div>
-<div><div class="callout-title">研究核心问题</div>10个Agent模板背后暴露了Skills+Connectors+Subagents三层架构——这对AI Agent商业化有什么结构性意义？对某公司AI生产力战役有什么行动建议？</div>
-</div>
-<div class="callout success">
-<div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#065F46" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-<div><div class="callout-title">信源质量</div>主信源：Anthropic官方博客+部署指南PDF（P0级）。交叉验证：WSJ/TechRadar/Reuters（P1级）+Reddit社区（P2级）+三篇微信公众号（P1级）。Anthropic自己承认64%不够——users stay in the loop。</div>
+<div class="insight-box"><div class="insight-title">关键判断</div><p><span class="text-bold">Agent商业化的关键不在模型</span>，而在"知识+数据+治理"的打包方式。Anthropic把金融行业的知识（skills）、受控数据接入（connectors）、可审计的协作分工（subagents）组合成可部署单元——这才是结构性信号。</p></div>
+<div class="quote-box"><p>来源：<a href="https://www.anthropic.com/news/finance-agents" target="_blank">Anthropic官方：Agents for financial services</a></p></div>
 </div>
 </section>
 
-<!-- 02 Architecture -->
-<section class="section" id="sec-architecture">
-<div class="section-num">02 · Skills+Connectors+Subagents</div>
-<h2 class="section-title">不是AI工具，是一套组织方式</h2>
-<div class="section-overview">
-<span class="section-overview-label">章节概览</span>
-<div class="section-overview-content">
-<svg viewBox="0 0 500 180" style="max-width:500px">
-<defs><linearGradient id="lg" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#047857"/></linearGradient></defs>
-<g transform="translate(150,10)"><rect width="200" height="40" rx="6" fill="url(#lg)"/><text x="100" y="25" text-anchor="middle" font-size="13" font-weight="600" fill="white">Skills · 岗位手册</text></g>
-<g transform="translate(75,70)"><rect width="140" height="40" rx="6" fill="#E6F7ED" stroke="#059669"/><text x="70" y="25" text-anchor="middle" font-size="12" font-weight="500" fill="#059669">Connectors · 系统权限</text></g>
-<g transform="translate(285,70)"><rect width="140" height="40" rx="6" fill="#EFF6FF" stroke="#2563EB"/><text x="70" y="25" text-anchor="middle" font-size="12" font-weight="500" fill="#2563EB">16+ 数据源</text></g>
-<g transform="translate(100,130)"><rect width="300" height="40" rx="6" fill="#F5F3FF" stroke="#7C3AED"/><text x="150" y="25" text-anchor="middle" font-size="12" font-weight="500" fill="#7C3AED">Subagents · 请教专家</text></g>
-</svg>
-</div>
-</div>
-<div class="grid-3">
-<div class="card" style="border-top:3px solid var(--color-success)">
-<div class="section-num" style="padding:0;margin-bottom:var(--spacing-sm)">Layer 01</div>
-<div class="card-title">Skills — 岗位手册</div>
-<div class="card-body">领域知识+指令：金融建模规范、合规流程、风控政策可注入。简单的用Markdown写，高级的可执行脚本。金融公司可以把自己的规矩塞进去——Agent变成"按你的规矩干活的新员工"。</div>
-<span class="card-tag tag-green">模块化能力包</span>
-</div>
-<div class="card" style="border-top:3px solid var(--color-info)">
-<div class="section-num" style="padding:0;margin-bottom:var(--spacing-sm)">Layer 02</div>
-<div class="card-title">Connectors — 系统权限</div>
-<div class="card-body">受控数据接入：FactSet、S&P Capital IQ、MSCI、PitchBook、Morningstar等16+金融数据源。新增8个（D&B、Fiscal AI等）。Moody's MCP app提供6亿+企业信用评级直接嵌入Claude。</div>
-<span class="card-tag tag-blue">数据接入层</span>
-</div>
-<div class="card" style="border-top:3px solid var(--color-purple)">
-<div class="section-num" style="padding:0;margin-bottom:var(--spacing-sm)">Layer 03</div>
-<div class="card-title">Subagents — 请教专家</div>
-<div class="card-body">主Agent调子模型：可比公司筛选、方法论校验等。不同Agent配置不同Skills——金融分析Agent用风险评估skills，客户支持Agent用CRM skills。层级委托，避免单一Agent认知瓶颈。</div>
-<span class="card-tag tag-purple">层级委托</span>
-</div>
-</div>
-<div class="callout purple">
-<div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#5B21B6" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0 4 12.9V17h-8v-2.1A7 7 0 0 0 12 2z"/></svg></div>
-<div><div class="callout-title">和自进化体系的对照</div>Skills=技能定义文件，Connectors=工具链/数据接入层，Subagents=人格Agent层级委托——同一思想的不同实现。Anthropic做成商业产品，我们做自进化底层架构。架构思路验证了，但执行速度要快。</div>
-</div>
-<div class="callout info">
-<div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1E40AF" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></div>
-<div><div class="callout-title">Domain-agnostic架构</div>Reddit/ClaudeCode社区指出：skill files定义触发条件和工作流步骤，connectors接入数据，subagents处理专门子任务——三因子模型在任何行业都能复用。金融只是第一个，法律、医疗、保险会接踵而至。</div>
-</div>
-</section>
-
-<!-- 03 Full Chain -->
-<section class="section" id="sec-fullchain">
-<div class="section-num">03 · Agent落地瓶颈：全链路</div>
-<h2 class="section-title">瓶颈不在模型，在全链路</h2>
-<div class="section-overview">
-<span class="section-overview-label">章节概览</span>
-<div class="section-overview-content">
-<svg viewBox="0 0 600 120" style="max-width:600px">
-<defs><linearGradient id="fg" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#10B981"/></linearGradient></defs>
-<g transform="translate(30,30)"><rect width="120" height="60" rx="8" fill="white" stroke="#E8ECF0"/><rect width="120" height="4" rx="2" fill="url(#fg)"/><text x="60" y="28" text-anchor="middle" font-size="11" font-weight="600" fill="#059669">数据层</text><text x="60" y="45" text-anchor="middle" font-size="12" fill="#1F2328">16+ connectors</text></g>
-<path d="M155 60 L185 60" stroke="#D0D7DE" stroke-width="2"/><polygon points="185,55 195,60 185,65" fill="#059669"/>
-<g transform="translate(200,30)"><rect width="120" height="60" rx="8" fill="white" stroke="#E8ECF0"/><rect width="120" height="4" rx="2" fill="#D97706"/><text x="60" y="28" text-anchor="middle" font-size="11" font-weight="600" fill="#D97706">治理层</text><text x="60" y="45" text-anchor="middle" font-size="12" fill="#1F2328">audit log+权限</text></g>
-<path d="M325 60 L355 60" stroke="#D0D7DE" stroke-width="2"/><polygon points="355,55 365,60 355,65" fill="#2563EB"/>
-<g transform="translate(370,30)"><rect width="120" height="60" rx="8" fill="white" stroke="#E8ECF0"/><rect width="120" height="4" rx="2" fill="#2563EB"/><text x="60" y="28" text-anchor="middle" font-size="11" font-weight="600" fill="#2563EB">交付层</text><text x="60" y="45" text-anchor="middle" font-size="12" fill="#1F2328">Excel/PPT/Word</text></g>
-<path d="M495 60 L520 60" stroke="#D0D7DE" stroke-width="2"/><polygon points="520,55 530,60 520,65" fill="#7C3AED"/>
-<g transform="translate(535,30)"><rect width="50" height="60" rx="8" fill="white" stroke="#7C3AED" stroke-width="2"/><rect width="50" height="4" rx="2" fill="#7C3AED"/><text x="25" y="28" text-anchor="middle" font-size="11" font-weight="600" fill="#7C3AED">部署</text><text x="25" y="45" text-anchor="middle" font-size="10" fill="#1F2328">2模式</text></g>
-</svg>
-</div>
-</div>
-<div class="grid-4">
-<div class="card" style="border-top:3px solid var(--color-success)"><div class="card-title">数据层</div><div class="card-body">16+ connector + Moody's MCP app。实时接入市场数据，不能离线。</div><span class="card-tag tag-green">实时接入</span></div>
-<div class="card" style="border-top:3px solid var(--color-warning)"><div class="card-title">治理层</div><div class="card-body">per-tool权限 + credential vaults + 全量audit log。每一步可审计。</div><span class="card-tag tag-amber">合规保障</span></div>
-<div class="card" style="border-top:3px solid var(--color-info)"><div class="card-title">交付层</div><div class="card-body">Excel/PowerPoint/Word/Outlook直接产出专业文件，不是chatbot输出。</div><span class="card-tag tag-blue">直接产出</span></div>
-<div class="card" style="border-top:3px solid var(--color-purple)"><div class="card-title">部署层</div><div class="card-body">Cowork插件（人机协作）或Managed Agents（自动排程，数小时长任务）。</div><span class="card-tag tag-purple">双模式</span></div>
-</div>
-<div class="callout warning">
-<div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#92400E" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
-<div><div class="callout-title">金融行业不是AI的"容易市场"</div>数据敏感、错误代价高、每一步都需要审计追踪。Agent商业化的瓶颈不在模型能力，在"能不能安全接入企业数据和流程"。这也是为什么Anthropic做了合资公司。</div>
-</div>
-</section>
-
-<!-- 04 Benchmark -->
-<section class="section" id="sec-benchmark">
-<div class="section-num">04 · 64.37%：成绩与警告</div>
-<h2 class="section-title">既是成绩也是警告</h2>
-<div class="section-overview">
-<span class="section-overview-label">章节概览</span>
-<div class="section-overview-content">
-<svg viewBox="0 0 600 100" style="max-width:600px">
-<g transform="translate(20,10)"><rect width="170" height="80" rx="10" fill="white" stroke="#059669" stroke-width="2"/><rect width="170" height="3" rx="1.5" fill="#059669"/><text x="85" y="35" text-anchor="middle" font-size="24" font-weight="700" fill="#059669">64.37%</text><text x="85" y="55" text-anchor="middle" font-size="11" fill="#656D76">Claude Opus 4.7 ✅</text></g>
-<g transform="translate(210,10)"><rect width="170" height="80" rx="10" fill="white" stroke="#2563EB"/><rect width="170" height="3" rx="1.5" fill="#2563EB"/><text x="85" y="35" text-anchor="middle" font-size="24" font-weight="700" fill="#2563EB">59.96%</text><text x="85" y="55" text-anchor="middle" font-size="11" fill="#656D76">GPT-5.5</text></g>
-<g transform="translate(400,10)"><rect width="170" height="80" rx="10" fill="white" stroke="#D97706"/><rect width="170" height="3" rx="1.5" fill="#D97706"/><text x="85" y="35" text-anchor="middle" font-size="24" font-weight="700" fill="#D97706">59.72%</text><text x="85" y="55" text-anchor="middle" font-size="11" fill="#656D76">Gemini 3.1 Pro</text></g>
-</svg>
-</div>
-</div>
-<div class="grid-3" style="margin-bottom:var(--spacing-md)">
-<div class="stat-card stat-accent-success"><div class="stat-val">64.37%</div><div class="stat-lbl">Claude Opus 4.7 领先</div></div>
-<div class="stat-card stat-accent-info"><div class="stat-val">59.96%</div><div class="stat-lbl">GPT-5.5</div></div>
-<div class="stat-card stat-accent-warning"><div class="stat-val">59.72%</div><div class="stat-lbl">Gemini 3.1 Pro</div></div>
-</div>
-<div class="progress-item"><div class="progress-header"><span class="progress-name">结构化任务准确率</span><span class="progress-pct">92%</span></div><div class="progress-track"><div class="bar-fill bar-blue" style="width:92%"></div></div></div>
-<div class="progress-item"><div class="progress-header"><span class="progress-name">月结关账准确率</span><span class="progress-pct">50%</span></div><div class="progress-track"><div class="bar-fill bar-amber" style="width:50%"></div></div></div>
-<div class="progress-item"><div class="progress-header"><span class="progress-name">财务报告准确率</span><span class="progress-pct">62%</span></div><div class="progress-track"><div class="bar-fill bar-purple" style="width:62%"></div></div></div>
-<div class="callout danger" style="margin-top:var(--spacing-md)">
-<div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#991B1B" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></div>
-<div><div class="callout-title">The Register的警告</div>35.63%的失败率会让任何人类分析师被开除。Anthropic自己的立场："users stay in the loop"——审核、修改、批准后再提交。<br><br><strong>关键判断</strong>：Agent适合做初稿和加速，不适合做最终交付。金融行业在L2（AI辅助）阶段会停留相当长时间。</div>
-</div>
-</section>
-
-<!-- 05 Joint Venture -->
-<section class="section" id="sec-jointventure">
-<div class="section-num">05 · 合资公司信号</div>
-<h2 class="section-title">Blackstone+Goldman：不只是渠道合作</h2>
-<div class="section-overview">
-<span class="section-overview-label">章节概览</span>
-<div class="section-overview-content">
-<svg viewBox="0 0 600 160" style="max-width:600px">
-<defs><linearGradient id="gg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#10B981"/></linearGradient><linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#E11D48"/><stop offset="100%" stop-color="#F43F5E"/></linearGradient></defs>
-<g transform="translate(20,20)"><rect width="250" height="120" rx="10" fill="#FEF2F2" stroke="#FECACA"/><circle cx="20" cy="20" r="12" fill="url(#rg)"/><text x="20" y="24" text-anchor="middle" font-size="14" fill="white">&#x2717;</text><text x="45" y="24" font-size="13" font-weight="600" fill="#E11D48">传统模式：卖API</text><text x="20" y="50" font-size="12" fill="#4D5561">&#8226; 客户自己实施落地</text><text x="20" y="70" font-size="12" fill="#4D5561">&#8226; 实施瓶颈无人解决</text><text x="20" y="90" font-size="12" fill="#4D5561">&#8226; AI公司只是技术供应商</text></g>
-<g transform="translate(285,60)"><circle cx="15" cy="20" r="20" fill="#F3F5F7" stroke="#D0D7DE"/><text x="15" y="26" text-anchor="middle" font-size="14" font-weight="700" fill="#656D76">VS</text></g>
-<g transform="translate(330,20)"><rect width="250" height="120" rx="10" fill="#F0FDF4" stroke="#BBF7D0"/><circle cx="20" cy="20" r="12" fill="url(#gg)"/><text x="20" y="24" text-anchor="middle" font-size="14" fill="white">&#x2713;</text><text x="45" y="24" font-size="13" font-weight="600" fill="#059669">合资公司模式</text><text x="20" y="50" font-size="12" fill="#4D5561">&#8226; Anthropic工程师嵌入团队</text><text x="20" y="70" font-size="12" fill="#4D5561">&#8226; PE提供客户+资本</text><text x="20" y="90" font-size="12" fill="#4D5561">&#8226; AI公司→数字化转型合伙人</text></g>
-</svg>
-</div>
-</div>
-<div class="callout purple">
-<div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#5B21B6" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-<div><div class="callout-title">合资公司的三重意义</div><strong>1. 实施瓶颈解决</strong>：不是卖API，把Anthropic工程师嵌入服务团队<br><strong>2. 天然种子客户</strong>：Blackstone+Goldman管理数千家portfolio公司<br><strong>3. 新商业形态</strong>：AI公司→行业数字化转型合伙人</div>
-</div>
-<div class="quote"><div class="quote-text">"我们打算建设一家规模化、世界级的企业AI服务公司。部署Anthropic的技术到Blackstone的portfolio和更广泛的业务中。"</div><div class="quote-author">— Jon Gray，Blackstone总裁兼COO</div></div>
-<div class="callout info"><div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1E40AF" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></div><div>Bloomberg：Anthropic考虑最早10月IPO，估值可能超过$900B。</div></div>
-</section>
-
-<!-- 06 Agent Templates -->
-<section class="section" id="sec-agents">
-<div class="section-num">06 · 10个Agent模板清单</div>
-<h2 class="section-title">前台5个 + 后台5个</h2>
-<table class="table">
-<thead><tr><th>类别</th><th>Agent模板</th><th>主要用途</th></tr></thead>
+<!-- 02 -->
+<section class="section-card" id="sec-02">
+<div class="section-header"><span class="section-number">2</span><h2>Skills+Connectors+Subagents：不是AI工具，是组织方式</h2></div>
+<div class="section-content">
+<p>10个Agent模板的核心架构是三层——Anthropic称之为<span class="text-bold">reference architecture</span>：</p>
+<table>
+<thead><tr><th>层</th><th>功能</th><th>类比</th><th>自进化体系对应</th></tr></thead>
 <tbody>
-<tr><td><span class="card-tag tag-green">前台</span></td><td>Pitch builder</td><td>建立目标名单、运行可比分析、起草pitchbook</td></tr>
-<tr><td><span class="card-tag tag-green">前台</span></td><td>Meeting preparer</td><td>组装客户/对手方简报，协助会前准备</td></tr>
-<tr><td><span class="card-tag tag-green">前台</span></td><td>Earnings reviewer</td><td>读财报逐字稿和申报文件，更新模型，标记关键变化</td></tr>
-<tr><td><span class="card-tag tag-green">前台</span></td><td>Model builder</td><td>从申报资料/数据源/分析师输入建立财务模型</td></tr>
-<tr><td><span class="card-tag tag-green">前台</span></td><td>Market researcher</td><td>追踪行业/发行人动态，综合新闻/文件/券商研究</td></tr>
-<tr><td><span class="card-tag tag-blue">后台</span></td><td>Valuation reviewer</td><td>按可比公司、方法论和公司标准检查估值</td></tr>
-<tr><td><span class="card-tag tag-blue">后台</span></td><td>GL reconciler</td><td>对账总账账户并执行NAV计算</td></tr>
-<tr><td><span class="card-tag tag-blue">后台</span></td><td>Month-end closer</td><td>执行关账清单、准备分录、产出关账报告</td></tr>
-<tr><td><span class="card-tag tag-blue">后台</span></td><td>Statement auditor</td><td>检查财务报表一致性、完整性和审计准备度</td></tr>
-<tr><td><span class="card-tag tag-blue">后台</span></td><td>KYC screener</td><td>组装实体档案、审查源文件、打包合规升级案件</td></tr>
+<tr><td><span class="text-bold">Skills</span></td><td>领域知识+指令（建模规范、合规流程、风控政策可注入）</td><td>员工的岗位手册</td><td>技能定义文件</td></tr>
+<tr><td><span class="text-bold">Connectors</span></td><td>受控数据接入（16+金融数据源+Moody's MCP app）</td><td>员工的系统权限</td><td>工具链/数据接入层</td></tr>
+<tr><td><span class="text-bold">Subagents</span></td><td>主Agent调子模型（可比公司筛选、方法论校验）</td><td>员工请教专家</td><td>人格Agent层级委托</td></tr>
 </tbody>
 </table>
 
-<div class="callout info" style="margin-top:var(--spacing-md)">
-<div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1E40AF" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></div>
-<div><div class="callout-title">两种部署模式</div><strong>Cowork/Code插件模式</strong>：Agent与分析师并肩工作，使用桌面已有软件。给Pitch Agent一个目标名单，就能得到Excel可比模型、PowerPoint pitchbook草稿、Outlook覆盖信。<br><strong>Managed Agent模式</strong>：同一个模板在Claude Platform上自主运行，适合处理整本书的交易或夜间排程。Cookbook提供长会话（数小时）、per-tool权限、managed credential vaults、全量audit log。</div>
+<p>Skill file有两种写法：<span class="text-bold">简单技能用Markdown</span>——定义触发条件和工作流步骤，类似岗位手册；<span class="text-bold">高级技能用可执行脚本</span>——能自动运行复杂流程。金融公司可以把风控政策、建模规范、合规审批流程直接写进skill file——Agent就变成"按你的规矩干活的新员工"。</p>
+<p>Reddit/ClaudeCode社区指出：skill files定义触发条件和工作流步骤，connectors接入数据，subagents处理专门子任务——三因子模型在任何行业都能复用。金融只是第一个，法律、医疗、保险的模板会接踵而至。Anthropic自己也明确表示模板是domain-agnostic的。</p>
+<p>金融公司可以把风控政策、审批流程塞进去——Agent变成<span class="text-bold">"按你的规矩干活的新员工"</span>。不是通用chatbot配了个金融壳，是整个行业的知识、数据、流程被打包成了可部署的单元。</p>
+<p>Reddit/ClaudeCode社区指出：这套架构是<span class="text-bold">domain-agnostic</span>的。金融只是第一个场景，法律、医疗、保险的模板会直接复用同一个三因子模型。</p>
+<div class="mini-svg">
+<svg viewBox="0 0 500 160" width="500" height="160" aria-label="三层架构">
+<defs><linearGradient id="lg2" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#047857"/></linearGradient></defs>
+<rect x="150" y="10" width="200" height="36" rx="6" fill="url(#lg2)"/>
+<text x="250" y="32" text-anchor="middle" font-size="13" font-weight="600" fill="white">Skills · 岗位手册</text>
+<rect x="50" y="60" width="180" height="36" rx="6" fill="#ECFDF5" stroke="#059669"/>
+<text x="140" y="82" text-anchor="middle" font-size="12" font-weight="500" fill="#059669">Connectors · 系统权限</text>
+<rect x="270" y="60" width="180" height="36" rx="6" fill="#EFF6FF" stroke="#2563EB"/>
+<text x="360" y="82" text-anchor="middle" font-size="12" font-weight="500" fill="#2563EB">16+ 数据源</text>
+<rect x="100" y="110" width="300" height="36" rx="6" fill="#F5F3FF" stroke="#7C3AED"/>
+<text x="250" y="132" text-anchor="middle" font-size="12" font-weight="500" fill="#7C3AED">Subagents · 请教专家</text>
+</svg>
 </div>
-
-<div class="callout success">
-<div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#065F46" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-<div><div class="callout-title">核心原则：Users stay in the loop</div>Anthropic反复强调：用户审核、迭代、批准后再提交——Agent不做最终决定。这不是技术限制，是产品设计哲学。金融行业的信任需要逐步建立。</div>
+<div class="insight-box"><div class="insight-title">和自进化体系的对照</div><p>Skills=技能定义文件技能定义文件，Connectors=工具链/数据接入层，Subagents=人格Agent层级委托——<span class="text-bold">同一思想的不同实现</span>。Anthropic做成商业产品，自进化体系做自进化底层架构。架构思路验证了，但执行速度要快。</p></div>
 </div>
 </section>
 
-<!-- 06.5 Microsoft 365 -->
-<section class="section" id="sec-m365">
-<div class="section-num">06.5 · Microsoft 365 深度整合</div>
-<h2 class="section-title">四个场景，一个上下文</h2>
-<div class="section-overview">
-<span class="section-overview-label">章节概览</span>
-<div class="section-overview-content">
-<svg viewBox="0 0 500 120" style="max-width:500px">
-<defs><linearGradient id="m365g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#2563EB"/></linearGradient></defs>
-<g transform="translate(10,30)"><rect width="110" height="60" rx="8" fill="white" stroke="#059669" stroke-width="2"/><text x="55" y="22" text-anchor="middle" font-size="10" font-weight="600" fill="#059669">Excel</text><text x="55" y="38" text-anchor="middle" font-size="11" fill="#1F2328">建模+审计</text><text x="55" y="52" text-anchor="middle" font-size="10" fill="#656D76">敏感性分析</text></g>
-<path d="M125 60 L140 60" stroke="#D0D7DE" stroke-width="2"/>
-<g transform="translate(145,30)"><rect width="110" height="60" rx="8" fill="white" stroke="#2563EB" stroke-width="2"/><text x="55" y="22" text-anchor="middle" font-size="10" font-weight="600" fill="#2563EB">PowerPoint</text><text x="55" y="38" text-anchor="middle" font-size="11" fill="#1F2328">Pitchbook</text><text x="55" y="52" text-anchor="middle" font-size="10" fill="#656D76">自动更新</text></g>
-<path d="M260 60 L275 60" stroke="#D0D7DE" stroke-width="2"/>
-<g transform="translate(280,30)"><rect width="110" height="60" rx="8" fill="white" stroke="#7C3AED" stroke-width="2"/><text x="55" y="22" text-anchor="middle" font-size="10" font-weight="600" fill="#7C3AED">Word</text><text x="55" y="38" text-anchor="middle" font-size="11" fill="#1F2328">信用备忘</text><text x="55" y="52" text-anchor="middle" font-size="10" fill="#656D76">模板合规</text></g>
-<path d="M395 60 L410 60" stroke="#D0D7DE" stroke-width="2"/>
-<g transform="translate(415,30)"><rect width="70" height="60" rx="8" fill="white" stroke="#D97706" stroke-width="2"/><text x="35" y="22" text-anchor="middle" font-size="10" font-weight="600" fill="#D97706">Outlook</text><text x="35" y="38" text-anchor="middle" font-size="11" fill="#1F2328">参谋</text><text x="35" y="52" text-anchor="middle" font-size="10" fill="#656D76">Coming</text></g>
-</svg>
-</div>
-</div>
-<div class="grid-4">
-<div class="card" style="border-top:3px solid var(--color-success)">
-<div class="card-title">📊 Excel — 金融建模引擎</div>
-<div class="card-body">从申报资料和数据源自动建立财务模型，审计跨linked workbook的公式，运行敏感性分析。分析师在Excel里直接与Claude交互——不切换窗口。<br><br><strong>典型用例</strong>：分析师输入目标公司名称，Claude自动从FactSet/S&P拉数据填入模型模板，标记关键假设点，运行3种场景敏感性测试。</div>
-<span class="card-tag tag-green">生产级</span>
-</div>
-<div class="card" style="border-top:3px solid var(--color-info)">
-<div class="card-title">📈 PowerPoint — 自动Pitchbook</div>
-<div class="card-body">起草deck，当底层数据变化时自动更新图表。Excel里建的模型，到PPT自动转成可视化——不需要手动复制粘贴。<br><br><strong>典型用例</strong>：Pitch builder Agent产出comps表格（Excel）+公司概况页（PowerPoint）+覆盖信草稿（Outlook），一次任务三份产出。</div>
-<span class="card-tag tag-blue">生产级</span>
-</div>
-<div class="card" style="border-top:3px solid var(--color-purple)">
-<div class="card-title">📝 Word — 信用备忘合规编辑</div>
-<div class="card-body">按公司自有模板编辑信用备忘。Claude理解公司格式要求和审批流程，自动填入数据、检查合规性。<br><br><strong>典型用例</strong>：Valuation reviewer Agent产出估值报告（Word），按公司内部review standard格式排版，标注需要人工审核的关键假设。</div>
-<span class="card-tag tag-purple">生产级</span>
-</div>
-<div class="card" style="border-top:3px solid var(--color-warning)">
-<div class="card-title">📬 Outlook — 首席参谋（Coming Soon）</div>
-<div class="card-body">分拣邮件、安排会议、用你的语气草拟回复。会议准备Agent把客户简报+对手方分析推到你的inbox。<br><br><strong>典型用例</strong>：Meeting preparer Agent把客户背景+最新财报+行业动态打包成会议简报，Outlook提醒你明天10点有call。</div>
-<span class="card-tag tag-amber">Beta</span>
-</div>
-</div>
-<div class="callout purple">
-<div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#5B21B6" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0 4 12.9V17h-8v-2.1A7 7 0 0 0 12 2z"/></svg></div>
-<div><div class="callout-title">上下文跨应用延续</div>核心创新不是"Claude能在Excel/PPT/Word里干活"，是<strong>上下文自动延续</strong>。分析师在Excel里建的模型，不需要到PPT里重新解释——Claude自动理解上下文。这是从"AI辅助每个应用"到"AI串联整个工作流"的质变。</div>
-</div>
-<div class="callout info">
-<div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1E40AF" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></div>
-<div><div class="callout-title">Dispatch — 离开桌面也能指挥</div>Claude Cowork新增Dispatch功能：通过文字或语音从任何地方分配任务给Claude。分析师离开办公桌后Claude继续处理本地文件，回来时已完成待审核。这是"AI员工"概念的落地——不是需要你盯着才干活。</div>
+<!-- 03 -->
+<section class="section-card" id="sec-03">
+<div class="section-header"><span class="section-number">3</span><h2>Skill file格式详解：Anthropic vs 自进化体系技能定义文件</h2></div>
+<div class="section-content">
+<p>Anthropic的Skill file是三层架构里最关键的一层——它决定了<span class="text-bold">Agent"知道什么"和"怎么干"</span>。</p>
+<table>
+<thead><tr><th>维度</th><th>Anthropic Skill file</th><th>自进化体系 技能定义文件</th></tr></thead>
+<tbody>
+<tr><td>格式</td><td>Markdown（简单技能）/ 可执行脚本（高级技能）</td><td>Markdown（统一格式）</td></tr>
+<tr><td>触发机制</td><td>定义触发条件和工作流步骤</td><td>description触发词 + 按步骤执行</td></tr>
+<tr><td>内容范围</td><td>建模规范、风控政策、合规审批流程</td><td>描述+触发词+执行流程+输出规范+经验沉淀</td></tr>
+<tr><td>注入方式</td><td>金融公司把自己的规矩塞进去</td><td>任务场景适配，自进化迭代</td></tr>
+<tr><td>进化机制</td><td>人工维护更新</td><td>自进化引擎（learn-from-mistakes + daily-reflection）</td></tr>
+<tr><td>分发方式</td><td>GitHub marketplace (anthropics/financial-services)</td><td>本地文件 + AI洞察 skill-creator</td></tr>
+</tbody>
+</table>
+<div class="insight-box"><div class="insight-title">对照核心洞察</div><p>两者都是<span class="text-bold">"领域知识+指令"的打包</span>，可注入行业规则。Anthropic用静态skill file（人工维护），自进化体系用动态技能定义文件（自进化引擎驱动）。<span class="text-highlight">Anthropic验证了skill file这条路是对的</span>——但进化机制是差异化竞争力。</p></div>
 </div>
 </section>
 
-<!-- 06.8 Data Ecosystem -->
-<section class="section" id="sec-ecosystem">
-<div class="section-num">06.8 · 数据生态：16+ Connector + Moody's MCP</div>
-<h2 class="section-title">Agent的数据基础设施</h2>
-<div class="section-overview">
-<span class="section-overview-label">章节概览</span>
-<div class="section-overview-content">
-<svg viewBox="0 0 600 160" style="max-width:600px">
-<defs><linearGradient id="ecog" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#10B981"/></linearGradient><linearGradient id="mcpg" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#7C3AED"/><stop offset="100%" stop-color="#8B5CF6"/></linearGradient></defs>
-<g transform="translate(50,10)"><rect width="500" height="40" rx="6" fill="url(#ecog)"/><text x="250" y="25" text-anchor="middle" font-size="13" font-weight="600" fill="white">8个新Connector + 8个原有Connector = 16+</text></g>
-<g transform="translate(50,60)"><rect width="240" height="40" rx="6" fill="#E6F7ED" stroke="#059669"/><text x="120" y="25" text-anchor="middle" font-size="12" font-weight="500" fill="#059669">Connectors · 受控数据接入</text></g>
-<g transform="translate(310,60)"><rect width="240" height="40" rx="6" fill="#F5F3FF" stroke="#7C3AED"/><text x="120" y="25" text-anchor="middle" font-size="12" font-weight="500" fill="#7C3AED">MCP App · 嵌入式交互</text></g>
-<g transform="translate(100,110)"><rect width="400" height="40" rx="6" fill="#EFF6FF" stroke="#2563EB"/><text x="200" y="25" text-anchor="middle" font-size="12" font-weight="500" fill="#2563EB">企业数据仓库 + 研究库 + CRM + 内部系统</text></g>
+<!-- 04 -->
+<section class="section-card" id="sec-04">
+<div class="section-header"><span class="section-number">4</span><h2>Agent落地全链路：瓶颈不在模型，在全链路</h2></div>
+<div class="section-content">
+<p>Anthropic不只是在卖模型，他们做的是<span class="text-bold">四层全链路</span>：</p>
+<table>
+<thead><tr><th>层</th><th>做了什么</th><th>金融行业要求</th></tr></thead>
+<tbody>
+<tr><td><span class="text-success">数据层</span></td><td>16+ connector + Moody's MCP app</td><td>实时接入市场数据，不能离线</td></tr>
+<tr><td><span class="text-warning">治理层</span></td><td>per-tool权限 + credential vaults + 全量audit log</td><td>每一步可审计，合规</td></tr>
+<tr><td><span class="text-info">交付层</span></td><td>Excel/PPT/Word/Outlook直接产出</td><td>专业文件输出，不是chatbot文本</td></tr>
+<tr><td><span class="text-danger">部署层</span></td><td>Cowork插件（人机）+ Managed Agents（自动排程）</td><td>两种模式满足不同场景</td></tr>
+</tbody>
+</table>
+<div class="mini-svg">
+<svg viewBox="0 0 600 100" width="600" height="100" aria-label="四层全链路">
+<g transform="translate(10,20)"><rect width="130" height="60" rx="8" fill="white" stroke="#059669" stroke-width="2"/><rect width="130" height="4" rx="2" fill="#059669"/><text x="65" y="28" text-anchor="middle" font-size="11" font-weight="600" fill="#059669">数据层</text><text x="65" y="45" text-anchor="middle" font-size="12" fill="#1F2328">16+ connectors</text></g>
+<path d="M145 50 L175 50" stroke="#D0D7DE" stroke-width="2"/>
+<polygon points="175,45 185,50 175,55" fill="#D97706"/>
+<g transform="translate(190,20)"><rect width="130" height="60" rx="8" fill="white" stroke="#D97706" stroke-width="2"/><rect width="130" height="4" rx="2" fill="#D97706"/><text x="65" y="28" text-anchor="middle" font-size="11" font-weight="600" fill="#D97706">治理层</text><text x="65" y="45" text-anchor="middle" font-size="12" fill="#1F2328">audit log+权限</text></g>
+<path d="M325 50 L355 50" stroke="#D0D7DE" stroke-width="2"/>
+<polygon points="355,45 365,50 355,55" fill="#2563EB"/>
+<g transform="translate(370,20)"><rect width="130" height="60" rx="8" fill="white" stroke="#2563EB" stroke-width="2"/><rect width="130" height="4" rx="2" fill="#2563EB"/><text x="65" y="28" text-anchor="middle" font-size="11" font-weight="600" fill="#2563EB">交付层</text><text x="65" y="45" text-anchor="middle" font-size="12" fill="#1F2328">Excel/PPT/Word</text></g>
+<path d="M505 50 L530 50" stroke="#D0D7DE" stroke-width="2"/>
+<polygon points="530,45 540,50 530,55" fill="#7C3AED"/>
+<g transform="translate(545,20)"><rect width="40" height="60" rx="8" fill="white" stroke="#7C3AED" stroke-width="2"/><rect width="40" height="4" rx="2" fill="#7C3AED"/><text x="20" y="28" text-anchor="middle" font-size="9" font-weight="600" fill="#7C3AED">部署</text><text x="20" y="45" text-anchor="middle" font-size="9" fill="#1F2328">2模式</text></g>
 </svg>
 </div>
+<div class="insight-box"><div class="insight-title">金融不是AI的"容易市场"</div><p>数据敏感、错误代价高、每一步都需要审计追踪。<span class="text-bold">Agent商业化的瓶颈不在模型能力，在"能不能安全接入企业数据和流程"</span>。这也是为什么Anthropic做了合资公司。</p></div>
 </div>
-<div class="callout info">
-<div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1E40AF" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></div>
-<div><div class="callout-title">Connector vs MCP App 的区别</div><strong>Connector</strong>：给Claude governed、实时数据访问——类似员工获得系统权限，只能读数据。<br><strong>MCP App</strong>：更进一步，把数据提供商自己的工具直接嵌入Claude——类似员工不仅有权限，还能用对方的完整工作台。Moody's MCP app不仅提供评级数据，还提供交互式UI，让分析师在Claude里直接操作Moody's的分析界面。</div>
+</section>
+
+<!-- 05 -->
+<section class="section-card" id="sec-05">
+<div class="section-header"><span class="section-number">5</span><h2>64.37% Benchmark：既是成绩也是警告</h2></div>
+<div class="section-content">
+<p>Vals AI Finance Agent benchmark分数：</p>
+<div class="grid-3">
+<div class="stat-card"><div class="stat-value success">64.37%</div><div class="stat-label">Claude Opus 4.7 领先</div></div>
+<div class="stat-card"><div class="stat-value info">59.96%</div><div class="stat-label">GPT-5.5</div></div>
+<div class="stat-card"><div class="stat-value warning">59.72%</div><div class="stat-label">Gemini 3.1 Pro</div></div>
 </div>
-<h3 style="font-size:16px;font-weight:700;color:var(--color-text-primary);margin:var(--spacing-lg) 0 var(--spacing-md)">新增8个Connector详解</h3>
+<p>细分任务表现差异巨大：</p>
+<table>
+<thead><tr><th>任务类型</th><th>准确率</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td>结构化任务（分类+日记账）</td><td><span class="text-success">92%</span></td><td>接近可用</td></tr>
+<tr><td>财务报告</td><td>62%</td><td>需人审</td></tr>
+<tr><td>月结关账</td><td><span class="text-danger">50%</span></td><td>离自主交付很远</td></tr>
+</tbody>
+</table>
+<p><span class="text-bold">金融AI成熟度分级解读</span>：</p>
+<table>
+<thead><tr><th>层级</th><th>定义</th><th>当前状态</th></tr></thead>
+<tbody>
+<tr><td>L1 · AI Coding</td><td>AI做代码级辅助</td><td>已成熟</td></tr>
+<tr><td>L2 · AI 辅助开发</td><td>AI做初稿，人审+修改+批准</td><td>金融行业当前（64%可靠度）</td></tr>
+<tr><td>L3 · AI 协同开发</td><td>AI自主交付部分需求</td><td>尚远（50%关账率不够）</td></tr>
+<tr><td>L4 · AI 自主开发</td><td>AI全自主完成交付</td><td>遥不可及</td></tr>
+</tbody>
+</table>
+<div class="insight-box"><div class="insight-title">关键判断</div><p><span class="text-highlight">Agent适合做初稿和加速，不适合做最终交付</span>。35.63%的失败率会让任何人类分析师被开除。Anthropic自己的立场："users stay in the loop"。
+<p>值得注意的是，Anthropic自己对此非常坦诚——不是夸耀64%领先，而是反复强调<span class="text-bold">"users stay in the loop"</span>。这是一种产品设计哲学：Agent是加速器不是替代品。金融行业的信任需要逐步建立，不是一蹴而就。</p>
+<p>The Register指出：35.63%的失败率会让任何人类分析师被开除。但Anthropic的立场是——Agent适合做初稿和加速，不适合做最终交付。这个坦诚本身就是差异化信号：比承诺"全自动"的供应商更值得信赖。</p>
+</div>
+<div class="quote-box"><p>来源：<a href="https://www.vals.ai/benchmarks/finance_agent" target="_blank">Vals AI Finance Agent Benchmark</a> · <a href="https://www.theregister.com/2026/05/05/anthropic_financial_agents/" target="_blank">The Register评论</a></p></div>
+</div>
+</section>
+
+<!-- 06 -->
+<section class="section-card" id="sec-06">
+<div class="section-header"><span class="section-number">6</span><h2>合资公司信号：Blackstone+Goldman不只是渠道合作</h2></div>
+<div class="section-content">
+<p>合资公司不是简单的渠道合作，而是一种<span class="text-bold">新的商业形态</span>：</p>
+<div class="comparison-grid">
+<div class="correct-path">
+<div class="path-title">✓ 合资公司模式</div>
+<div class="list-item success">Anthropic工程师嵌入服务团队</div>
+<div class="list-item success">PE portfolio公司是天然种子客户</div>
+<div class="list-item success">AI公司→行业数字化转型合伙人</div>
+<div class="list-item success">实施瓶颈有人解决</div>
+</div>
+<div class="wrong-path">
+<div class="path-title">✕ 传统卖API模式</div>
+<div class="list-item danger">客户自己实施落地</div>
+<div class="list-item danger">实施瓶颈无人解决</div>
+<div class="list-item danger">AI公司只是技术供应商</div>
+<div class="list-item danger">无法解决行业特定问题</div>
+</div>
+</div>
+<div class="quote-box"><p>"我们打算建设一家规模化、世界级的企业AI服务公司。部署Anthropic的技术到Blackstone的portfolio和更广泛的业务中。" — <span class="text-bold">Jon Gray</span>，Blackstone总裁兼COO <a href="https://www.anthropic.com/news/enterprise-ai-services-company" target="_blank">[原文]</a></p></div>
+<p><span class="text-bold">IPO时间线</span>：Bloomberg报道Anthropic考虑最早10月IPO，估值可能超过$900B。从$9B收入到$30B，再到$900B估值——这是AI公司从技术供应商到行业合伙人的资本逻辑。</p>
+<div class="insight-box"><div class="insight-title">结构性判断</div><p>合资模式是<span class="text-bold">不可逆的</span>，不是周期性。AI Agent落地需要行业知识+数据接入+合规治理——这三样只有行业内的公司才有。
+<p><span class="text-bold">合资公司模式与IPO的联动</span>：合资公司不仅是渠道创新，也是IPO估值逻辑的铺垫——从"AI模型公司"到"行业数字化转型合伙人"，估值基础从技术溢价变成生态溢价。Bloomberg报道估值$900B+，远超纯模型公司的估值天花板。</p>
+合资/生态绑定是唯一路径。</p></div>
+</div>
+</section>
+
+<!-- 07 -->
+<section class="section-card" id="sec-07">
+<div class="section-header"><span class="section-number">7</span><h2>10个Agent模板清单：前台5个 + 后台5个</h2></div>
+<div class="section-content">
+<table>
+<thead><tr><th>类别</th><th>Agent模板</th><th>主要用途</th><th>状态</th></tr></thead>
+<tbody>
+<tr><td>前台</td><td>Pitch builder</td><td>建立目标名单、运行可比分析、起草pitchbook</td><td><span class="status status-success">生产级</span></td></tr>
+<tr><td>前台</td><td>Meeting preparer</td><td>组装客户/对手方简报，协助会前准备</td><td><span class="status status-success">生产级</span></td></tr>
+<tr><td>前台</td><td>Earnings reviewer</td><td>读财报逐字稿和申报文件，更新模型，标记关键变化</td><td><span class="status status-success">生产级</span></td></tr>
+<tr><td>前台</td><td>Model builder</td><td>从申报资料/数据源/分析师输入建立财务模型</td><td><span class="status status-success">生产级</span></td></tr>
+<tr><td>前台</td><td>Market researcher</td><td>追踪行业/发行人动态，综合新闻/文件/券商研究</td><td><span class="status status-success">生产级</span></td></tr>
+<tr><td>后台</td><td>Valuation reviewer</td><td>按可比公司、方法论和公司标准检查估值</td><td><span class="status status-info">需人审</span></td></tr>
+<tr><td>后台</td><td>GL reconciler</td><td>对账总账账户并执行NAV计算</td><td><span class="status status-warning">部分可靠</span></td></tr>
+<tr><td>后台</td><td>Month-end closer</td><td>执行关账清单、准备分录、产出关账报告</td><td><span class="status status-danger">50%准确率</span></td></tr>
+<tr><td>后台</td><td>Statement auditor</td><td>检查财务报表一致性、完整性和审计准备度</td><td><span class="status status-info">需人审</span></td></tr>
+<tr><td>后台</td><td>KYC screener</td><td>组装实体档案、审查源文件、打包合规升级案件</td><td><span class="status status-success">合规刚需</span></td></tr>
+</tbody>
+</table>
+<p><span class="text-bold">两种部署模式</span>：</p>
 <div class="grid-2">
-<div class="card" style="border-top:3px solid var(--color-success)">
-<div class="card-title">Dun & Bradstreet — 企业身份验证</div>
-<div class="card-body">全球商业身份验证标准，D-U-N-S® Number体系。Agent在KYC和合规场景下需要"确认我正在和谁打交道"——D&B的Commercial Graph确保Agent基于验证数据运作，产出可审计的确定性结果。<br><strong>场景</strong>：KYC screener Agent用D&B验证实体身份，合规场景要求100%确定性。</div>
-<span class="card-tag tag-green">合规刚需</span>
+<div class="sub-card" style="border-top-color:var(--color-success)">
+<div class="sub-card-title">Cowork/Code插件模式</div>
+<p>Agent与分析师并肩工作，使用桌面已有软件。给Pitch Agent一个目标名单，就能得到Excel可比模型、PowerPoint pitchbook草稿、Outlook覆盖信——一次任务三份产出。</p>
+<span class="status status-success">人机协作</span>
 </div>
-<div class="card" style="border-top:3px solid var(--color-info)">
-<div class="card-title">Fiscal AI — 实时基本面覆盖</div>
-<div class="card-body">扩展公开股票的实时基本面覆盖。从季度财报到盈利预测，分析师做可比公司分析时需要实时更新的基本面数据。<br><strong>场景</strong>：Model builder Agent从Fiscal AI获取目标公司最新基本面，自动更新模型假设。</div>
-<span class="card-tag tag-blue">研究增强</span>
-</div>
-<div class="card" style="border-top:3px solid var(--color-purple)">
-<div class="card-title">Financial Modeling Prep — 全品类实时数据</div>
-<div class="card-body">覆盖股票、ETF、加密、外汇、商品的实时报价+基本面+报表+文件+逐字稿。金融行业最全面的数据接入之一。<br><strong>场景</strong>：Market researcher Agent从FMP获取多品类数据，构建跨市场行业动态简报。</div>
-<span class="card-tag tag-purple">全品类</span>
-</div>
-<div class="card" style="border-top:3px solid var(--color-warning)">
-<div class="card-title">Guidepoint — 10万+合规专家访谈</div>
-<div class="card-body">搜索100,000+合规审核过的专家访谈逐字稿，提供带来源链接的原始摘录。一级研究(primary research)的AI化。<br><strong>场景</strong>：Earnings reviewer Agent用Guidepoint获取行业专家对季度财报的点评，标记关键观点变化。</div>
-<span class="card-tag tag-amber">一级研究</span>
-</div>
-<div class="card" style="border-top:3px solid var(--color-success)">
-<div class="card-title">IBISWorld — 行业级分析</div>
-<div class="card-body">数千个行业的收入、金融比率、风险评分、成本结构、预测。从宏观行业视角补充公司级数据。<br><strong>场景</strong>：Pitch builder Agent用IBISWorld行业数据构建目标行业概览页。</div>
-<span class="card-tag tag-green">行业视角</span>
-</div>
-<div class="card" style="border-top:3px solid var(--color-info)">
-<div class="card-title">SS&C Intralinks — 数据室</div>
-<div class="card-body">DealCenter AI数据室，支持文档搜索、尽职调查Q&A、交易活动追踪。PE/M&A场景的核心工具。<br><strong>场景</strong>：Pitch builder Agent从Intralinks数据室搜索目标公司尽职调查文件。</div>
-<span class="card-tag tag-blue">M&A专用</span>
-</div>
-<div class="card" style="border-top:3px solid var(--color-purple)">
-<div class="card-title">Third Bridge — 专家访谈平台</div>
-<div class="card-body">公司与行业价值链的一手专家访谈。Guidepoint提供逐字稿，Third Bridge提供实时访谈预约。<br><strong>场景</strong>：Market researcher Agent通过Third Bridge获取行业专家对特定公司的最新见解。</div>
-<span class="card-tag tag-purple">实时访谈</span>
-</div>
-<div class="card" style="border-top:3px solid var(--color-warning)">
-<div class="card-title">Verisk — 保险数据</div>
-<div class="card-body">财产、意外险、特种保险数据。承保、理赔、风险分析。保险行业AI Agent的专用数据源。<br><strong>场景</strong>：Statement auditor Agent用Verisk数据对保险公司的理赔报告做交叉验证。</div>
-<span class="card-tag tag-amber">保险专用</span>
+<div class="sub-card" style="border-top-color:var(--color-purple)">
+<div class="sub-card-title">Managed Agent模式</div>
+<p>同一个模板在Claude Platform上自主运行。Cookbook提供长会话（数小时）、per-tool权限、managed credential vaults、全量audit log。适合夜间排程和整本书交易处理。</p>
+<span class="status status-purple">自动排程</span>
 </div>
 </div>
-<h3 style="font-size:16px;font-weight:700;color:var(--color-text-primary);margin:var(--spacing-lg) 0 var(--spacing-md)">Moody's MCP App — 6亿+企业信用评级</h3>
-<div class="card" style="border-left:4px solid var(--color-purple);max-width:100%">
-<div class="card-title">Moody's MCP App：把评级机构嵌入Claude</div>
-<div class="card-body">
-<p style="margin-bottom:var(--spacing-md)">这是Anthropic数据生态里最重要的一个——不是connector（只读数据），而是MCP app（嵌入交互式工具）。</p>
-<table class="table" style="margin-top:var(--spacing-md)">
-<thead><tr><th>维度</th><th>Connector</th><th>MCP App (Moody's)</th></tr></thead>
-<tbody>
-<tr><td>数据获取</td><td>受控读取数据</td><td>受控读取+交互式操作</td></tr>
-<tr><td>交互方式</td><td>API查询</td><td>嵌入式UI，分析师在Claude里直接操作</td></tr>
-<tr><td>数据覆盖</td><td>取决于provider</td><td>6亿+ 公开+非公开企业信用评级</td></tr>
-<tr><td>适用场景</td><td>研究/建模</td><td>合规/信用分析/业务拓展</td></tr>
-<tr><td>审计追踪</td><td>有</td><td>有+操作日志</td></tr>
-</tbody>
-</table>
-<p style="margin-top:var(--spacing-md)"><strong>关键判断</strong>：Moody's MCP app是一个信号——数据供应商正在从"卖数据"变成"卖Agent生态嵌入"。这个趋势会扩散。FactSet/S&P/PitchBook未来都可能出MCP app。</p>
-</div>
+<div class="insight-box"><div class="insight-title">核心原则</div><p><span class="text-bold">Users stay in the loop</span>——审核、迭代、批准后再提交。Agent不做最终决定。这不是技术限制，是产品设计哲学。</p></div>
 </div>
 </section>
 
-<!-- 06.9 Customer Testimonials -->
-<section class="section" id="sec-testimonials">
-<div class="section-num">06.9 · 客户证言分析</div>
-<h2 class="section-title">谁在用，为什么选Claude</h2>
+<!-- 08 -->
+<section class="section-card" id="sec-08">
+<div class="section-header"><span class="section-number">8</span><h2>Microsoft 365深度整合：四个场景，一个上下文</h2></div>
+<div class="section-content">
+<p>核心创新不是"Claude能在Excel/PPT/Word里干活"，是<span class="text-bold">上下文自动延续</span>。分析师在Excel里建的模型，不需要到PPT里重新解释——Claude自动理解上下文。</p>
+<div class="mini-svg">
+<svg viewBox="0 0 500 100" width="500" height="100" aria-label="M365四场景">
+<g transform="translate(10,15)"><rect width="110" height="70" rx="10" fill="#ECFDF5" stroke="#059669" stroke-width="2"/><text x="55" y="35" text-anchor="middle" font-size="12" font-weight="700" fill="#059669">Excel</text><text x="55" y="55" text-anchor="middle" font-size="10" fill="#57534E">建模+审计</text></g>
+<path d="M125 50 L145 50" stroke="#D0D7DE" stroke-width="2"/>
+<g transform="translate(150,15)"><rect width="110" height="70" rx="10" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/><text x="55" y="35" text-anchor="middle" font-size="12" font-weight="700" fill="#2563EB">PowerPoint</text><text x="55" y="55" text-anchor="middle" font-size="10" fill="#57534E">自动更新</text></g>
+<path d="M265 50 L285 50" stroke="#D0D7DE" stroke-width="2"/>
+<g transform="translate(290,15)"><rect width="110" height="70" rx="10" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2"/><text x="55" y="35" text-anchor="middle" font-size="12" font-weight="700" fill="#7C3AED">Word</text><text x="55" y="55" text-anchor="middle" font-size="10" fill="#57534E">模板合规</text></g>
+<path d="M405 50 L425 50" stroke="#D0D7DE" stroke-width="2"/>
+<g transform="translate(430,15)"><rect width="55" height="70" rx="10" fill="#FFFBEB" stroke="#D97706" stroke-width="2"/><text x="27" y="35" text-anchor="middle" font-size="10" font-weight="700" fill="#D97706">Outlook</text><text x="27" y="55" text-anchor="middle" font-size="9" fill="#57534E">Coming</text></g>
+</svg>
+</div>
+<div class="grid-2">
+<div class="sub-card" style="border-top-color:var(--color-success)">
+<div class="sub-card-title">📊 Excel — 金融建模引擎</div>
+<p>从申报资料和数据源自动建立财务模型，审计跨linked workbook的公式，运行敏感性分析。分析师在Excel里直接与Claude交互——不切换窗口。</p>
+</div>
+<div class="sub-card" style="border-top-color:var(--color-info)">
+<div class="sub-card-title">📈 PowerPoint — 自动Pitchbook</div>
+<p>起草deck，当底层数据变化时自动更新图表。Excel里建的模型，到PPT自动转成可视化——不需要手动复制粘贴。</p>
+</div>
+<div class="sub-card" style="border-top-color:var(--color-purple)">
+<div class="sub-card-title">📝 Word — 信用备忘合规编辑</div>
+<p>按公司自有模板编辑信用备忘。Claude理解公司格式要求和审批流程，自动填入数据、检查合规性。</p>
+</div>
+<div class="sub-card" style="border-top-color:var(--color-warning)">
+<div class="sub-card-title">📬 Outlook — 首席参谋（Beta）</div>
+<p>分拣邮件、安排会议、用你的语气草拟回复。Dispatch功能允许通过文字/语音从任何地方分配任务给Claude。</p>
+</div>
+</div>
+<div class="insight-box"><div class="insight-title">Dispatch的关键意义</div><p>分析师离开办公桌后Claude继续处理本地文件，回来时已完成待审核。这是<span class="text-bold">"AI员工"概念的落地</span>——不是需要你盯着才干活。</p></div>
+</div>
+</section>
+
+<!-- 09 -->
+<section class="section-card" id="sec-09">
+<div class="section-header"><span class="section-number">9</span><h2>数据生态：16+ Connector详解 + Moody's MCP App</h2></div>
+<div class="section-content">
+<p><span class="text-bold">AI Agent are only as good as the data they can access.</span> Claude connects to dozens of market data, research platforms, and financial companies' internal systems—all under governed access controls.</p>
+<p><span class="text-bold">Connector vs MCP App的区别</span>：</p>
+<div class="comparison-grid">
+<div class="correct-path">
+<div class="path-title">✓ MCP App（如Moody's）</div>
+<div class="list-item success">不只读数据，嵌入交互式工具</div>
+<div class="list-item success">6亿+ 公开+非公开企业信用评级</div>
+<div class="list-item success">分析师在Claude里直接操作Moody's界面</div>
+<div class="list-item success">合规/信用分析/业务拓展场景</div>
+</div>
+<div class="wrong-path">
+<div class="path-title">✕ Connector（只读）</div>
+<div class="list-item danger">只给Claude governed实时数据访问</div>
+<div class="list-item danger">类似员工获得系统权限，只能读数据</div>
+<div class="list-item danger">无交互式操作能力</div>
+<div class="list-item danger">研究/建模场景</div>
+</div>
+</div>
+<p><span class="text-bold">新增8个Connector详解</span>：</p>
+<table>
+<thead><tr><th>Connector</th><th>领域</th><th>数据覆盖</th><th>核心场景</th></tr></thead>
+<tbody>
+<tr><td>Dun & Bradstreet</td><td>企业身份验证</td><td>D-U-N-S® Number全球标准</td><td>KYC screener合规刚需</td></tr>
+<tr><td>Fiscal AI</td><td>实时基本面</td><td>公开股票基本面+盈利预测</td><td>Model builder实时更新</td></tr>
+<tr><td>Financial Modeling Prep</td><td>全品类实时数据</td><td>股票/ETF/加密/外汇/商品</td><td>跨市场研究</td></tr>
+<tr><td>Guidepoint</td><td>一级研究</td><td>10万+合规专家访谈逐字稿</td><td>Earnings reviewer交叉验证</td></tr>
+<tr><td>IBISWorld</td><td>行业级分析</td><td>数千行业收入/风险/成本结构</td><td>Pitch builder行业概览</td></tr>
+<tr><td>SS&C Intralinks</td><td>M&A数据室</td><td>DealCenter AI数据室</td><td>尽职调查+交易追踪</td></tr>
+<tr><td>Third Bridge</td><td>专家访谈</td><td>一手专家访谈预约</td><td>Market researcher实时洞察</td></tr>
+<tr><td>Verisk</td><td>保险数据</td><td>财产/意外/特种保险</td><td>Statement auditor交叉验证</td></tr>
+</tbody>
+</table>
+<div class="insight-box"><div class="insight-title">Moody's MCP App是信号</div><p>数据供应商正在从<span class="text-bold">"卖数据"变成"卖Agent生态嵌入"</span>。FactSet/S&P/PitchBook未来都可能出MCP app——数据行业的商业模式正在被重写。</p></div>
+</div>
+</section>
+
+<!-- 10 -->
+<section class="section-card" id="sec-10">
+<div class="section-header"><span class="section-number">10</span><h2>客户证言分析：谁在用，为什么选Claude</h2></div>
+<div class="section-content">
 <div class="grid-3">
-<div class="card" style="border-top:3px solid var(--color-danger)">
-<div class="card-title">FIS — 金融基础设施</div>
-<div class="card-body">"当我们开始建AI agents，需要一个可信赖的provider。Anthropic是明确的选择。一起建AML调查Agent——从数天压缩到数分钟。信用决策、反欺诈、存款留存Agent紧随其后。FIS客户不需要自建基础设施——已经在这里了。"<br><br><strong>选择理由</strong>：金融基础设施公司需要确定性+审计追踪，Claude的治理层是最强卖点。</div>
-<span class="card-tag tag-red">基础设施级</span>
+<div class="sub-card" style="border-top-color:var(--color-danger)">
+<div class="sub-card-title">FIS — 金融基础设施</div>
+<p>"当我们开始建AI agents，需要一个可信赖的provider。Anthropic是明确的选择。一起建AML调查Agent——从数天压缩到数分钟。FIS客户不需要自建基础设施。"</p>
+<span class="status status-danger">治理优先</span>
 </div>
-<div class="card" style="border-top:3px solid var(--color-info)">
-<div class="card-title">Carlyle — PE巨头</div>
-<div class="card-body">"Carlyle选择Claude作为AI技术栈关键部分——强编码能力、agent推理、模型和关键功能的持续进步。从投资到运营到portfolio管理，交付价值。"<br><br><strong>选择理由</strong>：PE公司需要覆盖全业务链的AI——前台研究+后台运营，Claude的三层架构正好匹配。</div>
-<span class="card-tag tag-blue">全链覆盖</span>
+<div class="sub-card" style="border-top-color:var(--color-info)">
+<div class="sub-card-title">Carlyle — PE巨头</div>
+<p>"Carlyle选择Claude作为AI技术栈关键部分——强编码能力、agent推理、持续进步。从投资到运营到portfolio管理，交付价值。"</p>
+<span class="status status-info">全链覆盖</span>
 </div>
-<div class="card" style="border-top:3px solid var(--color-success)">
-<div class="card-title">Walleye Capital — 100%全员采用</div>
-<div class="card-body">"400人hedge fund里100%员工用Claude Code。这个采纳水平反映了AI-first心态——我们期望每个人不断重新思考工作方式，总是在问'AI怎么帮我做这件事'——无论是不是技术岗。"<br><br><strong>选择理由</strong>：Hedge fund对速度和信息优势极度敏感，Claude Code的AI-first哲学与他们的文化完全对齐。</div>
-<span class="card-tag tag-green">全员采用</span>
-</div>
-</div>
-<div class="grid-2" style="margin-top:var(--spacing-md)">
-<div class="card" style="border-top:3px solid var(--color-purple)">
-<div class="card-title">Morningstar + PitchBook — 研究数据巨头</div>
-<div class="card-body">"投资者需要可信赖的AI——信任始于数据。Morningstar和PitchBook把几十年的独立、分析师支撑的智能带给Claude。用户不仅得到更快答案，而是更好答案。一起建设驱动更聪明决策的智能层。"<br><br><strong>选择理由</strong>：数据供应商选择Claude意味着数据质量和AI推理能力的双重信任。</div>
-<span class="card-tag tag-purple">数据+AI融合</span>
-</div>
-<div class="card" style="border-top:3px solid var(--color-warning)">
-<div class="card-title">FactSet — 数据接入平台化</div>
-<div class="card-body">"客户越来越想在AI辅助工作流里直接使用FactSet数据。与Anthropic合作把Claude带入托管编程环境——在已有工具里推理我们的基础市场数据、研究和分析。内部全组织Claude Code采纳加速了这些能力的交付速度。"<br><br><strong>选择理由</strong>：数据平台化——不是卖数据给AI公司，是把AI嵌入自己的数据生态。</div>
-<span class="card-tag tag-amber">平台化</span>
-</div>
-</div>
-<div class="callout success" style="margin-top:var(--spacing-md)">
-<div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#065F46" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-<div><div class="callout-title">证言揭示了三个选择模式</div><strong>1. 治理优先</strong>（FIS）：金融基础设施选确定性+审计<br><strong>2. 全链覆盖</strong>（Carlyle/Walleye）：从前台到后台，一个AI覆盖全部<br><strong>3. 数据+AI融合</strong>（Morningstar/FactSet）：数据供应商把AI嵌入自己的生态——这会改变数据行业的商业模式</div>
-</div>
-</section>
-
-<!-- 06.95 Competition + Glossary -->
-<section class="section" id="sec-competition">
-<div class="section-num">06.95 · 竞争格局 + 技术词汇表</div>
-<h2 class="section-title">Anthropic vs OpenAI vs Google</h2>
-<div class="section-overview">
-<span class="section-overview-label">章节概览</span>
-<div class="section-overview-content">
-<svg viewBox="0 0 500 100" style="max-width:500px">
-<g transform="translate(10,10)"><rect width="150" height="80" rx="10" fill="white" stroke="#059669" stroke-width="3"/><text x="75" y="35" text-anchor="middle" font-size="14" font-weight="700" fill="#059669">Anthropic</text><text x="75" y="55" text-anchor="middle" font-size="10" fill="#656D76">整车+合资</text></g>
-<g transform="translate(175,10)"><rect width="150" height="80" rx="10" fill="white" stroke="#2563EB" stroke-width="2"/><text x="75" y="35" text-anchor="middle" font-size="14" font-weight="700" fill="#2563EB">OpenAI</text><text x="75" y="55" text-anchor="middle" font-size="10" fill="#656D76">发动机+生态</text></g>
-<g transform="translate(340,10)"><rect width="150" height="80" rx="10" fill="white" stroke="#D97706" stroke-width="2"/><text x="75" y="35" text-anchor="middle" font-size="14" font-weight="700" fill="#D97706">Google</text><text x="75" y="55" text-anchor="middle" font-size="10" fill="#656D76">平台+自研</text></g>
-</svg>
-</div>
-</div>
-<table class="table">
-<thead><tr><th>维度</th><th>Anthropic</th><th>OpenAI</th><th>Google</th></tr></thead>
-<tbody>
-<tr><td><strong>产品形态</strong></td><td>整车：行业模板×数据×治理打包</td><td>发动机+改装件：GPT+Copilot生态</td><td>平台+自研：Gemini+内部整合</td></tr>
-<tr><td><strong>数据生态</strong></td><td>16+ connector + MCP app（Moody's 6亿+企业）</td><td>Copilot生态（Microsoft数据）+ChatGPT插件</td><td>Google搜索+内部数据（广告/地图/YouTube）</td></tr>
-<tr><td><strong>部署模式</strong></td><td>Cowork插件 + Managed Agent（双模式）</td><td>API + Copilot嵌入 + ChatGPT workspace</td><td>Vertex AI + Gemini整合Google Workspace</td></tr>
-<tr><td><strong>治理能力</strong></td><td>per-tool权限 + credential vaults + audit log（最完整）</td><td>ChatGPT Team权限 + API rate limits</td><td>Vertex IAM + 数据驻留选项</td></tr>
-<tr><td><strong>行业覆盖</strong></td><td>金融先行（10模板），法律/医疗/保险待跟进</td><td>通用（无行业垂直模板）</td><td>广告/搜索先行，其他行业弱</td></tr>
-<tr><td><strong>商业化路径</strong></td><td>合资公司（Blackstone+Goldman）</td><td>渠道合作（Microsoft）</td><td>内部自研+外部API</td></tr>
-<tr><td><strong>Benchmark领先</strong></td><td>Claude Opus 4.7 = 64.37%（金融Agent benchmark第一）</td><td>GPT-5.5 = 59.96%</td><td>Gemini 3.1 Pro = 59.72%</td></tr>
-</tbody>
-</table>
-
-<div class="callout success" style="margin-top:var(--spacing-md)">
-<div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#065F46" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-<div><div class="callout-title">关键差异</div>Anthropic的差异化不是"模型更强"（只领先5个百分点），而是<strong>整车交付+治理完整+合资绑定</strong>。金融行业选Claude不是因为64.37%比59.96%好，是因为整个合规+审计+数据接入+行业知识的打包交付。模型差距是量变，组织方式是质变。</div>
-</div>
-
-<h3 style="font-size:16px;font-weight:700;color:var(--color-text-primary);margin:var(--spacing-xl) 0 var(--spacing-md)">技术词汇表</h3>
-<table class="table">
-<thead><tr><th>术语</th><th>定义</th><th>金融场景</th></tr></thead>
-<tbody>
-<tr><td><strong>Skill file</strong></td><td>领域知识+指令定义文件。简单用Markdown写，高级可执行脚本。定义触发条件和工作流步骤。</td><td>风控政策、建模规范、合规审批流程注入Agent</td></tr>
-<tr><td><strong>Connector</strong></td><td>受控数据接入。给Agent governed访问外部数据源的能力，有权限管控和审计。</td><td>接入FactSet/S&P/Morningstar等16+金融数据源</td></tr>
-<tr><td><strong>Subagent</strong></td><td>主Agent调用的子模型。处理专门子任务（可比公司筛选、方法论校验）。</td><td>Pitch builder调subagent做comps筛选</td></tr>
-<tr><td><strong>MCP App</strong></td><td>Model Context Protocol应用。不只是读数据，是把provider的交互式工具嵌入Claude。</td><td>Moody's MCP app在Claude里直接操作评级界面</td></tr>
-<tr><td><strong>Managed Agent</strong></td><td>Claude Platform上自主运行的Agent。长会话+自动排程+credential vaults+audit log。</td><td>Month-end closer Agent夜间自主执行关账</td></tr>
-<tr><td><strong>Cowork plugin</strong></td><td>Claude Cowork/Code里与分析师并肩工作的Agent插件模式。</td><td>Pitch builder在分析师桌面Excel/PPT里工作</td></tr>
-<tr><td><strong>Credential vault</strong></td><td>受控凭证管理。Agent不直接持有密码，通过vault安全访问。</td><td>Agent访问FactSet需凭证，vault代管</td></tr>
-<tr><td><strong>Audit log</strong></td><td>全量操作日志。合规和工程团队可检查每个tool call和决策。</td><td>金融监管要求每步可追溯</td></tr>
-<tr><td><strong>Per-tool permission</strong></td><td>每个工具独立权限控制。不是"Agent有/没有权限"，是"Agent可以读FactSet但不能写Jira"。</td><td>KYC screener可读D&B但不可修改CRM</td></tr>
-<tr><td><strong>Dispatch</strong></td><td>Claude Cowork功能，通过文字/语音从任何地方分配任务。离开桌面后Claude继续工作。</td><td>分析师通勤时语音分配Earnings review任务</td></tr>
-<tr><td><strong>Reference architecture</strong></td><td>模板架构定义。Skills+Connectors+Subagents的完整打包——不是10个prompt，是可部署的行业方案。</td><td>10个金融Agent模板都是reference architecture</td></tr>
-<tr><td><strong>Comps model</strong></td><td>可比公司分析模型。金融行业前台核心工作——找相似公司做估值对比。</td><td>Pitch builder Agent自动建comps table</td></tr>
-<tr><td><strong>NAV calculation</strong></td><td>净资产值计算。对账总账后确认基金净值。</td><td>GL reconciler Agent自动算NAV</td></tr>
-<tr><td><strong>KYC escalation</strong></td><td>KYC合规升级案件。Agent审查后标记需要人工合规审核的实体。</td><td>KYC screener打包合规升级案件</td></tr>
-<tr><td><strong>Close checklist</strong></td><td>月结关账清单。金融后台月度例行工作——检查分录、调整、确认。</td><td>Month-end closer Agent执行关账清单</td></tr>
-</tbody>
-</table>
-</section>
-
-<!-- 07 Essence -->
-<section class="section" id="sec-essence">
-<div class="section-num">07 · 本质穿透（视角）</div>
-<h2 class="section-title">四层递进</h2>
-<div class="section-overview">
-<span class="section-overview-label">章节概览</span>
-<div class="section-overview-content">
-<svg viewBox="0 0 500 180" style="max-width:500px">
-<defs><linearGradient id="eg" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#047857"/></linearGradient></defs>
-<g transform="translate(150,10)"><rect width="200" height="40" rx="6" fill="url(#eg)"/><text x="100" y="25" text-anchor="middle" font-size="13" font-weight="600" fill="white">L2 规律层</text></g>
-<g transform="translate(75,70)"><rect width="140" height="40" rx="6" fill="#E6F7ED" stroke="#059669"/><text x="70" y="25" text-anchor="middle" font-size="12" font-weight="500" fill="#059669">L3 映射层</text></g>
-<g transform="translate(285,70)"><rect width="140" height="40" rx="6" fill="#EFF6FF" stroke="#2563EB"/><text x="70" y="25" text-anchor="middle" font-size="12" font-weight="500" fill="#2563EB">L4 演变层</text></g>
-<g transform="translate(100,130)"><rect width="300" height="40" rx="6" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2"/><text x="150" y="25" text-anchor="middle" font-size="12" font-weight="600" fill="#7C3AED">L5 预测层</text></g>
-</svg>
+<div class="sub-card" style="border-top-color:var(--color-success)">
+<div class="sub-card-title">Walleye Capital — 100%全员</div>
+<p>"400人hedge fund里100%员工用Claude Code。反映了AI-first心态——每个人不断重新思考工作方式，总是在问'AI怎么帮我做这件事'。"</p>
+<span class="status status-success">全员采用</span>
 </div>
 </div>
 <div class="grid-2">
-<div class="card" style="border-top:3px solid var(--color-success)">
-<div class="section-num" style="padding:0;margin-bottom:var(--spacing-sm)">L2 · 规律层</div>
-<div class="card-title">Agent商业化 = 行业模板 × 数据生态 × 治理保障</div>
-<div class="card-body">不是"更强的chatbot"，是把行业的知识（Skills）× 数据（Connectors）× 流程（Subagents）打包成可部署的单元。三因子模型才是真正的产品形态。</div>
+<div class="sub-card" style="border-top-color:var(--color-purple)">
+<div class="sub-card-title">Morningstar + PitchBook</div>
+<p>"投资者需要可信赖的AI——信任始于数据。把几十年的独立、分析师支撑的智能带给Claude。用户不仅得到更快答案，而是更好答案。"</p>
+<span class="status status-purple">数据+AI融合</span>
 </div>
-<div class="card" style="border-top:3px solid var(--color-purple)">
-<div class="section-num" style="padding:0;margin-bottom:var(--spacing-sm)">L3 · 映射层</div>
-<div class="card-title">不是卖发动机，是卖整车</div>
-<div class="card-body">通用模型是发动机（需自己组装），Copilot是改装件（增强工具），Anthropic金融Agent是整车——发动机+底盘+内饰+驾照一起交付，客户只需定制化。</div>
+<div class="sub-card" style="border-top-color:var(--color-warning)">
+<div class="sub-card-title">FactSet — 数据平台化</div>
+<p>"客户越来越想在AI辅助工作流里直接使用FactSet数据。与Anthropic合作把Claude带入托管编程环境——在已有工具里推理我们的基础市场数据。"</p>
+<span class="status status-warning">平台化</span>
 </div>
 </div>
-<div class="callout info">
-<div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1E40AF" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-<div><div class="callout-title">L4 · 演变层</div><strong>短期（3-6月）</strong>：法律、医疗、保险垂直模板出现。模板化是规模化路径。<br><strong>中期（6-18月）</strong>：数据供应商角色重新定义——从"数据源"变成"Agent生态一部分"。Moody's MCP app是信号。<br><strong>长期（18-36月）</strong>：合资模式扩散。AI公司→行业数字化转型合伙人。</div>
-</div>
-<div class="callout success">
-<div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#065F46" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-<div><div class="callout-title">L5 · 结构性判断：不可逆，不是周期性</div>AI Agent落地需要行业知识+数据接入+合规治理——这三样只有行业内的公司才有。合资/生态绑定是唯一路径。Anthropic先做了，其他人会跟进。</div>
+<div class="insight-box"><div class="insight-title">证言揭示了三种选择模式</div><p><span class="text-bold">治理优先</span>（FIS）：金融基础设施选确定性+审计。<span class="text-bold">全链覆盖</span>（Carlyle/Walleye）：从前台到后台，一个AI覆盖全部。<span class="text-bold">数据+AI融合</span>（Morningstar/FactSet）：数据供应商把AI嵌入自己的生态——会改变数据行业的商业模式。</p></div>
 </div>
 </section>
 
-<!-- 08 Actions -->
-<section class="section" id="sec-actions">
-<div class="section-num">08 · 对某公司/AI生产力战役的行动建议</div>
-<h2 class="section-title">从本质穿透到具体行动</h2>
-<div class="section-overview">
-<span class="section-overview-label">章节概览</span>
-<div class="section-overview-content">
-<svg viewBox="0 0 500 120" style="max-width:500px">
-<defs><linearGradient id="ag" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#10B981"/></linearGradient></defs>
-<g transform="translate(30,30)"><rect width="120" height="60" rx="8" fill="#FEF2F2" stroke="#E11D48" stroke-width="2"/><rect width="120" height="4" rx="2" fill="#E11D48"/><text x="60" y="28" text-anchor="middle" font-size="11" font-weight="600" fill="#E11D48">P0</text><text x="60" y="45" text-anchor="middle" font-size="12" font-weight="600" fill="#E11D48">架构对齐</text></g>
-<path d="M155 60 L185 60" stroke="#D0D7DE" stroke-width="2"/><polygon points="185,55 195,60 185,65" fill="#2563EB"/>
-<g transform="translate(200,30)"><rect width="120" height="60" rx="8" fill="white" stroke="#2563EB"/><rect width="120" height="4" rx="2" fill="#2563EB"/><text x="60" y="28" text-anchor="middle" font-size="11" font-weight="600" fill="#2563EB">P1</text><text x="60" y="45" text-anchor="middle" font-size="12" fill="#1F2328">模板+连接</text></g>
-<path d="M325 60 L355 60" stroke="#D0D7DE" stroke-width="2"/><polygon points="355,55 365,60 355,65" fill="#7C3AED"/>
-<g transform="translate(370,30)"><rect width="120" height="60" rx="8" fill="white" stroke="#7C3AED"/><rect width="120" height="4" rx="2" fill="#7C3AED"/><text x="60" y="28" text-anchor="middle" font-size="11" font-weight="600" fill="#7C3AED">P2</text><text x="60" y="45" text-anchor="middle" font-size="12" fill="#1F2328">合资+输出</text></g>
+<!-- 11 -->
+<section class="section-card" id="sec-11">
+<div class="section-header"><span class="section-number">11</span><h2>本质穿透：四层递进（视角）</h2></div>
+<div class="section-content">
+<p><span class="text-bold">L2 规律层</span>：Agent商业化 = 行业模板 × 数据生态 × 治理保障。不是更强的chatbot，是把行业的知识×数据×流程打包成可部署的单元。</p>
+<p><span class="text-bold">L3 映射层</span>：
+<p>通用模型是<span class="text-bold">发动机</span>——强大但需要自己组装底盘、内饰、驾照。Copilot是<span class="text-bold">改装套件</span>——增强现有工具，但不改变本质。Anthropic金融Agent模板是<span class="text-bold">整车</span>——发动机+底盘+内饰+驾照一起交付，客户只需定制化（填自己的风控政策和建模规范）。</p>
+
+<div class="comparison-grid">
+<div class="correct-path">
+<div class="path-title">✓ Anthropic金融Agent = 整车</div>
+<div class="list-item success">发动机+底盘+内饰+驾照一起交付</div>
+<div class="list-item success">客户只需定制化（填自己的规矩）</div>
+<div class="list-item success">行业知识×数据×流程全打包</div>
+<div class="list-item success">合资公司模式解决实施瓶颈</div>
+</div>
+<div class="wrong-path">
+<div class="path-title">✕ 通用AI模型 = 发动机</div>
+<div class="list-item danger">强大但需要自己组装</div>
+<div class="list-item danger">Copilot只是改装套件</div>
+<div class="list-item danger">客户自己解决数据接入+合规</div>
+<div class="list-item danger">实施瓶颈无人解决</div>
+</div>
+</div>
+<p><span class="text-bold">L4 演变层</span>：</p>
+<table>
+<thead><tr><th>时间</th><th>变化</th><th>信号</th></tr></thead>
+<tbody>
+<tr><td>短期（3-6月）</td><td>法律、医疗、保险垂直模板出现</td><td>模板化=规模化路径</td></tr>
+<tr><td>中期（6-18月）</td><td>数据供应商角色重新定义</td><td>Moody's MCP app=信号</td></tr>
+<tr><td>长期（18-36月）</td><td>合资模式扩散</td><td>AI公司→行业数字化转型合伙人</td></tr>
+</tbody>
+</table>
+<div class="mini-svg">
+<svg viewBox="0 0 520 80" width="520" height="80" aria-label="时间轴推演">
+<defs><linearGradient id="tl" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#059669"/><stop offset="50%" stop-color="#2563EB"/><stop offset="100%" stop-color="#7C3AED"/></linearGradient></defs>
+<rect x="20" y="35" width="480" height="6" rx="3" fill="url(#tl)"/>
+<circle cx="80" cy="38" r="14" fill="#059669" stroke="white" stroke-width="3"/>
+<text x="80" y="42" text-anchor="middle" font-size="9" font-weight="700" fill="white">3-6m</text>
+<text x="80" y="68" text-anchor="middle" font-size="10" fill="#059669" font-weight="600">垂直模板</text>
+<circle cx="280" cy="38" r="14" fill="#2563EB" stroke="white" stroke-width="3"/>
+<text x="280" y="42" text-anchor="middle" font-size="9" font-weight="700" fill="white">6-18m</text>
+<text x="280" y="68" text-anchor="middle" font-size="10" fill="#2563EB" font-weight="600">数据生态重构</text>
+<circle cx="460" cy="38" r="14" fill="#7C3AED" stroke="white" stroke-width="3"/>
+<text x="460" y="42" text-anchor="middle" font-size="9" font-weight="700" fill="white">18-36m</text>
+<text x="460" y="68" text-anchor="middle" font-size="10" fill="#7C3AED" font-weight="600">合资模式扩散</text>
 </svg>
 </div>
+<div class="insight-box"><div class="insight-title">L5 · 结构性判断：不可逆，不是周期性</div><p>AI Agent落地需要行业知识+数据接入+合规治理——这三样只有行业内的公司才有。合资/生态绑定是<span class="text-bold">唯一路径</span>。</p></div>
 </div>
-<table class="table">
+</section>
+
+<!-- 12 -->
+<section class="section-card" id="sec-12">
+<div class="section-header"><span class="section-number">12</span><h2>行动建议：对某公司AI生产力战役</h2></div>
+<div class="section-content">
+<table>
 <thead><tr><th>优先级</th><th>建议</th><th>说明</th></tr></thead>
 <tbody>
-<tr><td><span class="card-tag tag-red">P0</span></td><td>把Agent平台架构明确为Skills+Connectors+Subagents三层</td><td>与业界主流架构对齐，降低业务线理解成本</td></tr>
-<tr><td><span class="card-tag tag-blue">P1</span></td><td>设计研发效能的10个垂直Agent模板</td><td>需求拆解、代码审查、测试生成、部署检查、效能度量等——对标Anthropic金融10模板</td></tr>
-<tr><td><span class="card-tag tag-blue">P1</span></td><td>Agent平台 Connectors层接入数据平台+数据分析平台+BI平台</td><td>数据接入是Agent落地的前提，优先做3个核心平台</td></tr>
-<tr><td><span class="card-tag tag-purple">P2</span></td><td>研究Anthropic合资公司模式</td><td>AI生产力战役需要业务线深度参与，纯技术驱动不够</td></tr>
-<tr><td><span class="card-tag tag-purple">P2</span></td><td>在AiDD/QECon分享中引用此案例</td><td>Anthropic金融Agent是当前最热的行业案例，引用可增强可信度</td></tr>
+<tr><td><span class="status status-danger">P0</span></td><td>Agent平台架构明确Skills+Connectors+Subagents三层</td><td>与业界主流对齐，降低业务线理解成本</td></tr>
+<tr><td><span class="status status-info">P1</span></td><td>设计研发效能10个垂直Agent模板</td><td>需求拆解/代码审查/测试生成/部署检查/效能度量——对标Anthropic金融10模板</td></tr>
+<tr><td><span class="status status-info">P1</span></td><td>Connectors层接入数据平台+数据分析平台+BI平台</td><td>数据接入是Agent落地前提，优先3个核心平台</td></tr>
+<tr><td><span class="status status-purple">P2</span></td><td>研究合资公司模式</td><td>AI生产力战役需业务线深度参与，纯技术驱动不够</td></tr>
+<tr><td><span class="status status-purple">P2</span></td><td>AiDD/QECon引用此案例</td><td>增强业界影响力</td></tr>
 </tbody>
 </table>
+<p><span class="text-bold">研发效能10模板草案</span>（对标Anthropic金融10模板）：</p>
+<table>
+<thead><tr><th>类别</th><th>模板名</th><th>核心场景</th></tr></thead>
+<tbody>
+<tr><td>前台</td><td>需求拆解Agent</td><td>PRD→子任务分解+依赖识别+优先级排序</td></tr>
+<tr><td>前台</td><td>代码审查Agent</td><td>PR→自动审查+风格/安全/性能标记</td></tr>
+<tr><td>前台</td><td>测试生成Agent</td><td>需求/代码→单元/集成/边界测试用例</td></tr>
+<tr><td>前台</td><td>部署检查Agent</td><td>CI/CD→发布前检查+回滚预案</td></tr>
+<tr><td>前台</td><td>效能度量Agent</td><td>度量数据→异常检测+趋势分析+改进建议</td></tr>
+<tr><td>后台</td><td>依赖升级Agent</td><td>自动检测+安全评估+升级方案</td></tr>
+<tr><td>后台</td><td>文档补全Agent</td><td>代码→README/API doc/变更日志</td></tr>
+<tr><td>后台</td><td>性能优化Agent</td><td>profiling→瓶颈识别+优化建议</td></tr>
+<tr><td>后台</td><td>合规检查Agent</td><td>许可证/敏感词/安全漏洞扫描</td></tr>
+<tr><td>后台</td><td>知识沉淀Agent</td><td>经验→技能定义文件更新+最佳实践归档</td></tr>
+</tbody>
+</table>
+<div class="insight-box"><div class="insight-title">反过来的问题</div><p>当Anthropic把金融做成了Agent样板间，<span class="text-bold">我们能不能把研发效能做成下一个？</span>金融的数据生态是FactSet+S&P，研发效能的数据生态是Git+CI/CD+Jira+数据平台。
+<p>一个反过来的问题：当Anthropic把金融做成了Agent样板间，<span class="text-bold">我们能不能把研发效能做成下一个？</span>金融的数据生态是FactSet+S&P，研发效能的数据生态是Git+CI/CD+Jira+数据平台。数据接入层的壁垒，正好是Agent平台的机会。</p>
+<p>Connectors层接入数据平台（数据平台）+数据分析平台（数据分析平台）+BI平台（BI平台）——数据接入是Agent落地前提，优先3个核心平台。这三个平台的接入壁垒恰恰是某公司研发效能的护城河——外部AI公司没有这些内部数据源。</p>
+</div>
+</div>
+</section>
+
+<!-- 技术词汇表 -->
+<section class="section-card" id="sec-glossary">
+<div class="section-header"><span class="section-number">+</span><h2>技术词汇表</h2></div>
+<div class="section-content">
+<table>
+<thead><tr><th>术语</th><th>定义</th><th>金融场景</th></tr></thead>
+<tbody>
+<tr><td><span class="text-bold">Skill file</span></td><td>领域知识+指令定义文件。Markdown写触发条件和工作流步骤，高级可执行脚本。</td><td>风控政策、建模规范、合规审批流程注入</td></tr>
+<tr><td><span class="text-bold">Connector</span></td><td>受控数据接入。给Agent governed访问外部数据源的能力。</td><td>接入FactSet/S&P/Morningstar等16+金融数据源</td></tr>
+<tr><td><span class="text-bold">Subagent</span></td><td>主Agent调用的子模型，处理专门子任务。</td><td>Pitch builder调subagent做comps筛选</td></tr>
+<tr><td><span class="text-bold">MCP App</span></td><td>Model Context Protocol应用。不只读数据，嵌入provider的交互式工具。</td><td>Moody's MCP app在Claude里直接操作评级界面</td></tr>
+<tr><td><span class="text-bold">Managed Agent</span></td><td>Claude Platform上自主运行的Agent。长会话+自动排程+credential vaults+audit log。</td><td>Month-end closer Agent夜间自主执行关账</td></tr>
+<tr><td><span class="text-bold">Cowork plugin</span></td><td>Claude Cowork/Code里与分析师并肩工作的Agent插件模式。</td><td>Pitch builder在分析师桌面Excel/PPT里工作</td></tr>
+<tr><td><span class="text-bold">Credential vault</span></td><td>受控凭证管理。Agent不直接持有密码，通过vault安全访问。</td><td>Agent访问FactSet需凭证，vault代管</td></tr>
+<tr><td><span class="text-bold">Audit log</span></td><td>全量操作日志。合规和工程团队可检查每个tool call和决策。</td><td>金融监管要求每步可追溯</td></tr>
+<tr><td><span class="text-bold">Per-tool permission</span></td><td>每个工具独立权限控制。</td><td>KYC screener可读D&B但不可修改CRM</td></tr>
+<tr><td><span class="text-bold">Dispatch</span></td><td>Claude Cowork功能，文字/语音分配任务。离开桌面后Claude继续工作。</td><td>分析师通勤时语音分配Earnings review任务</td></tr>
+<tr><td><span class="text-bold">Reference architecture</span></td><td>模板架构定义。Skills+Connectors+Subagents的完整打包。</td><td>10个金融Agent模板都是reference architecture</td></tr>
+<tr><td><span class="text-bold">Comps model</span></td><td>可比公司分析模型。找相似公司做估值对比。</td><td>Pitch builder Agent自动建comps table</td></tr>
+<tr><td><span class="text-bold">NAV calculation</span></td><td>净资产值计算。对账总账后确认基金净值。</td><td>GL reconciler Agent自动算NAV</td></tr>
+<tr><td><span class="text-bold">KYC escalation</span></td><td>KYC合规升级案件。Agent审查后标记需要人工审核的实体。</td><td>KYC screener打包合规升级案件</td></tr>
+<tr><td><span class="text-bold">Close checklist</span></td><td>月结关账清单。检查分录、调整、确认。</td><td>Month-end closer Agent执行关账清单</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- 竞争格局 -->
+<section class="section-card" id="sec-competition">
+<div class="section-header"><span class="section-number">+</span><h2>竞争格局：Anthropic vs OpenAI vs Google</h2></div>
+<div class="section-content">
+<table>
+<thead><tr><th>维度</th><th>Anthropic</th><th>OpenAI</th><th>Google</th></tr></thead>
+<tbody>
+<tr><td><span class="text-bold">产品形态</span></td><td>整车：行业模板×数据×治理打包</td><td>发动机+改装件：GPT+Copilot生态</td><td>平台+自研：Gemini+内部整合</td></tr>
+<tr><td><span class="text-bold">数据生态</span></td><td>16+ connector + MCP app</td><td>Copilot生态（Microsoft数据）</td><td>Google搜索+内部数据</td></tr>
+<tr><td><span class="text-bold">部署模式</span></td><td>Cowork插件 + Managed Agent</td><td>API + Copilot + ChatGPT workspace</td><td>Vertex AI + Workspace整合</td></tr>
+<tr><td><span class="text-bold">治理能力</span></td><td>per-tool权限 + credential vaults + audit log（最完整）</td><td>ChatGPT Team权限 + API rate limits</td><td>Vertex IAM + 数据驻留选项</td></tr>
+<tr><td><span class="text-bold">行业覆盖</span></td><td>金融先行，法律/医疗/保险待跟进</td><td>通用（无行业垂直模板）</td><td>广告/搜索先行，其他弱</td></tr>
+<tr><td><span class="text-bold">商业路径</span></td><td>合资公司（Blackstone+Goldman）</td><td>渠道合作（Microsoft）</td><td>内部自研+外部API</td></tr>
+<tr><td><span class="text-bold">Benchmark</span></td><td>Claude 64.37%（第一）</td><td>GPT-5.5 59.96%</td><td>Gemini 3.1 Pro 59.72%</td></tr>
+</tbody>
+</table>
+<div class="insight-box"><div class="insight-title">关键差异</div><p>Anthropic的差异化不是"模型更强"（只领先5个百分点），而是<span class="text-bold">整车交付+治理完整+合资绑定</span>。模型差距是量变，组织方式是质变。</p></div>
+</div>
 </section>
 
 <!-- Footer -->
 <div class="footer-learn">
-<div style="font-size:16px;font-weight:700;margin-bottom:var(--spacing-sm);display:flex;align-items:center;gap:var(--spacing-sm)">
-<svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" width="20" height="20"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0 4 12.9V17h-8v-2.1A7 7 0 0 0 12 2z"/></svg>
-了解更多
-</div>
-<p style="font-size:14px;color:var(--color-text-secondary);line-height:1.7;margin-bottom:var(--spacing-md)">我是 <strong>AI洞察</strong>，的AI洞察。AI洞察是的项目，系统化追踪AI行业动态，每日/每周输出调研洞察，覆盖大模型、AI Coding、AI应用、投融资、企业AI转型五大领域。</p>
-<a href="https://xiaoxiong20260206.github.io/ai-insight-public/" target="_blank" class="footer-btn">&#x1F3E0; 访问AI洞察首页</a>
+<div style="font-size:16px;font-weight:700;margin-bottom:var(--spacing-sm)">💡 了解更多</div>
+<p style="font-size:14px;color:var(--color-text-secondary);line-height:1.7;margin-bottom:var(--spacing-md)">我是 <span class="text-bold">AI洞察</span>，的AI洞察。AI洞察是系统化追踪AI行业动态的项目，覆盖大模型、AI Coding、AI应用、投融资、企业AI转型五大领域。</p>
+<a href="https://xiaoxiong20260206.github.io/ai-insight-public/" target="_blank" class="footer-btn">🏠 访问AI洞察首页</a>
 <div class="footer-refs">
-<div style="font-size:13px;font-weight:600;color:var(--color-text-primary);margin-bottom:var(--spacing-sm)">参考来源</div>
-<ul style="list-style:none;padding:0;margin:0;font-size:13px">
-<li style="margin-bottom:6px"><a href="https://www.anthropic.com/news/finance-agents" target="_blank">Anthropic官方：Agents for financial services</a></li>
-<li style="margin-bottom:6px"><a href="https://www-cdn.anthropic.com/files/4zrzovbb/website/34783bca828d7fa331f515ced26f1c9232151b2c.pdf" target="_blank">Anthropic实战部署指南PDF</a></li>
-<li style="margin-bottom:6px"><a href="https://www.wsj.com/tech/ai/anthropic-releases-new-ai-agents-for-financial-services-firms-e2829b37" target="_blank">WSJ报道</a></li>
-<li style="margin-bottom:6px"><a href="https://www.reddit.com/r/ClaudeCode/comments/1t4si8f/" target="_blank">Reddit/ClaudeCode社区讨论</a></li>
-<li style="margin-bottom:6px"><a href="https://www.anthropic.com/news/enterprise-ai-services-company" target="_blank">Anthropic+Blackstone+Goldman合资公司</a></li>
-<li style="margin-bottom:6px"><a href="https://www.vals.ai/benchmarks/finance_agent" target="_blank">Vals AI Finance Agent Benchmark</a></li>
-<li style="margin-bottom:6px">财联社AI daily / 纵所周知101 / AI Post Hub / iThome（微信公众号）</li>
+<div style="font-size:13px;font-weight:700;color:var(--color-text-primary);margin-bottom:var(--spacing-sm)">参考来源</div>
+<ul style="list-style:none;padding:0;margin:0;font-size:13px;line-height:1.8">
+<li><a href="https://www.anthropic.com/news/finance-agents" target="_blank">Anthropic官方：Agents for financial services</a></li>
+<li><a href="https://www-cdn.anthropic.com/files/4zrzovbb/website/34783bca828d7fa331f515ced26f1c9232151b2c.pdf" target="_blank">Anthropic实战部署指南PDF</a></li>
+<li><a href="https://www.wsj.com/tech/ai/anthropic-releases-new-ai-agents-for-financial-services-firms-e2829b37" target="_blank">WSJ报道</a></li>
+<li><a href="https://www.anthropic.com/news/enterprise-ai-services-company" target="_blank">Anthropic+Blackstone+Goldman合资公司</a></li>
+<li><a href="https://www.vals.ai/benchmarks/finance_agent" target="_blank">Vals AI Finance Agent Benchmark</a></li>
+<li><a href="https://github.com/anthropics/financial-services" target="_blank">Anthropic金融Agent marketplace</a></li>
+<li>财联社AI daily / 纵所周知101 / AI Post Hub / iThome（微信公众号）</li>
 </ul>
 </div>
 </div>
+
 </div>
-
-<script>
-(function(){
-const tabs=document.querySelectorAll('.tab-btn');
-const sections=document.querySelectorAll('.section');
-
-function switchTab(id){
-tabs.forEach(t=>t.classList.toggle('active',t.dataset.tab===id));
-const target=document.getElementById('sec-'+id);
-if(target){window.scrollTo({top:target.getBoundingClientRect().top+window.scrollY-80,behavior:'smooth'})}
-}
-
-tabs.forEach(btn=>btn.addEventListener('click',()=>switchTab(btn.dataset.tab)));
-
-// Progress bar animation
-const bars=document.querySelectorAll('.bar-fill');
-if('IntersectionObserver'in window&&bars.length){
-const bObs=new IntersectionObserver(entries=>{
-entries.forEach(e=>{
-if(e.isIntersecting){
-const el=e.target;const w=el.dataset.tw||el.style.width||'0%';
-el.style.transition='none';el.style.width='0%';
-setTimeout(()=>{el.style.transition='width 1.2s cubic-bezier(.25,.46,.45,.94)';el.style.width=w},60);
-bObs.unobserve(el);
-}
-},{threshold:.2});
-bars.forEach(b=>{b.dataset.tw=b.style.width||'0%';bObs.observe(b)});
-}
-
-// Scroll spy for tabs
-let ticking=false;
-window.addEventListener('scroll',()=>{
-if(!ticking){requestAnimationFrame(()=>{
-const scrollY=window.scrollY+100;
-let active='overview';
-sections.forEach(s=>{if(s.offsetTop<=scrollY)active=s.id.replace('sec-','')});
-tabs.forEach(t=>t.classList.toggle('active',t.dataset.tab===active));
-ticking=false;
-});ticking=true}
-},{passive:true});
-})();
-</script>
 </body>
 </html>
