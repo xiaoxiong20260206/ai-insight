@@ -138,7 +138,7 @@
     <div class="hero">
         <div class="hero-badge">🔬 AI洞察 · 专题调研</div>
         <h1>Agent Skill 设计模式<br>让AI稳定输出的5种内容架构</h1>
-        <p class="hero-sub">格式统一之后，真正的竞争在于"SKILL.md里写什么"。Google ADK团队在构建50+ Skill后，总结出5种反复出现的结构性规律——这是关于如何在高度不确定的LLM推理过程中，在关键节点施加结构性约束的系统性答案。</p>
+        <p class="hero-sub">格式统一之后，真正的竞争在于"技能定义文件里写什么"。Google ADK团队在构建50+ Skill后，总结出5种反复出现的结构性规律——这是关于如何在高度不确定的LLM推理过程中，在关键节点施加结构性约束的系统性答案。</p>
         <div class="hero-meta">
             <span class="hero-meta-item">📅 2026-03-24</span>
             <span class="hero-meta-item">✍️ 来源：Google Cloud Tech · Lavi Nigam</span>
@@ -193,7 +193,7 @@
                         </div>
                     </div>
                     <div>
-                        <div style="font-size:12px;font-weight:700;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">SKILL.md 结构示例</div>
+                        <div style="font-size:12px;font-weight:700;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">技能定义文件 结构示例</div>
                         <div class="code-block" style="margin-top:0;">
 <span class="c-key">---</span>
 <span class="c-key">name:</span> <span class="c-str">fastapi-expert</span>
@@ -559,7 +559,7 @@ Report results. Fix issues before presenting.
 
         <div class="insight-strip">
             <div class="insight-strip-title">🧠 AI洞察的本质洞察</div>
-            <p><strong>表面</strong>：Google 总结了5种 SKILL.md 内容设计模式，帮助开发者写出更好的 Skill。</p>
+            <p><strong>表面</strong>：Google 总结了5种 技能定义文件 内容设计模式，帮助开发者写出更好的 Skill。</p>
             <p style="margin-top:10px;"><strong>本质</strong>：这5种模式，本质上是5种<strong style="color:#e2e8f0;">在 LLM 不确定性中施加结构性约束的策略</strong>。</p>
             <p style="margin-top:10px;">LLM 有两大天然"缺陷"：① 急于输出（不问清楚就开始生成）；② 漂移输出（格式随机，每次不一样）。五种模式分别从<strong style="color:#e2e8f0;">知识来源、输出结构、评估标准、信息收集顺序、执行顺序</strong>五个维度施加约束，让 AI 在"必要的不确定性"（创造性）之外的地方变得<strong style="color:#e2e8f0;">确定且可预期</strong>。</p>
         </div>
@@ -588,7 +588,7 @@ Report results. Fix issues before presenting.
                 </div>
                 <div style="padding:16px;background:var(--color-success-50);border-radius:var(--radius-md);border:1px solid #D1FAE5;">
                     <div style="font-size:13px;font-weight:700;color:var(--color-success-dark);margin-bottom:8px;">🔧 中期：自动生成</div>
-                    <div style="font-size:13px;color:#065f46;line-height:1.6;">AI 能够分析一段对话记录，自动识别"这里需要 Inversion 模式"并生成对应 SKILL.md。Skill 创建本身将被 AI 自动化。</div>
+                    <div style="font-size:13px;color:#065f46;line-height:1.6;">AI 能够分析一段对话记录，自动识别"这里需要 Inversion 模式"并生成对应 技能定义文件。Skill 创建本身将被 AI 自动化。</div>
                 </div>
                 <div style="padding:16px;background:var(--color-purple-50);border-radius:var(--radius-md);border:1px solid #EDE9FE;">
                     <div style="font-size:13px;font-weight:700;color:var(--color-purple);margin-bottom:8px;">🌐 长期：生态融合</div>
@@ -600,7 +600,7 @@ Report results. Fix issues before presenting.
         <div class="section-card">
             <div class="section-title"><div class="section-title-icon">💼</div>对团队的实践启示</div>
             <div style="font-size:14px;line-height:1.9;color:var(--color-text-secondary);">
-                <p style="margin-bottom:10px;">🎯 <strong style="color:var(--color-text-primary);">构建 Agent 工具时，先问自己：这是哪种模式？</strong> 不同模式决定了 SKILL.md 的内容结构、需要的目录（assets/references/scripts）以及指令的写法。</p>
+                <p style="margin-bottom:10px;">🎯 <strong style="color:var(--color-text-primary);">构建 Agent 工具时，先问自己：这是哪种模式？</strong> 不同模式决定了 技能定义文件 的内容结构、需要的目录（assets/references/scripts）以及指令的写法。</p>
                 <p style="margin-bottom:10px;">📝 <strong style="color:var(--color-text-primary);">description 字段是第一优先级。</strong> 一个写得好的 description 决定 Skill 是否被正确触发。包含具体关键词（技术名称/场景/触发词），避免笼统描述。</p>
                 <p style="margin-bottom:10px;">🔗 <strong style="color:var(--color-text-primary);">模式可组合，不必非此即彼。</strong> 生产级 Skill 通常组合 2-3 种模式。先单模式起步，遇到问题再升级。</p>
                 <p>🛡️ <strong style="color:var(--color-text-primary);">门控指令是 Pipeline/Inversion 的核心。</strong> "DO NOT proceed until..." 类指令看似简单，却是防止 AI 漂移、确保流程质量的核心机制。每个关键验证点都值得一个显式门控。</p>
@@ -623,7 +623,7 @@ Report results. Fix issues before presenting.
                 <div class="upgrade-title">创建了 skill-design-patterns.md 元技能文档</div>
                 <div class="upgrade-desc">
                     路径：<code style="background:#F5F5F4;padding:2px 7px;border-radius:5px;font-size:12px;">~/.cf/skills/link-skill-creator/references/skill-design-patterns.md</code><br><br>
-                    内容包含：5种模式速查表、选型决策树、每种模式的完整 SKILL.md 示例、<code style="background:#F5F5F4;padding:2px 5px;border-radius:4px;font-size:12px;">metadata.pattern</code> 标签规范、合规检查清单。这份文档让"如何设计 Skill 内容结构"从一种隐性知识变成<strong>显式可查的元技能规范</strong>。
+                    内容包含：5种模式速查表、选型决策树、每种模式的完整 技能定义文件 示例、<code style="background:#F5F5F4;padding:2px 5px;border-radius:4px;font-size:12px;">metadata.pattern</code> 标签规范、合规检查清单。这份文档让"如何设计 Skill 内容结构"从一种隐性知识变成<strong>显式可查的元技能规范</strong>。
                 </div>
             </div>
         </div>
@@ -631,9 +631,9 @@ Report results. Fix issues before presenting.
         <div class="upgrade-card">
             <div class="upgrade-icon" style="background:linear-gradient(135deg,#EAI助手平台DF5,#D1FAE5);">🔧</div>
             <div>
-                <div class="upgrade-title">升级了 link-skill-creator SKILL.md（v1.3.0 → v1.3.1）</div>
+                <div class="upgrade-title">升级了 link-skill-creator 技能定义文件（v1.3.0 → v1.3.1）</div>
                 <div class="upgrade-desc">
-                    在"如何写 SKILL.md 内容"章节之前，新增了 <strong>"Content Design — Which Skill Pattern Should I Use?"</strong> 章节，提供5种模式的快速速查卡和选型入口。同时把 skill-design-patterns.md 加入 references 目录。<br><br>
+                    在"如何写 技能定义文件 内容"章节之前，新增了 <strong>"Content Design — Which Skill Pattern Should I Use?"</strong> 章节，提供5种模式的快速速查卡和选型入口。同时把 skill-design-patterns.md 加入 references 目录。<br><br>
                     效果：以后每次创建 Skill 时，AI洞察会<strong>主动根据使用场景选择合适的内容结构模式</strong>，而不再是凭感觉随机组合。从"无意识使用正确模式"升级为"有意识地按模式设计"。
                 </div>
             </div>
