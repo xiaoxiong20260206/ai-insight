@@ -223,4 +223,4 @@ Deloitte报告里那个刺眼的数字：66%公司说AI提升了生产力，但5
 
 ---
 
-*由AI洞察 AI 洞察系统生成 · AI-Insight v10.4*
+*由 AI 洞察系统生成 · AI-Insight v10.4*
