@@ -42,25 +42,80 @@ export:
 | `kim-message-send` | KIM推送 |
 | `upload-cdn` | CDN链接 |
 | `tavily-search` | 海外搜索 |
-| `wechat-articles` | 微信文章 |
 | `quark-search` | 国内搜索 |
-| `sl-ai-insight/reference/kim-doc/` | KIM Doc格式规范 |
 
-## P0红线速查（完整版见 `reference/p0-redlines.md`）
+## P0红线（6条核心红线，脚本自动校验其余）
 
-1. 续接必须先 `resume` — 无例外
-2. KIM卡片必须用脚本生成 — 禁止手写
-3. mixCard只推一次 — 禁止重复
-4. 质量门失败 = 重做 — 禁止绕过
-5. 必须走 orchestrator — 禁止直接 deploy
-6. 6处联动失败 = 阻断
-7. 日报只私发订阅者 — 严禁群发
-8. 外部版禁止 raw cp — 必须走脱敏脚本
+> ⚠️ 只有6条需要Agent自觉遵守。其余校验已内置到脚本（mixCard自校验、HTML校验、首页更新脚本）。
 
-## 踩坑经验（完整见 `reference/lessons-learned.md`）
+### 1. 续接必须先 resume — 无例外
+```bash
+python3 scripts/ai_daily_orchestrator.py resume --date YYYY-MM-DD
+```
 
-高频必读：#36 质量门博弈、#54 联动绕过、#61 KIM退化纯文本、#111 误群发
+### 2. KIM卡片必须用脚本生成 — 禁止手写
+脚本自带6锚点校验+{{message}}扫描+kimMd格式校验，手写=必错。
+```bash
+python3 scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/card.json --with-summary
+```
+
+### 3. mixCard只推一次 — 禁止重复
+preview和正式推送是同一个命令，不要执行两次。
+
+### 4. 质量门硬性失败=重做 — 禁止绕过
+硬性失败（板块缺失/JSON结构错/HTML空壳）必须回到对应步骤重做。
+软性失败（搜狗URL占比/微信链接格式/覆盖度略低）= 警告不阻断。
+
+### 5. 环境前置检查 — 每次执行必做
+```bash
+# 项目目录+Git连通+SSH key
+ls user-skills/sl-ai-insight/.git/HEAD && ssh -o ConnectTimeout=5 -T git@github.com 2>&1 | grep "successfully"
+```
+任何项MISSING = 先恢复环境再执行日报。
+
+### 6. fail loud, don't fail silent
+找不到文件时报错退出，禁止静默降级为空内容兜底卡片。
+
+---
+
+## 脚本自校验清单（Agent不需要手动检查，脚本自动执行）
+
+| 脚本 | 校验项 | 失败时行为 |
+|------|--------|-----------|
+| `build_insight_mixcard.py` | 6锚点完整性 + kimMd格式 + {{message}}扫描 + URL格式 | ❌硬性报错退出 |
+| `gen_daily_html.py` | ≥50KB底线 + 5板块存在 + {{message}}扫描 + overview/深度聚焦存在 | ❌硬性报错退出 |
+| `update_homepage.py` | 内部版+public+索引页包含当天日期 | ❌报错退出 |
+| `daily_quality_gate.py` | 硬性:板块+JSON+HTML; 软性:URL+覆盖+链接 | 硬性阻断/软性警告 |
+
+---
+
+## 推送范围（脚本参数控制，不再靠Agent判断）
+
+| 类型 | 推送范围 | 脚本参数 |
+|------|---------|---------|
+| 日报 | 私发订阅者（禁止群发） | `--scope daily` |
+| 周报 | 发所有群 | `--scope weekly` |
+
+---
+
+## 一次到位执行流程（精简版）
+
+```
+Step 1: 搜索调研 → orchestrator complete --step 1
+Step 2: 内容生成 → orchestrator complete --step 2
+Step 3+4: finalize → orchestrator finalize（自动:质量门→HTML→首页更新→部署→外部同步）
+Step 5: KIM推送 → build_insight_mixcard.py → message(kimMixCard)
+```
+
+> **finalize = 一键命令**，内部自动执行：质量门→HTML生成→首页更新→部署→外部同步→Pages验证。
+
+---
 
 ## 订阅系统
 
 KIM DM「订阅AI日报」/「取消订阅AI日报」→ AGENTS.md订阅协议自动处理。数据：`data/subscribers.json`
+
+## 踩坑经验（归档，不加载）
+
+完整踩坑经验见 `reference/lessons-learned.md`（733行），但**执行时不主动加载**。
+关键教训已内置到脚本校验逻辑中，不需要Agent逐条检索。

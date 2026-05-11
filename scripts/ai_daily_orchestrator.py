@@ -889,41 +889,23 @@ def run_external_sync() -> bool:
         return False  # v9.5: 必须阻断
 
 
-def run_link_homepage_sync() -> bool:
-    """林克首页日报数据同步（v9.5 新增）"""
-    print("\n  📤 Step 4.6: 林克首页日报数据同步...")
-    homepage_scripts = PROJECT_DIR.parent / "scripts"
-    link_homepage = PROJECT_DIR.parent / "link-homepage"
-    
-    if not homepage_scripts.exists():
-        print(f"  ⚠️ 首页脚本目录不存在: {homepage_scripts}")
-        print("     跳过林克首页更新（不阻断）")
-        return True  # 不阻断，因为这是可选依赖
-    
+def run_homepage_update(date: str) -> bool:
+    """首页自动更新（v2.0: 独立脚本，不再耦合在deploy_daily.sh）"""
+    print("\n  🏠 首页更新: index.html + 索引页 + public/")
     try:
-        # Step 1: 生成日报数据
         result = subprocess.run(
-            ["python3", str(homepage_scripts / "generate_daily_report.py")],
-            capture_output=True, text=True, timeout=60, cwd=str(PROJECT_DIR.parent)
-        )
-        if result.returncode != 0:
-            print(f"  ⚠️ 日报数据生成失败: {result.stderr[:200]}")
-            return True  # 不阻断
-        
-        # Step 2: 部署首页
-        result = subprocess.run(
-            ["bash", str(homepage_scripts / "update-homepage.sh"), "auto: 日报联动更新"],
-            capture_output=True, text=True, timeout=180, cwd=str(PROJECT_DIR.parent)
+            ["python3", str(SCRIPT_DIR / "update_homepage.py"), date],
+            capture_output=True, text=True, timeout=60, cwd=str(PROJECT_DIR)
         )
         if result.returncode == 0:
-            print(f"  ✅ 林克首页更新完成")
+            print(f"  ✅ 首页更新完成")
+            return True
         else:
-            print(f"  ⚠️ 林克首页部署警告: {result.stderr[:200]}")
-        
-        return True
+            print(f"  ⚠️ 首页更新失败: {result.stderr[:200]}")
+            return False
     except Exception as e:
-        print(f"  ⚠️ 林克首页更新异常: {e}")
-        return True  # 不阻断
+        print(f"  ⚠️ 首页更新异常: {e}")
+        return False
 
 # ── 命令: push (Step 5) ──────────────────────────────────
 def cmd_push(date: str, preview_only: bool = True) -> bool:
