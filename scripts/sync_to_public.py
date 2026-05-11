@@ -112,6 +112,7 @@ REPLACEMENTS = _URL_REPLACEMENTS + [
     (r'由 <a href="https://github.com/xiaoxiong20260206" target="_blank">[^<]*</a>（[^）]*）负责维护', 'AI洞察 · 持续追踪AI行业动态'),
     (r'由 <a href="https://github.com/xiaoxiong20260206" target="_blank">林克</a>（沈浪的AI分身）负责维护', 'AI洞察 · 持续追踪AI行业动态'),
     (r'由林克（沈浪的AI分身）每日更新', '每日更新'),
+    (r'由林克 AI 洞察系统生成', '由 AI 洞察系统生成'),  # #114: 防止"由AI洞察 AI洞察系统"重复
     
     # ===== 页头Badge =====
     (r'📡 林克的AI洞察项目 - AI日报', '📡 AI行业洞察 - AI日报'),

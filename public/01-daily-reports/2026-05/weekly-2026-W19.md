@@ -31,7 +31,7 @@ Vals AI benchmark显示Claude Opus 4.7得分64.37%（领先GPT-5.5和Gemini 3.1 
 
 > **影响**：Agent商业化的瓶颈不在模型能力，在"能不能安全接入企业数据和流程"。三层架构是domain-agnostic的，金融只是第一个场景，法律/医疗/保险模板会直接复用。Agent从"通用chatbot配行业壳"走向"行业知识×数据×流程打包成可部署单元"——这是产品形态的根本性跃迁。
 
-🔗 [深度调研完整版](https://xiaoxiong20260206.github.io/ai-insight-public/02-deep-research/topics/anthropic-financial-agents-new-org-model.html) · [KIM Doc](https://docs.corp.kuaishou.com/doc/fcABGDPUsCKZZp51dJ66Z8-R7)
+🔗 [深度调研完整版](https://xiaoxiong20260206.github.io/ai-insight-public/02-deep-research/topics/anthropic-financial-agents-new-org-model.html)
 
 ---
 
