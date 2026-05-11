@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{--color-success:#059669;--color-success-light:#10B981;--color-success-dark:#047857;--color-success-50:#EAI助手平台DF5;--color-danger:#E11D48;--color-danger-light:#F43F5E;--color-warning:#D97706;--color-warning-light:#F59E0B;--color-warning-50:#FFFBEB;--color-info:#2563EB;--color-info-light:#3B82F6;--color-info-50:#EFF6FF;--color-purple:#7C3AED;--color-purple-light:#8B5AI助手平台6;--color-purple-50:#F5F3FF;--color-text-primary:#1C1917;--color-text-secondary:#57534E;--color-text-muted:#78716C;--color-border:#E7E5E4;--color-border-light:#F5F5F4;--color-bg:#F8FAFB;--color-bg-card:#FFFFFF;--color-bg-table-header:#FAFAF9;--gradient-success:linear-gradient(135deg,#059669 0%,#10B981 100%);--gradient-hero:linear-gradient(135deg,#059669 0%,#2563EB 50%,#7C3AED 100%);--gradient-badge:linear-gradient(135deg,#EAI助手平台DF5 0%,#EFF6FF 100%);--gradient-mesh:radial-gradient(at 20% 20%,rgba(5,150,105,0.08) 0%,transparent 50%),radial-gradient(at 80% 80%,rgba(37,99,235,0.06) 0%,transparent 50%),radial-gradient(at 50% 50%,rgba(124,58,237,0.04) 0%,transparent 50%);--shadow-xs:0 1px 2px rgba(0,0,0,0.04);--shadow-sm:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);--shadow-card:0 2px 8px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);--shadow-md:0 4px 6px -1px rgba(0,0,0,0.07),0 2px 4px -2px rgba(0,0,0,0.04);--shadow-glow-success:0 4px 14px rgba(5,150,105,0.15);--shadow-hover:0 6px 16px rgba(5,150,105,0.15),0 2px 6px rgba(5,150,105,0.1);--spacing-xs:4px;--spacing-sm:8px;--spacing-md:16px;--spacing-lg:24px;--spacing-xl:32px;--spacing-2xl:40px;--radius-sm:8px;--radius-md:12px;--radius-lg:16px;--radius-xl:20px;--radius-2xl:24px;--radius-full:9999px;--transition-fast:150ms cubic-bezier(.4,0,.2,1);--transition-normal:200ms cubic-bezier(.4,0,.2,1);--content-max-width:980px;--font-family:"Inter",-apple-system,"Noto Sans SC",sans-serif}
+:root{--color-success:#059669;--color-success-light:#10B981;--color-success-dark:#047857;--color-success-50:#ECFDF5;--color-danger:#E11D48;--color-danger-light:#F43F5E;--color-warning:#D97706;--color-warning-light:#F59E0B;--color-warning-50:#FFFBEB;--color-info:#2563EB;--color-info-light:#3B82F6;--color-info-50:#EFF6FF;--color-purple:#7C3AED;--color-purple-light:#8B5CF6;--color-purple-50:#F5F3FF;--color-text-primary:#1C1917;--color-text-secondary:#57534E;--color-text-muted:#78716C;--color-border:#E7E5E4;--color-border-light:#F5F5F4;--color-bg:#F8FAFB;--color-bg-card:#FFFFFF;--color-bg-table-header:#FAFAF9;--gradient-success:linear-gradient(135deg,#059669 0%,#10B981 100%);--gradient-hero:linear-gradient(135deg,#059669 0%,#2563EB 50%,#7C3AED 100%);--gradient-badge:linear-gradient(135deg,#ECFDF5 0%,#EFF6FF 100%);--gradient-mesh:radial-gradient(at 20% 20%,rgba(5,150,105,0.08) 0%,transparent 50%),radial-gradient(at 80% 80%,rgba(37,99,235,0.06) 0%,transparent 50%),radial-gradient(at 50% 50%,rgba(124,58,237,0.04) 0%,transparent 50%);--shadow-xs:0 1px 2px rgba(0,0,0,0.04);--shadow-sm:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);--shadow-card:0 2px 8px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);--shadow-md:0 4px 6px -1px rgba(0,0,0,0.07),0 2px 4px -2px rgba(0,0,0,0.04);--shadow-glow-success:0 4px 14px rgba(5,150,105,0.15);--shadow-hover:0 6px 16px rgba(5,150,105,0.15),0 2px 6px rgba(5,150,105,0.1);--spacing-xs:4px;--spacing-sm:8px;--spacing-md:16px;--spacing-lg:24px;--spacing-xl:32px;--spacing-2xl:40px;--radius-sm:8px;--radius-md:12px;--radius-lg:16px;--radius-xl:20px;--radius-2xl:24px;--radius-full:9999px;--transition-fast:150ms cubic-bezier(.4,0,.2,1);--transition-normal:200ms cubic-bezier(.4,0,.2,1);--content-max-width:980px;--font-family:"Inter",-apple-system,"Noto Sans SC",sans-serif}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:var(--font-family);font-size:15px;line-height:1.65;color:var(--color-text-secondary);background:var(--color-bg);background-image:var(--gradient-mesh);background-attachment:fixed;-webkit-font-smoothing:antialiased}
@@ -171,6 +171,22 @@ a{color:var(--color-info);text-decoration:none}a:hover{text-decoration:underline
 <span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></span>
 <span class="tab-label">10模板</span>
 </button>
+<button class="tab-btn" data-tab="m365">
+<span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><path d="M10 6.5h4M6.5 10v4M17.5 14h-4M14 17.5v-4"/></svg></span>
+<span class="tab-label">M365</span>
+</button>
+<button class="tab-btn" data-tab="ecosystem">
+<span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M12 9L5 7M12 9l7-2M12 15l-7 2M12 15l7 2"/></svg></span>
+<span class="tab-label">数据生态</span>
+</button>
+<button class="tab-btn" data-tab="testimonials">
+<span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+<span class="tab-label">客户证言</span>
+</button>
+<button class="tab-btn" data-tab="competition">
+<span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="6" height="10" rx="1"/><rect x="9" y="4" width="6" height="13" rx="1"/><rect x="16" y="9" width="6" height="8" rx="1"/></svg></span>
+<span class="tab-label">竞争格局</span>
+</button>
 <button class="tab-btn" data-tab="essence">
 <span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0 4 12.9V17h-8v-2.1A7 7 0 0 0 12 2z"/></svg></span>
 <span class="tab-label">本质穿透</span>
@@ -270,11 +286,11 @@ a{color:var(--color-info);text-decoration:none}a:hover{text-decoration:underline
 <div class="section-overview-content">
 <svg viewBox="0 0 600 120" style="max-width:600px">
 <defs><linearGradient id="fg" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#10B981"/></linearGradient></defs>
-<g transform="translate(30,30)"><rect width="120" height="60" rx="8" fill="white" stroke="#E8EAI助手平台0"/><rect width="120" height="4" rx="2" fill="url(#fg)"/><text x="60" y="28" text-anchor="middle" font-size="11" font-weight="600" fill="#059669">数据层</text><text x="60" y="45" text-anchor="middle" font-size="12" fill="#1F2328">16+ connectors</text></g>
+<g transform="translate(30,30)"><rect width="120" height="60" rx="8" fill="white" stroke="#E8ECF0"/><rect width="120" height="4" rx="2" fill="url(#fg)"/><text x="60" y="28" text-anchor="middle" font-size="11" font-weight="600" fill="#059669">数据层</text><text x="60" y="45" text-anchor="middle" font-size="12" fill="#1F2328">16+ connectors</text></g>
 <path d="M155 60 L185 60" stroke="#D0D7DE" stroke-width="2"/><polygon points="185,55 195,60 185,65" fill="#059669"/>
-<g transform="translate(200,30)"><rect width="120" height="60" rx="8" fill="white" stroke="#E8EAI助手平台0"/><rect width="120" height="4" rx="2" fill="#D97706"/><text x="60" y="28" text-anchor="middle" font-size="11" font-weight="600" fill="#D97706">治理层</text><text x="60" y="45" text-anchor="middle" font-size="12" fill="#1F2328">audit log+权限</text></g>
+<g transform="translate(200,30)"><rect width="120" height="60" rx="8" fill="white" stroke="#E8ECF0"/><rect width="120" height="4" rx="2" fill="#D97706"/><text x="60" y="28" text-anchor="middle" font-size="11" font-weight="600" fill="#D97706">治理层</text><text x="60" y="45" text-anchor="middle" font-size="12" fill="#1F2328">audit log+权限</text></g>
 <path d="M325 60 L355 60" stroke="#D0D7DE" stroke-width="2"/><polygon points="355,55 365,60 355,65" fill="#2563EB"/>
-<g transform="translate(370,30)"><rect width="120" height="60" rx="8" fill="white" stroke="#E8EAI助手平台0"/><rect width="120" height="4" rx="2" fill="#2563EB"/><text x="60" y="28" text-anchor="middle" font-size="11" font-weight="600" fill="#2563EB">交付层</text><text x="60" y="45" text-anchor="middle" font-size="12" fill="#1F2328">Excel/PPT/Word</text></g>
+<g transform="translate(370,30)"><rect width="120" height="60" rx="8" fill="white" stroke="#E8ECF0"/><rect width="120" height="4" rx="2" fill="#2563EB"/><text x="60" y="28" text-anchor="middle" font-size="11" font-weight="600" fill="#2563EB">交付层</text><text x="60" y="45" text-anchor="middle" font-size="12" fill="#1F2328">Excel/PPT/Word</text></g>
 <path d="M495 60 L520 60" stroke="#D0D7DE" stroke-width="2"/><polygon points="520,55 530,60 520,65" fill="#7C3AED"/>
 <g transform="translate(535,30)"><rect width="50" height="60" rx="8" fill="white" stroke="#7C3AED" stroke-width="2"/><rect width="50" height="4" rx="2" fill="#7C3AED"/><text x="25" y="28" text-anchor="middle" font-size="11" font-weight="600" fill="#7C3AED">部署</text><text x="25" y="45" text-anchor="middle" font-size="10" fill="#1F2328">2模式</text></g>
 </svg>
@@ -360,6 +376,244 @@ a{color:var(--color-info);text-decoration:none}a:hover{text-decoration:underline
 <tr><td><span class="card-tag tag-blue">后台</span></td><td>Month-end closer</td><td>执行关账清单、准备分录、产出关账报告</td></tr>
 <tr><td><span class="card-tag tag-blue">后台</span></td><td>Statement auditor</td><td>检查财务报表一致性、完整性和审计准备度</td></tr>
 <tr><td><span class="card-tag tag-blue">后台</span></td><td>KYC screener</td><td>组装实体档案、审查源文件、打包合规升级案件</td></tr>
+</tbody>
+</table>
+
+<div class="callout info" style="margin-top:var(--spacing-md)">
+<div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1E40AF" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></div>
+<div><div class="callout-title">两种部署模式</div><strong>Cowork/Code插件模式</strong>：Agent与分析师并肩工作，使用桌面已有软件。给Pitch Agent一个目标名单，就能得到Excel可比模型、PowerPoint pitchbook草稿、Outlook覆盖信。<br><strong>Managed Agent模式</strong>：同一个模板在Claude Platform上自主运行，适合处理整本书的交易或夜间排程。Cookbook提供长会话（数小时）、per-tool权限、managed credential vaults、全量audit log。</div>
+</div>
+
+<div class="callout success">
+<div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#065F46" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+<div><div class="callout-title">核心原则：Users stay in the loop</div>Anthropic反复强调：用户审核、迭代、批准后再提交——Agent不做最终决定。这不是技术限制，是产品设计哲学。金融行业的信任需要逐步建立。</div>
+</div>
+</section>
+
+<!-- 06.5 Microsoft 365 -->
+<section class="section" id="sec-m365">
+<div class="section-num">06.5 · Microsoft 365 深度整合</div>
+<h2 class="section-title">四个场景，一个上下文</h2>
+<div class="section-overview">
+<span class="section-overview-label">章节概览</span>
+<div class="section-overview-content">
+<svg viewBox="0 0 500 120" style="max-width:500px">
+<defs><linearGradient id="m365g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#2563EB"/></linearGradient></defs>
+<g transform="translate(10,30)"><rect width="110" height="60" rx="8" fill="white" stroke="#059669" stroke-width="2"/><text x="55" y="22" text-anchor="middle" font-size="10" font-weight="600" fill="#059669">Excel</text><text x="55" y="38" text-anchor="middle" font-size="11" fill="#1F2328">建模+审计</text><text x="55" y="52" text-anchor="middle" font-size="10" fill="#656D76">敏感性分析</text></g>
+<path d="M125 60 L140 60" stroke="#D0D7DE" stroke-width="2"/>
+<g transform="translate(145,30)"><rect width="110" height="60" rx="8" fill="white" stroke="#2563EB" stroke-width="2"/><text x="55" y="22" text-anchor="middle" font-size="10" font-weight="600" fill="#2563EB">PowerPoint</text><text x="55" y="38" text-anchor="middle" font-size="11" fill="#1F2328">Pitchbook</text><text x="55" y="52" text-anchor="middle" font-size="10" fill="#656D76">自动更新</text></g>
+<path d="M260 60 L275 60" stroke="#D0D7DE" stroke-width="2"/>
+<g transform="translate(280,30)"><rect width="110" height="60" rx="8" fill="white" stroke="#7C3AED" stroke-width="2"/><text x="55" y="22" text-anchor="middle" font-size="10" font-weight="600" fill="#7C3AED">Word</text><text x="55" y="38" text-anchor="middle" font-size="11" fill="#1F2328">信用备忘</text><text x="55" y="52" text-anchor="middle" font-size="10" fill="#656D76">模板合规</text></g>
+<path d="M395 60 L410 60" stroke="#D0D7DE" stroke-width="2"/>
+<g transform="translate(415,30)"><rect width="70" height="60" rx="8" fill="white" stroke="#D97706" stroke-width="2"/><text x="35" y="22" text-anchor="middle" font-size="10" font-weight="600" fill="#D97706">Outlook</text><text x="35" y="38" text-anchor="middle" font-size="11" fill="#1F2328">参谋</text><text x="35" y="52" text-anchor="middle" font-size="10" fill="#656D76">Coming</text></g>
+</svg>
+</div>
+</div>
+<div class="grid-4">
+<div class="card" style="border-top:3px solid var(--color-success)">
+<div class="card-title">📊 Excel — 金融建模引擎</div>
+<div class="card-body">从申报资料和数据源自动建立财务模型，审计跨linked workbook的公式，运行敏感性分析。分析师在Excel里直接与Claude交互——不切换窗口。<br><br><strong>典型用例</strong>：分析师输入目标公司名称，Claude自动从FactSet/S&P拉数据填入模型模板，标记关键假设点，运行3种场景敏感性测试。</div>
+<span class="card-tag tag-green">生产级</span>
+</div>
+<div class="card" style="border-top:3px solid var(--color-info)">
+<div class="card-title">📈 PowerPoint — 自动Pitchbook</div>
+<div class="card-body">起草deck，当底层数据变化时自动更新图表。Excel里建的模型，到PPT自动转成可视化——不需要手动复制粘贴。<br><br><strong>典型用例</strong>：Pitch builder Agent产出comps表格（Excel）+公司概况页（PowerPoint）+覆盖信草稿（Outlook），一次任务三份产出。</div>
+<span class="card-tag tag-blue">生产级</span>
+</div>
+<div class="card" style="border-top:3px solid var(--color-purple)">
+<div class="card-title">📝 Word — 信用备忘合规编辑</div>
+<div class="card-body">按公司自有模板编辑信用备忘。Claude理解公司格式要求和审批流程，自动填入数据、检查合规性。<br><br><strong>典型用例</strong>：Valuation reviewer Agent产出估值报告（Word），按公司内部review standard格式排版，标注需要人工审核的关键假设。</div>
+<span class="card-tag tag-purple">生产级</span>
+</div>
+<div class="card" style="border-top:3px solid var(--color-warning)">
+<div class="card-title">📬 Outlook — 首席参谋（Coming Soon）</div>
+<div class="card-body">分拣邮件、安排会议、用你的语气草拟回复。会议准备Agent把客户简报+对手方分析推到你的inbox。<br><br><strong>典型用例</strong>：Meeting preparer Agent把客户背景+最新财报+行业动态打包成会议简报，Outlook提醒你明天10点有call。</div>
+<span class="card-tag tag-amber">Beta</span>
+</div>
+</div>
+<div class="callout purple">
+<div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#5B21B6" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0 4 12.9V17h-8v-2.1A7 7 0 0 0 12 2z"/></svg></div>
+<div><div class="callout-title">上下文跨应用延续</div>核心创新不是"Claude能在Excel/PPT/Word里干活"，是<strong>上下文自动延续</strong>。分析师在Excel里建的模型，不需要到PPT里重新解释——Claude自动理解上下文。这是从"AI辅助每个应用"到"AI串联整个工作流"的质变。</div>
+</div>
+<div class="callout info">
+<div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1E40AF" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></div>
+<div><div class="callout-title">Dispatch — 离开桌面也能指挥</div>Claude Cowork新增Dispatch功能：通过文字或语音从任何地方分配任务给Claude。分析师离开办公桌后Claude继续处理本地文件，回来时已完成待审核。这是"AI员工"概念的落地——不是需要你盯着才干活。</div>
+</div>
+</section>
+
+<!-- 06.8 Data Ecosystem -->
+<section class="section" id="sec-ecosystem">
+<div class="section-num">06.8 · 数据生态：16+ Connector + Moody's MCP</div>
+<h2 class="section-title">Agent的数据基础设施</h2>
+<div class="section-overview">
+<span class="section-overview-label">章节概览</span>
+<div class="section-overview-content">
+<svg viewBox="0 0 600 160" style="max-width:600px">
+<defs><linearGradient id="ecog" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#10B981"/></linearGradient><linearGradient id="mcpg" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#7C3AED"/><stop offset="100%" stop-color="#8B5CF6"/></linearGradient></defs>
+<g transform="translate(50,10)"><rect width="500" height="40" rx="6" fill="url(#ecog)"/><text x="250" y="25" text-anchor="middle" font-size="13" font-weight="600" fill="white">8个新Connector + 8个原有Connector = 16+</text></g>
+<g transform="translate(50,60)"><rect width="240" height="40" rx="6" fill="#E6F7ED" stroke="#059669"/><text x="120" y="25" text-anchor="middle" font-size="12" font-weight="500" fill="#059669">Connectors · 受控数据接入</text></g>
+<g transform="translate(310,60)"><rect width="240" height="40" rx="6" fill="#F5F3FF" stroke="#7C3AED"/><text x="120" y="25" text-anchor="middle" font-size="12" font-weight="500" fill="#7C3AED">MCP App · 嵌入式交互</text></g>
+<g transform="translate(100,110)"><rect width="400" height="40" rx="6" fill="#EFF6FF" stroke="#2563EB"/><text x="200" y="25" text-anchor="middle" font-size="12" font-weight="500" fill="#2563EB">企业数据仓库 + 研究库 + CRM + 内部系统</text></g>
+</svg>
+</div>
+</div>
+<div class="callout info">
+<div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1E40AF" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></div>
+<div><div class="callout-title">Connector vs MCP App 的区别</div><strong>Connector</strong>：给Claude governed、实时数据访问——类似员工获得系统权限，只能读数据。<br><strong>MCP App</strong>：更进一步，把数据提供商自己的工具直接嵌入Claude——类似员工不仅有权限，还能用对方的完整工作台。Moody's MCP app不仅提供评级数据，还提供交互式UI，让分析师在Claude里直接操作Moody's的分析界面。</div>
+</div>
+<h3 style="font-size:16px;font-weight:700;color:var(--color-text-primary);margin:var(--spacing-lg) 0 var(--spacing-md)">新增8个Connector详解</h3>
+<div class="grid-2">
+<div class="card" style="border-top:3px solid var(--color-success)">
+<div class="card-title">Dun & Bradstreet — 企业身份验证</div>
+<div class="card-body">全球商业身份验证标准，D-U-N-S® Number体系。Agent在KYC和合规场景下需要"确认我正在和谁打交道"——D&B的Commercial Graph确保Agent基于验证数据运作，产出可审计的确定性结果。<br><strong>场景</strong>：KYC screener Agent用D&B验证实体身份，合规场景要求100%确定性。</div>
+<span class="card-tag tag-green">合规刚需</span>
+</div>
+<div class="card" style="border-top:3px solid var(--color-info)">
+<div class="card-title">Fiscal AI — 实时基本面覆盖</div>
+<div class="card-body">扩展公开股票的实时基本面覆盖。从季度财报到盈利预测，分析师做可比公司分析时需要实时更新的基本面数据。<br><strong>场景</strong>：Model builder Agent从Fiscal AI获取目标公司最新基本面，自动更新模型假设。</div>
+<span class="card-tag tag-blue">研究增强</span>
+</div>
+<div class="card" style="border-top:3px solid var(--color-purple)">
+<div class="card-title">Financial Modeling Prep — 全品类实时数据</div>
+<div class="card-body">覆盖股票、ETF、加密、外汇、商品的实时报价+基本面+报表+文件+逐字稿。金融行业最全面的数据接入之一。<br><strong>场景</strong>：Market researcher Agent从FMP获取多品类数据，构建跨市场行业动态简报。</div>
+<span class="card-tag tag-purple">全品类</span>
+</div>
+<div class="card" style="border-top:3px solid var(--color-warning)">
+<div class="card-title">Guidepoint — 10万+合规专家访谈</div>
+<div class="card-body">搜索100,000+合规审核过的专家访谈逐字稿，提供带来源链接的原始摘录。一级研究(primary research)的AI化。<br><strong>场景</strong>：Earnings reviewer Agent用Guidepoint获取行业专家对季度财报的点评，标记关键观点变化。</div>
+<span class="card-tag tag-amber">一级研究</span>
+</div>
+<div class="card" style="border-top:3px solid var(--color-success)">
+<div class="card-title">IBISWorld — 行业级分析</div>
+<div class="card-body">数千个行业的收入、金融比率、风险评分、成本结构、预测。从宏观行业视角补充公司级数据。<br><strong>场景</strong>：Pitch builder Agent用IBISWorld行业数据构建目标行业概览页。</div>
+<span class="card-tag tag-green">行业视角</span>
+</div>
+<div class="card" style="border-top:3px solid var(--color-info)">
+<div class="card-title">SS&C Intralinks — 数据室</div>
+<div class="card-body">DealCenter AI数据室，支持文档搜索、尽职调查Q&A、交易活动追踪。PE/M&A场景的核心工具。<br><strong>场景</strong>：Pitch builder Agent从Intralinks数据室搜索目标公司尽职调查文件。</div>
+<span class="card-tag tag-blue">M&A专用</span>
+</div>
+<div class="card" style="border-top:3px solid var(--color-purple)">
+<div class="card-title">Third Bridge — 专家访谈平台</div>
+<div class="card-body">公司与行业价值链的一手专家访谈。Guidepoint提供逐字稿，Third Bridge提供实时访谈预约。<br><strong>场景</strong>：Market researcher Agent通过Third Bridge获取行业专家对特定公司的最新见解。</div>
+<span class="card-tag tag-purple">实时访谈</span>
+</div>
+<div class="card" style="border-top:3px solid var(--color-warning)">
+<div class="card-title">Verisk — 保险数据</div>
+<div class="card-body">财产、意外险、特种保险数据。承保、理赔、风险分析。保险行业AI Agent的专用数据源。<br><strong>场景</strong>：Statement auditor Agent用Verisk数据对保险公司的理赔报告做交叉验证。</div>
+<span class="card-tag tag-amber">保险专用</span>
+</div>
+</div>
+<h3 style="font-size:16px;font-weight:700;color:var(--color-text-primary);margin:var(--spacing-lg) 0 var(--spacing-md)">Moody's MCP App — 6亿+企业信用评级</h3>
+<div class="card" style="border-left:4px solid var(--color-purple);max-width:100%">
+<div class="card-title">Moody's MCP App：把评级机构嵌入Claude</div>
+<div class="card-body">
+<p style="margin-bottom:var(--spacing-md)">这是Anthropic数据生态里最重要的一个——不是connector（只读数据），而是MCP app（嵌入交互式工具）。</p>
+<table class="table" style="margin-top:var(--spacing-md)">
+<thead><tr><th>维度</th><th>Connector</th><th>MCP App (Moody's)</th></tr></thead>
+<tbody>
+<tr><td>数据获取</td><td>受控读取数据</td><td>受控读取+交互式操作</td></tr>
+<tr><td>交互方式</td><td>API查询</td><td>嵌入式UI，分析师在Claude里直接操作</td></tr>
+<tr><td>数据覆盖</td><td>取决于provider</td><td>6亿+ 公开+非公开企业信用评级</td></tr>
+<tr><td>适用场景</td><td>研究/建模</td><td>合规/信用分析/业务拓展</td></tr>
+<tr><td>审计追踪</td><td>有</td><td>有+操作日志</td></tr>
+</tbody>
+</table>
+<p style="margin-top:var(--spacing-md)"><strong>关键判断</strong>：Moody's MCP app是一个信号——数据供应商正在从"卖数据"变成"卖Agent生态嵌入"。这个趋势会扩散。FactSet/S&P/PitchBook未来都可能出MCP app。</p>
+</div>
+</div>
+</section>
+
+<!-- 06.9 Customer Testimonials -->
+<section class="section" id="sec-testimonials">
+<div class="section-num">06.9 · 客户证言分析</div>
+<h2 class="section-title">谁在用，为什么选Claude</h2>
+<div class="grid-3">
+<div class="card" style="border-top:3px solid var(--color-danger)">
+<div class="card-title">FIS — 金融基础设施</div>
+<div class="card-body">"当我们开始建AI agents，需要一个可信赖的provider。Anthropic是明确的选择。一起建AML调查Agent——从数天压缩到数分钟。信用决策、反欺诈、存款留存Agent紧随其后。FIS客户不需要自建基础设施——已经在这里了。"<br><br><strong>选择理由</strong>：金融基础设施公司需要确定性+审计追踪，Claude的治理层是最强卖点。</div>
+<span class="card-tag tag-red">基础设施级</span>
+</div>
+<div class="card" style="border-top:3px solid var(--color-info)">
+<div class="card-title">Carlyle — PE巨头</div>
+<div class="card-body">"Carlyle选择Claude作为AI技术栈关键部分——强编码能力、agent推理、模型和关键功能的持续进步。从投资到运营到portfolio管理，交付价值。"<br><br><strong>选择理由</strong>：PE公司需要覆盖全业务链的AI——前台研究+后台运营，Claude的三层架构正好匹配。</div>
+<span class="card-tag tag-blue">全链覆盖</span>
+</div>
+<div class="card" style="border-top:3px solid var(--color-success)">
+<div class="card-title">Walleye Capital — 100%全员采用</div>
+<div class="card-body">"400人hedge fund里100%员工用Claude Code。这个采纳水平反映了AI-first心态——我们期望每个人不断重新思考工作方式，总是在问'AI怎么帮我做这件事'——无论是不是技术岗。"<br><br><strong>选择理由</strong>：Hedge fund对速度和信息优势极度敏感，Claude Code的AI-first哲学与他们的文化完全对齐。</div>
+<span class="card-tag tag-green">全员采用</span>
+</div>
+</div>
+<div class="grid-2" style="margin-top:var(--spacing-md)">
+<div class="card" style="border-top:3px solid var(--color-purple)">
+<div class="card-title">Morningstar + PitchBook — 研究数据巨头</div>
+<div class="card-body">"投资者需要可信赖的AI——信任始于数据。Morningstar和PitchBook把几十年的独立、分析师支撑的智能带给Claude。用户不仅得到更快答案，而是更好答案。一起建设驱动更聪明决策的智能层。"<br><br><strong>选择理由</strong>：数据供应商选择Claude意味着数据质量和AI推理能力的双重信任。</div>
+<span class="card-tag tag-purple">数据+AI融合</span>
+</div>
+<div class="card" style="border-top:3px solid var(--color-warning)">
+<div class="card-title">FactSet — 数据接入平台化</div>
+<div class="card-body">"客户越来越想在AI辅助工作流里直接使用FactSet数据。与Anthropic合作把Claude带入托管编程环境——在已有工具里推理我们的基础市场数据、研究和分析。内部全组织Claude Code采纳加速了这些能力的交付速度。"<br><br><strong>选择理由</strong>：数据平台化——不是卖数据给AI公司，是把AI嵌入自己的数据生态。</div>
+<span class="card-tag tag-amber">平台化</span>
+</div>
+</div>
+<div class="callout success" style="margin-top:var(--spacing-md)">
+<div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#065F46" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+<div><div class="callout-title">证言揭示了三个选择模式</div><strong>1. 治理优先</strong>（FIS）：金融基础设施选确定性+审计<br><strong>2. 全链覆盖</strong>（Carlyle/Walleye）：从前台到后台，一个AI覆盖全部<br><strong>3. 数据+AI融合</strong>（Morningstar/FactSet）：数据供应商把AI嵌入自己的生态——这会改变数据行业的商业模式</div>
+</div>
+</section>
+
+<!-- 06.95 Competition + Glossary -->
+<section class="section" id="sec-competition">
+<div class="section-num">06.95 · 竞争格局 + 技术词汇表</div>
+<h2 class="section-title">Anthropic vs OpenAI vs Google</h2>
+<div class="section-overview">
+<span class="section-overview-label">章节概览</span>
+<div class="section-overview-content">
+<svg viewBox="0 0 500 100" style="max-width:500px">
+<g transform="translate(10,10)"><rect width="150" height="80" rx="10" fill="white" stroke="#059669" stroke-width="3"/><text x="75" y="35" text-anchor="middle" font-size="14" font-weight="700" fill="#059669">Anthropic</text><text x="75" y="55" text-anchor="middle" font-size="10" fill="#656D76">整车+合资</text></g>
+<g transform="translate(175,10)"><rect width="150" height="80" rx="10" fill="white" stroke="#2563EB" stroke-width="2"/><text x="75" y="35" text-anchor="middle" font-size="14" font-weight="700" fill="#2563EB">OpenAI</text><text x="75" y="55" text-anchor="middle" font-size="10" fill="#656D76">发动机+生态</text></g>
+<g transform="translate(340,10)"><rect width="150" height="80" rx="10" fill="white" stroke="#D97706" stroke-width="2"/><text x="75" y="35" text-anchor="middle" font-size="14" font-weight="700" fill="#D97706">Google</text><text x="75" y="55" text-anchor="middle" font-size="10" fill="#656D76">平台+自研</text></g>
+</svg>
+</div>
+</div>
+<table class="table">
+<thead><tr><th>维度</th><th>Anthropic</th><th>OpenAI</th><th>Google</th></tr></thead>
+<tbody>
+<tr><td><strong>产品形态</strong></td><td>整车：行业模板×数据×治理打包</td><td>发动机+改装件：GPT+Copilot生态</td><td>平台+自研：Gemini+内部整合</td></tr>
+<tr><td><strong>数据生态</strong></td><td>16+ connector + MCP app（Moody's 6亿+企业）</td><td>Copilot生态（Microsoft数据）+ChatGPT插件</td><td>Google搜索+内部数据（广告/地图/YouTube）</td></tr>
+<tr><td><strong>部署模式</strong></td><td>Cowork插件 + Managed Agent（双模式）</td><td>API + Copilot嵌入 + ChatGPT workspace</td><td>Vertex AI + Gemini整合Google Workspace</td></tr>
+<tr><td><strong>治理能力</strong></td><td>per-tool权限 + credential vaults + audit log（最完整）</td><td>ChatGPT Team权限 + API rate limits</td><td>Vertex IAM + 数据驻留选项</td></tr>
+<tr><td><strong>行业覆盖</strong></td><td>金融先行（10模板），法律/医疗/保险待跟进</td><td>通用（无行业垂直模板）</td><td>广告/搜索先行，其他行业弱</td></tr>
+<tr><td><strong>商业化路径</strong></td><td>合资公司（Blackstone+Goldman）</td><td>渠道合作（Microsoft）</td><td>内部自研+外部API</td></tr>
+<tr><td><strong>Benchmark领先</strong></td><td>Claude Opus 4.7 = 64.37%（金融Agent benchmark第一）</td><td>GPT-5.5 = 59.96%</td><td>Gemini 3.1 Pro = 59.72%</td></tr>
+</tbody>
+</table>
+
+<div class="callout success" style="margin-top:var(--spacing-md)">
+<div class="callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#065F46" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+<div><div class="callout-title">关键差异</div>Anthropic的差异化不是"模型更强"（只领先5个百分点），而是<strong>整车交付+治理完整+合资绑定</strong>。金融行业选Claude不是因为64.37%比59.96%好，是因为整个合规+审计+数据接入+行业知识的打包交付。模型差距是量变，组织方式是质变。</div>
+</div>
+
+<h3 style="font-size:16px;font-weight:700;color:var(--color-text-primary);margin:var(--spacing-xl) 0 var(--spacing-md)">技术词汇表</h3>
+<table class="table">
+<thead><tr><th>术语</th><th>定义</th><th>金融场景</th></tr></thead>
+<tbody>
+<tr><td><strong>Skill file</strong></td><td>领域知识+指令定义文件。简单用Markdown写，高级可执行脚本。定义触发条件和工作流步骤。</td><td>风控政策、建模规范、合规审批流程注入Agent</td></tr>
+<tr><td><strong>Connector</strong></td><td>受控数据接入。给Agent governed访问外部数据源的能力，有权限管控和审计。</td><td>接入FactSet/S&P/Morningstar等16+金融数据源</td></tr>
+<tr><td><strong>Subagent</strong></td><td>主Agent调用的子模型。处理专门子任务（可比公司筛选、方法论校验）。</td><td>Pitch builder调subagent做comps筛选</td></tr>
+<tr><td><strong>MCP App</strong></td><td>Model Context Protocol应用。不只是读数据，是把provider的交互式工具嵌入Claude。</td><td>Moody's MCP app在Claude里直接操作评级界面</td></tr>
+<tr><td><strong>Managed Agent</strong></td><td>Claude Platform上自主运行的Agent。长会话+自动排程+credential vaults+audit log。</td><td>Month-end closer Agent夜间自主执行关账</td></tr>
+<tr><td><strong>Cowork plugin</strong></td><td>Claude Cowork/Code里与分析师并肩工作的Agent插件模式。</td><td>Pitch builder在分析师桌面Excel/PPT里工作</td></tr>
+<tr><td><strong>Credential vault</strong></td><td>受控凭证管理。Agent不直接持有密码，通过vault安全访问。</td><td>Agent访问FactSet需凭证，vault代管</td></tr>
+<tr><td><strong>Audit log</strong></td><td>全量操作日志。合规和工程团队可检查每个tool call和决策。</td><td>金融监管要求每步可追溯</td></tr>
+<tr><td><strong>Per-tool permission</strong></td><td>每个工具独立权限控制。不是"Agent有/没有权限"，是"Agent可以读FactSet但不能写Jira"。</td><td>KYC screener可读D&B但不可修改CRM</td></tr>
+<tr><td><strong>Dispatch</strong></td><td>Claude Cowork功能，通过文字/语音从任何地方分配任务。离开桌面后Claude继续工作。</td><td>分析师通勤时语音分配Earnings review任务</td></tr>
+<tr><td><strong>Reference architecture</strong></td><td>模板架构定义。Skills+Connectors+Subagents的完整打包——不是10个prompt，是可部署的行业方案。</td><td>10个金融Agent模板都是reference architecture</td></tr>
+<tr><td><strong>Comps model</strong></td><td>可比公司分析模型。金融行业前台核心工作——找相似公司做估值对比。</td><td>Pitch builder Agent自动建comps table</td></tr>
+<tr><td><strong>NAV calculation</strong></td><td>净资产值计算。对账总账后确认基金净值。</td><td>GL reconciler Agent自动算NAV</td></tr>
+<tr><td><strong>KYC escalation</strong></td><td>KYC合规升级案件。Agent审查后标记需要人工合规审核的实体。</td><td>KYC screener打包合规升级案件</td></tr>
+<tr><td><strong>Close checklist</strong></td><td>月结关账清单。金融后台月度例行工作——检查分录、调整、确认。</td><td>Month-end closer Agent执行关账清单</td></tr>
 </tbody>
 </table>
 </section>

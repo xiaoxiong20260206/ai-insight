@@ -425,7 +425,7 @@ const taskData = {
                         agent: 'Chatbot',
                         tech: 'LLM',
                         products: ['ChatGPT', 'Perplexity', 'Coursera'],
-                        example: 'AI助手平台A学习、Python编程'
+                        example: 'CFA学习、Python编程'
                     },
                     {
                         id: 'task-market-learning',
@@ -999,7 +999,7 @@ function renderNetworkGraph() {
         .attr('id', 'agent-gradient')
         .attr('x1', '0%').attr('y1', '0%')
         .attr('x2', '100%').attr('y2', '100%');
-    agentGradient.append('stop').attr('offset', '0%').attr('stop-color', '#8B5AI助手平台6');
+    agentGradient.append('stop').attr('offset', '0%').attr('stop-color', '#8B5CF6');
     agentGradient.append('stop').attr('offset', '100%').attr('stop-color', '#C4B5FD');
     
     // 产品渐变
