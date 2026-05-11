@@ -1,0 +1,205 @@
+# AI洞察输出格式公共规范 (v1.0)
+
+> **版本**: v1.0 (2026-05-11)
+> **原则**: 三种输出（HTML网页/KIM卡片/KIM Doc）的公共规范统一在此文件。每个子技能只写差异化部分。
+> **使用**: 所有子技能（日报/周报/深度调研）生成输出前，先读此文件了解公共规范，再读对应子技能的差异化部分。
+
+---
+
+## 一、HTML网页公共规范
+
+### 1.1 视觉风格
+
+所有AI洞察HTML统一使用**清爽调研风格 v5.0**：
+
+- 基色：白底(#FFFFFF) + 灰文字(#57534E) + 绿强调(#059669)
+- 卡片阴影：`0 2px 8px rgba(31,35,40,.06)`
+- 圆角：14px（区块）/ 999px（按钮）
+- 渐变按钮：绿 `linear-gradient(135deg,#059669 0%,#10B981 100%)`
+- 字体：系统字体栈 `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif`
+- 最大宽度：`var(--content-max-width)` 或 `960px`
+
+CSS模板：`templates/daily-report-v3.css`（日报/周报共用）
+
+### 1.2 底部"了解更多"模块（P0强制）
+
+**所有HTML页面底部必须包含此模块，格式统一**：
+
+```html
+<div style="max-width:var(--content-max-width);margin:0 auto;padding:16px 20px 48px;">
+<div style="background:linear-gradient(135deg,#F8FAFB 0%,#EEF2F6 100%);
+  border:1px solid #E7E5E4;border-radius:14px;padding:24px;
+  box-shadow:0 2px 8px rgba(31,35,40,.06)">
+  <div style="font-size:16px;font-weight:700;margin-bottom:8px">💡 了解更多</div>
+  <p style="font-size:14px;color:#57534E;line-height:1.7;margin:0 0 12px 0">
+    我是 <strong>林克</strong>，沈浪的AI分身。AI洞察是系统化追踪AI行业动态的项目，
+    覆盖大模型、AI Coding、AI应用、AI行业投融资、企业AI转型五大领域。
+  </p>
+  <a href="https://xiaoxiong20260206.github.io/ai-insight/" target="_blank"
+    style="display:inline-flex;padding:8px 16px;
+    background:linear-gradient(135deg,#059669,#10B981);
+    color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none">
+    🏠 访问AI洞察首页
+  </a>
+</div>
+</div>
+```
+
+| 页面类型 | 模块内容 | 差异 |
+|---------|---------|------|
+| 日报 | 林克介绍 + 首页按钮 | 无相关资源 |
+| 周报 | 林克介绍 + 首页按钮 | 无相关资源 |
+| 深度调研 | 林克介绍 + 首页按钮 + 参考来源列表 | 有相关资源 |
+
+### 1.3 文件大小底线
+
+- **所有HTML ≥50KB**（50000字节）。低于此 = 内容缺失，禁止推送
+- 验证命令：`wc -c <file>.html`
+
+### 1.4 超链接规则
+
+- 所有来源/引用必须有 `<a href="URL" target="_blank">文字</a>` 格式
+- 禁止纯文字来源列（无URL = 不可追溯）
+- 禁止 `docs.corp.kuaishou.com` 内部链接出现在任何HTML中
+- 外部版深度调研链接文案="深度调研"，不加"完整版"（暗示有内部版本）
+
+### 1.5 禁止项
+
+- ❌ 禁止 {{message}} / {{...}} 占位符出现在HTML中
+- ❌ 禁止 `docs.corp.kuaishou.com` 内部链接
+- ❌ 禁止外部版含"林克/沈浪/快手/Kuaishou"等敏感词（由sync_to_public.py脱敏）
+
+---
+
+## 二、KIM MixCard 公共规范
+
+### 2.1 卡片骨架（所有类型共享）
+
+```json
+{
+  "config": {"forward": true, "forwardType": 3, "wideSelfAdaptive": true},
+  "updateMulti": 1,
+  "blocks": [...]
+}
+```
+
+### 2.2 六锚点（所有类型必须有）
+
+| 锚点 | blockId | type | 说明 |
+|------|---------|------|------|
+| header | "header" | content | `# 📡/📊/📚/🧠 标题` |
+| subtitle | "subtitle" | content | 覆盖范围/板块数简述 |
+| footer | "footer" | content | `*林克（沈浪的AI分身）· AI洞察 · 类型*` |
+| buttons | "buttons" | action | 绿按钮(当期内容) + 蓝按钮(了解AI洞察项目) |
+
+> ⚠️ 缺少任何一个锚点 = `build_insight_mixcard.py` 自动报错退出
+
+### 2.3 kimMd格式规则
+
+- **所有content block的text必须是 `{"type": "kimMd", "content": "..."}` object**
+- ❌ 禁止纯字符串text（必导致卡片渲染异常）
+- ❌ 禁止 `{{message}}` / `{{...}}` 占位符
+- ❌ 禁止发送MixCard时传 `message` 字段（会导致 {{message}} 泄露）
+
+### 2.4 卡片内容原则
+
+- **结论先行**：每个板块一句话结论 + 关键判断，不是MD全文搬运
+- **深度聚焦≤200字**：截断后加 "..."
+- **关键判断不截断**：`**关键判断**：...` 必须完整保留
+- **10屏纯文本 = 禁止**：卡片是入口不是全文
+
+### 2.5 按钮URL规范
+
+- 绿按钮：当期内容HTML链接（如 `01-daily-reports/2026-05/2026-05-11.html`）
+- 蓝按钮：AI洞察首页 `https://xiaoxiong20260206.github.io/ai-insight/`
+- URL必须以 `http` 开头
+- ❌ 禁止404 URL（由脚本 `--verify-urls` 自动校验）
+
+### 2.6 推送P0红线
+
+- MixCard只用 `build_insight_mixcard.py` 生成，❌禁止手写
+- mixCard只推一次
+- 发MixCard时不传 `message` 字段
+- 群发必须用 `target: "space:<groupId>"` 格式
+- API报错后先去群确认是否收到，❌不要立即重试
+
+| 类型 | 推送范围 | 禁止 |
+|------|---------|------|
+| 日报 | 私发订阅者 | ❌群发 |
+| 周报 | 发所有群 | 正常 |
+| 深度调研 | 私发/按需 | 按需 |
+
+---
+
+## 三、KIM Doc 公共规范
+
+### 3.1 文章结构（所有类型共享）
+
+```
+00 全文概览（2-3句话总结核心结论）
+01-X 各章节（每章独立标题+论证+数据支撑+来源链接）
+最后 林克彩蛋/了解更多
+```
+
+详细规范见 `reference/kim-doc/kim-doc.md` 和 `reference/kim-doc/writing-style.md`
+
+### 3.2 格式规范
+
+- 标题格式：`【林克的AI洞察】<主标题>`
+- 来源标注：每个关键论点后标注 `[来源]`
+- 禁止内部链接：❌ `docs.corp.kuaishou.com`
+- 字数范围：3000-8000字（专题类）/ 8000-15000字（深度调研类）
+
+### 3.3 写作风格（所有类型共享）
+
+- **刻刀与画笔**：先删减噪声（刻刀），再增添洞察（画笔）
+- **知行合一**：每个结论必须有"对你意味着什么"的行动建议
+- **隐喻建造**：复杂概念用日常类比解释
+- 详见 `reference/kim-doc/writing-style.md`
+
+---
+
+## 四、各子技能差异化部分
+
+| 维度 | 日报 | 周报 | 深度调研 |
+|------|------|------|---------|
+| **HTML结构** | 5板块Tab切换+热度趋势+明日关注+林克自述 | Top5卡片+周度洞察+日报索引+词汇表+宏观叙事 | 8步论证结构+竞争格局+案例+行动建议 |
+| **HTML模板** | `templates/daily-report-v3.css/js` | 清爽调研风格（手动生成） | 清爽调研风格（手动生成） |
+| **HTML≥50KB补充** | 已内置充分 | 词汇表+宏观叙事 | 案例扩充+数据表格 |
+| **MixCard标题** | `# 📡 AI 日报（日期，星期）` | `# 📊 AI 周报（年第N周，日期范围）` | `# 📚 深度调研·标题` / `# 🧠 AI产品本质研究` |
+| **MixCard板块** | 热度趋势+5板块(动态+深度聚焦+关键判断)+林克自述 | Top5+周度洞察+林克洞察 | 核心结论+趋势+原理+来源(可参数化) |
+| **MixCard按钮1** | `📄 查看完整日报 >>` | `📄 查看完整周报 >>` | `📄 查看完整报告 >>` |
+| **MixCard按钮1URL** | `01-daily-reports/YYYY-MM/YYYY-MM-DD.html` | `01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html` | `02-deep-research/<slug>.html` |
+| **KIM Doc触发** | 不生成 | 按需 | 按需（用户明确要求时） |
+| **KIM Doc字数** | - | 3000-5000 | 8000-15000 |
+| **底部模块** | 简化版(无相关资源) | 简化版(无相关资源) | 完整版(含参考来源) |
+
+---
+
+## 五、外部版脱敏规则
+
+所有外部版（ai-insight-public/）必须脱敏，由 `sync_to_public.py` 自动执行：
+
+| 内部词 | 外部词 | 适用范围 |
+|--------|--------|---------|
+| 林克 | AI洞察 | 首页署名/页脚/介绍 |
+| 沈浪 | （删除） | 身份介绍 |
+| 快手 | 某公司 | 机构名 |
+| Kuaishou | Company | 英文机构名 |
+| CodeFlicker | AI IDE | 产品名 |
+| KATE | Agent平台 | 产品名 |
+| 天策 | 数据平台 | 产品名 |
+| 天玑 | 数据分析平台 | 产品名 |
+| KwaiBI | BI平台 | 产品名 |
+| 小无相功 | 自进化体系 | 方法论名 |
+| MyFlicker/myflicker | AI洞察/ai-insight | 平台名 |
+| AI分身 | AI洞察 | 身份描述 |
+| 让我负责 | （删除） | 身份暗示 |
+| link-avatar | ai-insight-logo | 头像文件名 |
+
+> ⚠️ "CF"、"SKILL.md"、"林克"（在CSS类名/文件名中）不是敏感词，不应误报。
+> 内部版(public/)包含"林克"是正确行为，不应被敏感词检查误杀。
+
+---
+
+_更新于 2026-05-11 · v1.0 · 三种输出的公共规范首次统一_
