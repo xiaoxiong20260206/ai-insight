@@ -337,6 +337,16 @@
             color: var(--color-text-secondary);
         }
         
+        .tab-btn:focus-visible {
+            outline: 2px solid var(--color-success);
+            outline-offset: 3px;
+            box-shadow: 0 0 0 5px rgba(5, 150, 105, 0.12);
+        }
+
+        :focus:not(:focus-visible) {
+            outline: none;
+        }
+
         .tab-btn.active {
             background: var(--gradient-success);
             color: #fff;
@@ -344,8 +354,21 @@
             font-weight: 600;
         }
         
-        .tab-btn-icon {
-            font-size: 18px;
+        .tab-icon {
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tab-icon svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .tab-label {
+            font-size: 14px;
         }
         
         .tab-panel {
@@ -1654,7 +1677,7 @@
             background: rgba(124, 58, 237, 0.06);
         }
         
-        .ai-insight-logo {
+        .link-avatar {
             font-size: 12px;
         }
         
@@ -2052,13 +2075,20 @@
             }
             
             .tab-btn {
-                padding: 10px 12px;
-                font-size: 13px;
-            }
-            
-            .tab-btn-text {
-                display: none;
-            }
+            padding: 10px 12px;
+            font-size: 13px;
+            min-height: 44px;
+            touch-action: manipulation;
+        }
+        
+        .tab-label {
+            display: none;
+        }
+        
+        .tab-icon svg {
+            width: 20px;
+            height: 20px;
+        }
             
             .section {
                 padding: var(--spacing-md);
@@ -2080,13 +2110,13 @@
         <!-- Header -->
         <header class="header">
             <div style="text-align:center; margin-bottom:16px;">
-                <img src="ai-insight-logo.webp" alt="AI洞察头像" style="width:72px; height:72px; border-radius:50%; border:2px solid rgba(5,150,105,0.3); box-shadow:0 2px 12px rgba(5,150,105,0.15); object-fit:cover;">
+                <img src="link-avatar-small.webp" alt="林克头像" style="width:72px; height:72px; border-radius:50%; border:2px solid rgba(5,150,105,0.3); box-shadow:0 2px 12px rgba(5,150,105,0.15); object-fit:cover;">
             </div>
             <div class="header-badge">
                 <span>🔬</span>
-                <span>AI行业洞察</span>
+                <span>林克的AI洞察</span>
             </div>
-            <h1 class="header-title">我是AI洞察，这是AI洞察项目</h1>
+            <h1 class="header-title">我是林克，这是沈浪让我负责的AI洞察项目</h1>
             <p class="header-subtitle">
                 系统化追踪AI行业动态，每日/每周输出调研洞察，帮助你保持对AI行业的全局视野
             </p>
@@ -2367,7 +2397,7 @@
                                     <span class="tc-tag topic">专题</span>
                                     <span class="tc-tag" style="background:#FEF2F2;color:#E11D48;">最新</span>
                                 </div>
-                                <div class="tc-desc">Skills+Connectors+Subagents三层架构、整车而非发动机、64.37%成绩与警告、Blackstone+Goldman合资——Agent商业化的新组织方式，以及对某公司AI生产力战役的行动建议</div>
+                                <div class="tc-desc">Skills+Connectors+Subagents三层架构、整车而非发动机、64.37%成绩与警告、Blackstone+Goldman合资——Agent商业化的新组织方式，以及对快手AI生产力战役的行动建议</div>
                                 <div class="tc-meta">📅 2026-05-10 · Anthropic · 金融Agent</div>
                             </a>
                             <a href="02-deep-research/topics/anthropic-product-velocity.html" target="_blank" class="timeline-card cat-topic">
@@ -2431,7 +2461,7 @@
                                     <span class="tc-title">元技能体系：让你越练越强的系统</span>
                                     <span class="tc-tag topic">专题</span>
                                 </div>
-                                <div class="tc-desc">先讲自然规律，再看AI洞察实现——人的训练成长系统×18个元技能组件×每日自动进化，复利不是口号，是可工程化的规律</div>
+                                <div class="tc-desc">先讲自然规律，再看林克实现——人的训练成长系统×18个元技能组件×每日自动进化，复利不是口号，是可工程化的规律</div>
                                 <div class="tc-meta">📅 2026-04-06 · 能力体系</div>
                             </a>
                             <a href="02-deep-research/topics/colleague-skill-anti-distill-2026.html" target="_blank" class="timeline-card cat-topic">
@@ -2561,7 +2591,7 @@
                                     <span class="tc-title">Agent Skill 设计模式</span>
                                     <span class="tc-tag topic">专题</span>
                                 </div>
-                                <div class="tc-desc">Google ADK团队总结的5种技能定义文件内容模式：Tool Wrapper/Generator/Reviewer/Inversion/Pipeline</div>
+                                <div class="tc-desc">Google ADK团队总结的5种SKILL.md内容模式：Tool Wrapper/Generator/Reviewer/Inversion/Pipeline</div>
                                 <div class="tc-meta">📅 2026-03-24 · Agent设计</div>
                             </a>
                             <a href="02-deep-research/topics/ai-product-essence-2026.html" target="_blank" class="timeline-card cat-topic">
@@ -3459,37 +3489,37 @@
                                 </div>
                                 <div class="foundation-items">
                                     <a href="04-knowledge-base/entity-profiles/people/barry-zhang.md" target="_blank" class="foundation-link">
-                                        <span class="ai-insight-logo">👤</span>
+                                        <span class="link-avatar">👤</span>
                                         <span class="link-name">Barry Zhang</span>
                                         <span class="link-org">Anthropic</span>
                                     </a>
                                     <a href="04-knowledge-base/entity-profiles/people/shunyu-yao.md" target="_blank" class="foundation-link">
-                                        <span class="ai-insight-logo">👤</span>
+                                        <span class="link-avatar">👤</span>
                                         <span class="link-name">姚顺雨</span>
                                         <span class="link-org">OpenAI</span>
                                     </a>
                                     <a href="04-knowledge-base/entity-profiles/people/harrison-chase.md" target="_blank" class="foundation-link">
-                                        <span class="ai-insight-logo">👤</span>
+                                        <span class="link-avatar">👤</span>
                                         <span class="link-name">Harrison Chase</span>
                                         <span class="link-org">LangChain</span>
                                     </a>
                                     <a href="04-knowledge-base/entity-profiles/people/jim-fan.md" target="_blank" class="foundation-link">
-                                        <span class="ai-insight-logo">👤</span>
+                                        <span class="link-avatar">👤</span>
                                         <span class="link-name">Jim Fan</span>
                                         <span class="link-org">NVIDIA</span>
                                     </a>
                                     <a href="04-knowledge-base/entity-profiles/people/andrej-karpathy.md" target="_blank" class="foundation-link">
-                                        <span class="ai-insight-logo">👤</span>
+                                        <span class="link-avatar">👤</span>
                                         <span class="link-name">Andrej Karpathy</span>
                                         <span class="link-org">前OpenAI</span>
                                     </a>
                                     <a href="04-knowledge-base/entity-profiles/people/simon-willison.md" target="_blank" class="foundation-link">
-                                        <span class="ai-insight-logo">👤</span>
+                                        <span class="link-avatar">👤</span>
                                         <span class="link-name">Simon Willison</span>
                                         <span class="link-org">Django</span>
                                     </a>
                                     <a href="04-knowledge-base/entity-profiles/people/addy-osmani.md" target="_blank" class="foundation-link">
-                                        <span class="ai-insight-logo">👤</span>
+                                        <span class="link-avatar">👤</span>
                                         <span class="link-name">Addy Osmani</span>
                                         <span class="link-org">Google</span>
                                     </a>
@@ -3579,8 +3609,8 @@
         <!-- Footer -->
         <footer class="footer">
             <div style="margin-bottom:12px;">
-                <img src="ai-insight-logo.webp" alt="AI洞察" style="width:40px; height:40px; border-radius:50%; border:1.5px solid rgba(5,150,105,0.3); object-fit:cover; vertical-align:middle; margin-right:8px;">
-                <strong>AI洞察</strong> · AI洞察
+                <img src="link-avatar-small.webp" alt="林克" style="width:40px; height:40px; border-radius:50%; border:1.5px solid rgba(5,150,105,0.3); object-fit:cover; vertical-align:middle; margin-right:8px;">
+                <strong>林克</strong> · 沈浪的AI分身
             </div>
             <div class="footer-brand">
                 <span>🔬</span>

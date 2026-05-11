@@ -337,6 +337,16 @@
             color: var(--color-text-secondary);
         }
         
+        .tab-btn:focus-visible {
+            outline: 2px solid var(--color-success);
+            outline-offset: 3px;
+            box-shadow: 0 0 0 5px rgba(5, 150, 105, 0.12);
+        }
+
+        :focus:not(:focus-visible) {
+            outline: none;
+        }
+
         .tab-btn.active {
             background: var(--gradient-success);
             color: #fff;
@@ -344,8 +354,21 @@
             font-weight: 600;
         }
         
-        .tab-btn-icon {
-            font-size: 18px;
+        .tab-icon {
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tab-icon svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .tab-label {
+            font-size: 14px;
         }
         
         .tab-panel {
@@ -2052,13 +2075,20 @@
             }
             
             .tab-btn {
-                padding: 10px 12px;
-                font-size: 13px;
-            }
-            
-            .tab-btn-text {
-                display: none;
-            }
+            padding: 10px 12px;
+            font-size: 13px;
+            min-height: 44px;
+            touch-action: manipulation;
+        }
+        
+        .tab-label {
+            display: none;
+        }
+        
+        .tab-icon svg {
+            width: 20px;
+            height: 20px;
+        }
             
             .section {
                 padding: var(--spacing-md);
