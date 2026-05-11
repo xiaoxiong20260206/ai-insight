@@ -610,13 +610,6 @@ def cmd_finalize(date: str) -> bool:
     mark_step(date, "validate", "completed")
     print("  ✅ Step 3 完成")
 
-    # --- Step 3.5: 首页自动更新（v2.0: 独立于deploy，HTML生成后立即执行）---
-    # 根因：首页更新耦合在deploy_daily.sh里 → deploy失败时首页不更新 → 用户404
-    print("\n📋 Step 3.5: 首页自动更新")
-    home_ok = run_homepage_update(date)
-    if not home_ok:
-        print("  ⚠️ 首页更新失败（不阻断，deploy后可再次尝试）")
-
     # --- Step 4: 部署发布 ---
     print("\n📋 Step 4: 部署发布")
     mark_step(date, "deploy", "in_progress")
@@ -626,13 +619,33 @@ def cmd_finalize(date: str) -> bool:
         mark_step(date, "deploy", "failed", error="部署失败")
         return False
 
-    # --- Step 4.5: 外部版同步 ---
-    print("\n  ⚡ Step 4.5: 外部版同步...")
-    sync_ok = run_external_sync()
-    if not sync_ok:
-        mark_step(date, "deploy", "failed", error="外部版同步失败")
-        print("\n🚫 外部版同步失败，finalize 中止。")
-        return False
+    # --- Step 4.5 + 4.6: 外部版同步 & 林克首页 — v9.8: 并行化（两者完全独立）---
+    print("\n  ⚡ Step 4.5+4.6: 外部版同步 & 林克首页同步（并行执行）...")
+    from concurrent.futures import ThreadPoolExecutor as _TPE, as_completed as _ac
+    
+    sync_ok = False
+    home_ok = True  # 首页同步不阻断
+    
+    with _TPE(max_workers=2) as _executor:
+        fut_sync = _executor.submit(run_external_sync)
+        fut_home = _executor.submit(run_link_homepage_sync)
+        
+        # 等待两者完成（最长等 sync_to_external 的 timeout）
+        for fut in _ac([fut_sync, fut_home], timeout=200):
+            try:
+                fut.result()
+            except Exception as _e:
+                print(f"  ⚠️ 并行任务异常: {_e}")
+        
+        try:
+            sync_ok = fut_sync.result()
+        except Exception as _e:
+            print(f"  ❌ 外部版同步异常: {_e}")
+            sync_ok = False
+        try:
+            home_ok = fut_home.result()
+        except Exception:
+            home_ok = True  # 不阻断
     
     if not sync_ok:
         mark_step(date, "deploy", "failed", error="外部版同步失败")

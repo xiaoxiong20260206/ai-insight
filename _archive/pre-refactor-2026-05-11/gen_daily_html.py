@@ -686,74 +686,51 @@ def main():
 
     # ============ 关键板块渲染完整性验证 ============
     warnings = []
-    hard_errors = []
 
-    import re as _re
-
-    # 0. HTML文件大小底线 — <50KB = 空壳/严重缺失
-    if len(html) < 50000:
-        hard_errors.append(f"❌ [致命] HTML仅 {len(html):,} chars (<50KB底线)，内容严重缺失")
-    
-    # 0.1 {{message}}占位符扫描 — 禁止泄露到HTML
-    if "{{message}}" in html or "{{" in html and _re.search(r'\{\{[^}]+\}\}', html):
-        placeholders = _re.findall(r'\{\{[^}]+\}\}', html)
-        for p in placeholders:
-            hard_errors.append(f"❌ [致命] HTML中发现模板占位符 '{p}'，禁止在渲染输出中使用")
+    import re as _re  # 后置完整性检查公共 import（v9.13 fix: 移至块外避免 UnboundLocalError）
 
     # 1. 验证"明日/下周值得关注"板块是否渲染（有内容）
     if "明日/下周值得关注" not in html:
-        warnings.append("⚠️ [警告] '明日/下周值得关注'板块未渲染 — 检查watch_list/preview_events字段")
+        warnings.append("❌ [关键] '明日/下周值得关注'板块未渲染 — 检查watch_list/preview_events字段格式")
     else:
+        # 检查板块内是否有实际条目内容
         section_match = _re.search(r"明日/下周值得关注(.*?)(?:了解更多|</div>\s*</div>\s*<div style=\"margin-top:24px)", html, _re.DOTALL)
         if section_match and len(section_match.group(1)) < 100:
-            warnings.append("⚠️ [警告] '明日/下周值得关注'板块内容疑似为空")
+            warnings.append("⚠️ [警告] '明日/下周值得关注'板块内容疑似为空，请检查渲染输出")
 
     # 2. 验证5个Tab板块都有内容
-    tab_checks = [("大模型", "llm"), ("AI Coding", "coding"),
-                  ("AI 应用", "app"), ("AI 行业", "industry"), ("企业转型", "enterprise")]
-    tab_present = 0
+    tab_checks = [("大模型", "foundation"), ("AI Coding", "coding"),
+                  ("AI 应用", "application"), ("AI 行业", "industry"), ("企业转型", "enterprise")]
     for tab_name, tab_id in tab_checks:
-        if f'id="{tab_id}"' in html:
-            tab_present += 1
-            m = _re.search(f'id="{tab_id}"(.*?)id="[a-z]', html, _re.DOTALL)
-            if m and len(m.group(1)) < 500:
-                warnings.append(f"⚠️ [警告] Tab '{tab_name}' 内容疑似为空")
-        else:
-            hard_errors.append(f"❌ [关键] Tab '{tab_name}' 完全缺失(id={tab_id})")
-    if tab_present < 3:
-        hard_errors.append(f"❌ [致命] 仅 {tab_present}/5 个板块渲染，内容严重不足")
+        pattern = f'id="{tab_id}".*?class="tab-panel'
+        m = _re.search(f'id="{tab_id}"(.*?)id="[a-z]', html, _re.DOTALL)
+        if m and len(m.group(1)) < 500:
+            warnings.append(f"⚠️ [警告] Tab '{tab_name}' 内容疑似为空")
 
     # 3. 验证overview板块
     if "overview-headline" not in html:
-        hard_errors.append("❌ [关键] '全文概览'板块未渲染")
+        warnings.append("❌ [关键] '全文概览'板块未渲染 — 检查overview字段")
 
     # 4. 验证热度趋势
     if "heat-trend" not in html and "热度趋势" not in html:
-        warnings.append("⚠️ [警告] 烦度趋势板块未渲染")
+        warnings.append("⚠️ [警告] 热度趋势板块未渲染 — 检查heat_trend字段")
 
-    # 5. 验证深度聚焦
+    # 5. 验证深度聚焦 (v9.14 — 每个tab必须有)
     if "deep-focus-card" not in html and "deep-focus-header" not in html:
-        hard_errors.append("❌ [关键] 深度聚焦(deep_focus)未渲染")
+        warnings.append("❌ [关键] 深度聚焦(deep_focus)未渲染 — 每个tab必须有deep_focus字段，请检查JSON数据")
 
-    # 6. 验证规律洞察
+    # 6. 验证规律洞察 (v9.14 — 每个tab必须有)
     if "pi-card" not in html:
-        warnings.append("⚠️ [警告] 规律洞察未渲染")
+        warnings.append("❌ [关键] 规律洞察(pattern_insight_html)未渲染 — 每个tab必须有pattern_insight_html字段，请检查JSON数据")
 
-    # ══ 结果输出 ══
-    if hard_errors:
-        print()
-        print("🚫 HTML校验硬性失败（不可推送）：")
-        for e in hard_errors:
-            print(f"   {e}")
-        print("   → 请检查JSON数据，修复后重新生成")
-        sys.exit(1)
     if warnings:
         print()
-        print("⚠️  HTML渲染完整性检查发现软性警告：")
+        print("⚠️  渲染完整性检查发现问题：")
         for w in warnings:
             print(f"   {w}")
+        print("   → 请检查JSON数据格式，确保字段名和数据结构符合模板要求")
     else:
-        print("   ✅ HTML校验通过: ≥50KB + 5板块完整 + 无{{message}}占位符 + overview/深度聚焦正常")
+        print("   ✅ 渲染完整性检查通过（所有关键板块正常）")
 
 
 if __name__ == "__main__":

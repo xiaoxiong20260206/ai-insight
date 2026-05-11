@@ -23,14 +23,13 @@ AI洞察 mixCard JSON 统一生成器
 - 输出不含 appKey（由 message 工具的 kimMixCard 机制处理，不走 KIM API）
 
 作者: 林克 (沈浪的AI分身)
-版本: 2.0.0 (2026-05-11: 新增6锚点自校验+URL可达性验证+{{message}}扫描+kimMd格式校验)
+版本: 1.0.0 (2026-04-29: 统一日报/周报/深度调研/产品本质)
 """
 import argparse
 import json
 import re
 import sys
-import urllib.request
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
 
 WEEKDAYS = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
@@ -43,10 +42,6 @@ PROJECT_URL = f"{INTERNAL_BASE}/"
 
 # 统一卡片骨架配置
 CARD_CONFIG = {"forward": True, "forwardType": 3, "wideSelfAdaptive": True}
-
-# ══ 6锚点定义（所有卡片类型必须包含） ══
-ANCHOR_NAMES = ["header", "subtitle", "footer", "buttons"]
-ANCHOR_TYPES = {"header": "content", "subtitle": "content", "footer": "content", "buttons": "action"}
 
 
 def _divider(block_id: str) -> dict:
@@ -113,6 +108,7 @@ def build_daily(date_str: str) -> dict:
         heat_lines = [f"🔥 **热度趋势**（{heat_title}）", ""]
         for i, t in enumerate(raw_items[:6]):
             rank = rank_icons[i] if i < len(rank_icons) else f"{i+1}️⃣"
+            # 旧格式用name+days, 新格式用title+rank+trend
             name = t.get("name", "") or t.get("title", "")
             days = t.get("days", 0)
             trend_class = t.get("trend_class", "") or t.get("trend", "")
@@ -122,6 +118,10 @@ def build_daily(date_str: str) -> dict:
                 heat_lines.append(f"- {rank} **{name}** — {days}天 {trend_icon}")
             else:
                 heat_lines.append(f"- {rank} **{name}** {trend_icon}")
+            if signal:
+                heat_lines.append(f"  → {signal}")
+            signal = t.get("signal", "")
+            heat_lines.append(f"- {rank} **{name}** — {days}天 {trend_icon}")
             if signal:
                 heat_lines.append(f"  → {signal}")
 
@@ -229,6 +229,7 @@ def build_weekly(week_id: str) -> dict:
         week_num = date_obj.isocalendar()[1]
 
     # 计算周日期范围
+    from datetime import timedelta
     monday = datetime.strptime(f"{year}-W{week_num:02d}-1", "%G-W%V-%u")
     sunday = monday + timedelta(days=6)
     date_range = f"{monday.strftime('%m/%d')}-{sunday.strftime('%m/%d')}"
@@ -414,79 +415,6 @@ def build_product_essence() -> dict:
     return {"config": CARD_CONFIG, "updateMulti": 1, "blocks": blocks}
 
 
-# ============ 自校验系统 ============
-
-def validate_card(card: dict, scenario: str) -> list[str]:
-    """校验 mixCard JSON 的完整性。返回错误列表，空=通过。
-    
-    校验项:
-    1. 6锚点存在性: header/subtitle/footer/buttons 必须存在
-    2. kimMd 格式: content block 的 text 必须是 {"type": "kimMd", "content": "..."} object
-    3. {{message}} 占位符扫描: kimMd content 中禁止包含 {{...}}
-    4. URL可达性: 按钮 URL 必须 HTTP 200 (可跳过)
-    """
-    errors = []
-    blocks = card.get("blocks", [])
-    block_ids = [b.get("blockId", "") for b in blocks]
-    block_types = {b.get("blockId", ""): b.get("type", "") for b in blocks}
-    
-    # 1. 锚点存在性检查
-    for anchor in ANCHOR_NAMES:
-        if anchor not in block_ids:
-            errors.append(f"❌ 缺少锚点: {anchor}")
-        elif ANCHOR_TYPES.get(anchor) and block_types.get(anchor) != ANCHOR_TYPES[anchor]:
-            errors.append(f"❌ 锚点 {anchor} 类型错误: 期望 {ANCHOR_TYPES[anchor]}, 实际 {block_types.get(anchor)}")
-    
-    # 2. kimMd 格式检查 — 所有 content block 的 text 必须是 kimMd object
-    for b in blocks:
-        if b.get("type") == "content" and "text" in b:
-            text = b["text"]
-            if isinstance(text, str):
-                errors.append(f"❌ block {b.get('blockId', '?')}: text 是纯字符串，必须是 {'type':'kimMd','content':'...'} object")
-            elif isinstance(text, dict):
-                if text.get("type") != "kimMd":
-                    errors.append(f"❌ block {b.get('blockId', '?')}: text.type={text.get('type')}, 必须是 kimMd")
-                content = text.get("content", "")
-                # 3. {{message}} 占位符扫描
-                placeholders = re.findall(r'\{\{[^}]+\}\}', content)
-                for p in placeholders:
-                    errors.append(f"❌ block {b.get('blockId', '?')}: 发现模板占位符 '{p}'，禁止在 kimMd 中使用")
-    
-    # 4. 按钮URL格式检查（不做HTTP验证，太慢）
-    for b in blocks:
-        if b.get("type") == "action":
-            for act in b.get("actions", []):
-                url = act.get("url", "")
-                if not url:
-                    errors.append(f"❌ 按钮 '{act.get('text', {}).get('content', '?')}' 缺少 url")
-                elif not url.startswith("http"):
-                    errors.append(f"❌ 按钮 URL 格式错误: {url}")
-    
-    return errors
-
-
-def validate_card_with_url_check(card: dict, scenario: str) -> list[str]:
-    """完整校验 = 结构校验 + 按钮 URL HTTP 可达性验证"""
-    errors = validate_card(card, scenario)
-    
-    # 按钮 URL HTTP 可达性验证
-    for b in card.get("blocks", []):
-        if b.get("type") == "action":
-            for act in b.get("actions", []):
-                url = act.get("url", "")
-                if url and url.startswith("http"):
-                    try:
-                        req = urllib.request.Request(url, method="HEAD")
-                        req.add_header('User-Agent', 'MyFlicker-MixCard-Validator/2.0')
-                        resp = urllib.request.urlopen(req, timeout=10)
-                        if resp.status >= 400:
-                            errors.append(f"⚠️ 按钮 URL 不可达: {url} (HTTP {resp.status})")
-                    except Exception:
-                        errors.append(f"⚠️ 按钮 URL 验证失败(可能网络波动): {url}")
-    
-    return errors
-
-
 # ============ 入口 ============
 
 def build_summary(scenario: str, date_str: str = "") -> str:
@@ -512,7 +440,6 @@ def main():
     parser.add_argument("--slug", help="深度调研 slug (如 ai-下半场)")
     parser.add_argument("--output", "-o", help="输出文件路径")
     parser.add_argument("--with-summary", action="store_true", help="输出 {card, summary}")
-    parser.add_argument("--verify-urls", action="store_true", help="校验按钮URL可达性(HTTP 200)")
     args = parser.parse_args()
 
     try:
@@ -534,43 +461,15 @@ def main():
         print(f"❌ {e}", file=sys.stderr)
         sys.exit(1)
 
-    # ══ 自校验（所有卡片生成后必须通过） ══
-    errors = validate_card(card, args.scenario)
-    hard_errors = [e for e in errors if e.startswith("❌")]
-    soft_errors = [e for e in errors if e.startswith("⚠️")]
-    if hard_errors:
-        print("🚫 MixCard 校验失败:", file=sys.stderr)
-        for e in hard_errors:
-            print(f"  {e}", file=sys.stderr)
-        sys.exit(1)
-    if soft_errors:
-        print("⚠️ MixCard 存在软性警告:", file=sys.stderr)
-        for e in soft_errors:
-            print(f"  {e}", file=sys.stderr)
-    if not errors:
-        print("✅ MixCard 校验通过: 6锚点完整 + kimMd格式正确 + 无{{message}}占位符")
-
-    # URL可达性验证（可选，--verify-urls 时执行）
-    if args.verify_urls:
-        url_errors = validate_card_with_url_check(card, args.scenario)
-        url_warnings = [e for e in url_errors if e.startswith("⚠️")]
-        if url_warnings:
-            for w in url_warnings:
-                print(f"  {w}")
-
     out = {"card": card, "summary": summary} if args.with_summary else card
     out_str = json.dumps(out, ensure_ascii=False, indent=2)
 
     if args.output:
         with open(args.output, "w", encoding="utf-8") as f:
             f.write(out_str)
-        # 输出生成摘要
-        n_blocks = len(card.get("blocks", []))
-        anchor_status = "✅ 6锚点完整" if not hard_errors else "❌ 锚点缺失"
         print(f"✅ mixCard已生成: {args.output}")
         print(f"   大小: {len(out_str)} chars ({len(out_str)/1024:.1f}KB)")
-        print(f"   Blocks: {n_blocks}")
-        print(f"   校验: {anchor_status}")
+        print(f"   Blocks: {len(card['blocks'])}")
         print(f"   Summary: {summary}")
     else:
         print(out_str)
