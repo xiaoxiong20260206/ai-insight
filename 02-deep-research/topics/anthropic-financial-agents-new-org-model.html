@@ -4,10 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Anthropic 金融 Agent：一套新组织方式 | AI洞察深度调研</title>
-<meta name="description" content="Skills+Connectors+Subagents三层架构、Microsoft 365整合、16+数据connector与Moody's MCP、64.37% benchmark、合资公司模式——深度解读Agent背后的新组织方式。">
+<meta name="description" content="Skills+Connectors+Subagents三层架构、Microsoft 365整合、16+数据connector、64.37% benchmark。">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23059669'/><path d='M8 22V12l4 6 4-8 4 5 4-7v14H8z' fill='none' stroke='white' stroke-width='2'/></svg>">
 <style>
-
 :root{--color-success:#059669;--color-success-light:#10B981;--color-success-dark:#047857;--color-success-50:#ECFDF5;--color-danger:#E11D48;--color-danger-light:#F43F5E;--color-warning:#D97706;--color-warning-light:#F59E0B;--color-warning-50:#FFFBEB;--color-info:#2563EB;--color-info-light:#3B82F6;--color-info-50:#EFF6FF;--color-purple:#7C3AED;--color-purple-light:#8B5CF6;--color-purple-50:#F5F3FF;--color-text-primary:#1C1917;--color-text-secondary:#57534E;--color-text-muted:#78716C;--color-border:#E7E5E4;--color-border-light:#F5F5F4;--color-bg:#F8FAFB;--color-bg-card:#FFFFFF;--color-bg-table-header:#FAFAF9;--gradient-success:linear-gradient(135deg,#059669 0%,#10B981 100%);--gradient-hero:linear-gradient(135deg,#059669 0%,#2563EB 50%,#7C3AED 100%);--gradient-badge:linear-gradient(135deg,#ECFDF5 0%,#EFF6FF 100%);--gradient-highlight:linear-gradient(135deg,rgba(5,150,105,0.08) 0%,rgba(5,150,105,0.03) 100%);--gradient-mesh:radial-gradient(at 20% 20%,rgba(5,150,105,0.08) 0%,transparent 50%),radial-gradient(at 80% 80%,rgba(37,99,235,0.06) 0%,transparent 50%),radial-gradient(at 50% 50%,rgba(124,58,237,0.04) 0%,transparent 50%);--shadow-xs:0 1px 2px rgba(0,0,0,0.04);--shadow-sm:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);--shadow-card:0 2px 8px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);--shadow-md:0 4px 6px -1px rgba(0,0,0,0.07),0 2px 4px -2px rgba(0,0,0,0.04);--shadow-lg:0 10px 15px -3px rgba(0,0,0,0.08),0 4px 6px -4px rgba(0,0,0,0.04);--shadow-glow-success:0 4px 14px rgba(5,150,105,0.15);--shadow-hover:0 6px 16px rgba(5,150,105,0.15),0 2px 6px rgba(5,150,105,0.1);--spacing-xs:4px;--spacing-sm:8px;--spacing-md:16px;--spacing-lg:24px;--spacing-xl:32px;--spacing-2xl:40px;--radius-sm:8px;--radius-md:12px;--radius-lg:16px;--radius-xl:20px;--radius-full:9999px;--font-family:-apple-system,"SF Pro Display","system-ui","Segoe UI","Noto Sans SC",Helvetica,Arial,sans-serif;--transition-fast:150ms cubic-bezier(.4,0,.2,1);--transition-normal:200ms cubic-bezier(.4,0,.2,1);--content-max-width:980px}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -63,27 +62,134 @@ tbody tr:hover{background:rgba(0,0,0,0.02)}
 .footer-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--gradient-success);color:#fff;border-radius:var(--radius-full);font-size:13px;font-weight:700;text-decoration:none;transition:all var(--transition-fast);margin-top:var(--spacing-sm)}
 .footer-btn:hover{box-shadow:var(--shadow-glow-success);transform:translateY(-1px)}
 .footer-refs{border-top:1px solid var(--color-border);padding-top:var(--spacing-md);margin-top:var(--spacing-md)}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+/* ===== Sidebar Layout ===== */
+:root { --sidebar-width: 240px; }
+.layout-wrapper { display: flex; min-height: 100vh; }
+.sidebar-nav {
+    width: var(--sidebar-width);
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    background: #fff;
+    border-right: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    padding: 24px 0 16px;
+    transition: transform 280ms ease, width 280ms ease;
+    z-index: 10;
+}
+.sidebar-nav.sidebar-collapsed { transform: translateX(calc(-1 * var(--sidebar-width))); }
 
-@media(prefers-reduced-motion:reduce){*,*::before,*::a<a class="skip-to-content" href="#main-content">跳到主内容</a>
+.sidebar-doc-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0 18px 12px;
+    border-bottom: 1px solid var(--color-border-light);
+    margin-bottom: 8px;
+}
+
+.toc-section { padding: 4px 0; }
+
+.toc-link {
+    display: block;
+    padding: 6px 18px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    border-right: 2px solid transparent;
+    transition: color 150ms ease, background 150ms ease, border-color 150ms ease;
+    line-height: 1.4;
+}
+.toc-link:hover { color: var(--color-info); background: var(--color-info-50); }
+.toc-link.toc-active { color: var(--color-info); border-right-color: var(--color-info); background: var(--color-info-50); font-weight: 600; }
+.toc-link.toc-sub { padding-left: 30px; font-size: 12px; color: var(--color-text-muted); }
+.toc-link.toc-sub.toc-active { color: var(--color-info); }
+
+.reading-progress-wrap {
+    margin-top: auto;
+    padding: 16px 18px 8px;
+    border-top: 1px solid var(--color-border-light);
+}
+.reading-progress-label {
+    font-size: 11px;
+    color: var(--color-text-muted);
+    margin-bottom: 6px;
+}
+.reading-progress-track {
+    height: 4px;
+    background: var(--color-border);
+    border-radius: 2px;
+    overflow: hidden;
+}
+.reading-progress-fill {
+    height: 100%;
+    background: var(--color-info);
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.1s linear;
+}
+
+/* ===== Collapse Button ===== */
+.sidebar-collapse-btn {
+    position: fixed;
+    left: calc(var(--sidebar-width) - 12px);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 48px;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 0 6px 6px 0;
+    cursor: pointer;
+    font-size: 12px;
+    color: var(--color-text-muted);
+    z-index: 20;
+    transition: left 280ms ease, background 150ms;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sidebar-collapse-btn:hover { background: var(--color-info-50); color: var(--color-info); }
+.sidebar-collapse-btn.collapsed-pos { left: 0; 
+.content-area {
+    flex: 1;
+    min-width: 0;
+    padding: 32px 40px 80px;
+    overflow: hidden;
+}
+@media (max-width: 900px) {
+    .sidebar-nav { transform: translateX(calc(-1 * var(--sidebar-width))); }
+    .sidebar-collapse-btn { left: 0; }
+    .content-area { padding: 24px 16px 64px; }
+}
+</style>
+</head>
+<body>
+<a class="skip-to-content" href="#main-content">跳到主内容</a>
 <div class="layout-wrapper">
-
 <nav class="sidebar-nav" id="sidebar" aria-label="目录导航">
     <div class="sidebar-doc-title">AI洞察 · 深度调研</div>
     <div class="toc-section">
-        <a href="#sec-01" class="toc-link">01 研究概述</a>
-        <a href="#sec-02" class="toc-link">02 三层架构</a>
-        <a href="#sec-03" class="toc-link">03 Skill 对照</a>
-        <a href="#sec-04" class="toc-link">04 全链路</a>
-        <a href="#sec-05" class="toc-link">05 Benchmark</a>
-        <a href="#sec-06" class="toc-link">06 合资信号</a>
-        <a href="#sec-07" class="toc-link">07 10个模板</a>
-        <a href="#sec-08" class="toc-link">08 M365整合</a>
-        <a href="#sec-09" class="toc-link">09 数据生态</a>
-        <a href="#sec-10" class="toc-link">10 客户证言</a>
-        <a href="#sec-11" class="toc-link">11 本质穿透</a>
-        <a href="#sec-12" class="toc-link">12 行动建议</a>
-        <a href="#sec-glossary" class="toc-link">+ 技术词汇表</a>
-        <a href="#sec-competition" class="toc-link">+ 竞争格局</a>
+        <a href="#sec-01"          class="toc-link">01 研究概述</a>
+        <a href="#sec-02"          class="toc-link">02 三层架构</a>
+        <a href="#sec-03"          class="toc-link">03 Skill file 对照</a>
+        <a href="#sec-04"          class="toc-link">04 Agent 全链路</a>
+        <a href="#sec-05"          class="toc-link">05 Benchmark</a>
+        <a href="#sec-06"          class="toc-link">06 合资公司</a>
+        <a href="#sec-07"          class="toc-link">07 10 个模板</a>
+        <a href="#sec-08"          class="toc-link">08 Microsoft 365</a>
+        <a href="#sec-09"          class="toc-link">09 数据生态</a>
+        <a href="#sec-10"          class="toc-link">10 客户证言</a>
+        <a href="#sec-11"          class="toc-link">11 本质穿透</a>
+        <a href="#sec-12"          class="toc-link">12 行动建议</a>
+        <a href="#sec-glossary"    class="toc-link">＋ 技术词汇表</a>
+        <a href="#sec-competition" class="toc-link">＋ 竞争格局</a>
     </div>
     <div class="reading-progress-wrap">
         <div class="reading-progress-label">阅读进度</div>
@@ -92,13 +198,9 @@ tbody tr:hover{background:rgba(0,0,0,0.02)}
         </div>
     </div>
 </nav>
-
 <button class="sidebar-collapse-btn" id="collapseBtn" title="折叠导航" aria-label="折叠导航">«</button>
-
 <main class="content-area" id="main-content">
-<div class="content-inner" style="max-width:920px;margin:0 auto;padding:32px 40px 80px;">
-
-
+<div style="max-width:860px;">
 <header class="header">
 <span class="badge">深度调研 · 2026-05-10</span>
 <h1 class="main-title">Anthropic 金融 Agent：一套新组织方式</h1>
@@ -112,7 +214,6 @@ tbody tr:hover{background:rgba(0,0,0,0.02)}
 <div class="stat-card"><div class="stat-value danger">64.37%</div><div class="stat-label">Finance Benchmark</div></div>
 </div>
 
-    
 <!-- 01 -->
 <section class="section-card" id="sec-01">
 <div class="section-header"><span class="section-number">1</span><h2>研究概述：同一天发生的三件事，不是巧合</h2></div>
@@ -601,312 +702,6 @@ tbody tr:hover{background:rgba(0,0,0,0.02)}
 </ul>
 </div>
 </div>
-
-</div></div><!-- /.content-inner -->
-</main><!-- /.content-area -->
-</div><!-- /.layout-wrapper -->nthropics/financial-services" target="_blank">Anthropic金融Agent marketplace</a></li>
-<li>财联社AI daily / 纵所周知101 / AI Post Hub / iThome（微信公众号）</li>
-</ul>
-</div>
-</div>
-
-</div>
-
-
-
-<script>
-(function () {
-    "use strict";
-    const HEADER_OFFSET = 72;
-    const SPY_OFFSET    = 110;
-    const sidebar       = document.getElementById("sidebar");
-    const collapseBtn   = document.getElementById("collapseBtn");
-    const progressBar   = document.getElementById("readingProgress");
-    const scrollTopBtn  = document.getElementById("scrollToTop");
-
-    // 平滑锚点
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
-        link.addEventListener("click", e => {
-            const id = link.getAttribute("href").slice(1);
-            const target = document.getElementById(id);
-            if (!target) return;
-            e.preventDefault();
-            window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET, behavior: "smooth" });
-        });
-    });
-
-    // Scroll Spy
-    const tocLinks = Array.from(document.querySelectorAll(".toc-link"));
-    const anchorEls = tocLinks.map(a => {
-        const href = a.getAttribute("href") || "";
-        return href.startsWith("#") ? document.getElementById(href.slice(1)) : null;
-    }).filter(Boolean);
-
-    function updateTocHighlight() {
-        const scrollY = window.scrollY + SPY_OFFSET;
-        let activeEl = anchorEls[0];
-        for (const el of anchorEls) {
-            if (el && el.offsetTop <= scrollY) activeEl = el;
-            else break;
-        }
-        tocLinks.forEach(link => {
-            const href = link.getAttribute("href") || "";
-            link.classList.toggle("toc-active", activeEl && href === "#" + activeEl.id);
-        });
-    }
-
-    function updateProgress() {
-        if (!progressBar) return;
-        const total = document.documentElement.scrollHeight - window.innerHeight;
-        progressBar.style.width = (total > 0 ? Math.min(100, window.scrollY / total * 100) : 0).toFixed(1) + "%";
-    }
-
-    // 侧边栏折叠
-    if (collapseBtn) {
-        collapseBtn.addEventListener("click", () => {
-            const isCollapsed = sidebar.classList.toggle("sidebar-collapsed");
-            collapseBtn.textContent = isCollapsed ? "»" : "«";
-            collapseBtn.classList.toggle("collapsed-pos", isCollapsed);
-        });
-    }
-
-    // 回到顶部
-    if (scrollTopBtn) {
-        scrollTopBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
-    }
-
-    // rAF 节流
-    let ticking = false;
-    window.addEventListener("scroll", () => {
-        if (!ticking) {
-            requestAnimationFrame(() => {
-                updateTocHighlight();
-                updateProgress();
-                if (scrollTopBtn) scrollTopBtn.classList.toggle("visible", window.scrollY > 280);
-                ticking = false;
-            });
-            ticking = true;
-        }
-    }, { passive: true });
-
-    updateTocHighlight();
-    updateProgress();
-
-    // 滚动入场动画
-    const animEls = document.querySelectorAll(".animate-on-scroll");
-    if (!("IntersectionObserver" in window)) {
-        animEls.forEach(el => el.classList.add("visible"));
-    } else {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("visible");
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.06, rootMargin: "0px 0px -30px 0px" });
-        animEls.forEach(el => observer.observe(el));
-    }
-
-    // 进度条视口动画
-    const barFills = document.querySelectorAll(".bar-fill");
-    if ("IntersectionObserver" in window && barFills.length) {
-        const barObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const el = entry.target;
-                    const w = el.dataset.targetWidth || el.style.width || "0%";
-                    el.style.width = "0%";
-                    requestAnimationFrame(() => {
-                        requestAnimationFrame(() => { el.style.width = w; });
-                    });
-                    barObserver.unobserve(el);
-                }
-            });
-        }, { threshold: 0.3 });
-        barFills.forEach(el => {
-            el.dataset.targetWidth = el.style.width || "0%";
-            el.style.width = "0%";
-            barObserver.observe(el);
-        });
-    }
-})();
-</script>
-</body>
-</html
-
-/* ===== Sidebar layout (from anthropic-product-velocity reference) ===== */
-:root{--sidebar-width:240px}
---sidebar-width: 240px;
-    --content-max: 920px;
-    --content-pad: 40px;
-}
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-html { scroll-behavior: smooth; }
-
-body {
-    font-family: var(--font-family);
-    background: var(--color-bg);
-    color: var(--color-text-primary);
-    line-height: 1.7;
-    font-size: 15px;
-    -webkit-font-smoothing: antialiased;
-}
-
-/* ===== Skip to content ===== */
-.skip-to-content {
-    position: absolute;
-    left: -9999px;
-    top: 4px;
-    z-index: 9999;
-    padding: 8px 16px;
-    background: var(--color-info);
-    color: #fff;
-    border-radius: 6px;
-    text-decoration: none;
-    font-size: 13px;
-}
-.skip-to-content:focus { left: 4px; }
-
-/* ===== Layout ===== */
-.layout-wrapper {
-    display: flex;
-    min-height: 100vh;
-    position: relative;
-}
-
-/* ===== Sidebar ===== */
-.sidebar-nav {
-    width: var(--sidebar-width);
-    flex-shrink: 0;
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    overflow-y: auto;
-    background: #fff;
-    border-right: 1px solid var(--color-border);
-    display: flex;
-    flex-direction: column;
-    padding: 24px 0 16px;
-    transition: transform 280ms ease, width 280ms ease;
-    z-index: 10;
-}
-.sidebar-nav.sidebar-collapsed { transform: translateX(calc(-1 * var(--sidebar-width))); }
-
-.sidebar-doc-title {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--color-text-muted);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 0 18px 12px;
-    border-bottom: 1px solid var(--color-border-light);
-    margin-bottom: 8px;
-}
-
-.toc-section { padding: 4px 0; }
-
-.toc-link {
-    display: block;
-    padding: 6px 18px;
-    font-size: 13px;
-    color: var(--color-text-secondary);
-    text-decoration: none;
-    border-right: 2px solid transparent;
-    transition: color 150ms ease, background 150ms ease, border-color 150ms ease;
-    line-height: 1.4;
-}
-.toc-link:hover { color: var(--color-info); background: var(--color-info-50); }
-.toc-link.toc-active { color: var(--color-info); border-right-color: var(--color-info); background: var(--color-info-50); font-weight: 600; }
-.toc-link.toc-sub { padding-left: 30px; font-size: 12px; color: var(--color-text-muted); }
-.toc-link.toc-sub.toc-active { color: var(--color-info); }
-
-.reading-progress-wrap {
-    margin-top: auto;
-    padding: 16px 18px 8px;
-    border-top: 1px solid var(--color-border-light);
-}
-.reading-progress-label {
-    font-size: 11px;
-    color: var(--color-text-muted);
-    margin-bottom: 6px;
-}
-.reading-progress-track {
-    height: 4px;
-    background: var(--color-border);
-    border-radius: 2px;
-    overflow: hidden;
-}
-.reading-progress-fill {
-    height: 100%;
-    background: var(--color-info);
-    border-radius: 2px;
-    width: 0%;
-    transition: width 0.1s linear;
-}
-
-/* ===== Collapse Button ===== */
-.sidebar-collapse-btn {
-    position: fixed;
-    left: calc(var(--sidebar-width) - 12px);
-    top: 50%;
-    transform: translateY(-50%);
-    width: 24px;
-    height: 48px;
-    background: #fff;
-    border: 1px solid var(--color-border);
-    border-radius: 0 6px 6px 0;
-    cursor: pointer;
-    font-size: 12px;
-    color: var(--color-text-muted);
-    z-index: 20;
-    transition: left 280ms ease, background 150ms;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.sidebar-collapse-btn:hover { background: var(--color-info-50); color: var(--color-info); }
-.sidebar-collapse-btn.collapsed-pos { left: 0; 
-.layout-wrapper{display:flex;min-height:100vh;position:relative}
-.content-area{flex:1;min-width:0;padding:var(--spacing-lg) var(--spacing-xl) 64px;max-width:calc(var(--content-max-width) - 240px)}
-.content-inner{max-width:860px}
-@media(max-width:900px){.sidebar-nav{transform:translateX(-240px)}.sidebar-collapse-btn{left:0}.content-area{padding:var(--spacing-lg) var(--spacing-md) 64px;max-width:100%}}
-</style>
-</head>
-<body>
-<a class="skip-to-content" href="#main-content">跳到主内容</a>
-<div class="layout-wrapper">
-<nav class="sidebar-nav" id="sidebar" aria-label="目录导航">
-    <div class="sidebar-doc-title">AI洞察 · 深度调研</div>
-    <div class="toc-section">
-        <a href="#sec-01"          class="toc-link">01 研究概述</a>
-        <a href="#sec-02"          class="toc-link">02 三层架构</a>
-        <a href="#sec-03"          class="toc-link">03 Skill file对照</a>
-        <a href="#sec-04"          class="toc-link">04 Agent全链路</a>
-        <a href="#sec-05"          class="toc-link">05 Benchmark</a>
-        <a href="#sec-06"          class="toc-link">06 合资公司</a>
-        <a href="#sec-07"          class="toc-link">07 10个模板</a>
-        <a href="#sec-08"          class="toc-link">08 Microsoft 365</a>
-        <a href="#sec-09"          class="toc-link">09 数据生态</a>
-        <a href="#sec-10"          class="toc-link">10 客户证言</a>
-        <a href="#sec-11"          class="toc-link">11 本质穿透</a>
-        <a href="#sec-12"          class="toc-link">12 行动建议</a>
-        <a href="#sec-glossary"    class="toc-link">+ 技术词汇表</a>
-        <a href="#sec-competition" class="toc-link">+ 竞争格局</a>
-    </div>
-    <div class="reading-progress-wrap">
-        <div class="reading-progress-label">阅读进度</div>
-        <div class="reading-progress-track">
-            <div class="reading-progress-fill" id="readingProgress"></div>
-        </div>
-    </div>
-</nav>
-<button class="sidebar-collapse-btn" id="collapseBtn" title="折叠导航" aria-label="折叠导航">«</button>
-<main class="content-area" id="main-content">
-<div class="content-inner">
-
 </div>
 </main>
 </div>
