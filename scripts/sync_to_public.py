@@ -420,9 +420,11 @@ def sync_index(force: bool = False):
         ext_dst = external_repo / "index.html"
         if ext_dst.exists():
             existing_public = ext_dst.read_text(encoding="utf-8")
+            # 先对旧外部版再做一次脱敏，确保 preserve_block 不会重新引入敏感词
+            existing_public_clean = sanitize_html(existing_public)
             sanitized, preserved = preserve_block(
                 sanitized,
-                existing_public,
+                existing_public_clean,
                 "<!-- 2. 深度调研 -->",
                 "<!-- 3. 追踪体系 -->",
             )
