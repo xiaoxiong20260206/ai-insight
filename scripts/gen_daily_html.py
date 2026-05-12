@@ -433,9 +433,13 @@ def generate_html(data: dict) -> str:
     if AI_INSIGHT_CUSTOM_CSS.exists():
         custom_css = AI_INSIGHT_CUSTOM_CSS.read_text(encoding="utf-8")
     
-    # 合并：公共层变量+基础样式 + 定制层组件样式
-    # 提取 base-styles.css 中的 :root 变量块和基础样式
-    css_combined = f"<style>\n{base_css}\n\n/* ===== AI洞察定制层 ===== */\n{custom_css}\n</style>"
+    # 日报组件样式（中间层：布局、sidebar、news-item、deep-focus 等日报专用选择器）
+    report_css = ""
+    if TEMPLATE_CSS_FILE.exists():
+        report_css = TEMPLATE_CSS_FILE.read_text(encoding="utf-8")
+    
+    # 合并：公共层变量+基础样式 + 日报组件样式 + 定制层组件样式
+    css_combined = f"<style>\n{base_css}\n\n/* ===== 日报组件层 ===== */\n{report_css}\n\n/* ===== AI洞察定制层 ===== */\n{custom_css}\n</style>"
     css_block = css_combined
     
     js_block = TEMPLATE_JS_FILE.read_text(encoding="utf-8") if TEMPLATE_JS_FILE.exists() else "<script></script>"
