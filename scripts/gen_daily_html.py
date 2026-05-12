@@ -434,9 +434,15 @@ def generate_html(data: dict) -> str:
         custom_css = AI_INSIGHT_CUSTOM_CSS.read_text(encoding="utf-8")
     
     # 日报组件样式（中间层：布局、sidebar、news-item、deep-focus 等日报专用选择器）
+    # 注意：daily-report-v3.css 本身包裹了 <style>...</style>，需剥掉再嵌入，避免双重嵌套
     report_css = ""
     if TEMPLATE_CSS_FILE.exists():
-        report_css = TEMPLATE_CSS_FILE.read_text(encoding="utf-8")
+        raw = TEMPLATE_CSS_FILE.read_text(encoding="utf-8")
+        # 剥掉首尾的 <style> / </style> 包装标签
+        import re as _re
+        raw = _re.sub(r'^\s*<style[^>]*>\s*', '', raw)
+        raw = _re.sub(r'\s*</style>\s*$', '', raw)
+        report_css = raw
     
     # 合并：公共层变量+基础样式 + 日报组件样式 + 定制层组件样式
     css_combined = f"<style>\n{base_css}\n\n/* ===== 日报组件层 ===== */\n{report_css}\n\n/* ===== AI洞察定制层 ===== */\n{custom_css}\n</style>"
