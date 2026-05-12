@@ -103,6 +103,7 @@ REPLACEMENTS = _URL_REPLACEMENTS + [
     
     # ===== 标题和描述 =====
     (r'林克的AI洞察', 'AI行业洞察'),
+    (r'林克实现', 'AI实现'),  # #116: tc-desc中的身份暴露
     (r'我是林克，这是沈浪让我负责的AI洞察项目', 'AI洞察 · 持续追踪AI行业动态'),
     (r'林克负责的AI行业洞察项目', '持续追踪AI行业动态'),
     
@@ -166,6 +167,7 @@ REPLACEMENTS = _URL_REPLACEMENTS + [
     # ⚠️ 注意: SENSITIVE_WORDS 和 deploy_daily.sh 的 grep 都检查「快手」
     # 必须保持一致：替换了才能通过验证；只要这里不替换，公开版敏感词检查就会 abort
     # v2.1曾尝试「只替换机构名」，但与 SENSITIVE_WORDS 检查不一致，会导致部署 abort
+    (r'快手AI生产力战役', 'AI生产力实践'),  # #116: 先匹配长词再匹配短词
     (r'快手', '某公司'),
     (r'Kuaishou', 'Company'),
     
