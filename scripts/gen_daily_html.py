@@ -56,7 +56,7 @@ def extract_templates_from_html(html_path: str):
 # ============ 新闻条目渲染 ============
 
 def render_news_item(item: dict) -> str:
-    """渲染单条新闻"""
+    """渲染单条新闻（v5.1 — 紧凑排版：标题+来源合并一行，NEW标签inline化）"""
     tag_map = {
         "hot": '<span class="news-tag tag-hot">HOT</span>',
         "new": '<span class="news-tag tag-new">NEW</span>',
@@ -78,21 +78,22 @@ def render_news_item(item: dict) -> str:
     xhs_url = item.get('xhs_url', '')
     xhs_link_html = ''
     if xhs_url:
-        xhs_link_html = f' · <a href="{xhs_url}" target="_blank" style="color:#ff2442;font-size:0.85em">📕小红书原帖</a>'
+        xhs_link_html = f' · <a href="{xhs_url}" target="_blank" style="color:#ff2442;font-size:0.85em">📕小红书</a>'
 
     # 微信公众号原文链接（可选）
     wx_url = item.get('wx_url', '')
     wx_link_html = ''
     if wx_url:
-        wx_link_html = f' · <a href="{wx_url}" target="_blank" style="color:#07C160;font-size:0.85em">💬微信原文</a>'
+        wx_link_html = f' · <a href="{wx_url}" target="_blank" style="color:#07C160;font-size:0.85em">💬微信</a>'
+
+    # 来源（inline 跟在标题后）
+    source_inline = f'<span class="news-source-inline">{item["source"]}{xhs_link_html}{wx_link_html}</span>'
 
     # 简洁模式：只有标题和摘要
     if "details" not in item:
         return f'''
                 <div class="news-item">
-                    {tag}
-                    <div class="news-title">{title_html}</div>
-                    <div class="news-source">{item['source']}{xhs_link_html}{wx_link_html}</div>
+                    <div class="news-title-row">{tag} {title_html} {source_inline}</div>
                     <div class="news-summary-compact">{item.get('summary', '')}</div>
                 </div>'''
 
@@ -119,9 +120,7 @@ def render_news_item(item: dict) -> str:
 
     return f'''
                 <div class="news-item">
-                    {tag}
-                    <div class="news-title">{title_html}</div>
-                    <div class="news-source">{item['source']}{xhs_link_html}{wx_link_html}</div>
+                    <div class="news-title-row">{tag} {title_html} {source_inline}</div>
                     <div class="news-detail">
                         <div class="news-detail-row">
                             <span class="news-detail-label {label_class}">核心发现</span>
@@ -463,13 +462,12 @@ def generate_html(data: dict) -> str:
         # 兼容两种schema: {icon,label,headline,text} 和 {tab,emoji,summary}
         icon = ov.get('icon', ov.get('emoji', '📌'))
         label = ov.get('label', ov.get('tab', ''))
-        headline = ov.get('headline', '')
         text = ov.get('text', ov.get('summary', ''))
         span = ' style="grid-column: span 2;"' if ov.get("span2") else ""
         label_class = f' class="{ov["label_class"]}"' if ov.get("label_class") else ""
+        # v5.1: 去掉 overview-headline（截断显示不好看），summary 已完整展示
         overview_items.append(f'''                <div class="overview-item animate-on-scroll"{span}>
                     <div class="overview-item-header"><span class="overview-item-icon">{icon}</span><span class="overview-item-label"{label_class}>{label}</span></div>
-                    <div class="overview-headline">{headline}</div>
                     <div class="overview-item-text">{text}</div>
                 </div>''')
 
@@ -556,7 +554,7 @@ def generate_html(data: dict) -> str:
 
 <div class="layout-wrapper">
     <!-- SIDEBAR TOC -->
-    <nav class="sidebar-nav" id="sidebar" aria-label="目录导航">
+    <nav class="sidebar-nav sidebar-collapsed" id="sidebar" aria-label="目录导航">
         <div class="sidebar-doc-title">AI 日报 · {date_str}</div>
         <div class="toc-section">
             <div class="toc-group-label">目录</div>
@@ -577,7 +575,7 @@ def generate_html(data: dict) -> str:
             </div>
         </div>
     </nav>
-    <button class="sidebar-collapse-btn" id="collapseBtn" title="折叠导航" aria-label="折叠导航">«</button>
+    <button class="sidebar-collapse-btn collapsed-pos" id="collapseBtn" title="展开导航" aria-label="展开导航">»</button>
 
     <!-- MAIN CONTENT -->
     <main class="content-area" id="main-content">
@@ -752,7 +750,7 @@ def main():
         hard_errors.append(f"❌ [致命] 仅 {tab_present}/5 个板块渲染，内容严重不足")
 
     # 3. 验证overview板块
-    if "overview-headline" not in html:
+    if "overview-item" not in html:
         hard_errors.append("❌ [关键] '全文概览'板块未渲染")
 
     # 4. 验证热度趋势

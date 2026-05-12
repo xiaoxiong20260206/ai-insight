@@ -108,6 +108,7 @@
             z-index: 101; transition: all var(--transition-fast);
         }
         .sidebar-collapse-btn:hover { background: var(--color-bg); }
+        .sidebar-collapse-btn.collapsed-pos { left: 8px; }
         .sidebar-nav.sidebar-collapsed { width: 0; padding: 0; overflow: hidden; border: none; }
         .sidebar-nav.sidebar-collapsed ~ .sidebar-collapse-btn { left: 8px; }
 
@@ -223,22 +224,28 @@
         .sub-header:first-child { margin-top: 0; }
 
         /* ===== NEWS ITEMS ===== */
-        .news-item { padding: 14px 0; border-bottom: 1px solid var(--color-border-light); transition: background .15s; margin: 0 -8px; padding-left: 8px; padding-right: 8px; border-radius: var(--radius-sm); }
+        .news-item { padding: 8px 0; border-bottom: 1px solid var(--color-border-light); transition: background .15s; margin: 0 -8px; padding-left: 8px; padding-right: 8px; border-radius: var(--radius-sm); }
         .news-item:hover { background: rgba(5,150,105,0.02); }
         .news-item:last-child { border-bottom: none; }
-        .news-tag { display: inline-block; padding: 2px 8px; border-radius: var(--radius-full); font-size: 11px; font-weight: 600; }
+        .news-tag { display: inline-block; padding: 1px 6px; border-radius: var(--radius-full); font-size: 10px; font-weight: 700; vertical-align: middle; }
         .tag-hot { background: #FEF2F2; color: var(--color-danger); }
         .tag-new { background: #EFFDF5; color: var(--color-success); }
         .tag-funding { background: #E0F2FE; color: #0284C7; }
         .tag-policy { background: #FFF7ED; color: var(--color-orange); }
         .tag-practice { background: #ECFDF5; color: #059669; }
         .tag-cn { background: #FEF2F2; color: #DC2626; }
+        /* v5.1: 标题行 — tag + 标题 + 来源 inline 合并 */
+        .news-title-row { font-size: 14px; font-weight: 600; line-height: 1.5; display: flex; align-items: baseline; flex-wrap: wrap; gap: 5px; margin-bottom: 3px; }
+        .news-title-row a { color: var(--color-text-primary); text-decoration: none; }
+        .news-title-row a:hover { color: var(--color-success); }
+        .news-source-inline { font-size: 11px; color: var(--color-text-muted); font-weight: 400; flex-shrink: 0; white-space: nowrap; }
+        /* 兼容旧的 news-title / news-source（独立行）结构 */
         .news-title { font-size: 15px; font-weight: 600; margin: 4px 0 3px; }
         .news-title a { color: var(--color-text-primary); text-decoration: none; }
         .news-title a:hover { color: var(--color-success); }
         .news-source { font-size: 12px; color: var(--color-text-muted); }
-        .news-detail { margin-top: 8px; display: flex; flex-direction: column; gap: 4px; }
-        .news-detail-row { display: flex; align-items: flex-start; gap: 8px; font-size: 13.5px; line-height: 1.6; }
+        .news-detail { margin-top: 6px; display: flex; flex-direction: column; gap: 4px; }
+        .news-detail-row { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; line-height: 1.6; }
         .news-detail-label { flex-shrink: 0; font-weight: 700; color: var(--color-success); font-size: 12px; padding: 1px 0; min-width: 60px; }
         .news-detail-label.orange { color: var(--color-orange); }
         .news-detail-label.china { color: #DC2626; }
@@ -249,7 +256,7 @@
         .news-data-chip:hover { background: #DCFCE7; border-color: #86EFAC; }
         .news-data-chip.orange { background: #FFF7ED; border-color: #FED7AA; color: #9A3412; }
         .news-data-chip.china { background: #FEF2F2; border-color: #FECACA; color: #991B1B; }
-        .news-summary-compact { font-size: 13.5px; color: var(--color-text-secondary); margin-top: 6px; line-height: 1.6; font-family: var(--font-family-cn); }
+        .news-summary-compact { font-size: 13px; color: var(--color-text-muted); margin-top: 2px; line-height: 1.55; font-family: var(--font-family-cn); }
 
         /* ===== DEEP FOCUS ===== */
         .deep-focus-card { background: var(--color-bg-card); border: 1px solid var(--color-border-light); border-radius: var(--radius-lg); padding: 0; margin-bottom: 16px; box-shadow: var(--shadow-card); overflow: hidden; }
