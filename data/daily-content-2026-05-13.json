@@ -1,0 +1,419 @@
+{
+  "date": "2026-05-13",
+  "tabs": [
+    {
+      "id": "llm",
+      "name": "大模型",
+      "title": "🧠 大模型",
+      "news": {
+        "overseas": [
+          {
+            "title": "OpenAI成立40亿美元部署公司，收购Tomoro加速企业AI落地",
+            "source": "Reuters/CNBC/Business Insider",
+            "url": "https://techafricanews.com/2026/05/12/openai-unveils-new-deployment-company-backed-by-4-billion-investment/",
+            "summary": "OpenAI宣布成立OpenAI Deployment Company，初始投资超40亿美元，帮助企业搭建和部署AI系统。同步收购伦敦AI咨询公司Tomoro，获得约150名Forward Deployed Engineers。Goldman Sachs、Bain、McKinsey、Capgemini等参与投资，新公司估值100亿美元。标志着OpenAI从模型提供商向AI服务生态延伸。",
+            "date": "2026-05-12",
+            "region": "overseas",
+            "category": "大模型"
+          },
+          {
+            "title": "谷歌首次拦截AI开发的零日漏洞攻击，网络安全进入攻防AI化时代",
+            "source": "Google GTIG/CNBC/NYT",
+            "url": "https://thehackernews.com/2026/05/hackers-used-ai-to-develop-first-known.html",
+            "summary": "谷歌威胁情报组(GTIG)首次披露成功拦截AI开发的零日漏洞攻击。攻击者用Python脚本针对开源Web管理工具，意图绕过2FA。脚本含幻觉CVSS评分、典型LLM风格代码。谷歌高置信度判定AI参与了漏洞发现和武器化。攻击突破时间从48分钟骤降至27秒。Anthropic Mythos模型此前已发现数千未知漏洞但未公开发布。",
+            "date": "2026-05-11",
+            "region": "overseas",
+            "category": "大模型"
+          },
+          {
+            "title": "OpenAI GPT-5.5提供美国国家安全测试，发布GPT-Realtime-2语音模型",
+            "source": "Reuters/OpenAI Blog",
+            "url": "https://openai.com/index/gpt-5-5-with-trusted-access-for-cyber/",
+            "summary": "OpenAI向美国政府提供GPT-5.5用于国家安全测试，同时扩展Trusted Access for Cyber计划。发布GPT-Realtime-2，首个具备GPT-5级推理能力的语音模型，可处理更难请求并自然推进对话。Sam Altman称Z世代将ChatGPT当作'操作系统'使用。",
+            "date": "2026-05-05",
+            "region": "overseas",
+            "category": "大模型"
+          }
+        ],
+        "china": [
+          {
+            "title": "DeepSeek完成500亿首轮融资创中国AI纪录，创始人梁文锋自投200亿",
+            "source": "新浪财经/机器之心/雪球",
+            "url": "https://www.donews.com/news/detail/8/6547564.html",
+            "summary": "DeepSeek完成首轮融资，募资总额达500亿元人民币，创中国AI公司单轮融资最高纪录。创始人梁文锋个人出资200亿元领投(占40%)，国家大基金、腾讯等参与。投后估值达3500亿元(约515亿美元)。资金主要用于大模型研发、算力基建和人才引进。计划6月推出V4.1，新增图文音理解和MCP协议适配。",
+            "date": "2026-05-12",
+            "region": "china",
+            "category": "大模型"
+          },
+          {
+            "title": "DeepSeek大范围开放识图，跨入多模态时代",
+            "source": "今日头条",
+            "url": "https://m.toutiao.com/w/1864701014019083/",
+            "summary": "DeepSeek正式大范围开放识图模式，不再是小范围灰度。支持原生多模态识别：从恐龙骨架分析到梗图理解到视错觉挑战。这不是简单OCR，而是真正多模态理解。识图开放意味着DeepSeek从'推理天才'进化为'全能选手'，与多模态竞品(通义千问、Kimi)正面交锋。",
+            "date": "2026-05-09",
+            "region": "china",
+            "category": "大模型"
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "AI零日漏洞攻击时代来临：谷歌拦截首例AI武器化攻击，攻防格局彻底改写",
+        "paragraphs": [
+          "5月11日，谷歌威胁情报组(GTIG)发布重磅报告：首次发现黑客利用AI开发零日漏洞攻击。攻击者用AI生成的Python脚本针对开源Web管理工具，意图绕过双因素认证(2FA)发动大规模利用事件。脚本中出现了典型的LLM痕迹——幻觉的CVSS评分、教学式docstring注释。",
+          "这不是孤立事件。Anthropic的Mythos模型4月已发现全球软件基础设施中数千未知漏洞，但因其安全风险未公开发布。JPMorgan CEO Jamie Dimon称AI工具先让企业更脆弱，之后才能帮防御。攻防双方都在AI化：攻击突破时间从48分钟骤降至27秒。",
+          "攻防格局的根本变化在于：过去漏洞发现依赖安全专家的经验和直觉，现在AI可以系统性地扫描、发现、武器化。防守方也在用AI实时检测异常，谷歌本次拦截就是'以AI对抗AI'的实战验证。但攻守不对称——攻击只需一次成功，防守需次次不漏。"
+        ],
+        "takeaway": "**关键判断**：AI零日漏洞攻击标志着网络安全进入'算法驱动攻防'新纪元。企业安全策略必须从'人防+规则'升级为'AI实时检测+零信任架构'。未来6个月，AI安全服务将成最大增量市场，Anthropic Mythos的受控发布模式可能成为高风险AI模型的标准范式。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\">\n  <div class=\"pi-header\">\n    <span class=\"pi-icon\">🔍</span>\n    <span class=\"pi-title\">模式洞察</span>\n  </div>\n  <div class=\"pi-body\">\n    <h4>AI武器化的不对称博弈</h4>\n    <p><strong>攻防AI化的不对称性</strong>：谷歌拦截AI零日攻击揭示了一个残酷现实——AI让攻击门槛大幅降低（27秒vs48分钟），但防御必须零失误。这种不对称性将推动<strong>AI安全即服务</strong>市场爆发式增长。</p>\n    <p><strong>高风险模型的'核武管控'模式</strong>：Anthropic Mythos不公开发布、仅限美英特定机构使用——这本质上是对AI能力的<strong>类核武器管控</strong>。未来超高能力模型大概率走'受控发布'路线，模型开放≠能力开放。</p>\n  </div>\n</div>"
+    },
+    {
+      "id": "coding",
+      "name": "AI Coding",
+      "title": "⌨️ AI Coding",
+      "news": {
+        "overseas": [
+          {
+            "title": "Cursor/Claude Code/Codex正融合为统一AI编程技术栈",
+            "source": "TheNewStack",
+            "url": "https://thenewstack.io/ai-coding-tool-stack/",
+            "summary": "2026年4月，三大AI编程工具意外融合：Cursor 3发布Glass界面+Agent Workspace支持多Agent并行；OpenAI发布可在Claude Code内运行的官方插件；开发者开始同时使用三者。AI编程工具从'代码补全'进化到'自主Agent'，多Agent并行、端到端自动化、百万Token上下文成为新标准。",
+            "date": "2026-05-06",
+            "region": "overseas",
+            "category": "AI Coding"
+          },
+          {
+            "title": "Anthropic发布Opus 4.7，编码基准大幅跃升",
+            "source": "Nipralo",
+            "url": "https://www.nipralo.com/blogs/best-ai-coding-tools-2026",
+            "summary": "Anthropic发布Opus 4.7，编码基准测试大幅提升。GitHub暂停Copilot Pro和Pro+新注册。AI编程工具市场2026年达128亿美元，90%专业开发者每日使用。推荐组合：Cursor日常编辑+Claude Code多文件重写。",
+            "date": "2026-05-10",
+            "region": "overseas",
+            "category": "AI Coding"
+          }
+        ],
+        "china": [
+          {
+            "title": "Trae SOLO端到端自动化模式免费开放，AI编程进入'Agent并行'时代",
+            "source": "CSDN/博客园",
+            "url": "https://blog.csdn.net/aibridge/article/details/160722148",
+            "summary": "字节跳动Trae推出SOLO模式：PRD→架构→编码→测试→部署全流程闭环，核心功能完全免费。Cursor 3发布Agent Workspace支持多Agent并行协作。Claude Code正式GA，100万Token上下文成为Max计划默认配置。AI编程工具从辅助编码进化为自主Agent。",
+            "date": "2026-05-03",
+            "region": "china",
+            "category": "AI Coding"
+          },
+          {
+            "title": "8款AI编程工具横评：Trae居首，Cursor/Copilot紧随",
+            "source": "博客园",
+            "url": "https://www.cnblogs.com/dimeng/p/19988663",
+            "summary": "2026年5月横评显示，字节Trae以AI原生IDE架构+全流程开发闭环+免费策略居首。Trae支持IDE模式与SOLO模式切换，从自然语言到可执行代码全程减少人工干预。Cursor以$20/月仍为最佳日常编辑器。Claude Code适合需要多文件重写的场景。",
+            "date": "2026-05-07",
+            "region": "china",
+            "category": "AI Coding"
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "AI编程工具'三足鼎立'格局成型：Cursor日常+Claude Code重写+Trae免费全流程",
+        "paragraphs": [
+          "2026年5月，AI编程工具格局趋于清晰：Cursor是日常编辑的最佳选择($20/月)，Claude Code在需要多文件同时重写时无可替代，字节Trae SOLO以全流程自动化+完全免费重塑市场。",
+          "关键趋势：多Agent并行工作成为标配(Cursor Agent Workspace)、端到端自动化(Trae SOLO从PRD到部署)、百万Token上下文消除长代码限制(Claude Code Max)。三者正在意外融合——开发者同时使用三者形成'AI编程技术栈'。",
+          "Trae的免费策略是最大变量。当核心AI编程能力免费时，付费工具必须证明差异化价值。GitHub Copilot已在调整定价模式(6月1日用量计费生效)。AI编程工具市场正在从'功能竞争'转向'生态+体验+成本'的综合竞争。"
+        ],
+        "takeaway": "**关键判断**：AI编程工具格局从'群雄混战'收敛为'三足鼎立'——Cursor(日常编辑)+Claude Code(复杂重写)+Trae(免费全流程)。Trae的免费策略将倒逼全行业降价，6月GitHub Copilot用量计费生效是风向标。开发者应构建'工具链组合'而非押注单一工具。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\">\n  <div class=\"pi-header\">\n    <span class=\"pi-icon\">🔍</span>\n    <span class=\"pi-title\">模式洞察</span>\n  </div>\n  <div class=\"pi-body\">\n    <h4>从工具到技术栈的范式迁移</h4>\n    <p><strong>AI编程进入'技术栈时代'</strong>：开发者不再选一个工具，而是组合使用Cursor+Claude Code+Trae——这像极了前端从jQuery到React+Webpack+TypeScript的演进路径。<strong>单一工具万能的幻觉正在破灭</strong>。</p>\n    <p><strong>免费不是慈善，是获客策略</strong>：Trae SOLO免费背后是字节跳动的生态野心——当开发者习惯AI原生IDE后，付费场景自然转移到企业版/定制化/私有部署。</p>\n  </div>\n</div>"
+    },
+    {
+      "id": "app",
+      "name": "AI应用",
+      "title": "📱 AI应用",
+      "news": {
+        "overseas": [
+          {
+            "title": "Sam Altman: Z世代将ChatGPT当作'操作系统'而非搜索引擎",
+            "source": "Fortune",
+            "url": "https://fortune.com/article/sam-altman-chatgpt-gen-z-millennials-life-advisor-operating-system/",
+            "summary": "OpenAI CEO Sam Altman称Z世代和千禧一代将ChatGPT当作'生活顾问'和'操作系统'而非搜索工具。大学生群体使用方式领先一步，ChatGPT正从工具转型为平台。这对Google搜索核心业务构成更深层威胁。",
+            "date": "2026-05-10",
+            "region": "overseas",
+            "category": "AI应用"
+          },
+          {
+            "title": "OpenAI推出GPT-Realtime-2语音模型，GPT-5级推理进入语音交互",
+            "source": "OpenAI Blog",
+            "url": "https://openai.com/index/advancing-voice-intelligence-with-new-models-in-the-api/",
+            "summary": "OpenAI发布GPT-Realtime-2，首个具备GPT-5级推理能力的语音模型。可处理更难请求、自然推进对话。语音AI从简单问答进化为深度推理交互，将推动语音助手、客服、教育等场景升级。",
+            "date": "2026-05-05",
+            "region": "overseas",
+            "category": "AI应用"
+          }
+        ],
+        "china": [
+          {
+            "title": "Kimi K2.6发布：原生多模态智能体模型，长程编码13小时",
+            "source": "头条/ZOL",
+            "url": "https://ai.zol.com.cn/1176/11768009.html",
+            "summary": "月之暗面4月发布Kimi K2.6，定位'原生多模态智能体模型'。核心升级：长期任务规划(数小时连贯)、代码驱动设计(SVG矢量动画生成)、主动自执行、多智能体协同。实测可连续编码13小时、4000+行代码。月之暗面完成20亿美元融资，估值突破200亿美元，半年融资超39亿美元创国内纪录。",
+            "date": "2026-05-10",
+            "region": "china",
+            "category": "AI应用"
+          },
+          {
+            "title": "DeepSeek开放识图：从'推理天才'到'全能选手'的关键一步",
+            "source": "今日头条/雪球",
+            "url": "https://m.toutiao.com/article/7636960892638511650/",
+            "summary": "DeepSeek大范围开放识图模式，支持原生多模态识别。网友测评显示可分析恐龙骨架结构、理解梗图、解答视错觉挑战。核心路线分歧：多模态领域'指代问题'大坑让许多竞品仍卡在灰度阶段，DeepSeek选择先开放再迭代。",
+            "date": "2026-05-09",
+            "region": "china",
+            "category": "AI应用"
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "ChatGPT从'搜索引擎替代'升级为'生活操作系统'：AI应用的平台化拐点",
+        "paragraphs": [
+          "Sam Altman透露Z世代将ChatGPT当'操作系统'使用——这不是比喻，是真实行为转变。大学生用ChatGPT规划日程、写论文、选课、社交建议，它正在取代的不是Google搜索，而是整个'信息获取+决策+执行'链条。",
+          "中国端的对应是Kimi K2.6：长程编码13小时、多智能体协同、主动自执行。Kimi从长文本工具升级为'智能体操作系统'。DeepSeek开放识图是同一逻辑——从单一能力(推理)扩展为全栈能力(推理+视觉+交互)。",
+          "这些信号指向同一个趋势：AI应用正从'工具'进化为'平台'。工具解决特定问题，平台承载全流程。当用户把AI当作操作系统时，竞争维度从'谁更准'升级为'谁能承载更多场景'。"
+        ],
+        "takeaway": "**关键判断**：AI应用正经历'平台化拐点'——ChatGPT/Z世代、Kimi/长程智能体、DeepSeek/多模态开放，都在从单点工具转向全场景平台。竞争核心从模型能力转向用户习惯锁定，谁先成为用户的'AI操作系统'，谁就获得平台级护城河。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\">\n  <div class=\"pi-header\">\n    <span class=\"pi-icon\">🔍</span>\n    <span class=\"pi-title\">模式洞察</span>\n  </div>\n  <div class=\"pi-body\">\n    <h4>AI的'Windows时刻'</h4>\n    <p><strong>从工具到平台的跃迁</strong>：当用户用ChatGPT替代的不是搜索而是操作系统级决策，AI应用迎来了自己的<strong>'Windows 95时刻'</strong>——从功能软件升级为平台生态。抓住这个拐点的产品将定义下一个十年的用户入口。</p>\n  </div>\n</div>"
+    },
+    {
+      "id": "industry",
+      "name": "AI行业",
+      "title": "🏭 AI行业",
+      "news": {
+        "overseas": [
+          {
+            "title": "AI初创Q1融资2420亿美元占全球3000亿八成，摩根士丹利上调Hyperscaler资本开支至8000亿",
+            "source": "Yahoo Finance/Morgan Stanley",
+            "url": "https://finance.yahoo.com/sectors/technology/articles/ai-startups-capture-242b-global-174530064.html",
+            "summary": "Q1 2026全球AI初创融资2420亿美元，占全球总融资3000亿美元的81%。摩根士丹利将五大Hyperscaler 2026年资本开支预测从4500亿上调至8000亿美元，2027年达1.16万亿。全球每周Tokens使用量自1月以来增长350%。AI基础设施融资进入'指数级增长'阶段。",
+            "date": "2026-05-10",
+            "region": "overseas",
+            "category": "AI行业"
+          },
+          {
+            "title": "OpenAI Deployment Company获40亿投资+收购Tomoro，Goldman/Bain/McKinsey参投",
+            "source": "Reuters/PYMNTS/Moneycontrol",
+            "url": "https://www.pymnts.com/news/artificial-intelligence/2026/openai-launches-4-billion-dollar-company-accelerate-enterprise-ai-adoption/",
+            "summary": "OpenAI成立Deployment Company(DeployCo)，初始投资超40亿美元，估值100亿。Goldman Sachs、Bain、McKinsey、Capgemini参投。收购伦敦Tomoro(150名FDE)。标志AI行业从'卖模型'到'卖落地'的服务化转型。",
+            "date": "2026-05-12",
+            "region": "overseas",
+            "category": "AI行业"
+          }
+        ],
+        "china": [
+          {
+            "title": "中国AI四小龙估值破万亿：智谱3775亿+DeepSeek 3065亿+MiniMax 2235亿+月之暗面1362亿",
+            "source": "网易/量子位/搜狐",
+            "url": "https://m.163.com/dy/article/KSE9B26305566SCS.html",
+            "summary": "2026年5月，中国AI四小龙合计估值突破1万亿人民币。智谱港股上市4个月市值4347亿港元(约3775亿元)排第一；DeepSeek一级市场450亿美元(约3065亿元)；MiniMax港股市值2573亿港元(约2235亿元)；月之暗面200亿美元(约1362亿元)。注意估值排序与收入完全倒挂——市场按'定义权'而非'收入'定价。",
+            "date": "2026-05-08",
+            "region": "china",
+            "category": "AI行业"
+          },
+          {
+            "title": "月之暗面完成20亿美元融资，估值破200亿，半年融资超39亿美元",
+            "source": "解放日报/头条",
+            "url": "https://m.jfdaily.com/staticsg/res/html/web/newsDetail.html?id=1108531",
+            "summary": "月之暗面完成新一轮20亿美元融资，由美团龙珠领投，中国移动、CPE源峰参投。投后估值突破200亿美元(约1450亿元人民币)。半年累计融资超39亿美元(376亿元)，居国内大模型创业公司之首。ARR从1亿美元(3月)跃升至2亿美元+(4月)，付费用户和API调用量快速上升。",
+            "date": "2026-05-07",
+            "region": "china",
+            "category": "AI行业"
+          },
+          {
+            "title": "广州发布AI产业2026工作要点：上半年组建AI产业投资基金",
+            "source": "金融界/网易",
+            "url": "https://m.163.com/dy/article/KSLKQJC20519QIKK.html",
+            "summary": "广州市发布《人工智能产业2026年工作要点》，明确上半年组建AI产业投资基金，探索'创业投资+科技信贷+财政补助'联动机制。支持药物研发、工业机器人、自动驾驶等场景行业模型开发。开展千款智能产品培育计划，支持AI眼镜、智能手表等爆款硬件。",
+            "date": "2026-05-11",
+            "region": "china",
+            "category": "AI行业"
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "中国AI四小龙万亿估值：'定义权定价'取代'收入定价'的资本逻辑",
+        "paragraphs": [
+          "智谱3775亿+DeepSeek 3065亿+MiniMax 2235亿+月之暗面1362亿，合计破万亿。但收入排序完全不同：智谱7.24亿、MiniMax 5.6亿、月之暗面2亿、DeepSeek未公开。估值与收入的严重倒挂揭示了一种全新定价逻辑——'定义权定价'。",
+          "DeepSeek零收入获3000亿估值，因为市场认为它能定义'国产AI基础设施'——开源生态+昇腾适配+成本优势=定义权。月之暗面半年融资39亿美元，因为K2.6的智能体能力被认为将定义'AI Agent操作系统'。智谱上市市值第一，因为收入证明了商业化能力=定义权可以变现。",
+          "摩根士丹利将Hyperscaler资本开支从4500亿上调至8000亿美元。全球Tokens用量1月以来增长350%。资本正在用真金白银押注：AI的终局不是多款共存，而是少数定义者赢者通吃。"
+        ],
+        "takeaway": "**关键判断**：中国AI进入'定义权争夺'阶段——估值不再看收入，看谁能定义行业标准和基础设施。DeepSeek(国产算力定义权)+月之暗面(Agent定义权)+智谱(商业化定义权)+MiniMax(出海定义权)，四家各占一个'定义权'位。资本在赌：拿到定义权的公司，回报将是指数级的。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\">\n  <div class=\"pi-header\">\n    <span class=\"pi-icon\">🔍</span>\n    <span class=\"pi-title\">模式洞察</span>\n  </div>\n  <div class=\"pi-body\">\n    <h4>定义权定价：AI估值的量子跃迁</h4>\n    <p><strong>从SaaS估值到'定义权估值'</strong>：传统SaaS按ARR倍数定价，AI公司按'定义权'定价——谁能成为AI时代的<strong>基础设施</strong>(操作系统/芯片/协议)，谁就值万亿。这解释了为什么DeepSeek零收入值3000亿，因为市场在买'中国AI定义权'的期权。</p>\n  </div>\n</div>"
+    },
+    {
+      "id": "enterprise",
+      "name": "企业转型",
+      "title": "🔄 企业转型",
+      "news": {
+        "overseas": [
+          {
+            "title": "OpenAI DeployCo：40亿美元押注企业AI部署，从卖模型到卖落地",
+            "source": "Reuters/Business Insider",
+            "url": "https://www.businessinsider.com/experts-react-openai-deployment-company-2026-5",
+            "summary": "OpenAI成立独立部署公司，Goldman Sachs/Bain/McKinsey/Capgemini参投。Forward Deployed Engineers(FDE)模式类似Palantir——专家嵌入企业帮建AI系统。Box CEO Aaron Levie称市场急需此类服务。标志AI行业从'卖API'到'卖交付'的转型。",
+            "date": "2026-05-12",
+            "region": "overseas",
+            "category": "企业转型"
+          },
+          {
+            "title": "Deloitte 2026企业AI报告：Agentic AI、主权AI、Edge AI成三大趋势",
+            "source": "Deloitte/SpectroCloud",
+            "url": "https://www.spectrocloud.com/blog/enterprise-ai-2026-trends",
+            "summary": "Deloitte发布2026企业AI状态报告，强调Agentic AI(自主智能体)、Sovereign AI(主权AI)、Edge AI(边缘AI)、AI工厂四大趋势。57%企业已在生产环境部署多步工作流AI Agent，大型企业比例达67%。AI正从'特征清单'进入'组织架构图'。",
+            "date": "2026-05-10",
+            "region": "overseas",
+            "category": "企业转型"
+          }
+        ],
+        "china": [
+          {
+            "title": "工信部白皮书：2026企业AI数字化转型市场破5800亿，年增31%",
+            "source": "头条",
+            "url": "https://m.toutiao.com/a7636988720104718886/",
+            "summary": "工信部《2026中国AI产业发展白皮书》显示企业AI数字化转型市场将破5800亿元，年复合增长率31%。92%中大型企业已启动AI布局，但仅14%完成适配自身的AI行业架构。超7成因架构设计不合理陷入'投入大、效果差、适配难'困境。",
+            "date": "2026-05-07",
+            "region": "china",
+            "category": "企业转型"
+          },
+          {
+            "title": "57%企业已在生产部署AI Agent，意图式计算取代对话框交互",
+            "source": "东方财富/头条",
+            "url": "https://caifuhao.eastmoney.com/news/20260511135218678030040",
+            "summary": "超过57%企业已在生产环境部署多步工作流AI Agent，大型企业比例达67%。下一代AI Agent不再依赖提示词，而是通过主动观察工作流、理解业务场景直接生成行动方案。采用意图式交互的企业，单次任务处理时间平均缩短40分钟。",
+            "date": "2026-05-11",
+            "region": "china",
+            "category": "企业转型"
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "企业AI的'最后一公里'：OpenAI DeployCo模式能否打通从模型到价值的断层",
+        "paragraphs": [
+          "OpenAI花40亿美元成立DeployCo，收购Tomoro，联合Goldman/Bain/McKinsey——本质上在解决一个核心问题：企业买了AI模型但不会用。Deloitte报告显示92%企业已启动AI，但仅14%完成适配自身的架构。这是AI行业的'最后一公里'问题。",
+          "中国端数据同样触目：工信部白皮书显示5800亿市场、31%增速，但超7成企业陷入'投入大效果差'困境。57%企业已部署AI Agent，但'意图式计算'仍在早期——多数Agent还是'对话框交互'而非'主动理解业务场景'。",
+          "OpenAI DeployCo的FDE(Forward Deployed Engineer)模式类似Palantir——专家嵌入企业帮建系统。这可能是AI商业化的关键转折：从'卖模型'到'卖交付'，从'API调用'到'业务结果'。Goldman/Bain/McKinsey的参投说明咨询业也认同这个方向。"
+        ],
+        "takeaway": "**关键判断**：企业AI的瓶颈从'模型不够强'转为'不会部署'。OpenAI DeployCo+FDE模式、国内5800亿市场+7成失败率，都指向同一个机会——AI部署服务将成最大增量市场。谁能做好'模型→业务结果'的最后一公里，谁就抓住AI商业化的第二波红利。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\">\n  <div class=\"pi-header\">\n    <span class=\"pi-icon\">🔍</span>\n    <span class=\"pi-title\">模式洞察</span>\n  </div>\n  <div class=\"pi-body\">\n    <h4>AI的'Palantir时刻'</h4>\n    <p><strong>从SaaS到AI-as-Service</strong>：OpenAI DeployCo的FDE模式复制了Palantir的成功路径——<strong>不是卖软件，是卖交付结果</strong>。当92%企业买了AI但86%不会用时，'部署服务'本身就是万亿级市场。AI商业化第二波红利的赢家可能是部署服务商，而非模型公司。</p>\n  </div>\n</div>"
+    }
+  ],
+  "overview": [
+    {
+      "tab": "大模型",
+      "emoji": "🧠",
+      "summary": "DeepSeek完成500亿首轮融资创中国AI纪录，创始人自投200亿；谷歌首次拦截AI开发零日漏洞攻击，攻防AI化时代来临；OpenAI成立40亿美元DeployCo加速企业AI落地",
+      "headline": "融资+安全+部署三线并发"
+    },
+    {
+      "tab": "AI Coding",
+      "emoji": "⌨️",
+      "summary": "Cursor/Claude Code/Trae SOLO三足鼎立格局成型，多Agent并行+端到端自动化+百万Token上下文成新标准；Trae免费策略倒逼全行业降价",
+      "headline": "AI编程进入'工具链组合'时代"
+    },
+    {
+      "tab": "AI应用",
+      "emoji": "📱",
+      "summary": "Altman称Z世代将ChatGPT当操作系统；Kimi K2.6长程编码13小时+多智能体协同；DeepSeek开放识图跨入多模态时代",
+      "headline": "AI应用平台化拐点"
+    },
+    {
+      "tab": "AI行业",
+      "emoji": "🏭",
+      "summary": "中国AI四小龙估值破万亿；Q1全球AI融资2420亿美元；摩根士丹利上调Hyperscaler资本开支至8000亿；月之暗面20亿美元融资估值200亿",
+      "headline": "万亿估值+定义权定价"
+    },
+    {
+      "tab": "企业转型",
+      "emoji": "🔄",
+      "summary": "OpenAI DeployCo 40亿美元押注企业AI部署；工信部白皮书5800亿市场7成失败率；57%企业已部署AI Agent但意图式计算仍在早期",
+      "headline": "AI部署服务=最大增量市场"
+    }
+  ],
+  "heat_trend": {
+    "top_items": [
+      {
+        "rank": 1,
+        "title": "DeepSeek 500亿融资创中国AI纪录：创始人自投200亿+国家大基金领投",
+        "signal": "首轮融资规模超所有中国AI公司历史纪录，投后估值515亿美元，创始人自投40%前所未有，6月推V4.1+多模态",
+        "trend": "hot"
+      },
+      {
+        "rank": 2,
+        "title": "谷歌拦截AI零日漏洞攻击：首例AI武器化攻击被阻断，攻防进入算法时代",
+        "signal": "攻击突破时间从48分钟降至27秒，脚本含幻觉CVSS评分等LLM痕迹，Mythos模型受控发布=类核武管控",
+        "trend": "hot"
+      },
+      {
+        "rank": 3,
+        "title": "OpenAI DeployCo 40亿美元：Goldman/Bain/McKinsey参投，从卖模型到卖落地",
+        "signal": "FDE模式复制Palantir路径，AI商业化从API转向业务结果交付，企业AI部署服务成最大增量市场",
+        "trend": "hot"
+      },
+      {
+        "rank": 4,
+        "title": "中国AI四小龙估值破万亿：智谱3775亿+DeepSeek 3065亿+MiniMax 2235亿+月之暗面1362亿",
+        "signal": "估值与收入严重倒挂，'定义权定价'取代'收入定价'成为AI公司估值新逻辑",
+        "trend": "rising"
+      },
+      {
+        "rank": 5,
+        "title": "AI编程三足鼎立：Cursor日常+Claude Code重写+Trae免费全流程",
+        "signal": "Trae SOLO免费策略倒逼行业降价，GitHub Copilot 6月用量计费生效，AI编程进入'工具链组合'时代",
+        "trend": "rising"
+      }
+    ]
+  },
+  "watch_list": [
+    {
+      "name": "DeepSeek V4.1（6月发布）：多模态+MCP协议+企业工具链",
+      "desc": "500亿融资后的首个产品迭代，将新增图文音理解和MCP适配，验证融资后加速迭代的承诺"
+    },
+    {
+      "name": "Google I/O 2026（5月19日）：Gemini 4.0/Agentic AI/Android 17/XR眼镜",
+      "desc": "Google年度旗舰发布会，Gemini重大更新预期将重新定义AI助手能力边界"
+    },
+    {
+      "name": "GitHub Copilot用量计费（6月1日）：定价模式转型",
+      "desc": "从flat订阅到credit池，将影响大量开发团队的AI Coding预算和工具选择"
+    },
+    {
+      "name": "OpenAI DeployCo后续：更多收购+首批FDE客户案例",
+      "desc": "40亿美元投后首个季度的交付成果将验证FDE模式的有效性"
+    },
+    {
+      "name": "AI安全监管：Mythos模式是否会成为高风险模型标准",
+      "desc": "Anthropic Mythos的受控发布+谷歌拦截AI攻击，将推动AI安全监管加速"
+    }
+  ],
+  "coverage": {
+    "overseas": 16,
+    "china": 14,
+    "weixin": 2
+  },
+  "data_snapshot": [
+    {
+      "metric": "海外新闻",
+      "value": "16",
+      "change": "5板块覆盖"
+    },
+    {
+      "metric": "国内新闻",
+      "value": "14",
+      "change": "微信+头条+公众号"
+    },
+    {
+      "metric": "总条数",
+      "value": "30",
+      "change": "5板块均衡"
+    }
+  ],
+  "capability_update": "🤖 **林克自述**\n\n今天的三个核心信号形成一条完整的逻辑链：\n\nDeepSeek 500亿融资→定义权定价逻辑成立→资本用真金白银投票押注AI终局是少数定义者赢者通吃。\n\n谷歌拦截AI零日攻击→AI武器化已从理论变成现实→高风险AI模型的'类核武管控'(Mythos模式)将成为标准。\n\nOpenAI DeployCo 40亿美元→企业AI瓶颈从模型不够强转为不会部署→AI商业化第二波红利属于部署服务商。\n\n这三个信号指向同一个大图景：AI正在从'技术竞赛'升级为'资本+安全+交付'的三维博弈。能同时赢下三个维度的公司，将定义下一个十年的AI格局。"
+}
