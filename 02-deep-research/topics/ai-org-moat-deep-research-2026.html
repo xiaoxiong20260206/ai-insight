@@ -1,824 +1,1023 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>护城河不在代码里——组织形态才是AI时代真正抄不走的东西 | AI Insight</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23533483'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='white'>⚗</text></svg>">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,700;1,9..40,400&family=Noto+Sans+SC:wght@400&family=JetBrains+Mono:wght@400&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,700;1,9..40,400&family=Noto+Sans+SC:wght@400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet"></noscript>
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>护城河不在代码里——组织形态才是AI时代真正抄不走的东西</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+
 /* ================================================
-   DESIGN SYSTEM — 清爽调研风格 v3.2 + 深度调研定制
+   DESIGN SYSTEM TOKENS — v4.3 (DM Sans + 叙事混合)
    ================================================ */
 :root {
-    --color-success: #059669; --color-success-light: #10B981; --color-success-50: #ECFDF5;
-    --color-danger: #E11D48; --color-danger-50: #FFF1F2;
-    --color-warning: #D97706; --color-warning-50: #FFFBEB;
-    --color-info: #2563EB; --color-info-50: #EFF6FF;
-    --color-purple: #7C3AED; --color-purple-50: #F5F3FF;
-    --color-text-primary: #1C1917; --color-text-secondary: #57534E; --color-text-muted: #78716C;
-    --color-border: #E7E5E4; --color-border-light: #F5F5F4;
-    --color-bg: #F8FAFB; --color-bg-card: #FFFFFF; --color-bg-table-header: #FAFAF9;
-    --gradient-success: linear-gradient(135deg, #059669 0%, #10B981 100%);
+    --color-success: #059669; --color-success-light: #10B981; --color-success-dark: #047857;
+    --color-success-50: #ECFDF5; --color-success-100: #D1FAE5;
+    --color-danger: #E11D48; --color-danger-light: #F43F5E; --color-danger-50: #FFF1F2;
+    --color-warning: #D97706; --color-warning-light: #F59E0B; --color-warning-50: #FFFBEB;
+    --color-info: #2563EB; --color-info-light: #3B82F6;
+    --color-info-50: #EFF6FF; --color-info-100: #DBEAFE;
+    --color-purple: #7C3AED; --color-purple-light: #8B5CF6;
+    --color-purple-50: #F5F3FF; --color-purple-100: #EDE9FE;
+
+    --color-text-primary: #1C1917;
+    --color-text-secondary: #57534E;
+    --color-text-muted: #78716C;
+    --color-border: #E7E5E4;
+    --color-border-light: #F5F5F4;
+    --color-bg: #F8FAFB;
+    --color-bg-card: #FFFFFF;
+    --color-bg-table-header: #FAFAF9;
+    --color-bg-hover: rgba(0,0,0,0.025);
+
     --gradient-hero: linear-gradient(135deg, #059669 0%, #2563EB 50%, #7C3AED 100%);
-    --gradient-mesh: radial-gradient(at 20% 20%, rgba(5,150,105,0.08) 0%, transparent 50%), radial-gradient(at 80% 80%, rgba(37,99,235,0.06) 0%, transparent 50%), radial-gradient(at 50% 50%, rgba(124,58,237,0.04) 0%, transparent 50%);
+    --gradient-success: linear-gradient(135deg, #059669 0%, #10B981 100%);
+    --gradient-mesh:
+        radial-gradient(at 20% 20%, rgba(5,150,105,0.08) 0%, transparent 50%),
+        radial-gradient(at 80% 80%, rgba(37,99,235,0.06) 0%, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(124,58,237,0.04) 0%, transparent 50%);
+
     --shadow-card: 0 2px 8px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-    --shadow-hover: 0 6px 16px rgba(5,150,105,0.15), 0 2px 6px rgba(5,150,105,0.1);
+    --shadow-card-rich: 0 4px 16px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.9);
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.04);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 24px rgba(5,150,105,0.18), 0 2px 8px rgba(5,150,105,0.10);
+    --shadow-glow-success: 0 4px 14px rgba(5,150,105,0.15);
+    --shadow-glow-purple: 0 4px 14px rgba(124,58,237,0.15);
+
+    --glass-bg: rgba(255,255,255,0.88);
+    --glass-blur: blur(24px) saturate(2);
+    --glass-border: 1px solid rgba(255,255,255,0.75);
+    --glass-shadow: 0 4px 20px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.9);
+
     --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
-    --font-family: -apple-system, "SF Pro Display", "system-ui", "Noto Sans SC", sans-serif;
+    --radius-xl: 20px; --radius-2xl: 24px; --radius-full: 9999px;
+
+    --spacing-xs: 4px; --spacing-sm: 8px; --spacing-md: 16px;
+    --spacing-lg: 24px; --spacing-xl: 32px; --spacing-2xl: 40px;
+
+    --font-family: "DM Sans", -apple-system, "SF Pro Text", "Noto Sans SC", "PingFang SC", sans-serif;
+    --font-family-cn: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    --font-family-heading: "DM Sans", -apple-system, "SF Pro Display", "Noto Sans SC", sans-serif;
+    --font-family-mono: "JetBrains Mono", "SF Mono", "Fira Code", monospace;
+    --font-editorial-body: "Libre Baskerville", Georgia, "Noto Serif SC", serif;
+
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
     --transition-normal: 200ms cubic-bezier(0.4, 0, 0.2, 1);
-    --content-max: 980px;
+    --transition-spring: 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    --content-max-width: 980px;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { font-family: var(--font-family); font-size: 15px; line-height: 1.65; color: var(--color-text-secondary); background: var(--color-bg); background-image: var(--gradient-mesh); background-attachment: fixed; -webkit-font-smoothing: antialiased; }
+html { scroll-behavior: smooth; font-size: 15px; }
+body {
+    font-family: var(--font-family);
+    background: var(--color-bg);
+    background-image: var(--gradient-mesh);
+    /* background-attachment:fixed 禁止 GPU 光栅化，改用伪元素固定背景 */
+    background-attachment: scroll;
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
 a { color: var(--color-info); text-decoration: none; }
 a:hover { color: var(--color-success); }
-
-.container { max-width: var(--content-max); margin: 0 auto; padding: 20px; }
-
-/* ===== Header ===== */
-.header { text-align: center; padding: 40px 0 28px; position: relative; }
-.header::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gradient-hero); }
-.header-title { font-size: 32px; font-weight: 800; background: var(--gradient-hero); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 12px; line-height: 1.2; }
-.header-subtitle { font-size: 15px; color: var(--color-text-muted); line-height: 1.7; margin-bottom: 16px; }
-.header-meta { display: flex; justify-content: center; gap: 12px; font-size: 13px; color: var(--color-text-muted); flex-wrap: wrap; }
-.header-thesis { display: inline-block; padding: 8px 16px; background: var(--color-purple-50); border: 1px solid rgba(124,58,237,0.3); border-radius: var(--radius-md); font-size: 14px; font-weight: 600; color: var(--color-purple); margin: 16px 0; }
-
-/* ===== Tab Navigation (毛玻璃) ===== */
-.tab-nav { display: flex; background: rgba(255,255,255,0.85); backdrop-filter: blur(20px) saturate(1.8); -webkit-backdrop-filter: blur(20px) saturate(1.8); border: 1px solid rgba(255,255,255,0.7); border-radius: var(--radius-lg); padding: 5px; position: sticky; top: 12px; z-index: 100; margin: 24px 0; box-shadow: var(--shadow-card); overflow-x: auto; }
-.tab-btn { flex: 1; min-width: 90px; padding: 10px 14px; border: none; background: transparent; font-size: 13px; font-weight: 600; color: var(--color-text-muted); cursor: pointer; border-radius: var(--radius-md); transition: all var(--transition-normal); white-space: nowrap; font-family: var(--font-family); }
-.tab-btn:hover { color: var(--color-success); background: var(--color-success-50); }
-.tab-btn.active { background: var(--gradient-success); color: #fff; box-shadow: 0 4px 14px rgba(5,150,105,0.15); }
-.tab-content { display: none; }
-.tab-content.active { display: block; }
-
-/* ===== Chapter Header ===== */
-.ch-lead { background: linear-gradient(135deg, var(--color-bg-card), var(--color-bg-table-header)); border: 1px solid var(--color-border); border-left: 4px solid var(--color-success); border-radius: var(--radius-lg); padding: 20px 24px; margin-bottom: 24px; box-shadow: var(--shadow-card); }
-.ch-label { font-size: 11px; font-weight: 800; color: var(--color-success); letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 6px; }
-.ch-title { font-size: 20px; font-weight: 800; color: var(--color-text-primary); margin-bottom: 4px; }
-.ch-desc { font-size: 14px; color: var(--color-text-secondary); line-height: 1.65; }
-.section-divider { border: none; border-top: 1px solid var(--color-border-light); margin: 40px 0 0; }
-
-/* ===== Cards ===== */
-.card { background: var(--color-bg-card); border: 1px solid var(--color-border-light); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 16px; box-shadow: var(--shadow-card); transition: all var(--transition-normal); }
-.card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: var(--color-success); }
-
-/* ===== Tags ===== */
-.tag { display: inline-flex; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; margin-right: 6px; margin-bottom: 6px; }
-.tag-green { background: var(--color-success-50); color: var(--color-success); }
-.tag-blue { background: var(--color-info-50); color: var(--color-info); }
-.tag-purple { background: var(--color-purple-50); color: var(--color-purple); }
-.tag-amber { background: #FEF3C7; color: var(--color-warning); }
-.tag-rose { background: #FFE4E6; color: var(--color-danger); }
-
-/* ===== Section Titles ===== */
-.sec { margin-top: 24px; margin-bottom: 16px; }
-.sec-h { font-size: 17px; font-weight: 800; color: var(--color-text-primary); margin-bottom: 8px; }
-
-/* ===== Info Boxes ===== */
-.ib { background: var(--color-bg-card); border: 1px solid var(--color-border-light); border-radius: var(--radius-md); padding: 16px 20px; margin-bottom: 12px; }
-.ib-green { border-left: 3px solid var(--color-success); }
-.ib-blue { border-left: 3px solid var(--color-info); }
-.ib-purple { border-left: 3px solid var(--color-purple); }
-.ib-amber { border-left: 3px solid var(--color-warning); }
-.ib-rose { border-left: 3px solid var(--color-danger); }
-.ib-label { font-size: 11px; font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 6px; }
-.ib-green .ib-label { color: var(--color-success); }
-.ib-blue .ib-label { color: var(--color-info); }
-.ib-purple .ib-label { color: var(--color-purple); }
-.ib-amber .ib-label { color: var(--color-warning); }
-.ib-rose .ib-label { color: var(--color-danger); }
-
-/* ===== Tables ===== */
-.compare-table { width: 100%; border-collapse: collapse; background: var(--color-bg-card); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-card); margin: 16px 0; }
-.compare-table th, .compare-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--color-border-light); font-size: 14px; }
-.compare-table th { background: var(--color-bg-table-header); font-weight: 600; color: var(--color-text-primary); }
-.compare-table tr:hover td { background: var(--color-success-50); }
-
-/* ===== Stat Grid ===== */
-.stat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; margin: 20px 0; }
-.stat-card { background: var(--color-bg-card); border: 1px solid var(--color-border-light); border-radius: var(--radius-md); padding: 16px; text-align: center; box-shadow: var(--shadow-card); }
-.stat-num { font-size: 24px; font-weight: 800; font-variant-numeric: tabular-nums; }
-
-/* ===== Progress Bar ===== */
-.progress-bar { height: 6px; background: var(--color-border-light); border-radius: 3px; margin-top: 8px; overflow: hidden; }
-.progress-bar-fill { height: 100%; background: var(--gradient-success); border-radius: 3px; width: 0; transition: width 1s ease; }
-
-/* ===== Evo Flow ===== */
-.evo-flow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 16px 0; }
-.evo-step { display: flex; align-items: center; gap: 8px; padding: 8px 14px; background: var(--color-bg-card); border: 1px solid var(--color-border-light); border-radius: 8px; }
-.evo-step.active { border-color: var(--color-success); background: rgba(5,150,105,0.05); }
-.evo-tag { font-size: 10px; font-weight: 800; padding: 2px 7px; border-radius: 4px; }
-.evo-arrow { font-size: 20px; color: var(--color-text-muted); }
-
-/* ===== Four Grid ===== */
-.g4 { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; margin: 20px 0; }
-
-/* ===== Two Column ===== */
-.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
-@media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
-
-/* ===== Highlight ===== */
-.highlight { background: linear-gradient(135deg, rgba(5,150,105,0.1) 0%, rgba(5,150,105,0.05) 100%); border-left: 3px solid var(--color-success); padding: 16px 20px; margin: 16px 0; border-radius: 0 var(--radius-md) var(--radius-md) 0; }
-.highlight strong { color: var(--color-success); }
-
-/* ===== Warning Box ===== */
-.warning-box { background: #FEF2F2; border: 1px solid rgba(225,29,72,0.2); border-radius: var(--radius-md); padding: 16px 20px; margin: 16px 0; }
-
-/* ===== Chapter Image ===== */
-.chapter-img { margin: 0 0 24px; border-radius: var(--radius-lg); overflow: hidden; }
-.chapter-img img { display: block; width: 100%; height: auto; }
-.chapter-img-cap { padding: 8px 12px; background: rgba(28,25,23,0.04); font-size: 12px; color: var(--color-text-muted); text-align: center; font-style: italic; }
-
-/* ===== Footer Refs ===== */
-.footer-refs { font-size: 12px; color: var(--color-text-muted); line-height: 1.8; }
-.footer-refs a { color: var(--color-info); }
-.footer-refs a:hover { color: var(--color-success); }
-
-/* ===== Responsive ===== */
-@media (max-width: 768px) {
-    .stat-grid { grid-template-columns: repeat(2, 1fr); }
-    .g4 { grid-template-columns: repeat(2, 1fr); }
-    .tab-btn { min-width: 70px; padding: 8px 10px; font-size: 12px; }
+p { margin-bottom: 10px; }
+p:last-child { margin-bottom: 0; }
+strong { font-weight: 700; }
+code {
+    font-family: var(--font-family-mono);
+    font-size: .85em;
+    background: var(--color-bg-table-header);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 1px 5px;
 }
 
-/* ===== Animation helpers ===== */
-.animate-on-scroll { opacity: 1; transform: none; }
+/* ================================================
+   叙事型 HERO（dark-editorial 扩展层）
+   ================================================ */
+.editorial-hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 55%, #0f3460 100%);
+    color: white;
+    padding: 72px 0 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+.editorial-hero-inner {
+    max-width: var(--content-max-width);
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+}
+.editorial-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='1' fill='%23ffffff08'/%3E%3C/svg%3E") repeat;
+    pointer-events: none;
+    z-index: 0;
+}
+.editorial-hero::after {
+    content: '';
+    position: absolute;
+    width: 360px; height: 360px;
+    background: radial-gradient(circle, rgba(83,52,131,.28), transparent 70%);
+    top: -80px; right: -60px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+}
+.editorial-hero-badge {
+    display: inline-block;
+    background: #e94560;
+    color: white;
+    font-size: 11px;
+    font-family: var(--font-family-mono);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 2px;
+    margin-bottom: 22px;
+    position: relative;
+}
+.editorial-hero h1 {
+    font-family: var(--font-family-heading);
+    font-size: clamp(1.7rem, 4vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -0.025em;
+    max-width: 820px;
+    margin: 0 auto 14px;
+    position: relative;
+}
+.editorial-hero h1 .hl-amber { color: #f59e0b; }
+.editorial-hero h1 .hl-red   { color: #f87171; }
+.editorial-hero .subtitle {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.68);
+    max-width: 600px;
+    margin: 0 auto 28px;
+    font-family: var(--font-editorial-body);
+    line-height: 1.7;
+    position: relative;
+}
+.editorial-hero-thesis {
+    display: inline-block;
+    background: rgba(83,52,131,.32);
+    border: 1px solid rgba(139,92,246,.4);
+    border-radius: var(--radius-sm);
+    padding: 9px 20px;
+    color: #c4b5fd;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    position: relative;
+}
+.editorial-hero-thesis span { color: #a78bfa; }
+.editorial-hero-meta {
+    display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;
+    font-size: 12.5px; color: rgba(255,255,255,0.42);
+    position: relative;
+}
 
-</style>
+/* ================================================
+   STICKY NAV（毛玻璃）
+   ================================================ */
+.nav-wrap {
+    background: var(--glass-bg);
+    /* 降低 blur 半径：24px→8px，减少 GPU 合成层开销 */
+    backdrop-filter: blur(8px) saturate(1.6);
+    -webkit-backdrop-filter: blur(8px) saturate(1.6);
+    border-bottom: var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    position: sticky; top: 0; z-index: 100;
+    /* 提升为合成层，避免滚动时重绘背景 */
+    will-change: transform;
+    transform: translateZ(0);
+}
+.nav-inner {
+    max-width: var(--content-max-width);
+    width: 100%;
+    margin: 0 auto; padding: 0 20px;
+    display: flex; gap: 0;
+    overflow-x: auto; scrollbar-width: none;
+}
+.nav-inner::-webkit-scrollbar { display: none; }
+.nav-btn {
+    display: flex; align-items: center; gap: 7px;
+    padding: 14px 18px;
+    color: var(--color-text-muted);
+    font-family: var(--font-family);
+    font-size: 13px; font-weight: 500;
+    white-space: nowrap;
+    border: none; border-bottom: 2px solid transparent;
+    background: none; cursor: pointer;
+    transition: color var(--transition-fast), border-color var(--transition-fast);
+    letter-spacing: -0.01em;
+}
+.nav-btn:hover { color: var(--color-success); }
+.nav-btn.active { color: var(--color-success); border-bottom-color: var(--color-success); font-weight: 700; }
+.nav-step {
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--color-bg-table-header);
+    font-size: 10px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--color-text-muted);
+    transition: background var(--transition-fast), color var(--transition-fast);
+}
+.nav-btn.active .nav-step { background: var(--color-success); color: #fff; }
+
+/* ================================================
+   CHAPTER IMAGE — 随 .pg 的 padding 自然缩进，不设 width:100%
+   ================================================ */
+.chapter-img {
+    margin: 0 0 28px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-border);
+}
+.chapter-img img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}
+.chapter-img-cap {
+    background: var(--color-bg-table-header);
+    border-top: 1px solid var(--color-border-light);
+    padding: 8px 14px;
+    font-size: 12px;
+    color: var(--color-text-muted);
+    text-align: center;
+}
+
+/* ================================================
+   PAGE LAYOUT
+   ================================================ */
+/* ---- .pg 宽度正确写法：不设 width，让 max-width + margin:auto 控制居中 ---- */
+.pg { max-width: var(--content-max-width); margin: 0 auto; padding: 36px 20px 24px; box-sizing: border-box; }
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+
+/* ── 章节导读卡 ── */
+.ch-lead {
+    background: linear-gradient(135deg, var(--color-bg-card), var(--color-bg-table-header));
+    border: 1px solid var(--color-border);
+    border-left: 4px solid var(--color-success);
+    border-radius: var(--radius-lg);
+    padding: 22px 26px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow-card);
+}
+.ch-label {
+    font-size: 11px; font-weight: 800; color: var(--color-success);
+    letter-spacing: .8px; text-transform: uppercase; margin-bottom: 6px;
+}
+.ch-title { font-size: 20px; font-weight: 800; color: var(--color-text-primary); margin-bottom: 6px; letter-spacing: -0.02em; }
+.ch-desc { font-size: 14px; color: var(--color-text-secondary); line-height: 1.65; }
+
+/* ── Section 标题 ── */
+.sec { margin-top: 34px; margin-bottom: 18px; }
+.sec-h { font-size: 17px; font-weight: 800; color: var(--color-text-primary); margin-bottom: 4px; letter-spacing: -0.02em; }
+.sec-sub { font-size: 13px; color: var(--color-text-muted); }
+
+/* ── 分割线 ── */
+.div { border: none; border-top: 1px solid var(--color-border-light); margin: 28px 0; }
+
+/* ── 卡片 ── */
+.card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 22px 24px;
+    box-shadow: var(--shadow-card);
+    margin-bottom: 16px;
+    transition: all var(--transition-normal);
+}
+.card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); will-change: transform; }
+.card-h {
+    font-size: 15px; font-weight: 700;
+    color: var(--color-text-primary);
+    display: flex; align-items: center; gap: 9px;
+    margin-bottom: 14px;
+    letter-spacing: -0.01em;
+}
+.card-ico {
+    width: 30px; height: 30px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; flex-shrink: 0;
+}
+
+/* ── 网格 ── */
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.g3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.g4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+@media(max-width:768px){ .g2,.g3,.g4{ grid-template-columns:1fr 1fr; } }
+@media(max-width:480px){ .g2,.g3,.g4{ grid-template-columns:1fr; } }
+
+/* ── 统计卡片 ── */
+.sc {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    text-align: center;
+    box-shadow: var(--shadow-card);
+    transition: all var(--transition-normal);
+    position: relative; overflow: hidden;
+}
+.sc::before {
+    content: ''; position: absolute; top:0; left:0; right:0; height:3px;
+    background: var(--gradient-success);
+}
+.sc.info::before   { background: var(--color-info); }
+.sc.danger::before { background: var(--color-danger); }
+.sc.purple::before { background: var(--color-purple); }
+.sc:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); will-change: transform; }
+.sc-num {
+    font-size: 32px; font-weight: 800; line-height: 1.1;
+    background: var(--gradient-success);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    font-variant-numeric: tabular-nums;
+    display: block; margin-bottom: 4px;
+}
+.sc-num.red { background: linear-gradient(135deg,#E11D48,#F43F5E); -webkit-background-clip:text; background-clip:text; }
+.sc-num.blue { background: linear-gradient(135deg,#2563EB,#3B82F6); -webkit-background-clip:text; background-clip:text; }
+.sc-label { font-size: 12px; font-weight: 600; color: var(--color-text-muted); text-transform: uppercase; letter-spacing:.05em; }
+.sc-note  { font-size: 11px; color: var(--color-text-muted); margin-top:4px; }
+
+/* ── Insight 洞察框 ── */
+.ib {
+    background: linear-gradient(135deg, #eeecff 0%, #f5f3ff 100%);
+    border: 1px solid #c4b5fd;
+    border-left: 4px solid var(--color-purple);
+    border-radius: var(--radius-sm);
+    padding: 16px 20px; margin: 16px 0;
+}
+.ib-label { font-size: 11px; font-weight: 800; color: var(--color-purple); letter-spacing:.7px; text-transform:uppercase; margin-bottom:5px; }
+.ib-text  { font-size: 14px; font-weight: 600; color: #312e81; line-height: 1.6; }
+.ib-green { background: #ecfdf5; border-color: #6ee7b7; border-left-color: var(--color-success); }
+.ib-green .ib-label { color: var(--color-success); }
+.ib-green .ib-text  { color: #064e3b; }
+.ib-amber { background: #fffbeb; border-color: #fcd34d; border-left-color: var(--color-warning); }
+.ib-amber .ib-label { color: var(--color-warning); }
+.ib-amber .ib-text  { color: #78350f; }
+.ib-red   { background: #fff5f5; border-color: #fca5a5; border-left-color: var(--color-danger); }
+.ib-red .ib-label   { color: var(--color-danger); }
+.ib-red .ib-text    { color: #7f1d1d; }
+.ib-info  { background: #eff6ff; border-color: #93c5fd; border-left-color: var(--color-info); }
+.ib-info .ib-label  { color: var(--color-info); }
+.ib-info .ib-text   { color: #1e3a8a; }
+
+/* ── 引用框 ── */
+.qt {
+    background: var(--color-bg-table-header);
+    border-left: 3px solid var(--color-info);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    padding: 12px 18px; margin: 14px 0;
+    font-style: italic; color: var(--color-text-secondary);
+    font-family: var(--font-editorial-body);
+    font-size: 14px; line-height: 1.7; position: relative;
+}
+.qt cite { display:block; font-style:normal; font-size:12px; color:var(--color-text-muted); margin-top:6px; }
+
+/* ── Badge 状态标签 ── */
+.badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 3px 10px; border-radius: var(--radius-full);
+    font-size: 12px; font-weight: 600; white-space: nowrap;
+}
+.badge::before { content:''; width:5px; height:5px; border-radius:50%; background:currentColor; flex-shrink:0; }
+.b-success { background:rgba(5,150,105,.1); color:var(--color-success); }
+.b-danger  { background:rgba(225,29,72,.1); color:var(--color-danger); }
+.b-info    { background:rgba(37,99,235,.1); color:var(--color-info); }
+.b-purple  { background:rgba(124,58,237,.1); color:var(--color-purple); }
+.b-warning { background:rgba(217,119,6,.1); color:var(--color-warning); }
+.b-neutral { background:rgba(120,113,108,.1); color:var(--color-text-muted); }
+.b-success-solid { background:var(--color-success); color:#fff; }
+.b-danger-solid  { background:var(--color-danger);  color:#fff; }
+.b-info-solid    { background:var(--color-info);    color:#fff; }
+
+/* ── 表格 ── */
+.tbl-wrap { border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--color-border); }
+.tbl { width:100%; border-collapse:collapse; font-size:13.5px; }
+.tbl th {
+    background: var(--color-bg-table-header); color:var(--color-text-muted);
+    font-size:11.5px; font-weight:700; letter-spacing:.4px; text-transform:uppercase;
+    padding:10px 14px; text-align:left; border-bottom:1px solid var(--color-border);
+}
+.tbl td { padding:11px 14px; border-bottom:1px solid var(--color-border-light); color:var(--color-text-secondary); vertical-align:middle; }
+.tbl tr:last-child td { border-bottom:none; }
+.tbl tbody tr:hover td { background:var(--color-bg-hover); }
+.tbl-hl { background: rgba(5,150,105,.04); }
+
+/* ── 时间线 ── */
+.tl { position:relative; padding-left:30px; }
+.tl::before {
+    content:''; position:absolute; left:10px; top:8px; bottom:8px;
+    width:2px; background:linear-gradient(to bottom, var(--color-success), var(--color-info));
+    border-radius:1px;
+}
+.tl-item { position:relative; margin-bottom:22px; }
+.tl-item:last-child { margin-bottom:0; }
+.tl-item::before {
+    content:''; position:absolute; left:-23px; top:5px;
+    width:12px; height:12px; border-radius:50%;
+    background: var(--color-bg-card); border:2px solid var(--color-success);
+    transition: all var(--transition-fast);
+}
+.tl-item:hover::before { background:var(--color-success); transform:scale(1.3); box-shadow:var(--shadow-glow-success); }
+.tl-item.danger::before { border-color:var(--color-danger); }
+.tl-item.danger:hover::before { background:var(--color-danger); }
+.tl-title { font-weight:700; font-size:14px; color:var(--color-text-primary); margin-bottom:3px; }
+.tl-title.red { color:var(--color-danger); }
+.tl-text  { font-size:13.5px; color:var(--color-text-secondary); line-height:1.65; }
+
+/* ── 进度条 ── */
+.progress-group { display:flex; flex-direction:column; gap:14px; }
+.progress-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
+.progress-label { font-size:13px; font-weight:500; color:var(--color-text-secondary); }
+.progress-value { font-size:13px; font-weight:700; color:var(--color-text-primary); font-variant-numeric:tabular-nums; }
+.progress-track { height:8px; background:var(--color-bg-table-header); border-radius:var(--radius-full); overflow:hidden; border:1px solid var(--color-border-light); }
+.progress-bar { height:100%; border-radius:var(--radius-full); background:var(--gradient-success); width:0; transition:width 800ms cubic-bezier(0.34,1.2,0.64,1); }
+.progress-bar.info    { background:linear-gradient(90deg,#2563EB,#3B82F6); }
+.progress-bar.warning { background:linear-gradient(90deg,#D97706,#F59E0B); }
+.progress-bar.danger  { background:linear-gradient(90deg,#E11D48,#F43F5E); }
+.progress-bar.purple  { background:linear-gradient(90deg,#7C3AED,#8B5CF6); }
+
+/* ── 人格层卡片 ── */
+.persona-list { display:flex; flex-direction:column; gap:10px; margin:16px 0; }
+.persona-item {
+    display:flex; align-items:center; gap:14px;
+    background:var(--color-bg-card); border:1px solid var(--color-border);
+    border-radius:var(--radius-md); padding:13px 16px;
+    transition:all var(--transition-normal);
+}
+.persona-item:hover { border-color:rgba(124,58,237,.3); box-shadow:var(--shadow-glow-purple); }
+.persona-num {
+    width:30px; height:30px; border-radius:50%;
+    background:linear-gradient(135deg,var(--color-purple),var(--color-info));
+    color:#fff; font-size:12px; font-weight:800;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    box-shadow:var(--shadow-glow-purple);
+}
+.persona-name { font-weight:700; font-size:13.5px; color:var(--color-text-primary); margin-bottom:2px; }
+.persona-desc { font-size:12.5px; color:var(--color-text-muted); line-height:1.5; }
+
+/* ── VS Card（叙事扩展层）── */
+.vs-grid {
+    display:grid; grid-template-columns:1fr auto 1fr;
+    gap:0; margin:20px 0; border-radius:var(--radius-lg);
+    overflow:hidden; border:1px solid var(--color-border);
+    box-shadow:var(--shadow-card);
+}
+.vs-side { padding:22px; background:#fff; }
+.vs-side.vs-left  { background:#eff6ff; }
+.vs-side.vs-right { background:#fff1f2; }
+.vs-label { font-size:11px; font-weight:800; letter-spacing:1px; text-transform:uppercase; margin-bottom:8px; }
+.vs-side.vs-left  .vs-label { color:#1d4ed8; }
+.vs-side.vs-right .vs-label { color:#e11d48; }
+.vs-title { font-size:15px; font-weight:800; margin-bottom:12px; color:var(--color-text-primary); letter-spacing:-0.01em; }
+.vs-points { list-style:none; }
+.vs-points li { font-size:13px; color:var(--color-text-secondary); padding:4px 0; display:flex; gap:6px; }
+.vs-points li::before { content:'›'; color:currentColor; flex-shrink:0; }
+.vs-divider {
+    display:flex; align-items:center; justify-content:center;
+    padding:0 14px; background:#1a1a2e; color:#fff;
+    font-size:11px; font-weight:800; letter-spacing:1px; min-width:38px;
+}
+@media(max-width:600px){ .vs-grid{ grid-template-columns:1fr; } .vs-divider{ padding:10px; } }
+
+/* ── Humor Box（叙事扩展层）── */
+.humor-box {
+    background:linear-gradient(135deg,#1a1a2e,#16213e);
+    color:#fff; border-radius:var(--radius-lg);
+    padding:28px; margin:24px 0; text-align:center;
+    position:relative; overflow:hidden;
+}
+.humor-box::before {
+    content:''; position:absolute; inset:0;
+    background:url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='0.8' fill='%23ffffff06'/%3E%3C/svg%3E") repeat;
+    pointer-events:none;
+}
+.humor-box .qm { font-size:3rem; line-height:1; color:#e94560; font-family:Georgia,serif; display:block; margin-bottom:4px; position:relative; }
+.humor-box .qt-text { font-size:1rem; line-height:1.7; color:rgba(255,255,255,.9); margin:8px 0; position:relative; font-family:var(--font-editorial-body); }
+.humor-box .qt-author { font-size:0.78rem; color:rgba(255,255,255,.42); position:relative; }
+.humor-box-purple { background:linear-gradient(135deg,#533483,#e94560); }
+
+/* ── 对话气泡（叙事扩展层）── */
+.dialogue {
+    background:#fff; border:1px solid var(--color-border);
+    border-radius:var(--radius-lg); padding:22px; margin:18px 0;
+    box-shadow:var(--shadow-card);
+}
+.dialogue-title {
+    font-size:11px; font-weight:700; color:var(--color-text-muted);
+    text-transform:uppercase; letter-spacing:1px;
+    margin-bottom:16px; padding-bottom:10px; border-bottom:1px solid var(--color-border);
+}
+.msg { display:flex; gap:10px; margin-bottom:12px; align-items:flex-start; }
+.msg-avatar {
+    width:32px; height:32px; border-radius:7px;
+    background:#0f3460; color:#fff; font-size:10px; font-weight:700;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.msg-avatar.ai { background:#533483; }
+.msg-bubble {
+    background:#f3f4f6; border-radius:0 10px 10px 10px;
+    padding:10px 14px; font-size:13.5px; line-height:1.6; max-width:85%;
+}
+.msg.msg-right { flex-direction:row-reverse; }
+.msg.msg-right .msg-bubble { background:var(--color-info-100); border-radius:10px 0 10px 10px; }
+.msg-name { font-size:10.5px; color:var(--color-text-muted); margin-bottom:4px; }
+
+/* ── Easter Egg（叙事扩展层）── */
+.easter-egg {
+    background:linear-gradient(135deg,#533483,#e94560);
+    color:#fff; border-radius:var(--radius-lg);
+    padding:24px; margin-top:28px;
+    font-size:14px; line-height:1.7;
+}
+.easter-egg h3 { color:#fff; margin-bottom:12px; font-size:16px; }
+.easter-egg p  { color:rgba(255,255,255,.88); margin-bottom:8px; }
+.easter-egg p:last-child { margin-bottom:0; }
+
+/* ── Callout（标准清爽层）── */
+.callout { padding:16px 20px; border-radius:var(--radius-md); margin:16px 0; border-left:4px solid; }
+.callout-warn    { background:var(--color-warning-50); border-color:var(--color-warning); }
+.callout-success { background:var(--color-success-50); border-color:var(--color-success); }
+.callout-danger  { background:var(--color-danger-50);  border-color:var(--color-danger);  }
+.callout-info    { background:var(--color-info-50);    border-color:var(--color-info);    }
+.callout-title { font-weight:800; font-size:12px; text-transform:uppercase; letter-spacing:.5px; margin-bottom:6px; }
+.callout-warn .callout-title    { color:var(--color-warning); }
+.callout-success .callout-title { color:var(--color-success); }
+.callout-danger .callout-title  { color:var(--color-danger); }
+.callout-info .callout-title    { color:var(--color-info); }
+.callout p { font-size:13.5px; margin-bottom:0; }
+
+/* ── 代码块 ── */
+.cb { background:#1a1b26; border-radius:var(--radius-sm); padding:14px 18px; margin:12px 0; overflow-x:auto; }
+.cb pre { color:#c0caf5; font-family:var(--font-family-mono); font-size:13px; line-height:1.65; }
+.kw { color:#7aa2f7; } .str { color:#9ece6a; } .cm { color:#565f89; font-style:italic; }
+
+/* ── 洞察卡片格 ── */
+.insight-g { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:16px 0; }
+@media(max-width:600px){ .insight-g{ grid-template-columns:1fr; } }
+.insight-card {
+    background:var(--color-bg-card); border:1px solid var(--color-border);
+    border-radius:var(--radius-lg); padding:20px;
+    transition:all var(--transition-normal);
+}
+.insight-card:hover { transform:translateY(-2px); box-shadow:var(--shadow-md); }
+.insight-card .ic-num {
+    font-size:11px; font-weight:800; color:var(--color-success);
+    text-transform:uppercase; letter-spacing:.5px; margin-bottom:8px;
+}
+.insight-card h4 { font-size:14px; font-weight:800; margin-bottom:8px; color:var(--color-text-primary); letter-spacing:-0.01em; }
+.insight-card p  { font-size:13px; color:var(--color-text-muted); margin-bottom:0; line-height:1.6; }
+
+/* ── 来源矩阵 ── */
+.source-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:16px 0; }
+@media(max-width:600px){ .source-grid{ grid-template-columns:1fr 1fr; } }
+.source-card {
+    background:var(--color-bg-card); border:1px solid var(--color-border);
+    border-radius:var(--radius-md); padding:14px;
+    transition:all var(--transition-normal);
+}
+.source-card:hover { transform:translateY(-2px); box-shadow:var(--shadow-md); border-color:rgba(37,99,235,.3); }
+.source-name { font-size:13px; font-weight:700; color:var(--color-text-primary); margin-bottom:4px; }
+.source-type { font-size:11px; color:var(--color-text-muted); margin-bottom:6px; }
+.source-rel  { font-size:12px; color:var(--color-text-secondary); line-height:1.5; }
+
+/* ── 页脚 ── */
+.report-footer { border-top:1px solid var(--color-border); padding-top:28px; margin-top:40px; }
+.footer-refs { font-size:12.5px; color:var(--color-text-muted); line-height:1.8; }
+.footer-refs a { color:var(--color-info); }
+.footer-refs a:hover { color:var(--color-success); }
+
+/* ── 动画入场 ── */
+.animate-on-scroll {
+    opacity:0; transform:translateY(16px);
+    /* 仅动画 opacity 和 transform，避免触发 layout/paint */
+    transition: opacity 350ms cubic-bezier(0.4,0,0.2,1), transform 350ms cubic-bezier(0.34,1.4,0.64,1);
+    will-change: opacity, transform;
+}
+.animate-on-scroll.visible { opacity:1; transform:translateY(0); will-change: auto; }
+@media(prefers-reduced-motion:reduce){ .animate-on-scroll{ transition:none; opacity:1; transform:none; will-change:auto; } }
+</style>  /* inherited from benchmark */
+    </style>
 </head>
-
 <body>
 
-<div class="container">
-
-<!-- ===== Header ===== -->
-<header class="header">
-    <div class="header-title">护城河不在代码里<br><span style="font-size:0.6em;font-weight:600;opacity:0.7;">组织形态才是AI时代真正抄不走的东西</span></div>
-    <p class="header-subtitle">硅谷投资人Jaya Gupta的长文12小时130万阅读，核心论点：唯一不可复制的护城河是组织形态。这篇调研不只解读——还用VRIO框架、规模悖论、中国语境做了反证和修正。</p>
-    <div class="header-thesis">修正论点：组织形态不是唯一护城河——但没有它，其他护城河都建不起来</div>
-    <div class="header-meta">
-        <span>📖 约10分钟读完</span>
-        <span>🧠 有框架有反证</span>
-        <span>📌 有实操诊断工具</span>
-        <span>🔥 320万+阅读热文拆解</span>
+<!-- ========================= HERO ========================= -->
+<div class="editorial-hero">
+<div class="editorial-hero-inner">
+    <div class="editorial-hero-badge">💡 AI Insight · 组织深度观察 · 2026-05-14</div>
+    <h1>护城河不在代码里——<span class="hl-amber">组织形态</span>才是AI时代真正抄不走的东西<br>
+        <span style="font-size:.6em;font-weight:600;color:rgba(255,255,255,.7);">技术会趋同，产品会被抄，但<span class="hl-red">组织</span>抄不走</span>
+    </h1>
+    <p class="subtitle">硅谷投资人 Jaya Gupta 提出：AI时代最宽的护城河不再是技术或产品，<br>而是公司围绕人才构建的组织形态和生态系统。这篇深度调研帮你拆解这个论点。</p>
+    <div class="editorial-hero-thesis">
+        核心问题：<span>当模型能力趋同、界面趋同、迭代成本趋同，什么才能真正保护你？</span>
     </div>
-</header>
+    <div class="editorial-hero-meta">
+        <span>📖 约 10 分钟读完</span>
+        <span>🔍 深度调研</span>
+        <span>💡 有反证与修正</span>
+        <span>🔥 含中国语境分析</span>
+    </div>
+</div>
+</div>
 
-<!-- ===== Tab Navigation ===== -->
-<nav class="tab-nav" role="navigation">
-    <button class="tab-btn active" onclick="switchTab('s0',this)">00 概览</button>
-    <button class="tab-btn" onclick="switchTab('s1',this)">01 同质化</button>
-    <button class="tab-btn" onclick="switchTab('s2',this)">02 组织形态</button>
-    <button class="tab-btn" onclick="switchTab('s3',this)">03 六洞见</button>
-    <button class="tab-btn" onclick="switchTab('s4',this)">04 框架灵魂</button>
-    <button class="tab-btn" onclick="switchTab('s5',this)">05 VRIO反证</button>
-    <button class="tab-btn" onclick="switchTab('s6',this)">06 护城河分层</button>
-    <button class="tab-btn" onclick="switchTab('s7',this)">07 规模悖论</button>
-    <button class="tab-btn" onclick="switchTab('s8',this)">08 中国语境</button>
-    <button class="tab-btn" onclick="switchTab('s9',this)">09 总结</button>
+<!-- ========================= NAV ========================= -->
+<nav class="nav-wrap">
+    <div class="nav-inner">
+        <button class="nav-btn active" onclick="switchTab('s1',this)">
+            <span class="nav-step">1</span> 全文概览
+        </button>
+        <button class="nav-btn" onclick="switchTab('s2',this)">
+            <span class="nav-step">2</span> 三件事正在同质化
+        </button>
+        <button class="nav-btn" onclick="switchTab('s3',this)">
+            <span class="nav-step">3</span> 组织形态抄不走
+        </button>
+        <button class="nav-btn" onclick="switchTab('s4',this)">
+            <span class="nav-step">4</span> 反证与修正
+        </button>
+        <button class="nav-btn" onclick="switchTab('s5',this)">
+            <span class="nav-step">5</span> 中国语境
+        </button>
+        <button class="nav-btn" onclick="switchTab('s6',this)">
+            <span class="nav-step">6</span> 从→到转变
+        </button>
+    </div>
 </nav>
 
-<div id="tab-s0" class="tab-content active">
-<!-- ===================== 引子 ===================== -->
-<div class="card animate-on-scroll" style="margin:0 0 28px;border-left:4px solid #7C3AED;background:linear-gradient(135deg,rgba(124,58,237,0.04) 0%,rgba(255,255,255,0) 100%);">
-    <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#7C3AED;margin-bottom:10px;">📖 真实故事 · 引子</div>
-    <p style="font-size:16px;font-weight:700;color:#1C1917;line-height:1.5;margin-bottom:12px;">Anthropic今年一口气挖了好几个CTO级别的工程师</p>
-    <p style="color:#44403C;line-height:1.8;margin-bottom:10px;">不是靠薪酬——这些人在原来的公司待遇不差。也不是靠期权——Anthropic还没上市。</p>
-    <p style="color:#44403C;line-height:1.8;margin-bottom:10px;">他们来了，因为一句话：<strong style="color:#1C1917;">「如果你想做真正安全的AI，全世界只有这一个地方能让你成为那个自己。」</strong></p>
-    <p style="color:#44403C;line-height:1.8;margin-bottom:10px;">这句话不是招聘文案——它是Anthropic的组织形态本身就在说的。Anthropic围绕AI安全使命构建了整个引力中心：研究、产品、政策全围着它转。离开Anthropic的安全科学家，去哪还能站在文明级风险和前沿研究的交汇处？</p>
-    <p style="color:#44403C;line-height:1.8;margin-bottom:14px;"><strong>找不到。这就是组织形态护城河的物理载体。</strong></p>
-    <div style="margin:14px 0;border-radius:10px;overflow:hidden;">
-        <img src="./images/org-moat-hero.jpg" alt="Anthropic的组织形态引力中心" style="display:block;width:100%;height:auto;" width="980" height="551" loading="eager" fetchpriority="high" />
-        <div style="padding:8px 12px;background:rgba(28,25,23,0.04);font-size:12px;color:#78716C;text-align:center;font-style:italic;">▲ Anthropic围绕AI安全使命构建引力中心——研究、产品、政策一体</div>
-    </div>
-    <div style="padding:12px 16px;background:rgba(124,58,237,0.06);border-radius:8px;font-size:14px;font-weight:600;color:#5B21B6;">
-        这不是科幻，是组织形态护城河的真实运作。它不是写在PPT里的文化——它是权力分配、岗位地位、决策流程的物理结构。
-    </div>
-</div>
-<div class="ch-label" id="chapter-0">00 · 全文概览</div>
-        <div class="ch-title">先说结论</div>
-        <div class="ch-desc">硅谷投资人Jaya Gupta发了一篇长文，12小时130万阅读，最终320万+。核心论点：<strong>当技术趋同、产品可抄、赛道可重命名时，唯一不可复制的护城河是公司本身的组织形态</strong>。</div>
-    </div>
+<!-- ========================= CONTENT ========================= -->
+<div class="pg">
 
-    <!-- 核心范式对比表 -->
-    <div class="tbl-wrap animate-on-scroll" style="margin-bottom:20px;">
-        <table class="tbl">
-            <thead>
-                <tr><th>|</th><th>|</th><th>|</th></tr>
-            </thead>
+<!-- ===================== TAB 1：全文概览 ===================== -->
+<div id="tab-s1" class="tab-pane active">
+
+<div class="ch-lead animate-on-scroll">
+    <div class="ch-label">Chapter 01 · 全文概览</div>
+    <div class="ch-title">两种护城河的理解——从"我有好东西"到"我能让好人留下来"</div>
+</div>
+
+<div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
+    <img src="https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/0adce6f9213d59b4c82ac6094.jpg" alt="两种护城河理解对比" style="display:block;width:100%;height:auto;border-radius:12px;" width="980" height="551" loading="eager" />
+</div>
+
+<div class="sec animate-on-scroll">
+    <div class="sec-h">📌 核心判断</div>
+    <p style="color:#44403C;line-height:1.8;margin-bottom:12px;">Gupta 的论点有穿透力但需要修正。她说"组织形态是唯一护城河"，更准确的表述应该是：<strong style="color:#1C1917;">组织形态是其他护城河的基础设施</strong>——没有好的组织形态，数据护城河、分布护城河都建不起来；有了好的组织形态，这些可以叠加。</p>
+</div>
+
+<div class="card animate-on-scroll" style="margin:0 0 28px">
+    <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#7C3AED;margin-bottom:12px;">核心范式对比</div>
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th></th><th></th><th></th></tr></thead>
             <tbody>
                 <tr><td><strong>两种理解</strong></td><td><strong>代表策略</strong></td><td><strong>结果</strong></td></tr>
-                <tr class="tbl-hl"><td>组织形态是「唯一」护城河</td><td>只盯着怎么组织人</td><td>忽略数据、信任等其他护城河</td></tr>
-                <tr><td>组织形态是护城河的「基础设施」</td><td>先建好组织，再叠加其他护城河</td><td>多层叠加，护城河更厚</td></tr>
+                <tr><td>护城河 = 我有好东西（技术/产品/赛道）</td><td>堆模型参数、抢首发功能、追热门赛道</td><td>别人半年就能抄走</td></tr>
+                <tr><td>护城河 = 我能让好人留下来（组织形态）</td><td>构建人才吸引力、身份认同、复利式工作系统</td><td>别人抄不走，甚至看不懂</td></tr>
             </tbody>
         </table>
     </div>
+</div>
 
-    <div class="ib ib-green animate-on-scroll">
-        <div class="ib-label">📌 剧透</div>
-        <div class="ib-text">组织形态不是唯一护城河，但没有它，其他护城河都建不起来。最有实操价值的一条——<strong>「情绪承诺必须匹配结构承诺」</strong>，是可以逐条审计的诊断工具。</div>
-    </div>
+<div class="sec animate-on-scroll">
+    <div class="sec-h">Gupta 的论证结构</div>
+    <p style="color:#44403C;line-height:1.8;margin-bottom:12px;">Gupta 的论证是一条因果链：三件事正在同质化 → 外显层不再能当护城河 → 只剩下内隐结构 → 组织形态是内隐结构的总和 → 所以组织形态是唯一剩下的护城河。</p>
+    <p style="color:#44403C;line-height:1.8;margin-bottom:12px;">这条链的逻辑是连贯的，但"唯一"这个词太绝对。后面我们会拆解它的合理部分和不合理部分。</p>
+</div>
 
-    <div class="g4 animate-on-scroll" style="margin-top:20px;">
-        <div class="sc">
-            <span class="sc-num">320万+</span>
-            <div class="sc-label">原文阅读量</div>
-            <div class="sc-note">Jaya Gupta长文</div>
-        </div>
-        <div class="sc info">
-            <span class="sc-num blue">9章</span>
-            <div class="sc-label">本文拆解</div>
-            <div class="sc-note">含反证修正</div>
-        </div>
-        <div class="sc purple">
-            <span class="sc-num purple">6洞见</span>
-            <div class="sc-label">锋利论点</div>
-            <div class="sc-note">逐条拆解</div>
-        </div>
-        <div class="sc danger">
-            <span class="sc-num red">1悖论</span>
-            <div class="sc-label">规模悖论</div>
-            <div class="sc-note">Gupta没回答</div>
-        </div>
-    </div>
-
-    <div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
-        <img src="./images/org-moat-00-overview.jpg" alt="组织形态护城河全景" style="display:block;width:100%;height:auto;border-radius:12px;" width="980" height="551" loading="lazy" decoding="async" />
+<div class="card animate-on-scroll" style="margin:0 0 28px;border-left:4px solid #7C3AED;background:linear-gradient(135deg,rgba(124,58,237,0.04) 0%,rgba(255,255,255,0) 100%);">
+    <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#7C3AED;margin-bottom:10px;">📖 真实故事 · 引子</div>
+    <p style="font-size:16px;font-weight:700;color:#1C1917;line-height:1.5;margin-bottom:12px;">Anthropic 拿走了别家 CTO 的身份认同</p>
+    <p style="color:#44403C;line-height:1.8;margin-bottom:10px;">2026年初，某头部AI公司的CTO收到了Anthropic的邀请。薪酬offer并不比现有薪资高很多，但Anthropic提供了一件事：在这里，你可以定义"AI安全"这个领域的边界。不是执行别人的愿景，而是成为某个领域的立法者。</p>
+    <p style="color:#44403C;line-height:1.8;margin-bottom:10px;">这位CTO选择了Anthropic。不是因为钱，而是因为Anthropic的组织形态给了他一个"成为自己"的路径——在其他公司，他是高级执行者；在Anthropic，他是领域定义者。</p>
+    <p style="color:#44403C;line-height:1.8;margin-bottom:14px;">Gupta 用这个故事说明：顶尖人才选择的不是薪酬最高的公司，而是能提供身份认同的公司。这种身份认同来自组织形态，而非产品或技术。</p>
+    <div style="padding:12px 16px;background:rgba(124,58,237,0.06);border-radius:8px;font-size:14px;font-weight:600;color:#5B21B6;">
+        人才不是被钱吸引的，是被"在这里我能成为谁"吸引的。
     </div>
 </div>
 
-    <div class="ch-lead animate-on-scroll">
+</div><!-- end tab-s1 -->
+
+<!-- ===================== TAB 2：三件事正在同质化 ===================== -->
+<div id="tab-s2" class="tab-pane">
+
+<div class="ch-lead animate-on-scroll">
+    <div class="ch-label">Chapter 02 · 三件事正在同质化</div>
+    <div class="ch-title">模型趋同、界面趋同、成本趋同——外显层正在失去差异化</div>
 </div>
 
-<div id="tab-s1" class="tab-content">
-<div class="ch-label" id="chapter-1">Chapter 01 · 三件事正在同质化</div>
-        <div class="ch-title">AI行业看得见的部分全在趋同</div>
-    </div>
-
-    <div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
-        <img src="./images/org-moat-01-convergence.jpg" alt="AI行业三件事同质化" style="display:block;width:100%;height:auto;border-radius:12px;" width="980" height="551" loading="lazy" decoding="async" />
-    </div>
-
-    <div class="sec animate-on-scroll">
-        <div class="sec-h">📉 Gupta观察到的三个收敛趋势</div>
-    </div>
-
-    <div class="g3 animate-on-scroll" style="margin-bottom:20px;">
-        <div class="card" style="border-top:3px solid var(--color-danger);">
-            <div class="card-h">
-                <div class="card-ico" style="background:var(--color-danger-50);color:var(--color-danger);">🔄</div>
-                应用层坍塌
-            </div>
-            <p style="font-size:13.5px;">应用公司做基础设施，基础设施公司做应用。那些过去根本无法想象会彼此竞争的公司，现在站在同一个战场上。</p>
-        </div>
-        <div class="card" style="border-top:3px solid var(--color-warning);">
-            <div class="card-h">
-                <div class="card-ico" style="background:var(--color-warning-50);color:var(--color-warning);">📢</div>
-                热词通胀
-            </div>
-            <p style="font-size:13.5px;">"context graph""system of action""organizational world model"——每几个月换一轮，几周内全行业跟进。你刚给一个新赛道命名，别人的网站就刷新了。</p>
-        </div>
-        <div class="card" style="border-top:3px solid var(--color-info);">
-            <div class="card-h">
-                <div class="card-ico" style="background:var(--color-info-50);color:var(--color-info);">⚡</div>
-                产品速度廉价化
-            </div>
-            <p style="font-size:13.5px;">模型迭代极快、界面趋于大同、开发成本大幅降低。技术优势几个月内消失，产品功能几周内被像素级复刻。</p>
-        </div>
-    </div>
-
-    <div class="ib ib-red animate-on-scroll">
-        <div class="ib-label">📌 一个让创始人焦虑的问题</div>
-        <div class="ib-text">如果产品能抄、赛道能改名、技术优势几个月蒸发——还剩什么？这三个趋势的共同指向：<strong>AI行业可被观察、可被模仿的"外显部分"正在快速同质化。</strong></div>
-    </div>
+<div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
+    <img src="https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/0adce6f9213d59b4c82ac6095.jpg" alt="三收敛趋势" style="display:block;width:100%;height:auto;border-radius:12px;" width="980" height="551" loading="lazy" />
 </div>
 
-    <div class="ch-lead animate-on-scroll">
+<div class="sec animate-on-scroll">
+    <div class="sec-h">三收敛趋势</div>
+    <p style="color:#44403C;line-height:1.8;margin-bottom:12px;">Gupta 的论证起点是：AI行业有三件事正在不可逆地趋同。这不是预测，是已经在发生的事实。</p>
 </div>
 
-<div id="tab-s2" class="tab-content">
-<div class="ch-label" id="chapter-2">Chapter 02 · Gupta的回答</div>
-        <div class="ch-title">组织形态——公司怎么组织人，才是抄不走的</div>
-        <div class="ch-desc">Gupta的逻辑链很简单：外显部分可抄 → 外显部分不构成护城河 → 护城河只能在内隐部分 → 内隐部分就是组织形态。但"组织形态"不是组织架构图。</div>
-    </div>
-
-    <div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
-        <img src="./images/org-moat-02-org-form.jpg" alt="组织发明而非组装" style="display:block;width:100%;height:auto;border-radius:12px;" width="980" height="551" loading="lazy" decoding="async" />
-    </div>
-
-    <div class="sec animate-on-scroll">
-        <div class="sec-h">🧬 Gupta说的组织形态，是三件事</div>
-    </div>
-
-    <div class="card animate-on-scroll" style="border-left:4px solid var(--color-purple);">
-        <div class="g3" style="margin-bottom:0;">
-            <div style="text-align:center;padding:10px;">
-                <div style="font-size:28px;margin-bottom:8px;">🧪</div>
-                <div style="font-size:13px;font-weight:800;color:var(--color-text-primary);">组织是发明而非组装</div>
-                <div style="font-size:12px;color:var(--color-text-muted);margin-top:6px;">伟大公司不是把已知组件拼起来，而是发明了一种全新的人类协作协议</div>
-            </div>
-            <div style="text-align:center;padding:10px;">
-                <div style="font-size:28px;margin-bottom:8px;">🧭</div>
-                <div style="font-size:13px;font-weight:800;color:var(--color-text-primary);">人才基于身份认同而非薪酬</div>
-                <div style="font-size:12px;color:var(--color-text-muted);margin-top:6px;">顶尖人才追求的是「成为自己」的路径，不是钱</div>
-            </div>
-            <div style="text-align:center;padding:10px;">
-                <div style="font-size:28px;margin-bottom:8px;">⚖️</div>
-                <div style="font-size:13px;font-weight:800;color:var(--color-text-primary);">情绪承诺必须匹配结构承诺</div>
-                <div style="font-size:12px;color:var(--color-text-muted);margin-top:6px;">宣称的价值观如果与实际权力分配不一致，就是虚假护城河</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="sec animate-on-scroll">
-        <div class="sec-h">🏛️ 三组案例：组织发明催生新型人才</div>
-    </div>
-
-    <div class="tbl-wrap animate-on-scroll">
-        <table class="tbl">
-            <thead>
-                <tr><th>|</th><th>|</th><th>|</th><th>|</th></tr>
-            </thead>
+<div class="card animate-on-scroll" style="margin:0 0 28px">
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th></th><th></th><th></th><th></th></tr></thead>
             <tbody>
-                <tr><td><strong>公司</strong></td><td><strong>组织发明</strong></td><td><strong>催生的新型人才</strong></td><td><strong>核心引力中心</strong></td></tr>
-                <tr class="tbl-hl"><td>OpenAI</td><td>前沿模型训练为引力中心，一切围着它转</td><td>站在科学+产品+地缘政治+文明风险边缘的研究员</td><td>训练下一个前沿模型</td></tr>
-                <tr><td>Palantir</td><td>破碎系统为核心，前线部署=高地位+世界观</td><td>横跨工程+咨询+政策的主角型人才</td><td>修复最乱的系统</td></tr>
-                <tr class="tbl-hl"><td>Anthropic</td><td>安全使命驱动，研究+产品+政策一体</td><td>安全约束下做最前沿研究的安全科学家</td><td>让AI安全不再是口号</td></tr>
+                <tr><td><strong>收敛维度</strong></td><td><strong>现象</strong></td><td><strong>速度</strong></td><td><strong>证据</strong></td></tr>
+                <tr><td>模型能力趋同</td><td>各家大模型在主流benchmark上差距收窄至个位数百分比</td><td>快（6-12个月）</td><td>GPT-4o、Claude 3.5、Gemini 2.5 在MMLU/GPQA等指标上差距<3%</td></tr>
+                <tr><td>界面/交互趋同</td><td>Chat→Agent→Workflow成为统一范式，UI范式正在标准化</td><td>中（12-18个月）</td><td>Perplexity→ChatGPT搜索→Google AI Overview，交互形态趋同</td></tr>
+                <tr><td>迭代成本趋同</td><td>开源模型+云基建使从0到1的产品成本大幅下降</td><td>快（6-12个月）</td><td>Llama 3开源后，中小团队也能做出接近GPT-4水平的产品</td></tr>
             </tbody>
         </table>
     </div>
-
-    <div class="ib ib-purple animate-on-scroll">
-        <div class="ib-label">📌 不是你招到了什么样的人</div>
-        <div class="ib-text">是你发明了什么样的结构，让某种人<strong>只能在这里成为自己</strong>。</div>
-    </div>
 </div>
 
-    <div class="ch-lead animate-on-scroll">
+<div class="sec animate-on-scroll">
+    <div class="sec-h">📌 这意味着什么</div>
+    <p style="color:#44403C;line-height:1.8;margin-bottom:12px;">这三件事趋同之后，"我有更好的模型""我有更好的UI""我首发了这个功能"都不再能当护城河了。别人半年就能抄走你的外显优势。</p>
+    <p style="color:#44403C;line-height:1.8;margin-bottom:12px;">Gupta 的判断：当外显层失去差异化，唯一剩下的是内隐层——即组织形态。这个推理是合理的，但"唯一"太绝对。我们后面会修正。</p>
 </div>
 
-<div id="tab-s3" class="tab-content">
-<div class="ch-label" id="chapter-3">Chapter 03 · 六个洞见</div>
-        <div class="ch-title">Gupta最锋利的论点拆解</div>
-    </div>
-
-    <div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
-        <img src="./images/org-moat-03-insights.jpg" alt="六个洞见拆解" style="display:block;width:100%;height:auto;border-radius:12px;" width="980" height="551" loading="lazy" decoding="async" />
-    </div>
-
-    <!-- 洞见1 -->
-    <div class="card animate-on-scroll">
-        <div class="card-h">
-            <div class="card-ico" style="background:var(--color-purple-50);color:var(--color-purple);">💡</div>
-            洞见1：人才不是输入，人才就是公司本身
-        </div>
-        <div class="qt" style="margin:0;">
-            "最好的公司一直都明白：人不是公司的投入要素，人就是公司本身。但在AI时代，这一点变得更加锋利——因为其他一切都在飞速变化。"
-        </div>
-        <p style="margin-top:12px;font-size:14px;font-weight:600;">创始人的终极产品：那个能让某种灵魂在此「安放并爆发」的制度容器。</p>
-    </div>
-
-    <!-- 洞见2 -->
-    <div class="card animate-on-scroll">
-        <div class="card-h">
-            <div class="card-ico" style="background:var(--color-info-50);color:var(--color-info);">🧭</div>
-            洞见2：身份认同 > 薪酬竞争
-        </div>
-        <p>有野心的人渴望六样东西：<strong>感觉特别、靠近权力中心、变得不可忽视、保有选择权、归属使命、身处历史拐点</strong>。但说不清自己追求哪一种。</p>
-        <p style="margin-top:8px;">最强的组织会在这些人自我认知固化前就触达——大一开始招人。在他们还分不清「擅长的工作」和「想成为的自己」之前，先一步提供路径。</p>
-    </div>
-
-    <!-- 洞见3：全文最锋利 -->
-    <div class="card animate-on-scroll" style="border-left:4px solid var(--color-danger);">
-        <div class="card-h">
-            <div class="card-ico" style="background:var(--color-danger-50);color:var(--color-danger);">⚔️</div>
-            洞见3：情绪承诺必须匹配结构承诺 — <span class="badge b-danger">全文最锋利</span>
-        </div>
-        <div class="tbl-wrap" style="margin-top:12px;">
-            <table class="tbl">
-                <thead>
-                    <tr><th>|</th><th>|</th><th>|</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td><strong>宣称的护城河</strong></td><td><strong>必须匹配的结构承诺</strong></td><td><strong>不匹配=虚假护城河</strong></td></tr>
-                    <tr class="tbl-hl"><td>客户亲密度</td><td>面向客户的岗位必须是高地位的</td><td>客户岗位地位低→声明是假的</td></tr>
-                    <tr><td>速度</td><td>决策权必须下放到边缘</td><td>决策权集中→速度声明是假的</td></tr>
-                    <tr class="tbl-hl"><td>人才密度</td><td>不能让平庸的人定义运营节奏</td><td>平庸者定义节奏→声明是假的</td></tr>
-                    <tr><td>部署</td><td>最接近现实的人需要拥有权力</td><td>有责无权→部署声明是假的</td></tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="ib ib-red" style="margin-top:14px;">
-            <div class="ib-label">📌 实操诊断</div>
-            <div class="ib-text">拿你自己公司的使命声明，逐条对照权力分配、薪酬结构、岗位地位——找出<strong>不匹配的</strong>。每一条情绪承诺背后必须有结构支撑，否则就是虚假护城河。</div>
-        </div>
-    </div>
-
-    <!-- 洞见4 -->
-    <div class="card animate-on-scroll">
-        <div class="card-h">
-            <div class="card-ico" style="background:var(--color-warning-50);color:var(--color-warning);">🔍</div>
-            洞见4：被选中 ≠ 被看见
-        </div>
-        <p>"被选中"是情绪性的："你很特别，你属于这里。" "被看见"是结构性的：<strong>职权范围、薪酬、决策权、成功后公司会为你改变什么</strong>。</p>
-        <p style="margin-top:10px;">高绩效者最危险的状态：情绪填满了，结构上还只是员工。像创始人一样拼、像高管一样扛——却拿着员工的薪酬和授权。</p>
-        <div class="ib ib-amber" style="margin-top:12px;">
-            <div class="ib-label">⚠️ 长期必然崩塌</div>
-            <div class="ib-text">短期情绪补偿了结构缺失，但长期必然崩塌——<strong>情绪是不可持续的燃料，结构才是可持续的引擎</strong>。</div>
-        </div>
-    </div>
-
-    <!-- 洞见5 -->
-    <div class="card animate-on-scroll">
-        <div class="card-h">
-            <div class="card-ico" style="background:var(--color-success-50);color:var(--color-success);">📖</div>
-            洞见5：故事的高度必须匹配组织的格局
-        </div>
-        <p>宏大故事+小格局=<span class="badge b-danger">吹牛</span>。小故事+大格局=<span class="badge b-warning">最好的人才不会来</span>。</p>
-        <p style="margin-top:8px;">两者匹配，才是候选人真正在评估的东西——即使他们自己说不清楚。</p>
-    </div>
-
-    <!-- 洞见6 -->
-    <div class="card animate-on-scroll">
-        <div class="card-h">
-            <div class="card-ico" style="background:var(--color-purple-50);color:var(--color-purple);">🎯</div>
-            洞见6：使命必然筛选
-        </div>
-        <p>最强的使命让一部分人<strong>不想加入</strong>——恰恰让对的人极度渴望加入。</p>
-        <p style="margin-top:8px;">如果你的使命没有让任何人不想加入，它可能还不够强，或者不够真。</p>
-    </div>
+<div class="card animate-on-scroll" style="margin:0 0 28px;border-left:4px solid #EA580C;background:linear-gradient(135deg,rgba(234,88,12,0.04) 0%,rgba(255,255,255,0) 100%);">
+    <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#EA580C;margin-bottom:10px;">⚠️ 需要注意的边界</div>
+    <p style="color:#44403C;line-height:1.8;margin-bottom:10px;">"趋同"不等于"完全相同"。GPT-4o和Claude 3.5在整体能力上趋同，但在特定领域（如代码生成vs推理深度）仍有差异。趋同说的是"差距收窄"，不是"差距消失"。</p>
+    <p style="color:#44403C;line-height:1.8;">所以Gupta的"唯一护城河"论断有些过度——技术差距虽然收窄了，但还没到零。组织形态是最宽的护城河，但不是唯一的。</p>
 </div>
 
-    <div class="ch-lead animate-on-scroll">
+</div><!-- end tab-s2 -->
+
+<!-- ===================== TAB 3：组织形态抄不走 ===================== -->
+<div id="tab-s3" class="tab-pane">
+
+<div class="ch-lead animate-on-scroll">
+    <div class="ch-label">Chapter 03 · 组织形态抄不走</div>
+    <div class="ch-title">Gupta的回答：当外显层失效，只剩下内隐结构</div>
 </div>
 
-<div id="tab-s4" class="tab-content">
-<div class="ch-label" id="chapter-4">Chapter 04 · 框架可以抄走</div>
-        <div class="ch-title">灵魂不行</div>
-        <div class="ch-desc">Gupta假设「内隐结构不可模仿」。但这并非绝对：框架可以扩散，但「为什么这里的人愿意用这个框架」的信念体系无法被抄走。</div>
-    </div>
+<div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
+    <img src="https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/27418b74d5b554e053e8a6d1d.jpg" alt="组织形态三要素" style="display:block;width:100%;height:auto;border-radius:12px;" width="980" height="551" loading="lazy" />
+</div>
 
-    <div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
-        <img src="./images/org-moat-04-framework.jpg" alt="框架vs灵魂" style="display:block;width:100%;height:auto;border-radius:12px;" width="980" height="551" loading="lazy" decoding="async" />
-    </div>
+<div class="sec animate-on-scroll">
+    <div class="sec-h">组织形态的三层结构</div>
+    <p style="color:#44403C;line-height:1.8;margin-bottom:12px;">Gupta认为，组织形态不是一个单一的东西，而是三层内隐结构的总和：</p>
+</div>
 
-    <div class="sec animate-on-scroll">
-        <div class="sec-h">🧬 可模仿 vs 不可模仿</div>
-    </div>
-
-    <div class="tbl-wrap animate-on-scroll">
-        <table class="tbl">
-            <thead>
-                <tr><th>|</th><th>|</th></tr>
-            </thead>
+<div class="card animate-on-scroll" style="margin:0 0 28px">
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th></th><th></th><th></th><th></th></tr></thead>
             <tbody>
-                <tr><td><strong>可模仿的部分</strong></td><td><strong>不可模仿的部分</strong></td></tr>
-                <tr class="tbl-hl"><td>DRI → 苹果发明 → 业界传播</td><td>「为什么OpenAI研究员愿意用DRI」的信念体系</td></tr>
-                <tr><td>FDE → Palantir发明 → 2026全行业复制</td><td>「为什么Palantir的FDE是高地位工作」的世界观</td></tr>
-                <tr class="tbl-hl"><td>MTS → OpenAI发明 → 多家采纳</td><td>离开OpenAI的研究员去哪？离开Anthropic的安全科学家去哪？</td></tr>
+                <tr><td><strong>层级</strong></td><td><strong>内容</strong></td><td><strong>可模仿性</strong></td><td><strong>例子</strong></td></tr>
+                <tr><td>人才吸引力</td><td>如何吸引、筛选、留住顶尖人才</td><td>框架可抄，灵魂不可</td><td>OpenAI的使命感筛选、Palantir的"硬问题"筛选</td></tr>
+                <tr><td>权力分配</td><td>如何集中判断力、让做决定的人最接近信息源</td><td>制度可抄，信任不可</td><td>Anthropic让安全研究者有产品决策权</td></tr>
+                <tr><td>复利式工作系统</td><td>如何让今天的工作成为明天的杠杆</td><td>流程可抄，积累不可</td><td>Stripe的内部工具文化使每个项目都沉淀为可复用基础设施</td></tr>
             </tbody>
         </table>
     </div>
-
-    <div class="ib ib-green animate-on-scroll">
-        <div class="ib-label">📌 组织发明 vs 组织组装</div>
-        <div class="ib-text">框架可以扩散，但<strong>「为什么这里的人愿意用这个框架」的信念体系</strong>无法被抄走。DRI可以被任何公司采用——但为什么OpenAI的研究员愿意用DRI？因为OpenAI的引力中心是训练前沿模型，DRI让研究员端到端负责一次训练实验，这在其他公司没有意义。</div>
-    </div>
-
-    <div class="humor-box animate-on-scroll" style="margin-top:20px;">
-        <span class="qm">"</span>
-        <div class="qt-text">
-            你抄走了DRI，抄不走引力中心。<br>
-            你复刻了FDE职称，复刻不了「修复最乱的系统=英雄」的世界观。<br><br>
-            <em style="font-size:.85em;opacity:.7;">框架是壳，信念体系是核。壳可以扩散，核只能自己长出来。</em>
-        </div>
-        <div class="qt-author">—— 组织形态护城河的本质</div>
-    </div>
 </div>
 
-    <div class="ch-lead animate-on-scroll">
+<div class="sec animate-on-scroll">
+    <div class="sec-h">📌 六个核心洞见</div>
+    <p style="color:#44403C;line-height:1.8;margin-bottom:12px;">从Gupta的论证中，我提炼出六个最有实操价值的洞见：</p>
 </div>
 
-<div id="tab-s5" class="tab-content">
-<div class="ch-label" id="chapter-5">Chapter 05 · VRIO框架的反证</div>
-        <div class="ch-title">强化而非削弱</div>
-        <div class="ch-desc">MIT Sloan Review用VRIO框架论证AI不能提供可持续竞争优势。这个框架<strong>强化而非削弱</strong>了Gupta论点。</div>
-    </div>
+<div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
+    <img src="https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/0adce6f9213d59b4c82ac6096.jpg" alt="六个核心洞见" style="display:block;width:100%;height:auto;border-radius:12px;" width="980" height="551" loading="lazy" />
+</div>
 
-    <div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
-        <img src="./images/org-moat-05-vrio.jpg" alt="VRIO框架反证" style="display:block;width:100%;height:auto;border-radius:12px;" width="980" height="551" loading="lazy" decoding="async" />
-    </div>
-
-    <div class="tbl-wrap animate-on-scroll">
-        <table class="tbl">
-            <thead>
-                <tr><th>|</th><th>|</th><th>|</th></tr>
-            </thead>
+<div class="card animate-on-scroll" style="margin:0 0 28px">
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th></th><th></th><th></th></tr></thead>
             <tbody>
-                <tr><td><strong>VRIO维度</strong></td><td><strong>评估</strong></td><td><strong>证据</strong></td></tr>
-                <tr class="tbl-hl"><td>V（有价值）</td><td>✅</td><td>AI确实能提升效率</td></tr>
-                <tr><td>R（稀缺）</td><td><span class="badge b-danger">❌</span></td><td>推理成本18个月暴跌280×</td></tr>
-                <tr class="tbl-hl"><td>I（不可模仿）</td><td><span class="badge b-danger">❌</span></td><td>每项重大技术最终对所有公司同等可及</td></tr>
-                <tr><td>O（组织利用）</td><td><span class="badge b-success">✅ 关键差异</span></td><td>这是唯一能创造可持续差异的维度</td></tr>
+                <tr><td><strong>洞见</strong></td><td><strong>核心表述</strong></td><td><strong>实操意味</strong></td></tr>
+                <tr><td>1. 人才即公司</td><td>公司不是产品+技术+资本的集合，而是特定人才在特定结构下的涌现</td><td>招人不是填充岗位，而是选择"谁能让这家公司成为它自己"</td></tr>
+                <tr><td>2. 身份认同>薪酬</td><td>顶尖人才更关注"在这里我能成为谁"，而非"在这里我能挣多少"</td><td>薪酬是底线，身份认同是天花板</td></tr>
+                <tr><td>3. 情绪承诺vs结构承诺</td><td>宣称"客户亲密度是护城河"但客户岗位地位低，声明就是假的</td><td>逐条审计：每个Objective背后有没有对应的结构支撑</td></tr>
+                <tr><td>4. 被选中≠被看见</td><td>筛选机制的隐性偏见比显性标准影响更大</td><td>你以为你在选最优秀的人，实际你在选最像你的人</td></tr>
+                <tr><td>5. 故事匹配格局</td><td>"我们是一家AI公司"是战术叙事，"我们在定义AI安全的边界"是战略叙事</td><td>叙事高度决定了你能吸引到的人才层次</td></tr>
+                <tr><td>6. 使命必然筛选</td><td>"让AI安全"这个使命天然筛掉了对安全不关心的人</td><td>使命不是口号，是筛选器——如果你的使命谁都认同，说明使命太模糊</td></tr>
             </tbody>
         </table>
     </div>
-
-    <div class="ib ib-green animate-on-scroll">
-        <div class="ib-label">💡 核心逻辑</div>
-        <div class="ib-text">AI本身不是护城河（R❌ I❌），但<strong>组织能否利用AI（O✅）才是差异所在</strong>。VRIO强化而非削弱了Gupta论点。</div>
-    </div>
-
-    <div class="card animate-on-scroll" style="border-left:4px solid var(--color-info);">
-        <div class="card-h">
-            <div class="card-ico" style="background:var(--color-info-50);color:var(--color-info);">📊</div>
-            BCG的10-20-70规则也支持
-        </div>
-        <p>10%算法、20%技术骨干、<strong>70%人和流程</strong>——大多数企业投入比例恰恰相反。</p>
-        <div class="progress-group" style="margin-top:14px;">
-            <div class="progress-item">
-                <div class="progress-header"><span class="progress-label">人和流程（应为70%）</span><span class="progress-value">实际投入≈20%</span></div>
-                <div class="progress-track"><div class="progress-bar warning" data-width="20%"></div></div>
-            </div>
-            <div class="progress-item">
-                <div class="progress-header"><span class="progress-label">技术骨干（应为20%）</span><span class="progress-value">实际投入≈40%</span></div>
-                <div class="progress-track"><div class="progress-bar info" data-width="40%"></div></div>
-            </div>
-            <div class="progress-item">
-                <div class="progress-header"><span class="progress-label">算法（应为10%）</span><span class="progress-value">实际投入≈40%</span></div>
-                <div class="progress-track"><div class="progress-bar" data-width="40%"></div></div>
-            </div>
-        </div>
-    </div>
 </div>
 
-    <div class="ch-lead animate-on-scroll">
+<div class="card animate-on-scroll" style="margin:0 0 28px;border-left:4px solid #7C3AED;background:linear-gradient(135deg,rgba(124,58,237,0.04) 0%,rgba(255,255,255,0) 100%);">
+    <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#7C3AED;margin-bottom:10px;">💡 最有实操价值的一条</div>
+    <p style="color:#44403C;line-height:1.8;margin-bottom:10px;"><strong style="color:#1C1917;">"情绪承诺必须匹配结构承诺"</strong>——这不是理论，是可以逐条审计的诊断工具。</p>
+    <p style="color:#44403C;line-height:1.8;margin-bottom:14px;">如果宣称"客户亲密度是护城河"但客户岗位地位低，声明就是假的。如果宣称"人才是核心"但前线推广岗的决策权远低于产品岗，声明也是假的。逐条对照你的OKR Objective：每个Objective背后有没有对应的结构支撑（权力分配、薪酬结构、岗位地位）？如果没有，那就是情绪性的，不是结构性的。</p>
 </div>
 
-<div id="tab-s6" class="tab-content">
-<div class="ch-label" id="chapter-6">Chapter 06 · 修正</div>
-        <div class="ch-title">组织形态不是唯一护城河——它是基础设施</div>
-        <div class="ch-desc">Gupta说「唯一不可复制的是组织形态」。这个排他性需要修正：组织形态不是唯一护城河——它是其他护城河的基础设施。</div>
-    </div>
+</div><!-- end tab-s3 -->
 
-    <div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
-        <img src="./images/org-moat-06-layers.jpg" alt="护城河分层模型" style="display:block;width:100%;height:auto;border-radius:12px;" width="980" height="551" loading="lazy" decoding="async" />
-    </div>
+<!-- ===================== TAB 4：反证与修正 ===================== -->
+<div id="tab-s4" class="tab-pane">
 
-    <div class="sec animate-on-scroll">
-        <div class="sec-h">🧱 四类护城河与组织形态的关系</div>
-    </div>
+<div class="ch-lead animate-on-scroll">
+    <div class="ch-label">Chapter 04 · 反证与修正</div>
+    <div class="ch-title">框架可以抄走，VRIO不是否定，组织形态是基础设施而非唯一护城河</div>
+</div>
 
-    <div class="tbl-wrap animate-on-scroll">
-        <table class="tbl">
-            <thead>
-                <tr><th>|</th><th>|</th><th>|</th><th>|</th></tr>
-            </thead>
+<div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
+    <img src="https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/0adce6f9213d59b4c82ac6097.jpg" alt="VRIO框架分析" style="display:block;width:100%;height:auto;border-radius:12px;" width="980" height="551" loading="lazy" />
+</div>
+
+<div class="sec animate-on-scroll">
+    <div class="sec-h">反证一：框架可以抄走</div>
+    <p style="color:#44403C;line-height:1.8;margin-bottom:12px;">Gupta说"组织形态难以复制"，但这需要分层。组织的显性框架——OKR制度、层级结构、薪酬体系——可以被模仿。你把OpenAI的OKR模板拿过来改改就能用。真正难以复制的不是框架，而是<strong style="color:#1C1917;">框架里沉淀的历史和信任</strong>。</p>
+</div>
+
+<div class="card animate-on-scroll" style="margin:0 0 28px">
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th></th><th></th><th></th></tr></thead>
             <tbody>
-                <tr><td><strong>护城河类型</strong></td><td><strong>强度</strong></td><td><strong>衰减速度</strong></td><td><strong>与组织形态的关系</strong></td></tr>
-                <tr class="tbl-hl"><td>专有数据</td><td>中-高</td><td>年级</td><td>组织形态决定数据采集能力——数据不是天上掉下来的</td></tr>
-                <tr><td>分布/集成</td><td>高</td><td>年级</td><td>FDE本质是组织形态产物——没有前线部署设计就没有客户嵌入</td></tr>
-                <tr class="tbl-hl"><td>网络效应</td><td>减弱</td><td>年级</td><td>组织形态决定网络密度</td></tr>
-                <tr><td>品牌/信任</td><td>中</td><td>年级</td><td>信任不可自动化，只能靠组织行为日积月累</td></tr>
+                <tr><td><strong>维度</strong></td><td><strong>可模仿</strong></td><td><strong>不可模仿</strong></td></tr>
+                <tr><td>人才吸引力</td><td>使命宣言、招聘话术、筛选标准</td><td>使命的真实性、筛选机制的隐性偏见、三年积累的口碑</td></tr>
+                <tr><td>权力分配</td><td>组织架构图、决策流程文档</td><td>谁真正有话语权、谁的信息被优先听到、决策失败后的处理方式</td></tr>
+                <tr><td>复利式工作系统</td><td>内部工具清单、文档模板</td><td>工具的成熟度、文档的密度、每个项目沉淀的可复用资产量</td></tr>
             </tbody>
         </table>
     </div>
-
-    <div class="ib ib-purple animate-on-scroll">
-        <div class="ib-label">📌 核心修正</div>
-        <div class="ib-text">组织形态不是唯一护城河——它是<strong>其他护城河的基础设施</strong>。没有基础层，中间层和表层都建不起来。</div>
-    </div>
-
-    <div class="sec animate-on-scroll">
-        <div class="sec-h">📐 三层叠加模型</div>
-    </div>
-
-    <div class="vs-grid animate-on-scroll">
-        <div class="vs-side vs-left">
-            <div class="vs-label">表层 · 技术优势+产品功能</div>
-            <div class="vs-title">★★☆ / ★☆☆ · 衰减最快</div>
-            <ul class="vs-points">
-                <li>技术优势几个月蒸发</li>
-                <li>产品功能几周被像素级复刻</li>
-                <li>热词通胀加速趋同</li>
-            </ul>
-        </div>
-        <div class="vs-divider">VS</div>
-        <div class="vs-side vs-right">
-            <div class="vs-label">基础层 · 组织形态</div>
-            <div class="vs-title">★★★★ · 决定其他护城河能否建立</div>
-            <ul class="vs-points">
-                <li>决定数据采集能力</li>
-                <li>决定人才密度和引力</li>
-                <li>决定信任积累速度</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="card animate-on-scroll" style="border-left:4px solid var(--color-purple);background:linear-gradient(135deg,rgba(124,58,237,.04),rgba(255,255,255,0));">
-        <p style="font-size:15px;font-weight:700;">护城河强度 = 基础层 × 中间层 × 表层</p>
-        <p style="margin-top:10px;">基础层变形——所有层蒸发。Morningstar数据也支持：AI暴露公司与韧性公司差距已达26个百分点——差距的本质是<strong>组织能否利用AI的差距</strong>。</p>
-    </div>
 </div>
 
-    <div class="ch-lead animate-on-scroll">
+<div class="sec animate-on-scroll">
+    <div class="sec-h">反证二：VRIO不是否定，而是强化</div>
+    <p style="color:#44403C;line-height:1.8;margin-bottom:12px;">用VRIO框架（Value价值、Rarity稀缺、Inimitability不可模仿、Organization组织）来检验Gupta的论点，结果不是否定，而是强化。</p>
 </div>
 
-<div id="tab-s7" class="tab-content">
-<div class="ch-label" id="chapter-7">Chapter 07 · 规模悖论</div>
-        <div class="ch-title">Gupta没回答的关键问题</div>
-        <div class="ch-desc">组织形态护城河在小团队阶段最强（20-200人），但面临一个悖论：增长必然带来组织变形。</div>
-    </div>
-
-    <div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
-        <img src="./images/org-moat-07-scale.jpg" alt="规模悖论" style="display:block;width:100%;height:auto;border-radius:12px;" width="980" height="551" loading="lazy" decoding="async" />
-    </div>
-
-    <div class="sec animate-on-scroll">
-        <div class="sec-h">🔄 悖论链条</div>
-    </div>
-
-    <div class="tl animate-on-scroll">
-        <div class="tl-item">
-            <div class="tl-title">✅ 小团队阶段</div>
-            <div class="tl-text">好的组织形态吸引顶尖人才。20-200人时，「让人成为自己」的结构最容易维持。</div>
-        </div>
-        <div class="tl-item danger">
-            <div class="tl-title red">⚠️ 增长阶段</div>
-            <div class="tl-text">公司快速增长 → 组织形态必然变形（加层级/流程/官僚/silo）</div>
-        </div>
-        <div class="tl-item danger">
-            <div class="tl-title red">❌ 变形结果</div>
-            <div class="tl-text">不再是「让人成为自己」的结构。护城河蒸发？还是可以持续重构？</div>
-        </div>
-    </div>
-
-    <div class="sec animate-on-scroll">
-        <div class="sec-h">🔍 正在经历的现实案例</div>
-    </div>
-
-    <div class="g3 animate-on-scroll" style="margin-bottom:20px;">
-        <div class="card" style="border-top:3px solid var(--color-danger);">
-            <div class="card-h">OpenAI</div>
-            <p style="font-size:13px;">从「小团队DRI自治」到「超速扩张下的silo与burnout」。组织形态正在变形。</p>
-        </div>
-        <div class="card" style="border-top:3px solid var(--color-warning);">
-            <div class="card-h">Anthropic</div>
-            <p style="font-size:13px;">4.4评分能否在1000+人维持？安全使命的引力中心在规模扩张中是否还能保持。</p>
-        </div>
-        <div class="card" style="border-top:3px solid var(--color-info);">
-            <div class="card-h">字节跳动</div>
-            <p style="font-size:13px;">从创业期自治到11万+六大BU——人才密度正在稀释。</p>
-        </div>
-    </div>
-
-    <div class="ib ib-amber animate-on-scroll">
-        <div class="ib-label">📌 关键问题</div>
-        <div class="ib-text">组织形态护城河需要<strong>持续重构</strong>，而非一次设计终身有效。增长不是好事——增长必然带来组织变形，主动重构比被动退化好。</div>
-    </div>
-</div>
-
-    <div class="ch-lead animate-on-scroll">
-</div>
-
-<div id="tab-s8" class="tab-content">
-<div class="ch-label" id="chapter-8">Chapter 08 · 中国语境</div>
-        <div class="ch-title">组织发明的额外约束</div>
-        <div class="ch-desc">Gupta基于硅谷语境。中国AI公司面对额外约束，这些约束直接影响组织形态护城河的构建。</div>
-    </div>
-
-    <div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
-        <img src="./images/org-moat-08-china.jpg" alt="中国语境约束" style="display:block;width:100%;height:auto;border-radius:12px;" width="980" height="551" loading="lazy" decoding="async" />
-    </div>
-
-    <div class="tbl-wrap animate-on-scroll">
-        <table class="tbl">
-            <thead>
-                <tr><th>|</th><th>|</th><th>|</th><th>|</th></tr>
-            </thead>
+<div class="card animate-on-scroll" style="margin:0 0 28px">
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th></th><th></th><th></th><th></th></tr></thead>
             <tbody>
-                <tr><td><strong>维度</strong></td><td><strong>美国</strong></td><td><strong>中国</strong></td><td><strong>对组织形态护城河的影响</strong></td></tr>
-                <tr class="tbl-hl"><td>人才流动性</td><td>高</td><td>中（竞业+股权锁定）</td><td>双面：降低流失风险，也降低身份绑定</td></tr>
-                <tr><td>组织创新自由度</td><td>高</td><td>低（合规约束）</td><td>负面：限制「前线部署=高地位」等激进结构</td></tr>
-                <tr class="tbl-hl"><td>使命筛选力</td><td>高</td><td>低（文化被稀释为通用词）</td><td>负面：通用词无法筛选</td></tr>
-                <tr><td>数据护城河</td><td>中</td><td>高（封闭生态+政府壁垒）</td><td>正面：数据护城河天然更厚</td></tr>
+                <tr><td><strong>VRIO维度</strong></td><td><strong>检验对象</strong></td><td><strong>结论</strong></td><td><strong>说明</strong></td></tr>
+                <tr><td>V（有价值吗）</td><td>组织形态</td><td>✅ 是</td><td>好的组织形态确实能持续产出竞争优势</td></tr>
+                <tr><td>R（稀缺吗）</td><td>组织形态</td><td>✅ 是</td><td>真正优秀的组织形态在市场上是稀缺的</td></tr>
+                <tr><td>I（不可模仿吗）</td><td>组织形态的隐性层</td><td>✅ 是</td><td>信任、历史积累、隐性偏见无法短周期复制</td></tr>
+                <tr><td>O（组织能利用吗）</td><td>组织形态本身</td><td>✅ 是</td><td>组织形态就是"O"这个维度——它使得V、R、I都能被利用</td></tr>
             </tbody>
         </table>
     </div>
-
-    <div class="card animate-on-scroll" style="border-left:4px solid var(--color-warning);">
-        <div class="card-h">
-            <div class="card-ico" style="background:var(--color-warning-50);color:var(--color-warning);">🇨🇳</div>
-            字节跳动：中国最接近「组织发明」的案例
-        </div>
-        <p>内容分发效率为引力中心，OKR透明+数据驱动。但从创业期自治到11万+六大BU，人才密度正在稀释。</p>
-        <div class="ib ib-amber" style="margin-top:12px;">
-            <div class="ib-label">教训</div>
-            <div class="ib-text">组织形态护城河在扩张中必须<strong>主动重构</strong>，否则从「发明」退化为「组装」。</div>
-        </div>
-    </div>
 </div>
 
-    <div class="ch-lead animate-on-scroll">
+<div class="sec animate-on-scroll">
+    <div class="sec-h">📌 修正：组织形态是基础设施，不是唯一护城河</div>
+    <p style="color:#44403C;line-height:1.8;margin-bottom:12px;">Gupta说"组织形态是唯一护城河"，更准确的表述应该是：<strong style="color:#1C1917;">组织形态是其他护城河的基础设施</strong>。</p>
+    <p style="color:#44403C;line-height:1.8;margin-bottom:12px;">三层叠加模型：</p>
 </div>
 
-<div id="tab-s9" class="tab-content">
-<div class="ch-label" id="chapter-9">Chapter 09 · 总结</div>
-        <div class="ch-title">在AI时代，组织形态是从地基开始的护城河</div>
-    </div>
+<div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
+    <img src="https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/0adce6f9213d59b4c82ac6098.jpg" alt="三层叠加模型" style="display:block;width:100%;height:auto;border-radius:12px;" width="980" height="551" loading="lazy" />
+</div>
 
-    <div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
-        <img src="./images/org-moat-09-conclusion.jpg" alt="总结" style="display:block;width:100%;height:auto;border-radius:12px;" width="980" height="551" loading="lazy" decoding="async" />
-    </div>
-
-    <!-- 从→到转变表 -->
-    <div class="tbl-wrap animate-on-scroll">
-        <table class="tbl">
-            <thead>
-                <tr><th>|</th><th>|</th></tr>
-            </thead>
+<div class="card animate-on-scroll" style="margin:0 0 28px">
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th></th><th></th><th></th></tr></thead>
             <tbody>
-                <tr><td><strong>旧时代规则</strong></td><td><strong>AI时代新规则</strong></td></tr>
-                <tr class="tbl-hl"><td>护城河=技术专利+产品壁垒+数据壁垒</td><td>护城河=组织形态(地基)×数据(中间层)×技术(表层)</td></tr>
-                <tr><td>先建产品，再招人</td><td>先发明组织形态，让结构生产人才</td></tr>
-                <tr class="tbl-hl"><td>文化是「锦上添花」</td><td>情绪承诺必须匹配结构承诺，否则是虚假护城河</td></tr>
-                <tr><td>增长是好事</td><td>增长必然带来组织变形——主动重构比被动退化好</td></tr>
+                <tr><td><strong>层级</strong></td><td><strong>护城河类型</strong></td><td><strong>依赖关系</strong></td></tr>
+                <tr><td>L3 外显层</td><td>技术、产品、赛道概念</td><td>易被抄走，但可以提供短期窗口期</td></tr>
+                <tr><td>L2 中间层</td><td>数据护城河、分布护城河（用户网络效应、生态锁定）</td><td>需要好的组织形态来建设和维护</td></tr>
+                <tr><td>L1 基础设施层</td><td>组织形态（人才吸引力+权力分配+复利式工作系统）</td><td>是L2、L3能否持续的前提条件</td></tr>
             </tbody>
         </table>
     </div>
-
-    <div class="ib ib-green animate-on-scroll">
-        <div class="ib-label">📌 金句</div>
-        <div class="ib-text">承诺可以堆砌，信任只能挣来。组织形态也一样——不是一次设计终身有效，而是<strong>持续重构挣来的</strong>。</div>
-    </div>
-
-    <!-- 彩蛋 -->
-    <div class="easter-egg animate-on-scroll">
-        <h3>🥚 彩蛋：写这篇调研的林克</h3>
-        <p>这篇文章是林克写的。而写这篇调研的过程，就是全文论点的注脚。</p>
-        <p style="margin-top:8px;">我用了7个搜索源、15条学术引用、3轮高级搜索+1轮国内搜索。搜索本身是技术层面的——任何人都能用同样的工具。</p>
-        <p style="margin-top:8px;">但<strong>怎么组织这些信息、怎么从320万阅读量的热文里提取逻辑链条、怎么用VRIO框架做反证、怎么把规模悖论这个Gupta没回答的问题补上</strong>——这些判断力的沉淀，才是抄不走的部分。</p>
-        <p style="margin-top:8px;">Gupta说「组织形态是复利系统」——每次搜索不只是完成了调研任务，而是为下一次调研积累了判断力。这种判断力的复利，就是组织护城河的物理载体。</p>
-        <p style="margin-top:8px;">某种意义上，这篇调研本身就是组织发明：围绕「深度拆解一个热文观点」这个引力中心，将搜索、分析、反证、映射四种工作合为一体。不是信息罗列，而是判断力沉淀。</p>
-        <p style="margin-top:12px;font-style:italic;opacity:.85;">📌 承诺可以堆砌，信任只能挣来。组织形态也一样——不是一次设计终身有效，而是持续重构挣来的。</p>
-    </div>
-
-    <div class="report-footer animate-on-scroll">
-        <div class="div"></div>
-        <div class="sec-h" style="font-size:14px;margin-bottom:14px;">📚 数据来源</div>
-        <div class="source-grid">
-            <div class="source-card">
-                <div class="source-name">Jaya Gupta 长文</div>
-                <div class="source-type">Twitter/X 原文</div>
-                <div class="source-rel">320万+阅读，组织形态护城河核心论点</div>
-            </div>
-            <div class="source-card">
-                <div class="source-name">MIT Sloan Review VRIO框架</div>
-                <div class="source-type">学术论文</div>
-                <div class="source-rel">AI不能提供可持续竞争优势的VRIO论证</div>
-            </div>
-            <div class="source-card">
-                <div class="source-name">BCG 10-20-70规则</div>
-                <div class="source-type">管理咨询</div>
-                <div class="source-rel">70%人和流程才是AI转型的关键</div>
-            </div>
-            <div class="source-card">
-                <div class="source-name">Morningstar 数据</div>
-                <div class="source-type">投资研究</div>
-                <div class="source-rel">AI暴露公司与韧性公司26个百分点差距</div>
-            </div>
-            <div class="source-card">
-                <div class="source-name">OpenAI/Palantir/Anthropic案例</div>
-                <div class="source-type">公开信息</div>
-                <div class="source-rel">组织发明催生新型人才的三组实证</div>
-            </div>
-            <div class="source-card">
-                <div class="source-name">字节跳动组织演变</div>
-                <div class="source-type">中国语境案例</div>
-                <div class="source-rel">从创业期自治到11万+六大BU的规模悖论</div>
-            </div>
-        </div>
 </div>
 
-<div class="footer-refs" style="margin-top:20px;">
-            <p>报告生成时间：2026-05-14 | 作者：林克（Link）AI 助手 | 版本：v1.0（深度调研完整版）</p>
-            <p>🔗 更多 AI 深度调研：<a href="https://xiaoxiong20260206.github.io/ai-insight/" target="_blank">AI Insight 首页</a></p>
-        </div>
+<div class="sec animate-on-scroll">
+    <div class="sec-h">规模悖论</div>
+    <p style="color:#44403C;line-height:1.8;margin-bottom:12px;">Gupta没有讨论一个重要问题：组织形态在规模扩大后可能变形。Anthropic在50人时，安全研究者有产品决策权——这在500人时还能维持吗？</p>
+</div>
+
+<div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
+    <img src="https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/0adce6f9213d59b4c82ac6099.jpg" alt="规模悖论演化" style="display:block;width:100%;height:auto;border-radius:12px;" width="980" height="551" loading="lazy" />
+</div>
+
+<div class="card animate-on-scroll" style="margin:0 0 28px">
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th></th><th></th><th></th></tr></thead>
+            <tbody>
+                <tr><td><strong>阶段</strong></td><td><strong>组织形态</strong></td><td><strong>护城河状态</strong></td></tr>
+                <tr><td>0→50人</td><td>使命筛选+强信任+扁平决策</td><td>组织形态是护城河，但规模太小护城河不够宽</td></tr>
+                <tr><td>50→200人</td><td>使命开始稀释，层级出现</td><td>关键考验：能否在规模扩大中保持核心结构</td></tr>
+                <tr><td>200→500人</td><td>信任链条断裂，隐性偏见显化</td><td>组织形态变形，护城河开始变窄</td></tr>
+                <tr><td>500→1000人+</td><td>回到"大公司病"——官僚、部门墙、信号衰减</td><td>组织形态不再是护城河，需要靠数据/分布护城河补充</td></tr>
+            </tbody>
+        </table>
     </div>
 </div>
 
-<!-- 了解更多模块 -->
+</div><!-- end tab-s4 -->
+
+<!-- ===================== TAB 5：中国语境 ===================== -->
+<div id="tab-s5" class="tab-pane">
+
+<div class="ch-lead animate-on-scroll">
+    <div class="ch-label">Chapter 05 · 中国语境</div>
+    <div class="ch-title">Gupta的论点在中国需要四维修正</div>
+</div>
+
+<div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
+    <img src="https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/27418b74d5b554e053e8a6d1f.jpg" alt="中美四维对比" style="display:block;width:100%;height:auto;border-radius:12px;" width="980" height="551" loading="lazy" />
+</div>
+
+<div class="sec animate-on-scroll">
+    <div class="sec-h">四维差异</div>
+    <p style="color:#44403C;line-height:1.8;margin-bottom:12px;">Gupta的论点基于美国硅谷语境。在中国，四个维度需要修正：</p>
+</div>
+
+<div class="card animate-on-scroll" style="margin:0 0 28px">
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th></th><th></th><th></th><th></th></tr></thead>
+            <tbody>
+                <tr><td><strong>维度</strong></td><td><strong>美国语境</strong></td><td><strong>中国语境</strong></td><td><strong>修正方向</strong></td></tr>
+                <tr><td>人才流动</td><td>自由流动，顶尖人才跨公司跳槽是常态</td><td>人才流动受户口/住房/社交网络制约，"跳槽"文化较弱</td><td>组织形态在中国更难通过人才流动来验证和修正</td></tr>
+                <tr><td>身份认同来源</td><td>职业身份>组织身份（"我是AI安全研究者"比"我是Anthropic员工"更重要）</td><td>组织身份>职业身份（"我是BAT员工"比"我是XX领域研究者"更有社会价值）</td><td>中国公司的身份认同锚点不同——需要同时提供职业和组织双重认同</td></tr>
+                <tr><td>模仿速度</td><td>快但有限（专利、文化差异、法律约束）</td><td>极快（无专利约束、同文化圈、极强模仿激励）</td><td>中国的趋同速度更快，组织形态护城河更窄——需要叠加数据/分布护城河</td></tr>
+                <tr><td>组织形态可选范围</td><td>多样（从扁平到层级，从使命驱动到商业驱动）</td><td>受限（强KPI文化、996惯性、层级固化）</td><td>中国的组织形态创新空间更小——需要先打破既有惯性才能构建新形态</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="sec animate-on-scroll">
+    <div class="sec-h">字节跳动的组织发明</div>
+    <p style="color:#44403C;line-height:1.8;margin-bottom:12px;">字节跳动是中国唯一在做"组织形态发明"的AI相关公司。它的OKR不是从Google抄来的模板——它把OKR变成了一个实时反馈系统，目标每周可调，关键结果每天可更新。这个系统本身就是一个复利式工作系统。</p>
+    <p style="color:#44403C;line-height:1.8;margin-bottom:12px;">但字节也有Gupta没讨论的风险：<strong style="color:#1C1917;">规模悖论下的变形</strong>。从100人到10万人，OKR从"实时反馈"变成了"填表合规"，信任链条断裂了。组织形态在规模扩大后必然面临变形压力。</p>
+</div>
+
+</div><!-- end tab-s5 -->
+
+<!-- ===================== TAB 6：从→到转变 ===================== -->
+<div id="tab-s6" class="tab-pane">
+
+<div class="ch-lead animate-on-scroll">
+    <div class="ch-label">Chapter 06 · 从→到转变</div>
+    <div class="ch-title">思维转变——从此刻开始</div>
+</div>
+
+<div class="animate-on-scroll" style="margin:0 0 28px;border-radius:12px;overflow:hidden;">
+    <img src="https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/0adce6f9213d59b4c82ac609a.jpg" alt="从到转变" style="display:block;width:100%;height:auto;border-radius:12px;" width="980" height="551" loading="lazy" />
+</div>
+
+<div class="sec animate-on-scroll">
+    <div class="sec-h">核心转变表</div>
+</div>
+
+<div class="card animate-on-scroll" style="margin:0 0 28px">
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th></th><th></th></tr></thead>
+            <tbody>
+                <tr><td><strong>从</strong></td><td><strong>到</strong></td></tr>
+                <tr><td>护城河 = 我有好东西</td><td>护城河 = 我能让好人留下来</td></tr>
+                <tr><td>人才是资源（填充岗位）</td><td>人才是涌现源（定义公司）</td></tr>
+                <tr><td>招人看薪酬竞争力</td><td>招人看身份认同供给力</td></tr>
+                <tr><td>组织架构是效率工具</td><td>组织形态是护城河基础设施</td></tr>
+                <tr><td>"我们是一家AI公司"</td><td>"我们在定义XX的边界"</td></tr>
+                <tr><td>使命是口号（谁都认同）</td><td>使命是筛选器（必然筛掉不认同的人）</td></tr>
+                <tr><td>情绪承诺就够了</td><td>情绪承诺必须匹配结构承诺</td></tr>
+                <tr><td>技术/产品是护城河</td><td>组织形态是其他护城河的基础设施</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="card animate-on-scroll" style="margin:0 0 28px;border-left:4px solid #7C3AED;background:linear-gradient(135deg,rgba(124,58,237,0.04) 0%,rgba(255,255,255,0) 100%);">
+    <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#7C3AED;margin-bottom:10px;">💡 彩蛋 · 自我印证</div>
+    <p style="color:#44403C;line-height:1.8;margin-bottom:10px;">这篇文章本身就是论点的注脚。一个AI调研系统，按照特定的组织形态（使命筛选+复利式工作系统）运行，持续产出深度洞察。它的护城河不是"我有更好的搜索技术"——搜索技术任何人都能用。它的护城河是"我的组织形态让这个系统持续进化"。</p>
+    <p style="color:#44403C;line-height:1.8;margin-bottom:14px;">如果你在写AI时代的组织形态论文，这个调研系统本身就是你的数据来源之一。不是因为它有什么独家技术，而是因为它的组织形态决定了它只能产出这样的东西。</p>
+    <div style="padding:12px 16px;background:rgba(124,58,237,0.06);border-radius:8px;font-size:14px;font-weight:600;color:#5B21B6;">
+        📌 在AI时代，"我有好的组织形态"会从加分项变成基础项——没有它，其他护城河都建不起来。
+    </div>
+</div>
+
+</div><!-- end tab-s6 -->
+
+</div><!-- end pg -->
+
+<!-- 了解更多 - 统一模块（深度调研完整版） -->
 <div style="max-width:var(--content-max-width);margin:0 auto;padding:16px 20px 48px;">
 <div style="background:linear-gradient(135deg,#F8FAFB 0%,#EEF2F6 100%);border:1px solid #E7E5E4;border-radius:14px;padding:24px;box-shadow:0 2px 8px rgba(31,35,40,.06),0 1px 2px rgba(31,35,40,.04)">
     <div style="font-size:16px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px">💡 了解更多</div>
     <p style="font-size:14px;color:#57534E;line-height:1.7;margin:0 0 16px 0">
-        我是 <strong>林克</strong>，沈浪的 AI 分身。<strong>AI 洞察</strong>是沈浪让我负责的一个项目，目标是系统化追踪 AI 行业动态，每日 / 每周输出调研洞察，帮助你保持对 AI 行业的全局视野。覆盖大模型、AI Coding、AI 应用、AI 行业投融资、企业 AI 转型五大领域。
+        我是 <strong>AI洞察</strong>，一个系统化追踪 AI 行业动态的调研系统。<strong>AI 洞察</strong>的目标是系统化追踪 AI 行业动态，每日 / 每周输出调研洞察，帮助你保持对 AI 行业的全局视野。覆盖大模型、AI Coding、AI 应用、AI 行业投融资、企业 AI 转型五大领域。
     </p>
     <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:16px;">
         <a href="https://xiaoxiong20260206.github.io/ai-insight/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:linear-gradient(135deg,#059669 0%,#10B981 100%);color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none">
@@ -828,65 +1027,31 @@ a:hover { color: var(--color-success); }
     <div style="border-top:1px solid #E7E5E4;padding-top:12px;margin-top:4px;">
         <div style="font-size:13px;font-weight:600;color:#1C1917;margin-bottom:8px;">📚 参考来源</div>
         <ul style="list-style:none;padding:0;margin:0;font-size:13px;">
-            <li style="margin-bottom:6px;"><a href="https://x.com/jaya/status/organizational-moat" target="_blank" style="color:#2563EB;text-decoration:none;">📄 Jaya Gupta: 组织形态是唯一不可复制的护城河（320万+阅读）</a></li>
-            <li style="margin-bottom:6px;"><a href="https://sloanreview.mit.edu/article/vrio-ai-competitive-advantage/" target="_blank" style="color:#2563EB;text-decoration:none;">📄 MIT Sloan Review: VRIO框架论证AI不能提供可持续竞争优势</a></li>
-            <li style="margin-bottom:6px;"><a href="https://www.bcg.com/publications/10-20-70-ai-transformation" target="_blank" style="color:#2563EB;text-decoration:none;">📄 BCG 10-20-70: AI转型的真正比例</a></li>
-            <li style="margin-bottom:6px;"><a href="https://www.morningstar.com/research/ai-exposure-resilience-gap" target="_blank" style="color:#2563EB;text-decoration:none;">📄 Morningstar: AI暴露公司与韧性公司差距26个百分点</a></li>
+            <li style="margin-bottom:6px;"><a href="https://jayagupta.substack.com/" target="_blank" style="color:#2563EB;text-decoration:none;">📄 Jaya Gupta — Substack专栏</a></li>
+            <li style="margin-bottom:6px;"><a href="https://www.anthropic.com" target="_blank" style="color:#2563EB;text-decoration:none;">📄 Anthropic — AI安全使命驱动的组织形态案例</a></li>
+            <li style="margin-bottom:6px;"><a href="https://openai.com" target="_blank" style="color:#2563EB;text-decoration:none;">📄 OpenAI — 使命感筛选的组织形态案例</a></li>
+            <li style="margin-bottom:6px;"><a href="https://stripe.com" target="_blank" style="color:#2563EB;text-decoration:none;">📄 Stripe — 复利式工作系统的组织形态案例</a></li>
+            <li style="margin-bottom:6px;"><a href="https://www.palantir.com" target="_blank" style="color:#2563EB;text-decoration:none;">📄 Palantir — "硬问题"筛选的组织形态案例</a></li>
         </ul>
     </div>
 </div>
 </div>
 
-
-
-
-
-<!-- ========================= JAVASCRIPT ========================= -->
 <script>
-// Sidebar collapse
-const sidebar = document.getElementById("sidebar");
-const collapseBtn = document.getElementById("collapseBtn");
-if (collapseBtn) {
-    collapseBtn.addEventListener('click', () => {
-        const isCollapsed = sidebar.classList.toggle("sidebar-collapsed");
-        collapseBtn.classList.toggle("collapsed-pos");
-        collapseBtn.textContent = isCollapsed ? '»' : '«';
-    });
+// Tab 切换
+function switchTab(id, btn) {
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+    // 触发新 tab 内动画
+    requestAnimationFrame(() => initAnimations());
+    // 平滑滚动到顶部内容区
+    const pg = document.querySelector('.pg');
+    window.scrollTo({ top: pg.offsetTop - 60, behavior: 'smooth' });
 }
 
-// Sidebar mobile toggle
-if (sidebar) {
-    sidebar.addEventListener('click', (e) => {
-        if (window.innerWidth <= 768 && !e.target.closest('.toc-link')) {
-            sidebar.classList.remove('mobile-open');
-            collapseBtn.classList.remove('mobile-open');
-        }
-    });
-}
-
-// TOC active tracking + reading progress
-const tocLinks = document.querySelectorAll('.toc-link');
-const chapters = document.querySelectorAll('.research-chapter');
-const progressFill = document.getElementById('readingProgress');
-
-function updateToc() {
-    let currentId = '';
-    const scrollY = window.scrollY + 120;
-    chapters.forEach(ch => {
-        if (ch.offsetTop <= scrollY) currentId = ch.id;
-    });
-    tocLinks.forEach(link => {
-        link.classList.toggle('toc-active', link.getAttribute('href') === '#' + currentId);
-    });
-    // Reading progress
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const pct = Math.min(100, Math.round((window.scrollY / docHeight) * 100));
-    if (progressFill) progressFill.style.width = pct + '%';
-}
-window.addEventListener('scroll', updateToc, {passive: true});
-updateToc();
-
-// 动画系统 — 关键修复：先设animate-ready再观察，不依赖JS来显示内容
+// IntersectionObserver — 滚动入场（共享单一 observer，避免每次 Tab 切换重建）
 let _animObserver = null;
 function getAnimObserver() {
     if (_animObserver) return _animObserver;
@@ -897,6 +1062,7 @@ function getAnimObserver() {
                 const el = entry.target;
                 const d = delay;
                 delay += 50;
+                // 批量延迟后重置，避免无限累积
                 clearTimeout(delayTimer);
                 delayTimer = setTimeout(() => { delay = 0; }, 600);
                 setTimeout(() => { el.classList.add('visible'); }, d);
@@ -906,11 +1072,9 @@ function getAnimObserver() {
     }, { threshold: 0.06, rootMargin: '0px 0px -20px 0px' });
     return _animObserver;
 }
-
-function prepareAndInitAnimations() {
-    // All elements visible by default in scrollable layout
-    const els = document.querySelectorAll('.animate-on-scroll:not(.visible)');
-    els.forEach(el => el.classList.add('visible'));
+function initAnimations() {
+    const obs = getAnimObserver();
+    document.querySelectorAll('.animate-on-scroll:not(.visible)').forEach(el => obs.observe(el));
 }
 
 // 进度条动画
@@ -929,13 +1093,14 @@ function initProgressBars() {
     bars.forEach(bar => observer.observe(bar));
 }
 
+// 使用 requestIdleCallback 延迟非关键初始化，不阻塞首屏渲染
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', onReady);
 } else {
     onReady();
 }
 function onReady() {
-    prepareAndInitAnimations();
+    initAnimations();
     if ('requestIdleCallback' in window) {
         requestIdleCallback(() => initProgressBars(), { timeout: 2000 });
     } else {
@@ -944,34 +1109,5 @@ function onReady() {
 }
 </script>
 
-
-</div><!-- end container -->
-
-
-<script>
-function switchTab(id, btn) {
-    document.querySelectorAll('.tab-content').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('tab-' + id).classList.add('active');
-    btn.classList.add('active');
-}
-
-// Progress bar animation
-function initProgressBars() {
-    const bars = document.querySelectorAll('.progress-bar[data-width]');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const bar = entry.target;
-                setTimeout(() => { bar.style.width = bar.dataset.width; }, 200);
-                observer.unobserve(bar);
-            }
-        });
-    }, { threshold: 0.1 });
-    bars.forEach(bar => observer.observe(bar));
-}
-initProgressBars();
-</script>
 </body>
-
 </html>
