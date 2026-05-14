@@ -1318,18 +1318,13 @@ function getAnimObserver() {
 }
 
 function prepareAndInitAnimations() {
-    // Step 1: 给当前可见tab内的animate-on-scroll元素添加animate-ready类
-    // 这让它们从opacity:1变为opacity:0+translateY(16px)，准备入场
+    // 修复：不再添加animate-ready类，所有元素默认可见
+    // Observer仅做动画增强（淡入+上移），不控制可见性
     const activeTab = document.querySelector('.tab-pane.active');
     if (!activeTab) return;
-    const els = activeTab.querySelectorAll('.animate-on-scroll:not(.visible):not(.animate-ready)');
-    els.forEach(el => el.classList.add('animate-ready'));
-    
-    // Step 2: 立即将已经在视口内的元素标记为visible（不等待滚动）
-    requestAnimationFrame(() => {
-        const obs = getAnimObserver();
-        els.forEach(el => obs.observe(el));
-    });
+    // 直接标记所有未visible的元素为visible（立即可见）
+    const els = activeTab.querySelectorAll('.animate-on-scroll:not(.visible)');
+    els.forEach(el => el.classList.add('visible'));
 }
 
 // 进度条动画
