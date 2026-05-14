@@ -93,6 +93,8 @@
 | 了解更多只有一条链接 | 了解更多一条链接即可（文章专题） |
 | 配图描述用"配图-XX" | 配图描述要有信息量：`![三件事正在同质化：AI行业外显部分的收敛趋势]` |
 | 表格分隔线后加空行 `| \| \| \| |` | 分隔线后直接跟内容行，不要加空行 |
+| URL用内部版域名 `ai-insight` | URL用外部版域名 `ai-insight-public` |
+| 文件名含冗余词 `ai-org-moat-deep-research-2026` | slug简洁 `ai-org-moat` |
 
 ### 0.3 00概览章：核心范式对比表+剧透金句
 
@@ -273,7 +275,33 @@ Gupta观察到三个收敛趋势：
 
 **一句话总结差异**：去加粗、去空行、去分割线、配图在章节末尾、了解更多一条链接
 
-### 0.14 KIM Doc图片处理方式（关键踩坑经验）
+### 0.15 URL命名规范（深度调研·沈浪修改定稿版确认）
+
+**文件命名规范**：
+- slug格式：`ai-org-moat`（简洁，不含`-deep-research-2026`等冗余词）
+- 文件名：`<slug>.html`、`<slug>-kimdoc.md`、`<slug>.md`
+- ❌ 禁止：`ai-org-moat-deep-research-2026.html`（冗余）
+
+**URL格式规范**：
+- Web交互版链接必须用**外部版域名**：`xiaoxiong20260206.github.io/ai-insight-public/`
+- ❌ 禁止用内部版域名：`xiaoxiong20260206.github.io/ai-insight/`
+- 原因：KIM Doc是对外的，外部版域名才是可公开访问的
+
+**正确URL**：
+```
+https://xiaoxiong20260206.github.io/ai-insight-public/02-deep-research/topics/ai-org-moat.html
+```
+
+**错误URL**（我原来写的）：
+```
+https://xiaoxiong20260206.github.io/ai-insight/02-deep-research/topics/ai-org-moat-deep-research-2026.html
+```
+
+**了解更多链接格式**：
+- 首页链接：`https://xiaoxiong20260206.github.io/ai-insight-public/`
+- HTML内部所有对外链接都用外部版域名
+
+### 0.16 KIM Doc图片处理方式（关键踩坑经验）
 
 **核心问题**：docs-shuttle的push API推的MD文本里，CDN URL图片（`cdnfile.corp.kuaishou.com/kc/files/a/design-ai/...`）不会被KIM Doc自动转换为内部图片链接。KIM Doc只支持内部`is-docsfile`签名URL格式的图片。
 
