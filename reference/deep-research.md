@@ -66,6 +66,21 @@ Step 6: KIM推送 → build_insight_mixcard.py research
 ### 生成文件
 - `02-deep-research/<type>/<slug>.md`（Markdown）
 - `02-deep-research/<type>/<slug>.html`（HTML，≥50KB）
+- `02-deep-research/<type>/<slug>-kimdoc.md`（KIM Doc版本）
+
+### ⚠️ KIM Doc写作标准（必须先读！）
+**写KIM Doc之前，必须先读 `reference/kim-doc/writing-style.md`！**
+
+核心格式规律（从沈浪修改定稿版学习）：
+1. 标题两行：`# 【林克的AI洞察】主标题` + `## 副标题`
+2. 封面大图在标题+Web链接后面（高密度信息大图，一张图看清核心）
+3. 章节配图紧跟`# XX`标题下一行（0空行）
+4. 全文0空行紧凑排版，不用`---`分割线
+5. 几乎不加粗，让📌做标识
+6. 📌格式：`📌 纯文本`（不加粗）
+7. 每个章节必须有副标题：`# 01 主标题——副标题`
+8. 配图描述有信息量：`![三件事正在同质化：收敛趋势]`
+9. 了解更多三条链接
 
 ### 洞察提炼框架
 1. **现象层**: 行业正在发生什么？
