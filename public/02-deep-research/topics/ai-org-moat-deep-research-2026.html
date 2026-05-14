@@ -188,53 +188,91 @@ code {
 }
 
 /* ================================================
-   STICKY NAV（毛玻璃）
+   SIDEBAR NAV + LAYOUT
    ================================================ */
-.nav-wrap {
-    background: var(--glass-bg);
-    backdrop-filter: blur(8px) saturate(1.6);
-    -webkit-backdrop-filter: blur(8px) saturate(1.6);
-    border-bottom: var(--glass-border);
-    box-shadow: var(--glass-shadow);
-    position: sticky; top: 0; z-index: 100;
-    will-change: transform;
-    transform: translateZ(0);
+.layout-wrapper {
+    display: flex;
+    min-height: 100vh;
+    position: relative;
 }
-.nav-inner {
-    max-width: var(--content-max-width);
-    width: 100%;
-    margin: 0 auto; padding: 0 20px;
-    display: flex; gap: 0;
-    overflow-x: auto; scrollbar-width: none;
+.sidebar-nav {
+    width: 240px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    background: #fff;
+    border-right: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    padding: 24px 0 16px;
+    transition: transform 280ms ease;
+    z-index: 10;
 }
-.nav-inner::-webkit-scrollbar { display: none; }
-.nav-btn {
-    display: flex; align-items: center; gap: 7px;
-    padding: 14px 18px;
-    color: var(--color-text-muted);
-    font-family: var(--font-family);
-    font-size: 13px; font-weight: 500;
-    white-space: nowrap;
-    border: none; border-bottom: 2px solid transparent;
-    background: none; cursor: pointer;
-    transition: color var(--transition-fast), border-color var(--transition-fast);
-    letter-spacing: -0.01em;
+.sidebar-nav.sidebar-collapsed { transform: translateX(-240px); }
+.sidebar-doc-title {
+    font-size: 11px; font-weight: 700; color: var(--color-text-muted);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0 18px 12px; border-bottom: 1px solid var(--color-border-light); margin-bottom: 8px;
 }
-.nav-btn:hover { color: var(--color-success); }
-.nav-btn.active { color: var(--color-success); border-bottom-color: var(--color-success); font-weight: 700; }
-.nav-step {
-    width: 18px; height: 18px; border-radius: 50%;
-    background: var(--color-bg-table-header);
-    font-size: 10px; font-weight: 800;
+.sidebar-home-link {
+    display: flex; align-items: center; gap: 6px;
+    padding: 8px 18px; font-size: 12px; font-weight: 600;
+    color: var(--color-success); text-decoration: none;
+    border-bottom: 1px solid var(--color-border-light); margin-bottom: 8px;
+    transition: background 150ms ease;
+}
+.sidebar-home-link:hover { background: var(--color-success-50); }
+.toc-section { padding: 4px 0; }
+.toc-link {
+    display: block; padding: 6px 18px; font-size: 13px;
+    color: var(--color-text-secondary); text-decoration: none;
+    border-right: 2px solid transparent;
+    transition: color 150ms ease, background 150ms ease, border-color 150ms ease;
+    line-height: 1.4;
+}
+.toc-link:hover { color: var(--color-success); background: var(--color-success-50); }
+.toc-link.toc-active { color: var(--color-success); border-right-color: var(--color-success); background: var(--color-success-50); font-weight: 600; }
+.reading-progress-wrap {
+    margin-top: auto; padding: 16px 18px 8px;
+    border-top: 1px solid var(--color-border-light);
+}
+.reading-progress-label { font-size: 11px; color: var(--color-text-muted); margin-bottom: 6px; }
+.reading-progress-track { height: 4px; background: var(--color-border); border-radius: 2px; overflow: hidden; }
+.reading-progress-fill { height: 100%; background: var(--color-success); border-radius: 2px; width: 0%; transition: width 0.1s linear; }
+.sidebar-collapse-btn {
+    position: fixed; left: 228px; top: 50%; transform: translateY(-50%);
+    width: 24px; height: 48px; background: #fff;
+    border: 1px solid var(--color-border); border-radius: 0 6px 6px 0;
+    cursor: pointer; font-size: 12px; color: var(--color-text-muted); z-index: 20;
+    transition: left 280ms ease, background 150ms;
     display: flex; align-items: center; justify-content: center;
-    color: var(--color-text-muted);
-    transition: background var(--transition-fast), color var(--transition-fast);
 }
-.nav-btn.active .nav-step { background: var(--color-success); color: #fff; }
+.sidebar-collapse-btn:hover { background: var(--color-success-50); color: var(--color-success); }
+.sidebar-collapse-btn.collapsed-pos { left: 0; }
+.content-area {
+    flex: 1; min-width: 0;
+    display: flex; flex-direction: column; align-items: center;
+}
+.content-inner {
+    width: 100%; max-width: 920px; padding: 48px 40px 120px;
+}
+/* ===== Responsive: mobile ===== */
+@media (max-width: 768px) {
+    .sidebar-nav {
+        position: fixed; left: 0; top: 0; z-index: 100;
+        transform: translateX(-240px);
+    }
+    .sidebar-nav.mobile-open { transform: translateX(0); }
+    .sidebar-collapse-btn { left: 0; }
+    .sidebar-collapse-btn.mobile-open { left: 228px; }
+    .content-inner { padding: 24px 16px 80px; }
+}
 
 /* ================================================
    CHAPTER IMAGE
-   ================================================ */
+   ================================================ 
 .chapter-img {
     margin: 0 0 28px;
     border-radius: var(--radius-lg);
@@ -260,9 +298,8 @@ code {
 /* ================================================
    PAGE LAYOUT
    ================================================ */
-.pg { max-width: var(--content-max-width); margin: 0 auto; padding: 36px 20px 24px; box-sizing: border-box; }
-.tab-pane { display: none; }
-.tab-pane.active { display: block; }
+.pg { padding: 0; box-sizing: border-box; }
+
 
 /* ── 章节导读卡 ── */
 .ch-lead {
@@ -575,6 +612,33 @@ code {
 </style>
 </head>
 <body>
+<div class="layout-wrapper">
+<nav class="sidebar-nav" id="sidebar" aria-label="目录导航">
+    <div class="sidebar-doc-title">AI洞察 · 深度调研</div>
+    <a href="https://xiaoxiong20260206.github.io/ai-insight-public/" class="sidebar-home-link" target="_blank">🏠 返回首页</a>
+    <div class="toc-section">
+        <div style="padding:4px 18px 6px;font-size:11px;font-weight:700;color:#A8A29E;letter-spacing:0.08em;text-transform:uppercase;">目录</div>
+        <a href="#chapter-0"    class="toc-link toc-active">00 概览</a>
+        <a href="#chapter-1"    class="toc-link">01 三件事同质化</a>
+        <a href="#chapter-2"    class="toc-link">02 组织形态</a>
+        <a href="#chapter-3"    class="toc-link">03 六个洞见</a>
+        <a href="#chapter-4"    class="toc-link">04 框架vs灵魂</a>
+        <a href="#chapter-5"    class="toc-link">05 VRIO反证</a>
+        <a href="#chapter-6"    class="toc-link">06 护城河分层</a>
+        <a href="#chapter-7"    class="toc-link">07 规模悖论</a>
+        <a href="#chapter-8"    class="toc-link">08 中国语境</a>
+        <a href="#chapter-9"    class="toc-link">09 总结</a>
+    </div>
+    <div class="reading-progress-wrap">
+        <div class="reading-progress-label">阅读进度</div>
+        <div class="reading-progress-track">
+            <div class="reading-progress-fill" id="readingProgress"></div>
+        </div>
+    </div>
+</nav>
+<button class="sidebar-collapse-btn" id="collapseBtn" title="折叠导航" aria-label="折叠导航">«</button>
+<main class="content-area" id="main-content">
+<div class="content-inner">
 <!-- ========================= HERO ========================= -->
 <div class="editorial-hero">
 <div class="editorial-hero-inner">
@@ -596,44 +660,9 @@ code {
 </div>
 
 <!-- ========================= NAV ========================= -->
-<nav class="nav-wrap">
-    <div class="nav-inner">
-        <button class="nav-btn active" onclick="switchTab('s0',this)">
-            <span class="nav-step">00</span> 概览
-        </button>
-        <button class="nav-btn" onclick="switchTab('s1',this)">
-            <span class="nav-step">01</span> 三件事同质化
-        </button>
-        <button class="nav-btn" onclick="switchTab('s2',this)">
-            <span class="nav-step">02</span> 组织形态
-        </button>
-        <button class="nav-btn" onclick="switchTab('s3',this)">
-            <span class="nav-step">03</span> 六个洞见
-        </button>
-        <button class="nav-btn" onclick="switchTab('s4',this)">
-            <span class="nav-step">04</span> 框架vs灵魂
-        </button>
-        <button class="nav-btn" onclick="switchTab('s5',this)">
-            <span class="nav-step">05</span> VRIO反证
-        </button>
-        <button class="nav-btn" onclick="switchTab('s6',this)">
-            <span class="nav-step">06</span> 护城河分层
-        </button>
-        <button class="nav-btn" onclick="switchTab('s7',this)">
-            <span class="nav-step">07</span> 规模悖论
-        </button>
-        <button class="nav-btn" onclick="switchTab('s8',this)">
-            <span class="nav-step">08</span> 中国语境
-        </button>
-        <button class="nav-btn" onclick="switchTab('s9',this)">
-            <span class="nav-step">09</span> 总结
-        </button>
-    </div>
-</nav>
+
 
 <!-- ========================= CONTENT ========================= -->
-<div class="pg">
-
 <!-- ===================== 引子 ===================== -->
 <div class="card animate-on-scroll" style="margin:0 0 28px;border-left:4px solid #7C3AED;background:linear-gradient(135deg,rgba(124,58,237,0.04) 0%,rgba(255,255,255,0) 100%);">
     <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#7C3AED;margin-bottom:10px;">📖 真实故事 · 引子</div>
@@ -652,10 +681,9 @@ code {
 </div>
 
 <!-- ===================== TAB 00：概览 ===================== -->
-<div id="tab-s0" class="tab-pane active">
 
     <div class="ch-lead animate-on-scroll">
-        <div class="ch-label">00 · 全文概览</div>
+        <div class="ch-label" id="chapter-0">00 · 全文概览</div>
         <div class="ch-title">先说结论</div>
         <div class="ch-desc">硅谷投资人Jaya Gupta发了一篇长文，12小时130万阅读，最终320万+。核心论点：<strong>当技术趋同、产品可抄、赛道可重命名时，唯一不可复制的护城河是公司本身的组织形态</strong>。</div>
     </div>
@@ -708,9 +736,8 @@ code {
 </div>
 
 <!-- ===================== TAB 01：三件事同质化 ===================== -->
-<div id="tab-s1" class="tab-pane">
     <div class="ch-lead animate-on-scroll">
-        <div class="ch-label">Chapter 01 · 三件事正在同质化</div>
+        <div class="ch-label" id="chapter-1">Chapter 01 · 三件事正在同质化</div>
         <div class="ch-title">AI行业看得见的部分全在趋同</div>
     </div>
 
@@ -753,9 +780,8 @@ code {
 </div>
 
 <!-- ===================== TAB 02：组织形态 ===================== -->
-<div id="tab-s2" class="tab-pane">
     <div class="ch-lead animate-on-scroll">
-        <div class="ch-label">Chapter 02 · Gupta的回答</div>
+        <div class="ch-label" id="chapter-2">Chapter 02 · Gupta的回答</div>
         <div class="ch-title">组织形态——公司怎么组织人，才是抄不走的</div>
         <div class="ch-desc">Gupta的逻辑链很简单：外显部分可抄 → 外显部分不构成护城河 → 护城河只能在内隐部分 → 内隐部分就是组织形态。但"组织形态"不是组织架构图。</div>
     </div>
@@ -813,9 +839,8 @@ code {
 </div>
 
 <!-- ===================== TAB 03：六个洞见 ===================== -->
-<div id="tab-s3" class="tab-pane">
     <div class="ch-lead animate-on-scroll">
-        <div class="ch-label">Chapter 03 · 六个洞见</div>
+        <div class="ch-label" id="chapter-3">Chapter 03 · 六个洞见</div>
         <div class="ch-title">Gupta最锋利的论点拆解</div>
     </div>
 
@@ -907,9 +932,8 @@ code {
 </div>
 
 <!-- ===================== TAB 04：框架vs灵魂 ===================== -->
-<div id="tab-s4" class="tab-pane">
     <div class="ch-lead animate-on-scroll">
-        <div class="ch-label">Chapter 04 · 框架可以抄走</div>
+        <div class="ch-label" id="chapter-4">Chapter 04 · 框架可以抄走</div>
         <div class="ch-title">灵魂不行</div>
         <div class="ch-desc">Gupta假设「内隐结构不可模仿」。但这并非绝对：框架可以扩散，但「为什么这里的人愿意用这个框架」的信念体系无法被抄走。</div>
     </div>
@@ -953,9 +977,8 @@ code {
 </div>
 
 <!-- ===================== TAB 05：VRIO反证 ===================== -->
-<div id="tab-s5" class="tab-pane">
     <div class="ch-lead animate-on-scroll">
-        <div class="ch-label">Chapter 05 · VRIO框架的反证</div>
+        <div class="ch-label" id="chapter-5">Chapter 05 · VRIO框架的反证</div>
         <div class="ch-title">强化而非削弱</div>
         <div class="ch-desc">MIT Sloan Review用VRIO框架论证AI不能提供可持续竞争优势。这个框架<strong>强化而非削弱</strong>了Gupta论点。</div>
     </div>
@@ -1008,9 +1031,8 @@ code {
 </div>
 
 <!-- ===================== TAB 06：护城河分层 ===================== -->
-<div id="tab-s6" class="tab-pane">
     <div class="ch-lead animate-on-scroll">
-        <div class="ch-label">Chapter 06 · 修正</div>
+        <div class="ch-label" id="chapter-6">Chapter 06 · 修正</div>
         <div class="ch-title">组织形态不是唯一护城河——它是基础设施</div>
         <div class="ch-desc">Gupta说「唯一不可复制的是组织形态」。这个排他性需要修正：组织形态不是唯一护城河——它是其他护城河的基础设施。</div>
     </div>
@@ -1076,9 +1098,8 @@ code {
 </div>
 
 <!-- ===================== TAB 07：规模悖论 ===================== -->
-<div id="tab-s7" class="tab-pane">
     <div class="ch-lead animate-on-scroll">
-        <div class="ch-label">Chapter 07 · 规模悖论</div>
+        <div class="ch-label" id="chapter-7">Chapter 07 · 规模悖论</div>
         <div class="ch-title">Gupta没回答的关键问题</div>
         <div class="ch-desc">组织形态护城河在小团队阶段最强（20-200人），但面临一个悖论：增长必然带来组织变形。</div>
     </div>
@@ -1132,9 +1153,8 @@ code {
 </div>
 
 <!-- ===================== TAB 08：中国语境 ===================== -->
-<div id="tab-s8" class="tab-pane">
     <div class="ch-lead animate-on-scroll">
-        <div class="ch-label">Chapter 08 · 中国语境</div>
+        <div class="ch-label" id="chapter-8">Chapter 08 · 中国语境</div>
         <div class="ch-title">组织发明的额外约束</div>
         <div class="ch-desc">Gupta基于硅谷语境。中国AI公司面对额外约束，这些约束直接影响组织形态护城河的构建。</div>
     </div>
@@ -1172,9 +1192,8 @@ code {
 </div>
 
 <!-- ===================== TAB 09：总结 ===================== -->
-<div id="tab-s9" class="tab-pane">
     <div class="ch-lead animate-on-scroll">
-        <div class="ch-label">Chapter 09 · 总结</div>
+        <div class="ch-label" id="chapter-9">Chapter 09 · 总结</div>
         <div class="ch-title">在AI时代，组织形态是从地基开始的护城河</div>
     </div>
 
@@ -1252,12 +1271,10 @@ code {
 
         <div class="footer-refs" style="margin-top:20px;">
             <p>报告生成时间：2026-05-14 | 作者：AI洞察（Link）AI 助手 | 版本：v1.0（深度调研完整版）</p>
-            <p>🔗 更多 AI 深度调研：<a href="../index.html">AI Insight 深度研究中心</a></p>
+            <p>🔗 更多 AI 深度调研：<a href="https://xiaoxiong20260206.github.io/ai-insight-public/" target="_blank">AI Insight 首页</a></p>
         </div>
     </div>
 </div>
-
-</div><!-- end .pg -->
 
 <!-- 了解更多模块 -->
 <div style="max-width:var(--content-max-width);margin:0 auto;padding:16px 20px 48px;">
@@ -1267,7 +1284,7 @@ code {
         我是 <strong>AI洞察</strong>，的 AI 分身。<strong>AI 洞察</strong>是的一个项目，目标是系统化追踪 AI 行业动态，每日 / 每周输出调研洞察，帮助你保持对 AI 行业的全局视野。覆盖大模型、AI Coding、AI 应用、AI 行业投融资、企业 AI 转型五大领域。
     </p>
     <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:16px;">
-        <a href="https://ai-insight-lab.github.io/ai-insight-public/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:linear-gradient(135deg,#059669 0%,#10B981 100%);color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none">
+        <a href="https://xiaoxiong20260206.github.io/ai-insight-public/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:linear-gradient(135deg,#059669 0%,#10B981 100%);color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none">
             🏠 访问 AI 洞察首页
         </a>
     </div>
@@ -1283,18 +1300,54 @@ code {
 </div>
 </div>
 
+</div><!-- end content-inner -->
+</main><!-- end content-area -->
+</div><!-- end layout-wrapper -->
+
 <!-- ========================= JAVASCRIPT ========================= -->
 <script>
-// Tab 切换
-function switchTab(id, btn) {
-    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('tab-' + id).classList.add('active');
-    btn.classList.add('active');
-    requestAnimationFrame(() => prepareAndInitAnimations());
-    const pg = document.querySelector('.pg');
-    window.scrollTo({ top: pg.offsetTop - 60, behavior: 'smooth' });
+// Sidebar collapse
+const sidebar = document.getElementById("sidebar");
+const collapseBtn = document.getElementById("collapseBtn");
+if (collapseBtn) {
+    collapseBtn.addEventListener('click', () => {
+        const isCollapsed = sidebar.classList.toggle("sidebar-collapsed");
+        collapseBtn.classList.toggle("collapsed-pos");
+        collapseBtn.textContent = isCollapsed ? '»' : '«';
+    });
 }
+
+// Sidebar mobile toggle
+if (sidebar) {
+    sidebar.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768 && !e.target.closest('.toc-link')) {
+            sidebar.classList.remove('mobile-open');
+            collapseBtn.classList.remove('mobile-open');
+        }
+    });
+}
+
+// TOC active tracking + reading progress
+const tocLinks = document.querySelectorAll('.toc-link');
+const chapters = document.querySelectorAll('.research-chapter');
+const progressFill = document.getElementById('readingProgress');
+
+function updateToc() {
+    let currentId = '';
+    const scrollY = window.scrollY + 120;
+    chapters.forEach(ch => {
+        if (ch.offsetTop <= scrollY) currentId = ch.id;
+    });
+    tocLinks.forEach(link => {
+        link.classList.toggle('toc-active', link.getAttribute('href') === '#' + currentId);
+    });
+    // Reading progress
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = Math.min(100, Math.round((window.scrollY / docHeight) * 100));
+    if (progressFill) progressFill.style.width = pct + '%';
+}
+window.addEventListener('scroll', updateToc, {passive: true});
+updateToc();
 
 // 动画系统 — 关键修复：先设animate-ready再观察，不依赖JS来显示内容
 let _animObserver = null;
@@ -1318,18 +1371,9 @@ function getAnimObserver() {
 }
 
 function prepareAndInitAnimations() {
-    // Step 1: 给当前可见tab内的animate-on-scroll元素添加animate-ready类
-    // 这让它们从opacity:1变为opacity:0+translateY(16px)，准备入场
-    const activeTab = document.querySelector('.tab-pane.active');
-    if (!activeTab) return;
-    const els = activeTab.querySelectorAll('.animate-on-scroll:not(.visible):not(.animate-ready)');
-    els.forEach(el => el.classList.add('animate-ready'));
-    
-    // Step 2: 立即将已经在视口内的元素标记为visible（不等待滚动）
-    requestAnimationFrame(() => {
-        const obs = getAnimObserver();
-        els.forEach(el => obs.observe(el));
-    });
+    // All elements visible by default in scrollable layout
+    const els = document.querySelectorAll('.animate-on-scroll:not(.visible)');
+    els.forEach(el => el.classList.add('visible'));
 }
 
 // 进度条动画
