@@ -98,13 +98,18 @@ def build_daily(date_str: str) -> dict:
     overseas = coverage.get("overseas", 0)
     china = coverage.get("china", 0)
 
-    # 热度趋势 — 兼容两种数据格式(v11.1 fix)
-    # 旧格式: heat_trend.topics (cron早期版本)
-    # 新格式: heat_trend.top_items (2026-05-11起cron session生成)
+    # 热度趋势 — 兼容多种数据格式(v11.2 fix)
+    # 格式1: heat_trend.topics (cron早期版本)
+    # 格式2: heat_trend.top_items (2026-05-11起)
+    # 格式3: heat_trend.top_keywords + trend_summary (2026-05-15起)
     heat_data = data.get("heat_trend", {}) or {}
     heat_title = heat_data.get("title", "近7期日报交叉分析")
-    # 优先取top_items，fallback到topics
-    raw_items = heat_data.get("top_items", []) or heat_data.get("topics", []) or []
+    # 优先取top_items，fallback到topics，再fallback到top_keywords
+    raw_items = heat_data.get("top_items", []) or heat_data.get("topics", []) or heat_data.get("top_keywords", []) or []
+    # 如果raw_items是字符串列表(top_keywords格式)，转换为dict格式
+    if raw_items and isinstance(raw_items[0], str):
+        raw_items = [{"title": kw, "trend": "new"} for kw in raw_items[:6]]
+    trend_summary = heat_data.get("trend_summary", "") or heat_data.get("summary", "")
     trend_icons = {"up": "📈", "down": "📉", "stable": "➡️", "new": "🆕", "burst": "⚡", "hot": "🔥"}
     rank_icons = ["🥇", "🥈", "🥉", "4️⃣", "5️⃣", "6️⃣"]
 
