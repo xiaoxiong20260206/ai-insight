@@ -1,0 +1,578 @@
+{
+  "coverage": {
+    "overseas": 10,
+    "china": 6
+  },
+  "overview": [
+    {
+      "tab": "大模型",
+      "emoji": "🧠",
+      "summary": "OpenAI发布GPT-5.5 Instant为ChatGPT新默认模型，幻觉率降低50%+记忆源引用；OpenAI推出三款实时语音模型(Realtime-2/Translate/Whisper)正式GA；Air Street Press五月报告：中国四款开源编码模型(Kimi K2.6/GLM-5.1/M2.7/DeepSeek V4)12天内齐发打破'落后6-9月'叙事；OpenAI ChatGPT敏感对话上下文识别更新",
+      "headline": "OpenAI GPT-5.5 Instant降低幻觉50%+实时语音三模型GA，中国开源编码军团齐发打破落后叙事"
+    },
+    {
+      "tab": "AI Coding",
+      "emoji": "⌨️",
+      "summary": "AI Coding 2026全景对比：Claude Code成为架构师级工具，1M上下文+Agent Teams并行审查；Cursor $1B ARR创B2B SaaS最快纪录；AI代码45%含安全漏洞，1/5企业漏洞源自AI代码；Codex CLI五月更新：OpenTelemetry+远程控制+Bedrock认证；Opsera×Cursor合作嵌入DevSecOps Agent到IDE",
+      "headline": "Claude Code崛起为架构师级工具+Cursor $1B ARR创纪录，AI代码安全漏洞率达45%成最大隐忧"
+    },
+    {
+      "tab": "AI应用",
+      "emoji": "📱",
+      "summary": "Kimi K2.6 Agent Swarm并行化BrowseComp从60.6%→78.4%；Cursor×Kimi合作确认K2.5为下一代模型底座；Kimi融资估值$20B(Yang Zhilin Forbes 30 Under 30)；CoreWeave K2.6推理速度+性价比双第一；xAI免费语音克隆功能上线；OpenAI Codex Pets虚拟宠物功能引发关注",
+      "headline": "Kimi K2.6 Agent Swarm性能跃升29%+融资估值$20B，Cursor×Kimi合作确认模型底座"
+    },
+    {
+      "tab": "AI行业",
+      "emoji": "🏭",
+      "summary": "Sierra $950M Series E估值$15.8B(Bret Taylor+Tiger Global/GV)；Ineffable Intelligence $1.1B seed创欧洲纪录(David Silver/Sequoia/Lightspeed/Nvidia/Google)；Blitzy $200M Series A估值$1.4B确认企业级Agentic AI落地；4月全球AI融资$56B同比翻倍；Moonshot $2B主权AI叙事；Google承诺$40B投资Anthropic；Meta收购Assured Robot Intelligence推进物理AGI",
+      "headline": "Sierra $15.8B+Ineffable $1.1B seed创纪录，资本流向'模型与现实之间的层'"
+    },
+    {
+      "tab": "企业转型",
+      "emoji": "🔄",
+      "summary": "Coastal/Oxford Economics调研800组织：46%企业AI项目未达预期，最大障碍非技术而是运营；CIO.com：仅5%企业称数据就绪但几乎全员投资AI；Deloitte企业AI报告：66%组织报告效率提升但规模化困难；Gartner预测2027年40%+Agentic AI项目将被取消；80%应用已嵌入Agent但仅31%组织有生产级部署，88%试点无法跨越",
+      "headline": "46%企业AI项目失败+仅5%数据就绪，运营而非技术是最大障碍"
+    }
+  ],
+  "tabs": [
+    {
+      "id": "llm",
+      "name": "🧠 大模型",
+      "title": "🧠 大模型",
+      "news": {
+        "overseas": [
+          {
+            "title": "OpenAI发布GPT-5.5 Instant：幻觉率降低50%+记忆源引用",
+            "source": "TechCrunch",
+            "url": "https://techcrunch.com/2026/05/05/openai-releases-gpt-5-5-instant-a-new-default-model-for-chatgpt/",
+            "summary": "GPT-5.5 Instant成为ChatGPT新默认模型，重点改进上下文管理——可引用过去对话、文件和Gmail信息给出个性化回答。Plus/Pro用户已可用，Free/企业版数周内扩展。新'记忆源'控制让用户看到哪些上下文影响了回答，共享聊天时他人无法看到记忆源。幻觉率在高风险场景降低超过50%。",
+            "date": "2026-05-05",
+            "tags": [
+              "OpenAI",
+              "GPT-5.5",
+              "ChatGPT",
+              "幻觉率"
+            ]
+          },
+          {
+            "title": "OpenAI推出三款实时语音模型，Realtime API正式GA",
+            "source": "Reuters",
+            "url": "https://www.reuters.com/business/media-telecom/openai-unveils-three-audio-models-real-time-voice-tasks-2026-05-07/",
+            "summary": "OpenAI发布GPT-Realtime-2(对话执行)、GPT-Realtime-Translate(70+语言实时翻译)、GPT-Realtime-Whisper(实时转录)三款模型。Realtime API正式退出beta进入GA。支持MCP Server、图片输入、SIP电话集成。Zillow为早期测试伙伴。",
+            "date": "2026-05-07",
+            "tags": [
+              "OpenAI",
+              "Realtime API",
+              "语音模型",
+              "GA"
+            ]
+          },
+          {
+            "title": "Air Street Press五月报告：中国开源编码模型打破'落后6-9月'叙事",
+            "source": "Air Street Press",
+            "url": "https://press.airstreet.com/p/state-of-ai-may-2026",
+            "summary": "Kimi K2.6、MiniMax M2.7、Z.ai GLM-5.1、DeepSeek V4在12天内相继发布，全部SWE-Bench Pro 56-59分，全部开源权重，价格不到西方前沿模型1/3。AI网络攻防能力每4个月翻倍加速。",
+            "date": "2026-05-13",
+            "tags": [
+              "中国AI",
+              "开源模型",
+              "SWE-Bench",
+              "Air Street"
+            ]
+          },
+          {
+            "title": "OpenAI ChatGPT敏感对话上下文识别改进",
+            "source": "OpenAI",
+            "url": "https://openai.com/index/helping-chatgpt-better-recognize-context-in-sensitive-conversations/",
+            "summary": "5月14日OpenAI发布更新帮助ChatGPT在敏感对话中更好识别上下文。Codex Windows版本同日发布。系列更新表明OpenAI正持续打磨模型在边界场景的安全性和准确性。",
+            "date": "2026-05-14",
+            "tags": [
+              "OpenAI",
+              "ChatGPT",
+              "安全",
+              "上下文"
+            ]
+          },
+          {
+            "title": "Google承诺$40B投资Anthropic",
+            "source": "New York Times",
+            "url": "https://www.nytimes.com/2026/04/24/technology/google-anthropic-investment-artificial-intelligence.html",
+            "summary": "Google承诺最高$40B投资Anthropic，Claude Code业务爆发增长是核心驱动力。Anthropic据传正在洽谈$200B Google Cloud合作。",
+            "date": "2026-04-24",
+            "tags": [
+              "Google",
+              "Anthropic",
+              "$40B",
+              "Claude Code"
+            ]
+          },
+          {
+            "title": "Meta收购Assured Robot Intelligence推进物理AGI",
+            "source": "AF.net",
+            "url": "https://af.net/realtime/meta-acquires-assured-robot-intelligence-to-advance-humanoid-ai-development/",
+            "summary": "Meta收购Assured Robot Intelligence推进人形机器人AI开发，战略目标为领导物理AGI领域。标志着Meta从数字智能向物理智能延伸的战略转向。",
+            "date": "2026-05-14",
+            "tags": [
+              "Meta",
+              "机器人",
+              "物理AGI",
+              "收购"
+            ]
+          }
+        ],
+        "china": []
+      },
+      "deep_focus": {
+        "title": "中国开源编码模型12天齐发：从'落后6-9月'到'同价不同质'",
+        "paragraphs": [
+          "Kimi K2.6、MiniMax M2.7、Z.ai GLM-5.1、DeepSeek V4四款中国开源编码模型在12天内集中发布，全部达到SWE-Bench Pro 56-59分区间，全部开源权重，推理价格不到Claude Opus 4.7的1/3。Air Street Press五月报告明确指出：'中国落后6-9月'的叙事在agentic coding领域不再成立。价格战正式打响——DeepSeek V4 Pro $1.74/$3.48对比Claude Opus 4.7 $5/$25，性价比差距显著。",
+          "自我优化闭环出现是更值得关注的信号。MiniMax展示M2.7内部自我优化100+轮，Kimi发布12小时连续工具调用trace移植推理引擎到Zig。这些不是模型参数的增量提升，而是编排和自主学习能力的质变。资本市场响应迅速——智谱股票当日涨15.92%，月之暗面估值$20B，验证了技术突破→市场认可的快速传导。",
+          "对企业选型的实际影响：开源+低成本的组合让'先用开源验证、再上商业前沿'的混合策略更具可行性。但差距评估高度依赖评估框架和脚手架配置——并非所有场景都已追平，特别是长周期多仓库项目仍需要商业级Agent。2026年Q2的选型决策不应基于'谁更强'而应基于'哪个场景哪个模型性价比最优'的精细化匹配。"
+        ],
+        "takeaway": "中国开源编码模型的性价比已建立事实上的竞争优势，'落后6-9月'叙事在agentic coding领域正式失效。但差距仍取决于评估维度和脚手架配置——选型决策应从'谁更强'转向'哪个场景性价比最优'的精细化匹配。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\">\n  <div class=\"pi-header\">\n    <span class=\"pi-icon\">🔍</span>\n    <span class=\"pi-title\">模式洞察</span>\n  </div>\n  <div class=\"pi-body\">\n    <h4>开源价格战×自我优化闭环</h4>\n    <p>四款中国模型12天齐发的背后是两个结构性趋势：<strong>开源价格战</strong>将推理成本压到西方前沿1/3以下，迫使商业模型重新定义价值边界；<strong>自我优化闭环</strong>(MiniMax 100+轮自我优化、Kimi 12小时连续trace)标志着模型从被动工具进入主动进化阶段。</p>\n    <p>对企业的实际选择：混合策略(开源验证→商业精调)在2026年Q2已有数据支撑，但脚手架和评估维度仍是选型关键变量——不是'谁更强'而是'哪个场景性价比最优'。</p>\n  </div>\n</div>"
+    },
+    {
+      "id": "coding",
+      "name": "⌨️ AI Coding",
+      "title": "⌨️ AI Coding",
+      "news": {
+        "overseas": [
+          {
+            "title": "2026 AI Coding全景对比：Claude Code成为架构师级工具",
+            "source": "Linos NEWS",
+            "url": "https://linos.ai/technology/ai-coding-assistants-cursor-copilot-claude-code-2026",
+            "summary": "2026年AI Coding市场增长25%达$8.5B。Claude Code以1M上下文+Agent Teams成为架构师级工具，Valon等公司取消Cursor订阅转向'Agent舰队'模式。Cursor $1B ARR创B2B SaaS最快纪录。AI代码45%含安全漏洞，1/5企业漏洞源自AI代码。",
+            "date": "2026-05-12",
+            "tags": [
+              "Claude Code",
+              "Cursor",
+              "AI Coding",
+              "$1B ARR"
+            ]
+          },
+          {
+            "title": "Codex CLI五月更新：OpenTelemetry+远程控制+Bedrock认证",
+            "source": "SD Times",
+            "url": "https://sdtimes.com/ai/may-8-2026-ai-updates-from-the-past-week-coder-agents-launch-snyk-claude-partnership-opsera-cursor-partnership-and-more/",
+            "summary": "OpenAI Codex CLI五月更新增加OpenTelemetry trace、远程控制入口(headless部署)和Bedrock认证。Codex-Spark预览版128k上下文。Prismatic Skills开源支持Claude Code全集成生命周期。",
+            "date": "2026-05-08",
+            "tags": [
+              "Codex CLI",
+              "OpenTelemetry",
+              "OpenAI"
+            ]
+          },
+          {
+            "title": "Opsera×Cursor合作：DevSecOps Agent嵌入IDE",
+            "source": "SD Times",
+            "url": "https://sdtimes.com/ai/may-8-2026-ai-updates-from-the-past-week-coder-agents-launch-snyk-claude-partnership-opsera-cursor-partnership-and-more/",
+            "summary": "Opsera DevSecOps Agents可嵌入Cursor IDE，确保高速代码生成与企业安全合规/架构护栏对齐。速度与治理不再是对立选择。",
+            "date": "2026-05-08",
+            "tags": [
+              "Opsera",
+              "Cursor",
+              "DevSecOps",
+              "IDE"
+            ]
+          },
+          {
+            "title": "88%企业AI Agent试点无法投产，7项控制不可妥协",
+            "source": "Northflank",
+            "url": "https://northflank.com/blog/enterprise-ai-coding-agent-deployment",
+            "summary": "Gartner预测2027年40%+ Agentic AI项目将被取消。88%试点无法投产。企业部署需7项不可妥协控制：SSO集成、SIEM审计日志、Agent PR密钥扫描、PR策略门控、许可证治理、沙箱隔离、事件响应手册。",
+            "date": "2026-05-07",
+            "tags": [
+              "企业AI",
+              "Agent部署",
+              "88%失败",
+              "安全"
+            ]
+          }
+        ],
+        "china": [
+          {
+            "title": "AI代码安全：45%漏洞率+1/5企业漏洞源自AI",
+            "source": "Linos NEWS",
+            "url": "https://linos.ai/technology/ai-coding-assistants-cursor-copilot-claude-code-2026",
+            "summary": "AI生成代码45%含安全漏洞，>50% AI代码仓库出现更多漏洞(24%)。2026年每5个企业安全事件中就有1个归因于不安全的AI代码。安全是AI Coding行业最大未解决问题。",
+            "date": "2026-05-12",
+            "tags": [
+              "AI安全",
+              "漏洞率",
+              "45%",
+              "企业风险"
+            ]
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "AI Coding安全漏洞率45%：速度与治理的致命张力",
+        "paragraphs": [
+          "AI Coding行业在2026年面临核心矛盾：开发者合并PR数增加60%、Cursor $1B ARR创纪录、Agent舰队模式兴起——但AI生成代码45%含安全漏洞，每5个企业安全事件就有1个源自AI代码。速度红利已建立事实优势，但安全漏洞率是系统性风险而非个别问题。",
+          "Opsera×Cursor合作标志着'治理嵌入速度'新范式——DevSecOps Agent直接在IDE内运行，让速度与治理不再是对立选择。但现实是多数开发者仍优先追求速度。Gartner预测2027年40%+ Agentic项目将被取消，88%试点无法投产，根因是业务价值不清+风险控制不足。",
+          "企业的关键选择：是否在部署AI Coding Agent时同步建立7项不可妥协控制(SSO/审计/密钥扫描/策略门控/许可证/沙箱/响应手册)，还是继续追求速度让安全成为事后补救。Northflank数据表明，多数失败因为把工具选择当作部署决策而跳过了基础设施层。"
+        ],
+        "takeaway": "AI Coding的速度红利已建立事实优势，但45%安全漏洞率是系统性风险。企业必须在部署时同步建立治理护栏而非事后补救——7项不可妥协控制是规模化前提。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\">\n  <div class=\"pi-header\">\n    <span class=\"pi-icon\">🔍</span>\n    <span class=\"pi-title\">模式洞察</span>\n  </div>\n  <div class=\"pi-body\">\n    <h4>速度×治理的双重收敛</h4>\n    <p>2026年AI Coding呈现<strong>双重收敛</strong>：速度侧(Cursor $1B ARR/Agent舰队/60% PR增量)和治理侧(45%漏洞率/88%试点失败/7项不可妥协控制)同时加速。</p>\n    <p>Opsera×Cursor合作标志着<strong>治理嵌入速度</strong>新范式——DevSecOps Agent直接在IDE内运行。对企业选型：2026年Q2不再是'选哪个工具'而是'选哪种治理模式'——事后补救型 vs 同步嵌入型。</p>\n  </div>\n</div>"
+    },
+    {
+      "id": "app",
+      "name": "📱 AI应用",
+      "title": "📱 AI应用",
+      "news": {
+        "overseas": [
+          {
+            "title": "Kimi K2.6 Agent Swarm：BrowseComp性能从60.6%跃升至78.4%",
+            "source": "NXCode",
+            "url": "https://www.nxcode.io/resources/news/kimi-ai-complete-guide-features-pricing-2026",
+            "summary": "Kimi K2.6的Agent Swarm并行化使BrowseComp分数提升29%(60.6%→78.4%)，执行时间最高缩短4.5倍。Kimi原生多模态理解，长上下文处理，Deep Research多步调研。",
+            "date": "2026-05-11",
+            "tags": [
+              "Kimi",
+              "Agent Swarm",
+              "BrowseComp",
+              "并行化"
+            ]
+          },
+          {
+            "title": "CoreWeave K2.6推理速度+性价比双第一",
+            "source": "CoreWeave",
+            "url": "https://www.coreweave.com/news/coreweave-achieves-1-ranking-for-inference-speed-and-price-performance-for-moonshot-ais-kimi-k2-6-model-in-independent-benchmark",
+            "summary": "CoreWeave在独立基准测试中获得Kimi K2.6推理速度和性价比双项第一。全栈优化覆盖内存架构、运行时和互连。开源模型推理基础设施竞争加速。",
+            "date": "2026-05-11",
+            "tags": [
+              "CoreWeave",
+              "K2.6",
+              "推理",
+              "性价比"
+            ]
+          },
+          {
+            "title": "xAI免费语音克隆功能上线",
+            "source": "LinkedIn/Jeff J Hunter",
+            "url": "https://www.linkedin.com/pulse/openai-launches-three-new-voice-models-its-realtime-api-jeff-j-hunter-xxqvc",
+            "summary": "xAI推出浏览器端免费语音克隆功能，录1分钟自然语音即可克隆。降低语音AI应用门槛。",
+            "date": "2026-05-05",
+            "tags": [
+              "xAI",
+              "语音克隆",
+              "免费"
+            ]
+          },
+          {
+            "title": "OpenAI Codex Pets虚拟宠物功能",
+            "source": "LinkedIn/Jeff J Hunter",
+            "url": "https://www.linkedin.com/pulse/openai-launches-three-new-voice-models-its-realtime-api-jeff-j-hunter-xxqvc",
+            "summary": "OpenAI为Codex添加虚拟宠物功能——Agent持续运行状态的视觉化，让开发者直观感知Agent是否在活跃工作。",
+            "date": "2026-05-04",
+            "tags": [
+              "OpenAI",
+              "Codex",
+              "可视化",
+              "Agent状态"
+            ]
+          }
+        ],
+        "china": [
+          {
+            "title": "Kimi融资估值$20B，Yang Zhilin Forbes 30 Under 30",
+            "source": "Forbes",
+            "url": "https://www.forbes.com/sites/ywang/2026/05/07/chinese-ai-model-developer-kimi-raising-funds-valuing-it-at-20-billion/",
+            "summary": "月之暗面(Kimi)正在筹集估值$20B的融资。创始人Yang Zhilin曾入选Forbes 30 Under 30 Asia。现有股东包括阿里和腾讯。K2.6模型在OpenRouter排名全球前三最受欢迎AI模型。",
+            "date": "2026-05-07",
+            "tags": [
+              "Kimi",
+              "$20B",
+              "融资",
+              "月之暗面"
+            ]
+          },
+          {
+            "title": "Kimi K2系列将于5月25日正式停用，迁移至K2.6",
+            "source": "Kimi API Platform",
+            "url": "https://platform.kimi.ai/docs/models",
+            "summary": "Kimi K2系列模型将于2026年5月25日正式停用，用户需迁移至Kimi K2.6。API端迁移仅需更新model参数。",
+            "date": "2026-05-01",
+            "tags": [
+              "Kimi",
+              "K2.6",
+              "API迁移",
+              "停用"
+            ]
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "Kimi Agent Swarm：并行化是AI应用的下一个杠杆点",
+        "paragraphs": [
+          "Kimi K2.6的Agent Swarm将BrowseComp分数提升29%(60.6%→78.4%)，执行时间缩短4.5倍。这不是模型能力的提升而是编排能力的跃迁——将任务分解为独立子任务并行执行。Agent Swarm的原理是：当一个任务可以被分解为多个独立子任务时，并行执行比串行执行效率显著更高。",
+          "Cursor×Kimi合作确认K2.5为下一代底座，验证了'模型→编排→应用'的价值链在向上移动。CoreWeave为K2.6构建推理速度+性价比双优化，意味着推理基础设施也在为特定模型做专用优化。价值链的每个层级都在加速垂直化——从通用GPU云到特定模型优化，从通用Agent框架到特定编排策略。",
+          "对产品设计的启示：2026年Q2，AI应用的竞争杠杆不再是'谁的模型更强'而是'谁的编排更高效'——并行化、Agent Swarm、工具调用trace长度是新的核心指标。谁能把任务拆得更细、调度更高效、反馈更即时，谁就赢得应用层竞争。"
+        ],
+        "takeaway": "AI应用的竞争杠杆从模型能力转向编排效率——Agent Swarm并行化29%性能跃升证明编排是下一个杠杆点。价值链从'谁的模型更强'转向'谁的编排更高效'。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\">\n  <div class=\"pi-header\">\n    <span class=\"pi-icon\">🔍</span>\n    <span class=\"pi-title\">模式洞察</span>\n  </div>\n  <div class=\"pi-body\">\n    <h4>编排效率×推理基建双提速</h4>\n    <p>Kimi Agent Swarm的29%性能跃升揭示了<strong>价值链上移</strong>：竞争从模型层→编排层。同时CoreWeave为K2.6做推理专用优化，<strong>推理基建也在垂直化</strong>。</p>\n    <p>对AI产品团队的启示：2026年Q2的竞争焦点是<strong>编排效率</strong>(并行化/工具调用trace/Agent舰队)而非<strong>模型参数</strong>——谁能把任务拆得更细、调度更高效，谁就赢得应用层。</p>\n  </div>\n</div>"
+    },
+    {
+      "id": "industry",
+      "name": "🏭 AI行业",
+      "title": "🏭 AI行业",
+      "news": {
+        "overseas": [
+          {
+            "title": "Sierra $950M Series E估值$15.8B",
+            "source": "CNBC",
+            "url": "https://www.cnbc.com/2026/05/04/bret-taylor-sierra-fundraise-openai.html",
+            "summary": "Sierra(Bret Taylor CEO/OpenAI Chair)融资$950M Series E，估值$15.8B。Tiger Global领投，Google GV参投。Bret Taylor同一周预测AI投资将出现'淘汰效应'。",
+            "date": "2026-05-04",
+            "tags": [
+              "Sierra",
+              "$950M",
+              "$15.8B",
+              "Bret Taylor"
+            ]
+          },
+          {
+            "title": "Ineffable Intelligence $1.1B seed创欧洲纪录",
+            "source": "Cooley",
+            "url": "https://www.cooley.com/news/coverage/2026/2026-04-27-ineffable-intelligence-announces-$1-1-billion-seed-financing",
+            "summary": "David Silver(AlphaGo)创办的Ineffable Intelligence获$1.1B seed融资，估值$5.1B。Sequoia+Lightspeed领投，Nvidia+Google参投。定义新模式：世界级研究人才在产品上市前即获得主权级资本。",
+            "date": "2026-04-27",
+            "tags": [
+              "Ineffable",
+              "$1.1B",
+              "seed",
+              "David Silver"
+            ]
+          },
+          {
+            "title": "4月全球AI融资$56B同比翻倍，资本高度集中",
+            "source": "AI Funding Tracker",
+            "url": "https://aifundingtracker.com/ai-startup-funding-news-today/",
+            "summary": "4月完成年度第三大融资月$56B，同比翻倍。全球VC投资增长139%，近60%流向仅5家公司。SpaceX/xAI IPO路演目标$1.75T(6-7月)，OpenAI Q4上市目标~$1T。",
+            "date": "2026-05-10",
+            "tags": [
+              "融资",
+              "$56B",
+              "AI Funding Tracker"
+            ]
+          },
+          {
+            "title": "Google承诺$40B投资Anthropic",
+            "source": "New York Times",
+            "url": "https://www.nytimes.com/2026/04/24/technology/google-anthropic-investment-artificial-intelligence.html",
+            "summary": "Google承诺最高$40B投资Anthropic。Claude Code业务爆发增长是核心驱动力。Anthropic据传正在洽谈$200B Google Cloud合作。",
+            "date": "2026-04-24",
+            "tags": [
+              "Google",
+              "Anthropic",
+              "$40B"
+            ]
+          }
+        ],
+        "china": [
+          {
+            "title": "Moonshot $2B融资+Kimi估值$20B",
+            "source": "Forbes",
+            "url": "https://www.forbes.com/sites/ywang/2026/05/07/chinese-ai-model-developer-kimi-raising-funds-valuing-it-at-20-billion/",
+            "summary": "月之暗面(Kimi)估值$20B融资。Moonshot AI $2B融资被描述为'主权AI叙事伪装的VC轮'。阿里+腾讯双背书。",
+            "date": "2026-05-07",
+            "tags": [
+              "Moonshot",
+              "$2B",
+              "Kimi",
+              "$20B"
+            ]
+          },
+          {
+            "title": "Meta收购Assured Robot Intelligence推进物理AGI",
+            "source": "AF.net",
+            "url": "https://af.net/realtime/meta-acquires-assured-robot-intelligence-to-advance-humanoid-ai-development/",
+            "summary": "Meta收购Assured Robot Intelligence推进人形机器人AI，战略目标为领导物理AGI。大型科技公司从数字AI向物理AI延伸的系统性转向。",
+            "date": "2026-05-14",
+            "tags": [
+              "Meta",
+              "机器人",
+              "物理AGI",
+              "收购"
+            ]
+          },
+          {
+            "title": "Blitzy $200M Series A估值$1.4B：企业级Agentic AI落地确认",
+            "source": "AI Funding Tracker",
+            "url": "https://aifundingtracker.com/ai-startup-funding-news-today/",
+            "summary": "Blitzy $200M Series A估值$1.4B，确认Global 2000企业已将Agentic AI用于数十年现代化积压。Agentic code从开发者工具正式进入企业基础设施类别。",
+            "date": "2026-05-01",
+            "tags": [
+              "Blitzy",
+              "$200M",
+              "Agentic AI",
+              "企业"
+            ]
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "资本流向'模型与现实之间的层'：五个结构性主题",
+        "paragraphs": [
+          "AI Funding Tracker五月窗口明确定义五个融资主题：1)Agentic code从开发者工具→企业基础设施(Blitzy $200M/$1.4B确认Global 2000已commit)；2)欧洲AI栈独立融资(Ineffable $1.1B/Prior Labs $1.16B/QuantWare $178M单周落地)；3)主权AI叙事主导大额(Moonshot $2B+SAP $1.16B是国家导向的VC伪装)；4)太空防御进入主流VC(True Anomaly $600M/Astranis $450M)；5)AI可观测性新基建类别(Braintrust $80M/Bluefish $43M/Mintlify $45M)。",
+          "Bret Taylor'淘汰效应'预警与自己$950M融资的张力定义了2026中期——资本充裕但即将整合。4月全球AI融资$56B同比翻倍，但近60%流向仅5家公司。SpaceX/xAI IPO路演目标$1.75T(6-7月)，OpenAI Q4上市目标~$1T——这两宗IPO将定义公共市场AI胃口24个月。",
+          "对中小团队的实际影响：纯模型创业窗口正在关闭(资本流向中间层)，但中间层(编排/基建/安全/可观测)是当前最被看好的位置。中小团队必须在垂直场景建立不可替代性——否则在即将到来的'淘汰效应'中无法存活。Ineffable $1.1B seed创欧洲纪录的模式(world-class talent→sovereign capital before product)只适用于极少数天才。"
+        ],
+        "takeaway": "资本正在系统性流向'模型与现实之间的层'(编排/基建/可观测性/安全)，纯模型层机会窗口正在收窄。中小团队的存活关键是垂直场景不可替代性，而非模型参数竞赛。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\">\n  <div class=\"pi-header\">\n    <span class=\"pi-icon\">🔍</span>\n    <span class=\"pi-title\">模式洞察</span>\n  </div>\n  <div class=\"pi-body\">\n    <h4>资本从模型层→中间层系统性迁移</h4>\n    <p>2026年5月融资数据揭示<strong>资本迁移方向</strong>：从纯模型层→中间层(编排/基建/安全/可观测)。60%资金流向5家公司意味着<strong>头部集中效应加剧</strong>。</p>\n    <p>对创业团队和投资人：纯模型创业窗口正在关闭；<strong>中间层</strong>是当前最被资本看好的位置；中小团队必须在<strong>垂直场景</strong>建立不可替代性——否则在即将到来的'淘汰效应'中无法存活。</p>\n  </div>\n</div>"
+    },
+    {
+      "id": "transform",
+      "name": "🔄 企业转型",
+      "title": "🔄 企业转型",
+      "news": {
+        "overseas": [
+          {
+            "title": "46%企业AI项目未达预期，运营而非技术是最大障碍",
+            "source": "GlobeNewswire/Coastal",
+            "url": "https://www.globenewswire.com/news-release/2026/05/11/3291816/0/en/enterprise-ai-is-stalling-46-of-initiatives-fall-short-despite-rising-investment.html",
+            "summary": "Coastal & Oxford Economics调研800组织：46%企业AI项目未达预期。最大障碍不是技术而是运营方式。每50项AI投资仅1项产生变革性价值。",
+            "date": "2026-05-11",
+            "tags": [
+              "企业AI",
+              "46%失败",
+              "运营障碍",
+              "Coastal"
+            ]
+          },
+          {
+            "title": "仅5%企业称数据就绪，但几乎全员投资AI",
+            "source": "CIO.com",
+            "url": "https://www.cio.com/article/4170978/nearly-every-enterprise-is-investing-in-ai-but-only-5-say-their-data-is-ready.html",
+            "summary": "几乎每家企业都在投资AI但仅5%认为数据就绪。数据基础设施不足是AI规模化最被低估的障碍。AI暴露了组织流程的混乱。",
+            "date": "2026-05-13",
+            "tags": [
+              "数据就绪",
+              "5%",
+              "CIO",
+              "AI投资"
+            ]
+          },
+          {
+            "title": "80%应用嵌入Agent但仅31%有生产级部署，88%试点失败",
+            "source": "Digital Applied",
+            "url": "https://www.digitalapplied.com/blog/ai-agent-adoption-2026-enterprise-data-points",
+            "summary": "Gartner Q1 2026：80%应用已嵌入Agent但仅31%组织有生产级部署。88%试点无法跨越到生产。12%成功部署共享：命名所有权+范围成功标准+自动化评估+组织勇气。LangGraph占41%框架使用。",
+            "date": "2026-05-10",
+            "tags": [
+              "Agent部署",
+              "80%",
+              "31%",
+              "88%失败"
+            ]
+          },
+          {
+            "title": "Deloitte企业AI报告：66%组织报告效率提升但规模化困难",
+            "source": "Deloitte",
+            "url": "https://www.deloitte.com/us/en/what-we-do/capabilities/applied-artificial-intelligence/content/state-of-ai-in-the-enterprise.html",
+            "summary": "66%组织从AI获得效率提升。Agentic AI预期在客服、供应链、R&D产生高影响。组织结构开始扁平化，角色和职业路径需要重建而非简单调整。",
+            "date": "2026-05-10",
+            "tags": [
+              "Deloitte",
+              "66%效率",
+              "Agentic AI",
+              "组织转型"
+            ]
+          }
+        ],
+        "china": [
+          {
+            "title": "Gartner九大预测：AI困局多数企业栽在九大坑",
+            "source": "36氪",
+            "url": "https://m.36kr.com/p/3728086488677256",
+            "summary": "Gartner九大预测：AI投资价值转化率极低(50项仅1项变革性)；过早裁员将导致重新雇佣成本更高；AI'工作垃圾'泛滥(平均花2小时处理每例)；91% CIO未排查AI使用行为副产品；2028年25%求职者将是'虚假求职者'；内部威胁增长220%。",
+            "date": "2026-05-14",
+            "tags": [
+              "Gartner",
+              "九大预测",
+              "AI困局",
+              "36氪"
+            ]
+          },
+          {
+            "title": "企业AI转型7大用例：从客服到供应链",
+            "source": "Claritus Consulting",
+            "url": "https://claritusconsulting.com/insights-resources/blogs/ai-transformation-in-2026/",
+            "summary": "2026年企业AI七大核心用例：客服自动化、供应链优化、预测分析、产品开发、营销个性化、法律运营、风险管理。65%组织至少一个业务功能使用GenAI但极少数成功规模化。",
+            "date": "2026-05-10",
+            "tags": [
+              "企业AI",
+              "7大用例",
+              "规模化",
+              "客服"
+            ]
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "46%失败率背后的结构性原因：运营而非技术",
+        "paragraphs": [
+          "46%企业AI项目未达预期的核心原因是运营而非技术。数据就绪率仅5%——几乎每家企业都在投资AI但数据基础设施严重不足，AI暴露而非修复流程混乱。Coastal/Oxford Economics调研800组织的结论：最大障碍不是技术而是运营方式——每50项AI投资仅1项产生变革性价值。",
+          "88%试点无法投产——80%应用已嵌入Agent但仅31%组织有生产级部署。成功部署的12%共享命名所有权+范围成功标准+自动化评估+组织勇气四项运营特征。'工作垃圾'泛滥——员工平均花2小时处理每例AI产出的低质量内容，这是AI投资无法产生财务价值的关键原因。91% CIO几乎未排查AI使用的行为副产品(心理健康风险被忽视)。",
+          "对企业决策者的启示：2026年Q2，AI投资的成功条件不是'更好的模型'而是'更好的运营'——数据就绪+命名所有权+评估闭环+组织勇气。追加AI投资前先问三个运营问题：数据就绪了吗?谁负责这个Agent的成败?评估标准是什么?如果这三个问题没有明确答案，更多投资只会产生更多'工作垃圾'。"
+        ],
+        "takeaway": "企业AI失败率46%的根因是运营而非技术，成功条件是数据就绪+命名所有权+评估闭环+组织勇气。追加投资前先确认三个运营问题，否则只会产生更多'工作垃圾'。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\">\n  <div class=\"pi-header\">\n    <span class=\"pi-icon\">🔍</span>\n    <span class=\"pi-title\">模式洞察</span>\n  </div>\n  <div class=\"pi-body\">\n    <h4>运营层是AI价值转化的瓶颈而非模型层</h4>\n    <p>46%失败率+88%试点失败+5%数据就绪率指向同一个结论：<strong>运营层是AI价值转化的瓶颈</strong>。12%成功组织的四项运营特征(命名所有权/范围成功标准/自动化评估/组织勇气)不是技术问题而是<strong>管理设计问题</strong>。</p>\n    <p>追加AI投资前先问三个运营问题：数据就绪了吗?谁负责这个Agent的成败?评估标准是什么?如果这三个问题没有明确答案，更多投资只会产生更多'工作垃圾'。</p>\n  </div>\n</div>"
+    }
+  ],
+  "heat_trend": {
+    "top_keywords": [
+      "GPT-5.5 Instant",
+      "实时语音模型",
+      "Kimi K2.6 Agent Swarm",
+      "AI代码安全漏洞45%",
+      "46%企业AI项目失败"
+    ],
+    "trend_summary": "本周三大热点信号：1)OpenAI产品矩阵快速扩张(模型+语音+广告+编码+宠物可视化)，GPT-5.5 Instant核心卖点从'更强推理'转向'更低幻觉+更好上下文管理'——模型竞争从能力比拼转向可靠性比拼；2)中国开源编码模型12天4发打破落后叙事，评估维度仍高度依赖脚手架配置——'同价不同质'而非'同质同价'；3)企业AI46%失败率暴露运营层瓶颈，成功条件从'更好的模型'转向'更好的运营设计'",
+    "watch_next": [
+      "Google I/O 2026下周开幕：Gemini重大更新预期+Android XR",
+      "OpenAI广告平台$2.5B今年目标/$100B/年2030目标",
+      "Kimi K2.6开源权重发布时间线",
+      "SpaceX/xAI IPO路演6-7月目标$1.75T",
+      "Gartner 2027年40%+ Agentic项目取消预测的实际验证"
+    ]
+  },
+  "watch_list": [
+    "Google I/O 2026 (5月20日)：Gemini更新+Android XR",
+    "OpenAI广告平台规模化路径：$2.5B→$100B",
+    "Kimi K2.6开源权重时间线",
+    "SpaceX/xAI IPO 6-7月路演$1.75T",
+    "Gartner 40%+ Agentic取消预测验证"
+  ],
+  "link_sources": [
+    "TechCrunch",
+    "Reuters",
+    "Air Street Press",
+    "OpenAI",
+    "NYT",
+    "CNBC",
+    "Forbes",
+    "Linos NEWS",
+    "SD Times",
+    "Northflank",
+    "CIO.com",
+    "Deloitte",
+    "Digital Applied",
+    "36氪",
+    "GlobeNewswire",
+    "CoreWeave",
+    "NXCode",
+    "AI Funding Tracker",
+    "Cooley",
+    "Claritus Consulting",
+    "AF.net"
+  ],
+  "capability_update": "本周林克最大的认知更新：模型竞争的焦点已从'谁更强'转向'谁更可靠'——GPT-5.5 Instant的核心卖点不是推理能力而是幻觉率降低50%，这标志着行业从能力竞赛进入可靠性竞赛。同时，中国开源编码模型12天4发让我意识到'落后6-9月'的叙事在agentic coding领域已经失效，但评估维度的高度依赖脚手架配置意味着'同价不同质'而非'同质同价'——选型决策需要更精细化。企业AI46%失败率暴露的运营瓶颈(仅5%数据就绪、88%试点失败)让我重新思考：AI投资的成功条件不是'更好的模型'而是'更好的运营设计'——命名所有权+评估闭环+组织勇气是四项关键运营特征。"
+}

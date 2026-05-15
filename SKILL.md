@@ -46,9 +46,9 @@ export:
 | `tavily-search` | 海外搜索 |
 | `quark-search` | 国内搜索 |
 
-## P0红线（6条核心红线）
+## P0红线（8条核心红线）
 
-> ⚠️ 只有6条需要Agent自觉遵守。其余校验已内置到脚本。
+> ⚠️ 只有8条需要Agent自觉遵守。其余校验已内置到脚本。
 
 ### 1. 续接必须先 resume — 无例外
 ```bash
@@ -78,6 +78,13 @@ ls user-skills/sl-ai-insight/.git/HEAD && ssh -o ConnectTimeout=5 -T git@github.
 - ❌ `cp index.html ai-insight-public/index.html` = 敏感词泄露
 - ✅ 必须走 `sanitize_html()` 脱敏流程
 - 详见 `reference/homepage-spec.md`
+
+### 8. 深度调研执行前必须读完3个规范文件+1个标杆 — 禁止凭感觉动手
+- `reference/output-format-spec.md`（公共规范）
+- `reference/deep-research.md`（深度调研流程+4组P0规则）
+- `reference/kim-doc/writing-style.md`（KIM Doc写作标准）
+- `02-deep-research/topics/colleague-skill-anti-distill-2026.html`（标杆HTML源码）
+- 不读完不能动手。历史上因不读规范就动手导致反复修改8+轮。
 
 ---
 
