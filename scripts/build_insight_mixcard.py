@@ -299,7 +299,8 @@ def build_weekly(week_id: str) -> dict:
 
 # ============ 深度调研 ============
 
-def build_research(slug: str = "", title: str = "", core_insight: str = "",
+def build_research(slug: str = "", title: str = "", subtitle: str = "",
+                   core_insight: str = "",
                    trends: str = "", principles: str = "", sources: str = "",
                    report_url: str = "") -> dict:
     """构建深度调研 mixCard（参数化，可传入任意专题内容）"""
@@ -316,6 +317,7 @@ def build_research(slug: str = "", title: str = "", core_insight: str = "",
 
     blocks = [
         _content("header", f"# {title}"),
+        _content("subtitle", subtitle or "深度调研 · AI专题"),
         _content("date", f"📅 *{today}（{weekday}）发布*"),
         _divider("div0"),
     ]
@@ -510,6 +512,14 @@ def main():
                         help="推送场景")
     parser.add_argument("--date", "-d", help="日期 (日报: YYYY-MM-DD, 周报: YYYY-Www 或 YYYY-MM-DD)")
     parser.add_argument("--slug", help="深度调研 slug (如 ai-下半场)")
+    parser.add_argument("--title", help="深度调研卡片标题")
+    parser.add_argument("--subtitle-text", help="深度调研卡片subtitle内容")
+    parser.add_argument("--insight", help="核心结论内容")
+    parser.add_argument("--trends", help="趋势内容")
+    parser.add_argument("--principles", help="原理/洞见内容")
+    parser.add_argument("--sources", help="参考来源内容")
+    parser.add_argument("--footer-text", help="footer文字")
+    parser.add_argument("--report-url", help="完整报告URL")
     parser.add_argument("--output", "-o", help="输出文件路径")
     parser.add_argument("--with-summary", action="store_true", help="输出 {card, summary}")
     parser.add_argument("--verify-urls", action="store_true", help="校验按钮URL可达性(HTTP 200)")
@@ -525,7 +535,16 @@ def main():
             card = build_weekly(date_str)
             summary = build_summary("weekly", date_str)
         elif args.scenario == "research":
-            card = build_research(slug=args.slug or "")
+            card = build_research(
+                slug=args.slug or "",
+                title=args.title or "",
+                subtitle=args.subtitle_text or "",
+                core_insight=args.insight or "",
+                trends=args.trends or "",
+                principles=args.principles or "",
+                sources=args.sources or "",
+                report_url=args.report_url or "",
+            )
             summary = build_summary("research")
         elif args.scenario == "product":
             card = build_product_essence()

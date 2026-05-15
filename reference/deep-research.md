@@ -1,15 +1,18 @@
 # AI深度调研执行流程 (v3.0 精简版)
 
-> **版本**: v3.0 (2026-05-11: 精简版)
+> **版本**: v3.1 (2026-05-14: 新增HTML/KIM Doc/MixCard/修复策略4组P0强制规则，从5-14复盘血的教训沉淀)
 > **原则**: 本文件只写"做什么→调用什么→看什么输出"。执行细节由脚本自动处理。
 > **⚠️ 生成任何输出前，先读 `reference/output-format-spec.md`（HTML/卡片/Doc公共规范）**
 
 ---
 
-## ⚠️ 执行前（2条）
+## ⚠️ 执行前（5条，强制，不读完不能动手）
 
 1. **明确研究问题**: 核心问题+范围边界+预期输出+目标受众，不能模糊
 2. **环境检查**: `ls user-skills/sl-ai-insight/.git/HEAD && ssh -o ConnectTimeout=5 -T git@github.com`
+3. **读公共规范**: `reference/output-format-spec.md` — 逐条列出关键格式要点（≥10条），确认理解后再动手
+4. **读KIM Doc写作标准**: `reference/kim-doc/writing-style.md` — 对照§0.2格式清单逐条确认
+5. **读标杆HTML源码**: `02-deep-research/topics/colleague-skill-anti-distill-2026.html` — 提取CSS骨架+导航结构+tab逻辑，确认骨架一致后再填入内容
 
 ---
 
@@ -62,6 +65,48 @@ Step 6: KIM推送 → build_insight_mixcard.py research
 ---
 
 ## Step 2: 信息整合 + 洞察提炼
+
+### HTML实现规则（P0强制）
+
+> ⚠️ 历史上因不遵守这些规则导致页面白屏、布局错误、反复修改8+轮。以下每条都是血的教训。
+
+**标杆文件**：`02-deep-research/topics/colleague-skill-anti-distill-2026.html`
+**所有深度调研HTML必须完全复制标杆的CSS+JS骨架，只替换body内容区域（hero标题+nav按钮+各tab-pane内容+了解更多模块）。**
+
+1. **布局结构**：`editorial-hero → sticky nav-wrap → tab-pane`。❌禁止sidebar布局、❌禁止任何非标杆结构
+2. **导航按钮数量**：≤7个。按钮文案简洁无emoji无编号（如"正在发生什么"而非"01 同质化"）
+3. **animate-on-scroll规则**：所有元素**默认opacity:1（可见）**。Observer只做动画增强（入场渐显），❌绝对禁止用Observer控制可见性（会导致切换tab后白屏）
+4. **tab切换逻辑**：切换tab时，新tab内容必须立即可见，不依赖Observer触发
+5. **CSS来源**：从标杆HTML提取完整CSS+JS，不自己发明CSS变量或布局系统
+6. **了解更多模块**：直接复制标杆的HTML格式（林克介绍+首页按钮），❌禁止手写格式
+7. **脱敏**：外部版必须运行`sync_to_external.py`自动脱敏，❌禁止手动脱敏（遗漏率极高）
+8. **文件大小**：≥50KB。不够时补充案例扩充+数据表格+词汇表，不靠空行撑
+
+### KIM Doc实现规则（P0强制）
+
+1. **写前必须读**：`reference/kim-doc/writing-style.md` 逐条对照§0.2格式清单
+2. **图片机制**：Docs push API不支持CDN URL图片自动转换。KIM Doc图片必须：
+   - 方法A：push MD后，在Docs编辑器手动插入图片（推荐）
+   - 方法B：先pull获取已有is-docsfile签名URL，替换到MD中再push
+   - ❌禁止：在push的MD里直接写`![描述](cdnfile链接)`——不会被渲染
+3. **表格格式**：分隔线`| --- |`后直接跟内容行，❌禁止加空行`| | | |`（KIM Doc会渲染出多余空行）
+4. **配图位置**：章节末尾（下个`#`标题前），包括📖引子也需要配图。❌不是标题前面
+5. **段落间距**：全文0空行紧凑排版，❌不用`---`分割线
+6. **加粗**：几乎不加粗，让📌做标识。❌禁止大量`**加粗**`
+7. **📌格式**：`📌 纯文本`，❌禁止`📌 **加粗**`
+
+### MixCard实现规则（P0强制）
+
+1. **必须用脚本生成+校验**：`python3 scripts/build_insight_mixcard.py research --slug <slug> --title ... --subtitle ...`
+2. **如果脚本不支持所需内容**：先扩展脚本参数，再生成。❌禁止手写MixCard JSON绕过脚本
+3. **按钮URL**：绿按钮指向报告HTML页面，蓝按钮指向AI洞察首页`https://xiaoxiong20260206.github.io/ai-insight/`
+4. **推送时不传message字段**（会导致{{message}}泄露）
+
+### 修复策略（P0强制）
+
+1. **修复用edit精确手术**：定位到具体行/具体文本做替换。❌禁止用write重写整个文件（风险：丢失内容、子agent超时、引入新bug）
+2. **只有结构彻底不对时才重写**：且必须先读标杆源码，提取骨架后再填入内容
+3. **子agent不适合50KB+HTML生成**：大文件直接在主会话用write/edit工具，不依赖子agent
 
 ### 生成文件
 - `02-deep-research/<type>/<slug>.md`（Markdown）
@@ -148,4 +193,4 @@ python3 scripts/build_insight_mixcard.py research --slug <slug> --output /tmp/ca
 
 ---
 
-_更新于 2026-05-11 · v3.0 · 精简版，881行→核心流程_
+_更新于 2026-05-14 · v3.1 · 新增4组P0强制规则（从5-14复盘沉淀）_
