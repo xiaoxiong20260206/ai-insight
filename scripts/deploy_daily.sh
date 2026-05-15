@@ -265,11 +265,20 @@ try:
     with open('data/daily-content-$DATE.json', 'r', encoding='utf-8') as f:
         data = json.load(f)
     ht = data.get('heat_trend', {})
-    summary = ht.get('summary', '')
+    
+    # 兼容多种heat_trend格式提取描述
+    # 格式1: ht.summary (旧版)
+    # 格式2: ht.top_items[].title (05-11格式)
+    # 格式3: ht.trend_summary + ht.top_keywords (05-15格式)
+    # 格式4: ht.topics[].name (cron早期格式)
+    
+    summary = ht.get('summary', '') or ht.get('trend_summary', '')
+    top_items = ht.get('top_items', []) or ht.get('topics', [])
+    
     # 截取前100字，去除HTML标签
     summary = re.sub(r'<[^>]+>', '', summary)
-    # 取highlights作为·分隔描述
-    wl = data.get('watch_list', [])
+    
+    # 从overviews提取headline
     overviews = data.get('overview', [])
     parts = []
     for ov in overviews[:4]:
@@ -277,6 +286,14 @@ try:
         if hl:
             clean = re.sub(r'<[^>]+>', '', hl)[:20]
             parts.append(clean)
+    
+    # 如果overviews没内容，从top_items提取
+    if not parts and top_items:
+        for item in top_items[:4]:
+            name = item.get('name', '') or item.get('title', '')
+            if name:
+                clean = re.sub(r'<[^>]+>', '', name)[:20]
+                parts.append(clean)
     desc = ' · '.join(parts) if parts else summary[:80]
     print(desc)
 except Exception as e:
