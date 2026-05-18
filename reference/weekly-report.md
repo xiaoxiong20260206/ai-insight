@@ -1,6 +1,6 @@
-# AI周报执行流程 (v3.0 精简版)
+# AI周报执行流程 (v3.1 精简版)
 
-> **版本**: v3.0 (2026-05-11: 精简版)
+> **版本**: v3.1 (2026-05-18: 新增踩坑教训+自检强制规则)
 > **原则**: 本文件只写"做什么→调用什么→看什么输出"。执行细节由脚本自动处理。
 > **⚠️ 生成任何输出前，先读 `reference/output-format-spec.md`（HTML/卡片/Doc公共规范）**
 
@@ -155,4 +155,49 @@ python3 scripts/build_insight_mixcard.py weekly --date YYYY-WXX --output /tmp/ca
 
 ---
 
-_更新于 2026-05-11 · v3.0 · 精简版，539行→核心流程_
+## ⚠️ 周报交付强制自检（P0 — 每次执行必须完成）
+
+> **2026-05-18 新增**：W20周报首页日历+外部版同步失败，根因是脚本 silent skip + 验证不覆盖日历/外部版。
+
+周报执行完成后，**必须逐项验证以下清单**，任何一项失败 = hard fail，不能标记任务完成：
+
+| # | 自检项 | 验证方法 | 失败= |
+|---|--------|----------|-------|
+| 1 | 日历数据包含本周周号 | `grep "weekly-{week_id}" index.html`，必须在 `weeklyReportsData` 行出现 | ❌ hard fail |
+| 2 | 内部版首页包含周报链接 | `grep "weekly-{week_id}.html" index.html` | ❌ hard fail |
+| 3 | 外部版周报HTML存在 | `ls ai-insight-public/01-daily-reports/{month}/weekly-{week_id}.html` | ❌ hard fail |
+| 4 | 外部版首页包含本周周号 | `grep "{week_id}" ai-insight-public/index.html` | ❌ hard fail |
+| 5 | 四链接可达 | 逐一访问4个URL确认HTTP 200 | ❌ hard fail |
+| 6 | MixCard校验通过 | `build_insight_mixcard.py weekly --date {week_id} --verify` | ❌ hard fail |
+
+**重要**：`update_homepage.py` 如果输出 `❌` 或 `⚠️`，等于验证未通过，**不能继续推送**。必须排查并修复后再继续。
+
+---
+
+## 踩坑教训
+
+### 2026-05-18: W20周报首页日历更新失败 + 外部版同步阻塞
+
+**问题**: 周报cron标记ok，但首页日历点击W20不跳转，外部版W20文件缺失。
+
+**根因链**:
+
+1. **`update_homepage.py` 日历正则 `[^}]+` 无法匹配嵌套 `{}`** — 首页 `weeklyReportsData` 的值是 `'2026-05': {4: ..., 11: ...}`，内层 `}` 先被拒绝匹配，正则命中第一个 `}` 就停止。从W18开始日历更新永远被跳过，脚本输出 `⚠️ 未找到weeklyReportsData，跳过周报日历更新` 并返回 True（silent skip）。
+
+2. **`sync_to_public.py` 一致性验证阻塞同步** — `public/02-deep-research/topics/ai-org-moat-v2.html` 是历史残留（内部版不存在），一致性检查 sys.exit(1) 阻塞了整条同步管道，外部版 W20 从未同步。
+
+3. **cron 误判成功** — 脚本 silent skip + 退出码 0 = cron 标记 ok。交付物自检六项 ✅ 但实际日历和外部版都没更新。
+
+**修复**:
+- 重写日历更新函数：三策略（非贪婪匹配+月份行直接搜索+已存在快速返回），跳过 = hard fail
+- 一致性验证降级为 warning（sys.exit → 打印警告继续）
+- 增强验证：检查日历数据+外部版文件+外部首页
+
+**举一反三**:
+- **脚本跳过步骤 = hard fail，不能 silent return True** — cron ok ≠ 任务完成
+- **四位置验证必须纳入交付物自检** — 不能只检查"文件存在"，还要检查"日历有周号""外部版到位"
+- **一致性验证应该是 warning 不是 blocker** — 历史残留不应阻止新内容上线
+
+---
+
+_更新于 2026-05-18 · v3.1 · 新增P0自检清单+踩坑教训_

@@ -94,7 +94,7 @@ ls user-skills/sl-ai-insight/.git/HEAD && ssh -o ConnectTimeout=5 -T git@github.
 |------|--------|-----------|
 | `build_insight_mixcard.py` | 6锚点+kimMd格式+{{message}}扫描+URL格式 | ❌硬性报错退出 |
 | `gen_daily_html.py` | ≥50KB+5板块+{{message}}扫描+overview/深度聚焦 | ❌硬性报错退出 |
-| `update_homepage.py` | 内部版+public+索引页包含当天日期 | ❌报错退出 |
+| `update_homepage.py` | 内部版+public+索引页包含当天日期 + 周报模式额外检查：日历数据含周号+外部版HTML存在+外部首页含周号 | ❌报错退出 |
 | `daily_quality_gate.py` | hard/soft分级 | 硬性阻断/软性警告 |
 
 ---
