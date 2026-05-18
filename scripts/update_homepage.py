@@ -149,57 +149,63 @@ def update_calendar_weekly(index_path: Path, month: str, day: int, week_id: str)
     content = index_path.read_text(encoding="utf-8")
     day_str = f"{day}: 'weekly-{week_id}'"
 
+    # 快速检查：如果日历区域已包含该条目，直接返回成功
+    # 只在 weeklyReportsData 变量块内搜索，避免误匹配卡片链接等区域
+    weekly_block_pattern_quick = r'weeklyReportsData\s*=\s*\{([\s\S]+?)\}\s*;'
+    m_quick = re.search(weekly_block_pattern_quick, content)
+    if m_quick and day_str in m_quick.group(1):
+        print(f"  ⏭️ 周报日历已包含 {month}/{day} ({week_id})，无需更新")
+        return True
+    # fallback: 也在月份行模式中检查
+    month_line_pattern_quick = rf"'{month}':\s*\{{([^}}]*)\}}"
+    m2_quick = re.search(month_line_pattern_quick, content)
+    if m2_quick and day_str in m2_quick.group(1):
+        print(f"  ⏭️ 周报日历已包含 {month}/{day} ({week_id})，无需更新")
+        return True
+
     # Strategy 1: 匹配 weeklyReportsData 变量（值含嵌套{}，需要非贪婪多层匹配）
-    # 匹配整个 weeklyReportsData = { ... }; 块
     weekly_block_pattern = r'weeklyReportsData\s*=\s*\{([\s\S]+?)\}\s*;'
     m = re.search(weekly_block_pattern, content)
     if m:
         existing = m.group(1)
-        if day_str not in existing:
-            # 在对应月份后面追加
-            month_pattern = rf"'{month}':\s*\{{[^}}]+\}}"
-            month_match = re.search(month_pattern, existing)
-            if month_match:
-                old = month_match.group()
-                new = old.rstrip("}") + ", " + day_str + "}"
-                new_content = content.replace(existing, existing.replace(old, new))
+        # 在对应月份后面追加
+        month_pattern = rf"'{month}':\s*\{{[^}}]+\}}"
+        month_match = re.search(month_pattern, existing)
+        if month_match:
+            old = month_match.group()
+            new = old.rstrip("}") + ", " + day_str + "}"
+            new_content = content.replace(existing, existing.replace(old, new))
+            index_path.write_text(new_content, encoding="utf-8")
+            print(f"  ✅ 周报日历已更新: {month}/{day}")
+            return True
+        else:
+            # 月份不存在，追加新月份行
+            last_month_pattern = r"'(\d{4}-\d{2})':\s*\{[^}]+\}\s*(?:,\s*)?(//[^\n]*)?"
+            all_months = list(re.finditer(last_month_pattern, existing))
+            if all_months:
+                last_m = all_months[-1]
+                new_month_line = f"    '{month}': {{{day_str}}},  // {week_id}"
+                insert_pos = last_m.end()
+                new_existing = existing[:insert_pos] + "\n            " + new_month_line + existing[insert_pos:]
+                new_content = content.replace(existing, new_existing)
                 index_path.write_text(new_content, encoding="utf-8")
-                print(f"  ✅ 周报日历已更新: {month}/{day}")
+                print(f"  ✅ 周报日历追加新月: {month}/{day}")
                 return True
-            else:
-                # 月份不存在，追加新月份行
-                # 找到最后一个月份行，在后面追加
-                last_month_pattern = r"'(\d{4}-\d{2})':\s*\{[^}]+\}\s*(?:,\s*)?(//[^\n]*)?"
-                all_months = list(re.finditer(last_month_pattern, existing))
-                if all_months:
-                    last_m = all_months[-1]
-                    # 去掉最后一行的尾逗号（如果有），加逗号，追加新月行
-                    old_block = existing
-                    new_month_line = f"    '{month}': {{{day_str}}},  // {week_id}"
-                    # 在整个 block 的最后一个月份条目后追加
-                    insert_pos = last_m.end()
-                    new_existing = existing[:insert_pos] + "\n            " + new_month_line + existing[insert_pos:]
-                    new_content = content.replace(existing, new_existing)
-                    index_path.write_text(new_content, encoding="utf-8")
-                    print(f"  ✅ 周报日历追加新月: {month}/{day}")
-                    return True
 
     # Strategy 2: 直接搜索月份行模式（无 weeklyReportsData 变量名）
     month_line_pattern = rf"'{month}':\s*\{{([^}}]*)\}}"
     m2 = re.search(month_line_pattern, content)
     if m2:
-        inner = m2.group(1)
-        if day_str not in inner:
-            old_line = m2.group(0)
-            new_line = old_line.rstrip("}") + ", " + day_str + "}"
-            new_content = content[:m2.start()] + new_line + content[m2.end():]
-            index_path.write_text(new_content, encoding="utf-8")
-            print(f"  ✅ 周报日历已更新(直接匹配): {month}/{day}")
-            return True
+        old_line = m2.group(0)
+        new_line = old_line.rstrip("}") + ", " + day_str + "}"
+        new_content = content[:m2.start()] + new_line + content[m2.end():]
+        index_path.write_text(new_content, encoding="utf-8")
+        print(f"  ✅ 周报日历已更新(直接匹配): {month}/{day}")
+        return True
 
-    # 最终 fallback: 没找到任何周报日历数据，跳过
-    print(f"  ⚠️ 未找到周报日历数据，跳过周报日历更新")
-    return True
+    # 最终 fallback: 没找到任何周报日历数据 — hard fail
+    print(f"  ❌ 未找到周报日历数据，无法更新日历（期望包含 weeklyReportsData 或月份行）")
+    return False
 
 
 # ============ 公共逻辑 ============
@@ -234,10 +240,11 @@ def sync_all_homepages(date_str: str, update_type: str,
 
 
 def verify_homepage(date_str: str = "", week_id: str = "") -> bool:
-    """验证所有版本首页"""
+    """验证所有版本首页（含日历数据检查和外部版文件检查）"""
     errors = []
     check_str = date_str or week_id
 
+    # 1. 首页 HTML 包含当前日期/周号
     for label, path in [
         ("内部版", PROJECT_ROOT / "index.html"),
         ("public/", PROJECT_ROOT / "public" / "index.html"),
@@ -246,6 +253,37 @@ def verify_homepage(date_str: str = "", week_id: str = "") -> bool:
             errors.append(f"❌ {label}不存在")
         elif check_str not in path.read_text(encoding="utf-8"):
             errors.append(f"❌ {label}未包含 {check_str}")
+
+    # 2. 周报模式：日历数据中必须包含本周周号
+    if week_id:
+        for label, path in [
+            ("内部版日历", PROJECT_ROOT / "index.html"),
+            ("public/日历", PROJECT_ROOT / "public" / "index.html"),
+        ]:
+            if path.exists():
+                content = path.read_text(encoding="utf-8")
+                # 检查日历中 weeklyReportsData 是否包含 week_id
+                if f"weekly-{week_id}" not in content:
+                    errors.append(f"❌ {label}日历数据未包含 weekly-{week_id}")
+
+    # 3. 外部版：HTML 文件必须存在
+    if week_id:
+        # 从 week_id 计算月份目录
+        week_num = int(week_id.split("-W")[1])
+        year = int(week_id.split("-")[0])
+        from datetime import timedelta
+        monday_dt = datetime.strptime(f"{year}-W{week_num:02d}-1", "%G-W%V-%u")
+        sunday_dt = monday_dt + timedelta(days=6)
+        month_str = sunday_dt.strftime("%Y-%m")
+        
+        ext_repo = PROJECT_ROOT.parent / "ai-insight-public"
+        if ext_repo.exists():
+            ext_html = ext_repo / "01-daily-reports" / month_str / f"weekly-{week_id}.html"
+            if not ext_html.exists():
+                errors.append(f"❌ 外部版周报HTML缺失: {ext_html}")
+            ext_index = ext_repo / "index.html"
+            if ext_index.exists() and week_id not in ext_index.read_text(encoding="utf-8"):
+                errors.append(f"❌ 外部版首页未包含 {week_id}")
 
     if errors:
         for e in errors:
