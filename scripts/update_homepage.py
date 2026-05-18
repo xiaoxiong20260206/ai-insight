@@ -149,9 +149,10 @@ def update_calendar_weekly(index_path: Path, month: str, day: int, week_id: str)
     content = index_path.read_text(encoding="utf-8")
     day_str = f"{day}: 'weekly-{week_id}'"
 
-    # 查找周报数据位置
-    weekly_pattern = r'weeklyReportsData\s*=\s*\{([^}]+)\}'
-    m = re.search(weekly_pattern, content)
+    # Strategy 1: 匹配 weeklyReportsData 变量（值含嵌套{}，需要非贪婪多层匹配）
+    # 匹配整个 weeklyReportsData = { ... }; 块
+    weekly_block_pattern = r'weeklyReportsData\s*=\s*\{([\s\S]+?)\}\s*;'
+    m = re.search(weekly_block_pattern, content)
     if m:
         existing = m.group(1)
         if day_str not in existing:
@@ -165,9 +166,39 @@ def update_calendar_weekly(index_path: Path, month: str, day: int, week_id: str)
                 index_path.write_text(new_content, encoding="utf-8")
                 print(f"  ✅ 周报日历已更新: {month}/{day}")
                 return True
+            else:
+                # 月份不存在，追加新月份行
+                # 找到最后一个月份行，在后面追加
+                last_month_pattern = r"'(\d{4}-\d{2})':\s*\{[^}]+\}\s*(?:,\s*)?(//[^\n]*)?"
+                all_months = list(re.finditer(last_month_pattern, existing))
+                if all_months:
+                    last_m = all_months[-1]
+                    # 去掉最后一行的尾逗号（如果有），加逗号，追加新月行
+                    old_block = existing
+                    new_month_line = f"    '{month}': {{{day_str}}},  // {week_id}"
+                    # 在整个 block 的最后一个月份条目后追加
+                    insert_pos = last_m.end()
+                    new_existing = existing[:insert_pos] + "\n            " + new_month_line + existing[insert_pos:]
+                    new_content = content.replace(existing, new_existing)
+                    index_path.write_text(new_content, encoding="utf-8")
+                    print(f"  ✅ 周报日历追加新月: {month}/{day}")
+                    return True
 
-    # fallback: 没找到weeklyReportsData，跳过
-    print(f"  ⚠️ 未找到weeklyReportsData，跳过周报日历更新")
+    # Strategy 2: 直接搜索月份行模式（无 weeklyReportsData 变量名）
+    month_line_pattern = rf"'{month}':\s*\{{([^}}]*)\}}"
+    m2 = re.search(month_line_pattern, content)
+    if m2:
+        inner = m2.group(1)
+        if day_str not in inner:
+            old_line = m2.group(0)
+            new_line = old_line.rstrip("}") + ", " + day_str + "}"
+            new_content = content[:m2.start()] + new_line + content[m2.end():]
+            index_path.write_text(new_content, encoding="utf-8")
+            print(f"  ✅ 周报日历已更新(直接匹配): {month}/{day}")
+            return True
+
+    # 最终 fallback: 没找到任何周报日历数据，跳过
+    print(f"  ⚠️ 未找到周报日历数据，跳过周报日历更新")
     return True
 
 
