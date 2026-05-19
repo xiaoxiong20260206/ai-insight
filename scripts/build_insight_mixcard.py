@@ -477,6 +477,8 @@ def validate_card_with_url_check(card: dict, scenario: str) -> list[str]:
     errors = validate_card(card, scenario)
     
     # 按钮 URL HTTP 可达性验证
+    # weekly场景：按钮URL不可达=hard fail(❌)，其他场景=soft warning(⚠️)
+    is_weekly = scenario == "weekly"
     for b in card.get("blocks", []):
         if b.get("type") == "action":
             for act in b.get("actions", []):
@@ -487,9 +489,11 @@ def validate_card_with_url_check(card: dict, scenario: str) -> list[str]:
                         req.add_header('User-Agent', 'MyFlicker-MixCard-Validator/2.0')
                         resp = urllib.request.urlopen(req, timeout=10)
                         if resp.status >= 400:
-                            errors.append(f"⚠️ 按钮 URL 不可达: {url} (HTTP {resp.status})")
+                            prefix = "❌" if is_weekly else "⚠️"
+                            errors.append(f"{prefix} 按钮 URL 不可达: {url} (HTTP {resp.status})")
                     except Exception:
-                        errors.append(f"⚠️ 按钮 URL 验证失败(可能网络波动): {url}")
+                        prefix = "❌" if is_weekly else "⚠️"
+                        errors.append(f"{prefix} 按钮 URL 验证失败: {url}")
     
     return errors
 
@@ -574,13 +578,20 @@ def main():
     if not errors:
         print("✅ MixCard 校验通过: 6锚点完整 + kimMd格式正确 + 无{{message}}占位符")
 
-    # URL可达性验证（可选，--verify-urls 时执行）
-    if args.verify_urls:
+    # URL可达性验证（可选，--verify-urls 时执行；weekly场景默认执行）
+    should_verify_urls = args.verify_urls or args.scenario == "weekly"
+    if should_verify_urls:
         url_errors = validate_card_with_url_check(card, args.scenario)
         url_warnings = [e for e in url_errors if e.startswith("⚠️")]
+        url_hard = [e for e in url_errors if e.startswith("❌")]
         if url_warnings:
             for w in url_warnings:
                 print(f"  {w}")
+        if url_hard:
+            for h in url_hard:
+                print(f"  {h}")
+            print("🚫 按钮URL不可达，MixCard不能推送！", file=sys.stderr)
+            sys.exit(1)
 
     out = {"card": card, "summary": summary} if args.with_summary else card
     out_str = json.dumps(out, ensure_ascii=False, indent=2)
