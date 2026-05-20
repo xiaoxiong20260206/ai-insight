@@ -1163,6 +1163,7 @@
             background: var(--color-bg-table-header);
             border: 1px solid transparent;
             transition: all var(--transition-fast);
+            position: relative;
         }
         
         .calendar-day.empty {
@@ -1208,6 +1209,100 @@
             height: 3px;
             border-radius: 2px;
             background: linear-gradient(90deg, var(--color-info), var(--color-purple));
+        }
+        
+        /* 日期选择弹窗（日报/周报二选一） */
+        .calendar-day-menu {
+            display: none;
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            padding: 6px;
+            z-index: 200;
+            min-width: 150px;
+            white-space: nowrap;
+        }
+        
+        .calendar-day-menu.visible {
+            display: block;
+            animation: fadeIn 0.15s ease-out;
+        }
+        
+        .calendar-day-menu::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: var(--color-border);
+        }
+        
+        .calendar-day-menu-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            color: var(--color-text-primary);
+            font-size: 13px;
+            font-weight: 500;
+            transition: all var(--transition-fast);
+            cursor: pointer;
+        }
+        
+        .calendar-day-menu-item:hover {
+            background: rgba(5, 150, 105, 0.08);
+            color: var(--color-success);
+        }
+        
+        .calendar-day-menu-item.daily {
+            color: var(--color-success);
+        }
+        
+        .calendar-day-menu-item.weekly {
+            color: var(--color-info);
+        }
+        
+        .calendar-day-menu-icon {
+            font-size: 15px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .calendar-day-menu-label {
+            font-size: 11px;
+            padding: 1px 5px;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            margin-left: auto;
+        }
+        
+        .calendar-day-menu-label.daily {
+            background: rgba(5, 150, 105, 0.12);
+            color: var(--color-success);
+        }
+        
+        .calendar-day-menu-label.weekly {
+            background: rgba(37, 99, 235, 0.12);
+            color: var(--color-info);
+        }
+        
+        /* 同时有日报+周报的日期样式增强 */
+        .calendar-day.has-report.has-weekly {
+            background: linear-gradient(135deg, rgba(5, 150, 105, 0.15) 0%, rgba(37, 99, 235, 0.10) 100%);
+            cursor: pointer;
+        }
+        
+        .calendar-day.has-report.has-weekly:hover {
+            background: linear-gradient(135deg, var(--color-success) 0%, var(--color-info) 100%);
+            color: white;
         }
         
         /* 周报入口卡片 */
@@ -2275,19 +2370,36 @@
                     <div class="section-icon">📰</div>
                     <div>
                         <h2 class="section-title">AI 日报 & 周报</h2>
-                        <p class="section-desc">每日/每周AI行业动态汇总，覆盖大模型、AI Coding、AI应用、AI行业、企业AI转型五大领域</p>
+                        <p class="section-desc">每日AI行业动态 + 每周深度汇总，覆盖大模型、AI Coding、AI应用、AI行业、企业AI转型五大领域</p>
                     </div>
                 </div>
                 
-                <!-- 周报入口 -->
+                <!-- 周报入口（最新一期） -->
                 <a href="01-daily-reports/2026-05/weekly-2026-W20.html" target="_blank" class="weekly-report-card">
                     <div class="wrc-icon">📊</div>
                     <div class="wrc-content">
                         <div class="wrc-title">AI 周报 · 第20周（05/12 - 05/17）<span class="wrc-badge">最新</span></div>
-                        <div class="wrc-desc">测试</div>
+                        <div class="wrc-desc">一周AI行业动态深度汇总</div>
                     </div>
                     <span class="wrc-arrow">→</span>
                 </a>
+                
+                <!-- 往期周报快速入口 -->
+                <div style="margin-bottom: var(--spacing-md);">
+                    <div style="font-size: 13px; font-weight: 600; color: var(--color-text-secondary); margin-bottom: 8px;">📊 往期周报</div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                        <a href="01-daily-reports/2026-05/weekly-2026-W19.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--color-bg-table-header); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); font-size: 12px; color: var(--color-info); text-decoration: none; transition: all 0.15s;">W19<span style="font-size: 10px; color: var(--color-text-muted);">05/05-05/11</span></a>
+                        <a href="01-daily-reports/2026-05/weekly-2026-W18.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--color-bg-table-header); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); font-size: 12px; color: var(--color-info); text-decoration: none; transition: all 0.15s;">W18<span style="font-size: 10px; color: var(--color-text-muted);">04/28-05/04</span></a>
+                        <a href="01-daily-reports/2026-04/weekly-2026-W17.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--color-bg-table-header); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); font-size: 12px; color: var(--color-info); text-decoration: none; transition: all 0.15s;">W17<span style="font-size: 10px; color: var(--color-text-muted);">04/21-04/27</span></a>
+                        <a href="01-daily-reports/2026-04/weekly-2026-W16.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--color-bg-table-header); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); font-size: 12px; color: var(--color-info); text-decoration: none; transition: all 0.15s;">W16<span style="font-size: 10px; color: var(--color-text-muted);">04/14-04/20</span></a>
+                        <a href="01-daily-reports/2026-04/weekly-2026-W15.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--color-bg-table-header); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); font-size: 12px; color: var(--color-info); text-decoration: none; transition: all 0.15s;">W15<span style="font-size: 10px; color: var(--color-text-muted);">04/07-04/13</span></a>
+                        <a href="01-daily-reports/2026-04/weekly-2026-W14.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--color-bg-table-header); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); font-size: 12px; color: var(--color-info); text-decoration: none; transition: all 0.15s;">W14<span style="font-size: 10px; color: var(--color-text-muted);">03/31-04/06</span></a>
+                        <a href="01-daily-reports/2026-03/weekly-2026-W13.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--color-bg-table-header); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); font-size: 12px; color: var(--color-info); text-decoration: none; transition: all 0.15s;">W13<span style="font-size: 10px; color: var(--color-text-muted);">03/24-03/30</span></a>
+                        <a href="01-daily-reports/2026-03/weekly-2026-W12.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--color-bg-table-header); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); font-size: 12px; color: var(--color-info); text-decoration: none; transition: all 0.15s;">W12<span style="font-size: 10px; color: var(--color-text-muted);">03/17-03/23</span></a>
+                        <a href="01-daily-reports/2026-03/weekly-2026-W11.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--color-bg-table-header); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); font-size: 12px; color: var(--color-info); text-decoration: none; transition: all 0.15s;">W11<span style="font-size: 10px; color: var(--color-text-muted);">03/10-03/16</span></a>
+                        <a href="01-daily-reports/2026-03/weekly-2026-W10.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--color-bg-table-header); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); font-size: 12px; color: var(--color-info); text-decoration: none; transition: all 0.15s;">W10<span style="font-size: 10px; color: var(--color-text-muted);">03/03-03/09</span></a>
+                    </div>
+                </div>
                 
                 <!-- 最新日报（仅展示最近一期） -->
                 <div class="content-list">
@@ -2305,8 +2417,8 @@
                 <!-- 日历导航 —— 往期日报/周报在这里找 -->
                 <div class="calendar-section-header">
                     <span style="font-size: 18px;">📆</span>
-                    <span class="calendar-section-title">往期日报 & 周报</span>
-                    <span class="calendar-section-hint">点击日期直达 ↓</span>
+                    <span class="calendar-section-title">日历导航 · 日报 & 周报</span>
+                    <span class="calendar-section-hint">点击日期直达 ↓  既有日报又有周报时弹出选择</span>
                 </div>
                 <div class="calendar-container">
                     <div class="calendar-header">
@@ -2324,11 +2436,15 @@
                     <div class="calendar-legend">
                         <div class="calendar-legend-item">
                             <div class="calendar-legend-dot has-report"></div>
-                            <span>有日报</span>
+                            <span>日报</span>
+                        </div>
+                        <div class="calendar-legend-item">
+                            <div style="width:8px;height:8px;border-radius:2px;background:linear-gradient(135deg,rgba(5,150,105,0.25),rgba(37,99,235,0.18));border:1px solid var(--color-success);position:relative;"><div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:6px;height:2px;border-radius:1px;background:linear-gradient(90deg,var(--color-info),var(--color-purple));"></div></div>
+                            <span>日报+周报</span>
                         </div>
                         <div class="calendar-legend-item">
                             <div style="width:8px;height:8px;border-radius:2px;background:transparent;border:1px solid var(--color-border);position:relative;"><div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:6px;height:2px;border-radius:1px;background:linear-gradient(90deg,var(--color-info),var(--color-purple));"></div></div>
-                            <span>有周报</span>
+                            <span>仅周报</span>
                         </div>
                         <div class="calendar-legend-item">
                             <div class="calendar-legend-dot today"></div>
@@ -3749,18 +3865,23 @@
                 const weeklyUrl = hasWeekly ? `01-daily-reports/${currentYear}-${String(currentMonth).padStart(2, '0')}/${weeklyMonthData[day]}.html` : '';
                 
                 if (hasReport || hasWeekly) {
-                    let title = '';
-                    let url = reportUrl;
+                    let classes = 'calendar-day';
+                    if (hasReport) classes += ' has-report';
+                    if (hasWeekly) classes += ' has-weekly';
+                    if (isToday) classes += ' today';
+                    
                     if (hasReport && hasWeekly) {
-                        title = `${currentMonth}月${day}日 AI日报 + 📊 周报`;
+                        // 同时有日报+周报 → 弹出选择菜单
+                        html += `<div class="${classes}" onclick="showDayMenu(this, '${reportUrl}', '${weeklyUrl}', ${currentMonth}, ${day})" title="${currentMonth}月${day}日：日报+周报">${day}<div class="calendar-day-menu" id="dayMenu-${currentMonth}-${day}"><a class="calendar-day-menu-item daily" href="${reportUrl}" target="_blank"><span class="calendar-day-menu-icon">📅</span>AI 日报<span class="calendar-day-menu-label daily">Daily</span></a><a class="calendar-day-menu-item weekly" href="${weeklyUrl}" target="_blank"><span class="calendar-day-menu-icon">📊</span>AI 周报<span class="calendar-day-menu-label weekly">Weekly</span></a></div></div>`;
                     } else if (hasWeekly) {
-                        title = `📊 AI 周报（第${weeklyMonthData[day].replace('weekly-2026-W','')}周）`;
-                        url = weeklyUrl;
+                        // 仅周报
+                        const title = `📊 AI 周报（第${weeklyMonthData[day].replace('weekly-2026-W','')}周）`;
+                        html += `<div class="${classes}" onclick="window.open('${weeklyUrl}', '_blank')" title="${title}">${day}</div>`;
                     } else {
-                        title = `${currentMonth}月${day}日 AI日报`;
+                        // 仅日报
+                        const title = `${currentMonth}月${day}日 AI日报`;
+                        html += `<div class="${classes}" onclick="window.open('${reportUrl}', '_blank')" title="${title}">${day}</div>`;
                     }
-                    if (isToday) title += '（今天）';
-                    html += `<div class="${classes}" onclick="window.open('${url}', '_blank')" title="${title}">${day}</div>`;
                 } else {
                     html += `<div class="${classes}">${day}</div>`;
                 }
@@ -3793,6 +3914,32 @@
         renderCalendar();
         
         // ============ 知识库架构功能 ============
+        
+        // 日历日期选择菜单（日报/周报二选一）
+        let activeMenu = null;
+        
+        function showDayMenu(el, dailyUrl, weeklyUrl, month, day) {
+            // 关闭已打开的菜单
+            if (activeMenu) {
+                activeMenu.classList.remove('visible');
+            }
+            
+            const menu = el.querySelector('.calendar-day-menu');
+            if (menu) {
+                menu.classList.add('visible');
+                activeMenu = menu;
+            }
+        }
+        
+        // 点击空白处关闭菜单
+        document.addEventListener('click', function(e) {
+            if (activeMenu && !e.target.closest('.calendar-day')) {
+                activeMenu.classList.remove('visible');
+                activeMenu = null;
+            }
+        });
+        
+        // ============ 知识库架构功能（续） ============
         // 展开/折叠维度卡片
         function toggleKBDimension(node) {
             event.stopPropagation();
