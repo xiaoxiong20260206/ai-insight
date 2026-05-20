@@ -1215,7 +1215,7 @@
         .calendar-day-menu {
             display: none;
             position: absolute;
-            bottom: calc(100% + 8px);
+            top: calc(100% + 8px);
             left: 50%;
             transform: translateX(-50%);
             background: var(--color-bg-card);
@@ -1233,14 +1233,14 @@
             animation: fadeIn 0.15s ease-out;
         }
         
-        .calendar-day-menu::after {
+        .calendar-day-menu::before {
             content: '';
             position: absolute;
-            top: 100%;
+            bottom: 100%;
             left: 50%;
             transform: translateX(-50%);
             border: 6px solid transparent;
-            border-top-color: var(--color-border);
+            border-bottom-color: var(--color-border);
         }
         
         .calendar-day-menu-item {
@@ -1303,6 +1303,10 @@
         .calendar-day.has-report.has-weekly:hover {
             background: linear-gradient(135deg, var(--color-success) 0%, var(--color-info) 100%);
             color: white;
+        }
+        
+        .calendar-day.has-report.has-weekly:hover::after {
+            background: rgba(255, 255, 255, 0.8);
         }
         
         /* 周报入口卡片 */
@@ -2247,12 +2251,12 @@
                 <div class="stat-label">信息源</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value orange">26</div>
+                <div class="stat-value orange">28</div>
                 <div class="stat-label">深度调研</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value green">47</div>
-                <div class="stat-label">知识文档</div>
+                <div class="stat-value green">80+</div>
+                <div class="stat-label">日报 / 周报</div>
             </div>
         </div>
         
@@ -2407,8 +2411,7 @@
                         <span class="list-item-icon">📅</span>
                         <div class="list-item-content">
                             <div class="list-item-title">2026年5月20日 AI日报 <span style="background:#FEF2F2;color:#E11D48;font-size:11px;padding:2px 6px;border-radius:999px;margin-left:6px;">最新</span></div>
-                            <div class="list-item-desc">Google I/O 2026 Day1 · AI编程市场85亿美元，Cursor/C · ChatGPT接入银行账户，AI进入个人 · DeepMind 80-90M收购Con</div>
-                            <div class="list-item-desc">Google I/O 2026 Day1 · AI编程市场85亿美元，Cursor/C · ChatGPT接入银行账户，AI进入个人 · DeepMind 80-90M收购Con</div>
+                            <div class="list-item-desc">Google I/O 2026 Day1 · AI编程市场85亿美元 · ChatGPT接入银行账户 · DeepMind 80-90M收购Hugging Face部分</div>
                         </div>
                         <span class="list-item-arrow">→</span>
                     </a>
@@ -3694,7 +3697,7 @@
                         <div style="width: 44px; height: 44px; background: linear-gradient(135deg, #7C3AED 0%, #059669 100%); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 22px; box-shadow: 0 3px 8px rgba(124, 58, 237, 0.25);">🔮</div>
                         <div>
                             <div style="font-size: 17px; font-weight: 700; color: var(--color-text-primary); letter-spacing: -0.01em;">AI洞察的本质洞察</div>
-                            <div style="font-size: 12px; color: var(--color-text-muted);">Meta-Insight v2.0 · 对AI本身的理解 · 2026-03-06更新</div>
+                            <div style="font-size: 12px; color: var(--color-text-muted);">Meta-Insight v2.0 · 对AI本身的理解 · 持续迭代</div>
                         </div>
                         <span style="margin-left: auto; font-size: 11px; padding: 3px 10px; background: linear-gradient(135deg, #7C3AED, #059669); color: white; border-radius: var(--radius-full); font-weight: 600;">元认知</span>
                     </div>
@@ -3732,7 +3735,7 @@
                 <span>AI洞察 · 持续追踪 · 深度洞察</span>
             </div>
             <p>
-                AI洞察 · 持续追踪AI行业动态
+                AI洞察 · 持续追踪AI行业动态 · <a href="https://xiaoxiong20260206.github.io/ai-insight-public/" target="_blank">外部版入口 →</a>
             </p>
         </footer>
     </div>
