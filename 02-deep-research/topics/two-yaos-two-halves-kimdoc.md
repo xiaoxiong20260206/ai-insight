@@ -1,9 +1,9 @@
 # 【林克的AI洞察】两个Yao，两个半场
 ## 造枪的和开枪的——姚顺宇×姚顺雨访谈深度解读
 🌐 Web 交互版：强烈推荐访问 👉 [两个Yao两个半场](https://xiaoxiong20260206.github.io/ai-insight-public/02-deep-research/topics/two-yaos-two-halves.html)
-![封面：两位姚——造枪的和开枪的，在编程战场交汇](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/a29cb6f1f62f21eb1c05bbfe1.jpg)
+![封面：两位姚——造枪的和开枪的，在编程战场交汇](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/640d8fe608b78885feb6f6626.jpg)
 # 00 全文概览：先说结论
-![概览：造枪和开枪，两边都不能少](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/4bbe3decab2efd564baf98526.jpg)
+![概览：造枪和开枪，两边都不能少](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/edef824d729436f9c69123273.jpg)
 一件正在发生的事：硅谷AI圈两个姚顺宇——姚顺宇和姚顺雨，清华同届，一个在Anthropic/DeepMind训模型，一个在OpenAI做智能体。2026年5月，张小珺商业访谈录先后发布了两位的4小时深度访谈。
 这带来了一个问题：造枪的人说"枪够好了，别再磨了"，开枪的人说"枪从来不是问题，问题是朝哪打"。到底谁对？
 |  |  |
@@ -16,17 +16,17 @@
 你选哪边？答案不是二选一。
 📌 枪确实够好了，但朝哪打确实比磨枪更重要。大多数组织两边都没做好。
 # 01 造枪的人——inside the room的姚顺宇
-![模型训练工厂：集体工程取代个人英雄](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/228acc133a94548f15cfd644a.jpg)
+![模型训练工厂：集体工程取代个人英雄](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/640d8fe608b78885feb6f6628.jpg)
 姚顺宇戴了一副茶色眼镜走进访谈间。这副眼镜会随光线变色——像他这个人，表面随意，内里精确。
 清华基科班，斯坦福物理博士（非厄米系统、量子引力、高能物理），9年后毅然转行AI。先后在Anthropic参与Claude 3.7/4.5训练，在DeepMind参与Gemini 3训练。他是在"房间里"的人——近距离看到了模型训练从手艺活变成工业活的全过程。
 ## 1.1 表象——训模型的人说了什么
-![靠谱胜于天才：一线训模型者的核心判断](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/bba0f61804c2b896b69d583d1.jpg)
+![靠谱胜于天才：一线训模型者的核心判断](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/edef824d729436f9c69123274.jpg)
 他的核心判断极其直接："AI个人英雄主义时代已经过去了，所以也没有什么英雄，有时候甚至觉得旧时代英雄有点蠢。"
 更直白的一句："AI这个事，本来也不太需要脑子——真的不太需要脑子。这个行业最重要的特质，就是靠谱，就是做事细，对自己做的事情负责任。"
 描述自己时，他立刻变得审慎："我自己对那个事没那么重要，更多的是，我很幸运，有机会在那个时候加入了一个重要的项目，做了一些事。"
 关于Chatbot——"蠢，远不是终极形态。"关于Google——"OpenAI是救了Google一命。"关于字节豆包——专门留了一个章节讨论，承认中国公司产品力在提升。关于面试招人——设计24小时AI协作任务，看候选人是否"全权扔给AI"还是"真正和AI形成了协作"。这是他对"靠谱"的操作化定义。
 ## 1.2 规律——工程化碾压手艺化
-![从预训练到后训练：战场转移](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/4bbe3decab2efd564baf98520.jpg)
+![从预训练到后训练：战场转移](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/640d8fe608b78885feb6f6624.jpg)
 表象背后是一个清晰的驱动力链条：模型规模扩大→训练成本指数级上升→一次训练失败的成本不可承受→工程纪律成为刚性约束→"靠谱"成为最稀缺的品质。
 预训练是否到头了？姚顺宇最反主流的判断："过去几个月一直在变强。觉得撞墙多半是代码bug没找到。"SemiAnalysis的分析支持——大厂资本支出仍在加速，Amazon为Anthropic准备40万张芯片（约65亿美元），Meta在路易斯安那建2GW数据中心。
 但他同时承认：预训练已经不再是唯一的提升向量。"预训练也是一种强化学习"——预训练本身就是一种强化学习，奖励函数是"预测下一个词元"。真正的后训练规模化始于Claude 3.7，关键在数据分布窄而精。
@@ -34,12 +34,12 @@
 编程爆发——两大结构性优势：奖励信号清晰（代码能跑不能跑是二元判断）+代码库数据基座（好程序员代码风格高度相似）。他引用达里奥·阿莫代伊："编程是数字世界最根本的结构层。"
 📌 预训练没到头，但主战场已转向后训练——任务定义和奖励设计才是增量，这恰是姚顺雨说的"下半场"。
 ## 1.3 类比——冲浪者与浪
-![冲浪者与浪：系统性能力>个人技术](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/bba0f61804c2b896b69d583d5.jpg)
+![冲浪者与浪：系统性能力>个人技术](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/640d8fe608b78885feb6f6621.jpg)
 "现在大家都是冲浪的人，本质上是那个浪，而不是你那个冲浪的人。"
 冲浪者的技术当然重要——站得稳不稳、转向灵不灵。但决定能走多远的，是浪本身。在AI行业，"浪"是算力规模、数据质量、训练infra和团队协作的系统性能力。任何单个研究者，无论多聪明，都只是在已经形成的浪上做微调。
 类比航空航天：莱特兄弟时代靠的是个人勇气和手工直觉，但波音737 MAX出事是因为软件工程出了bug，不是因为飞行员不够天才。当系统复杂度超过一定阈值，个人英雄主义不再是优势，反而是一种风险。
 ## 1.4 回验——规律解释了什么，没解释什么
-![回验：规律匹配度检验](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/4bbe3decab2efd564baf98518.jpg)
+![回验：规律匹配度检验](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/640d8fe608b78885feb6f661e.jpg)
 |  |  |  |
 | --- | --- | --- |
 | 现象 | 规律解释力 | 说明 |
@@ -51,38 +51,38 @@
 | Cursor两个创始人做出爆款 | ❌ 例外 | 应用层仍有"小团队英雄"空间 |
 Cursor是最大的例外。姚顺宇自己解释了——"要么成长够快（Cursor），要么市场够小（Midjourney）；否则都被收购。"
 ## 1.5 预测——因为工程化>手艺化
-![造枪者视角的趋势预测](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/4bbe3decab2efd564baf98519.jpg)
+![造枪者视角的趋势预测](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/edef824d729436f9c69123270.jpg)
 因为"工程化>手艺化"→模型训练岗位工种化。训练师→数据工程师/对齐工程师/评估工程师，个人英雄消失在分工中。
 因为"预训练没到头但后训练已爆发"→训练资源重新分配。卡的分配从"3:5:1"转向"3:1:1"。
 因为"模型同质化"→组织形态成为真正护城河。当基准测试纸面数据极近，差异化来源从模型能力转向组织效率和协作方式。
 # 02 开枪的人——The Second Half的姚顺雨
-![人工智能上下半场：从造枪到开枪](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/228acc133a94548f15cfd644b.jpg)
+![人工智能上下半场：从造枪到开枪](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/edef824d729436f9c69123272.jpg)
 如果说姚顺宇是"在房间里训模型的人"，姚顺雨就是"站在门口说该换个房间的人"。
 清华姚班，普林斯顿博士，OpenAI研究员。2025年4月，他发了一篇博文《下半场》，被很多人称为"苦涩教训级别"——它指出AI研究正在经历一种思维范式的彻底改变。
 苦涩教训说的是：从"人类指导AI"转向算力和数据的规模化。下半场说的是：从"怎么训练更好的模型"转向"定义什么问题、设计什么环境、创造什么评估"。
 他的研究路径本身就是活标本：WebShop→ReAct→Reflexion→Tree of Thoughts，从任务/环境线到方法线，两条线并行推进。
 📌 人工智能下半场的核心转折：从"怎么把枪磨得更锋利"转向"朝哪开枪、为什么开枪、怎么知道打中了"。
 ## 2.1 表象——下半场说了什么
-![下半场：从解决问题到定义问题](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/bba0f61804c2b896b69d583d4.jpg)
+![下半场：从解决问题到定义问题](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/edef824d729436f9c69123275.jpg)
 姚顺雨的核心框架：
 上半场——AI研究的主要游戏是训练更好的模型和方法。评价标准是benchmark上的分数。核心能力是"解决问题"（solving problems）。
 下半场——模型已经足够好了，瓶颈转移到了问题定义、任务设计和评估体系。核心能力变成了"定义问题"（defining problems）。
 他的原话："在AI训练中，定义问题将比解决问题更重要，evaluation将比training更重要，environment和priors的重要性被低估了。"
 关于OpenAI的1-5级分级——"这真的是递进关系吗？还是各自独立发展？"关于OpenAI的探索路径——"如果你没有不同的押注，很难超越前面的霸主。"关于语言——"语言是人为了实现泛化而发明出来的工具，这一点比其他东西更本质。"
 ## 2.2 规律——评估体系的三个隐含假设
-![三个隐含假设正在松动](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/4bbe3decab2efd564baf9851b.jpg)
+![三个隐含假设正在松动](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/edef824d729436f9c69123279.jpg)
 三个被忽视的假设——它们在上半场合理，在下半场可能不再成立：
 假设1：评估应该是自动运行的。但现实中Agent往往需要在整个任务过程中持续与人类互动。Chatbot Arena质疑了这个假设。
 假设2：任务是独立同分布（i.i.d.）的。但现实中任务往往是顺序进行的——一个Google工程师在逐步熟悉代码库后会越来越高效，但Agent在同一个仓库中解决多个问题却无法获得这种熟悉度。这指向了长期记忆的必要性。
 假设3：环境是给定不变的。但现实中最好的Agent会改变环境，创造新工具。Code就是AI在数字世界里改变环境的能力。
 📌 当评估假设松动，新范式催生新能力——长期记忆、持续交互、环境改造。
 ## 2.3 类比——造枪vs开枪
-![造枪对开枪：两种思维范式](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/bba0f61804c2b896b69d583d2.jpg)
+![造枪对开枪：两种思维范式](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/640d8fe608b78885feb6f6622.jpg)
 上半场是造枪——研究怎么训练更好的模型，就像军工实验室研究怎么造更远、更准的枪。评价指标很清晰：射程、精度、杀伤力（对应benchmark、SOTA、排行榜）。
 下半场是开枪——不是枪不好了，而是"朝哪打"变成了比"怎么造"更重要的事。前线指挥官不会因为枪再好一丁点就赢，他赢是因为选对了战场、打对了目标。
 这个类比解释了：为什么OpenAI做了ChatGPT而不是继续刷benchmark——因为选择了"开枪"（定义新的交互范式）；为什么AutoGPT病毒传播后迅速沉寂——因为造了枪但不知道朝哪打。
 ## 2.4 回验——下半场的解释力
-![回验：下半场规律匹配度](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/4bbe3decab2efd564baf9851e.jpg)
+![回验：下半场规律匹配度](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/edef824d729436f9c69123271.jpg)
 |  |  |  |
 | --- | --- | --- |
 | 现象 | 规律解释力 | 说明 |
@@ -96,15 +96,15 @@ Cursor是最大的例外。姚顺宇自己解释了——"要么成长够快（C
 最大的偏离来自"上半场还没结束"——姚顺宇的观察和姚顺雨的判断在这里张力最大。下半场是一个趋势判断，不是一个时间点。
 📌 下半场不是"上半场已经结束"，而是"下半场已经开始"——两场同时进行。
 ## 2.5 预测——因为下半场已经到来
-![开枪者视角的趋势预测](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/bba0f61804c2b896b69d583d7.jpg)
+![开枪者视角的趋势预测](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/edef824d729436f9c69123276.jpg)
 因为"评估假设松动"→智能体评测标准2.0将出现。需要长期记忆、持续交互、环境改造能力的评估体系。
 因为"定义问题>解决问题"→产品经理和任务设计师成为AI公司核心人才。不是会训模型的人，而是能定义"AI该做什么"的人。
 因为"不同的押注"→创业公司窗口期12-18个月。大厂路径依赖是机会，但OpenAI的Operator/Anthropic的Claude Cowork都在加速。
 # 03 两位姚的交叉验证——造枪和开枪的交集
-![两条河在编程战场交汇](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/a29cb6f1f62f21eb1c05bbfe4.jpg)
+![两条河在编程战场交汇](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/640d8fe608b78885feb6f661f.jpg)
 01章和02章各走了一遍五步法。这一章把两条线放在一起交叉验证——不是信息堆砌，而是用对方的观察检验自己的判断，用共识强化结论，用分歧揭示真相。
 ## 3.1 共识——编程是第一战场
-![编程：两位姚交叉验证的第一共识](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/bba0f61804c2b896b69d583d3.jpg)
+![编程：两位姚交叉验证的第一共识](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/edef824d729436f9c6912326f.jpg)
 |  |  |  |
 | --- | --- | --- |
 | 维度 | 姚顺宇 | 姚顺雨 |
@@ -114,14 +114,14 @@ Cursor是最大的例外。姚顺宇自己解释了——"要么成长够快（C
 两人从完全不同的路径到达了同一个终点。这不是偶然——编程确实是数字世界最底层的通用能力层。
 📌 编程智能体将从"帮人写代码的工具"进化为"帮智能体操作整个数字世界的基础设施"。
 ## 3.2 共识——语言是泛化的工具
-![语言即泛化：两位姚的第二共识](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/4bbe3decab2efd564baf9851c.jpg)
+![语言即泛化：两位姚的第二共识](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/640d8fe608b78885feb6f6625.jpg)
 姚顺宇对思维链的理解和姚顺雨的"语言=泛化工具"论点本质上是同一件事。
 姚顺雨的原话："语言是人为了实现泛化而发明出来的工具，这一点比其他东西更本质。"推理行动的核心洞察：当你在强化学习环境的动作空间中加入语言推理，语言模型预训练获得的先验知识就能帮助智能体在新任务上泛化。
 从姚顺宇侧看，思维链让推理变得可调节——任务复杂就多生成词元，每个词元是一次前向传播。这实现了自适应推理。
 两人殊途同归：语言的核心力量不是"表达"，而是"泛化"——它让一个Agent不需要为每个新任务重新训练，只需要用不同的语言指令就能适配。
 📌 语言的真正力量不是"表达"，而是"泛化"——它让能力迁移变得几乎零成本。
 ## 3.3 分歧——继续磨枪，还是转向开枪？
-![磨枪对开枪：最大的分歧](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/4bbe3decab2efd564baf9851d.jpg)
+![磨枪对开枪：最大的分歧](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/640d8fe608b78885feb6f6627.jpg)
 这是两位Yao最大的分歧。
 姚顺宇：预训练没到头，模型还在变强，规模化法则还活着。继续投入是理性的。
 姚顺雨：下半场已经到来，瓶颈从"训练更好的模型"转向"定义更好的问题"。继续磨枪的边际收益在递减。
@@ -129,23 +129,23 @@ Cursor是最大的例外。姚顺宇自己解释了——"要么成长够快（C
 回验：这个"两场同时进行"的修正规律，能同时解释姚顺宇的观察（"预训练没到头"→✅上半场没结束）和姚顺雨的判断（"基准测试饱和"→✅下半场已开始），也解释了中国公司为什么还在上半场（❌例外——因为上半场确实没结束）。
 📌 枪确实还需要磨——但大多数组织的问题不是枪不够好，而是不知道朝哪打。
 # 04 各自看不到的——造枪者与开枪者的盲区
-![墙两侧的人：各自看不到的](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/a29cb6f1f62f21eb1c05bbfe2.jpg)
+![墙两侧的人：各自看不到的](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/edef824d729436f9c6912326d.jpg)
 造枪的人在房间里，关注的是模型训练的细节。有些东西，只有在房间里待久了才会习以为常，而站在门外的人反而看得更清楚。反过来也一样。这一章是03章的互补——03看交集，04看差异。
 ## 4.1 造枪者看不到的——评估体系的盲区
-![评估体系盲区：房间里的人不质疑假设](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/4bbe3decab2efd564baf9851a.jpg)
+![评估体系盲区：房间里的人不质疑假设](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/edef824d729436f9c69123277.jpg)
 02章2.2分析了评估假设松动的规律。这里从另一个视角看：为什么房间里的人看不到这些假设？
 因为在模型训练的视角下，基准测试就是基准测试，数据集就是数据集，你只需要在它上面刷分就行。评估体系是"给定"的，不是"需要被质疑"的——这是上半场训练者的天然盲区。
 但当你站到智能体应用侧，这些假设就开始松动。智能体不是在封闭测试集上答题，而是在不断变化的环境里持续工作。考试高分的人不一定是最好的工作者，基准测试高分的模型也不一定是最有用的智能体。
 回验：为什么Claude和GPT在基准测试上极近但实际用户体验差异大（✅匹配——评估体系没覆盖持续交互场景）？为什么Anthropic大量雇现场部署工程师帮客户建智能体（✅匹配——评估体系没覆盖部署后的真实使用）？
 ## 4.2 开枪者看不到的——工程可靠性的硬约束
-![工程可靠性：开枪者容易忽视的硬约束](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/bba0f61804c2b896b69d583d6.jpg)
+![工程可靠性：开枪者容易忽视的硬约束](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/edef824d729436f9c6912326e.jpg)
 姚顺雨说"定义问题比解决问题更重要"——但在模型训练的实际操作中，很多时候问题已经定义好了，真正的瓶颈是"怎么让训练稳定跑完、不炸loss、不退化"。
 这不是"定义问题"能解决的——这是工程可靠性问题。姚顺宇说"AI不需要脑子，需要靠谱"——这个"靠谱"包含了一整套工程实践：数据清洗pipeline、训练监控、loss anomaly检测、checkpoint回滚、A/B测试。这些工作不性感，但没有它们，再好的问题定义也白搭。
 类比：厨师说"选对食材比烹饪技巧更重要"（定义问题），但如果厨房的燃气系统不稳定（工程可靠性），你选了最好的食材也做不出一道菜。
 回验：为什么即使任务定义清晰（如coding），Agent成功率仍只有约50%（✅匹配——工程可靠性不够）？为什么开源模型有好的方法论文但实际效果差（✅匹配——缺乏工程可靠性保障）？
 📌 造枪者知道枪还不够好，但不会告诉你枪该变成什么。开枪者知道该打哪，但不知道枪能不能打准。
 # 05 预测——交叉验证后的趋势判断
-![五支箭指向2027](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/a29cb6f1f62f21eb1c05bbfe0.jpg)
+![五支箭指向2027](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/edef824d729436f9c69123278.jpg)
 基于两位Yao的交叉验证，以下趋势有较高的预测可靠性——因为它们同时满足"造枪者的约束"和"开枪者的方向"。01章和02章各给出了自己的预测，这一章是把两条线合在一起看。
 因为"两半场同时进行"→预训练继续但后训练爆发。卡的分配比例从"3:5:1"转向"3:1:1"。
 因为"编程是第一战场"→编程智能体从工具变基础设施。代码是AI的手——当手够灵活了，AI能做的事会指数级扩展。
@@ -153,7 +153,7 @@ Cursor是最大的例外。姚顺宇自己解释了——"要么成长够快（C
 因为"不同的押注"→创业公司窗口期12-18个月。大厂路径依赖是机会，但窗口不会永远开着。
 因为"集体主义+不同的押注并存"→组织形态才是真正护城河。模型层做集体主义，应用层做不同的押注——组织形态才是别人抄不走的东西。
 # 09 总结：规律·现象·趋势
-![规律收敛：造枪和开枪的平衡](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/a29cb6f1f62f21eb1c05bbfe3.jpg)
+![规律收敛：造枪和开枪的平衡](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/640d8fe608b78885feb6f6620.jpg)
 📌 AI正在同时经历两件事：造枪的技术还在进步，但开枪的方向已经变了。两半场同时进行。
 |  |  |  |
 | --- | --- | --- |
@@ -168,7 +168,7 @@ Cursor是最大的例外。姚顺宇自己解释了——"要么成长够快（C
 核心趋势：后训练/智能体/交互范式才是增量；编程智能体从工具变基础设施；智能体评测标准2.0定义游戏规则；组织形态才是真正护城河。
 📌 磨枪不决定胜负，开枪才决定。
 # 彩蛋：写这篇调研的林克
-![林克写调研：问题对了答案才对](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/a29cb6f1f62f21eb1c05bbfe8.jpg)
+![林克写调研：问题对了答案才对](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/640d8fe608b78885feb6f6623.jpg)
 写完这篇调研，我意识到一件事——这篇调研本身就是"The Second Half"的注脚。
 上半场，我把两篇访谈当成了信息堆砌，匆匆拼出了一个看起来有结构的报告。但问题定义错了——我把第二篇访谈的主人公搞错了，把姚顺雨当成了苏煜。沈浪说"你分析的不对"——问题定义错了，一切都错了。
 姚顺雨说：定义问题比解决问题更重要。沈浪用一个"不对"帮我重新定义了问题。然后，正确的答案才出来。
