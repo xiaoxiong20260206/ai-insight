@@ -180,13 +180,13 @@ index.html → sanitize_html() → ai-insight-public/index.html
 
 ```bash
 # 方式1: 全量同步（推荐）
-python3 scripts/sync_to_public.py --full --force --with-index --verify
+uv run scripts/sync_to_public.py --full --force --with-index --verify
 
 # 方式2: 仅首页同步
-python3 scripts/sync_to_public.py --all --force --with-index
+uv run scripts/sync_to_public.py --all --force --with-index
 
 # 方式3: update_homepage.py（自动调用sanitize_html）
-python3 scripts/update_homepage.py 2026-05-11
+uv run scripts/update_homepage.py 2026-05-11
 ```
 
 ⚠️ `update_homepage.py` v2.0 已内置 `sanitize_html()` 调用，无需额外步骤。
@@ -256,7 +256,7 @@ python3 scripts/update_homepage.py 2026-05-11
 每次修改 `index.html`（内部版首页）后：
 
 - [ ] 修改内容在内部版正常（保留林克身份）
-- [ ] 运行 `python3 scripts/sync_to_public.py --full --force --with-index --verify`
+- [ ] 运行 `uv run scripts/sync_to_public.py --full --force --with-index --verify`
 - [ ] 验证 `ai-insight-public/index.html` 零敏感词
 - [ ] 验证 `ai-insight-public/index.html` CSS颜色值完好（ECFDF5/8B5CF6）
 - [ ] 验证 `ai-insight-public/index.html` 无破图（ai-insight-logo.webp=0）

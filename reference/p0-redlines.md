@@ -8,14 +8,14 @@
 ## 🔴 红线1：续接必须先 resume（无例外）
 
 ```bash
-python3 scripts/ai_daily_orchestrator.py resume --date YYYY-MM-DD
+uv run scripts/ai_daily_orchestrator.py resume --date YYYY-MM-DD
 ```
 读完resume输出后，**验证**前序数据的合理性，不能盲目继续。
 
 ## 🔴 红线2：KIM卡片必须用脚本生成（禁止手写）
 
 ```bash
-python3 scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/card.json --with-summary
+uv run scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/card.json --with-summary
 # 然后读取 card.json，用 message(channel=kim, kimMixCard=<card>) 发送
 ```
 脚本自带校验：6锚点完整性 + kimMd格式 + {{message}}扫描 + URL格式。手写=必错=空卡片。

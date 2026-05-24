@@ -268,7 +268,7 @@ Step 4: 梯队分级（复用现有框架）
 3. people/index.md → 新增核心人物
 4. 版本号全部递增
 5. ⭐ 更新 scripts/update_tracking.py 中对应的数据
-6. ⭐ 运行 python3 scripts/update_tracking.py → 同步首页HTML
+6. ⭐ 运行 uv run scripts/update_tracking.py → 同步首页HTML
 7. ⭐ 手动更新 index.html 统计卡片数字 (.stats-grid)
 8. git add 全部文件 → 单次commit → push
 
@@ -288,7 +288,7 @@ Step 4: 梯队分级（复用现有框架）
 - [ ] people/index.md 核心人物已补充
 - [ ] 快速索引已更新且无重复
 - [ ] **scripts/update_tracking.py 脚本数据已同步更新**
-- [ ] **已运行 `python3 scripts/update_tracking.py` 同步首页HTML**
+- [ ] **已运行 `uv run scripts/update_tracking.py` 同步首页HTML**
 - [ ] **index.html 统计卡片数字已手动更新**
 - [ ] **本地预览验证追踪体系展开内容正确**
 - [ ] 三文件 + 首页 原子提交

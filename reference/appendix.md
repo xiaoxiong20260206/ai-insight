@@ -4,17 +4,17 @@
 
 | 脚本 | 用途 | 命令 |
 |------|------|------|
-| `ai_daily_orchestrator.py` | **日报编排(状态+finalize+push) v1.1** | `python3 scripts/ai_daily_orchestrator.py status` |
-| `build_insight_mixcard.py` | 统一mixCard生成(日报/周报/调研/产品) | `python3 scripts/build_insight_mixcard.py daily --date YYYY-MM-DD` |
-| `build_insight_mixcard.py weekly` | 周报mixCard生成 | `python3 scripts/build_insight_mixcard.py weekly --date YYYY-Www` |
-| `send_deep_research_card.py` | 深度调研KIM推送 | `python3 scripts/send_deep_research_card.py` |
-| `daily_quality_gate.py` | **日报质量门(19项检查) v10.0** | `python3 scripts/daily_quality_gate.py` |
-| `gen_daily_json.py` | 生成JSON数据 | `python3 scripts/gen_daily_json.py` |
-| `gen_daily_html.py` | 生成日报HTML页面 | `python3 scripts/gen_daily_html.py` |
+| `ai_daily_orchestrator.py` | **日报编排(状态+finalize+push) v1.1** | `uv run scripts/ai_daily_orchestrator.py status` |
+| `build_insight_mixcard.py` | 统一mixCard生成(日报/周报/调研/产品) | `uv run scripts/build_insight_mixcard.py daily --date YYYY-MM-DD` |
+| `build_insight_mixcard.py weekly` | 周报mixCard生成 | `uv run scripts/build_insight_mixcard.py weekly --date YYYY-Www` |
+| `send_deep_research_card.py` | 深度调研KIM推送 | `uv run scripts/send_deep_research_card.py` |
+| `daily_quality_gate.py` | **日报质量门(19项检查) v10.0** | `uv run scripts/daily_quality_gate.py` |
+| `gen_daily_json.py` | 生成JSON数据 | `uv run scripts/gen_daily_json.py` |
+| `gen_daily_html.py` | 生成日报HTML页面 | `uv run scripts/gen_daily_html.py` |
 | `deploy_daily.sh` | 日报一键部署(**含orchestrator状态验证**) | `bash scripts/deploy_daily.sh` |
-| `sync_to_external.py` | 外部版同步 | `python3 scripts/sync_to_external.py --full --verify` |
-| `update_tracking.py` | 追踪体系同步 | `python3 scripts/update_tracking.py` |
-| `fetch_arxiv.py` | **arXiv学术论文监控(v9.3新增)** | `python3 scripts/fetch_arxiv.py --days 1` |
+| `sync_to_external.py` | 外部版同步 | `uv run scripts/sync_to_external.py --full --verify` |
+| `update_tracking.py` | 追踪体系同步 | `uv run scripts/update_tracking.py` |
+| `fetch_arxiv.py` | **arXiv学术论文监控(v9.3新增)** | `uv run scripts/fetch_arxiv.py --days 1` |
 
 ---
 
