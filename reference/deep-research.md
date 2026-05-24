@@ -51,7 +51,7 @@ Step 6: KIM推送 → build_insight_mixcard.py research
 ### 搜索策略
 - 海外: tavily-search（3-5轮精准搜索）
 - 国内: quark-search + 微信账号搜索
-- 学术: `python3 scripts/fetch_arxiv.py`（可选）
+- 学术: `uv run scripts/fetch_arxiv.py`（可选）
 - **时间锚定**: 搜索关键词必须含日期（"2026 Q1"/"最近3个月"），禁止泛日期
 
 ### 迭代搜索机制（P1，深度调研的核心保障）
@@ -136,7 +136,7 @@ Step 6: KIM推送 → build_insight_mixcard.py research
 
 ### MixCard实现规则（P0强制）
 
-1. **必须用脚本生成+校验**：`python3 scripts/build_insight_mixcard.py research --slug <slug> --title ... --subtitle ...`
+1. **必须用脚本生成+校验**：`uv run scripts/build_insight_mixcard.py research --slug <slug> --title ... --subtitle ...`
 2. **如果脚本不支持所需内容**：先扩展脚本参数，再生成。❌禁止手写MixCard JSON绕过脚本
 3. **按钮URL**：绿按钮指向报告HTML页面，蓝按钮指向AI洞察首页`https://xiaoxiong20260206.github.io/ai-insight/`
 4. **推送时不传message字段**（会导致{{message}}泄露）
@@ -243,10 +243,10 @@ Step 6: KIM推送 → build_insight_mixcard.py research
 
 ```bash
 # 1. 同步到public/（内部版保留林克）
-python3 scripts/sync_to_public.py --full --force
+uv run scripts/sync_to_public.py --full --force
 
 # 2. 同步到外部版（自动脱敏+验证零敏感词）
-python3 scripts/sync_to_external.py --full --verify
+uv run scripts/sync_to_external.py --full --verify
 
 # 3. Git push内部版+外部版
 git add -A && git commit -m "📚 深度调研 <slug>" && git push origin main
@@ -258,7 +258,7 @@ cd ../ai-insight-public && git add -A && git commit -m "📚 深度调研 <slug>
 ## Step 5: 首页更新
 
 ```bash
-python3 scripts/update_homepage.py <date> --type weekly \
+uv run scripts/update_homepage.py <date> --type weekly \
   --week-title "深度调研·<title>" \
   --week-desc "<一句话描述>" \
   --week-month YYYY-MM --week-day DD
@@ -269,7 +269,7 @@ python3 scripts/update_homepage.py <date> --type weekly \
 ## Step 6: KIM推送
 
 ```bash
-python3 scripts/build_insight_mixcard.py research --slug <slug> --output /tmp/card.json --with-summary
+uv run scripts/build_insight_mixcard.py research --slug <slug> --output /tmp/card.json --with-summary
 # 然后读取 card.json，用 message(channel=kim, kimMixCard=<card>) 发送
 ```
 

@@ -598,10 +598,10 @@ assert path_depth >= 2, f"URL太浅({path_depth})，可能是首页: {url}"
 
 ```bash
 # 运行所有检查（19项，含v10.0 capability_update检查）
-python3 scripts/daily_quality_gate.py YYYY-MM-DD
+uv run scripts/daily_quality_gate.py YYYY-MM-DD
 
 # 运行并自动修复可修复项
-python3 scripts/daily_quality_gate.py YYYY-MM-DD --fix
+uv run scripts/daily_quality_gate.py YYYY-MM-DD --fix
 
 # 检查项 (19项):
 # 1. JSON文件存在性 (error)

@@ -46,18 +46,18 @@ export:
 | `tavily-search` | 海外搜索 |
 | `quark-search` | 国内搜索 |
 
-## P0红线（8条核心红线）
+## P0红线（9条核心红线）
 
-> ⚠️ 只有8条需要Agent自觉遵守。其余校验已内置到脚本。
+> ⚠️ 只有9条需要Agent自觉遵守。其余校验已内置到脚本。
 
 ### 1. 续接必须先 resume — 无例外
 ```bash
-python3 scripts/ai_daily_orchestrator.py resume --date YYYY-MM-DD
+uv run scripts/ai_daily_orchestrator.py resume --date YYYY-MM-DD
 ```
 
 ### 2. KIM卡片必须用脚本生成 — 禁止手写
 ```bash
-python3 scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/card.json --with-summary
+uv run scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/card.json --with-summary
 ```
 
 ### 3. mixCard只推一次 — 禁止重复
@@ -85,6 +85,12 @@ ls user-skills/sl-ai-insight/.git/HEAD && ssh -o ConnectTimeout=5 -T git@github.
 - `reference/kim-doc/writing-style.md`（KIM Doc写作标准）
 - `02-deep-research/topics/colleague-skill-anti-distill-2026.html`（标杆HTML源码）
 - 不读完不能动手。历史上因不读规范就动手导致反复修改8+轮。
+
+### 9. 所有Python命令必须用 uv run — 禁止 python/python3
+- `uv run scripts/xxx.py` ✅
+- `python3 scripts/xxx.py` ❌ — 容器中没有python命令，会直接报错
+- `uv run skills/quark-search/scripts/agent.py news "关键词"` ✅
+- `python skills/quark-search/scripts/agent.py news "关键词"` ❌
 
 ---
 

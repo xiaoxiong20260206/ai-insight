@@ -84,7 +84,7 @@ week_num = monday.isocalendar()[1]
 ## Step 4: 首页更新（统一脚本）
 
 ```bash
-python3 scripts/update_homepage.py YYYY-WXX --type weekly \
+uv run scripts/update_homepage.py YYYY-WXX --type weekly \
   --week-title "第XX周（MM/DD - MM/DD）" \
   --week-desc "覆盖N条资讯 · 事件1 · 事件2" \
   --week-month YYYY-MM --week-day DD
@@ -99,7 +99,7 @@ python3 scripts/update_homepage.py YYYY-WXX --type weekly \
 git add -A && git commit -m "📊 AI周报 YYYY-WXX" && git push origin main
 
 # 外部版同步（自动脱敏）
-python3 scripts/sync_to_external.py --full --verify
+uv run scripts/sync_to_external.py --full --verify
 ```
 
 ### 四位置验证
@@ -113,7 +113,7 @@ python3 scripts/sync_to_external.py --full --verify
 
 ```bash
 # 1. 生成mixCard（脚本自带6锚点校验+kimMd格式校验）
-python3 scripts/build_insight_mixcard.py weekly --date YYYY-WXX --output /tmp/card.json --with-summary
+uv run scripts/build_insight_mixcard.py weekly --date YYYY-WXX --output /tmp/card.json --with-summary
 
 # 2. 先私发预览给 shenlang03
 # message(channel=kim, kimMixCard=<card>, target="username:shenlang03")

@@ -92,7 +92,7 @@
 if [ "${SKIP_GATE:-0}" = "1" ]; then
     echo "  ⏭️ 由orchestrator调用，外部版同步由orchestrator负责，此处跳过"
 else
-    python3 scripts/sync_to_external.py --full --verify
+    uv run scripts/sync_to_external.py --full --verify
 fi
 ```
 `SKIP_GATE=1` 本来的语义是"绕过质量门强制部署"，但经验#53修复双重同步时，把"跳过外部同步"的逻辑也绑定到了这个变量上。
@@ -116,7 +116,7 @@ fi
 if [ "${SKIP_EXTERNAL:-0}" = "1" ]; then
     echo "  ⏭️ SKIP_EXTERNAL=1，跳过外部版同步（由调用方明确控制）"
 else
-    python3 scripts/sync_to_external.py --full --verify
+    uv run scripts/sync_to_external.py --full --verify
 fi
 ```
 
@@ -143,7 +143,7 @@ fi
 | **第三层** | 微信 `real_url` 字段在部分结果中为带时间戳的临时 URL，未在传递给 subagent 前过滤 |
 
 ### 修复规则
-1. **会话恢复时**：先执行 `python3 scripts/ai_daily_orchestrator.py status` + 检查 `data/flags/step1-completed.flag` → 已存在则直接跳到 Step 2
+1. **会话恢复时**：先执行 `uv run scripts/ai_daily_orchestrator.py status` + 检查 `data/flags/step1-completed.flag` → 已存在则直接跳到 Step 2
 2. **微信链接过滤**：`real_url` 字段判断，`mp.weixin.qq.com/s?src=11&timestamp=` 开头的全部替换为 sogou 格式
 3. **subagent task 描述**：必须明确注明「禁止将临时微信URL写入JSON，必须转换为 sogou 格式」
 

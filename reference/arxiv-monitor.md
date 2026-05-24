@@ -17,22 +17,22 @@
 
 ```bash
 # 获取过去1天的AI论文
-python3 scripts/fetch_arxiv.py --days 1
+uv run scripts/fetch_arxiv.py --days 1
 
 # 获取过去7天论文摘要（适合周报）
-python3 scripts/fetch_arxiv.py --days 7 --summary
+uv run scripts/fetch_arxiv.py --days 7 --summary
 
 # 按关键词过滤
-python3 scripts/fetch_arxiv.py --keywords "agent" "LLM" "coding"
+uv run scripts/fetch_arxiv.py --keywords "agent" "LLM" "coding"
 
 # 输出JSON格式（供日报系统集成）
-python3 scripts/fetch_arxiv.py --days 1 --json --output data/arxiv-daily.json
+uv run scripts/fetch_arxiv.py --days 1 --json --output data/arxiv-daily.json
 ```
 
 ## 与日报集成
 
 日报搜索阶段可选调用 arXiv 监控：
-1. **Step 1.5 (可选)**: 执行 `python3 scripts/fetch_arxiv.py --days 1` 查看当日论文
+1. **Step 1.5 (可选)**: 执行 `uv run scripts/fetch_arxiv.py --days 1` 查看当日论文
 2. 如有高相关度论文（⭐⭐⭐及以上），可纳入日报"AI前沿"板块
 3. 论文信源标注为 `arXiv [cs.XX]`
 

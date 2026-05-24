@@ -20,7 +20,7 @@
 ## 同步命令
 
 ```bash
-python3 scripts/sync_to_external.py --full --verify
+uv run scripts/sync_to_external.py --full --verify
 ```
 
 ## P0规则
