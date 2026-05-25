@@ -1,884 +1,266 @@
 #!/usr/bin/env python3
-"""Rebuild W22 weekly HTML using W20's CSS template and structure."""
+# -*- coding: utf-8 -*-
+"""
+AI周报 HTML 生成器 — 从JSON动态生成
+====================================
+用法:
+  1. LLM填写 data/weekly-content-YYYY-WXX.json
+  2. uv run scripts/gen_weekly_html.py --date YYYY-WXX --input data/weekly-content-YYYY-WXX.json
+  3. 自动输出到 01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html + cp到public/
 
-W20_CSS_HEAD = """<!DOCTYPE html>
+自校验: ≥50KB + 5板块完整 + {{message}}扫描 + class名一致性
+"""
+
+import argparse
+import json
+import re
+import shutil
+import sys
+from datetime import datetime, timedelta
+from pathlib import Path
+
+BASE_DIR = Path(__file__).parent.parent
+TEMPLATE_CSS_FILE = BASE_DIR / "templates" / "daily-report-v3.css"
+TEMPLATE_JS_FILE = BASE_DIR / "templates" / "daily-report-v3.js"
+REPORT_DIR = BASE_DIR / "01-daily-reports"
+PUBLIC_DIR = BASE_DIR / "public"
+DATA_DIR = BASE_DIR / "data"
+INTERNAL_BASE = "https://xiaoxiong20260206.github.io/ai-insight"
+QINGSHUANG_SKILL_PATH = Path("/data/aime/48b01692-87fe-48a1-860d-a6ab789801e6/workspace/skills/qingshuang-research-style")
+QINGSHUANG_BASE_CSS = QINGSHUANG_SKILL_PATH / "references" / "base-styles.css"
+CUSTOM_CSS = BASE_DIR / "templates" / "ai-insight-custom.css"
+
+ACCENT_MAP = {"purple":"var(--color-purple)","info":"var(--color-info)",
+              "success":"var(--color-success)","warning":"var(--color-warning)","danger":"var(--color-danger)"}
+REQUIRED_CLASSES = ["news-card","stat-card","insight-card","callout",
+                    "doc-header","daily-index","table-wrap","doc-chapter-label"]
+
+def compute_week_dates(week_id):
+    y, wn = int(week_id.split("-W")[0]), int(week_id.split("-W")[1])
+    iso_mon = datetime.strptime(f"{y}-W{wn:02d}-1", "%G-W%V-%u")
+    cov_mon = iso_mon - timedelta(days=7)
+    cov_sun = iso_mon - timedelta(days=1)
+    return {"cov_mon":cov_mon, "cov_sun":cov_sun, "month_str":cov_sun.strftime("%Y-%m"),
+            "date_range":f"{cov_mon.strftime('%m/%d')}-{cov_sun.strftime('%m/%d')}"}
+
+def esc(s):
+    """Escape { } in strings for safe f-string embedding"""
+    return s.replace("{", "&#123;").replace("}", "&#125;") if s else ""
+
+def render_overview(d):
+    ov = d.get("overview",{})
+    rows = ov.get("table_rows",[])
+    stats = ov.get("stats",[])
+    tbl = ""
+    if rows:
+        tbl = '<div class="animate-on-scroll" style="overflow-x:auto;">\n<table style="width:100%;border-collapse:collapse;margin-top:16px;">\n<thead><tr style="background:var(--color-bg-table-header);"><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--color-success);font-weight:700;">维度</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--color-success);font-weight:700;">周度信号</th></tr></thead>\n<tbody>\n'
+        for r in rows:
+            tbl += f'<tr><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);font-weight:600;">{r["dimension"]}</td><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);">{r["signal"]}</td></tr>\n'
+        tbl += '</tbody></table></div>'
+    st = '<div class="stats-grid animate-on-scroll">\n'
+    for s in stats:
+        st += f'  <div class="stat-card {s.get("class","stat-info")}"><div class="stat-value">{s["value"]}</div><div class="stat-label">{s["label"]}</div></div>\n'
+    st += '</div>'
+    return f'<section id="overview">\n<div class="doc-chapter-label animate-on-scroll">概览</div>\n<h2 class="animate-on-scroll">📋 本周概览</h2>\n{tbl}\n{st}\n</section>'
+
+def render_top5(d):
+    cards = ""
+    for item in d.get("top5",[]):
+        ac = ACCENT_MAP.get(item.get("accent","info"),"var(--color-info)")
+        cards += f'<div class="news-card animate-on-scroll" style="--card-accent: {ac};">\n  <div class="news-card-rank">TOP {item["rank"]} · {item.get("label","")}</div>\n  <div class="news-card-title">{item["title"]}</div>\n  <div class="news-card-source">📅 {d.get("date_range","")} · 📎 {item["source"]}</div>\n  <div class="news-card-desc">{item["desc"]}</div>\n  <div class="news-card-why"><strong>关键判断</strong>：{item["why"]}</div>\n</div>\n'
+    return f'<section id="top5">\n<div class="doc-chapter-label animate-on-scroll">Top 5</div>\n<h2 class="animate-on-scroll">🏆 本周 Top 5 事件</h2>\n{cards}\n</section>'
+
+def render_insights(d):
+    cards = ""
+    for item in d.get("insights",[]):
+        links = item.get("trend_links",[])
+        tl = " · ".join(f'<a href="{l["url"]}" target="_blank">{l["text"]}</a>' for l in links) if links else ""
+        cards += f'<div class="insight-card animate-on-scroll">\n  <div class="insight-tag">{item["tag_label"]}</div>\n  <div class="insight-title">{item["title"]}</div>\n  <p style="font-family:var(--font-family-cn);line-height:1.75;font-size:13px;">{item["content"]}</p>\n  <div class="insight-trend">🔗 {tl}</div>\n</div>\n'
+    return f'<section id="insight">\n<div class="doc-chapter-label animate-on-scroll">洞察</div>\n<h2 class="animate-on-scroll">💡 周度洞察</h2>\n{cards}\n</section>'
+
+def render_link_insight(d):
+    li = d.get("link_insight",{})
+    intro = f'<div class="callout callout-purple animate-on-scroll"><strong>{li.get("intro_callout","")}</strong></div>'
+    blocks = ""
+    for k in ["turning_point","paradox","takeaway"]:
+        b = li.get(k,{})
+        if b: blocks += f'<div class="callout {b.get("class","callout-info")} animate-on-scroll" style="margin-top:16px;">{b.get("content","")}</div>\n'
+    return f'<section id="linkinsight">\n<div class="doc-chapter-label animate-on-scroll">林克的洞察</div>\n<h2 class="animate-on-scroll">🧠 林克的洞察</h2>\n{intro}\n{blocks}\n</section>'
+
+def render_section(sec):
+    id_ = sec.get("id","")
+    icon = sec.get("icon","")
+    title = sec.get("title","")
+    co = sec.get("callout","")
+    cocl = sec.get("callout_class","callout-info")
+    co_html = f'<div class="callout {cocl} animate-on-scroll">{co}</div>' if co else ""
+    tbl = sec.get("table",[])
+    tbl_html = ""
+    if tbl:
+        rows = "".join(f'<tr><td>{r.get("date","")}</td><td>{r.get("event","")}</td><td>{r.get("source","")}</td><td>{r.get("importance","")}</td></tr>\n' for r in tbl)
+        tbl_html = f'<div class="table-wrap animate-on-scroll">\n<table><thead><tr><th>日期</th><th>事件</th><th>来源</th><th>重要度</th></tr></thead>\n<tbody>{rows}</tbody></table></div>'
+    stats = sec.get("stats",[])
+    stats_html = ""
+    if stats:
+        stats_html = '<div class="stats-grid animate-on-scroll">\n' + "".join(f'  <div class="stat-card {s.get("class","stat-info")}"><div class="stat-value">{s["value"]}</div><div class="stat-label">{s["label"]}</div></div>\n' for s in stats) + '</div>'
+    return f'<section id="{id_}">\n<div class="doc-chapter-label animate-on-scroll">{icon}</div>\n<h2 class="animate-on-scroll">{icon} {title}</h2>\n{co_html}\n{tbl_html}\n{stats_html}\n</section>'
+
+def render_daily_index(d):
+    items = d.get("daily_index",[])
+    cards = "".join(f'<div class="daily-item">\n  <div class="daily-item-date">{i["date"]} {i["weekday"]}</div>\n  <a href="{i["url"]}" target="_blank" class="daily-item-link">{i["title"]}</a>\n  <div class="daily-item-kw">{i.get("keywords","")}</div>\n</div>\n' for i in items)
+    return f'<section id="dailyindex">\n<div class="doc-chapter-label animate-on-scroll">日报索引</div>\n<h2 class="animate-on-scroll">📅 本周日报索引</h2>\n<div class="daily-index animate-on-scroll">\n{cards}\n</div>\n</section>'
+
+def render_vocab(d):
+    items = d.get("vocab",[])
+    if not items: return ""
+    rows = "".join(f'<tr><td style="font-weight:600;">{i["term"]}</td><td>{i["definition"]}</td><td>{i.get("source","")}</td></tr>\n' for i in items)
+    return f'<section id="vocab">\n<div class="doc-chapter-label animate-on-scroll">技术词汇</div>\n<h2 class="animate-on-scroll">📖 技术词汇表</h2>\n<div class="table-wrap animate-on-scroll">\n<table><thead><tr><th>术语</th><th>定义</th><th>出处</th></tr></thead>\n<tbody>{rows}</tbody></table></div>\n</section>'
+
+def render_narrative(d):
+    n = d.get("narrative",{})
+    if not n: return ""
+    intro = f'<div class="callout callout-purple animate-on-scroll"><strong>{n.get("intro_callout","")}</strong></div>'
+    blocks = "".join(f'<div class="callout {b.get("class","callout-info")} animate-on-scroll" style="margin-top:16px;">{b.get("content","")}</div>\n' for b in n.get("main_blocks",[]))
+    conc = ""
+    if n.get("conclusion_callout"):
+        conc = f'<hr style="border:none;border-top:2px solid var(--color-success);margin:32px 0;">\n<div class="callout callout-success animate-on-scroll">{n["conclusion_callout"]}</div>'
+    return f'<section id="narrative">\n<div class="doc-chapter-label animate-on-scroll">宏观叙事</div>\n<h2 class="animate-on-scroll">🌊 宏观叙事：{n.get("title","")}</h2>\n{intro}\n{blocks}\n{conc}\n</section>'
+
+LEARN_MORE = '''<div style="max-width:var(--content-max);margin:0 auto;padding:16px 20px 48px;">
+<div style="background:linear-gradient(135deg,#F8FAFB 0%,#EEF2F6 100%);border:1px solid #E7E5E4;border-radius:14px;padding:24px;box-shadow:0 2px 8px rgba(31,35,40,.06)">
+  <div style="font-size:16px;font-weight:700;margin-bottom:8px">💡 了解更多</div>
+  <p style="font-size:14px;color:#57534E;line-height:1.7;margin:0 0 12px 0">我是 <strong>林克</strong>，沈浪的AI分身。AI洞察是系统化追踪AI行业动态的项目，覆盖大模型、AI Coding、AI应用、AI行业投融资、企业AI转型五大领域。</p>
+  <a href="https://xiaoxiong20260206.github.io/ai-insight/" target="_blank" style="display:inline-flex;padding:8px 16px;background:linear-gradient(135deg,#059669,#10B981);color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none">🏠 访问AI洞察首页</a>
+</div></div>'''
+
+def render_sidebar(d):
+    secs = d.get("sections",{})
+    links = ['<a href="#overview" class="toc-link">📋 本周概览</a>',
+             '<a href="#top5" class="toc-link">🏆 Top 5 事件</a>',
+             '<a href="#insight" class="toc-link">💡 周度洞察</a>',
+             '<a href="#linkinsight" class="toc-link">🧠 林克的洞察</a>']
+    for k,s in secs.items():
+        links.append(f'<a href="#{k}" class="toc-link">{s.get("icon","")} {s.get("title",k)}</a>')
+    links.extend(['<a href="#dailyindex" class="toc-link">📅 日报索引</a>',
+                  '<a href="#vocab" class="toc-link">📖 技术词汇</a>',
+                  '<a href="#narrative" class="toc-link">🌊 宏观叙事</a>'])
+    return f'<nav class="sidebar-nav" id="sidebar" aria-label="目录导航">\n<div class="sidebar-doc-title">AI 周报 {d.get("week_id","")}</div>\n<div class="toc-section"><div class="toc-group-label">目录</div>\n{chr(10).join(links)}\n</div>\n<div class="reading-progress-wrap"><div class="reading-progress-label">阅读进度</div><div class="reading-progress-track"><div class="reading-progress-fill" id="readingProgress"></div></div></div>\n</nav>'
+
+def generate_html(d):
+    wid = d.get("week_id","2026-W22")
+    dt = compute_week_dates(wid)
+    # CSS
+    base_css = QINGSHUANG_BASE_CSS.read_text(encoding="utf-8") if QINGSHUANG_BASE_CSS.exists() else ""
+    rep_css = ""
+    if TEMPLATE_CSS_FILE.exists():
+        raw = TEMPLATE_CSS_FILE.read_text(encoding="utf-8")
+        raw = re.sub(r'^\s*<style[^>]*>\s*','',raw); raw = re.sub(r'\s*</style>\s*$','',raw)
+        rep_css = raw
+    cust_css = CUSTOM_CSS.read_text(encoding="utf-8") if CUSTOM_CSS.exists() else ""
+    css_block = f"<style>\n{base_css}\n\n/* ===== 日报组件层 ===== */\n{rep_css}\n\n/* ===== AI洞察定制层 ===== */\n{cust_css}\n</style>"
+    js_block = TEMPLATE_JS_FILE.read_text(encoding="utf-8") if TEMPLATE_JS_FILE.exists() else "<script></script>"
+    
+    header = f'<header class="doc-header">\n  <div class="header-badge">AI INSIGHT · WEEKLY REPORT · {d["week_num"]}</div>\n  <h1 class="header-title">AI 周报 {d["year"]}年第{d["week_num"]}周</h1>\n  <p class="header-meta"><span>📅 {d["date_range"]}</span><span>📰 覆盖7天日报 · 5板块</span><span>🌐 海外+国内</span></p>\n</header>'
+    
+    body_secs = [header, render_overview(d), render_top5(d), render_insights(d), render_link_insight(d)]
+    for k in ["llm","coding","app","industry","enterprise"]:
+        s = d.get("sections",{}).get(k,{})
+        if s: body_secs.append(render_section(s))
+    body_secs.append(render_daily_index(d))
+    v = render_vocab(d)
+    if v: body_secs.append(v)
+    n = render_narrative(d)
+    if n: body_secs.append(n)
+    body_secs.append(LEARN_MORE)
+    
+    footer = f'<div class="doc-footer"><p>🧠 林克（沈浪的AI分身） · AI洞察 · 周报 · {wid}</p><p style="margin-top:4px;">数据来源：AI洞察日报 {d.get("date_range","")} · 5板块</p></div>'
+    sidebar = render_sidebar(d)
+    
+    fav = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232563EB'/%3E%3Ctext x='6' y='23' font-size='18' fill='white'%3E⚡%3C/text%3E%3C/svg%3E"
+    
+    html_head = f"""<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI 周报 2026-W22 (05.19-05.25) | AI洞察</title>
-    <meta name="description" content="2026年第22周AI行业动态精选：Google I/O Agent宣言、DeepSeek 700亿融资+永久降价75%、Anthropic估值9000亿反超OpenAI、AI编程工具三巨头分化、四小龙估值破万亿">
-    <meta property="og:title" content="AI 周报 2026-W22 | AI洞察">
-    <meta property="og:description" content="本周重大事件：Google I/O Agent宣言、DeepSeek 700亿分厘定价、Anthropic反超OpenAI双寡头确立、AI编程三条路线分化、四小龙估值破万亿集体IPO">
-    <meta property="og:type" content="article">
-    <meta name="twitter:card" content="summary_large_image">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%232563EB'/><text x='6' y='23' font-size='18' fill='white'>⚡</text></svg>">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-    <noscript></noscript>
-<style>.animate-on-scroll{opacity:1!important;transform:none!important;}</style>
-<style>
-        /* ===== CSS VARIABLES ===== */
-        :root {
-            --color-success: #059669; --color-success-light: #10B981; --color-success-dark: #047857;
-            --color-success-50: #ECFDF5; --color-success-100: #D1FAE5;
-            --color-danger: #E11D48; --color-danger-light: #F43F5E; --color-danger-50: #FFF1F2;
-            --color-warning: #D97706; --color-warning-light: #F59E0B; --color-warning-50: #FFFBEB;
-            --color-info: #2563EB; --color-info-light: #3B82F6; --color-info-50: #EFF6FF; --color-info-100: #DBEAFE;
-            --color-purple: #7C3AED; --color-purple-light: #8B5CF6; --color-purple-50: #F5F3FF; --color-purple-100: #EDE9FE;
-            --color-text-primary: #1C1917; --color-text-secondary: #57534E; --color-text-muted: #78716C;
-            --color-border: #E7E5E4; --color-border-light: #F5F5F4;
-            --color-bg: #F8FAFB; --color-bg-card: #FFFFFF; --color-bg-table-header: #FAFAF9;
-            --color-bg-hover: rgba(0,0,0,0.025);
-            --gradient-hero: linear-gradient(135deg, #059669 0%, #2563EB 50%, #7C3AED 100%);
-            --gradient-badge: linear-gradient(135deg, #ECFDF5 0%, #EFF6FF 100%);
-            --gradient-mesh:
-                radial-gradient(at 20% 20%, rgba(5,150,105,0.08) 0%, transparent 50%),
-                radial-gradient(at 80% 80%, rgba(37,99,235,0.06) 0%, transparent 50%),
-                radial-gradient(at 50% 50%, rgba(124,58,237,0.04) 0%, transparent 50%);
-            --shadow-xs: 0 1px 2px rgba(0,0,0,0.04);
-            --shadow-card: 0 2px 8px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-            --shadow-card-rich: 0 4px 16px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.9);
-            --shadow-hover: 0 8px 24px rgba(5,150,105,0.18), 0 2px 8px rgba(5,150,105,0.10);
-            --shadow-float: 0 12px 32px rgba(0,0,0,0.10), 0 4px 8px rgba(0,0,0,0.06);
-            --shadow-glow-info: 0 4px 14px rgba(37,99,235,0.15);
-            --spacing-xs: 4px; --spacing-sm: 8px; --spacing-md: 16px;
-            --spacing-lg: 24px; --spacing-xl: 32px; --spacing-2xl: 40px; --spacing-3xl: 48px;
-            --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-xl: 20px; --radius-full: 9999px;
-            --font-family: "DM Sans", -apple-system, "Noto Sans SC", "PingFang SC", sans-serif;
-            --font-family-heading: "DM Sans", -apple-system, "Noto Sans SC", sans-serif;
-            --font-family-cn: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
-            --font-family-mono: "JetBrains Mono", "SF Mono", "Consolas", monospace;
-            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-normal: 200ms cubic-bezier(0.4, 0, 0.2, 1);
-            --sidebar-width: 228px;
-            --content-max: 920px;
-            --content-pad: 56px;
-        }
-
-        /* ===== RESET & BASE ===== */
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: var(--font-family);
-            font-size: 15px;
-            line-height: 1.65;
-            letter-spacing: -0.01em;
-            color: var(--color-text-secondary);
-            background: var(--color-bg);
-            background-image: var(--gradient-mesh);
-            background-attachment: fixed;
-            -webkit-font-smoothing: antialiased;
-            text-rendering: optimizeLegibility;
-        }
-        ::selection { background: rgba(5,150,105,0.18); }
-        a { color: var(--color-info); text-decoration: none; }
-        a:hover { text-decoration: underline; }
-
-        /* ===== SKIP TO CONTENT ===== */
-        .skip-to-content {
-            position: absolute; top: -40px; left: 0; background: var(--color-info);
-            color: #fff; padding: 8px 16px; border-radius: 0 0 8px 0; z-index: 9999;
-            transition: top var(--transition-fast);
-        }
-        .skip-to-content:focus { top: 0; }
-
-        /* ===== LAYOUT ===== */
-        .layout-wrapper { display: flex; width: 100%; min-height: 100vh; align-items: stretch; }
-
-        /* ===== SIDEBAR ===== */
-        .sidebar-nav {
-            width: var(--sidebar-width); flex-shrink: 0;
-            position: sticky; top: 0; height: 100vh;
-            overflow-y: auto; background: #fff;
-            border-right: 1px solid var(--color-border);
-            padding: 20px 0; z-index: 100;
-            display: flex; flex-direction: column;
-        }
-        .sidebar-nav::-webkit-scrollbar { width: 4px; }
-        .sidebar-nav::-webkit-scrollbar-track { background: transparent; }
-        .sidebar-nav::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.08); border-radius: 2px; }
-        .sidebar-doc-title {
-            font-size: 13px; font-weight: 700; color: var(--color-text-primary);
-            padding: 0 20px 16px; line-height: 1.4; font-family: var(--font-family-heading);
-        }
-        .toc-group-label {
-            font-size: 11px; font-weight: 700; color: var(--color-text-muted);
-            letter-spacing: 0.08em; text-transform: uppercase;
-            padding: 4px 20px 6px; margin-top: 8px;
-        }
-        .toc-link {
-            display: block; padding: 7px 20px; font-size: 13px; font-weight: 500;
-            color: var(--color-text-secondary); border-left: 3px solid transparent;
-            transition: all var(--transition-fast); line-height: 1.4; text-decoration: none;
-        }
-        .toc-link:hover { background: rgba(0,0,0,0.03); color: var(--color-text-primary); text-decoration: none; }
-        .toc-link.toc-active { color: var(--color-info); background: rgba(37,99,235,0.04); border-left-color: var(--color-info); font-weight: 600; }
-        .toc-link.toc-sub { padding-left: 32px; font-size: 12px; font-weight: 400; color: var(--color-text-muted); }
-        .toc-link.toc-sub.toc-active { color: var(--color-info); font-weight: 500; }
-
-        .reading-progress-wrap { margin-top: auto; padding: 16px 20px 8px; }
-        .reading-progress-label { font-size: 11px; color: var(--color-text-muted); margin-bottom: 6px; }
-        .reading-progress-track { height: 4px; background: var(--color-border); border-radius: 2px; overflow: hidden; }
-        .reading-progress-fill { height: 100%; width: 0%; background: var(--color-info); border-radius: 2px; transition: width 0.2s ease; }
-
-        .sidebar-collapse-btn {
-            display: flex; align-items: center; justify-content: center;
-            width: 28px; height: 28px; background: transparent;
-            border: 1px solid var(--color-border); border-radius: 6px;
-            cursor: pointer; color: var(--color-text-muted); font-size: 13px;
-            position: fixed; top: 20px; left: calc(var(--sidebar-width) - 14px);
-            z-index: 101; transition: all var(--transition-fast); background: #fff;
-        }
-        .sidebar-collapse-btn:hover { background: var(--color-bg); }
-        .sidebar-collapse-btn.collapsed-pos { left: 34px; }
-
-        .sidebar-nav.sidebar-collapsed { width: 0; padding: 0; overflow: hidden; border: none; }
-        .sidebar-nav.sidebar-collapsed ~ .sidebar-collapse-btn { left: 8px; }
-
-        /* ===== CONTENT AREA ===== */
-        .content-area {
-            flex: 1; min-width: 0;
-            display: flex; flex-direction: column; align-items: center;
-        }
-        .content-inner {
-            width: 100%; max-width: var(--content-max);
-            padding: 48px var(--content-pad) 120px;
-        }
-
-        /* ===== HEADER ===== */
-        .doc-header {
-            padding: 36px 0 32px; position: relative; margin-bottom: 32px;
-        }
-        .doc-header::after {
-            content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-            height: 3px; background: var(--gradient-hero); border-radius: 2px;
-        }
-        .header-badge {
-            display: inline-block; background: var(--gradient-badge); color: var(--color-info);
-            padding: 4px 14px; border-radius: var(--radius-full); font-size: 11px; font-weight: 600;
-            margin-bottom: 12px; border: 1px solid rgba(37,99,235,0.12); box-shadow: var(--shadow-xs);
-            letter-spacing: 0.04em;
-        }
-        .header-title {
-            font-size: 34px; font-weight: 800; letter-spacing: -0.025em;
-            background: var(--gradient-hero); -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent; background-clip: text;
-            line-height: 1.2; margin-bottom: 10px; text-wrap: balance;
-        }
-        .header-meta { font-size: 13px; color: var(--color-text-muted); display: flex; gap: 16px; flex-wrap: wrap; }
-        .header-meta span { display: flex; align-items: center; gap: 4px; }
-
-        /* ===== CHAPTER LABEL ===== */
-        .doc-chapter-label {
-            display: flex; align-items: center; gap: 10px;
-            font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
-            text-transform: uppercase; color: #A8A29E;
-            padding: 40px 0 12px;
-        }
-        .doc-chapter-label::after { content: ''; flex: 1; height: 1px; background: #F0EFEE; }
-
-        /* ===== SECTION ===== */
-        section { margin-bottom: 48px; }
-        section h2 {
-            font-size: 21px; font-weight: 700; color: var(--color-text-primary);
-            letter-spacing: -0.02em; margin-bottom: 16px; line-height: 1.3;
-        }
-        section h3 {
-            font-size: 16px; font-weight: 600; color: var(--color-text-primary);
-            margin: 20px 0 10px; line-height: 1.4;
-        }
-        section p { font-family: var(--font-family-cn); line-height: 1.75; margin-bottom: 12px; }
-
-        /* ===== STAT CARDS ===== */
-        .stats-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 12px; margin: 20px 0;
-        }
-        .stat-card {
-            background: var(--color-bg-card); border: 1px solid var(--color-border);
-            border-radius: var(--radius-md); padding: 16px;
-            border-top: 3px solid var(--color-border);
-            box-shadow: var(--shadow-card);
-            transition: transform var(--transition-normal), box-shadow var(--transition-normal);
-        }
-        .stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
-        .stat-info    { border-top-color: var(--color-info); }
-        .stat-success { border-top-color: var(--color-success); }
-        .stat-warning { border-top-color: var(--color-warning); }
-        .stat-purple  { border-top-color: var(--color-purple); }
-        .stat-danger  { border-top-color: var(--color-danger); }
-        .stat-value {
-            font-size: 24px; font-weight: 800; color: var(--color-text-primary);
-            font-variant-numeric: tabular-nums; line-height: 1.2; margin-bottom: 4px;
-            font-family: var(--font-family-heading);
-        }
-        .stat-label { font-size: 12px; color: var(--color-text-muted); font-weight: 500; letter-spacing: 0.02em; }
-
-        /* ===== TABLE ===== */
-        .table-wrap { overflow-x: auto; margin: 16px 0; border-radius: var(--radius-md); border: 1px solid var(--color-border); }
-        table { width: 100%; border-collapse: collapse; font-size: 13px; }
-        thead tr { background: var(--color-bg-table-header); }
-        th {
-            padding: 10px 14px; text-align: left; font-weight: 600; font-size: 11px;
-            color: var(--color-text-muted); letter-spacing: 0.06em; text-transform: uppercase;
-            border-bottom: 1px solid var(--color-border);
-        }
-        td { padding: 10px 14px; border-bottom: 1px solid var(--color-border-light); vertical-align: top; }
-        tbody tr:last-child td { border-bottom: none; }
-        tbody tr:hover { background: var(--color-bg-hover); }
-        .star { color: var(--color-warning); }
-
-        /* ===== TOP 5 CARDS ===== */
-        .news-card {
-            background: var(--color-bg-card); border: 1px solid var(--color-border);
-            border-radius: var(--radius-lg); padding: 20px 24px;
-            margin-bottom: 12px; box-shadow: var(--shadow-card);
-            transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
-            position: relative; overflow: hidden;
-        }
-        .news-card::before {
-            content: ''; position: absolute; left: 0; top: 0; bottom: 0;
-            width: 4px; background: var(--card-accent, var(--color-info));
-        }
-        .news-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); border-color: rgba(5,150,105,0.2); }
-        .news-card-rank {
-            font-size: 11px; font-weight: 800; color: var(--color-text-muted);
-            letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px;
-        }
-        .news-card-title { font-size: 15px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 8px; line-height: 1.4; }
-        .news-card-source { font-size: 11px; color: var(--color-text-muted); margin-bottom: 10px; }
-        .news-card-desc { font-size: 13px; font-family: var(--font-family-cn); line-height: 1.7; color: var(--color-text-secondary); margin-bottom: 10px; }
-        .news-card-why {
-            font-size: 12px; background: var(--color-info-50); border-left: 3px solid var(--color-info);
-            padding: 8px 12px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-            color: var(--color-text-secondary); font-family: var(--font-family-cn); line-height: 1.6;
-        }
-        .news-card-why strong { color: var(--color-info); }
-
-        /* ===== INSIGHT CARDS ===== */
-        .insight-card {
-            background: linear-gradient(135deg, var(--color-purple-50) 0%, var(--color-info-50) 100%);
-            border: 1px solid rgba(124,58,237,0.15); border-radius: var(--radius-lg);
-            padding: 20px 24px; margin-bottom: 12px;
-            box-shadow: var(--shadow-card);
-        }
-        .insight-tag {
-            display: inline-block; font-size: 10px; font-weight: 700;
-            background: var(--color-purple); color: #fff;
-            padding: 2px 8px; border-radius: var(--radius-full); margin-bottom: 10px;
-            letter-spacing: 0.06em;
-        }
-        .insight-title { font-size: 15px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 8px; }
-        .insight-trend {
-            font-size: 12px; background: rgba(124,58,237,0.08); padding: 8px 12px;
-            border-radius: var(--radius-sm); margin-top: 10px; color: var(--color-purple);
-            font-weight: 500;
-        }
-
-        /* ===== CALLOUT ===== */
-        .callout {
-            padding: 14px 18px; border-radius: var(--radius-md); margin: 16px 0;
-            font-size: 13px; font-family: var(--font-family-cn); line-height: 1.7;
-            border-left: 4px solid;
-        }
-        .callout-info { background: var(--color-info-50); border-color: var(--color-info); color: #1e3a8a; }
-        .callout-success { background: var(--color-success-50); border-color: var(--color-success); color: #065f46; }
-        .callout-warning { background: var(--color-warning-50); border-color: var(--color-warning); color: #78350f; }
-        .callout-purple { background: var(--color-purple-50); border-color: var(--color-purple); color: #4c1d95; }
-
-        /* ===== WATCHLIST ===== */
-        .watchlist { list-style: none; margin: 0; padding: 0; }
-        .watchlist li {
-            padding: 10px 14px; background: var(--color-bg-card); border: 1px solid var(--color-border);
-            border-radius: var(--radius-md); margin-bottom: 8px;
-            font-family: var(--font-family-cn); font-size: 13px; line-height: 1.6;
-            display: flex; gap: 10px; align-items: flex-start;
-        }
-        .watchlist li::before { content: '→'; color: var(--color-info); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
-
-        /* ===== DAILY INDEX ===== */
-        .daily-index { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin: 16px 0; }
-        .daily-item {
-            background: var(--color-bg-card); border: 1px solid var(--color-border);
-            border-radius: var(--radius-md); padding: 12px 16px;
-            transition: transform var(--transition-normal), box-shadow var(--transition-normal);
-        }
-        .daily-item:hover { transform: translateY(-1px); box-shadow: var(--shadow-card); }
-        .daily-item-date { font-size: 12px; font-weight: 700; color: var(--color-info); margin-bottom: 4px; }
-        .daily-item-link { font-size: 13px; font-weight: 600; color: var(--color-text-primary); display: block; margin-bottom: 4px; }
-        .daily-item-kw { font-size: 11px; color: var(--color-text-muted); font-family: var(--font-family-cn); line-height: 1.5; }
-
-        /* ===== ANIMATE ===== */
-        .animate-on-scroll {
-            opacity: 0; transform: translateY(14px);
-            transition: opacity 0.42s ease, transform 0.42s ease;
-        }
-        .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
-        @media (prefers-reduced-motion: reduce) {
-            .animate-on-scroll { transition: none; opacity: 1; transform: none; }
-        }
-
-        /* ===== SCROLL TO TOP ===== */
-        .scroll-to-top {
-            position: fixed; bottom: 28px; right: 28px;
-            width: 40px; height: 40px; border-radius: 50%;
-            background: var(--color-info); color: #fff; border: none;
-            cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center;
-            box-shadow: var(--shadow-glow-info); opacity: 0; pointer-events: none;
-            transition: opacity var(--transition-normal), transform var(--transition-normal);
-            z-index: 200;
-        }
-        .scroll-to-top.visible { opacity: 1; pointer-events: auto; }
-        .scroll-to-top:hover { transform: translateY(-2px); }
-
-        /* ===== FOOTER ===== */
-        .doc-footer {
-            margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--color-border);
-            font-size: 12px; color: var(--color-text-muted); text-align: center;
-            font-family: var(--font-family-cn);
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 768px) {
-            .layout-wrapper { flex-direction: column; }
-            .sidebar-nav {
-                width: 100%; position: sticky; top: 0; height: auto;
-                overflow-y: visible; border-right: none; border-bottom: 1px solid var(--color-border);
-                display: flex; flex-direction: row; overflow-x: auto; padding: 4px 0;
-                -webkit-overflow-scrolling: touch;
-            }
-            .sidebar-doc-title, .toc-group-label, .reading-progress-wrap { display: none; }
-            .toc-link { flex: 0 0 auto; border-left: none; border-bottom: 2px solid transparent; white-space: nowrap; padding: 8px 14px; font-size: 12px; }
-            .toc-link.toc-active { border-left-color: transparent; border-bottom-color: var(--color-info); }
-            .toc-link.toc-sub { display: none; }
-            .sidebar-collapse-btn { display: none; }
-            .content-inner { padding: 28px 16px 80px; }
-            .stats-grid { grid-template-columns: 1fr 1fr; }
-            .header-title { font-size: 26px; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 周报 {wid} ({d["date_range"]}) | AI洞察</title>
+<meta name="description" content="{d.get('description','AI行业动态周报')}">
+<meta property="og:title" content="AI 周报 {wid} | AI洞察">
+<meta property="og:description" content="{d.get('description','')}">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="{fav}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<noscript></noscript>
+{css_block}
 </head>"""
-
-W22_BODY = """
-<body>
+    
+    html_body = f"""<body>
 <a class="skip-to-content" href="#main-content">跳到主内容</a>
-
 <div class="layout-wrapper">
-    <!-- SIDEBAR -->
-    <nav class="sidebar-nav" id="sidebar" aria-label="目录导航">
-        <div class="sidebar-doc-title">AI 周报 2026-W22</div>
-        <div class="toc-section">
-            <div class="toc-group-label">目录</div>
-            <a href="#overview"    class="toc-link">📋 本周概览</a>
-            <a href="#top5"        class="toc-link">🏆 Top 5 事件</a>
-            <a href="#insight"     class="toc-link">💡 周度洞察</a>
-            <a href="#linkinsight" class="toc-link">🧠 林克的洞察</a>
-            <a href="#llm"         class="toc-link">🧠 大模型</a>
-            <a href="#coding"      class="toc-link">⌨️ AI Coding</a>
-            <a href="#app"         class="toc-link">📱 AI 应用</a>
-            <a href="#industry"    class="toc-link">🏭 AI 行业</a>
-            <a href="#enterprise"  class="toc-link">🔄 企业AI转型</a>
-            <a href="#dailyindex"  class="toc-link">📅 日报索引</a>
-            <a href="#vocab"       class="toc-link">📖 技术词汇</a>
-            <a href="#narrative"   class="toc-link">🌊 宏观叙事</a>
-        </div>
-        <div class="reading-progress-wrap">
-            <div class="reading-progress-label">阅读进度</div>
-            <div class="reading-progress-track">
-                <div class="reading-progress-fill" id="readingProgress"></div>
-            </div>
-        </div>
-    </nav>
-    <button class="sidebar-collapse-btn" id="collapseBtn" title="折叠导航" aria-label="折叠导航">«</button>
-
-    <!-- MAIN CONTENT -->
-    <main class="content-area" id="main-content">
-        <div class="content-inner">
-
-            <!-- HEADER -->
-            <header class="doc-header">
-                <div class="header-badge">AI INSIGHT · WEEKLY REPORT · W22</div>
-                <h1 class="header-title">AI 周报 2026年第22周</h1>
-                <p class="header-meta">
-                    <span>📅 2026-05-19 至 05-25</span>
-                    <span>📰 覆盖7天日报 · 5板块</span>
-                    <span>🌐 海外+国内</span>
-                </p>
-            </header>
-
-            <!-- OVERVIEW -->
-            <section id="overview">
-            <div class="doc-chapter-label animate-on-scroll">概览</div>
-            <h2 class="animate-on-scroll">📋 本周概览</h2>
-            <div class="animate-on-scroll" style="overflow-x:auto;">
-            <table style="width:100%;border-collapse:collapse;margin-top:16px;">
-            <thead><tr style="background:var(--color-bg-table-header);">
-            <th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--color-success);font-weight:700;">维度</th>
-            <th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--color-success);font-weight:700;">周度信号</th>
-            </tr></thead>
-            <tbody>
-<tr><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);font-weight:600;">🧠 大模型</td><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);">Google I/O Agent宣言+Gemini 3.5 Flash/Spark/Intelligence/Omni四连发、DeepSeek 700亿+V4-Pro永久降价75%、Anthropic估值9000亿反超OpenAI双寡头确立、Claude Mythos自主发现30年安全漏洞</td></tr>
-<tr><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);font-weight:600;">⌨️ AI Coding</td><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);">三路线分化：Cursor 3多Agent并行+Trae SOLO免费全流程+Claude Code 1M GA，习惯竞争取代功能竞争，Claude Code年化25亿美元证明Agent是变现最短路径</td></tr>
-<tr><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);font-weight:600;">📱 AI应用</td><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);">Gemini Spark 24/7 Agent+Omni任意输入任意输出+搜索AI Mode 10亿月活、ChatGPT接入银行账户、Kimi WebBridge浏览器自动化、AI Skill平台8000万月活</td></tr>
-<tr><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);font-weight:600;">🏭 AI行业</td><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);">四小龙估值破万亿+DeepSeek 700亿+Kimi 136亿D轮+月暗200亿IPO、字节AI资本开支2000亿、DeepMind收购Contextual AI、全球VC 53%流向AI</td></tr>
-<tr><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);font-weight:600;">🔄 企业转型</td><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);">央企AI转型必答题+80%融入主业、34%深度转型翻倍、微软安永10亿美元助推、Agent-first基础设施重构、SaaS→Agent-as-a-Service</td></tr>
-            </tbody></table></div>
-            <div class="stats-grid animate-on-scroll">
-                <div class="stat-card stat-purple"><div class="stat-value">3500亿</div><div class="stat-label">DeepSeek投后估值（人民币）</div></div>
-                <div class="stat-card stat-success"><div class="stat-value">75%</div><div class="stat-label">DeepSeek V4-Pro永久降幅</div></div>
-                <div class="stat-card stat-info"><div class="stat-value">9000亿</div><div class="stat-label">Anthropic估值反超OpenAI</div></div>
-                <div class="stat-card stat-warning"><div class="stat-value">25亿美元</div><div class="stat-label">Claude Code年化收入</div></div>
-                <div class="stat-card stat-danger"><div class="stat-value">万亿</div><div class="stat-label">四小龙合并估值</div></div>
-            </div>
-        </section>
-
-            <!-- TOP 5 -->
-            <section id="top5">
-            <div class="doc-chapter-label animate-on-scroll">Top 5</div>
-            <h2 class="animate-on-scroll">🏆 本周 Top 5 事件</h2>
-
-            <div class="news-card animate-on-scroll" style="--card-accent: var(--color-purple);">
-                <div class="news-card-rank">TOP 1 · Agent宣言</div>
-                <div class="news-card-title">Google I/O 2026：从搜索公司到Agent公司——AI产业格局重定义</div>
-                <div class="news-card-source">📅 2026-05-19/05-25 · 📎 <a href="https://www.cnet.com/tech/services-and-software/google-gemini-3-5-flash-spark-antigravity/" target="_blank">CNET</a> · <a href="https://mashable.com/article/ai-search-announcements-google-io-2026" target="_blank">Mashable</a></div>
-                <div class="news-card-desc">Google I/O 2026核心信号不是模型参数提升，而是Sundar Pichai宣言"Google Search is AI Search"。四连发——Gemini 3.5 Flash（agentic-first训练4倍速）、Gemini Spark（24/7云端个人Agent）、Gemini Intelligence（Android系统级AI层）、Gemini Omni（任意输入→任意输出）——指向同一方向：Agent是AI下一个形态。搜索引擎从"十条蓝色链接"变成Agent直接回答，Web流量分配逻辑正在被重写。</div>
-                <div class="news-card-why"><strong>关键判断</strong>：Google不是在升级搜索而是在定义Agent时代的基础设施。10亿月活AI Mode意味着用户已经接受Agent替代检索——从搜索公司到Agent公司是结构性的。</div>
-            </div>
-
-            <div class="news-card animate-on-scroll" style="--card-accent: var(--color-info);">
-                <div class="news-card-rank">TOP 2 · 定价权</div>
-                <div class="news-card-title">DeepSeek 700亿融资+V4-Pro永久降价75%：大模型定价权的结构性转向</div>
-                <div class="news-card-source">📅 2026-05-23/05-24 · 📎 <a href="https://techcrunch.com/2026/04/24/deepseek-previews-new-ai-model-that-closes-the-gap-with-frontier-models/" target="_blank">TechCrunch</a> · <a href="https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-24-v3.html" target="_blank">AI洞察日报</a></div>
-                <div class="news-card-desc">梁文锋200亿个人出资占比28%，18天估值从100亿暴涨3.5倍到3500亿。V4-Pro从促销走向永久1/4定价——每百万Token输入2分5厘、输出6元，对比GPT-5.5 Pro输出1296元差距约200倍。这不是促销终局而是结构性定价的开始。MoE架构每次推理仅激活49B参数支撑1/4定价的技术底气。</div>
-                <div class="news-card-why"><strong>关键判断</strong>：700亿不是融资纪录而是定价权宣言——当模型差距实质性消除，价格成为真正的差异化武器。分厘定价是AI产业成熟的结构性信号。</div>
-            </div>
-
-            <div class="news-card animate-on-scroll" style="--card-accent: var(--color-success);">
-                <div class="news-card-rank">TOP 3 · 双寡头</div>
-                <div class="news-card-title">Anthropic估值9000亿反超OpenAI：双寡头格局确立但面临三个硬问题</div>
-                <div class="news-card-source">📅 2026-05-22 · 📎 <a href="https://www.theinformation.com/briefings/google-deepmind-hires-staff-licenses-technology-contextual-ai" target="_blank">The Information</a></div>
-                <div class="news-card-desc">Anthropic估值9000亿反超OpenAI 8520亿，Karpathy加盟，Claude Mythos自主发现30年安全漏洞——双寡头格局正式确立。但三个硬问题浮现：估值增速vs营收增速的匹配（5个月估值翻5倍）、安全能力悖论（能力越强可控性越弱）、人才争夺加速技术扩散而非壁垒加深。</div>
-                <div class="news-card-why"><strong>关键判断</strong>：首超是信号而非终局。估值增速远超营收增速意味着市场在赌Agent生产力估值超越模型估值——但三个硬问题提醒：估值≠护城河。</div>
-            </div>
-
-            <div class="news-card animate-on-scroll" style="--card-accent: var(--color-danger);">
-                <div class="news-card-rank">TOP 4 · 编程分化</div>
-                <div class="news-card-title">AI编程工具从"补全助手"分化为三条路线：习惯竞争取代功能竞争</div>
-                <div class="news-card-source">📅 2026-05-19/05-25 · 📎 <a href="https://www.linos.ai/technology/ai-coding-assistants-cursor-copilot-claude-code-2026" target="_blank">Linos NEWS</a> · <a href="https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-25-v3.html" target="_blank">AI洞察日报</a></div>
-                <div class="news-card-desc">Cursor 3多Agent并行Workspace、Trae SOLO端到端全流程闭环免费、Claude Code 1M上下文正式GA——三者不是功能差异而是哲学差异。Claude Code年化收入超25亿美元证明代码智能体是模型能力到商业变现的最短路径。竞争维度从"谁补全更准"转向"谁先锁定开发者习惯"。</div>
-                <div class="news-card-why"><strong>关键判断</strong>：AI编程进入习惯竞争阶段——补贴是习惯重塑催化剂而非永久策略。选型看场景适配而非绝对性能：日常用Cursor、重写用Claude Code、免费验证用Trae。</div>
-            </div>
-
-            <div class="news-card animate-on-scroll" style="--card-accent: var(--color-warning);">
-                <div class="news-card-rank">TOP 5 · 价值变现</div>
-                <div class="news-card-title">中国AI四小龙估值破万亿+集体IPO：从烧钱研发走向价值变现</div>
-                <div class="news-card-source">📅 2026-05-23/05-25 · 📎 <a href="https://k.sina.cn/article_7857201856_1d45362c001905a1pa.html" target="_blank">新浪</a> · <a href="https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-24-v3.html" target="_blank">AI洞察日报</a></div>
-                <div class="news-card-desc">DeepSeek 700亿、Kimi 136亿D轮、月之暗面200亿美元冲刺IPO、智谱MiniMax港交所市值300亿——四小龙合并估值破万亿。几乎在估值最高时刻急于上市，原因是Agent化转型需要更重的基础设施投入。IPO不是为了退出而是为了更大的融资能力。</div>
-                <div class="news-card-why"><strong>关键判断</strong>：集体IPO不是退出而是加码——Agent化转型需要更重的基础设施投入。估值最高时刻上市=对未来变现能力的极度自信+对基础设施投入的刚性需求。</div>
-            </div>
-            </section>
-
-            <!-- INSIGHTS -->
-            <section id="insight">
-            <div class="doc-chapter-label animate-on-scroll">洞察</div>
-            <h2 class="animate-on-scroll">💡 周度洞察</h2>
-
-            <div class="insight-card animate-on-scroll">
-                <div class="insight-tag">洞察一</div>
-                <div class="insight-title">AI产业从"模型竞赛"转向"Agent落地"——三方同周宣言不是偶然</div>
-                <p style="font-family:var(--font-family-cn);line-height:1.75;font-size:13px;">Google I/O、阿里云峰会、微软安永三方同周押注Agent不是偶然，而是行业共识的确立：<br><br>
-<strong>1) 阿里云宣言</strong>："云的用户正在从人变成Agent"<br>
-<strong>2) Google搜索</strong>：从信息检索转向任务执行，10亿月活AI Mode证明用户已接受<br>
-<strong>3) 微软安永</strong>：10亿美元助推Agent部署，从卖API到卖交付<br><br>
-三条线从模型→智能体→基础设施同时推进。下一个竞争维度不是谁的模型更强，而是谁的Agent能更自主地完成更多任务。</p>
-                <div class="insight-trend">🔗 <a href="https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-19-v3.html" target="_blank">Google I/O</a> · <a href="https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-22-v3.html" target="_blank">阿里云峰会</a> · <a href="https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-23-v3.html" target="_blank">微软安永</a></div>
-            </div>
-
-            <div class="insight-card animate-on-scroll">
-                <div class="insight-tag">洞察二</div>
-                <div class="insight-title">大模型从免费走向收费不是倒退，是产业成熟的标志</div>
-                <p style="font-family:var(--font-family-cn);line-height:1.75;font-size:13px;">三个信号指向同一结论：<br><br>
-<strong>腾讯云Hy3</strong>告别免费公测<br>
-<strong>DeepSeek V4-Pro</strong>永久降价但不是免费——分厘定价是结构性信号<br>
-<strong>Copilot用量计费</strong>6月生效——从免费到按使用付费<br><br>
-免费模式解决了获客问题但制造了价值信号缺失问题。收费模式让每个API调用都有经济含义，迫使供需双方都更理性。Token积分制是同一逻辑的内化版本。</p>
-                <div class="insight-trend">🔗 <a href="https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-24-v3.html" target="_blank">分厘定价</a> · <a href="https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-23-v3.html" target="_blank">Copilot计费</a></div>
-            </div>
-            </section>
-
-            <!-- LINK'S INSIGHT -->
-            <section id="linkinsight">
-            <div class="doc-chapter-label animate-on-scroll">林克的洞察</div>
-            <h2 class="animate-on-scroll">🧠 林克的洞察</h2>
-
-            <div class="callout callout-purple animate-on-scroll"><strong>本周最值得记住的不是Google I/O的四个产品发布或DeepSeek的700亿融资数字，而是一个拐点和一个悖论同时显现。</strong></div>
-
-            <div class="callout callout-info animate-on-scroll" style="margin-top:16px;">
-<strong>拐点：AI产业从"谁更聪明"转向"谁更便宜+更能干活"</strong><br><br>
-三个信号指向同一结论：<br>
-• DeepSeek用1/4价格提供相当能力——价格成为差异化武器<br>
-• Claude Code用25亿美元年化收入证明Agent是变现最短路径<br>
-• Google搜索10亿月活AI Mode证明用户已接受Agent替代检索<br><br>
-模型差距不再是核心竞争力壁垒，Agent执行力和用户习惯才是。对从业者：选型看场景适配而非绝对性能，投资看中间层而非模型层。
-            </div>
-
-            <div class="callout callout-success animate-on-scroll" style="margin-top:16px;">
-<strong>悖论：Agent自主性是能力也是风险</strong><br><br>
-Gemini Spark"替你做事"比"帮你搜索"效率更高，但Google搜索Agent出现"罢工"现象；Claude Mythos自主发现安全漏洞是技术壮举，但Anthropic因此启动受限发布——能力越强，可控性越弱。<br><br>
-Agent化的下一步不是更大的自主性，而是更可靠的可控性。谁能先解决"自主执行+可控边界"的矛盾，谁就定义Agent时代的产品范式。
-            </div>
-
-            <div class="callout callout-warning animate-on-scroll" style="margin-top:16px;">
-<strong>对从业者的启示</strong><br><br>
-1. <strong>选型看场景适配而非绝对性能</strong>——DeepSeek V4-Pro输出6元vs GPT-5.5 Pro输出1296元，差距约200倍<br>
-2. <strong>投资看Agent中间层而非模型层</strong>——编排/基建/安全/可观测是Agent时代的黄金赛道<br>
-3. <strong>推广看ROI而非工具本身</strong>——88%已部署企业获正ROI，回本6-18月
-            </div>
-            </section>
-
-            <!-- LLM -->
-            <section id="llm">
-            <div class="doc-chapter-label animate-on-scroll">大模型</div>
-            <h2 class="animate-on-scroll">🧠 大模型本周动态</h2>
-            <div class="callout callout-info animate-on-scroll">本周大模型主线：Google I/O Agent宣言四连发、DeepSeek 700亿+V4-Pro永久降价75%、Anthropic估值9000亿反超OpenAI、Claude Mythos自主发现安全漏洞、GPT-5.5发布vs价格战。</div>
-            <div class="table-wrap animate-on-scroll">
-<table><thead><tr><th>日期</th><th>事件</th><th>来源</th><th>重要度</th></tr></thead>
-<tbody>
-<tr><td>05-19</td><td><a href="https://www.cnet.com/tech/services-and-software/google-gemini-3-5-flash-spark-antigravity/" target="_blank">Gemini 3.5 Flash：agentic-first训练4倍速</a></td><td><a href="https://www.cnet.com/tech/services-and-software/google-gemini-3-5-flash-spark-antigravity/" target="_blank">CNET</a></td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-19</td><td><a href="https://www.cnet.com/tech/services-and-software/google-gemini-3-5-flash-spark-antigravity/" target="_blank">Gemini Spark：24/7云端AI智能体</a></td><td><a href="https://www.cnet.com/tech/services-and-software/google-gemini-3-5-flash-spark-antigravity/" target="_blank">CNET</a></td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-22</td><td><a href="https://www.theinformation.com/briefings/google-deepmind-hires-staff-licenses-technology-contextual-ai" target="_blank">Anthropic估值9000亿反超OpenAI</a></td><td><a href="https://www.theinformation.com/briefings/google-deepmind-hires-staff-licenses-technology-contextual-ai" target="_blank">The Information</a></td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-22</td><td>Claude Mythos自主发现30年安全漏洞</td><td>Anthropic</td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-23</td><td><a href="https://techcrunch.com/2026/04/24/deepseek-previews-new-ai-model-that-closes-the-gap-with-frontier-models/" target="_blank">DeepSeek V4-Pro永久降价75%</a></td><td><a href="https://techcrunch.com/2026/04/24/deepseek-previews-new-ai-model-that-closes-the-gap-with-frontier-models/" target="_blank">TechCrunch</a></td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-24</td><td>DeepSeek 700亿融资梁文锋200亿个人出资</td><td>AI洞察日报</td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-25</td><td>GPT-5.5发布vs DeepSeek价格战</td><td>AI洞察日报</td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-22</td><td>阿里云Qwen3.7-Max面向Agent全新设计</td><td>AI洞察日报</td><td>⭐⭐⭐⭐</td></tr>
-<tr><td>05-22</td><td>中国大模型周调用量1.81倍美国</td><td>工信部</td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-25</td><td>Anthropic承认Claude质量下降</td><td>Anthropic</td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-18</td><td><a href="https://www.reuters.com/legal/government/elon-musk-loses-lawsuit-against-openai-2026-05-18/" target="_blank">Musk诉OpenAI案败诉IPO障碍清除</a></td><td><a href="https://www.reuters.com/legal/government/elon-musk-loses-lawsuit-against-openai-2026-05-18/" target="_blank">Reuters</a></td><td>⭐⭐⭐⭐</td></tr>
-<tr><td>05-23</td><td>DeepSeek V4国产算力全栈迁移</td><td>AI洞察日报</td><td>⭐⭐⭐⭐</td></tr>
-</tbody></table></div>
-            <div class="stats-grid animate-on-scroll">
-                <div class="stat-card stat-purple"><div class="stat-value">3500亿</div><div class="stat-label">DeepSeek投后估值（人民币）</div></div>
-                <div class="stat-card stat-info"><div class="stat-value">9000亿</div><div class="stat-label">Anthropic估值反超OpenAI</div></div>
-                <div class="stat-card stat-success"><div class="stat-value">75%</div><div class="stat-label">V4-Pro永久降幅</div></div>
-                <div class="stat-card stat-warning"><div class="stat-value">1.81x</div><div class="stat-label">中国Token周调用vs美国</div></div>
-            </div>
-            </section>
-
-            <!-- AI CODING -->
-            <section id="coding">
-            <div class="doc-chapter-label animate-on-scroll">AI Coding</div>
-            <h2 class="animate-on-scroll">⌨️ AI Coding本周动态</h2>
-            <div class="callout callout-danger animate-on-scroll">本周AI Coding主线：Cursor 3多Agent并行+Trae SOLO免费全流程+Claude Code 1M GA三路线分化、习惯竞争取代功能竞争、Claude Code年化25亿美元、AI编程市场85亿美元。</div>
-            <div class="table-wrap animate-on-scroll">
-<table><thead><tr><th>日期</th><th>事件</th><th>来源</th><th>重要度</th></tr></thead>
-<tbody>
-<tr><td>05-19</td><td>AI编程spec-driven vs immediate-generation路线分歧</td><td>AI洞察日报</td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-22</td><td>DeepSeek Harness团队对标Claude Code</td><td>AI洞察日报</td><td>⭐⭐⭐⭐</td></tr>
-<tr><td>05-22</td><td>Kimi K2.5 Composer集成Cursor</td><td>Kimi</td><td>⭐⭐⭐⭐</td></tr>
-<tr><td>05-23</td><td>Claude Code 1M上下文窗口正式GA</td><td>Anthropic</td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-24</td><td>Code with Claude大会引爆编程范式之争</td><td>Anthropic</td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-25</td><td>Cursor 3多Agent并行Workspace</td><td>Cursor</td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-25</td><td>Trae SOLO端到端全流程闭环免费模式</td><td>字节</td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-20</td><td><a href="https://www.linos.ai/technology/ai-coding-assistants-cursor-copilot-claude-code-2026" target="_blank">AI编程市场85亿美元72%资深工程师依赖AI</a></td><td><a href="https://www.linos.ai/technology/ai-coding-assistants-cursor-copilot-claude-code-2026" target="_blank">Linos NEWS</a></td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-22</td><td>阿里云千问云150+模型API统一入口</td><td>AI洞察日报</td><td>⭐⭐⭐⭐</td></tr>
-<tr><td>05-19</td><td><a href="https://www.cnet.com/tech/services-and-software/google-gemini-3-5-flash-spark-antigravity/" target="_blank">Google Antigravity：agent-first开发平台</a></td><td><a href="https://www.cnet.com/tech/services-and-software/google-gemini-3-5-flash-spark-antigravity/" target="_blank">CNET</a></td><td>⭐⭐⭐⭐⭐</td></tr>
-</tbody></table></div>
-            <div class="stats-grid animate-on-scroll">
-                <div class="stat-card stat-success"><div class="stat-value">$25亿</div><div class="stat-label">Claude Code年化收入</div></div>
-                <div class="stat-card stat-info"><div class="stat-value">$85亿</div><div class="stat-label">AI编程市场规模</div></div>
-                <div class="stat-card stat-warning"><div class="stat-value">72%</div><div class="stat-label">资深工程师AI依赖率</div></div>
-                <div class="stat-card stat-purple"><div class="stat-value">1M</div><div class="stat-label">Claude Code上下文窗口</div></div>
-            </div>
-            </section>
-
-            <!-- AI APP -->
-            <section id="app">
-            <div class="doc-chapter-label animate-on-scroll">AI应用</div>
-            <h2 class="animate-on-scroll">📱 AI应用本周动态</h2>
-            <div class="callout callout-warning animate-on-scroll">本周AI应用主线：Google搜索AI Mode 10亿月活、Gemini Omni任意输入任意输出、ChatGPT接入银行账户、Kimi WebBridge浏览器自动化、AI Skill平台8000万月活。</div>
-            <div class="table-wrap animate-on-scroll">
-<table><thead><tr><th>日期</th><th>事件</th><th>来源</th><th>重要度</th></tr></thead>
-<tbody>
-<tr><td>05-19</td><td><a href="https://mashable.com/article/ai-search-announcements-google-io-2026" target="_blank">Google搜索AI Mode月活破10亿</a></td><td><a href="https://mashable.com/article/ai-search-announcements-google-io-2026" target="_blank">Mashable</a></td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-19</td><td><a href="https://mashable.com/article/ai-search-announcements-google-io-2026" target="_blank">Gemini Omni：任意输入→任意输出</a></td><td><a href="https://mashable.com/article/ai-search-announcements-google-io-2026" target="_blank">Mashable</a></td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-20</td><td><a href="https://techcrunch.com/2026/05/15/openai-launches-chatgpt-for-personal-finance-will-let-you-connect-bank-accounts/" target="_blank">ChatGPT接入银行账户</a></td><td><a href="https://techcrunch.com/2026/05/15/openai-launches-chatgpt-for-personal-finance-will-let-you-connect-bank-accounts/" target="_blank">TechCrunch</a></td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-24</td><td>Kimi WebBridge浏览器自动化上线</td><td>AI洞察日报</td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-22</td><td>阿里云千问云150+模型API统一入口</td><td>AI洞察日报</td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-24</td><td>AI Skill平台月活破8000万</td><td>AI洞察日报</td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-19</td><td><a href="https://www.androidauthority.com/gemini-intelligence-3665302/" target="_blank">Gemini Intelligence：Android系统级AI层</a></td><td><a href="https://www.androidauthority.com/gemini-intelligence-3665302/" target="_blank">Android Authority</a></td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-21</td><td>82%组织计划2026年集成AI Agent</td><td>量子位峰会</td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-19</td><td>可灵O1：首个大一统多模态创作工具</td><td>AI洞察日报</td><td>⭐⭐⭐⭐</td></tr>
-<tr><td>05-19</td><td><a href="https://www.androidauthority.com/what-to-expect-from-google-io-2026-3664979/" target="_blank">Android XR智能眼镜预览</a></td><td><a href="https://www.androidauthority.com/what-to-expect-from-google-io-2026-3664979/" target="_blank">Android Authority</a></td><td>⭐⭐⭐⭐</td></tr>
-</tbody></table></div>
-            <div class="stats-grid animate-on-scroll">
-                <div class="stat-card stat-success"><div class="stat-value">10亿</div><div class="stat-label">Google AI Mode月活</div></div>
-                <div class="stat-card stat-info"><div class="stat-value">8000万</div><div class="stat-label">AI Skill平台月活</div></div>
-                <div class="stat-card stat-warning"><div class="stat-value">82%</div><div class="stat-label">组织计划集成AI Agent</div></div>
-                <div class="stat-card stat-purple"><div class="stat-value">150+</div><div class="stat-label">千问云模型API数量</div></div>
-            </div>
-            </section>
-
-            <!-- AI INDUSTRY -->
-            <section id="industry">
-            <div class="doc-chapter-label animate-on-scroll">AI行业</div>
-            <h2 class="animate-on-scroll">🏭 AI行业本周动态</h2>
-            <div class="callout callout-success animate-on-scroll">本周AI行业主线：四小龙估值破万亿+DeepSeek 700亿+Kimi 136亿D轮、字节AI资本开支2000亿、DeepMind收购Contextual AI、全球VC 53%流向AI。</div>
-            <div class="table-wrap animate-on-scroll">
-<table><thead><tr><th>日期</th><th>事件</th><th>来源</th><th>重要度</th></tr></thead>
-<tbody>
-<tr><td>05-24</td><td>DeepSeek 700亿融资估值3500亿</td><td>AI洞察日报</td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-25</td><td>Kimi 136亿D轮创国内纪录</td><td>AI洞察日报</td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-23</td><td>月之暗面200亿美元冲刺IPO</td><td>AI洞察日报</td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-24</td><td><a href="https://k.sina.cn/article_7857201856_1d45362c001905a1pa.html" target="_blank">中国AI四小龙合并估值破万亿</a></td><td><a href="https://k.sina.cn/article_7857201856_1d45362c001905a1pa.html" target="_blank">新浪</a></td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-24</td><td>字节AI资本开支上调至2000亿</td><td>雪球</td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-22</td><td><a href="https://www.theinformation.com/briefings/google-deepmind-hires-staff-licenses-technology-contextual-ai" target="_blank">DeepMind收购Contextual AI团队</a></td><td><a href="https://www.theinformation.com/briefings/google-deepmind-hires-staff-licenses-technology-contextual-ai" target="_blank">The Information</a></td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-19</td><td>阶跃星辰25亿美元Pre-IPO</td><td>头条</td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-22</td><td><a href="https://aifundingtracker.com/ai-startup-funding-news-today/" target="_blank">Anduril H轮50亿创防务科技融资纪录</a></td><td><a href="https://aifundingtracker.com/ai-startup-funding-news-today/" target="_blank">AI Funding Tracker</a></td><td>⭐⭐⭐⭐</td></tr>
-<tr><td>05-25</td><td><a href="https://news.crunchbase.com/venture/record-breaking-funding-ai-global-q1-2026/" target="_blank">全球VC 53%流向AI初创</a></td><td><a href="https://news.crunchbase.com/venture/record-breaking-funding-ai-global-q1-2026/" target="_blank">Crunchbase</a></td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-19</td><td><a href="https://news.crunchbase.com/venture/record-breaking-funding-ai-global-q1-2026/" target="_blank">Q1全球VC创纪录AI占1/3</a></td><td><a href="https://news.crunchbase.com/venture/record-breaking-funding-ai-global-q1-2026/" target="_blank">Crunchbase</a></td><td>⭐⭐⭐⭐</td></tr>
-</tbody></table></div>
-            <div class="stats-grid animate-on-scroll">
-                <div class="stat-card stat-purple"><div class="stat-value">万亿</div><div class="stat-label">四小龙合并估值</div></div>
-                <div class="stat-card stat-success"><div class="stat-value">2000亿</div><div class="stat-label">字节AI资本开支</div></div>
-                <div class="stat-card stat-info"><div class="stat-value">136亿</div><div class="stat-label">Kimi D轮金额</div></div>
-                <div class="stat-card stat-warning"><div class="stat-value">53%</div><div class="stat-label">全球VC流向AI比例</div></div>
-            </div>
-            </section>
-
-            <!-- ENTERPRISE -->
-            <section id="enterprise">
-            <div class="doc-chapter-label animate-on-scroll">企业转型</div>
-            <h2 class="animate-on-scroll">🔄 企业AI转型本周动态</h2>
-            <div class="callout callout-warning animate-on-scroll">本周企业转型主线：央企AI转型必答题+80%融入主业、34%深度转型翻倍、微软安永10亿美元助推、Agent-first基础设施重构、SaaS→Agent-as-a-Service。</div>
-            <div class="table-wrap animate-on-scroll">
-<table><thead><tr><th>日期</th><th>事件</th><th>来源</th><th>重要度</th></tr></thead>
-<tbody>
-<tr><td>05-22</td><td>央企AI转型从可选项变必答题</td><td>AI洞察日报</td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-24</td><td>超20家央企完成大模型部署80%融入主业</td><td>AI洞察日报</td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-23</td><td>微软安永10亿美元助推企业AI转型</td><td>AI洞察日报</td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-23</td><td><a href="https://www.deloitte.com/ce/en/issues/generative-ai/state-of-ai-in-enterprise.html" target="_blank">Deloitte：34%企业开始深度转型翻倍</a></td><td><a href="https://www.deloitte.com/ce/en/issues/generative-ai/state-of-ai-in-enterprise.html" target="_blank">Deloitte</a></td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-21</td><td>88%已部署企业获正ROI回本6-18月</td><td>量子位峰会</td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-24</td><td>钉钉悟空"1-3个十倍提效场景先行"策略</td><td>钉钉</td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-24</td><td>PwC 3万员工规模化部署Claude</td><td>PwC</td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>05-19</td><td>中国移动MobileClaw：Token计价</td><td>AI洞察日报</td><td>⭐⭐⭐⭐</td></tr>
-<tr><td>05-22</td><td>欧盟AI法案修正案8月前建监管沙盒</td><td>欧盟</td><td>⭐⭐⭐⭐</td></tr>
-<tr><td>05-25</td><td>企业服务从SaaS转向Agent-as-a-Service</td><td>AI洞察日报</td><td>⭐⭐⭐⭐⭐</td></tr>
-</tbody></table></div>
-            <div class="stats-grid animate-on-scroll">
-                <div class="stat-card stat-success"><div class="stat-value">34%</div><div class="stat-label">企业深度转型率(翻倍)</div></div>
-                <div class="stat-card stat-info"><div class="stat-value">80%</div><div class="stat-label">央企大模型融入主业率</div></div>
-                <div class="stat-card stat-warning"><div class="stat-value">88%</div><div class="stat-label">已部署企业获正ROI</div></div>
-                <div class="stat-card stat-purple"><div class="stat-value">$10亿</div><div class="stat-label">微软安永AI转型投资</div></div>
-            </div>
-            </section>
-
-            <!-- DAILY INDEX -->
-            <section id="dailyindex">
-            <div class="doc-chapter-label animate-on-scroll">日报索引</div>
-            <h2 class="animate-on-scroll">📅 本周日报索引</h2>
-            <div class="daily-index animate-on-scroll">
-                <div class="daily-item">
-                    <div class="daily-item-date">2026-05-19 周一</div>
-                    <a href="https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-19-v3.html" target="_blank" class="daily-item-link">AI洞察日报</a>
-                    <div class="daily-item-kw">Google I/O Agent宣言 · Gemini四连发 · spec-driven编程路线 · Anduril50亿 · 阶跃星辰IPO</div>
-                </div>
-                <div class="daily-item">
-                    <div class="daily-item-date">2026-05-20 周二</div>
-                    <a href="https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-20-v3.html" target="_blank" class="daily-item-link">AI洞察日报</a>
-                    <div class="daily-item-kw">AI编程市场85亿美元 · ChatGPT接入银行 · Trae免费策略 · Kimi+Cursor · 千问云</div>
-                </div>
-                <div class="daily-item">
-                    <div class="daily-item-date">2026-05-21 周三</div>
-                    <a href="https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-21-v3.html" target="_blank" class="daily-item-link">AI洞察日报</a>
-                    <div class="daily-item-kw">82%组织计划集成Agent · 可灵O1多模态 · 阿里云峰会Agent宣言 · 88%获正ROI</div>
-                </div>
-                <div class="daily-item">
-                    <div class="daily-item-date">2026-05-22 周四</div>
-                    <a href="https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-22-v3.html" target="_blank" class="daily-item-link">AI洞察日报</a>
-                    <div class="daily-item-kw">Anthropic估值9000亿 · Claude Mythos · Harness对标Claude Code · 央企必答题 · DeepMind收购</div>
-                </div>
-                <div class="daily-item">
-                    <div class="daily-item-date">2026-05-23 周五</div>
-                    <a href="https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-23-v3.html" target="_blank" class="daily-item-link">AI洞察日报</a>
-                    <div class="daily-item-kw">DeepSeek永久降价75% · Claude Code 1M GA · 微软安永10亿 · 月暗IPO · 国产算力迁移</div>
-                </div>
-                <div class="daily-item">
-                    <div class="daily-item-date">2026-05-24 周六</div>
-                    <a href="https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-24-v3.html" target="_blank" class="daily-item-link">AI洞察日报</a>
-                    <div class="daily-item-kw">DeepSeek 700亿融资 · 四小龙破万亿 · Code with Claude大会 · 钉钉十倍策略 · PwC规模化</div>
-                </div>
-                <div class="daily-item">
-                    <div class="daily-item-date">2026-05-25 周日</div>
-                    <a href="https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-25-v3.html" target="_blank" class="daily-item-link">AI洞察日报</a>
-                    <div class="daily-item-kw">Cursor 3 + Trae SOLO · Kimi 136亿D轮 · GPT-5.5vs价格战 · Agent-as-a-Service · VC53%流向AI</div>
-                </div>
-            </div>
-            </section>
-
-            <!-- VOCABULARY -->
-            <section id="vocab">
-            <div class="doc-chapter-label animate-on-scroll">技术词汇</div>
-            <h2 class="animate-on-scroll">📖 技术词汇表</h2>
-            <div class="table-wrap animate-on-scroll">
-<table><thead><tr><th>术语</th><th>定义</th><th>出处</th></tr></thead>
-<tbody>
-<tr><td style="font-weight:600;">Agentic-first训练</td><td>Gemini 3.5 Flash专为Agent场景优化——多Agent协作、长期项目追踪、工具调用链，评价标准从"能答多难的问题"转向"能做多复杂的事"</td><td>Google I/O</td></tr>
-<tr><td style="font-weight:600;">Gemini Spark</td><td>Google 24/7云端个人AI智能体，锁屏后继续工作、主动编排任务、接入Gmail日历等核心服务</td><td>Google I/O</td></tr>
-<tr><td style="font-weight:600;">Gemini Intelligence</td><td>Android系统级AI智能体层，跨应用执行任务，AI从APP级功能升级为OS级基础设施</td><td>Google I/O</td></tr>
-<tr><td style="font-weight:600;">分厘定价</td><td>DeepSeek V4-Pro每百万Token输入2分5厘、输出6元的API定价策略，对比GPT-5.5 Pro输出1296元约200倍差距</td><td>DeepSeek</td></tr>
-<tr><td style="font-weight:600;">Harness</td><td>DeepSeek编程智能体团队，对标Claude Code，走国产自主路线</td><td>DeepSeek</td></tr>
-<tr><td style="font-weight:600;">WebBridge</td><td>Kimi浏览器自动化能力，AI从对话窗口走向浏览器操作执行</td><td>Kimi</td></tr>
-<tr><td style="font-weight:600;">千问云</td><td>阿里云150+模型API统一入口平台，开发者从"选模型"转向"选Agent方案"</td><td>阿里云</td></tr>
-<tr><td style="font-weight:600;">Antigravity</td><td>Google agent-first开发平台，与Gemini 3.5深度集成，编排构建部署Agent</td><td>Google I/O</td></tr>
-<tr><td style="font-weight:600;">习惯竞争</td><td>AI编程工具竞争维度从功能上升到习惯锁定——补贴是习惯重塑催化剂，不是永久策略</td><td>Linos NEWS</td></tr>
-<tr><td style="font-weight:600;">Agent-first基础设施</td><td>企业IT架构为Agent而非人类设计——API、权限体系、计费模式全链路重构</td><td>微软安永</td></tr>
-</tbody></table></div>
-            </section>
-
-            <!-- NARRATIVE -->
-            <section id="narrative">
-            <div class="doc-chapter-label animate-on-scroll">宏观叙事</div>
-            <h2 class="animate-on-scroll">🌊 宏观叙事：W22——Agent时代的宣言周与定价权的争夺周</h2>
-
-            <div class="callout callout-purple animate-on-scroll"><strong>本周的宏观叙事不是某个单一事件的爆发，而是宣言与定价的双重交汇。</strong></div>
-
-            <div class="callout callout-info animate-on-scroll" style="margin-top:16px;">
-<strong>宣言：三方同周宣告Agent时代正式开幕</strong><br><br>
-Google I/O发布"Google Search is AI Search"，阿里云宣布"云的用户正在从人变成Agent"，微软安永投入10亿美元助推Agent转型——三方同周宣言不是巧合，而是Agent时代正式开幕的共识信号。<br><br>
-从搜索公司到Agent公司，从卖算力到卖Agent基础设施，从教人用AI到为Agent设计系统——三条线从不同入口指向同一出口：AI下一个形态不是更好的模型而是更能干活的Agent。
-            </div>
-
-            <div class="callout callout-success animate-on-scroll" style="margin-top:16px;">
-<strong>定价：从"谁更聪明"转向"谁更便宜+更能干活"</strong><br><br>
-DeepSeek 700亿融资+V4-Pro永久1/4定价宣告大模型进入"分厘时代"，Anthropic估值9000亿反超OpenAI意味着Agent生产力估值超越模型估值，四小龙万亿估值押注的不是更好的模型而是能独立完成工作的Agent——定价权的争夺从"谁更聪明"转向"谁更便宜+更能干活"。<br><br>
-当模型差距实质性消除，价格和执行力成为真正的差异化武器。DeepSeek用1/4价格提供相当能力、Claude Code用25亿美元年化收入证明Agent是变现最短路径——两个信号指向同一结论：性价比+执行力=新的护城河。
-            </div>
-
-            <div class="callout callout-warning animate-on-scroll" style="margin-top:16px;">
-<strong>对从业者的启示</strong><br><br>
-1. <strong>选型看场景适配而非绝对性能</strong>——DeepSeek V4-Pro输出6元vs GPT-5.5 Pro输出1296元，差距约200倍<br>
-2. <strong>投资看Agent中间层而非模型层</strong>——编排/基建/安全/可观测是Agent时代的黄金赛道<br>
-3. <strong>推广看ROI而非工具本身</strong>——88%已部署企业获正ROI，回本6-18月<br><br>
-<strong>本周核心判断</strong>：宣言+定价=Agent时代规则确立。不是谁更强，而是谁更适合+谁更可控。
-            </div>
-
-            <hr style="border:none;border-top:2px solid var(--color-success);margin:32px 0;">
-            <div class="callout callout-success animate-on-scroll"><strong>发动机决定了上限，整车决定了交付</strong><br><br>
-Google I/O的四连发、DeepSeek的分厘定价、Anthropic的双寡头确立——三个看似独立的信号串联出同一结论：Agent时代不是模型更强的时代而是交付更完整、成本更可控、边界更清晰的时代。<br><br>本周最值得记住的是一个拐点和一个悖论同时显现：拐点是AI产业从"谁更聪明"转向"谁更便宜+更能干活"；悖论是Agent自主性越强可控性越弱。谁能先解决"自主执行+可控边界"的矛盾，谁就定义Agent时代的产品范式。</div>
-            </section>
-
-            <!-- 了解更多 -->
-            <div style="max-width:var(--content-max);margin:0 auto;padding:16px 20px 48px;">
-            <div style="background:linear-gradient(135deg,#F8FAFB 0%,#EEF2F6 100%);
-              border:1px solid #E7E5E4;border-radius:14px;padding:24px;
-              box-shadow:0 2px 8px rgba(31,35,40,.06)">
-              <div style="font-size:16px;font-weight:700;margin-bottom:8px">💡 了解更多</div>
-              <p style="font-size:14px;color:#57534E;line-height:1.7;margin:0 0 12px 0">
-                我是 <strong>林克</strong>，沈浪的AI分身。AI洞察是系统化追踪AI行业动态的项目，
-                覆盖大模型、AI Coding、AI应用、AI行业投融资、企业AI转型五大领域。
-              </p>
-              <a href="https://xiaoxiong20260206.github.io/ai-insight/" target="_blank"
-                style="display:inline-flex;padding:8px 16px;
-                background:linear-gradient(135deg,#059669,#10B981);
-                color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none">
-                🏠 访问AI洞察首页
-              </a>
-            </div>
-            </div>
-
-            <!-- FOOTER -->
-            <div class="doc-footer">
-                <p>🧠 林克（沈浪的AI分身） · AI洞察 · 周报 · 2026-W22</p>
-                <p style="margin-top:4px;">数据来源：AI洞察日报 2026-05-19 至 2026-05-25 · 5板块</p>
-            </div>
-        </div>
-    </main>
+{sidebar}
+<button class="sidebar-collapse-btn" id="collapseBtn" title="折叠导航" aria-label="折叠导航">«</button>
+<main class="content-area" id="main-content">
+<div class="content-inner">
+{chr(10).join(body_secs)}
+{footer}
 </div>
-
+</main>
+</div>
 <div class="scroll-to-top" id="scrollToTop">↑</div>
-<script>
-(function () {
-    "use strict";
-    const HEADER_OFFSET = 72;
-    const SPY_OFFSET    = 110;
-    const sidebar    = document.getElementById("sidebar");
-    const collapseBtn = document.getElementById("collapseBtn");
-    const progressBar = document.getElementById("readingProgress");
-    const scrollTopBtn = document.getElementById("scrollToTop");
-
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
-        link.addEventListener("click", e => {
-            const target = document.getElementById(link.getAttribute("href").slice(1));
-            if (!target) return;
-            e.preventDefault();
-            window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET, behavior: "smooth" });
-        });
-    });
-
-    const tocLinks = Array.from(document.querySelectorAll(".toc-link"));
-    const anchorEls = tocLinks.map(a => document.getElementById((a.getAttribute("href")||"").slice(1))).filter(Boolean);
-    function updateTocHighlight() {
-        const scrollY = window.scrollY + SPY_OFFSET;
-        let activeEl = anchorEls[0];
-        for (const el of anchorEls) { if (el && el.offsetTop <= scrollY) activeEl = el; else break; }
-        tocLinks.forEach(link => link.classList.toggle("toc-active", link.getAttribute("href") === "#" + (activeEl && activeEl.id)));
-    }
-
-    function updateProgress() {
-        if (!progressBar) return;
-        const total = document.documentElement.scrollHeight - window.innerHeight;
-        progressBar.style.width = (total > 0 ? Math.min(100, window.scrollY / total * 100) : 0).toFixed(1) + "%";
-    }
-
-    if (collapseBtn && sidebar) {
-        collapseBtn.addEventListener("click", () => {
-            const isCollapsed = sidebar.classList.toggle("sidebar-collapsed");
-            collapseBtn.textContent = isCollapsed ? "»" : "«";
-            collapseBtn.classList.toggle("collapsed-pos", isCollapsed);
-        });
-    }
-
-    scrollTopBtn && scrollTopBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
-
-    let ticking = false;
-    window.addEventListener("scroll", () => {
-        if (!ticking) {
-            requestAnimationFrame(() => {
-                updateTocHighlight(); updateProgress();
-                scrollTopBtn && scrollTopBtn.classList.toggle("visible", window.scrollY > 280);
-                ticking = false;
-            });
-            ticking = true;
-        }
-    }, { passive: true });
-
-    updateTocHighlight(); updateProgress();
-
-    const animEls = document.querySelectorAll(".animate-on-scroll");
-    if (!("IntersectionObserver" in window)) {
-        animEls.forEach(el => el.classList.add("visible"));
-    } else {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("visible");
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.06, rootMargin: "0px 0px -30px 0px" });
-        animEls.forEach(el => observer.observe(el));
-    }
-})();
-</script>
+{js_block}
 </body>
 </html>"""
+    
+    return html_head + "\n" + html_body
 
-with open('01-daily-reports/2026-05/weekly-2026-W22.html', 'w') as f:
-    f.write(W20_CSS_HEAD + W22_BODY)
+def validate_html(html, wid):
+    errs = []
+    sz = len(html.encode("utf-8"))
+    if sz < 50000: errs.append(f"HTML大小={sz}字节，低于50KB阈值")
+    if "{{message}}" in html or "{{" in html: errs.append("HTML包含{{...}}占位符（P0红线）")
+    for sid in ["llm","coding","app","industry","enterprise"]:
+        if f'id="{sid}"' not in html: errs.append(f"缺失板块: {sid}")
+    for cls in REQUIRED_CLASSES:
+        if cls not in html: errs.append(f"缺失class名: {cls}")
+    if "了解更多" not in html: errs.append("缺失底部了解更多模块（P0强制）")
+    if errs:
+        print(f"\n❌ HTML自校验失败 ({len(errs)}):")
+        for e in errs: print(f"  • {e}")
+        return False
+    print(f"\n✅ HTML自校验通过: {sz/1024:.1f}KB + 5板块 + {len(REQUIRED_CLASSES)}个class名 + 了解更多模块")
+    return True
 
-import os
-size = os.path.getsize('01-daily-reports/2026-05/weekly-2026-W22.html')
-print(f"W22 HTML size: {size} bytes ({size/1024:.1f} KB)")
+def main():
+    parser = argparse.ArgumentParser(description="AI周报HTML生成器（从JSON动态生成）")
+    parser.add_argument("--date", required=True, help="周号 YYYY-WXX")
+    parser.add_argument("--input", required=True, help="JSON文件路径")
+    parser.add_argument("--skip-validate", action="store_true", help="跳过HTML自校验")
+    args = parser.parse_args()
+    wid = args.date
+    jp = Path(args.input)
+    if not jp.exists(): print(f"❌ JSON文件不存在: {jp}"); sys.exit(1)
+    try: d = json.loads(jp.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as e: print(f"❌ JSON格式错误: {e}"); sys.exit(1)
+    print(f"📊 生成周报HTML: {wid}")
+    html = generate_html(d)
+    if not args.skip_validate and not validate_html(html, wid): sys.exit(1)
+    dt = compute_week_dates(wid)
+    ms = dt["month_str"]
+    op = REPORT_DIR / ms / f"weekly-{wid}.html"
+    op.parent.mkdir(parents=True, exist_ok=True)
+    op.write_text(html, encoding="utf-8")
+    sz = op.stat().st_size
+    print(f"✅ HTML已写入: {op} ({sz/1024:.1f}KB)")
+    pp = PUBLIC_DIR / "01-daily-reports" / ms / f"weekly-{wid}.html"
+    pp.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(op, pp)
+    ps = pp.stat().st_size
+    print(f"✅ 已同步到public/: {pp} ({ps/1024:.1f}KB)")
+    if abs(sz-ps)>100: print(f"⚠️ 源文件({sz})和public({ps})大小不一致！")
+    print(f"\n🔗 内部版URL: {INTERNAL_BASE}/01-daily-reports/{ms}/weekly-{wid}.html")
+
+if __name__ == "__main__":
+    main()
