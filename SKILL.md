@@ -113,6 +113,8 @@ ls user-skills/sl-ai-insight/.git/HEAD && ssh -o ConnectTimeout=5 -T git@github.
 | `daily_quality_gate.py` | 质量门（hard/soft分级） |
 | `build_insight_mixcard.py` | MixCard生成+自校验 |
 | `gen_daily_html.py` | HTML生成+自校验 |
+| `gen_weekly_json.py` | 周报JSON模板+schema验证 |
+| `gen_weekly_html.py` | 周报HTML生成（从JSON动态生成+自校验≥50KB+5板块+class名一致性+自动cp到public） |
 | `update_homepage.py` | 首页更新（统一入口，支持daily+weekly） |
 | `deploy_daily.sh` | 日报一键部署 |
 | `sync_to_public.py` | 内部版→public+外部版同步 |
