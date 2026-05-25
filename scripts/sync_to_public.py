@@ -202,6 +202,50 @@ REPLACEMENTS = _URL_REPLACEMENTS + [
 PUBLIC_SENSITIVE_WORDS = ['沈浪', '快手', 'Kuaishou', 'CodeFlicker', 'KATE', '天策', '天玑', 'KwaiBI', '小无相功', 'docs.corp.kuaishou', 'shenlang', 'KIM Doc', 'MyFlicker', 'myflicker']  # v12.0: 不含"林克/AI分身/让我负责/link-avatar/CF/SKILL.md"
 
 
+def _remove_tab(content: str, tab_label: str) -> str:
+    """从首页HTML中删除指定Tab及其对应的article面板。
+    
+    首页结构：
+    - Tab按钮: <span class="tab-label">xxx</span>
+    - 内容面板: <article id="xxx" class="tab-panel">...整个区块...</article>
+    """
+    result = content
+    
+    # 删除tab按钮
+    result = re.sub(rf'<span[^>]*class="tab-label"[^>]*>\s*{tab_label}\s*</span>', '', result)
+    
+    # 删除article面板（整个区块）
+    # 首页用 <article id="tracking/knowledge" class="tab-panel"> 包裹
+    tab_id_map = {"追踪体系": "tracking", "知识库": "knowledge"}
+    tab_id = tab_id_map.get(tab_label, tab_label.lower())
+    
+    # 匹配 <article id="xxx" class="tab-panel"> 到 </article>（包括所有嵌套内容）
+    # 使用逐层匹配策略：从article开始标签到对应的结束标签
+    start_pattern = rf'<article[^>]*id="{tab_id}"[^>]*class="tab-panel[^"]*"[^>]*>'
+    start_match = re.search(start_pattern, result)
+    if start_match:
+        # 找到对应的 </article> 结束标签（需要处理嵌套article）
+        pos = start_match.end()
+        depth = 1
+        while pos < len(result) and depth > 0:
+            next_open = result.find('<article', pos)
+            next_close = result.find('</article>', pos)
+            if next_close == -1:
+                break
+            if next_open != -1 and next_open < next_close:
+                depth += 1
+                pos = next_open + 8
+            else:
+                depth -= 1
+                if depth == 0:
+                    end_pos = next_close + len('</article>')
+                    result = result[:start_match.start()] + result[end_pos:]
+                    break
+                pos = next_close + len('</article>')
+    
+    return result
+
+
 def sanitize_html(content: str) -> str:
     """对HTML内容进行脱敏处理"""
     result = content
@@ -215,6 +259,30 @@ def sanitize_html(content: str) -> str:
         combined = ' '.join(texts) if texts else '知识条目'
         return f'<span class="kb-item-text">{combined}</span>'
     result = re.sub(r'<a\s+href="04-knowledge-base/[^"]*"[^>]*>.*?</a>', _replace_kb_link, result, flags=re.DOTALL)
+
+    # ===== 首页区块级删除（外部版不应包含内部特有区块）=====
+    # 删除追踪体系Tab（<span class="tab-label">追踪体系</span> 及其对应 tab-panel）
+    result = _remove_tab(result, "追踪体系")
+    # 删除知识库Tab
+    result = _remove_tab(result, "知识库")
+    # 删除人物追踪分类按钮（在深度调研Tab里）
+    result = re.sub(r'<button[^>]*class="cat-legend-item[^"]*"[^>]*onclick[^>]*>人物追踪</button>', '', result, flags=re.DOTALL)
+    # 删除深度调研cat-legend中的人物追踪条目（多种格式）
+    result = re.sub(r'<span[^>]*class="cat-legend-dot[^"]*"[^>]*></span>人物追踪', '', result)
+    # 删除人物追踪类卡片（含人物追踪meta标签的research-card）
+    # 匹配 <!-- 人物追踪类 --> 开始到下一个 <!-- xxx类 --> 或同级结束
+    result = re.sub(r'<!-- 人物追踪类 -->[\s\S]*?(?=<!-- [^人]|</div>\s*<!-- /深度)', '', result, flags=re.DOTALL)
+    # 删除research-card中的人物追踪meta
+    result = re.sub(r'<div[^>]*class="tc-meta[^"]*"[^>]*>[^<]*人物追踪[^<]*</div>', '', result, flags=re.DOTALL)
+    # 删除"建立追踪体系"流程步骤中的标题
+    result = re.sub(r'<div[^>]*class="flow-step-title[^"]*"[^>]*>建立追踪体系</div>', '<div class="flow-step-title">建立研究体系</div>', result)
+    # 删除highlight-desc中的追踪体系引用
+    result = re.sub(r'AI洞察主动规划追踪体系、每日执行调研、持续沉淀知识', 'AI洞察主动规划研究体系、每日执行调研、持续沉淀知识', result)
+    # 删除 <!-- 3. 追踪体系 --> 注释（虽然面板已删除，注释可能残留）
+    result = re.sub(r'<!-- 3. 追踪体系 -->', '', result)
+    # 删除 <!-- 4. 知识库 --> 注释
+    result = re.sub(r'<!-- 4. 知识库 -->', '', result)
+
     return result
 
 
