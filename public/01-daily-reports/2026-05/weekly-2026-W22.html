@@ -357,6 +357,70 @@
             .stats-grid { grid-template-columns: 1fr 1fr; }
             .header-title { font-size: 26px; }
         }
+    /* ===== WEEKLY REPORT FIX: Missing CSS Classes ===== */
+    
+    /* Layout */
+    .main-content { flex: 1; min-width: 0; }
+    
+    /* Header */
+    .doc-title { font-size: 34px; font-weight: 800; letter-spacing: -0.025em; background: var(--gradient-hero); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.2; margin-bottom: 10px; text-wrap: balance; }
+    .doc-subtitle { font-size: 13px; color: var(--color-text-muted); }
+    
+    /* Section */
+    .content-section { margin-bottom: 48px; }
+    .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--color-border-light); }
+    .section-emoji { font-size: 20px; }
+    .section-title { font-size: 21px; font-weight: 700; color: var(--color-text-primary); letter-spacing: -0.02em; line-height: 1.3; margin: 0; }
+    .section-body { }
+    
+    /* Overview Grid */
+    .overview-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 20px 0; }
+    .overview-card { background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 20px; box-shadow: var(--shadow-card); transition: transform var(--transition-normal), box-shadow var(--transition-normal); }
+    .overview-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+    .overview-icon { font-size: 24px; margin-bottom: 8px; }
+    .overview-label { font-size: 13px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 6px; }
+    .overview-text { font-size: 13px; color: var(--color-text-secondary); font-family: var(--font-family-cn); line-height: 1.6; }
+    
+    /* Top 5 Grid */
+    .top5-grid { display: grid; gap: 16px; }
+    .top5-card { background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-card); transition: transform var(--transition-normal), box-shadow var(--transition-normal); position: relative; overflow: hidden; }
+    .top5-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+    .top5-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--gradient-hero); }
+    .top5-badge { display: inline-block; font-size: 11px; font-weight: 800; color: var(--color-text-muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; background: var(--color-bg-table-header); padding: 2px 8px; border-radius: var(--radius-sm); }
+    
+    /* Generic Card */
+    .card-section { }
+    .card-badge { }
+    .card-title { font-size: 16px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 12px; line-height: 1.4; }
+    .card-content { font-size: 14px; font-family: var(--font-family-cn); line-height: 1.75; color: var(--color-text-secondary); margin-bottom: 12px; }
+    .card-source { font-size: 12px; color: var(--color-text-muted); margin-top: 10px; }
+    .card-source a { color: var(--color-info); text-decoration: none; }
+    .card-source a:hover { text-decoration: underline; }
+    
+    /* Insight Cards */
+    .insight-content { font-size: 14px; font-family: var(--font-family-cn); line-height: 1.75; color: var(--color-text-secondary); margin-bottom: 12px; }
+    .insight-highlight { font-size: 13px; background: rgba(124,58,237,0.08); padding: 10px 14px; border-radius: var(--radius-sm); margin-top: 10px; color: var(--color-purple); font-weight: 500; font-family: var(--font-family-cn); line-height: 1.6; }
+    
+    /* Linker Section */
+    .linker-card { background: linear-gradient(135deg, var(--color-success-50) 0%, var(--color-info-50) 100%); border: 1px solid rgba(5,150,105,0.15); border-radius: var(--radius-lg); padding: 20px 24px; margin-bottom: 12px; box-shadow: var(--shadow-card); }
+    .linker-content { font-size: 14px; font-family: var(--font-family-cn); line-height: 1.75; color: var(--color-text-secondary); }
+    
+    /* Data Table */
+    .data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .data-table th { padding: 10px 14px; text-align: left; font-weight: 600; font-size: 11px; color: var(--color-text-muted); letter-spacing: 0.06em; text-transform: uppercase; border-bottom: 1px solid var(--color-border); background: var(--color-bg-table-header); }
+    .data-table td { padding: 10px 14px; border-bottom: 1px solid var(--color-border-light); vertical-align: top; font-family: var(--font-family-cn); }
+    .data-table tbody tr:last-child td { border-bottom: none; }
+    .data-table tbody tr:hover { background: var(--color-bg-hover); }
+    
+    /* Macro */
+    .macro-card { background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 20px 24px; margin-bottom: 12px; box-shadow: var(--shadow-card); }
+    
+    /* Footer */
+    .footer-text { font-size: 12px; color: var(--color-text-muted); text-align: center; font-family: var(--font-family-cn); }
+    
+    /* TOC */
+    .toc-section { }
+    
     </style>
 </head>
 <body>
