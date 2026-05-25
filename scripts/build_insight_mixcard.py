@@ -233,15 +233,16 @@ def build_weekly(week_id: str) -> dict:
         year = date_obj.isocalendar()[0]
         week_num = date_obj.isocalendar()[1]
 
-    # 计算周日期范围
-    monday = datetime.strptime(f"{year}-W{week_num:02d}-1", "%G-W%V-%u")
-    sunday = monday + timedelta(days=6)
-    date_range = f"{monday.strftime('%m/%d')}-{sunday.strftime('%m/%d')}"
+    # 计算周日期范围——从MD内容提取（最准确）
+    # 兜底：ISO周号-1周
+    iso_monday = datetime.strptime(f"{year}-W{week_num:02d}-1", "%G-W%V-%u")
+    fallback_monday = iso_monday - timedelta(days=7)
+    fallback_sunday = iso_monday - timedelta(days=1)
 
     # 查找周报文件（动态搜索月目录，不硬编码月份）
     weekly_patterns = [
-        PROJECT_ROOT / "01-daily-reports" / monday.strftime("%Y-%m") / f"weekly-{year}-W{week_num:02d}.md",
-        PROJECT_ROOT / "01-daily-reports" / sunday.strftime("%Y-%m") / f"weekly-{year}-W{week_num:02d}.md",
+        PROJECT_ROOT / "01-daily-reports" / fallback_monday.strftime("%Y-%m") / f"weekly-{year}-W{week_num:02d}.md",
+        PROJECT_ROOT / "01-daily-reports" / fallback_sunday.strftime("%Y-%m") / f"weekly-{year}-W{week_num:02d}.md",
         PROJECT_ROOT / "01-daily-reports" / f"weekly-{year}-W{week_num:02d}.md",
     ]
 
@@ -253,6 +254,27 @@ def build_weekly(week_id: str) -> dict:
                 content = f.read()
             found = True
             break
+
+    # 从MD内容提取日期范围（最准确的方式）
+    date_range = None
+    coverage_sunday = fallback_sunday
+    if found and content:
+        # 匹配标题中的日期范围，如 "05/19 - 05/25" 或 "05.19-05.25"
+        date_match = re.search(r'(\d{2}[./]\d{2})\s*[-–至到]\s*(\d{2}[./]\d{2})', content)
+        if date_match:
+            start_str = date_match.group(1).replace('.', '/')
+            end_str = date_match.group(2).replace('.', '/')
+            try:
+                start_date = datetime.strptime(f"{year}-{start_str}", "%Y-%m/%d")
+                end_date = datetime.strptime(f"{year}-{end_str}", "%Y-%m/%d")
+                date_range = f"{start_date.strftime('%m/%d')}-{end_date.strftime('%m/%d')}"
+                coverage_sunday = end_date
+            except ValueError:
+                pass
+    
+    if not date_range:
+        # 兜底：ISO周号-1周
+        date_range = f"{fallback_monday.strftime('%m/%d')}-{fallback_sunday.strftime('%m/%d')}"
 
     # 提取 Top 5、周度洞察、林克的洞察
     top5_text = ""
@@ -277,8 +299,8 @@ def build_weekly(week_id: str) -> dict:
     if not top5_text:
         top5_text = "(周报尚未生成，请先生成周报后再推送)"
 
-    # 周报 URL：使用周日的月份目录（周报通常存在周日所在月份）
-    month_str = sunday.strftime("%Y-%m")
+    # 周报 URL：使用覆盖周的月份目录（周报存在数据覆盖周的月份）
+    month_str = coverage_sunday.strftime("%Y-%m")
     weekly_url = f"{REPORT_BASE_URL}/{month_str}/weekly-{year}-W{week_num:02d}.html"
 
     blocks = [
