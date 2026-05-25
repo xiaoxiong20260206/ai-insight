@@ -132,6 +132,16 @@ def update_weekly_card(index_path: Path, week_id: str, month: str, title: str, d
     content = re.sub(
         r'<div class="wrc-title">AI 周报 · 第\d+周（[\d.]+ - [\d.]+）',
         f'<div class="wrc-title">AI 周报 · {title}', content)
+    
+    # 更新描述
+    if desc:
+        content = re.sub(
+            r'<div class="wrc-desc">.*?</div>',
+            f'<div class="wrc-desc">{desc}</div>', content, count=1)
+    
+    index_path.write_text(content, encoding="utf-8")
+    print(f"  ✅ 周报卡片已更新: {title}")
+    return True
 
 
 def update_weekly_pill(index_path: Path, week_id: str, month: str, date_range: str) -> bool:
@@ -173,16 +183,6 @@ def update_weekly_pill(index_path: Path, week_id: str, month: str, date_range: s
     
     index_path.write_text(content, encoding="utf-8")
     print(f"  ✅ 周报pill已添加 {week_id} ({date_range})")
-    return True
-
-    # 更新描述
-    desc_idx = content.find('<div class="wrc-desc">')
-    if desc_idx >= 0:
-        end_idx = content.find('</div>', desc_idx) + len('</div>')
-        content = content[:desc_idx] + f'<div class="wrc-desc">{desc}</div>' + content[end_idx:]
-
-    index_path.write_text(content, encoding="utf-8")
-    print(f"  ✅ 周报卡片已更新: {title}")
     return True
 
 
