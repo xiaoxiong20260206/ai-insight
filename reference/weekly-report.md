@@ -70,65 +70,56 @@ week_num = monday.isocalendar()[1]
 
 ---
 
-## Step 2: 汇总分析 → 周报MD
+## Step 2: 汇总分析 → 周报JSON
 
-### 内容结构
-- **Top 5**: 5条最重要事件（行业影响力+关注度+趋势信号+数据冲击+政策意义）
-- **周度洞察**: 跨板块共同主题 + 趋势强化/反转 + 数据/事件含义（至少2条）
-- **林克的洞察**: 独立判断段落
-- **日报索引**: 周一到周日所有已有日报
-- **技术词汇表**: 8-10条新术语（≥50KB补充）
-- **宏观叙事**: 本周主题叙事段落（≥50KB补充）
+### 内容结构（JSON格式）
+周报内容现在使用JSON格式输出（约200行），由 `gen_weekly_html.py` 从JSON动态生成HTML（约900行）。LLM只需输出JSON，不再手拼HTML。
+
+**JSON生成命令**：
+```bash
+# 生成空白模板
+uv run scripts/gen_weekly_json.py --date YYYY-WXX --template
+
+# LLM填写模板后，验证JSON
+uv run scripts/gen_weekly_json.py --date YYYY-WXX --validate
+```
+
+**JSON schema必须包含**：
+- `overview`: 概览表格5行 + 统计卡片5个
+- `top5`: 5条最重要事件（label/title/source/desc/why/accent）
+- `insights`: 至少2条洞察（tag_label/title/content/trend_links）
+- `link_insight`: intro_callout/turning_point/paradox/takeaway
+- `sections`: 5板块（llm/coding/app/industry/enterprise），每个含callout+table+stats
+- `daily_index`: 7天日报索引（自动从模板生成URL）
+- `vocab`: 8-10条技术术语
+- `narrative`: 宏观叙事（title/intro_callout/main_blocks/conclusion_callout）
 
 ### 质量规则
-- Top5和洞察必须有 `[文字](URL)` 超链接（URL来自日报JSON）
+- JSON必须通过 `gen_weekly_json.py --validate` 校验
+- Top5每条source行必须包含超链接（URL来自日报JSON）
 - 禁止KIM Doc内部链接（docs.corp.kuaishou.com）
 - 外部版深度调研链接文案="深度调研"，不加"完整版"
 
 ---
 
-## Step 3: 生成周报HTML（≥50KB）
+## Step 3: 生成周报HTML（≥50KB）— 从JSON自动生成
 
-文件路径：`01-daily-reports/YYYY-MM/weekly-YYYY-WXX.md` + `.html`
-
-### HTML规范
-- 清爽调研风格 v5.0（复用日报CSS/JS模板：`templates/daily-report-v3.css` + `.js`）
-- **HTML结构必须使用W20一致的class名体系**（news-card/stat-card/insight-card/callout/doc-chapter-label/daily-index/table-wrap）
-- Top5卡片source行有 `<a href>` 链接
-- 各板块事件表格有 `<a href>` 链接
-- `<50KB时补充技术词汇表+宏观叙事`
-- 底部"了解更多"模块（P0强制，见 output-format-spec.md）
-
-### MD→HTML class名映射表（强制遵守）
-
-| MD结构 | HTML结构 | class名 |
-|--------|----------|---------|
-| ## 📋 本周概览 | `#overview` section | — |
-| 概览表格 | `.table-wrap` + `<table>` | — |
-| 统计数字 | `.stats-grid` + `.stat-card .stat-value/.stat-label` | `.stat-info/.stat-success/.stat-warning/.stat-purple/.stat-danger` |
-| ### 1. [Top5标题] | `.news-card` | `style="--card-accent: var(--color-purple/info/success/danger/warning)"` |
-| Top5排名 | `.news-card-rank` | — |
-| Top5标题 | `.news-card-title` | — |
-| Top5来源 | `.news-card-source` | — |
-| Top5摘要 | `.news-card-desc` | — |
-| Top5为什么重要 | `.news-card-why` | — |
-| ## 💡 周度洞察 | `#insight` section | `.insight-card` + `.insight-tag/title/trend` |
-| ## 🧠 林克的洞察 | `#linkinsight` section | `.callout.callout-purple/info/success/warning` |
-| 板块事件表格 | `.table-wrap` + `<table>` | — |
-| ## 📅 日报索引 | `#dailyindex` section | `.daily-index` + `.daily-item` |
-| ## 📖 技术词汇 | `#vocab` section | `.table-wrap` + `<table>` |
-| ## 🌊 宏观叙事 | `#narrative` section | `.callout` 系列 |
-
-### 生成方式
-
-**优先使用脚本**（如果 `gen_weekly_html.py` 已改造为动态版本）：
+**脚本化流程（不再手拼HTML）**：
 ```bash
+# 从JSON生成HTML（自动：CSS模板+JS模板+自校验+cp到public）
 uv run scripts/gen_weekly_html.py --date YYYY-WXX --input data/weekly-content-YYYY-WXX.json
+
+# 脏检查：≥50KB + 5板块 + {{message}}=0 + 8个class名 + 了解更多模块
+# 脚本已自动完成，无需手动验证
 ```
 
-**手动生成时**：使用W20的HTML作为CSS/JS模板骨架，只替换 `<body>` 内的内容部分。禁止自创class名。
+**如果JSON校验或HTML校验失败**：回到Step 2修复JSON内容，重新运行。
 
-验证：`wc -c *.html` 必须 ≥50000字节
+### 手动备选方案（脚本不可用时）
+- 使用W20的HTML作为CSS/JS模板骨架
+- 只替换 `<body>` 内的内容部分
+- 禁止自创class名（必须使用映射表中的class名）
+- 手动验证：`wc -c *.html` 必须≥50000字节 + 手动cp到public/
 
 ---
 
