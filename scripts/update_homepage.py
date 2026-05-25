@@ -310,19 +310,23 @@ def verify_homepage(date_str: str = "", week_id: str = "") -> bool:
 
     # 3. 外部版：HTML 文件必须存在
     if week_id:
-        # 从 week_id 计算月份目录
+        # 从 week_id 计算月份目录 — 必须和 gen_weekly_html.py 一致
+        # gen_weekly_html.py 用 coverage_sunday (= ISO周一-1天) 的月份
+        # 周报覆盖的是"上一周"数据，所以month_str取覆盖范围最后一天（周日）的月份
         week_num = int(week_id.split("-W")[1])
         year = int(week_id.split("-")[0])
         from datetime import timedelta
-        monday_dt = datetime.strptime(f"{year}-W{week_num:02d}-1", "%G-W%V-%u")
-        sunday_dt = monday_dt + timedelta(days=6)
-        month_str = sunday_dt.strftime("%Y-%m")
+        iso_monday = datetime.strptime(f"{year}-W{week_num:02d}-1", "%G-W%V-%u")
+        coverage_sunday = iso_monday - timedelta(days=1)  # 和gen_weekly_html.py一致
+        month_str = coverage_sunday.strftime("%Y-%m")
         
         ext_repo = PROJECT_ROOT.parent / "ai-insight-public"
         if ext_repo.exists():
             ext_html = ext_repo / "01-daily-reports" / month_str / f"weekly-{week_id}.html"
             if not ext_html.exists():
-                errors.append(f"❌ 外部版周报HTML缺失: {ext_html}")
+                # 外部版HTML在Step 5(sync_to_external)后才同步，Step 4时可能不存在
+                # 改为WARNING而非硬性ERROR，避免首页更新阶段误判
+                print(f"  ⚠️ 外部版周报HTML尚未同步（将在Step 5 sync_to_external后到位）: {ext_html}")
             ext_index = ext_repo / "index.html"
             if ext_index.exists() and week_id not in ext_index.read_text(encoding="utf-8"):
                 errors.append(f"❌ 外部版首页未包含 {week_id}")
