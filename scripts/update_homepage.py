@@ -133,6 +133,48 @@ def update_weekly_card(index_path: Path, week_id: str, month: str, title: str, d
         r'<div class="wrc-title">AI 周报 · 第\d+周（[\d.]+ - [\d.]+）',
         f'<div class="wrc-title">AI 周报 · {title}', content)
 
+
+def update_weekly_pill(index_path: Path, week_id: str, month: str, date_range: str) -> bool:
+    """在首页往期周报pills区新增当前周报的pill链接"""
+    content = index_path.read_text(encoding="utf-8")
+    
+    # pill HTML模板
+    pill_html = f'''                        <a href="01-daily-reports/{month}/weekly-{week_id}.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--color-bg-table-header); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); font-size: 12px; color: var(--color-info); text-decoration: none; transition: all 0.15s;">{week_id}<span style="font-size: 10px; color: var(--color-text-muted);">{date_range}</span></a>'''
+    
+    # 检查是否已存在该pill
+    if f'weekly-{week_id}.html' in content and '往期周报' in content:
+        print(f"  ⏭️ 周报pill已包含 {week_id}")
+        return True
+    
+    # 在往期周报区块开头插入新pill（最新的排在最前）
+    pill_marker = '                        <a href="01-daily-reports/'
+    # 找到往期周报区块的第一个pill
+    pills_section = '<!-- 往期周报快速入口 -->'
+    if pills_section not in content:
+        print(f"  ⚠️ 未找到往期周报区块，跳过pill更新")
+        return True  # 不是硬性失败
+    
+    # 在第一个pill之前插入新pill
+    # 找往期周报区块后面的第一个pill链接
+    pills_start = content.find(pills_section)
+    if pills_start == -1:
+        print(f"  ⚠️ 未找到往期周报区块标记")
+        return True
+    
+    # 从pills_section往后找到第一个pill <a>标签
+    first_pill_pos = content.find(pill_marker, pills_start)
+    if first_pill_pos == -1:
+        print(f"  ⚠️ 未找到往期周报pill链接")
+        return True
+    
+    # 在第一个pill前插入新pill+换行
+    insert_pos = first_pill_pos
+    content = content[:insert_pos] + pill_html + '\n' + content[insert_pos:]
+    
+    index_path.write_text(content, encoding="utf-8")
+    print(f"  ✅ 周报pill已添加 {week_id} ({date_range})")
+    return True
+
     # 更新描述
     desc_idx = content.find('<div class="wrc-desc">')
     if desc_idx >= 0:
@@ -345,6 +387,10 @@ def main():
         print("\n📋 Step 1: 更新周报入口卡片")
         update_weekly_card(PROJECT_ROOT / "index.html", week_id,
                            args.week_month, args.week_title, args.week_desc)
+
+        print("\n📋 Step 1.5: 更新周报pill")
+        update_weekly_pill(PROJECT_ROOT / "index.html", week_id,
+                          args.week_month, args.week_title.replace("第", "").replace("周（", "").replace("）", "").strip())
 
         print("\n📋 Step 2: 更新周报日历数据")
         update_calendar_weekly(PROJECT_ROOT / "index.html", args.week_month, args.week_day, week_id)
