@@ -136,7 +136,7 @@ ls user-skills/sl-ai-insight/.git/HEAD && ssh -o ConnectTimeout=5 -T git@github.
 | 类型 | 推送范围 | 禁止 |
 |------|---------|------|
 | 日报 | 私发订阅者 | ❌禁止群发 |
-| 周报 | 发所有群 | 正常 |
+| 周报 | 仅发AI生产力中心大群(space:6783643915686960) | ❌禁止发其他群 |
 
 ---
 
