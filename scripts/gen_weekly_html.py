@@ -32,6 +32,15 @@ CUSTOM_CSS = BASE_DIR / "templates" / "ai-insight-custom.css"
 
 ACCENT_MAP = {"purple":"var(--color-purple)","info":"var(--color-info)",
               "success":"var(--color-success)","warning":"var(--color-warning)","danger":"var(--color-danger)"}
+
+SECTION_META = {
+    "llm":        {"icon": "🧠", "label": "大模型",    "h2_suffix": "大模型本周动态"},
+    "coding":     {"icon": "⌨️", "label": "AI Coding", "h2_suffix": "AI Coding本周动态"},
+    "app":        {"icon": "📱", "label": "AI应用",    "h2_suffix": "AI应用本周动态"},
+    "industry":   {"icon": "🏭", "label": "AI行业",    "h2_suffix": "AI行业本周动态"},
+    "enterprise": {"icon": "🔄", "label": "企业转型",   "h2_suffix": "企业AI转型本周动态"},
+}
+
 REQUIRED_CLASSES = ["news-card","stat-card","insight-card","callout",
                     "doc-header","daily-index","table-wrap","doc-chapter-label"]
 
@@ -87,23 +96,25 @@ def render_link_insight(d):
         if b: blocks += f'<div class="callout {b.get("class","callout-info")} animate-on-scroll" style="margin-top:16px;">{b.get("content","")}</div>\n'
     return f'<section id="linkinsight">\n<div class="doc-chapter-label animate-on-scroll">林克的洞察</div>\n<h2 class="animate-on-scroll">🧠 林克的洞察</h2>\n{intro}\n{blocks}\n</section>'
 
-def render_section(sec):
-    id_ = sec.get("id","")
-    icon = sec.get("icon","")
-    title = sec.get("title","")
+def render_section(key, sec):
+    """渲染五大板块，key是llm/coding/app/industry/enterprise"""
+    meta = SECTION_META.get(key, {"icon": "📌", "label": key, "h2_suffix": key})
+    id_ = key
+    icon = meta["icon"]
+    title = meta["h2_suffix"]
     co = sec.get("callout","")
     cocl = sec.get("callout_class","callout-info")
     co_html = f'<div class="callout {cocl} animate-on-scroll">{co}</div>' if co else ""
     tbl = sec.get("table",[])
     tbl_html = ""
     if tbl:
-        rows = "".join(f'<tr><td>{r.get("date","")}</td><td>{r.get("event","")}</td><td>{r.get("source","")}</td><td>{r.get("importance","")}</td></tr>\n' for r in tbl)
-        tbl_html = f'<div class="table-wrap animate-on-scroll">\n<table><thead><tr><th>日期</th><th>事件</th><th>来源</th><th>重要度</th></tr></thead>\n<tbody>{rows}</tbody></table></div>'
+        rows = "".join(f'<tr><td>{r.get("event","")}</td><td>{r.get("source","")}</td><td><a href="{r.get("url","")}" target="_blank">链接</a></td></tr>\n' for r in tbl)
+        tbl_html = f'<div class="table-wrap animate-on-scroll">\n<table><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>\n<tbody>{rows}</tbody></table></div>'
     stats = sec.get("stats",[])
     stats_html = ""
     if stats:
         stats_html = '<div class="stats-grid animate-on-scroll">\n' + "".join(f'  <div class="stat-card {s.get("class","stat-info")}"><div class="stat-value">{s["value"]}</div><div class="stat-label">{s["label"]}</div></div>\n' for s in stats) + '</div>'
-    return f'<section id="{id_}">\n<div class="doc-chapter-label animate-on-scroll">{icon}</div>\n<h2 class="animate-on-scroll">{icon} {title}</h2>\n{co_html}\n{tbl_html}\n{stats_html}\n</section>'
+    return f'<section id="{id_}">\n<div class="doc-chapter-label animate-on-scroll">{meta["label"]}</div>\n<h2 class="animate-on-scroll">{icon} {title}</h2>\n{co_html}\n{tbl_html}\n{stats_html}\n</section>'
 
 def render_daily_index(d):
     items = d.get("daily_index",[])
@@ -165,7 +176,7 @@ def generate_html(d):
     body_secs = [header, render_overview(d), render_top5(d), render_insights(d), render_link_insight(d)]
     for k in ["llm","coding","app","industry","enterprise"]:
         s = d.get("sections",{}).get(k,{})
-        if s: body_secs.append(render_section(s))
+        if s: body_secs.append(render_section(k, s))
     body_secs.append(render_daily_index(d))
     v = render_vocab(d)
     if v: body_secs.append(v)
@@ -236,11 +247,12 @@ def validate_html(html, wid):
 def main():
     parser = argparse.ArgumentParser(description="AI周报HTML生成器（从JSON动态生成）")
     parser.add_argument("--date", required=True, help="周号 YYYY-WXX")
-    parser.add_argument("--input", required=True, help="JSON文件路径")
+    parser.add_argument("--input", default=None, help="JSON文件路径（默认 data/weekly-content-YYYY-WXX.json）")
     parser.add_argument("--skip-validate", action="store_true", help="跳过HTML自校验")
     args = parser.parse_args()
     wid = args.date
-    jp = Path(args.input)
+    json_path = args.input if args.input else str(BASE_DIR / "data" / f"weekly-content-{wid}.json")
+    jp = Path(json_path)
     if not jp.exists(): print(f"❌ JSON文件不存在: {jp}"); sys.exit(1)
     try: d = json.loads(jp.read_text(encoding="utf-8"))
     except json.JSONDecodeError as e: print(f"❌ JSON格式错误: {e}"); sys.exit(1)
