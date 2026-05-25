@@ -38,7 +38,7 @@ ls user-skills/sl-ai-insight/.git/HEAD && ssh -o ConnectTimeout=5 -T git@github.
 
 ```
 Step 1: 读取本周日报 → 日期验证 + URL提取
-Step 2: 汇总分析 → Top5 + 洞察 → 周报JSON
+Step 2: 汇总分析 → Top5 + 洞察 → 周报JSON + MD
 Step 3: 生成周报HTML（≥50KB + 来源超链接）— 从JSON自动生成
 Step 4: 首页更新 → update_homepage.py --type weekly
 Step 5: 部署 + 外部同步 → sync_to_external
@@ -70,10 +70,10 @@ week_num = monday.isocalendar()[1]
 
 ---
 
-## Step 2: 汇总分析 → 周报JSON
+## Step 2: 汇总分析 → 周报JSON + MD
 
-### 内容结构（JSON格式）
-周报内容现在使用JSON格式输出（约200行），由 `gen_weekly_html.py` 从JSON动态生成HTML（约900行）。LLM只需输出JSON，不再手拼HTML。
+### JSON（脚本化输入）
+周报内容使用JSON格式输出（约200行），由 `gen_weekly_html.py` 从JSON动态生成HTML。
 
 **JSON生成命令**：
 ```bash
@@ -84,15 +84,20 @@ uv run scripts/gen_weekly_json.py --date YYYY-WXX --template
 uv run scripts/gen_weekly_json.py --date YYYY-WXX --validate
 ```
 
-**JSON schema必须包含**：
-- `overview`: 概览表格5行 + 统计卡片5个
-- `top5`: 5条最重要事件（label/title/source/desc/why/accent）
-- `insights`: 至少2条洞察（tag_label/title/content/trend_links）
-- `link_insight`: intro_callout/turning_point/paradox/takeaway
-- `sections`: 5板块（llm/coding/app/industry/enterprise），每个含callout+table+stats
-- `daily_index`: 7天日报索引（自动从模板生成URL）
-- `vocab`: 8-10条技术术语
-- `narrative`: 宏观叙事（title/intro_callout/main_blocks/conclusion_callout）
+### MD（KIM Doc + MixCard源文件）
+**⚠️ MD文件必须同时生成** — `build_insight_mixcard.py` 从MD提取Top5+洞察+日期范围。不生成MD → MixCard内容为空 → 推送失败。
+
+MD文件路径：`01-daily-reports/YYYY-MM/weekly-YYYY-WXX.md`
+
+MD内容结构：
+- **Top 5**: 5条最重要事件（行业影响力+关注度+趋势信号+数据冲击+政策意义）
+- **周度洞察**: 跨板块共同主题 + 趋势强化/反转 + 数据/事件含义（至少2条）
+- **林克的洞察**: 独立判断段落
+- **日报索引**: 周一到周日所有已有日报
+- **技术词汇表**: 8-10条新术语（≥50KB补充）
+- **宏观叙事**: 本周主题叙事段落（≥50KB补充）
+
+标题格式必须是 `# 📊 AI 洟察周报 · YYYY年第XX周（MM/DD - MM/DD）` — MixCard从标题提取日期范围。
 
 ### 质量规则
 - JSON必须通过 `gen_weekly_json.py --validate` 校验
