@@ -38,8 +38,8 @@ ls user-skills/sl-ai-insight/.git/HEAD && ssh -o ConnectTimeout=5 -T git@github.
 
 ```
 Step 1: 读取本周日报 → 日期验证 + URL提取
-Step 2: 汇总分析 → Top5 + 洞察 → 周报MD
-Step 3: 生成周报HTML（≥50KB + 来源超链接）
+Step 2: 汇总分析 → Top5 + 洞察 → 周报JSON
+Step 3: 生成周报HTML（≥50KB + 来源超链接）— 从JSON自动生成
 Step 4: 首页更新 → update_homepage.py --type weekly
 Step 5: 部署 + 外部同步 → sync_to_external
 Step 6: KIM推送 → build_insight_mixcard.py weekly → message(kimMixCard)
