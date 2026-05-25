@@ -6,11 +6,31 @@
 
 ---
 
-## ⚠️ 执行前（2条）
+## ⚠️ 执行前（4条 — 元执行P1保障）
+
+### P1-1: 环境初始化
+```bash
+export PATH="$HOME/.local/bin:$PATH"
+which uv || (curl -LsSf https://astral.sh/uv/install.sh | sh && export PATH="$HOME/.local/bin:$PATH")
+ls user-skills/sl-ai-insight/.git/HEAD && ssh -o ConnectTimeout=5 -T git@github.com
+```
+
+### P1-2: 技能加载（读完才能动手）
+必须**按顺序**读完以下文件后才能执行任何步骤：
+1. `SKILL.md`（P0红线9条）
+2. `reference/output-format-spec.md`（公共规范：HTML≥50KB+了解更多模块+超链接规则）
+3. `reference/weekly-report.md`（本文件：周报6步流程+自检清单）
+
+### P1-3: 踩坑检索
+读完本文件「踩坑教训」部分，确认理解：
+- W18: 日历正则 `[^}]+` 无法匹配嵌套 `{}` → silent skip → 误判ok
+- W22全部6类问题：cron直接群发跳过确认、CSS/class名不匹配、public/截断版、首页pills错误、MixCard日期错误、外部版暴露内部内容
+
+### P1-4: 自检声明
+执行前输出：`"我已读完SKILL.md+output-format-spec.md+weekly-report.md+踩坑教训，理解9条P0红线，准备执行Step 1"`
 
 1. **确认类型**: 周日出周报，其他出日报。周号计算：`date +%G-W%V`（当前周号，周报cron在周一执行生成当前周的周报）
 2. **⚠️ MixCard按钮URL校验**：推送前必须用 `--verify-urls` 确认按钮URL可达（HTTP 200）。如果HTML还没部署完成，不能推送MixCard。
-3. **环境检查**: `ls user-skills/sl-ai-insight/.git/HEAD && ssh -o ConnectTimeout=5 -T git@github.com`
 
 ---
 
@@ -72,10 +92,41 @@ week_num = monday.isocalendar()[1]
 文件路径：`01-daily-reports/YYYY-MM/weekly-YYYY-WXX.md` + `.html`
 
 ### HTML规范
-- 清爽调研风格 v5.0
+- 清爽调研风格 v5.0（复用日报CSS/JS模板：`templates/daily-report-v3.css` + `.js`）
+- **HTML结构必须使用W20一致的class名体系**（news-card/stat-card/insight-card/callout/doc-chapter-label/daily-index/table-wrap）
 - Top5卡片source行有 `<a href>` 链接
 - 各板块事件表格有 `<a href>` 链接
 - `<50KB时补充技术词汇表+宏观叙事`
+- 底部"了解更多"模块（P0强制，见 output-format-spec.md）
+
+### MD→HTML class名映射表（强制遵守）
+
+| MD结构 | HTML结构 | class名 |
+|--------|----------|---------|
+| ## 📋 本周概览 | `#overview` section | — |
+| 概览表格 | `.table-wrap` + `<table>` | — |
+| 统计数字 | `.stats-grid` + `.stat-card .stat-value/.stat-label` | `.stat-info/.stat-success/.stat-warning/.stat-purple/.stat-danger` |
+| ### 1. [Top5标题] | `.news-card` | `style="--card-accent: var(--color-purple/info/success/danger/warning)"` |
+| Top5排名 | `.news-card-rank` | — |
+| Top5标题 | `.news-card-title` | — |
+| Top5来源 | `.news-card-source` | — |
+| Top5摘要 | `.news-card-desc` | — |
+| Top5为什么重要 | `.news-card-why` | — |
+| ## 💡 周度洞察 | `#insight` section | `.insight-card` + `.insight-tag/title/trend` |
+| ## 🧠 林克的洞察 | `#linkinsight` section | `.callout.callout-purple/info/success/warning` |
+| 板块事件表格 | `.table-wrap` + `<table>` | — |
+| ## 📅 日报索引 | `#dailyindex` section | `.daily-index` + `.daily-item` |
+| ## 📖 技术词汇 | `#vocab` section | `.table-wrap` + `<table>` |
+| ## 🌊 宏观叙事 | `#narrative` section | `.callout` 系列 |
+
+### 生成方式
+
+**优先使用脚本**（如果 `gen_weekly_html.py` 已改造为动态版本）：
+```bash
+uv run scripts/gen_weekly_html.py --date YYYY-WXX --input data/weekly-content-YYYY-WXX.json
+```
+
+**手动生成时**：使用W20的HTML作为CSS/JS模板骨架，只替换 `<body>` 内的内容部分。禁止自创class名。
 
 验证：`wc -c *.html` 必须 ≥50000字节
 
@@ -98,14 +149,25 @@ uv run scripts/update_homepage.py YYYY-WXX --type weekly \
 # 内部版 git push
 git add -A && git commit -m "📊 AI周报 YYYY-WXX" && git push origin main
 
+# ⚠️ 必须同步 public/ 目录（Pages部署源）
+cp 01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html public/01-daily-reports/YYYY-MM/weekly-2026-WXX.html
+cp index.html public/index.html  # 首页也必须同步
+wc -c 01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html public/01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html  # 验证大小一致
+
 # 外部版同步（自动脱敏）
 uv run scripts/sync_to_external.py --full --verify
+
+# 确认外部首页也更新了
+# 如果 sync_to_external.py 输出"无变更需要提交"，说明外部首页可能没同步
+# 需要手动同步：sanitize_html(index.html) → ai-insight-public/index.html
 ```
 
 ### 四位置验证
 ```
-①内部周报 ②内部首页(含周报入口) ③public/周报 ④外部仓库周报
+①内部周报 ②内部首页(含周报入口) ③public/周报 ④外部仓库周报+首页
 ```
+
+> **⚠️ W22踩坑教训**: 修改了 01-daily-reports/ 下的文件但忘了cp到 public/ 对应路径 → Pages返回截断旧版27KB而非完整70KB。public/是Pages部署源，不是可选步骤。
 
 ---
 
@@ -130,9 +192,9 @@ uv run scripts/build_insight_mixcard.py weekly --date YYYY-WXX --output /tmp/car
 - API报错后先去群确认是否收到，不要立即重试
 
 ### 推送范围
-| 类型 | 范围 | 禁止 |
+| 类型 | 范围 | 说明 |
 |------|------|------|
-| 周报 | 发所有群 | 正常 |
+| 周报 | **先私发预览给shenlang03** → 确认后再群发AI生产力中心大群 | ❌禁止不确认就群发 |
 | 日报 | 私发订阅者 | ❌禁止群发 |
 
 ### 默认推送群
@@ -198,6 +260,40 @@ uv run scripts/build_insight_mixcard.py weekly --date YYYY-WXX --output /tmp/car
 - **脚本跳过步骤 = hard fail，不能 silent return True** — cron ok ≠ 任务完成
 - **四位置验证必须纳入交付物自检** — 不能只检查"文件存在"，还要检查"日历有周号""外部版到位"
 - **一致性验证应该是 warning 不是 blocker** — 历史残留不应阻止新内容上线
+
+### 2026-05-25: W22周报6类问题全面复盘
+
+**问题1: cron不按规范执行，直接群发跳过私发确认**
+- 根因：cron payload含"只推一次"指令 → agent理解为"一次性推完" → 直接群发大群
+- 修复：删除"只推一次"，改为"先私发预览给shenlang03，不自动群发"，群发是手动步骤
+- 举一反三：cron payload措辞必须精确，避免歧义指令
+
+**问题2: 周报HTML CSS和class名不匹配**
+- 根因：没有gen_weekly_html.py动态生成脚本 → agent自由拼HTML → 使用了card-badge/top5-card/overview-grid等和CSS不匹配的class名 → 所有样式失效
+- 修复：建立class名映射表（news-card/stat-card/insight-card/callout等），强制使用W20一致的class名
+- 举一反三：没有脚本化保障的输出=高风险输出，agent自由拼HTML是不可靠的
+
+**问题3: public/目录未同步导致内部版截断**
+- 根因：修改了01-daily-reports/下的源文件但没cp到public/对应路径 → Pages从public/部署返回27KB截断旧版
+- 修复：Step 5增加强制cp命令+大小验证
+- 举一反三：public/是Pages部署源不是可选步骤，每次修改必须同步
+
+**问题4: 首页周报pills链接错误**
+- 根因：cron session修改首页pills时全部指向同一个错误URL weekly-2026-05-21.html
+- 修复：pills是首页静态HTML，脚本不自动维护（需手动更新或脚本化）
+- 举一反三：首页有多个手工维护区域（pills/日历/卡片），脚本只更新部分，其余需明确标注
+
+**问题5: MixCard日期范围错误（05/25-05/31而非05/19-05/25）**
+- 根因：build_insight_mixcard.py用ISO当前周号计算日期范围（W22从05/25开始），但周报数据覆盖的是上一周（05/19-05/25）
+- 修复：改为从MD内容提取日期范围（最准确），兜底用ISO周号-1周
+- 举一反三：周报的"周号"和"数据覆盖范围"语义不同，ISO周号≠数据覆盖周
+
+**问题6: 外部版暴露内部内容（追踪体系/知识库/人物追踪）**
+- 根因：sync_to_public.py的sanitize_html()只做关键词替换不做区块级删除 → 首页仍包含追踪体系Tab、知识库Tab、人物追踪分类按钮
+- 修复：增加_remove_tab()函数+区块级正则删除
+- 举一反三：关键词替换不够，HTML删除必须用区块级操作（删除整个article/section/div）
+
+**系统根因总结**：周报没有专用gen_weekly_html.py动态生成脚本 → 一切问题从这里开始。有了脚本+JSON schema，CSS/class名不匹配、public/截断、手动拼HTML等问题都不会发生。
 
 ---
 
