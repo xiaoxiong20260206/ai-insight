@@ -145,17 +145,14 @@ uv run scripts/update_homepage.py YYYY-WXX --type weekly \
 # 内部版 git push
 git add -A && git commit -m "📊 AI周报 YYYY-WXX" && git push origin main
 
-# ⚠️ 必须同步 public/ 目录（Pages部署源）
-cp 01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html public/01-daily-reports/YYYY-MM/weekly-2026-WXX.html
-cp index.html public/index.html  # 首页也必须同步
-wc -c 01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html public/01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html  # 验证大小一致
+# ⚠️ gen_weekly_html.py已自动cp周报HTML到public/
+# update_homepage.py已自动cp首页到public/
+# 只需验证大小一致：
+wc -c 01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html public/01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html
+wc -c index.html public/index.html
 
-# 外部版同步（自动脱敏）
+# 外部版同步（自动脱敏+push）
 uv run scripts/sync_to_external.py --full --verify
-
-# 确认外部首页也更新了
-# 如果 sync_to_external.py 输出"无变更需要提交"，说明外部首页可能没同步
-# 需要手动同步：sanitize_html(index.html) → ai-insight-public/index.html
 ```
 
 ### 四位置验证
