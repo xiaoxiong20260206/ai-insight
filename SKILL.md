@@ -79,6 +79,11 @@ ls user-skills/sl-ai-insight/.git/HEAD && ssh -o ConnectTimeout=5 -T git@github.
 - ✅ 必须走 `sanitize_html()` 脱敏流程
 - 详见 `reference/homepage-spec.md`
 
+### 7.1 sync_to_external.py 的 sync_all() 禁止复制根级 index.html
+- ❌ `sync_all()` 无差别复制 public/ → 覆盖外部脱敏版 = 敏感词泄露（经验#118）
+- ✅ `sync_all()` 必须跳过 `index.html`，外部版由 `sync_to_public.py` 单独脱敏
+- 已修复：v2.2 版本 `sync_all()` 会自动跳过
+
 ### 8. 深度调研执行前必须读完3个规范文件+1个标杆 — 禁止凭感觉动手
 - `reference/output-format-spec.md`（公共规范）
 - `reference/deep-research.md`（深度调研流程+4组P0规则）
@@ -150,7 +155,11 @@ Step 2: 内容生成 → orchestrator complete --step 2
 Step 3+4: finalize → orchestrator finalize（自动:质量门→HTML→首页更新→部署→外部同步）
 Step 5: KIM推送 → build_insight_mixcard.py → message(kimMixCard, message="")
 
-**⚠️ 重要**: message参数必须传空字符串""，禁止同时传message和kimMixCard（会导致{{message}}模板注入泄露）
+**⚠️ MixCard发送格式（P0红线）**：
+- `kimMixCard`参数必须传**inner card格式**（`{config, updateMulti, blocks}`直接在顶层）
+- ❌禁止传双层格式`{card: {...}, summary: "..."}` — KIM找不到blocks字段会渲染为空消息
+- `message`参数必须传空字符串`""`，禁止同时传message和kimMixCard（会导致{{message}}模板注入泄露）
+- 脚本输出已改为inner card格式，读取JSON后直接传给message工具即可
 ```
 
 ---

@@ -615,7 +615,11 @@ def main():
             print("🚫 按钮URL不可达，MixCard不能推送！", file=sys.stderr)
             sys.exit(1)
 
-    out = {"card": card, "summary": summary} if args.with_summary else card
+    # ⚠️ 输出格式说明：
+    # - kimMixCard参数需要inner card格式（config+blocks直接在顶层）
+    # - 旧版 --with-summary 输出 {"card": {...}, "summary": "..."} 双层结构会导致KIM渲染为空消息
+    # - 新版默认输出inner card格式；summary信息打印到stdout而非嵌入JSON
+    out = card  # 直接输出inner card（config+blocks），可用于kimMixCard参数
     out_str = json.dumps(out, ensure_ascii=False, indent=2)
 
     if args.output:
@@ -629,6 +633,7 @@ def main():
         print(f"   Blocks: {n_blocks}")
         print(f"   校验: {anchor_status}")
         print(f"   Summary: {summary}")
+        print(f"   ⚠️ 使用方式: 读取此JSON，直接传给 message(kimMixCard=<此JSON内容>)")
     else:
         print(out_str)
 
