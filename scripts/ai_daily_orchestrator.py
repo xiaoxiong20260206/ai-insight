@@ -923,13 +923,13 @@ def cmd_push(date: str, preview_only: bool = True) -> bool:
         )
         if result.returncode == 0:
             print(result.stdout[-300:] if len(result.stdout) > 300 else result.stdout)
-            print(f"\n  ⚠️ 下一步：读取 {card_path}，用 message(channel=kim, kimMixCard=<card>, ...) 发送")
-            mark_step(date, "push", "completed")
-            return True
+            print(f"\n  ✅ MixCard已生成: {card_path}")
+            print(f"  ⚠️ 下一步：读取 {card_path}，用 message(channel=kim, kimMixCard=<card>, target=...) 发送")
+            print(f"  ⚠️ 重要：message参数必须传空字符串 ''，禁止同时传message和kimMixCard")
             mark_step(date, "push", "completed")
             return True
         else:
-            print(f"  ❌ 推送失败: {result.stderr[:200]}")
+            print(f"  ❌ MixCard生成失败: {result.stderr[:200]}")
             mark_step(date, "push", "failed", error=f"exit={result.returncode}")
             return False
     except Exception as e:

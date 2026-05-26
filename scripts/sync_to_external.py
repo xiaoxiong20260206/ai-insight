@@ -1,8 +1,16 @@
 #!/usr/bin/env python3
 """
-AI洞察外部版本同步脚本 v2.1
+AI洞察外部版本同步脚本 v2.2
 ============================
 将脱敏后的 public/ 内容同步到外部公开仓库 (ai-insight-public)
+
+v2.2 变更 (2026-05-26):
+- 🔥 P0修复：sync_all() 跳过 public/index.html（原始内部版，含林克/沈浪等敏感词）
+  根因：public/index.html 是内部版Pages部署源（v3.0注释"保留原始内容"），含4处林克+沈浪+快手等敏感词
+  sync_all() 之前无差别复制全部文件，导致外部仓库 index.html 被原始版覆盖，
+  推送到 GitHub Pages 后外部首页泄露内部身份信息。
+  修复：index.html 由 sync_to_public.py 的 sync_index_html() 单独处理（先 sanitize_html 再写入），
+  sync_all() 只负责非首页文件。
 
 v2.1 变更 (2026-03-09):
 - 新增 --full 模式: 自动先执行 sync_to_public.py --full
@@ -74,16 +82,26 @@ def sync_all() -> bool:
         return False
     
     # 复制所有内容 (保持目录结构, 排除隐藏文件/目录)
+    # ⭐ v2.2修复（P0）：跳过根级 index.html — 它是内部版原始文件（含林克/沈浪/快手等敏感词）
+    # 根因：public/index.html = 内部版Pages部署源（v3.0注释"保留原始内容"），不应出现在外部仓库
+    #       外部版 index.html 由 sync_to_public.py 的 sync_index_html() 单独 sanitize 后写入
+    #       如果这里也复制，就会覆盖已经脱敏的版本，推送到 GitHub Pages 后泄露内部身份
     # ⭐ v2.2修复：明确过滤 -v3.html 文件（内部版专有文件，不应出现在外部仓库）
     # 根因经验：public/ 目录中若存在 -v3.html，会触发外部仓库的敏感词检测失败
     copied_count = 0
     skipped_v3 = 0
+    skipped_index = 0
     for src_path in PUBLIC_DIR.rglob("*"):
         if not src_path.is_file():
             continue
         
         rel_path = src_path.relative_to(PUBLIC_DIR)
         if any(part.startswith('.') for part in rel_path.parts):
+            continue
+        
+        # 🔥 P0：跳过根级 index.html（内部版，含敏感词）
+        if rel_path == Path("index.html"):
+            skipped_index += 1
             continue
         
         # 过滤 -v3.html 文件（内部版，不对外公开）
@@ -98,6 +116,8 @@ def sync_all() -> bool:
     
     if skipped_v3 > 0:
         print(f"  ⏭️ 已过滤 {skipped_v3} 个内部版 -v3.html 文件")
+    if skipped_index > 0:
+        print(f"  ⏭️ 已跳过根级 index.html（由 sync_to_public.py 单独脱敏处理）")
     print(f"✅ 已复制 {copied_count} 个文件")
     return True
 
