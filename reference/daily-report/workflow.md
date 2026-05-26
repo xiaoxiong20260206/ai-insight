@@ -90,7 +90,8 @@ finalize内部自动执行：
 uv run scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/card.json --with-summary
 
 # 2. 读取卡片JSON，发送
-# message(channel=kim, kimMixCard=<card>, target="username:shenlang03")
+# message(channel=kim, action=send, kimMixCard=<card>, target="username:shenlang03", message="")
+# ⚠️ message参数必须传空字符串""，禁止同时传message和kimMixCard（会导致{{message}}模板注入泄露）
 
 # 3. 标记完成
 uv run scripts/ai_daily_orchestrator.py complete --step 5

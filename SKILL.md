@@ -148,7 +148,9 @@ ls user-skills/sl-ai-insight/.git/HEAD && ssh -o ConnectTimeout=5 -T git@github.
 Step 1: 搜索调研 → orchestrator complete --step 1
 Step 2: 内容生成 → orchestrator complete --step 2
 Step 3+4: finalize → orchestrator finalize（自动:质量门→HTML→首页更新→部署→外部同步）
-Step 5: KIM推送 → build_insight_mixcard.py → message(kimMixCard)
+Step 5: KIM推送 → build_insight_mixcard.py → message(kimMixCard, message="")
+
+**⚠️ 重要**: message参数必须传空字符串""，禁止同时传message和kimMixCard（会导致{{message}}模板注入泄露）
 ```
 
 ---
