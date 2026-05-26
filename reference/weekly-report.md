@@ -42,7 +42,7 @@ Step 2: 汇总分析 → Top5 + 洞察 → 周报JSON + MD
 Step 3: 生成周报HTML（≥50KB + 来源超链接）— 从JSON自动生成
 Step 4: 首页更新 → update_homepage.py --type weekly
 Step 5: 部署 + 外部同步 → sync_to_external
-Step 6: KIM推送 → build_insight_mixcard.py weekly → message(kimMixCard)
+Step 6: KIM推送 → build_insight_mixcard.py weekly → message(kimMixCard=inner card, message="")
 ```
 
 ---
@@ -171,10 +171,12 @@ uv run scripts/sync_to_external.py --full --verify
 uv run scripts/build_insight_mixcard.py weekly --date YYYY-WXX --output /tmp/card.json --with-summary
 
 # 2. 先私发预览给 shenlang03
-# message(channel=kim, kimMixCard=<card>, target="username:shenlang03")
+# message(channel=kim, action=send, kimMixCard=<inner card JSON>, target="username:shenlang03", message="")
+# ⚠️ kimMixCard必须传inner card格式（{config, blocks, updateMulti}在顶层），禁止传双层{card: {...}}
+# ⚠️ message参数必须传空字符串""
 
-# 3. 等沈浪确认后再群发
-# message(channel=kim, kimMixCard=<card>, target="space:<groupId>")
+# 3. 等沈浪确认后再群发AI生产力中心全员群
+# message(channel=kim, action=send, kimMixCard=<inner card JSON>, target="space:3705455482343722", message="")
 ```
 
 ### 推送P0红线
