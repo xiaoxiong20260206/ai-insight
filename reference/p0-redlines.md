@@ -16,7 +16,8 @@ uv run scripts/ai_daily_orchestrator.py resume --date YYYY-MM-DD
 
 ```bash
 uv run scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/card.json --with-summary
-# 然后读取 card.json，用 message(channel=kim, action=send, kimMixCard=<card>, target="username:shenlang03", message="") 发送
+# 然后读取 card.json，直接传给 message(kimMixCard=<inner card JSON>, message="")
+# ⚠️ kimMixCard必须传inner card格式（{config, blocks, updateMulti}在顶层），禁止传双层{card: {...}}
 # ⚠️ message参数必须传空字符串""，禁止同时传message和kimMixCard（会导致{{message}}模板注入泄露）
 ```
 脚本自带校验：6锚点完整性 + kimMd格式 + {{message}}扫描 + URL格式。手写=必错=空卡片。

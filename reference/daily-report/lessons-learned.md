@@ -90,4 +90,24 @@ which uv || (curl -LsSf https://astral.sh/uv/install.sh | sh && export PATH="$HO
 
 ---
 
-_更新于 2026-05-11 | v1.0 | 6条经验_
+## 2026-05-26: MixCard双层JSON格式导致空消息（P0）
+
+**问题**: cron session执行AI日报后，用户收到空消息。手动重发也收到空消息。
+
+**根因**: `build_insight_mixcard.py`使用`--with-summary`参数时，输出格式为`{"card": {...}, "summary": "..."}`双层结构。但`message`工具的`kimMixCard`参数需要inner card格式（`config+blocks`直接在顶层）。传了双层结构后，KIM在JSON中找不到`blocks`字段（因为`blocks`在`card.blocks`而非顶层），渲染为空。
+
+**验证**: 第三次发送时直接传inner card（去掉外层`card`键），卡片正常渲染。
+
+**修复**:
+1. `build_insight_mixcard.py`: 输出格式改为inner card（`config+updateMulti+blocks`直接在顶层），summary信息打印到stdout而非嵌入JSON
+2. `ai_daily_orchestrator.py`: 去除重复代码，添加message参数必须传空字符串的警告
+3. workflow.md/p0-redlines.md/SKILL.md: 添加`message=""`参数规范和inner card格式说明
+
+**举一反三**: 
+1. **所有MixCard推送场景必须使用inner card格式** — `kimMixCard`参数直接传`{config, blocks, updateMulti}`，不能传`{card: {...}}`
+2. **脚本输出格式和消费方格式必须对齐** — 脚本输出的JSON格式必须和`message`工具的`kimMixCard`参数格式完全一致，不能有中间转换层
+3. **空消息=格式问题而非内容问题** — MixCard内容完整但格式不对（双层→单层），KIM会渲染为空而非报错。这是最危险的silent failure
+
+---
+
+_更新于 2026-05-26 | v1.1 | 7条经验_
