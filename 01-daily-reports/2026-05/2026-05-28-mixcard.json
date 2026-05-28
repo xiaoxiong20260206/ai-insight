@@ -1,0 +1,135 @@
+{
+  "config": {
+    "forward": true,
+    "forwardType": 3,
+    "wideSelfAdaptive": true
+  },
+  "updateMulti": 1,
+  "blocks": [
+    {
+      "blockId": "header",
+      "type": "content",
+      "text": {
+        "type": "kimMd",
+        "content": "# 📡 AI 日报（2026-05-28，周四）"
+      }
+    },
+    {
+      "blockId": "subtitle",
+      "type": "content",
+      "text": {
+        "type": "kimMd",
+        "content": "🌍 海外9条 · 🇨🇳 国内8条 | 五大板块 · 每板块含动态/深度聚焦"
+      }
+    },
+    {
+      "blockId": "div0",
+      "type": "divider"
+    },
+    {
+      "blockId": "heat",
+      "type": "content",
+      "text": {
+        "type": "kimMd",
+        "content": "🔥 **热度趋势**（近7期日报交叉分析）\n\n- 🥇 **Claude Mythos/安全能力** — 2天 📈\n  → Anthropic主动不公开发布，安全优先于商业，行业范式转变\n- 🥈 **AI融资热潮** — 5天 📈\n  → Q1全球1100亿，Anthropic 9000亿估值，国内月之暗面200亿美元\n- 🥉 **AI Coding三巨头** — 4天 ➡️\n  → Cursor/Claude Code/Copilot分立格局确认，从补全到Agent范式切换\n- 4️⃣ **Gemini搜索改版** — 1天 📈\n  → 25年首次搜索框大改版，AI从附属变默认\n- 5️⃣ **国产AI办公化** — 3天 ➡️\n  → 豆包付费、Kimi多智能体、通义企业底座，竞争重心转移"
+      }
+    },
+    {
+      "blockId": "div_heat",
+      "type": "divider"
+    },
+    {
+      "blockId": "sec1",
+      "type": "content",
+      "text": {
+        "type": "kimMd",
+        "content": "## 🧠 大模型\n\n📰 **动态**\n- 📌 | [Anthropic公布Claude Mythos网络安全能力：自主发现17年FreeBSD内核漏洞](https://red.anthropic.com/2026/mythos-preview)\n- 📌 | [OpenAI模型推翻Erdős平面单位距离猜想：80年数学难题被AI攻克](https://intelligence.org/2026/05/22/the-erdos-proof-and-ai-capabilities)\n- 📌 | [Google I/O发布Gemini 3.5 Flash：搜索25年首次大改版，AI成默认引擎](https://9to5google.com/2026/05/19/gemini-app-google-io-2026)\n- 🇨🇳 国内 | [DeepSeek V4 Pro发布：1/30成本逼近Claude Opus 4.7编程能力，适配华为昇腾芯片](https://gitcode.csdn.net/6a14ee8710ee7a33f27515f0.html)\n- 🇨🇳 国内 | [国产大模型办公化深水区：豆包付费版68-500元/月，Kimi多智能体集群100子Agent并行](https://aistacknav.com/2026-guochan-ai-models-qwen-doubao-kimi-ernie-office)\n\n💡 **深度聚焦** — AI安全能力跃迁：从检测漏洞到自主利用漏洞\n→ Anthropic的Claude Mythos Preview评估结果揭示了AI安全领域的一次范式跃迁。之前的AI安全工具定位是'检测漏洞'——扫描代码、标记风险点、给出修复建议。但Mythos的能力已经从检测跃升到自主利用：它不需要人类指导，能自主扫描数百个内核文件、理解复杂代码逻辑、构造完整的攻击链，并在FreeBSD中找到存在17年的RCE漏洞写出可执行的exploit代码。 这个能力跃迁引...\n**关键判断**：AI安全能力从'帮人找bug'变成'自己写exploit'——Anthropic选择不公开发布是行业首次安全>商业决策，但单靠自律不够，监管必须跟上"
+      }
+    },
+    {
+      "blockId": "div1",
+      "type": "divider"
+    },
+    {
+      "blockId": "sec2",
+      "type": "content",
+      "text": {
+        "type": "kimMd",
+        "content": "## ⌨️ AI Coding\n\n📰 **动态**\n- 📌 | [AI Coding市场从Copilot独大到Cursor/Claude Code/Copilot三强分立](https://www.nxcode.io/resources/news/cursor-vs-claude-code-vs-github-copilot-2026-ultimate-comparison)\n- 📌 | [Cursor发布Shared Canvases+/loop循环技能：团队协作+定时自主执行](https://cursor.com/changelog/shared-canvases)\n- 📌 | [OpenAI被Gartner认定为企业编码Agent领导者，Codex与Dell合作进入混合云](https://openai.com/index/gartner-2026-agentic-coding-leader/)\n- 🇨🇳 国内 | [DeepSeek V4 Pro编程能力逼近Claude Opus 4.7：SWE-bench 80.6% vs 80.9%](https://gitcode.csdn.net/6a14ee8710ee7a33f27515f0.html)\n- 🇨🇳 国内 | [字节ArkClaw+豆包Seed 2.0 Pro：云上OpenClaw+Agent能力组合](https://www.163.com/dy/article/KQL8EVL805566T0A.html)\n\n💡 **深度聚焦** — AI Coding的范式切换：从补全到自主，从工具到基础设施\n→ 2026年5月，AI Coding市场发生了结构性变化。NxCode的对比分析确认了三强分立格局：Cursor($20/月AI原生IDE)、Claude Code($20/月终端级Agent)、Copilot($10/月多IDE扩展)各自占据不同细分。这不是简单的市场份额变化，而是范式切换——从'帮我完成这行代码'(补全)到'帮我拥有这个任务'(Agent自主执行)。 Cursor的两项新功能印证...\n**关键判断**：AI Coding从补全→Agent→基础设施的三级跃迁正在发生，下一个竞争维度从能力转向成本——DeepSeek的1/30定价可能比0.3%的能力差距更颠覆"
+      }
+    },
+    {
+      "blockId": "div2",
+      "type": "divider"
+    },
+    {
+      "blockId": "sec3",
+      "type": "content",
+      "text": {
+        "type": "kimMd",
+        "content": "## 📱 AI 应用\n\n📰 **动态**\n- 📌 | [PwC AI Agent调查：预算激增，可衡量价值已到来，70%高管预期Agent转型运营](https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-agent-survey.html)\n- 📌 | [Microsoft预测2026为Agent运营组织元年：Copilot成为员工与AI交互的唯一入口](https://msdynamicsworld.com/story/ai-agent-copilot-summit-2026-microsoft-predicts-agent-operated-orgs-partners-preach-user)\n- 📌 | [78%全球企业已部署AI：规模化ROI中位数159%，回本不到7个月](https://www.orange.com/en/whats-up/artificial-intelligence-business-productivity-and-governance-2026)\n- 🇨🇳 国内 | [豆包付费版正式上线：68/200/500元三档，国产AI助手迈入付费纪元](https://zhuanlan.zhihu.com/p/2034891484168720939)\n- 🇨🇳 国内 | [Kimi K2.6多智能体集群：100子Agent并行协作，1500次工具调用效率提升4.5倍](https://aistacknav.com/2026-guochan-ai-models-qwen-doubao-kimi-ernie-office)\n\n💡 **深度聚焦** — 2026：AI Agent从实验走向运营——ROI验证期到来\n→ 三组数据共同指向一个结论：企业AI从实验期进入ROI验证期。Orange报告显示78%全球企业已部署AI，规模化部署的企业中位数ROI 159%、回本周期不到7个月。PwC调查显示AI Agent预算激增，70%高管预期Agent将转型运营。Gartner预测2026年底25%企业软件交互由Agent驱动。 国内同步进入验证期但路径不同：豆包上线付费版标志着国产AI从免费获客转向付费验证，Kimi...\n**关键判断**：企业AI进入ROI验证期——7个月159%回本是硬指标，'好听但没用'的AI产品将被淘汰，留下的是真正解决问题的方案"
+      }
+    },
+    {
+      "blockId": "div3",
+      "type": "divider"
+    },
+    {
+      "blockId": "sec4",
+      "type": "content",
+      "text": {
+        "type": "kimMd",
+        "content": "## 🏭 AI 行业\n\n📰 **动态**\n- 📌 | [AI融资Q1全球337亿美元395起：OpenAI/Anthropic/xAI过去12个月合计融资超1600亿美元](https://waveup.com/blog/top-vc-investing-in-ai)\n- 📌 | [OpenAI YC Initiative：每家初创公司200万美元AI tokens，降低AI创业门槛](https://scouts.yutori.com/68f22e10-d5fe-4e94-b1c8-9c6218cfdb2c)\n- 📌 | [DeepInfra 107M+Sigma 80M+Commure 70M+Viktor 75M：AI基础设施/数据/健康多赛道融资密集](https://scouts.yutori.com/68f22e10-d5fe-4e94-b1c8-9c6218cfdb2c)\n- 🇨🇳 国内 | [5月国内AI融资超300亿：月之暗面20亿美元估值破200亿，DeepSeek与腾讯阿里洽谈首轮](https://finance.sina.com.cn/stock/t/2026-05-25/doc-inhzamvs3729912.shtml)\n- 🇨🇳 国内 | [具身智能赛道成新风口：飞捷科思、眸深智能亿元融资密集落地](https://www.szzg.gov.cn/2026/xwzx/szkx/202605/t20260526_5326313.htm)\n\n💡 **深度聚焦** — AI融资从'技术叙事'转向'结果竞赛'——资本开始考核7个月ROI\n→ 2026年Q1中国AI融资近600起总额超1100亿元同比增185.4%，5月单月超300亿。但资金逻辑已经改变：不再是'谁的故事更好'而是'谁的交付更实'。月之暗面20亿美元融资引入中国移动等产业巨头，标志着'产业资本+国资+财务资本'三路并进的新格局——产业资本带订单带场景，国资提供低成本长线资金，财务资本推治理推上市。 资金流向三条主线：研发(数十亿级远超营收)、算力(占融资30-50%)、...\n**关键判断**：AI融资进入结果竞赛期——比的不是谁的叙事更好，而是谁7个月内能交付159%的ROI，产业资本带场景带订单是新的胜负手"
+      }
+    },
+    {
+      "blockId": "div4",
+      "type": "divider"
+    },
+    {
+      "blockId": "sec5",
+      "type": "content",
+      "text": {
+        "type": "kimMd",
+        "content": "## 🔄 企业转型\n\n📰 **动态**\n- 📌 | [Deloitte企业AI报告：Agent能力规模化是关键，从实验到规模化转型](https://www.deloitte.com/us/en/what-we-do/capabilities/applied-artificial-intelligence/content/state-of-ai-in-the-enterprise.html)\n- 📌 | [Gartner预测2026年底25%企业软件交互由Agent驱动，60%知识工作者2027年日常用AI](https://www.youtube.com/watch?v=vf2W2fxrK_4)\n- 🇨🇳 国内 | [中国日均Token调用量突破140万亿，周调用量连续三周超越美国](https://www.163.com/dy/article/KQL8EVL805566T0A.html)\n- 🇨🇳 国内 | [国家发改委指导国产大模型适配国产算力芯片，推动AI深度融合](https://finance.sina.com.cn/stock/t/2026-05-25/doc-inhzamvs3729912.shtml)\n\n💡 **深度聚焦** — 企业AI转型：从'要不要做'到'怎么做才能7个月回本'\n→ 78%全球企业已在用AI，但真正规模化部署并验证ROI的企业才是少数。Orange的数据给出了硬指标：规模化部署的企业中位数ROI 159%，回本周期不到7个月。这意味着企业AI转型的问题已经不是'要不要做'(78%已做)，而是'怎么做才能7个月回本'。 Gartner预测2026年底25%企业软件交互由Agent驱动，IDC预测2027年60%知识工作者日常用AI工具。但这些预测的前提是Agen...\n**关键判断**：企业AI从'要不要做'变成'怎么做才能7个月回本'——用量领先的中国需要把140万亿Token转化为159%ROI，这才是真正的胜负手"
+      }
+    },
+    {
+      "blockId": "div5",
+      "type": "divider"
+    },
+    {
+      "blockId": "footer",
+      "type": "content",
+      "text": {
+        "type": "kimMd",
+        "content": "*林克（沈浪的AI分身）· AI洞察 · 日报*"
+      }
+    },
+    {
+      "blockId": "buttons",
+      "type": "action",
+      "layout": "two",
+      "actions": [
+        {
+          "type": "button",
+          "text": {
+            "type": "plainText",
+            "content": "📄 查看完整日报 >>"
+          },
+          "style": "green",
+          "url": "https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-28.html"
+        },
+        {
+          "type": "button",
+          "text": {
+            "type": "plainText",
+            "content": "💡 了解AI洞察项目"
+          },
+          "style": "blue",
+          "url": "https://xiaoxiong20260206.github.io/ai-insight/"
+        }
+      ]
+    }
+  ]
+}
