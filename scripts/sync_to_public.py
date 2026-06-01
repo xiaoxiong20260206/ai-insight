@@ -98,7 +98,10 @@ _URL_REPLACEMENTS = _build_url_replacements()
 REPLACEMENTS = _URL_REPLACEMENTS + [
     # ===== (下方规则由 _build_url_replacements 生成，此处为其余脱敏规则) =====
     
-    # ===== 文件名重写（public版统一去掉-v3后缀） =====
+    # ===== 文件名/URL重写（public版统一去掉-v3后缀） =====
+    # ⚠️ 外部版日报文件名为 2026-05-25.html，内部版为 2026-05-25-v3.html
+    # 此规则同时处理：①纯文件名引用 ②完整URL中的-v3后缀
+    # 必须在 URL替换规则之后执行（先 ai-insight→ai-insight-public，再去-v3）
     (r'(\d{4}-\d{2}-\d{2})-v3\.html', r'\1.html'),
     
     # ===== 标题和描述 =====
