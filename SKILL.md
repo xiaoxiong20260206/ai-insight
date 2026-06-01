@@ -46,9 +46,9 @@ export:
 | `tavily-search` | 海外搜索 |
 | `quark-search` | 国内搜索 |
 
-## P0红线（9条核心红线）
+## P0红线（11条核心红线）
 
-> ⚠️ 只有9条需要Agent自觉遵守。其余校验已内置到脚本。
+> ⚠️ 只有11条需要Agent自觉遵守。其余校验已内置到脚本。
 
 ### 1. 续接必须先 resume — 无例外
 ```bash
@@ -96,6 +96,27 @@ ls user-skills/sl-ai-insight/.git/HEAD && ssh -o ConnectTimeout=5 -T git@github.
 - `python3 scripts/xxx.py` ❌ — 容器中没有python命令，会直接报错
 - `uv run skills/quark-search/scripts/agent.py news "关键词"` ✅
 - `python skills/quark-search/scripts/agent.py news "关键词"` ❌
+
+### 10. 外部版HTML修改必须完成三项URL替换+线上验证 — 禁止只改一处
+修改外部版(`ai-insight-public`)周报/日报HTML时（无论手动还是子agent），必须同时完成：
+
+| 替换项 | 内部版 | 外部版 | 验证方法 |
+|--------|--------|--------|---------|
+| 仓库域名 | `ai-insight/` | `ai-insight-public/` | `grep -c "ai-insight/"` 在日报链接区域 = 0 |
+| 文件后缀 | `-v3.html` | `.html` | `grep -c "\-v3\.html"` = 0 |
+| 首页按钮 | 内部版首页URL | 外部版首页URL | 检查所有"访问首页"链接 |
+
+- ❌ 只替换域名但遗漏 `-v3` 后缀 → 外部版日报链接404
+- ❌ 只替换后缀但遗漏域名 → 外部版链接跳到内部版
+- ✅ 三项都替换 + curl线上验证生效 → 才算完成
+- **每次修改外部版HTML后，push之前必须跑 `grep -c "\-v3\.html" file.html` 确认返回0**
+- **内部版修改后必须同步到 `public/` 对应路径**（GitHub Pages从public/构建）
+
+### 10.1 容器管布局宽度，文字管可读宽度 — 不可违反
+- 卡片/框等容器：`width: 100%`（撑满父宽度，等宽排列）
+- 段落/正文文字：`max-width: 68ch`（限制行宽，提高可读性）
+- ❌ 在 `.callout`/`.news-card-why`/`.insight-card` 等容器上加 `max-width: 68ch` → 右侧留白参差不齐
+- ✅ 在 `.news-card-desc`/`.callout p`/`.insight-text` 等文字节点上加 `max-width: 68ch` → 等宽卡片+可读行宽
 
 ---
 
