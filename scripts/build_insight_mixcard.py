@@ -41,8 +41,9 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 # 从 config.py SSoT 读取 URL
 sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
 from config import INTERNAL_PAGES_BASE as INTERNAL_BASE
+from config import EXTERNAL_PAGES_BASE as EXTERNAL_BASE
 REPORT_BASE_URL = f"{INTERNAL_BASE}/01-daily-reports"
-PROJECT_URL = f"{INTERNAL_BASE}/"
+PROJECT_URL = f"{INTERNAL_BASE}/"  # 默认内部版，--target group 时切换为外部版
 
 # 统一卡片骨架配置
 CARD_CONFIG = {"forward": True, "forwardType": 3, "wideSelfAdaptive": True}
@@ -67,7 +68,9 @@ def _footer(tag: str = "") -> dict:
 
 
 def _buttons(btn1_text: str, btn1_url: str, btn2_text: str = "💡 了解AI洞察项目",
-             btn2_url: str = PROJECT_URL) -> dict:
+             btn2_url: str = None) -> dict:
+    if btn2_url is None:
+        btn2_url = PROJECT_URL
     return {
         "blockId": "buttons",
         "type": "action",
@@ -557,7 +560,15 @@ def main():
     parser.add_argument("--output", "-o", help="输出文件路径")
     parser.add_argument("--with-summary", action="store_true", help="输出 {card, summary}")
     parser.add_argument("--verify-urls", action="store_true", help="校验按钮URL可达性(HTTP 200)")
+    parser.add_argument("--target", choices=["private", "group"], default="private",
+                        help="推送目标: private=私发订阅者(内部版URL), group=群发(外部版URL)")
     args = parser.parse_args()
+
+    # 根据 --target 切换按钮URL（P0 #13: 私发用内部版，群发用外部版）
+    global PROJECT_URL, REPORT_BASE_URL
+    if args.target == "group":
+        PROJECT_URL = f"{EXTERNAL_BASE}/"
+        REPORT_BASE_URL = f"{EXTERNAL_BASE}/01-daily-reports"
 
     try:
         if args.scenario == "daily":

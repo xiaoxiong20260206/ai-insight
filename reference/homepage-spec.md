@@ -50,7 +50,7 @@
         系统化追踪AI行业动态，每日/每周输出调研洞察，帮助你保持对AI行业的全局视野
     </p>
     <div style="margin-top: 24px; text-align: center; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-        <a href="./subscribe/" style="...">📧 订阅AI日报（每天08:00推送）</a>
+        <a href="https://aidailyinsight-subscribe.frontend-cloud.corp.kuaishou.com" style="...">📧 订阅AI日报（每天08:00推送）</a>
         <a href="https://xiaoxiong20260206.github.io/ai-insight-public/" style="...">🌐 外部版入口</a>
     </div>
 </header>
@@ -108,7 +108,9 @@
 - ❌ 个性化署名 div（"林克 · 沈浪的AI分身"）
 
 ### 知识库
-- 内部版**可以**保留 `04-knowledge-base/*.md` 的 `<a>` 链接（文件存在于内部版仓库）
+- 内部版知识库Tab中的条目使用 `<span>` 展示（不可点击），**禁止** `<a href="04-knowledge-base/*.md">` — 这些Markdown文件在浏览器中无法渲染，且 `public/` 目录下不存在
+- ✅ `<span class="kb-item"><span class="item-icon">📄</span><span class="item-text">标题</span></span>`
+- ❌ `<a href="04-knowledge-base/01-models/xxx.md" class="kb-item">...</a>`（浏览器无法渲染.md，且文件不在public/下）
 - 但知识库卡片使用 `onclick="toggleKBDimension(this)"` 展开/折叠交互，保持不变
 
 ---
@@ -195,7 +197,7 @@
 | 身份描述 | AI分身、让我负责、AI数字分身 | 暗示个人身份 |
 | 内部体系 | 小无相功、SKILL.md、KIM Doc | 内部方法论 |
 | 内网地址 | docs.corp.kuaishou.com | 内网地址 |
-| 订阅按钮 | ./subscribe/ | 内部KIM订阅 |
+| 订阅按钮 | `https://aidailyinsight-subscribe.frontend-cloud.corp.kuaishou.com` | 内部KIM订阅（⚠️禁止用`./subscribe/`相对路径，会触发SSO 302拦截） |
 
 ---
 
