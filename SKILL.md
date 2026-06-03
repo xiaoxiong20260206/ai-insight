@@ -67,8 +67,8 @@ AI洞察是一个**AI驱动的行业研究平台**，核心做四件事：
 
 **映射关系**：
 - **P1 启动** → 环境前置检查(#5) + 技能路由表加载 + 踩坑检索(#1-#11) + 自检声明
-- **P0 交付** → 质量门(#4) + fail loud(#6) + 首页脱敏(#7) + 外部版三项替换(#10) + {{message}}禁令(#11)
-- **P2 事后** → skill_calls日志 + token记录 + 5项自举扫描
+- **P0 交付** → 质量门(#4) + fail loud(#6) + 首页脱敏(#7) + 外部版三项替换(#10) + {{message}}禁令(#11) + 知识库禁md链接(#12) + MixCard URL区分场景(#13) + 首页按钮绝对URL(#14)
+- **P2 事后** → skill_calls日志 + token记录 + 知识沉淀(Harvest) + 5项自举扫描
 
 **P1 踩坑清单（从14条P0红线提炼高频失败项）**：
 1. ❌ 续接必须先resume(#1) — 无例外
@@ -303,6 +303,60 @@ Step 5: KIM推送 → build_insight_mixcard.py → message(kimMixCard, message="
 - **订阅按钮**：必须用 `https://aidailyinsight-subscribe.frontend-cloud.corp.kuaishou.com`（见订阅系统⚠️说明）
 - **外部版入口**：必须用 `https://xiaoxiong20260206.github.io/ai-insight-public/`
 - **禁止相对路径**（`./subscribe/`、`../`等）— frontend-cloud会拦截部分路径触发SSO重定向
+
+### P0 #15: 知识沉淀(Harvest)是P2强制步骤 — 不可跳过
+- 日报/周报/深度调研完成后，**必须**检查本次是否有复用价值的洞察/对比/模式
+- 有 → 写入 `knowledge/packages/ai-insight/` + 更新 INDEX.md + 更新 MEMORY.md 指针
+- 没有 → 简短声明"本次无 Harvest"并继续
+- **不做 Harvest = P2 不通过**
+- 当前断档：6/2、6/3日报均未做Harvest，需要补做
+
+### 首页统计卡片维护规则（P1 — 定期校准）
+- 统计卡片数字是硬编码，无数据源联动
+- **每月至少校准一次**：追踪人物/公司/信息源/深度调研/日报周报
+- 校准方法：`grep -c '<tr><td><strong>' index.html`（追踪条目）、`find public/02-deep-research -name '*.html' ! -name 'index.html' | wc -l`（深度调研）、`find public/01-daily-reports -name '2026-*.html' ! -name 'weekly-*' | wc -l`（日报）
+- 当前值（2026-06-04）：人物100+、公司140+、深度调研30、日报95+周报13
+
+### 日历数据维护规则（P1 — cron自动+手动补漏）
+- 日报cron的 `update_homepage.py daily` 会自动更新日历日期数组
+- **但以下情况需手动修复**：漏日期（如5/28）、周报映射错误（如W22重复标记31号）、周报缺失（如W21）
+- 周报日历映射规则：`weeklyReportsData['YYYY-MM'] = {周一日期: 'weekly-YYYY-Wxx'}`
+- ISO周号计算：`date.fromisocalendar(YYYY, W, 1)` → 起始周一日期
+
+## 系统健康检查（2026-06-04 全面复盘）
+
+### 闭环验证结果
+
+| 子系统 | 状态 | 问题 | 修复 |
+|--------|------|------|------|
+| 日报cron(08:00) | ✅ 运行稳定 | 知识沉淀6/2-6/3断档 | P0#15: Harvest列为P2强制步骤 |
+| 周报cron(周一09:00) | ✅ 运行稳定 | W21缺失 | ✅ 补跑完成 |
+| 订阅系统 | ✅ 6人活跃 | 非owner推送未验证 | 待08:00 cron验证 |
+| 内部首页 | ✅ | 统计失真(22→100+) | ✅ 校准 |
+| 外部首页 | ✅ 零敏感词 | — | — |
+| 双版本同步 | ✅ | — | — |
+| 知识库Tab | ⚠️ | 37个链接→span(临时方案) | 长期: 知识渲染为HTML |
+| 追踪体系 | ⚠️ | 无自动保鲜机制 | P1: 待设计cron |
+| 时间轴 | ⚠️ | 新调研需手动添加 | P1: gen_timeline.py待集成 |
+| 统计卡片 | ⚠️ | 需手动校准 | P1: 月度检查 |
+
+### 知识沉淀断档分析
+
+**现状**：知识沉淀(Harvest)仅在6/1日报执行了一次，6/2-6/3均未执行。
+**根因**：日报workflow.md的6步流程中没有明确的Harvest步骤——P2阶段只写了skill_calls日志+token记录，遗漏了知识沉淀。
+**修复**：
+1. workflow.md Step 5之后增加 Step 6: 知识沉淀(Harvest)
+2. SKILL.md P2事后步骤增加Harvest（P0#15）
+3. cron payload增加Harvest提示
+
+### 待建设能力（P1优先级排序）
+
+1. **日报workflow增加Harvest步骤** — 已修
+2. **追踪体系自动保鲜cron** — 定期扫描新人物/公司，更新追踪清单
+3. **时间轴自动生成** — `gen_timeline.py` 集成到 `update_homepage.py`
+4. **统计卡片自动校准** — `update_homepage.py` 自动计算实际数值
+5. **知识库HTML渲染** — 将md转为可浏览的HTML页面
+6. **非owner订阅推送验证** — 08:00 cron后检查3位新订阅者是否收到
 
 ## 踩坑经验（归档，不加载）
 
