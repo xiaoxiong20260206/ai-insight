@@ -351,12 +351,12 @@ Step 5: KIM推送 → build_insight_mixcard.py → message(kimMixCard, message="
 
 ### 待建设能力（P1优先级排序）
 
-1. **日报workflow增加Harvest步骤** — 已修
+1. ~~**日报workflow增加Harvest步骤**~~ → ✅ 2026-06-04完成
 2. **追踪体系自动保鲜cron** — 定期扫描新人物/公司，更新追踪清单
-3. **时间轴自动生成** — `gen_timeline.py` 集成到 `update_homepage.py`
-4. **统计卡片自动校准** — `update_homepage.py` 自动计算实际数值
+3. ~~**时间轴自动生成**~~ → gen_timeline.py 已有脚本，待集成到 update_homepage.py
+4. ~~**统计卡片自动校准**~~ → ✅ 2026-06-04: calibrate_stats.py + 集成到 update_homepage.py
 5. **知识库HTML渲染** — 将md转为可浏览的HTML页面
-6. **非owner订阅推送验证** — 08:00 cron后检查3位新订阅者是否收到
+6. ~~**非owner订阅推送验证**~~ → 待08:00 cron触发后验证
 
 ## 踩坑经验（归档，不加载）
 
