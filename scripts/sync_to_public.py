@@ -192,10 +192,12 @@ REPLACEMENTS = _URL_REPLACEMENTS + [
     (r'shenlang03', ''),
     (r'shenlang', ''),
     
-    # ===== 外部版首页订阅按钮自动剥离（v10.4 经验62）=====
+    # ===== 外部版首页订阅按钮+外部版入口自动剥离（v10.5）=====
     # 外部版是公开页面，订阅功能需要内部认证，不提供此能力
-    # 匹配 header 区域内订阅按钮 div（含 <a href="./subscribe/">）
-    (r'<div style="margin-top: 24px; text-align: center;">[\s\S]*?订阅AI日报[\s\S]*?</div>', ''),
+    # 外部版入口按钮也是内部功能，外部版不需要
+    # 匹配 header 区域内按钮 div（flex布局，含订阅和外部版入口）
+    (r'<div style="margin-top: 24px;[^"]*display: flex;[^"]*">[\s\S]*?订阅AI日报[\s\S]*?</div>', ''),
+    (r'<div style="margin-top: 24px;[^"]*text-align: center;[^"]*">[\s\S]*?订阅AI日报[\s\S]*?</div>', ''),
 ]
 
 # 敏感词验证列表（脱敏后不应出现的词）

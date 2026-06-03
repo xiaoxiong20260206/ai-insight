@@ -69,13 +69,13 @@ DeepSWE评测揭示更深层问题：排行榜正在失真。GPT-5.5登顶的同
 
 | 日期 | 关键词 | 链接 |
 |------|--------|------|
-| 05/25 周一 | GPT-5.5, DeepSeek V4价格战, Cursor 3, Google I/O | [日报](https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-05/2026-05-25.html) |
-| 05/26 周二 | Anthropic超越OpenAI, Code Harness, 豆包付费 | [日报](https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-05/2026-05-26.html) |
-| 05/27 周三 | Anthropic估值9000亿, AI眼镜, 央企AI+ | [日报](https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-05/2026-05-27.html) |
-| 05/28 周四 | Claude Mythos安全, ROI 159%, 编程范式切换 | [日报](https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-05/2026-05-28.html) |
-| 05/29 周五 | DeepSeek定价权, 试点转化率12%, 具身智能65% | [日报](https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-05/2026-05-29.html) |
-| 05/30 周六 | Codex桌面化, DeepSWE评测失真, Amazon叫停 | [日报](https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-05/2026-05-30.html) |
-| 05/31 周日 | Opus 4.8诚实度, Marvis OS层下沉, 三重锁定 | [日报](https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-05/2026-05-31.html) |
+| 05/25 周一 | GPT-5.5, DeepSeek V4价格战, Cursor 3, Google I/O | [日报](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-25.html) |
+| 05/26 周二 | Anthropic超越OpenAI, Code Harness, 豆包付费 | [日报](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-26.html) |
+| 05/27 周三 | Anthropic估值9000亿, AI眼镜, 央企AI+ | [日报](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-27.html) |
+| 05/28 周四 | Claude Mythos安全, ROI 159%, 编程范式切换 | [日报](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-28.html) |
+| 05/29 周五 | DeepSeek定价权, 试点转化率12%, 具身智能65% | [日报](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-29.html) |
+| 05/30 周六 | Codex桌面化, DeepSWE评测失真, Amazon叫停 | [日报](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-30.html) |
+| 05/31 周日 | Opus 4.8诚实度, Marvis OS层下沉, 三重锁定 | [日报](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-31.html) |
 
 ---
 

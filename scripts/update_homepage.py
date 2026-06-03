@@ -22,7 +22,10 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-INTERNAL_BASE = "https://xiaoxiong20260206.github.io/ai-insight"
+
+# 从 config.py SSoT 读取 URL
+sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
+from config import INTERNAL_PAGES_BASE as INTERNAL_BASE
 
 
 # ============ 日报更新逻辑 ============

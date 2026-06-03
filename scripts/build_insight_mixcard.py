@@ -37,7 +37,10 @@ WEEKDAYS = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"
 WEEKDAY_CN = {0: "周一", 1: "周二", 2: "周三", 3: "周四", 4: "周五", 5: "周六", 6: "周日"}
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-INTERNAL_BASE = "https://xiaoxiong20260206.github.io/ai-insight"
+
+# 从 config.py SSoT 读取 URL
+sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
+from config import INTERNAL_PAGES_BASE as INTERNAL_BASE
 REPORT_BASE_URL = f"{INTERNAL_BASE}/01-daily-reports"
 PROJECT_URL = f"{INTERNAL_BASE}/"
 

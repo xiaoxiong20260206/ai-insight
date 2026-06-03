@@ -34,6 +34,15 @@ uv run scripts/sync_to_external.py --full --verify
 
 外部版首页 `index.html` 必须删除订阅按钮区块和 `<a href="./subscribe/">` 链接及相关样式。
 
+## 手动修改外部版HTML的URL替换规则（P0 — 2026-06-01）
+
+根因：手动修改外部版周报时（绕过sync_to_external.py），只替换了 `ai-insight/` → `ai-insight-public/` 但漏了 `-v3.html` → `.html`。外部版日报文件名为 `2026-05-25.html`，内部版为 `2026-05-25-v3.html`。两项替换必须同时做。
+
+硬规则：
+1. 修改外部版HTML后，必须 `grep -c "\-v3\.html"` 返回 0（文件名和URL里的 `-v3` 都不能残留）
+2. 修改外部版HTML后，必须 `grep -c "ai-insight/"` 在日报链接区域返回 0（不能残留内部版URL）
+3. `sync_to_external.py` 已有这两条规则（REPLACEMENTS列表），脚本流程自动处理——只有手动修改才需要人工检查
+
 ## 内部版订阅页面架构（v10.2）
 
 Appwrite 前端云不支持快手 OAuth Provider。替代方案：使用工号输入模式，绕过 OAuth 依赖，直接写入订阅表。
