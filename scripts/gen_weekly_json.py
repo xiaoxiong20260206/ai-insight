@@ -20,7 +20,10 @@ from pathlib import Path
 BASE_DIR = Path(__file__).parent.parent
 DATA_DIR = BASE_DIR / "data"
 REPORT_DIR = BASE_DIR / "01-daily-reports"
-INTERNAL_BASE = "https://xiaoxiong20260206.github.io/ai-insight"
+
+# 从 config.py SSoT 读取 URL
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from config import INTERNAL_PAGES_BASE as INTERNAL_BASE
 
 
 def compute_week_dates(week_id: str):

@@ -54,7 +54,7 @@ PROJECT_DIR = SCRIPT_DIR.parent
 
 # 导入 SSoT 配置
 sys.path.insert(0, str(SCRIPT_DIR))
-from config import EXTERNAL_REPO as EXTERNAL_REPO_PATH, EXTERNAL_CLONE_URL
+from config import EXTERNAL_REPO as EXTERNAL_REPO_PATH, EXTERNAL_CLONE_URL, INTERNAL_PAGES_BASE, EXTERNAL_PAGES_BASE
 
 # ── Step 定义 ─────────────────────────────────────────────
 STEPS = {
@@ -668,8 +668,8 @@ def _verify_pages_accessibility(date: str, max_retries: int = 3, wait_seconds: i
     
     month = date[:7]
     # 内部站和外部站的日报URL
-    internal_url = f"https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/{month}/{date}.html"
-    external_url = f"https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/{month}/{date}.html"
+    internal_url = f"{INTERNAL_PAGES_BASE}/01-daily-reports/{month}/{date}.html"
+    external_url = f"{EXTERNAL_PAGES_BASE}/01-daily-reports/{month}/{date}.html"
     
     print(f"\n🔍 Pages 可达性验证: {date}")
     print(f"   内部站: {internal_url}")
