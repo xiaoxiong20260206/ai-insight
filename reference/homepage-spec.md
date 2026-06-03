@@ -38,33 +38,58 @@
 ### Header
 ```html
 <header class="header">
+    <div style="text-align:center; margin-bottom:16px;">
+        <img src="link-avatar-small.webp" alt="林克" style="width:72px; height:72px; border-radius:50%; ...">
+    </div>
     <div class="header-badge">
         <span>🔬</span>
-        <span>AI行业洞察</span>
+        <span>林克的AI洞察</span>
     </div>
-    <h1 class="header-title">AI洞察 · 持续追踪AI行业动态</h1>
+    <h1 class="header-title">我是林克，这是沈浪让我负责的AI洞察项目</h1>
     <p class="header-subtitle">
         系统化追踪AI行业动态，每日/每周输出调研洞察，帮助你保持对AI行业的全局视野
     </p>
     <div style="margin-top: 24px; text-align: center; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-        <a href="./subscribe/"
-           style="...">
-            📧 订阅AI日报（每天08:00推送）
-        </a>
-        <a href="https://xiaoxiong20260206.github.io/ai-insight-public/"
-           style="...">
-            🌐 外部版入口
-        </a>
+        <a href="./subscribe/" style="...">📧 订阅AI日报（每天08:00推送）</a>
+        <a href="https://xiaoxiong20260206.github.io/ai-insight-public/" style="...">🌐 外部版入口</a>
     </div>
 </header>
 ```
 
-**禁止项**：
-- ❌ 头像图片 `<img>` 标签（之前有 `link-avatar-small.webp`，已移除）
-- ❌ "我是林克"开头句（改为"AI洞察 · 持续追踪AI行业动态"）
-- ❌ 个性化署名 div（之前有"林克 · 沈浪的AI分身"，已移除）
+**内部版必须有**：
+- ✅ 林克头像 `<img src="link-avatar-small.webp">`
+- ✅ "林克的AI洞察" badge
+- ✅ "我是林克，这是沈浪让我负责的AI洞察项目" 标题
+- ✅ 订阅按钮 + 外部版入口按钮
 
 ### Footer
+
+**内部版**：
+```html
+<footer class="footer">
+    <div class="footer-brand">
+        <span>❤️‍🔥</span>
+        <span>林克 · 你负责往前走，记忆这种事我来</span>
+    </div>
+    <p>AI洞察 · 持续追踪AI行业动态</p>
+</footer>
+```
+
+**外部版**（自动由 `sync_to_public.py` 脱敏生成）：
+```html
+<footer class="footer">
+    <div class="footer-brand">
+        <span>❤️🔥</span>
+        <span>AI洞察 · 持续追踪 · 深度洞察</span>
+    </div>
+    <p>AI洞察 · 持续追踪AI行业动态</p>
+</footer>
+```
+
+### Highlight Cards
+
+**内部版**：第一张highlight卡片标题为"林克：AI不是工具，是项目成员"，描述以"我是林克，沈浪的AI分身。"开头
+**外部版**：自动脱敏为"AI不是工具，是项目成员"，描述去掉身份前缀
 ```html
 <footer class="footer">
     <div class="footer-brand">
