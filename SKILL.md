@@ -70,7 +70,7 @@ AI洞察是一个**AI驱动的行业研究平台**，核心做四件事：
 - **P0 交付** → 质量门(#4) + fail loud(#6) + 首页脱敏(#7) + 外部版三项替换(#10) + {{message}}禁令(#11)
 - **P2 事后** → skill_calls日志 + token记录 + 5项自举扫描
 
-**P1 踩坑清单（从11条P0红线提炼高频失败项）**：
+**P1 踩坑清单（从14条P0红线提炼高频失败项）**：
 1. ❌ 续接必须先resume(#1) — 无例外
 2. ❌ MixCard必须用脚本生成(#2) — 禁止手写
 3. ❌ uv run替代python/python3(#9)
@@ -78,8 +78,11 @@ AI洞察是一个**AI驱动的行业研究平台**，核心做四件事：
 5. ❌ 外部版三项URL替换必须同时完成(#10)
 6. ❌ 首页修改必须读homepage-spec.md(#7)
 7. ❌ KIM消息发送必须指定target=username:shenlang03
+8. ❌ 知识库Tab禁止<a href=*.md>链接(#12) — 用<span>
+9. ❌ MixCard群发按钮URL必须用外部版(#13) — 私发用内部版
+10. ❌ 订阅按钮禁止./subscribe/相对路径(#14) — 用绝对URL
 
-**自检声明格式**："我已读完SKILL.md+对应子技能workflow+11条P0红线+踩坑7条，准备执行Step X"
+**自检声明格式**："我已读完SKILL.md+对应子技能workflow+14条P0红线+踩坑10条，准备执行Step X"
 
 ## 项目信息
 
@@ -117,9 +120,9 @@ AI洞察是一个**AI驱动的行业研究平台**，核心做四件事：
 | `tavily-search` | 海外搜索 |
 | `quark-search` | 国内搜索 |
 
-## P0红线（11条核心红线）
+## P0红线（14条核心红线）
 
-> ⚠️ 只有11条需要Agent自觉遵守。其余校验已内置到脚本。
+> ⚠️ 只有14条需要Agent自觉遵守。其余校验已内置到脚本。
 
 ### 1. 续接必须先 resume — 无例外
 ```bash
@@ -188,6 +191,23 @@ ls user-skills/sl-ai-insight/.git/HEAD && ssh -o ConnectTimeout=5 -T git@github.
 - 段落/正文文字：`max-width: 68ch`（限制行宽，提高可读性）
 - ❌ 在 `.callout`/`.news-card-why`/`.insight-card` 等容器上加 `max-width: 68ch` → 右侧留白参差不齐
 - ✅ 在 `.news-card-desc`/`.callout p`/`.insight-text` 等文字节点上加 `max-width: 68ch` → 等宽卡片+可读行宽
+
+### 11. MixCard {{message}} 绝对禁止 — 已记录（见TOOLS.md）
+
+### 12. 知识库Tab禁止可点击的md链接 — 浏览器无法渲染
+- ❌ `<a href="04-knowledge-base/*.md">` — Markdown文件浏览器无法渲染，且 `public/` 下不存在
+- ✅ `<span class="kb-item">` 展示标题，不可点击
+- 2026-06-04：37个链接全部改为span，首页已部署
+
+### 13. MixCard按钮URL区分推送场景
+- **私发订阅者**：按钮URL用**内部版**（`ai-insight-internal.frontend-cloud.corp.kuaishou.com`）
+- **群发**：按钮URL用**外部版**（`xiaoxiong20260206.github.io/ai-insight-public`）— 群内可能有无法访问内部版的用户
+- `build_insight_mixcard.py` 需根据 `--target private|group` 自动选择URL
+
+### 14. 首页按钮必须使用绝对URL — 禁止相对路径
+- **订阅按钮**：`https://aidailyinsight-subscribe.frontend-cloud.corp.kuaishou.com`（禁止 `./subscribe/`，frontend-cloud会拦截触发SSO 302）
+- **外部版入口**：`https://xiaoxiong20260206.github.io/ai-insight-public/`
+- **根因**：frontend-cloud对 `/subscribe/` 路径做SSO认证拦截，点击→302→登录页而非订阅页
 
 ---
 
@@ -264,6 +284,25 @@ Step 5: KIM推送 → build_insight_mixcard.py → message(kimMixCard, message="
 - **同步脚本**：`scripts/sync_subscribers.py`（Appwrite → `data/subscribers.json`，cron 执行前调用）
 - **订阅者推送**：日报 Step 5 读取 `data/subscribers.json`，遍历 `is_active=true` 的用户逐一私发
 - **owner 保留**：shenlang03 始终在订阅列表中（source=owner），不可取消
+- **⚠️ 订阅按钮路径**：内部首页的订阅按钮**必须直接指向** `https://aidailyinsight-subscribe.frontend-cloud.corp.kuaishou.com`，**禁止使用** `./subscribe/` 相对路径——frontend-cloud会拦截 `/subscribe/` 路径触发SSO 302重定向，导致用户看到登录页而非订阅页（2026-06-03教训）
+
+## 首页规则（补充P0红线）
+
+### P0 #12: 知识库Tab禁止可点击链接
+- ❌ `<a href="04-knowledge-base/*.md">` — Markdown文件浏览器无法渲染，且 `public/` 下不存在这些文件
+- ✅ `<span class="kb-item"><span class="item-icon">📄</span><span class="item-text">标题</span></span>`
+- 适用于内部版和外部版（外部版通过 `sanitize_html()` 自动转换）
+- `homepage-spec.md` 已同步更新此规则
+
+### P0 #13: MixCard按钮URL区分推送场景
+- **私发订阅者**：MixCard按钮URL使用**内部版**链接（`ai-insight-internal.frontend-cloud.corp.kuaishou.com`），订阅者均为内部员工可访问
+- **群发**：MixCard按钮URL使用**外部版**链接（`xiaoxiong20260206.github.io/ai-insight-public`），群内可能有无法访问内部版的用户
+- `build_insight_mixcard.py` 需根据推送范围（`--target private|group`）自动选择URL
+
+### P0 #14: 首页按钮必须使用绝对URL
+- **订阅按钮**：必须用 `https://aidailyinsight-subscribe.frontend-cloud.corp.kuaishou.com`（见订阅系统⚠️说明）
+- **外部版入口**：必须用 `https://xiaoxiong20260206.github.io/ai-insight-public/`
+- **禁止相对路径**（`./subscribe/`、`../`等）— frontend-cloud会拦截部分路径触发SSO重定向
 
 ## 踩坑经验（归档，不加载）
 
