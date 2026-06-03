@@ -23,10 +23,24 @@ AI洞察是一个**AI驱动的行业研究平台**，核心做四件事：
 
 | 版本 | URL | 说明 |
 |------|-----|------|
-| 内部版 | `https://ai-insight-internal.frontend-cloud.corp.kuaishou.com` | 含林克身份、订阅按钮、内部链接 |
-| 外部版 | `https://xiaoxiong20260206.github.io/ai-insight-public` | 脱敏版，零敏感词，GitHub Pages 托管 |
+| 内部版 | `https://ai-insight-internal.frontend-cloud.corp.kuaishou.com` | 林克品牌+订阅按钮+内部链接 |
+| 外部版 | `https://xiaoxiong20260206.github.io/ai-insight-public` | 通用品牌，零敏感词，GitHub Pages 托管 |
 
 每次新增内容，必须同时生成内部版和外部版，并同步更新两个首页。
+
+**内部版 vs 外部版的设计分界线**：
+
+| 元素 | 内部版 | 外部版 |
+|------|--------|--------|
+| 林克头像 | ✅ `link-avatar-small.webp` | ❌ 隐藏 |
+| 标题 | "我是林克，这是沈浪让我负责的AI洞察项目" | "AI洞察 · 持续追踪AI行业动态" |
+| Badge | "林克的AI洞察" | "AI行业洞察" |
+| Highlight卡片 | "林克：AI不是工具，是项目成员" + "我是林克，沈浪的AI分身。" | "AI不是工具，是项目成员" + 去身份描述 |
+| 订阅按钮 | ✅ | ❌ 外部不可订阅 |
+| 外部版入口 | ✅ | ❌ 不需要 |
+| Footer | "❤️‍🔥 林克 · 你负责往前走，记忆这种事我来" | "❤️🔥 AI洞察 · 持续追踪 · 深度洞察" |
+
+**原则**：内部版让人看到"林克在帮沈浪做AI洞察"，外部版让人看到"一个专业的AI行业洞察平台"。
 
 ### 闭环约束
 
