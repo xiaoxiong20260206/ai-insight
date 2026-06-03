@@ -461,7 +461,7 @@ def _run_main_logic(args) -> None:
     print()
     print("=" * 50)
     print("📊 同步完成!")
-    print(f"🔗 外部版本: https://xiaoxiong20260206.github.io/ai-insight-public/")
+    print(f"🔗 外部版本: https://xiaoxiong20260206.github.io/ai-insight-public/ (GitHub Pages)")
 
 
 if __name__ == "__main__":

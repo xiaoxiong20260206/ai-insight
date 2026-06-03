@@ -46,11 +46,22 @@
     <p class="header-subtitle">
         系统化追踪AI行业动态，每日/每周输出调研洞察，帮助你保持对AI行业的全局视野
     </p>
+    <div style="margin-top: 24px; text-align: center; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+        <a href="./subscribe/"
+           style="...">
+            📧 订阅AI日报（每天08:00推送）
+        </a>
+        <a href="https://xiaoxiong20260206.github.io/ai-insight-public/"
+           style="...">
+            🌐 外部版入口
+        </a>
+    </div>
 </header>
 ```
 
 **禁止项**：
 - ❌ 头像图片 `<img>` 标签（之前有 `link-avatar-small.webp`，已移除）
+- ❌ "我是林克"开头句（改为"AI洞察 · 持续追踪AI行业动态"）
 - ❌ 个性化署名 div（之前有"林克 · 沈浪的AI分身"，已移除）
 
 ### Footer

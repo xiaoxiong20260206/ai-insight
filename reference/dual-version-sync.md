@@ -4,7 +4,7 @@
 
 | 版本 | 路径 | GitHub Pages |
 |------|------|--------------|
-| 内部版 | `../AI-Insight/` | xiaoxiong20260206.github.io/ai-insight/ |
+| 内部版 | `../AI-Insight/` | ai-insight-internal.frontend-cloud.corp.kuaishou.com |
 | public | `../AI-Insight/public/` | （同上，部署源） |
 | **外部版** | `../ai-insight-public/` | **xiaoxiong20260206.github.io/ai-insight-public/** |
 
