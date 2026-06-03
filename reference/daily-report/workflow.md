@@ -20,6 +20,7 @@ Step 1: 搜索调研 → orchestrator complete --step 1
 Step 2: 内容生成 → orchestrator complete --step 2
 Step 3+4: finalize → orchestrator finalize（一键命令，内部自动执行5个子步骤）
 Step 5: KIM推送 → build_insight_mixcard.py → message(kimMixCard)
+Step 6: 知识沉淀(Harvest) → 检查复用价值 → 写入knowledge包（P0#15强制）
 ```
 
 ---
@@ -103,6 +104,28 @@ uv run scripts/ai_daily_orchestrator.py complete --step 5
 ```
 
 **推送范围**: 日报只私发订阅者（从 `data/subscribers.json` 读取 `is_active=true` 的用户），❌禁止群发。
+
+---
+
+## Step 6: 知识沉淀（Harvest）— P0#15 强制，不可跳过
+
+日报完成后，**必须**检查本次是否有复用价值的分析/对比/洞察：
+
+```
+□ 本次日报有复用价值的分析/对比/洞察吗？
+  → 有 → 写入 knowledge/packages/ai-insight/ + 更新 INDEX.md + 更新 MEMORY.md 指针
+  → 没有 → 简短声明"本次无 Harvest"并继续
+```
+
+**写入路径**：`knowledge/packages/ai-insight/insights/YYYY-MM-DD-daily-insights.md`
+
+**典型Harvest内容**：
+- 新出现的行业模式/规律（如"AI从聊天竞赛转向企业生产力平台"）
+- 跨板块共同主题（如"成本战→结构性定价"）
+- 人物/公司动态需更新追踪体系（如"Anthropic首超OpenAI企业采用率"）
+- 新术语/新概念需记录
+
+**不做 Harvest = P2 不通过**
 
 ---
 
