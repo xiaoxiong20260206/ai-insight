@@ -10,6 +10,30 @@ export:
 
 > 系统化追踪AI行业动态，每日/每周输出调研洞察。
 
+## 项目目标
+
+AI洞察是一个**AI驱动的行业研究平台**，核心做四件事：
+
+1. **产出**：AI日报、周报、深度调研——稳定、准确、持续地输出行业洞察
+2. **沉淀**：每次跑完报告/调研，对应的知识自动沉淀到追踪体系和知识库，保持新鲜度
+3. **呈现**：所有信息同步更新到内外部首页，首页必须能看到最新的日报、周报、深度调研（按月呈现）、追踪体系、知识库
+4. **订阅**：内部同学可订阅AI日报，订阅后自动接收推送
+
+### 双版本体系
+
+| 版本 | URL | 说明 |
+|------|-----|------|
+| 内部版 | `https://ai-insight-internal.frontend-cloud.corp.kuaishou.com` | 含林克身份、订阅按钮、内部链接 |
+| 外部版 | `https://xiaoxiong20260206.github.io/ai-insight-public` | 脱敏版，零敏感词，GitHub Pages 托管 |
+
+每次新增内容，必须同时生成内部版和外部版，并同步更新两个首页。
+
+### 闭环约束
+
+- **报告产出 → 知识沉淀**：日报/周报/调研跑完后，必须检查是否有知识需要沉淀到追踪体系或知识库
+- **知识沉淀 → 首页更新**：每次内容变更后，必须同步更新两个首页
+- **首页 → 订阅推送**：首页是信息的窗口，订阅推送是信息的渠道，两者联动
+
 ## ⚠️ 元执行保障（必加载）
 
 本技能命中绑定标准 C1+C2+C3+C4+C5（多阶段+外部可见+部署发布+无人值守+数据完整性），**最高优先级**绑定 evo-meta-execution。
@@ -32,8 +56,8 @@ export:
 
 ## 项目信息
 
-- **内部版**: https://xiaoxiong20260206.github.io/ai-insight/
-- **外部版**: https://xiaoxiong20260206.github.io/ai-insight-public/
+- **内部版**: https://ai-insight-internal.frontend-cloud.corp.kuaishou.com
+- **外部版**: https://xiaoxiong20260206.github.io/ai-insight-public
 - **项目路径**: `user-skills/sl-ai-insight/`
 
 ## 子技能路由表

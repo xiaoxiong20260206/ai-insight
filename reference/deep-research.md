@@ -138,7 +138,7 @@ Step 6: KIM推送 → build_insight_mixcard.py research
 
 1. **必须用脚本生成+校验**：`uv run scripts/build_insight_mixcard.py research --slug <slug> --title ... --subtitle ...`
 2. **如果脚本不支持所需内容**：先扩展脚本参数，再生成。❌禁止手写MixCard JSON绕过脚本
-3. **按钮URL**：绿按钮指向报告HTML页面，蓝按钮指向AI洞察首页`https://xiaoxiong20260206.github.io/ai-insight/`
+3. **按钮URL**：绿按钮指向报告HTML页面，蓝按钮指向AI洞察首页（从 `config.py` 的 `INTERNAL_PAGES_BASE` 读取）
 4. **推送时不传message字段**（会导致{{message}}泄露）
 
 ### 修复策略（P0强制）
