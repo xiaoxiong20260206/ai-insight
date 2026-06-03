@@ -1,3 +1,77 @@
 {
-    "projectId": "INTERNAL_PROJECT_ID"
+    "projectId": "aidailyinsight",
+    "tablesDB": [
+        {
+            "$id": "subscribers",
+            "name": "Subscribers",
+            "enabled": true
+        }
+    ],
+    "tables": [
+        {
+            "$id": "daily_subscribers",
+            "$permissions": [
+                "create(\"users\")"
+            ],
+            "databaseId": "subscribers",
+            "name": "Daily Subscribers",
+            "enabled": true,
+            "rowSecurity": true,
+            "columns": [
+                {
+                    "key": "username",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 128,
+                    "default": null,
+                    "encrypt": false
+                },
+                {
+                    "key": "kwai_user_id",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 128,
+                    "default": null,
+                    "encrypt": false
+                },
+                {
+                    "key": "source",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 64,
+                    "default": null,
+                    "encrypt": false
+                },
+                {
+                    "key": "is_active",
+                    "type": "boolean",
+                    "required": false,
+                    "array": false,
+                    "default": null
+                },
+                {
+                    "key": "subscribed_at",
+                    "type": "datetime",
+                    "required": false,
+                    "array": false,
+                    "default": null,
+                    "format": ""
+                }
+            ],
+            "indexes": [
+                {
+                    "key": "username_unique",
+                    "type": "unique",
+                    "status": "available",
+                    "columns": [
+                        "username"
+                    ],
+                    "orders": []
+                }
+            ]
+        }
+    ]
 }
