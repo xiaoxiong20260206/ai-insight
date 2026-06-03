@@ -207,7 +207,12 @@ Step 5: KIM推送 → build_insight_mixcard.py → message(kimMixCard, message="
 
 ## 订阅系统
 
-KIM DM「订阅AI日报」/「取消订阅AI日报」→ AGENTS.md订阅协议自动处理。数据：`data/subscribers.json`
+- **Web 订阅页面**：https://aidailyinsight-subscribe.frontend-cloud.corp.kuaishou.com （快手 SSO 登录 → 一键订阅/取消）
+- **内部首页入口**：`public/subscribe/index.html` 重定向到 Web 订阅页面
+- **数据存储**：Appwrite TablesDB（`subscribers` 库 → `daily_subscribers` 表，行级安全）
+- **同步脚本**：`scripts/sync_subscribers.py`（Appwrite → `data/subscribers.json`，cron 执行前调用）
+- **订阅者推送**：日报 Step 5 读取 `data/subscribers.json`，遍历 `is_active=true` 的用户逐一私发
+- **owner 保留**：shenlang03 始终在订阅列表中（source=owner），不可取消
 
 ## 踩坑经验（归档，不加载）
 
