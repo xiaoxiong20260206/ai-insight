@@ -34,7 +34,7 @@
         我是 <strong>林克</strong>，沈浪的AI分身。AI洞察是沈浪让我负责的一个项目，目标是系统化追踪AI行业动态，每日/每周输出调研洞察，帮助你保持对AI行业的全局视野。覆盖大模型、AI Coding、AI应用、AI行业投融资、企业AI转型五大领域。
     </p>
     <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:16px;">
-        <a href="https://[GITHUB_USER].github.io/ai-insight/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:linear-gradient(135deg,#059669 0%,#10B981 100%);color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none">
+        <a href="https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:linear-gradient(135deg,#059669 0%,#10B981 100%);color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none">
             🏠 访问AI洞察首页
         </a>
     </div>
@@ -60,7 +60,7 @@
     <p style="font-size:14px;color:#57534E;line-height:1.7;margin:0 0 12px 0">
         我是 <strong>林克</strong>，沈浪的AI分身。AI洞察是沈浪让我负责的一个项目，目标是系统化追踪AI行业动态，每日/每周输出调研洞察，帮助你保持对AI行业的全局视野。覆盖大模型、AI Coding、AI应用、AI行业投融资、企业AI转型五大领域。
     </p>
-    <a href="https://[GITHUB_USER].github.io/ai-insight/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:linear-gradient(135deg,#059669 0%,#10B981 100%);color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none">
+    <a href="https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:linear-gradient(135deg,#059669 0%,#10B981 100%);color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none">
         🏠 访问AI洞察首页
     </a>
 </div>
@@ -89,7 +89,7 @@
 - [ ] **底部有"了解更多"模块**
 - [ ] **包含林克介绍段落**（"我是林克，沈浪的AI分身..."）
 - [ ] **包含首页入口按钮**（"🏠 访问AI洞察首页"）
-- [ ] **链接正确**（https://[GITHUB_USER].github.io/ai-insight/）
+- [ ] **链接正确**（https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/）
 - [ ] **深度调研页面有相关资源列表**
 
 ---
@@ -128,7 +128,7 @@
 <div style="...">
     <div>💡 了解更多</div>
     <p>我是<strong>林克</strong>，沈浪的AI分身。AI洞察是...</p>
-    <a href="https://[GITHUB_USER].github.io/ai-insight/">🏠 访问AI洞察首页</a>
+    <a href="https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/">🏠 访问AI洞察首页</a>
 </div>
 ```
 

@@ -17,6 +17,10 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
+# 从 config.py SSoT 读取 URL
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from config import INTERNAL_PAGES_BASE
+
 BASE_DIR = Path(__file__).parent.parent
 TEMPLATE_CSS_FILE = BASE_DIR / "templates" / "daily-report-v3.css"
 TEMPLATE_JS_FILE = BASE_DIR / "templates" / "daily-report-v3.js"
@@ -651,7 +655,7 @@ def generate_html(data: dict) -> str:
                 <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
                     <img src="link-avatar-small.webp" alt="林克" style="width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(5,150,105,0.3);object-fit:cover">
                     <span>我是 <strong>林克</strong>，沈浪的AI分身。
-                    <a href="https://xiaoxiong20260206.github.io/ai-insight/" target="_blank">🏠 访问AI洞察首页</a></span>
+                    <a href="{INTERNAL_PAGES_BASE}/" target="_blank">🏠 访问AI洞察首页</a></span>
                 </div>
                 <p style="margin-top:6px">AI洞察 · 系统化追踪AI行业动态 · 五大板块每日更新</p>
             </footer>

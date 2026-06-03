@@ -28,7 +28,7 @@
 - ⚠️ 每次修改首页CSS变量时，必须同时检查 `qingshuang-research-style/references/base-styles.css` 的最新版本，确保变量名和值一致
 
 **部署链路**：
-- 内部版：`sl-ai-insight/index.html` → `sl-ai-insight/public/index.html` → `xiaoxiong20260206.github.io/ai-insight/`
+- 内部版：`sl-ai-insight/index.html` → `sl-ai-insight/public/index.html` → `ai-insight-internal.frontend-cloud.corp.kuaishou.com`
 - 外部版：`sl-ai-insight/index.html` → `sanitize_html()` → `ai-insight-public/index.html` → `xiaoxiong20260206.github.io/ai-insight-public/`
 
 ---
