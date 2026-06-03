@@ -86,11 +86,15 @@ finalize内部自动执行：
 ## Step 5: KIM推送
 
 ```bash
+# 0. 同步订阅者（Appwrite → subscribers.json）
+uv run --with requests scripts/sync_subscribers.py
+
 # 1. 生成mixCard（脚本自带6锚点校验+kimMd格式校验+{{message}}扫描）
 uv run scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/card.json --with-summary
 
-# 2. 读取卡片JSON，发送
-# message(channel=kim, action=send, kimMixCard=<inner card JSON>, target="username:shenlang03", message="")
+# 2. 读取卡片JSON，遍历订阅者逐一私发
+# message(channel=kim, action=send, kimMixCard=<inner card JSON>, target="username:USERNAME", message="")
+# 读取 data/subscribers.json，遍历 is_active=true 的订阅者，逐一发送
 # ⚠️ kimMixCard必须传inner card格式（{config, blocks, updateMulti}在顶层），禁止传双层{card: {...}}
 # ⚠️ message参数必须传空字符串""，禁止同时传message和kimMixCard（会导致{{message}}模板注入泄露）
 
@@ -98,7 +102,7 @@ uv run scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/ca
 uv run scripts/ai_daily_orchestrator.py complete --step 5
 ```
 
-**推送范围**: 日报只私发订阅者，❌禁止群发。
+**推送范围**: 日报只私发订阅者（从 `data/subscribers.json` 读取 `is_active=true` 的用户），❌禁止群发。
 
 ---
 
