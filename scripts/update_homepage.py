@@ -267,6 +267,13 @@ def sync_all_homepages(date_str: str, update_type: str,
     # 内部版 → public/
     pub = PROJECT_ROOT / "public" / "index.html"
     pub.write_text(src.read_text(encoding="utf-8"), encoding="utf-8")
+    
+    # ⚡ 统计卡片自动校准（P1 — 每次同步首页时自动校准）
+    try:
+        from calibrate_stats import calibrate
+        calibrate(pub, dry_run=False)
+    except Exception as e:
+        print(f"  ⚠️ 统计校准跳过: {e}")
 
     # 调用 sync_to_public.py 脱敏 → ai-insight-public/
     external_repo = PROJECT_ROOT.parent / "ai-insight-public"
