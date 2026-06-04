@@ -44,6 +44,7 @@ from config import INTERNAL_PAGES_BASE as INTERNAL_BASE
 from config import EXTERNAL_PAGES_BASE as EXTERNAL_BASE
 REPORT_BASE_URL = f"{INTERNAL_BASE}/01-daily-reports"
 PROJECT_URL = f"{INTERNAL_BASE}/"  # 默认内部版，--target group 时切换为外部版
+_current_target = "private"  # 推送目标：private=私发(内部版身份), group=群发(脱敏身份)
 
 # 统一卡片骨架配置
 CARD_CONFIG = {"forward": True, "forwardType": 3, "wideSelfAdaptive": True}
@@ -64,7 +65,11 @@ def _content(block_id: str, text: str) -> dict:
 
 def _footer(tag: str = "") -> dict:
     suffix = f" · {tag}" if tag else ""
-    return _content("footer", f"*林克（沈浪的AI分身）· AI洞察{suffix}*")
+    if _current_target == "group":
+        text = f"*AI洞察{suffix}*"
+    else:
+        text = f"*林克（沈浪的AI分身）· AI洞察{suffix}*"
+    return _content("footer", text)
 
 
 def _buttons(btn1_text: str, btn1_url: str, btn2_text: str = "💡 了解AI洞察项目",
@@ -565,7 +570,8 @@ def main():
     args = parser.parse_args()
 
     # 根据 --target 切换按钮URL（P0 #13: 私发用内部版，群发用外部版）
-    global PROJECT_URL, REPORT_BASE_URL
+    global PROJECT_URL, REPORT_BASE_URL, _current_target
+    _current_target = args.target
     if args.target == "group":
         PROJECT_URL = f"{EXTERNAL_BASE}/"
         REPORT_BASE_URL = f"{EXTERNAL_BASE}/01-daily-reports"

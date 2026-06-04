@@ -70,7 +70,7 @@ AI洞察是一个**AI驱动的行业研究平台**，核心做四件事：
 - **P0 交付** → 质量门(#4) + fail loud(#6) + 首页脱敏(#7) + 外部版三项替换(#10) + {{message}}禁令(#11) + 知识库禁md链接(#12) + MixCard URL区分场景(#13) + 首页按钮绝对URL(#14)
 - **P2 事后** → skill_calls日志 + token记录 + 知识沉淀(Harvest) + 5项自举扫描
 
-**P1 踩坑清单（从14条P0红线提炼高频失败项）**：
+**P1 踩坑清单（从15条P0红线提炼高频失败项）**：
 1. ❌ 续接必须先resume(#1) — 无例外
 2. ❌ MixCard必须用脚本生成(#2) — 禁止手写
 3. ❌ uv run替代python/python3(#9)
@@ -79,10 +79,11 @@ AI洞察是一个**AI驱动的行业研究平台**，核心做四件事：
 6. ❌ 首页修改必须读homepage-spec.md(#7)
 7. ❌ KIM消息发送必须指定target=username:shenlang03
 8. ❌ 知识库Tab禁止<a href=*.md>链接(#12) — 用<span>
-9. ❌ MixCard群发按钮URL必须用外部版(#13) — 私发用内部版
+9. ❌ MixCard群发按钮URL+footer必须用外部版(#13) — 私发用内部版
 10. ❌ 订阅按钮禁止./subscribe/相对路径(#14) — 用绝对URL
+11. ❌ 知识沉淀(Harvest)不可跳过(#15) — 日报Step 6强制
 
-**自检声明格式**："我已读完SKILL.md+对应子技能workflow+14条P0红线+踩坑10条，准备执行Step X"
+**自检声明格式**："我已读完SKILL.md+对应子技能workflow+15条P0红线+踩坑11条，准备执行Step X"
 
 ## 项目信息
 
@@ -120,9 +121,9 @@ AI洞察是一个**AI驱动的行业研究平台**，核心做四件事：
 | `tavily-search` | 海外搜索 |
 | `quark-search` | 国内搜索 |
 
-## P0红线（14条核心红线）
+## P0红线（15条核心红线）
 
-> ⚠️ 只有14条需要Agent自觉遵守。其余校验已内置到脚本。
+> ⚠️ 只有15条需要Agent自觉遵守。其余校验已内置到脚本。
 
 ### 1. 续接必须先 resume — 无例外
 ```bash
@@ -232,7 +233,8 @@ ls user-skills/sl-ai-insight/.git/HEAD && ssh -o ConnectTimeout=5 -T git@github.
 | `gen_daily_html.py` | HTML生成+自校验 |
 | `gen_weekly_json.py` | 周报JSON模板+schema验证 |
 | `gen_weekly_html.py` | 周报HTML生成（从JSON动态生成+自校验≥50KB+5板块+class名一致性+自动cp到public） |
-| `update_homepage.py` | 首页更新（统一入口，支持daily+weekly） |
+| `update_homepage.py` | 首页更新（统一入口，支持daily+weekly）+ 自动校准统计卡片 |
+| `calibrate_stats.py` | 统计卡片自动校准（从实际文件计算5项数字） |
 | `deploy_daily.sh` | 日报一键部署 |
 | `sync_to_public.py` | 内部版→public+外部版同步 |
 | `sync_to_external.py` | 外部版仓库同步+脱敏 |
@@ -244,6 +246,7 @@ ls user-skills/sl-ai-insight/.git/HEAD && ssh -o ConnectTimeout=5 -T git@github.
 | `fetch_arxiv.py` | arXiv论文监控 |
 | `daily_env_init.sh` | 环境初始化 |
 | `validate_daily_schema.py` | JSON schema校验（按需） |
+| `sync_subscribers.py` | 订阅者同步（Appwrite → subscribers.json） |
 | `config.py` | 全局配置SSoT |
 
 > 已归档的脚本：fix_0508_json/fix_deep_research_footers/fix_json_quotes/fix_weixin_links/verify_4positions/daily_agent_runner/update_homepage_weekly → `_archive/`
@@ -255,17 +258,18 @@ ls user-skills/sl-ai-insight/.git/HEAD && ssh -o ConnectTimeout=5 -T git@github.
 | 类型 | 推送范围 | 禁止 |
 |------|---------|------|
 | 日报 | 私发订阅者 | ❌禁止群发 |
-| 周报 | 仅发AI生产力中心大群(space:6783643915686960) | ❌禁止发其他群 |
+| 周报 | 先私发预览shenlang03 → 确认后发AI生产力中心大群(space:3705455482343722) | ❌禁止不确认就群发 |
 
 ---
 
-## 一次到位执行流程（日报）
+## 一次到位执行流程（日报7步）
 
 ```
 Step 1: 搜索调研 → orchestrator complete --step 1
 Step 2: 内容生成 → orchestrator complete --step 2
 Step 3+4: finalize → orchestrator finalize（自动:质量门→HTML→首页更新→部署→外部同步）
-Step 5: KIM推送 → build_insight_mixcard.py → message(kimMixCard, message="")
+Step 5: KIM推送 → sync_subscribers.py → build_insight_mixcard.py → message(kimMixCard, message="")
+Step 6: 知识沉淀(Harvest) → 检查复用价值 → 写入knowledge包（P0#15强制）
 
 **⚠️ MixCard发送格式（P0红线）**：
 - `kimMixCard`参数必须传**inner card格式**（`{config, updateMulti, blocks}`直接在顶层）
@@ -294,10 +298,10 @@ Step 5: KIM推送 → build_insight_mixcard.py → message(kimMixCard, message="
 - 适用于内部版和外部版（外部版通过 `sanitize_html()` 自动转换）
 - `homepage-spec.md` 已同步更新此规则
 
-### P0 #13: MixCard按钮URL区分推送场景
-- **私发订阅者**：MixCard按钮URL使用**内部版**链接（`ai-insight-internal.frontend-cloud.corp.kuaishou.com`），订阅者均为内部员工可访问
-- **群发**：MixCard按钮URL使用**外部版**链接（`xiaoxiong20260206.github.io/ai-insight-public`），群内可能有无法访问内部版的用户
-- `build_insight_mixcard.py` 需根据推送范围（`--target private|group`）自动选择URL
+### P0 #13: MixCard按钮URL+footer区分推送场景
+- **私发订阅者**：按钮URL用内部版，footer保留"林克（沈浪的AI分身）· AI洞察"
+- **群发**：按钮URL用外部版，footer脱敏为"AI洞察" — 群内可能有无法访问内部版的用户，不应暴露内部身份
+- `build_insight_mixcard.py` 根据 `--target private|group` 自动切换URL+footer
 
 ### P0 #14: 首页按钮必须使用绝对URL
 - **订阅按钮**：必须用 `https://aidailyinsight-subscribe.frontend-cloud.corp.kuaishou.com`（见订阅系统⚠️说明）
@@ -311,11 +315,10 @@ Step 5: KIM推送 → build_insight_mixcard.py → message(kimMixCard, message="
 - **不做 Harvest = P2 不通过**
 - 当前断档：6/2、6/3日报均未做Harvest，需要补做
 
-### 首页统计卡片维护规则（P1 — 定期校准）
-- 统计卡片数字是硬编码，无数据源联动
-- **每月至少校准一次**：追踪人物/公司/信息源/深度调研/日报周报
-- 校准方法：`grep -c '<tr><td><strong>' index.html`（追踪条目）、`find public/02-deep-research -name '*.html' ! -name 'index.html' | wc -l`（深度调研）、`find public/01-daily-reports -name '2026-*.html' ! -name 'weekly-*' | wc -l`（日报）
-- 当前值（2026-06-04）：人物100+、公司140+、深度调研30、日报95+周报13
+### 首页统计卡片维护规则（P1 — 自动校准）
+- 统计卡片数字由 `calibrate_stats.py` 自动计算，每次 `update_homepage.py` 运行时自动校准
+- 校准方法：追踪条目从index.html表格行计数、深度调研从时间轴链接数、日报/周报从public/文件计数
+- 当前值（2026-06-04校准）：人物85+、公司183+、深度调研30、日报95+周报14=109+
 
 ### 日历数据维护规则（P1 — cron自动+手动补漏）
 - 日报cron的 `update_homepage.py daily` 会自动更新日历日期数组
@@ -338,7 +341,8 @@ Step 5: KIM推送 → build_insight_mixcard.py → message(kimMixCard, message="
 | 知识库Tab | ⚠️ | 37个链接→span(临时方案) | 长期: 知识渲染为HTML |
 | 追踪体系 | ⚠️ | 无自动保鲜机制 | P1: 待设计cron |
 | 时间轴 | ⚠️ | 新调研需手动添加 | P1: gen_timeline.py待集成 |
-| 统计卡片 | ⚠️ | 需手动校准 | P1: 月度检查 |
+| 统计卡片 | ✅ | 自动校准 | calibrate_stats.py集成到update_homepage |
+| MixCard footer | ✅ | 群发脱敏 | --target group自动切换 |
 
 ### 知识沉淀断档分析
 
