@@ -498,7 +498,10 @@ if [ "${SKIP_FRONTEND_CLOUD:-0}" != "1" ]; then
     if npx -y --registry https://npm.corp.kuaishou.com @codeflicker/frontend-cloud-cli@latest deploy 2>&1; then
         echo "  ✅ 内部首页已部署到 frontend-cloud"
     else
-        echo "  ⚠️ frontend-cloud 部署失败（非阻断，GitHub Pages 仍可用）"
+        echo "  ❌ frontend-cloud 部署失败！内部版URL将指向过期内容或404。"
+        echo "     MixCard按钮链接的是 frontend-cloud 内部版URL，部署失败=用户无法查看日报。"
+        echo "     修复方法：cd public && npx @codeflicker/frontend-cloud-cli@latest deploy"
+        DEPLOY_FAIL=1
     fi
     cd "$PROJECT_DIR"
 else
