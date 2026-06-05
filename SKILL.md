@@ -70,7 +70,7 @@ AI洞察是一个**AI驱动的行业研究平台**，核心做四件事：
 - **P0 交付** → 质量门(#4) + fail loud(#6) + 首页脱敏(#7) + 外部版三项替换(#10) + {{message}}禁令(#11) + 知识库禁md链接(#12) + MixCard URL区分场景(#13) + 首页按钮绝对URL(#14)
 - **P2 事后** → skill_calls日志 + token记录 + 知识沉淀(Harvest) + 5项自举扫描
 
-**P1 踩坑清单（从15条P0红线提炼高频失败项）**：
+**P1 踩坑清单（从18条P0红线提炼高频失败项）**：
 1. ❌ 续接必须先resume(#1) — 无例外
 2. ❌ MixCard必须用脚本生成(#2) — 禁止手写
 3. ❌ uv run替代python/python3(#9)
@@ -82,8 +82,11 @@ AI洞察是一个**AI驱动的行业研究平台**，核心做四件事：
 9. ❌ MixCard群发按钮URL+footer必须用外部版(#13) — 私发用内部版
 10. ❌ 订阅按钮禁止./subscribe/相对路径(#14) — 用绝对URL
 11. ❌ 知识沉淀(Harvest)不可跳过(#15) — 日报Step 6强制
+12. ❌ frontend-cloud部署失败=硬性阻断(#16) — 禁止当warning继续
+13. ❌ 周报更新必须三联动(#17) — 卡片+badge+日历映射
+14. ❌ 日报footer禁止手动修改URL(#18) — 内部版用内部URL，外部版用外部URL
 
-**自检声明格式**："我已读完SKILL.md+对应子技能workflow+15条P0红线+踩坑11条，准备执行Step X"
+**自检声明格式**："我已读完SKILL.md+对应子技能workflow+18条P0红线+踩坑11条，准备执行Step X"
 
 ## 项目信息
 
@@ -121,7 +124,7 @@ AI洞察是一个**AI驱动的行业研究平台**，核心做四件事：
 | `tavily-search` | 海外搜索 |
 | `quark-search` | 国内搜索 |
 
-## P0红线（15条核心红线）
+## P0红线（18条核心红线）
 
 > ⚠️ 只有15条需要Agent自觉遵守。其余校验已内置到脚本。
 
@@ -217,9 +220,10 @@ ls user-skills/sl-ai-insight/.git/HEAD && ssh -o ConnectTimeout=5 -T git@github.
 | 脚本 | 校验项 | 失败时行为 |
 |------|--------|-----------|
 | `build_insight_mixcard.py` | 6锚点+kimMd格式+{{message}}扫描+URL格式 | ❌硬性报错退出 |
-| `gen_daily_html.py` | ≥50KB+5板块+{{message}}扫描+overview/深度聚焦 | ❌硬性报错退出 |
-| `update_homepage.py` | 内部版+public+索引页包含当天日期 + 周报模式额外检查：日历数据含周号+外部版HTML存在+外部首页含周号 | ❌报错退出 |
-| `daily_quality_gate.py` | hard/soft分级 | 硬性阻断/软性警告 |
+| `gen_daily_html.py` | ≥50KB+5板块+{{message}}扫描+overview/深度聚焦+footer URL=INTERNAL_PAGES_BASE | ❌硬性报错退出 |
+| `update_homepage.py` | 内部版+public+索引页包含当天日期 + 周报模式额外检查：日历数据含周号+外部版HTML存在+外部首页含周号+badge链接与文本匹配 | ❌报错退出 |
+| `sync_to_external.py` | footer URL替换(内部→外部)+敏感词零残留+index.html跳过 | ❌硬性报错退出 |
+| `daily_quality_gate.py` | hard/soft分级+frontend-cloud URL可达性 | 硬性阻断/软性警告 |
 
 ---
 
@@ -315,6 +319,25 @@ Step 6: 知识沉淀(Harvest) → 检查复用价值 → 写入knowledge包（P0
 - **不做 Harvest = P2 不通过**
 - 当前断档：6/2、6/3日报均未做Harvest，需要补做
 
+### P0 #16: frontend-cloud部署失败=硬性阻断 — MixCard按钮依赖内部版URL
+- `deploy_daily.sh` Step 8 的 frontend-cloud 部署失败从⚠️非阻断升级为❌硬性阻断（设 `DEPLOY_FAIL=1`）
+- **根因**：MixCard按钮URL指向 `ai-insight-internal.frontend-cloud.corp.kuaishou.com`，部署失败=用户404
+- GitHub Pages可用≠内部版可用，两者独立不可替代
+- cron agent的"手动部署"模式容易遗漏此步骤，必须依赖 `deploy_daily.sh` 脚本
+
+### P0 #17: 周报更新必须三联动 — 卡片+badge+日历映射
+- ①最新卡片→新周报URL ②往期badge→补上一期 ③weeklyReportsData→修正映射
+- 任何一环遗漏=链接错误（经验#120：所有badge指向W21而非各自对应周报）
+- badge文本≠badge链接：显示"W14"但href可能指向任何URL，必须逐对验证
+- 日历映射用周一起始日：W19起05/04(Mon)
+
+### P0 #18: 双版本日报footer URL不同 — 禁止手动修改
+- 内部版（frontend-cloud）→ `https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/`
+- 外部版（GitHub Pages）→ `https://xiaoxiong20260206.github.io/ai-insight-public/`
+- `gen_daily_html.py` 模板用 `INTERNAL_PAGES_BASE` 生成内部版footer（正确）
+- **cron agent禁止手动修改footer URL**（必须用gen_daily_html.py重新生成）
+- `sync_to_external.py` 同步外部版时必须替换footer URL为外部版URL
+
 ### 首页统计卡片维护规则（P1 — 自动校准）
 - 统计卡片数字由 `calibrate_stats.py` 自动计算，每次 `update_homepage.py` 运行时自动校准
 - 校准方法：追踪条目从index.html表格行计数、深度调研从时间轴链接数、日报/周报从public/文件计数
@@ -326,23 +349,25 @@ Step 6: 知识沉淀(Harvest) → 检查复用价值 → 写入knowledge包（P0
 - 周报日历映射规则：`weeklyReportsData['YYYY-MM'] = {周一日期: 'weekly-YYYY-Wxx'}`
 - ISO周号计算：`date.fromisocalendar(YYYY, W, 1)` → 起始周一日期
 
-## 系统健康检查（2026-06-04 全面复盘）
+## 系统健康检查（2026-06-05 全面复盘续）
 
 ### 闭环验证结果
 
 | 子系统 | 状态 | 问题 | 修复 |
 |--------|------|------|------|
-| 日报cron(08:00) | ✅ 运行稳定 | 知识沉淀6/2-6/3断档 | P0#15: Harvest列为P2强制步骤 |
+| 日报cron(08:00) | ✅ 运行稳定 | frontend-cloud部署被跳过 | P0#16: 硬性阻断+手动补部署 |
 | 周报cron(周一09:00) | ✅ 运行稳定 | W21缺失 | ✅ 补跑完成 |
-| 订阅系统 | ✅ 6人活跃 | 非owner推送未验证 | 待08:00 cron验证 |
-| 内部首页 | ✅ | 统计失真(22→100+) | ✅ 校准 |
-| 外部首页 | ✅ 零敏感词 | — | — |
+| 订阅系统 | ✅ 7人活跃 | — | — |
+| 内部首页 | ✅ | 周报badge全指向W21+日历映射错+footerURL错 | ✅ 三联动修复+footer统一 |
+| 外部首页 | ✅ 零敏感词 | 53个日报footerURL错误 | ✅ 统一外部URL |
 | 双版本同步 | ✅ | — | — |
+| frontend-cloud部署 | ✅ | cron跳过→用户404 | P0#16: 非阻断→硬性阻断 |
 | 知识库Tab | ⚠️ | 37个链接→span(临时方案) | 长期: 知识渲染为HTML |
 | 追踪体系 | ⚠️ | 无自动保鲜机制 | P1: 待设计cron |
 | 时间轴 | ⚠️ | 新调研需手动添加 | P1: gen_timeline.py待集成 |
 | 统计卡片 | ✅ | 自动校准 | calibrate_stats.py集成到update_homepage |
 | MixCard footer | ✅ | 群发脱敏 | --target group自动切换 |
+| 林克首页 | ✅ | 数据过期(6/1→6/5) | ✅ 重新部署 |
 
 ### 知识沉淀断档分析
 

@@ -122,6 +122,52 @@ def sync_all() -> bool:
     return True
 
 
+def fix_footer_urls() -> int:
+    """替换外部仓库中日报/周报HTML的footer首页URL
+    
+    P0 #18 规则：内部版日报footer→内部首页URL，外部版日报footer→外部首页URL
+    sync_to_external.py 同步后，外部版HTML中可能残留内部URL，需要批量替换。
+    
+    Returns:
+        修复的文件数
+    """
+    from config import INTERNAL_PAGES_BASE, EXTERNAL_PAGES_BASE
+    
+    internal_url = f'{INTERNAL_PAGES_BASE}/"'
+    external_url = f'{EXTERNAL_PAGES_BASE}/"'
+    # 也处理旧版错误URL（缺少-public后缀）
+    wrong_external_url = 'https://xiaoxiong20260206.github.io/ai-insight/"'
+    
+    fixed = 0
+    for html_file in EXTERNAL_REPO.rglob("*.html"):
+        if not html_file.is_file():
+            continue
+        # 只处理01-daily-reports下的日报/周报HTML
+        rel = html_file.relative_to(EXTERNAL_REPO)
+        if not str(rel).startswith("01-daily-reports/"):
+            continue
+        
+        with open(html_file, 'r', encoding='utf-8') as f:
+            content = f.read()
+        
+        new_content = content
+        # 替换内部URL→外部URL
+        if internal_url in new_content:
+            new_content = new_content.replace(internal_url, external_url)
+        # 替换错误外部URL→正确外部URL（缺少-public后缀）
+        if wrong_external_url in new_content:
+            new_content = new_content.replace(wrong_external_url, external_url)
+        
+        if new_content != content:
+            with open(html_file, 'w', encoding='utf-8') as f:
+                f.write(new_content)
+            fixed += 1
+    
+    if fixed > 0:
+        print(f"  ✅ 已修复 {fixed} 个文件的footer首页URL（内部→外部）")
+    return fixed
+
+
 def clean_stale_files() -> int:
     """
     清理外部仓库中 public/ 已不存在的文件（v2.1新增）
@@ -453,6 +499,9 @@ def _run_main_logic(args) -> None:
         # 必须以非零退出码退出，确保调用方（deploy_daily.sh/orchestrator）能捕获同步失败
         print("❌ [ABORT] sync_all() 失败，外部文件同步中止")
         sys.exit(1)
+    
+    # 步骤 3.5: 修复footer首页URL（P0 #18：内部版URL→外部版URL）
+    fix_footer_urls()
     
     # 步骤 4: Git 推送
     if not args.no_push:
