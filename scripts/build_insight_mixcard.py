@@ -256,7 +256,9 @@ def build_weekly(week_id: str) -> dict:
     fallback_sunday = iso_monday - timedelta(days=1)
 
     # 查找周报文件（动态搜索月目录，不硬编码月份）
+    # 搜索范围：覆盖周的周一日、fallback周一/周日、根目录
     weekly_patterns = [
+        PROJECT_ROOT / "01-daily-reports" / iso_monday.strftime("%Y-%m") / f"weekly-{year}-W{week_num:02d}.md",
         PROJECT_ROOT / "01-daily-reports" / fallback_monday.strftime("%Y-%m") / f"weekly-{year}-W{week_num:02d}.md",
         PROJECT_ROOT / "01-daily-reports" / fallback_sunday.strftime("%Y-%m") / f"weekly-{year}-W{week_num:02d}.md",
         PROJECT_ROOT / "01-daily-reports" / f"weekly-{year}-W{week_num:02d}.md",
