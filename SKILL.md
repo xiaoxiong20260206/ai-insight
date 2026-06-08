@@ -86,7 +86,7 @@ AI洞察是一个**AI驱动的行业研究平台**，核心做四件事：
 13. ❌ 周报更新必须三联动(#17) — 卡片+badge+日历映射
 14. ❌ 日报footer禁止手动修改URL(#18) — 内部版用内部URL，外部版用外部URL
 
-**自检声明格式**："我已读完SKILL.md+对应子技能workflow+18条P0红线+踩坑11条，准备执行Step X"
+**自检声明格式**："我已读完SKILL.md+对应子技能workflow+20条P0红线+踩坑11条，准备执行Step X"
 
 ## 项目信息
 
@@ -124,9 +124,9 @@ AI洞察是一个**AI驱动的行业研究平台**，核心做四件事：
 | `tavily-search` | 海外搜索 |
 | `quark-search` | 国内搜索 |
 
-## P0红线（18条核心红线）
+## P0红线（20条核心红线）
 
-> ⚠️ 只有15条需要Agent自觉遵守。其余校验已内置到脚本。
+> ⚠️ 只有17条需要Agent自觉遵守。其余校验已内置到脚本。
 
 ### 1. 续接必须先 resume — 无例外
 ```bash
@@ -210,6 +210,34 @@ ls user-skills/sl-ai-insight/.git/HEAD && ssh -o ConnectTimeout=5 -T git@github.
 - **外部版入口**：`https://xiaoxiong20260206.github.io/ai-insight-public/`
 - **根因**：frontend-cloud对 `/subscribe/` 路径做SSO认证拦截，点击→302→登录页而非订阅页
 
+### 15. 格式升级必须改脚本 — 禁止只改HTML文件
+- 一旦建立了脚本化生成流程（`gen_weekly_html.py`），所有格式变更必须修改脚本
+- 手工修改HTML输出而不修改脚本 = 债务，下次脚本生成时自动退回旧版
+- **根因（#125）**：W22在6月1日经四轮手工格式升级（emoji→SVG + 68ch行宽 + 卡片结构重构），但没回写到 `gen_weekly_html.py`，导致W23退回升级前格式
+- **判定**：如果你正在修改 `01-daily-reports/` 下由脚本生成的HTML文件 → 先问自己"这个修改是否应该改脚本"
+
+### 16. HTML视觉格式标准（周报+日报统一）
+
+#### 16a. 结构元素用SVG icon，不用emoji
+- 侧边栏TOC链接、章节标题旁、news-card meta行 → 用 `<svg class="meta-icon">` 内联SVG
+- 正文内容中的emoji保留（如事件描述中的🤖📊等）
+- SVG icon定义见 `gen_weekly_html.py` 的 `SVG_ICONS` 字典
+
+#### 16b. 卡片视觉层级（Top5/洞察卡）
+```
+rank pill(12px) → 标题(18px/600) → meta行(13px/SVG icon) → 正文(14px/68ch) → 关键判断独立框
+```
+- meta行用 `news-card-meta` + `<span class="meta-item">` + `<a class="meta-link">`
+- 关键判断用 `<div class="judgment-label">关键判断</div>` 而非 `<strong>关键判断</strong>：`
+
+#### 16c. 行宽限制
+- 容器撑满父宽度（100%），只有段落文字限行宽（68ch）
+- 应用位置：`.news-card-desc` / `.news-card-why` / `.insight-card p` / `.callout > p`
+- ❌ 禁止在 `.callout` / `.news-card-why` / `.insight-card` 等容器上加 max-width
+
+#### 16d. 概览图位置
+- 概览图/配图放在标题之后，不是之前（标题是语义锚点，图片是补充）
+
 ---
 
 ## 脚本自校验清单
@@ -232,9 +260,9 @@ ls user-skills/sl-ai-insight/.git/HEAD && ssh -o ConnectTimeout=5 -T git@github.
 | `daily_quality_gate.py` | 质量门（hard/soft分级） |
 | `build_insight_mixcard.py` | MixCard生成+自校验 |
 | `gen_daily_html.py` | HTML生成+自校验 |
-| `gen_weekly_json.py` | 周报JSON模板+schema验证 |
-| `gen_weekly_html.py` | 周报HTML生成（从JSON动态生成+自校验≥50KB+5板块+class名一致性+自动cp到public） |
-| `update_homepage.py` | 首页更新（统一入口，支持daily+weekly）+ 自动校准统计卡片 |
+| `gen_weekly_json.py` | 周报JSON模板+schema验证（event字段Markdown检测+url字段缺失检测） |
+| `gen_weekly_html.py` | 周报HTML生成（从JSON动态生成+自校验≥50KB+5板块+class名一致性+SVG icons+68ch行宽+Markdown自清洁+自动cp到public） |
+| `update_homepage.py` | 首页更新（统一入口，支持daily+weekly）+ 自动校准统计卡片 + pills href校验（#124防复发） |
 | `calibrate_stats.py` | 统计卡片自动校准（从实际文件计算5项数字） |
 | `deploy_daily.sh` | 日报一键部署 |
 | `sync_to_public.py` | 内部版→public+外部版同步 |

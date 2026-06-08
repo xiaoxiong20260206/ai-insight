@@ -321,14 +321,13 @@ def verify_homepage(date_str: str = "", week_id: str = "") -> bool:
     # 3. 外部版：HTML 文件必须存在
     if week_id:
         # 从 week_id 计算月份目录 — 必须和 gen_weekly_html.py 一致
-        # gen_weekly_html.py 用 coverage_sunday (= ISO周一-1天) 的月份
-        # 周报覆盖的是"上一周"数据，所以month_str取覆盖范围最后一天（周日）的月份
+        # gen_weekly_html.py 用 ISO Monday 的月份（日报存放月份）
+        # W23的日报在2026-06/，周报文件也应在2026-06/
         week_num = int(week_id.split("-W")[1])
         year = int(week_id.split("-")[0])
         from datetime import timedelta
         iso_monday = datetime.strptime(f"{year}-W{week_num:02d}-1", "%G-W%V-%u")
-        coverage_sunday = iso_monday - timedelta(days=1)  # 和gen_weekly_html.py一致
-        month_str = coverage_sunday.strftime("%Y-%m")
+        month_str = iso_monday.strftime("%Y-%m")  # 和gen_weekly_html.py一致
         
         ext_repo = PROJECT_ROOT.parent / "ai-insight-public"
         if ext_repo.exists():
