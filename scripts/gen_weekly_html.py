@@ -42,6 +42,33 @@ SECTION_META = {
     "enterprise": {"icon": "🔄", "label": "企业转型",   "h2_suffix": "企业AI转型本周动态"},
 }
 
+# SVG icons for sidebar TOC — replaces emoji in structural elements (#124 format upgrade)
+# Source: W22 manual upgrade (2026-06-01), now codified in script
+SVG_ICONS = {
+    "overview":    '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>',
+    "top5":        '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.83-1 .83s-1-.28-1-.83v-2.34"/><path d="M14 14.66V17c0 .55.47.83 1 .83s1-.28 1-.83v-2.34"/><line x1="12" y1="3" x2="12" y2="14"/><path d="M6 4v5a6 6 0 0 0 12 0V4"/></svg>',
+    "insight":     '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>',
+    "linkinsight": '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.5V22h6v-4.5c2.9-1.2 5-4.1 5-7.5a8 8 0 0 0-8-8z"/><line x1="12" y2="12" x2="12" y2="18"/></svg>',
+    "llm":         '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.5V22h6v-4.5c2.9-1.2 5-4.1 5-7.5a8 8 0 0 0-8-8z"/><line x1="12" y2="12" x2="12" y2="18"/></svg>',
+    "coding":      '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>',
+    "app":         '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>',
+    "industry":    '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20V8l-6 4V4l-6 4V2L2 10v10z"/></svg>',
+    "enterprise":   '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/></svg>',
+    "dailyindex":  '<svg class="meta-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y2="4" x2="16" y2="1"/><line x1="8" y2="4" x2="8" y2="1"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
+    "vocab":       '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
+    "narrative":    '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.6 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2s2.6 2 5 2c2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2s2.6 2 5 2c2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg>',
+}
+
+# 68ch line width CSS for body text paragraphs (#124 format upgrade)
+LINE_WIDTH_CSS = """
+/* ===== 68ch行宽限制（容器100%，文字68ch）===== */
+.news-card-desc, .news-card-why, .insight-card p,
+.content-paragraph, .callout > p,
+.daily-item-kw, .doc-footer p {
+  max-width: 68ch;
+}
+"""
+
 REQUIRED_CLASSES = ["news-card","stat-card","insight-card","callout",
                     "doc-header","daily-index","table-wrap","doc-chapter-label"]
 
@@ -74,10 +101,24 @@ def render_overview(d):
     return f'<section id="overview">\n<div class="doc-chapter-label animate-on-scroll">概览</div>\n<h2 class="animate-on-scroll">📋 本周概览</h2>\n{tbl}\n{st}\n</section>'
 
 def render_top5(d):
+    # SVG icons for meta items (#124 format upgrade: emoji→SVG)
+    svg_calendar = '<svg class="meta-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y2="4" x2="16" y2="1"/><line x1="8" y2="4" x2="8" y2="1"/><line x1="3" y1="10" x2="21" y2="10"/></svg>'
+    svg_link = '<svg class="meta-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>'
     cards = ""
     for item in d.get("top5",[]):
         ac = ACCENT_MAP.get(item.get("accent","info"),"var(--color-info)")
-        cards += f'<div class="news-card animate-on-scroll" style="--card-accent: {ac};">\n  <div class="news-card-rank">TOP {item["rank"]} · {item.get("label","")}</div>\n  <div class="news-card-title">{item["title"]}</div>\n  <div class="news-card-source">📅 {d.get("date_range","")} · 📎 {item["source"]}</div>\n  <div class="news-card-desc">{item["desc"]}</div>\n  <div class="news-card-why"><strong>关键判断</strong>：{item["why"]}</div>\n</div>\n'
+        # Build meta line with SVG icons + source links
+        source_url = item.get("source_url", item.get("url",""))
+        source_name = item.get("source","")
+        meta_date = f'<span class="meta-item">{svg_calendar} {d.get("date_range","")}</span>'
+        meta_source = f'<span class="meta-divider">·</span><a href="{source_url}" target="_blank" class="meta-link">{svg_link} {source_name}</a>' if source_url else f'<span class="meta-divider">·</span><span class="meta-item">{source_name}</span>'
+        # Secondary source
+        secondary = item.get("secondary_source","")
+        secondary_url = item.get("secondary_source_url","")
+        meta_secondary = ""
+        if secondary:
+            meta_secondary = f'<span class="meta-divider">·</span><a href="{secondary_url}" target="_blank" class="meta-link">{svg_link} {secondary}</a>' if secondary_url else f'<span class="meta-divider">·</span><span class="meta-item">{secondary}</span>'
+        cards += f'<div class="news-card animate-on-scroll" style="--card-accent: {ac};">\n  <div class="news-card-rank">TOP {item["rank"]} · {item.get("label","")}</div>\n  <div class="news-card-title">{item["title"]}</div>\n  <div class="news-card-meta">{meta_date}{meta_source}{meta_secondary}</div>\n  <div class="news-card-desc">{item["desc"]}</div>\n  <div class="news-card-why"><div class="judgment-label">关键判断</div>{item["why"]}</div>\n</div>\n'
     return f'<section id="top5">\n<div class="doc-chapter-label animate-on-scroll">Top 5</div>\n<h2 class="animate-on-scroll">🏆 本周 Top 5 事件</h2>\n{cards}\n</section>'
 
 def render_insights(d):
@@ -176,15 +217,16 @@ LEARN_MORE = '''<div style="max-width:var(--content-max);margin:0 auto;padding:1
 
 def render_sidebar(d):
     secs = d.get("sections",{})
-    links = ['<a href="#overview" class="toc-link">📋 本周概览</a>',
-             '<a href="#top5" class="toc-link">🏆 Top 5 事件</a>',
-             '<a href="#insight" class="toc-link">💡 周度洞察</a>',
-             '<a href="#linkinsight" class="toc-link">🧠 林克的洞察</a>']
+    links = [f'<a href="#overview" class="toc-link">{SVG_ICONS.get("overview","")} 本周概览</a>',
+             f'<a href="#top5" class="toc-link">{SVG_ICONS.get("top5","")} Top 5 事件</a>',
+             f'<a href="#insight" class="toc-link">{SVG_ICONS.get("insight","")} 周度洞察</a>',
+             f'<a href="#linkinsight" class="toc-link">{SVG_ICONS.get("linkinsight","")} 林克的洞察</a>']
     for k,s in secs.items():
-        links.append(f'<a href="#{k}" class="toc-link">{s.get("icon","")} {s.get("title",k)}</a>')
-    links.extend(['<a href="#dailyindex" class="toc-link">📅 日报索引</a>',
-                  '<a href="#vocab" class="toc-link">📖 技术词汇</a>',
-                  '<a href="#narrative" class="toc-link">🌊 宏观叙事</a>'])
+        icon_svg = SVG_ICONS.get(k, s.get("icon",""))
+        links.append(f'<a href="#{k}" class="toc-link">{icon_svg} {s.get("title",k)}</a>')
+    links.extend([f'<a href="#dailyindex" class="toc-link">{SVG_ICONS.get("dailyindex","")} 日报索引</a>',
+                  f'<a href="#vocab" class="toc-link">{SVG_ICONS.get("vocab","")} 技术词汇</a>',
+                  f'<a href="#narrative" class="toc-link">{SVG_ICONS.get("narrative","")} 宏观叙事</a>'])
     return f'<nav class="sidebar-nav" id="sidebar" aria-label="目录导航">\n<div class="sidebar-doc-title">AI 周报 {d.get("week_id","")}</div>\n<div class="toc-section"><div class="toc-group-label">目录</div>\n{chr(10).join(links)}\n</div>\n<div class="reading-progress-wrap"><div class="reading-progress-label">阅读进度</div><div class="reading-progress-track"><div class="reading-progress-fill" id="readingProgress"></div></div></div>\n</nav>'
 
 def generate_html(d):
@@ -198,7 +240,7 @@ def generate_html(d):
         raw = re.sub(r'^\s*<style[^>]*>\s*','',raw); raw = re.sub(r'\s*</style>\s*$','',raw)
         rep_css = raw
     cust_css = CUSTOM_CSS.read_text(encoding="utf-8") if CUSTOM_CSS.exists() else ""
-    css_block = f"<style>\n{base_css}\n\n/* ===== 日报组件层 ===== */\n{rep_css}\n\n/* ===== AI洞察定制层 ===== */\n{cust_css}\n</style>"
+    css_block = f"<style>\n{base_css}\n\n/* ===== 日报组件层 ===== */\n{rep_css}\n\n/* ===== AI洞察定制层 ===== */\n{cust_css}\n\n{LINE_WIDTH_CSS}\n</style>"
     js_block = TEMPLATE_JS_FILE.read_text(encoding="utf-8") if TEMPLATE_JS_FILE.exists() else "<script></script>"
     
     header = f'<header class="doc-header">\n  <div class="header-badge">AI INSIGHT · WEEKLY REPORT · {d["week_num"]}</div>\n  <h1 class="header-title">AI 周报 {d["year"]}年第{d["week_num"]}周</h1>\n  <p class="header-meta"><span>📅 {d["date_range"]}</span><span>📰 覆盖7天日报 · 5板块</span><span>🌐 海外+国内</span></p>\n</header>'
