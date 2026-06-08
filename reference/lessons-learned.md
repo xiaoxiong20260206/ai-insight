@@ -1049,3 +1049,67 @@ cron 日报流程 deploy 步骤失败后，手动修复时遗漏了 frontend-clo
 > **需要SSO的URL不适合做按钮跳转目标。按钮是给所有点击场景准备的，必须零门槛可达。**
 
 > **脚本步骤顺序是隐性逻辑——放在exit之后的步骤等于不存在。结构审查不仅要看功能，还要看执行顺序。**
+
+---
+
+## 经验#124 — 2026-06-08 — W23周报Markdown泄漏+空href+首页pills再次全指向同一URL（同类复发#120）
+
+### 问题描述
+W23周报上线后，用户反馈两个问题：
+1. **周报页面格式错乱**：5个板块的表格中，44处 `[text](url)` Markdown语法直接以原文显示，未被转为 `<a>` 标签；第三列"链接"全是 `<a href="">链接</a>` 空href
+2. **首页未正确更新**：最新卡片标题写"第22周"但链接到W23；往期周报pills（W10-W21）全部指向 `weekly-2026-W23.html`
+
+### 根因链（四层追溯）
+
+| 层级 | 具体原因 | 性质 |
+|------|----------|------|
+| **L1 直接** | JSON的 `table[].event` 字段包含Markdown链接语法 `[text](url)`，`gen_weekly_html.py` 的 `render_section()` 直接将 `r["event"]` 嵌入 `<td>`，不做Markdown→HTML转换 | 脚本缺陷 |
+| **L1 直接** | JSON的 `table[]` 缺少 `url` 字段（应为 `r["url"]`），`render_section()` 取不到url就输出 `href=""` | JSON schema缺陷 |
+| **L2 流程** | cron agent填写JSON模板时，把event写成了Markdown语法而非纯文本+url分立；JSON schema没有校验event字段不能包含Markdown | 约束缺失 |
+| **L3 体系** | #120已经踩过"pills全指向同一URL"的坑，但红线只写成了文字规范（"三联动"），没有进入 `gen_weekly_html.py` 或 `update_homepage.py` 的自动化校验 | 红线未代码化 |
+
+### 为什么#120的红线没防住？
+
+#120写了"周报更新必须三联动"红线，但：
+1. **红线只存在于文档，不存在于脚本** — `update_homepage.py` 没有校验pills href与显示文本的对应关系
+2. **cron agent不看lessons-learned** — weekly-report.md引用了踩坑教训，但cron独立session执行时，P1-3"踩坑检索"依赖agent主动去读，执行时可能被跳过
+3. **gen_weekly_html.py没有Markdown→HTML的转换步骤** — 脚本假设JSON输入是"清洁"的纯文本+结构化字段，但实际JSON被填入了Markdown
+
+### 修复动作（已执行）
+1. Python批量修复：`[text](url)` → `<a href="url" target="_blank">text</a>`，删除冗余的空href第三列
+2. 首页最新卡片标题：第22周→第23周，描述更新
+3. 往期pills逐个修正到对应月份目录的HTML（W22补入、W10-W21各指自己的文件）
+4. 内部版+外部版+public/ 三位置同步
+5. Git push两仓库
+
+### 🔴 防复发措施（必须落地）
+
+**措施1：gen_weekly_html.py 增加Markdown→HTML自清洁**
+- `render_section()` 中对 `r["event"]` 和 `r["source"]` 做预处理：
+  - 检测 `[text](url)` → 拆分为纯文本 + url
+  - 如果 `r["url"]` 缺失，从event中的Markdown链接提取url
+  - event字段只保留纯文本（去掉 `[` `]` `(url)` 部分）
+- 这是脚本级防线，不依赖JSON输入质量
+
+**措施2：JSON schema校验增加event字段规则**
+- `gen_weekly_json.py --validate` 增加：
+  - `table[].event` 禁止包含 `[...](...) ` Markdown语法（应拆分为 event纯文本 + url字段）
+  - `table[].url` 必须存在且为合法URL
+- 校验失败 = hard fail，阻止不合规JSON进入HTML生成
+
+**措施3：update_homepage.py 增加pills href校验**
+- 更新首页后自动检查：pills的href与显示文本（W10/W11/...）必须匹配
+- 检测到任何pills href不包含对应的周号 = hard fail
+- 这是#120红线的代码化，不依赖人类记忆
+
+**措施4：HTML生成后增加格式完整性校验**
+- validate_html() 增加：
+  - 禁止 `[text](url)` Markdown语法出现在HTML中
+  - 禁止 `href=""` 空链接
+  - 违反任一条件 = hard fail
+
+### 关键认知
+- **同类问题第二次出现（#120→#124）= 红线只在文档里没用，必须代码化**
+- **脚本对输入的假设必须防御性** — 不能假设JSON是"清洁"的，必须在脚本里做自清洁
+- **"三联动"必须自动化** — 人类在cron session里执行时，pills是最容易漏掉的手工步骤
+
