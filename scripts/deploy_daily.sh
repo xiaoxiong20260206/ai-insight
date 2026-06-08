@@ -478,19 +478,7 @@ if [ "${SKIP_EXTERNAL:-0}" != "1" ]; then
     fi
 fi
 
-echo ""
-echo "=================================================="
-if [ "$DEPLOY_FAIL" -eq 0 ]; then
-    echo "✅ 部署完成！"
-    echo "  📄 日报: https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/$MONTH/$DATE.html"
-    echo "  🏠 首页: https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/"
-else
-    echo "❌ 部署验证失败！请查看上方的 ❌ 条目并手动修复。"
-    echo "   外部同步手动补跑: python3 scripts/sync_to_external.py --full --verify"
-    exit 1
-fi
-
-# ===== 9. 部署到 frontend-cloud =====
+# ===== 8. 部署到 frontend-cloud（必须在最终验证之前） =====
 echo ""
 echo "📋 Step 8: 部署内部首页到 frontend-cloud"
 if [ "${SKIP_FRONTEND_CLOUD:-0}" != "1" ]; then
@@ -508,3 +496,15 @@ else
     echo "  ⏭️ SKIP_FRONTEND_CLOUD=1，跳过 frontend-cloud 部署"
 fi
 echo ""
+
+echo ""
+echo "=================================================="
+if [ "$DEPLOY_FAIL" -eq 0 ]; then
+    echo "✅ 部署完成！"
+    echo "  📄 日报: https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/$MONTH/$DATE.html"
+    echo "  🏠 首页: https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/"
+else
+    echo "❌ 部署验证失败！请查看上方的 ❌ 条目并手动修复。"
+    echo "   外部同步手动补跑: python3 scripts/sync_to_external.py --full --verify"
+    exit 1
+fi
