@@ -42,8 +42,13 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
 from config import INTERNAL_PAGES_BASE as INTERNAL_BASE
 from config import EXTERNAL_PAGES_BASE as EXTERNAL_BASE
-REPORT_BASE_URL = f"{INTERNAL_BASE}/01-daily-reports"
-PROJECT_URL = f"{INTERNAL_BASE}/"  # 默认内部版，--target group 时切换为外部版
+# ⭐ v2.1 修正（2026-06-08 P0）：MixCard按钮URL统一使用外部版（GitHub Pages）
+# 根因：frontend-cloud内部版需要快手SSO登录，KIM WebView点击按钮时没有SSO cookie → SSO拦截 → 用户看到"无法跳转"
+# 外部版（GitHub Pages）不需要SSO，任何人都能直接访问，是KIM MixCard按钮的唯一可靠URL
+# 旧规则（P0 #13）"私发用内部版"已被推翻——内部版URL在KIM里根本无法正常跳转
+# 内部版URL仅适合在已登录快手SSO的浏览器里直接访问（如首页浏览），不适合MixCard按钮场景
+REPORT_BASE_URL = f"{EXTERNAL_BASE}/01-daily-reports"
+PROJECT_URL = f"{EXTERNAL_BASE}/"  # 所有MixCard按钮统一使用外部版
 _current_target = "private"  # 推送目标：private=私发(内部版身份), group=群发(脱敏身份)
 
 # 统一卡片骨架配置
@@ -346,7 +351,7 @@ def build_research(slug: str = "", title: str = "", subtitle: str = "",
         title = f"📚 深度调研 · {slug or 'AI专题'}"
     if not report_url:
         if slug:
-            report_url = f"{INTERNAL_BASE}/02-deep-research/{slug}.html"
+            report_url = f"{EXTERNAL_BASE}/02-deep-research/{slug}.html"
         else:
             report_url = PROJECT_URL
 
@@ -434,7 +439,7 @@ def build_product_essence() -> dict:
         f"{EM}谁的AI积累了更多个性化记忆、让用户越用越离不开，就越难被替换。"
     )
 
-    research_url = f"{INTERNAL_BASE}/02-deep-research/ai-product-essence.html"
+    research_url = f"{EXTERNAL_BASE}/02-deep-research/ai-product-essence.html"
 
     blocks = [
         _content("header", header_text),
@@ -569,12 +574,11 @@ def main():
                         help="推送目标: private=私发订阅者(内部版URL), group=群发(外部版URL)")
     args = parser.parse_args()
 
-    # 根据 --target 切换按钮URL（P0 #13: 私发用内部版，群发用外部版）
-    global PROJECT_URL, REPORT_BASE_URL, _current_target
+    # ⭐ v2.1 修正（2026-06-08 P0）：所有MixCard按钮统一使用外部版URL
+    # --target 仅控制 footer 文本（private=林克身份, group=脱敏身份）
+    # 不再控制按钮URL——因为frontend-cloud内部版需要SSO，KIM里点击必被拦截
+    # 所有MixCard按钮URL统一用外部版（GitHub Pages），无需SSO即可访问
     _current_target = args.target
-    if args.target == "group":
-        PROJECT_URL = f"{EXTERNAL_BASE}/"
-        REPORT_BASE_URL = f"{EXTERNAL_BASE}/01-daily-reports"
 
     try:
         if args.scenario == "daily":
