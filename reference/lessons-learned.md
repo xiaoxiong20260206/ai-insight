@@ -989,3 +989,63 @@ cron 日报流程 deploy 步骤失败后，手动修复时遗漏了 frontend-clo
 **红线 3：deploy 失败的错误信息必须包含子步骤、exit code、stderr**
 - 现状：只有 `"error": "部署失败"` → 无法定位根因
 - 要求：记录失败的具体子步骤名、exit code、stderr 前 500 字
+
+---
+
+## 经验#123 — 2026-06-08 — MixCard按钮URL指向内部版→SSO拦截→用户看到"无法跳转"
+
+### 问题描述
+用户连续两天（6/7、6/8）点击AI日报KIM MixCard按钮后无法跳转到日报网站。按钮看似正常但点击后被快手SSO拦截，跳转到登录页，看起来像"按钮失效"。
+
+### 根因链（三层）
+
+| 层级 | 具体原因 |
+|------|----------|
+| **L1** | MixCard按钮URL指向 `ai-insight-internal.frontend-cloud.corp.kuaishou.com`（内部版），需要快手SSO登录才能访问 |
+| **L2** | KIM WebView没有快手SSO cookie → 点击按钮 → frontend-cloud accessproxy拦截 → 302跳转SSO登录页 |
+| **L3** | P0 #13规则设计为"私发用内部版"——以为快手员工在KIM里能自动SSO，但实际上KIM WebView和浏览器是两个独立会话 |
+
+### 与经验#119/#122的关系
+- #119/#122：frontend-cloud部署失败→按钮404（部署层面）
+- #123：frontend-cloud部署成功→但SSO拦截→按钮"无法跳转"（访问层面）
+- **同源但不同层**：前两个是部署问题，这次是URL选择问题
+
+### 修复动作（已执行）
+
+1. **脚本修复**：`build_insight_mixcard.py` 所有按钮URL统一使用外部版（GitHub Pages）
+   - REPORT_BASE_URL 从 `INTERNAL_BASE` 改为 `EXTERNAL_BASE`
+   - PROJECT_URL 从 `INTERNAL_BASE` 改为 `EXTERNAL_BASE`
+   - build_research() 和 build_product_essence() 的 report_url 也改为 `EXTERNAL_BASE`
+   - --target 参数仅控制 footer 文本（private=林克身份, group=脱敏身份），不再控制按钮URL
+
+2. **规则修复**：P0 #13 从"私发用内部版"推翻为"统一用外部版"
+   - 内部版URL仅适合在已登录快手SSO的浏览器里直接访问（首页浏览等）
+   - MixCard按钮场景必须用外部版，因为KIM WebView无法自动继承SSO会话
+
+3. **deploy_daily.sh 结构修复**：Step 8（frontend-cloud部署）从 exit 1 之后移到之前
+   - 旧版：验证失败→exit 1→frontend-cloud部署永远不执行
+   - 新版：frontend-cloud部署→验证→exit（确保部署总是被执行）
+
+4. **手动部署frontend-cloud**：重新部署 internal 版确保首页和日报在内部版也可访问
+
+5. **重新推送修正MixCard给shenlang03**：按钮URL改为外部版
+
+### ⛔ 红线（修正/新增）
+
+**红线修正：P0 #13 — MixCard按钮URL统一使用外部版（GitHub Pages）**
+- ❌ 旧规则：私发用内部版，群发用外部版
+- ✅ 新规则：所有MixCard按钮统一用外部版——因为内部版需要SSO，KIM WebView无法自动继承SSO会话
+- --target 仅控制 footer 文本，不控制按钮URL
+
+**红线新增：frontend-cloud部署必须在最终验证之前**
+- ✅ deploy → validate → exit
+- ❌ validate → exit → deploy（deploy永远不执行）
+- 根因：deploy_daily.sh Step 8 放在 exit 1 之后，验证失败时frontend-cloud部署被跳过
+
+### 核心教训
+
+> **"私发用内部版"的设计假设是快手员工在KIM里能自动SSO——这个假设是错的。KIM WebView和浏览器是两个独立会话，SSO cookie不会自动继承。**
+
+> **需要SSO的URL不适合做按钮跳转目标。按钮是给所有点击场景准备的，必须零门槛可达。**
+
+> **脚本步骤顺序是隐性逻辑——放在exit之后的步骤等于不存在。结构审查不仅要看功能，还要看执行顺序。**
