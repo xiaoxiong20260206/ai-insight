@@ -1113,3 +1113,30 @@ W23周报上线后，用户反馈两个问题：
 - **脚本对输入的假设必须防御性** — 不能假设JSON是"清洁"的，必须在脚本里做自清洁
 - **"三联动"必须自动化** — 人类在cron session里执行时，pills是最容易漏掉的手工步骤
 
+
+---
+
+## 经验#125 — 2026-06-08 — 格式升级手工修改HTML未回写脚本→下次生成自动退回旧版
+
+### 问题描述
+W22周报在6月1日经过四轮手工格式升级（emoji→SVG icons + 68ch行宽 + 卡片视觉层级重构 + 概览图位置修正），但W23由 `gen_weekly_html.py` 脚本生成时，直接退回了升级前的旧格式：sidebar用emoji代替SVG、正文没有68ch行宽限制、Top5卡片用旧版 `news-card-source` + emoji 而非新版 `news-card-meta` + SVG icons。
+
+### 根因
+
+**手工修改HTML没有回写到生成脚本** — 5月25日的 `gen_weekly_html.py` 是脚本初版，6月1日的四轮升级全部直接修改HTML文件，脚本从未同步更新。下次cron用脚本生成新周报时，脚本输出的就是升级前的旧格式。
+
+这是"脚本驱动"原则的经典违反：**一旦建立了脚本化生成流程，所有格式变更必须修改脚本，不能只改输出文件**。
+
+### 修复动作（已执行）
+1. `gen_weekly_html.py` 新增 `SVG_ICONS` 字典（12个SVG icon，从W22 HTML提取）
+2. `render_sidebar()` 从emoji切换到SVG_ICONS
+3. `render_top5()` 从 `news-card-source` + emoji 升级到 `news-card-meta` + SVG icons
+4. 新增 `LINE_WIDTH_CSS`（68ch行宽限制），注入 `generate_html()` 的CSS块
+5. `judgment-label` class 替代旧的 `<strong>关键判断</strong>`
+
+### 🔴 红线（新增）
+
+**格式升级必须改脚本，不能只改HTML文件。** 如果当前修改的是脚本生成的输出，则脚本也必须同步修改。否则下次生成就会丢失所有升级。
+
+这条和#122（"修复失败走脚本不走记忆"）是同一个原则的不同侧面：**脚本化流程 = 单一信源，修改输出不修改脚本 = 债务**。
+
