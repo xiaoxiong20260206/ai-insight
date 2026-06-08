@@ -13,6 +13,7 @@ AI周报 JSON 生成器
 
 import argparse
 import json
+import re
 import sys
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -224,6 +225,25 @@ def validate_json(week_id: str) -> bool:
     # docs.corp.kuaishou.com检查
     if "docs.corp.kuaishou.com" in json_str:
         warnings.append("JSON包含内部链接docs.corp.kuaishou.com（应替换为公开URL）")
+    
+    # #124防复发：table行的event字段禁止包含Markdown链接语法
+    md_link_pattern = re.compile(r'\[([^\]]+)\]\(([^)]+)\)')
+    if "sections" in data:
+        for k in section_keys:
+            sec = data["sections"].get(k, {})
+            for i, row in enumerate(sec.get("table", [])):
+                event = row.get("event", "")
+                source = row.get("source", "")
+                if md_link_pattern.search(event):
+                    errors.append(f"板块{k} table[{i}].event包含Markdown链接语法，应拆分为纯文本event+url字段（#124防复发）")
+                if md_link_pattern.search(source):
+                    warnings.append(f"板块{k} table[{i}].source包含Markdown链接语法，建议拆分")
+                if "url" not in row or not row.get("url"):
+                    # url缺失但从event可提取 → error
+                    if md_link_pattern.search(event):
+                        errors.append(f"板块{k} table[{i}]缺少url字段且event含Markdown链接，应将链接提取到url字段（#124防复发）")
+                    else:
+                        warnings.append(f"板块{k} table[{i}]缺少url字段，链接列将为空")
     
     if errors:
         print(f"\n❌ 硬性错误 ({len(errors)}):")

@@ -341,6 +341,23 @@ def verify_homepage(date_str: str = "", week_id: str = "") -> bool:
             if ext_index.exists() and week_id not in ext_index.read_text(encoding="utf-8"):
                 errors.append(f"❌ 外部版首页未包含 {week_id}")
 
+    # 4. #124防复发：pills href与显示文本匹配校验
+    # 检测往期周报pills是否全部指向同一URL（#120/#124同类复发）
+    for label, path in [
+        ("内部版", PROJECT_ROOT / "index.html"),
+        ("public/", PROJECT_ROOT / "public" / "index.html"),
+    ]:
+        if path.exists():
+            content = path.read_text(encoding="utf-8")
+            # Find all pill badges like >W21< and their hrefs
+            pill_pattern = re.compile(r'>W(\d+)<.*?href="([^"]*weekly-[^"]+)"', re.DOTALL)
+            pills = pill_pattern.findall(content)
+            if pills:
+                mismatched = [(f"W{w}", href) for w, href in pills if f"W{w}" not in href]
+                if len(mismatched) > len(pills) // 2:
+                    # More than half of pills don't match = likely all pointing to same URL
+                    errors.append(f"❌ {label}往期周报pills链接与文本不匹配（{len(mismatched)}/{len(pills)}个），疑似全指向同一URL（#124防复发）")
+
     if errors:
         for e in errors:
             print(f"  {e}")

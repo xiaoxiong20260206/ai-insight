@@ -97,6 +97,19 @@ def render_link_insight(d):
         if b: blocks += f'<div class="callout {b.get("class","callout-info")} animate-on-scroll" style="margin-top:16px;">{b.get("content","")}</div>\n'
     return f'<section id="linkinsight">\n<div class="doc-chapter-label animate-on-scroll">林克的洞察</div>\n<h2 class="animate-on-scroll">🧠 林克的洞察</h2>\n{intro}\n{blocks}\n</section>'
 
+def md_link_to_html(text):
+    """Convert markdown links [text](url) to HTML <a> tags. Defensive cleaner.
+    Returns (converted_html, list_of_extracted_urls)."""
+    import re as _re
+    urls = []
+    def _replace(m):
+        link_text = m.group(1)
+        url = m.group(2)
+        urls.append(url)
+        return f'<a href="{url}" target="_blank">{link_text}</a>'
+    result = _re.sub(r'\[([^\]]+)\]\(([^)]+)\)', _replace, text)
+    return result, urls
+
 def render_section(key, sec):
     """渲染五大板块，key是llm/coding/app/industry/enterprise"""
     meta = SECTION_META.get(key, {"icon": "📌", "label": key, "h2_suffix": key})
@@ -109,8 +122,24 @@ def render_section(key, sec):
     tbl = sec.get("table",[])
     tbl_html = ""
     if tbl:
-        rows = "".join(f'<tr><td>{r.get("event","")}</td><td>{r.get("source","")}</td><td><a href="{r.get("url","")}" target="_blank">链接</a></td></tr>\n' for r in tbl)
-        tbl_html = f'<div class="table-wrap animate-on-scroll">\n<table><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>\n<tbody>{rows}</tbody></table></div>'
+        rows = ""
+        for r in tbl:
+            # Defensive: auto-clean markdown links in event/source fields (#124)
+            event_raw = r.get("event","")
+            source_raw = r.get("source","")
+            extracted_url = r.get("url","")
+            event_html, event_urls = md_link_to_html(event_raw)
+            source_html, source_urls = md_link_to_html(source_raw)
+            # If url field missing but markdown link has url, use extracted
+            if not extracted_url and event_urls:
+                extracted_url = event_urls[0]
+            # Build link cell — only show if we have a real url
+            link_cell = f'<a href="{extracted_url}" target="_blank">链接</a>' if extracted_url else ""
+            rows += f'<tr><td>{event_html}</td><td>{source_html}</td>{f"<td>{link_cell}</td>" if link_cell else ""}</tr>\n'
+        # Header: include 链接 column only if any row has a link
+        has_any_link = any(r.get("url","") or md_link_to_html(r.get("event",""))[1] for r in tbl)
+        header_extra = "<th>链接</th>" if has_any_link else ""
+        tbl_html = f'<div class="table-wrap animate-on-scroll">\n<table><thead><tr><th>事件</th><th>来源</th>{header_extra}</tr></thead>\n<tbody>{rows}</tbody></table></div>'
     stats = sec.get("stats",[])
     stats_html = ""
     if stats:
@@ -238,11 +267,17 @@ def validate_html(html, wid):
     for cls in REQUIRED_CLASSES:
         if cls not in html: errs.append(f"缺失class名: {cls}")
     if "了解更多" not in html: errs.append("缺失底部了解更多模块（P0强制）")
+    # #124: Markdown syntax leaked into HTML
+    import re as _re
+    md_links = _re.findall(r'\[([^\]]+)\]\(([^)]+)\)', html)
+    if md_links: errs.append(f"HTML包含{len(md_links)}处未渲染Markdown链接[text](url)（#124防复发）")
+    empty_hrefs = html.count('href=""')
+    if empty_hrefs: errs.append(f"HTML包含{empty_hrefs}处空href链接（#124防复发）")
     if errs:
         print(f"\n❌ HTML自校验失败 ({len(errs)}):")
         for e in errs: print(f"  • {e}")
         return False
-    print(f"\n✅ HTML自校验通过: {sz/1024:.1f}KB + 5板块 + {len(REQUIRED_CLASSES)}个class名 + 了解更多模块")
+    print(f"\n✅ HTML自校验通过: {sz/1024:.1f}KB + 5板块 + {len(REQUIRED_CLASSES)}个class名 + 了解更多模块 + 无Markdown泄漏 + 无空href")
     return True
 
 def main():
