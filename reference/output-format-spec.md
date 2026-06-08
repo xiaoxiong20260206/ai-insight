@@ -67,6 +67,54 @@ CSS模板：`templates/daily-report-v3.css`（日报/周报共用）
 - ❌ 禁止 {{message}} / {{...}} 占位符出现在HTML中
 - ❌ 禁止 `docs.corp.kuaishou.com` 内部链接
 - ❌ 禁止外部版含"林克/沈浪/快手/Kuaishou"等敏感词（由sync_to_public.py脱敏）
+- ❌ 禁止结构元素（TOC、meta行、章节标签）使用emoji代替图标
+- ❌ 禁止 `[text](url)` Markdown语法出现在HTML中（必须转为 `<a>` 标签）
+- ❌ 禁止 `href=""` 空链接
+- ❌ 禁止在 `.callout`/`.news-card-why`/`.insight-card` 等容器上加 `max-width: 68ch`
+
+### 1.6 HTML视觉格式标准（v2.0 · 2026-06-08 升级）
+
+以下标准已在 `gen_weekly_html.py` 中代码化，脚本生成时自动遵循。手工修改HTML时也必须遵守。
+
+#### 1.6.1 SVG icon替代emoji
+
+**原则**：结构元素（导航、meta行、章节标签）用内联SVG，正文内容保留emoji。
+
+| 位置 | ❌ 旧版（emoji） | ✅ 新版（SVG icon） |
+|------|----------------|-------------------|
+| 侧边栏TOC | `📋 本周概览` | `<svg class="meta-icon">...</svg> 本周概览` |
+| Top5 meta日期 | `📅 06/01-06/07` | `<svg class="meta-icon">日历SVG</svg> 06/01-06/07` |
+| Top5 meta来源 | `📎 Anthropic Blog` | `<a class="meta-link"><svg>链接SVG</svg> Anthropic Blog</a>` |
+
+SVG icon定义见 `scripts/gen_weekly_html.py` 的 `SVG_ICONS` 字典（12个标准icon）。
+
+#### 1.6.2 Top5卡片视觉层级
+
+```
+rank pill (12px/背景色) → 标题 (18px/600) → meta行 (13px/SVG icon) → 正文 (14px/68ch) → 关键判断独立框
+```
+
+关键元素：
+- meta行用 `news-card-meta` + `<span class="meta-item">` + `<a class="meta-link">`
+- 来源URL必须是超链接 `<a class="meta-link" href="URL" target="_blank">`
+- 关键判断用 `<div class="judgment-label">关键判断</div>` 而非 `<strong>关键判断</strong>：`
+
+#### 1.6.3 行宽限制（容器vs文字）
+
+- **容器**：`width: 100%`，撑满父宽度（`.callout`, `.news-card-why`, `.insight-card` 等）
+- **段落文字**：`max-width: 68ch`，提高可读性（`.news-card-desc`, `.callout > p`, `.insight-card p` 等）
+- CSS规则在 `gen_weekly_html.py` 的 `LINE_WIDTH_CSS` 中定义
+
+#### 1.6.4 概览图/配图位置
+
+- 概览图放在标题**之后**（标签 → 标题 → 概览图），不是之前
+- 标题是语义锚点，图片是补充说明
+
+#### 1.6.5 Markdown自清洁（防御性）
+
+- `gen_weekly_html.py` 的 `md_link_to_html()` 函数自动将 `[text](url)` 转为 `<a>` 标签
+- `validate_html()` 自动检测HTML中残留的Markdown语法和空href
+- 即使JSON输入包含Markdown，输出HTML也能自清洁
 
 ---
 
