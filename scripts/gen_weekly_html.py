@@ -77,7 +77,10 @@ def compute_week_dates(week_id):
     iso_mon = datetime.strptime(f"{y}-W{wn:02d}-1", "%G-W%V-%u")
     cov_mon = iso_mon - timedelta(days=7)
     cov_sun = iso_mon - timedelta(days=1)
-    return {"cov_mon":cov_mon, "cov_sun":cov_sun, "month_str":cov_sun.strftime("%Y-%m"),
+    # Month for file path = ISO Monday month (where cron runs & daily reports live),
+    # NOT coverage_sunday month (which can be previous month for W23 etc.)
+    month_str = iso_mon.strftime("%Y-%m")
+    return {"cov_mon":cov_mon, "cov_sun":cov_sun, "month_str":month_str,
             "date_range":f"{cov_mon.strftime('%m/%d')}-{cov_sun.strftime('%m/%d')}"}
 
 def esc(s):

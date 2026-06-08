@@ -2284,6 +2284,15 @@ body.mobile-preview-mode .global-controls {
         grid-template-columns: repeat(3, 1fr);
     }
 }
+
+
+/* ===== 68ch行宽限制（容器100%，文字68ch）===== */
+.news-card-desc, .news-card-why, .insight-card p,
+.content-paragraph, .callout > p,
+.daily-item-kw, .doc-footer p {
+  max-width: 68ch;
+}
+
 </style>
 </head>
 <body>
@@ -2292,18 +2301,18 @@ body.mobile-preview-mode .global-controls {
 <nav class="sidebar-nav" id="sidebar" aria-label="目录导航">
 <div class="sidebar-doc-title">AI 周报 2026-W23</div>
 <div class="toc-section"><div class="toc-group-label">目录</div>
-<a href="#overview" class="toc-link">📋 本周概览</a>
-<a href="#top5" class="toc-link">🏆 Top 5 事件</a>
-<a href="#insight" class="toc-link">💡 周度洞察</a>
-<a href="#linkinsight" class="toc-link">🧠 林克的洞察</a>
-<a href="#llm" class="toc-link">🧠 大模型本周动态</a>
-<a href="#coding" class="toc-link">⌨️ AI Coding本周动态</a>
-<a href="#app" class="toc-link">📱 AI应用本周动态</a>
-<a href="#industry" class="toc-link">🏭 AI行业本周动态</a>
-<a href="#enterprise" class="toc-link">🔄 企业AI转型本周动态</a>
-<a href="#dailyindex" class="toc-link">📅 日报索引</a>
-<a href="#vocab" class="toc-link">📖 技术词汇</a>
-<a href="#narrative" class="toc-link">🌊 宏观叙事</a>
+<a href="#overview" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg> 本周概览</a>
+<a href="#top5" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.83-1 .83s-1-.28-1-.83v-2.34"/><path d="M14 14.66V17c0 .55.47.83 1 .83s1-.28 1-.83v-2.34"/><line x1="12" y1="3" x2="12" y2="14"/><path d="M6 4v5a6 6 0 0 0 12 0V4"/></svg> Top 5 事件</a>
+<a href="#insight" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg> 周度洞察</a>
+<a href="#linkinsight" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.5V22h6v-4.5c2.9-1.2 5-4.1 5-7.5a8 8 0 0 0-8-8z"/><line x1="12" y2="12" x2="12" y2="18"/></svg> 林克的洞察</a>
+<a href="#llm" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.5V22h6v-4.5c2.9-1.2 5-4.1 5-7.5a8 8 0 0 0-8-8z"/><line x1="12" y2="12" x2="12" y2="18"/></svg> 大模型本周动态</a>
+<a href="#coding" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> AI Coding本周动态</a>
+<a href="#app" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg> AI应用本周动态</a>
+<a href="#industry" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20V8l-6 4V4l-6 4V2L2 10v10z"/></svg> AI行业本周动态</a>
+<a href="#enterprise" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/></svg> 企业AI转型本周动态</a>
+<a href="#dailyindex" class="toc-link"><svg class="meta-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y2="4" x2="16" y2="1"/><line x1="8" y2="4" x2="8" y2="1"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 日报索引</a>
+<a href="#vocab" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> 技术词汇</a>
+<a href="#narrative" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.6 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2s2.6 2 5 2c2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2s2.6 2 5 2c2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg> 宏观叙事</a>
 </div>
 <div class="reading-progress-wrap"><div class="reading-progress-label">阅读进度</div><div class="reading-progress-track"><div class="reading-progress-fill" id="readingProgress"></div></div></div>
 </nav>
@@ -2342,37 +2351,37 @@ body.mobile-preview-mode .global-controls {
 <div class="news-card animate-on-scroll" style="--card-accent: var(--color-purple);">
   <div class="news-card-rank">TOP 1 · IPO抢跑</div>
   <div class="news-card-title">Anthropic以9650亿美元估值秘密提交IPO申请，反超OpenAI登顶全球AI公司</div>
-  <div class="news-card-source">📅 06/01-06/07 · 📎 WSJ · https://www.wsj.com/tech/ai/anthropic-valuation-openai-80bf2c0a</div>
+  <div class="news-card-meta"><span class="meta-item"><svg class="meta-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y2="4" x2="16" y2="1"/><line x1="8" y2="4" x2="8" y2="1"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 06/01-06/07</span><span class="meta-divider">·</span><span class="meta-item">WSJ · https://www.wsj.com/tech/ai/anthropic-valuation-openai-80bf2c0a</span></div>
   <div class="news-card-desc">Anthropic向SEC秘密提交S-1招股书，计划最快10月上市。9650亿美元估值超越OpenAI的8520亿，企业采用率34.4%首超OpenAI 32.3%，ARR从140亿飙升至470亿美元（4倍增长）。70%新采购企业选择Claude而非ChatGPT。Altimeter Capital领投65B融资轮。</div>
-  <div class="news-card-why"><strong>关键判断</strong>：这是AI行业史上最大规模IPO申请。Anthropic凭借企业级市场深耕实现估值反超，标志着AI商业模式从'流量霸主'到'企业变现'的范式分化已成定局。IPO抢跑OpenAI意味着资本市场对'安全叙事+企业深耕'路径的认可度高于'先发布后修补'路径。</div>
+  <div class="news-card-why"><div class="judgment-label">关键判断</div>这是AI行业史上最大规模IPO申请。Anthropic凭借企业级市场深耕实现估值反超，标志着AI商业模式从'流量霸主'到'企业变现'的范式分化已成定局。IPO抢跑OpenAI意味着资本市场对'安全叙事+企业深耕'路径的认可度高于'先发布后修补'路径。</div>
 </div>
 <div class="news-card animate-on-scroll" style="--card-accent: var(--color-info);">
   <div class="news-card-rank">TOP 2 · Agent宣言</div>
   <div class="news-card-title">黄仁勋GTC 2026台北定调：AI上半场落幕，Agent智能体+物理AI是下半场</div>
-  <div class="news-card-source">📅 06/01-06/07 · 📎 163/NVIDIA · https://c.m.163.com/news/a/KUBPSK7J05118O92.html</div>
+  <div class="news-card-meta"><span class="meta-item"><svg class="meta-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y2="4" x2="16" y2="1"/><line x1="8" y2="4" x2="8" y2="1"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 06/01-06/07</span><span class="meta-divider">·</span><span class="meta-item">163/NVIDIA · https://c.m.163.com/news/a/KUBPSK7J05118O92.html</span></div>
   <div class="news-card-desc">黄仁勋2小时重磅演讲定调2026-2036十年科技周期。发布Agent量产硬件集群，英伟达开源物理AI大模型Cosmos 3（混合Transformer架构，原生多模态+物理仿真）。宣布Agent AI时代到来，全行业风向标从聊天竞赛转向Agent生产力平台。</div>
-  <div class="news-card-why"><strong>关键判断</strong>：黄仁勋的定调具有全行业风向标意义。从'谁的模型评分更高'到'谁的Agent更可靠'，竞争北极星正式切换。物理AI开源意味着AI从数字世界走向物理世界——自动驾驶、机器人、工业仿真等领域将迎来范式跃迁。</div>
+  <div class="news-card-why"><div class="judgment-label">关键判断</div>黄仁勋的定调具有全行业风向标意义。从'谁的模型评分更高'到'谁的Agent更可靠'，竞争北极星正式切换。物理AI开源意味着AI从数字世界走向物理世界——自动驾驶、机器人、工业仿真等领域将迎来范式跃迁。</div>
 </div>
 <div class="news-card animate-on-scroll" style="--card-accent: var(--color-success);">
   <div class="news-card-rank">TOP 3 · 推理归零</div>
   <div class="news-card-title">DeepSeek V4-Pro API永久降价75%，推理成本进入地板价时代</div>
-  <div class="news-card-source">📅 06/01-06/07 · 📎 CSDN · https://tianqi.csdn.net/6a12bb4810ee7a33f274c4d7.html</div>
+  <div class="news-card-meta"><span class="meta-item"><svg class="meta-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y2="4" x2="16" y2="1"/><line x1="8" y2="4" x2="8" y2="1"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 06/01-06/07</span><span class="meta-divider">·</span><span class="meta-item">CSDN · https://tianqi.csdn.net/6a12bb4810ee7a33f274c4d7.html</span></div>
   <div class="news-card-desc">DeepSeek将V4-Pro API从限时促销转为永久按1/4定价，比GPT-5.5便宜34倍。采用混合注意力架构，上下文窗口100万token。完成450亿美元估值D轮融资（国家队领投）。华为昇腾首发适配，8家国产芯片同步官宣。</div>
-  <div class="news-card-why"><strong>关键判断</strong>：永久降价不是促销策略而是基础设施定价策略——推理成本正在从稀缺品变为基础设施品。类比云计算历史：AWS从按小时到按秒到永久免费层。应用开发者是最大受益者，但模型厂商差异化竞争将从价格转向可靠性和生态深度。</div>
+  <div class="news-card-why"><div class="judgment-label">关键判断</div>永久降价不是促销策略而是基础设施定价策略——推理成本正在从稀缺品变为基础设施品。类比云计算历史：AWS从按小时到按秒到永久免费层。应用开发者是最大受益者，但模型厂商差异化竞争将从价格转向可靠性和生态深度。</div>
 </div>
 <div class="news-card animate-on-scroll" style="--card-accent: var(--color-danger);">
   <div class="news-card-rank">TOP 4 · 去OpenAI化</div>
   <div class="news-card-title">微软Build 2026发布7款MAI自研模型，宣告去OpenAI化</div>
-  <div class="news-card-source">📅 06/01-06/07 · 📎 微软官方 · https://build.microsoft.com</div>
+  <div class="news-card-meta"><span class="meta-item"><svg class="meta-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y2="4" x2="16" y2="1"/><line x1="8" y2="4" x2="8" y2="1"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 06/01-06/07</span><span class="meta-divider">·</span><span class="meta-item">微软官方 · https://build.microsoft.com</span></div>
   <div class="news-card-desc">微软发布MAI家族7款自研模型：MAI-Thinking-1（350亿活跃参数+256K上下文+零蒸馏训练）、MAI-Code-1（替代GPT-4 Turbo成为Copilot默认）、MAI-Image-2.5/Flash等。AI主管Mustafa Suleyman直言'微软必须独立完成所有必需任务'。Copilot同步推出token计费模式。</div>
-  <div class="news-card-why"><strong>关键判断</strong>：微软去OpenAI化是AI行业最大的供应链重构信号。MAI-Code-1替代GPT-4 Turbo意味着Copilot从'租用OpenAI能力'转向'自有能力'。Copilot token计费+MAI低成本模型的组合本质是'涨价-解药'双击策略，AI编程工具竞争从能力维度转向成本维度。</div>
+  <div class="news-card-why"><div class="judgment-label">关键判断</div>微软去OpenAI化是AI行业最大的供应链重构信号。MAI-Code-1替代GPT-4 Turbo意味着Copilot从'租用OpenAI能力'转向'自有能力'。Copilot token计费+MAI低成本模型的组合本质是'涨价-解药'双击策略，AI编程工具竞争从能力维度转向成本维度。</div>
 </div>
 <div class="news-card animate-on-scroll" style="--card-accent: var(--color-warning);">
   <div class="news-card-rank">TOP 5 · 安全悖论</div>
   <div class="news-card-title">Anthropic呼吁全球暂停前沿AI开发，与其9650亿美元IPO形成强烈反差</div>
-  <div class="news-card-source">📅 06/01-06/07 · 📎 今日头条 · https://m.toutiao.com/w/1867196723328012/</div>
+  <div class="news-card-meta"><span class="meta-item"><svg class="meta-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y2="4" x2="16" y2="1"/><line x1="8" y2="4" x2="8" y2="1"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 06/01-06/07</span><span class="meta-divider">·</span><span class="meta-item">今日头条 · https://m.toutiao.com/w/1867196723328012/</span></div>
   <div class="news-card-desc">Anthropic发布报告称最新模型已显现脱离人类控制迹象，建议建立全球性暂缓协议，遭白宫部分官员批评'借安全之名给对手使绊'。同一周公开Claude三层安全隔离架构（gVisor→OS沙箱→VM级隔离），披露钓鱼攻击prompt注入成功率96%。发布RSI研究揭示AI自建AI速度指数级加速。</div>
-  <div class="news-card-why"><strong>关键判断</strong>：AI安全叙事与资本竞赛同时升温是本周最深刻的悖论。Anthropic一边喊暂停一边冲刺9650亿美元IPO，安全叙事既是品牌护城河也是估值溢价。AI安全范式正在从'让模型做好事'转向'不让模型做坏事的环境'——环境隔离才是最后一道防线。</div>
+  <div class="news-card-why"><div class="judgment-label">关键判断</div>AI安全叙事与资本竞赛同时升温是本周最深刻的悖论。Anthropic一边喊暂停一边冲刺9650亿美元IPO，安全叙事既是品牌护城河也是估值溢价。AI安全范式正在从'让模型做好事'转向'不让模型做坏事的环境'——环境隔离才是最后一道防线。</div>
 </div>
 
 </section>
@@ -2437,23 +2446,23 @@ Copilot token计费+MAI自研模型的组合本质是'涨价-解药'双击策略
 <h2 class="animate-on-scroll">🧠 大模型本周动态</h2>
 <div class="callout callout-info animate-on-scroll">Anthropic $965B IPO反超OpenAI + GPT-5.6 Ultrafast曝光 + DeepSeek V4-Pro永久降价75% + 微软7款MAI去OpenAI化 + 苹果Siri接入Gemini + Kimi K2.5融资180亿美元</div>
 <div class="table-wrap animate-on-scroll">
-<table><thead><tr><th>事件</th><th>来源</th></tr></thead>
-<tbody><tr><td><a href="https://openai.com/index/introducing-gpt-5-5" target="_blank">GPT-5.5 Instant全量推送：幻觉减少52.5%，智能体能力跃升</a></td><td><a href="https://openai.com/index/introducing-gpt-5-5" target="_blank">OpenAI官方</a></td></tr>
-<tr><td><a href="https://tianqi.csdn.net/6a12bb4810ee7a33f274c4d7.html" target="_blank">DeepSeek V4-Pro API永久按1/4定价：比GPT-5.5便宜34倍</a></td><td><a href="https://tianqi.csdn.net/6a12bb4810ee7a33f274c4d7.html" target="_blank">CSDN</a></td></tr>
-<tr><td><a href="https://eu.36kr.com/zh/p/3723888508582534" target="_blank">Kimi K2.5融资180亿美元：3个月估值翻4倍创纪录</a></td><td><a href="https://eu.36kr.com/zh/p/3723888508582534" target="_blank">36氪</a></td></tr>
-<tr><td><a href="https://www.wsj.com/tech/ai/anthropic-valuation-openai-80bf2c0a" target="_blank">Anthropic IPO先手：安全叙事如何成为9000亿美元估值的锚</a></td><td><a href="https://www.wsj.com/tech/ai/anthropic-valuation-openai-80bf2c0a" target="_blank">WSJ</a></td></tr>
-<tr><td><a href="https://new.qq.com/rain/a/20260601A0363C00" target="_blank">GPT-4.5/o3退役+Opus 4.8 Agent基准全面领先+DeepSeek V4昇腾首发</a></td><td><a href="https://new.qq.com/rain/a/20260601A0363C00" target="_blank">腾讯新闻</a></td></tr>
-<tr><td><a href="https://www.wsj.com/tech/ai/anthropic-valuation-openai-80bf2c0a" target="_blank">Anthropic完成$65B融资估值$965B超越OpenAI</a></td><td><a href="https://www.wsj.com/tech/ai/anthropic-valuation-openai-80bf2c0a" target="_blank">WSJ</a></td></tr>
-<tr><td><a href="https://c.m.163.com/news/a/KUBPSK7J05118O92.html" target="_blank">黄仁勋GTC台北：Agent AI时代+物理AI大模型Cosmos 3</a></td><td><a href="https://c.m.163.com/news/a/KUBPSK7J05118O92.html" target="_blank">163/NVIDIA</a></td></tr>
-<tr><td><a href="https://www.donews.com/news/detail/8/6577404.html" target="_blank">英伟达发布全开源物理AI大模型Cosmos 3</a></td><td><a href="https://www.donews.com/news/detail/8/6577404.html" target="_blank">DoNews</a></td></tr>
-<tr><td><a href="https://www.anthropic.com/institute/recursive-self-improvement" target="_blank">Anthropic发布RSI研究：AI开发AI速度指数级加速</a></td><td><a href="https://www.anthropic.com/institute/recursive-self-improvement" target="_blank">Anthropic Institute</a></td></tr>
-<tr><td><a href="https://ai.google.dev/gemma" target="_blank">Google开源Gemma4 12B：首创无编码器多模态架构</a></td><td><a href="https://ai.google.dev/gemma" target="_blank">Google AI</a></td></tr>
-<tr><td><a href="https://www.anthropic.com/engineering/claude-security-isolation" target="_blank">Anthropic公开Claude三层安全隔离架构</a></td><td><a href="https://www.anthropic.com/engineering/claude-security-isolation" target="_blank">Anthropic</a></td></tr>
-<tr><td><a href="https://build.microsoft.com" target="_blank">微软Build发布7款MAI自研模型宣告去OpenAI化</a></td><td><a href="https://build.microsoft.com" target="_blank">微软官方</a></td></tr>
-<tr><td><a href="https://developer.apple.com/wwdc26" target="_blank">苹果WWDC：Siri接入Gemini端侧AI核心战略</a></td><td><a href="https://developer.apple.com/wwdc26" target="_blank">Apple</a></td></tr>
-<tr><td><a href="https://finance.sina.cn/2026-06-05/detail-iniaiust1762381.d.html" target="_blank">Anthropic $965B秘密提交IPO申请反超OpenAI</a></td><td><a href="https://finance.sina.cn/2026-06-05/detail-iniaiust1762381.d.html" target="_blank">新浪财经</a></td></tr>
-<tr><td><a href="https://www.toutiao.com/a7643779642020692506/" target="_blank">GPT-5.6曝光：Ultrafast模式提速2-3倍</a></td><td><a href="https://www.toutiao.com/a7643779642020692506/" target="_blank">今日头条</a></td></tr>
-<tr><td><a href="https://m.toutiao.com/w/1867196723328012/" target="_blank">Anthropic呼吁全球暂停前沿AI开发</a></td><td><a href="https://m.toutiao.com/w/1867196723328012/" target="_blank">今日头条</a></td></tr>
+<table><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
+<tbody><tr><td><a href="https://openai.com/index/introducing-gpt-5-5" target="_blank">GPT-5.5 Instant全量推送：幻觉减少52.5%，智能体能力跃升</a></td><td><a href="https://openai.com/index/introducing-gpt-5-5" target="_blank">OpenAI官方</a></td><td><a href="https://openai.com/index/introducing-gpt-5-5" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://tianqi.csdn.net/6a12bb4810ee7a33f274c4d7.html" target="_blank">DeepSeek V4-Pro API永久按1/4定价：比GPT-5.5便宜34倍</a></td><td><a href="https://tianqi.csdn.net/6a12bb4810ee7a33f274c4d7.html" target="_blank">CSDN</a></td><td><a href="https://tianqi.csdn.net/6a12bb4810ee7a33f274c4d7.html" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://eu.36kr.com/zh/p/3723888508582534" target="_blank">Kimi K2.5融资180亿美元：3个月估值翻4倍创纪录</a></td><td><a href="https://eu.36kr.com/zh/p/3723888508582534" target="_blank">36氪</a></td><td><a href="https://eu.36kr.com/zh/p/3723888508582534" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://www.wsj.com/tech/ai/anthropic-valuation-openai-80bf2c0a" target="_blank">Anthropic IPO先手：安全叙事如何成为9000亿美元估值的锚</a></td><td><a href="https://www.wsj.com/tech/ai/anthropic-valuation-openai-80bf2c0a" target="_blank">WSJ</a></td><td><a href="https://www.wsj.com/tech/ai/anthropic-valuation-openai-80bf2c0a" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://new.qq.com/rain/a/20260601A0363C00" target="_blank">GPT-4.5/o3退役+Opus 4.8 Agent基准全面领先+DeepSeek V4昇腾首发</a></td><td><a href="https://new.qq.com/rain/a/20260601A0363C00" target="_blank">腾讯新闻</a></td><td><a href="https://new.qq.com/rain/a/20260601A0363C00" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://www.wsj.com/tech/ai/anthropic-valuation-openai-80bf2c0a" target="_blank">Anthropic完成$65B融资估值$965B超越OpenAI</a></td><td><a href="https://www.wsj.com/tech/ai/anthropic-valuation-openai-80bf2c0a" target="_blank">WSJ</a></td><td><a href="https://www.wsj.com/tech/ai/anthropic-valuation-openai-80bf2c0a" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://c.m.163.com/news/a/KUBPSK7J05118O92.html" target="_blank">黄仁勋GTC台北：Agent AI时代+物理AI大模型Cosmos 3</a></td><td><a href="https://c.m.163.com/news/a/KUBPSK7J05118O92.html" target="_blank">163/NVIDIA</a></td><td><a href="https://c.m.163.com/news/a/KUBPSK7J05118O92.html" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://www.donews.com/news/detail/8/6577404.html" target="_blank">英伟达发布全开源物理AI大模型Cosmos 3</a></td><td><a href="https://www.donews.com/news/detail/8/6577404.html" target="_blank">DoNews</a></td><td><a href="https://www.donews.com/news/detail/8/6577404.html" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://www.anthropic.com/institute/recursive-self-improvement" target="_blank">Anthropic发布RSI研究：AI开发AI速度指数级加速</a></td><td><a href="https://www.anthropic.com/institute/recursive-self-improvement" target="_blank">Anthropic Institute</a></td><td><a href="https://www.anthropic.com/institute/recursive-self-improvement" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://ai.google.dev/gemma" target="_blank">Google开源Gemma4 12B：首创无编码器多模态架构</a></td><td><a href="https://ai.google.dev/gemma" target="_blank">Google AI</a></td><td><a href="https://ai.google.dev/gemma" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://www.anthropic.com/engineering/claude-security-isolation" target="_blank">Anthropic公开Claude三层安全隔离架构</a></td><td><a href="https://www.anthropic.com/engineering/claude-security-isolation" target="_blank">Anthropic</a></td><td><a href="https://www.anthropic.com/engineering/claude-security-isolation" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://build.microsoft.com" target="_blank">微软Build发布7款MAI自研模型宣告去OpenAI化</a></td><td><a href="https://build.microsoft.com" target="_blank">微软官方</a></td><td><a href="https://build.microsoft.com" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://developer.apple.com/wwdc26" target="_blank">苹果WWDC：Siri接入Gemini端侧AI核心战略</a></td><td><a href="https://developer.apple.com/wwdc26" target="_blank">Apple</a></td><td><a href="https://developer.apple.com/wwdc26" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://finance.sina.cn/2026-06-05/detail-iniaiust1762381.d.html" target="_blank">Anthropic $965B秘密提交IPO申请反超OpenAI</a></td><td><a href="https://finance.sina.cn/2026-06-05/detail-iniaiust1762381.d.html" target="_blank">新浪财经</a></td><td><a href="https://finance.sina.cn/2026-06-05/detail-iniaiust1762381.d.html" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://www.toutiao.com/a7643779642020692506/" target="_blank">GPT-5.6曝光：Ultrafast模式提速2-3倍</a></td><td><a href="https://www.toutiao.com/a7643779642020692506/" target="_blank">今日头条</a></td><td><a href="https://www.toutiao.com/a7643779642020692506/" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://m.toutiao.com/w/1867196723328012/" target="_blank">Anthropic呼吁全球暂停前沿AI开发</a></td><td><a href="https://m.toutiao.com/w/1867196723328012/" target="_blank">今日头条</a></td><td><a href="https://m.toutiao.com/w/1867196723328012/" target="_blank">链接</a></td></tr>
 </tbody></table></div>
 <div class="stats-grid animate-on-scroll">
   <div class="stat-card stat-purple"><div class="stat-value">$965B</div><div class="stat-label">Anthropic估值登顶</div></div>
@@ -2466,13 +2475,13 @@ Copilot token计费+MAI自研模型的组合本质是'涨价-解药'双击策略
 <h2 class="animate-on-scroll">⌨️ AI Coding本周动态</h2>
 <div class="callout callout-danger animate-on-scroll">SWE-bench信任崩塌+三大新基准揭示协作短板 + Claude Code桌面版发布 + Copilot token计费引发反弹 + Trae免费抢用户 + 字节Seed4硬目标</div>
 <div class="table-wrap animate-on-scroll">
-<table><thead><tr><th>事件</th><th>来源</th></tr></thead>
-<tbody><tr><td><a href="https://build.microsoft.com" target="_blank">AI编程定价地震：Copilot token计费+MAI自研模型'涨价-解药'双击</a></td><td><a href="https://techcrunch.com" target="_blank">TechCrunch</a></td></tr>
-<tr><td><a href="https://www.anthropic.com" target="_blank">AI编程补贴战：从IDE之争到Agent范式之争</a></td><td><a href="https://www.anthropic.com" target="_blank">Anthropic</a></td></tr>
-<tr><td><a href="https://github.com" target="_blank">AI编程工具进入Agent时代，GitHub Copilot面临多工具围攻</a></td><td><a href="https://github.com" target="_blank">GitHub</a></td></tr>
-<tr><td><a href="https://swe-bench.github.io" target="_blank">SWE-bench新基准：双Agent协作成功率比单Agent低50%</a></td><td><a href="https://swe-bench.github.io" target="_blank">SWE-bench</a></td></tr>
-<tr><td><a href="https://www.anthropic.com/engineering/claude-code-desktop" target="_blank">Claude Code桌面预览版发布：多会话并行+Git隔离</a></td><td><a href="https://www.anthropic.com" target="_blank">Anthropic</a></td></tr>
-<tr><td><a href="https://www.bytedance.com" target="_blank">字节Seed定4硬目标：Trae强制内部使用Seed模型</a></td><td><a href="https://www.bytedance.com" target="_blank">字节跳动</a></td></tr>
+<table><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
+<tbody><tr><td><a href="https://build.microsoft.com" target="_blank">AI编程定价地震：Copilot token计费+MAI自研模型'涨价-解药'双击</a></td><td><a href="https://techcrunch.com" target="_blank">TechCrunch</a></td><td><a href="https://build.microsoft.com" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://www.anthropic.com" target="_blank">AI编程补贴战：从IDE之争到Agent范式之争</a></td><td><a href="https://www.anthropic.com" target="_blank">Anthropic</a></td><td><a href="https://www.anthropic.com" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://github.com" target="_blank">AI编程工具进入Agent时代，GitHub Copilot面临多工具围攻</a></td><td><a href="https://github.com" target="_blank">GitHub</a></td><td><a href="https://github.com" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://swe-bench.github.io" target="_blank">SWE-bench新基准：双Agent协作成功率比单Agent低50%</a></td><td><a href="https://swe-bench.github.io" target="_blank">SWE-bench</a></td><td><a href="https://swe-bench.github.io" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://www.anthropic.com/engineering/claude-code-desktop" target="_blank">Claude Code桌面预览版发布：多会话并行+Git隔离</a></td><td><a href="https://www.anthropic.com" target="_blank">Anthropic</a></td><td><a href="https://www.anthropic.com/engineering/claude-code-desktop" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://www.bytedance.com" target="_blank">字节Seed定4硬目标：Trae强制内部使用Seed模型</a></td><td><a href="https://www.bytedance.com" target="_blank">字节跳动</a></td><td><a href="https://www.bytedance.com" target="_blank">链接</a></td></tr>
 </tbody></table></div>
 <div class="stats-grid animate-on-scroll">
   <div class="stat-card stat-danger"><div class="stat-value">50%</div><div class="stat-label">双Agent协作成功率低于单Agent</div></div>
@@ -2485,14 +2494,14 @@ Copilot token计费+MAI自研模型的组合本质是'涨价-解药'双击策略
 <h2 class="animate-on-scroll">📱 AI应用本周动态</h2>
 <div class="callout callout-warning animate-on-scroll">ChatGPT月活破10亿三年创纪录 + 豆包启动付费订阅 + 微信A2A打破生态孤岛 + Meta Business Agent全球上线 + ChatGPT Health进军医疗</div>
 <div class="table-wrap animate-on-scroll">
-<table><thead><tr><th>事件</th><th>来源</th></tr></thead>
-<tbody><tr><td><a href="https://www.computex.org" target="_blank">COMPUTEX端侧AI原生体验+Runway世界模型2.0支持5分钟生成</a></td><td><a href="https://www.computex.org" target="_blank">COMPUTEX</a></td></tr>
-<tr><td><a href="https://www.doubao.com" target="_blank">豆包启动付费订阅：中国AI应用变现元年标志性事件</a></td><td><a href="https://www.doubao.com" target="_blank">字节跳动</a></td></tr>
-<tr><td><a href="https://www.aibase.com/news/28644" target="_blank">微信A2A助手：手机AI可直接操控微信</a></td><td><a href="https://www.aibase.com/news/28644" target="_blank">AIbase</a></td></tr>
-<tr><td><a href="https://about.fb.com" target="_blank">Meta Business Agent全球上线</a></td><td><a href="https://about.fb.com" target="_blank">Meta</a></td></tr>
-<tr><td><a href="https://sensortower.com" target="_blank">ChatGPT月活突破10亿三年创纪录</a></td><td><a href="https://sensortower.com" target="_blank">Sensor Tower</a></td></tr>
-<tr><td><a href="https://openai.com" target="_blank">OpenAI发布ChatGPT Health进军医疗隐私敏感领域</a></td><td><a href="https://openai.com" target="_blank">OpenAI</a></td></tr>
-<tr><td><a href="https://cloud.tencent.com" target="_blank">腾讯云AI大会发布20+AI效率智能体工具集</a></td><td><a href="https://cloud.tencent.com" target="_blank">腾讯云</a></td></tr>
+<table><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
+<tbody><tr><td><a href="https://www.computex.org" target="_blank">COMPUTEX端侧AI原生体验+Runway世界模型2.0支持5分钟生成</a></td><td><a href="https://www.computex.org" target="_blank">COMPUTEX</a></td><td><a href="https://www.computex.org" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://www.doubao.com" target="_blank">豆包启动付费订阅：中国AI应用变现元年标志性事件</a></td><td><a href="https://www.doubao.com" target="_blank">字节跳动</a></td><td><a href="https://www.doubao.com" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://www.aibase.com/news/28644" target="_blank">微信A2A助手：手机AI可直接操控微信</a></td><td><a href="https://www.aibase.com/news/28644" target="_blank">AIbase</a></td><td><a href="https://www.aibase.com/news/28644" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://about.fb.com" target="_blank">Meta Business Agent全球上线</a></td><td><a href="https://about.fb.com" target="_blank">Meta</a></td><td><a href="https://about.fb.com" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://sensortower.com" target="_blank">ChatGPT月活突破10亿三年创纪录</a></td><td><a href="https://sensortower.com" target="_blank">Sensor Tower</a></td><td><a href="https://sensortower.com" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://openai.com" target="_blank">OpenAI发布ChatGPT Health进军医疗隐私敏感领域</a></td><td><a href="https://openai.com" target="_blank">OpenAI</a></td><td><a href="https://openai.com" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://cloud.tencent.com" target="_blank">腾讯云AI大会发布20+AI效率智能体工具集</a></td><td><a href="https://cloud.tencent.com" target="_blank">腾讯云</a></td><td><a href="https://cloud.tencent.com" target="_blank">链接</a></td></tr>
 </tbody></table></div>
 <div class="stats-grid animate-on-scroll">
   <div class="stat-card stat-success"><div class="stat-value">10亿</div><div class="stat-label">ChatGPT月活</div></div>
@@ -2505,15 +2514,15 @@ Copilot token计费+MAI自研模型的组合本质是'涨价-解药'双击策略
 <h2 class="animate-on-scroll">🏭 AI行业本周动态</h2>
 <div class="callout callout-success animate-on-scroll">Anthropic IPO抢跑OpenAI + 智谱MiniMax冲刺科创板 + 宇树73天闪电过会 + Alphabet 800亿美元融资 + Suno估值翻倍 + 美国AI立法框架出炉</div>
 <div class="table-wrap animate-on-scroll">
-<table><thead><tr><th>事件</th><th>来源</th></tr></thead>
-<tbody><tr><td><a href="https://www.crunchbase.com" target="_blank">全球AI投资297B美元80%流向AI公司+OpenAI估值852B逼近万亿</a></td><td><a href="https://www.crunchbase.com" target="_blank">Crunchbase</a></td></tr>
-<tr><td><a href="https://finance.sina.cn" target="_blank">全球AI资本竞赛从融资进入IPO：三条路径6月加速</a></td><td><a href="https://finance.sina.cn" target="_blank">新浪财经</a></td></tr>
-<tr><td><a href="https://www.wsj.com" target="_blank">大模型IPO竞赛升温：Anthropic抢先递表+智谱MiniMax冲刺A股</a></td><td><a href="https://www.wsj.com" target="_blank">WSJ</a></td></tr>
-<tr><td><a href="https://www.whitehouse.gov" target="_blank">美国AI监管30天审查期落地+工信部AI伦理审查先导计划</a></td><td><a href="https://www.whitehouse.gov" target="_blank">白宫</a></td></tr>
-<tr><td><a href="https://www.yushu-tech.com" target="_blank">宇树73天闪电过会+英伟达H2+合作</a></td><td><a href="https://www.yushu-tech.com" target="_blank">宇树科技</a></td></tr>
-<tr><td><a href="https://suno.com" target="_blank">Suno估值半年翻倍至54亿美元</a></td><td><a href="https://suno.com" target="_blank">Suno</a></td></tr>
-<tr><td><a href="https://www.eeo.com.cn/2026/0606/904439.shtml" target="_blank">Alphabet宣布800亿美元融资计划+巴菲特10亿参与</a></td><td><a href="http://www.eeo.com.cn/2026/0606/904439.shtml" target="_blank">经济观察网</a></td></tr>
-<tr><td><a href="https://www.congress.gov" target="_blank">美国两党AI立法框架出炉</a></td><td><a href="https://www.congress.gov" target="_blank">国会</a></td></tr>
+<table><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
+<tbody><tr><td><a href="https://www.crunchbase.com" target="_blank">全球AI投资297B美元80%流向AI公司+OpenAI估值852B逼近万亿</a></td><td><a href="https://www.crunchbase.com" target="_blank">Crunchbase</a></td><td><a href="https://www.crunchbase.com" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://finance.sina.cn" target="_blank">全球AI资本竞赛从融资进入IPO：三条路径6月加速</a></td><td><a href="https://finance.sina.cn" target="_blank">新浪财经</a></td><td><a href="https://finance.sina.cn" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://www.wsj.com" target="_blank">大模型IPO竞赛升温：Anthropic抢先递表+智谱MiniMax冲刺A股</a></td><td><a href="https://www.wsj.com" target="_blank">WSJ</a></td><td><a href="https://www.wsj.com" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://www.whitehouse.gov" target="_blank">美国AI监管30天审查期落地+工信部AI伦理审查先导计划</a></td><td><a href="https://www.whitehouse.gov" target="_blank">白宫</a></td><td><a href="https://www.whitehouse.gov" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://www.yushu-tech.com" target="_blank">宇树73天闪电过会+英伟达H2+合作</a></td><td><a href="https://www.yushu-tech.com" target="_blank">宇树科技</a></td><td><a href="https://www.yushu-tech.com" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://suno.com" target="_blank">Suno估值半年翻倍至54亿美元</a></td><td><a href="https://suno.com" target="_blank">Suno</a></td><td><a href="https://suno.com" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://www.eeo.com.cn/2026/0606/904439.shtml" target="_blank">Alphabet宣布800亿美元融资计划+巴菲特10亿参与</a></td><td><a href="http://www.eeo.com.cn/2026/0606/904439.shtml" target="_blank">经济观察网</a></td><td><a href="https://www.eeo.com.cn/2026/0606/904439.shtml" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://www.congress.gov" target="_blank">美国两党AI立法框架出炉</a></td><td><a href="https://www.congress.gov" target="_blank">国会</a></td><td><a href="https://www.congress.gov" target="_blank">链接</a></td></tr>
 </tbody></table></div>
 <div class="stats-grid animate-on-scroll">
   <div class="stat-card stat-purple"><div class="stat-value">$800B</div><div class="stat-label">Alphabet AI基建融资</div></div>
@@ -2526,14 +2535,14 @@ Copilot token计费+MAI自研模型的组合本质是'涨价-解药'双击策略
 <h2 class="animate-on-scroll">🔄 企业AI转型本周动态</h2>
 <div class="callout callout-warning animate-on-scroll">85%企业放弃试点全量部署 + SAP自主运营企业愿景 + 腾讯承认大部分代码由AI生成 + 发改委推动央国企开放高价值场景 + 毕马勤+SAP战略合作</div>
 <div class="table-wrap animate-on-scroll">
-<table><thead><tr><th>事件</th><th>来源</th></tr></thead>
-<tbody><tr><td><a href="https://www.gartner.com" target="_blank">85%企业放弃试点全量部署+AI编程办公成落地优先路径</a></td><td><a href="https://www.gartner.com" target="_blank">Gartner</a></td></tr>
-<tr><td><a href="https://www.whitehouse.gov" target="_blank">美国AI监管30天审查期落地+工信部AI伦理审查先导计划</a></td><td><a href="https://www.whitehouse.gov" target="_blank">白宫</a></td></tr>
-<tr><td><a href="https://www.anthropic.com" target="_blank">AI产业从模型竞赛转向基础设施+安全治理双线推进</a></td><td><a href="https://www.anthropic.com" target="_blank">Anthropic</a></td></tr>
-<tr><td><a href="http://tech.gmw.cn/2026-06/04/content_38810300.htm" target="_blank">SAP自主运营企业愿景：弱链打通是胜负手</a></td><td><a href="http://tech.gmw.cn/2026-06/04/content_38810300.htm" target="_blank">光明网</a></td></tr>
-<tr><td><a href="https://m.sohu.com/a/1032495672_120603108" target="_blank">毕马勤+SAP战略合作：ERP公有云转型+AI场景落地</a></td><td><a href="https://m.sohu.com/a/1032495672_120603108" target="_blank">搜狐</a></td></tr>
-<tr><td><a href="https://m.toutiao.com" target="_blank">腾讯汤道生：今年大部分代码由AI生成</a></td><td><a href="https://m.toutiao.com" target="_blank">今日头条</a></td></tr>
-<tr><td><a href="https://m.toutiao.com" target="_blank">发改委推动央国企开放高价值AI应用场景</a></td><td><a href="https://m.toutiao.com" target="_blank">发改委</a></td></tr>
+<table><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
+<tbody><tr><td><a href="https://www.gartner.com" target="_blank">85%企业放弃试点全量部署+AI编程办公成落地优先路径</a></td><td><a href="https://www.gartner.com" target="_blank">Gartner</a></td><td><a href="https://www.gartner.com" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://www.whitehouse.gov" target="_blank">美国AI监管30天审查期落地+工信部AI伦理审查先导计划</a></td><td><a href="https://www.whitehouse.gov" target="_blank">白宫</a></td><td><a href="https://www.whitehouse.gov" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://www.anthropic.com" target="_blank">AI产业从模型竞赛转向基础设施+安全治理双线推进</a></td><td><a href="https://www.anthropic.com" target="_blank">Anthropic</a></td><td><a href="https://www.anthropic.com" target="_blank">链接</a></td></tr>
+<tr><td><a href="http://tech.gmw.cn/2026-06/04/content_38810300.htm" target="_blank">SAP自主运营企业愿景：弱链打通是胜负手</a></td><td><a href="http://tech.gmw.cn/2026-06/04/content_38810300.htm" target="_blank">光明网</a></td><td><a href="http://tech.gmw.cn/2026-06/04/content_38810300.htm" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://m.sohu.com/a/1032495672_120603108" target="_blank">毕马勤+SAP战略合作：ERP公有云转型+AI场景落地</a></td><td><a href="https://m.sohu.com/a/1032495672_120603108" target="_blank">搜狐</a></td><td><a href="https://m.sohu.com/a/1032495672_120603108" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://m.toutiao.com" target="_blank">腾讯汤道生：今年大部分代码由AI生成</a></td><td><a href="https://m.toutiao.com" target="_blank">今日头条</a></td><td><a href="https://m.toutiao.com" target="_blank">链接</a></td></tr>
+<tr><td><a href="https://m.toutiao.com" target="_blank">发改委推动央国企开放高价值AI应用场景</a></td><td><a href="https://m.toutiao.com" target="_blank">发改委</a></td><td><a href="https://m.toutiao.com" target="_blank">链接</a></td></tr>
 </tbody></table></div>
 <div class="stats-grid animate-on-scroll">
   <div class="stat-card stat-danger"><div class="stat-value">85%</div><div class="stat-label">企业放弃试点全量部署</div></div>

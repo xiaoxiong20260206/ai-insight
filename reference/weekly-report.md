@@ -101,6 +101,8 @@ MD内容结构：
 
 ### 质量规则
 - JSON必须通过 `gen_weekly_json.py --validate` 校验
+- **table行的event字段必须是纯文本，禁止Markdown语法 `[text](url)`**（#124防复发）
+- **table行必须有url字段，且为合法URL**（#124防复发）
 - Top5每条source行必须包含超链接（URL来自日报JSON）
 - 禁止KIM Doc内部链接（docs.corp.kuaishou.com）
 - 外部版深度调研链接文案="深度调研"，不加"完整版"
@@ -114,7 +116,7 @@ MD内容结构：
 # 从JSON生成HTML（自动：CSS模板+JS模板+自校验+cp到public）
 uv run scripts/gen_weekly_html.py --date YYYY-WXX --input data/weekly-content-YYYY-WXX.json
 
-# 脏检查：≥50KB + 5板块 + {{message}}=0 + 8个class名 + 了解更多模块
+# 脏检查：≥50KB + 5板块 + {{message}}=0 + 8个class名 + 了解更多模块 + Markdown泄漏=0 + 空href=0
 # 脚本已自动完成，无需手动验证
 ```
 
