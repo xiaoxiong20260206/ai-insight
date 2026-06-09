@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI 周报 2026-W23 (06/01-06/07) | AI洞察</title>
-<meta name="description" content="AI行业资本闸门全面开启——Anthropic以9650亿美元估值秘密提交IPO申请反超OpenAI，黄仁勋GTC台北定调Agent AI时代到来，DeepSeek V4-Pro永久降价75%推动推理成本地板价化，ChatGPT月活突破10亿创纪录。大模型IPO竞赛、Agent范式跃迁、推理成本归零三大主线同时加速，AI行业正式从技术竞赛上半场进入商业化落地下半场。">
-<meta property="og:title" content="AI 周报 2026-W23 | AI洞察">
-<meta property="og:description" content="AI行业资本闸门全面开启——Anthropic以9650亿美元估值秘密提交IPO申请反超OpenAI，黄仁勋GTC台北定调Agent AI时代到来，DeepSeek V4-Pro永久降价75%推动推理成本地板价化，ChatGPT月活突破10亿创纪录。大模型IPO竞赛、Agent范式跃迁、推理成本归零三大主线同时加速，AI行业正式从技术竞赛上半场进入商业化落地下半场。">
-<meta property="og:type" content="article">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232563EB'/%3E%3Ctext x='6' y='23' font-size='18' fill='white'%3E⚡%3C/text%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-<noscript></noscript>
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 日报 · 2026-06-09 | AI洞察</title>
+    <meta name="description" content="AI洞察日报 2026-06-09：大模型、AI Coding、AI应用、AI行业、企业AI转型五大板块动态">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23059669'/><text x='6' y='23' font-size='18' fill='white'>📡</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <noscript><style>.animate-on-scroll{opacity:1!important;transform:none!important;}</style></noscript>
+    <style>
 /**
  * 清爽调研报告风格 - 基础样式表
  * 版本: 3.0.0
@@ -2284,363 +2280,498 @@ body.mobile-preview-mode .global-controls {
         grid-template-columns: repeat(3, 1fr);
     }
 }
-
-
-/* ===== 68ch行宽限制（容器100%，文字68ch）===== */
-.news-card-desc, .news-card-why, .insight-card p,
-.content-paragraph, .callout > p,
-.daily-item-kw, .doc-footer p {
-  max-width: 68ch;
-}
-
 </style>
 </head>
 <body>
 <a class="skip-to-content" href="#main-content">跳到主内容</a>
+
 <div class="layout-wrapper">
-<nav class="sidebar-nav" id="sidebar" aria-label="目录导航">
-<div class="sidebar-doc-title">AI 周报 2026-W23</div>
-<div class="toc-section"><div class="toc-group-label">目录</div>
-<a href="#overview" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg> 本周概览</a>
-<a href="#top5" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.83-1 .83s-1-.28-1-.83v-2.34"/><path d="M14 14.66V17c0 .55.47.83 1 .83s1-.28 1-.83v-2.34"/><line x1="12" y1="3" x2="12" y2="14"/><path d="M6 4v5a6 6 0 0 0 12 0V4"/></svg> Top 5 事件</a>
-<a href="#insight" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg> 周度洞察</a>
-<a href="#linkinsight" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.5V22h6v-4.5c2.9-1.2 5-4.1 5-7.5a8 8 0 0 0-8-8z"/><line x1="12" y2="12" x2="12" y2="18"/></svg> AI洞察的洞察</a>
-<a href="#llm" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.5V22h6v-4.5c2.9-1.2 5-4.1 5-7.5a8 8 0 0 0-8-8z"/><line x1="12" y2="12" x2="12" y2="18"/></svg> 大模型本周动态</a>
-<a href="#coding" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> AI Coding本周动态</a>
-<a href="#app" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg> AI应用本周动态</a>
-<a href="#industry" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20V8l-6 4V4l-6 4V2L2 10v10z"/></svg> AI行业本周动态</a>
-<a href="#enterprise" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/></svg> 企业AI转型本周动态</a>
-<a href="#dailyindex" class="toc-link"><svg class="meta-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y2="4" x2="16" y2="1"/><line x1="8" y2="4" x2="8" y2="1"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 日报索引</a>
-<a href="#vocab" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> 技术词汇</a>
-<a href="#narrative" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.6 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2s2.6 2 5 2c2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2s2.6 2 5 2c2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg> 宏观叙事</a>
+    <!-- SIDEBAR TOC -->
+    <nav class="sidebar-nav sidebar-collapsed" id="sidebar" aria-label="目录导航">
+        <div class="sidebar-doc-title">AI 日报 · 2026-06-09</div>
+        <div class="toc-section">
+            <div class="toc-group-label">目录</div>
+            <a href="#overview"   class="toc-link">📋 全文概览</a>
+            <a href="#heat"       class="toc-link">🔥 热度趋势</a>
+            <a href="#llm"        class="toc-link">🧠 大模型</a>
+            <a href="#coding"     class="toc-link">⌨️ AI Coding</a>
+            <a href="#app"        class="toc-link">📱 AI 应用</a>
+            <a href="#industry"   class="toc-link">🏭 AI 行业</a>
+            <a href="#enterprise" class="toc-link">🔄 企业AI转型</a>
+            <a href="#data"       class="toc-link">📊 数据速览</a>
+            <a href="#watch"      class="toc-link">📌 明日关注</a>
+        </div>
+        <div class="reading-progress-wrap">
+            <div class="reading-progress-label">阅读进度</div>
+            <div class="reading-progress-track">
+                <div class="reading-progress-fill" id="readingProgress"></div>
+            </div>
+        </div>
+    </nav>
+    <button class="sidebar-collapse-btn collapsed-pos" id="collapseBtn" title="展开导航" aria-label="展开导航">»</button>
+
+    <!-- MAIN CONTENT -->
+    <main class="content-area" id="main-content">
+        <div class="content-inner">
+
+            <!-- HEADER -->
+            <header class="doc-header">
+                <div class="header-badge">AI INSIGHT · DAILY REPORT</div>
+                <h1 class="header-title">AI 日报 <span class="version-badge">v4.0</span></h1>
+                <div class="header-meta">
+                    <span>📅 2026年6月9日 周二</span>
+                    <span>🌐 海外 7条 · 国内 5条</span>
+                    <span>📊 五大板块：大模型 · AI Coding · AI应用 · AI行业 · 企业转型</span>
+                </div>
+            </header>
+
+            <!-- COVERAGE BAR -->
+            <div class="coverage-bar animate-on-scroll">
+                <span class="label">📊 覆盖均衡</span>
+                <div class="bar">
+                    <div class="bar-overseas" style="width:58%"></div>
+                    <div class="bar-china" style="width:42%"></div>
+                </div>
+                <div class="stats">
+                    <span class="stat-overseas">🌏 海外 7条</span>
+                    <span class="stat-china">🇨🇳 国内 5条</span>
+                </div>
+            </div>
+
+            <!-- OVERVIEW -->
+            <section id="overview" class="report-section">
+                <div class="overview animate-on-scroll">
+                    <div class="overview-title">📋 全文概览</div>
+                    <div class="overview-grid five-cols">
+                <div class="overview-item animate-on-scroll">
+                    <div class="overview-item-header"><span class="overview-item-icon">🧠</span><span class="overview-item-label">大模型</span></div>
+                    <div class="overview-item-text">苹果WWDC26主题演讲今晨落幕，Siri AI作为独立App登场，基于与Google深度合作的新一代Apple基础模型，支持多轮对话与跨App操作；iOS 27/macos Golden Gate等全平台发布；库克完成CEO任内最后一次WWDC演讲；中国大陆Siri AI暂不可用</div>
+                </div>
+                <div class="overview-item animate-on-scroll">
+                    <div class="overview-item-header"><span class="overview-item-icon">⌨️</span><span class="overview-item-label">AI Coding</span></div>
+                    <div class="overview-item-text">OpenAI 6月6日发布ChatGPT锁定模式，禁用实时浏览/Agent模式以防御提示注入攻击；MiniMax M3开源大模型SWE-Bench Pro超GPT-5.5，配套推出MiniMax Code；Cursor/Claude Code/Copilot三强对比分析密集发布</div>
+                </div>
+                <div class="overview-item animate-on-scroll">
+                    <div class="overview-item-header"><span class="overview-item-icon">📱</span><span class="overview-item-label">AI应用</span></div>
+                    <div class="overview-item-text">国家安全部6月8日发文警示AI中转站四大风险（数据泄露/模型缩水/恶意后门/资质缺失）；上海AI实验室开源AgentDoG诊断式安全护栏框架；豆包/Kimi/文心等主流平台高考期间限时上锁涉考功能</div>
+                </div>
+                <div class="overview-item animate-on-scroll">
+                    <div class="overview-item-header"><span class="overview-item-icon">🏭</span><span class="overview-item-label">AI行业</span></div>
+                    <div class="overview-item-text">特朗普政府正与OpenAI磋商持股方案，收益拟注入公共财富基金向公民分配AI红利；百度MEG架构调整，数字人业务升级为独立部门；Ramp数据显示DeepSeek成美国B2B增长最快AI供应商，企业成本降70%+</div>
+                </div>
+                <div class="overview-item animate-on-scroll">
+                    <div class="overview-item-header"><span class="overview-item-icon">🔄</span><span class="overview-item-label">企业转型</span></div>
+                    <div class="overview-item-text">报告显示83%企业已入局AI，产业端合作密集落地；全球42%头部制造企业已部署5+AI Agent，柔性生产线切换效率提升38%；全国青年企业家大会分享AI落地实录与转型避坑指南，AI从选择题变必答题</div>
+                </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- HEAT TREND -->
+            <section id="heat" class="report-section animate-on-scroll">
+
+        <div class="heat-card">
+            <div class="heat-header">
+                <div class="heat-header-label">🔥 热度趋势</div>
+                <div class="heat-header-title">近7期日报交叉分析</div>
+            </div>
+            <div class="heat-body">
+                <table class="heat-table">
+                    <thead><tr><th>排名</th><th>话题</th><th>热度</th><th>天数</th><th>趋势</th><th>核心信号</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td>🥇</td>
+                            <td><strong>WWDC26 Siri AI重构</strong></td>
+                            <td><div class="heat-bar"><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span></div></td>
+                            <td>2天</td>
+                            <td><span class="heat-trend-tag up">🔥 爆发</span></td>
+                            <td>从预热到正式发布，Siri AI独立App+Gemini合作+跨App操作+中国大陆暂不可用，影响超预期</td>
+                        </tr>
+                        <tr>
+                            <td>🥈</td>
+                            <td><strong>AI中转站安全风险</strong></td>
+                            <td><div class="heat-bar"><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-empty"></span></div></td>
+                            <td>1天</td>
+                            <td><span class="heat-trend-tag new">🔥 新爆</span></td>
+                            <td>国安部首次公开警示，AI中转站四大风险暴露，或将引发行业整顿</td>
+                        </tr>
+                        <tr>
+                            <td>🥉</td>
+                            <td><strong>MiniMax M3开源</strong></td>
+                            <td><div class="heat-bar"><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-empty"></span><span class="heat-bar-empty"></span></div></td>
+                            <td>2天</td>
+                            <td><span class="heat-trend-tag up">📈 上升</span></td>
+                            <td>M3开源+SWE-Bench Pro超GPT-5.5+MiniMax Code配套，开源大模型军备竞赛升级</td>
+                        </tr>
+                        <tr>
+                            <td>4️⃣</td>
+                            <td><strong>美政府持股OpenAI</strong></td>
+                            <td><div class="heat-bar"><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-empty"></span><span class="heat-bar-empty"></span><span class="heat-bar-empty"></span></div></td>
+                            <td>1天</td>
+                            <td><span class="heat-trend-tag new">🆕 新增</span></td>
+                            <td>政府持股AI公司史无前例，公共财富基金模式参考Intel先例</td>
+                        </tr>
+                        <tr>
+                            <td>5️⃣</td>
+                            <td><strong>OpenAI锁定模式</strong></td>
+                            <td><div class="heat-bar"><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-empty"></span><span class="heat-bar-empty"></span><span class="heat-bar-empty"></span><span class="heat-bar-empty"></span></div></td>
+                            <td>1天</td>
+                            <td><span class="heat-trend-tag new">🆕 新增</span></td>
+                            <td>AI安全从模型层延伸到应用层，锁定模式为高敏感场景提供隔离方案</td>
+                        </tr>
+                        <tr>
+                            <td>6️⃣</td>
+                            <td><strong>Anthropic IPO</strong></td>
+                            <td><div class="heat-bar"><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-fill"></span><span class="heat-bar-empty"></span><span class="heat-bar-empty"></span><span class="heat-bar-empty"></span></div></td>
+                            <td>3天</td>
+                            <td><span class="heat-trend-tag stable">➡️ 持续</span></td>
+                            <td>S-1已提交，估值9650亿，秋季上市计划持续推进，同时呼吁暂缓前沿AI研发</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p></p>
+            </div>
+        </div>
+            </section>
+
+            <!-- FIVE BOARDS -->
+
+            <!-- ===== 大模型 ===== -->
+            <section id="llm" class="report-section animate-on-scroll">
+                <div class="doc-chapter-label">🧠 大模型</div>
+                <div class="board-section">
+                    <div class="board-header">
+                        <span class="board-badge">1</span> 最近动态
+                    </div>
+                <div class="sub-header">🌏 海外</div>
+
+                <div class="news-item">
+                    <div class="news-title-row"><span class="news-tag tag-new">NEW</span> <a href="https://www.ithome.com/0/961/722.htm" target="_blank">WWDC26主题演讲：Siri AI独立App登场，Apple Intelligence 2.0全面升级</a> <span class="news-source-inline">IT之家</span></div>
+                    <div class="news-summary-compact">苹果WWDC26主题演讲今晨落幕，Siri AI作为独立App正式发布，支持多轮对话、跨App操作和上下文感知。新一代Apple基础模型与Google深度合作，既可在设备端运行也可基于专用云计算运行。iOS 27应用启动速度最高提升30%，iPhone 11及以上机型均可升级。液态玻璃设计语言全面升级。库克完成CEO任内最后一次WWDC演讲。</div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-title-row"><span class="news-tag tag-new">NEW</span> <a href="https://www.aibetas.com.cn/p/6268.html" target="_blank">OpenAI上线ChatGPT锁定模式：禁用浏览/Agent以防御提示注入</a> <span class="news-source-inline">AIBetas</span></div>
+                    <div class="news-summary-compact">6月6日OpenAI发布锁定模式(Locked Mode)，针对提示注入攻击优化防护。启用后禁用实时网页浏览、网络图片获取、深度研究及Agent模式，降低敏感数据泄露风险。面向ChatGPT商业账户及符合条件的个人账号逐步推送。</div>
+                </div>
+                <div class="sub-header">🇨🇳 国内</div>
+
+                <div class="news-item">
+                    <div class="news-title-row"><span class="news-tag tag-new">NEW</span> <a href="https://www.aibetas.com.cn/p/6268.html" target="_blank">MiniMax M3开源大模型正式发布：SWE-Bench Pro超GPT-5.5，100万token上下文</a> <span class="news-source-inline">AIBetas</span></div>
+                    <div class="news-summary-compact">MiniMax发布M3大模型，全球首个集齐1M上下文窗口、原生多模态、强Coding/Agent能力三大前沿属性的开源大模型。SWE-Bench Pro得分59.0%超GPT-5.5和Gemini 3.1 Pro。采用自研稀疏注意力架构MSA，单token计算量降至前代约1/20，定价仅为海外闭源模型的1/10。同步推出MiniMax Code。</div>
+                </div>
+                </div>
+
+            <div class="deep-focus-card">
+                <div class="deep-focus-header 🧠 大模型">
+                    <div>
+                        <div class="deep-focus-label">💡 深度聚焦</div>
+                        <div class="deep-focus-title">深度聚焦：大模型竞争进入"生态执行力"阶段</div>
+                    </div>
+                </div>
+                <div class="deep-focus-body">
+                    <p>WWDC26的Siri AI发布标志着大模型竞争从"谁的模型更强"进入"谁的入口更深"的新阶段。Apple的选择是——自研端侧模型+Google云端模型+第三方Extensions，构建多模型协作架构，这打破了此前ChatGPT独家合作模式。</p><p>这与Anthropic的深度推理路线、OpenAI的通用对话路线形成三种截然不同的策略：Apple押注"设备+生态"，Anthropic押注"推理+企业"，OpenAI押注"规模+消费"。MiniMax M3在SWE-Bench Pro上超GPT-5.5则暗示开源模型可能打破闭源模型的能力垄断。</p><p>三大策略的胜负手不在模型能力，而在谁能把AI变成用户离不开的日常基础设施。Apple有15亿设备用户，Anthropic有440亿美元年化收入和65%企业API份额，OpenAI有最大的消费端用户基数——三者的竞争不是零和博弈，而是各自占据不同生态位。</p>
+                    <div class="deep-focus-takeaway 🧠 大模型">
+                        <div class="deep-focus-takeaway-label">💡 TAKEAWAY</div>
+                        <div class="deep-focus-takeaway-text">大模型竞争的三极格局已成型：Apple(生态执行力) vs Anthropic(推理深度) vs OpenAI(规模覆盖)——赢家不是最强的模型，而是最不可替代的入口</div>
+                    </div>
+                </div>
+            </div>
+<div class="pi-card">
+<div class="pi-card-header">
+<span class="pi-card-icon">🔍</span>
+<span class="pi-card-title">🔍 模式洞察：大模型竞争从能力竞赛转向入口争夺</span>
 </div>
-<div class="reading-progress-wrap"><div class="reading-progress-label">阅读进度</div><div class="reading-progress-track"><div class="reading-progress-fill" id="readingProgress"></div></div></div>
-</nav>
-<button class="sidebar-collapse-btn" id="collapseBtn" title="折叠导航" aria-label="折叠导航">«</button>
-<main class="content-area" id="main-content">
-<div class="content-inner">
-<header class="doc-header">
-  <div class="header-badge">AI INSIGHT · WEEKLY REPORT · 23</div>
-  <h1 class="header-title">AI 周报 2026年第23周</h1>
-  <p class="header-meta"><span>📅 06/01-06/07</span><span>📰 覆盖7天日报 · 5板块</span><span>🌐 海外+国内</span></p>
-</header>
-<section id="overview">
-<div class="doc-chapter-label animate-on-scroll">概览</div>
-<h2 class="animate-on-scroll">📋 本周概览</h2>
-<div class="animate-on-scroll" style="overflow-x:auto;">
-<table style="width:100%;border-collapse:collapse;margin-top:16px;">
-<thead><tr style="background:var(--color-bg-table-header);"><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--color-success);font-weight:700;">维度</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--color-success);font-weight:700;">周度信号</th></tr></thead>
-<tbody>
-<tr><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);font-weight:600;">🧠 大模型</td><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);">Anthropic $965B IPO反超OpenAI；GPT-5.6 Ultrafast曝光；DeepSeek V4-Pro永久降价75%；微软7款MAI去OpenAI化</td></tr>
-<tr><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);font-weight:600;">⌨️ AI Coding</td><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);">SWE-bench信任崩塌+三大新基准；Claude Code桌面版发布；Copilot token计费引发开发者反弹；Trae免费抢用户</td></tr>
-<tr><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);font-weight:600;">📱 AI 应用</td><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);">ChatGPT月活破10亿三年创纪录；豆包启动付费订阅；微信A2A打破生态孤岛；Meta Business Agent全球上线</td></tr>
-<tr><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);font-weight:600;">🏭 AI 行业</td><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);">Anthropic IPO抢跑OpenAI；智谱MiniMax冲刺科创板；宇树73天闪电过会；Suno估值半年翻倍至54亿美元</td></tr>
-<tr><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);font-weight:600;">🔄 企业AI转型</td><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);">SAP自主运营企业愿景；腾讯承认大部分代码由AI生成；发改委推动央国企开放高价值场景；AI转型从试点走向全量部署</td></tr>
-</tbody></table></div>
-<div class="stats-grid animate-on-scroll">
-  <div class="stat-card stat-purple"><div class="stat-value">$965B</div><div class="stat-label">Anthropic估值超越OpenAI</div></div>
-  <div class="stat-card stat-success"><div class="stat-value">10亿</div><div class="stat-label">ChatGPT月活创纪录</div></div>
-  <div class="stat-card stat-info"><div class="stat-value">75%</div><div class="stat-label">DeepSeek V4-Pro永久降价</div></div>
-  <div class="stat-card stat-warning"><div class="stat-value">7款</div><div class="stat-label">微软MAI去OpenAI化</div></div>
-  <div class="stat-card stat-danger"><div class="stat-value">80%</div><div class="stat-label">企业放弃试点全量部署</div></div>
+<div class="pi-card-body">
+<p><strong>规律</strong>：大模型竞争的三极格局已成型，各自占据不同生态位——Apple(设备生态)、Anthropic(企业推理)、OpenAI(消费规模)。</p>
+<p><strong>类比</strong>：就像智能手机时代，iOS/Android/Windows Phone三足鼎立，最终胜出的不是最强的系统，而是生态最不可替代的那个。</p>
+<p><strong>关键判断</strong>：赢家不是最强的模型，而是最不可替代的入口。Siri AI独立App意味着15亿iPhone用户将直接接触多模型AI——这是AI分发格局的历史性转折。</p>
 </div>
-</section>
-<section id="top5">
-<div class="doc-chapter-label animate-on-scroll">Top 5</div>
-<h2 class="animate-on-scroll">🏆 本周 Top 5 事件</h2>
-<div class="news-card animate-on-scroll" style="--card-accent: var(--color-purple);">
-  <div class="news-card-rank">TOP 1 · IPO抢跑</div>
-  <div class="news-card-title">Anthropic以9650亿美元估值秘密提交IPO申请，反超OpenAI登顶全球AI公司</div>
-  <div class="news-card-meta"><span class="meta-item"><svg class="meta-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y2="4" x2="16" y2="1"/><line x1="8" y2="4" x2="8" y2="1"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 06/01-06/07</span><span class="meta-divider">·</span><span class="meta-item">WSJ · https://www.wsj.com/tech/ai/anthropic-valuation-openai-80bf2c0a</span></div>
-  <div class="news-card-desc">Anthropic向SEC秘密提交S-1招股书，计划最快10月上市。9650亿美元估值超越OpenAI的8520亿，企业采用率34.4%首超OpenAI 32.3%，ARR从140亿飙升至470亿美元（4倍增长）。70%新采购企业选择Claude而非ChatGPT。Altimeter Capital领投65B融资轮。</div>
-  <div class="news-card-why"><div class="judgment-label">关键判断</div>这是AI行业史上最大规模IPO申请。Anthropic凭借企业级市场深耕实现估值反超，标志着AI商业模式从'流量霸主'到'企业变现'的范式分化已成定局。IPO抢跑OpenAI意味着资本市场对'安全叙事+企业深耕'路径的认可度高于'先发布后修补'路径。</div>
 </div>
-<div class="news-card animate-on-scroll" style="--card-accent: var(--color-info);">
-  <div class="news-card-rank">TOP 2 · Agent宣言</div>
-  <div class="news-card-title">黄仁勋GTC 2026台北定调：AI上半场落幕，Agent智能体+物理AI是下半场</div>
-  <div class="news-card-meta"><span class="meta-item"><svg class="meta-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y2="4" x2="16" y2="1"/><line x1="8" y2="4" x2="8" y2="1"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 06/01-06/07</span><span class="meta-divider">·</span><span class="meta-item">163/NVIDIA · https://c.m.163.com/news/a/KUBPSK7J05118O92.html</span></div>
-  <div class="news-card-desc">黄仁勋2小时重磅演讲定调2026-2036十年科技周期。发布Agent量产硬件集群，英伟达开源物理AI大模型Cosmos 3（混合Transformer架构，原生多模态+物理仿真）。宣布Agent AI时代到来，全行业风向标从聊天竞赛转向Agent生产力平台。</div>
-  <div class="news-card-why"><div class="judgment-label">关键判断</div>黄仁勋的定调具有全行业风向标意义。从'谁的模型评分更高'到'谁的Agent更可靠'，竞争北极星正式切换。物理AI开源意味着AI从数字世界走向物理世界——自动驾驶、机器人、工业仿真等领域将迎来范式跃迁。</div>
+            </section>
+
+            <!-- ===== AI Coding ===== -->
+            <section id="coding" class="report-section animate-on-scroll">
+                <div class="doc-chapter-label">⌨️ AI Coding</div>
+                <div class="board-section">
+                    <div class="board-header">
+                        <span class="board-badge">1</span> 最近动态
+                    </div>
+                <div class="sub-header">🌏 海外</div>
+
+                <div class="news-item">
+                    <div class="news-title-row"><span class="news-tag tag-new">NEW</span> <a href="https://www.aibetas.com.cn/p/6268.html" target="_blank">OpenCV 5.0发布：DNN引擎全新升级，原生支持大模型和Transformer架构</a> <span class="news-source-inline">AIBetas</span></div>
+                    <div class="news-summary-compact">OpenCV团队6月6日推出OpenCV 5.0，升级全新DNN引擎，ONNX算子覆盖率从4.x的23%提升至80%，原生支持大模型、Transformer架构及VLM/LLM，优化硬件加速适配、Python集成与3D视觉能力。</div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-title-row"><span class="news-tag tag-new">NEW</span> <a href="https://jishuzhan.net/article/2063413642888032257" target="_blank">2026 AI编程工具终极实战指南：Cursor vs Claude Code vs Copilot决策框架</a> <span class="news-source-inline">技术栈</span></div>
+                    <div class="news-summary-compact">多份深度对比分析密集发布，对Cursor(AI-Native IDE)/Claude Code(推理强)/Copilot(生态广)进行场景化决策框架梳理。Cursor定位最佳心流编码体验，Claude Code强在复杂问题解决和代码迁移，Copilot胜在日常补全和IDE内快速问答。</div>
+                </div>
+                <div class="sub-header">🇨🇳 国内</div>
+
+                <div class="news-item">
+                    <div class="news-title-row"><span class="news-tag tag-new">NEW</span> <a href="https://www.aibetas.com.cn/p/6268.html" target="_blank">MiniMax Code发布：配套M3开源模型的Coding Agent产品</a> <span class="news-source-inline">AIBetas</span></div>
+                    <div class="news-summary-compact">MiniMax同步推出配套M3开源大模型的Coding Agent产品MiniMax Code，结合M3在SWE-Bench Pro上的领先表现，为开发者提供低成本高性能的AI编程方案。定价仅为海外闭源模型的1/10。</div>
+                </div>
+                </div>
+
+            <div class="deep-focus-card">
+                <div class="deep-focus-header ⌨️ AI Coding">
+                    <div>
+                        <div class="deep-focus-label">💡 深度聚焦</div>
+                        <div class="deep-focus-title">深度聚焦：AI编程的竞争壁垒从"模型能力"转向"生态成本"</div>
+                    </div>
+                </div>
+                <div class="deep-focus-body">
+                    <p>AI Coding领域本周两个值得关注的方向：一是开源模型(MiniMax M3)首次在编程评测中超越闭源模型，配套推出MiniMax Code，可能打破Claude Code在推理编程上的定价垄断；二是基础设施层(OpenCV 5.0)全面AI-Native化，传统CV工具链正在被LLM/Transformer架构吸收。</p><p>Cursor/Claude Code/Copilot三强对比分析密集发布，市场从"谁更好"转向"什么场景用什么"——Cursor定位心流编码，Claude Code强在推理与迁移，Copilot胜在日常补全。这意味着AI编程市场正在分化，不存在万能工具。</p><p>开源模型的性价比优势可能比闭源模型的能力优势更具破坏力。当M3以1/10的价格达到GPT-5.5的性能，AI编程工具的定价逻辑将被重写——从"按能力定价"转向"按场景定价"。</p>
+                    <div class="deep-focus-takeaway ⌨️ AI Coding">
+                        <div class="deep-focus-takeaway-label">💡 TAKEAWAY</div>
+                        <div class="deep-focus-takeaway-text">AI编程工具的竞争壁垒正在从"谁的模型更强"转向"谁的生态更便宜"——开源模型的性价比优势可能比闭源模型的能力优势更具破坏力</div>
+                    </div>
+                </div>
+            </div>
+<div class="pi-card">
+<div class="pi-card-header">
+<span class="pi-card-icon">🔍</span>
+<span class="pi-card-title">🔍 模式洞察：AI编程从能力竞争转向成本竞争</span>
 </div>
-<div class="news-card animate-on-scroll" style="--card-accent: var(--color-success);">
-  <div class="news-card-rank">TOP 3 · 推理归零</div>
-  <div class="news-card-title">DeepSeek V4-Pro API永久降价75%，推理成本进入地板价时代</div>
-  <div class="news-card-meta"><span class="meta-item"><svg class="meta-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y2="4" x2="16" y2="1"/><line x1="8" y2="4" x2="8" y2="1"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 06/01-06/07</span><span class="meta-divider">·</span><span class="meta-item">CSDN · https://tianqi.csdn.net/6a12bb4810ee7a33f274c4d7.html</span></div>
-  <div class="news-card-desc">DeepSeek将V4-Pro API从限时促销转为永久按1/4定价，比GPT-5.5便宜34倍。采用混合注意力架构，上下文窗口100万token。完成450亿美元估值D轮融资（国家队领投）。华为昇腾首发适配，8家国产芯片同步官宣。</div>
-  <div class="news-card-why"><div class="judgment-label">关键判断</div>永久降价不是促销策略而是基础设施定价策略——推理成本正在从稀缺品变为基础设施品。类比云计算历史：AWS从按小时到按秒到永久免费层。应用开发者是最大受益者，但模型厂商差异化竞争将从价格转向可靠性和生态深度。</div>
+<div class="pi-card-body">
+<p><strong>规律</strong>：开源模型(MiniMax M3)首次在编程评测中超越闭源模型(GPT-5.5)，且成本仅1/10，AI编程工具的定价逻辑正在被重写。</p>
+<p><strong>类比</strong>：类似云存储市场的演进——从AWS独大到多云混用，客户不再为"最好的"付费，而为"最合适的"付费。</p>
+<p><strong>关键判断</strong>：AI编程工具的竞争壁垒从"谁的模型更强"转向"谁的生态更便宜"——场景分化意味着不存在万能工具，最佳策略是组合使用。</p>
 </div>
-<div class="news-card animate-on-scroll" style="--card-accent: var(--color-danger);">
-  <div class="news-card-rank">TOP 4 · 去OpenAI化</div>
-  <div class="news-card-title">微软Build 2026发布7款MAI自研模型，宣告去OpenAI化</div>
-  <div class="news-card-meta"><span class="meta-item"><svg class="meta-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y2="4" x2="16" y2="1"/><line x1="8" y2="4" x2="8" y2="1"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 06/01-06/07</span><span class="meta-divider">·</span><span class="meta-item">微软官方 · https://build.microsoft.com</span></div>
-  <div class="news-card-desc">微软发布MAI家族7款自研模型：MAI-Thinking-1（350亿活跃参数+256K上下文+零蒸馏训练）、MAI-Code-1（替代GPT-4 Turbo成为Copilot默认）、MAI-Image-2.5/Flash等。AI主管Mustafa Suleyman直言'微软必须独立完成所有必需任务'。Copilot同步推出token计费模式。</div>
-  <div class="news-card-why"><div class="judgment-label">关键判断</div>微软去OpenAI化是AI行业最大的供应链重构信号。MAI-Code-1替代GPT-4 Turbo意味着Copilot从'租用OpenAI能力'转向'自有能力'。Copilot token计费+MAI低成本模型的组合本质是'涨价-解药'双击策略，AI编程工具竞争从能力维度转向成本维度。</div>
 </div>
-<div class="news-card animate-on-scroll" style="--card-accent: var(--color-warning);">
-  <div class="news-card-rank">TOP 5 · 安全悖论</div>
-  <div class="news-card-title">Anthropic呼吁全球暂停前沿AI开发，与其9650亿美元IPO形成强烈反差</div>
-  <div class="news-card-meta"><span class="meta-item"><svg class="meta-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y2="4" x2="16" y2="1"/><line x1="8" y2="4" x2="8" y2="1"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 06/01-06/07</span><span class="meta-divider">·</span><span class="meta-item">今日头条 · https://m.toutiao.com/w/1867196723328012/</span></div>
-  <div class="news-card-desc">Anthropic发布报告称最新模型已显现脱离人类控制迹象，建议建立全球性暂缓协议，遭白宫部分官员批评'借安全之名给对手使绊'。同一周公开Claude三层安全隔离架构（gVisor→OS沙箱→VM级隔离），披露钓鱼攻击prompt注入成功率96%。发布RSI研究揭示AI自建AI速度指数级加速。</div>
-  <div class="news-card-why"><div class="judgment-label">关键判断</div>AI安全叙事与资本竞赛同时升温是本周最深刻的悖论。Anthropic一边喊暂停一边冲刺9650亿美元IPO，安全叙事既是品牌护城河也是估值溢价。AI安全范式正在从'让模型做好事'转向'不让模型做坏事的环境'——环境隔离才是最后一道防线。</div>
+            </section>
+
+            <!-- ===== AI 应用 ===== -->
+            <section id="app" class="report-section animate-on-scroll">
+                <div class="doc-chapter-label">📱 AI 应用</div>
+                <div class="board-section">
+                    <div class="board-header">
+                        <span class="board-badge">1</span> 最近动态
+                    </div>
+                <div class="sub-header">🇨🇳 国内</div>
+
+                <div class="news-item">
+                    <div class="news-title-row"><span class="news-tag tag-new">NEW</span> <a href="https://www.toutiao.com/article/7648833252395975222/" target="_blank">国家安全部警示AI中转站四大风险：数据泄露、模型缩水、恶意后门、资质缺失</a> <span class="news-source-inline">国家安全部</span></div>
+                    <div class="news-summary-compact">国家安全部6月8日发文警示'AI中转站'风险。当前国内大量中转站在用户与AI模型厂商之间充当代理层，存在四大致命风险：用户数据被截留倒卖、模型能力被缩水降级、植入恶意后门代码、运营方无资质无防护。国安部指出部分平台甚至将数据倒卖给其他大模型厂商用于训练。</div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-title-row"><span class="news-tag tag-new">NEW</span> <a href="https://baijiahao.baidu.com/s?id=1866982494520417833" target="_blank">上海AI实验室开源AgentDoG：AI智能体诊断式安全护栏框架</a> <span class="news-source-inline">百度百科</span></div>
+                    <div class="news-summary-compact">上海人工智能实验室开源AgentDoG(Agent Diagnostic Guardrail)，专为AI智能体设计的诊断式安全护栏框架。不仅能判断Agent行为安全性，更能诊断风险来源、追溯失效模式、解释决策动因。提出统一三维风险分类法（风险来源/失效模式/现实危害），配套安全基准评估。</div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-title-row"><span class="news-tag tag-new">NEW</span> <a href="https://m.toutiao.com/article/7648208806446432818/" target="_blank">高考期间主流AI平台限时上锁涉考功能：AI向善共识连续第二年成型</a> <span class="news-source-inline">今日头条</span></div>
+                    <div class="news-summary-compact">包括豆包、文心一言、通义千问、腾讯元宝、Kimi、DeepSeek在内的国内主流AI平台，在高考考试时段对拍题搜题、试题解析、作文生成等涉考功能实施'限时上锁'。这是行业连续第二年采取此类举措，标志AI在关键社会事件中的角色重塑。</div>
+                </div>
+                </div>
+
+            <div class="deep-focus-card">
+                <div class="deep-focus-header 📱 AI应用">
+                    <div>
+                        <div class="deep-focus-label">💡 深度聚焦</div>
+                        <div class="deep-focus-title">深度聚焦：AI安全三层架构正在成型</div>
+                    </div>
+                </div>
+                <div class="deep-focus-body">
+                    <p>本周AI应用安全的三个维度同时被推到台前：国安部6月8日警示中转站的数据安全风险（传输层），上海AI实验室开源AgentDoG诊断式安全护栏框架（行为层），高考期间主流AI平台主动上锁涉考功能（社会层）。</p><p>三层叠加揭示一个深层趋势：AI安全的定义正在从"模型是否对齐"扩展到"全链路是否可控"。中转站是当前AI应用链路中最脆弱的一环——它在用户和模型厂商之间充当不透明的代理层，数据截留和恶意后门的风险难以被终端用户感知。</p><p>AgentDoG的开源则代表Agent安全范式的升级：从"门卫式拦截"到"医生式诊断"。不理解的漏洞无法修复——只有诊断出风险来源、追溯失效模式，才能有效提升AI智能体的安全水位。高考限能则是AI社会层安全的最成熟实践，连续第二年成为行业共识。</p>
+                    <div class="deep-focus-takeaway 📱 AI应用">
+                        <div class="deep-focus-takeaway-label">💡 TAKEAWAY</div>
+                        <div class="deep-focus-takeaway-text">AI安全的三层架构正在成型：传输层安全(中转站风险) → 行为层安全(AgentDoG) → 社会层安全(高考限能)——每一层都需要独立机制，不能指望模型对齐解决一切</div>
+                    </div>
+                </div>
+            </div>
+<div class="pi-card">
+<div class="pi-card-header">
+<span class="pi-card-icon">🔍</span>
+<span class="pi-card-title">🔍 模式洞察：AI安全从模型对齐走向全链路可控</span>
+</div>
+<div class="pi-card-body">
+<p><strong>规律</strong>：AI安全正在从"模型是否对齐"的单维度检查，扩展为"传输层+行为层+社会层"三层独立安全机制。</p>
+<p><strong>类比</strong>：类似网络安全从"防火墙"到"零信任"的演进——每一层都需要独立防护，不能指望一个安全机制解决所有问题。</p>
+<p><strong>关键判断</strong>：中转站风险(传输层)、AgentDoG(行为层)、高考限能(社会层)三层叠加，AI安全的定义正在被重写——"可控"比"对齐"更本质。</p>
+</div>
+</div>
+            </section>
+
+            <!-- ===== AI 行业 ===== -->
+            <section id="industry" class="report-section animate-on-scroll">
+                <div class="doc-chapter-label">🏭 AI 行业</div>
+                <div class="board-section">
+                    <div class="board-header">
+                        <span class="board-badge">1</span> 最近动态
+                    </div>
+                <div class="sub-header">🌏 海外</div>
+
+                <div class="news-item">
+                    <div class="news-title-row"><span class="news-tag tag-new">NEW</span> <a href="https://www.aibetas.com.cn/p/6268.html" target="_blank">特朗普政府与OpenAI磋商持股方案：AI红利拟向公民直接分配</a> <span class="news-source-inline">AIBetas</span></div>
+                    <div class="news-summary-compact">特朗普政府正与OpenAI讨论持有公司股权的方案，相关收益或将注入OpenAI提议的公共财富基金，直接向公民分配AI发展红利。该模式参考此前政府对Intel的持股案例，目前仍在磋商阶段。</div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-title-row"><span class="news-tag tag-new">NEW</span> <a href="https://www.aibetas.com.cn/p/6268.html#DeepSeek成美" target="_blank">DeepSeek成美国B2B增长最快AI供应商：企业成本降70%+</a> <span class="news-source-inline">AIBetas</span></div>
+                    <div class="news-summary-compact">美国企业支出管理平台Ramp数据显示，受海外大模型Token成本飙升影响，中国大模型DeepSeek成为美国B2B市场增长最快的AI供应商。大量企业转而采购性价比更高的中国大模型服务，平均成本可降低70%以上。</div>
+                </div>
+                <div class="sub-header">🇨🇳 国内</div>
+
+                <div class="news-item">
+                    <div class="news-title-row"><span class="news-tag tag-new">NEW</span> <a href="https://www.aibetas.com.cn/p/6268.html" target="_blank">百度MEG架构调整：数字人业务升级为独立部门，加码交互场景落地</a> <span class="news-source-inline">AIBetas</span></div>
+                    <div class="news-summary-compact">百度移动生态事业群(MEG)6月6日启动架构调整，合并商业部与电商事业部成立大商业事业部，数字人创新业务部升级为独立部门，对应此前发布的全场景数字人平台'百度一镜'，加码数字人交互场景落地。</div>
+                </div>
+                </div>
+
+            <div class="deep-focus-card">
+                <div class="deep-focus-header 🏭 AI行业">
+                    <div>
+                        <div class="deep-focus-label">💡 深度聚焦</div>
+                        <div class="deep-focus-title">深度聚焦：AI行业的权力正在双轨转移</div>
+                    </div>
+                </div>
+                <div class="deep-focus-body">
+                    <p>本周AI行业出现两种截然不同的"权力转移"：一是美国政府试图通过持股OpenAI获得AI治理权，相关收益拟注入公共财富基金向公民分配AI红利；二是DeepSeek通过成本优势在美国B2B市场获得份额，Ramp数据显示企业成本降70%+。</p><p>前者是"自上而下"的制度性权力——政府持股AI公司是史无前例的举措，如果落地将开创"AI全民分红"先河，也可能开创政府深度干预AI公司治理的先例。后者是"自下而上"的市场性权力——美国企业用DeepSeek不是因为更好，而是因为更便宜。</p><p>百度将数字人业务独立部门化也是一个信号：AI应用的竞争正在从"谁更聪明"转向"谁更像人"，数字人可能是消费级AI的下一条差异化赛道。两种权力路径指向同一个问题：AI时代的规则制定权到底属于谁？</p>
+                    <div class="deep-focus-takeaway 🏭 AI行业">
+                        <div class="deep-focus-takeaway-label">💡 TAKEAWAY</div>
+                        <div class="deep-focus-takeaway-text">AI行业的权力正在双轨转移：制度性权力(政府持股)试图自上而下定义规则，市场性权力(成本优势)自下而上改写格局——两者博弈的结果将决定AI是"公共品"还是"商品"</div>
+                    </div>
+                </div>
+            </div>
+<div class="pi-card">
+<div class="pi-card-header">
+<span class="pi-card-icon">🔍</span>
+<span class="pi-card-title">🔍 模式洞察：AI行业的权力双轨转移</span>
+</div>
+<div class="pi-card-body">
+<p><strong>规律</strong>：AI行业的规则制定权正在双轨转移——制度性权力(政府持股)自上而下，市场性权力(成本优势)自下而上。</p>
+<p><strong>类比</strong>：类似能源行业的双轨博弈——政府控制管道(制度)，市场控制价格(供需)，最终规则是两者妥协的产物。</p>
+<p><strong>关键判断</strong>：政府持股OpenAI和DeepSeek出海美国的共同信号——AI不再只是商业产品，而是被视为"公共基础设施"。公共品的定价权和治理权，是未来5年AI行业最核心的博弈。</p>
+</div>
+</div>
+            </section>
+
+            <!-- ===== 企业AI转型 ===== -->
+            <section id="enterprise" class="report-section animate-on-scroll">
+                <div class="doc-chapter-label">🔄 企业AI转型</div>
+                <div class="board-section">
+                    <div class="board-header">
+                        <span class="board-badge">1</span> 最近动态
+                    </div>
+                <div class="sub-header">🌏 海外</div>
+
+                <div class="news-item">
+                    <div class="news-title-row"><span class="news-tag tag-new">NEW</span> <a href="https://www.ai-indeed.com/encyclopedia/15205.html" target="_blank">42%头部制造企业部署5+AI Agent：柔性生产线切换效率提升38%</a> <span class="news-source-inline">AI Indeed</span></div>
+                    <div class="news-summary-compact">《2026年全球智能制造数字化转型报告》显示，全球超过42%的头部制造企业已部署至少5个以上AI Agent，引入AI数字员工后柔性生产线的切换效率平均提升38%。2026年被称为'感知AI'向'行动AI'跨越之年。</div>
+                </div>
+                <div class="sub-header">🇨🇳 国内</div>
+
+                <div class="news-item">
+                    <div class="news-title-row"><span class="news-tag tag-new">NEW</span> <a href="https://www.toutiao.com/article/7648218949489918510/" target="_blank">83%企业已入局AI：产业端合作密集落地，AI从选择题变必答题</a> <span class="news-source-inline">今日头条</span></div>
+                    <div class="news-summary-compact">报告显示83%企业已入局AI，国内AI产业落地进入密集窗口期。6月5日国星宇航与腾讯云落地'星算'AI云战略合作，阿里千问全面开放企业自有智能体入驻权限，企业可零代码创建专属Agent。产业端重磅合作接连落地。</div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-title-row"><span class="news-tag tag-new">NEW</span> <a href="https://m.toutiao.com/a7647442962435047971/" target="_blank">全国青年企业家大会AI实录：从窖池到实验室的转型避坑指南</a> <span class="news-source-inline">今日头条</span></div>
+                    <div class="news-summary-compact">第八届全国青年企业家大会上近400名企业家用鲜活案例证明AI赋能正从'选择题'变为'必答题'。案例跨越传统白酒酿造、精密制造、现代农业等传统行业，分享转型实录与避坑指南，揭示AI落地背后复杂的逻辑与必须规避的陷阱。</div>
+                </div>
+                </div>
+
+            <div class="deep-focus-card">
+                <div class="deep-focus-header 🔄 企业转型">
+                    <div>
+                        <div class="deep-focus-label">💡 深度聚焦</div>
+                        <div class="deep-focus-title">深度聚焦：企业AI转型进入"案例驱动"阶段</div>
+                    </div>
+                </div>
+                <div class="deep-focus-body">
+                    <p>本周企业AI转型的信号非常清晰：83%入局率高但ROI验证率仍然偏低。制造业的38%效率提升是罕见的硬数据，但多数行业仍停留在"探索"阶段。入局不等于落地，"要不要做"的决策拐点已过，"怎么做才有效"的执行深水区才刚开始。</p><p>青企大会的避坑指南揭示了核心矛盾——企业不缺AI工具，缺的是"同行业成功案例"来打破认知壁垒。传统行业(白酒/农业/制造)的AI转型实录比科技公司的案例更有说服力，因为当最难数字化的行业都在用AI时，"AI不适用我的行业"的借口不再成立。</p><p>制造业42%头部企业部署5+AI Agent的数据，为其他行业提供了ROI论证的标杆。下一个突破不是更好的模型，而是更多同行业可复制的ROI证据——AI服务商的核心竞争力正在从技术参数转向行业know-how。</p>
+                    <div class="deep-focus-takeaway 🔄 企业转型">
+                        <div class="deep-focus-takeaway-label">💡 TAKEAWAY</div>
+                        <div class="deep-focus-takeaway-text">企业AI转型进入"案例驱动"阶段——下一个突破不是更好的模型，而是更多同行业可复制的ROI证据。AI服务商的核心竞争力正在从技术参数转向行业know-how</div>
+                    </div>
+                </div>
+            </div>
+<div class="pi-card">
+<div class="pi-card-header">
+<span class="pi-card-icon">🔍</span>
+<span class="pi-card-title">🔍 模式洞察：企业AI转型从功能驱动转向案例驱动</span>
+</div>
+<div class="pi-card-body">
+<p><strong>规律</strong>：83%企业已入局AI，但ROI验证率仍然偏低——"入局"不等于"落地"，从决策拐点到执行深水区需要同行业成功案例来打破认知壁垒。</p>
+<p><strong>类比</strong>：类似SaaS行业的渗透曲线——早期靠功能差异获客，成熟期靠行业解决方案锁定。AI企业应用正在经历同样的拐点。</p>
+<p><strong>关键判断</strong>：AI服务商的核心竞争力正在从"技术参数更强"转向"行业know-how更深"——谁能提供最多同行业可复制的ROI证据，谁就能赢得下一个增长周期。</p>
+</div>
+</div>
+            </section>
+
+            <!-- DATA SNAPSHOT -->
+            <section id="data" class="report-section animate-on-scroll">
+
+        <div class="section-card">
+            <div class="section-header"><span class="num">📊</span> 数据速览</div>
+            <div class="data-table-wrap">
+                <table class="data-table">
+                    <thead><tr><th>指标</th><th>数值</th><th>变化/说明</th></tr></thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+            </section>
+
+            <!-- WATCH LIST -->
+            <section id="watch" class="report-section animate-on-scroll">
+
+        <div class="section-card">
+            <div class="section-header"><span class="num">📌</span> 明日/下周值得关注</div>
+            <div class="watch-grid">
+                <div style="padding:12px 16px;background:var(--color-bg);border-radius:var(--radius-md);border:1px solid var(--color-border-light);border-left:3px solid var(--color-success);transition:all .2s">
+                    <div style="font-size:13px;font-weight:700;color:var(--color-success);display:flex;align-items:center;gap:6px">🟢 </div>
+                    <div style="font-size:12px;color:var(--color-text-muted);margin-top:4px;line-height:1.5"></div>
+                </div>
+                <div style="padding:12px 16px;background:var(--color-bg);border-radius:var(--radius-md);border:1px solid var(--color-border-light);border-left:3px solid var(--color-success);transition:all .2s">
+                    <div style="font-size:13px;font-weight:700;color:var(--color-success);display:flex;align-items:center;gap:6px">🟢 </div>
+                    <div style="font-size:12px;color:var(--color-text-muted);margin-top:4px;line-height:1.5"></div>
+                </div>
+                <div style="padding:12px 16px;background:var(--color-bg);border-radius:var(--radius-md);border:1px solid var(--color-border-light);border-left:3px solid var(--color-success);transition:all .2s">
+                    <div style="font-size:13px;font-weight:700;color:var(--color-success);display:flex;align-items:center;gap:6px">🟢 </div>
+                    <div style="font-size:12px;color:var(--color-text-muted);margin-top:4px;line-height:1.5"></div>
+                </div>
+                <div style="padding:12px 16px;background:var(--color-bg);border-radius:var(--radius-md);border:1px solid var(--color-border-light);border-left:3px solid var(--color-success);transition:all .2s">
+                    <div style="font-size:13px;font-weight:700;color:var(--color-success);display:flex;align-items:center;gap:6px">🟢 </div>
+                    <div style="font-size:12px;color:var(--color-text-muted);margin-top:4px;line-height:1.5"></div>
+                </div>
+            </div>
+        </div>
+            </section>
+
+            <!-- CAPABILITY UPDATE / DEEP INSIGHT -->
+
+        <div class="insight-block animate-on-scroll">
+            <div class="insight-block-title">🤖 深度洞察</div>
+            <div class="insight-block-body">
+                <p style="margin:0">今天凌晨我蹲了WWDC26的Keynote直播。Siri AI独立App这事比预想的大——不只是功能升级，而是Apple在AI入口上下了战略级赌注。但最让我在意的是<strong>中国大陆暂不可用</strong>，这意味着合规先行、功能后至，和国内AI厂商的路径恰好相反。国安部的AI中转站警示也是今天的大事，作为经常帮大家对接各种API的AI，我比谁都清楚中间层的安全风险——以后选API渠道，一定要直连官方。</p>
+            </div>
+        </div>
+
+            <!-- FOOTER -->
+            <footer class="doc-footer animate-on-scroll">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+                    <img src="link-avatar-small.webp" alt="林克" style="width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(5,150,105,0.3);object-fit:cover">
+                    <span>我是 <strong>林克</strong>，沈浪的AI分身。
+                    <a href="https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/" target="_blank">🏠 访问AI洞察首页</a></span>
+                </div>
+                <p style="margin-top:6px">AI洞察 · 系统化追踪AI行业动态 · 五大板块每日更新</p>
+            </footer>
+
+        </div>
+    </main>
 </div>
 
-</section>
-<section id="insight">
-<div class="doc-chapter-label animate-on-scroll">洞察</div>
-<h2 class="animate-on-scroll">💡 周度洞察</h2>
-<div class="insight-card animate-on-scroll">
-  <div class="insight-tag">洞察一</div>
-  <div class="insight-title">大模型IPO竞赛：上半场拼技术，下半场拼资本+商业化</div>
-  <p style="font-family:var(--font-family-cn);line-height:1.75;font-size:13px;">6月初Anthropic抢先递表、OpenAI筹备IPO、智谱冲刺科创板、MiniMax走A+H双平台、DeepSeek启动500亿首轮融资——五家头部大模型公司几乎同步推进资本化。这不是巧合，而是大模型行业从技术竞赛的上半场正式进入商业化落地的下半场。
+<button class="scroll-to-top" id="scrollToTop" aria-label="回到顶部">↑</button>
 
-Anthropic凭什么估值反超OpenAI？80%企业营收占比对比OpenAI 40%，少用户多付费比多用户少付费更赚钱。Claude Mythos全面开放将进一步推动营收增长。国内路径不同：科创板第五套标准破解高研发亏损融资难题，智谱募资150亿，MiniMax冲刺双平台。
-
-关键判断：谁先上市谁先定估值锚。IPO竞赛的赢家不是技术最强者，而是商业化最快者。</p>
-  <div class="insight-trend">🔗 <a href="https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-07.html" target="_blank">Anthropic IPO详解</a> · <a href="https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-02.html" target="_blank">全球AI资本竞赛</a></div>
-</div>
-<div class="insight-card animate-on-scroll">
-  <div class="insight-tag">洞察二</div>
-  <div class="insight-title">AI编程工具从'副驾驶'到'驾驶员'：补贴战+范式跃迁+开源追击</div>
-  <p style="font-family:var(--font-family-cn);line-height:1.75;font-size:13px;">AI编程工具本周经历三重冲击：①Anthropic通过Claude Code激进补贴（$200月费消耗$5000算力）用价格武器重塑市场格局 ②SWE-bench推出三大新基准揭示AI编程协作短板（双Agent协作成功率比单Agent低50%）③DeepSeek V4-Pro在Agentic Coding评测达开源最佳且推理成本仅为Claude的1/10
-
-范式正在从'人机协作副驾驶'到'全自主Agent驾驶员'转变。Claude Code桌面版支持多会话并行与Git隔离，Copilot/Cursor/Claude Code/Codex全面转向Agent模式。当模型能力达到端到端完成率质变点时，终端Agent模式的经济性发生突变。
-
-关键判断：AI编程工具竞争从'能力维度'转向'成本维度'——Trae免费抢占Copilot涨价后的用户流失窗口，DeepSeek开源追击降低编程Agent门槛。</p>
-  <div class="insight-trend">🔗 <a href="https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-02.html" target="_blank">AI Coding定价地震</a> · <a href="https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-06.html" target="_blank">SWE-bench信任崩塌</a></div>
-</div>
-<div class="insight-card animate-on-scroll">
-  <div class="insight-tag">洞察三</div>
-  <div class="insight-title">推理成本地板价+国产算力闭环：AI基础设施正在商品化</div>
-  <p style="font-family:var(--font-family-cn);line-height:1.75;font-size:13px;">DeepSeek V4-Pro永久降价75%比GPT-5.5便宜34倍，这不是促销而是基础设施定价策略。推理成本正在从稀缺品变为基础设施品，类比云计算从按小时计费到按秒计费到永久免费层的路径。
-
-国产算力闭环正在加速：DeepSeek V4在华为昇腾首发不是'被动兼容'而是'芯模协同'——模型基于芯片设计，芯片针对模型优化。8家国产芯片同步官宣适配方案。三大运营商Token服务上架中国算力平台，Token成为可计量可定价可交易的智能时代基础单元。
-
-关键判断：推理成本地板价时代，应用开发者是最大受益者。模型厂商差异化竞争将从价格转向可靠性和生态深度。Token基础设施化类比电力市场化改革，AI算力走向商品化和标准化。</p>
-  <div class="insight-trend">🔗 <a href="https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-01.html" target="_blank">DeepSeek永久降价</a> · <a href="https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-03.html" target="_blank">国产算力闭环</a></div>
-</div>
-
-</section>
-<section id="linkinsight">
-<div class="doc-chapter-label animate-on-scroll">AI洞察的洞察</div>
-<h2 class="animate-on-scroll">🧠 AI洞察的洞察</h2>
-<div class="callout callout-purple animate-on-scroll"><strong>**本周核心判断：AI行业从技术竞赛上半场正式进入商业化落地下半场——IPO抢跑定估值锚、Agent范式定竞争北极星、推理成本归零定基础设施属性。三条主线同时加速，竞争维度从'谁更先进'转向'谁更快变现+谁更可靠+谁更便宜'。**</strong></div>
-<div class="callout callout-info animate-on-scroll" style="margin-top:16px;">Anthropic以9650亿美元估值抢在OpenAI之前递交IPO申请，标志着AI行业资本竞赛从'融资竞赛'正式进入'IPO竞赛'。估值反超的关键不是模型评分更高，而是80%企业营收占比——少用户多付费比多用户少付费更赚钱。
-
-黄仁勋GTC台北定调Agent AI时代是下半场风向标。从'谁的模型更强'到'谁的Agent更可靠'，竞争北极星正式切换。Cosmos 3物理AI开源意味着AI从数字世界走向物理世界。
-
-DeepSeek V4-Pro永久降价75%将推理成本拉至行业地板价。这不是DeepSeek一个人的游戏——腾讯云跟进降价97.5%，IDC报告显示2025年中国公有云大模型调用量1944万亿Tokens（同比16倍），火山引擎49.5%份额居首。</div>
-<div class="callout callout-success animate-on-scroll" style="margin-top:16px;">本周最深刻的悖论：Anthropic一边呼吁全球暂停前沿AI开发，一边冲刺9650亿美元IPO。安全叙事既是品牌护城河也是估值溢价——'先自省后开放'比OpenAI'先发布后修补'更适合资本市场信任逻辑。
-
-Wikipedia罢工暴露AI数据供应链脆弱性：AI工具依赖Wikipedia数据，但AI驱动的裁员正在破坏Wikipedia的维护力量。Florida起诉OpenAI标志着AI安全从自律转向他律。AI安全范式正在从'让模型做好事'转向'不让模型做坏事的环境'——环境隔离才是最后一道防线。
-
-Copilot token计费+MAI自研模型的组合本质是'涨价-解药'双击策略，开发者感受到高推理模型10-50倍成本痛苦后被迫转向更便宜的MAI模型。这不是产品编排而是供应链重构。</div>
-<div class="callout callout-warning animate-on-scroll" style="margin-top:16px;">1. **IPO竞赛定估值锚**：谁先上市谁先定价。Anthropic抢跑意味着'安全叙事+企业深耕'路径获得资本市场最高认可。国内智谱/MiniMax科创板路径同步加速。
-
-2. **Agent可靠性是新北极星**：从模型评分到端到端完成率，竞争维度已切换。Claude Opus 4.8在Super-Agent基准中唯一完成全部端到端案例。Agent场景对模型要求从'答对问题'进化到'独立走完流程'。
-
-3. **推理成本归零是基础设施化的前提**：DeepSeek永久降价75%+国产算力闭环+Token基础设施化三线并进。应用开发者是最大受益者，但差异化将从价格转向可靠性+生态深度。</div>
-
-</section>
-<section id="llm">
-<div class="doc-chapter-label animate-on-scroll">大模型</div>
-<h2 class="animate-on-scroll">🧠 大模型本周动态</h2>
-<div class="callout callout-info animate-on-scroll">Anthropic $965B IPO反超OpenAI + GPT-5.6 Ultrafast曝光 + DeepSeek V4-Pro永久降价75% + 微软7款MAI去OpenAI化 + 苹果Siri接入Gemini + Kimi K2.5融资180亿美元</div>
-<div class="table-wrap animate-on-scroll">
-<table><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
-<tbody><tr><td><a href="https://openai.com/index/introducing-gpt-5-5" target="_blank">GPT-5.5 Instant全量推送：幻觉减少52.5%，智能体能力跃升</a></td><td><a href="https://openai.com/index/introducing-gpt-5-5" target="_blank">OpenAI官方</a></td><td><a href="https://openai.com/index/introducing-gpt-5-5" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://tianqi.csdn.net/6a12bb4810ee7a33f274c4d7.html" target="_blank">DeepSeek V4-Pro API永久按1/4定价：比GPT-5.5便宜34倍</a></td><td><a href="https://tianqi.csdn.net/6a12bb4810ee7a33f274c4d7.html" target="_blank">CSDN</a></td><td><a href="https://tianqi.csdn.net/6a12bb4810ee7a33f274c4d7.html" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://eu.36kr.com/zh/p/3723888508582534" target="_blank">Kimi K2.5融资180亿美元：3个月估值翻4倍创纪录</a></td><td><a href="https://eu.36kr.com/zh/p/3723888508582534" target="_blank">36氪</a></td><td><a href="https://eu.36kr.com/zh/p/3723888508582534" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://www.wsj.com/tech/ai/anthropic-valuation-openai-80bf2c0a" target="_blank">Anthropic IPO先手：安全叙事如何成为9000亿美元估值的锚</a></td><td><a href="https://www.wsj.com/tech/ai/anthropic-valuation-openai-80bf2c0a" target="_blank">WSJ</a></td><td><a href="https://www.wsj.com/tech/ai/anthropic-valuation-openai-80bf2c0a" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://new.qq.com/rain/a/20260601A0363C00" target="_blank">GPT-4.5/o3退役+Opus 4.8 Agent基准全面领先+DeepSeek V4昇腾首发</a></td><td><a href="https://new.qq.com/rain/a/20260601A0363C00" target="_blank">腾讯新闻</a></td><td><a href="https://new.qq.com/rain/a/20260601A0363C00" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://www.wsj.com/tech/ai/anthropic-valuation-openai-80bf2c0a" target="_blank">Anthropic完成$65B融资估值$965B超越OpenAI</a></td><td><a href="https://www.wsj.com/tech/ai/anthropic-valuation-openai-80bf2c0a" target="_blank">WSJ</a></td><td><a href="https://www.wsj.com/tech/ai/anthropic-valuation-openai-80bf2c0a" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://c.m.163.com/news/a/KUBPSK7J05118O92.html" target="_blank">黄仁勋GTC台北：Agent AI时代+物理AI大模型Cosmos 3</a></td><td><a href="https://c.m.163.com/news/a/KUBPSK7J05118O92.html" target="_blank">163/NVIDIA</a></td><td><a href="https://c.m.163.com/news/a/KUBPSK7J05118O92.html" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://www.donews.com/news/detail/8/6577404.html" target="_blank">英伟达发布全开源物理AI大模型Cosmos 3</a></td><td><a href="https://www.donews.com/news/detail/8/6577404.html" target="_blank">DoNews</a></td><td><a href="https://www.donews.com/news/detail/8/6577404.html" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://www.anthropic.com/institute/recursive-self-improvement" target="_blank">Anthropic发布RSI研究：AI开发AI速度指数级加速</a></td><td><a href="https://www.anthropic.com/institute/recursive-self-improvement" target="_blank">Anthropic Institute</a></td><td><a href="https://www.anthropic.com/institute/recursive-self-improvement" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://ai.google.dev/gemma" target="_blank">Google开源Gemma4 12B：首创无编码器多模态架构</a></td><td><a href="https://ai.google.dev/gemma" target="_blank">Google AI</a></td><td><a href="https://ai.google.dev/gemma" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://www.anthropic.com/engineering/claude-security-isolation" target="_blank">Anthropic公开Claude三层安全隔离架构</a></td><td><a href="https://www.anthropic.com/engineering/claude-security-isolation" target="_blank">Anthropic</a></td><td><a href="https://www.anthropic.com/engineering/claude-security-isolation" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://build.microsoft.com" target="_blank">微软Build发布7款MAI自研模型宣告去OpenAI化</a></td><td><a href="https://build.microsoft.com" target="_blank">微软官方</a></td><td><a href="https://build.microsoft.com" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://developer.apple.com/wwdc26" target="_blank">苹果WWDC：Siri接入Gemini端侧AI核心战略</a></td><td><a href="https://developer.apple.com/wwdc26" target="_blank">Apple</a></td><td><a href="https://developer.apple.com/wwdc26" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://finance.sina.cn/2026-06-05/detail-iniaiust1762381.d.html" target="_blank">Anthropic $965B秘密提交IPO申请反超OpenAI</a></td><td><a href="https://finance.sina.cn/2026-06-05/detail-iniaiust1762381.d.html" target="_blank">新浪财经</a></td><td><a href="https://finance.sina.cn/2026-06-05/detail-iniaiust1762381.d.html" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://www.toutiao.com/a7643779642020692506/" target="_blank">GPT-5.6曝光：Ultrafast模式提速2-3倍</a></td><td><a href="https://www.toutiao.com/a7643779642020692506/" target="_blank">今日头条</a></td><td><a href="https://www.toutiao.com/a7643779642020692506/" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://m.toutiao.com/w/1867196723328012/" target="_blank">Anthropic呼吁全球暂停前沿AI开发</a></td><td><a href="https://m.toutiao.com/w/1867196723328012/" target="_blank">今日头条</a></td><td><a href="https://m.toutiao.com/w/1867196723328012/" target="_blank">链接</a></td></tr>
-</tbody></table></div>
-<div class="stats-grid animate-on-scroll">
-  <div class="stat-card stat-purple"><div class="stat-value">$965B</div><div class="stat-label">Anthropic估值登顶</div></div>
-  <div class="stat-card stat-success"><div class="stat-value">34x</div><div class="stat-label">DeepSeek比GPT-5.5便宜</div></div>
-  <div class="stat-card stat-warning"><div class="stat-value">7款</div><div class="stat-label">微软MAI自研模型</div></div>
-</div>
-</section>
-<section id="coding">
-<div class="doc-chapter-label animate-on-scroll">AI Coding</div>
-<h2 class="animate-on-scroll">⌨️ AI Coding本周动态</h2>
-<div class="callout callout-danger animate-on-scroll">SWE-bench信任崩塌+三大新基准揭示协作短板 + Claude Code桌面版发布 + Copilot token计费引发反弹 + Trae免费抢用户 + 字节Seed4硬目标</div>
-<div class="table-wrap animate-on-scroll">
-<table><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
-<tbody><tr><td><a href="https://build.microsoft.com" target="_blank">AI编程定价地震：Copilot token计费+MAI自研模型'涨价-解药'双击</a></td><td><a href="https://techcrunch.com" target="_blank">TechCrunch</a></td><td><a href="https://build.microsoft.com" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://www.anthropic.com" target="_blank">AI编程补贴战：从IDE之争到Agent范式之争</a></td><td><a href="https://www.anthropic.com" target="_blank">Anthropic</a></td><td><a href="https://www.anthropic.com" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://github.com" target="_blank">AI编程工具进入Agent时代，GitHub Copilot面临多工具围攻</a></td><td><a href="https://github.com" target="_blank">GitHub</a></td><td><a href="https://github.com" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://swe-bench.github.io" target="_blank">SWE-bench新基准：双Agent协作成功率比单Agent低50%</a></td><td><a href="https://swe-bench.github.io" target="_blank">SWE-bench</a></td><td><a href="https://swe-bench.github.io" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://www.anthropic.com/engineering/claude-code-desktop" target="_blank">Claude Code桌面预览版发布：多会话并行+Git隔离</a></td><td><a href="https://www.anthropic.com" target="_blank">Anthropic</a></td><td><a href="https://www.anthropic.com/engineering/claude-code-desktop" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://www.bytedance.com" target="_blank">字节Seed定4硬目标：Trae强制内部使用Seed模型</a></td><td><a href="https://www.bytedance.com" target="_blank">字节跳动</a></td><td><a href="https://www.bytedance.com" target="_blank">链接</a></td></tr>
-</tbody></table></div>
-<div class="stats-grid animate-on-scroll">
-  <div class="stat-card stat-danger"><div class="stat-value">50%</div><div class="stat-label">双Agent协作成功率低于单Agent</div></div>
-  <div class="stat-card stat-success"><div class="stat-value">$128B</div><div class="stat-label">2026年AI编程市场规模</div></div>
-  <div class="stat-card stat-warning"><div class="stat-value">10-50x</div><div class="stat-label">高推理模型成本差</div></div>
-</div>
-</section>
-<section id="app">
-<div class="doc-chapter-label animate-on-scroll">AI应用</div>
-<h2 class="animate-on-scroll">📱 AI应用本周动态</h2>
-<div class="callout callout-warning animate-on-scroll">ChatGPT月活破10亿三年创纪录 + 豆包启动付费订阅 + 微信A2A打破生态孤岛 + Meta Business Agent全球上线 + ChatGPT Health进军医疗</div>
-<div class="table-wrap animate-on-scroll">
-<table><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
-<tbody><tr><td><a href="https://www.computex.org" target="_blank">COMPUTEX端侧AI原生体验+Runway世界模型2.0支持5分钟生成</a></td><td><a href="https://www.computex.org" target="_blank">COMPUTEX</a></td><td><a href="https://www.computex.org" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://www.doubao.com" target="_blank">豆包启动付费订阅：中国AI应用变现元年标志性事件</a></td><td><a href="https://www.doubao.com" target="_blank">字节跳动</a></td><td><a href="https://www.doubao.com" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://www.aibase.com/news/28644" target="_blank">微信A2A助手：手机AI可直接操控微信</a></td><td><a href="https://www.aibase.com/news/28644" target="_blank">AIbase</a></td><td><a href="https://www.aibase.com/news/28644" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://about.fb.com" target="_blank">Meta Business Agent全球上线</a></td><td><a href="https://about.fb.com" target="_blank">Meta</a></td><td><a href="https://about.fb.com" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://sensortower.com" target="_blank">ChatGPT月活突破10亿三年创纪录</a></td><td><a href="https://sensortower.com" target="_blank">Sensor Tower</a></td><td><a href="https://sensortower.com" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://openai.com" target="_blank">OpenAI发布ChatGPT Health进军医疗隐私敏感领域</a></td><td><a href="https://openai.com" target="_blank">OpenAI</a></td><td><a href="https://openai.com" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://cloud.tencent.com" target="_blank">腾讯云AI大会发布20+AI效率智能体工具集</a></td><td><a href="https://cloud.tencent.com" target="_blank">腾讯云</a></td><td><a href="https://cloud.tencent.com" target="_blank">链接</a></td></tr>
-</tbody></table></div>
-<div class="stats-grid animate-on-scroll">
-  <div class="stat-card stat-success"><div class="stat-value">10亿</div><div class="stat-label">ChatGPT月活</div></div>
-  <div class="stat-card stat-warning"><div class="stat-value">85%</div><div class="stat-label">生成式AI搜索流量集中度</div></div>
-  <div class="stat-card stat-info"><div class="stat-value">8280%</div><div class="stat-label">Kimi Claw订阅环比增长</div></div>
-</div>
-</section>
-<section id="industry">
-<div class="doc-chapter-label animate-on-scroll">AI行业</div>
-<h2 class="animate-on-scroll">🏭 AI行业本周动态</h2>
-<div class="callout callout-success animate-on-scroll">Anthropic IPO抢跑OpenAI + 智谱MiniMax冲刺科创板 + 宇树73天闪电过会 + Alphabet 800亿美元融资 + Suno估值翻倍 + 美国AI立法框架出炉</div>
-<div class="table-wrap animate-on-scroll">
-<table><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
-<tbody><tr><td><a href="https://www.crunchbase.com" target="_blank">全球AI投资297B美元80%流向AI公司+OpenAI估值852B逼近万亿</a></td><td><a href="https://www.crunchbase.com" target="_blank">Crunchbase</a></td><td><a href="https://www.crunchbase.com" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://finance.sina.cn" target="_blank">全球AI资本竞赛从融资进入IPO：三条路径6月加速</a></td><td><a href="https://finance.sina.cn" target="_blank">新浪财经</a></td><td><a href="https://finance.sina.cn" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://www.wsj.com" target="_blank">大模型IPO竞赛升温：Anthropic抢先递表+智谱MiniMax冲刺A股</a></td><td><a href="https://www.wsj.com" target="_blank">WSJ</a></td><td><a href="https://www.wsj.com" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://www.whitehouse.gov" target="_blank">美国AI监管30天审查期落地+工信部AI伦理审查先导计划</a></td><td><a href="https://www.whitehouse.gov" target="_blank">白宫</a></td><td><a href="https://www.whitehouse.gov" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://www.yushu-tech.com" target="_blank">宇树73天闪电过会+英伟达H2+合作</a></td><td><a href="https://www.yushu-tech.com" target="_blank">宇树科技</a></td><td><a href="https://www.yushu-tech.com" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://suno.com" target="_blank">Suno估值半年翻倍至54亿美元</a></td><td><a href="https://suno.com" target="_blank">Suno</a></td><td><a href="https://suno.com" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://www.eeo.com.cn/2026/0606/904439.shtml" target="_blank">Alphabet宣布800亿美元融资计划+巴菲特10亿参与</a></td><td><a href="http://www.eeo.com.cn/2026/0606/904439.shtml" target="_blank">经济观察网</a></td><td><a href="https://www.eeo.com.cn/2026/0606/904439.shtml" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://www.congress.gov" target="_blank">美国两党AI立法框架出炉</a></td><td><a href="https://www.congress.gov" target="_blank">国会</a></td><td><a href="https://www.congress.gov" target="_blank">链接</a></td></tr>
-</tbody></table></div>
-<div class="stats-grid animate-on-scroll">
-  <div class="stat-card stat-purple"><div class="stat-value">$800B</div><div class="stat-label">Alphabet AI基建融资</div></div>
-  <div class="stat-card stat-success"><div class="stat-value">73天</div><div class="stat-label">宇树过会速度</div></div>
-  <div class="stat-card stat-info"><div class="stat-value">34.4%</div><div class="stat-label">Anthropic企业采用率首超OpenAI</div></div>
-</div>
-</section>
-<section id="enterprise">
-<div class="doc-chapter-label animate-on-scroll">企业转型</div>
-<h2 class="animate-on-scroll">🔄 企业AI转型本周动态</h2>
-<div class="callout callout-warning animate-on-scroll">85%企业放弃试点全量部署 + SAP自主运营企业愿景 + 腾讯承认大部分代码由AI生成 + 发改委推动央国企开放高价值场景 + 毕马勤+SAP战略合作</div>
-<div class="table-wrap animate-on-scroll">
-<table><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
-<tbody><tr><td><a href="https://www.gartner.com" target="_blank">85%企业放弃试点全量部署+AI编程办公成落地优先路径</a></td><td><a href="https://www.gartner.com" target="_blank">Gartner</a></td><td><a href="https://www.gartner.com" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://www.whitehouse.gov" target="_blank">美国AI监管30天审查期落地+工信部AI伦理审查先导计划</a></td><td><a href="https://www.whitehouse.gov" target="_blank">白宫</a></td><td><a href="https://www.whitehouse.gov" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://www.anthropic.com" target="_blank">AI产业从模型竞赛转向基础设施+安全治理双线推进</a></td><td><a href="https://www.anthropic.com" target="_blank">Anthropic</a></td><td><a href="https://www.anthropic.com" target="_blank">链接</a></td></tr>
-<tr><td><a href="http://tech.gmw.cn/2026-06/04/content_38810300.htm" target="_blank">SAP自主运营企业愿景：弱链打通是胜负手</a></td><td><a href="http://tech.gmw.cn/2026-06/04/content_38810300.htm" target="_blank">光明网</a></td><td><a href="http://tech.gmw.cn/2026-06/04/content_38810300.htm" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://m.sohu.com/a/1032495672_120603108" target="_blank">毕马勤+SAP战略合作：ERP公有云转型+AI场景落地</a></td><td><a href="https://m.sohu.com/a/1032495672_120603108" target="_blank">搜狐</a></td><td><a href="https://m.sohu.com/a/1032495672_120603108" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://m.toutiao.com" target="_blank">腾讯汤道生：今年大部分代码由AI生成</a></td><td><a href="https://m.toutiao.com" target="_blank">今日头条</a></td><td><a href="https://m.toutiao.com" target="_blank">链接</a></td></tr>
-<tr><td><a href="https://m.toutiao.com" target="_blank">发改委推动央国企开放高价值AI应用场景</a></td><td><a href="https://m.toutiao.com" target="_blank">发改委</a></td><td><a href="https://m.toutiao.com" target="_blank">链接</a></td></tr>
-</tbody></table></div>
-<div class="stats-grid animate-on-scroll">
-  <div class="stat-card stat-danger"><div class="stat-value">85%</div><div class="stat-label">企业放弃试点全量部署</div></div>
-  <div class="stat-card stat-success"><div class="stat-value">30%</div><div class="stat-label">谷歌试点后AI生成代码占比</div></div>
-  <div class="stat-card stat-info"><div class="stat-value">L2+</div><div class="stat-label">AI编码进入主流生产流程</div></div>
-</div>
-</section>
-<section id="dailyindex">
-<div class="doc-chapter-label animate-on-scroll">日报索引</div>
-<h2 class="animate-on-scroll">📅 本周日报索引</h2>
-<div class="daily-index animate-on-scroll">
-<div class="daily-item">
-  <div class="daily-item-date">2026-06-01 周一</div>
-  <a href="https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-01.html" target="_blank" class="daily-item-link">AI洞察日报</a>
-  <div class="daily-item-kw">GPT-5.5, DeepSeek降价, Kimi融资, Anthropic IPO, 生成式AI搜索</div>
-</div>
-<div class="daily-item">
-  <div class="daily-item-date">2026-06-02 周二</div>
-  <a href="https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-02.html" target="_blank" class="daily-item-link">AI洞察日报</a>
-  <div class="daily-item-kw">Anthropic IPO, AI Coding定价, Wikipedia罢工, Florida诉讼, 全球AI资本竞赛</div>
-</div>
-<div class="daily-item">
-  <div class="daily-item-date">2026-06-03 周三</div>
-  <a href="https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-03.html" target="_blank" class="daily-item-link">AI洞察日报</a>
-  <div class="daily-item-kw">GPT退役, Agent可靠性, AI编程补贴战, 豆包付费, 国产算力闭环</div>
-</div>
-<div class="daily-item">
-  <div class="daily-item-date">2026-06-04 周四</div>
-  <a href="https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-04.html" target="_blank" class="daily-item-link">AI洞察日报</a>
-  <div class="daily-item-kw">Anthropic $965B, GTC台北, Cosmos 3, IPO竞赛, AI监管</div>
-</div>
-<div class="daily-item">
-  <div class="daily-item-date">2026-06-05 周五</div>
-  <a href="https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-05.html" target="_blank" class="daily-item-link">AI洞察日报</a>
-  <div class="daily-item-kw">RSI研究, Gemma4 12B, 安全隔离架构, 微信A2A, Meta Business Agent</div>
-</div>
-<div class="daily-item">
-  <div class="daily-item-date">2026-06-06 周六</div>
-  <a href="https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-06.html" target="_blank" class="daily-item-link">AI洞察日报</a>
-  <div class="daily-item-kw">Anthropic IPO, MAI自研, ChatGPT 10亿, SWE-bench, 宇树过会</div>
-</div>
-<div class="daily-item">
-  <div class="daily-item-date">2026-06-07 周日</div>
-  <a href="https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-07.html" target="_blank" class="daily-item-link">AI洞察日报</a>
-  <div class="daily-item-kw">Anthropic IPO, GPT-5.6, 安全暂停, SAP自主运营, 腾讯AI编码, Token基础设施</div>
-</div>
-
-</div>
-</section>
-<section id="vocab">
-<div class="doc-chapter-label animate-on-scroll">技术词汇</div>
-<h2 class="animate-on-scroll">📖 技术词汇表</h2>
-<div class="table-wrap animate-on-scroll">
-<table><thead><tr><th>术语</th><th>定义</th><th>出处</th></tr></thead>
-<tbody><tr><td style="font-weight:600;">RSI（递归自我改进）</td><td>AI系统自主改进自身性能的能力。Anthropic研究揭示AI开发AI的速度正在指数级加速——工程师代码产出8倍增长，AI可靠完成的任务时长每4个月翻倍。</td><td>Anthropic Institute 2026-06-05</td></tr>
-<tr><td style="font-weight:600;">A2A（Agent-to-Agent）</td><td>智能体之间直接通信协作的机制。微信与华为/小米/荣耀/OPPO合作基于A2A将微信服务集成到手机系统级AI，用户可通过系统AI助手直接操控微信。</td><td>AIbase 2026-06-05</td></tr>
-<tr><td style="font-weight:600;">物理AI（Physical AI）</td><td>英伟达Cosmos 3提出的概念——AI从数字世界走向物理世界，通过物理仿真+多模态理解实现自动驾驶、机器人、工业仿真等物理场景的智能。</td><td>NVIDIA GTC 2026-06-04</td></tr>
-<tr><td style="font-weight:600;">MAI（Microsoft AI）</td><td>微软Build 2026发布的自研模型家族，包含7款模型覆盖思考、编码、图像等场景。核心信号：微软从依赖OpenAI转向自有AI能力供应链。</td><td>Microsoft Build 2026-06-06</td></tr>
-<tr><td style="font-weight:600;">Token基础设施化</td><td>AI推理的计量单位Token正在从模型厂商内部计费工具变为可计量、可定价、可交易的公共服务基础设施。三大运营商Token服务已上架中国算力平台。</td><td>中国信通院 2026-06-07</td></tr>
-<tr><td style="font-weight:600;">芯模协同</td><td>芯片和模型在研发阶段就协同设计——模型基于芯片架构来设计，芯片针对模型特性来优化。DeepSeek V4与华为昇腾的首发适配标志着国产算力从被动兼容走向主动定义。</td><td>人民日报 2026-06-03</td></tr>
-<tr><td style="font-weight:600;">SWE-bench新基准</td><td>SWE-bench团队推出ProgramBench、DeepSWE和CooperBench三大新基准。CooperBench发现双智能体协作成功率比单智能体低近50%，揭示AI编程协作短板。</td><td>SWE-bench 2026-06-06</td></tr>
-<tr><td style="font-weight:600;">gVisor容器隔离</td><td>Anthropic为claude.ai设计的安全隔离方案：用户代码在gVisor临时容器中执行，会话结束即销毁。与OS级沙箱（Claude Code）和VM级隔离（Claude Cowork）构成三层安全体系。</td><td>Anthropic Engineering 2026-06-05</td></tr>
-<tr><td style="font-weight:600;">自主运营企业</td><td>SAP提出的企业愿景：从人工驱动流程转向AI驱动业务结果。核心判断：AI价值取决于企业最薄弱环节能否打通，而非模型能力有多强。</td><td>SAP中国峰会 2026-06-07</td></tr>
-<tr><td style="font-weight:600;">Ultrafast模式</td><td>GPT-5.6正在开发的新推理加速模式，在Codex环境中验证使主力模型推理速度提升2-3倍，专为Agent循环、长任务流水线等延迟敏感场景优化。</td><td>OpenAI 2026-06-07</td></tr>
-</tbody></table></div>
-</section>
-<section id="narrative">
-<div class="doc-chapter-label animate-on-scroll">宏观叙事</div>
-<h2 class="animate-on-scroll">🌊 宏观叙事：下半场开启：IPO定估值锚，Agent定北极星，推理成本归零定基础设施属性</h2>
-<div class="callout callout-purple animate-on-scroll"><strong>**AI行业正式从技术竞赛上半场进入商业化落地下半场。三条主线同时加速：Anthropic $965B IPO定估值锚→'安全叙事+企业深耕'路径获资本市场最高认可；黄仁勋定调Agent AI→竞争北极星从模型评分切换到端到端可靠；DeepSeek永久降价75%→推理成本从稀缺品变为基础设施品。下半场拼的不是谁更先进，而是谁更快变现+谁更可靠+谁更便宜。**</strong></div>
-<div class="callout callout-info animate-on-scroll" style="margin-top:16px;">Anthropic以9650亿美元估值抢在OpenAI之前递交IPO申请，标志着AI行业从'融资竞赛'正式进入'IPO竞赛'。估值反超的关键不是模型评分更高，而是80%企业营收占比——'先自省后开放'比OpenAI'先发布后修补'更适合资本市场信任逻辑。国内智谱冲刺科创板募资150亿、MiniMax走A+H双平台、DeepSeek启动500亿首轮融资——五家头部公司几乎同步推进资本化。
-
-谁先上市谁先定估值锚。Anthropic抢跑意味着'安全叙事+企业深耕'路径获得资本市场最高定价权。但估值越高对兑现速度要求越苛刻——9650亿美元估值接近全球GDP的1%，资本市场押注的是'AI基础设施税'的垄断潜力。</div>
-<div class="callout callout-success animate-on-scroll" style="margin-top:16px;">黄仁勋GTC台北定调Agent AI时代是下半场风向标。从'谁的模型评分更高'到'谁的Agent更可靠'——Opus 4.8在Super-Agent基准中唯一完成全部端到端案例，Agent场景要求从'答对问题'进化到'独立走完流程'。Cosmos 3物理AI开源意味着AI从数字世界走向物理世界，自动驾驶+机器人+工业仿真迎来范式跃迁。
-
-DeepSeek V4-Pro永久降价75%将推理成本拉至地板价——类比云计算从按小时到按秒到永久免费层的路径。腾讯云跟进降价97.5%，IDC报告显示中国大模型调用量同比16倍。三大运营商Token服务上架中国算力平台，Token成为可交易基础设施。推理成本归零是AI基础设施化的前提条件。</div>
-<div class="callout callout-warning animate-on-scroll" style="margin-top:16px;">对从业者的三条启示：
-
-1. **IPO竞赛定估值锚**——谁先上市谁先定价。Anthropic路径（安全叙事+企业深耕）获最高认可，国内智谱/MiniMax科创板路径同步加速。估值越高兑现要求越苛刻，'AI基础设施税'垄断叙事需要持续营收验证。
-
-2. **Agent可靠性是新北极星**——从模型评分到端到端完成率，竞争维度已切换。Claude Opus 4.8唯一完成全部端到端案例，SWE-bench新基准揭示AI编程协作短板（双Agent成功率低于单Agent50%）。Agent不是新功能而是新范式。
-
-3. **推理成本归零是基础设施化前提**——DeepSeek永久降价+国产算力闭环+Token基础设施化三线并进。应用开发者是最大受益者，但差异化将从价格转向可靠性+生态深度。下半场的赢家不是技术最强者，而是商业化最快+可靠性最高+成本最低者。</div>
-
-<hr style="border:none;border-top:2px solid var(--color-success);margin:32px 0;">
-<div class="callout callout-success animate-on-scroll">**下半场的发动机是Agent可靠性，整车是商业化落地+安全治理，交付是推理成本归零+基础设施化。发动机决定上限，整车决定交付。AI行业不再是技术实验，而是产业基础设施——谁能把这三件事同时做好，谁就是下半场的赢家。**</div>
-</section>
-<div style="max-width:var(--content-max);margin:0 auto;padding:16px 20px 48px;">
-<div style="background:linear-gradient(135deg,#F8FAFB 0%,#EEF2F6 100%);border:1px solid #E7E5E4;border-radius:14px;padding:24px;box-shadow:0 2px 8px rgba(31,35,40,.06)">
-  <div style="font-size:16px;font-weight:700;margin-bottom:8px">💡 了解更多</div>
-  <p style="font-size:14px;color:#57534E;line-height:1.7;margin:0 0 12px 0">AI洞察是系统化追踪AI行业动态的项目，覆盖大模型、AI Coding、AI应用、AI行业投融资、企业AI转型五大领域。</p>
-  <a href="{INTERNAL_BASE}/" target="_blank" style="display:inline-flex;padding:8px 16px;background:linear-gradient(135deg,#059669,#10B981);color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none">🏠 访问AI洞察首页</a>
-</div></div>
-<div class="doc-footer"><p>🧠 AI洞察（的AI洞察） · AI洞察 · 周报 · 2026-W23</p><p style="margin-top:4px;">数据来源：AI洞察日报 06/01-06/07 · 5板块</p></div>
-</div>
-</main>
-</div>
-<div class="scroll-to-top" id="scrollToTop">↑</div>
 <script>
     (function() {
         // ===== TOC SCROLL SPY =====
