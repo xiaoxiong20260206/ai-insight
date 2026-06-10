@@ -105,6 +105,22 @@ uv run scripts/ai_daily_orchestrator.py complete --step 5
 
 **推送范围**: 日报只私发订阅者（从 `data/subscribers.json` 读取 `is_active=true` 的用户），❌禁止群发。
 
+### Step 5.5: 交付链接（P0 强制，每次日报完成必须输出）
+
+推送完成后，**必须**向用户输出以下四个链接，方便自检内外版本是否都正确发布：
+
+```
+内部版：
+1. 📄 当日日报：https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/YYYY-MM/YYYY-MM-DD.html
+2. 🏠 AI洞察首页：https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/
+
+外部版：
+3. 📄 当日日报：https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/YYYY-MM/YYYY-MM-DD.html
+4. 🏠 AI洞察首页：https://xiaoxiong20260206.github.io/ai-insight-public/
+```
+
+**目的**：快速自检内部版（frontend-cloud）和外部版（GitHub Pages）是否都正常发布，防止某个版本静默失败而不知。
+
 ---
 
 ## Step 6: 知识沉淀（Harvest）— P0#15 强制，不可跳过
