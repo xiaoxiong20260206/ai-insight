@@ -135,8 +135,11 @@ def fix_footer_urls() -> int:
     
     internal_url = f'{INTERNAL_PAGES_BASE}/"'
     external_url = f'{EXTERNAL_PAGES_BASE}/"'
-    # 也处理旧版错误URL（缺少-public后缀）
-    wrong_external_url = 'https://xiaoxiong20260206.github.io/ai-insight/"'
+    # 也处理旧版错误URL（缺少-public后缀）或旧内部版GitHub Pages地址
+    wrong_urls = [
+        'https://xiaoxiong20260206.github.io/ai-insight/"',  # 旧内部版GitHub Pages（已废弃）
+        'https://xiaoxiong20260206.github.io/ai-insight-public/"',  # 旧外部版GitHub Pages
+    ]
     
     fixed = 0
     for html_file in EXTERNAL_REPO.rglob("*.html"):

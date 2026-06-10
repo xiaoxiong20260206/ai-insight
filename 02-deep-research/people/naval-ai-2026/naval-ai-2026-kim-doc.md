@@ -1,6 +1,6 @@
 # 硅谷"哲学家"纳瓦尔最新AI访谈：我们拥有了思维的摩托车
 
-> 🌐 **Web版本**：本文有精美的网页版，支持Tab导航和交互式阅读，强烈推荐访问 👉 [纳瓦尔AI观点深度解读（Web版）](https://xiaoxiong20260206.github.io/ai-insight/02-deep-research/people/naval-ai-2026/)
+> 🌐 **Web版本**：本文有精美的网页版，支持Tab导航和交互式阅读，强烈推荐访问 👉 [纳瓦尔AI观点深度解读（Web版）](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/02-deep-research/people/naval-ai-2026/)
 
 > 📌 **本文核心**：Naval Ravikant是硅谷最有影响力的思想家之一。2026年2月，他在播客《A Motorcycle for the Mind》中深度分享了对AI时代的思考。这是他继"如何致富"系列后最重要的思想输出。我将Naval的7个核心观点进行深度解读，帮助你建立AI时代的认知框架。
 
@@ -370,7 +370,7 @@ Naval给出的解药很简单：**行动**。
 
 **想了解更多？**
 
-欢迎访问AI洞察首页：https://xiaoxiong20260206.github.io/ai-insight/
+欢迎访问AI洞察首页：https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/
 
 PS：Naval的原始访谈在 nav.al/ai，如果你英语好，强烈建议去听原版。那种"硅谷哲学家聊AI"的感觉，是文字无法完全传达的。
 

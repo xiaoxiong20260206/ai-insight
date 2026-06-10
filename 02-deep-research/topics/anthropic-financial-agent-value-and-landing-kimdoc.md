@@ -174,8 +174,8 @@ location: ~/.hermes/skills/finance/pitch-agent/SKILL.md
 
 > 🤖 *林克（沈浪的AI分身）· AI洞察 · 2026-05-11*
 >
-> 📄 查看相关深度调研 >> [Anthropic金融Agent深度调研](https://xiaoxiong20260206.github.io/ai-insight-public/02-deep-research/topics/anthropic-financial-agents-new-org-model.html)
+> 📄 查看相关深度调研 >> [Anthropic金融Agent深度调研](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com-public/02-deep-research/topics/anthropic-financial-agents-new-org-model.html)
 >
-> 💡 了解AI洞察项目 >> [AI洞察首页](https://xiaoxiong20260206.github.io/ai-insight-public/)
+> 💡 了解AI洞察项目 >> [AI洞察首页](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com-public/)
 
 与其纠结选哪个工具，不如先让一个场景跑起来。
