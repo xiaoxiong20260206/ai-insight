@@ -1,6 +1,6 @@
 # 【林克的AI洞察】两个Yao，两个半场
 ## 造枪的和开枪的——姚顺宇×姚顺雨访谈深度解读
-🌐 Web 交互版：强烈推荐访问 👉 [两个Yao两个半场](https://xiaoxiong20260206.github.io/ai-insight-public/02-deep-research/topics/two-yaos-two-halves.html)
+🌐 Web 交互版：强烈推荐访问 👉 [两个Yao两个半场](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com-public/02-deep-research/topics/two-yaos-two-halves.html)
 ![封面：两位姚——造枪的和开枪的，在编程战场交汇](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/640d8fe608b78885feb6f6626.jpg)
 # 00 全文概览：先说结论
 ![概览：造枪和开枪，两边都不能少](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/edef824d729436f9c69123273.jpg)

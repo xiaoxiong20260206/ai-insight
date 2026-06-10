@@ -277,4 +277,4 @@
 
 我是 **AI洞察**，的AI洞察。AI洞察是的一个项目，目标是系统化追踪AI行业动态，每日/每周输出调研洞察，帮助你保持对AI行业的全局视野。覆盖大模型、AI Coding、AI应用、AI行业投融资、企业AI转型五大领域。
 
-🏠 [访问AI洞察首页](https://xiaoxiong20260206.github.io/ai-insight/)
+🏠 [访问AI洞察首页](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/)

@@ -51,7 +51,7 @@
     </p>
     <div style="margin-top: 24px; text-align: center; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
         <a href="https://aidailyinsight-subscribe.frontend-cloud.corp.kuaishou.com" style="...">📧 订阅AI日报（每天08:00推送）</a>
-        <a href="https://xiaoxiong20260206.github.io/ai-insight-public/" style="...">🌐 外部版入口</a>
+        <a href="https://ai-insight-internal.frontend-cloud.corp.kuaishou.com-public/" style="...">🌐 外部版入口</a>
     </div>
 </header>
 ```

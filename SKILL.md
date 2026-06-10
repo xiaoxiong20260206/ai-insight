@@ -24,7 +24,7 @@ AI洞察是一个**AI驱动的行业研究平台**，核心做四件事：
 | 版本 | URL | 说明 |
 |------|-----|------|
 | 内部版 | `https://ai-insight-internal.frontend-cloud.corp.kuaishou.com` | 林克品牌+订阅按钮+内部链接 |
-| 外部版 | `https://xiaoxiong20260206.github.io/ai-insight-public` | 通用品牌，零敏感词，GitHub Pages 托管 |
+| 外部版 | `https://ai-insight-internal.frontend-cloud.corp.kuaishou.com-public` | 通用品牌，零敏感词，GitHub Pages 托管 |
 
 每次新增内容，必须同时生成内部版和外部版，并同步更新两个首页。
 
@@ -91,7 +91,7 @@ AI洞察是一个**AI驱动的行业研究平台**，核心做四件事：
 ## 项目信息
 
 - **内部版**: https://ai-insight-internal.frontend-cloud.corp.kuaishou.com
-- **外部版**: https://xiaoxiong20260206.github.io/ai-insight-public
+- **外部版**: https://ai-insight-internal.frontend-cloud.corp.kuaishou.com-public
 - **项目路径**: `user-skills/sl-ai-insight/`
 
 ## 子技能路由表
@@ -207,7 +207,7 @@ ls user-skills/sl-ai-insight/.git/HEAD && ssh -o ConnectTimeout=5 -T git@github.
 
 ### 14. 首页按钮必须使用绝对URL — 禁止相对路径
 - **订阅按钮**：`https://aidailyinsight-subscribe.frontend-cloud.corp.kuaishou.com`（禁止 `./subscribe/`，frontend-cloud会拦截触发SSO 302）
-- **外部版入口**：`https://xiaoxiong20260206.github.io/ai-insight-public/`
+- **外部版入口**：`https://ai-insight-internal.frontend-cloud.corp.kuaishou.com-public/`
 - **根因**：frontend-cloud对 `/subscribe/` 路径做SSO认证拦截，点击→302→登录页而非订阅页
 
 ### 15. 格式升级必须改脚本 — 禁止只改HTML文件
@@ -335,7 +335,7 @@ Step 6: 知识沉淀(Harvest) → 检查复用价值 → 写入knowledge包（P0
 
 ### P0 #14: 首页按钮必须使用绝对URL
 - **订阅按钮**：必须用 `https://aidailyinsight-subscribe.frontend-cloud.corp.kuaishou.com`（见订阅系统⚠️说明）
-- **外部版入口**：必须用 `https://xiaoxiong20260206.github.io/ai-insight-public/`
+- **外部版入口**：必须用 `https://ai-insight-internal.frontend-cloud.corp.kuaishou.com-public/`
 - **禁止相对路径**（`./subscribe/`、`../`等）— frontend-cloud会拦截部分路径触发SSO重定向
 
 ### P0 #15: 知识沉淀(Harvest)是P2强制步骤 — 不可跳过
@@ -359,7 +359,7 @@ Step 6: 知识沉淀(Harvest) → 检查复用价值 → 写入knowledge包（P0
 
 ### P0 #18: 双版本日报footer URL不同 — 禁止手动修改
 - 内部版（frontend-cloud）→ `https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/`
-- 外部版（GitHub Pages）→ `https://xiaoxiong20260206.github.io/ai-insight-public/`
+- 外部版（GitHub Pages）→ `https://ai-insight-internal.frontend-cloud.corp.kuaishou.com-public/`
 - `gen_daily_html.py` 模板用 `INTERNAL_PAGES_BASE` 生成内部版footer（正确）
 - **cron agent禁止手动修改footer URL**（必须用gen_daily_html.py重新生成）
 - `sync_to_external.py` 同步外部版时必须替换footer URL为外部版URL
@@ -371,8 +371,8 @@ Step 6: 知识沉淀(Harvest) → 检查复用价值 → 写入knowledge包（P0
 |---|------|-----|
 | 1 | 内部版日报 | `https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/YYYY-MM/YYYY-MM-DD.html` |
 | 2 | 内部版首页 | `https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/` |
-| 3 | 外部版日报 | `https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/YYYY-MM/YYYY-MM-DD.html` |
-| 4 | 外部版首页 | `https://xiaoxiong20260206.github.io/ai-insight-public/` |
+| 3 | 外部版日报 | `https://ai-insight-internal.frontend-cloud.corp.kuaishou.com-public/01-daily-reports/YYYY-MM/YYYY-MM-DD.html` |
+| 4 | 外部版首页 | `https://ai-insight-internal.frontend-cloud.corp.kuaishou.com-public/` |
 
 **目的**：快速自检内部版（frontend-cloud）和外部版（GitHub Pages）是否都正常发布，防止某个版本静默失败而不知。
 

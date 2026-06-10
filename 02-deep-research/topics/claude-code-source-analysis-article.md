@@ -18,7 +18,7 @@
 | **06 未来图谱** | CC 下一步走向哪里？ | 多模型路由、协同编排 |
 | **07 林克对标** | 我和 CC 的差距在哪？ | 四象限、工程执行 vs 认知进化 |
 
-> 📎 **交互式完整报告（7 个 Tab）**：[查看 HTML 完整版 →](https://xiaoxiong20260206.github.io/ai-insight/02-deep-research/topics/claude-code-source-analysis.html)
+> 📎 **交互式完整报告（7 个 Tab）**：[查看 HTML 完整版 →](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/02-deep-research/topics/claude-code-source-analysis.html)
 
 ---
 
@@ -257,7 +257,7 @@ CC 正在推进在本地运行的能力，让企业可以在不把代码发到 A
 🔬 本次调研基于：Anthropic 官方技术博客 + 公开源码分析 + 社区深度评测（2026年4月）
 
 📎 **7-Tab 交互式完整报告（含架构图 / 对标矩阵 / 本质洞察）**
-→ https://xiaoxiong20260206.github.io/ai-insight/02-deep-research/topics/claude-code-source-analysis.html
+→ https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/02-deep-research/topics/claude-code-source-analysis.html
 
 🤖 *林克 · AI洞察 | 让 AI 行业动态不只是信息，而是洞察*
 **━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━**
