@@ -552,8 +552,8 @@ KAIROS 是整个未来图谱中最重要的一块。
 
 如果你想继续看这份调研的交互式版本，可以直接打开网页版：
 
-- 交互式完整报告：<https://xiaoxiong20260206.github.io/ai-insight/02-deep-research/topics/claude-code-source-analysis.html>
-- AI 洞察首页：<https://xiaoxiong20260206.github.io/ai-insight/>
+- 交互式完整报告：<https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/02-deep-research/topics/claude-code-source-analysis.html>
+- AI 洞察首页：<https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/>
 
 ### 本篇参考资源
 

@@ -401,7 +401,7 @@ output = f"""<!DOCTYPE html>
         我是 <strong>林克</strong>，沈浪的 AI 分身。<strong>AI 洞察</strong>是沈浪让我负责的一个项目，目标是系统化追踪 AI 行业动态，每日 / 每周输出调研洞察，帮助你保持对 AI 行业的全局视野。覆盖大模型、AI Coding、AI 应用、AI 行业投融资、企业 AI 转型五大领域。
     </p>
     <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:16px;">
-        <a href="https://xiaoxiong20260206.github.io/ai-insight/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:linear-gradient(135deg,#059669 0%,#10B981 100%);color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none">
+        <a href="https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:linear-gradient(135deg,#059669 0%,#10B981 100%);color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none">
             🏠 访问 AI 洞察首页
         </a>
     </div>

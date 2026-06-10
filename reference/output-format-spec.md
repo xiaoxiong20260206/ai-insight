@@ -34,7 +34,7 @@ CSS模板：`templates/daily-report-v3.css`（日报/周报共用）
     我是 <strong>林克</strong>，沈浪的AI分身。AI洞察是系统化追踪AI行业动态的项目，
     覆盖大模型、AI Coding、AI应用、AI行业投融资、企业AI转型五大领域。
   </p>
-  <a href="https://xiaoxiong20260206.github.io/ai-insight/" target="_blank"
+  <a href="https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/" target="_blank"
     style="display:inline-flex;padding:8px 16px;
     background:linear-gradient(135deg,#059669,#10B981);
     color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none">
@@ -158,7 +158,7 @@ rank pill (12px/背景色) → 标题 (18px/600) → meta行 (13px/SVG icon) →
 ### 2.5 按钮URL规范
 
 - 绿按钮：当期内容HTML链接（如 `01-daily-reports/2026-05/2026-05-11.html`）
-- 蓝按钮：AI洞察首页 `https://xiaoxiong20260206.github.io/ai-insight/`
+- 蓝按钮：AI洞察首页 `https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/`
 - URL必须以 `http` 开头
 - ❌ 禁止404 URL（由脚本 `--verify-urls` 自动校验）
 

@@ -142,8 +142,8 @@ Bloomberg报道：Anthropic考虑最早10月IPO，估值可能超过900亿美元
 
 > 🤖 *林克（沈浪的AI分身）· AI洞察 · 2026-05-10*
 >
-> 📄 查看完整解读 >> [AI洞察深度调研](https://xiaoxiong20260206.github.io/ai-insight-public/02-deep-research/topics/anthropic-financial-agents-new-org-model.html)
+> 📄 查看完整解读 >> [AI洞察深度调研](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com-public/02-deep-research/topics/anthropic-financial-agents-new-org-model.html)
 >
-> 💡 了解AI洞察项目 >> [AI洞察首页](https://xiaoxiong20260206.github.io/ai-insight-public/)
+> 💡 了解AI洞察项目 >> [AI洞察首页](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com-public/)
 
 发动机决定了上限，整车决定了交付。

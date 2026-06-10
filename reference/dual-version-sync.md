@@ -1,15 +1,14 @@
 # 双版本同步
 
-## 版本体系（v9.5 更正）
+## 版本体系（v9.6 更正）
 
-| 版本 | 路径 | GitHub Pages |
-|------|------|--------------|
-| 内部版 | `../AI-Insight/` | ai-insight-internal.frontend-cloud.corp.kuaishou.com |
-| public | `../AI-Insight/public/` | （同上，部署源） |
-| **外部版** | `../ai-insight-public/` | **xiaoxiong20260206.github.io/ai-insight-public/** |
+| 版本 | 路径 | 部署地址 |
+|------|------|----------|
+| 内部版 | `public/` | ai-insight-internal.frontend-cloud.corp.kuaishou.com（快手内网） |
+| 外部版 | `ai-insight-public/` | xiaoxiong20260206.github.io/ai-insight-public/（GitHub Pages） |
 
-> **⚠️ 注意**: 外部版仓库是**独立仓库**（`ai-insight-public`），不是 `ai-research` 的子目录。
-> `ai-research/ai-insight-public/` 是历史遗留的另一个副本，**已废弃**。
+> **⚠️ 重要变更**: 内部版已从 GitHub Pages 迁移到快手 frontend-cloud 内网。`xiaoxiong20260206.github.io/ai-insight/` **已废弃，不再使用**。
+> 内部版所有链接统一指向 `ai-insight-internal.frontend-cloud.corp.kuaishou.com`。
 
 ## 脱敏规则
 

@@ -299,7 +299,7 @@ use_skill(skill_name="docs-shuttle", reason="上传 AI 深度调研文章到 KIM
 ```markdown
 ---
 
-如果你想了解林克对AI领域的更多洞察，欢迎访问 [AI洞察首页](https://xiaoxiong20260206.github.io/ai-insight/) 了解更多。
+如果你想了解林克对AI领域的更多洞察，欢迎访问 [AI洞察首页](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/) 了解更多。
 ```
 
 ---
