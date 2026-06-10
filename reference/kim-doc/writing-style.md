@@ -323,15 +323,15 @@ Gupta观察到三个收敛趋势：
 - 文件名：`<slug>.html`、`<slug>-kimdoc.md`、`<slug>.md`
 - ❌ 禁止：`ai-org-moat-deep-research-2026.html`（冗余）
 
-**URL格式规范**：
-- Web交互版链接必须用**外部版域名**：`xiaoxiong20260206.github.io/ai-insight-public/`
-- ❌ 禁止用旧内部版域名：`xiaoxiong20260206.github.io/ai-insight/`（已废弃）
-- ✅ 内部版域名：`ai-insight-internal.frontend-cloud.corp.kuaishou.com`（仅内部场景使用）
+**URL格式规范**（⚠️ 链接体系锁定，不再变更）：
+- Web交互版链接必须用**外部版域名**：`https://xiaoxiong20260206.github.io/ai-insight-public/`（KIM Doc对外）
+- ✅ 内部版域名：`https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/`（仅内部场景：私发MixCard、首页按钮）
+- ❌ 旧内部版域名 `xiaoxiong20260206.github.io/ai-insight/` 已废弃
 - 原因：KIM Doc是对外的，外部版域名才是可公开访问的
 
 **正确URL**：
 ```
-https://ai-insight-internal.frontend-cloud.corp.kuaishou.com-public/02-deep-research/topics/ai-org-moat.html
+https://xiaoxiong20260206.github.io/ai-insight-public/02-deep-research/topics/ai-org-moat.html
 ```
 
 **错误URL**（我原来写的）：
@@ -340,7 +340,7 @@ https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/02-deep-research/to
 ```
 
 **了解更多链接格式**：
-- 首页链接：`https://ai-insight-internal.frontend-cloud.corp.kuaishou.com-public/`
+- 首页链接：`https://xiaoxiong20260206.github.io/ai-insight-public/`
 - HTML内部所有对外链接都用外部版域名
 
 ### 0.13 KIM Doc图片处理方式（关键踩坑经验）

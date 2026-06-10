@@ -1,6 +1,6 @@
 # 【林克的AI洞察】护城河不在代码里——组织形态才是AI时代真正抄不走的东西
 ## 组织形态才是其他护城河的基础设施
-🌐 Web 交互版：强烈推荐访问 👉 [链接](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com-public/02-deep-research/topics/ai-org-moat.html)
+🌐 Web 交互版：强烈推荐访问 👉 [链接](https://xiaoxiong20260206.github.io/ai-insight-public/02-deep-research/topics/ai-org-moat.html)
 [[封面：AI时代护城河不在代码里——组织形态才是其他护城河的基础设施](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/k89nnac150vzg2hnp1eb8k7qgqfzs1xuaxs96tlol.png)](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/k89nnac150vzg2hnp1eb8k7qgqfzs1xuaxs96tlol.png)
 # 📖 真实故事 · 引子
 Anthropic今年一口气从其他公司挖了好几个CTO级别的工程师。

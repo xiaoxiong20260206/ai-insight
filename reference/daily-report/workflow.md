@@ -115,8 +115,8 @@ uv run scripts/ai_daily_orchestrator.py complete --step 5
 2. 🏠 AI洞察首页：https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/
 
 外部版：
-3. 📄 当日日报：https://ai-insight-internal.frontend-cloud.corp.kuaishou.com-public/01-daily-reports/YYYY-MM/YYYY-MM-DD.html
-4. 🏠 AI洞察首页：https://ai-insight-internal.frontend-cloud.corp.kuaishou.com-public/
+3. 📄 当日日报：https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/YYYY-MM/YYYY-MM-DD.html
+4. 🏠 AI洞察首页：https://xiaoxiong20260206.github.io/ai-insight-public/
 ```
 
 **目的**：快速自检内部版（frontend-cloud）和外部版（GitHub Pages）是否都正常发布，防止某个版本静默失败而不知。
