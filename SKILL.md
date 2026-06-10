@@ -298,6 +298,7 @@ Step 1: 搜索调研 → orchestrator complete --step 1
 Step 2: 内容生成 → orchestrator complete --step 2
 Step 3+4: finalize → orchestrator finalize（自动:质量门→HTML→首页更新→部署→外部同步）
 Step 5: KIM推送 → sync_subscribers.py → build_insight_mixcard.py → message(kimMixCard, message="")
+Step 5.5: 交付链接 → 输出四个链接（内部版日报+首页 + 外部版日报+首页），方便自检
 Step 6: 知识沉淀(Harvest) → 检查复用价值 → 写入knowledge包（P0#15强制）
 
 **⚠️ MixCard发送格式（P0红线）**：
@@ -362,6 +363,18 @@ Step 6: 知识沉淀(Harvest) → 检查复用价值 → 写入knowledge包（P0
 - `gen_daily_html.py` 模板用 `INTERNAL_PAGES_BASE` 生成内部版footer（正确）
 - **cron agent禁止手动修改footer URL**（必须用gen_daily_html.py重新生成）
 - `sync_to_external.py` 同步外部版时必须替换footer URL为外部版URL
+
+### P0 #19: 日报完成后必须输出四个交付链接 — 方便自检
+每次日报流程完成（Step 5推送后），必须向用户输出以下四个链接：
+
+| # | 链接 | URL |
+|---|------|-----|
+| 1 | 内部版日报 | `https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/YYYY-MM/YYYY-MM-DD.html` |
+| 2 | 内部版首页 | `https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/` |
+| 3 | 外部版日报 | `https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/YYYY-MM/YYYY-MM-DD.html` |
+| 4 | 外部版首页 | `https://xiaoxiong20260206.github.io/ai-insight-public/` |
+
+**目的**：快速自检内部版（frontend-cloud）和外部版（GitHub Pages）是否都正常发布，防止某个版本静默失败而不知。
 
 ### 首页统计卡片维护规则（P1 — 自动校准）
 - 统计卡片数字由 `calibrate_stats.py` 自动计算，每次 `update_homepage.py` 运行时自动校准
