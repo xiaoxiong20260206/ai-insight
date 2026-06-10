@@ -203,7 +203,7 @@ ls user-skills/sl-ai-insight/.git/HEAD && ssh -o ConnectTimeout=5 -T git@github.
 - ✅ `<span class="kb-item">` 展示标题，不可点击
 - 2026-06-04：37个链接全部改为span，首页已部署
 
-13. ❌ MixCard按钮URL统一用外部版（GitHub Pages）(#13) — 内部版需SSO，KIM WebView被拦截
+13. ❌ MixCard按钮URL统一用内部版(#13) — --target仅控制footer文本
 
 ### 14. 首页按钮必须使用绝对URL — 禁止相对路径
 - **订阅按钮**：`https://aidailyinsight-subscribe.frontend-cloud.corp.kuaishou.com`（禁止 `./subscribe/`，frontend-cloud会拦截触发SSO 302）
@@ -327,12 +327,10 @@ Step 6: 知识沉淀(Harvest) → 检查复用价值 → 写入knowledge包（P0
 - 适用于内部版和外部版（外部版通过 `sanitize_html()` 自动转换）
 - `homepage-spec.md` 已同步更新此规则
 
-### P0 #13: MixCard按钮URL统一使用外部版 — SSO拦截推翻"私发用内部版"
-- **私发订阅者**：按钮URL用**外部版**（GitHub Pages）— frontend-cloud内部版需要快手SSO，KIM WebView无SSO cookie，点击按钮被拦截跳SSO登录页，用户看到"无法跳转"
-- **群发**：按钮URL用**外部版** — 群内可能有无法访问内部版的用户
-- **内部版URL唯一适用场景**：用户在已登录快手SSO的浏览器里直接访问（首页浏览），不适用于KIM MixCard按钮场景
+### P0 #13: MixCard按钮URL统一使用内部版 — --target仅控制footer文本
+- **所有推送场景（私发+群发）**：按钮URL统一用**内部版**（frontend-cloud）— 快手内部IM可自动处理SSO
 - **--target仅控制footer文本**：private=林克身份("林克（沈浪的AI分身）· AI洞察")，group=脱敏身份("AI洞察")
-- `build_insight_mixcard.py` 所有按钮URL统一使用外部版，--target不再切换URL
+- `build_insight_mixcard.py` --target不再切换按钮URL，仅切换footer
 
 ### P0 #14: 首页按钮必须使用绝对URL
 - **订阅按钮**：必须用 `https://aidailyinsight-subscribe.frontend-cloud.corp.kuaishou.com`（见订阅系统⚠️说明）
@@ -393,7 +391,7 @@ Step 6: 知识沉淀(Harvest) → 检查复用价值 → 写入knowledge包（P0
 | 追踪体系 | ⚠️ | 无自动保鲜机制 | P1: 待设计cron |
 | 时间轴 | ⚠️ | 新调研需手动添加 | P1: gen_timeline.py待集成 |
 | 统计卡片 | ✅ | 自动校准 | calibrate_stats.py集成到update_homepage |
-| MixCard URL | ✅ | 统一外部版 | SSO拦截推翻"私发用内部版"(#123) |
+| MixCard URL | ✅ | 统一内部版 | --target仅控制footer文本(#123修正) |
 | 林克首页 | ✅ | 数据过期(6/1→6/5) | ✅ 重新部署 |
 
 ### 知识沉淀断档分析
