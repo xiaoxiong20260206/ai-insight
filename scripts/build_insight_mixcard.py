@@ -571,12 +571,11 @@ def main():
                         help="推送目标: private=私发订阅者(内部版URL), group=群发(外部版URL)")
     args = parser.parse_args()
 
-    # 根据 --target 切换按钮URL（P0 #13: 私发用内部版，群发用外部版）
-    global PROJECT_URL, REPORT_BASE_URL, _current_target
+    # --target 仅控制 footer 文本（private=林克身份, group=脱敏身份）
+    # 所有MixCard按钮统一使用内部版URL（frontend-cloud），不再区分private/group
+    # 2026-06-10: 用户明确要求统一用内网链接
+    global _current_target
     _current_target = args.target
-    if args.target == "group":
-        PROJECT_URL = f"{EXTERNAL_BASE}/"
-        REPORT_BASE_URL = f"{EXTERNAL_BASE}/01-daily-reports"
 
     try:
         if args.scenario == "daily":
