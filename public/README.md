@@ -65,7 +65,7 @@ python scripts/sync_to_public.py --with-index
 
 ## 🔗 访问方式
 
-- 在线访问: [https://ai-insight-internal.frontend-cloud.corp.kuaishou.com-public/](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com-public/)
+- 在线访问: [https://xiaoxiong20260206.github.io/ai-insight-public/](https://xiaoxiong20260206.github.io/ai-insight-public/)
 - GitHub仓库: [https://github.com/xiaoxiong20260206/ai-insight-public](https://github.com/xiaoxiong20260206/ai-insight-public)
 
 ## ⚠️ 版本区别

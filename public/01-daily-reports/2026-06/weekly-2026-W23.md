@@ -34,10 +34,10 @@ AI行业正式从技术竞赛上半场进入商业化落地下半场。三条主
 
 ## 日报索引
 
-- [周一 6/1](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com-public/01-daily-reports/2026-06/2026-06-01.html) — GPT-5.5, DeepSeek降价, Kimi融资, Anthropic IPO
-- [周二 6/2](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com-public/01-daily-reports/2026-06/2026-06-02.html) — Anthropic IPO先手, AI Coding定价, Wikipedia罢工
-- [周三 6/3](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com-public/01-daily-reports/2026-06/2026-06-03.html) — GPT退役, Agent可靠性, 豆包付费, 国产算力
-- [周四 6/4](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com-public/01-daily-reports/2026-06/2026-06-04.html) — Anthropic $965B, GTC台北, Cosmos 3
-- [周五 6/5](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com-public/01-daily-reports/2026-06/2026-06-05.html) — RSI研究, Gemma4, 安全隔离, 微信A2A
-- [周六 6/6](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com-public/01-daily-reports/2026-06/2026-06-06.html) — Anthropic IPO, MAI自研, ChatGPT 10亿, SWE-bench
-- [周日 6/7](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com-public/01-daily-reports/2026-06/2026-06-07.html) — GPT-5.6, 安全暂停, SAP自主运营, 腾讯AI编码
+- [周一 6/1](https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-01.html) — GPT-5.5, DeepSeek降价, Kimi融资, Anthropic IPO
+- [周二 6/2](https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-02.html) — Anthropic IPO先手, AI Coding定价, Wikipedia罢工
+- [周三 6/3](https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-03.html) — GPT退役, Agent可靠性, 豆包付费, 国产算力
+- [周四 6/4](https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-04.html) — Anthropic $965B, GTC台北, Cosmos 3
+- [周五 6/5](https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-05.html) — RSI研究, Gemma4, 安全隔离, 微信A2A
+- [周六 6/6](https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-06.html) — Anthropic IPO, MAI自研, ChatGPT 10亿, SWE-bench
+- [周日 6/7](https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-07.html) — GPT-5.6, 安全暂停, SAP自主运营, 腾讯AI编码
