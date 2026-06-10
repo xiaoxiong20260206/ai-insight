@@ -2421,11 +2421,11 @@
                 
                 <!-- 最新日报（仅展示最近一期） -->
                 <div class="content-list">
-                    <a href="01-daily-reports/2026-06/2026-06-09.html" target="_blank" class="list-item">
+                    <a href="01-daily-reports/2026-06/2026-06-10.html" target="_blank" class="list-item">
                         <span class="list-item-icon">📅</span>
                         <div class="list-item-content">
-                            <div class="list-item-title">2026年6月9日 AI日报 <span style="background:#FEF2F2;color:#E11D48;font-size:11px;padding:2px 6px;border-radius:999px;margin-left:6px;">最新</span></div>
-                            <div class="list-item-desc">WWDC26正式开幕：Siri AI重构 · OpenAI上线锁定模式强化安全+Min · 国安部警示AI中转站风险+AgentDo · 美政府磋商持股OpenAI+百度数字人独</div>
+                            <div class="list-item-title">2026年6月10日 AI日报 <span style="background:#FEF2F2;color:#E11D48;font-size:11px;padding:2px 6px;border-radius:999px;margin-left:6px;">最新</span></div>
+                            <div class="list-item-desc">WWDC26开幕：Siri代号Campo · OpenAI官宣退役GPT-4.5和o3 · 豆包6月下旬正式收费：标准版68元/月， · Anthropic披露80%代码由Cla</div>
                         </div>
                         <span class="list-item-arrow">→</span>
                     </a>
@@ -3794,10 +3794,10 @@
         // ============ 日历功能 ============
         // 已有日报的数据（格式: YYYY-MM-DD）
         const reportsData = {
-            '2026-06': [1, 2, 3, 4, 5, 6, 7, 8, 9],  // 2026-06日报日期 (最新: 2026-06-09)
+            '2026-06': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],  // 2026-06日报日期 (最新: 2026-06-11)
             '2026-05': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],  // 2026-05日报日期
-            '2026-04': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 27, 28, 29, 30],  // 2026-04日报日期 (最新: 2026-06-09)
-            '2026-03': [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],  // 3月有日报的日期 (最新: 2026-06-09)
+            '2026-04': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 27, 28, 29, 30],  // 2026-04日报日期 (最新: 2026-06-11)
+            '2026-03': [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],  // 3月有日报的日期 (最新: 2026-06-11)
             '2026-02': [28],          // 2月示例
         };
         
@@ -3872,11 +3872,6 @@
                 const weeklyUrl = hasWeekly ? `01-daily-reports/${currentYear}-${String(currentMonth).padStart(2, '0')}/${weeklyMonthData[day]}.html` : '';
                 
                 if (hasReport || hasWeekly) {
-                    let classes = 'calendar-day';
-                    if (hasReport) classes += ' has-report';
-                    if (hasWeekly) classes += ' has-weekly';
-                    if (isToday) classes += ' today';
-                    
                     if (hasReport && hasWeekly) {
                         // 同时有日报+周报 → 弹出选择菜单
                         html += `<div class="${classes}" onclick="showDayMenu(this, '${reportUrl}', '${weeklyUrl}', ${currentMonth}, ${day})" title="${currentMonth}月${day}日：日报+周报">${day}<div class="calendar-day-menu" id="dayMenu-${currentMonth}-${day}"><a class="calendar-day-menu-item daily" href="${reportUrl}" target="_blank"><span class="calendar-day-menu-icon">📅</span>AI 日报<span class="calendar-day-menu-label daily">Daily</span></a><a class="calendar-day-menu-item weekly" href="${weeklyUrl}" target="_blank"><span class="calendar-day-menu-icon">📊</span>AI 周报<span class="calendar-day-menu-label weekly">Weekly</span></a></div></div>`;
