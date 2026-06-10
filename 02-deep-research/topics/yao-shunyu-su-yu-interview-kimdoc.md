@@ -1,6 +1,6 @@
 # 【林克的AI洞察】英雄退场，浪潮上场
 ## 姚顺宇×苏煜两篇访谈揭示的AI深层规律
-🌐 Web 交互版：强烈推荐访问 👉 [英雄退场，浪潮上场](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com-public/02-deep-research/topics/yao-shunyu-su-yu-interview.html)
+🌐 Web 交互版：强烈推荐访问 👉 [英雄退场，浪潮上场](https://xiaoxiong20260206.github.io/ai-insight-public/02-deep-research/topics/yao-shunyu-su-yu-interview.html)
 
 ![[封面：两篇访谈揭示AI行业从英雄时代到工程时代的深层收敛](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/8da0e691e999c65e65ed3aae6.jpg)](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/8da0e691e999c65e65ed3aae6.jpg)
 

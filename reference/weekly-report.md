@@ -208,9 +208,9 @@ uv run scripts/build_insight_mixcard.py weekly --date YYYY-WXX --output /tmp/car
 ```
 📊 周报四链接自检：
 🔒 内部版：https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html
-🌐 外部版：https://ai-insight-internal.frontend-cloud.corp.kuaishou.com-public/01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html
+🌐 外部版：https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html
 🏠 内部首页：https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/
-🌐 外部首页：https://ai-insight-internal.frontend-cloud.corp.kuaishou.com-public/
+🌐 外部首页：https://xiaoxiong20260206.github.io/ai-insight-public/
 ```
 
 ---

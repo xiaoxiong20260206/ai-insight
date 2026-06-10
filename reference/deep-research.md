@@ -167,7 +167,7 @@ Step 6: KIM推送 → build_insight_mixcard.py research
 9. 配图描述有信息量：`![三件事正在同质化：收敛趋势]`
 10. 了解更多一条链接即可（文章专题）
 11. 表格分隔线后直接跟内容，不要加空行 `| | | |`
-12. **URL格式**：Web交互版链接用外部版域名 `ai-insight-public`，slug不含冗余词
+12. **URL格式**：Web交互版链接用外部版域名 `https://xiaoxiong20260206.github.io/ai-insight-public/`（KIM Doc对外），内部版用 `https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/`（仅内部场景）
 13. **章节逻辑**：正文遵循五步法（表象→规律→类比→回验→预测）
 14. **总结章节**：包含规律+现象+趋势三部分，不是简单的"从→到"表
 

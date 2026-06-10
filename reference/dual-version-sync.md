@@ -7,8 +7,11 @@
 | 内部版 | `public/` | ai-insight-internal.frontend-cloud.corp.kuaishou.com（快手内网） |
 | 外部版 | `ai-insight-public/` | xiaoxiong20260206.github.io/ai-insight-public/（GitHub Pages） |
 
-> **⚠️ 重要变更**: 内部版已从 GitHub Pages 迁移到快手 frontend-cloud 内网。`xiaoxiong20260206.github.io/ai-insight/` **已废弃，不再使用**。
-> 内部版所有链接统一指向 `ai-insight-internal.frontend-cloud.corp.kuaishou.com`。
+> **⚠️ 链接体系锁定，不再变更**：
+> - 内部版：`https://ai-insight-internal.frontend-cloud.corp.kuaishou.com`（快手内网，SSO登录）
+> - 外部版：`https://xiaoxiong20260206.github.io/ai-insight-public/`（GitHub Pages，公开访问）
+> - 旧内部版 `xiaoxiong20260206.github.io/ai-insight/` **已废弃，不再使用**
+> - 所有脚本URL从 `config.py` SSoT 派生，禁止硬编码。修改URL只改 config.py，不改其他文件。
 
 ## 脱敏规则
 
