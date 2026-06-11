@@ -158,8 +158,9 @@ def fix_footer_urls() -> int:
         if internal_url in new_content:
             new_content = new_content.replace(internal_url, external_url)
         # 替换错误外部URL→正确外部URL（缺少-public后缀）
-        if wrong_external_url in new_content:
-            new_content = new_content.replace(wrong_external_url, external_url)
+        for wrong_external_url in wrong_urls:
+            if wrong_external_url in new_content:
+                new_content = new_content.replace(wrong_external_url, external_url)
         
         if new_content != content:
             with open(html_file, 'w', encoding='utf-8') as f:
