@@ -126,14 +126,18 @@ def update_weekly_card(index_path: Path, week_id: str, month: str, title: str, d
     """更新首页周报入口卡片"""
     content = index_path.read_text(encoding="utf-8")
 
-    # 更新 href
+    # 更新 href（仅替换周报入口卡片，不动往期pills — #124防复发）
+    # 限定在包含 class="weekly-report-card" 的 <a> 标签内替换
+    # 注意：HTML中href在class前面：href="..." class="weekly-report-card"
+    def replace_card_href(match):
+        return match.group(1) + f'01-daily-reports/{month}/weekly-{week_id}.html' + match.group(2)
     content = re.sub(
-        r'href="01-daily-reports/\d{4}-\d{2}/weekly-\d{4}-W\d{2}.html"',
-        f'href="01-daily-reports/{month}/weekly-{week_id}.html"', content)
+        r'(<a href=")01-daily-reports/\d{4}-\d{2}/weekly-\d{4}-W\d{2}\.html("[^>]*class="weekly-report-card"[^>]*>)',
+        replace_card_href, content)
 
     # 更新标题
     content = re.sub(
-        r'<div class="wrc-title">AI 周报 · 第\d+周（[\d.]+ - [\d.]+）',
+        r'<div class="wrc-title">AI 周报 · 第\d+周（[\d./\-]+ - [\d./\-]+）',
         f'<div class="wrc-title">AI 周报 · {title}', content)
     
     # 更新描述
