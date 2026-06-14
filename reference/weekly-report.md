@@ -144,7 +144,7 @@ uv run scripts/update_homepage.py YYYY-WXX --type weekly \
 ## Step 5: 部署 + 外部同步
 
 ```bash
-# 内部版 git push
+# 5a. 内部版 git push
 git add -A && git commit -m "📊 AI周报 YYYY-WXX" && git push origin main
 
 # ⚠️ gen_weekly_html.py已自动cp周报HTML到public/
@@ -153,16 +153,23 @@ git add -A && git commit -m "📊 AI周报 YYYY-WXX" && git push origin main
 wc -c 01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html public/01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html
 wc -c index.html public/index.html
 
-# 外部版同步（自动脱敏+push）
+# 5b. 外部版同步（自动脱敏+push）
 uv run scripts/sync_to_external.py --full --verify
+
+# 5c. 内部版 frontend-cloud 部署（P0 — W24踩坑教训）
+# ⚠️ git push只更新GitHub仓库，不触发frontend-cloud部署
+# frontend-cloud必须单独部署，否则内部版首页不会更新
+cd public && npx -y --registry https://npm.corp.kuaishou.com @codeflicker/frontend-cloud-cli@latest deploy && cd ..
 ```
 
 ### 四位置验证
 ```
-①内部周报 ②内部首页(含周报入口) ③public/周报 ④外部仓库周报+首页
+①内部周报(frontend-cloud) ②内部首页(frontend-cloud) ③外部周报(GitHub Pages) ④外部首页(GitHub Pages)
 ```
 
 > **⚠️ W22踩坑教训**: 修改了 01-daily-reports/ 下的文件但忘了cp到 public/ 对应路径 → Pages返回截断旧版27KB而非完整70KB。public/是Pages部署源，不是可选步骤。
+
+> **⚠️ W24踩坑教训**: 周报cron只执行了git push + sync_to_external，遗漏了frontend-cloud deploy。内部版首页停留在上一版，用户看到旧首页。git push ≠ 网页部署，frontend-cloud必须单独执行。
 
 ---
 
