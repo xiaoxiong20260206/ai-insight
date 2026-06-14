@@ -155,8 +155,9 @@ def update_weekly_pill(index_path: Path, week_id: str, month: str, date_range: s
     """在首页往期周报pills区新增当前周报的pill链接"""
     content = index_path.read_text(encoding="utf-8")
     
-    # pill HTML模板
-    pill_html = f'''                        <a href="01-daily-reports/{month}/weekly-{week_id}.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--color-bg-table-header); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); font-size: 12px; color: var(--color-info); text-decoration: none; transition: all 0.15s;">{week_id}<span style="font-size: 10px; color: var(--color-text-muted);">{date_range}</span></a>'''
+    # pill HTML模板（#124防复发：标签用W+数字，不用完整week_id）
+    pill_label = "W" + (week_id.split("-W")[1] if "-W" in week_id else week_id)  # "2026-W23" → "W23"
+    pill_html = f'''                        <a href="01-daily-reports/{month}/weekly-{week_id}.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--color-bg-table-header); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); font-size: 12px; color: var(--color-info); text-decoration: none; transition: all 0.15s;">{pill_label}<span style="font-size: 10px; color: var(--color-text-muted);">{date_range}</span></a>'''
     
     # 检查是否已存在该pill
     if f'weekly-{week_id}.html' in content and '往期周报' in content:
@@ -352,11 +353,12 @@ def verify_homepage(date_str: str = "", week_id: str = "") -> bool:
     ]:
         if path.exists():
             content = path.read_text(encoding="utf-8")
-            # Find all pill badges like >W21< and their hrefs
-            pill_pattern = re.compile(r'>W(\d+)<.*?href="([^"]*weekly-[^"]+)"', re.DOTALL)
+            # Find all pill badges: href在前, >W21<在后（#124修复：正则顺序匹配HTML结构）
+            pill_pattern = re.compile(r'href="([^"]*weekly-2026-W(\d+)\.html)"[^>]*>[^<]*>W(\d+)<', re.DOTALL)
             pills = pill_pattern.findall(content)
             if pills:
-                mismatched = [(f"W{w}", href) for w, href in pills if f"W{w}" not in href]
+                # href中的W编号(组2) vs 标签文本中的W编号(组3) 必须匹配
+                mismatched = [(f"W{text_w}", href) for href, href_w, text_w in pills if href_w != text_w]
                 if len(mismatched) > len(pills) // 2:
                     # More than half of pills don't match = likely all pointing to same URL
                     errors.append(f"❌ {label}往期周报pills链接与文本不匹配（{len(mismatched)}/{len(pills)}个），疑似全指向同一URL（#124防复发）")
@@ -423,8 +425,12 @@ def main():
                            args.week_month, args.week_title, args.week_desc)
 
         print("\n📋 Step 1.5: 更新周报pill")
+        # 从title提取日期范围：第24周（06/08 - 06/14）→ 06/08-06/14
+        import re as _re
+        _m = _re.search(r"（([^）]+)）", args.week_title)
+        _date_range = _m.group(1).replace(" - ", "-") if _m else args.week_title.replace("第", "").replace("周", "")
         update_weekly_pill(PROJECT_ROOT / "index.html", week_id,
-                          args.week_month, args.week_title.replace("第", "").replace("周（", "").replace("）", "").strip())
+                          args.week_month, _date_range)
 
         print("\n📋 Step 2: 更新周报日历数据")
         update_calendar_weekly(PROJECT_ROOT / "index.html", args.week_month, args.week_day, week_id)
