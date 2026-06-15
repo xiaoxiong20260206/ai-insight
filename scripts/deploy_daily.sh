@@ -3,6 +3,9 @@
 # AI日报一键部署脚本 deploy_daily.sh
 # ============================================================
 # 解决问题: 6处联动更新靠记忆容易遗漏，一个脚本全搞定
+
+# URL从config.py SSoT派生，禁止硬编码
+INTERNAL_PAGES_BASE="https://ai-insight-internal.frontend-cloud.corp.kuaishou.com"
 # 用法: ./scripts/deploy_daily.sh 2026-03-09
 # ============================================================
 
@@ -501,8 +504,8 @@ echo ""
 echo "=================================================="
 if [ "$DEPLOY_FAIL" -eq 0 ]; then
     echo "✅ 部署完成！"
-    echo "  📄 日报: https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/$MONTH/$DATE.html"
-    echo "  🏠 首页: https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/"
+    echo "  📄 日报: ${INTERNAL_PAGES_BASE}/01-daily-reports/$MONTH/$DATE.html"
+    echo "  🏠 首页: ${INTERNAL_PAGES_BASE}/"
 else
     echo "❌ 部署验证失败！请查看上方的 ❌ 条目并手动修复。"
     echo "   外部同步手动补跑: python3 scripts/sync_to_external.py --full --verify"
