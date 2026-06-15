@@ -1,6 +1,6 @@
 # AI周报执行流程 (v3.1 精简版)
 
-> **版本**: v3.1 (2026-05-18: 新增踩坑教训+自检强制规则)
+> **版本**: v3.3 (2026-06-14: 新增踩坑教训+自检强制规则)
 > **原则**: 本文件只写"做什么→调用什么→看什么输出"。执行细节由脚本自动处理。
 > **⚠️ 生成任何输出前，先读 `reference/output-format-spec.md`（HTML/卡片/Doc公共规范）**
 
@@ -24,7 +24,7 @@ ls user-skills/sl-ai-insight/.git/HEAD && ssh -o ConnectTimeout=5 -T git@github.
 ### P1-3: 踩坑检索
 读完本文件「踩坑教训」部分，确认理解：
 - W18: 日历正则 `[^}]+` 无法匹配嵌套 `{}` → silent skip → 误判ok
-- W22全部6类问题：cron直接群发跳过确认、CSS/class名不匹配、public/截断版、首页pills错误、MixCard日期错误、外部版暴露内部内容
+- W22全部6类问题+W24全部4类问题：见踩坑教训部分
 
 ### P1-4: 自检声明
 执行前输出：`"我已读完SKILL.md+output-format-spec.md+weekly-report.md+踩坑教训，理解9条P0红线，准备执行Step 1"`
@@ -346,6 +346,59 @@ uv run scripts/build_insight_mixcard.py weekly --date YYYY-WXX --output /tmp/car
 
 **系统根因总结**：今天的所有问题都指向同一个根本缺陷——**没有从脚本流程生成/修改，而是手动操作绕过了脚本**。`sync_to_public.py` 本身包含 `-v3→plain` 和 URL 替换规则，但手动修改时这些保障全部失效。正确做法：修改通过脚本流程完成，或者手动修改后必须过脚本验证。
 
+### 2026-06-14: W24周报3类问题全面复盘
+
+**问题1: git push ≠ 网页部署（frontend-cloud漏部署）**
+- 根因：周报cron Step 5只有git push + sync_to_external，**没有frontend-cloud deploy**。git push只更新GitHub仓库文件，frontend-cloud是内部版CDN托管平台，必须单独执行`cd public && npx @codeflicker/frontend-cloud-cli@latest deploy`。内部版首页永远不会自动更新。
+- 对比：日报通过deploy_daily.sh自动包含frontend-cloud部署（state.json确认"frontend-cloud已部署"），周报没有对应的部署脚本。
+- 修复：
+  1. weekly-report.md Step 5拆为5a(git push)+5b(sync_to_external)+5c(frontend-cloud deploy)三步
+  2. 周报cron payload更新，Step 5明确三步部署+标注"git push ≠ 网页部署"
+- **教训①**: **git push只更新代码仓库，不触发CDN部署。每个部署目标需要自己的部署步骤。** 内部版靠frontend-cloud，外部版靠GitHub Pages（由push触发），两者机制不同。
+
+**问题2: update_homepage.py pills href全局替换（#124复发）**
+- 根因：`update_weekly_card`的href替换用`re.sub`全局匹配`href="01-daily-reports/...weekly-...html"`——没有count限制，也没有限定HTML区域。每次更新新周报，所有pills的href都被替换成最新周报URL。W22的标签指向W24的链接，W10的标签也指向W24的链接。
+- 对比：日报的href替换(行77)有`class="list-item"`限定——只有卡片区域被替换，pills区域不受影响。
+- 修复：
+  1. href替换正则限定在`class="weekly-report-card"`的`<a>`标签内（注意HTML中href在class前面）
+  2. 手动修复13个pills链接（按W10-W22各自指向正确月份目录）
+  3. 添加W23 pill
+- **教训②**: **re.sub不加count=1就是全量替换。HTML有多个同结构区域时，必须用上下文限定（class/id），不能靠全局模式。**
+
+**问题3: update_homepage.py pill标签和日期格式错误**
+- 根因层1：pill模板用`{week_id}`作为标签文本，但week_id传入的是"2026-W23"完整格式 → 生成">2026-W23<"而非">W23<"
+- 根因层2：date_range通过`title.replace("第","").replace("周（","").replace("）","")`提取，"第23周（06/01 - 06/07）"→"23周（06/01 - 06/07）"→replace"周（"→"2306/01 - 06/07）"→前面多了"23"
+- 修复：
+  1. pill标签改为"W" + week_id.split("-W")[1]，只取W+数字部分
+  2. date_range改为从title正则提取括号内容：`re.search(r"（([^）]+)）", title)` → "06/08 - 06/14" → replace(" - ", "-") → "06/08-06/14"
+- **教训③**: **字符串replace链是脆弱的提取方式。有固定格式时用正则提取括号内容更可靠。**
+
+**问题4: update_homepage.py 验证脚本pills正则顺序错误**
+- 根因：验证正则`r'>W(\d+)<.*?href="..."'`假设>W21<在href前面，但HTML结构是href在>W21<前面（`<a href="...">W22<span>`）→ 验证永远报"pills链接不匹配"的假阳性
+- 修复：正则改为`r'href="([^"]*weekly-2026-W(\d+)\.html)"[^>]*>[^<]*>W(\d+)<'`，提取href中的W编号和标签中的W编号做匹配
+- **教训④**: **验证脚本的假阳性比没有验证更危险——它浪费调试时间，还可能掩盖真问题。**
+
+**系统根因总结**：W24的三类问题都指向同一个根因——**update_homepage.py是"能跑就行"的粗粒度脚本，没有考虑HTML多区域隔离**。href全局替换、pill标签格式、date_range提取、验证正则——四个独立bug叠加，导致每次周报更新后首页都被破坏，而cron agent误判为成功。
+
+**彻底修复清单（已全部完成）**：
+1. ✅ Step 5三步部署(5a git push + 5b sync_to_external + 5c frontend-cloud deploy)
+2. ✅ update_weekly_card href替换限定class="weekly-report-card"
+3. ✅ pill标签改为W+数字格式
+4. ✅ date_range从title正则提取括号内容
+5. ✅ 验证脚本pills正则匹配HTML实际结构
+6. ✅ 首页pills手动修复(W10-W23各自指向正确月份)
+7. ✅ 三步部署验证通过
+
+**下次周报一步到位验证清单**：
+| # | 验证项 | 命令/方法 | 预期 |
+|---|--------|-----------|------|
+| 1 | update_homepage.py 执行无❌ | 脚本输出 | ✅ 首页更新完成！|
+| 2 | 卡片标题=最新周 | `grep "wrc-title" index.html` | 第24周（06/08 - 06/14）|
+| 3 | pills链接和标签匹配 | `grep ">W[0-9]*<" index.html` | W10-W23各自对应 |
+| 4 | frontend-cloud部署成功 | `cd public && npx frontend-cloud-cli deploy` | ✅ 部署成功！|
+| 5 | 外部版push成功 | sync_to_external输出 | ✅ 已推送到外部仓库 |
+| 6 | 四链接HTTP 200 | curl验证 | 302(内部)/200(外部) |
+
 ---
 
-_更新于 2026-06-01 · v3.2 · 新增W22修复复盘(10条教训)+外部版修改规则_
+_更新于 2026-06-14 · v3.3 · 新增W24复盘(4类问题+6条教训+彻底修复清单+一步到位验证表)_
