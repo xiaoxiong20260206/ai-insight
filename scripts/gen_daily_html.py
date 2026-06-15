@@ -35,6 +35,27 @@ AI_INSIGHT_CUSTOM_CSS = BASE_DIR / "templates" / "ai-insight-custom.css"
 
 WEEKDAYS = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
 
+# ============ SVG Icon（替代结构元素emoji，v2.0格式升级）============
+SVG_ICONS = {
+    "overview":    '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>',
+    "top5":        '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.83-1 .83s-1-.28-1-.83v-2.34"/><path d="M14 14.66V17c0 .55.47.83 1 .83s1-.28 1-.83v-2.34"/><line x1="12" y1="3" x2="12" y2="14"/><path d="M6 4v5a6 6 0 0 0 12 0V4"/></svg>',
+    "insight":     '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>',
+    "heat":        '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.5V22h6v-4.5c2.9-1.2 5-4.1 5-7.5a8 8 0 0 0-8-8z"/><line x1="12" y1="12" x2="12" y2="18"/></svg>',
+    "llm":         '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.5V22h6v-4.5c2.9-1.2 5-4.1 5-7.5a8 8 0 0 0-8-8z"/><line x1="12" y1="12" x2="12" y2="18"/></svg>',
+    "coding":      '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>',
+    "app":         '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>',
+    "industry":    '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20V8l-6 4V4l-6 4V2L2 10v10z"/></svg>',
+    "enterprise":   '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/></svg>',
+    "data":        '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>',
+    "watch":       '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+    "calendar":    '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="4"/><line x1="8" y1="2" x2="8" y2="4"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
+    "globe":       '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
+    "newspaper":   '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/></svg>',
+    "deepfocus":   '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
+    "home":        '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10l9-7 9 7v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg>',
+}
+
+
 # ============ 模板提取（首次运行用） ============
 
 def extract_templates_from_html(html_path: str):
@@ -146,7 +167,7 @@ def render_section(section) -> str:
         overseas = [item for item in section if item.get("region") != "china"]
         china = [item for item in section if item.get("region") == "china"]
         if overseas:
-            parts.append('                <div class="sub-header">🌏 海外</div>')
+            parts.append('                <div class="sub-header">{SVG_ICONS["globe"]} 海外</div>')
             for item in overseas:
                 parts.append(render_news_item(item))
         if china:
@@ -155,7 +176,7 @@ def render_section(section) -> str:
                 parts.append(render_news_item(item))
     elif isinstance(section, dict):
         if section.get("overseas"):
-            parts.append('                <div class="sub-header">🌏 海外</div>')
+            parts.append('                <div class="sub-header">{SVG_ICONS["globe"]} 海外</div>')
             for item in section["overseas"]:
                 parts.append(render_news_item(item))
         if section.get("china"):
@@ -215,7 +236,7 @@ def render_deep_focus(df: dict, theme: str = "") -> str:
     takeaway_html = ""
     if ndf['takeaway']:
         takeaway_html = f'''\n                    <div class="deep-focus-takeaway{takeaway_theme}">
-                        <div class="deep-focus-takeaway-label{label_color}">💡 TAKEAWAY</div>
+                        <div class="deep-focus-takeaway-label{label_color}">{SVG_ICONS["deepfocus"]} TAKEAWAY</div>
                         <div class="deep-focus-takeaway-text">{ndf['takeaway']}</div>
                     </div>'''
 
@@ -223,7 +244,7 @@ def render_deep_focus(df: dict, theme: str = "") -> str:
             <div class="deep-focus-card">
                 <div class="deep-focus-header{theme_class}">
                     <div>
-                        <div class="deep-focus-label">💡 深度聚焦</div>
+                        <div class="deep-focus-label">{SVG_ICONS["deepfocus"]} 深度聚焦</div>
                         <div class="deep-focus-title">{ndf['title']}</div>
                     </div>
                 </div>
@@ -268,7 +289,7 @@ def render_heat_trend(heat: dict) -> str:
     return f'''
         <div class="heat-card">
             <div class="heat-header">
-                <div class="heat-header-label">🔥 热度趋势</div>
+                <div class="heat-header-label">{SVG_ICONS["heat"]} 热度趋势</div>
                 <div class="heat-header-title">{heat.get('title', '')}</div>
             </div>
             <div class="heat-body">
@@ -296,7 +317,7 @@ def render_capability_update(text: str) -> str:
     html_text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', html_text)
     return f'''
         <div class="insight-block animate-on-scroll">
-            <div class="insight-block-title">🤖 深度洞察</div>
+            <div class="insight-block-title">{SVG_ICONS["insight"]} 深度洞察</div>
             <div class="insight-block-body">
                 <p style="margin:0">{html_text}</p>
             </div>
@@ -312,7 +333,7 @@ def render_data_table(data: list) -> str:
     )
     return f'''
         <div class="section-card">
-            <div class="section-header"><span class="num">📊</span> 数据速览</div>
+            <div class="section-header"><span class="num">{SVG_ICONS["data"]}</span> 数据速览</div>
             <div class="data-table-wrap">
                 <table class="data-table">
                     <thead><tr><th>指标</th><th>数值</th><th>变化/说明</th></tr></thead>
@@ -341,19 +362,19 @@ def render_preview(events: list) -> str:
             if "日期" in cat or "📅" in cat:
                 color = "var(--color-warning)"
                 border_color = "var(--color-warning)"
-                icon = "📅"
+                icon = SVG_ICONS["calendar"]
             elif "指标" in cat or "📊" in cat:
                 color = "var(--color-info)"
                 border_color = "var(--color-info)"
-                icon = "📊"
+                icon = SVG_ICONS["data"]
             elif "信号" in cat or "🔍" in cat:
                 color = "var(--color-success)"
                 border_color = "var(--color-success)"
-                icon = "🔍"
+                icon = SVG_ICONS["deepfocus"]
             else:
                 color = "var(--color-success)"
                 border_color = "var(--color-success)"
-                icon = "📌"
+                icon = SVG_ICONS["watch"]
             desc_html = "".join(f'<div style="margin-top:3px">• {item}</div>' for item in sub_items)
             # 如果category本身已含emoji，则不再重复加icon
             cat_display = cat if any(ord(c) > 127 for c in cat[:2]) else f"{icon} {cat}"
@@ -404,7 +425,7 @@ def render_preview(events: list) -> str:
         return ""
     return f'''
         <div class="section-card">
-            <div class="section-header"><span class="num">📌</span> 明日/下周值得关注</div>
+            <div class="section-header"><span class="num">{SVG_ICONS["watch"]}</span> 明日/下周值得关注</div>
             <div class="watch-grid">
 {chr(10).join(items)}
             </div>
@@ -488,11 +509,11 @@ def generate_html(data: dict) -> str:
     # 五大板块 Sections — 从 Tab 改为锚点 Section
     tabs = data.get("tabs", [])
     tab_defs = [
-        ("🧠", "大模型", "llm"),
+        (SVG_ICONS["llm"], "大模型", "llm"),
         ("⌨️", "AI Coding", "coding"),
-        ("📱", "AI 应用", "app"),
-        ("🏭", "AI 行业", "industry"),
-        ("🔄", "企业AI转型", "enterprise"),
+        (SVG_ICONS["app"], "AI 应用", "app"),
+        (SVG_ICONS["industry"], "AI 行业", "industry"),
+        (SVG_ICONS["enterprise"], "企业AI转型", "enterprise"),
     ]
 
     # === 验证 ===
@@ -572,15 +593,15 @@ def generate_html(data: dict) -> str:
         <div class="sidebar-doc-title">AI 日报 · {date_str}</div>
         <div class="toc-section">
             <div class="toc-group-label">目录</div>
-            <a href="#overview"   class="toc-link">📋 全文概览</a>
-            <a href="#heat"       class="toc-link">🔥 热度趋势</a>
-            <a href="#llm"        class="toc-link">🧠 大模型</a>
+            <a href="#overview"   class="toc-link">{SVG_ICONS["overview"]} 全文概览</a>
+            <a href="#heat"       class="toc-link">{SVG_ICONS["heat"]} 热度趋势</a>
+            <a href="#llm"        class="toc-link">{SVG_ICONS["llm"]} 大模型</a>
             <a href="#coding"     class="toc-link">⌨️ AI Coding</a>
-            <a href="#app"        class="toc-link">📱 AI 应用</a>
-            <a href="#industry"   class="toc-link">🏭 AI 行业</a>
-            <a href="#enterprise" class="toc-link">🔄 企业AI转型</a>
-            <a href="#data"       class="toc-link">📊 数据速览</a>
-            <a href="#watch"      class="toc-link">📌 明日关注</a>
+            <a href="#app"        class="toc-link">{SVG_ICONS["app"]} AI 应用</a>
+            <a href="#industry"   class="toc-link">{SVG_ICONS["industry"]} AI 行业</a>
+            <a href="#enterprise" class="toc-link">{SVG_ICONS["enterprise"]} 企业AI转型</a>
+            <a href="#data"       class="toc-link">{SVG_ICONS["data"]} 数据速览</a>
+            <a href="#watch"      class="toc-link">{SVG_ICONS["watch"]} 明日关注</a>
         </div>
         <div class="reading-progress-wrap">
             <div class="reading-progress-label">阅读进度</div>
@@ -600,21 +621,21 @@ def generate_html(data: dict) -> str:
                 <div class="header-badge">AI INSIGHT · DAILY REPORT</div>
                 <h1 class="header-title">AI 日报 <span class="version-badge">v4.0</span></h1>
                 <div class="header-meta">
-                    <span>📅 {date_display} {weekday}</span>
-                    <span>🌐 海外 {overseas_count}条 · 国内 {china_count}条</span>
-                    <span>📊 五大板块：大模型 · AI Coding · AI应用 · AI行业 · 企业转型</span>
+                    <span>{SVG_ICONS["calendar"]} {date_display} {weekday}</span>
+                    <span>{SVG_ICONS["globe"]} 海外 {overseas_count}条 · 国内 {china_count}条</span>
+                    <span>{SVG_ICONS["data"]} 五大板块：大模型 · AI Coding · AI应用 · AI行业 · 企业转型</span>
                 </div>
             </header>
 
             <!-- COVERAGE BAR -->
             <div class="coverage-bar animate-on-scroll">
-                <span class="label">📊 覆盖均衡</span>
+                <span class="label">{SVG_ICONS["data"]} 覆盖均衡</span>
                 <div class="bar">
                     <div class="bar-overseas" style="width:{overseas_pct}%"></div>
                     <div class="bar-china" style="width:{china_pct}%"></div>
                 </div>
                 <div class="stats">
-                    <span class="stat-overseas">🌏 海外 {overseas_count}条</span>
+                    <span class="stat-overseas">{SVG_ICONS["globe"]} 海外 {overseas_count}条</span>
                     <span class="stat-china">🇨🇳 国内 {china_count}条</span>
                 </div>
             </div>
@@ -622,7 +643,7 @@ def generate_html(data: dict) -> str:
             <!-- OVERVIEW -->
             <section id="overview" class="report-section">
                 <div class="overview animate-on-scroll">
-                    <div class="overview-title">📋 全文概览</div>
+                    <div class="overview-title">{SVG_ICONS["overview"]} 全文概览</div>
                     <div class="overview-grid five-cols">
 {chr(10).join(overview_items)}
                     </div>
@@ -655,7 +676,7 @@ def generate_html(data: dict) -> str:
                 <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
                     <img src="link-avatar-small.webp" alt="林克" style="width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(5,150,105,0.3);object-fit:cover">
                     <span>我是 <strong>林克</strong>，沈浪的AI分身。
-                    <a href="{INTERNAL_PAGES_BASE}/" target="_blank">🏠 访问AI洞察首页</a></span>
+                    <a href="{INTERNAL_PAGES_BASE}/" target="_blank">{SVG_ICONS["home"]} 访问AI洞察首页</a></span>
                 </div>
                 <p style="margin-top:6px">AI洞察 · 系统化追踪AI行业动态 · 五大板块每日更新</p>
             </footer>
