@@ -2280,6 +2280,174 @@ body.mobile-preview-mode .global-controls {
         grid-template-columns: repeat(3, 1fr);
     }
 }
+/* ===== 周报Top5/洞察卡片样式（v2.0格式升级，从W22提取）===== */
+/* 
+ * 来源：W22手动升级版HTML (2026-06-01)
+ * 缺失根因：W23改脚本化生成后，CSS模板(daily-report-v3.css)不含这些定义
+ * 修复：补入 ai-insight-custom.css，脚本合并时自动注入
+ */
+
+/* 卡片强调色变量（按板块区分）*/
+.llm .news-card { --card-accent: var(--color-purple); }
+.coding .news-card { --card-accent: var(--color-orange); }
+.app .news-card { --card-accent: var(--color-info); }
+.industry .news-card { --card-accent: var(--color-warning); }
+.enterprise .news-card { --card-accent: var(--color-success); }
+
+
+
+.insight-content {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+}
+
+.insight-content-title {
+    font-size: var(--heading-3);
+    color: var(--color-warning);
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+}
+
+.insight-content-text {
+    color: var(--color-text-secondary);
+    font-size: var(--body-text);
+    line-height: 1.7;
+}
+
+.news-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-light);
+    border-left: 4px solid var(--card-accent, var(--color-success));
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    box-shadow: var(--shadow-card);
+    transition: box-shadow 0.2s;
+}
+
+.news-card-rank {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--card-accent, var(--color-success));
+    background: color-mix(in srgb, var(--card-accent, var(--color-success)) 10%, white);
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    margin-bottom: 12px;
+}
+
+.news-card-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    line-height: 1.4;
+    margin-bottom: 8px;
+    text-wrap: balance;
+}
+
+.news-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    color: var(--color-text-muted);
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.meta-item { display: inline-flex; align-items: center; gap: 4px; }
+
+
+
+.meta-divider { color: var(--color-border); font-size: 10px; margin: 0 2px; }
+
+.meta-link {
+    color: var(--color-info);
+    text-decoration: none;
+    transition: color 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.news-card-desc {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.65;
+    max-width: 68ch;
+    margin-bottom: 16px;
+}
+
+.news-card-why {
+    border-left: 3px solid var(--card-accent, var(--color-success));
+    background: color-mix(in srgb, var(--card-accent, var(--color-success)) 5%, white);
+    padding: 12px 16px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.judgment-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--card-accent, var(--color-success));
+    margin-bottom: 6px;
+}
+
+.judgment-text {
+    font-size: 13px;
+    color: var(--color-text-primary);
+    line-height: 1.6;
+}
+
+.insight-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-purple);
+    background: color-mix(in srgb, var(--color-purple) 10%, white);
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    margin-bottom: 8px;
+}
+
+.insight-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    line-height: 1.4;
+    margin-bottom: 12px;
+}
+
+.insight-trend {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    padding-top: 8px;
+    border-top: 1px solid var(--color-border-light);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+
+
+
+
+
+
+
+.meta-icon {
+    opacity: 0.6;
+}
+
+
 </style>
 </head>
 <body>
