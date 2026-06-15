@@ -34,13 +34,6 @@ CUSTOM_CSS = BASE_DIR / "templates" / "ai-insight-custom.css"
 ACCENT_MAP = {"purple":"var(--color-purple)","info":"var(--color-info)",
               "success":"var(--color-success)","warning":"var(--color-warning)","danger":"var(--color-danger)"}
 
-SECTION_META = {
-    "llm":        {"icon": "🧠", "label": "大模型",    "h2_suffix": "大模型本周动态"},
-    "coding":     {"icon": "⌨️", "label": "AI Coding", "h2_suffix": "AI Coding本周动态"},
-    "app":        {"icon": "📱", "label": "AI应用",    "h2_suffix": "AI应用本周动态"},
-    "industry":   {"icon": "🏭", "label": "AI行业",    "h2_suffix": "AI行业本周动态"},
-    "enterprise": {"icon": "🔄", "label": "企业转型",   "h2_suffix": "企业AI转型本周动态"},
-}
 
 # SVG icons for sidebar TOC — replaces emoji in structural elements (#124 format upgrade)
 # Source: W22 manual upgrade (2026-06-01), now codified in script
@@ -60,6 +53,17 @@ SVG_ICONS = {
     "calendar":    '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="4"/><line x1="8" y1="2" x2="8" y2="4"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
     "newspaper":   '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/></svg>',
     "globe":       '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
+    "home":        '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10l9-7 9 7v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg>',
+    "trophy":      '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.83-1 .83s-1-.28-1-.83v-2.34"/><path d="M14 14.66V17c0 .55.47.83 1 .83s1-.28 1-.83v-2.34"/><line x1="12" y1="3" x2="12" y2="14"/><path d="M6 4v5a6 6 0 0 0 12 0V4"/></svg>',
+    "link":        '<svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>',
+}
+
+SECTION_META = {
+    "llm":        {"icon": SVG_ICONS["llm"], "label": "大模型",    "h2_suffix": "大模型本周动态"},
+    "coding":     {"icon": SVG_ICONS["coding"], "label": "AI Coding", "h2_suffix": "AI Coding本周动态"},
+    "app":        {"icon": SVG_ICONS["app"], "label": "AI应用",    "h2_suffix": "AI应用本周动态"},
+    "industry":   {"icon": SVG_ICONS["industry"], "label": "AI行业",    "h2_suffix": "AI行业本周动态"},
+    "enterprise": {"icon": SVG_ICONS["enterprise"], "label": "企业转型",   "h2_suffix": "企业AI转型本周动态"},
 }
 
 # 68ch line width CSS for body text paragraphs (#124 format upgrade)
@@ -104,7 +108,7 @@ def render_overview(d):
     for s in stats:
         st += f'  <div class="stat-card {s.get("class","stat-info")}"><div class="stat-value">{s["value"]}</div><div class="stat-label">{s["label"]}</div></div>\n'
     st += '</div>'
-    return f'<section id="overview">\n<div class="doc-chapter-label animate-on-scroll">概览</div>\n<h2 class="animate-on-scroll">📋 本周概览</h2>\n{tbl}\n{st}\n</section>'
+    return f'<section id="overview">\n<div class="doc-chapter-label animate-on-scroll">概览</div>\n<h2 class="animate-on-scroll">{SVG_ICONS["overview"]} 本周概览</h2>\n{tbl}\n{st}\n</section>'
 
 def render_top5(d):
     # SVG icons for meta items (#124 format upgrade: emoji→SVG)
@@ -125,15 +129,15 @@ def render_top5(d):
         if secondary:
             meta_secondary = f'<span class="meta-divider">·</span><a href="{secondary_url}" target="_blank" class="meta-link">{svg_link} {secondary}</a>' if secondary_url else f'<span class="meta-divider">·</span><span class="meta-item">{secondary}</span>'
         cards += f'<div class="news-card animate-on-scroll" style="--card-accent: {ac};">\n  <div class="news-card-rank">TOP {item["rank"]} · {item.get("label","")}</div>\n  <div class="news-card-title">{item["title"]}</div>\n  <div class="news-card-meta">{meta_date}{meta_source}{meta_secondary}</div>\n  <div class="news-card-desc">{item["desc"]}</div>\n  <div class="news-card-why"><div class="judgment-label">关键判断</div>{item["why"]}</div>\n</div>\n'
-    return f'<section id="top5">\n<div class="doc-chapter-label animate-on-scroll">Top 5</div>\n<h2 class="animate-on-scroll">🏆 本周 Top 5 事件</h2>\n{cards}\n</section>'
+    return f'<section id="top5">\n<div class="doc-chapter-label animate-on-scroll">Top 5</div>\n<h2 class="animate-on-scroll">{SVG_ICONS["trophy"]} 本周 Top 5 事件</h2>\n{cards}\n</section>'
 
 def render_insights(d):
     cards = ""
     for item in d.get("insights",[]):
         links = item.get("trend_links",[])
         tl = " · ".join(f'<a href="{l["url"]}" target="_blank">{l["text"]}</a>' for l in links) if links else ""
-        cards += f'<div class="insight-card animate-on-scroll">\n  <div class="insight-tag">{item["tag_label"]}</div>\n  <div class="insight-title">{item["title"]}</div>\n  <p style="font-family:var(--font-family-cn);line-height:1.75;font-size:13px;">{item["content"]}</p>\n  <div class="insight-trend">🔗 {tl}</div>\n</div>\n'
-    return f'<section id="insight">\n<div class="doc-chapter-label animate-on-scroll">洞察</div>\n<h2 class="animate-on-scroll">💡 周度洞察</h2>\n{cards}\n</section>'
+        cards += f'<div class="insight-card animate-on-scroll">\n  <div class="insight-tag">{item["tag_label"]}</div>\n  <div class="insight-title">{item["title"]}</div>\n  <p style="font-family:var(--font-family-cn);line-height:1.75;font-size:13px;">{item["content"]}</p>\n  <div class="insight-trend">{SVG_ICONS["link"]} {tl}</div>\n</div>\n'
+    return f'<section id="insight">\n<div class="doc-chapter-label animate-on-scroll">洞察</div>\n<h2 class="animate-on-scroll">{SVG_ICONS["insight"]} 周度洞察</h2>\n{cards}\n</section>'
 
 def render_link_insight(d):
     li = d.get("link_insight",{})
@@ -142,7 +146,7 @@ def render_link_insight(d):
     for k in ["turning_point","paradox","takeaway"]:
         b = li.get(k,{})
         if b: blocks += f'<div class="callout {b.get("class","callout-info")} animate-on-scroll" style="margin-top:16px;">{b.get("content","")}</div>\n'
-    return f'<section id="linkinsight">\n<div class="doc-chapter-label animate-on-scroll">林克的洞察</div>\n<h2 class="animate-on-scroll">🧠 林克的洞察</h2>\n{intro}\n{blocks}\n</section>'
+    return f'<section id="linkinsight">\n<div class="doc-chapter-label animate-on-scroll">林克的洞察</div>\n<h2 class="animate-on-scroll">{SVG_ICONS["linkinsight"]} 林克的洞察</h2>\n{intro}\n{blocks}\n</section>'
 
 def md_link_to_html(text):
     """Convert markdown links [text](url) to HTML <a> tags. Defensive cleaner.
@@ -196,13 +200,13 @@ def render_section(key, sec):
 def render_daily_index(d):
     items = d.get("daily_index",[])
     cards = "".join(f'<div class="daily-item">\n  <div class="daily-item-date">{i["date"]} {i["weekday"]}</div>\n  <a href="{i["url"]}" target="_blank" class="daily-item-link">{i["title"]}</a>\n  <div class="daily-item-kw">{i.get("keywords","")}</div>\n</div>\n' for i in items)
-    return f'<section id="dailyindex">\n<div class="doc-chapter-label animate-on-scroll">日报索引</div>\n<h2 class="animate-on-scroll">📅 本周日报索引</h2>\n<div class="daily-index animate-on-scroll">\n{cards}\n</div>\n</section>'
+    return f'<section id="dailyindex">\n<div class="doc-chapter-label animate-on-scroll">日报索引</div>\n<h2 class="animate-on-scroll">{SVG_ICONS["dailyindex"]} 本周日报索引</h2>\n<div class="daily-index animate-on-scroll">\n{cards}\n</div>\n</section>'
 
 def render_vocab(d):
     items = d.get("vocab",[])
     if not items: return ""
     rows = "".join(f'<tr><td style="font-weight:600;">{i["term"]}</td><td>{i["definition"]}</td><td>{i.get("source","")}</td></tr>\n' for i in items)
-    return f'<section id="vocab">\n<div class="doc-chapter-label animate-on-scroll">技术词汇</div>\n<h2 class="animate-on-scroll">📖 技术词汇表</h2>\n<div class="table-wrap animate-on-scroll">\n<table><thead><tr><th>术语</th><th>定义</th><th>出处</th></tr></thead>\n<tbody>{rows}</tbody></table></div>\n</section>'
+    return f'<section id="vocab">\n<div class="doc-chapter-label animate-on-scroll">技术词汇</div>\n<h2 class="animate-on-scroll">{SVG_ICONS["vocab"]} 技术词汇表</h2>\n<div class="table-wrap animate-on-scroll">\n<table><thead><tr><th>术语</th><th>定义</th><th>出处</th></tr></thead>\n<tbody>{rows}</tbody></table></div>\n</section>'
 
 def render_narrative(d):
     n = d.get("narrative",{})
@@ -212,13 +216,13 @@ def render_narrative(d):
     conc = ""
     if n.get("conclusion_callout"):
         conc = f'<hr style="border:none;border-top:2px solid var(--color-success);margin:32px 0;">\n<div class="callout callout-success animate-on-scroll">{n["conclusion_callout"]}</div>'
-    return f'<section id="narrative">\n<div class="doc-chapter-label animate-on-scroll">宏观叙事</div>\n<h2 class="animate-on-scroll">🌊 宏观叙事：{n.get("title","")}</h2>\n{intro}\n{blocks}\n{conc}\n</section>'
+    return f'<section id="narrative">\n<div class="doc-chapter-label animate-on-scroll">宏观叙事</div>\n<h2 class="animate-on-scroll">{SVG_ICONS["narrative"]} 宏观叙事：{n.get("title","")}</h2>\n{intro}\n{blocks}\n{conc}\n</section>'
 
 LEARN_MORE = '''<div style="max-width:var(--content-max);margin:0 auto;padding:16px 20px 48px;">
 <div style="background:linear-gradient(135deg,#F8FAFB 0%,#EEF2F6 100%);border:1px solid #E7E5E4;border-radius:14px;padding:24px;box-shadow:0 2px 8px rgba(31,35,40,.06)">
-  <div style="font-size:16px;font-weight:700;margin-bottom:8px">💡 了解更多</div>
+  <div style="font-size:16px;font-weight:700;margin-bottom:8px">{SVG_ICONS["insight"]} 了解更多</div>
   <p style="font-size:14px;color:#57534E;line-height:1.7;margin:0 0 12px 0">AI洞察是系统化追踪AI行业动态的项目，覆盖大模型、AI Coding、AI应用、AI行业投融资、企业AI转型五大领域。</p>
-  <a href="{INTERNAL_BASE}/" target="_blank" style="display:inline-flex;padding:8px 16px;background:linear-gradient(135deg,#059669,#10B981);color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none">🏠 访问AI洞察首页</a>
+  <a href="{INTERNAL_BASE}/" target="_blank" style="display:inline-flex;padding:8px 16px;background:linear-gradient(135deg,#059669,#10B981);color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none">{SVG_ICONS["home"]} 访问AI洞察首页</a>
 </div></div>'''
 
 def render_sidebar(d):
@@ -262,7 +266,7 @@ def generate_html(d):
     if n: body_secs.append(n)
     body_secs.append(LEARN_MORE)
     
-    footer = f'<div class="doc-footer"><p>🧠 林克（沈浪的AI分身） · AI洞察 · 周报 · {wid}</p><p style="margin-top:4px;">数据来源：AI洞察日报 {d.get("date_range","")} · 5板块</p></div>'
+    footer = f'<div class="doc-footer"><p>{SVG_ICONS["llm"]} 林克（沈浪的AI分身） · AI洞察 · 周报 · {wid}</p><p style="margin-top:4px;">数据来源：AI洞察日报 {d.get("date_range","")} · 5板块</p></div>'
     sidebar = render_sidebar(d)
     
     fav = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232563EB'/%3E%3Ctext x='6' y='23' font-size='18' fill='white'%3E⚡%3C/text%3E%3C/svg%3E"
