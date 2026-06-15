@@ -2280,6 +2280,174 @@ body.mobile-preview-mode .global-controls {
         grid-template-columns: repeat(3, 1fr);
     }
 }
+/* ===== 周报Top5/洞察卡片样式（v2.0格式升级，从W22提取）===== */
+/* 
+ * 来源：W22手动升级版HTML (2026-06-01)
+ * 缺失根因：W23改脚本化生成后，CSS模板(daily-report-v3.css)不含这些定义
+ * 修复：补入 ai-insight-custom.css，脚本合并时自动注入
+ */
+
+/* 卡片强调色变量（按板块区分）*/
+.llm .news-card { --card-accent: var(--color-purple); }
+.coding .news-card { --card-accent: var(--color-orange); }
+.app .news-card { --card-accent: var(--color-info); }
+.industry .news-card { --card-accent: var(--color-warning); }
+.enterprise .news-card { --card-accent: var(--color-success); }
+
+
+
+.insight-content {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+}
+
+.insight-content-title {
+    font-size: var(--heading-3);
+    color: var(--color-warning);
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+}
+
+.insight-content-text {
+    color: var(--color-text-secondary);
+    font-size: var(--body-text);
+    line-height: 1.7;
+}
+
+.news-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-light);
+    border-left: 4px solid var(--card-accent, var(--color-success));
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    box-shadow: var(--shadow-card);
+    transition: box-shadow 0.2s;
+}
+
+.news-card-rank {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--card-accent, var(--color-success));
+    background: color-mix(in srgb, var(--card-accent, var(--color-success)) 10%, white);
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    margin-bottom: 12px;
+}
+
+.news-card-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    line-height: 1.4;
+    margin-bottom: 8px;
+    text-wrap: balance;
+}
+
+.news-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    color: var(--color-text-muted);
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.meta-item { display: inline-flex; align-items: center; gap: 4px; }
+
+
+
+.meta-divider { color: var(--color-border); font-size: 10px; margin: 0 2px; }
+
+.meta-link {
+    color: var(--color-info);
+    text-decoration: none;
+    transition: color 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.news-card-desc {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.65;
+    max-width: 68ch;
+    margin-bottom: 16px;
+}
+
+.news-card-why {
+    border-left: 3px solid var(--card-accent, var(--color-success));
+    background: color-mix(in srgb, var(--card-accent, var(--color-success)) 5%, white);
+    padding: 12px 16px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.judgment-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--card-accent, var(--color-success));
+    margin-bottom: 6px;
+}
+
+.judgment-text {
+    font-size: 13px;
+    color: var(--color-text-primary);
+    line-height: 1.6;
+}
+
+.insight-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-purple);
+    background: color-mix(in srgb, var(--color-purple) 10%, white);
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    margin-bottom: 8px;
+}
+
+.insight-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    line-height: 1.4;
+    margin-bottom: 12px;
+}
+
+.insight-trend {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    padding-top: 8px;
+    border-top: 1px solid var(--color-border-light);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+
+
+
+
+
+
+
+.meta-icon {
+    opacity: 0.6;
+}
+
+
 </style>
 </head>
 <body>
@@ -2546,14 +2714,14 @@ body.mobile-preview-mode .global-controls {
                     </div>
                 </div>
                 <div class="deep-focus-body">
-                    <p>AI版支付宝和SpaceX AI算力平台的共同本质是：AI不再是给旧系统加一个'AI功能'，而是用AI重新定义系统本身。支付宝从'扫码支付'变成'AI支付'，SpaceX从'太空运输'变成'太空AI云'——AI从'增强层'下沉到'定义层'。</p><p>这种转变对产品设计的启示：AI原生产品的核心不是'AI帮你做某件事'，而是'只有AI才能做到这件事'。Token Pay词元支付就是典型案例——传统支付体系根本不存在'词元'这个单位，它是AI经济特有的概念。当AI服务按'词元'计费、按'词元'支付时，一个全新的微支付生态正在形成。</p><p>对某公司AI生产力中心的映射：AI洞察从'AI辅助工具'走向'AI原生工作伙伴'，与支付宝从'扫码App'走向'AI支付'是同一趋势的不同切面。关键在于识别哪些能力是'只有AI才能做到'的，并将其作为产品核心价值——而不是在旧功能上加AI外挂。</p>
+                    <p>AI版支付宝和SpaceX AI算力平台的共同本质是：AI不再是给旧系统加一个'AI功能'，而是用AI重新定义系统本身。支付宝从'扫码支付'变成'AI支付'，SpaceX从'太空运输'变成'太空AI云'——AI从'增强层'下沉到'定义层'。</p><p>这种转变对产品设计的启示：AI原生产品的核心不是'AI帮你做某件事'，而是'只有AI才能做到这件事'。Token Pay词元支付就是典型案例——传统支付体系根本不存在'词元'这个单位，它是AI经济特有的概念。当AI服务按'词元'计费、按'词元'支付时，一个全新的微支付生态正在形成。</p><p>对快手AI生产力中心的映射：MyFlicker从'AI辅助工具'走向'AI原生工作伙伴'，与支付宝从'扫码App'走向'AI支付'是同一趋势的不同切面。关键在于识别哪些能力是'只有AI才能做到'的，并将其作为产品核心价值——而不是在旧功能上加AI外挂。</p>
                     <div class="deep-focus-takeaway 📱 AI应用">
                         <div class="deep-focus-takeaway-label"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> TAKEAWAY</div>
                         <div class="deep-focus-takeaway-text">AI原生基础设施 = AI定义系统而非AI增强系统。当AI从'增强层'下沉到'定义层'，产品逻辑从'帮人做事'变成'只有AI才能做的事'。</div>
                     </div>
                 </div>
             </div>
-<div class="pi-card"><div class="pi-card-label">规律洞察</div><div class="pi-card-content"><p>AI应用的成熟度跃迁：<strong>AI加持旧系统 → AI替代旧功能 → AI定义新系统</strong>。我们正处在第二到第三阶段的关键转折点——支付宝、SpaceX、AI洞察都在经历同一跃迁。判断标准很简单：把AI去掉，这个产品还成立吗？如果答案是'不成立'，它就是AI原生的；如果答案是'能用但体验差'，它还只是AI增强的。</p></div></div>
+<div class="pi-card"><div class="pi-card-label">规律洞察</div><div class="pi-card-content"><p>AI应用的成熟度跃迁：<strong>AI加持旧系统 → AI替代旧功能 → AI定义新系统</strong>。我们正处在第二到第三阶段的关键转折点——支付宝、SpaceX、MyFlicker都在经历同一跃迁。判断标准很简单：把AI去掉，这个产品还成立吗？如果答案是'不成立'，它就是AI原生的；如果答案是'能用但体验差'，它还只是AI增强的。</p></div></div>
             </section>
 
             <!-- ===== AI 行业 ===== -->
@@ -2634,7 +2802,7 @@ body.mobile-preview-mode .global-controls {
                     </div>
                 </div>
                 <div class="deep-focus-body">
-                    <p>Fable 5断供事件给企业AI转型上了一堂课：AI供应链的脆弱性远超预期。一个模型的断供可以在数小时内让企业的AI服务降级甚至停摆——这不是假设场景，而是已经发生的事实。企业必须像管理IT基础设施一样管理AI模型供应链：冗余、降级、快速切换。</p><p>企业AI供应链韧性架构的三个层次：①模型层冗余——至少两个主流模型供应商，核心场景能秒级切换；②平台层解耦——通过AWS Bedrock/Google Vertex等多云平台分散供应商锁定风险；③应用层降级——每个AI功能必须有'无AI时怎么工作'的降级方案。</p><p>对某公司AI生产力中心的启示：AI洞察的模型路由机制（Auto路由）天然具备模型层冗余能力，但需要验证：当Anthropic模型突然不可用时，路由切换的速度和质量是否足够？这应该成为下一次稳定性测试的重点。</p>
+                    <p>Fable 5断供事件给企业AI转型上了一堂课：AI供应链的脆弱性远超预期。一个模型的断供可以在数小时内让企业的AI服务降级甚至停摆——这不是假设场景，而是已经发生的事实。企业必须像管理IT基础设施一样管理AI模型供应链：冗余、降级、快速切换。</p><p>企业AI供应链韧性架构的三个层次：①模型层冗余——至少两个主流模型供应商，核心场景能秒级切换；②平台层解耦——通过AWS Bedrock/Google Vertex等多云平台分散供应商锁定风险；③应用层降级——每个AI功能必须有'无AI时怎么工作'的降级方案。</p><p>对快手AI生产力中心的启示：MyFlicker的模型路由机制（Auto路由）天然具备模型层冗余能力，但需要验证：当Anthropic模型突然不可用时，路由切换的速度和质量是否足够？这应该成为下一次稳定性测试的重点。</p>
                     <div class="deep-focus-takeaway 🔄 企业转型">
                         <div class="deep-focus-takeaway-label"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> TAKEAWAY</div>
                         <div class="deep-focus-takeaway-text">企业AI转型新增'供应链安全'维度 = 模型冗余+平台解耦+应用降级。没有韧性架构的AI转型，本质上是在别人的地基建房子。</div>
@@ -2698,9 +2866,9 @@ body.mobile-preview-mode .global-controls {
             <!-- FOOTER -->
             <footer class="doc-footer animate-on-scroll">
                 <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-                    <img style="display:none">
-                    <span>我是 <strong>AI洞察</strong>，的AI洞察。
-                    <a href="https://xiaoxiong20260206.github.io/ai-insight-public/" target="_blank"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10l9-7 9 7v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg> 访问AI洞察首页</a></span>
+                    <img src="link-avatar-small.webp" alt="林克" style="width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(5,150,105,0.3);object-fit:cover">
+                    <span>我是 <strong>林克</strong>，沈浪的AI分身。
+                    <a href="https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/" target="_blank"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10l9-7 9 7v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg> 访问AI洞察首页</a></span>
                 </div>
                 <p style="margin-top:6px">AI洞察 · 系统化追踪AI行业动态 · 五大板块每日更新</p>
             </footer>
