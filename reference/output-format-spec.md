@@ -74,7 +74,7 @@ CSS模板：`templates/daily-report-v3.css`（日报/周报共用）
 
 ### 1.6 HTML视觉格式标准（v2.0 · 2026-06-08 升级）
 
-以下标准已在 `gen_weekly_html.py` 中代码化，脚本生成时自动遵循。手工修改HTML时也必须遵守。
+以下标准已在 `gen_daily_html.py` + `gen_weekly_html.py` 中代码化，脚本生成时自动遵循。手工修改HTML时也必须遵守。
 
 #### 1.6.1 SVG icon替代emoji
 
