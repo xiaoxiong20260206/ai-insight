@@ -1117,3 +1117,57 @@ W22周报在6月1日经过四轮手工格式升级（emoji→SVG icons + 68ch行
 
 这条和#122（"修复失败走脚本不走记忆"）是同一个原则的不同侧面：**脚本化流程 = 单一信源，修改输出不修改脚本 = 债务**。
 
+---
+
+## 经验#126 — 2026-06-15 — Header副标题+底部对齐+内外版URL全错（手动操作绕脚本3例）
+
+### 问题描述
+W24周报上线后用户反馈3个问题：
+1. Header副标题文字太挤，和badge/meta挤在一起，辨识度差
+2. 底部"了解更多"区域宽度与上面内容区不对齐
+3. 外部版所有链接都指向内部版URL（14处）
+
+### 根因链
+
+三个问题的根因模式完全相同——**手动操作绕过了脚本自动化保障**：
+
+| 问题 | 直接原因 | 系统原因 |
+|------|---------|---------|
+| Header副标题 | 旧模板margin-top:2px+max-width:640px | gen_weekly_html.py模板未更新 |
+| 底部不对齐 | 了解更多外层div有独立max-width+doc-footer无max-width | 模板+CSS未考虑content-inner双约束 |
+| URL全错 | 手动修改HTML后直接cp到外部仓库 | 跳过sync_to_external.py的URL替换 |
+
+### 修复动作
+
+**1. Header副标题**：
+- 字号14px→13px，颜色secondary→muted，margin-top:2px→14px，去640px max-width
+- gen_weekly_html.py新增subtitle字段渲染（从JSON读取）
+
+**2. 底部对齐**：
+- 了解更多外层div：max-width:var(--content-max)→max-width:100%，padding:16px 20px 48px→0 0 48px
+- doc-footer CSS：加max-width:100%
+- 核心原则：content-inner已有max-width:960px，子元素不需要再加约束
+
+**3. URL分离**：
+- 外部版走sync_to_external.py脚本（自动替换INTERNAL→EXTERNAL），禁止手动cp
+- 验证：外部版零残留internal URL
+
+### 已代码化的防线
+
+| 防线 | 位置 | 说明 |
+|------|------|------|
+| Header副标题渲染 | gen_weekly_html.py | JSON新增subtitle字段，模板用13px+muted+14px间距 |
+| 底部对齐模板 | gen_weekly_html.py LEARN_MORE | max-width:100%+无水平padding |
+| doc-footer CSS | daily-report-v3.css | max-width:100% |
+| 自校验增强 | gen_weekly_html.py validate_html() | 检测margin-top:2px/max-width:640px/双约束 |
+| 外部版URL规范 | output-format-spec.md §5.1 | P0红线：禁止手动cp，必须走脚本 |
+| 自检清单+2项 | weekly-report.md | #7外部版零残留internal URL + #8 Header副标题间距 |
+
+### ⛔ 红线（新增）
+
+**1. 外部版部署必须走sync_to_external.py脚本，禁止手动cp HTML到外部仓库。** 脚本不只做文件复制，更做URL替换（INTERNAL→EXTERNAL）。手动cp = 14处链接全错 = 外部用户点跳SSO。
+
+**2. 在content-inner(max-width:960px)内，子容器不需要再加独立max-width。** 双约束=更窄=和上面内容不对齐。子元素跟随父容器宽度，只管内容不管布局。
+
+**3. Header副标题需要独立视觉空间。** margin-top≥14px，字号≤13px，颜色用muted而非secondary。
+

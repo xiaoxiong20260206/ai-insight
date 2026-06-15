@@ -231,8 +231,8 @@ def render_narrative(d):
         conc = f'<hr style="border:none;border-top:2px solid var(--color-success);margin:32px 0;">\n<div class="callout callout-success animate-on-scroll">{n["conclusion_callout"]}</div>'
     return f'<section id="narrative">\n<div class="doc-chapter-label animate-on-scroll">宏观叙事</div>\n<h2 class="animate-on-scroll">{SVG_ICONS["narrative"]} 宏观叙事：{n.get("title","")}</h2>\n{intro}\n{blocks}\n{conc}\n</section>'
 
-LEARN_MORE = '''<div style="max-width:var(--content-max);margin:0 auto;padding:16px 20px 48px;">
-<div style="background:linear-gradient(135deg,#F8FAFB 0%,#EEF2F6 100%);border:1px solid #E7E5E4;border-radius:14px;padding:24px;box-shadow:0 2px 8px rgba(31,35,40,.06)">
+LEARN_MORE = '''<div style="max-width:100%;margin:0 auto;padding:0 0 48px;">
+<div style="background:linear-gradient(135deg,#F8FAFB 0%,#EEF2F6 100%);border:1px solid #E7E5E4;border-radius:14px;padding:24px 28px;box-shadow:0 2px 8px rgba(31,35,40,.06)">
   <div style="font-size:16px;font-weight:700;margin-bottom:8px">{SVG_ICONS["insight"]} 了解更多</div>
   <p style="font-size:14px;color:#57534E;line-height:1.7;margin:0 0 12px 0">AI洞察是系统化追踪AI行业动态的项目，覆盖大模型、AI Coding、AI应用、AI行业投融资、企业AI转型五大领域。</p>
   <a href="{INTERNAL_BASE}/" target="_blank" style="display:inline-flex;padding:8px 16px;background:linear-gradient(135deg,#059669,#10B981);color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none">{SVG_ICONS["home"]} 访问AI洞察首页</a>
@@ -266,7 +266,9 @@ def generate_html(d):
     css_block = f"<style>\n{base_css}\n\n/* ===== 日报组件层 ===== */\n{rep_css}\n\n/* ===== AI洞察定制层 ===== */\n{cust_css}\n\n{LINE_WIDTH_CSS}\n</style>"
     js_block = TEMPLATE_JS_FILE.read_text(encoding="utf-8") if TEMPLATE_JS_FILE.exists() else "<script></script>"
     
-    header = f'<header class="doc-header">\n  <div class="header-badge">AI INSIGHT · WEEKLY REPORT · {d["week_num"]}</div>\n  <h1 class="header-title">AI 周报 {d["year"]}年第{d["week_num"]}周</h1>\n  <p class="header-meta"><span>{SVG_ICONS["calendar"]} {d["date_range"]}</span><span>{SVG_ICONS["newspaper"]} 覆盖7天日报 · 5板块</span><span>{SVG_ICONS["globe"]} 海外+国内</span></p>\n</header>'
+    subtitle = d.get("subtitle","")
+    subtitle_html = f'\n  <div style="clear:both;display:block;width:100%;font-size:13px;color:var(--color-text-muted);margin-top:14px;margin-bottom:16px;line-height:1.8;max-width:100%;letter-spacing:0.01em;">{subtitle}</div>' if subtitle else ""
+    header = f'<header class="doc-header">\n  <div class="header-badge">AI INSIGHT · WEEKLY REPORT · {d["week_num"]}</div>\n  <h1 class="header-title">AI 周报 {d["year"]}年第{d["week_num"]}周</h1>{subtitle_html}\n  <p class="header-meta"><span>{SVG_ICONS["calendar"]} {d["date_range"]}</span><span>{SVG_ICONS["newspaper"]} 覆盖7天日报 · 5板块</span><span>{SVG_ICONS["globe"]} 海外+国内</span></p>\n</header>'
     
     body_secs = [header, render_overview(d), render_top5(d), render_insights(d), render_link_insight(d)]
     for k in ["llm","coding","app","industry","enterprise"]:
@@ -338,6 +340,11 @@ def validate_html(html, wid):
     if md_links: errs.append(f"HTML包含{len(md_links)}处未渲染Markdown链接[text](url)（#124防复发）")
     empty_hrefs = html.count('href=""')
     if empty_hrefs: errs.append(f"HTML包含{empty_hrefs}处空href链接（#124防复发）")
+    # #W24-0615: Header副标题间距检查
+    if 'margin-top:2px' in html and 'clear:both' in html: errs.append("副标题margin-top=2px太挤，需≥14px（#W24-0615）")
+    if 'max-width:640px' in html and 'clear:both' in html: errs.append("副标题max-width=640px在content-inner内双约束，需100%（#W24-0615）")
+    # #W24-0615: 了解更多模块双约束检查
+    if 'max-width:var(--content-max)' in html and 'padding:16px 20px 48px' in html: errs.append("了解更多外层div有独立max-width约束，需改为100%（#W24-0615）")
     if errs:
         print(f"\n❌ HTML自校验失败 ({len(errs)}):")
         for e in errs: print(f"  • {e}")
