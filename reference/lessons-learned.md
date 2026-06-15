@@ -1171,3 +1171,23 @@ W24周报上线后用户反馈3个问题：
 
 **3. Header副标题需要独立视觉空间。** margin-top≥14px，字号≤13px，颜色用muted而非secondary。
 
+
+### #127 Skill更新未同步Cron Payload（2026-06-15）
+
+**现象**：W24周报修了4个bug（Header副标题+底部对齐+内外版URL分离+手动cp绕脚本），更新了output-format-spec.md和weekly-report.md，但AI洞察日报和周报的cron payload没有同步——cron agent仍按旧规则执行。
+
+**根因**：没有"Skill更新→检查cron→同步payload"的闭环机制。Skill是source of truth，但cron payload是"内存中的副本"，两者没有同步钩子。
+
+**3条红线**：
+1. **Skill更新后必须检查对应cron payload** — P0红线/流程/推送规则变更时，检查MEMORY.md的Skill-Cron映射表，逐个核对
+2. **Cron payload不能与Skill矛盾** — 如果Skill说"双渠道推送"，cron不能说"不推KIM卡片"
+3. **新增P0规则必须同时写Skill+Cron** — 不能只写一处
+
+**本次修复**：
+- AI洞察日报cron：+output-format-spec.md§5.1加载 +Step 5.5交付链接 +URL SSoT意识 +禁止手动cp
+- AI洞察周报cron：+§5.1加载 +#126踩坑 +3条P0红线(URL SSoT/Header副标题/底部对齐) +5b验证说明 +禁止手动cp +Step 5.5交付链接
+- 积分日报cron：+产品发动机群推送 +禁止纯文本链接
+- 积分周报cron：+KIM Doc+MixCard双渠道(纠正旧"不推KIM卡片") +产品下钻归因 +edit禁令 +表格分隔行校验 +群发空间 +禁止纯文本链接
+- 周修炼cron：+沈浪分身已删除(4→3分身)
+
+**规则沉淀**：AGENTS.md Red Lines + MEMORY.md Skill-Cron映射表
