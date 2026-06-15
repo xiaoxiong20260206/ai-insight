@@ -168,37 +168,64 @@ def fix_footer_urls() -> int:
         if '-v3.html' in new_content:
             new_content = new_content.replace('-v3.html', '.html')
         
-        # P0 #126: 外部版日报/周报HTML基本脱敏（身份信息）
-        # 这些替换对日报/周报通用：了解更多身份介绍、footer签名等
-        identity_swaps = [
-            ('沈浪的AI分身', 'AI洞察'),
-            ('，沈浪的AI分身', ''),  # "林克，沈浪的AI分身" → "林克"
-            ('沈浪', ''),  # 残留的"沈浪"
+        # P0 #126: 外部版日报/周报HTML脱敏
+        # 与 output-format-spec.md §五脱敏规则表 + sync_to_public.py REPLACEMENTS 保持一致
+        # 此列表是日报/周报级脱敏（首页级脱敏由sync_to_public.py的sanitize_html处理）
+        import re as _re_for_sanitize
+        _SANITIZE_RULES = [
+            # 身份信息
+            (r'沈浪的AI分身', 'AI洞察'),
+            (r'，沈浪的AI分身', ''),
+            (r'沈浪', ''),
+            (r'AI分身', 'AI洞察'),
+            (r'让我负责', ''),
+            (r'林克的AI洞察', 'AI行业洞察'),
+            (r'林克实现', 'AI实现'),
+            # 页脚/署名
+            (r'林克（沈浪的AI分身）· AI洞察', 'AI洞察'),
+            (r'由 <strong>林克</strong>（沈浪的AI分身）完成洞察', 'AI洞察'),
+            (r'由林克（沈浪的AI分身）每日更新', '每日更新'),
+            (r'由林克 AI 洞察系统生成', '由 AI 洞察系统生成'),
+            # 平台/产品名
+            (r'MyFlicker', 'AI洞察'),
+            (r'myflicker', 'ai-insight'),
+            (r'Powered by MyFlicker ❤️🔥（沈浪的AI工作伙伴）', 'Powered by ❤️🔥'),
+            (r'Powered by MyFlicker ❤️🔥', 'Powered by ❤️🔥'),
+            # 文件名/头像
+            (r'link-avatar', 'ai-insight-logo'),
         ]
-        for old, new in identity_swaps:
-            if old in new_content:
-                new_content = new_content.replace(old, new)
+        for pattern, replacement in _SANITIZE_RULES:
+            new_content = _re_for_sanitize.sub(pattern, replacement, new_content)
         
         if new_content != content:
             with open(html_file, 'w', encoding='utf-8') as f:
                 f.write(new_content)
             fixed += 1
     
-    # P0 #126: 替换后验证零残留internal URL
-    residuals = 0
+    # P0 #126: 替换后验证零残留
+    _SENSITIVE_WORDS = ['沈浪', 'AI分身', 'MyFlicker', 'myflicker', '-v3.html']
+    residuals = {}
     for html_file in EXTERNAL_REPO.rglob("*.html"):
         if not html_file.is_file(): continue
         rel = html_file.relative_to(EXTERNAL_REPO)
         if not str(rel).startswith("01-daily-reports/"): continue
         with open(html_file, 'r', encoding='utf-8') as f:
-            if internal_base in f.read():
-                residuals += 1
+            content = f.read()
+        for word in _SENSITIVE_WORDS:
+            if word in content:
+                residuals.setdefault(word, 0)
+                residuals[word] += 1
+    
+    if residuals:
+        print(f"  ❌ ⛔ 外部版仍有敏感词残留（P0 #126）:")
+        for word, count in residuals.items():
+            print(f"      {word}: {count}处")
+        return -1  # hard fail
     
     if fixed > 0:
-        print(f"  ✅ 已修复 {fixed} 个文件的URL（内部→外部全量替换）")
-    if residuals > 0:
-        print(f"  ❌ ⛔ 仍有 {residuals} 个文件残留内部URL（P0 #126）")
-        return -1  # hard fail
+        print(f"  ✅ 已修复 {fixed} 个文件（URL全量替换+脱敏+-v3后缀）")
+    else:
+        print(f"  ✅ 外部版URL+脱敏验证通过，无需修复")
     return fixed
 
 
@@ -534,17 +561,18 @@ def _run_main_logic(args) -> None:
         print("❌ [ABORT] sync_all() 失败，外部文件同步中止")
         sys.exit(1)
     
-    # 步骤 3.5: 修复footer首页URL（P0 #18：内部版URL→外部版URL）
+    # 步骤 3.5: URL替换+脱敏（P0 #126：全量替换+敏感词+零残留验证）
     fix_footer_urls()
     
     # 步骤 4: Git 推送
     if not args.no_push:
         git_push()
     
+    from config import EXTERNAL_PAGES_BASE
     print()
     print("=" * 50)
     print("📊 同步完成!")
-    print(f"🔗 外部版本: https://xiaoxiong20260206.github.io/ai-insight-public/ (GitHub Pages)")
+    print(f"🔗 外部版本: {EXTERNAL_PAGES_BASE}/ (GitHub Pages)")
 
 
 if __name__ == "__main__":
