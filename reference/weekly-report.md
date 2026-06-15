@@ -153,8 +153,13 @@ git add -A && git commit -m "📊 AI周报 YYYY-WXX" && git push origin main
 wc -c 01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html public/01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html
 wc -c index.html public/index.html
 
-# 5b. 外部版同步（自动脱敏+push）
+# 5b. 外部版同步（自动脱敏+URL替换+push）
+# ⛔ 禁止手动cp HTML到外部仓库——必须走脚本，脚本自动做URL替换
+# 手动cp = 所有链接都指向内部URL = 外部用户点进去跳SSO = P0违规
 uv run scripts/sync_to_external.py --full --verify
+
+# 验证外部版零残留internal URL
+grep -c "ai-insight-internal" ai-insight-public/01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html  # 必须=0
 
 # 5c. 内部版 frontend-cloud 部署（P0 — W24踩坑教训）
 # ⚠️ git push只更新GitHub仓库，不触发frontend-cloud部署
@@ -236,6 +241,8 @@ uv run scripts/build_insight_mixcard.py weekly --date YYYY-WXX --output /tmp/car
 | 4 | 外部版首页包含本周周号 | `grep "{week_id}" ai-insight-public/index.html` | ❌ hard fail |
 | 5 | 四链接可达 | 逐一访问4个URL确认HTTP 200 | ❌ hard fail |
 | 6 | MixCard校验通过 | `build_insight_mixcard.py weekly --date {week_id} --verify` | ❌ hard fail |
+| 7 | 外部版零残留internal URL | `grep -c "ai-insight-internal" ai-insight-public/01-daily-reports/{month}/weekly-{week_id}.html` =0 | ❌ hard fail |
+| 8 | Header副标题间距≥14px | 检查HTML中副标题div的margin-top | ❌ hard fail |
 
 **重要**：`update_homepage.py` 如果输出 `❌` 或 `⚠️`，等于验证未通过，**不能继续推送**。必须排查并修复后再继续。
 
@@ -399,6 +406,26 @@ uv run scripts/build_insight_mixcard.py weekly --date YYYY-WXX --output /tmp/car
 | 5 | 外部版push成功 | sync_to_external输出 | ✅ 已推送到外部仓库 |
 | 6 | 四链接HTTP 200 | curl验证 | 302(内部)/200(外部) |
 
+### 2026-06-15: W24周报Header副标题+底部对齐+内外版URL分离
+
+**问题1: Header副标题文字太挤、辨识度差**
+- 根因：副标题紧跟在h1渐变标题下方，margin-top仅2px，字号14px与badge/meta同级，且max-width:640px使文字被挤压
+- 修复：字号14px→13px，颜色secondary→muted（更淡），margin-top:2px→14px，去640px max-width限制
+- **教训①**: Header副标题是"定调句"不是"备注行"——需要独立视觉空间，与标题拉开间距、降低视觉权重（muted色+小字号）
+
+**问题2: 底部"了解更多"区域宽度与上面内容区不对齐**
+- 根因：了解更多外层div有独立的`max-width:var(--content-max)`在content-inner里面又套了一层max-width，加上padding:16px 20px使容器比内容区窄。doc-footer没有max-width约束。
+- 修复：外层div去掉`max-width:var(--content-max)`改为`max-width:100%`，padding改为`0 0 48px`（让内层卡片自定宽），doc-footer加`max-width:100%`
+- **教训②**: **在已有max-width容器（content-inner）内，子元素不需要再加独立max-width——双约束=更窄。子元素跟随父容器宽度，只管内容不管布局**
+
+**问题3: 外部版所有链接都指向内部版URL（最关键）**
+- 根因：本次周报手动编辑HTML时跳过了`sync_to_external.py`的URL替换流程。脚本本身包含`INTERNAL_PAGES_BASE→EXTERNAL_PAGES_BASE`的自动替换，但手动修改→手动cp到外部仓库→没有过脚本=所有14处链接都还是internal URL
+- 修复：`sync_to_external.py --full --verify` 自动替换，验证外部版零残留internal URL
+- **教训③**: **外部版部署必须走sync_to_external.py脚本，禁止手动cp HTML到外部仓库。脚本不只做文件复制，更做URL替换——手动cp = URL全错**
+- **教训④**: **内外版本分离原则：内部版HTML所有链接指向internal域名，外部版HTML所有链接指向external域名。"了解更多"按钮、日报链接、首页按钮都必须区分**
+
+**系统根因总结**：三个问题都指向同一个根因——**手动操作绕过了脚本自动化保障**。gen_weekly_html.py生成时用的是INTERNAL_PAGES_BASE（正确），但手动修改HTML后直接cp到外部仓库，跳过了sync_to_external.py的URL替换=外部版14处链接全错。
+
 ---
 
-_更新于 2026-06-14 · v3.3 · 新增W24复盘(4类问题+6条教训+彻底修复清单+一步到位验证表)_
+_更新于 2026-06-15 · v3.4 · 新增W24 Header/底部对齐/URL分离复盘（3类问题+4条教训）_

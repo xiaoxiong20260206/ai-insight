@@ -25,16 +25,16 @@ CSS模板：`templates/daily-report-v3.css`（日报/周报共用）
 **所有HTML页面底部必须包含此模块，格式统一**：
 
 ```html
-<div style="max-width:var(--content-max-width);margin:0 auto;padding:16px 20px 48px;">
+<div style="max-width:100%;margin:0 auto;padding:0 0 48px;">
 <div style="background:linear-gradient(135deg,#F8FAFB 0%,#EEF2F6 100%);
-  border:1px solid #E7E5E4;border-radius:14px;padding:24px;
+  border:1px solid #E7E5E4;border-radius:14px;padding:24px 28px;
   box-shadow:0 2px 8px rgba(31,35,40,.06)">
   <div style="font-size:16px;font-weight:700;margin-bottom:8px">💡 了解更多</div>
   <p style="font-size:14px;color:#57534E;line-height:1.7;margin:0 0 12px 0">
     我是 <strong>林克</strong>，沈浪的AI分身。AI洞察是系统化追踪AI行业动态的项目，
     覆盖大模型、AI Coding、AI应用、AI行业投融资、企业AI转型五大领域。
   </p>
-  <a href="https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/" target="_blank"
+  <a href="{{HOMEPAGE_URL}}" target="_blank"
     style="display:inline-flex;padding:8px 16px;
     background:linear-gradient(135deg,#059669,#10B981);
     color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none">
@@ -43,6 +43,8 @@ CSS模板：`templates/daily-report-v3.css`（日报/周报共用）
 </div>
 </div>
 ```
+
+> ⚠️ **`{{HOMEPAGE_URL}}` 由脚本自动替换**：内部版=INTERNAL_PAGES_BASE，外部版=EXTERNAL_PAGES_BASE。禁止硬编码具体URL。
 
 | 页面类型 | 模块内容 | 差异 |
 |---------|---------|------|
@@ -71,6 +73,7 @@ CSS模板：`templates/daily-report-v3.css`（日报/周报共用）
 - ❌ 禁止 `[text](url)` Markdown语法出现在HTML中（必须转为 `<a>` 标签）
 - ❌ 禁止 `href=""` 空链接
 - ❌ 禁止在 `.callout`/`.news-card-why`/`.insight-card` 等容器上加 `max-width: 68ch`
+- ❌ 禁止在content-inner内给子容器加独立max-width约束（双约束=更窄，子元素跟随父容器宽度）
 
 ### 1.6 HTML视觉格式标准（v2.0 · 2026-06-08 升级）
 
@@ -104,6 +107,7 @@ rank pill (12px/背景色) → 标题 (18px/600) → meta行 (13px/SVG icon) →
 - **容器**：`width: 100%`，撑满父宽度（`.callout`, `.news-card-why`, `.insight-card` 等）
 - **段落文字**：`max-width: 68ch`，提高可读性（`.news-card-desc`, `.callout > p`, `.insight-card p` 等）
 - CSS规则在 `gen_weekly_html.py` 的 `LINE_WIDTH_CSS` 中定义
+- **⚠️ W24踩坑**: 在content-inner(max-width:960px)内，子容器不需要再加max-width——双约束=更窄=和上面内容不对齐
 
 #### 1.6.4 概览图/配图位置
 
@@ -115,6 +119,19 @@ rank pill (12px/背景色) → 标题 (18px/600) → meta行 (13px/SVG icon) →
 - `gen_weekly_html.py` 的 `md_link_to_html()` 函数自动将 `[text](url)` 转为 `<a>` 标签
 - `validate_html()` 自动检测HTML中残留的Markdown语法和空href
 - 即使JSON输入包含Markdown，输出HTML也能自清洁
+
+#### 1.6.6 Header副标题（定调句）
+
+- **定位**：副标题是"本周一句话定调"，不是badge或meta的附属
+- **视觉**：字号13px（比badge小1px），颜色`var(--color-text-muted)`（淡于正文），margin-top:14px（与h1标题拉开间距），letter-spacing:0.01em
+- **宽度**：`max-width:100%`（跟随content-inner，不额外限制）
+- **⚠️ 禁止**：margin-top<10px（与标题太挤）、字号≥14px（和badge同层级）、max-width<960px（在已有容器内再约束=更窄）
+
+#### 1.6.7 底部模块对齐
+
+- 了解更多外层div：`max-width:100%`（不设独立max-width，跟随content-inner），`padding:0 0 48px`（无水平padding，让内层卡片自定宽）
+- doc-footer：`max-width:100%`，跟随content-inner宽度
+- **核心原则**：content-inner已有max-width:960px约束，子元素只管内容不管布局宽度
 
 ---
 
@@ -305,6 +322,38 @@ rank pill (12px/背景色) → 标题 (18px/600) → meta行 (13px/SVG icon) →
 > ⚠️ "CF"、"SKILL.md"、"林克"（在CSS类名/文件名中）不是敏感词，不应误报。
 > 内部版(public/)包含"林克"是正确行为，不应被敏感词检查误杀。
 
+### 5.1 内外版URL分离（P0 — 2026-06-15 新增）
+
+**根因**：W24周报外部版所有14处链接都指向内部版URL（ai-insight-internal.frontend-cloud），用户点击后从公网跳到内网SSO=体验断裂。根因是手动修改HTML后直接cp到外部仓库，跳过了sync_to_external.py的URL自动替换。
+
+**硬规则**：
+
+| 版本 | 域名 | 所有链接基础URL |
+|------|------|----------------|
+| 内部版（frontend-cloud） | `ai-insight-internal.frontend-cloud.corp.kuaishou.com` | `INTERNAL_PAGES_BASE` |
+| 外部版（GitHub Pages） | `xiaoxiong20260206.github.io/ai-insight-public` | `EXTERNAL_PAGES_BASE` |
+
+**必须替换的范围**：
+- ✅ 了解更多按钮的`href`（"访问AI洞察首页"）
+- ✅ 日报链接（`01-daily-reports/YYYY-MM/YYYY-MM-DD.html`）
+- ✅ 深度调研链接（`02-deep-research/...`）
+- ✅ 首页链接
+- ✅ 任何`<a>`标签中的`href`包含`ai-insight-internal`的
+
+**禁止**：
+- ❌ 手动cp HTML到外部仓库（绕过脚本=URL全错）
+- ❌ 外部版包含`ai-insight-internal.frontend-cloud.corp.kuaishou.com`
+- ❌ 内部版包含`xiaoxiong20260206.github.io/ai-insight-public`
+
+**正确流程**：
+```bash
+# 外部版必须走脚本
+uv run scripts/sync_to_external.py --full --verify
+
+# 验证：外部版零残留internal URL
+grep -c "ai-insight-internal" ai-insight-public/01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html  # 必须=0
+```
+
 ---
 
-_更新于 2026-05-20 · v1.1 · 配图位置从章节末尾改为标题后+子章节配图+废弃引子_
+_更新于 2026-06-15 · v1.2 · 新增§5.1内外版URL分离P0规则+Header副标题规范(1.6.6)+底部对齐(1.6.7)+容器双约束禁止(1.5)_

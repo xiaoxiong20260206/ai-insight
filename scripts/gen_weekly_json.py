@@ -70,6 +70,7 @@ def generate_template(week_id: str) -> dict:
         "year": dates["year"],
         "week_num": dates["week_num"],
         "title": f"AI 周报 {dates['year']}年第{dates['week_num']}周",
+        "subtitle": "（一句话定调：本周3-5个关键词，用·分隔）",
         "description": "（一段话总结本周核心信号）",
         "overview": {
             "table_rows": [
