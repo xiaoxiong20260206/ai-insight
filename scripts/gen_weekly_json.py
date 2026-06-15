@@ -73,11 +73,11 @@ def generate_template(week_id: str) -> dict:
         "description": "（一段话总结本周核心信号）",
         "overview": {
             "table_rows": [
-                {"dimension": "🧠 大模型", "signal": "（本周核心信号）"},
-                {"dimension": "⌨️ AI Coding", "signal": "（本周核心信号）"},
-                {"dimension": "📱 AI 应用", "signal": "（本周核心信号）"},
-                {"dimension": "🏭 AI 行业", "signal": "（本周核心信号）"},
-                {"dimension": "🔄 企业AI转型", "signal": "（本周核心信号）"},
+                {"dimension": "大模型", "signal": "（本周核心信号）"},
+                {"dimension": "AI Coding", "signal": "（本周核心信号）"},
+                {"dimension": "AI 应用", "signal": "（本周核心信号）"},
+                {"dimension": "AI 行业", "signal": "（本周核心信号）"},
+                {"dimension": "企业AI转型", "signal": "（本周核心信号）"},
             ],
             "stats": [
                 {"value": "（数字）", "label": "（标签）", "class": "stat-purple"},

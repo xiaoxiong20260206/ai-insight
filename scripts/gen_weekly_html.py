@@ -66,6 +66,19 @@ SECTION_META = {
     "enterprise": {"icon": SVG_ICONS["enterprise"], "label": "企业转型",   "h2_suffix": "企业AI转型本周动态"},
 }
 
+# Emoji-to-section key mapping for overview table dimension cleanup (#124)
+_DIMENSION_EMOJI_MAP = {
+    "🧠": "llm", "⌨️": "coding", "📱": "app", "🏭": "industry", "🔄": "enterprise",
+}
+
+def _clean_dimension_emoji(text):
+    """Replace leading emoji in overview table dimension with SVG icon (#124 format upgrade)"""
+    for emj, key in _DIMENSION_EMOJI_MAP.items():
+        if text.startswith(emj):
+            label = text[len(emj):].strip()
+            return f'{SVG_ICONS.get(key, "")} {label}'
+    return text
+
 # 68ch line width CSS for body text paragraphs (#124 format upgrade)
 LINE_WIDTH_CSS = """
 /* ===== 68ch行宽限制（容器100%，文字68ch）===== */
@@ -102,7 +115,7 @@ def render_overview(d):
     if rows:
         tbl = '<div class="animate-on-scroll" style="overflow-x:auto;">\n<table style="width:100%;border-collapse:collapse;margin-top:16px;">\n<thead><tr style="background:var(--color-bg-table-header);"><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--color-success);font-weight:700;">维度</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--color-success);font-weight:700;">周度信号</th></tr></thead>\n<tbody>\n'
         for r in rows:
-            tbl += f'<tr><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);font-weight:600;">{r["dimension"]}</td><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);">{r["signal"]}</td></tr>\n'
+            tbl += f'<tr><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);font-weight:600;">{_clean_dimension_emoji(r["dimension"])}</td><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);">{r["signal"]}</td></tr>\n'
         tbl += '</tbody></table></div>'
     st = '<div class="stats-grid animate-on-scroll">\n'
     for s in stats:
