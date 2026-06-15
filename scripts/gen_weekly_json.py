@@ -59,7 +59,7 @@ def generate_template(week_id: str) -> dict:
         daily_index.append({
             "date": d.strftime("%Y-%m-%d"),
             "weekday": ["周一","周二","周三","周四","周五","周六","周日"][i],
-            "url": f"{INTERNAL_BASE}/01-daily-reports/{month_str}/{d.strftime('%Y-%m-%d')}-v3.html",
+            "url": f"{INTERNAL_BASE}/01-daily-reports/{month_str}/{d.strftime('%Y-%m-%d')}.html",
             "title": "AI洞察日报",
             "keywords": "（填入关键词，逗号分隔）"
         })

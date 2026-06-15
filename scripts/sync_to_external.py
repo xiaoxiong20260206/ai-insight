@@ -123,22 +123,25 @@ def sync_all() -> bool:
 
 
 def fix_footer_urls() -> int:
-    """替换外部仓库中日报/周报HTML的footer首页URL
+    """替换外部仓库中日报/周报HTML的所有内部URL
     
-    P0 #18 规则：内部版日报footer→内部首页URL，外部版日报footer→外部首页URL
-    sync_to_external.py 同步后，外部版HTML中可能残留内部URL，需要批量替换。
+    P0 #121 规则：内部版HTML所有链接指向内部URL，外部版HTML所有链接指向外部URL
+    P0 #126 规则：不只是footer首页URL，所有<a>标签中的href都需替换
+    同步后，外部版HTML中可能残留内部URL，需要全量替换。
     
     Returns:
         修复的文件数
     """
     from config import INTERNAL_PAGES_BASE, EXTERNAL_PAGES_BASE
     
-    internal_url = f'{INTERNAL_PAGES_BASE}/"'
-    external_url = f'{EXTERNAL_PAGES_BASE}/"'
-    # 也处理旧版错误URL（缺少-public后缀）或旧内部版GitHub Pages地址
+    # 全量替换：所有含INTERNAL_PAGES_BASE的URL→EXTERNAL_PAGES_BASE
+    # 这覆盖：footer首页链接、日报链接、了解更多按钮、深度调研链接等所有URL
+    internal_base = INTERNAL_PAGES_BASE
+    external_base = EXTERNAL_PAGES_BASE
+    
+    # 也处理旧版错误URL
     wrong_urls = [
-        'https://xiaoxiong20260206.github.io/ai-insight/"',  # 旧内部版GitHub Pages（已废弃）
-        'https://xiaoxiong20260206.github.io/ai-insight-public/"',  # 旧外部版GitHub Pages
+        'https://xiaoxiong20260206.github.io/ai-insight/',  # 旧内部版GitHub Pages（已废弃）
     ]
     
     fixed = 0
@@ -154,21 +157,48 @@ def fix_footer_urls() -> int:
             content = f.read()
         
         new_content = content
-        # 替换内部URL→外部URL
-        if internal_url in new_content:
-            new_content = new_content.replace(internal_url, external_url)
-        # 替换错误外部URL→正确外部URL（缺少-public后缀）
+        # 全量替换内部URL→外部URL（所有出现位置）
+        if internal_base in new_content:
+            new_content = new_content.replace(internal_base, external_base)
+        # 替换旧版错误URL
         for wrong_external_url in wrong_urls:
             if wrong_external_url in new_content:
-                new_content = new_content.replace(wrong_external_url, external_url)
+                new_content = new_content.replace(wrong_external_url, external_base)
+        # P0 #126: 替换HTML内容中残留的-v3.html后缀（内部版专用，外部版文件名不含-v3）
+        if '-v3.html' in new_content:
+            new_content = new_content.replace('-v3.html', '.html')
+        
+        # P0 #126: 外部版日报/周报HTML基本脱敏（身份信息）
+        # 这些替换对日报/周报通用：了解更多身份介绍、footer签名等
+        identity_swaps = [
+            ('沈浪的AI分身', 'AI洞察'),
+            ('，沈浪的AI分身', ''),  # "林克，沈浪的AI分身" → "林克"
+            ('沈浪', ''),  # 残留的"沈浪"
+        ]
+        for old, new in identity_swaps:
+            if old in new_content:
+                new_content = new_content.replace(old, new)
         
         if new_content != content:
             with open(html_file, 'w', encoding='utf-8') as f:
                 f.write(new_content)
             fixed += 1
     
+    # P0 #126: 替换后验证零残留internal URL
+    residuals = 0
+    for html_file in EXTERNAL_REPO.rglob("*.html"):
+        if not html_file.is_file(): continue
+        rel = html_file.relative_to(EXTERNAL_REPO)
+        if not str(rel).startswith("01-daily-reports/"): continue
+        with open(html_file, 'r', encoding='utf-8') as f:
+            if internal_base in f.read():
+                residuals += 1
+    
     if fixed > 0:
-        print(f"  ✅ 已修复 {fixed} 个文件的footer首页URL（内部→外部）")
+        print(f"  ✅ 已修复 {fixed} 个文件的URL（内部→外部全量替换）")
+    if residuals > 0:
+        print(f"  ❌ ⛔ 仍有 {residuals} 个文件残留内部URL（P0 #126）")
+        return -1  # hard fail
     return fixed
 
 
