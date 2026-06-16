@@ -696,13 +696,18 @@ def generate_html(data: dict) -> str:
 # ============ CLI入口 ============
 
 def main():
-    if len(sys.argv) < 2:
+    if len(sys.argv) < 2 or sys.argv[1] in ("--help", "-h"):
+        print("AI日报HTML生成器（从JSON动态生成）")
+        print()
         print("用法:")
-        print("  python gen_daily_html.py <date>          # 从 data/daily-content-<date>.json 生成HTML")
-        print("  python gen_daily_html.py --extract <html> # 从现有HTML提取CSS/JS模板")
-        sys.exit(1)
+        print("  uv run scripts/gen_daily_html.py <date>          # 从 data/daily-content-<date>.json 生成HTML")
+        print("  uv run scripts/gen_daily_html.py --extract <html> # 从现有HTML提取CSS/JS模板")
+        sys.exit(0)
 
     if sys.argv[1] == "--extract":
+        if len(sys.argv) < 3:
+            print("❌ --extract 需要指定HTML文件路径")
+            sys.exit(1)
         extract_templates_from_html(sys.argv[2])
         return
 
