@@ -176,6 +176,22 @@ cd public && npx -y --registry https://npm.corp.kuaishou.com @codeflicker/fronte
 
 > **⚠️ W24踩坑教训**: 周报cron只执行了git push + sync_to_external，遗漏了frontend-cloud deploy。内部版首页停留在上一版，用户看到旧首页。git push ≠ 网页部署，frontend-cloud必须单独执行。
 
+### Step 5.5: 交付链接（P0 强制 — 每次周报完成必须输出）
+
+周报部署完成后，**必须**输出以下四个链接，方便自检内外版本是否都正确发布：
+
+```
+内部版：
+1. 📄 本周周报：https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html
+2. 🏠 AI洞察首页：https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/
+
+外部版：
+3. 📄 本周周报：https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html
+4. 🏠 AI洞察首页：https://xiaoxiong20260206.github.io/ai-insight-public/
+```
+
+> ⚠️ 周报内外版文件名一致（无-v3后缀），URL SSoT = scripts/config.py。
+
 ---
 
 ## Step 6: KIM推送
