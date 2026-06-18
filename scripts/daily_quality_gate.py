@@ -620,6 +620,11 @@ def check_date_window(date_str: str) -> CheckResult:
             f"{report_date.month}月{report_date.day}日",
             f"{report_date.month}月{report_date.day - 1}日" if report_date.day > 1 else "",
         ])
+        # v12.1修复: 支持YYYY年M月D日格式
+        valid_dates.extend([
+            f"{report_date.year}年{report_date.month}月{report_date.day}日",
+            f"{report_date.year}年{(report_date - timedelta(days=1)).month}月{(report_date - timedelta(days=1)).day}日",
+        ])
         valid_dates = [d for d in valid_dates if d]  # 过滤空字符串
         
         out_of_window = []
