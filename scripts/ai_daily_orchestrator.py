@@ -191,19 +191,31 @@ def run_url_spot_check(date: str) -> bool:
         ]
         
         for tab in data.get("tabs", []):
-            for region in ['overseas', 'china']:
-                for item in tab.get('news', {}).get(region, []):
-                    url = item.get('url', '')
-                    title = item.get('title', '')[:30]
-                    
+            # v1.5修复: 兼容两种JSON格式（旧格式: news.overseas/china vs 新格式: news数组）
+            news_data = tab.get('news', {})
+            if isinstance(news_data, list):
+                # 新格式: news是数组
+                for item in news_data:
+                    url = item.get('url', '') if isinstance(item, dict) else ''
+                    title = item.get('title', '')[:30] if isinstance(item, dict) else ''
                     if url and url.startswith('http'):
                         all_urls.append((url, title))
-                        
-                        # 检查封闭平台禁止项
                         for pattern, desc in FORBIDDEN_PATTERNS:
                             if re.search(pattern, url):
                                 forbidden.append(f"{title} → {desc}")
                                 break
+            elif isinstance(news_data, dict):
+                # 旧格式: news.overseas + news.china
+                for region in ['overseas', 'china']:
+                    for item in news_data.get(region, []):
+                        url = item.get('url', '') if isinstance(item, dict) else ''
+                        title = item.get('title', '')[:30] if isinstance(item, dict) else ''
+                        if url and url.startswith('http'):
+                            all_urls.append((url, title))
+                            for pattern, desc in FORBIDDEN_PATTERNS:
+                                if re.search(pattern, url):
+                                    forbidden.append(f"{title} → {desc}")
+                                    break
         
         issues = []
         

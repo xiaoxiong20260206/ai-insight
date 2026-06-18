@@ -133,7 +133,7 @@ uv run scripts/ai_daily_orchestrator.py complete --step 5
   → 没有 → 简短声明"本次无 Harvest"并继续
 ```
 
-**写入路径**：`knowledge/packages/ai-insight/insights/YYYY-MM-DD-daily-insights.md`
+**写入路径**：`knowledge/packages/ai-insight/wiki/insights-YYYY-MM-DD-daily-insights.md`（MyKnowledge KnowledgePackage 格式）
 
 **典型Harvest内容**：
 - 新出现的行业模式/规律（如"AI从聊天竞赛转向企业生产力平台"）
