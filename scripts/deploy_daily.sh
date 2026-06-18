@@ -354,10 +354,10 @@ python3 scripts/sync_to_public.py --full --force
 # 外部版脱敏由 sync_to_external.py 完成，这里做二次核查
 EXTERNAL_REPO_DIR="${PROJECT_DIR}/../ai-insight-public"
 if [ -d "$EXTERNAL_REPO_DIR" ]; then
-    SENSITIVE_COUNT=$( (grep -rl --include="*.html" --include="*.md" --include="*.json" --include="*.js" --include="*.txt" -E "沈浪|林克|快手|Kuaishou|CodeFlicker|KATE|天策|天玑|KwaiBI|小无相功|shenlang|MyFlicker|myflicker|AI分身|让我负责|link-avatar|docs\.corp\.kuaishou" "$EXTERNAL_REPO_DIR/" 2>/dev/null || true) | wc -l | tr -d ' ')
+    SENSITIVE_COUNT=$( (grep -rl --include="*.html" --include="*.md" --include="*.json" --include="*.js" --include="*.txt" --exclude-dir=".git" --exclude-dir="subscribe-app" -E "沈浪|林克|快手|Kuaishou|CodeFlicker|KATE|天策|天玑|KwaiBI|小无相功|shenlang|MyFlicker|myflicker|AI分身|让我负责|link-avatar|docs\.corp\.kuaishou" "$EXTERNAL_REPO_DIR/" 2>/dev/null || true) | wc -l | tr -d ' ')
     if [ "$SENSITIVE_COUNT" -gt 0 ]; then
         echo "  ❌ [ABORT] 外部版(ai-insight-public/)有 ${SENSITIVE_COUNT} 个文件含敏感词，禁止推送！"
-        grep -rl --include="*.html" --include="*.md" --include="*.json" -E "沈浪|林克|shenlang|MyFlicker" "$EXTERNAL_REPO_DIR/" | head -5
+        grep -rl --include="*.html" --include="*.md" --include="*.json" --exclude-dir=".git" --exclude-dir="subscribe-app" -E "沈浪|林克|shenlang|MyFlicker" "$EXTERNAL_REPO_DIR/" | head -5
         exit 1
     else
         echo "  ✅ 外部版敏感词验证通过（0处残留）"
