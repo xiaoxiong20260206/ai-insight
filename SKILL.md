@@ -123,6 +123,14 @@ AI洞察是一个**AI驱动的行业研究平台**，核心做四件事：
 | `designai-Infographic-image` | 章节配图（信息图） |
 | `docs-shuttle` | Docs平台发布 |
 | `kim-message-send` | KIM推送 |
+
+## Knowledge Dependencies
+
+- package: ai-insight
+- package: product-thinking
+
+> MyKnowledge KnowledgePackage 格式。召回方式：读 `wiki/index.md` → 定位页面 → 读 `wiki/<slug>.md`（降级路径），或 `kcli myknowledge get --package <pkg> --page <slug>`。
+> 消费方只读 wiki/，禁止读 raw/。
 | `upload-cdn` | CDN链接 |
 | `tavily-search` | 海外搜索 |
 | `quark-search` | 国内搜索 |
