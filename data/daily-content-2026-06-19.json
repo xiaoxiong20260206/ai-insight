@@ -1,0 +1,160 @@
+{
+  "date": "2026-06-19",
+  "coverage": {"overseas": 8, "china": 7},
+  "overview": [
+    {"icon": "🧠", "label": "大模型", "headline": "Claude Fable 5限时开放+MLPerf v6.0刷新纪录", "text": "Anthropic新旗舰Fable 5限时含在订阅中至6/22；MLCommons MLPerf Training v6.0发布，NVIDIA Blackwell Ultra全项称王；Nemotron 3 Ultra 550B参数开源"},
+    {"icon": "⌨️", "label": "AI Coding", "headline": "Gemini CLI→Antigravity CLI迁移日", "text": "6/18起Gemini CLI停止服务免费用户，全面迁移至Antigravity CLI；Copilot转credits制；Codex+GPT-5.5领跑Terminal-Bench 83.4%；OpenCode 17万星免费开源"},
+    {"icon": "📱", "label": "AI 应用", "headline": "Google搜索进入Agent时代+Apple Siri大更新", "text": "Google搜索Agent化+智能搜索框；Apple WWDC 2026发布Siri重大AI更新(用Gemini)；Gemini 3.5 Live Translate实时语音翻译"},
+    {"icon": "🏭", "label": "AI 行业", "headline": "Anthropic估值9650亿超OpenAI+AI投资3300亿Q1", "text": "Anthropic Series H $650亿估值$9650亿超OpenAI $8520亿；Q1全球VC $3300亿80%流向AI；OpenAI瞄准Q4万亿IPO"},
+    {"icon": "🔄", "label": "企业转型", "label_class": "orange", "headline": "AI安全出口管制+企业Agent信任框架成焦点", "text": "Claude Fable 5被美国出口管制；Anthropic Mythos通过Project Glasswing受控开放；Bain调查60%大公司缺AI数据基建"}
+  ],
+  "heat_trend": {
+    "title": "近7期日报交叉分析",
+    "topics": [
+      {"name": "AI Coding Agent迁移", "score": 9, "days": 3, "trend_class": "up", "trend_label": "📈 攀升", "signal": "Gemini CLI→Antigravity CLI+Copilot转credits+开源IDE崛起"},
+      {"name": "AI安全/出口管制", "score": 8, "days": 5, "trend_class": "up", "trend_label": "📈 攀升", "signal": "Fable 5出口管制+Mythos受控开放+Florida诉OpenAI"},
+      {"name": "AI融资/估值", "score": 8, "days": 4, "trend_class": "stable", "trend_label": "➡️ 高位", "signal": "Anthropic $9650亿+OpenAI万亿IPO+xAI-SpaceX $1.75万亿"},
+      {"name": "MLPerf/算力竞赛", "score": 7, "days": 2, "trend_class": "up", "trend_label": "📈 攀升", "signal": "MLPerf v6.0+Blackwell Ultra+NVFP4+AMD Instinct"},
+      {"name": "中国大模型成本战", "score": 7, "days": 7, "trend_class": "stable", "trend_label": "➡️ 持续", "signal": "DeepSeek V4 API再降价+国产算力全链适配+开源阵营全球市占15%"}
+    ],
+    "summary": "本周AI行业三大信号叠加：①Coding Agent进入平台迁移期（Gemini CLI→Antigravity），②AI安全从讨论走向制度（出口管制+受控开放），③融资规模继续刷新纪录但企业落地仍受数据基建瓶颈制约。"
+  },
+  "tabs": [
+    {
+      "theme": "大模型",
+      "news": {
+        "overseas": [
+          {"tag": "hot", "title": "Anthropic发布Claude Fable 5和Mythos 5双旗舰", "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5", "source": "Anthropic", "details": {"finding": "Fable 5限时含在Pro/Max/Team/Enterprise订阅中至6/22，之后需使用credits；Mythos 5为受控网络安全模型，仅通过Project Glasswing向审核合作伙伴开放。Fable 5在SWE-bench Verified达88.6%，ExploitBench达78%", "chips": ["双旗舰策略", "限时开放", "出口管制"], "impact": "Anthropic首次同时发布公开旗舰和受限模型，标志AI公司开始主动管理模型双用风险。Fable 5限时策略暗示算力供给仍紧张"}},
+          {"tag": "hot", "title": "MLCommons发布MLPerf Training v6.0结果", "url": "https://mlcommons.org/2026/06/mlperf-training-v6-0-results", "source": "MLCommons", "details": {"finding": "95个系统、24家机构参赛，13种硬件加速器+19种处理器创纪录。新增MoE和稀疏计算两个基准。NVIDIA Blackwell Ultra全项领先，GB300 NVL72比GB200快1.6倍", "chips": ["95系统创纪录", "MoE基准", "Blackwell Ultra"], "impact": "MLPerf v6.0正式确认AI训练进入稀疏计算/MoE时代。NVFP4低精度训练在550B参数Nemotron 3 Ultra上验证通过"}},
+          {"tag": "new", "title": "NVIDIA发布Nemotron 3 Ultra 550B参数开源模型", "url": "https://blogs.nvidia.com/blog/blackwell-mlperf-training-6-0", "source": "NVIDIA Blog", "details": {"finding": "550B参数(55B active) MoE架构，Jensen Huang在Computex发布。定位美国最智能开源权重模型。NVFP4训练方法首次在大规模预训练中验证", "chips": ["550B参数", "开源权重", "NVFP4训练"], "impact": "NVIDIA从卖芯片到卖模型，Nemotron系列正在构建芯片-模型-软件全栈生态"}},
+          {"tag": "new", "title": "Claude Fable 5 vs GPT-5.5 vs Gemini 3.1 Pro全面对比", "url": "https://lushbinary.com/blog/claude-fable-5-vs-gpt-5-5-vs-gemini-3-1-pro-comparison", "source": "LushBinary", "details": {"finding": "Fable 5 SWE-bench Pro 58.6%，GPT-5.5 Terminal-Bench 83.4%。定价：Fable 5 $15/$75，GPT-5.5 $5/$25", "chips": ["三巨头对比", "定价分化", "Agentic差距"], "impact": "Frontier模型定价首次出现3-5倍差异，Agentic Coding成为新的差异化战场"}}
+        ],
+        "china": [
+          {"tag": "cn", "title": "DeepSeek V4全系API再降价，Pro版限时2.5折", "url": "https://www.deepseek.com", "source": "DeepSeek", "details": {"finding": "V4-Flash输入缓存命中0.2元/百万Token；V4-Pro限时2.5折，百万Token输入缓存命中0.025元创全球新低。百万Token上下文全系标配", "chips": ["全球最低价", "百万上下文", "国产算力适配"], "impact": "DeepSeek V4定价为GPT-5.5的1/8-1/50，正在把API成本锚定到地板价。国产算力全链适配摆脱CUDA依赖"}},
+          {"tag": "cn", "title": "中国大模型全球API调用量占比超60%", "url": "https://news.cnyes.com/news/id/6322370", "source": "鉅亨網", "details": {"finding": "OpenRouter统计Q1全球API调用中国模型周Token消耗占比超60%。Artificial Analysis开源模型榜单全球前五全为中国模型", "chips": ["60%调用占比", "开源前五全中国", "市占15%"], "impact": "中国AI从'跟跑'到'领跑'拐点信号。DeepSeek+Kimi+MiniMax+智谱+阿里形成开源生态"}}
+        ]
+      },
+      "deep_focus": {
+        "title": "Anthropic双旗舰策略：公开+受控，AI安全的制度实验",
+        "paragraphs": [
+          "Anthropic同时发布Fable 5（公开旗舰）和Mythos 5（受控网络安全模型），这是AI行业首次由公司主动将最强能力分层管控。Fable 5限时含在订阅中（6/9-6/22），之后需用credits——这不是饥饿营销，而是算力供给紧张下的真实约束。",
+          "更值得关注的是监管层面的连锁反应：美国政府对Claude Fable 5实施出口管制，Florida州起诉OpenAI未警告ChatGPT风险，Trump签署AI行政令要求建立网络安全审查机制。这三件事同时发生，意味着AI安全从'自觉'走向'制度化'。",
+          "从竞争格局看，Fable 5 SWE-bench 88.6%与Opus 4.8并列，但Agentic Coding被GPT-5.5(Codex)的83.4%领先。模型能力不再是单一维度竞赛——在什么harness里跑、用什么安全约束、向谁开放，都成了竞争变量。"
+        ],
+        "takeaway": "AI安全的制度化窗口已打开。Anthropic用双旗舰策略抢占了'受控开放'的叙事高地，但能否将安全约束转化为竞争壁垒，取决于Mythos的实战效果和合规效率。"
+      },
+      "pattern_insight_html": "<div class=\"insight-card\"><div class=\"insight-label\">结构性信号</div><p class=\"insight-text\" style=\"max-width:68ch\">AI模型竞争从'谁更强'转向'谁更可控'。Fable 5/Mythos 5双旗舰 + 出口管制 + 诉讼风险 = AI安全从自律走向制度的三重拐点。</p></div>"
+    },
+    {
+      "theme": "AI Coding",
+      "news": {
+        "overseas": [
+          {"tag": "hot", "title": "Gemini CLI停止服务，全面迁移至Antigravity CLI", "url": "https://developers.googleblog.com/an-important-update-transitioning-gemini-cli-to-antigravity-cli", "source": "Google Developers Blog", "details": {"finding": "6/18起Gemini CLI停止服务免费用户。Antigravity CLI用Go重写，支持异步多agent工作流，与Antigravity 2.0桌面应用共享agent harness。企业Code Assist许可用户保留访问", "chips": ["6/18迁移日", "Go重写", "异步agent"], "impact": "Google在做Coding Agent平台迁移，从CLI工具到Agent操作系统。免费用户被切断引发社区不满"}},
+          {"tag": "hot", "title": "2026年AI Coding Agent排行榜：Codex+GPT-5.5领先", "url": "https://www.morphllm.com/best-ai-coding-agents-2026", "source": "MorphLLM", "details": {"finding": "Terminal-Bench 2.1：Codex+GPT-5.5(83.4%)>Gemini 3.5 Flash(76.2%)>Claude Opus 4.8(74.6%)。SWE-bench：Claude Opus 4.8(88.6%)领先。OpenCode 17万星开源免费", "chips": ["Terminal-Bench 2.1", "12款对比", "Copilot转credits"], "impact": "wrapper和harness正在成为比model更重要的变量。同一模型在不同harness里得分差异巨大"}},
+          {"tag": "new", "title": "GitHub Copilot转用credits制替代premium请求", "url": "https://www.firecrawl.dev/blog/best-ai-coding-agents", "source": "Firecrawl", "details": {"finding": "6/1起Copilot 1 credit=$0.01，退役premium requests，暂停新付费注册。Claude Code+Codex+Cline+Goose均支持MCP协议", "chips": ["credits制", "MCP统一", "暂停注册"], "impact": "Copilot转credits=承认按量计费更灵活。MCP协议成为Agent互联的事实标准"}}
+        ],
+        "china": [
+          {"tag": "cn", "title": "字节Trae月活超100万，内部80%工程师使用", "url": "https://finance.sina.com.cn/stock/t/2025-11-05/doc-infwifvu9239821.shtml", "source": "新浪财经", "details": {"finding": "字节技术VP洪定坤6月透露Trae整体月活超100万，内部80%+工程师使用。已移除Claude，国际版用GPT-5/Gemini/Kimi-K2/DeepSeek", "chips": ["100万月活", "移除Claude", "多模型策略"], "impact": "Trae月活破百万=中国AI Coding IDE首次达到规模。移除Claude后多模型适配=验证中国模型编程可替代性"}},
+          {"tag": "cn", "title": "国内6家AI Coding Plan全对比", "url": "https://www.cnblogs.com/wzxNote/p/19648084", "source": "博客园", "details": {"finding": "6家平台月费7.9-49元，计费单位混杂。Kimi 49元多模态Vibe Coding但工具限制严；MiniMax 29元入门最低；智谱高峰期3倍扣费", "chips": ["6家对比", "计费陷阱", "Kimi多模态"], "impact": "国内AI Coding进入订阅制混战，计费透明度是核心痛点"}}
+        ]
+      },
+      "deep_focus": {
+        "title": "AI Coding Agent大迁移：从工具到操作系统",
+        "paragraphs": [
+          "6/18是AI Coding Agent的分水岭：Google正式关闭Gemini CLI免费通道，迁移至Antigravity CLI；GitHub Copilot转credits制；OpenCode积累17万星。三个事件同时发生，揭示结构性趋势——AI Coding从'工具'进化为'Agent操作系统'。",
+          "Antigravity CLI用Go重写、支持异步多agent工作流、与桌面应用共享harness，这不是迭代而是架构升级。Copilot转credits实则是为Agent经济按量计费铺路。OpenCode的17万星说明：开发者对模型无关的开源Agent框架需求巨大。MCP协议成为事实标准=Agent互联底层管道已打通。",
+          "对开发者而言：你不只在选一个编码助手，你在选一个Agent运行时。Claude Code是'steering agent'（你控方向），Codex是'dispatching agent'（你下任务它自己跑），Antigravity是'orchestrating agent'（多agent并行协同）。三种范式并存，选错harness比选错模型代价更大。"
+        ],
+        "takeaway": "AI Coding的核心变量已从'谁的模型更强'转向'谁的harness更灵活'。harness决定模型的发挥上限，MCP决定Agent的互联边界。选harness比选model更关键。"
+      },
+      "pattern_insight_html": "<div class=\"insight-card\"><div class=\"insight-label\">结构性信号</div><p class=\"insight-text\" style=\"max-width:68ch\">AI Coding Agent从'工具'进化为'Agent操作系统'。6/18 Gemini CLI→Antigravity CLI + Copilot转credits + OpenCode 17万星 = 三条路线并行的拐点。harness > model。</p></div>"
+    },
+    {
+      "theme": "AI 应用",
+      "news": {
+        "overseas": [
+          {"tag": "hot", "title": "Google搜索进入Agent时代：智能搜索框+Agent代订", "url": "https://blog.google/products-and-platforms/products/search/search-io-2026", "source": "Google Blog", "details": {"finding": "Google I/O 2026发布全新AI搜索框，25年来最大升级。用户可用自然语言请求agent执行任务（代订KTV/餐厅），Google代打电话给商家。夏季向全美开放", "chips": ["25年最大升级", "Agent代订", "代打电话"], "impact": "Google搜索从信息检索到任务执行的质变。对Yelp/美团等本地服务平台构成结构性威胁"}},
+          {"tag": "hot", "title": "Apple WWDC 2026：Siri迎来重大AI更新", "url": "https://www.npr.org/2026/06/08/nx-s1-5847937/apple-wwdc-2026-siri-ai-tim-cook", "source": "NPR", "details": {"finding": "Apple发布Siri重大AI更新，基于Google Gemini而非自研。Apple年付Google $10亿+使用Gemini", "chips": ["Siri大更新", "用Google Gemini", "年付$10亿+"], "impact": "Apple承认AI落后，$10亿/年授权费=AI底层能力外包成本。设备商正在降级为分发渠道"}},
+          {"tag": "new", "title": "Gemini 3.5 Live Translate实时语音翻译", "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5", "source": "Google Blog", "details": {"finding": "Gemini 3.5新增Live Translate，支持实时语音翻译。3.5 Flash已在生产环境可用，$1.50/$9.00/百万Token", "chips": ["实时翻译", "3.5 Flash", "$1.50/$9.00"], "impact": "实时语音翻译=AI原生应用，传统翻译App差异化被消解"}}
+        ],
+        "china": [
+          {"tag": "cn", "title": "Kimi K2.6发布：原生多模态+Agent Swarm架构", "url": "https://www.moonshot.cn", "source": "月之暗面", "details": {"finding": "Kimi K2.6发布，支持原生多模态+Agent性能。Agent Swarm架构允许多agent协同。K2.5长上下文基准领先，262K上下文", "chips": ["K2.6", "Agent Swarm", "原生多模态"], "impact": "Kimi从单模型到Agent Swarm=构建Agent基础设施。K2.5调用量持续领先=技术驱动的API变现路径验证"}},
+          {"tag": "cn", "title": "豆包DAU达2亿，6月下旬上线付费", "url": "https://m.36kr.com/p/3838454229027072", "source": "36氪", "details": {"finding": "2026春节后豆包DAU达2亿。6月下旬上线付费内容，计划与抖音电商打通。月订阅免费到500元", "chips": ["DAU 2亿", "付费上线", "抖音电商打通"], "impact": "豆包DAU 2亿=中国AI应用用户规模天花板。与抖音电商打通=AI首次从工具到交易闭环"}}
+        ]
+      },
+      "deep_focus": {
+        "title": "Google搜索Agent化：从信息检索到任务执行的质变",
+        "paragraphs": [
+          "Google I/O 2026最被低估的发布不是Gemini 3.5，而是搜索的Agent化。当用户可以说'帮我找一个周五晚上6人KTV包间要能送餐'，Google直接调用agent查询实时价格并提供预订链接——这不是搜索升级，这是本地服务平台的颠覆。",
+          "Google正在用搜索的流量入口+Gemini的agent能力，构建一个'AI中间层'。用户不再需要打开Yelp找餐厅、打开OpenTable订位——Google搜索agent把所有步骤压缩成一个对话。对现有本地服务平台而言，这不是竞争，是管道截流。",
+          "Apple选择用Gemini而非自研模型驱动Siri，进一步确认了AI应用的'底层能力外包'趋势。$10亿+/年授权费，本质是Apple承认：掌握底层模型能力的公司才是平台，掌握设备的公司正在降级为分发渠道。"
+        ],
+        "takeaway": "AI应用竞争的本质从'谁有更好功能'转向'谁控制任务执行入口'。Google搜索Agent化=AI应用层的'管道截流'，把分散服务平台压缩成一个对话。"
+      },
+      "pattern_insight_html": "<div class=\"insight-card\"><div class=\"insight-label\">结构性信号</div><p class=\"insight-text\" style=\"max-width:68ch\">AI应用竞争从'功能'转向'入口'。Google搜索Agent化=本地服务平台管道截流。Apple用Gemini=设备商降级为分发渠道。掌握底层模型=掌握AI平台定位。</p></div>"
+    },
+    {
+      "theme": "AI 行业",
+      "news": {
+        "overseas": [
+          {"tag": "hot", "title": "Anthropic Series H $650亿估值$9650亿超OpenAI", "url": "https://aifundingtracker.com/top-50-ai-startups", "source": "AI Funding Tracker", "details": {"finding": "Anthropic $65B Series H，post-money $965B，超越OpenAI $852B。年化收入~$47B(从$14B跃升)。Q2首次预计经营利润$559M。IPO在讨论中，潜在10月上市", "chips": ["$965B估值", "$47B年收入", "Q2首盈利"], "impact": "Anthropic从'追赶者'到'最值钱AI公司'只用一个季度。$47B收入+首次盈利=AI公司商业模式从烧钱到盈利的拐点"}},
+          {"tag": "hot", "title": "Q1全球VC $3300亿，80%流向AI", "url": "https://www.linkedin.com/posts/hugo-carreira-31b18a29", "source": "LinkedIn/Hugo Carreira", "details": {"finding": "Q1 2026全球VC $3300亿，$2420亿(80%)流向AI公司。Cerebras IPO $950亿。三大资金流向：基础设施、垂直Agent、安全合规", "chips": ["$3300亿Q1", "80%流向AI", "三大方向"], "impact": "80% VC流向AI=非AI创业几乎无法融资。但Bain调查60%大公司缺AI数据基建=钱涌入但落地仍卡在基础层"}},
+          {"tag": "new", "title": "OpenAI瞄准Q4万亿IPO", "url": "https://aifundingtracker.com/top-50-ai-startups", "source": "AI Funding Tracker", "details": {"finding": "OpenAI last private round $852B，瞄准Q4 2026万亿IPO。GPT-5.5-Cyber扩展到欧盟审核团队。S-1已提交", "chips": ["万亿IPO", "S-1已提交", "GPT-5.5-Cyber EU"], "impact": "如果成功=人类史上最大IPO。Anthropic $965B vs OpenAI $852B的估值逆转，本质是API收入增长vs订阅天花板的叙事竞争"}}
+        ],
+        "china": [
+          {"tag": "cn", "title": "DeepSeek首轮融资估值$450亿", "url": "https://tidenews.com.cn/news.html?id=3438419", "source": "潮新闻", "details": {"finding": "DeepSeek首轮融资估值约$450亿。此前从未融资。英伟达黄仁勋CES基准测试用DeepSeek和Kimi K2", "chips": ["首融$450亿", "零融资到首融", "黄仁勋背书"], "impact": "从'不融资的理想主义者'到首融$450亿=资本在给中国AI重新定价。极致低价策略能否持续是关键验证点"}},
+          {"tag": "cn", "title": "字节2026年AI四大命题", "url": "https://m.36kr.com/p/3838454229027072", "source": "36氪", "details": {"finding": "字节2026 AI四大命题：①世界模型(追Genie3) ②Seedance动态生成 ③Coding飞轮 ④豆包商业化。豆包DAU 2亿，字节资本支出1600亿", "chips": ["四大命题", "世界模型", "Coding飞轮"], "impact": "字节AI'无明显短板'但缺世界模型=大模型下一阶段入场券。强制使用Seed=内部数据闭环的强制建设"}}
+        ]
+      },
+      "deep_focus": {
+        "title": "AI融资的拐点：钱在涌入，但落地仍卡在基础层",
+        "paragraphs": [
+          "Q1 2026全球VC $3300亿80%流向AI，Anthropic $965B超OpenAI，OpenAI瞄准万亿IPO——数字令人眩晕。但Bain同期调查揭示了一个刺眼的反差：60%的大公司缺乏支撑AI规模化的数据基础设施，AI自动化成本节省普遍低于预期。",
+          "这个矛盾的本质是：资本在为AI的'可能性'定价，但企业还在为AI的'可用性'挣扎。Unframe拿到$5000万帮企业评估AI应用ROI，本身就是一个信号——市场需要'AI ROI审计'中间层，说明从投入到产出之间还有巨大不确定性。",
+          "Anthropic的$47B年化收入+首次盈利是唯一的例外。但这个收入主要来自Claude订阅和API，而非企业级AI转型项目。AI公司的收入增长目前靠的还是'工具替代'，而非'流程重构'。真正的企业AI转型市场，可能还需要12-18个月的数据基建建设期。"
+        ],
+        "takeaway": "AI融资规模和AI落地进度之间存在'可信度鸿沟'。钱在为可能性定价，但落地卡在数据基建。2026年下半年是验证期——如果企业AI项目ROI仍不达标，资本热情可能迅速冷却。"
+      },
+      "pattern_insight_html": "<div class=\"insight-card\"><div class=\"insight-label\">结构性信号</div><p class=\"insight-text\" style=\"max-width:68ch\">AI融资vs落地的'可信度鸿沟'：80% VC流向AI但60%企业缺数据基建。Anthropic $47B收入+首盈利=工具替代验证成功，但流程重构市场仍在蓄力。2026H2是ROI验证窗口。</p></div>"
+    },
+    {
+      "theme": "企业转型",
+      "news": {
+        "overseas": [
+          {"tag": "hot", "title": "Trump签署AI行政令：自愿审查+网络安全clearinghouse", "url": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security", "source": "White House", "details": {"finding": "6/2签署行政令：要求联邦机构开发AI网络能力基准，建立AI网络安全Clearinghouse，强化政府安全防线。同时强调减少监管负担", "chips": ["AI行政令", "自愿审查", "安全Clearinghouse"], "impact": "美国AI政策在'安全'和'创新'间走钢丝。Clearinghouse=信息共享但无强制力=与EU AI Act监管路径分化"}},
+          {"tag": "hot", "title": "Claude Fable 5遭美国出口管制", "url": "https://www.mindstudio.ai/blog/ai-cybersecurity-claude-mythos-gpt-5-5-zero-day-exploits", "source": "MindStudio", "details": {"finding": "Fable 5被美国政府实施出口管制。Mythos ExploitBench 78%+GPT-5.5-Cyber EU审核=AI模型首次成地缘工具。五角大楼签8家AI合同，Anthropic缺席", "chips": ["出口管制", "地缘政治", "五角大楼合同"], "impact": "AI出口管制=模型能力被视为战略资源。地缘AI格局形成：OpenAI走政府路线，Anthropic走合规路线"}},
+          {"tag": "new", "title": "Bain调查：60%大公司缺AI数据基建，ROI低于预期", "url": "https://www.linkedin.com/pulse/ai-news-highlights-from-2nd-june-2026-ai-insiders-news-7kade", "source": "LinkedIn/AI Insiders", "details": {"finding": "Bain全球调查：AI自动化成本节省普遍低于预期，60%大公司缺乏规模化AI所需数据基础设施。但91%企业仍预测2026年更高增长", "chips": ["60%缺基建", "ROI低于预期", "91%仍乐观"], "impact": "91%乐观vs 60%缺基建=企业AI转型的'乐观偏见'。ROI低于预期的根因不是模型能力不足而是数据/流程/组织准备度不够"}}
+        ],
+        "china": [
+          {"tag": "cn", "title": "DeepSeek V4全链路国产算力适配", "url": "https://www.news.cn/finance/20260429/e54437bbf02243e48252e8d7a71c26e5/c.html", "source": "新华网", "details": {"finding": "DeepSeek V4完成与华为昇腾、寒武纪的Day 0极速适配。寒武纪2025年首年盈利(营收64.97亿+453%)，摩尔线程Q1首季盈利", "chips": ["Day 0适配", "国产算力", "寒武纪首盈利"], "impact": "DeepSeek V4+国产算力=中国AI'芯模联动'路线验证。国产AI芯片商业化拐点。下半年昇腾超节点批量上市后Pro版价格有望大降"}},
+          {"tag": "cn", "title": "智谱AI逆势涨价83%后调用量不降反升", "url": "https://tidenews.com.cn/news.html?id=3438419", "source": "潮新闻", "details": {"finding": "智谱涨价83%后调用量不降反升=罕见定价权。MaaS平台ARR 17亿。但亏损近50亿，收入不足研发1/4", "chips": ["涨价83%", "定价权", "亏损50亿"], "impact": "涨价不降量=B端AI服务出现定价权。但收入/研发比1/4=规模化亏损也在加速。定价权≠盈利能力"}}
+        ]
+      },
+      "deep_focus": {
+        "title": "AI企业转型的'可信度鸿沟'：91%乐观vs 60%缺基建",
+        "paragraphs": [
+          "Bain调查揭示了一个令人不安的剪刀差：91%企业预测2026年AI驱动更高增长，但60%缺乏规模化AI所需数据基础设施，且自动化成本节省普遍低于预期。这不是常规差距——这是投入与产出的结构性错位。",
+          "错位的根因：企业在为AI的'可能性'投资，但没有为AI的'可用性'改造。大多数AI项目还在做'工具替代'而非'流程重构'——后者需要重写业务流程、重组数据架构、重新定义岗位职责。",
+          "中国的'芯模联动'路线提供不同视角：DeepSeek V4+国产算力Day 0适配，把AI底层成本压到地板（V4-Pro限时2.5折=百万Token 0.025元）。如果AI计算成本足够低，企业转型ROI门槛就会降低——不是靠更好的模型，而是靠更低成本让更多场景变得可行。"
+        ],
+        "takeaway": "企业AI转型瓶颈不在模型能力，在数据基建和组织准备度。中国路线（极致降本扩大可行场景）vs美国路线（更强模型驱动更高价值）——2026H2将验证哪条路径更快到达ROI拐点。"
+      },
+      "pattern_insight_html": "<div class=\"insight-card\"><div class=\"insight-label\">结构性信号</div><p class=\"insight-text\" style=\"max-width:68ch\">企业AI转型的'可信度鸿沟'：91%乐观但60%缺基建+ROI低于预期。瓶颈不在模型在数据+流程+组织。中国路线（极致降本）vs美国路线（更强模型）=2026H2验证窗口。</p></div>"
+    }
+  ],
+  "watch_list": [
+    {"item": "Gemini 3.5 Pro何时发布", "reason": "Google I/O承诺6月发布，至今未落地。Pro tier是与Claude Opus/GPT-5.5直接竞争的关键棋子", "urgency": "high"},
+    {"item": "Anthropic IPO时间表", "reason": "$965B估值+Q2首盈利+GS/JPM/MS承销=IPO条件成熟。10月可能成人类最大IPO", "urgency": "high"},
+    {"item": "Apple+Google AI合作深化", "reason": "Siri用Gemini+$10亿/年=Apple在AI领域的'投降式合作'。下一代Siri Agent能力取决于Google", "urgency": "medium"},
+    {"item": "DeepSeek商业化路径", "reason": "首融$450亿=从理想主义到商业现实的转折。极致低价策略能否持续+Pro版何时降本", "urgency": "medium"},
+    {"item": "Fable 5 6/22后credits制效果", "reason": "限时含在订阅→credits制=算力供给紧张信号。如果使用量骤降=AI旗舰模型经济模型仍不成熟", "urgency": "medium"}
+  ],
+  "capability_update": "AI日报第98期。本期新增MLPerf v6.0详细解读、Antigravity CLI迁移深度分析、DeepSeek V4国产算力适配追踪。",
+  "source_summary": {
+    "overseas_sources": ["Anthropic Blog", "MLCommons", "NVIDIA Blog", "Google Blog", "Google Developers Blog", "NPR", "White House", "MindStudio", "MorphLLM", "Firecrawl", "LushBinary", "AI Funding Tracker", "LinkedIn AI Insiders", "Forbes AI 50", "Hacker News"],
+    "china_sources": ["DeepSeek官网", "月之暗面官网", "新浪财经", "36氪", "潮新闻", "新华网", "鉅亨網", "博客园"],
+    "wechat_sources": [],
+    "total_overseas": 8,
+    "total_china": 7
+  }
+}
