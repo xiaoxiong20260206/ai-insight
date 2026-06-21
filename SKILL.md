@@ -214,7 +214,15 @@ ls user-skills/sl-ai-insight/.git/HEAD && ssh -o ConnectTimeout=5 -T git@github.
 - ✅ `<span class="kb-item">` 展示标题，不可点击
 - 2026-06-04：37个链接全部改为span，首页已部署
 
-### #15. MixCard按钮URL统一用内部版 — --target仅控制footer文本
+### #18d. 搜索硬限制 — 总次数≤8，每板块≤1次海外+1次微信（2026-06-22新增）
+- **总搜索次数上限：8次**（海外tavily≤4次 + 国内quark≤4次）
+- **每板块搜索上限：海外1次 + 微信1次**，禁止一个板块搜3-5次
+- **热点探针(Step 0.5)单独计：≤2次**（1海外+1国内），计入总上限
+- ❌ 超过8次搜索 = P0违规（6/12搜30次=消耗1.2M input，6倍超限）
+- ❌ 同一关键词重复搜索（换个搜索引擎≠新搜索）
+- ✅ 搜索精简是Token消耗最大的优化杠杆（日报占73%消耗，其中搜索占40-50%）
+
+### #19. MixCard按钮URL统一用内部版 — --target仅控制footer文本
 
 ### #16. 首页按钮必须使用绝对URL — 禁止相对路径
 - **订阅按钮**：`https://aidailyinsight-subscribe.frontend-cloud.corp.kuaishou.com`（禁止 `./subscribe/`，frontend-cloud会拦截触发SSO 302）

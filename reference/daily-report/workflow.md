@@ -35,6 +35,8 @@ Step 6: 知识沉淀(Harvest) → 检查复用价值 → 写入knowledge包（P0
 
 ## Step 1: 两层搜索 (L1→L2)
 
+**⚠️ 搜索硬限制（P0红线#18d，2026-06-22新增）：总次数≤8，每板块海外1次+微信1次**
+
 | 板块 | 海外关键词 | 国内关键词 |
 |------|-----------|-----------|
 | 🧠 大模型 | "OpenAI GPT latest news today" | "DeepSeek 最新" |
@@ -42,6 +44,12 @@ Step 6: 知识沉淀(Harvest) → 检查复用价值 → 写入knowledge包（P0
 | 📱 AI应用 | "AI application news today" | "kimi 产品更新" |
 | 🏭 AI行业 | "AI startup funding today" | "AI 融资 中国 2026" |
 | 🔄 企业转型 | "enterprise AI transformation" | "企业 AI 转型 案例" |
+
+**搜索配额（严格执行）**：
+- Step 0.5 热点探针：≤2次（1海外+1国内）
+- Step 1 板块搜索：5板块×2=10次 → **实际控制在6次以内**（合并相近板块的搜索）
+- **总计：≤8次搜索**
+- ❌ 超过8次 = P0违规，需要消耗1.2M input的30次搜索绝不会重演
 
 微信公众号搜索：先账号搜索（机器之心/量子位/新智元/宝玉），再话题搜索。
 
