@@ -80,7 +80,7 @@ AI洞察是一个**AI驱动的行业研究平台**，核心做四件事：
 4. ❌ MixCard {{message}}绝对禁止(#11)
 5. ❌ 外部版三项URL替换必须同时完成(#10)
 6. ❌ 首页修改必须读homepage-spec.md(#7)
-7. ❌ KIM消息发送必须指定target=username:shenlang03
+7. ❌ KIM消息发送必须指定target={{OWNER_KIM_USERNAME}}
 8. ❌ 知识库Tab禁止<a href=*.md>链接(#12) — 用<span>
 9. ❌ MixCard群发按钮URL+footer必须用外部版(#13) — 私发用内部版
 10. ❌ 订阅按钮禁止./subscribe/相对路径(#14) — 用绝对URL
@@ -306,7 +306,7 @@ rank pill(12px) → 标题(18px/600) → meta行(13px/SVG icon) → 正文(14px/
 | 类型 | 推送范围 | 禁止 |
 |------|---------|------|
 | 日报 | 私发订阅者 | ❌禁止群发 |
-| 周报 | 先私发预览shenlang03 → 确认后发AI生产力中心大群(space:3705455482343722) | ❌禁止不确认就群发 |
+| 周报 | 先私发预览{{OWNER_KIM_USERNAME}} → 确认后发AI生产力中心大群(space:3705455482343722) | ❌禁止不确认就群发 |
 
 ---
 
@@ -336,7 +336,7 @@ Step 6: 知识沉淀(Harvest) → 检查复用价值 → 写入knowledge包（P0
 - **数据存储**：Appwrite TablesDB（`subscribers` 库 → `daily_subscribers` 表，行级安全）
 - **同步脚本**：`scripts/sync_subscribers.py`（Appwrite → `data/subscribers.json`，cron 执行前调用）
 - **订阅者推送**：日报 Step 5 读取 `data/subscribers.json`，遍历 `is_active=true` 的用户逐一私发
-- **owner 保留**：shenlang03 始终在订阅列表中（source=owner），不可取消
+- **owner 保留**：{{OWNER_KIM_USERNAME}} 始终在订阅列表中（source=owner），不可取消
 - **⚠️ 订阅按钮路径**：内部首页的订阅按钮**必须直接指向** `https://aidailyinsight-subscribe.frontend-cloud.corp.kuaishou.com`，**禁止使用** `./subscribe/` 相对路径——frontend-cloud会拦截 `/subscribe/` 路径触发SSO 302重定向，导致用户看到登录页而非订阅页（2026-06-03教训）
 
 ## 首页规则（P0红线 #19-#26 的补充说明）

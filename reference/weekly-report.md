@@ -200,8 +200,8 @@ cd public && npx -y --registry https://npm.corp.kuaishou.com @codeflicker/fronte
 # 1. 生成mixCard（脚本自带6锚点校验+kimMd格式校验）
 uv run scripts/build_insight_mixcard.py weekly --date YYYY-WXX --output /tmp/card.json --with-summary
 
-# 2. 先私发预览给 shenlang03
-# message(channel=kim, action=send, kimMixCard=<inner card JSON>, target="username:shenlang03", message="")
+# 2. 先私发预览给 {{OWNER_KIM_USERNAME}}
+# message(channel=kim, action=send, kimMixCard=<inner card JSON>, target="{{OWNER_KIM_USERNAME}}", message="")
 # ⚠️ kimMixCard必须传inner card格式（{config, blocks, updateMulti}在顶层），禁止传双层{card: {...}}
 # ⚠️ message参数必须传空字符串""
 
@@ -219,7 +219,7 @@ uv run scripts/build_insight_mixcard.py weekly --date YYYY-WXX --output /tmp/car
 ### 推送范围
 | 类型 | 范围 | 说明 |
 |------|------|------|
-| 周报 | **先私发预览给shenlang03** → 确认后再群发AI生产力中心全员群 | ❌禁止不确认就群发 |
+| 周报 | **先私发预览给{{OWNER_KIM_USERNAME}}** → 确认后再群发AI生产力中心全员群 | ❌禁止不确认就群发 |
 | 日报 | 私发订阅者 | ❌禁止群发 |
 
 ### 默认推送群
@@ -292,7 +292,7 @@ uv run scripts/build_insight_mixcard.py weekly --date YYYY-WXX --output /tmp/car
 
 **问题1: cron不按规范执行，直接群发跳过私发确认**
 - 根因：cron payload含"只推一次"指令 → agent理解为"一次性推完" → 直接群发大群
-- 修复：删除"只推一次"，改为"先私发预览给shenlang03，不自动群发"，群发是手动步骤
+- 修复：删除"只推一次"，改为"先私发预览给{{OWNER_KIM_USERNAME}}，不自动群发"，群发是手动步骤
 - 举一反三：cron payload措辞必须精确，避免歧义指令
 
 **问题2: 周报HTML CSS和class名不匹配**
