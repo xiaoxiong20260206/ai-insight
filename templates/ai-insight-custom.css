@@ -29,6 +29,20 @@
     --color-bg-hover: rgba(0,0,0,0.025);
 }
 
+/* ===== 周报Header副标题覆盖（公共层max-width:580px太窄） ===== */
+.header-subtitle, .subtitle {
+    max-width: 100% !important;
+    color: var(--color-text-muted) !important;
+    font-size: 13px !important;
+    margin-top: 14px !important;
+}
+
+/* ===== 周报insight-card段落样式（统一用CSS而非内联style） ===== */
+.insight-card > p {
+    line-height: 1.75;
+    font-size: 13px;
+}
+
 /* ===== 日报特有组件 ===== */
 
 /* 最新日报卡片 */
