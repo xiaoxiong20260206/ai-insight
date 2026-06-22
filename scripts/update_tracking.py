@@ -61,6 +61,7 @@ def build_people_section():
         [b('Aman Sanger'), 'Cursor CTO', 'X, 技术演讲', '技术架构, Agent模式'],
         [b('Amjad Masad'), 'Replit CEO', 'X, 博客', 'AI Agent编程'],
         [b('Scott Wu'), 'Cognition (Devin) CEO', 'X, 博客', '自主编程Agent'],
+        [b('Omar Shams'), 'OpenAI Codex产品负责人', 'X, 采访', 'Codex CLI/Agent产品路线图'],
         [b('Addy Osmani'), 'Google Chrome 工程总监', 'addyosmani.com', 'LLM Coding Workflow'],
         [b('Kent Beck'), '极限编程之父', 'X, Newsletter', 'TDD + AI Agent方法论'],
         [b('Steve Yegge'), 'Sourcegraph', 'sourcegraph.com', 'AI对开发者影响'],
@@ -100,12 +101,14 @@ def build_people_section():
     parts.append(table(['人物','公司/角色','主要渠道','追踪重点'], [
         [b('梁文锋'), 'DeepSeek 创始人', '采访', '开源大模型, MoE架构'],
         [b('杨植麟'), 'Moonshot AI / Kimi 创始人', '采访, 演讲', '长上下文, 消费级AI'],
-        [b('唐杰'), '智谱AI 首席科学家', '论文, 演讲', 'GLM系列, Agent'],
+        [b('唐杰'), '智谱AI 首席科学家', '论文, 演讲', 'GLM系列, Agent, AutoGLM'],
+        [b('闫俊杰'), 'MiniMax 创始人/CEO', '采访, 演讲', 'M2.7旗舰, 视频生成, Agent'],
         [b('王小川'), '百川智能 CEO', 'X, 公众号', '搜索增强, 企业AI'],
         [b('李彦宏'), '百度 CEO', '演讲, 采访', '国内AI战略'],
         [b('朱松纯'), '北大, 通用AI研究院', '论文, 演讲', '通用人工智能, 认知科学'],
         [b('刘知远'), '清华大学, OpenBMB', 'Papers, GitHub', '大模型高效微调, 开源'],
         [b('贾扬清'), '阿里云AI (Caffe作者)', 'X, 采访', 'AI基础设施, 云原生AI'],
+        [b('谢赛宁'), '纽约大学/阶跃星辰', 'X, Papers', '视觉生成, DiT架构'],
     ]))
 
     # L1 - 中国AI Coding (NEW)
@@ -196,17 +199,17 @@ def build_companies_section():
     parts.append(h4('模型实验室 — 中国'))
     parts.append(table(['公司','核心产品','检查频率','追踪重点'], [
         [b('DeepSeek'), 'DeepSeek V3/R1', '每日', '开源标杆, MoE架构'],
-        [b('智谱AI'), 'GLM系列', '每周2次', 'GLM开源, Agent平台'],
+        [b('智谱AI'), 'GLM系列, AutoGLM, CodeGeeX', '每日', 'GLM-5旗舰, Agent平台, AI Coding'],
+        [b('MiniMax'), 'M2.7, 海螺AI, Hub', '每日', 'M2.7榜单#1, 视频生成, Agent工作流'],
         [b('Moonshot AI'), 'Kimi', '每周2次', '长上下文, 消费级AI'],
         [b('百川智能'), 'Baichuan系列', '每周1次', '搜索增强, 企业AI'],
         [b('百度'), '文心一言, ERNIE', '每周2次', '国产标杆, 行业应用'],
         [b('阿里'), '通义千问, Qwen', '每周2次', '开源, 多模态, 云集成'],
         [b('字节跳动'), '豆包', '每周1次', '消费级AI, 多模态'],
-        [b('腾讯'), '混元', '每周1次', '企业应用, 生态集成'],
-        [b('蚂蚁集团 🆕'), '蚂蚁百灵, 阿福APP', '每周1次', '独立基座大模型, 金融AI'],
-        [b('面壁智能 🆕'), 'MiniCPM系列', '每周1次', '端侧高效模型, 清华系'],
-        [b('昆仑万维 🆕'), '天工大模型4.0', '每周1次', 'AI搜索, 天工'],
-        [b('MiniMax'), '海螺AI', '每周1次', '多模态, 语音生成'],
+        [b('腾讯'), '混元, 腾讯元宝', '每周2次', '企业应用, 生态集成, 元器Agent平台'],
+        [b('蚂蚁集团'), '蚂蚁百灵, 阿福APP', '每周1次', '独立基座大模型, 金融AI'],
+        [b('面壁智能'), 'MiniCPM系列', '每周1次', '端侧高效模型, 清华系'],
+        [b('昆仑万维'), '天工大模型4.0', '每周1次', 'AI搜索, 天工'],
         [b('阶跃星辰'), '跃问', '每周1次', '多模态, 视频生成'],
         [b('零一万物'), '万知', '每月1次', '开源, 多模态'],
         [b('科大讯飞'), '星火', '每周1次', '语音+大模型, 教育'],
@@ -215,13 +218,17 @@ def build_companies_section():
     # AI Coding - 海外
     parts.append(h4('AI Coding 工具 — 海外'))
     parts.append(table(['公司','产品','检查频率','追踪重点'], [
+        [b('OpenAI'), 'Codex CLI, Codex Agent', '每日', '终端Agent, GPT-5.5驱动, 75K+ stars'],
         [b('Anysphere'), 'Cursor', '每日', 'AI IDE标杆, Agent模式'],
+        [b('Anthropic'), 'Claude Code', '每日', '终端Agent, 安全编码'],
         [b('Cognition'), 'Devin, Windsurf', '每周2次', '自主编程Agent'],
         [b('GitHub'), 'Copilot', '每周1次', '企业级AI编程'],
         [b('Replit'), 'Ghostwriter, Agent', '每周1次', '云端AI编程'],
         [b('Lovable'), 'Lovable', '每周1次', '欧洲独角兽, Vibe Coding'],
         [b('Bolt'), 'Bolt.new', '每周1次', '浏览器端AI开发'],
         [b('Sourcegraph'), 'Cody', '每周1次', '代码搜索 + AI'],
+        [b('Google'), 'Gemini Code Assist', '每周1次', '企业级, 大上下文'],
+        [b('Amazon'), 'CodeWhisperer/Q Developer', '每周1次', 'AWS生态, 企业编码'],
     ]))
 
     # AI Coding - 国内 (NEW)
@@ -247,6 +254,8 @@ def build_companies_section():
         [b('Hebbia'), 'Matrix', '金融AI', '金融分析, RAG先驱'],
         [b('Writer'), 'Writer', '企业写作', '企业写作AI, 自有模型'],
         [b('Decagon'), 'Decagon', '客服AI', 'AI Agent, YC系'],
+        [b('Physical Intelligence'), 'π0', '机器人AI', '通用机器人基础模型, 2026新势力'],
+        [b('Thinking Machines'), '(研发中)', 'AI工具', '前OpenAI CTO Mira Murati创立'],
     ]))
 
     # AI 应用
@@ -395,13 +404,20 @@ def build_sources_section():
 
     parts.append(h5('公司/实验室官方号'))
     parts.append(table(['公众号','所属公司','频率','价值'], [
-        [b('智谱AI'), '智谱', '每周2次', 'GLM模型更新、技术博客'],
-        [b('深度求索DeepSeek'), 'DeepSeek', '每周2次', '开源模型、技术论文'],
+        [b('智谱AI'), '智谱', '每日', 'GLM模型更新、AutoGLM、CodeGeeX'],
+        [b('深度求索DeepSeek'), 'DeepSeek', '每日', '开源模型、技术论文'],
+        [b('MiniMax'), 'MiniMax', '每日', 'M2.7、视频生成、海螺AI'],
         [b('月之暗面Moonshot'), '月之暗面', '每周1次', 'Kimi更新、产品动态'],
         [b('字节跳动技术团队'), '字节跳动', '每周1次', '豆包、Trae、技术分享'],
         [b('阿里云'), '阿里巴巴', '每周1次', '通义系列、云AI服务'],
         [b('百度AI'), '百度', '每周1次', '文心一言、自动驾驶'],
         [b('腾讯AI实验室'), '腾讯', '每周1次', '混元、AI研究'],
+    ]))
+
+    parts.append(h5('研究院/智库'))
+    parts.append(table(['公众号','所属机构','频率','价值'], [
+        [b('腾讯研究院'), '腾讯', '每日', 'AI产业研究、政策分析、趋势报告'],
+        [b('甲子光年'), '甲子光年', '每周2次', 'AI产业深度研究、投融资'],
     ]))
 
     # Discord
