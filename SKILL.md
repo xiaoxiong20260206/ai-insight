@@ -73,12 +73,12 @@ AI洞察是一个**AI驱动的行业研究平台**，核心做四件事：
 - **P0 交付** → 质量门(#4) + fail loud(#6) + 首页脱敏(#7) + 外部版三项替换(#11) + {{message}}禁令(#11) + 知识库禁md链接(#12) + MixCard URL区分场景(#13) + 首页按钮绝对URL(#14)
 - **P2 事后** → skill_calls日志 + token记录 + 知识沉淀(Harvest) + 5项自举扫描
 
-**P1 踩坑清单（从18条P0红线提炼高频失败项）**：
+**P1 踩坑清单（从29条P0红线提炼高频失败项）**：
 1. ❌ 续接必须先resume(#1) — 无例外
 2. ❌ MixCard必须用脚本生成(#2) — 禁止手写
 3. ❌ uv run替代python/python3(#9)
 4. ❌ MixCard {{message}}绝对禁止(#11)
-5. ❌ 外部版三项URL替换必须同时完成(#11)
+5. ❌ 外部版三项URL替换必须同时完成(#10)
 6. ❌ 首页修改必须读homepage-spec.md(#7)
 7. ❌ KIM消息发送必须指定target=username:shenlang03
 8. ❌ 知识库Tab禁止<a href=*.md>链接(#12) — 用<span>
@@ -89,7 +89,7 @@ AI洞察是一个**AI驱动的行业研究平台**，核心做四件事：
 13. ❌ 周报更新必须三联动(#17) — 卡片+badge+日历映射
 14. ❌ 日报footer禁止手动修改URL(#18) — 内部版用内部URL，外部版用外部URL
 
-**自检声明格式**："我已读完SKILL.md+对应子技能workflow+20条P0红线+踩坑11条，准备执行Step X"
+**自检声明格式**："我已读完SKILL.md+对应子技能workflow+29条P0红线+踩坑17条，准备执行Step X"
 
 ## 项目信息
 
@@ -359,6 +359,23 @@ Step 6: 知识沉淀(Harvest) → 检查复用价值 → 写入knowledge包（P0
 ### #26 补充：日报完成后交付链接
 - ⚠️ 内部版日报链接含`-v3.html`后缀（历史遗留），外部版不含`-v3`
 - URL SSoT = scripts/config.py
+
+### #27 模板变量禁止嵌入f-string上下文外的字符串常量（2026-06-22 #128）
+- **禁止**在Python字符串常量中直接写`{SVG_ICONS["insight"]}`或`{INTERNAL_BASE}`——不在f-string上下文中=原始文本输出
+- **正确**：用占位符模板（`__SVG_INSIGHT__`/`__HOMEPAGE_URL__`），在`generate_html()`中显式替换
+- 根因：W25了解更多模块2处模板变量未替换，页面直接显示原始文本
+
+### #28 Top5来源必须逐个配超链接（2026-06-22 #128）
+- **禁止**合并多个来源到纯文字span（`<span class="meta-item">Fortune · 36氪 · Axios</span>`不可追溯）
+- **正确**：JSON `sources[]`数组，每个来源独立`{name, url}`，渲染为`<a class="meta-link">`
+- 旧`source`/`source_url`字段保留为fallback，`sources[]`优先
+- 根因：W25周报5张Top5卡片来源均为纯文字，违反output-format-spec 1.4
+
+### #29 脚本必须防御JSON脏数据（2026-06-22 #128）
+- 日报链接`-v3.html`后缀 → `_clean_daily_url()`自动去除
+- 双`<strong>`嵌套 → `_strip_double_strong()`清理
+- 空URL → fallback渲染为纯文字span
+- 根因：6类问题中5类因为脚本假设JSON数据干净，实际有`-v3`后缀、空URL、自带HTML标签、合并文字来源
 
 ### 首页统计卡片维护规则（P1 — 自动校准）
 - 统计卡片数字由 `calibrate_stats.py` 自动计算，每次 `update_homepage.py` 运行时自动校准

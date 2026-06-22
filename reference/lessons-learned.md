@@ -1191,3 +1191,50 @@ W24周报上线后用户反馈3个问题：
 - 周修炼cron：+沈浪分身已删除(4→3分身)
 
 **规则沉淀**：AGENTS.md Red Lines + MEMORY.md Skill-Cron映射表
+
+---
+
+### #128 W25周报6类格式问题全面修复（2026-06-22）
+
+**现象**：W25周报HTML审查发现3个P0+5个P1问题，全部属于脚本生成逻辑缺陷而非手工错误。
+
+**6类问题+根因+修复**：
+
+| # | 问题 | 根因 | 修复 |
+|---|------|------|------|
+| 1 | 日报链接带`-v3.html`后缀（3处） | insight trend_links的URL在JSON里写了`-v3.html`（内部版后缀），但外部版文件名无此后缀→外部用户404 | 脚本新增`_clean_daily_url()`自动去除`-v3.html`；JSON数据9条链接全部修正 |
+| 2 | 了解更多模块含未替换模板变量（2处） | `LEARN_MORE`常量直接用f-string嵌入`{SVG_ICONS["insight"]}`和`{INTERNAL_BASE}`，但该常量不在f-string上下文中被求值，直接输出原始文本 | 改用占位符模板`__SVG_INSIGHT__`/`__HOMEPAGE_URL__`，在`generate_html()`中显式替换 |
+| 3 | 外部版W25不存在 | cron只执行了git push+sync_to_external到旧版本，本次修复后需要重新同步 | 执行`sync_to_external.py --full --verify` |
+| 4 | 双`<strong><strong>`嵌套（2处） | JSON的`intro_callout`字段已自带`<strong>`标签，脚本`render_link_insight()`又包了一层`<strong>`=双层 | 新增`_strip_double_strong()`清理双层；自动检测JSON自带`<strong>`并解包后脚本再加 |
+| 5 | Top5来源无超链接（5张卡片） | JSON的`source`字段是合并文字`"Fortune · 36氪 · Axios"`，但`source_url`字段为空，脚本渲染为纯文字span | JSON新增`sources[]`数组（每个来源独立配name+url）；脚本`render_top5()`支持sources数组逐个渲染为`<a class="meta-link">` |
+| 6 | stats-grid 5卡但CSS只支持4列 | `.stats-grid`桌面端固定`repeat(4, 1fr)`，第5卡折行且仅1/4宽 | 改为`repeat(auto-fit, minmax(160px, 1fr))`自适应 |
+
+**额外修复**：
+- insight-card内联`style="font-family:var(--font-family-cn)"`删除，改用CSS class（`--font-family-cn`未定义）
+- `ai-insight-custom.css`新增header-subtitle覆盖（max-width:100% + muted + 13px）+insight-card段落统一样式
+
+**系统性根因**：6类问题中5类指向**脚本生成逻辑未覆盖实际数据格式**——脚本假设JSON字段干净且完整，但实际JSON有`-v3`后缀、空URL、自带HTML标签、合并文字来源等"脏数据"。脚本需要防御性处理。
+
+**3条红线（新增）**：
+
+1. **模板变量禁止直接嵌入f-string上下文外的字符串常量** — `{VAR}`在Python f-string外=原始文本。用占位符+显式替换，或者确保字符串在f-string上下文内。
+
+2. **Top5来源必须逐个配超链接** — `sources[]`数组是标准字段，每条来源独立`{name, url}`。禁止把多个来源合并到一个纯文字span（不可追溯=违反output-format-spec 1.4）。
+
+3. **脚本生成必须防御JSON脏数据** — `-v3.html`后缀自动清理、双`<strong>`自动去嵌套、空URL fallback为纯文字span。脚本不能假设JSON数据是干净的。
+
+**脚本变更汇总**：
+- `gen_weekly_html.py`：+7处修改（_clean_daily_url / _strip_double_strong / sources数组 / 占位符模板 / stats-grid auto-fit / narrative解包 / insight去内联style）
+- `ai-insight-custom.css`：+2处（header-subtitle覆盖 / insight-card段落样式）
+- `weekly-content-2026-W25.json`：+sources数组 / -v3链接修正 / 双strong清理
+
+**JSON Schema新字段**（向后兼容）：
+```json
+{
+  "top5": [{
+    "sources": [{"name": "Fortune", "url": "https://..."}, ...],
+    "source": "Fortune · 36氪 · Axios",  // legacy fallback
+    "source_url": "https://..."           // legacy fallback
+  }]
+}
+```
