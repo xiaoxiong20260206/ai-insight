@@ -14,7 +14,7 @@
 | 5 | JSON先validate | `gen_weekly_json.py --validate` |
 | 6 | HTML≥50KB | `wc -c` 验证 |
 | 7 | 搜索≤8次 | 同日报#18d |
-| 8 | target必带 | message send带target=username:shenlang03 |
+| 8 | target必带 | message send带target={{OWNER_KIM_USERNAME}} |
 | 9 | 三步部署 | git push + sync_to_external + frontend-cloud |
 
 ## 6步流程
@@ -29,7 +29,7 @@ Step 5: 三步部署
   5b: uv run scripts/sync_to_external.py --full --verify
   5c: cd public && npx -y --registry https://npm.corp.kuaishou.com @codeflicker/frontend-cloud-cli@latest deploy && cd ..
 Step 5.5: 输出4个交付链接
-Step 6: MixCard私发shenlang03 + token记录
+Step 6: MixCard私发{{OWNER_KIM_USERNAME}} + token记录
 ```
 
 ## 关键命令
@@ -46,7 +46,7 @@ uv run scripts/sync_to_external.py --full --verify
 
 # Step 6: MixCard
 uv run scripts/build_insight_mixcard.py weekly --date YYYY-MM-DD --week WXX --output /tmp/card.json --with-summary
-message(action=send, channel=kim, target=username:shenlang03, kimMixCard=<card>, message="")
+message(action=send, channel=kim, target={{OWNER_KIM_USERNAME}}, kimMixCard=<card>, message="")
 ```
 
 ## 交付链接模板

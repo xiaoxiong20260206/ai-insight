@@ -101,21 +101,21 @@ uv run --with requests scripts/sync_subscribers.py
 # 1. 生成mixCard（脚本自带6锚点校验+kimMd格式校验+{{message}}扫描）
 uv run scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/card.json --with-summary
 
-# 2. 只给 shenlang03 发MixCard全文版（P0 强制，防超时）
-# message(channel=kim, action=send, kimMixCard=<inner card JSON>, target="username:shenlang03", message="")
+# 2. 只给 {{OWNER_KIM_USERNAME}} 发MixCard全文版（P0 强制，防超时）
+# message(channel=kim, action=send, kimMixCard=<inner card JSON>, target="{{OWNER_KIM_USERNAME}}", message="")
 # ⚠️ kimMixCard必须传inner card格式（{config, blocks, updateMulti}在顶层），禁止传双层{card: {...}}
 # ⚠️ message参数必须传空字符串""，禁止同时传message和kimMixCard（会导致{{message}}模板注入泄露）
 
 # 3. 其他活跃订阅者：用子agent并行推送MixCard精简版（spawn一次，payload含订阅者列表+卡片JSON路径）
 # ⚠️ 如果订阅者≤5人，可以直接逐一发送；如果>5人，必须用子agent并行，防止超时
-# ⚠️ 子agent推送不阻断主流程，主流程发完shenlang03后直接进入Step 5.5
+# ⚠️ 子agent推送不阻断主流程，主流程发完{{OWNER_KIM_USERNAME}}后直接进入Step 5.5
 
 # 4. 标记完成
 uv run scripts/ai_daily_orchestrator.py complete --step 5
 ```
 
 **推送策略（防超时，2026-06-18 修订）**：
-- **shenlang03**：主流程直接发送MixCard全文版（P0强制，不超时）
+- **{{OWNER_KIM_USERNAME}}**：主流程直接发送MixCard全文版（P0强制，不超时）
 - **其他订阅者**：如果≤5人，逐一发送；如果>5人，spawn子agent并行推送，主流程不等
 - **禁止群发**：所有推送均为私发
 - **超时根因**：25人逐一发送=每人2-3分钟推理=50-75分钟=远超3600秒限制
