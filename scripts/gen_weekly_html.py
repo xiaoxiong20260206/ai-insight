@@ -87,6 +87,11 @@ LINE_WIDTH_CSS = """
 .daily-item-kw, .doc-footer p {
   max-width: 68ch;
 }
+
+/* ===== stats-grid自适应列数（支持4/5卡）===== */
+.stats-grid {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
 """
 
 REQUIRED_CLASSES = ["news-card","stat-card","insight-card","callout",
@@ -144,21 +149,39 @@ def render_top5(d):
         cards += f'<div class="news-card animate-on-scroll" style="--card-accent: {ac};">\n  <div class="news-card-rank">TOP {item["rank"]} · {item.get("label","")}</div>\n  <div class="news-card-title">{item["title"]}</div>\n  <div class="news-card-meta">{meta_date}{meta_source}{meta_secondary}</div>\n  <div class="news-card-desc">{item["desc"]}</div>\n  <div class="news-card-why"><div class="judgment-label">关键判断</div>{item["why"]}</div>\n</div>\n'
     return f'<section id="top5">\n<div class="doc-chapter-label animate-on-scroll">Top 5</div>\n<h2 class="animate-on-scroll">{SVG_ICONS["trophy"]} 本周 Top 5 事件</h2>\n{cards}\n</section>'
 
+def _clean_daily_url(url):
+    """Remove -v3.html suffix from daily report URLs — internal and external use plain .html"""
+    if url and "-v3.html" in url:
+        return url.replace("-v3.html", ".html")
+    return url
+
 def render_insights(d):
     cards = ""
     for item in d.get("insights",[]):
         links = item.get("trend_links",[])
-        tl = " · ".join(f'<a href="{l["url"]}" target="_blank">{l["text"]}</a>' for l in links) if links else ""
-        cards += f'<div class="insight-card animate-on-scroll">\n  <div class="insight-tag">{item["tag_label"]}</div>\n  <div class="insight-title">{item["title"]}</div>\n  <p style="font-family:var(--font-family-cn);line-height:1.75;font-size:13px;">{item["content"]}</p>\n  <div class="insight-trend">{SVG_ICONS["link"]} {tl}</div>\n</div>\n'
+        tl = " · ".join(f'<a href="{_clean_daily_url(l["url"])}" target="_blank">{l["text"]}</a>' for l in links) if links else ""
+        cards += f'<div class="insight-card animate-on-scroll">\n  <div class="insight-tag">{item["tag_label"]}</div>\n  <div class="insight-title">{item["title"]}</div>\n  <p>{item["content"]}</p>\n  <div class="insight-trend">{SVG_ICONS["link"]} {tl}</div>\n</div>\n'
     return f'<section id="insight">\n<div class="doc-chapter-label animate-on-scroll">洞察</div>\n<h2 class="animate-on-scroll">{SVG_ICONS["insight"]} 周度洞察</h2>\n{cards}\n</section>'
+
+def _strip_double_strong(text):
+    """Remove double <strong><strong>...</strong></strong> nesting — only one level needed"""
+    # Also strip single <strong> if the whole content is wrapped (callout adds its own <strong> wrapper)
+    text = text.replace("<strong><strong>", "<strong>").replace("</strong></strong>", "</strong>")
+    return text
 
 def render_link_insight(d):
     li = d.get("link_insight",{})
-    intro = f'<div class="callout callout-purple animate-on-scroll"><strong>{li.get("intro_callout","")}</strong></div>'
+    intro_raw = li.get("intro_callout","")
+    # intro_callout in JSON may already contain <strong> tags; strip them to avoid double wrapping
+    intro_inner = _strip_double_strong(intro_raw)
+    # If the entire intro is wrapped in a single <strong>, unwrap it (we add our own wrapper)
+    if intro_inner.startswith("<strong>") and intro_inner.endswith("</strong>"):
+        intro_inner = intro_inner[len("<strong>"):-len("</strong>")]
+    intro = f'<div class="callout callout-purple animate-on-scroll"><strong>{intro_inner}</strong></div>' if intro_raw else ""
     blocks = ""
     for k in ["turning_point","paradox","takeaway"]:
         b = li.get(k,{})
-        if b: blocks += f'<div class="callout {b.get("class","callout-info")} animate-on-scroll" style="margin-top:16px;">{b.get("content","")}</div>\n'
+        if b: blocks += f'<div class="callout {b.get("class","callout-info")} animate-on-scroll" style="margin-top:16px;">{_strip_double_strong(b.get("content",""))}</div>\n'
     return f'<section id="linkinsight">\n<div class="doc-chapter-label animate-on-scroll">林克的洞察</div>\n<h2 class="animate-on-scroll">{SVG_ICONS["linkinsight"]} 林克的洞察</h2>\n{intro}\n{blocks}\n</section>'
 
 def md_link_to_html(text):
@@ -224,18 +247,22 @@ def render_vocab(d):
 def render_narrative(d):
     n = d.get("narrative",{})
     if not n: return ""
-    intro = f'<div class="callout callout-purple animate-on-scroll"><strong>{n.get("intro_callout","")}</strong></div>'
-    blocks = "".join(f'<div class="callout {b.get("class","callout-info")} animate-on-scroll" style="margin-top:16px;">{b.get("content","")}</div>\n' for b in n.get("main_blocks",[]))
+    intro_inner = _strip_double_strong(n.get("intro_callout",""))
+    # If entire intro is wrapped in <strong>, unwrap it (we add our own wrapper)
+    if intro_inner.startswith("<strong>") and intro_inner.endswith("</strong>"):
+        intro_inner = intro_inner[len("<strong>"):-len("</strong>")]
+    intro = f'<div class="callout callout-purple animate-on-scroll"><strong>{intro_inner}</strong></div>'
+    blocks = "".join(f'<div class="callout {b.get("class","callout-info")} animate-on-scroll" style="margin-top:16px;">{_strip_double_strong(b.get("content",""))}</div>\n' for b in n.get("main_blocks",[]))
     conc = ""
     if n.get("conclusion_callout"):
-        conc = f'<hr style="border:none;border-top:2px solid var(--color-success);margin:32px 0;">\n<div class="callout callout-success animate-on-scroll">{n["conclusion_callout"]}</div>'
+        conc = f'<hr style="border:none;border-top:2px solid var(--color-success);margin:32px 0;">\n<div class="callout callout-success animate-on-scroll">{_strip_double_strong(n["conclusion_callout"])}</div>'
     return f'<section id="narrative">\n<div class="doc-chapter-label animate-on-scroll">宏观叙事</div>\n<h2 class="animate-on-scroll">{SVG_ICONS["narrative"]} 宏观叙事：{n.get("title","")}</h2>\n{intro}\n{blocks}\n{conc}\n</section>'
 
-LEARN_MORE = '''<div style="max-width:100%;margin:0 auto;padding:0 0 48px;">
+LEARN_MORE_TEMPLATE = '''<div style="max-width:100%;margin:0 auto;padding:0 0 48px;">
 <div style="background:linear-gradient(135deg,#F8FAFB 0%,#EEF2F6 100%);border:1px solid #E7E5E4;border-radius:14px;padding:24px 28px;box-shadow:0 2px 8px rgba(31,35,40,.06)">
-  <div style="font-size:16px;font-weight:700;margin-bottom:8px">{SVG_ICONS["insight"]} 了解更多</div>
+  <div style="font-size:16px;font-weight:700;margin-bottom:8px">__SVG_INSIGHT__ 了解更多</div>
   <p style="font-size:14px;color:#57534E;line-height:1.7;margin:0 0 12px 0">AI洞察是系统化追踪AI行业动态的项目，覆盖大模型、AI Coding、AI应用、AI行业投融资、企业AI转型五大领域。</p>
-  <a href="{INTERNAL_BASE}/" target="_blank" style="display:inline-flex;padding:8px 16px;background:linear-gradient(135deg,#059669,#10B981);color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none">{SVG_ICONS["home"]} 访问AI洞察首页</a>
+  <a href="__HOMEPAGE_URL__/" target="_blank" style="display:inline-flex;padding:8px 16px;background:linear-gradient(135deg,#059669,#10B981);color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none">__SVG_HOME__ 访问AI洞察首页</a>
 </div></div>'''
 
 def render_sidebar(d):
@@ -279,7 +306,8 @@ def generate_html(d):
     if v: body_secs.append(v)
     n = render_narrative(d)
     if n: body_secs.append(n)
-    body_secs.append(LEARN_MORE)
+    learn_more = LEARN_MORE_TEMPLATE.replace("__SVG_INSIGHT__", SVG_ICONS["insight"]).replace("__HOMEPAGE_URL__", INTERNAL_BASE).replace("__SVG_HOME__", SVG_ICONS["home"])
+    body_secs.append(learn_more)
     
     footer = f'<div class="doc-footer"><p>{SVG_ICONS["llm"]} 林克（沈浪的AI分身） · AI洞察 · 周报 · {wid}</p><p style="margin-top:4px;">数据来源：AI洞察日报 {d.get("date_range","")} · 5板块</p></div>'
     sidebar = render_sidebar(d)
