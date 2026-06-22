@@ -35,6 +35,12 @@ Step 5.5: 输出4个交付链接（内部×2+外部×2）
 - **搜索结果数：--max-results 3**（tavily默认5条，改为3条省~40%搜索token）
 - ❌ 超过8次 = P0违规
 
+**重点搜索目标**（2026-06-23更新）：
+- 大模型: OpenAI GPT/o系列 + DeepSeek V3/R1
+- AI Coding: **Codex CLI/Agent** + Cursor + Claude Code + Trae + CodeGeeX
+- AI应用: **MiniMax M2.7/海螺AI** + **智谱GLM-5/AutoGLM** + Kimi
+- 国内微信: 机器之心/量子位/新智元/宝玉 + **腾讯研究院**
+
 ## 关键命令
 
 ```bash

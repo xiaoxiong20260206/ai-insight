@@ -40,10 +40,16 @@ Step 6: 知识沉淀(Harvest) → 检查复用价值 → 写入knowledge包（P0
 | 板块 | 海外关键词 | 国内关键词 |
 |------|-----------|-----------|
 | 🧠 大模型 | "OpenAI GPT latest news today" | "DeepSeek 最新" |
-| ⌨️ AI Coding | "Cursor changelog", "Claude Code news" | "Trae 字节 AI编程" |
-| 📱 AI应用 | "AI application news today" | "kimi 产品更新" |
+| ⌨️ AI Coding | "OpenAI Codex, Cursor, Claude Code news" | "Trae 字节 AI编程, CodeGeeX 智谱" |
+| 📱 AI应用 | "AI application news today" | "MiniMax 海螺AI, 智谱GLM, Kimi 更新" |
 | 🏭 AI行业 | "AI startup funding today" | "AI 融资 中国 2026" |
 | 🔄 企业转型 | "enterprise AI transformation" | "企业 AI 转型 案例" |
+
+**重点产品/公司搜索补充**（热点日优先搜，非热点日可跳过）：
+- **OpenAI Codex**: "Codex CLI update" / "Codex agent coding"
+- **MiniMax**: "MiniMax M2" / "海螺AI 更新"
+- **智谱AI**: "智谱 GLM" / "AutoGLM"
+- **腾讯研究院**: "腾讯研究院 AI"
 
 **搜索配额（严格执行）**：
 - Step 0.5 热点探针：≤2次（1海外+1国内）
