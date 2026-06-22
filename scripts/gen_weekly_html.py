@@ -136,17 +136,26 @@ def render_top5(d):
     for item in d.get("top5",[]):
         ac = ACCENT_MAP.get(item.get("accent","info"),"var(--color-info)")
         # Build meta line with SVG icons + source links
-        source_url = item.get("source_url", item.get("url",""))
-        source_name = item.get("source","")
+        # New: sources array (each source with name+url), fallback to old source/source_url fields
+        sources = item.get("sources", [])
         meta_date = f'<span class="meta-item">{svg_calendar} {d.get("date_range","")}</span>'
-        meta_source = f'<span class="meta-divider">·</span><a href="{source_url}" target="_blank" class="meta-link">{svg_link} {source_name}</a>' if source_url else f'<span class="meta-divider">·</span><span class="meta-item">{source_name}</span>'
-        # Secondary source
-        secondary = item.get("secondary_source","")
-        secondary_url = item.get("secondary_source_url","")
-        meta_secondary = ""
-        if secondary:
-            meta_secondary = f'<span class="meta-divider">·</span><a href="{secondary_url}" target="_blank" class="meta-link">{svg_link} {secondary}</a>' if secondary_url else f'<span class="meta-divider">·</span><span class="meta-item">{secondary}</span>'
-        cards += f'<div class="news-card animate-on-scroll" style="--card-accent: {ac};">\n  <div class="news-card-rank">TOP {item["rank"]} · {item.get("label","")}</div>\n  <div class="news-card-title">{item["title"]}</div>\n  <div class="news-card-meta">{meta_date}{meta_source}{meta_secondary}</div>\n  <div class="news-card-desc">{item["desc"]}</div>\n  <div class="news-card-why"><div class="judgment-label">关键判断</div>{item["why"]}</div>\n</div>\n'
+        meta_sources = ""
+        if sources:
+            source_parts = []
+            for s in sources:
+                surl = s.get("url","")
+                sname = s.get("name","")
+                if surl:
+                    source_parts.append(f'<a href="{surl}" target="_blank" class="meta-link">{svg_link} {sname}</a>')
+                else:
+                    source_parts.append(f'<span class="meta-item">{sname}</span>')
+            meta_sources = '<span class="meta-divider">·</span>' + '<span class="meta-divider">·</span>'.join(source_parts)
+        else:
+            # Legacy fallback: single source_url
+            source_url = item.get("source_url", item.get("url",""))
+            source_name = item.get("source","")
+            meta_sources = f'<span class="meta-divider">·</span><a href="{source_url}" target="_blank" class="meta-link">{svg_link} {source_name}</a>' if source_url else f'<span class="meta-divider">·</span><span class="meta-item">{source_name}</span>'
+        cards += f'<div class="news-card animate-on-scroll" style="--card-accent: {ac};">\n  <div class="news-card-rank">TOP {item["rank"]} · {item.get("label","")}</div>\n  <div class="news-card-title">{item["title"]}</div>\n  <div class="news-card-meta">{meta_date}{meta_sources}</div>\n  <div class="news-card-desc">{item["desc"]}</div>\n  <div class="news-card-why"><div class="judgment-label">关键判断</div>{item["why"]}</div>\n</div>\n'
     return f'<section id="top5">\n<div class="doc-chapter-label animate-on-scroll">Top 5</div>\n<h2 class="animate-on-scroll">{SVG_ICONS["trophy"]} 本周 Top 5 事件</h2>\n{cards}\n</section>'
 
 def _clean_daily_url(url):
