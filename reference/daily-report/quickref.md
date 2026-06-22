@@ -24,7 +24,7 @@ Step 0.5: 热点探针（≤2次搜索）
 Step 1:   搜索调研（≤6次搜索，5板块×1海外+1微信）
 Step 2:   内容生成 → daily-content-YYYY-MM-DD.json + .md
 Step 3+4: finalize（一键命令，含质量门+HTML+首页+部署）
-Step 5:   MixCard → 只发shenlang03，>5人用子agent并行
+Step 5:   MixCard → 只发{{OWNER_KIM_USERNAME}}，>5人用子agent并行
 Step 5.5: 输出4个交付链接（内部×2+外部×2）
 ```
 
@@ -43,7 +43,7 @@ uv run scripts/ai_daily_orchestrator.py finalize --date YYYY-MM-DD
 
 # Step 5 MixCard生成+发送
 uv run scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/card.json --with-summary
-# 发给shenlang03: message(action=send, channel=kim, target=username:shenlang03, kimMixCard=<card>, message="")
+# 发给{{OWNER_KIM_USERNAME}}: message(action=send, channel=kim, target={{OWNER_KIM_USERNAME}}, kimMixCard=<card>, message="")
 
 # Step 5 外部版同步
 uv run scripts/sync_to_external.py --full --verify
