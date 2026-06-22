@@ -133,6 +133,29 @@ rank pill (12px/背景色) → 标题 (18px/600) → meta行 (13px/SVG icon) →
 - doc-footer：`max-width:100%`，跟随content-inner宽度
 - **核心原则**：content-inner已有max-width:960px约束，子元素只管内容不管布局宽度
 
+#### 1.6.8 了解更多模块模板变量（#128 — 2026-06-22）
+
+- **禁止在字符串常量中直接使用`{VAR}`Python变量** — 在f-string上下文外，`{SVG_ICONS["insight"]}`和`{INTERNAL_BASE}`不会被求值，直接输出原始文本
+- **正确做法**：用占位符模板`__SVG_INSIGHT__`/`__HOMEPAGE_URL__`，在`generate_html()`中显式替换
+- 脚本已修复：`LEARN_MORE_TEMPLATE` → 占位符 → `generate_html()`中替换为实际SVG+URL
+
+#### 1.6.9 Top5来源超链接（#128 — 2026-06-22）
+
+- **Top5每条来源必须是独立超链接** `<a class="meta-link" href="URL" target="_blank">`
+- **禁止合并多个来源到一个纯文字span**（如`<span class="meta-item">Fortune · 36氪 · Axios</span>`）
+- JSON新增`sources[]`数组字段（向后兼容旧`source`/`source_url`字段）：
+  ```json
+  "sources": [{"name": "Fortune", "url": "https://..."}, {"name": "36氪", "url": "https://..."}]
+  ```
+- 脚本优先读`sources[]`，无则fallback到旧`source`/`source_url`
+
+#### 1.6.10 脚本防御性数据处理（#128 — 2026-06-22）
+
+- **日报链接`-v3.html`后缀自动清理** — `_clean_daily_url()`函数去除后缀（内部版用`-v3.html`，外部版用`.html`）
+- **双`<strong>`嵌套自动去嵌** — `_strip_double_strong()`清理JSON自带的`<strong>`与脚本自加的`<strong>`重叠
+- **空URL fallback为纯文字** — `sources[]`中无URL的来源渲染为`<span>`而非空`<a>`
+- **stats-grid自适应列数** — `repeat(auto-fit, minmax(160px, 1fr))`替代固定`repeat(4, 1fr)`
+
 ---
 
 ## 二、KIM MixCard 公共规范

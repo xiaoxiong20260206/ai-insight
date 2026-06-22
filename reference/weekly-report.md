@@ -445,3 +445,45 @@ uv run scripts/build_insight_mixcard.py weekly --date YYYY-WXX --output /tmp/car
 ---
 
 _更新于 2026-06-15 · v3.4 · 新增W24 Header/底部对齐/URL分离复盘（3类问题+4条教训）_
+### 2026-06-22: W25周报6类格式问题全面修复（#128）
+
+**问题1: 了解更多模块模板变量未替换（P0）**
+- 根因：`LEARN_MORE`常量直接用`{SVG_ICONS["insight"]}`和`{INTERNAL_BASE}`，但常量不在f-string上下文中，Python不会求值=输出原始文本`{SVG_ICONS["insight"]}`
+- 修复：改用占位符模板`__SVG_INSIGHT__`/`__HOMEPAGE_URL__`，在`generate_html()`中显式替换
+- **教训①**: **Python变量`{var}`只在f-string上下文内求值。字符串常量中写花括号变量=原始文本输出。用占位符+显式替换替代。**
+
+**问题2: insight trend_links日报链接带`-v3.html`后缀（P0）**
+- 根因：JSON中trend_links的URL用了内部版后缀`-v3.html`，但外部版文件名无此后缀→外部用户404
+- 修复：新增`_clean_daily_url()`函数自动去除`-v3.html`
+- **教训②**: **内部版和外部版的日报文件名不同（`-v3.html` vs `.html`），脚本必须自动清理后缀，不能假设JSON数据格式正确。**
+
+**问题3: Top5来源无超链接（P1→升为P0）**
+- 根因：JSON的`source`字段合并了3个来源为纯文字`"Fortune · 36氪 · Axios"`，`source_url`为空，脚本渲染为`<span>`=不可追溯
+- 修复：JSON新增`sources[]`数组（每来源独立name+url），脚本优先读sources逐个渲染为`<a class="meta-link">`
+- **教训③**: **来源不可追溯=违反output-format-spec 1.4。多来源必须逐个配URL，不能合并为一个纯文字span。**
+
+**问题4: 双`<strong>`嵌套（P1）**
+- 根因：JSON的`intro_callout`自带`<strong>本周核心判断：...</strong>`，脚本又包了一层`<strong>`=双层
+- 修复：`_strip_double_strong()`清理+自动检测解包JSON自带`<strong>`后脚本再加
+- **教训④**: **JSON内容可能自带HTML标签，脚本渲染时必须检查并避免与自身模板标签重叠。**
+
+**问题5: insight-card内联`font-family:var(--font-family-cn)`（P2）**
+- 根因：`--font-family-cn`变量未定义（会fallback），内联style和全局body字体冲突
+- 修复：删除内联style，统一用CSS class
+- **教训⑤**: **内联style是最脆弱的样式方式——无法被覆盖、与全局样式冲突、变量可能未定义。优先用CSS class。**
+
+**问题6: stats-grid 5卡但CSS固定4列（P1）**
+- 根因：`.stats-grid`桌面端`repeat(4, 1fr)`固定4列，第5卡折行+1/4宽=视觉孤岛
+- 修复：改为`repeat(auto-fit, minmax(160px, 1fr))`自适应
+- **教训⑥**: **固定列数CSS假设卡片数量固定。用auto-fit/adaptiv布局更健壮。**
+
+**系统根因总结**：6类问题中5类指向**脚本生成逻辑缺乏防御性**——脚本假设JSON数据格式干净、字段完整、不带HTML标签、文件名统一，但实际数据有`-v3`后缀、空URL、自带`<strong>`标签、合并文字来源。脚本需要防御性处理，不能依赖数据质量。
+
+**3条新P0红线**：
+1. **#27: 模板变量禁止嵌入f-string上下文外的字符串常量** — 用占位符+显式替换
+2. **#28: Top5来源必须逐个配超链接** — `sources[]`数组，禁止纯文字合并
+3. **#29: 脚本必须防御JSON脏数据** — `-v3`自动清理/双`<strong>`去嵌套/空URL fallback
+
+---
+
+_更新于 2026-06-22 · v3.5 · 新增W25 6类格式问题复盘+3条P0红线(#27-#29)_
