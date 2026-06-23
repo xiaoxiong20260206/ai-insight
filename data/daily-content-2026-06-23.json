@@ -1,0 +1,365 @@
+{
+  "date": "2026-06-23",
+  "coverage": {
+    "overseas": 7,
+    "china": 5,
+    "wechat_direct": 2
+  },
+  "overview": [
+    {
+      "icon": "🧠",
+      "label": "大模型",
+      "summary": "白宫AI安全令致Anthropic全球断供Fable/Mythos 5，智谱GLM-5.2趁势完全开源"
+    },
+    {
+      "icon": "⌨️",
+      "label": "AI Coding",
+      "summary": "Codex CLI登顶Terminal-Bench 83.4%，Cursor/Claude Code/Codex三大栈合流趋势显现"
+    },
+    {
+      "icon": "📱",
+      "label": "AI应用",
+      "summary": "MiniMax M3开源百万上下文，Kimi K2.7 Code高速版上线，智源发布全球首个世界基座模型"
+    },
+    {
+      "icon": "🏭",
+      "label": "AI行业",
+      "summary": "DeepSeek估值450亿美元首轮融资，Kimi累计融资376亿，中国AI独角兽进入诸神之战"
+    },
+    {
+      "icon": "🔄",
+      "label": "企业转型",
+      "summary": "SpaceX AI1卫星开启太空算力，具身智能元年正式到来，AI Agent从概念到规模化落地"
+    }
+  ],
+  "heat_trend": {
+    "trend": "上升",
+    "title": "地缘博弈+独角兽定局+世界模型破晓",
+    "topics": [
+      {
+        "name": "Anthropic Fable/Mythos 5全球断供",
+        "score": 10,
+        "days": 7,
+        "trend_class": "up",
+        "trend_label": "🔥 爆发",
+        "signal": "AI地缘博弈标志性事件，安全管制与开放对立"
+      },
+      {
+        "name": "DeepSeek 450亿估值首轮融资",
+        "score": 9,
+        "days": 3,
+        "trend_class": "up",
+        "trend_label": "📈 攀升",
+        "signal": "中国AI最大融资，技术理想主义向资本化转身"
+      },
+      {
+        "name": "智源悟界·Physis世界模型",
+        "score": 8,
+        "days": 1,
+        "trend_class": "up",
+        "trend_label": "📈 新增",
+        "signal": "从Next Token到Next Physical State的范式跃迁"
+      },
+      {
+        "name": "MiniMax M3开源百万上下文",
+        "score": 7,
+        "days": 3,
+        "trend_class": "up",
+        "trend_label": "📈 攀升",
+        "signal": "国产开源模型百万上下文成标配"
+      },
+      {
+        "name": "AI Coding三大栈合流",
+        "score": 7,
+        "days": 5,
+        "trend_class": "stable",
+        "trend_label": "➡️ 持续",
+        "signal": "Codex/Cursor/Claude Code生态互操作"
+      }
+    ]
+  },
+  "tabs": [
+    {
+      "id": "llm",
+      "title": "🧠 大模型",
+      "icon": "brain",
+      "news": {
+        "overseas": [
+          {
+            "title": "美国商务部下令Anthropic全球断供Fable 5与Mythos 5",
+            "summary": "6月12日，美国商务部以国家安全为由要求Anthropic禁止所有外国公民（含Anthropic外籍员工）访问Fable 5和Mythos 5。Anthropic被迫全球暂停所有客户访问。白宫称发现Fable 5存在可被越狱利用的安全漏洞，且怀疑有中国关联组织曾访问Mythos 5。这标志着美国对尖端AI模型出口管制最严厉的一次行动。",
+            "source": "Bloomberg / DW · 6月23日",
+            "url": "https://www.dw.com/zh/和中国有关anthropic最新ai模型全球断供/a-77543796",
+            "importance": 5
+          },
+          {
+            "title": "白宫发布AI创新与安全行政命令",
+            "summary": "白宫发布「促进先进人工智能创新与安全」行政命令，要求协调行动应对AI国家安全风险。该命令为商务部限制Anthropic模型访问提供了法律基础，同时强调维持美国AI领导力。",
+            "source": "WhiteHouse.gov · 6月23日",
+            "url": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security",
+            "importance": 4
+          },
+          {
+            "title": "OpenAI GPT-5.5与Codex模型持续迭代，Terminal-Bench登顶",
+            "summary": "Codex CLI搭配GPT-5.5在Terminal-Bench 2.1以83.4%登顶，Claude Code（Opus 4.8）78.9%居第二。GPT-5.5 Goal Mode稳定化，Browser Use从实验转为正式功能，Mobile iOS远程控制上线。",
+            "source": "DevelopersDigest / MorphLLM · 6月",
+            "url": "https://www.morphllm.com/ai-coding-agent",
+            "importance": 4
+          }
+        ],
+        "china": [
+          {
+            "title": "智谱GLM-5.2趁势完全开源：「前沿智能属于每一个人」",
+            "summary": "在Fable 5被禁当晚，智谱宣布GLM-5.2完全开源。该模型在FrontierSWE编程评测得分74.4，仅落后Opus 4.8约1个百分点，超过GPT-5.5。Artificial Analysis综合榜单51分，登顶全球开源模型第一。",
+            "source": "B站AI早报 · 6月23日",
+            "url": "https://www.bilibili.com/video/BV1oMJ76bE73",
+            "importance": 5
+          },
+          {
+            "title": "DeepSeek V4发布并开源：Pro+Flash双版本，深度适配华为昇腾",
+            "summary": "DeepSeek V4预览版上线并同步开源，包含V4-Pro和V4-Flash。细粒度专家并行(EP)同时在英伟达GPU和华为昇腾NPU上完成验证。V4-Pro API目前吞吐有限，预计下半年昇腾950超节点批量上市后价格大幅下调。",
+            "source": "量子位 · 6月23日",
+            "url": "https://h5.ifeng.com/c/vivoArticle",
+            "importance": 4
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "AI地缘博弈：当大模型成为战略资产",
+        "paragraphs": [
+          "6月中旬的Fable/Mythos 5断供事件，是大模型从「技术产品」升级为「战略资产」的标志性转折。美国商务部首次以国家安全为由对特定AI模型实施出口管制，Anthropic被迫全球暂停服务——影响的不仅是外国用户，连美国本土客户和Anthropic自己的外籍员工都无法幸免。",
+          "智谱的反应速度令人侧目：Fable 5被禁当晚即宣布GLM-5.2完全开源，打出「前沿智能属于每一个人」的旗号。这不是慈善行为，而是地缘博弈下的战略占位——当闭源模型面临断供风险时，开源成为最稳固的信任锚。",
+          "更深层的信号：大模型的国家安全属性已被正式写入政策。白宫AI行政命令为此提供了法律框架，未来类似断供可能成为常态而非特例。对企业而言，「模型供应多样性」从降本策略升级为风控刚需。"
+        ],
+        "takeaway": "核心启示：大模型已成战略资产，断供风险将模型多样性从降本策略升级为风控刚需"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\" style=\"padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7\"><b>📊 模式洞察</b><br/>大模型领域的「核武器化」趋势加速：出口管制→断供→开源反击，形成「闭源管控-开源对冲」的新博弈均衡。企业需建立模型供应多样性作为基础风控。"
+    },
+    {
+      "id": "coding",
+      "title": "⌨️ AI Coding",
+      "icon": "code",
+      "news": {
+        "overseas": [
+          {
+            "title": "Codex CLI登顶Terminal-Bench 2.1，AI Coding Agent格局分化",
+            "summary": "Terminal-Bench 2.1排行：Codex CLI(GPT-5.5) 83.4%第一，Claude Code(Opus 4.8) 78.9%第二，Gemini CLI 70.7%第三。Codex擅长续航，Claude Code擅长推理深度，DeepSeek TUI以1/10成本做同类工作。",
+            "source": "MorphLLM · 6月23日",
+            "url": "https://www.morphllm.com/ai-coding-agent#coding",
+            "importance": 5
+          },
+          {
+            "title": "Cursor、Claude Code、Codex正在合流为一个AI编程技术栈",
+            "summary": "4月第一周，Cursor发布重构界面支持并行Agent编排，OpenAI发布可在Claude Code内运行的官方插件，早期用户开始三者并用。这个没人计划的合流趋势正在成为主流开发范式。",
+            "source": "TheNewStack · 6月23日",
+            "url": "https://thenewstack.io/ai-coding-tool-stack",
+            "importance": 4
+          }
+        ],
+        "china": [
+          {
+            "title": "Kimi K2.7 Code高速版上线：2倍价格、最快6倍速度",
+            "summary": "月之暗面发布Kimi K2.7 Code高速版，以2倍价格提供最快6倍推理速度。K2.7 Code在SWE-bench Pro上表现强劲，支持Agent连续自主运行。OpenCode Go套餐已支持K2.7 Code。",
+            "source": "AI早报 · 6月23日",
+            "url": "https://www.bilibili.com/video/BV1oMJ76bE73#coding",
+            "importance": 4
+          },
+          {
+            "title": "智谱ZCode 3.0发布：国产Codex来袭，1.5倍套餐额度+新用户免费",
+            "summary": "智谱推出ZCode 3.0编程助手，配套1.5倍套餐额度和新用户免费试用。在GLM-5.2编程能力提升的加持下，国产Coding Agent竞争白热化。",
+            "source": "B站AI日报 · 6月23日",
+            "url": "https://www.bilibili.com/video/BV1oMJ76bE73#coding#coding-china",
+            "importance": 3
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "AI Coding Agent：从工具竞争到生态合流",
+        "paragraphs": [
+          "2026年6月，AI Coding Agent领域出现两个并行趋势：一是工具层面的持续分化——Codex CLI拼性能天花板、Claude Code拼推理深度、DeepSeek TUI拼成本效率；二是生态层面的意外合流——Cursor重写界面支持并行Agent、OpenAI插件进入Claude Code生态、开发者开始三者混用。",
+          "TheNewStack将其描述为「没人计划的AI编程技术栈」：Codex负责高吞吐任务，Claude Code负责深度推理，Cursor负责IDE级编排。这种自然形成的分工比任何单一工具的生态锁定都更有生命力。",
+          "对团队的启示：不要在单一Agent上下赌注。构建可互操作的Agent编排层，让不同Agent在最擅长的任务上运行，是2026下半年最务实的选择。"
+        ],
+        "takeaway": "核心启示：不锁定单一Agent，构建可互操作的Agent编排层是当前最务实的选择"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\" style=\"padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7\"><b>📊 模式洞察</b><br/>AI Coding Agent从「赢家通吃」转向「最佳组合」：Codex+Claude Code+Cursor的三栈合流，意味着Agent互操作性比单点优势更重要。"
+    },
+    {
+      "id": "app",
+      "title": "📱 AI应用",
+      "icon": "app",
+      "news": {
+        "overseas": [
+          {
+            "title": "OpenAI公布新路线图：人人都将拥有自己的AGI助手",
+            "summary": "OpenAI宣布下一阶段重心转向打造个人通用人工智能(AGI)助手，帮助处理日常事务、提升工作效率、辅助学习。但具体细节仍悬而未决。",
+            "source": "环球网/新浪 · 6月23日",
+            "url": "https://k.sina.com.cn/article_7857201856",
+            "importance": 4
+          },
+          {
+            "title": "Karpathy加入Anthropic，Vibe Coding到Agentic Engineering关键词持续发酵",
+            "summary": "AI教育领域顶级影响力人物Karpathy宣布加入Anthropic。他此前引出的Vibe Coding、Agentic Engineering等概念在2026年持续被广泛讨论和深挖。",
+            "source": "Bloomberg / DW · 6月23日",
+            "url": "https://k.sina.com.cn/article_7857201856#app",
+            "importance": 3
+          }
+        ],
+        "china": [
+          {
+            "title": "MiniMax M3正式开源：原生多模态、百万上下文",
+            "summary": "MiniMax M3模型正式开放权重，支持原生多模态和百万Token上下文窗口。编程评测已超越海外主流模型，国产开源在长上下文赛道实现从追赶到领跑。",
+            "source": "晨间信号 · 6月23日",
+            "url": "https://podcasts.apple.com/us/podcast/",
+            "importance": 4
+          },
+          {
+            "title": "2026智源大会：发布全球首个通用世界基座模型悟界·Physis",
+            "summary": "智源研究院在第八届智源大会发布悟界·Physis-v0.1，以「预测下一个物理状态」为底层范式，支持50+复杂物理场景长程推理，标志AI从数字世界迈向物理世界的范式跃迁。",
+            "source": "QQ新闻 · 6月23日",
+            "url": "https://news.qq.com/rain/a/20260612A09GNF00",
+            "importance": 5
+          },
+          {
+            "title": "人形机器人「边巴」登顶6000米雪山，展现自主决策能力",
+            "summary": "人形机器人「边巴」在海拔5800米处拒绝被装入背包，坚持「自己走」并成功登顶钦博拉索火山。这一事件引发全网热议，被视为具身智能自主性的标志性表现。",
+            "source": "新浪 · 6月23日",
+            "url": "https://k.sina.com.cn/article_7857201856#app#app-china",
+            "importance": 3
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "世界模型破晓：从Next Token到Next Physical State",
+        "paragraphs": [
+          "2026智源大会发布的悟界·Physis-v0.1是一个里程碑事件。它不只是一个更好的多模态模型——而是以「预测下一个物理状态」替代「预测下一个Token」的范式革命。物理隐空间表征替代像素级预测，支持视频、深度、3D点云、力触反馈等全模态信息压缩。",
+          "这不是孤立事件。机器人「边巴」登顶雪山时展现的自主决策、MiniMax M3的百万上下文原生多模态、OpenAI的AGI助手路线图——这些看似独立的事件，共同指向一个方向：AI正在从「理解文本」走向「理解并操作物理世界」。",
+          "对企业的启示：关注世界模型+具身智能的结合点。工业仿真、数字孪生、机器人控制将是2026下半年的落地爆发区。"
+        ],
+        "takeaway": "核心启示：世界模型是通往Physical AGI的必经之路，工业仿真和机器人控制是首波落地场景"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\" style=\"padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7\"><div style=\"padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7\"><b>📊 模式洞察</b><br/>AI应用三重进化并行：文本→多模态→物理世界。百万上下文解决「理解宽度」，世界模型解决「物理深度」，具身智能解决「行动能力」。三者汇聚于2026下半年，工业仿真和机器人控制是首波落地场景。</div></div>"
+    },
+    {
+      "id": "industry",
+      "title": "🏭 AI行业",
+      "icon": "factory",
+      "news": {
+        "overseas": [
+          {
+            "title": "SpaceX AI1卫星点燃太空算力新风口",
+            "summary": "SpaceX发布代号AI1的轨道AI卫星，翼展70米太阳能阵列支持120千瓦算力，搭配液冷散热和激光链路，性能接近英伟达GB300机柜。AI算力基础设施正从地面大规模向太空迁移。",
+            "source": "中财网 · 6月23日",
+            "url": "https://k.sina.com.cn/article_7857201856#industry",
+            "importance": 4
+          },
+          {
+            "title": "亚马逊向Anthropic追加50亿美元投资，总额达250亿美元",
+            "summary": "亚马逊追加对Anthropic投资至250亿美元，Claude平台上线AWS。亚马逊未来十年将在AWS技术上投入超1000亿美元拓展AI推理能力。",
+            "source": "Bloomberg / DW · 6月23日",
+            "url": "https://h5.ifeng.com/c/vivoArticle#industry",
+            "importance": 4
+          }
+        ],
+        "china": [
+          {
+            "title": "DeepSeek首轮融资估值450亿美元，中国AI史上最大",
+            "summary": "DeepSeek首轮融资估值达450亿美元，大基金领投。创始人梁文锋此前对商业化说「不」，如今姿态转变意味着AI创业从技术理想向资本博弈全面转型。V4深度适配华为昇腾，「模型+芯片」协同战略成形。",
+            "source": "量子位 · 6月23日",
+            "url": "https://news.qq.com/rain/a/20260507A055G300",
+            "importance": 5
+          },
+          {
+            "title": "Kimi累计融资376亿元创中国大模型之最，月之暗面进入200亿美元俱乐部",
+            "summary": "月之暗面完成20亿美元新融资，投后估值200亿美元。Kimi K2.6此前夺回开源模型全球第一，ARR从1亿到2亿美元仅用一个月。Kimi+DeepSeek包揽全球开源榜单前二。",
+            "source": "AI早报 · 6月23日",
+            "url": "https://news.qq.com/rain/a/20260507A055G300#industry",
+            "importance": 5
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "中国AI独角兽诸神之战：从技术秀肌肉到资本拼内力",
+        "paragraphs": [
+          "2026年，中国AI独角兽格局彻底分化。DeepSeek 450亿美元估值首轮融资，Kimi累计融资376亿元，智谱和MiniMax已登陆港交所——曾经的「AI六小虎」已无法用同一标签概括。",
+          "三条路径清晰可见：①API+开源变现（Kimi/DeepSeek）：技术领先直接转化为商业回报，全球开源生态是护城河；②B端深耕（智谱）：逆势涨价83%后调用量不降反升，但亏损近50亿，规模化盈利仍是问号；③C端全球化（MiniMax）：社交产品收入占七成，用户见顶后转向企业级。",
+          "关键变量：DeepSeek的「模型+芯片」协同战略（V4深度适配昇腾）如果跑通，将创造一条与英伟达生态平行的中国AI基础设施路径。这是比估值更值得关注的结构性信号。"
+        ],
+        "takeaway": "核心启示：独角兽定局后，生态广度+商业化速度>技术领先。DeepSeek的「模型+芯片」协同是最大变量"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\" style=\"padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7\"><b>📊 模式洞察</b><br/>中国AI独角兽从「六小虎」集体叙事分化为三条路径：开源API变现在跑通、B端深耕在煎熬、C端全球化在见顶。真正的分水岭是商业化拐点而非技术里程碑。"
+    },
+    {
+      "id": "enterprise",
+      "title": "🔄 企业转型",
+      "icon": "sync",
+      "news": {
+        "overseas": [
+          {
+            "title": "谷歌推出Gemini Enterprise Agent Platform，Agent记忆+模拟能力上线",
+            "summary": "谷歌发布Gemini企业智能体平台，新增Memory Bank、Agent Simulation、Projects等能力。智能体可记忆历史互动、模拟测试后上线，支持Workspace与OneDrive数据集成。",
+            "source": "凤凰科技 · 6月23日",
+            "url": "https://h5.ifeng.com/c/vivoArticle#enterprise",
+            "importance": 4
+          },
+          {
+            "title": "黄仁勋要求英伟达全员使用Codex：1万员工AI编程成「队友」",
+            "summary": "英伟达CEO黄仁勋发全员邮件要求1万名员工使用OpenAI Codex编程工具，称其为「队友」和「超能力」。英伟达与OpenAI合作搭建Codex实验室，举办系列研讨会。AI工具从「可选」变为「必选」的信号。",
+            "source": "凤凰科技 · 6月23日",
+            "url": "https://h5.ifeng.com/c/vivoArticle#enterprise#enterprise-overseas",
+            "importance": 4
+          }
+        ],
+        "china": [
+          {
+            "title": "华为云码道代码智能体日活18倍增长，本周上线Skill市场+自定义Agent",
+            "summary": "华为云码道(CodeArts)代码智能体自2月公测以来日活增长约18倍，预计本周上线Skill市场、自定义Agent、多任务并行等新特性。企业级AI编程工具在中国市场加速落地。",
+            "source": "凤凰科技 · 6月23日",
+            "url": "https://h5.ifeng.com/c/vivoArticle#enterprise#enterprise-china",
+            "importance": 4
+          },
+          {
+            "title": "全球AI Agent生态爆火：OpenClaw GitHub 25万星，中国模型占Token消耗61%",
+            "summary": "AI Agent平台OpenClaw在全球开发者社区爆火，GitHub星标接近25万。2026年2月OpenRouter前十模型Token消耗约8.7万亿，中国模型独占5.3万亿(61%)。MiniMax、Kimi、智谱通过与Agent生态深度绑定完成从技术厂商到AI基础设施的跃迁。",
+            "source": "腾讯新闻 · 6月23日",
+            "url": "https://news.qq.com/rain/a/20260507A055G300#enterprise",
+            "importance": 5
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "Agent生态拐点：从工具到基础设施",
+        "paragraphs": [
+          "2026年6月，Agent生态出现明确的「基础设施化」拐点。英伟达要求全员使用Codex是自上而下的强制信号，谷歌推出企业Agent平台是产品化信号，华为码道日活18倍增长是中国市场的落地信号。",
+          "更值得关注的数据：OpenRouter上中国模型占Token消耗的61%。这不是偶然——MiniMax、Kimi、智谱通过与OpenClaw等Agent生态的深度绑定，已从「模型厂商」转变为「AI基础设施」。模型调用量>模型参数量，成为新的竞争维度。",
+          "对企业决策者的启示：1) Agent技能市场(Skill Market)是下一个平台型机会；2) 模型供应多样性是风控刚需而非降本策略；3) AI工具从「可选」到「必选」的拐点已到，延迟部署=竞争劣势。"
+        ],
+        "takeaway": "核心启示：Agent生态基础设施化拐点已到，模型调用量>模型参数量，Skill市场是下一个平台型机会"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\" style=\"padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7\"><b>📊 模式洞察</b><br/>Agent生态的「Android时刻」：模型是芯片，Agent是手机，Skill是App。中国模型凭借性价比占领Agent生态的Token消耗层，正在重演移动互联网的生态占位逻辑。"
+    }
+  ],
+  "watch_list": [
+    {
+      "item": "Anthropic能否重开Fable/Mythos 5及条件",
+      "signal": "将定义AI安全管制的边界和执行模式"
+    },
+    {
+      "item": "DeepSeek「模型+昇腾芯片」协同落地速度",
+      "signal": "如果跑通将创造与英伟达平行的中国AI基础设施路径"
+    },
+    {
+      "item": "智源悟界·Physis后续版本与应用场景",
+      "signal": "世界模型商业化路径是否清晰"
+    },
+    {
+      "item": "OpenClaw/Skill市场生态演化",
+      "signal": "Agent生态基础设施化速度，中国模型Token占比是否持续攀升"
+    },
+    {
+      "item": "GPT-5.6发布时间与能力基准",
+      "signal": "可能重塑大模型能力排行"
+    }
+  ],
+  "capability_update": "林克今日追踪：AI地缘博弈标志性转折(Anthropic断供+智谱开源反击)，独角兽诸神之战(DeepSeek 450亿+Kimi 376亿)，世界模型破晓(智源Physis发布)。三大趋势并行：断供风险使模型多样性成风控刚需，Agent生态基础设施化拐点已到，物理AI从实验室进入产业化前夜。建议重点关注DeepSeek「模型+昇腾」协同战略落地"
+}
