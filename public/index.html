@@ -256,10 +256,14 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: var(--gradient-success);
-            opacity: 0;
+            border-radius: var(--radius-md) var(--radius-md) 0 0;
             transition: var(--transition-normal);
         }
+        .stat-card:nth-child(1)::before { background: var(--gradient-success); opacity: 0.7; }
+        .stat-card:nth-child(2)::before { background: linear-gradient(135deg, #2563EB, #3B82F6); opacity: 0.7; }
+        .stat-card:nth-child(3)::before { background: linear-gradient(135deg, #7C3AED, #8B5CF6); opacity: 0.7; }
+        .stat-card:nth-child(4)::before { background: linear-gradient(135deg, #D97706, #F59E0B); opacity: 0.7; }
+        .stat-card:nth-child(5)::before { background: var(--gradient-success); opacity: 0.7; }
         
         .stat-card:hover {
             transform: translateY(-3px);
@@ -1094,6 +1098,7 @@
             border-radius: var(--radius-lg);
             padding: var(--spacing-lg);
             box-shadow: var(--shadow-card);
+            overflow: visible;
         }
         
         .calendar-header {
@@ -2217,7 +2222,7 @@
                 <span>🔬</span>
                 <span>林克的AI洞察</span>
             </div>
-            <h1 class="header-title">我是林克，这是沈浪让我负责的AI洞察项目</h1>
+            <h1 class="header-title">AI洞察 · 持续追踪AI行业动态</h1>
             <p class="header-subtitle">
                 系统化追踪AI行业动态，每日/每周输出调研洞察，帮助你保持对AI行业的全局视野
             </p>
@@ -2249,7 +2254,7 @@
         <!-- Stats -->
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-value green">85+</div>
+                <div class="stat-value green">100+</div>
                 <div class="stat-label">追踪人物</div>
             </div>
             <div class="stat-card">
@@ -2261,11 +2266,11 @@
                 <div class="stat-label">信息源</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value orange">30</div>
+                <div class="stat-value orange">28</div>
                 <div class="stat-label">深度调研</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value green">111+</div>
+                <div class="stat-value green">139</div>
                 <div class="stat-label">日报 / 周报</div>
             </div>
         </div>
@@ -2393,8 +2398,7 @@
                     <div class="wrc-icon">📊</div>
                     <div class="wrc-content">
                         <div class="wrc-title">AI 周报 · 第25周（06/15 - 06/21）<span class="wrc-badge">最新</span></div>
-                        <div class="wrc-desc">覆盖70+条资讯 · Fable 5出口管制 · SpaceX收购Cursor · 双IPO格局 · 豆包付费</div>
-                        <div class="wrc-desc">覆盖75条资讯 · Anthropic IPO反超OpenAI · Agent AI时代定调 · DeepSeek永久降价75%</div>
+                        <div class="wrc-desc">Fable 5/Mythos 5出口管制 · Anthropic IPO估值首超OpenAI · Agent AI时代定调 · DeepSeek永久降价75%</div>
                     </div>
                     <span class="wrc-arrow">→</span>
                 </a>
@@ -2423,11 +2427,11 @@
                 
                 <!-- 最新日报（仅展示最近一期） -->
                 <div class="content-list">
-                    <a href="01-daily-reports/2026-06/2026-06-23.html" target="_blank" class="list-item">
+                    <a href="01-daily-reports/2026-06/2026-06-22.html" target="_blank" class="list-item">
                         <span class="list-item-icon">📅</span>
                         <div class="list-item-content">
-                            <div class="list-item-title">2026年6月23日 AI日报 <span style="background:#FEF2F2;color:#E11D48;font-size:11px;padding:2px 6px;border-radius:999px;margin-left:6px;">最新</span></div>
-                            <div class="list-item-desc">Anthropic Fable/Myth · DeepSeek 450亿估值首轮融资 · 智源悟界·Physis世界模型 · MiniMax M3开源百万上下文</div>
+                            <div class="list-item-title">2026年6月22日 AI日报 <span style="background:#FEF2F2;color:#E11D48;font-size:11px;padding:2px 6px;border-radius:999px;margin-left:6px;">最新</span></div>
+                            <div class="list-item-desc">大模型成战略资产 · AI Coding Agent生态合流 · 智源悟界·Physis世界模型 · MiniMax M3开源百万上下文</div>
                         </div>
                         <span class="list-item-arrow">→</span>
                     </a>
@@ -2444,7 +2448,7 @@
                         <div class="calendar-nav">
                             <button class="calendar-nav-btn" onclick="changeMonth(-1)" title="上个月">◀</button>
                         </div>
-                        <span class="calendar-month" id="calendarMonth">📅 2026年3月</span>
+                        <span class="calendar-month" id="calendarMonth">📅 2026年6月</span>
                         <div class="calendar-nav">
                             <button class="calendar-nav-btn" onclick="changeMonth(1)" title="下个月">▶</button>
                         </div>
@@ -2490,7 +2494,7 @@
                 <div class="research-toolbar">
                     <div class="research-stats">
                         <span class="research-stat-badge">📊 28篇报告</span>
-                        <span class="research-stat-badge">🗓️ 跨2个月</span>
+                        <span class="research-stat-badge">🗓️ 跨4个月</span>
                         <span class="research-stat-badge">持续更新中</span>
                     </div>
                     <div class="cat-legend" id="catLegend">
@@ -3465,7 +3469,7 @@
                         <div class="layer-title">
                             <span class="layer-icon">🎯</span>
                             <span>四大维度</span>
-                            <span class="layer-stats">41篇 · 7人 · 4企业</span>
+                            <span class="layer-stats">41篇 · 10+人 · 4+企业</span>
                         </div>
                         <div class="kb-dimensions">
                         
