@@ -1,0 +1,233 @@
+{
+  "date": "2026-06-24",
+  "overview": [
+    {"icon": "🧠", "label": "大模型", "summary": "MiniMax M2.7+GLM-5开源模型追平闭源前沿(成本1/3)，Noam Shazeer离开Google加入OpenAI，白宫发布AI行政令"},
+    {"icon": "⌨️", "label": "AI Coding", "summary": "SpaceX 600亿美元收购Cursor创AI工具并购纪录，Cursor/Claude Code/Codex三大栈融合成统一编程栈"},
+    {"icon": "📱", "label": "AI应用", "summary": "GLM Coding Plan 2个月ARR破1亿，中国AI模型出海从平替到首选(MiniMax境外收入73%)"},
+    {"icon": "🏭", "label": "AI行业", "summary": "阿里发布首个具身智能大模型Qwen-Robot三件套，LangChain验证开源模型在Agent任务匹配闭源"},
+    {"icon": "🔄", "label": "企业AI转型", "summary": "证监会将AI大模型纳入科创板第五套标准，智谱/MiniMax IPO标志烧钱竞赛进入上市竞赛"}
+  ],
+  "heat_trend": {
+    "trend": "上升",
+    "title": "开源跨阈值+AI Coding基础设施化+具身智能通用底座",
+    "topics": [
+      {"name": "开源模型跨过Agent可用阈值", "score": 9, "days": 3, "trend_class": "up", "trend_label": "📈 攀升", "signal": "M2.7/GLM-5匹配闭源，成本仅1/3，Agent场景结构性优势放大"},
+      {"name": "SpaceX 600亿收购Cursor", "score": 10, "days": 5, "trend_class": "up", "trend_label": "🔥 爆发", "signal": "AI Coding从工具升级为战略基础设施，估值天花板打开"},
+      {"name": "Qwen-Robot具身智能通用底座", "score": 8, "days": 3, "trend_class": "up", "trend_label": "📈 攀升", "signal": "具身智能从一机一模型到通用大脑，复刻大模型路径"}
+    ]
+  },
+  "coverage": {"overseas": 6, "china": 5, "wechat_direct": 2},
+  "capability_update": "林克今日追踪：SpaceX 600亿收购Cursor标志AI Coding从工具升级为战略基础设施，MiniMax M2.7+GLM-5开源模型跨过Agent可用阈值(成本仅闭源1/3)，阿里Qwen-Robot三件套让具身智能有了通用底座。建议重点评估开源模型替代闭源的混合Agent策略，以及AI Coding组合栈(编排+执行+部署)的构建。",
+  "tabs": [
+    {
+      "id": "llm",
+      "title": "🧠 大模型",
+      "icon": "brain",
+      "news": [
+        {
+          "title": "MiniMax M2.7发布：开源模型追平闭源前沿，成本仅1/3",
+          "summary": "MiniMax发布M2.7，56.22% SWE-Pro、57.0% Terminal Bench 2，编程能力追平Claude Sonnet 4.6。采用MoE稀疏架构+MSA稀疏注意力，激活参数23B，支持百万级上下文。自称\"首个深度参与自身进化的模型\"，可处理30%-50%自身工作流。LangChain评估显示M2.7与GLM-5在核心Agent任务上已匹配闭源前沿。",
+          "source": "Latent Space / LangChain · 6月24日",
+          "url": "https://www.latent.space/p/ainews-minimax-27-glm-5-at-13-cost",
+          "region": "overseas",
+          "importance": 5
+        },
+        {
+          "title": "智谱GLM-5.2全量开放：1M上下文，盘中暴涨48%",
+          "summary": "智谱宣布GLM-5.2面向GLM Coding Plan全量用户开放，支持1M上下文窗口（上代200K）。发布当日港股盘中一度涨近48%。GLM-5在Design Arena登顶，Coding能力对齐Claude Sonnet 4.5。MaaS ARR从2000万增至超5亿，10个月25倍增长。",
+          "source": "财新网 · 6月15日",
+          "url": "https://www.caixin.com/2026-06-15/102454260.html",
+          "region": "domestic",
+          "importance": 5
+        },
+        {
+          "title": "Noam Shazeer离开Google加入OpenAI，Transformer作者再聚首",
+          "summary": "Transformer共同作者Noam Shazeer离开Google加入OpenAI。作为AI领域最核心架构的创造者之一，Shazeer的流动标志着顶级人才进一步向OpenAI集中，也暗示Google内部AI研发方向可能面临调整。",
+          "source": "机器之心 · 6月24日",
+          "url": "https://www.jiqizhixin.com",
+          "region": "overseas",
+          "importance": 4
+        },
+        {
+          "title": "白宫发布AI行政令：促进先进AI创新与安全",
+          "summary": "白宫发布《促进先进人工智能创新与安全》行政令，配套国家安全总统备忘录NSPM-11。这是特朗普政府首个全面AI政策文件，平衡创新促进与安全管控，可能影响全球AI监管走向。",
+          "source": "White House · 6月24日",
+          "url": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security",
+          "region": "overseas",
+          "importance": 4
+        }
+      ],
+      "deep_focus": {
+        "title": "开源模型跨过关键阈值：从追赶到领跑的转折点",
+        "paragraphs": [
+          "MiniMax M2.7和GLM-5在同一个月内被验证可匹配闭源前沿，这不是巧合。LangChain的Deep Agents评测显示，开源模型在文件操作、工具调用、指令遵循等核心Agent任务上已达闭源水平，但成本仅1/3、延迟更低。",
+          "MoE稀疏架构让小参数模型追平大模型，Agent场景降低了对\"最聪明模型\"的依赖——任务拆解和工具调用比推理深度更重要。中国模型厂商的全球化路径已从\"平替\"升级为\"首选\"。",
+          "当成本优势3倍且能力不差时，企业采购决策的逻辑将彻底改变。先切换非关键Agent任务，关键路径保留闭源，形成\"开源为主、闭源兜底\"的混合策略，是当前ROI最优的选择。"
+        ],
+        "takeaway": "开源模型在Agent场景跨过可用阈值，建议立即评估M2.7/GLM-5替代闭源的混合Agent策略——非关键任务切开源，关键路径保留闭源。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\" style='padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7'><b>📊 模式洞察</b><br/>开源模型追平闭源的时机与Agent爆发高度重合——Agent场景对成本敏感、对延迟敏感，恰好放大了开源模型的结构性优势。<br/><br/><b>行动建议</b>：评估将非关键Agent任务从闭源切换到M2.7/GLM-5，关键路径保留闭源，形成\"开源为主、闭源兜底\"的混合策略。</div>"
+    },
+    {
+      "id": "ai_coding",
+      "title": "⌨️ AI Coding",
+      "icon": "keyboard",
+      "news": [
+        {
+          "title": "SpaceX 600亿美元全股收购Cursor，创AI工具最大并购纪录",
+          "summary": "SpaceX以600亿美元全股交易收购AI编程工具Cursor。此前SpaceX有60亿收购或10亿合作两个选项，IPO后股价大涨使全股收购更划算。Cursor在SWE-bench上得分72.4%，领先Claude Code和Codex。这标志着AI Coding工具从创业赛道跃入巨头博弈。",
+          "source": "9to5Mac · 6月17日",
+          "url": "https://9to5mac.com/2026/06/17/spacex-cursor-acquisition/",
+          "region": "overseas",
+          "importance": 5
+        },
+        {
+          "title": "Cursor 3 × Claude Code × Codex正在融合成无人预见的统一编程栈",
+          "summary": "TheNewStack报道：4月Cursor发布重构界面编排并行Agent，OpenAI发布Claude Code官方插件，早期用户已同时运行三者。AI Coding工具不再是单选，而是组合栈。Cursor负责交互编排，Claude Code做深度执行，Codex处理终端和Web任务。",
+          "source": "TheNewStack · 6月10日",
+          "url": "https://thenewstack.io/ai-coding-tool-stack",
+          "region": "overseas",
+          "importance": 4
+        },
+        {
+          "title": "2026年6月AI编程工具六强横评：Agent时代谁是真王者",
+          "summary": "DeepSeek社区发布六强横评：Cursor 3(72.4%)领先，Claude Code(Sonnet 4.5, 64.3%)次之，OpenAI Codex(三端统一)、Trae 2.0(中文最佳)、Windsurf(免费+企业双轨)、Replit Agent(全栈云端)各有所长。核心趋势：从补全时代跨入Agent时代，选型需按场景决策。",
+          "source": "CSDN · 6月24日",
+          "url": "https://deepseek.csdn.net/6a30937110ee7a33f27da5b4.html",
+          "region": "domestic",
+          "importance": 4
+        }
+      ],
+      "deep_focus": {
+        "title": "SpaceX收购Cursor的深层信号：AI Coding从工具到基础设施",
+        "paragraphs": [
+          "SpaceX收购Cursor不仅是估值事件，更是AI Coding工具从\"开发者工具\"跃升为\"战略基础设施\"的标志。当AI编程工具的估值达到600亿美元量级，意味着AI Coding已是硬科技公司的核心生产力要素。",
+          "Cursor的Agent编排能力比单纯补全更有战略价值，三工具融合栈趋势意味着AI Coding将走向\"编排层+执行层+部署层\"的操作系统化。对开发者而言，不再只是选哪个工具，而是构建自己的AI编程栈。",
+          "选型决策树已从\"谁更准\"升级为\"谁能编排更多Agent\"——这是从IDE到AI OS的跃迁。SWE-bench分数只是入场券，Agent编排能力、多模型接入灵活度和企业级权限管控才是长期竞争力。"
+        ],
+        "takeaway": "AI Coding进入操作系统化阶段，不要只看SWE-bench分数——Agent编排能力、多模型灵活度和企业管控才是长期竞争维度。构建自己的AI编程组合栈。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\" style='padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7'><b>📊 模式洞察</b><br/>AI Coding工具的竞争维度从\"谁更准\"升级为\"谁能编排更多Agent\"——这是从IDE到AI OS的跃迁。SpaceX收购Cursor佐证了这一判断。<br/><br/><b>行动建议</b>：不要只看SWE-bench分数，重点评估工具的Agent编排能力、多模型接入灵活度和企业级权限管控。</div>"
+    },
+    {
+      "id": "ai_app",
+      "title": "📱 AI应用",
+      "icon": "smartphone",
+      "news": [
+        {
+          "title": "MiniMax M2.7自进化突破：模型深度参与自身进化流程",
+          "summary": "MiniMax称M2.7是\"首个深度参与自身进化的模型\"，可处理30%-50%自身工作流。同时推出Agent Teams多智能体协作方案，并跟随Anthropic/OpenAI进入金融场景。自进化能力标志着AI从工具向自主系统演进。",
+          "source": "Latent Space · 6月24日",
+          "url": "https://www.latent.space/p/ainews-minimax-27-glm-5-at-13-cost",
+          "region": "overseas",
+          "importance": 4
+        },
+        {
+          "title": "智谱GLM Coding Plan上线2个月ARR破1亿，MaaS同比增900%",
+          "summary": "智谱面向开发者的GLM Coding Plan上线仅2个月ARR就突破1亿元。MaaS平台年化收入从2000万增至超5亿，10个月25倍增长。海外184个国家15万开发者月付费，GLM-4.6已上架Cursor、Windsurf等主流工具。",
+          "source": "36氪 · 6月24日",
+          "url": "https://m.36kr.com/p/3630818637186052",
+          "region": "domestic",
+          "importance": 4
+        },
+        {
+          "title": "中国AI模型出海：从平替到首选的质变",
+          "summary": "MiniMax境外收入占73.1%，智谱获184国开发者付费。硅谷基金Social Capital创始人公开转向Kimi K2，称\"比OpenAI和Anthropic便宜太多\"。马来西亚国家级MaaS平台基于智谱Z.ai构建。中国模型已从\"平替\"转为\"首选\"。",
+          "source": "36氪 · 6月24日",
+          "url": "https://m.36kr.com/p/3630818637186052",
+          "region": "domestic",
+          "importance": 3
+        }
+      ],
+      "deep_focus": {
+        "title": "AI应用变现的拐点：Coding是最先跑通的赛道",
+        "paragraphs": [
+          "GLM Coding Plan 2个月1亿ARR、MiniMax M2.7的金融场景落地、Kimi上架AWS Bedrock——三条线指向同一个结论：AI应用的变现拐点已到，而Coding是最先跑通的赛道。",
+          "原因清晰：1)Coding有可量化的产出衡量标准（代码质量/效率）；2)开发者愿意为确定性付费；3)Agent模式让AI从\"辅助\"变为\"独立完成\"，付费逻辑从\"省时间\"升级为\"代替人\"。",
+          "对AI应用创业者而言，找到可量化的产出指标=找到了付费逻辑。变现实公式是：可量化产出 × Agent自主率 = 付费意愿。Coding先跑通因为两者都高。"
+        ],
+        "takeaway": "AI应用变现公式已清晰：可量化产出 × Agent自主率 = 付费意愿。Coding赛道双高先跑通，评估你所在场景的两项指标，双高优先投入。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\" style='padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7'><b>📊 模式洞察</b><br/>AI应用变现公式：可量化产出 × Agent自主率 = 付费意愿。Coding先跑通因为两者都高。<br/><br/><b>行动建议</b>：评估你所在场景的\"可量化度\"和\"Agent可自主率\"，双高场景优先投入。</div>"
+    },
+    {
+      "id": "ai_industry",
+      "title": "🏭 AI行业",
+      "icon": "industry",
+      "news": [
+        {
+          "title": "阿里发布首个具身智能大模型Qwen-Robot系列：三模型协同",
+          "summary": "阿里千问团队发布Qwen-Robot系列：Qwen-RobotManip(VLA操作)、Qwen-RobotNav(VLN移动)、Qwen-RobotWorld(世界模型)。Manip基于38000+小时开源数据训练，在RoboChallenge 30项任务中夺冠；Nav统一五大任务族；World实现跨场景物理状态预测。三模型既可独立部署也可协同运行。",
+          "source": "TechNode / 新浪财经 · 6月16日",
+          "url": "https://technode.com/2026/06/17/alibaba-unveils-qwen-robot-series-with-three-foundation-models-for-embodied-ai",
+          "region": "domestic",
+          "importance": 5
+        },
+        {
+          "title": "LangChain验证：开源模型在Agent核心任务上已匹配闭源前沿",
+          "summary": "LangChain发布Deep Agents评估：GLM-5和MiniMax M2.7在文件操作、工具调用、指令遵循等核心Agent任务上得分与闭源前沿模型相当，但成本和延迟显著更低。开源模型正式跨过\"可用阈值\"，成为Agent应用的可行选择。",
+          "source": "LangChain Blog · 6月24日",
+          "url": "https://www.langchain.com/blog/open-models-have-crossed-a-threshold",
+          "region": "overseas",
+          "importance": 4
+        },
+        {
+          "title": "Stanford HAI发布2026 AI Index Report：全球AI发展全景",
+          "summary": "Stanford HAI发布2026 AI Index Report，覆盖研发、技术性能、负责任AI、经济、科学、医学、教育、政策治理、公众意见9大维度。这是理解全球AI发展态势最权威的年度报告之一。",
+          "source": "Stanford HAI · 6月",
+          "url": "https://hai.stanford.edu/ai-index/2026-ai-index-report",
+          "region": "overseas",
+          "importance": 3
+        }
+      ],
+      "deep_focus": {
+        "title": "具身智能的\"通用底座\"时刻：从一机一模型到统一大脑",
+        "paragraphs": [
+          "Qwen-Robot系列的核心突破不在于单项SOTA，而在于\"统一底座\"范式：80维统一动作表征让不同机器人共享同一套\"肢体语言\"，相对位置操作替代绝对坐标让跨场景泛化成为可能，世界模型让机器人在执行前推演未来。",
+          "这与大模型领域的\"通用预训练→微调\"路径高度同构——从\"一机一模型\"到\"通用大脑+适配\"。Qwen-Robot的\"三件套\"相当于大模型领域的预训练+微调+推理三阶段。",
+          "但真实物理世界的毫秒级响应和力控反馈仍是产业鸿沟，实验室SOTA和工厂量产之间还有长路。关注Qwen-Robot在真实工业场景的量产表现，实验室数据不等于产线可用。"
+        ],
+        "takeaway": "具身智能正在复刻大模型路径(专用→通用底座→适配)，但物理世界的实时控制仍是鸿沟——关注Qwen-Robot真机量产表现而非实验室SOTA。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\" style='padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7'><b>📊 模式洞察</b><br/>具身智能正在复刻大模型的发展路径：专用→通用底座→适配。Qwen-Robot的\"三件套\"相当于GPT的预训练+微调+推理。<br/><br/><b>行动建议</b>：关注Qwen-Robot在真实工业场景的量产表现，实验室数据不等于产线可用。</div>"
+    },
+    {
+      "id": "enterprise",
+      "title": "🔄 企业AI转型",
+      "icon": "sync",
+      "news": [
+        {
+          "title": "证监会将AI大模型企业纳入科创板第五套上市标准",
+          "summary": "证监会正式将AI大模型企业纳入科创板第五套上市标准，头部国产大模型企业冲刺IPO加速。MiniMax IPO后境外收入占比73.1%，智谱IPO市值预计超500亿港元。政策+技术+资本三重利好，国产AI迎黄金发展期。",
+          "source": "36氪 · 6月24日",
+          "url": "https://m.36kr.com/p/3630818637186052",
+          "region": "domestic",
+          "importance": 3
+        },
+        {
+          "title": "Databricks开放AI Agent技能共享标准",
+          "summary": "Databricks发布OpenSharing标准，旨在解决\"邮件传文件\"式的AI Agent技能分享问题。让Agent能力跨平台可移植、可验证、可审计，推动Agent生态从孤岛走向互联。",
+          "source": "TheNewStack · 6月10日",
+          "url": "https://thenewstack.io/databricks-opensharing-ai-agents/",
+          "region": "overseas",
+          "importance": 3
+        }
+      ],
+      "deep_focus": {
+        "title": "AI资本化提速：从烧钱竞赛到上市竞赛",
+        "paragraphs": [
+          "智谱和MiniMax两家IPO标志着中国AI大模型从\"烧钱竞赛\"进入\"上市竞赛\"阶段。关键数据：两家三年烧近110亿，70%用于研发；但IPO后智谱市值翻倍、MiniMax获更公允的国际估值。",
+          "资本市场正在为AI长期投入给出定价，这对还在路上的创业者意味着融资窗口打开。但IPO不是终点，而是从\"讲故事\"到\"交答卷\"的起点。",
+          "先上市者获人才+资金双重优势，但盈利能力才是长期估值锚。关注IPO后首份财报的营收结构和MaaS增速，而非模型能力PR。"
+        ],
+        "takeaway": "AI大模型IPO窗口打开，但110亿投入vs 500亿市值的ROI还需时间验证。先上市获优势，但营收结构和MaaS增速才是长期估值锚。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\" style='padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7'><b>📊 模式洞察</b><br/>AI大模型IPO窗口打开，但110亿投入vs 500亿市值的ROI还需时间验证。先上市者获人才+资金优势，但盈利能力才是长期估值锚。<br/><br/><b>行动建议</b>：关注IPO后首份财报的营收结构和MaaS增速，而非模型能力PR。</div>"
+    }
+  ],
+  "tracking": {
+    "headline_event": "SpaceX 600亿收购Cursor，AI Coding成战略基础设施",
+    "trend_signal": "开源模型(M2.7/GLM-5)跨过Agent可用阈值，成本仅闭源1/3",
+    "week_watch": "Anthropic Mythos/Fable 5重新开放时间；GPT-5.6发布；Qwen-Robot真机评测"
+  }
+}
