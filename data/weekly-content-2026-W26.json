@@ -1,0 +1,753 @@
+{
+  "week_id": "2026-W26",
+  "date_range": "06/15-06/21",
+  "year": 2026,
+  "week_num": 26,
+  "title": "AI 周报 2026年第26周",
+  "subtitle": "出口管制 · DeepSeek500亿 · OpenAI IPO · Cursor被收购 · AI应用付费拐点",
+  "description": "美国首次对已部署AI模型实施出口管制，Anthropic Fable 5/Mythos 5全球停用，AI主权化时代正式开启；DeepSeek完成500亿首轮融资创中国AI纪录；OpenAI秘密提交IPO申请；SpaceX 600亿美元全股收购Cursor，AI编程赛道进入巨头生态对抗；豆包上线付费订阅，国产AI应用完成'免费→付费'范式切换。",
+  "overview": {
+    "table_rows": [
+      {
+        "dimension": "大模型",
+        "signal": "Fable 5/Mythos 5遭出口管制全球停用，国产大模型72小时反击（GLM-5.2/DeepSeek V4/豆包5.0 Pro集体发布）"
+      },
+      {
+        "dimension": "AI Coding",
+        "signal": "SpaceX 600亿美元收购Cursor，OpenCode登顶开源排行，GitHub Copilot转credits制，AI编程定价模式大变革"
+      },
+      {
+        "dimension": "AI 应用",
+        "signal": "Apple WWDC发布Siri AI独立应用，豆包DAU 2亿上线付费，AI应用从'能聊天'到'能办事'范式切换"
+      },
+      {
+        "dimension": "AI 行业",
+        "signal": "DeepSeek 500亿首轮融资创纪录，OpenAI秘密提交IPO，Anthropic估值冲至9000亿美元，科创板向AI大模型开放"
+      },
+      {
+        "dimension": "企业AI转型",
+        "signal": "Gartner称Agent企业渗透率从5%→40%一年8倍增长，阿里成立Token Foundry、美团成立AI部门，CEO通知5100人不涨薪钱投AI"
+      }
+    ],
+    "stats": [
+      {
+        "value": "500亿",
+        "label": "DeepSeek首轮融资（元）",
+        "class": "stat-purple"
+      },
+      {
+        "value": "600亿$",
+        "label": "SpaceX收购Cursor",
+        "class": "stat-success"
+      },
+      {
+        "value": "8×",
+        "label": "Agent企业渗透率年增长",
+        "class": "stat-info"
+      },
+      {
+        "value": "46.4%",
+        "label": "ChatGPT市占率（首次跌破50%）",
+        "class": "stat-warning"
+      },
+      {
+        "value": "5.3万亿$",
+        "label": "四大巨头2030年AI资本开支",
+        "class": "stat-danger"
+      }
+    ]
+  },
+  "top5": [
+    {
+      "rank": 1,
+      "label": "出口管制",
+      "title": "美国首次对已部署AI模型实施出口管制——Anthropic Fable 5/Mythos 5全球停用",
+      "source": "Axios · Reuters · 机器之心",
+      "desc": "6月12日美国商务部将Anthropic Fable 5和Mythos 5列入出口管制范围，限制对象涵盖美国境外所有机构和个人。因技术上无法按国籍精确限制访问，Anthropic于6月13日全球无差别关停两款模型。这是人类历史上首次对已部署AI模型实施国家级出口管制，标志着AI主权化时代正式开启。G7随后讨论允许盟友有限访问美国先进AI模型，全球AI市场加速分裂为两大阵营。",
+      "why": "AI模型首次被等同于武器级技术管控，将重塑全球AI供应链。闭源模型的'可用性'成为系统性风险，开源替代从可选项变成必选项。中国大模型72小时内集体反击（GLM-5.2/DeepSeek V4/豆包5.0 Pro），自主可控路线从口号变成生存需求。",
+      "accent": "purple"
+    },
+    {
+      "rank": 2,
+      "label": "DeepSeek融资",
+      "title": "DeepSeek完成500亿首轮融资——创中国AI单轮融资纪录，梁文锋200亿个人出资保控制权",
+      "source": "36Kr · 晚点LatePost · IT之家",
+      "desc": "DeepSeek完成超500亿元首轮融资，创始人梁文锋个人出资200亿保持绝对控制权，腾讯和宁德时代入局。估值突破4000亿元，创下中国AI单轮融资纪录。腾讯+宁德时代的组合被解读为'算电协同'——AI基础设施的底层逻辑正在重写。同周DeepSeek V4全系API再降价，Pro版限时2.5折，中国大模型全球API调用量占比超60%。",
+      "why": "DeepSeek以'极致性价比+开源生态'打法验证了中国AI的另一条路径：不追最前沿参数，追极致成本效率。首轮融资结构中创始人200亿个人出资的安排，确保技术路线不受资本短视干扰。与OpenAI/Anthropic的万亿IPO竞赛形成鲜明对照。",
+      "accent": "info"
+    },
+    {
+      "rank": 3,
+      "label": "AI编程并购",
+      "title": "SpaceX 600亿美元全股收购Cursor——AI编程赛道进入巨头生态对抗时代",
+      "source": "TechCrunch · The Verge · 量子位",
+      "desc": "SpaceX以600亿美元全股收购Cursor，AI编程赛道最大的并购案诞生。同周Cursor ARR突破20亿美元创SaaS历史最快，Cursor 3发布进入多智能体协同时代。Claude Code满意度46%居首但面临生态整合压力，OpenCode登顶开源AI编程工具排行。GitHub Copilot转向credits用量计费，AI编程定价模式发生重大变革。",
+      "why": "Cursor被收购意味着独立AI编程工具的窗口正在关闭——巨头生态整合开始。SpaceX的收购动机指向'太空AI云'的基础设施布局。对开发者而言，选择AI编程工具从'选最好用的'变成'选生态对齐的'，这是赛道成熟的标志也是竞争格局固化的信号。",
+      "accent": "success"
+    },
+    {
+      "rank": 4,
+      "label": "OpenAI IPO",
+      "title": "OpenAI秘密提交IPO申请——估值1-3万亿美元，CFO与CEO对上市时间表存分歧",
+      "source": "WSJ · Bloomberg · Reuters",
+      "desc": "OpenAI秘密提交IPO申请，估值区间1-3万亿美元。CFO与CEO对上市时间表存在分歧，GPT-5.6泄露或因Fable 5禁令延迟发布。同周Anthropic估值冲至9000亿美元，IPO传闻升温。AI行业从'信念驱动'走向'财报驱动'。",
+      "why": "OpenAI+Anthropic双IPO格局意味着AI行业正式进入资本市场的审视期。叙事驱动的估值泡沫需要用营收证伪——目前OpenAI年收入约160亿美元，3万亿估值对应近200倍PS。ChatGPT市占率首次跌破50%至46.4%，市场三极分化加速。",
+      "accent": "danger"
+    },
+    {
+      "rank": 5,
+      "label": "AI付费拐点",
+      "title": "豆包上线付费订阅+Kimi打赏+文心订阅——国产AI应用完成'免费→付费'范式切换",
+      "source": "36Kr · 极客公园 · 虎嗅",
+      "desc": "豆包DAU达2亿全球第二，6月下旬正式上线付费内容；Kimi推出打赏机制；文心一言持续订阅模式。前OpenAI研究员公开批评'20美元消费级订阅是方向错误'，企业级AI时代加速到来。Apple WWDC发布Siri AI独立应用，Google搜索进入Agent时代。",
+      "why": "'免费AI死于2026'不再是一句噱头，而是正在发生的范式切换。但60%美国消费者反感品牌AI内容、86%不信任AI生成信息——信任赤字是付费模式的阿喀琉斯之踵。AI应用从'能聊天'到'能办事'的关键跳跃，决定了谁能活过免费时代。",
+      "accent": "warning"
+    }
+  ],
+  "insights": [
+    {
+      "tag_label": "洞察一",
+      "title": "AI主权化：从技术竞争到地缘博弈",
+      "content": "Fable 5出口管制不是单一事件，而是AI主权化进程的里程碑。G7讨论盟友有限访问、中国大模型72小时集体反击、国产替代从可选项变必选项——这标志着全球AI市场正式分裂为两大技术生态。闭源模型的'可用性'成为系统性风险，开源替代（GLM-5.2 MIT开源、DeepSeek V4全系降价）从技术选择变成战略安全选择。对从业者而言，技术栈的'地缘兼容性'将成为和'性能'同等重要的评估维度。",
+      "trend_links": [
+        {
+          "text": "Anthropic出口管制48小时追踪",
+          "url": "https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-15.html"
+        },
+        {
+          "text": "国产大模型集体反击",
+          "url": "https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-17.html"
+        }
+      ]
+    },
+    {
+      "tag_label": "洞察二",
+      "title": "AI编程从'选工具'到'选生态'：并购加速格局固化",
+      "content": "SpaceX收购Cursor、GitHub集成Claude+Codex、字节方舟Coding Plan打通多模型——AI编程赛道从百花齐放进入巨头生态对抗。Cursor ARR 20亿美元证明AI编程的商业价值已验证，但独立工具窗口正在关闭。开源阵营（OpenCode）和订阅制阵营（方舟Coding Plan）成为开发者的两条出路。关键信号：GitHub Copilot转credits制——AI编程的定价模式正在从'席位'走向'用量'，这意味着重度AI用户的使用成本将大幅上升，也意味着AI编程的价值终于被按消耗计量。",
+      "trend_links": [
+        {
+          "text": "SpaceX收购Cursor全分析",
+          "url": "https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-17.html"
+        },
+        {
+          "text": "AI编程工具2026年中横评",
+          "url": "https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-15.html"
+        }
+      ]
+    }
+  ],
+  "link_insight": {
+    "intro_callout": "<strong>出口管制与资本竞赛同时加速，AI行业从'谁更强'进入'谁能活'</strong>",
+    "turning_point": {
+      "content": "本周的拐点不在技术层，而在规则层。Fable 5出口管制首次把AI模型等同于武器级技术管控，这不是某个模型的坏消息，而是整个闭源模型商业模式的系统性风险信号。同一周，DeepSeek 500亿融资验证了'极致性价比+开源生态'的反面路线，OpenAI/Anthropic双IPO把AI推入资本市场的财报审视期。三件事同时发生，指向同一个结论：AI行业的竞争框架正在从'谁的技术更强'变成'谁的路线更可持续'。",
+      "class": "callout-info"
+    },
+    "paradox": {
+      "content": "最吊诡的是：闭源模型越强大，出口管制的风险越高；开源模型越成熟，商业护城河越薄。Anthropic被管制后，国产大模型72小时集体发布新版本'补位'——但这些补位模型的底层训练算力，有多少来自美国芯片？DeepSeek的'算电协同'融资结构（宁德时代入局）试图回答这个问题：用能源绑定替代芯片绑定。这条路能否走通，将决定AI主权化的终极形态。",
+      "class": "callout-success"
+    },
+    "takeaway": {
+      "content": "<strong>对从业者的三条启示：</strong><br>1. 技术栈必须具备'地缘兼容性'——纯闭源依赖是系统性风险，开源+多云是底线策略<br>2. AI编程从选工具变选生态——趁窗口期还没完全关闭，建立跨平台AI编程能力<br>3. AI应用付费拐点已到——但信任赤字（86%不信任AI生成信息）是付费模式的阿喀琉斯之踵，谁先解决信任谁先活过免费时代",
+      "class": "callout-warning"
+    }
+  },
+  "sections": {
+    "llm": {
+      "id": "llm",
+      "icon": "🧠",
+      "title": "大模型本周动态",
+      "callout": "Fable 5出口管制重塑全球AI供应链，国产大模型72小时集体反击。ChatGPT市占率首次跌破50%，市场三极分化加速。",
+      "callout_class": "callout-info",
+      "table": [
+        {
+          "date": "06-15",
+          "event": "美国出口管制Anthropic Fable 5/Mythos 5",
+          "source": "Axios/Reuters",
+          "importance": "⭐⭐⭐⭐⭐",
+          "url": "https://www.axios.com/2026/06/12/anthropic-trump-mythos-fable-national-security"
+        },
+        {
+          "date": "06-16",
+          "event": "DeepSeek首轮融资超500亿落地",
+          "source": "36Kr",
+          "importance": "⭐⭐⭐⭐⭐",
+          "url": "https://36kr.com"
+        },
+        {
+          "date": "06-16",
+          "event": "OpenAI秘密提交IPO申请",
+          "source": "WSJ",
+          "importance": "⭐⭐⭐⭐⭐",
+          "url": "https://www.wsj.com"
+        },
+        {
+          "date": "06-17",
+          "event": "智谱AI发布GLM-5.2：100万token+MIT开源",
+          "source": "智谱AI",
+          "importance": "⭐⭐⭐⭐",
+          "url": "https://www.zhipuai.cn"
+        },
+        {
+          "date": "06-19",
+          "event": "NVIDIA发布Nemotron 3 Ultra 550B开源模型",
+          "source": "NVIDIA",
+          "importance": "⭐⭐⭐⭐",
+          "url": "https://www.nvidia.com"
+        },
+        {
+          "date": "06-19",
+          "event": "DeepSeek V4全系API再降价，Pro版2.5折",
+          "source": "DeepSeek",
+          "importance": "⭐⭐⭐⭐",
+          "url": "https://www.deepseek.com"
+        },
+        {
+          "date": "06-20",
+          "event": "GPT-5.6泄露：150万Token上下文",
+          "source": "The Verge",
+          "importance": "⭐⭐⭐⭐",
+          "url": "https://www.theverge.com"
+        },
+        {
+          "date": "06-20",
+          "event": "国产大模型6月集体爆发：GLM 5.2/DeepSeek V4/豆包5.0/通义3.6",
+          "source": "36Kr",
+          "importance": "⭐⭐⭐⭐",
+          "url": "https://36kr.com"
+        },
+        {
+          "date": "06-21",
+          "event": "Claude Opus 4.8登顶Artificial Analysis榜",
+          "source": "Artificial Analysis",
+          "importance": "⭐⭐⭐",
+          "url": "https://artificialanalysis.ai"
+        },
+        {
+          "date": "06-21",
+          "event": "ChatGPT市占率首次跌破50%至46.4%",
+          "source": "Reuters",
+          "importance": "⭐⭐⭐⭐",
+          "url": "https://www.reuters.com"
+        }
+      ],
+      "stats": [
+        {
+          "value": "2",
+          "label": "遭出口管制的旗舰模型数",
+          "class": "stat-danger"
+        },
+        {
+          "value": "4+",
+          "label": "国产大模型72h反击发布数",
+          "class": "stat-purple"
+        },
+        {
+          "value": "60%",
+          "label": "中国大模型全球API调用量占比",
+          "class": "stat-success"
+        },
+        {
+          "value": "46.4%",
+          "label": "ChatGPT市占率（历史新低）",
+          "class": "stat-warning"
+        }
+      ]
+    },
+    "coding": {
+      "id": "coding",
+      "icon": "⌨️",
+      "title": "AI Coding本周动态",
+      "callout": "SpaceX 600亿美元收购Cursor，AI编程赛道进入巨头生态对抗时代。GitHub Copilot转credits制，定价模式重大变革。",
+      "callout_class": "callout-danger",
+      "table": [
+        {
+          "date": "06-15",
+          "event": "2026年中AI编程工具横评：Claude Code 95%准确率领先",
+          "source": "TechCrunch",
+          "importance": "⭐⭐⭐⭐",
+          "url": "https://techcrunch.com"
+        },
+        {
+          "date": "06-16",
+          "event": "Claude Code迭代至0.12版：Agent Teams+1M上下文beta",
+          "source": "Anthropic",
+          "importance": "⭐⭐⭐⭐",
+          "url": "https://www.anthropic.com"
+        },
+        {
+          "date": "06-16",
+          "event": "扣子3.0上线：多人多Agent协同",
+          "source": "字节跳动",
+          "importance": "⭐⭐⭐",
+          "url": "https://www.coze.com"
+        },
+        {
+          "date": "06-17",
+          "event": "SpaceX 600亿美元全股收购Cursor",
+          "source": "TechCrunch",
+          "importance": "⭐⭐⭐⭐⭐",
+          "url": "https://techcrunch.com"
+        },
+        {
+          "date": "06-17",
+          "event": "字节方舟Coding Plan上线：一个订阅打通多模型",
+          "source": "字节跳动",
+          "importance": "⭐⭐⭐⭐",
+          "url": "https://www.bytedance.com"
+        },
+        {
+          "date": "06-19",
+          "event": "GitHub Copilot转credits用量计费",
+          "source": "GitHub",
+          "importance": "⭐⭐⭐⭐",
+          "url": "https://github.blog"
+        },
+        {
+          "date": "06-20",
+          "event": "OpenCode登顶开源AI开发工具排行",
+          "source": "GitHub",
+          "importance": "⭐⭐⭐",
+          "url": "https://github.com"
+        },
+        {
+          "date": "06-20",
+          "event": "Miasma蠕虫攻陷微软73个GitHub仓库",
+          "source": "BleepingComputer",
+          "importance": "⭐⭐⭐⭐",
+          "url": "https://www.bleepingcomputer.com"
+        },
+        {
+          "date": "06-21",
+          "event": "Cursor 3发布：多智能体协同时代",
+          "source": "Cursor",
+          "importance": "⭐⭐⭐⭐",
+          "url": "https://cursor.com"
+        },
+        {
+          "date": "06-21",
+          "event": "Cursor ARR突破20亿美元创SaaS历史最快",
+          "source": "TechCrunch",
+          "importance": "⭐⭐⭐⭐⭐",
+          "url": "https://techcrunch.com"
+        }
+      ],
+      "stats": [
+        {
+          "value": "20亿$",
+          "label": "Cursor ARR（SaaS历史最快）",
+          "class": "stat-purple"
+        },
+        {
+          "value": "600亿$",
+          "label": "SpaceX收购Cursor金额",
+          "class": "stat-danger"
+        },
+        {
+          "value": "46%",
+          "label": "Claude Code满意度（排行第一）",
+          "class": "stat-success"
+        },
+        {
+          "value": "73",
+          "label": "Miasma蠕虫攻陷GitHub仓库数",
+          "class": "stat-warning"
+        }
+      ]
+    },
+    "app": {
+      "id": "app",
+      "icon": "📱",
+      "title": "AI应用本周动态",
+      "callout": "Apple WWDC发布Siri AI独立应用，豆包DAU 2亿上线付费，AI应用从'能聊天'到'能办事'的范式切换正在发生。",
+      "callout_class": "callout-warning",
+      "table": [
+        {
+          "date": "06-15",
+          "event": "苹果Siri AI正式上线App Store",
+          "source": "Apple",
+          "importance": "⭐⭐⭐⭐⭐",
+          "url": "https://www.apple.com"
+        },
+        {
+          "date": "06-16",
+          "event": "豆包全量上线'任务模式'——端到端自主执行",
+          "source": "字节跳动",
+          "importance": "⭐⭐⭐⭐",
+          "url": "https://www.doubao.com"
+        },
+        {
+          "date": "06-16",
+          "event": "中国AI应用商业化拐点：豆包付费+Kimi打赏+文心订阅",
+          "source": "36Kr",
+          "importance": "⭐⭐⭐⭐⭐",
+          "url": "https://36kr.com"
+        },
+        {
+          "date": "06-17",
+          "event": "Apple WWDC 2026：Siri AI独立应用",
+          "source": "Apple",
+          "importance": "⭐⭐⭐⭐⭐",
+          "url": "https://www.apple.com"
+        },
+        {
+          "date": "06-17",
+          "event": "Google推出Gemini Spark通用Agent",
+          "source": "Google",
+          "importance": "⭐⭐⭐⭐",
+          "url": "https://blog.google"
+        },
+        {
+          "date": "06-19",
+          "event": "Google搜索进入Agent时代",
+          "source": "Google",
+          "importance": "⭐⭐⭐⭐",
+          "url": "https://blog.google"
+        },
+        {
+          "date": "06-19",
+          "event": "Kimi K2.6发布：原生多模态+Agent Swarm",
+          "source": "月之暗面",
+          "importance": "⭐⭐⭐",
+          "url": "https://www.moonshot.cn"
+        },
+        {
+          "date": "06-20",
+          "event": "豆包月活3.45亿全球第二",
+          "source": "字节跳动",
+          "importance": "⭐⭐⭐⭐",
+          "url": "https://www.doubao.com"
+        },
+        {
+          "date": "06-20",
+          "event": "AI应用进入GEO时代：65%消费者通过AI做复杂咨询",
+          "source": "Reuters",
+          "importance": "⭐⭐⭐⭐",
+          "url": "https://www.reuters.com"
+        },
+        {
+          "date": "06-21",
+          "event": "八部门出台AI+消费发展意见",
+          "source": "国务院",
+          "importance": "⭐⭐⭐⭐",
+          "url": "https://www.gov.cn"
+        }
+      ],
+      "stats": [
+        {
+          "value": "3.45亿",
+          "label": "豆包月活（全球第二）",
+          "class": "stat-purple"
+        },
+        {
+          "value": "86%",
+          "label": "消费者不信任AI生成信息",
+          "class": "stat-danger"
+        },
+        {
+          "value": "65%",
+          "label": "消费者通过AI做复杂咨询",
+          "class": "stat-success"
+        },
+        {
+          "value": "60%",
+          "label": "消费者反感品牌AI内容",
+          "class": "stat-warning"
+        }
+      ]
+    },
+    "industry": {
+      "id": "industry",
+      "icon": "🏭",
+      "title": "AI行业本周动态",
+      "callout": "DeepSeek 500亿首轮融资创纪录，OpenAI/Anthropic双IPO格局形成，四大巨头2030年AI资本开支5.3万亿美元。",
+      "callout_class": "callout-success",
+      "table": [
+        {
+          "date": "06-15",
+          "event": "SpaceX万亿IPO——1.8万亿估值背后的AI算力黑洞",
+          "source": "Bloomberg",
+          "importance": "⭐⭐⭐⭐",
+          "url": "https://www.bloomberg.com"
+        },
+        {
+          "date": "06-16",
+          "event": "MiniMax开源Sparse Attention：1M上下文效率28倍提升",
+          "source": "MiniMax",
+          "importance": "⭐⭐⭐",
+          "url": "https://www.minimaxi.com"
+        },
+        {
+          "date": "06-16",
+          "event": "DeepSeek融资结构解读：算电协同",
+          "source": "36Kr",
+          "importance": "⭐⭐⭐⭐⭐",
+          "url": "https://36kr.com"
+        },
+        {
+          "date": "06-17",
+          "event": "Anthropic提出AI就业税提案",
+          "source": "Anthropic",
+          "importance": "⭐⭐⭐",
+          "url": "https://www.anthropic.com"
+        },
+        {
+          "date": "06-18",
+          "event": "字节上调资本开支至2000亿，850亿专项AI芯片",
+          "source": "字节跳动",
+          "importance": "⭐⭐⭐⭐⭐",
+          "url": "https://www.bytedance.com"
+        },
+        {
+          "date": "06-18",
+          "event": "欧盟AI法案8月全面生效",
+          "source": "EU",
+          "importance": "⭐⭐⭐⭐",
+          "url": "https://www.europa.eu"
+        },
+        {
+          "date": "06-19",
+          "event": "Anthropic Series H $650亿估值超OpenAI",
+          "source": "Reuters",
+          "importance": "⭐⭐⭐⭐⭐",
+          "url": "https://www.reuters.com"
+        },
+        {
+          "date": "06-20",
+          "event": "四大巨头2030年AI资本开支5.3万亿美元",
+          "source": "Bloomberg",
+          "importance": "⭐⭐⭐⭐⭐",
+          "url": "https://www.bloomberg.com"
+        },
+        {
+          "date": "06-20",
+          "event": "字节启动AI制药业务线拆分与独立融资",
+          "source": "36Kr",
+          "importance": "⭐⭐⭐",
+          "url": "https://36kr.com"
+        },
+        {
+          "date": "06-21",
+          "event": "科创板第五套标准扩围至AI大模型",
+          "source": "上交所",
+          "importance": "⭐⭐⭐⭐",
+          "url": "https://www.sse.com.cn"
+        }
+      ],
+      "stats": [
+        {
+          "value": "5.3万亿$",
+          "label": "四大巨头2030年AI资本开支",
+          "class": "stat-danger"
+        },
+        {
+          "value": "9000亿$",
+          "label": "Anthropic估值",
+          "class": "stat-purple"
+        },
+        {
+          "value": "3300亿$",
+          "label": "Q1全球VC（80%流向AI）",
+          "class": "stat-success"
+        },
+        {
+          "value": "6%",
+          "label": "欧盟AI法案最高罚款（全球年营业额）",
+          "class": "stat-warning"
+        }
+      ]
+    },
+    "enterprise": {
+      "id": "enterprise",
+      "icon": "🔄",
+      "title": "企业AI转型本周动态",
+      "callout": "Agent企业渗透率一年8倍增长（5%→40%），阿里成立Token Foundry、美团成立AI部门，CEO通知5100人不涨薪钱投AI。",
+      "callout_class": "callout-warning",
+      "table": [
+        {
+          "date": "06-15",
+          "event": "出口管制后企业客户多云策略成标配",
+          "source": "Reuters",
+          "importance": "⭐⭐⭐⭐",
+          "url": "https://www.reuters.com"
+        },
+        {
+          "date": "06-16",
+          "event": "Gartner：90%企业启动AI试点，仅41%进入生产",
+          "source": "Gartner",
+          "importance": "⭐⭐⭐⭐",
+          "url": "https://www.gartner.com"
+        },
+        {
+          "date": "06-16",
+          "event": "企业AI转型新范式：从工具采购到数字员工",
+          "source": "HBR",
+          "importance": "⭐⭐⭐⭐",
+          "url": "https://www.hbr.org"
+        },
+        {
+          "date": "06-17",
+          "event": "SAP 224个智能体嵌入核心流程",
+          "source": "SAP",
+          "importance": "⭐⭐⭐⭐⭐",
+          "url": "https://www.sap.com"
+        },
+        {
+          "date": "06-17",
+          "event": "华为云发布行业AI梦工厂",
+          "source": "华为云",
+          "importance": "⭐⭐⭐",
+          "url": "https://www.huaweicloud.com"
+        },
+        {
+          "date": "06-18",
+          "event": "阿里成立Token Foundry事业部",
+          "source": "36Kr",
+          "importance": "⭐⭐⭐⭐⭐",
+          "url": "https://36kr.com"
+        },
+        {
+          "date": "06-18",
+          "event": "美团成立AI Transformation部门",
+          "source": "36Kr",
+          "importance": "⭐⭐⭐⭐",
+          "url": "https://36kr.com"
+        },
+        {
+          "date": "06-19",
+          "event": "Bain调查：60%大公司缺AI数据基建",
+          "source": "Bain",
+          "importance": "⭐⭐⭐⭐",
+          "url": "https://www.bain.com"
+        },
+        {
+          "date": "06-20",
+          "event": "CEO通知5100名员工：今年不涨薪，钱投AI",
+          "source": "WSJ",
+          "importance": "⭐⭐⭐⭐⭐",
+          "url": "https://www.wsj.com"
+        },
+        {
+          "date": "06-21",
+          "event": "Gartner：Agent企业渗透率一年8倍",
+          "source": "Gartner",
+          "importance": "⭐⭐⭐⭐⭐",
+          "url": "https://www.gartner.com"
+        }
+      ],
+      "stats": [
+        {
+          "value": "8×",
+          "label": "Agent企业渗透率年增长",
+          "class": "stat-success"
+        },
+        {
+          "value": "41%",
+          "label": "AI试点进入生产环境比例",
+          "class": "stat-warning"
+        },
+        {
+          "value": "224",
+          "label": "SAP嵌入核心流程Agent数",
+          "class": "stat-info"
+        },
+        {
+          "value": "60%",
+          "label": "大公司缺AI数据基建",
+          "class": "stat-danger"
+        }
+      ]
+    }
+  },
+  "daily_index": [
+    {
+      "date": "2026-06-15",
+      "weekday": "周一",
+      "url": "https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-15.html",
+      "title": "AI洞察日报",
+      "keywords": "Fable 5出口管制,AI编程横评,Siri AI,蚂蚁AI支付,SpaceX IPO"
+    },
+    {
+      "date": "2026-06-16",
+      "weekday": "周二",
+      "url": "https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-16.html",
+      "title": "AI洞察日报",
+      "keywords": "DeepSeek 500亿融资,OpenAI IPO,Claude Code 0.12,豆包任务模式,Apple AI"
+    },
+    {
+      "date": "2026-06-17",
+      "weekday": "周三",
+      "url": "https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-17.html",
+      "title": "AI洞察日报",
+      "keywords": "SpaceX收购Cursor,GLM-5.2开源,Gemini Spark,Gartner 90%试点"
+    },
+    {
+      "date": "2026-06-18",
+      "weekday": "周四",
+      "url": "https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-18.html",
+      "title": "AI洞察日报",
+      "keywords": "OpenAI上市,GPT-5.6,字节2000亿资本开支,阿里Token Foundry,欧盟AI法案"
+    },
+    {
+      "date": "2026-06-19",
+      "weekday": "周五",
+      "url": "https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-19.html",
+      "title": "AI洞察日报",
+      "keywords": "Nemotron 3 Ultra,DeepSeek降价,GitHub credits,Miasma蠕虫,豆包付费"
+    },
+    {
+      "date": "2026-06-20",
+      "weekday": "周六",
+      "url": "https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-20.html",
+      "title": "AI洞察日报",
+      "keywords": "GPT-5.6泄露,OpenCode登顶,AI信任赤字,英伟达发债,CEO不涨薪投AI"
+    },
+    {
+      "date": "2026-06-21",
+      "weekday": "周日",
+      "url": "https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-21.html",
+      "title": "AI洞察日报",
+      "keywords": "ChatGPT市占率跌破50%,Cursor ARR 20亿,Agent渗透率8倍,科创板AI开放"
+    }
+  ],
+  "vocab": [
+    {
+      "term": "AI Export Control",
+      "definition": "AI出口管制——国家将AI模型或技术列入出口管制清单，限制特定实体/国家访问。Fable 5事件是首次对已部署AI模型实施此类管制，标志着AI被等同于武器级技术管控。",
+      "source": "US Department of Commerce, 2026-06-12"
+    },
+    {
+      "term": "GEO",
+      "definition": "生成引擎优化——传统SEO的AI时代演进。当65%消费者通过AI大模型做复杂咨询时，品牌需要优化在AI生成答案中的可见度和准确性，而非仅优化搜索引擎排名。",
+      "source": "Reuters, 2026-06-20"
+    },
+    {
+      "term": "算电协同",
+      "definition": "算力与能源的深度协同模式。DeepSeek融资中宁德时代入局即是此逻辑——用能源绑定替代芯片绑定，在算力受出口管制制约时，通过能源自主保障AI基础设施的可持续性。",
+      "source": "36Kr, 2026-06-16"
+    },
+    {
+      "term": "Credits-based Pricing",
+      "definition": "基于用量的计费模式，取代传统席位制。GitHub Copilot本周转为credits制，标志着AI编程工具从'按人头收费'走向'按AI消耗收费'，重度用户成本将大幅上升。",
+      "source": "GitHub Blog, 2026-06-19"
+    }
+  ],
+  "narrative": {
+    "title": "规则层拐点：AI从技术竞赛进入生存竞赛",
+    "intro_callout": "<strong>出口管制+资本竞赛+付费拐点三件事同时发生，指向同一个结论：AI行业的竞争框架正在从'谁更强'变成'谁能活'</strong>",
+    "main_blocks": [
+      {
+        "content": "本周最大的信号不是某个模型发布，而是一条规则：美国首次对已部署AI模型实施出口管制。Fable 5/Mythos 5全球停用的48小时内，国产大模型集体发布新版本'补位'——GLM-5.2 MIT开源、DeepSeek V4全系降价、豆包5.0 Pro上线。这不是巧合，这是行业在规则冲击下的条件反射。闭源模型的'可用性'从此成为系统性风险，开源替代从可选项变成必选项。G7讨论盟友有限访问，欧盟AI法案8月全面生效——全球AI监管正在加速分化为两大技术生态。",
+        "class": "callout-info"
+      },
+      {
+        "content": "资本端同样在加速。OpenAI秘密提交IPO（估值1-3万亿），Anthropic估值冲至9000亿，DeepSeek 500亿首轮融资创中国AI纪录——AI行业从'信念驱动'走向'财报驱动'。但ChatGPT市占率首次跌破50%，市场三极分化加速。四大巨头2030年AI资本开支5.3万亿美元的预测，正在把整个行业推入'烧钱→规模→垄断'的经典互联网逻辑。CEO通知5100名员工'今年不涨薪钱投AI'——这不是个例，而是企业AI转型的真实代价。",
+        "class": "callout-success"
+      },
+      {
+        "content": "应用端的范式切换同样剧烈。豆包上线付费订阅、Kimi推打赏、文心持续订阅——'免费AI死于2026'正在成为现实。但信任赤字（86%不信任AI生成信息）是付费模式的阿喀琉斯之踵。AI编程赛道更残酷：SpaceX收购Cursor意味着独立工具窗口正在关闭，从'选最好用的'变成'选生态对齐的'。Agent企业渗透率一年8倍增长（5%→40%），SAP 224个智能体嵌入核心流程——Agent从Demo走向生产的关键转折已经发生。对从业者而言，三条路最值得押注：开源+多云的底线策略、跨平台AI编程能力建设、AI应用信任体系的构建。",
+        "class": "callout-warning"
+      }
+    ],
+    "conclusion_callout": "<strong>规则层拐点已到。技术竞赛的上半场结束，生存竞赛的下半场开始——发动机决定上限，整车决定交付。</strong>"
+  }
+}
