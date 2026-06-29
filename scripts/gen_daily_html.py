@@ -506,23 +506,23 @@ def generate_html(data: dict) -> str:
                     <div class="overview-item-text">{text}</div>
                 </div>''')
 
-    # 五大板块 Sections — 从 Tab 改为锚点 Section
-    tabs = data.get("tabs", [])
-    tab_defs = [
+    # Tab按钮定义：icon + name + data-tab id
+    tab_btn_defs = [
         (SVG_ICONS["llm"], "大模型", "llm"),
-        ("⌨️", "AI Coding", "coding"),
+        (SVG_ICONS["coding"], "AI Coding", "coding"),
         (SVG_ICONS["app"], "AI 应用", "app"),
         (SVG_ICONS["industry"], "AI 行业", "industry"),
         (SVG_ICONS["enterprise"], "企业AI转型", "enterprise"),
     ]
 
     # === 验证 ===
+    tabs = data.get("tabs", [])
     if len(tabs) != 5:
         print(f"  ⚠️ 警告: JSON包含{len(tabs)}个tab，期望5个。缺失板块将渲染为空。")
-        print(f"     期望: {[n for _, n, _ in tab_defs]}")
+        print(f"     期望: {[n for _, n, _ in tab_btn_defs]}")
 
     empty_tabs = []
-    for i, (icon, name, tid) in enumerate(tab_defs):
+    for i, (icon, name, tid) in enumerate(tab_btn_defs):
         if i < len(tabs):
             news = tabs[i].get("news", {})
             # 兼容两种schema: {overseas:[], china:[]} 或 flat list
@@ -537,9 +537,15 @@ def generate_html(data: dict) -> str:
     if empty_tabs:
         print(f"  ⚠️ 警告: 以下板块无新闻条目: {', '.join(empty_tabs)}")
 
-    # 生成 Section HTML
+    # 生成 Tab 按钮HTML
+    tab_btns_html = ""
+    for i, (icon, name, tid) in enumerate(tab_btn_defs):
+        active_class = ' active' if i == 0 else ''
+        tab_btns_html += f'\n            <button class="tab-btn{active_class}" data-tab="{tid}" role="tab" aria-selected="{"true" if i == 0 else "false"}"><span class="tab-icon">{icon}</span><span class="tab-label">{name}</span></button>'
+
+    # 生成 Section HTML — 每个板块包裹在 tab-panel 中
     section_blocks = []
-    for i, (icon, name, tid) in enumerate(tab_defs):
+    for i, (icon, name, tid) in enumerate(tab_btn_defs):
         tab_data = tabs[i] if i < len(tabs) else {}
         section_html = render_section(tab_data.get("news", {}))
         df_data = tab_data.get("deep_focus") or tab_data.get("focus")
@@ -549,19 +555,22 @@ def generate_html(data: dict) -> str:
         if not pi_html or len(pi_html) < 50 or "pi-card" not in pi_html:
             pi_html = f'<div class="pi-card"><div class="pi-title">规律洞察</div><div class="pi-content">本板块暂无规律洞察，关注后续更新。</div></div>'
 
+        active_class = ' active' if i == 0 else ''
         section_blocks.append(f'''
             <!-- ===== {name} ===== -->
+            <article class="tab-panel{active_class}" data-tab="{tid}" role="tabpanel" aria-label="{name}">
             <section id="{tid}" class="report-section animate-on-scroll">
                 <div class="doc-chapter-label">{icon} {name}</div>
-                <div class="board-section">
+                <div class="board-section" data-board="{tid}">
                     <div class="board-header">
-                        <span class="board-badge">1</span> 最近动态
+                        <span class="board-badge">{i + 1}</span> 最近动态
                     </div>
 {section_html}
                 </div>
 {deep_focus_html}
 {pi_html}
-            </section>''')
+            </section>
+            </article>''')
 
     # 数据速览 & 预览 & 深度洞察
     data_table_html = render_data_table(data.get("data_snapshot", []))
@@ -618,12 +627,12 @@ def generate_html(data: dict) -> str:
 
             <!-- HEADER -->
             <header class="doc-header">
-                <div class="header-badge">AI INSIGHT · DAILY REPORT</div>
-                <h1 class="header-title">AI 日报 <span class="version-badge">v4.0</span></h1>
+                <div class="header-badge">{SVG_ICONS["newspaper"]} AI INSIGHT · DAILY REPORT</div>
+                <h1 class="header-title">AI 日报 · {date_display}</h1>
                 <div class="header-meta">
-                    <span>{SVG_ICONS["calendar"]} {date_display} {weekday}</span>
+                    <span>{SVG_ICONS["calendar"]} {weekday}</span>
                     <span>{SVG_ICONS["globe"]} 海外 {overseas_count}条 · 国内 {china_count}条</span>
-                    <span>{SVG_ICONS["data"]} 五大板块：大模型 · AI Coding · AI应用 · AI行业 · 企业转型</span>
+                    <span>{SVG_ICONS["data"]} 五大板块</span>
                 </div>
             </header>
 
@@ -655,7 +664,11 @@ def generate_html(data: dict) -> str:
 {render_heat_trend(data.get("heat_trend", {}))}
             </section>
 
-            <!-- FIVE BOARDS -->
+            <!-- TAB NAVIGATION (v4.0 — 毛玻璃Tab栏，点击切换板块) -->
+            <nav class="tab-nav" role="tablist" aria-label="板块导航">{tab_btns_html}
+            </nav>
+
+            <!-- FIVE BOARDS (wrapped in tab-panels) -->
 {chr(10).join(section_blocks)}
 
             <!-- DATA SNAPSHOT -->

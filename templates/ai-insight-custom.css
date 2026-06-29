@@ -1,4 +1,4 @@
-/* ===== AI洞察定制层样式（仅日报/首页特有的组件样式） ===== */
+/* ===== AI洞察定制层样式（v4.0 — Tab导航升级，板块主题色）===== */
 /* 
  * ⚠️ 本文件只包含AI洞察项目特有的组件样式和扩展变量。
  * CSS变量定义和基础样式从 qingshuang-research-style 动态引用。
@@ -12,7 +12,7 @@
  * - 新增组件样式在本文件添加
  */
 
-/* ===== AI洞察扩展CSS变量（公共层未覆盖的） ===== */
+/* ===== AI洞察扩展CSS变量（公共层未覆盖的）===== */
 :root {
     --color-orange: #EA580C;
     --color-success-dark: #047857;
@@ -29,7 +29,7 @@
     --color-bg-hover: rgba(0,0,0,0.025);
 }
 
-/* ===== 周报Header副标题覆盖（公共层max-width:580px太窄） ===== */
+/* ===== 周报Header副标题覆盖（公共层max-width:580px太窄）===== */
 .header-subtitle, .subtitle {
     max-width: 100% !important;
     color: var(--color-text-muted) !important;
@@ -37,7 +37,7 @@
     margin-top: 14px !important;
 }
 
-/* ===== 周报insight-card段落样式（统一用CSS而非内联style） ===== */
+/* ===== 周报insight-card段落样式（统一用CSS而非内联style）===== */
 .insight-card > p {
     line-height: 1.75;
     font-size: 13px;
@@ -96,7 +96,7 @@
 
 /* ===== 首页特有组件 ===== */
 
-/* Tab导航 */
+/* Tab导航（首页）*/
 .tab-nav {
     background: rgba(255,255,255,0.85);
     backdrop-filter: blur(20px) saturate(1.8);
@@ -187,21 +187,15 @@
         grid-template-columns: repeat(3, 1fr);
     }
 }
+
 /* ===== 周报Top5/洞察卡片样式（v2.0格式升级，从W22提取）===== */
-/* 
- * 来源：W22手动升级版HTML (2026-06-01)
- * 缺失根因：W23改脚本化生成后，CSS模板(daily-report-v3.css)不含这些定义
- * 修复：补入 ai-insight-custom.css，脚本合并时自动注入
- */
 
-/* 卡片强调色变量（按板块区分）*/
-.llm .news-card { --card-accent: var(--color-purple); }
-.coding .news-card { --card-accent: var(--color-orange); }
-.app .news-card { --card-accent: var(--color-info); }
-.industry .news-card { --card-accent: var(--color-warning); }
-.enterprise .news-card { --card-accent: var(--color-success); }
-
-
+/* 卡片强调色变量（按板块区分）— 继承日报组件层的 --board-accent 变量 */
+.llm .news-card { --card-accent: var(--board-llm, var(--color-success)); }
+.coding .news-card { --card-accent: var(--board-coding, var(--color-info)); }
+.app .news-card { --card-accent: var(--board-app, var(--color-purple)); }
+.industry .news-card { --card-accent: var(--board-industry, var(--color-warning)); }
+.enterprise .news-card { --card-accent: var(--board-enterprise, var(--color-danger)); }
 
 .insight-content {
     margin-top: var(--spacing-md);
@@ -224,6 +218,7 @@
     line-height: 1.7;
 }
 
+/* 周报 news-card 样式 — 与日报新闻项共享 board-accent 主题色 */
 .news-card {
     background: var(--color-bg-card);
     border: 1px solid var(--color-border-light);
@@ -232,7 +227,12 @@
     padding: var(--spacing-lg);
     margin-bottom: var(--spacing-xl);
     box-shadow: var(--shadow-card);
-    transition: box-shadow 0.2s;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
 }
 
 .news-card-rank {
@@ -268,11 +268,7 @@
 }
 
 .meta-item { display: inline-flex; align-items: center; gap: 4px; }
-
-
-
 .meta-divider { color: var(--color-border); font-size: 10px; margin: 0 2px; }
-
 .meta-link {
     color: var(--color-info);
     text-decoration: none;
@@ -343,14 +339,6 @@
     flex-wrap: wrap;
 }
 
-
-
-
-
-
-
-
 .meta-icon {
     opacity: 0.6;
 }
-
