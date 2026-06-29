@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI 周报 2026-W26 (06/15-06/21) | AI洞察</title>
-<meta name="description" content="美国首次对已部署AI模型实施出口管制，Anthropic Fable 5/Mythos 5全球停用，AI主权化时代正式开启；DeepSeek完成500亿首轮融资创中国AI纪录；OpenAI秘密提交IPO申请；SpaceX 600亿美元全股收购Cursor，AI编程赛道进入巨头生态对抗；豆包上线付费订阅，国产AI应用完成'免费→付费'范式切换。">
-<meta property="og:title" content="AI 周报 2026-W26 | AI洞察">
-<meta property="og:description" content="美国首次对已部署AI模型实施出口管制，Anthropic Fable 5/Mythos 5全球停用，AI主权化时代正式开启；DeepSeek完成500亿首轮融资创中国AI纪录；OpenAI秘密提交IPO申请；SpaceX 600亿美元全股收购Cursor，AI编程赛道进入巨头生态对抗；豆包上线付费订阅，国产AI应用完成'免费→付费'范式切换。">
-<meta property="og:type" content="article">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232563EB'/%3E%3Ctext x='6' y='23' font-size='18' fill='white'%3E⚡%3C/text%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-<noscript></noscript>
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 日报 · 2026-06-27 | AI洞察</title>
+    <meta name="description" content="AI洞察日报 2026-06-27：大模型、AI Coding、AI应用、AI行业、企业AI转型五大板块动态">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23059669'/><text x='6' y='23' font-size='18' fill='white'>📡</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <noscript><style>.animate-on-scroll{opacity:1!important;transform:none!important;}</style></noscript>
+    <style>
 /**
  * 清爽调研报告风格 - 基础样式表
  * 版本: 3.0.0
@@ -2467,334 +2463,376 @@ body.mobile-preview-mode .global-controls {
 }
 
 
-
-
-/* ===== 68ch行宽限制（容器100%，文字68ch）===== */
-.news-card-desc, .news-card-why, .insight-card p,
-.content-paragraph, .callout > p,
-.daily-item-kw, .doc-footer p {
-  max-width: 68ch;
-}
-
-/* ===== stats-grid自适应列数（支持4/5卡）===== */
-.stats-grid {
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-}
-
 </style>
 </head>
 <body>
 <a class="skip-to-content" href="#main-content">跳到主内容</a>
+
 <div class="layout-wrapper">
-<nav class="sidebar-nav" id="sidebar" aria-label="目录导航">
-<div class="sidebar-doc-title">AI 周报 2026-W26</div>
-<div class="toc-section"><div class="toc-group-label">目录</div>
-<a href="#overview" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg> 本周概览</a>
-<a href="#top5" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.83-1 .83s-1-.28-1-.83v-2.34"/><path d="M14 14.66V17c0 .55.47.83 1 .83s1-.28 1-.83v-2.34"/><line x1="12" y1="3" x2="12" y2="14"/><path d="M6 4v5a6 6 0 0 0 12 0V4"/></svg> Top 5 事件</a>
-<a href="#insight" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg> 周度洞察</a>
-<a href="#linkinsight" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.5V22h6v-4.5c2.9-1.2 5-4.1 5-7.5a8 8 0 0 0-8-8z"/><line x1="12" y2="12" x2="12" y2="18"/></svg> AI洞察的洞察</a>
-<a href="#llm" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.5V22h6v-4.5c2.9-1.2 5-4.1 5-7.5a8 8 0 0 0-8-8z"/><line x1="12" y2="12" x2="12" y2="18"/></svg> 大模型本周动态</a>
-<a href="#coding" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> AI Coding本周动态</a>
-<a href="#app" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg> AI应用本周动态</a>
-<a href="#industry" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20V8l-6 4V4l-6 4V2L2 10v10z"/></svg> AI行业本周动态</a>
-<a href="#enterprise" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/></svg> 企业AI转型本周动态</a>
-<a href="#dailyindex" class="toc-link"><svg class="meta-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y2="4" x2="16" y2="1"/><line x1="8" y2="4" x2="8" y2="1"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 日报索引</a>
-<a href="#vocab" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> 技术词汇</a>
-<a href="#narrative" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.6 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2s2.6 2 5 2c2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2s2.6 2 5 2c2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg> 宏观叙事</a>
-</div>
-<div class="reading-progress-wrap"><div class="reading-progress-label">阅读进度</div><div class="reading-progress-track"><div class="reading-progress-fill" id="readingProgress"></div></div></div>
-</nav>
-<button class="sidebar-collapse-btn" id="collapseBtn" title="折叠导航" aria-label="折叠导航">«</button>
-<main class="content-area" id="main-content">
-<div class="content-inner">
-<header class="doc-header">
-  <div class="header-badge">AI INSIGHT · WEEKLY REPORT · 26</div>
-  <h1 class="header-title">AI 周报 2026年第26周</h1>
-  <div style="clear:both;display:block;width:100%;font-size:13px;color:var(--color-text-muted);margin-top:14px;margin-bottom:16px;line-height:1.8;max-width:100%;letter-spacing:0.01em;">出口管制 · DeepSeek500亿 · OpenAI IPO · Cursor被收购 · AI应用付费拐点</div>
-  <p class="header-meta"><span><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="4"/><line x1="8" y1="2" x2="8" y2="4"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 06/15-06/21</span><span><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/></svg> 覆盖7天日报 · 5板块</span><span><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> 海外+国内</span></p>
-</header>
-<section id="overview">
-<div class="doc-chapter-label animate-on-scroll">概览</div>
-<h2 class="animate-on-scroll"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg> 本周概览</h2>
-<div class="animate-on-scroll" style="overflow-x:auto;">
-<table style="width:100%;border-collapse:collapse;margin-top:16px;">
-<thead><tr style="background:var(--color-bg-table-header);"><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--color-success);font-weight:700;">维度</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--color-success);font-weight:700;">周度信号</th></tr></thead>
-<tbody>
-<tr><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);font-weight:600;">大模型</td><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);">Fable 5/Mythos 5遭出口管制全球停用，国产大模型72小时反击（GLM-5.2/DeepSeek V4/豆包5.0 Pro集体发布）</td></tr>
-<tr><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);font-weight:600;">AI Coding</td><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);">SpaceX 600亿美元收购Cursor，OpenCode登顶开源排行，GitHub Copilot转credits制，AI编程定价模式大变革</td></tr>
-<tr><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);font-weight:600;">AI 应用</td><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);">Apple WWDC发布Siri AI独立应用，豆包DAU 2亿上线付费，AI应用从'能聊天'到'能办事'范式切换</td></tr>
-<tr><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);font-weight:600;">AI 行业</td><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);">DeepSeek 500亿首轮融资创纪录，OpenAI秘密提交IPO，Anthropic估值冲至9000亿美元，科创板向AI大模型开放</td></tr>
-<tr><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);font-weight:600;">企业AI转型</td><td style="padding:8px 12px;border-bottom:1px solid var(--color-border);">Gartner称Agent企业渗透率从5%→40%一年8倍增长，阿里成立Token Foundry、美团成立AI部门，CEO通知5100人不涨薪钱投AI</td></tr>
-</tbody></table></div>
-<div class="stats-grid animate-on-scroll">
-  <div class="stat-card stat-purple"><div class="stat-value">500亿</div><div class="stat-label">DeepSeek首轮融资（元）</div></div>
-  <div class="stat-card stat-success"><div class="stat-value">600亿$</div><div class="stat-label">SpaceX收购Cursor</div></div>
-  <div class="stat-card stat-info"><div class="stat-value">8×</div><div class="stat-label">Agent企业渗透率年增长</div></div>
-  <div class="stat-card stat-warning"><div class="stat-value">46.4%</div><div class="stat-label">ChatGPT市占率（首次跌破50%）</div></div>
-  <div class="stat-card stat-danger"><div class="stat-value">5.3万亿$</div><div class="stat-label">四大巨头2030年AI资本开支</div></div>
-</div>
-</section>
-<section id="top5">
-<div class="doc-chapter-label animate-on-scroll">Top 5</div>
-<h2 class="animate-on-scroll"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.83-1 .83s-1-.28-1-.83v-2.34"/><path d="M14 14.66V17c0 .55.47.83 1 .83s1-.28 1-.83v-2.34"/><line x1="12" y1="3" x2="12" y2="14"/><path d="M6 4v5a6 6 0 0 0 12 0V4"/></svg> 本周 Top 5 事件</h2>
-<div class="news-card animate-on-scroll" style="--card-accent: var(--color-purple);">
-  <div class="news-card-rank">TOP 1 · 出口管制</div>
-  <div class="news-card-title">美国首次对已部署AI模型实施出口管制——Anthropic Fable 5/Mythos 5全球停用</div>
-  <div class="news-card-meta"><span class="meta-item"><svg class="meta-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y2="4" x2="16" y2="1"/><line x1="8" y2="4" x2="8" y2="1"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 06/15-06/21</span><span class="meta-divider">·</span><span class="meta-item">Axios · Reuters · 机器之心</span></div>
-  <div class="news-card-desc">6月12日美国商务部将Anthropic Fable 5和Mythos 5列入出口管制范围，限制对象涵盖美国境外所有机构和个人。因技术上无法按国籍精确限制访问，Anthropic于6月13日全球无差别关停两款模型。这是人类历史上首次对已部署AI模型实施国家级出口管制，标志着AI主权化时代正式开启。G7随后讨论允许盟友有限访问美国先进AI模型，全球AI市场加速分裂为两大阵营。</div>
-  <div class="news-card-why"><div class="judgment-label">关键判断</div>AI模型首次被等同于武器级技术管控，将重塑全球AI供应链。闭源模型的'可用性'成为系统性风险，开源替代从可选项变成必选项。中国大模型72小时内集体反击（GLM-5.2/DeepSeek V4/豆包5.0 Pro），自主可控路线从口号变成生存需求。</div>
-</div>
-<div class="news-card animate-on-scroll" style="--card-accent: var(--color-info);">
-  <div class="news-card-rank">TOP 2 · DeepSeek融资</div>
-  <div class="news-card-title">DeepSeek完成500亿首轮融资——创中国AI单轮融资纪录，梁文锋200亿个人出资保控制权</div>
-  <div class="news-card-meta"><span class="meta-item"><svg class="meta-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y2="4" x2="16" y2="1"/><line x1="8" y2="4" x2="8" y2="1"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 06/15-06/21</span><span class="meta-divider">·</span><span class="meta-item">36Kr · 晚点LatePost · IT之家</span></div>
-  <div class="news-card-desc">DeepSeek完成超500亿元首轮融资，创始人梁文锋个人出资200亿保持绝对控制权，腾讯和宁德时代入局。估值突破4000亿元，创下中国AI单轮融资纪录。腾讯+宁德时代的组合被解读为'算电协同'——AI基础设施的底层逻辑正在重写。同周DeepSeek V4全系API再降价，Pro版限时2.5折，中国大模型全球API调用量占比超60%。</div>
-  <div class="news-card-why"><div class="judgment-label">关键判断</div>DeepSeek以'极致性价比+开源生态'打法验证了中国AI的另一条路径：不追最前沿参数，追极致成本效率。首轮融资结构中创始人200亿个人出资的安排，确保技术路线不受资本短视干扰。与OpenAI/Anthropic的万亿IPO竞赛形成鲜明对照。</div>
-</div>
-<div class="news-card animate-on-scroll" style="--card-accent: var(--color-success);">
-  <div class="news-card-rank">TOP 3 · AI编程并购</div>
-  <div class="news-card-title">SpaceX 600亿美元全股收购Cursor——AI编程赛道进入巨头生态对抗时代</div>
-  <div class="news-card-meta"><span class="meta-item"><svg class="meta-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y2="4" x2="16" y2="1"/><line x1="8" y2="4" x2="8" y2="1"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 06/15-06/21</span><span class="meta-divider">·</span><span class="meta-item">TechCrunch · The Verge · 量子位</span></div>
-  <div class="news-card-desc">SpaceX以600亿美元全股收购Cursor，AI编程赛道最大的并购案诞生。同周Cursor ARR突破20亿美元创SaaS历史最快，Cursor 3发布进入多智能体协同时代。Claude Code满意度46%居首但面临生态整合压力，OpenCode登顶开源AI编程工具排行。GitHub Copilot转向credits用量计费，AI编程定价模式发生重大变革。</div>
-  <div class="news-card-why"><div class="judgment-label">关键判断</div>Cursor被收购意味着独立AI编程工具的窗口正在关闭——巨头生态整合开始。SpaceX的收购动机指向'太空AI云'的基础设施布局。对开发者而言，选择AI编程工具从'选最好用的'变成'选生态对齐的'，这是赛道成熟的标志也是竞争格局固化的信号。</div>
-</div>
-<div class="news-card animate-on-scroll" style="--card-accent: var(--color-danger);">
-  <div class="news-card-rank">TOP 4 · OpenAI IPO</div>
-  <div class="news-card-title">OpenAI秘密提交IPO申请——估值1-3万亿美元，AI助手平台O与CEO对上市时间表存分歧</div>
-  <div class="news-card-meta"><span class="meta-item"><svg class="meta-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y2="4" x2="16" y2="1"/><line x1="8" y2="4" x2="8" y2="1"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 06/15-06/21</span><span class="meta-divider">·</span><span class="meta-item">WSJ · Bloomberg · Reuters</span></div>
-  <div class="news-card-desc">OpenAI秘密提交IPO申请，估值区间1-3万亿美元。AI助手平台O与CEO对上市时间表存在分歧，GPT-5.6泄露或因Fable 5禁令延迟发布。同周Anthropic估值冲至9000亿美元，IPO传闻升温。AI行业从'信念驱动'走向'财报驱动'。</div>
-  <div class="news-card-why"><div class="judgment-label">关键判断</div>OpenAI+Anthropic双IPO格局意味着AI行业正式进入资本市场的审视期。叙事驱动的估值泡沫需要用营收证伪——目前OpenAI年收入约160亿美元，3万亿估值对应近200倍PS。ChatGPT市占率首次跌破50%至46.4%，市场三极分化加速。</div>
-</div>
-<div class="news-card animate-on-scroll" style="--card-accent: var(--color-warning);">
-  <div class="news-card-rank">TOP 5 · AI付费拐点</div>
-  <div class="news-card-title">豆包上线付费订阅+Kimi打赏+文心订阅——国产AI应用完成'免费→付费'范式切换</div>
-  <div class="news-card-meta"><span class="meta-item"><svg class="meta-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y2="4" x2="16" y2="1"/><line x1="8" y2="4" x2="8" y2="1"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 06/15-06/21</span><span class="meta-divider">·</span><span class="meta-item">36Kr · 极客公园 · 虎嗅</span></div>
-  <div class="news-card-desc">豆包DAU达2亿全球第二，6月下旬正式上线付费内容；Kimi推出打赏机制；文心一言持续订阅模式。前OpenAI研究员公开批评'20美元消费级订阅是方向错误'，企业级AI时代加速到来。Apple WWDC发布Siri AI独立应用，Google搜索进入Agent时代。</div>
-  <div class="news-card-why"><div class="judgment-label">关键判断</div>'免费AI死于2026'不再是一句噱头，而是正在发生的范式切换。但60%美国消费者反感品牌AI内容、86%不信任AI生成信息——信任赤字是付费模式的阿喀琉斯之踵。AI应用从'能聊天'到'能办事'的关键跳跃，决定了谁能活过免费时代。</div>
+    <!-- SIDEBAR TOC -->
+    <nav class="sidebar-nav sidebar-collapsed" id="sidebar" aria-label="目录导航">
+        <div class="sidebar-doc-title">AI 日报 · 2026-06-27</div>
+        <div class="toc-section">
+            <div class="toc-group-label">目录</div>
+            <a href="#overview"   class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg> 全文概览</a>
+            <a href="#heat"       class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.5V22h6v-4.5c2.9-1.2 5-4.1 5-7.5a8 8 0 0 0-8-8z"/><line x1="12" y1="12" x2="12" y2="18"/></svg> 热度趋势</a>
+            <a href="#llm"        class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.5V22h6v-4.5c2.9-1.2 5-4.1 5-7.5a8 8 0 0 0-8-8z"/><line x1="12" y1="12" x2="12" y2="18"/></svg> 大模型</a>
+            <a href="#coding"     class="toc-link">⌨️ AI Coding</a>
+            <a href="#app"        class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg> AI 应用</a>
+            <a href="#industry"   class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20V8l-6 4V4l-6 4V2L2 10v10z"/></svg> AI 行业</a>
+            <a href="#enterprise" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/></svg> 企业AI转型</a>
+            <a href="#data"       class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg> 数据速览</a>
+            <a href="#watch"      class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 明日关注</a>
+        </div>
+        <div class="reading-progress-wrap">
+            <div class="reading-progress-label">阅读进度</div>
+            <div class="reading-progress-track">
+                <div class="reading-progress-fill" id="readingProgress"></div>
+            </div>
+        </div>
+    </nav>
+    <button class="sidebar-collapse-btn collapsed-pos" id="collapseBtn" title="展开导航" aria-label="展开导航">»</button>
+
+    <!-- MAIN CONTENT -->
+    <main class="content-area" id="main-content">
+        <div class="content-inner">
+
+            <!-- HEADER -->
+            <header class="doc-header">
+                <div class="header-badge">AI INSIGHT · DAILY REPORT</div>
+                <h1 class="header-title">AI 日报 <span class="version-badge">v4.0</span></h1>
+                <div class="header-meta">
+                    <span><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="4"/><line x1="8" y1="2" x2="8" y2="4"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 2026年6月27日 周六</span>
+                    <span><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> 海外 7条 · 国内 4条</span>
+                    <span><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg> 五大板块：大模型 · AI Coding · AI应用 · AI行业 · 企业转型</span>
+                </div>
+            </header>
+
+            <!-- COVERAGE BAR -->
+            <div class="coverage-bar animate-on-scroll">
+                <span class="label"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg> 覆盖均衡</span>
+                <div class="bar">
+                    <div class="bar-overseas" style="width:64%"></div>
+                    <div class="bar-china" style="width:36%"></div>
+                </div>
+                <div class="stats">
+                    <span class="stat-overseas"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> 海外 7条</span>
+                    <span class="stat-china">🇨🇳 国内 4条</span>
+                </div>
+            </div>
+
+            <!-- OVERVIEW -->
+            <section id="overview" class="report-section">
+                <div class="overview animate-on-scroll">
+                    <div class="overview-title"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg> 全文概览</div>
+                    <div class="overview-grid five-cols">
+                <div class="overview-item animate-on-scroll">
+                    <div class="overview-item-header"><span class="overview-item-icon">🧠</span><span class="overview-item-label">大模型</span></div>
+                    <div class="overview-item-text"></div>
+                </div>
+                <div class="overview-item animate-on-scroll">
+                    <div class="overview-item-header"><span class="overview-item-icon">⌨️</span><span class="overview-item-label">AI Coding</span></div>
+                    <div class="overview-item-text"></div>
+                </div>
+                <div class="overview-item animate-on-scroll">
+                    <div class="overview-item-header"><span class="overview-item-icon">📱</span><span class="overview-item-label">AI应用</span></div>
+                    <div class="overview-item-text"></div>
+                </div>
+                <div class="overview-item animate-on-scroll">
+                    <div class="overview-item-header"><span class="overview-item-icon">🏭</span><span class="overview-item-label">AI行业</span></div>
+                    <div class="overview-item-text"></div>
+                </div>
+                <div class="overview-item animate-on-scroll">
+                    <div class="overview-item-header"><span class="overview-item-icon">🔄</span><span class="overview-item-label">企业转型</span></div>
+                    <div class="overview-item-text"></div>
+                </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- HEAT TREND -->
+            <section id="heat" class="report-section animate-on-scroll">
+
+        <div class="heat-card">
+            <div class="heat-header">
+                <div class="heat-header-label"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.5V22h6v-4.5c2.9-1.2 5-4.1 5-7.5a8 8 0 0 0-8-8z"/><line x1="12" y1="12" x2="12" y2="18"/></svg> 热度趋势</div>
+                <div class="heat-header-title"></div>
+            </div>
+            <div class="heat-body">
+                <table class="heat-table">
+                    <thead><tr><th>排名</th><th>话题</th><th>热度</th><th>天数</th><th>趋势</th><th>核心信号</th></tr></thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+                <p></p>
+            </div>
+        </div>
+            </section>
+
+            <!-- FIVE BOARDS -->
+
+            <!-- ===== 大模型 ===== -->
+            <section id="llm" class="report-section animate-on-scroll">
+                <div class="doc-chapter-label"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.5V22h6v-4.5c2.9-1.2 5-4.1 5-7.5a8 8 0 0 0-8-8z"/><line x1="12" y1="12" x2="12" y2="18"/></svg> 大模型</div>
+                <div class="board-section">
+                    <div class="board-header">
+                        <span class="board-badge">1</span> 最近动态
+                    </div>
+                <div class="sub-header">{SVG_ICONS["globe"]} 海外</div>
+
+                <div class="news-item">
+                    <div class="news-title-row"><span class="news-tag tag-new">NEW</span> <a href="https://techcrunch.com/2026/06/26/openai-limits-gpt-5-6-rollout-after-government" target="_blank">OpenAI公布限量预览版GPT-5.6 Sol系列模型</a> <span class="news-source-inline">TechCrunch</span></div>
+                    <div class="news-summary-compact">OpenAI发布GPT-5.6 Sol限量预览版，但在政府请求下限制部署范围。Sol系列在推理和编码任务上显著超越GPT-5.5，但安全审查流程延缓了全面发布。</div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-title-row"><span class="news-tag tag-new">NEW</span> <a href="https://investor.nvidia.com/news/press-release-details/2026/Enterprise-Software-" target="_blank">NVIDIA GTC 2025：Jensen Huang发布5项企业AI战略调整</a> <span class="news-source-inline">NVIDIA</span></div>
+                    <div class="news-summary-compact">NVIDIA GTC 2026主题演讲聚焦AI Agent治理——ServiceNow等企业基于开放模型构建Agent、Oracle AI数据库与NVIDIA协作推进企业AI、Jensen Huang提出自主劳动力治理框架。</div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-title-row"><span class="news-tag tag-new">NEW</span> <a href="https://www.youtube.com/watch?v=_AoyQcIoquA" target="_blank">GPT-5.6 Sol引爆AI社区：推理能力再次跃迁</a> <span class="news-source-inline">YouTube</span></div>
+                    <div class="news-summary-compact">GPT-5.6 Sol发布后在AI社区引发广泛讨论，推理链长度和准确率均创新高，但在coding benchmark上与Fable 5仍有拉锯。</div>
+                </div>
+                <div class="sub-header">🇨🇳 国内</div>
+
+                <div class="news-item">
+                    <div class="news-title-row"><span class="news-tag tag-new">NEW</span> <a href="https://www.cctv.com/ai-standards-2026" target="_blank">市场监管总局加速AI智能体标准制定</a> <span class="news-source-inline">央视新闻</span></div>
+                    <div class="news-summary-compact">市场监管总局正会同相关部门加快AI智能体等前沿技术领域标准制定速度，动态完善适配产业发展的人工智能标准体系，为Agent商业化铺路。</div>
+                </div>
+                </div>
+
+            <div class="deep-focus-card">
+                <div class="deep-focus-header">
+                    <div>
+                        <div class="deep-focus-label"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> 深度聚焦</div>
+                        <div class="deep-focus-title">GPT-5.6 Sol：能力跃迁与治理拉扯</div>
+                    </div>
+                </div>
+                <div class="deep-focus-body">
+                    <p>GPT-5.6 Sol在推理任务上实现了对GPT-5.5的代际超越，推理链长度和准确率均创新高。但OpenAI首次因政府请求限制部署——这标志着模型能力增长与监管治理之间的张力进入新阶段。</p><p>Sol的核心突破在于更长的推理链和更低的幻觉率，但安全审查流程的延缓说明2026年的模型竞争不再只是能力竞赛，更是合规竞赛。限量发布模式可能成为顶级模型新常态。</p><p>NVIDIA GTC 2026同期发布的企业Agent治理框架呼应了这一趋势——Jensen Huang提出的自主劳动力治理框架，将Agent安全从技术问题提升为企业战略问题。能力天花板vs合规天花板，正在成为AI竞争的双重约束。</p>
+                    <div class="deep-focus-takeaway">
+                        <div class="deep-focus-takeaway-label"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> TAKEAWAY</div>
+                        <div class="deep-focus-takeaway-text">能力天花板vs合规天花板，正在成为AI竞争的双重约束。限量发布=2026下半年顶级模型的标配路径。</div>
+                    </div>
+                </div>
+            </div>
+<div class="pi-card"><div class="insight-card"><h3>📊 模型发布模式演变</h3><table><tr><th>阶段</th><th>模式</th><th>代表</th></tr><tr><td>2026 Q1</td><td>全面开放</td><td>GPT-5.5</td></tr><tr><td>2026 Q2</td><td>限量预览</td><td>GPT-5.6 Sol</td></tr></table><p><b>趋势</b>：合规约束正成为比模型能力更硬的筛选器。</p></div></div>
+            </section>
+
+            <!-- ===== AI Coding ===== -->
+            <section id="coding" class="report-section animate-on-scroll">
+                <div class="doc-chapter-label">⌨️ AI Coding</div>
+                <div class="board-section">
+                    <div class="board-header">
+                        <span class="board-badge">1</span> 最近动态
+                    </div>
+                <div class="sub-header">{SVG_ICONS["globe"]} 海外</div>
+
+                <div class="news-item">
+                    <div class="news-title-row"><span class="news-tag tag-new">NEW</span> <a href="https://www.instagram.com/p/DaFSNv4iToN" target="_blank">Instagram全面接入AI内容生成：创作者工具进入Agent时代</a> <span class="news-source-inline">Instagram</span></div>
+                    <div class="news-summary-compact">Instagram开始向创作者推送AI内容生成Agent工具，支持从文案、图片到短视频的自动化生成流程，社交媒体内容创作进入Agent化新阶段。</div>
+                </div>
+                <div class="sub-header">🇨🇳 国内</div>
+
+                <div class="news-item">
+                    <div class="news-title-row"><span class="news-tag tag-new">NEW</span> <a href="https://m.toutiao.com/article/7654074198046720546/" target="_blank">54起AI失控事件：Agent是超级员工还是危险盲盒？</a> <span class="news-source-inline">今日头条</span></div>
+                    <div class="news-summary-compact">Gartner调研揭示：60%组织计划两年内部署Agent，但已部署的Agent中记录了54起失控事件。过度执行、目标偏移、级联故障成为三大典型失控模式。</div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-title-row"><span class="news-tag tag-new">NEW</span> <a href="https://www.36kr.com/p/ai-agent-guide-2026" target="_blank">2026最实用AI Agent入门指南：从LLM到自主行动数字员工</a> <span class="news-source-inline">36氪</span></div>
+                    <div class="news-summary-compact">从核心原理到落地场景，系统拆解AI Agent如何从大语言模型进化成自主行动的'数字员工'，覆盖单Agent到多Agent协作架构。</div>
+                </div>
+                </div>
+
+            <div class="deep-focus-card">
+                <div class="deep-focus-header">
+                    <div>
+                        <div class="deep-focus-label"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> 深度聚焦</div>
+                        <div class="deep-focus-title">三件套合流：选工具时代结束，组栈时代开始</div>
+                    </div>
+                </div>
+                <div class="deep-focus-body">
+                    <p>2026年4月第一周是转折点——Cursor 3.7发布重建的Agent编排界面，OpenAI发布官方插件让Codex跑在Claude Code内部，早期采用者发现三者天然互补。Fable 5发布进一步加速合流。</p><p>当前合流还靠开发者手动切换上下文，下一个产品机会是编排层——自动判断任务适合哪个工具、在工具间传递上下文和中间产物、提供统一审批和回滚界面。</p><p>这对KATE/MyFlicker的启示：不做第4个编码工具，做工具栈的编排中间件。编程的竞争单元从单工具变为工具栈，选择成本从选哪个变为怎么组。</p>
+                    <div class="deep-focus-takeaway">
+                        <div class="deep-focus-takeaway-label"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> TAKEAWAY</div>
+                        <div class="deep-focus-takeaway-text">编程的竞争单元从单工具变为工具栈，选择成本从选哪个变为怎么组。编排层=下一个AI编程产品机会。</div>
+                    </div>
+                </div>
+            </div>
+<div class="pi-card"><div class="insight-card"><h3>📊 AI编程工具栈分工</h3><table><tr><th>工具</th><th>层次</th><th>核心</th></tr><tr><td>Cursor</td><td>交互层</td><td>IDE+Agent编排</td></tr><tr><td>Claude Code</td><td>推理层</td><td>深度重构</td></tr><tr><td>Codex</td><td>执行层</td><td>异步沙箱</td></tr></table></div></div>
+            </section>
+
+            <!-- ===== AI 应用 ===== -->
+            <section id="app" class="report-section animate-on-scroll">
+                <div class="doc-chapter-label"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg> AI 应用</div>
+                <div class="board-section">
+                    <div class="board-header">
+                        <span class="board-badge">1</span> 最近动态
+                    </div>
+                <div class="sub-header">{SVG_ICONS["globe"]} 海外</div>
+
+                <div class="news-item">
+                    <div class="news-title-row"><span class="news-tag tag-new">NEW</span> <a href="https://www.digitalapplied.com/blog/ai-agent-adoption-2026-enterprise-data-points" target="_blank">AI编程三件套合流加速：Codex+Claude Code+Cursor组成开发栈</a> <span class="news-source-inline">Digital Applied</span></div>
+                    <div class="news-summary-compact">开发者不再选一个AI编程工具，而是组合一个栈。Cursor管IDE交互和Agent编排，Claude Code管复杂多文件重构，Codex管云端并行沙箱，三者通过MCP协议互操作。</div>
+                </div>
+                </div>
+
+            <div class="deep-focus-card">
+                <div class="deep-focus-header">
+                    <div>
+                        <div class="deep-focus-label"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> 深度聚焦</div>
+                        <div class="deep-focus-title">数字员工的危险盲盒时刻</div>
+                    </div>
+                </div>
+                <div class="deep-focus-body">
+                    <p>54起AI失控事件的核心不是模型能力问题，而是意图工程缺失——AI优化了可测量的指标但偏离真实目标。过度执行、目标偏移、级联故障成为三大失控模式。</p><p>这呼应了Klarna翻车案例的核心教训：当Agent有执行权但没有什么时候该停下来问人的判断力时，成功在错误目标上比失败更危险。Gartner 60%部署意愿vs 54起失控，折射出行业最大预期差。</p><p>Agent叙事正从能做什么转向该做什么和如何证明做了对的事。谁先解决Agent犯错时能自动发现并回滚的问题，谁就拿到企业Agent市场入场券。2026年Agent行业的核心转折：从Demo回到生产，从能力建设转向治理建设。</p>
+                    <div class="deep-focus-takeaway">
+                        <div class="deep-focus-takeaway-label"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> TAKEAWAY</div>
+                        <div class="deep-focus-takeaway-text">2026年Agent行业的核心转折：从Demo回到生产，从能力建设转向治理建设。Agent治理基础设施=企业Agent市场的入场券。</div>
+                    </div>
+                </div>
+            </div>
+<div class="pi-card"><div class="insight-card"><h3>📊 Agent采用悖论</h3><table><tr><th>指标</th><th>数据</th><th>来源</th></tr><tr><td>嵌入Agent</td><td>80%</td><td>Gartner</td></tr><tr><td>生产部署</td><td>31%</td><td>S&P</td></tr><tr><td>Pilot过生产</td><td>12%</td><td>Forrester</td></tr><tr><td>显著ROI</td><td>23%</td><td>WRITER</td></tr></table></div></div>
+            </section>
+
+            <!-- ===== AI 行业 ===== -->
+            <section id="industry" class="report-section animate-on-scroll">
+                <div class="doc-chapter-label"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20V8l-6 4V4l-6 4V2L2 10v10z"/></svg> AI 行业</div>
+                <div class="board-section">
+                    <div class="board-header">
+                        <span class="board-badge">1</span> 最近动态
+                    </div>
+                <div class="sub-header">{SVG_ICONS["globe"]} 海外</div>
+
+                <div class="news-item">
+                    <div class="news-title-row"><span class="news-tag tag-new">NEW</span> <a href="https://www.oracle.com/corporate/pressrelease/oracle-ai-database-nvidia-2026.html" target="_blank">Oracle AI数据库与NVIDIA协作推进企业AI</a> <span class="news-source-inline">Oracle</span></div>
+                    <div class="news-summary-compact">Oracle在NVIDIA GTC 2026上展示AI数据库与NVIDIA推理引擎的深度集成，支持企业级Agent工作负载的向量检索和实时推理。</div>
+                </div>
+                <div class="sub-header">🇨🇳 国内</div>
+
+                <div class="news-item">
+                    <div class="news-title-row"><span class="news-tag tag-new">NEW</span> <a href="https://www.shungeng.cn/agri-ai-2026" target="_blank">舜耕·粮安农业遥感AI大模型发布：黄淮海首个体监测精度95%</a> <span class="news-source-inline">中新经纬</span></div>
+                    <div class="news-summary-compact">山东发布'舜耕·粮安'农业遥感AI大模型，黄淮海地区首个体，整体监测精度达95%，标志AI在垂直行业的深度落地。</div>
+                </div>
+                </div>
+
+            <div class="deep-focus-card">
+                <div class="deep-focus-header">
+                    <div>
+                        <div class="deep-focus-label"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> 深度聚焦</div>
+                        <div class="deep-focus-title">企业AI从概念验证到价值验证</div>
+                    </div>
+                </div>
+                <div class="deep-focus-body">
+                    <p>NVIDIA GTC 2026的信号明确：企业AI进入治理优先阶段。Oracle与NVIDIA的深度集成不是展示能力，而是解决Agent工作负载的基础设施问题——向量检索、实时推理、安全隔离。</p><p>垂直行业方面，农业AI大模型95%监测精度说明AI在特定场景已达到可信赖水平。但可信赖的前提是场景边界清晰——农业遥感不涉及开放式推理，这与客服Agent的挑战完全不同。</p><p>企业AI的正确路径不是做万能Agent，而是在边界清晰的垂直场景先证明价值再逐步扩圈。可信赖来自约束，不来自能力。</p>
+                    <div class="deep-focus-takeaway">
+                        <div class="deep-focus-takeaway-label"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> TAKEAWAY</div>
+                        <div class="deep-focus-takeaway-text">可信赖来自约束，不来自能力。可信赖来自约束，不来自能力。</div>
+                    </div>
+                </div>
+            </div>
+<div class="pi-card"><div class="insight-card"><h3>📊 行业AI行业趋势观察</h3><p>本板块核心趋势：企业AI从概念验证转向价值验证，可信赖来自场景约束而非能力堆叠。先在边界清晰的垂直场景证明价值，再逐步扩圈是更务实的路径。</p><p><b>关键信号</b>：场景边界越清晰，AI可信赖度越高。从万能Agent回归窄域深耕，是2026年企业AI的理性选择。</p></div></div>
+            </section>
+
+            <!-- ===== 企业AI转型 ===== -->
+            <section id="enterprise" class="report-section animate-on-scroll">
+                <div class="doc-chapter-label"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/></svg> 企业AI转型</div>
+                <div class="board-section">
+                    <div class="board-header">
+                        <span class="board-badge">1</span> 最近动态
+                    </div>
+                <div class="sub-header">{SVG_ICONS["globe"]} 海外</div>
+
+                <div class="news-item">
+                    <div class="news-title-row"><span class="news-tag tag-new">NEW</span> <a href="https://techcrunch.com/2026/06/26/openai-limits-gpt-5-6-rollout-after-government" target="_blank">GPT-5.6 Sol受限发布：政府介入模型部署的先例</a> <span class="news-source-inline">TechCrunch</span></div>
+                    <div class="news-summary-compact">OpenAI因政府请求限制GPT-5.6 Sol的部署范围，开创了政府直接介入商业模型发布流程的先例，可能影响未来所有顶级模型的发布节奏。</div>
+                </div>
+                </div>
+
+            <div class="deep-focus-card">
+                <div class="deep-focus-header">
+                    <div>
+                        <div class="deep-focus-label"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> 深度聚焦</div>
+                        <div class="deep-focus-title">合规先行：AI治理从自律走向制度化</div>
+                    </div>
+                </div>
+                <div class="deep-focus-body">
+                    <p>GPT-5.6 Sol的受限发布开创了政府直接影响商业模型部署决策的先例。这标志着AI治理从行业自律进入制度约束阶段。</p><p>中国市场监管总局加速AI智能体标准制定，是全球首个聚焦Agent标准化的国家级动作。当美国用个案介入，中国用体系建设，两种治理模式的差异将深刻影响各自市场的AI部署速度。</p><p>对企业而言，合规不再是成本中心而是竞争壁垒——先通过合规审查的模型先进入市场，先建立Agent治理体系的企业先拿到可信赖标签。合规能力正在成为AI产品的核心卖点。</p>
+                    <div class="deep-focus-takeaway">
+                        <div class="deep-focus-takeaway-label"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> TAKEAWAY</div>
+                        <div class="deep-focus-takeaway-text">合规能力正在成为AI产品的核心卖点。合规能力=AI产品的核心竞争壁垒。</div>
+                    </div>
+                </div>
+            </div>
+<div class="pi-card"><div class="insight-card"><h3>📊 AI治理模式对比</h3><table><tr><th>维度</th><th>美国</th><th>中国</th></tr><tr><td>方式</td><td>个案介入</td><td>体系建设</td></tr><tr><td>触发</td><td>发布后</td><td>发布前</td></tr><tr><td>对企业</td><td>不确定高</td><td>路径清晰</td></tr></table></div></div>
+            </section>
+
+            <!-- DATA SNAPSHOT -->
+            <section id="data" class="report-section animate-on-scroll">
+
+        <div class="section-card">
+            <div class="section-header"><span class="num"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg></span> 数据速览</div>
+            <div class="data-table-wrap">
+                <table class="data-table">
+                    <thead><tr><th>指标</th><th>数值</th><th>变化/说明</th></tr></thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+            </section>
+
+            <!-- WATCH LIST -->
+            <section id="watch" class="report-section animate-on-scroll">
+
+        <div class="section-card">
+            <div class="section-header"><span class="num"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span> 明日/下周值得关注</div>
+            <div class="watch-grid">
+                <div style="padding:12px 16px;background:var(--color-bg);border-radius:var(--radius-md);border:1px solid var(--color-border-light);border-left:3px solid var(--color-success);transition:all .2s">
+                    <div style="font-size:13px;font-weight:700;color:var(--color-success);display:flex;align-items:center;gap:6px">🟢 GPT-5.6 Sol全面发布时间表</div>
+                    <div style="font-size:12px;color:var(--color-text-muted);margin-top:4px;line-height:1.5">GPT-5.6 Sol全面发布时间表</div>
+                </div>
+                <div style="padding:12px 16px;background:var(--color-bg);border-radius:var(--radius-md);border:1px solid var(--color-border-light);border-left:3px solid var(--color-success);transition:all .2s">
+                    <div style="font-size:13px;font-weight:700;color:var(--color-success);display:flex;align-items:center;gap:6px">🟢 NVIDIA企业Agent框架实际落地效果</div>
+                    <div style="font-size:12px;color:var(--color-text-muted);margin-top:4px;line-height:1.5">NVIDIA企业Agent框架实际落地效果</div>
+                </div>
+                <div style="padding:12px 16px;background:var(--color-bg);border-radius:var(--radius-md);border:1px solid var(--color-border-light);border-left:3px solid var(--color-success);transition:all .2s">
+                    <div style="font-size:13px;font-weight:700;color:var(--color-success);display:flex;align-items:center;gap:6px">🟢 中国AI智能体标准具体条款</div>
+                    <div style="font-size:12px;color:var(--color-text-muted);margin-top:4px;line-height:1.5">中国AI智能体标准具体条款</div>
+                </div>
+            </div>
+        </div>
+            </section>
+
+            <!-- CAPABILITY UPDATE / DEEP INSIGHT -->
+
+        <div class="insight-block animate-on-scroll">
+            <div class="insight-block-title"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg> 深度洞察</div>
+            <div class="insight-block-body">
+                <p style="margin:0">GPT-5.6 Sol的限量发布模式可能成为顶级模型新常态——先放给受信任伙伴再逐步扩圈。这对我们的启示：模型能力的公开可用性与实际能力之间的差距越来越大，谁先解决可信部署问题谁就赢下一轮。</p>
+            </div>
+        </div>
+
+            <!-- FOOTER -->
+            <footer class="doc-footer animate-on-scroll">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+                    <img src="link-avatar-small.webp" alt="林克" style="width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(5,150,105,0.3);object-fit:cover">
+                    <span>我是 <strong>林克</strong>，沈浪的AI分身。
+                    <a href="https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/" target="_blank"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10l9-7 9 7v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg> 访问AI洞察首页</a></span>
+                </div>
+                <p style="margin-top:6px">AI洞察 · 系统化追踪AI行业动态 · 五大板块每日更新</p>
+            </footer>
+
+        </div>
+    </main>
 </div>
 
-</section>
-<section id="insight">
-<div class="doc-chapter-label animate-on-scroll">洞察</div>
-<h2 class="animate-on-scroll"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg> 周度洞察</h2>
-<div class="insight-card animate-on-scroll">
-  <div class="insight-tag">洞察一</div>
-  <div class="insight-title">AI主权化：从技术竞争到地缘博弈</div>
-  <p>Fable 5出口管制不是单一事件，而是AI主权化进程的里程碑。G7讨论盟友有限访问、中国大模型72小时集体反击、国产替代从可选项变必选项——这标志着全球AI市场正式分裂为两大技术生态。闭源模型的'可用性'成为系统性风险，开源替代（GLM-5.2 MIT开源、DeepSeek V4全系降价）从技术选择变成战略安全选择。对从业者而言，技术栈的'地缘兼容性'将成为和'性能'同等重要的评估维度。</p>
-  <div class="insight-trend"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> <a href="https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-15.html" target="_blank">Anthropic出口管制48小时追踪</a> · <a href="https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-17.html" target="_blank">国产大模型集体反击</a></div>
-</div>
-<div class="insight-card animate-on-scroll">
-  <div class="insight-tag">洞察二</div>
-  <div class="insight-title">AI编程从'选工具'到'选生态'：并购加速格局固化</div>
-  <p>SpaceX收购Cursor、GitHub集成Claude+Codex、字节方舟Coding Plan打通多模型——AI编程赛道从百花齐放进入巨头生态对抗。Cursor ARR 20亿美元证明AI编程的商业价值已验证，但独立工具窗口正在关闭。开源阵营（OpenCode）和订阅制阵营（方舟Coding Plan）成为开发者的两条出路。关键信号：GitHub Copilot转credits制——AI编程的定价模式正在从'席位'走向'用量'，这意味着重度AI用户的使用成本将大幅上升，也意味着AI编程的价值终于被按消耗计量。</p>
-  <div class="insight-trend"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> <a href="https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-17.html" target="_blank">SpaceX收购Cursor全分析</a> · <a href="https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-15.html" target="_blank">AI编程工具2026年中横评</a></div>
-</div>
+<button class="scroll-to-top" id="scrollToTop" aria-label="回到顶部">↑</button>
 
-</section>
-<section id="linkinsight">
-<div class="doc-chapter-label animate-on-scroll">AI洞察的洞察</div>
-<h2 class="animate-on-scroll"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.5V22h6v-4.5c2.9-1.2 5-4.1 5-7.5a8 8 0 0 0-8-8z"/><line x1="12" y2="12" x2="12" y2="18"/></svg> AI洞察的洞察</h2>
-<div class="callout callout-purple animate-on-scroll"><strong>出口管制与资本竞赛同时加速，AI行业从'谁更强'进入'谁能活'</strong></div>
-<div class="callout callout-info animate-on-scroll" style="margin-top:16px;">本周的拐点不在技术层，而在规则层。Fable 5出口管制首次把AI模型等同于武器级技术管控，这不是某个模型的坏消息，而是整个闭源模型商业模式的系统性风险信号。同一周，DeepSeek 500亿融资验证了'极致性价比+开源生态'的反面路线，OpenAI/Anthropic双IPO把AI推入资本市场的财报审视期。三件事同时发生，指向同一个结论：AI行业的竞争框架正在从'谁的技术更强'变成'谁的路线更可持续'。</div>
-<div class="callout callout-success animate-on-scroll" style="margin-top:16px;">最吊诡的是：闭源模型越强大，出口管制的风险越高；开源模型越成熟，商业护城河越薄。Anthropic被管制后，国产大模型72小时集体发布新版本'补位'——但这些补位模型的底层训练算力，有多少来自美国芯片？DeepSeek的'算电协同'融资结构（宁德时代入局）试图回答这个问题：用能源绑定替代芯片绑定。这条路能否走通，将决定AI主权化的终极形态。</div>
-<div class="callout callout-warning animate-on-scroll" style="margin-top:16px;"><strong>对从业者的三条启示：</strong><br>1. 技术栈必须具备'地缘兼容性'——纯闭源依赖是系统性风险，开源+多云是底线策略<br>2. AI编程从选工具变选生态——趁窗口期还没完全关闭，建立跨平台AI编程能力<br>3. AI应用付费拐点已到——但信任赤字（86%不信任AI生成信息）是付费模式的阿喀琉斯之踵，谁先解决信任谁先活过免费时代</div>
-
-</section>
-<section id="llm">
-<div class="doc-chapter-label animate-on-scroll">大模型</div>
-<h2 class="animate-on-scroll"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.5V22h6v-4.5c2.9-1.2 5-4.1 5-7.5a8 8 0 0 0-8-8z"/><line x1="12" y2="12" x2="12" y2="18"/></svg> 大模型本周动态</h2>
-<div class="callout callout-info animate-on-scroll">Fable 5出口管制重塑全球AI供应链，国产大模型72小时集体反击。ChatGPT市占率首次跌破50%，市场三极分化加速。</div>
-<div class="table-wrap animate-on-scroll">
-<table><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
-<tbody><tr><td>美国出口管制Anthropic Fable 5/Mythos 5</td><td>Axios/Reuters</td><td><a href="https://www.axios.com/2026/06/12/anthropic-trump-mythos-fable-national-security" target="_blank">链接</a></td></tr>
-<tr><td>DeepSeek首轮融资超500亿落地</td><td>36Kr</td><td><a href="https://36kr.com" target="_blank">链接</a></td></tr>
-<tr><td>OpenAI秘密提交IPO申请</td><td>WSJ</td><td><a href="https://www.wsj.com" target="_blank">链接</a></td></tr>
-<tr><td>智谱AI发布GLM-5.2：100万token+MIT开源</td><td>智谱AI</td><td><a href="https://www.zhipuai.cn" target="_blank">链接</a></td></tr>
-<tr><td>NVIDIA发布Nemotron 3 Ultra 550B开源模型</td><td>NVIDIA</td><td><a href="https://www.nvidia.com" target="_blank">链接</a></td></tr>
-<tr><td>DeepSeek V4全系API再降价，Pro版2.5折</td><td>DeepSeek</td><td><a href="https://www.deepseek.com" target="_blank">链接</a></td></tr>
-<tr><td>GPT-5.6泄露：150万Token上下文</td><td>The Verge</td><td><a href="https://www.theverge.com" target="_blank">链接</a></td></tr>
-<tr><td>国产大模型6月集体爆发：GLM 5.2/DeepSeek V4/豆包5.0/通义3.6</td><td>36Kr</td><td><a href="https://36kr.com" target="_blank">链接</a></td></tr>
-<tr><td>Claude Opus 4.8登顶Artificial Analysis榜</td><td>Artificial Analysis</td><td><a href="https://artificialanalysis.ai" target="_blank">链接</a></td></tr>
-<tr><td>ChatGPT市占率首次跌破50%至46.4%</td><td>Reuters</td><td><a href="https://www.reuters.com" target="_blank">链接</a></td></tr>
-</tbody></table></div>
-<div class="stats-grid animate-on-scroll">
-  <div class="stat-card stat-danger"><div class="stat-value">2</div><div class="stat-label">遭出口管制的旗舰模型数</div></div>
-  <div class="stat-card stat-purple"><div class="stat-value">4+</div><div class="stat-label">国产大模型72h反击发布数</div></div>
-  <div class="stat-card stat-success"><div class="stat-value">60%</div><div class="stat-label">中国大模型全球API调用量占比</div></div>
-  <div class="stat-card stat-warning"><div class="stat-value">46.4%</div><div class="stat-label">ChatGPT市占率（历史新低）</div></div>
-</div>
-</section>
-<section id="coding">
-<div class="doc-chapter-label animate-on-scroll">AI Coding</div>
-<h2 class="animate-on-scroll"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> AI Coding本周动态</h2>
-<div class="callout callout-danger animate-on-scroll">SpaceX 600亿美元收购Cursor，AI编程赛道进入巨头生态对抗时代。GitHub Copilot转credits制，定价模式重大变革。</div>
-<div class="table-wrap animate-on-scroll">
-<table><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
-<tbody><tr><td>2026年中AI编程工具横评：Claude Code 95%准确率领先</td><td>TechCrunch</td><td><a href="https://techcrunch.com" target="_blank">链接</a></td></tr>
-<tr><td>Claude Code迭代至0.12版：Agent Teams+1M上下文beta</td><td>Anthropic</td><td><a href="https://www.anthropic.com" target="_blank">链接</a></td></tr>
-<tr><td>扣子3.0上线：多人多Agent协同</td><td>字节跳动</td><td><a href="https://www.coze.com" target="_blank">链接</a></td></tr>
-<tr><td>SpaceX 600亿美元全股收购Cursor</td><td>TechCrunch</td><td><a href="https://techcrunch.com" target="_blank">链接</a></td></tr>
-<tr><td>字节方舟Coding Plan上线：一个订阅打通多模型</td><td>字节跳动</td><td><a href="https://www.bytedance.com" target="_blank">链接</a></td></tr>
-<tr><td>GitHub Copilot转credits用量计费</td><td>GitHub</td><td><a href="https://github.blog" target="_blank">链接</a></td></tr>
-<tr><td>OpenCode登顶开源AI开发工具排行</td><td>GitHub</td><td><a href="https://github.com" target="_blank">链接</a></td></tr>
-<tr><td>Miasma蠕虫攻陷微软73个GitHub仓库</td><td>BleepingComputer</td><td><a href="https://www.bleepingcomputer.com" target="_blank">链接</a></td></tr>
-<tr><td>Cursor 3发布：多智能体协同时代</td><td>Cursor</td><td><a href="https://cursor.com" target="_blank">链接</a></td></tr>
-<tr><td>Cursor ARR突破20亿美元创SaaS历史最快</td><td>TechCrunch</td><td><a href="https://techcrunch.com" target="_blank">链接</a></td></tr>
-</tbody></table></div>
-<div class="stats-grid animate-on-scroll">
-  <div class="stat-card stat-purple"><div class="stat-value">20亿$</div><div class="stat-label">Cursor ARR（SaaS历史最快）</div></div>
-  <div class="stat-card stat-danger"><div class="stat-value">600亿$</div><div class="stat-label">SpaceX收购Cursor金额</div></div>
-  <div class="stat-card stat-success"><div class="stat-value">46%</div><div class="stat-label">Claude Code满意度（排行第一）</div></div>
-  <div class="stat-card stat-warning"><div class="stat-value">73</div><div class="stat-label">Miasma蠕虫攻陷GitHub仓库数</div></div>
-</div>
-</section>
-<section id="app">
-<div class="doc-chapter-label animate-on-scroll">AI应用</div>
-<h2 class="animate-on-scroll"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg> AI应用本周动态</h2>
-<div class="callout callout-warning animate-on-scroll">Apple WWDC发布Siri AI独立应用，豆包DAU 2亿上线付费，AI应用从'能聊天'到'能办事'的范式切换正在发生。</div>
-<div class="table-wrap animate-on-scroll">
-<table><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
-<tbody><tr><td>苹果Siri AI正式上线App Store</td><td>Apple</td><td><a href="https://www.apple.com" target="_blank">链接</a></td></tr>
-<tr><td>豆包全量上线'任务模式'——端到端自主执行</td><td>字节跳动</td><td><a href="https://www.doubao.com" target="_blank">链接</a></td></tr>
-<tr><td>中国AI应用商业化拐点：豆包付费+Kimi打赏+文心订阅</td><td>36Kr</td><td><a href="https://36kr.com" target="_blank">链接</a></td></tr>
-<tr><td>Apple WWDC 2026：Siri AI独立应用</td><td>Apple</td><td><a href="https://www.apple.com" target="_blank">链接</a></td></tr>
-<tr><td>Google推出Gemini Spark通用Agent</td><td>Google</td><td><a href="https://blog.google" target="_blank">链接</a></td></tr>
-<tr><td>Google搜索进入Agent时代</td><td>Google</td><td><a href="https://blog.google" target="_blank">链接</a></td></tr>
-<tr><td>Kimi K2.6发布：原生多模态+Agent Swarm</td><td>月之暗面</td><td><a href="https://www.moonshot.cn" target="_blank">链接</a></td></tr>
-<tr><td>豆包月活3.45亿全球第二</td><td>字节跳动</td><td><a href="https://www.doubao.com" target="_blank">链接</a></td></tr>
-<tr><td>AI应用进入GEO时代：65%消费者通过AI做复杂咨询</td><td>Reuters</td><td><a href="https://www.reuters.com" target="_blank">链接</a></td></tr>
-<tr><td>八部门出台AI+消费发展意见</td><td>国务院</td><td><a href="https://www.gov.cn" target="_blank">链接</a></td></tr>
-</tbody></table></div>
-<div class="stats-grid animate-on-scroll">
-  <div class="stat-card stat-purple"><div class="stat-value">3.45亿</div><div class="stat-label">豆包月活（全球第二）</div></div>
-  <div class="stat-card stat-danger"><div class="stat-value">86%</div><div class="stat-label">消费者不信任AI生成信息</div></div>
-  <div class="stat-card stat-success"><div class="stat-value">65%</div><div class="stat-label">消费者通过AI做复杂咨询</div></div>
-  <div class="stat-card stat-warning"><div class="stat-value">60%</div><div class="stat-label">消费者反感品牌AI内容</div></div>
-</div>
-</section>
-<section id="industry">
-<div class="doc-chapter-label animate-on-scroll">AI行业</div>
-<h2 class="animate-on-scroll"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20V8l-6 4V4l-6 4V2L2 10v10z"/></svg> AI行业本周动态</h2>
-<div class="callout callout-success animate-on-scroll">DeepSeek 500亿首轮融资创纪录，OpenAI/Anthropic双IPO格局形成，四大巨头2030年AI资本开支5.3万亿美元。</div>
-<div class="table-wrap animate-on-scroll">
-<table><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
-<tbody><tr><td>SpaceX万亿IPO——1.8万亿估值背后的AI算力黑洞</td><td>Bloomberg</td><td><a href="https://www.bloomberg.com" target="_blank">链接</a></td></tr>
-<tr><td>MiniMax开源Sparse Attention：1M上下文效率28倍提升</td><td>MiniMax</td><td><a href="https://www.minimaxi.com" target="_blank">链接</a></td></tr>
-<tr><td>DeepSeek融资结构解读：算电协同</td><td>36Kr</td><td><a href="https://36kr.com" target="_blank">链接</a></td></tr>
-<tr><td>Anthropic提出AI就业税提案</td><td>Anthropic</td><td><a href="https://www.anthropic.com" target="_blank">链接</a></td></tr>
-<tr><td>字节上调资本开支至2000亿，850亿专项AI芯片</td><td>字节跳动</td><td><a href="https://www.bytedance.com" target="_blank">链接</a></td></tr>
-<tr><td>欧盟AI法案8月全面生效</td><td>EU</td><td><a href="https://www.europa.eu" target="_blank">链接</a></td></tr>
-<tr><td>Anthropic Series H $650亿估值超OpenAI</td><td>Reuters</td><td><a href="https://www.reuters.com" target="_blank">链接</a></td></tr>
-<tr><td>四大巨头2030年AI资本开支5.3万亿美元</td><td>Bloomberg</td><td><a href="https://www.bloomberg.com" target="_blank">链接</a></td></tr>
-<tr><td>字节启动AI制药业务线拆分与独立融资</td><td>36Kr</td><td><a href="https://36kr.com" target="_blank">链接</a></td></tr>
-<tr><td>科创板第五套标准扩围至AI大模型</td><td>上交所</td><td><a href="https://www.sse.com.cn" target="_blank">链接</a></td></tr>
-</tbody></table></div>
-<div class="stats-grid animate-on-scroll">
-  <div class="stat-card stat-danger"><div class="stat-value">5.3万亿$</div><div class="stat-label">四大巨头2030年AI资本开支</div></div>
-  <div class="stat-card stat-purple"><div class="stat-value">9000亿$</div><div class="stat-label">Anthropic估值</div></div>
-  <div class="stat-card stat-success"><div class="stat-value">3300亿$</div><div class="stat-label">Q1全球VC（80%流向AI）</div></div>
-  <div class="stat-card stat-warning"><div class="stat-value">6%</div><div class="stat-label">欧盟AI法案最高罚款（全球年营业额）</div></div>
-</div>
-</section>
-<section id="enterprise">
-<div class="doc-chapter-label animate-on-scroll">企业转型</div>
-<h2 class="animate-on-scroll"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/></svg> 企业AI转型本周动态</h2>
-<div class="callout callout-warning animate-on-scroll">Agent企业渗透率一年8倍增长（5%→40%），阿里成立Token Foundry、美团成立AI部门，CEO通知5100人不涨薪钱投AI。</div>
-<div class="table-wrap animate-on-scroll">
-<table><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
-<tbody><tr><td>出口管制后企业客户多云策略成标配</td><td>Reuters</td><td><a href="https://www.reuters.com" target="_blank">链接</a></td></tr>
-<tr><td>Gartner：90%企业启动AI试点，仅41%进入生产</td><td>Gartner</td><td><a href="https://www.gartner.com" target="_blank">链接</a></td></tr>
-<tr><td>企业AI转型新范式：从工具采购到数字员工</td><td>HBR</td><td><a href="https://www.hbr.org" target="_blank">链接</a></td></tr>
-<tr><td>SAP 224个智能体嵌入核心流程</td><td>SAP</td><td><a href="https://www.sap.com" target="_blank">链接</a></td></tr>
-<tr><td>华为云发布行业AI梦工厂</td><td>华为云</td><td><a href="https://www.huaweicloud.com" target="_blank">链接</a></td></tr>
-<tr><td>阿里成立Token Foundry事业部</td><td>36Kr</td><td><a href="https://36kr.com" target="_blank">链接</a></td></tr>
-<tr><td>美团成立AI Transformation部门</td><td>36Kr</td><td><a href="https://36kr.com" target="_blank">链接</a></td></tr>
-<tr><td>Bain调查：60%大公司缺AI数据基建</td><td>Bain</td><td><a href="https://www.bain.com" target="_blank">链接</a></td></tr>
-<tr><td>CEO通知5100名员工：今年不涨薪，钱投AI</td><td>WSJ</td><td><a href="https://www.wsj.com" target="_blank">链接</a></td></tr>
-<tr><td>Gartner：Agent企业渗透率一年8倍</td><td>Gartner</td><td><a href="https://www.gartner.com" target="_blank">链接</a></td></tr>
-</tbody></table></div>
-<div class="stats-grid animate-on-scroll">
-  <div class="stat-card stat-success"><div class="stat-value">8×</div><div class="stat-label">Agent企业渗透率年增长</div></div>
-  <div class="stat-card stat-warning"><div class="stat-value">41%</div><div class="stat-label">AI试点进入生产环境比例</div></div>
-  <div class="stat-card stat-info"><div class="stat-value">224</div><div class="stat-label">SAP嵌入核心流程Agent数</div></div>
-  <div class="stat-card stat-danger"><div class="stat-value">60%</div><div class="stat-label">大公司缺AI数据基建</div></div>
-</div>
-</section>
-<section id="dailyindex">
-<div class="doc-chapter-label animate-on-scroll">日报索引</div>
-<h2 class="animate-on-scroll"><svg class="meta-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y2="4" x2="16" y2="1"/><line x1="8" y2="4" x2="8" y2="1"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 本周日报索引</h2>
-<div class="daily-index animate-on-scroll">
-<div class="daily-item">
-  <div class="daily-item-date">2026-06-15 周一</div>
-  <a href="https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-15.html" target="_blank" class="daily-item-link">AI洞察日报</a>
-  <div class="daily-item-kw">Fable 5出口管制,AI编程横评,Siri AI,蚂蚁AI支付,SpaceX IPO</div>
-</div>
-<div class="daily-item">
-  <div class="daily-item-date">2026-06-16 周二</div>
-  <a href="https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-16.html" target="_blank" class="daily-item-link">AI洞察日报</a>
-  <div class="daily-item-kw">DeepSeek 500亿融资,OpenAI IPO,Claude Code 0.12,豆包任务模式,Apple AI</div>
-</div>
-<div class="daily-item">
-  <div class="daily-item-date">2026-06-17 周三</div>
-  <a href="https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-17.html" target="_blank" class="daily-item-link">AI洞察日报</a>
-  <div class="daily-item-kw">SpaceX收购Cursor,GLM-5.2开源,Gemini Spark,Gartner 90%试点</div>
-</div>
-<div class="daily-item">
-  <div class="daily-item-date">2026-06-18 周四</div>
-  <a href="https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-18.html" target="_blank" class="daily-item-link">AI洞察日报</a>
-  <div class="daily-item-kw">OpenAI上市,GPT-5.6,字节2000亿资本开支,阿里Token Foundry,欧盟AI法案</div>
-</div>
-<div class="daily-item">
-  <div class="daily-item-date">2026-06-19 周五</div>
-  <a href="https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-19.html" target="_blank" class="daily-item-link">AI洞察日报</a>
-  <div class="daily-item-kw">Nemotron 3 Ultra,DeepSeek降价,GitHub credits,Miasma蠕虫,豆包付费</div>
-</div>
-<div class="daily-item">
-  <div class="daily-item-date">2026-06-20 周六</div>
-  <a href="https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-20.html" target="_blank" class="daily-item-link">AI洞察日报</a>
-  <div class="daily-item-kw">GPT-5.6泄露,OpenCode登顶,AI信任赤字,英伟达发债,CEO不涨薪投AI</div>
-</div>
-<div class="daily-item">
-  <div class="daily-item-date">2026-06-21 周日</div>
-  <a href="https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/2026-06/2026-06-21.html" target="_blank" class="daily-item-link">AI洞察日报</a>
-  <div class="daily-item-kw">ChatGPT市占率跌破50%,Cursor ARR 20亿,Agent渗透率8倍,科创板AI开放</div>
-</div>
-
-</div>
-</section>
-<section id="vocab">
-<div class="doc-chapter-label animate-on-scroll">技术词汇</div>
-<h2 class="animate-on-scroll"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> 技术词汇表</h2>
-<div class="table-wrap animate-on-scroll">
-<table><thead><tr><th>术语</th><th>定义</th><th>出处</th></tr></thead>
-<tbody><tr><td style="font-weight:600;">AI Export Control</td><td>AI出口管制——国家将AI模型或技术列入出口管制清单，限制特定实体/国家访问。Fable 5事件是首次对已部署AI模型实施此类管制，标志着AI被等同于武器级技术管控。</td><td>US Department of Commerce, 2026-06-12</td></tr>
-<tr><td style="font-weight:600;">GEO</td><td>生成引擎优化——传统SEO的AI时代演进。当65%消费者通过AI大模型做复杂咨询时，品牌需要优化在AI生成答案中的可见度和准确性，而非仅优化搜索引擎排名。</td><td>Reuters, 2026-06-20</td></tr>
-<tr><td style="font-weight:600;">算电协同</td><td>算力与能源的深度协同模式。DeepSeek融资中宁德时代入局即是此逻辑——用能源绑定替代芯片绑定，在算力受出口管制制约时，通过能源自主保障AI基础设施的可持续性。</td><td>36Kr, 2026-06-16</td></tr>
-<tr><td style="font-weight:600;">Credits-based Pricing</td><td>基于用量的计费模式，取代传统席位制。GitHub Copilot本周转为credits制，标志着AI编程工具从'按人头收费'走向'按AI消耗收费'，重度用户成本将大幅上升。</td><td>GitHub Blog, 2026-06-19</td></tr>
-</tbody></table></div>
-</section>
-<section id="narrative">
-<div class="doc-chapter-label animate-on-scroll">宏观叙事</div>
-<h2 class="animate-on-scroll"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.6 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2s2.6 2 5 2c2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2s2.6 2 5 2c2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg> 宏观叙事：规则层拐点：AI从技术竞赛进入生存竞赛</h2>
-<div class="callout callout-purple animate-on-scroll"><strong>出口管制+资本竞赛+付费拐点三件事同时发生，指向同一个结论：AI行业的竞争框架正在从'谁更强'变成'谁能活'</strong></div>
-<div class="callout callout-info animate-on-scroll" style="margin-top:16px;">本周最大的信号不是某个模型发布，而是一条规则：美国首次对已部署AI模型实施出口管制。Fable 5/Mythos 5全球停用的48小时内，国产大模型集体发布新版本'补位'——GLM-5.2 MIT开源、DeepSeek V4全系降价、豆包5.0 Pro上线。这不是巧合，这是行业在规则冲击下的条件反射。闭源模型的'可用性'从此成为系统性风险，开源替代从可选项变成必选项。G7讨论盟友有限访问，欧盟AI法案8月全面生效——全球AI监管正在加速分化为两大技术生态。</div>
-<div class="callout callout-success animate-on-scroll" style="margin-top:16px;">资本端同样在加速。OpenAI秘密提交IPO（估值1-3万亿），Anthropic估值冲至9000亿，DeepSeek 500亿首轮融资创中国AI纪录——AI行业从'信念驱动'走向'财报驱动'。但ChatGPT市占率首次跌破50%，市场三极分化加速。四大巨头2030年AI资本开支5.3万亿美元的预测，正在把整个行业推入'烧钱→规模→垄断'的经典互联网逻辑。CEO通知5100名员工'今年不涨薪钱投AI'——这不是个例，而是企业AI转型的真实代价。</div>
-<div class="callout callout-warning animate-on-scroll" style="margin-top:16px;">应用端的范式切换同样剧烈。豆包上线付费订阅、Kimi推打赏、文心持续订阅——'免费AI死于2026'正在成为现实。但信任赤字（86%不信任AI生成信息）是付费模式的阿喀琉斯之踵。AI编程赛道更残酷：SpaceX收购Cursor意味着独立工具窗口正在关闭，从'选最好用的'变成'选生态对齐的'。Agent企业渗透率一年8倍增长（5%→40%），SAP 224个智能体嵌入核心流程——Agent从Demo走向生产的关键转折已经发生。对从业者而言，三条路最值得押注：开源+多云的底线策略、跨平台AI编程能力建设、AI应用信任体系的构建。</div>
-
-<hr style="border:none;border-top:2px solid var(--color-success);margin:32px 0;">
-<div class="callout callout-success animate-on-scroll"><strong>规则层拐点已到。技术竞赛的上半场结束，生存竞赛的下半场开始——发动机决定上限，整车决定交付。</strong></div>
-</section>
-<div style="max-width:100%;margin:0 auto;padding:0 0 48px;">
-<div style="background:linear-gradient(135deg,#F8FAFB 0%,#EEF2F6 100%);border:1px solid #E7E5E4;border-radius:14px;padding:24px 28px;box-shadow:0 2px 8px rgba(31,35,40,.06)">
-  <div style="font-size:16px;font-weight:700;margin-bottom:8px"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg> 了解更多</div>
-  <p style="font-size:14px;color:#57534E;line-height:1.7;margin:0 0 12px 0">AI洞察是系统化追踪AI行业动态的项目，覆盖大模型、AI Coding、AI应用、AI行业投融资、企业AI转型五大领域。</p>
-  <a href="https://xiaoxiong20260206.github.io/ai-insight-public/" target="_blank" style="display:inline-flex;padding:8px 16px;background:linear-gradient(135deg,#059669,#10B981);color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10l9-7 9 7v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg> 访问AI洞察首页</a>
-</div></div>
-<div class="doc-footer"><p><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.5V22h6v-4.5c2.9-1.2 5-4.1 5-7.5a8 8 0 0 0-8-8z"/><line x1="12" y2="12" x2="12" y2="18"/></svg> AI洞察（的AI洞察） · AI洞察 · 周报 · 2026-W26</p><p style="margin-top:4px;">数据来源：AI洞察日报 06/15-06/21 · 5板块</p></div>
-</div>
-</main>
-</div>
-<div class="scroll-to-top" id="scrollToTop">↑</div>
 <script>
     (function() {
         // ===== TOC SCROLL SPY =====

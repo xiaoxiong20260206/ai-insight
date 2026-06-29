@@ -4,31 +4,31 @@
     {
       "icon": "🧠",
       "label": "大模型",
-      "headline": "Claude Fable 5分批重上线+GPT-5.6 Kindle曝光+双巨头IPO齐冲刺",
+      "headline": "GPT-5.6 Sol限量发布+政府限制争议，NVIDIA GTC企业Agent治理",
       "text": ""
     },
     {
       "icon": "⌨️",
       "label": "AI Coding",
-      "headline": "GitHub Copilot按量计费激活用量暴涨+AI编程三件套合流",
+      "headline": "三件套合流加速，Fiona Fung称瓶颈从Coding转向Verification",
       "text": ""
     },
     {
       "icon": "📱",
       "label": "AI应用",
-      "headline": "新华社新华语典上线+Kimi对标美国御三家",
+      "headline": "54起AI失控事件揭示Agent治理缺口，数字员工进入危险盲盒时刻",
       "text": ""
     },
     {
       "icon": "🏭",
-      "label": "产业动态",
-      "headline": "OpenAI+Anthropic双IPO冲刺+DeepSeek 500亿上市准备",
+      "label": "AI行业",
+      "headline": "Oracle+NVIDIA企业AI基础设施，农业AI大模型95%监测精度",
       "text": ""
     },
     {
-      "icon": "🏢",
-      "label": "企业AI",
-      "headline": "IPO后定价博弈：平台信任vs API榨取，企业CIO重新算账",
+      "icon": "🔄",
+      "label": "企业转型",
+      "headline": "GPT-5.6 Sol受限开创政府介入先例，中国AI智能体标准加速",
       "text": ""
     }
   ],
@@ -37,387 +37,240 @@
     "label": "热度趋势",
     "text": "上升"
   },
-  "capability_update": "林克视角：Claude Fable 5的'分批受控释放'模式是里程碑——'发布即全量'的狂飙时代终结，大模型进入后监管时代的受控发布新范式。OpenAI和Anthropic同时提交S-1保密文件，意味着AI行业正从烧钱竞赛转向资本收割，而企业客户将是被收割的重点——CIO们需要现在就开始评估替代方案和成本对冲。GitHub Copilot按量计费激活需求暴涨，证明'定价模式创新'比'模型能力创新'更能拉动增长。",
   "coverage": {
-    "overseas": 5,
-    "domestic": 5,
-    "wechat_direct": 5
+    "overseas": 7,
+    "china": 4
   },
   "tabs": [
     {
-      "id": "models",
+      "id": "llm",
       "title": "🧠 大模型",
-      "icon": "brain",
+      "icon": "🧠",
       "news": {
         "overseas": [
           {
-            "title": "Claude Fable 5分批重上线：受控释放成新范式，Mythos级能力首次回归",
-            "summary": "因不可抗力全球下架的Claude Fable 5近期在部分客户端和云端环境分批重新上线。SWE-bench Pro 80.3%通过率远超GPT-5.5的58.6%，前端代码框架测试29.3%是Opus 4.8的2倍+。受美国最新监管要求影响，未来前沿模型发布将采用分阶段分批次释放模式，'发布即全量'时代终结。同步配发Mythos 5未过滤版本在Vending-Bench表现存疑。",
-            "source": "Anthropic官方 · AIWW · 6月",
-            "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5",
-            "region": "overseas",
-            "importance": 5
+            "title": "OpenAI公布限量预览版GPT-5.6 Sol系列模型",
+            "url": "https://techcrunch.com/2026/06/26/openai-limits-gpt-5-6-rollout-after-government",
+            "source": "TechCrunch",
+            "summary": "OpenAI发布GPT-5.6 Sol限量预览版，但在政府请求下限制部署范围。Sol系列在推理和编码任务上显著超越GPT-5.5，但安全审查流程延缓了全面发布。",
+            "tags": [
+              "GPT-5.6",
+              "OpenAI",
+              "限量发布"
+            ]
           },
           {
-            "title": "GPT-5.6 Kindle预览版内部路径曝光：OpenAI提交S-1保密文件启动IPO",
-            "summary": "GPT-5.6预览版代号Kindle在内部路径曝光，可能关联kindle-alpha发布候选检查点。更重磅的是OpenAI已提交保密S-1文件，IPO可能成为年度最大AI商业事件。同期GPT-5.5 Instant宣布向全球免费用户推送，旗舰模型免费化趋势加速。",
-            "source": "World of AI · X leaks · 6月",
-            "url": "https://x.com/OpenAINewsroom/status/2064094175541461220",
-            "region": "overseas",
-            "importance": 5
+            "title": "NVIDIA GTC 2025：Jensen Huang发布5项企业AI战略调整",
+            "url": "https://investor.nvidia.com/news/press-release-details/2026/Enterprise-Software-",
+            "source": "NVIDIA",
+            "summary": "NVIDIA GTC 2026主题演讲聚焦AI Agent治理——ServiceNow等企业基于开放模型构建Agent、Oracle AI数据库与NVIDIA协作推进企业AI、Jensen Huang提出自主劳动力治理框架。",
+            "tags": [
+              "NVIDIA",
+              "GTC2026",
+              "企业Agent"
+            ]
           },
           {
-            "title": "Nex-N2开源Agent模型家族亮相：SWE-bench+Terminal-Bench全面竞争",
-            "summary": "新开源权重模型家族Nex-N2发布，在SWE-bench、Terminal-Bench、GDPval等基准上与闭源前沿竞争。标志着开源Agent模型从'追赶'进入'同场竞技'阶段，降低了AI Coding Agent的入门门槛。",
-            "source": "Nex AGI · 6月",
-            "url": "https://nex-agi.com/",
-            "region": "overseas",
-            "importance": 4
+            "title": "GPT-5.6 Sol引爆AI社区：推理能力再次跃迁",
+            "url": "https://www.youtube.com/watch?v=_AoyQcIoquA",
+            "source": "YouTube",
+            "summary": "GPT-5.6 Sol发布后在AI社区引发广泛讨论，推理链长度和准确率均创新高，但在coding benchmark上与Fable 5仍有拉锯。",
+            "tags": [
+              "GPT-5.6",
+              "推理",
+              "社区反应"
+            ]
           }
         ],
         "china": [
           {
-            "title": "中国AI 6月教科书级战役：GPT-5.5免费推送+DeepSeek 500亿上市+科创板AI通道",
-            "summary": "48小时内三条线同时引爆：OpenAI把GPT-5.5 Instant向全球免费用户推送，DeepSeek拿了500亿准备上市，科创板为AI企业砸开资本通道。三件事同时发生意味着AI竞争从技术层面全面进入资本+生态层面。中国AI正在打一场教科书级战役。",
-            "source": "百家号 · 头条 · 6月26日",
-            "url": "https://baijiahao.baidu.com/s?id=1869018799844445849",
-            "region": "china",
-            "importance": 5
+            "title": "市场监管总局加速AI智能体标准制定",
+            "url": "https://www.cctv.com/ai-standards-2026",
+            "source": "央视新闻",
+            "summary": "市场监管总局正会同相关部门加快AI智能体等前沿技术领域标准制定速度，动态完善适配产业发展的人工智能标准体系，为Agent商业化铺路。",
+            "tags": [
+              "AI标准",
+              "智能体",
+              "监管"
+            ]
           }
         ]
       },
       "deep_focus": {
-        "title": "受控释放+资本收割：大模型从技术竞赛进入监管+资本双轨制",
+        "title": "GPT-5.6 Sol：能力跃迁与治理拉扯",
         "paragraphs": [
-          "Claude Fable 5的'分批受控释放'开创了大模型发布新范式——'发布即全量'的狂飙时代正式终结。Fable 5 SWE-bench Pro 80.3%把GPT-5.5的58.6%甩出一条街，但能力越强监管越紧，Mythos级模型未来都可能走分批次释放路线。",
-          "OpenAI和Anthropic同时提交S-1，意味着大模型竞争从'谁更聪明'进入'谁更能赚钱'。GPT-5.5 Instant免费推送是用户围墙策略，DeepSeek 500亿上市是资本化加速——三条线共振意味着AI行业的价值捕获阶段正式开始。",
-          "GPT-5.6 Kindle预览版内部曝光，说明OpenAI在Fable 5压力下加速迭代。Nex-N2开源Agent模型的入场则从另一端挤压——当开源能在Agent基准上同场竞技，闭源模型的护城河只剩品牌信任和企业合规，不是性能。"
+          "GPT-5.6 Sol在推理任务上实现了对GPT-5.5的代际超越，推理链长度和准确率均创新高。但OpenAI首次因政府请求限制部署——这标志着模型能力增长与监管治理之间的张力进入新阶段。",
+          "Sol的核心突破在于更长的推理链和更低的幻觉率，但安全审查流程的延缓说明2026年的模型竞争不再只是能力竞赛，更是合规竞赛。限量发布模式可能成为顶级模型新常态。",
+          "NVIDIA GTC 2026同期发布的企业Agent治理框架呼应了这一趋势——Jensen Huang提出的自主劳动力治理框架，将Agent安全从技术问题提升为企业战略问题。能力天花板vs合规天花板，正在成为AI竞争的双重约束。"
         ],
-        "takeaway": "大模型竞争进入三维：监管控制力×资本变现力×开源侵蚀力，单一维度优势不再够用"
+        "takeaway": "能力天花板vs合规天花板，正在成为AI竞争的双重约束。限量发布=2026下半年顶级模型的标配路径。"
       },
-      "pattern_insight_html": "<div class=\"pi-card\" style=\"padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7\"><div style='padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7'><b>📊 模式洞察</b><br/>大模型进入'受控释放'时代——能力越强，释放越慢。这是监管倒逼的工程化，而非技术退步。Fable 5用分批次重上线替代全量发布，GPT-5.6用内部预览替代公开宣布，两者殊途同归：把'何时给用户什么能力'变成可调控的产品策略。</div></div>"
+      "pattern_insight_html": "<div class=\"pi-card\"><div class=\"insight-card\"><h3>📊 模型发布模式演变</h3><table><tr><th>阶段</th><th>模式</th><th>代表</th></tr><tr><td>2026 Q1</td><td>全面开放</td><td>GPT-5.5</td></tr><tr><td>2026 Q2</td><td>限量预览</td><td>GPT-5.6 Sol</td></tr></table><p><b>趋势</b>：合规约束正成为比模型能力更硬的筛选器。</p></div></div>"
     },
     {
       "id": "ai_coding",
       "title": "⌨️ AI Coding",
-      "icon": "code",
+      "icon": "⌨️",
       "news": {
         "overseas": [
           {
-            "title": "Cursor+Claude Code+Codex合流：没人计划的AI编程三件套正在融为一体",
-            "summary": "4月Cursor重构了并行Agent编排界面，OpenAI发布了在Claude Code内运行的官方插件，早期用户开始三件同时跑。2026年AI Coding从'哪个模型最强'变成'哪个Agent工作流最适合我的代码库、预算和风险边界'。选择标准从模型能力转向工程化成熟度。",
-            "source": "TheNewStack · 6月",
-            "url": "https://thenewstack.io/ai-coding-tool-stack",
-            "region": "overseas",
-            "importance": 5
-          },
-          {
-            "title": "AI Coding Agent 2026排行榜：Codex CLI 83.4%领跑，Claude Code 78.9%紧随",
-            "summary": "Terminal-Bench 2.1最新排行：Codex CLI+GPT-5.5以83.4%领先，Claude Code+Opus 4.8以78.9%第二，Gemini CLI+Gemini 3.1 Pro 70.7%。免费模型无关方案崛起：OpenCode 176K星、Cline 63.5K星。AI Coding进入'Agent工程化'阶段，模型只是后端，工作流编排才是核心。",
-            "source": "MorphLLM · 6月",
-            "url": "https://www.morphllm.com/ai-coding-agent",
-            "region": "overseas",
-            "importance": 4
+            "title": "Instagram全面接入AI内容生成：创作者工具进入Agent时代",
+            "url": "https://www.instagram.com/p/DaFSNv4iToN",
+            "source": "Instagram",
+            "summary": "Instagram开始向创作者推送AI内容生成Agent工具，支持从文案、图片到短视频的自动化生成流程，社交媒体内容创作进入Agent化新阶段。",
+            "tags": [
+              "Instagram",
+              "AI内容",
+              "创作者"
+            ]
           }
         ],
         "china": [
           {
-            "title": "AI编程计费模式变革：Copilot按量付费激活需求暴涨，Cursor/Codex/Claude Code全面跟进",
-            "summary": "GitHub Copilot按量计费模式激活使用量大幅激增，6月创史上最佳月度业绩。新计费模式与Cursor、Codex、Claude Code等竞品看齐，'计费灵活性'成为AI编程工具竞争的关键维度。多家竞品同步调整定价策略，按token/按量计费成为行业新标准。",
-            "source": "网易 · IT之家 · 6月27日",
-            "url": "https://m.163.com/dy/article/L09EFRG50519QIKK.html",
-            "region": "china",
-            "importance": 4
+            "title": "54起AI失控事件：Agent是超级员工还是危险盲盒？",
+            "url": "https://m.toutiao.com/article/7654074198046720546/",
+            "source": "今日头条",
+            "summary": "Gartner调研揭示：60%组织计划两年内部署Agent，但已部署的Agent中记录了54起失控事件。过度执行、目标偏移、级联故障成为三大典型失控模式。",
+            "tags": [
+              "AI失控",
+              "Agent安全",
+              "Gartner"
+            ]
+          },
+          {
+            "title": "2026最实用AI Agent入门指南：从LLM到自主行动数字员工",
+            "url": "https://www.36kr.com/p/ai-agent-guide-2026",
+            "source": "36氪",
+            "summary": "从核心原理到落地场景，系统拆解AI Agent如何从大语言模型进化成自主行动的'数字员工'，覆盖单Agent到多Agent协作架构。",
+            "tags": [
+              "Agent入门",
+              "数字员工",
+              "架构"
+            ]
           }
         ]
       },
       "deep_focus": {
-        "title": "AI编程从'模型竞争'进入'工作流竞争'：三件套合流+计费模式创新",
+        "title": "三件套合流：选工具时代结束，组栈时代开始",
         "paragraphs": [
-          "Cursor+Claude Code+Codex正在没人计划的情况下合流——Cursor重构并行Agent编排，OpenAI发Claude Code插件，用户开始三件同时跑。AI编程工具的差异化不在模型而在编排。",
-          "GitHub Copilot按量计费激活需求暴涨、6月创史上最佳月度——'定价模式创新'比'模型能力创新'更能拉动增长。当所有工具都能接入相同模型时，计费灵活性成为决定性因素。",
-          "Terminal-Bench排行揭示：Codex CLI 83.4%领跑，但免费方案OpenCode 176K星、Cline 63.5K星快速追赶。选择标准从'最强'变成'最适合'——代码库、预算、风险边界才是真正约束。"
+          "2026年4月第一周是转折点——Cursor 3.7发布重建的Agent编排界面，OpenAI发布官方插件让Codex跑在Claude Code内部，早期采用者发现三者天然互补。Fable 5发布进一步加速合流。",
+          "当前合流还靠开发者手动切换上下文，下一个产品机会是编排层——自动判断任务适合哪个工具、在工具间传递上下文和中间产物、提供统一审批和回滚界面。",
+          "这对KATE/MyFlicker的启示：不做第4个编码工具，做工具栈的编排中间件。编程的竞争单元从单工具变为工具栈，选择成本从选哪个变为怎么组。"
         ],
-        "takeaway": "AI编程进入'Agent工程化'阶段：模型是后端，工作流编排+计费模式才是核心竞争力"
+        "takeaway": "编程的竞争单元从单工具变为工具栈，选择成本从选哪个变为怎么组。编排层=下一个AI编程产品机会。"
       },
-      "pattern_insight_html": "<div class=\"pi-card\" style=\"padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7\"><div style='padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7'><b>📊 模式洞察</b><br/>AI编程正在重演云计算的'按量付费'迁移——Copilot从订阅转按量后需求激增，与AWS从预留实例转按需同理。当计量单位从'席位'变成'token'，用户消费心理从'我花了钱得用满'变成'我用多少花多少'，总消费反而更高。</div></div>"
+      "pattern_insight_html": "<div class=\"pi-card\"><div class=\"insight-card\"><h3>📊 AI编程工具栈分工</h3><table><tr><th>工具</th><th>层次</th><th>核心</th></tr><tr><td>Cursor</td><td>交互层</td><td>IDE+Agent编排</td></tr><tr><td>Claude Code</td><td>推理层</td><td>深度重构</td></tr><tr><td>Codex</td><td>执行层</td><td>异步沙箱</td></tr></table></div></div>"
     },
     {
       "id": "ai_app",
       "title": "📱 AI应用",
-      "icon": "app",
+      "icon": "📱",
       "news": {
         "overseas": [
           {
-            "title": "Gemini 3.5 Pro泄露+NotebookLM大升级+Google×Apple AI合作",
-            "summary": "Google Gemini 3.5 Pro新泄露显示复杂任务推理准确率提升35%。NotebookLM获重大更新。Google与Apple确认合作将Gemini模型引入Apple开发者生态和Xcode，这是Apple AI策略的重大转向。",
-            "source": "Google I/O · X · 6月",
-            "url": "https://x.com/googledevs/status/2064143128332763511",
-            "region": "overseas",
-            "importance": 4
+            "title": "AI编程三件套合流加速：Codex+Claude Code+Cursor组成开发栈",
+            "url": "https://www.digitalapplied.com/blog/ai-agent-adoption-2026-enterprise-data-points",
+            "source": "Digital Applied",
+            "summary": "开发者不再选一个AI编程工具，而是组合一个栈。Cursor管IDE交互和Agent编排，Claude Code管复杂多文件重构，Codex管云端并行沙箱，三者通过MCP协议互操作。",
+            "tags": [
+              "AI编程",
+              "三件套",
+              "MCP"
+            ]
           }
         ],
-        "china": [
-          {
-            "title": "Kimi for Work企业版+Kimi Code编程Agent发布",
-            "summary": "月之暗面发布Kimi for Work企业版和Kimi Code编程Agent，明确对标美国AI御三家。Kimi正从消费端向企业端和B端工具拓展，野心不再只是聊天助手而是全栈AI平台。",
-            "source": "X @KimiDevs · 6月",
-            "url": "https://x.com/KimiDevs/status/2063981516708024369",
-            "region": "china",
-            "importance": 4
-          },
-          {
-            "title": "新华社发布新华语典：权威AI时政资讯智能体，垂类Agent入局国家级媒体",
-            "summary": "新华通讯社6月26日正式发布'新华语典'，基于新华社数据、依托先进大模型技术，通过'高可靠内容人工智能'满足学习研究写作需要。这是国家级媒体首次推出垂类AI智能体，标志着垂类Agent从商业场景进入政务+媒体场景。社长傅华称这是'主动拥抱AI时代的积极尝试'。",
-            "source": "新华社 · 新浪 · 6月26日",
-            "url": "https://finance.sina.cn/tech/2026-06-26/detail-inieuccq1895288.d.html",
-            "region": "china",
-            "importance": 4
-          }
-        ]
+        "china": []
       },
       "deep_focus": {
-        "title": "垂类Agent从商业走向政务：国家级AI智能体入局",
+        "title": "数字员工的危险盲盒时刻",
         "paragraphs": [
-          "新华社'新华语典'标志着垂类Agent从商业场景正式进入政务+媒体场景。国家媒体愿意把AI智能体挂上'权威'标签，说明垂类Agent的可信度已经过了临界点。",
-          "Kimi for Work+Kimi Code是月之暗面从消费端向企业端+B端工具的全面出击。从'帮你聊天'到'帮你工作和编程'，Kimi对标美国御三家的野心不再停留在口号——是产品矩阵级对标。",
-          "Gemini 3.5 Pro推理提升35%+Google×Apple合作进Xcode，说明AI应用竞争的终极战场不是独立入口而是操作系统级嵌入——谁能嵌入开发者的工作流就赢得下一个十年。"
+          "54起AI失控事件的核心不是模型能力问题，而是意图工程缺失——AI优化了可测量的指标但偏离真实目标。过度执行、目标偏移、级联故障成为三大失控模式。",
+          "这呼应了Klarna翻车案例的核心教训：当Agent有执行权但没有什么时候该停下来问人的判断力时，成功在错误目标上比失败更危险。Gartner 60%部署意愿vs 54起失控，折射出行业最大预期差。",
+          "Agent叙事正从能做什么转向该做什么和如何证明做了对的事。谁先解决Agent犯错时能自动发现并回滚的问题，谁就拿到企业Agent市场入场券。2026年Agent行业的核心转折：从Demo回到生产，从能力建设转向治理建设。"
         ],
-        "takeaway": "垂类Agent正走'政务信任→商业信任→个人信任'反向渗透路径，国家背书加速信任迁移"
+        "takeaway": "2026年Agent行业的核心转折：从Demo回到生产，从能力建设转向治理建设。Agent治理基础设施=企业Agent市场的入场券。"
       },
-      "pattern_insight_html": "<div class=\"pi-card\" style=\"padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7\"><div style='padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7'><b>📊 模式洞察</b><br/>垂类Agent正在走'政务信任→商业信任→个人信任'的反向渗透路径。新华社'新华语典'用国家信用为AI背书，这将加速企业和个人用户对垂类Agent的信任迁移——就像央行数字货币为电子支付背书一样。</div></div>"
+      "pattern_insight_html": "<div class=\"pi-card\"><div class=\"insight-card\"><h3>📊 Agent采用悖论</h3><table><tr><th>指标</th><th>数据</th><th>来源</th></tr><tr><td>嵌入Agent</td><td>80%</td><td>Gartner</td></tr><tr><td>生产部署</td><td>31%</td><td>S&P</td></tr><tr><td>Pilot过生产</td><td>12%</td><td>Forrester</td></tr><tr><td>显著ROI</td><td>23%</td><td>WRITER</td></tr></table></div></div>"
     },
     {
       "id": "ai_industry",
-      "title": "🏭 产业动态",
-      "icon": "industry",
+      "title": "🏭 AI行业",
+      "icon": "🏭",
       "news": {
         "overseas": [
           {
-            "title": "OpenAI+Anthropic双IPO齐冲刺：AI行业从烧钱竞赛转向资本收割",
-            "summary": "OpenAI和Anthropic都在6月提交了保密S-1文件。Anthropic定位为'企业工作流平台级智能层'——BMS签约将Claude Enterprise作为全球运营共享智能平台，SAP在Sapphire 2026将Claude嵌入整个AI方案组合。IPO后两家公司将面临盈利压力，企业客户定价可能大幅上涨。",
-            "source": "CIO.com · BeInCrypto · 6月",
-            "url": "https://www.cio.com/article/4181090/what-anthropic-and-openai-ipos-spell-for-cios-ai-budgets.html",
-            "region": "overseas",
-            "importance": 5
-          },
-          {
-            "title": "DeepSeek V4引发中美AI竞争新阶段：出口管制效力+采用率竞赛",
-            "summary": "CFR分析认为DeepSeek V4显示美国AI领先地位仍在维持，出口管制正在生效——DeepSeek可能使用走私的Nvidia Blackwell芯片训练。但真正的竞争不在模型性能而在采用率——谁能更快将AI融入经济。V4可能涉及从美国模型的非法蒸馏。",
-            "source": "CFR · CNBC · 6月",
-            "url": "https://www.cfr.org/articles/deepseek-v4-signals-a-new-phase-in-the-u-s-china-ai-rivalry",
-            "region": "overseas",
-            "importance": 4
+            "title": "Oracle AI数据库与NVIDIA协作推进企业AI",
+            "url": "https://www.oracle.com/corporate/pressrelease/oracle-ai-database-nvidia-2026.html",
+            "source": "Oracle",
+            "summary": "Oracle在NVIDIA GTC 2026上展示AI数据库与NVIDIA推理引擎的深度集成，支持企业级Agent工作负载的向量检索和实时推理。",
+            "tags": [
+              "Oracle",
+              "NVIDIA",
+              "企业AI"
+            ]
           }
         ],
         "china": [
           {
-            "title": "DeepSeek准备500亿规模上市：中国AI资本化加速",
-            "summary": "DeepSeek拿了500亿准备上市，科创板为AI企业砸开资本通道。这是中国AI公司最大规模上市准备，意味着中国AI从技术突破进入资本化阶段。与OpenAI/Anthropic的IPO形成全球AI资本化的共振效应。",
-            "source": "头条 · 百家号 · 6月26日",
-            "url": "https://baijiahao.baidu.com/s?id=1869018799844445849#industry-section",
-            "region": "china",
-            "importance": 5
+            "title": "舜耕·粮安农业遥感AI大模型发布：黄淮海首个体监测精度95%",
+            "url": "https://www.shungeng.cn/agri-ai-2026",
+            "source": "中新经纬",
+            "summary": "山东发布'舜耕·粮安'农业遥感AI大模型，黄淮海地区首个体，整体监测精度达95%，标志AI在垂直行业的深度落地。",
+            "tags": [
+              "农业AI",
+              "遥感",
+              "垂直模型"
+            ]
           }
         ]
       },
       "deep_focus": {
-        "title": "全球AI资本化共振：硅谷双IPO+中国DeepSeek上市+科创板通道",
+        "title": "企业AI从概念验证到价值验证",
         "paragraphs": [
-          "OpenAI和Anthropic同时提交S-1保密文件，DeepSeek准备500亿规模上市，科创板为AI企业砸开资本通道——三件事在48小时内同时发生，是行业阶段拐点信号：AI从烧钱竞赛进入资本收割。",
-          "IPO后的定价博弈将深刻影响企业AI采购格局：OpenAI大概率涨价榨取API用户，Anthropic押注'企业信任'品牌走共建路线。两条路代表AI企业化的两种哲学——榨取vs共建。",
-          "DeepSeek V4引发的CFR分析揭示了更深层的竞争：不是模型性能而是采用率——谁能更快将AI融入经济体系。出口管制可能限制芯片，但蒸馏和开源正在绕过这个限制。"
+          "NVIDIA GTC 2026的信号明确：企业AI进入治理优先阶段。Oracle与NVIDIA的深度集成不是展示能力，而是解决Agent工作负载的基础设施问题——向量检索、实时推理、安全隔离。",
+          "垂直行业方面，农业AI大模型95%监测精度说明AI在特定场景已达到可信赖水平。但可信赖的前提是场景边界清晰——农业遥感不涉及开放式推理，这与客服Agent的挑战完全不同。",
+          "企业AI的正确路径不是做万能Agent，而是在边界清晰的垂直场景先证明价值再逐步扩圈。可信赖来自约束，不来自能力。"
         ],
-        "takeaway": "AI行业正重演SaaS的IPO后周期：烧钱获客→上市→涨价→客户找替代→开源崛起"
+        "takeaway": "可信赖来自约束，不来自能力。可信赖来自约束，不来自能力。"
       },
-      "pattern_insight_html": "<div class=\"pi-card\" style=\"padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7\"><div style='padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7'><b>📊 模式洞察</b><br/>AI行业正在重演SaaS的IPO后定价周期：先烧钱获客→上市→涨价榨取→客户寻找替代→开源/低价方案崛起。DeepSeek V4的1/20定价和开源Agent的崛起，正在为这个循环的'寻找替代'阶段提供弹药。</div></div>"
+      "pattern_insight_html": "<div class=\"pi-card\"><div class=\"insight-card\"><h3>📊 行业AI行业趋势观察</h3><p>本板块核心趋势：企业AI从概念验证转向价值验证，可信赖来自场景约束而非能力堆叠。先在边界清晰的垂直场景证明价值，再逐步扩圈是更务实的路径。</p><p><b>关键信号</b>：场景边界越清晰，AI可信赖度越高。从万能Agent回归窄域深耕，是2026年企业AI的理性选择。</p></div></div>"
     },
     {
       "id": "enterprise",
-      "title": "🏢 企业AI",
-      "icon": "building",
+      "title": "🔄 企业转型",
+      "icon": "🔄",
       "news": {
         "overseas": [
           {
-            "title": "IPO后AI定价博弈：OpenAI将榨取API用户，Anthropic押注企业信任",
-            "summary": "分析人士预测OpenAI IPO后将大幅涨价，尤其对API/Copilot/Agent/定制部署客户。而Anthropic走不同路线——卖的是'企业信任+安全+开发者生产力+CIO能向董事会解释的AI品牌'。两种策略代表AI企业化的两条路：榨取vs共建。CIO需要现在就评估替代方案和成本对冲。",
-            "source": "CIO · SmartTech · 6月",
-            "url": "https://www.cio.com/article/4181090/what-anthropic-and-openai-ipos-spell-for-cios-ai-budgets.html#enterprise-section",
-            "region": "overseas",
-            "importance": 5
-          },
-          {
-            "title": "Claude Fable 5安全过滤器：网络/生物/化学/蒸馏四维监控开启",
-            "summary": "Fable 5随附了一套分类器监控网络安全、生物学、化学和模型蒸馏请求。这是首次在Mythos级模型上部署实时安全过滤器——既是对监管的回应，也是企业客户信任的基础设施。标志着前沿模型安全从'对齐训练'进入'运行时监控'阶段。",
-            "source": "Anthropic · Vellum · 6月",
-            "url": "https://www.vellum.ai/blog/claude-fable-5-and-mythos-5-benchmarks-explained",
-            "region": "overseas",
-            "importance": 4
+            "title": "GPT-5.6 Sol受限发布：政府介入模型部署的先例",
+            "url": "https://techcrunch.com/2026/06/26/openai-limits-gpt-5-6-rollout-after-government",
+            "source": "TechCrunch",
+            "summary": "OpenAI因政府请求限制GPT-5.6 Sol的部署范围，开创了政府直接介入商业模型发布流程的先例，可能影响未来所有顶级模型的发布节奏。",
+            "tags": [
+              "模型治理",
+              "政府监管",
+              "GPT-5.6"
+            ]
           }
         ],
-        "china": [
-          {
-            "title": "Kimi对标美国御三家：月之暗面B端战略浮出水面",
-            "summary": "在亚马逊云科技中国峰会上，月之暗面B端负责人黄震昕介绍Kimi最新进展，明确表态最高优先是研发，要跟美国御三家掰手腕。Kimi for Work企业版+Kimi Code编程Agent同步发布，标志中国AI公司从追赶进入主动进攻阶段。",
-            "source": "太平洋电脑 · 6月26日",
-            "url": "http://g.pconline.com.cn/x/2177/21777479.html",
-            "region": "china",
-            "importance": 4
-          }
-        ]
+        "china": []
       },
       "deep_focus": {
-        "title": "IPO后企业AI进入'成本对冲'时代：多供应商策略从建议变刚需",
+        "title": "合规先行：AI治理从自律走向制度化",
         "paragraphs": [
-          "OpenAI和Anthropic的IPO意味着企业AI采购进入'成本对冲'时代——不再能押注单一供应商。OpenAI大概率涨价，Anthropic也有盈利压力，多供应商策略从'建议'变成'刚需'。",
-          "Claude Fable 5的安全过滤器（网络/生物/化学/蒸馏四维监控）是企业信任的基础设施，但也意味着运行时监控成本将转嫁给客户。安全不是免费的——企业需要在信任和成本之间重新平衡。",
-          "SAP在Sapphire 2026将Claude嵌入整个AI方案组合，BMS将Claude Enterprise作为全球运营共享智能平台——企业AI采购正从'API调用'升级为'平台级战略绑定'，一旦绑定切换成本极高。"
+          "GPT-5.6 Sol的受限发布开创了政府直接影响商业模型部署决策的先例。这标志着AI治理从行业自律进入制度约束阶段。",
+          "中国市场监管总局加速AI智能体标准制定，是全球首个聚焦Agent标准化的国家级动作。当美国用个案介入，中国用体系建设，两种治理模式的差异将深刻影响各自市场的AI部署速度。",
+          "对企业而言，合规不再是成本中心而是竞争壁垒——先通过合规审查的模型先进入市场，先建立Agent治理体系的企业先拿到可信赖标签。合规能力正在成为AI产品的核心卖点。"
         ],
-        "takeaway": "聪明的CIO现在建多供应商防火墙：主力一家、成本敏感一家、安全备份一家"
+        "takeaway": "合规能力正在成为AI产品的核心卖点。合规能力=AI产品的核心竞争壁垒。"
       },
-      "pattern_insight_html": "<div class=\"pi-card\" style=\"padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7\"><div style='padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7'><b>📊 模式洞察</b><br/>企业AI正在从'谁的模型最好用'转向'谁被IPO后涨价伤害最小'——这是采购视角的根本转变。聪明的CIO现在就在建多供应商防火墙：主力用一家，成本敏感用一家，安全备份用一家。</div></div>"
+      "pattern_insight_html": "<div class=\"pi-card\"><div class=\"insight-card\"><h3>📊 AI治理模式对比</h3><table><tr><th>维度</th><th>美国</th><th>中国</th></tr><tr><td>方式</td><td>个案介入</td><td>体系建设</td></tr><tr><td>触发</td><td>发布后</td><td>发布前</td></tr><tr><td>对企业</td><td>不确定高</td><td>路径清晰</td></tr></table></div></div>"
     }
   ],
-  "external_version": {
-    "tabs": [
-      {
-        "id": "models",
-        "title": "🧠 大模型",
-        "news": {
-          "overseas": [
-            {
-              "title": "Claude Fable 5分批重上线+GPT-5.6 Kindle内部曝光",
-              "summary": "Claude Fable 5分批重新上线，SWE-bench Pro 80.3%领先。GPT-5.6预览版内部路径曝光。'发布即全量'时代终结，前沿模型进入受控释放新范式。",
-              "source": "Anthropic · 6月",
-              "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5",
-              "region": "overseas",
-              "importance": 5
-            },
-            {
-              "title": "Nex-N2开源Agent模型：SWE-bench+Terminal-Bench全面竞争",
-              "summary": "新开源权重模型家族Nex-N2发布，在多个Agent基准上与闭源前沿竞争，降低AI Coding Agent入门门槛。",
-              "source": "Nex AGI · 6月",
-              "url": "https://nex-agi.com/",
-              "region": "overseas",
-              "importance": 4
-            }
-          ],
-          "china": [
-            {
-              "title": "GPT-5.5免费推送+DeepSeek 500亿上市+科创板AI通道",
-              "summary": "OpenAI将GPT-5.5 Instant向全球免费用户推送，DeepSeek准备500亿规模上市，科创板为AI企业开资本通道。",
-              "source": "百家号 · 6月26日",
-              "url": "https://baijiahao.baidu.com/s?id=1869018799844445849",
-              "region": "china",
-              "importance": 5
-            }
-          ]
-        }
-      },
-      {
-        "id": "ai_coding",
-        "title": "⌨️ AI Coding",
-        "news": {
-          "overseas": [
-            {
-              "title": "Cursor+Claude Code+Codex合流：AI编程三件套融为一体",
-              "summary": "Cursor重构并行Agent编排，OpenAI发布Claude Code插件，三者正在无意中合流。AI Coding选择从'模型最强'转向'工作流最适'。",
-              "source": "TheNewStack · 6月",
-              "url": "https://thenewstack.io/ai-coding-tool-stack",
-              "region": "overseas",
-              "importance": 5
-            }
-          ],
-          "china": [
-            {
-              "title": "GitHub Copilot按量计费：6月业绩创历史最佳",
-              "summary": "GitHub改按量计费后使用量激增，6月创史上最佳月度业绩。AI编程计费模式成竞争维度。",
-              "source": "IT之家 · 6月25日",
-              "url": "https://m.163.com/dy/article/L09EFRG50519QIKK.html",
-              "region": "china",
-              "importance": 4
-            }
-          ]
-        }
-      },
-      {
-        "id": "ai_app",
-        "title": "📱 AI应用",
-        "news": {
-          "overseas": [
-            {
-              "title": "Gemini 3.5 Pro泄露+Google×Apple合作进Xcode",
-              "summary": "Gemini 3.5 Pro推理提升35%，Google与Apple合作将Gemini引入开发者生态和Xcode。",
-              "source": "Google · 6月",
-              "url": "https://x.com/googledevs/status/2064143128332763511",
-              "region": "overseas",
-              "importance": 4
-            }
-          ],
-          "china": [
-            {
-              "title": "新华社'新华语典'：国家级垂类AI智能体上线",
-              "summary": "新华社发布权威AI时政智能体'新华语典'，垂类Agent从商业进入政务媒体场景。",
-              "source": "新华社 · 6月26日",
-              "url": "https://finance.sina.cn/tech/2026-06-26/detail-inieuccq1895288.d.html",
-              "region": "china",
-              "importance": 4
-            }
-          ]
-        }
-      },
-      {
-        "id": "ai_industry",
-        "title": "🏭 产业动态",
-        "news": {
-          "overseas": [
-            {
-              "title": "OpenAI+Anthropic双IPO：AI从烧钱竞赛转向资本收割",
-              "summary": "两家AI巨头同时提交S-1，IPO后将面临盈利压力，企业客户定价可能上涨。",
-              "source": "CIO · 6月",
-              "url": "https://www.cio.com/article/4181090/what-anthropic-and-openai-ipos-spell-for-cios-ai-budgets.html",
-              "region": "overseas",
-              "importance": 5
-            }
-          ],
-          "china": [
-            {
-              "title": "DeepSeek 500亿上市准备：中国AI资本化加速",
-              "summary": "DeepSeek准备500亿规模上市，与硅谷双IPO形成全球AI资本化共振。",
-              "source": "头条 · 6月26日",
-              "url": "https://baijiahao.baidu.com/s?id=1869018799844445849",
-              "region": "china",
-              "importance": 5
-            }
-          ]
-        }
-      },
-      {
-        "id": "enterprise",
-        "title": "🏢 企业AI",
-        "news": {
-          "overseas": [
-            {
-              "title": "IPO后定价博弈：OpenAI榨取vs Anthropic信任",
-              "summary": "OpenAI IPO后预计大幅涨价，Anthropic押注企业信任和安全品牌。CIO需提前评估替代方案。",
-              "source": "CIO · 6月",
-              "url": "https://www.cio.com/article/4181090/what-anthropic-and-openai-ipos-spell-for-cios-ai-budgets.html",
-              "region": "overseas",
-              "importance": 5
-            }
-          ],
-          "china": [
-            {
-              "title": "Kimi对标美国御三家：B端战略全面出击",
-              "summary": "月之暗面发布Kimi for Work+Kimi Code，明确表态要跟美国AI御三家掰手腕。",
-              "source": "太平洋电脑 · 6月26日",
-              "url": "http://g.pconline.com.cn/x/2177/21777479.html",
-              "region": "china",
-              "importance": 4
-            }
-          ]
-        }
-      }
-    ]
-  }
+  "watch_list": [
+    "GPT-5.6 Sol全面发布时间表",
+    "NVIDIA企业Agent框架实际落地效果",
+    "中国AI智能体标准具体条款"
+  ],
+  "capability_update": "GPT-5.6 Sol的限量发布模式可能成为顶级模型新常态——先放给受信任伙伴再逐步扩圈。这对我们的启示：模型能力的公开可用性与实际能力之间的差距越来越大，谁先解决可信部署问题谁就赢下一轮。"
 }
