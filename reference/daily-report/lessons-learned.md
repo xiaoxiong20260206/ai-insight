@@ -110,4 +110,89 @@ which uv || (curl -LsSf https://astral.sh/uv/install.sh | sh && export PATH="$HO
 
 ---
 
-_更新于 2026-05-26 | v1.1 | 7条经验_
+## 2026-06-29: 非f-string模板变量未替换导致页面乱码（P0）
+
+**问题**: 外部版日报页面出现 `{SVG_ICONS["globe"]} 海外` 等原始模板文本，用户看到的是乱码。
+
+**根因**: `gen_daily_html.py` 中 `parts.append('...{SVG_ICONS["globe"]}...')` 用的是**单引号普通字符串**，不是 f-string，大括号变量不会被 Python 替换。而三引号 f-string 中的同名变量能正确替换，导致某些位置正常、某些位置乱码，自动化检测容易漏判。
+
+**修复**: 所有包含 `{变量}` 的 `parts.append` 必须用 `f'...'` 前缀。
+
+**举一反三**: **gen_daily_html.py 中任何包含 Python 变量的字符串拼接必须用 f-string**。新增字符串时必须检查引号类型。质量门应增加"HTML输出中无 `{[A-Z_]` 模式"的硬性检查。
+
+## 2026-06-29: JSON数据字段名与脚本读取不一致导致空模块（P0）
+
+**问题**: 热度趋势(heat-table)和数据速览(data-table)在页面上渲染为空表格（只有表头无数据行）。
+
+**根因**: 
+1. `render_data_table()` 读取 `data.get("data_snapshot", [])`，但 JSON 里实际字段是 `data_table`。cron agent 生成的 JSON 字段名和脚本读取的字段名不一致。
+2. `heat_trend` 缺少 `topics` 数组，只有 `icon/label/text/title`，导致 `render_heat_trend()` 输出空 tbody。
+
+**修复**: 
+1. 脚本字段读取增加优先级链：`data_table → data_snapshot`，`heat_trend.topics → heat_trend.rising/stable/cooling`
+2. 空数据时整个模块不渲染（`render_data_table` 返回空字符串），避免空表头
+3. JSON 生成环节（cron payload）必须确保 `heat_trend.topics` 和 `data_table` 非空
+
+**举一反三**: **脚本读取的 JSON 字段名必须与数据生产方的字段名对齐**。当新增字段时，同步更新 gen_daily_html.py 的读取逻辑和 quality-rules.md 的数据契约。空模块不应该渲染空表头——要么有数据，要么整块隐藏。
+
+## 2026-06-29: overview/heat 兜底逻辑缺失（P0）
+
+**问题**: overview 卡片的 `text` 字段为空，`heat-header-title` 为空。
+
+**根因**: JSON 里 overview 用 `headline` 字段存摘要，`text` 为空字符串。脚本只读 `text → summary`，没读 `headline`。heat_trend 没有 `title` 字段。
+
+**修复**: 
+1. `gen_daily_html.py` overview 取值链：`text → summary → headline`
+2. `heat-header-title` 兜底：`title → text → 'AI行业热度趋势'`
+
+**举一反三**: **所有模板变量渲染必须有非空兜底**。当 JSON 字段可能为空时，必须提供合理的默认值或从替代字段读取，不能输出空 div。
+
+## 2026-06-29: footer 脱敏后不通顺（P0）
+
+**问题**: 外部版 footer 显示"我是 AI洞察，的AI洞察。"——完全不通顺。
+
+**根因**: 内部版 footer 是"我是**林克**，沈浪的AI分身"。脱敏脚本把"林克"→"AI洞察"，"沈浪的AI分身"→"的AI洞察"，拼出不通顺的句子。
+
+**修复**: footer 改为不含身份信息的通用文案：
+```
+AI洞察 · 系统化追踪AI行业动态 · 五大板块每日更新
+访问AI洞察首页，获取更多深度分析
+```
+
+**举一反三**: **内外部版共享的文案不应包含需要脱敏替换的身份信息**。脱敏替换是机械的字符串替换，无法保证语义通顺。直接写通用的、无需脱敏的文案才是正确做法。
+
+## 2026-06-29: frontend-cloud 部署缓存问题（P1）
+
+**问题**: 本地 `public/` 文件已更新，但 frontend-cloud 线上仍返回旧版（108KB vs 139KB）。
+
+**根因**: frontend-cloud 有 CDN 缓存。部署成功（CLI 返回 ✅）不代表 CDN 立即生效。
+
+**修复**: 多次部署后 CDN 最终刷新。pinned URL（带 hash）可作为验证新版本是否上线的手段。
+
+**举一反三**: **frontend-cloud 部署后需要等 CDN 缓存刷新（约5-10分钟）**。如需立即验证，使用 pinned URL。部署脚本应在 deploy 后 sleep 并验证。
+
+## 2026-06-29: 表格样式过于紧凑（P1）
+
+**问题**: heat-table、data-table、pi-card 内嵌 table 的 padding 和字号过小，视觉效果差。
+
+**根因**: 原始 CSS padding 只有 8-10px，字号 13px。移动端更被压缩到 6px 4px。
+
+**修复**: 
+1. heat-table: padding 12px 16px, 字号 14px
+2. data-table: padding 12px 18px, line-height 1.5
+3. pi-card table: 新增完整样式规则（Violet色调表头、14px字号、合理间距）
+4. 移动端: padding 从 6px→8px，字号 13px
+
+**举一反三**: **表格样式应与清爽调研报告风格统一**。新增表格组件时必须同时定义桌面端和移动端样式，且与 `qingshuang-research-style` 的 spacing/font 体系对齐。
+
+## 2026-06-29: 移动端 sidebar 与 Tab 导航重复（P1）
+
+**问题**: 移动端（≤768px）sidebar 变成水平滚动导航条，和 Tab 导航功能重复，占屏幕空间。
+
+**修复**: 移动端 sidebar 完全 `display:none`，只保留 Tab 导航。Tab 按钮加大触控区域（44×44px）。
+
+**举一反三**: **移动端布局应做减法**。两个功能相同的导航组件不应同时出现，隐藏更重的那个。
+
+---
+
+_更新于 2026-06-30 | v1.2 | 14条经验（新增7条6/29修复）_
