@@ -630,3 +630,52 @@ uv run scripts/daily_quality_gate.py YYYY-MM-DD --fix
 # 16. 6处联动更新 (error, 可修复)
 # 17. 外部版同步 (error, 可修复)
 ```
+
+---
+
+## gen_daily_html.py 脚本硬性约束（v14.0 — 2026-06-29 修复沉淀）
+
+> 以下规则是 6/29 日报页面修复的经验固化，确保后续每次生成 HTML 都符合标准。
+
+### P0: f-string 规范
+
+1. **所有包含 Python 变量的 `parts.append` 必须用 `f'...'` 前缀**。单引号普通字符串里的 `{变量}` 不会被替换，直接输出为乱码。
+2. **HTML 输出中禁止出现 `{[A-Z_][A-Z_0-9]*` 模式**——这是未替换模板变量的特征。质量门应硬性阻断。
+
+### P0: JSON 字段对齐
+
+3. **脚本读取的字段名必须与 cron agent 生成的 JSON 字段名一致**。当前对照表：
+
+| 脚本读取 | JSON 实际字段 | 优先级链 |
+|---------|-------------|---------|
+| `data_table` | `data_table` | `data_table → data_snapshot` |
+| `heat_trend.topics` | `heat_trend.topics` | `topics → rising/stable/cooling` |
+| `overview.text` | `overview.text` | `text → summary → headline` |
+| `heat_trend.title` | `heat_trend.title` | `title → text → 'AI行业热度趋势'` |
+
+4. **空数据模块不渲染**：`render_data_table(data=[])` 返回空字符串，不输出空表头。
+
+### P0: Footer 文案
+
+5. **footer 不得包含需要脱敏替换的身份信息**。当前标准文案：
+   - 一行：`AI洞察 · 系统化追踪AI行业动态 · 五大板块每日更新`
+   - 二行：`访问AI洞察首页，获取更多深度分析`（含首页链接）
+   - 内外部版使用同一文案，无需脱敏
+
+### P1: 表格样式
+
+6. **heat-table**: padding `12px 16px`，字号 `14px`，移动端 `8px 10px`
+7. **data-table**: padding `12px 18px`，字号 `14px`，line-height `1.5`
+8. **pi-card table**: 必须有定制样式（Violet色调表头、14px字号、合理间距），不能用原生 table 样式
+
+### P1: 移动端
+
+9. **sidebar 在 ≤768px 完全隐藏**（`display:none`），只保留 Tab 导航
+10. **Tab 按钮**：移动端图标模式，触控区域 ≥44×44px
+11. **tab-panel CSS fallback**：`.tab-panel:first-of-type { display: block }` 确保 JS 未加载时首屏不空白
+
+### P1: Tab 面板初始状态
+
+12. **CSS 默认隐藏所有 panel，`.active` 显示**。必须加 `:first-of-type` fallback 防止 JS 未执行时全空白。
+13. **JS 在 DOMContentLoaded 时给第一个 panel 加 `.active`**。
+

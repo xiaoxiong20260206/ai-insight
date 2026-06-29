@@ -1724,6 +1724,33 @@ def check_xhs_note_validity(date_str: str) -> CheckResult:
         return CheckResult("小红书noteId", False, f"检查失败: {e}")
 
 
+def check_html_template_leaks(date_str: str) -> CheckResult:
+    """检查20: [v14.0新增] HTML中无未替换的Python模板变量
+    
+    2026-06-29教训: gen_daily_html.py中parts.append('...{SVG_ICONS["globe"]}...')
+    用了单引号普通字符串而非f-string，导致变量不被替换，页面出现乱码。
+    
+    检查逻辑: 扫描生成的HTML文件，搜索 {[A-Z_][A-Z_0-9]* 模式（Python变量特征）
+    """
+    html_path = DAILY_REPORTS_PATH / date_str[:7] / f"{date_str}-v3.html"
+    if not html_path.exists():
+        return CheckResult("HTML模板变量", True, "HTML文件不存在，跳过")
+    
+    try:
+        html = html_path.read_text(encoding="utf-8")
+        # 搜索未替换的模板变量: {VAR_NAME} 或 {VAR_NAME["key"]}
+        leaks = re.findall(r'\{[A-Z_][A-Z_0-9]*(?:\[.*?\])?\}', html)
+        
+        if leaks:
+            unique = sorted(set(leaks))
+            detail = ", ".join(unique[:5])
+            return CheckResult("HTML模板变量", False, 
+                f"❌ 发现{len(leaks)}处未替换模板变量: {detail}", 
+                severity="error")
+        return CheckResult("HTML模板变量", True, "✅ 无未替换模板变量")
+    except Exception as e:
+        return CheckResult("HTML模板变量", True, f"检查异常: {e}")
+
 def run_all_checks(date_str: str) -> Tuple[List[CheckResult], int, int, int]:
     """运行所有检查 — v9.8: 预加载JSON，所有检查函数通过_SHARED_DATA复用，避免14次重复解析"""
     global _SHARED_DATA
@@ -1760,6 +1787,7 @@ def run_all_checks(date_str: str) -> Tuple[List[CheckResult], int, int, int]:
         check_md_html_exists,
         check_six_locations,
         check_external_sync,
+        check_html_template_leaks,    # v14.0新增 - HTML模板变量残留硬性阻断
     ]
     
     results = []
@@ -1953,3 +1981,6 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main())
+
+
+
