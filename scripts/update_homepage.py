@@ -195,9 +195,29 @@ def update_weekly_pill(index_path: Path, week_id: str, month: str, date_range: s
 
 
 def update_calendar_weekly(index_path: Path, month: str, day: int, week_id: str) -> bool:
-    """更新日历JS周报数据"""
+    """更新日历JS周报数据
+    
+    day = 本周周一的日期（周报所在周的起始日）
+    同时自动将下周周一（day+7）也关联到本周周报，
+    确保下周一在周报未出前能看到最新周报。
+    如果 day+7 超出本月，则跨月写入（由脚本自动处理）。
+    """
     content = index_path.read_text(encoding="utf-8")
     day_str = f"{day}: 'weekly-{week_id}'"
+    
+    # 计算下周周一：如果同月则追加，如果跨月则独立写入下月
+    from calendar import monthrange
+    import datetime as _dt
+    year_int = int(month.split('-')[0])
+    month_int = int(month.split('-')[1])
+    next_monday_day = day + 7
+    next_monday_month = month
+    if next_monday_day > monthrange(year_int, month_int)[1]:
+        next_monday_day -= monthrange(year_int, month_int)[1]
+        next_month = month_int + 1 if month_int < 12 else 1
+        next_year = year_int if month_int < 12 else year_int + 1
+        next_monday_month = f"{next_year}-{next_month:02d}"
+    next_monday_str = f"{next_monday_day}: 'weekly-{week_id}'"
 
     # 快速检查：如果日历区域已包含该条目，直接返回成功
     # 只在 weeklyReportsData 变量块内搜索，避免误匹配卡片链接等区域
@@ -227,6 +247,7 @@ def update_calendar_weekly(index_path: Path, month: str, day: int, week_id: str)
             new_content = content.replace(existing, existing.replace(old, new))
             index_path.write_text(new_content, encoding="utf-8")
             print(f"  ✅ 周报日历已更新: {month}/{day}")
+            _write_next_monday_to_calendar(index_path, next_monday_month, next_monday_day, week_id)
             return True
         else:
             # 月份不存在，追加新月份行
@@ -240,6 +261,7 @@ def update_calendar_weekly(index_path: Path, month: str, day: int, week_id: str)
                 new_content = content.replace(existing, new_existing)
                 index_path.write_text(new_content, encoding="utf-8")
                 print(f"  ✅ 周报日历追加新月: {month}/{day}")
+                _write_next_monday_to_calendar(index_path, next_monday_month, next_monday_day, week_id)
                 return True
 
     # Strategy 2: 直接搜索月份行模式（无 weeklyReportsData 变量名）
@@ -251,11 +273,48 @@ def update_calendar_weekly(index_path: Path, month: str, day: int, week_id: str)
         new_content = content[:m2.start()] + new_line + content[m2.end():]
         index_path.write_text(new_content, encoding="utf-8")
         print(f"  ✅ 周报日历已更新(直接匹配): {month}/{day}")
+        _write_next_monday_to_calendar(index_path, next_monday_month, next_monday_day, week_id)
         return True
 
     # 最终 fallback: 没找到任何周报日历数据 — hard fail
     print(f"  ❌ 未找到周报日历数据，无法更新日历（期望包含 weeklyReportsData 或月份行）")
     return False
+
+
+def _write_next_monday_to_calendar(index_path: Path, next_monday_month: str, next_monday_day: int, week_id: str) -> None:
+    """将下周周一也关联到本周周报（供update_calendar_weekly调用）"""
+    content = index_path.read_text(encoding="utf-8")
+    next_day_str = f"{next_monday_day}: 'weekly-{week_id}'"
+    
+    # 如果已存在，跳过
+    if next_day_str in content:
+        print(f"  ⏭️ 下周周一 {next_monday_month}/{next_monday_day} 已关联 {week_id}")
+        return
+    
+    month_line_pattern = rf"'{next_monday_month}':\s*\{{([^}}]*)\}}"
+    m = re.search(month_line_pattern, content)
+    if m:
+        old_line = m.group(0)
+        new_line = old_line.rstrip("}") + ", " + next_day_str + "}"
+        new_content = content[:m.start()] + new_line + content[m.end():]
+        index_path.write_text(new_content, encoding="utf-8")
+        print(f"  ✅ 下周周一 {next_monday_month}/{next_monday_day} 已关联 {week_id}")
+    else:
+        # 下月尚无数据，追加新月份行
+        weekly_block_pattern = r'weeklyReportsData\s*=\s*\{([\s\S]+?)\}\s*;'
+        bm = re.search(weekly_block_pattern, content)
+        if bm:
+            existing = bm.group(1)
+            last_month_pattern = r"'(\d{4}-\d{2})':\s*\{[^}]+\}\s*(?:,\s*)?"
+            all_months = list(re.finditer(last_month_pattern, existing))
+            if all_months:
+                last_m = all_months[-1]
+                new_month_line = f"    '{next_monday_month}': {{{next_day_str}}},  // {week_id}"
+                insert_pos = last_m.end()
+                new_existing = existing[:insert_pos] + "\n            " + new_month_line + existing[insert_pos:]
+                new_content = content.replace(existing, new_existing)
+                index_path.write_text(new_content, encoding="utf-8")
+                print(f"  ✅ 下周周一 {next_monday_month}/{next_monday_day} 追加新月 {week_id}")
 
 
 # ============ 公共逻辑 ============

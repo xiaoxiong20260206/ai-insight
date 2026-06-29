@@ -146,10 +146,20 @@ uv run scripts/gen_weekly_html.py --date YYYY-WXX --input data/weekly-content-YY
 ## Step 4: 首页更新（统一脚本）
 
 ```bash
+# ⚠️ --week-day 必须传本周【周一】的日期（不是周日，不是任意日）
+# 脚本会自动计算 day+7 = 下周周一，也关联到本周周报（确保下周一能看到最新周报）
+# 例：W26 周一=22日 → --week-day 22
 uv run scripts/update_homepage.py YYYY-WXX --type weekly \
   --week-title "第XX周（MM/DD - MM/DD）" \
   --week-desc "覆盖N条资讯 · 事件1 · 事件2" \
-  --week-month YYYY-MM --week-day DD
+  --week-month YYYY-MM --week-day MONDAY_DAY
+```
+
+**周一日期计算**：
+```python
+from datetime import datetime, timedelta
+monday = datetime.now() - timedelta(days=datetime.now().weekday())
+print(monday.day)  # 本周周一的日
 ```
 
 ---
