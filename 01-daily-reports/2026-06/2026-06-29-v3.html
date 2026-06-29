@@ -1693,7 +1693,7 @@ body.mobile-preview-mode .global-controls {
 
 
 /* ===== 日报组件层 ===== */
-/* ===== CSS VARIABLES (清爽调研风格 v5.0 × 日报) ===== */
+/* ===== CSS VARIABLES (清爽调研风格 v5.0 × 日报 × Tab导航升级) ===== */
         :root {
             --color-success: #059669; --color-success-light: #10B981; --color-success-dark: #047857;
             --color-success-50: #ECFDF5; --color-success-100: #D1FAE5;
@@ -1706,6 +1706,24 @@ body.mobile-preview-mode .global-controls {
             --color-border: #E7E5E4; --color-border-light: #F5F5F4;
             --color-bg: #F8FAFB; --color-bg-card: #FFFFFF; --color-bg-table-header: #FAFAF9;
             --color-bg-hover: rgba(0,0,0,0.025);
+
+            /* ===== 板块主题色映射（v4.0 Tab导航升级）===== */
+            --board-llm: #059669;       /* Emerald */
+            --board-llm-light: #10B981;
+            --board-llm-50: #ECFDF5;
+            --board-coding: #2563EB;    /* Blue */
+            --board-coding-light: #3B82F6;
+            --board-coding-50: #EFF6FF;
+            --board-app: #7C3AED;      /* Violet */
+            --board-app-light: #8B5CF6;
+            --board-app-50: #F5F3FF;
+            --board-industry: #D97706;  /* Amber */
+            --board-industry-light: #F59E0B;
+            --board-industry-50: #FFFBEB;
+            --board-enterprise: #E11D48; /* Rose */
+            --board-enterprise-light: #F43F5E;
+            --board-enterprise-50: #FFF1F2;
+
             --gradient-hero: linear-gradient(135deg, #059669 0%, #2563EB 50%, #7C3AED 100%);
             --gradient-success: linear-gradient(135deg, #059669 0%, #10B981 100%);
             --gradient-orange: linear-gradient(135deg, #EA580C 0%, #F97316 100%);
@@ -1909,18 +1927,121 @@ body.mobile-preview-mode .global-controls {
         .heat-trend-tag.down { background: #FEF2F2; color: #DC2626; }
         .heat-trend-tag.burst { background: #FEF2F2; color: #DC2626; }
 
-        /* ===== SECTION CARDS (for boards) ===== */
-        .board-section { background: var(--color-bg-card); border: 1px solid var(--color-border-light); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 16px; box-shadow: var(--shadow-card); }
-        .board-header { font-size: 17px; font-weight: 700; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--color-border-light); display: flex; align-items: center; gap: 8px; color: var(--color-text-primary); }
-        .board-badge { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background: var(--gradient-success); color: #fff; font-size: 12px; font-weight: 700; }
-        .board-badge.orange { background: var(--gradient-orange); }
+        /* ===== TAB NAVIGATION (v4.0 毛玻璃Tab栏) ===== */
+        .tab-nav {
+            display: flex;
+            gap: 4px;
+            padding: 8px 12px;
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: blur(20px) saturate(1.8);
+            -webkit-backdrop-filter: blur(20px) saturate(1.8);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(0,0,0,0.06);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            position: sticky;
+            top: 12px;
+            z-index: 100;
+            margin-bottom: 24px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .tab-nav::-webkit-scrollbar { display: none; }
+        .tab-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-muted);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+            position: relative;
+        }
+        .tab-btn:hover {
+            background: rgba(0,0,0,0.04);
+            color: var(--color-text-primary);
+        }
+        .tab-btn:focus-visible {
+            outline: 2px solid var(--color-success);
+            outline-offset: -2px;
+        }
+        .tab-btn.active {
+            color: var(--color-text-primary);
+            background: var(--color-success-50);
+        }
+        .tab-btn[data-tab="llm"].active { background: var(--board-llm-50); color: var(--board-llm); }
+        .tab-btn[data-tab="coding"].active { background: var(--board-coding-50); color: var(--board-coding); }
+        .tab-btn[data-tab="app"].active { background: var(--board-app-50); color: var(--board-app); }
+        .tab-btn[data-tab="industry"].active { background: var(--board-industry-50); color: var(--board-industry); }
+        .tab-btn[data-tab="enterprise"].active { background: var(--board-enterprise-50); color: var(--board-enterprise); }
+        .tab-btn .tab-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            border-radius: 6px;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+        .tab-btn .tab-label { line-height: 1; }
+
+        /* Tab Panel */
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+
+        /* ===== BOARD SECTION WITH THEME COLOR (v4.0) ===== */
+        .board-section {
+            background: var(--color-bg-card); border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-lg); padding: 24px; margin-bottom: 16px;
+            box-shadow: var(--shadow-card);
+            border-top: 3px solid var(--board-accent, var(--color-success));
+        }
+        .board-section[data-board="llm"] { --board-accent: var(--board-llm); }
+        .board-section[data-board="coding"] { --board-accent: var(--board-coding); }
+        .board-section[data-board="app"] { --board-accent: var(--board-app); }
+        .board-section[data-board="industry"] { --board-accent: var(--board-industry); }
+        .board-section[data-board="enterprise"] { --board-accent: var(--board-enterprise); }
+        .board-badge {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 26px; height: 26px; border-radius: 50%;
+            background: var(--board-accent, var(--gradient-success)); color: #fff;
+            font-size: 12px; font-weight: 700;
+        }
         .sub-header { font-size: 13px; font-weight: 700; color: var(--color-text-muted); margin: 14px 0 10px; padding-left: 4px; letter-spacing: .5px; }
         .sub-header:first-child { margin-top: 0; }
 
-        /* ===== NEWS ITEMS ===== */
-        .news-item { padding: 8px 0; border-bottom: 1px solid var(--color-border-light); transition: background .15s; margin: 0 -8px; padding-left: 8px; padding-right: 8px; border-radius: var(--radius-sm); }
-        .news-item:hover { background: rgba(5,150,105,0.02); }
-        .news-item:last-child { border-bottom: none; }
+        /* ===== NEWS ITEMS (v4.0 — 卡片化+板块主题色左边框+hover上浮) ===== */
+        .news-item {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border-light);
+            border-left: 3px solid var(--board-accent, var(--color-success));
+            border-radius: var(--radius-md);
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .news-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px color-mix(in srgb, var(--board-accent, var(--color-success)) 12%, transparent);
+        }
+        /* 板块级新闻项继承主题色 */
+        .tab-panel[data-tab="llm"] .news-item { border-left-color: var(--board-llm); }
+        .tab-panel[data-tab="llm"] .news-item:hover { box-shadow: 0 6px 16px rgba(5,150,105,0.12); }
+        .tab-panel[data-tab="coding"] .news-item { border-left-color: var(--board-coding); }
+        .tab-panel[data-tab="coding"] .news-item:hover { box-shadow: 0 6px 16px rgba(37,99,235,0.12); }
+        .tab-panel[data-tab="app"] .news-item { border-left-color: var(--board-app); }
+        .tab-panel[data-tab="app"] .news-item:hover { box-shadow: 0 6px 16px rgba(124,58,237,0.12); }
+        .tab-panel[data-tab="industry"] .news-item { border-left-color: var(--board-industry); }
+        .tab-panel[data-tab="industry"] .news-item:hover { box-shadow: 0 6px 16px rgba(217,119,6,0.12); }
+        .tab-panel[data-tab="enterprise"] .news-item { border-left-color: var(--board-enterprise); }
+        .tab-panel[data-tab="enterprise"] .news-item:hover { box-shadow: 0 6px 16px rgba(225,29,72,0.12); }
         .news-tag { display: inline-block; padding: 1px 6px; border-radius: var(--radius-full); font-size: 10px; font-weight: 700; vertical-align: middle; }
         .tag-hot { background: #FEF2F2; color: var(--color-danger); }
         .tag-new { background: #EFFDF5; color: var(--color-success); }
@@ -1928,8 +2049,8 @@ body.mobile-preview-mode .global-controls {
         .tag-policy { background: #FFF7ED; color: var(--color-orange); }
         .tag-practice { background: #ECFDF5; color: #059669; }
         .tag-cn { background: #FEF2F2; color: #DC2626; }
-        /* v5.1: 标题行 — tag + 标题 + 来源 inline 合并 */
-        .news-title-row { font-size: 14px; font-weight: 600; line-height: 1.5; display: flex; align-items: baseline; flex-wrap: wrap; gap: 5px; margin-bottom: 3px; }
+        /* v5.1→v4.0: 标题行 — tag + 标题(16px/600) + 来源(12px) inline 合并 */
+        .news-title-row { font-size: 16px; font-weight: 600; line-height: 1.5; display: flex; align-items: baseline; flex-wrap: wrap; gap: 5px; margin-bottom: 4px; }
         .news-title-row a { color: var(--color-text-primary); text-decoration: none; }
         .news-title-row a:hover { color: var(--color-success); }
         .news-source-inline { font-size: 11px; color: var(--color-text-muted); font-weight: 400; flex-shrink: 0; white-space: nowrap; }
@@ -1952,8 +2073,19 @@ body.mobile-preview-mode .global-controls {
         .news-data-chip.china { background: #FEF2F2; border-color: #FECACA; color: #991B1B; }
         .news-summary-compact { font-size: 13px; color: var(--color-text-muted); margin-top: 2px; line-height: 1.55; font-family: var(--font-family-cn); }
 
-        /* ===== DEEP FOCUS ===== */
-        .deep-focus-card { background: var(--color-bg-card); border: 1px solid var(--color-border-light); border-radius: var(--radius-lg); padding: 0; margin-bottom: 16px; box-shadow: var(--shadow-card); overflow: hidden; }
+        /* ===== DEEP FOCUS (v4.0 — 板块主题色) ===== */
+        .deep-focus-card { background: var(--color-bg-card); border: 1px solid var(--color-border-light); border-radius: var(--radius-lg); padding: 0; margin-bottom: 16px; box-shadow: var(--shadow-card); overflow: hidden; border-top: 3px solid var(--board-accent, var(--color-purple)); }
+        /* 板块主题色 header */
+        .tab-panel[data-tab="llm"] .deep-focus-card { border-top-color: var(--board-llm); }
+        .tab-panel[data-tab="llm"] .deep-focus-header { background: linear-gradient(135deg, #059669 0%, #047857 100%); }
+        .tab-panel[data-tab="coding"] .deep-focus-card { border-top-color: var(--board-coding); }
+        .tab-panel[data-tab="coding"] .deep-focus-header { background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%); }
+        .tab-panel[data-tab="app"] .deep-focus-card { border-top-color: var(--board-app); }
+        .tab-panel[data-tab="app"] .deep-focus-header { background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%); }
+        .tab-panel[data-tab="industry"] .deep-focus-card { border-top-color: var(--board-industry); }
+        .tab-panel[data-tab="industry"] .deep-focus-header { background: linear-gradient(135deg, #D97706 0%, #B45309 100%); }
+        .tab-panel[data-tab="enterprise"] .deep-focus-card { border-top-color: var(--board-enterprise); }
+        .tab-panel[data-tab="enterprise"] .deep-focus-header { background: linear-gradient(135deg, #E11D48 0%, #BE123C 100%); }
         .deep-focus-header { background: var(--gradient-purple); color: #fff; padding: 18px 24px; display: flex; align-items: center; gap: 10px; }
         .deep-focus-header.orange-theme { background: linear-gradient(135deg, #EA580C 0%, #DC2626 100%); }
         .deep-focus-header.china-theme { background: linear-gradient(135deg, #DC2626 0%, #B91C1C 50%, #991B1B 100%); }
@@ -2087,7 +2219,12 @@ body.mobile-preview-mode .global-controls {
             .toc-link.toc-active { border-left-color: transparent; border-bottom-color: var(--color-success); }
             .toc-link.toc-sub { display: none; }
             .sidebar-collapse-btn { display: none; }
-            .content-inner { padding: 24px 16px 80px; }
+            .content-inner { padding: 20px 12px 80px; }
+            /* Tab: 移动端图标模式 */
+            .tab-nav { top: 8px; padding: 6px 8px; gap: 2px; }
+            .tab-btn { padding: 8px 10px; font-size: 12px; }
+            .tab-btn .tab-label { display: none; }
+            .tab-btn .tab-icon { width: 26px; height: 26px; font-size: 16px; }
             .overview-grid.five-cols { grid-template-columns: 1fr 1fr; }
             .watch-grid { grid-template-columns: 1fr; }
             .header-title { font-size: 24px; }
@@ -2100,13 +2237,20 @@ body.mobile-preview-mode .global-controls {
             .pi-t-row { grid-template-columns: 1fr; gap: 2px; padding: 6px 10px; border-left: 3px solid var(--color-border-light); margin-bottom: 4px; }
             .pi-t-row.projected { border-left-color: rgba(124,58,237,.3); }
             .pi-t-analogy { border-left: none; padding-left: 0; font-size: 12px; }
+            .news-item { padding: 10px 12px; }
+        }
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .tab-btn .tab-label { display: inline; }
         }
         @media (max-width: 960px) {
             .overview-grid.five-cols { grid-template-columns: 1fr 1fr; }
         }
+        @media (min-width: 1025px) {
+            .tab-btn .tab-label { display: inline; }
+        }
 
 /* ===== AI洞察定制层 ===== */
-/* ===== AI洞察定制层样式（仅日报/首页特有的组件样式） ===== */
+/* ===== AI洞察定制层样式（v4.0 — Tab导航升级，板块主题色）===== */
 /* 
  * ⚠️ 本文件只包含AI洞察项目特有的组件样式和扩展变量。
  * CSS变量定义和基础样式从 qingshuang-research-style 动态引用。
@@ -2120,7 +2264,7 @@ body.mobile-preview-mode .global-controls {
  * - 新增组件样式在本文件添加
  */
 
-/* ===== AI洞察扩展CSS变量（公共层未覆盖的） ===== */
+/* ===== AI洞察扩展CSS变量（公共层未覆盖的）===== */
 :root {
     --color-orange: #EA580C;
     --color-success-dark: #047857;
@@ -2137,7 +2281,7 @@ body.mobile-preview-mode .global-controls {
     --color-bg-hover: rgba(0,0,0,0.025);
 }
 
-/* ===== 周报Header副标题覆盖（公共层max-width:580px太窄） ===== */
+/* ===== 周报Header副标题覆盖（公共层max-width:580px太窄）===== */
 .header-subtitle, .subtitle {
     max-width: 100% !important;
     color: var(--color-text-muted) !important;
@@ -2145,7 +2289,7 @@ body.mobile-preview-mode .global-controls {
     margin-top: 14px !important;
 }
 
-/* ===== 周报insight-card段落样式（统一用CSS而非内联style） ===== */
+/* ===== 周报insight-card段落样式（统一用CSS而非内联style）===== */
 .insight-card > p {
     line-height: 1.75;
     font-size: 13px;
@@ -2204,7 +2348,7 @@ body.mobile-preview-mode .global-controls {
 
 /* ===== 首页特有组件 ===== */
 
-/* Tab导航 */
+/* Tab导航（首页）*/
 .tab-nav {
     background: rgba(255,255,255,0.85);
     backdrop-filter: blur(20px) saturate(1.8);
@@ -2295,21 +2439,15 @@ body.mobile-preview-mode .global-controls {
         grid-template-columns: repeat(3, 1fr);
     }
 }
+
 /* ===== 周报Top5/洞察卡片样式（v2.0格式升级，从W22提取）===== */
-/* 
- * 来源：W22手动升级版HTML (2026-06-01)
- * 缺失根因：W23改脚本化生成后，CSS模板(daily-report-v3.css)不含这些定义
- * 修复：补入 ai-insight-custom.css，脚本合并时自动注入
- */
 
-/* 卡片强调色变量（按板块区分）*/
-.llm .news-card { --card-accent: var(--color-purple); }
-.coding .news-card { --card-accent: var(--color-orange); }
-.app .news-card { --card-accent: var(--color-info); }
-.industry .news-card { --card-accent: var(--color-warning); }
-.enterprise .news-card { --card-accent: var(--color-success); }
-
-
+/* 卡片强调色变量（按板块区分）— 继承日报组件层的 --board-accent 变量 */
+.llm .news-card { --card-accent: var(--board-llm, var(--color-success)); }
+.coding .news-card { --card-accent: var(--board-coding, var(--color-info)); }
+.app .news-card { --card-accent: var(--board-app, var(--color-purple)); }
+.industry .news-card { --card-accent: var(--board-industry, var(--color-warning)); }
+.enterprise .news-card { --card-accent: var(--board-enterprise, var(--color-danger)); }
 
 .insight-content {
     margin-top: var(--spacing-md);
@@ -2332,6 +2470,7 @@ body.mobile-preview-mode .global-controls {
     line-height: 1.7;
 }
 
+/* 周报 news-card 样式 — 与日报新闻项共享 board-accent 主题色 */
 .news-card {
     background: var(--color-bg-card);
     border: 1px solid var(--color-border-light);
@@ -2340,7 +2479,12 @@ body.mobile-preview-mode .global-controls {
     padding: var(--spacing-lg);
     margin-bottom: var(--spacing-xl);
     box-shadow: var(--shadow-card);
-    transition: box-shadow 0.2s;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
 }
 
 .news-card-rank {
@@ -2376,11 +2520,7 @@ body.mobile-preview-mode .global-controls {
 }
 
 .meta-item { display: inline-flex; align-items: center; gap: 4px; }
-
-
-
 .meta-divider { color: var(--color-border); font-size: 10px; margin: 0 2px; }
-
 .meta-link {
     color: var(--color-info);
     text-decoration: none;
@@ -2451,17 +2591,9 @@ body.mobile-preview-mode .global-controls {
     flex-wrap: wrap;
 }
 
-
-
-
-
-
-
-
 .meta-icon {
     opacity: 0.6;
 }
-
 
 </style>
 </head>
@@ -2499,12 +2631,12 @@ body.mobile-preview-mode .global-controls {
 
             <!-- HEADER -->
             <header class="doc-header">
-                <div class="header-badge">AI INSIGHT · DAILY REPORT</div>
-                <h1 class="header-title">AI 日报 <span class="version-badge">v4.0</span></h1>
+                <div class="header-badge"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/></svg> AI INSIGHT · DAILY REPORT</div>
+                <h1 class="header-title">AI 日报 · 2026年6月29日</h1>
                 <div class="header-meta">
-                    <span><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="4"/><line x1="8" y1="2" x2="8" y2="4"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 2026年6月29日 周一</span>
+                    <span><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="4"/><line x1="8" y1="2" x2="8" y2="4"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 周一</span>
                     <span><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> 海外 4条 · 国内 6条</span>
-                    <span><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg> 五大板块：大模型 · AI Coding · AI应用 · AI行业 · 企业转型</span>
+                    <span><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg> 五大板块</span>
                 </div>
             </header>
 
@@ -2570,12 +2702,22 @@ body.mobile-preview-mode .global-controls {
         </div>
             </section>
 
-            <!-- FIVE BOARDS -->
+            <!-- TAB NAVIGATION (v4.0 — 毛玻璃Tab栏，点击切换板块) -->
+            <nav class="tab-nav" role="tablist" aria-label="板块导航">
+            <button class="tab-btn active" data-tab="llm" role="tab" aria-selected="true"><span class="tab-icon"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.5V22h6v-4.5c2.9-1.2 5-4.1 5-7.5a8 8 0 0 0-8-8z"/><line x1="12" y1="12" x2="12" y2="18"/></svg></span><span class="tab-label">大模型</span></button>
+            <button class="tab-btn" data-tab="coding" role="tab" aria-selected="false"><span class="tab-icon"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span><span class="tab-label">AI Coding</span></button>
+            <button class="tab-btn" data-tab="app" role="tab" aria-selected="false"><span class="tab-icon"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></span><span class="tab-label">AI 应用</span></button>
+            <button class="tab-btn" data-tab="industry" role="tab" aria-selected="false"><span class="tab-icon"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20V8l-6 4V4l-6 4V2L2 10v10z"/></svg></span><span class="tab-label">AI 行业</span></button>
+            <button class="tab-btn" data-tab="enterprise" role="tab" aria-selected="false"><span class="tab-icon"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/></svg></span><span class="tab-label">企业AI转型</span></button>
+            </nav>
+
+            <!-- FIVE BOARDS (wrapped in tab-panels) -->
 
             <!-- ===== 大模型 ===== -->
+            <article class="tab-panel active" data-tab="llm" role="tabpanel" aria-label="大模型">
             <section id="llm" class="report-section animate-on-scroll">
                 <div class="doc-chapter-label"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.5V22h6v-4.5c2.9-1.2 5-4.1 5-7.5a8 8 0 0 0-8-8z"/><line x1="12" y1="12" x2="12" y2="18"/></svg> 大模型</div>
-                <div class="board-section">
+                <div class="board-section" data-board="llm">
                     <div class="board-header">
                         <span class="board-badge">1</span> 最近动态
                     </div>
@@ -2630,13 +2772,15 @@ body.mobile-preview-mode .global-controls {
             </div>
 <div class="pi-card"><div class="insight-card"><h3>📊 大模型市场份额重构</h3><table><tr><th>指标</th><th>2025年6月</th><th>2026年6月</th><th>变化</th></tr><tr><td>美国模型全球份额</td><td>72%</td><td>33%</td><td>-39pp</td></tr><tr><td>GLM-5.2调用量环比</td><td>—</td><td>+66%</td><td>↑</td></tr><tr><td>驱动因素</td><td colspan="3">出口管制 + 成本优势 + 开源质量飞跃</td></tr></table></div></div>
             </section>
+            </article>
 
             <!-- ===== AI Coding ===== -->
+            <article class="tab-panel" data-tab="coding" role="tabpanel" aria-label="AI Coding">
             <section id="coding" class="report-section animate-on-scroll">
-                <div class="doc-chapter-label">⌨️ AI Coding</div>
-                <div class="board-section">
+                <div class="doc-chapter-label"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> AI Coding</div>
+                <div class="board-section" data-board="coding">
                     <div class="board-header">
-                        <span class="board-badge">1</span> 最近动态
+                        <span class="board-badge">2</span> 最近动态
                     </div>
                 <div class="sub-header">{SVG_ICONS["globe"]} 海外</div>
 
@@ -2679,13 +2823,15 @@ body.mobile-preview-mode .global-controls {
             </div>
 <div class="pi-card"><div class="insight-card"><h3>⌨️ AI Coding平台格局</h3><table><tr><th>玩家</th><th>战略</th><th>优势</th></tr><tr><td>SpaceX+Cursor</td><td>算力+分发垂直整合</td><td>Colossus超算</td></tr><tr><td>Anthropic Claude Code</td><td>能力领先</td><td>受出口管制约束</td></tr><tr><td>国内开源路线</td><td>低成本合规部署</td><td>$2K/月成本压力窗口</td></tr></table></div></div>
             </section>
+            </article>
 
             <!-- ===== AI 应用 ===== -->
+            <article class="tab-panel" data-tab="app" role="tabpanel" aria-label="AI 应用">
             <section id="app" class="report-section animate-on-scroll">
                 <div class="doc-chapter-label"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg> AI 应用</div>
-                <div class="board-section">
+                <div class="board-section" data-board="app">
                     <div class="board-header">
-                        <span class="board-badge">1</span> 最近动态
+                        <span class="board-badge">3</span> 最近动态
                     </div>
                 <div class="sub-header">{SVG_ICONS["globe"]} 海外</div>
 
@@ -2718,13 +2864,15 @@ body.mobile-preview-mode .global-controls {
             </div>
 <div class="pi-card"><div class="insight-card"><h3>📱 AI应用多智能体化趋势</h3><table><tr><th>产品</th><th>多智能体特性</th><th>覆盖范围</th></tr><tr><td>GPT-5.6 ultra</td><td>子智能体协作</td><td>可信合作伙伴优先</td></tr><tr><td>谷歌Personal Intelligence</td><td>Agent预订能力</td><td>200国98语言</td></tr><tr><td>Kimi K2.6</td><td>Agent集群</td><td>国内</td></tr></table></div></div>
             </section>
+            </article>
 
             <!-- ===== AI 行业 ===== -->
+            <article class="tab-panel" data-tab="industry" role="tabpanel" aria-label="AI 行业">
             <section id="industry" class="report-section animate-on-scroll">
                 <div class="doc-chapter-label"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20V8l-6 4V4l-6 4V2L2 10v10z"/></svg> AI 行业</div>
-                <div class="board-section">
+                <div class="board-section" data-board="industry">
                     <div class="board-header">
-                        <span class="board-badge">1</span> 最近动态
+                        <span class="board-badge">4</span> 最近动态
                     </div>
                 <div class="sub-header">{SVG_ICONS["globe"]} 海外</div>
 
@@ -2767,13 +2915,15 @@ body.mobile-preview-mode .global-controls {
             </div>
 <div class="pi-card"><div class="insight-card"><h3>🏭 AI行业资本化进程</h3><table><tr><th>事件</th><th>含义</th></tr><tr><td>SpaceX市值$2.5万亿</td><td>AI+硬件整合估值天花板已现</td></tr><tr><td>智谱A股目标150亿元</td><td>国内AI IPO通道正式打开</td></tr><tr><td>科创板第五套扩容</td><td>40亿市值门槛，政策背书</td></tr><tr><td>OpenAI延迟上市</td><td>等待盈利证明，非增长故事</td></tr></table></div></div>
             </section>
+            </article>
 
             <!-- ===== 企业AI转型 ===== -->
+            <article class="tab-panel" data-tab="enterprise" role="tabpanel" aria-label="企业AI转型">
             <section id="enterprise" class="report-section animate-on-scroll">
                 <div class="doc-chapter-label"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/></svg> 企业AI转型</div>
-                <div class="board-section">
+                <div class="board-section" data-board="enterprise">
                     <div class="board-header">
-                        <span class="board-badge">1</span> 最近动态
+                        <span class="board-badge">5</span> 最近动态
                     </div>
                 <div class="sub-header">🇨🇳 国内</div>
 
@@ -2810,6 +2960,7 @@ body.mobile-preview-mode .global-controls {
             </div>
 <div class="pi-card"><div class="insight-card"><h3>🔄 企业AI转型：具身智能商业化路径</h3><table><tr><th>阶段</th><th>状态</th><th>代表</th></tr><tr><td>结构化场景量产</td><td>已达到</td><td>智元：搬货/烤面包</td></tr><tr><td>半结构化场景</td><td>政策驱动中</td><td>五部门AI+交通方案</td></tr><tr><td>开放环境通用</td><td>技术攻关中</td><td>Genie 3世界模型</td></tr></table></div></div>
             </section>
+            </article>
 
             <!-- DATA SNAPSHOT -->
             <section id="data" class="report-section animate-on-scroll">
@@ -2884,6 +3035,77 @@ body.mobile-preview-mode .global-controls {
 
 <script>
     (function() {
+        // ===== TAB NAVIGATION (v4.0) =====
+        const tabNav = document.querySelector('.tab-nav');
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabPanels = document.querySelectorAll('.tab-panel');
+
+        function switchTab(tabId) {
+            // Update buttons
+            tabBtns.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.tab === tabId);
+            });
+            // Update panels
+            tabPanels.forEach(panel => {
+                panel.classList.toggle('active', panel.dataset.tab === tabId);
+            });
+            // Update sidebar TOC active state
+            const tocLinks = document.querySelectorAll('.toc-link');
+            tocLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href === '#' + tabId) {
+                    link.classList.add('toc-active');
+                } else if (tabId && !href.startsWith('#' + tabId)) {
+                    // Only remove active from board-section TOC links, not overview/heat/data/watch
+                    const boardIds = ['llm', 'coding', 'app', 'industry', 'enterprise'];
+                    if (boardIds.some(id => href === '#' + id)) {
+                        link.classList.remove('toc-active');
+                    }
+                }
+            });
+            // Scroll to top of content area
+            const contentInner = document.querySelector('.content-inner');
+            if (contentInner) {
+                window.scrollTo({ top: contentInner.offsetTop - 60, behavior: 'smooth' });
+            }
+        }
+
+        if (tabBtns.length && tabPanels.length) {
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    switchTab(btn.dataset.tab);
+                });
+                // Keyboard support
+                btn.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        switchTab(btn.dataset.tab);
+                    }
+                    // Arrow key navigation
+                    const btns = Array.from(tabBtns);
+                    const idx = btns.indexOf(btn);
+                    if (e.key === 'ArrowRight' && idx < btns.length - 1) {
+                        e.preventDefault();
+                        btns[idx + 1].focus();
+                        switchTab(btns[idx + 1].dataset.tab);
+                    }
+                    if (e.key === 'ArrowLeft' && idx > 0) {
+                        e.preventDefault();
+                        btns[idx - 1].focus();
+                        switchTab(btns[idx - 1].dataset.tab);
+                    }
+                });
+            });
+
+            // Show first tab by default if none active
+            const hasActive = document.querySelector('.tab-panel.active');
+            if (!hasActive && tabPanels.length > 0) {
+                tabPanels[0].classList.add('active');
+                if (tabBtns[0]) tabBtns[0].classList.add('active');
+            }
+        }
+
         // ===== TOC SCROLL SPY =====
         const tocLinks = document.querySelectorAll('.toc-link[href^="#"]');
         const sections = Array.from(tocLinks)
@@ -2891,15 +3113,31 @@ body.mobile-preview-mode .global-controls {
             .filter(Boolean);
 
         function updateToc() {
+            // Skip scroll spy for tab-managed sections (they're hidden/shown by tab)
+            const boardIds = ['llm', 'coding', 'app', 'industry', 'enterprise'];
+            const activeTabId = document.querySelector('.tab-btn.active')?.dataset.tab || '';
+            
             let active = null;
             const scrollY = window.scrollY + 120;
             for (const sec of sections) {
+                if (!sec) continue;
+                const secId = sec.id;
+                // For board sections, only mark active if it's the current tab
+                if (boardIds.includes(secId)) {
+                    if (secId === activeTabId) {
+                        active = sec;
+                    }
+                    continue;
+                }
                 if (sec.getBoundingClientRect().top + window.scrollY <= scrollY) {
                     active = sec;
                 }
             }
             tocLinks.forEach(l => {
                 const target = document.querySelector(l.getAttribute('href'));
+                const targetId = target?.id;
+                // Don't change active for tab-managed sections (that's Tab's job)
+                if (boardIds.includes(targetId)) return;
                 l.classList.toggle('toc-active', target === active);
             });
         }
@@ -2943,6 +3181,26 @@ body.mobile-preview-mode .global-controls {
             });
         }
 
+        // ===== SIDEBAR TOC LINKS → TAB SWITCH =====
+        // When clicking a board TOC link, switch to that tab
+        const boardTocLinks = document.querySelectorAll('.toc-link[href^="#"]');
+        boardTocLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                const targetId = href.replace('#', '');
+                const boardIds = ['llm', 'coding', 'app', 'industry', 'enterprise'];
+                if (boardIds.includes(targetId)) {
+                    e.preventDefault();
+                    switchTab(targetId);
+                    // Scroll to tab nav area
+                    const tabNavEl = document.querySelector('.tab-nav');
+                    if (tabNavEl) {
+                        window.scrollTo({ top: tabNavEl.offsetTop - 20, behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+
         // ===== ANIMATE ON SCROLL =====
         const animEls = document.querySelectorAll('.animate-on-scroll');
         if (animEls.length) {
@@ -2950,6 +3208,13 @@ body.mobile-preview-mode .global-controls {
                 entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
             }, { rootMargin: '0px 0px -40px 0px', threshold: 0.08 });
             animEls.forEach(el => observer.observe(el));
+        }
+
+        // ===== PREFERS-REDUCED-MOTION =====
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                el.classList.add('visible');
+            });
         }
     })();
 </script>
