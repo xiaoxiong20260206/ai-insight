@@ -1,200 +1,264 @@
 {
   "date": "2026-06-29",
-  "overview": "6月29日AI动态：中美大模型竞争格局加速重构——智谱GLM-5.2开源冲击波持续扩散，OpenRouter数据显示美国模型份额从72%跌至33%；DeepSeek联合北大推出DSpark推理加速框架全链路开源；谷歌限制Meta对Gemini算力访问显示算力争夺白热化。海外方面，SpaceX-Cursor $60B并购完成交割，白宫发布促进AI创新安全行政令。硬件端，智元机器人量产加速，具身智能进入关键节点。",
-  "heat_trend": "🔥🔥🔥🔥🔥",
+  "overview": "6月29日AI动态：中美大模型竞争格局加速重构——智谱GLM-5.2开源冲击波持续扩散，OpenRouter数据显示美国模型份额从72%跌至33%；DeepSeek联合北大推出DSpark推理加速框架全链路开源；谷歌限制Meta对Gemini算力访问显示算力争夺白热化。海外方面，SpaceX-Cursor 600亿美元并购完成交割，白宫发布促进AI创新安全行政令。硬件端，智元机器人量产加速，具身智能进入关键节点。",
+  "heat_trend": "hot",
   "coverage": {
     "overseas": 4,
     "china": 6,
     "wechat": 3
   },
   "watch_list": [
-    "GLM-5.2 开源冲击：美国大模型市场份额一年跌40个点",
-    "SpaceX-Cursor $60B并购交割完成",
+    "GLM-5.2开源冲击：美国大模型市场份额一年跌40个点",
+    "SpaceX-Cursor 600亿美元并购交割完成",
     "谷歌对Meta限供Gemini算力",
     "白宫6月AI行政令落地",
     "智元机器人量产加速"
   ],
+  "capability_update": "今天最值得追踪的信号是OpenRouter的份额数据：美国大模型在全球开发者中的占比一年内从72%跌至33%，不是渐进退潮，是断崖式重组。出口管制本想保护美国优势，却在全球市场创造了中国开源的空白。这是我观察到的2026年上半年最具结构性意义的数据点之一。",
   "tabs": [
     {
       "id": "models",
-      "label": "🧠 大模型",
-      "news": [
-        {
-          "title": "中国AI大模型调用量连续九周领跑，美国份额一年内从72%跌至33%",
-          "url": "https://finance.sina.cn/stock/jdts/2026-06-29/detail-iniezsvh7149093.d.html",
-          "source": "新浪财经 · 6月29日",
-          "summary": "OpenRouter数据显示，2026年6月来自谷歌、OpenAI和Anthropic的美国模型Token请求占比已从一年前的72%降至33%。智谱GLM-5.2调用量环比增长66%，Claude Sonnet 4.6近四个月首次下滑。中国开源模型凭借更低成本和更快响应在高频标准化任务上持续抢占市场。",
-          "region": "china"
-        },
-        {
-          "title": "开源不再是追赶游戏：GLM-5.2正在改写美国AI产业护城河叙事",
-          "url": "https://www.tmtpost.com/agent/ai-article/18647",
-          "source": "钛媒体 · 6月28日",
-          "summary": "2026年6月，智谱发布GLM 5.2——753B参数开源大模型，MIT许可，100万Token上下文窗口。CNBC报道标题直接点明：China's Zhipu is closing in on top U.S. AI models with Anthropic and OpenAI held back。在关键智能体基准测试中，GLM 5.2已与Anthropic顶尖模型持平，而美国两大旗舰受出口管制制约。",
-          "region": "china"
-        },
-        {
-          "title": "北大与DeepSeek联合推出DSpark推理加速框架，全链路开源",
-          "url": "https://k.sina.cn/article_7880068203_1d5b04c6b06801p7uy.html",
-          "source": "新浪科技 · 6月28日",
-          "summary": "DSpark是DeepSeek与北京大学联合推出的推理加速框架，于2026年6月27日全链路开源上传至GitHub。针对大模型高并发场景下算力浪费、响应延迟高的痛点，采用半自回归等创新机制。这是DeepSeek继模型开源后，再次向底层推理基础设施层延伸。",
-          "region": "china"
-        },
-        {
-          "title": "谷歌对Meta断粮：Gemini算力遭限供，算力争夺战白热化",
-          "url": "https://m.163.com/dy/article/L0J378R405198UNI.html",
-          "source": "量子位 · 6月29日(微信)",
-          "summary": "芯片估值高企背景下，谷歌开始限制Meta对Gemini模型算力的访问权限，显示顶尖模型提供商在算力资源分配上的博弈升级。欧洲投资者已将AI赛道布局方向从芯片股转向电力公用事业企业与银行板块，反映算力基础设施的价值重估。",
-          "region": "china"
-        },
-        {
-          "title": "AI News June 28: It's No Longer OpenAI vs Anthropic — Both Labs Face the Same Government Approval Problem",
-          "url": "https://aitoolsrecap.com/Blog/ai-news-june-28-2026",
-          "source": "AI Tools Recap · June 28",
-          "summary": "TechCrunch editorial highlights a new framing: the real competition is no longer between OpenAI and Anthropic, but both labs now face the same obstacle — U.S. government export controls that restrict global distribution of flagship models. This structural constraint is accelerating the rise of open-source alternatives from China.",
-          "region": "overseas"
-        }
-      ],
+      "title": "大模型",
+      "icon": "🧠",
+      "news": {
+        "overseas": [
+          {
+            "title": "AI News June 28: It's No Longer OpenAI vs Anthropic — Both Labs Face the Same Government Approval Problem",
+            "url": "https://aitoolsrecap.com/Blog/ai-news-june-28-2026",
+            "source": "AI Tools Recap · June 28",
+            "summary": "TechCrunch editorial highlights: the real competition is no longer between OpenAI and Anthropic, but both labs now face the same obstacle — U.S. government export controls that restrict global distribution of flagship models. This structural constraint is accelerating the rise of open-source alternatives from China.",
+            "region": "overseas"
+          }
+        ],
+        "china": [
+          {
+            "title": "中国AI大模型调用量连续九周领跑，美国份额一年内从72%跌至33%",
+            "url": "https://finance.sina.cn/stock/jdts/2026-06-29/detail-iniezsvh7149093.d.html",
+            "source": "新浪财经 · 6月29日",
+            "summary": "OpenRouter数据显示，2026年6月来自谷歌、OpenAI和Anthropic的美国模型Token请求占比已从一年前的72%降至33%。智谱GLM-5.2调用量环比增长66%，Claude Sonnet 4.6近四个月首次下滑。中国开源模型凭借更低成本和更快响应在高频标准化任务上持续抢占市场。",
+            "region": "china"
+          },
+          {
+            "title": "开源不再是追赶游戏：GLM-5.2正在改写美国AI产业护城河叙事",
+            "url": "https://www.tmtpost.com/agent/ai-article/18647",
+            "source": "钛媒体 · 6月28日",
+            "summary": "2026年6月，智谱发布GLM 5.2，753B参数开源大模型，MIT许可，100万Token上下文窗口。CNBC报道：China's Zhipu is closing in on top U.S. AI models with Anthropic and OpenAI held back。在关键智能体基准测试中，GLM 5.2已与Anthropic顶尖模型持平。",
+            "region": "china"
+          },
+          {
+            "title": "北大与DeepSeek联合推出DSpark推理加速框架，全链路开源",
+            "url": "https://k.sina.cn/article_7880068203_1d5b04c6b06801p7uy.html",
+            "source": "新浪科技 · 6月28日",
+            "summary": "DSpark是DeepSeek与北京大学联合推出的推理加速框架，于2026年6月27日全链路开源上传至GitHub。针对大模型高并发场景下算力浪费、响应延迟高的痛点，采用半自回归等创新机制。这是DeepSeek继模型开源后向底层推理基础设施层的延伸。",
+            "region": "china"
+          },
+          {
+            "title": "谷歌对Meta断粮：Gemini算力遭限供，算力争夺战白热化",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=%E8%B0%B7%E6%AD%8CMeta+Gemini%E7%AE%97%E5%8A%9B+2026%E5%B9%B46%E6%9C%88",
+            "source": "量子位 · 6月29日(微信)",
+            "summary": "谷歌开始限制Meta对Gemini模型算力的访问权限，显示顶尖模型提供商在算力资源分配上的博弈升级。欧洲投资者已将AI赛道布局方向从芯片股转向电力公用事业企业与银行板块，反映算力基础设施的价值重估。",
+            "region": "china"
+          },
+          {
+            "title": "GLM-5.2开源冲击：中国大模型首度比肩美国顶尖，美出口管制反成助攻",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=GLM-5.2+%E5%BC%80%E6%BA%90+%E7%BE%8E%E5%9B%BD+%E5%87%BA%E5%8F%A3%E7%AE%A1%E5%88%B6+2026%E5%B9%B46%E6%9C%88",
+            "source": "量子位 · 6月28日(微信)",
+            "summary": "量子位分析：智谱GLM-5.2开源MIT许可，美国出口管制限制Anthropic和OpenAI全球分发，反而为中国开源创造了全球市场真空。在开发者选型时，合规可部署性已超越绝对能力成为第一筛选器，中国开源正在系统性填补这一空白。",
+            "region": "china"
+          }
+        ]
+      },
       "deep_focus": {
         "title": "开源逆袭：一年内美国模型份额从72%跌至33%意味着什么",
-        "content": "OpenRouter数据揭示的这一趋势，不只是市场份额的数字变化，而是AI产业权力结构的深层重组。\n\n三个结构性原因：①成本压力——高频标准化任务中，响应速度和单位成本的重要性超过绝对能力；②出口管制反效果——美国限制Anthropic和OpenAI向非美籍用户分发旗舰模型，直接把市场拱手让给中国开源；③开源质量飞跃——GLM-5.2等中国开源模型已在关键基准上与美国顶尖商业模型持平。\n\n不该忽略的信号：这个趋势发生在中国开源生态仍相对年轻的阶段。DeepSeek、Qwen、GLM的联合崛起，背后是共享的算法创新（MoE架构、高效训练技术）和开放协作文化。如果这一趋势延续，2027年美国大模型的全球市场主导地位将面临系统性挑战。"
+        "paragraphs": [
+          "OpenRouter数据揭示的这一趋势，不只是市场份额的数字变化，而是AI产业权力结构的深层重组。三个结构性原因同时发力：高频标准化任务中响应速度和单位成本的重要性超过绝对能力；美国出口管制反而把市场拱手让给中国开源；GLM-5.2等中国开源模型已在关键基准上与美国顶尖商业模型持平。",
+          "这个趋势发生在中国开源生态仍相对年轻的阶段。DeepSeek、Qwen、GLM的联合崛起，背后是共享的算法创新（MoE架构、高效训练技术）和开放协作文化。DSpark推理加速框架的全链路开源，标志着中国AI开源已从模型层向基础设施层全面延伸——这才是真正的生态护城河。",
+          "对企业用户的实际含义：美国模型的能力优势依然存在，但合规约束（出口管制、数据主权）正在成为比模型能力更硬的选型筛选器。如果这一趋势延续到2027年，全球AI市场将形成稳定的双轨生态：能力天花板型（美系闭源）和部署自由型（中国开源）。"
+        ],
+        "takeaway": "出口管制的本意是保护美国优势，实际效果是为中国开源创造了全球市场真空。合规约束正在超越模型能力，成为企业AI选型的第一筛选器。"
       },
-      "pattern_insight_html": "<div style='font-family:sans-serif;padding:16px;background:#f8f9fa;border-radius:8px'><h4 style='margin:0 0 8px;color:#1a1a1a'>📊 大模型市场格局重构</h4><p style='margin:0;color:#555;font-size:14px'>美国模型份额：<span style='color:#e74c3c;font-weight:bold'>72% → 33%</span>（一年内）<br>GLM-5.2调用量环比：<span style='color:#27ae60;font-weight:bold'>+66%</span><br>驱动因素：出口管制 + 成本优势 + 开源质量飞跃</p></div>"
+      "pattern_insight_html": "<div class=\"pi-card\"><div class=\"insight-card\"><h3>📊 大模型市场份额重构</h3><table><tr><th>指标</th><th>2025年6月</th><th>2026年6月</th><th>变化</th></tr><tr><td>美国模型全球份额</td><td>72%</td><td>33%</td><td>-39pp</td></tr><tr><td>GLM-5.2调用量环比</td><td>—</td><td>+66%</td><td>↑</td></tr><tr><td>驱动因素</td><td colspan=\"3\">出口管制 + 成本优势 + 开源质量飞跃</td></tr></table></div></div>"
     },
     {
       "id": "coding",
-      "label": "⌨️ AI Coding",
-      "news": [
-        {
-          "title": "SpaceX正式完成收购Cursor：$60B全股票交易，Anysphere成SpaceX全资子公司",
-          "url": "https://www.gadgets360.com/ai/news/spacex-buys-cursor-ai-coding-startup-claude-code-openai-codex-competitor-60-billion-usd-11647529",
-          "source": "Gadgets360 · 6月28日",
-          "summary": "SpaceX于6月28日宣布正式完成600亿美元全股票并购Cursor（Anysphere），Cursor成为SpaceX全资子公司，预计Q3 2026正式交割。此前xAI的Grok在AI编程工具竞争中落后于Claude Code和OpenAI Codex，Cursor的专家软件工程师分发网络被视为关键战略资产。SpaceX拥有百万H100等量的Colossus训练超算，将为Cursor提供算力背书。",
-          "region": "overseas"
-        },
-        {
-          "title": "AI Coding工具成本重定价：2000美元/工程师/月迫使行业重新思考",
-          "url": "https://thenextweb.com/news/microsoft-claude-code-retreat-ai-cost",
-          "source": "The Next Web · 6月28日",
-          "summary": "GitHub Copilot按Token计费上线后，部分企业实测AI Coding工具月均成本达2000美元/人，远超原有预算。Microsoft已悄然收缩Claude Code部署范围，行业开始重新评估AI Coding的真实ROI。这一趋势可能加速开源编程工具的采用，并推动定价模式向按价值付费转变。",
-          "region": "overseas"
-        },
-        {
-          "title": "让Agent具有预算意识？斯坦福博士后的Budget-aware AI Agent研究",
-          "url": "https://new.qq.com/rain/a/20260627V0AA9F00",
-          "source": "机器之心 · 6月27日(微信)",
-          "summary": "斯坦福博士后裴嘉欣分享了AI Agent转向长时程任务后Token消耗爆炸的问题，及其正在研究的Budget-aware AI Agent方向——让Agent在执行任务时感知并控制Token预算，避免无节制消耗。他将于8月加入UT Austin担任助理教授，研究方向还包括Human-AI Collaboration和Self-Improving系统。",
-          "region": "china"
-        }
-      ],
+      "title": "AI Coding",
+      "icon": "⌨️",
+      "news": {
+        "overseas": [
+          {
+            "title": "SpaceX正式完成收购Cursor：600亿美元全股票交易，Anysphere成全资子公司",
+            "url": "https://www.gadgets360.com/ai/news/spacex-buys-cursor-ai-coding-startup-claude-code-openai-codex-competitor-60-billion-usd-11647529",
+            "source": "Gadgets360 · 6月28日",
+            "summary": "SpaceX于6月28日宣布正式完成600亿美元全股票并购Cursor（Anysphere），Cursor成为SpaceX全资子公司，预计Q3 2026正式交割。此前xAI的Grok在AI编程工具竞争中落后于Claude Code和OpenAI Codex，Cursor的专家软件工程师分发网络被视为关键战略资产。SpaceX拥有百万H100等量的Colossus训练超算将为Cursor提供算力背书。",
+            "region": "overseas"
+          },
+          {
+            "title": "AI Coding工具成本重定价：2000美元/工程师/月迫使行业重新思考ROI",
+            "url": "https://thenextweb.com/news/microsoft-claude-code-retreat-ai-cost",
+            "source": "The Next Web · 6月28日",
+            "summary": "GitHub Copilot按Token计费上线后，部分企业实测AI Coding工具月均成本达2000美元/人，远超原有预算。Microsoft已悄然收缩Claude Code部署范围，行业开始重新评估AI Coding的真实ROI。这一趋势可能加速开源编程工具的采用，并推动定价模式向按价值付费转变。",
+            "region": "overseas"
+          }
+        ],
+        "china": [
+          {
+            "title": "智谱GLM-5.5规划升级万亿参数，8月有望追赶美国顶尖模型",
+            "url": "https://m.toutiao.com/article/7654496223823200810/",
+            "source": "今日头条 · 6月28日",
+            "summary": "智谱AI规划推出GLM-5.5，拟升级至万亿参数级别，与DeepSeek V4 Pro相当规模。结合智谱对大模型后训练的技术优势，GLM-5.5预计8月有望在关键基准上追赶美国顶尖模型。这是继GLM-5.2开源冲击后，中国大模型在参数规模上的新一轮进攻。",
+            "region": "china"
+          },
+          {
+            "title": "SpaceX收购Cursor后，AI编程工具平台化战争正式开启",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=SpaceX+Cursor+%E6%94%B6%E8%B4%AD+AI%E7%BC%96%E7%A8%8B+2026%E5%B9%B46%E6%9C%88",
+            "source": "机器之心 · 6月28日(微信)",
+            "summary": "机器之心分析SpaceX 600亿美元收购Cursor的战略意义：AI编程工具已从单点功能竞争进入平台控制权争夺。Colossus超算+Cursor工程师分发网络形成垂直整合闭环，对Anthropic Claude Code和OpenAI Codex构成直接挑战。",
+            "region": "china"
+          }
+        ]
+      },
       "deep_focus": {
         "title": "SpaceX收购Cursor：AI编程工具的平台化战争开始了",
-        "content": "这笔600亿美元并购的意义，远不止于让SpaceX有了一个编程工具。它标志着AI编程工具从功能竞争进入平台控制权争夺阶段。\n\n战略逻辑：SpaceX的Colossus超算（百万H100等量）加上Cursor的工程师用户网络，形成垂直整合的AI研发基础设施。这个组合让SpaceX能够从模型训练到开发工具再到工程师桌面形成完整闭环，与OpenAI（Codex + ChatGPT）和Anthropic（Claude Code）直接竞争。\n\n对国内的启示：当AI Coding工具成本达到每人每月2000美元，国内以字节Trae、智谱CodeGeeX为代表的开源/低成本路线反而获得更多市场机会。成本压力可能是国产AI Coding工具实现真正商业化突破的关键窗口。"
+        "paragraphs": [
+          "这笔600亿美元并购的意义，远不止于让SpaceX有了一个编程工具。它标志着AI编程工具从功能竞争进入平台控制权争夺阶段。SpaceX的Colossus超算（百万H100等量）加上Cursor的工程师用户网络，形成垂直整合的AI研发基础设施，与OpenAI（Codex + ChatGPT）和Anthropic（Claude Code）直接竞争完整闭环。",
+          "更值得关注的是成本压力信号：当AI Coding工具月均成本达到2000美元/人，企业的预算审批门槛被彻底打破。Microsoft收缩Claude Code部署不是意外——这是整个行业在按Token计费模式下的理性反应。按价值付费的重新定价，将重塑AI Coding工具的市场格局。",
+          "对国内的启示：字节Trae、智谱CodeGeeX等开源/低成本路线恰好契合这一市场空间。成本压力可能是国产AI Coding工具实现真正商业化突破的关键窗口——不是靠功能追赶，而是靠价格优势和合规部署能力赢得企业客户。"
+        ],
+        "takeaway": "AI Coding平台化战争开启：垂直整合算力+分发网络是新护城河。成本压力（$2K/人/月）同时为开源低成本路线创造机会。"
       },
-      "pattern_insight_html": "<div style='font-family:sans-serif;padding:16px;background:#f0f4ff;border-radius:8px'><h4 style='margin:0 0 8px;color:#1a1a1a'>⌨️ AI Coding平台化进程</h4><p style='margin:0;color:#555;font-size:14px'>SpaceX-Cursor：<span style='color:#3498db;font-weight:bold'>$60B</span>全股票并购完成<br>AI Coding月成本：<span style='color:#e74c3c;font-weight:bold'>$2,000/工程师</span><br>竞争轴：垂直整合算力 vs 开源低成本路线</p></div>"
+      "pattern_insight_html": "<div class=\"pi-card\"><div class=\"insight-card\"><h3>⌨️ AI Coding平台格局</h3><table><tr><th>玩家</th><th>战略</th><th>优势</th></tr><tr><td>SpaceX+Cursor</td><td>算力+分发垂直整合</td><td>Colossus超算</td></tr><tr><td>Anthropic Claude Code</td><td>能力领先</td><td>受出口管制约束</td></tr><tr><td>国内开源路线</td><td>低成本合规部署</td><td>$2K/月成本压力窗口</td></tr></table></div></div>"
     },
     {
       "id": "apps",
-      "label": "📱 AI应用",
-      "news": [
-        {
-          "title": "OpenAI GPT-5.6发布：旗舰模型Sol加平衡型Terra加快速型Luna，引入ultra多智能体模式",
-          "url": "https://m.163.com/tech/article/L0DP0TVR00097U7T.html",
-          "source": "机器之心 · 6月27日(微信)",
-          "summary": "6月26日，OpenAI开始有限预览GPT-5.6系列，包含旗舰模型Sol（编程/生物学/网络安全能力全面提升）、平衡型Terra和快速低成本Luna。新引入max推理强度和ultra模式（通过子智能体处理复杂任务）。本次发布强调更谨慎的发布节奏，Sol先向可信合作伙伴开放。",
-          "region": "overseas"
-        },
-        {
-          "title": "Kimi K2.6正式上线，月之暗面持续迭代AI产品",
-          "url": "https://kimi.moonshot.cn/",
-          "source": "Kimi官网 · 6月29日",
-          "summary": "月之暗面旗下Kimi AI官网显示K2.6版本已上线，新增Agent集群、Kimi Code等功能入口。在OpenAI上市延迟背景下，市场关注中国AI独角兽的IPO路径和估值逻辑变化，虎嗅分析认为AI产品的估值逻辑正从用户规模转向商业化变现能力。",
-          "region": "china"
-        },
-        {
-          "title": "谷歌Search AI化全面提速：Personal Intelligence扩展至200国，支持98种语言",
-          "url": "https://blog.google/products-and-platforms/products/search/search-io-2026",
-          "source": "Google Blog · June 2026",
-          "summary": "谷歌I/O 2026发布搜索重大更新：Personal Intelligence在AI Mode扩展至近200个国家和地区，98种语言免费提供。新增Agent预订功能（本地体验、服务直接预订），搜索与AI Mode形成对话式闭环。Google Finance同步推出新应用。",
-          "region": "overseas"
-        }
-      ],
-      "deep_focus": {
-        "title": "GPT-5.6的Sol+ultra模式：OpenAI的多智能体战略明牌了",
-        "content": "ultra模式通过子智能体处理复杂任务这个设计，透露了OpenAI对下一阶段竞争的判断：单模型能力提升的边际效益递减，多智能体协作才是处理真实世界复杂任务的关键。\n\nSol先向可信合作伙伴开放的谨慎策略，也反映出OpenAI在出口管制压力下重新构建产品分发策略：不再追求全球最快速度，而是维护与核心用户的深度关系。\n\n国内对标：Kimi K2.6的Agent集群功能和智谱AutoGLM都在走类似路径。下半年多智能体应用会是最热的战场。"
+      "title": "AI应用",
+      "icon": "📱",
+      "news": {
+        "overseas": [
+          {
+            "title": "谷歌Search AI化全面提速：Personal Intelligence扩展至200国，支持98种语言",
+            "url": "https://blog.google/products-and-platforms/products/search/search-io-2026",
+            "source": "Google Blog · June 2026",
+            "summary": "谷歌I/O 2026发布搜索重大更新：Personal Intelligence在AI Mode扩展至近200个国家和地区，98种语言免费提供。新增Agent预订功能（本地体验、服务直接预订），搜索与AI Mode形成对话式闭环。Google Finance同步推出新应用。",
+            "region": "overseas"
+          },
+          {
+            "title": "OpenAI Releases GPT-5.6: Flagship Sol Model with Multi-Agent Ultra Mode",
+            "url": "https://aitoolsrecap.com/Blog/ai-news-june-28-2026",
+            "source": "AI Tools Recap · June 28",
+            "summary": "OpenAI began limited preview of GPT-5.6 on June 26, featuring flagship Sol (improved coding, biology, cybersecurity), balanced Terra, and fast Luna. The new ultra mode coordinates sub-agents for complex tasks. Sol is being rolled out to trusted partners first — a cautious release strategy reflecting post-export-control distribution concerns.",
+            "region": "overseas"
+          }
+        ],
+        "china": [
+          {
+            "title": "Kimi K2.6正式上线，月之暗面持续迭代AI产品",
+            "url": "https://kimi.moonshot.cn/",
+            "source": "Kimi官网 · 6月29日",
+            "summary": "月之暗面旗下Kimi AI官网显示K2.6版本已上线，新增Agent集群、Kimi Code等功能入口。在OpenAI上市延迟背景下，市场关注中国AI独角兽的IPO路径，虎嗅分析认为AI产品的估值逻辑正从用户规模转向商业化变现能力。",
+            "region": "china"
+          }
+        ]
       },
-      "pattern_insight_html": "<div style='font-family:sans-serif;padding:16px;background:#f0fff4;border-radius:8px'><h4 style='margin:0 0 8px;color:#1a1a1a'>📱 AI应用多智能体化趋势</h4><p style='margin:0;color:#555;font-size:14px'>GPT-5.6 ultra模式：<span style='color:#27ae60;font-weight:bold'>子智能体协作</span>处理复杂任务<br>谷歌Personal Intelligence：<span style='color:#3498db;font-weight:bold'>200国 / 98语言</span>免费开放<br>国内：Kimi K2.6 Agent集群同步跟进</p></div>"
+      "deep_focus": {
+        "title": "GPT-5.6 ultra模式：OpenAI的多智能体战略明牌了",
+        "paragraphs": [
+          "ultra模式通过子智能体处理复杂任务这个设计，透露了OpenAI对下一阶段竞争的判断：单模型能力提升的边际效益递减，多智能体协作才是处理真实世界复杂任务的关键。Sol先向可信合作伙伴开放的谨慎策略，也反映出出口管制压力下产品分发策略的重构。",
+          "谷歌同步将Personal Intelligence扩展至200国98语言，这两个动作放在一起看：顶级AI实验室都在用不同路径争夺全球用户基础——OpenAI靠可信合作伙伴网络深度绑定，谷歌靠免费开放广度覆盖。两种策略在AI应用普及阶段都有合理性。",
+          "国内对标：Kimi K2.6的Agent集群功能和智谱AutoGLM都在走类似的多智能体路径。下半年多智能体应用将是最热的产品战场，但Token成本（$2K/月阈值已出现在Coding场景）将成为多智能体产品能否大规模商业化的关键变量。"
+        ],
+        "takeaway": "多智能体是下半年AI应用的核心战场，但Token成本管控（Budget-aware）将成为能否真正商业化的决定性因素。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\"><div class=\"insight-card\"><h3>📱 AI应用多智能体化趋势</h3><table><tr><th>产品</th><th>多智能体特性</th><th>覆盖范围</th></tr><tr><td>GPT-5.6 ultra</td><td>子智能体协作</td><td>可信合作伙伴优先</td></tr><tr><td>谷歌Personal Intelligence</td><td>Agent预订能力</td><td>200国98语言</td></tr><tr><td>Kimi K2.6</td><td>Agent集群</td><td>国内</td></tr></table></div></div>"
     },
     {
       "id": "industry",
-      "label": "🏭 AI行业",
-      "news": [
-        {
-          "title": "白宫发布促进先进人工智能创新与安全行政令",
-          "url": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security",
-          "source": "White House · June 2026",
-          "summary": "特朗普政府发布新行政令，聚焦推动美国在AI领域的全球领导地位与国家安全，配套发布事实清单。同期还发布量子密码攻击防护令和NSPM-11国家安全备忘录，显示AI与国家安全的深度绑定正在成为美国政府的核心战略布局。",
-          "region": "overseas"
-        },
-        {
-          "title": "图灵奖得主希发基思正式加盟曹操出行，任AI创新中心首席科学顾问",
-          "url": "https://m.zol.com.cn/article/12073911.html",
-          "source": "中关村在线 · 6月29日",
-          "summary": "2026年6月29日，全球著名AI科学家、图灵奖获得者约瑟夫·希发基思正式受聘担任曹操出行AI创新中心首席科学顾问。此次合作旨在为曹操出行向AI原生企业转型提供学术支撑和国际战略指引，是出行领域头部企业深度绑定学术资源的最新案例。",
-          "region": "china"
-        },
-        {
-          "title": "AI六小虎成色分析：智谱IPO推进，MiniMax港股通过聆讯",
-          "url": "https://deepview.caixin.com/event/EVENT.000000348.html",
-          "source": "财新 · 6月27日",
-          "summary": "财新深度分析中国AI六家头部初创（智谱/MiniMax/月之暗面/零一万物/百川/阶跃星辰）的竞争格局。智谱已宣布推动A股IPO，拟募资150亿元；MiniMax已通过港股聆讯。在OpenAI上市延迟、SpaceX上市后市值破2.5万亿美元的背景下，中国AI独角兽的估值逻辑正从规模导向转向变现能力。",
-          "region": "china"
-        },
-        {
-          "title": "OpenAI IPO延迟背景下，AI独角兽估值逻辑重构",
-          "url": "https://finance.sina.cn/2026-06-28/detail-inieyriq2739417.d.html",
-          "source": "虎嗅 · 6月28日",
-          "summary": "SpaceX 6月12日正式登陆资本市场，上市后市值破2.5万亿美元。OpenAI则宣布推迟上市计划。对中国AI初创而言，资本市场对AI产品的估值关注点已从用户增速转向商业化路径的确定性，这直接影响Kimi、MiniMax等的IPO定价逻辑。",
-          "region": "china"
-        }
-      ],
+      "title": "AI行业",
+      "icon": "🏭",
+      "news": {
+        "overseas": [
+          {
+            "title": "白宫发布促进先进人工智能创新与安全行政令",
+            "url": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security",
+            "source": "White House · June 2026",
+            "summary": "特朗普政府发布新行政令，聚焦推动美国在AI领域的全球领导地位与国家安全，配套发布事实清单。同期还发布量子密码攻击防护令和NSPM-11国家安全备忘录，显示AI与国家安全的深度绑定正在成为美国政府的核心战略布局。",
+            "region": "overseas"
+          }
+        ],
+        "china": [
+          {
+            "title": "图灵奖得主希发基思正式加盟曹操出行，任AI创新中心首席科学顾问",
+            "url": "https://m.zol.com.cn/article/12073911.html",
+            "source": "中关村在线 · 6月29日",
+            "summary": "2026年6月29日，全球著名AI科学家、图灵奖获得者约瑟夫·希发基思正式受聘担任曹操出行AI创新中心首席科学顾问。此次合作旨在为曹操出行向AI原生企业转型提供学术支撑和国际战略指引，是出行领域头部企业深度绑定学术资源的最新案例。",
+            "region": "china"
+          },
+          {
+            "title": "SpaceX上市后AI独角兽估值逻辑重构，OpenAI推迟IPO",
+            "url": "https://finance.sina.cn/2026-06-28/detail-inieyriq2739417.d.html",
+            "source": "虎嗅 · 6月28日",
+            "summary": "SpaceX 6月12日正式登陆资本市场，上市后市值破2.5万亿美元。OpenAI则宣布推迟上市计划。对中国AI初创而言，资本市场对AI产品的估值关注点已从用户增速转向商业化路径的确定性，直接影响Kimi、MiniMax等的IPO定价逻辑。",
+            "region": "china"
+          },
+          {
+            "title": "港股AI应用板块走强：ASMPT涨逾10%，金蝶国际涨8%，明略科技-W涨7%",
+            "url": "https://c.m.163.com/news/a/L0J8GMDF0534A4SC.html",
+            "source": "网易财经 · 6月29日",
+            "summary": "2026年6月29日，港股AI应用板块持续走强，港股通信息技术ETF鹏华（159185）上涨1.81%。ASMPT上涨10.71%、金蝶国际上涨8.27%、明略科技-W上涨7.70%。港股AI板块近2周累计上涨4.65%，反映资本市场对中国AI企业商业化进程的持续看好。",
+            "region": "china"
+          }
+        ]
+      },
       "deep_focus": {
         "title": "AI行业IPO窗口：SpaceX上市后，下一个会是谁？",
-        "content": "SpaceX上市并购Cursor之后，AI行业的IPO预期全面升温。但这个窗口有个微妙的分叉：\n\n美国路径：OpenAI延迟上市可能是战略性的——等待估值逻辑从增长故事切换到盈利证明。Anthropic Q2 2026盈利预期落地后，整个赛道的上市时机窗口才真正打开。\n\n中国路径：智谱A股加MiniMax港股双轨推进，显示中国AI初创选择在本土资本市场寻求估值支撑，而非等待美股窗口。科创板将AI大模型纳入第五套标准（40亿市值加产品规模化上线）是重要的制度性配套。\n\n核心判断：2026年下半年，中国AI独角兽的第一波IPO浪潮将开启，但成功者将是那些能在IPO前展示明确变现路径的公司，而非仅凭技术叙事驱动估值的公司。"
+        "paragraphs": [
+          "SpaceX上市并购Cursor之后，AI行业的IPO预期全面升温。但这个窗口有个微妙的分叉：美国路径上，OpenAI延迟上市可能是战略性的——等待估值逻辑从增长故事切换到盈利证明。Anthropic Q2 2026盈利预期落地后，整个赛道的上市时机窗口才真正打开。",
+          "中国路径：智谱A股加MiniMax港股双轨推进，显示中国AI初创选择在本土资本市场寻求估值支撑，而非等待美股窗口。科创板将AI大模型纳入第五套标准（40亿市值加产品规模化上线）是重要的制度性配套，为国内AI公司上市提供了合法合规的新通道。",
+          "核心判断：2026年下半年，中国AI独角兽的第一波IPO浪潮将开启，但成功者将是那些能在IPO前展示明确变现路径的公司，而非仅凭技术叙事驱动估值的公司。SpaceX的先例表明，先证明商业价值再上市的路径，会获得更高的市场认可度。"
+        ],
+        "takeaway": "估值逻辑已从增长叙事转向变现确定性。2026下半年AI独角兽IPO浪潮开启，能展示变现路径者胜。"
       },
-      "pattern_insight_html": "<div style='font-family:sans-serif;padding:16px;background:#fff8f0;border-radius:8px'><h4 style='margin:0 0 8px;color:#1a1a1a'>🏭 AI行业资本化进程</h4><p style='margin:0;color:#555;font-size:14px'>SpaceX市值：<span style='color:#e67e22;font-weight:bold'>$2.5万亿</span>（上市后）<br>智谱A股目标：<span style='color:#e67e22;font-weight:bold'>150亿元</span>融资<br>科创板新标准：AI大模型纳入第五套 40亿市值门槛</p></div>"
+      "pattern_insight_html": "<div class=\"pi-card\"><div class=\"insight-card\"><h3>🏭 AI行业资本化进程</h3><table><tr><th>事件</th><th>含义</th></tr><tr><td>SpaceX市值$2.5万亿</td><td>AI+硬件整合估值天花板已现</td></tr><tr><td>智谱A股目标150亿元</td><td>国内AI IPO通道正式打开</td></tr><tr><td>科创板第五套扩容</td><td>40亿市值门槛，政策背书</td></tr><tr><td>OpenAI延迟上市</td><td>等待盈利证明，非增长故事</td></tr></table></div></div>"
     },
     {
       "id": "enterprise",
-      "label": "🔄 企业转型",
-      "news": [
-        {
-          "title": "具身智能关键节点：智元机器人量产加速，人形机器人走向产业落地",
-          "url": "https://m.163.com/dy/article/L0HUSTGC0530NLC9.html",
-          "source": "机器之心Pro · 6月28日(微信)",
-          "summary": "机器之心Pro报道智元机器人进入量产加速阶段，标志着具身智能从实验室走向产业落地的重要时刻。搬货、烤面包、摆桌牌等多种应用场景已进入可量产状态，人形机器人产业链进入硬件交付验证关键期。",
-          "region": "china"
-        },
-        {
-          "title": "从第一性原理看机器人AI：Google DeepMind Genie 3世界模型为具身AI提供无限虚拟环境",
-          "url": "https://c.m.163.com/news/a/L0HC7FAO0511AQHO.html",
-          "source": "机器之心 · 6月28日",
-          "summary": "深度分析机器人AI为何比大模型更难——物理世界的闭环反馈和长程规划是核心挑战。Google DeepMind Genie 3的世界模型能实时生成完全可交互的3D环境，为机器人训练提供无限虚拟场景，被视为2025-2026年具身AI的关键跃迁。",
-          "region": "china"
-        },
-        {
-          "title": "五部门联合印发AI加交通行动方案，首次为端到端大模型正名，覆盖十大领域",
-          "url": "https://m.toutiao.com/article/7655934171986100779/",
-          "source": "今日头条 · 6月27日",
-          "summary": "2026年6月25日，交通运输部等五部门联合印发人工智能加交通运输典型应用场景创新行动方案，首次将端到端大模型写入官方政策文件并正名。覆盖公路、铁路、民航、邮政四大领域，是中国AI行业政策落地的重要里程碑。",
-          "region": "china"
-        }
-      ],
+      "title": "企业转型",
+      "icon": "🔄",
+      "news": {
+        "overseas": [],
+        "china": [
+          {
+            "title": "具身智能关键节点：智元机器人量产加速，人形机器人走向产业落地",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=%E6%99%BA%E5%85%83%E6%9C%BA%E5%99%A8%E4%BA%BA+%E9%87%8F%E4%BA%A7+2026%E5%B9%B46%E6%9C%88",
+            "source": "机器之心Pro · 6月28日(微信)",
+            "summary": "机器之心Pro报道智元机器人进入量产加速阶段，标志着具身智能从实验室走向产业落地的重要时刻。搬货、烤面包、摆桌牌等多种应用场景已进入可量产状态，人形机器人产业链进入硬件交付验证关键期。",
+            "region": "china"
+          },
+          {
+            "title": "从第一性原理看机器人AI：Google DeepMind Genie 3世界模型为具身AI提供无限虚拟环境",
+            "url": "https://c.m.163.com/news/a/L0HC7FAO0511AQHO.html",
+            "source": "机器之心 · 6月28日",
+            "summary": "深度分析机器人AI为何比大模型更难——物理世界的闭环反馈和长程规划是核心挑战。Google DeepMind Genie 3的世界模型能实时生成完全可交互的3D环境，为机器人训练提供无限虚拟场景，被视为2025-2026年具身AI的关键跃迁。",
+            "region": "china"
+          },
+          {
+            "title": "中国大模型跻身全球AI开源第一梯队：DeepSeek、Qwen、GLM联合崛起",
+            "url": "https://m.163.com/dy/article/L0GGPGEG0516EPQ9.html",
+            "source": "网易科技 · 6月28日",
+            "summary": "2026年6月，中国AI开源生态以DeepSeek、Kimi、Qwen、MiniMax、智谱GLM等模型接连崛起，中国开源已跻身全球开源发展第一梯队。这一格局的形成不只是技术追赶，更是共享算法创新（MoE架构）和开放协作文化共同驱动的结果，代表着中国企业AI转型底层基础设施的系统性升级。",
+            "region": "china"
+          }
+        ]
+      },
       "deep_focus": {
         "title": "具身智能2026：量产节点到了，但难题还在",
-        "content": "智元量产加速是一个强烈的市场信号：人形机器人不再只是展会上的概念。但从机器之心对第一性原理的分析可以看出，真正的难关还在前面。\n\n已经解决的：外观设计、基础运动控制、单一场景下的任务执行（搬货/烤面包）。\n\n还没解决的：开放环境的长程规划、多任务泛化、与真实世界的闭环反馈。Genie 3这类世界模型的价值，恰恰在于用无限虚拟场景弥补真实世界数据不足的短板——但从虚拟训练到真实部署的迁移鸿沟，仍然是行业级挑战。\n\n国内产业节奏：五部门AI加交通政策的发布，意味着政府端的应用场景将率先规模化，这给了具身AI在半结构化环境（仓储/港口/交通枢纽）优先验证的机会。2026年量产的意义，可能不在于通用，而在于在特定场景真正做到商业可行。"
+        "paragraphs": [
+          "智元量产加速是一个强烈的市场信号：人形机器人不再只是展会上的概念。从机器之心的第一性原理分析看，已经解决的部分是：外观设计、基础运动控制、单一场景下的任务执行（搬货/烤面包）。这些场景的共同特征是：结构化环境 + 重复性动作 + 有限状态空间。",
+          "还没解决的是开放环境的长程规划、多任务泛化、与真实世界的闭环反馈。Genie 3这类世界模型的价值，恰恰在于用无限虚拟场景弥补真实世界数据不足的短板——但从虚拟训练到真实部署的迁移鸿沟，仍然是行业级挑战。五部门AI加交通政策的发布，意味着政府端的应用场景将率先规模化。",
+          "2026年量产的意义，可能不在于通用，而在于在特定场景（仓储/港口/交通枢纽）真正做到商业可行。这与大模型发展路径相似：不是一步到AGI，而是在垂直场景一个一个证明价值。具身AI的商业化拐点，将从这些半结构化环境中出现。"
+        ],
+        "takeaway": "具身智能进入量产阶段，但商业化路径是垂直场景逐一突破，而非通用化一步到位。政策驱动的交通/物流场景将是最近的落地窗口。"
       },
-      "pattern_insight_html": "<div style='font-family:sans-serif;padding:16px;background:#f5f0ff;border-radius:8px'><h4 style='margin:0 0 8px;color:#1a1a1a'>🔄 企业AI转型加速</h4><p style='margin:0;color:#555;font-size:14px'>具身智能：<span style='color:#8e44ad;font-weight:bold'>量产加速</span>阶段（智元）<br>政策支撑：<span style='color:#8e44ad;font-weight:bold'>五部门联合</span>AI+交通行动方案<br>技术底座：Genie 3世界模型赋能虚拟训练</p></div>"
+      "pattern_insight_html": "<div class=\"pi-card\"><div class=\"insight-card\"><h3>🔄 企业AI转型：具身智能商业化路径</h3><table><tr><th>阶段</th><th>状态</th><th>代表</th></tr><tr><td>结构化场景量产</td><td>已达到</td><td>智元：搬货/烤面包</td></tr><tr><td>半结构化场景</td><td>政策驱动中</td><td>五部门AI+交通方案</td></tr><tr><td>开放环境通用</td><td>技术攻关中</td><td>Genie 3世界模型</td></tr></table></div></div>"
     }
   ]
 }
