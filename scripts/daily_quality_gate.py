@@ -1273,6 +1273,16 @@ def check_six_locations(date_str: str) -> CheckResult:
         # 2e. 经验#62: 检查未替换的 $MONTH/$DAY/$DATE 模板变量残留（经验#63 遗留物）
         if _re.search(r"'\\\$MONTH'|'\$MONTH'", content):
             issues.append("首页 reportsData 中存在未替换的 '$MONTH' 模板变量")
+        # 2f. #129 硬约束：周报大卡片链接不能指向不存在的文件
+        weekly_card_href = _re.search(r'class="weekly-report-card"[^>]*href="([^"]+)"', content)
+        if weekly_card_href:
+            href = weekly_card_href.group(1)
+            target_file = PROJECT_ROOT / href.lstrip("./")
+            if not target_file.exists():
+                issues.append(f"周报卡片链接指向不存在的文件: {href}")
+        # 2g. #129 硬约束：内部版首页必须保留林克身份
+        if "林克" not in content:
+            issues.append("内部版首页缺少林克身份（可能被脱敏版覆盖）")
     
     if issues:
         return CheckResult("6处联动", False, ", ".join(issues), fixable=True)
@@ -1323,6 +1333,11 @@ def check_external_sync(date_str: str) -> CheckResult:
         # 检查2：最新日报链接是否指向当日
         if f"{date_str}.html" not in index_content:
             index_issues.append("外部首页链接未指向当日日报")
+        # 检查3（#129 硬约束）：外部版首页零敏感词
+        SENSITIVE_WORDS = ["林克", "沈浪", "link-avatar-small", "corp.kuaishou.com"]
+        for word in SENSITIVE_WORDS:
+            if word in index_content:
+                index_issues.append(f"外部首页含敏感词: {word}")
         if index_issues:
             return CheckResult("外部同步", False, "public/+外部仓库均已同步, 但 " + "; ".join(index_issues), fixable=True)
     
