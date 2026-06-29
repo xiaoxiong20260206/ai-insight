@@ -172,6 +172,28 @@ uv run scripts/ai_daily_orchestrator.py complete --step 5
 
 **目的**：快速自检内部版（frontend-cloud）和外部版（GitHub Pages）是否都正常发布，防止某个版本静默失败而不知。
 
+### Step 5.6: 首页完整性验证（P0 强制，2026-06-29 新增）
+
+部署完成后，**必须**运行首页验证脚本，全部通过才算任务完成：
+
+```bash
+uv run scripts/verify_homepage.py --date YYYY-MM-DD
+```
+
+**准出标准**：所有 HARD 检查通过 = ✅ 准出；任何 HARD 失败 = 🚫 阻断，必须修复后重跑。
+
+验证项包括：
+- 三个版本首页文件存在（内部版/public/外部版）
+- 内部版保留林克身份（头像/CSS class/文字）
+- 外部版零敏感词（林克/沈浪/corp.kuaishou.com/快手/MyFlicker）
+- 日历日报数据包含当日
+- 日历周报数据包含本周周一+下周周一
+- 日历无幽灵条目（引用的周报文件必须存在）
+- 周报大卡片链接指向存在的文件
+- 订阅按钮指向正确内网URL
+- 内部版和public/内容一致
+- 日历无重复周号、key格式正确
+
 ---
 
 ## Step 6: 知识沉淀（Harvest）— P0#15 强制，不可跳过
