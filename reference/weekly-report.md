@@ -72,6 +72,19 @@ week_num = monday.isocalendar()[1]
 
 ## Step 2: 汇总分析 → 周报JSON + MD
 
+### ⛔ P0铁律：周报所有新闻条目必须来自本周日报JSON，禁止从训练记忆补充
+
+**时间窗口：周报 = 本周一00:00 ~ 周日23:59 之间的新闻**
+
+- ❌ **禁止**：在周报里加入本周日报中没有的新闻（即使模型"知道"那是真实新闻）
+- ❌ **禁止**：把上周或更早的旧新闻以本周日期写入周报
+- ❌ **禁止**：用旧URL + 修改日期来凑本周条目
+- ✅ **必须**：Step 1 先读取本周一~周日所有 `daily-content-YYYY-MM-DD.json`，提取所有 news 条目（含真实URL）
+- ✅ **必须**：Step 2 的 sections.table 每一行的 event/url/date 都要能在某天日报 JSON 里找到对应条目
+- ✅ **允许**：Top5描述、洞察分析、pattern_insight 等叙述类内容可自由推理，但不能新增事实性新闻条目
+
+**检验方法**：sections.table 里每条 `date=06-XX` 的条目，必须能在对应 `daily-content-2026-06-XX.json` 里找到相似标题。
+
 ### JSON（脚本化输入）
 周报内容使用JSON格式输出（约200行），由 `gen_weekly_html.py` 从JSON动态生成HTML。
 

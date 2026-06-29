@@ -653,6 +653,7 @@ def check_date_window(date_str: str) -> CheckResult:
                 for item in tab.get('news', {}).get(region, []):
                     source = item.get('source', '')
                     total_checked += 1
+                    url = item.get('url', '')
                     
                     # 提取日期部分 (格式: "来源 · 日期")
                     if '·' in source:
@@ -660,11 +661,28 @@ def check_date_window(date_str: str) -> CheckResult:
                     else:
                         date_part = source
                     
-                    # 检查是否在有效日期范围内
+                    # 检查是否在有效日期范围内（source字段）
                     is_valid = any(valid_date in date_part for valid_date in valid_dates)
                     
-                    if not is_valid and date_part:
-                        # 尝试解析日期判断是否过时
+                    # v13.0: URL嵌入日期二次验证
+                    # source字段是AI自己写的，可能伪造日期——用URL里的实际日期做双重验证
+                    url_date_ok = True  # 默认通过（无URL时不检测）
+                    if url and url.startswith('http'):
+                        url_date_match = re.search(r'(\d{4})[-/](\d{2})[-/](\d{2})', url)
+                        if url_date_match:
+                            y, m, d = int(url_date_match.group(1)), int(url_date_match.group(2)), int(url_date_match.group(3))
+                            try:
+                                url_news_date = datetime(y, m, d)
+                                url_days_diff = (report_date - url_news_date).days
+                                if url_days_diff > 3:  # URL嵌入日期比日报日期早超过3天
+                                    title = item.get('title', '')[:25]
+                                    out_of_window.append(f"{title}...(URL含旧日期{y}-{m:02d}-{d:02d},比日报早{url_days_diff}天)")
+                                    url_date_ok = False
+                            except ValueError:
+                                pass
+                    
+                    if not is_valid and date_part and url_date_ok:
+                        # 尝试解析source日期判断是否过时
                         # 匹配 "X月Y日" 格式
                         match = re.search(r'(\d+)月(\d+)日', date_part)
                         if match:
