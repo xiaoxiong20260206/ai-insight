@@ -245,6 +245,15 @@ def validate_json(week_id: str) -> bool:
                         errors.append(f"板块{k} table[{i}]缺少url字段且event含Markdown链接，应将链接提取到url字段（#124防复发）")
                     else:
                         warnings.append(f"板块{k} table[{i}]缺少url字段，链接列将为空")
+                else:
+                    # v12.0: 检测锚点占位符 URL（如 #coding / #industry）
+                    import re as _re
+                    _url = row.get("url", "")
+                    _FAKE_FRAGMENTS = {'coding', 'industry', 'enterprise', 'enterprise-china',
+                                       'enterprise-overseas', 'app', 'llm', 'model', 'ai'}
+                    _fragment = _re.search(r'#([a-zA-Z_-]+)$', _url)
+                    if _fragment and _fragment.group(1).lower() in _FAKE_FRAGMENTS:
+                        errors.append(f"板块{k} table[{i}] URL是锚点占位符 #{_fragment.group(1)}，必须替换为真实链接")
     
     if errors:
         print(f"\n❌ 硬性错误 ({len(errors)}):")
