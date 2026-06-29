@@ -301,6 +301,10 @@
         /* Tab Panel */
         .tab-panel { display: none; }
         .tab-panel.active { display: block; }
+        /* Fallback: 如果JS未加载，显示第一个panel（noscript友好） */
+        .tab-panel:first-of-type { display: block; }
+        .tab-panel.active ~ .tab-panel:first-of-type { display: none; }
+        .tab-panel.active { display: block !important; }
 
         /* ===== BOARD SECTION WITH THEME COLOR (v4.0) ===== */
         .board-section {
@@ -512,28 +516,18 @@
         @media (max-width: 768px) {
             .layout-wrapper { flex-direction: column; }
             .sidebar-nav {
-                width: 100%; position: sticky; top: 0; height: auto;
-                overflow-y: visible; border-right: none; border-bottom: 1px solid var(--color-border);
-                display: flex; flex-direction: row; overflow-x: auto; padding: 4px 0;
-                -webkit-overflow-scrolling: touch;
+                display: none;
             }
-            .sidebar-doc-title, .toc-group-label, .reading-progress-wrap { display: none; }
-            .toc-link {
-                flex: 0 0 auto; border-left: none; border-bottom: 2px solid transparent;
-                white-space: nowrap; padding: 8px 14px; font-size: 12px;
-            }
-            .toc-link.toc-active { border-left-color: transparent; border-bottom-color: var(--color-success); }
-            .toc-link.toc-sub { display: none; }
             .sidebar-collapse-btn { display: none; }
-            .content-inner { padding: 20px 12px 80px; }
+            .content-inner { padding: 16px 12px 80px; width: 100%; }
             /* Tab: 移动端图标模式 */
-            .tab-nav { top: 8px; padding: 6px 8px; gap: 2px; }
-            .tab-btn { padding: 8px 10px; font-size: 12px; }
+            .tab-nav { top: 0; padding: 6px 8px; gap: 2px; border-radius: 0; }
+            .tab-btn { padding: 8px 10px; font-size: 12px; min-width: 44px; min-height: 44px; touch-action: manipulation; }
             .tab-btn .tab-label { display: none; }
-            .tab-btn .tab-icon { width: 26px; height: 26px; font-size: 16px; }
+            .tab-btn .tab-icon { width: 22px; height: 22px; font-size: 14px; }
             .overview-grid.five-cols { grid-template-columns: 1fr 1fr; }
             .watch-grid { grid-template-columns: 1fr; }
-            .header-title { font-size: 24px; }
+            .header-title { font-size: 22px; }
             .heat-table { font-size: 12px; }
             .heat-table th, .heat-table td { padding: 6px 4px; }
             .coverage-bar { flex-direction: column; gap: 8px; }
@@ -543,7 +537,12 @@
             .pi-t-row { grid-template-columns: 1fr; gap: 2px; padding: 6px 10px; border-left: 3px solid var(--color-border-light); margin-bottom: 4px; }
             .pi-t-row.projected { border-left-color: rgba(124,58,237,.3); }
             .pi-t-analogy { border-left: none; padding-left: 0; font-size: 12px; }
-            .news-item { padding: 10px 12px; }
+            .news-item { padding: 12px 14px; border-left-width: 3px; }
+            .news-title-row { font-size: 16px; flex-wrap: wrap; }
+            .news-summary-compact { font-size: 13px; }
+            .deep-focus-card { margin: 16px 0; }
+            .header { padding: 20px 0 16px; }
+            .header-meta { flex-wrap: wrap; }
         }
         @media (min-width: 769px) and (max-width: 1024px) {
             .tab-btn .tab-label { display: inline; }

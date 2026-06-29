@@ -290,7 +290,7 @@ def render_heat_trend(heat: dict) -> str:
         <div class="heat-card">
             <div class="heat-header">
                 <div class="heat-header-label">{SVG_ICONS["heat"]} 热度趋势</div>
-                <div class="heat-header-title">{heat.get('title', '')}</div>
+                <div class="heat-header-title">{heat.get('title', heat.get('text', 'AI行业热度趋势'))}</div>
             </div>
             <div class="heat-body">
                 <table class="heat-table">
@@ -497,7 +497,7 @@ def generate_html(data: dict) -> str:
         # 兼容两种schema: {icon,label,headline,text} 和 {tab,emoji,summary}
         icon = ov.get('icon', ov.get('emoji', '📌'))
         label = ov.get('label', ov.get('tab', ''))
-        text = ov.get('text', ov.get('summary', ''))
+        text = ov.get('text', ov.get('summary', ov.get('headline', '')))
         span = ' style="grid-column: span 2;"' if ov.get("span2") else ""
         label_class = f' class="{ov["label_class"]}"' if ov.get("label_class") else ""
         # v5.1: 去掉 overview-headline（截断显示不好看），summary 已完整展示
