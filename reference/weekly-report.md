@@ -231,6 +231,18 @@ cd public && npx -y --registry https://npm.corp.kuaishou.com @codeflicker/fronte
 
 > ⚠️ 周报内外版文件名一致（无-v3后缀），URL SSoT = scripts/config.py。
 
+### Step 5.6: 首页完整性验证（P0 强制，2026-06-29 新增）
+
+部署完成后，**必须**运行首页验证脚本，全部通过才算任务完成：
+
+```bash
+uv run scripts/verify_homepage.py --week YYYY-WXX
+```
+
+**准出标准**：所有 HARD 检查通过 = ✅ 准出；任何 HARD 失败 = 🚫 阻断，必须修复后重跑。
+
+验证项同日报（内部版身份/外部版脱敏/日历/卡片链接/订阅按钮等17项）。
+
 ---
 
 ## Step 6: KIM推送
