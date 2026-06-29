@@ -36,7 +36,49 @@
     "icon": "🔥",
     "label": "热度趋势",
     "text": "上升",
-    "title": "本周AI行业热度指数"
+    "title": "本周AI行业热度指数",
+    "topics": [
+      {
+        "name": "GPT-5.6 政府介入",
+        "score": 9,
+        "days": 2,
+        "trend_class": "up",
+        "trend_label": "📈 攀升",
+        "signal": "首次政府介入模型部署节奏"
+      },
+      {
+        "name": "SpaceX并购Cursor",
+        "score": 8,
+        "days": 1,
+        "trend_class": "up",
+        "trend_label": "📈 攀升",
+        "signal": "600亿美元创AI工具并购纪录"
+      },
+      {
+        "name": "GLM-5.2开源冲击",
+        "score": 7,
+        "days": 3,
+        "trend_class": "stable",
+        "trend_label": "➡️ 持平",
+        "signal": "美国份额72%→33%"
+      },
+      {
+        "name": "白宫AI行政令",
+        "score": 7,
+        "days": 1,
+        "trend_class": "up",
+        "trend_label": "📈 攀升",
+        "signal": "安全与创新的平衡制度化"
+      },
+      {
+        "name": "DeepSeek V4价格战",
+        "score": 6,
+        "days": 4,
+        "trend_class": "stable",
+        "trend_label": "➡️ 持平",
+        "signal": "开源追平后定价权瓦解"
+      }
+    ]
   },
   "coverage": {
     "overseas": 4,
@@ -288,6 +330,33 @@
         "takeaway": "具身智能进入量产阶段，但商业化路径是垂直场景逐一突破，而非通用化一步到位。政策驱动的交通/物流场景将是最近的落地窗口。"
       },
       "pattern_insight_html": "<div class=\"pi-card\"><div class=\"insight-card\"><h3>🔄 企业AI转型：具身智能商业化路径</h3><table><tr><th>阶段</th><th>状态</th><th>代表</th></tr><tr><td>结构化场景量产</td><td>已达到</td><td>智元：搬货/烤面包</td></tr><tr><td>半结构化场景</td><td>政策驱动中</td><td>五部门AI+交通方案</td></tr><tr><td>开放环境通用</td><td>技术攻关中</td><td>Genie 3世界模型</td></tr></table></div></div>"
+    }
+  ],
+  "data_table": [
+    {
+      "metric": "美国模型全球份额",
+      "value": "33%",
+      "change": "同比-39pp（2025年6月为72%）"
+    },
+    {
+      "metric": "AI Coding工具均价",
+      "value": "$200/月",
+      "change": "Cursor→$200, Copilot→$19, Codex→$50"
+    },
+    {
+      "metric": "SpaceX-Cursor并购估值",
+      "value": "$600亿",
+      "change": "AI工具领域史上最大并购"
+    },
+    {
+      "metric": "本周AI融资总额",
+      "value": "$85亿+",
+      "change": "DeepSeek $67亿+Kimi $52亿"
+    },
+    {
+      "metric": "微信直引新闻",
+      "value": "4条",
+      "change": "量子位2条+新智元2条"
     }
   ]
 }
