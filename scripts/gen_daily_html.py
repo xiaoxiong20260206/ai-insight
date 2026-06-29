@@ -689,11 +689,9 @@ def generate_html(data: dict) -> str:
             <!-- FOOTER -->
             <footer class="doc-footer animate-on-scroll">
                 <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-                    <img src="link-avatar-small.webp" alt="林克" style="width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(5,150,105,0.3);object-fit:cover">
-                    <span>我是 <strong>林克</strong>，沈浪的AI分身。
-                    <a href="{INTERNAL_PAGES_BASE}/" target="_blank">{SVG_ICONS["home"]} 访问AI洞察首页</a></span>
+                    <span>AI洞察 · 系统化追踪AI行业动态 · 五大板块每日更新</span>
                 </div>
-                <p style="margin-top:6px">AI洞察 · 系统化追踪AI行业动态 · 五大板块每日更新</p>
+                <p style="margin-top:6px"><a href="{INTERNAL_PAGES_BASE}/" target="_blank">{SVG_ICONS["home"]} 访问AI洞察首页，获取更多深度分析</a></p>
             </footer>
 
         </div>
