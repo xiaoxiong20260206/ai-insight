@@ -4,31 +4,31 @@
     {
       "icon": "🧠",
       "label": "大模型",
-      "headline": "GPT-5.6发布夺回王座+DeepSeek V4上线+智谱GLM-5.2开源登顶",
+      "headline": "中国AI开源百亿下载(达沃斯)，GPT-5.6 Sol评测vs Fable 5",
       "text": ""
     },
     {
       "icon": "⌨️",
       "label": "AI Coding",
-      "headline": "编程Agent六强格局确立+微软FastContext开源降60% Token",
+      "headline": "三件套编排层产品机会浮现，Verification瓶颈未解",
       "text": ""
     },
     {
       "icon": "📱",
       "label": "AI应用",
-      "headline": "豆包任务模式+腾讯研究院ROI报告+SpaceX收购Cursor后IPO",
+      "headline": "企业AI 48%失望率+23%Agent ROI，Klarna替代回调核心教训",
       "text": ""
     },
     {
       "icon": "🏭",
-      "label": "产业动态",
-      "headline": "华为HDC+字节Seedance+MiniMax M2.5 Agent原生设计",
+      "label": "AI行业",
+      "headline": "达沃斯李强致辞开源AI战略，百亿下载从追赶者到基础设施",
       "text": ""
     },
     {
-      "icon": "🏢",
-      "label": "企业AI",
-      "headline": "价值竞速替代技术竞速，组织能力是AI放大的前置条件",
+      "icon": "🔄",
+      "label": "企业转型",
+      "headline": "Klarna省6000万但打破公司，intent engineering成为新焦点",
       "text": ""
     }
   ],
@@ -37,277 +37,240 @@
     "label": "热度趋势",
     "text": "上升"
   },
-  "capability_update": "林克视角：GPT-5.6和Fable 5的王座之争表面是跑分，实质是安全治理权的博弈——Anthropic的数据保留政策可能成为行业先例，'用你的数据训练还是用你的数据防御'的边界正在被重新划定。编程Agent三强（Codex/Claude Code/Gemini CLI）格局确立，但微软FastContext-1.0的'降60% Token'才是真正的变量——当Token成本不再是Agent的瓶颈，使用门槛将降到'人人可用Agent写代码'。腾讯研究院80%企业AI ROI为负的结论像一盆冷水，但对AI生产力中心来说也是机遇——证明'组织能力+AI'比'纯AI'更能产出价值。",
   "coverage": {
-    "overseas": 5,
-    "domestic": 5,
-    "wechat_direct": 5
+    "overseas": 4,
+    "china": 7
   },
   "tabs": [
     {
-      "id": "models",
+      "id": "llm",
       "title": "🧠 大模型",
-      "icon": "brain",
+      "icon": "🧠",
       "news": {
         "overseas": [
           {
-            "title": "GPT-5.6突然发布，Fable 5痛失最强基模王座",
-            "summary": "OpenAI发布GPT-5.6，在多项基准测试中超越Claude Fable 5。Fable 5此前在AA智能指数(65分)和LMArena文本生成榜(Elo 1510)均位列全球第一。GPT-5.6夺回王座意味着基模竞赛进入拉锯战阶段。",
-            "source": "量子位 · 6月28日",
-            "url": "https://www.qbitai.com",
-            "region": "overseas",
-            "importance": 5
-          },
-          {
-            "title": "Claude Fable 5分批重新上线，数据保留政策引发行业争议",
-            "summary": "Anthropic分批重新上线Claude Fable 5。Mythos 5继续通过Project Glasswing向政府与关键基础设施提供商部署。Anthropic称不会用用户数据训练模型，但会用于防御攻击和减少误报——该政策可能成为行业先例，'以安全之名留存数据'的边界正被重划。",
-            "source": "TechCrunch · Anthropic · 6月",
-            "url": "https://techcrunch.com/2026/06/09/anthropics-claude-fable-5-is-a-version-of-mythos-the-public-can-access-today",
-            "region": "overseas",
-            "importance": 5
-          },
-          {
-            "title": "DeepSeek V4 Pro/V4 Flash上线：1M上下文+推理成本断崖式下降",
-            "summary": "DeepSeek发布V4系列，Pro版支持1M上下文窗口，Flash版输入价格仅0.23/M token。同一模型家族最高端与最低端成本差距达12.5倍。V4 Pro在SWE-bench等编码基准上表现优异，开源+低价策略持续侵蚀闭源护城河。",
-            "source": "Atlas Cloud · ModelScope · 6月",
-            "url": "https://www.atlascloud.ai/zh/blog/guides/coding-plan-best-open-source-coding-llm",
-            "region": "china",
-            "importance": 4
+            "title": "GPT-5.6 Sol发布后续：能力评测与限制争议并存",
+            "url": "https://techcrunch.com/2026/06/26/openai-limits-gpt-5-6-rollout-after-government",
+            "source": "TechCrunch",
+            "summary": "GPT-5.6 Sol发布后，独立评测显示推理任务超越Fable 5但coding任务仍有差距。限制部署的决定在AI社区引发关于政府介入模型发布的激烈辩论。",
+            "tags": [
+              "GPT-5.6",
+              "评测",
+              "限制部署"
+            ]
           }
         ],
         "china": [
           {
-            "title": "智谱GLM-5.2开源登顶Code Arena，综合能力全面对齐Claude Opus 4.6",
-            "summary": "智谱AI发布GLM-5.2，Coding与长程任务评测达开源SOTA，支持一次任务独立持续工作长达8小时。综合能力全面对齐Claude Opus 4.6，成为首个在综合能力上实现全面对齐的中国模型。科创板上市标准扩围至AI大模型行业。",
-            "source": "智谱AI · CSDN · 6月",
-            "url": "https://docs.bigmodel.cn/cn/update/new-releases",
-            "region": "china",
-            "importance": 5
+            "title": "夏季达沃斯：中国AI开源大模型全球下载量突破100亿次",
+            "url": "https://www.jwview.com/jingwei/100b-downloads-2026",
+            "source": "中新经纬",
+            "summary": "国务院总理李强在2026夏季达沃斯论坛致辞：中国AI开源大模型全球累计下载量突破100亿次，标志中国开源AI在全球影响力的里程碑时刻。",
+            "tags": [
+              "达沃斯",
+              "开源AI",
+              "100亿下载"
+            ]
           },
           {
-            "title": "Kimi 2.7 Code高速版发布：峰值260 Token/s，5-6倍提速",
-            "summary": "月之暗面推出Kimi 2.7 Code高速版编码大模型，开启思考模式后输出速度达常规版本5-6倍，短上下文场景峰值速度260 Token/s，API定价仅为普通版本2倍。编码场景性价比极高。",
-            "source": "AI6S · 6月",
-            "url": "https://ai6s.net/6a3159c6662f9a54cb80026b.html",
-            "region": "china",
-            "importance": 3
+            "title": "GPT-5.6 Sol限量预览：国内外AI模型竞争新格局",
+            "url": "https://www.36kr.com/p/gpt56-sol-china-reaction",
+            "source": "36氪",
+            "summary": "国内AI社区对GPT-5.6 Sol的反应分化：一方认为受限发布是安全负责，另一方认为这是压制创新。DeepSeek和MiniMax的追赶速度受到关注。",
+            "tags": [
+              "GPT-5.6",
+              "国内反应",
+              "竞争格局"
+            ]
           }
         ]
       },
       "deep_focus": {
-        "title": "基模王座拉锯战：跑分之争背后的安全治理权与数据定价权",
+        "title": "100亿次下载：中国开源AI全球影响力拐点",
         "paragraphs": [
-          "GPT-5.6夺回Fable 5的王座，表面是跑分之争，实质是两个战略方向的角力：OpenAI走'免费推送+生态围栏'路线（GPT-5.5 Instant全球免费），Anthropic走'受控释放+安全先验'路线（Fable 5分批上线+数据保留政策）。两条路线都指向同一个终局——大模型从'谁更聪明'进入'谁更能定义安全边界和数据定价权'。",
-          "DeepSeek V4的1M上下文+Flash版0.23/M token的价格，和智谱GLM-5.2的开源登顶，从另一端撕开闭源护城河。当开源模型能在Code Arena上争第一、Agent基准上同场竞技，闭源的溢价只剩品牌信任和企业合规——性能不再是独占优势。",
-          "Kimi 2.7 Code的260 Token/s高速推理说明，推理速度正在成为新的竞争维度：不是'谁更强'而是'谁更快更便宜'。编码场景对速度和成本敏感，Flash/Lite模型的市场份额将持续扩大。"
+          "李强在达沃斯披露100亿次下载，不是简单的数字里程碑——它意味着中国AI开源模型已经从追赶者变为基础设施提供者。DeepSeek、Qwen、MiniMax等模型在全球开发者社区被广泛采用。",
+          "结合GPT-5.6 Sol受限发布，双轨格局正在形成：美系闭源模型在能力天花板领先但受合规限制，中国开源模型在可及性和部署自由度上占据优势。100亿次下载=100亿次选择自由。",
+          "全球AI分化为两个生态位：能力天花板型（美系闭源）和部署自由型（中国开源+欧洲监管友好）。企业选型不再只看哪个强，而是看哪个能合法部署到我的场景。合规约束正在成为比模型能力更硬的筛选器。"
         ],
-        "takeaway": "基模竞争进入三维：安全治理权×数据定价权×开源侵蚀力，跑分只是最浅的一层"
+        "takeaway": "合规约束正在成为比模型能力更硬的筛选器。合规约束>模型能力，成为企业AI选型的第一筛选器。"
       },
-      "pattern_insight_html": "<div class=\"pi-card\" style=\"padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7\"><div style='padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7'><b>📊 模式洞察</b><br/>大模型竞赛从'技术竞速'转向'价值竞速'——GPT-5.6和Fable 5的交替登顶说明跑分已无法锁定胜局，真正的壁垒是安全治理规则和数据定价权的先发定义权。国内开源(DeepSeek V4/GLM-5.2)从性能端撕开闭源护城河，推理速度(Kimi 2.7 Code 260 tok/s)从成本端侵蚀利润空间。</div></div>"
+      "pattern_insight_html": "<div class=\"pi-card\"><div class=\"insight-card\"><h3>📊 全球AI双轨格局</h3><table><tr><th>生态位</th><th>代表</th><th>优势</th><th>限制</th></tr><tr><td>能力天花板型</td><td>GPT-5.6/Fable 5</td><td>推理最强</td><td>合规受限</td></tr><tr><td>部署自由型</td><td>DeepSeek/Qwen</td><td>100亿下载</td><td>能力差距</td></tr></table></div></div>"
     },
     {
-      "id": "coding",
+      "id": "ai_coding",
       "title": "⌨️ AI Coding",
-      "icon": "code",
+      "icon": "⌨️",
       "news": {
         "overseas": [
           {
-            "title": "AI编程工具六强格局确立：Codex领衔+Claude Code质量最强+Gemini CLI开源新秀",
-            "summary": "2026年6月AI编程工具市场正式从'补全时代'跨入'Agent时代'。Morphllm更新排行榜（含Fable 5评测）：Codex在多Agent编排领先，Claude Code在复杂重构产出更高质量代码，Gemini CLI快速崛起。常见技术栈：Codex/Claude Code做重活，Copilot/Cursor做补全，开源Agent做灵活替补。",
-            "source": "Morphllm · Firecrawl · 6月",
-            "url": "https://www.morphllm.com/best-ai-coding-agents-2026",
-            "region": "overseas",
-            "importance": 5
-          },
-          {
-            "title": "微软开源FastContext-1.0：编码Agent上下文助手，最高降60% Token消耗",
-            "summary": "微软开源FastContext-1.0模型，专为编码Agent设计，最高降低主模型60% Token消耗，任务解决率提升5.5%。参数覆盖4B至30B，基于Qwen3架构。同时开源agentrc工具实时同步代码仓库变更。编码Agent的Token成本瓶颈正在被打破。",
-            "source": "AI6S · 微软 · 6月",
-            "url": "https://ai6s.net/6a3159c6662f9a54cb80026b.html",
-            "region": "overseas",
-            "importance": 4
+            "title": "企业AI采用调研：79%面临挑战，48%称令人失望",
+            "url": "https://writer.com/blog/enterprise-ai-adoption-2026",
+            "source": "WRITER",
+            "summary": "WRITER 2026企业调研：79%企业面临AI采用挑战，48%称令人失望（去年34%），仅23%报告Agent显著ROI。75%高管承认AI策略'更多是表演'。",
+            "tags": [
+              "企业AI",
+              "ROI",
+              "失望率"
+            ]
           }
         ],
         "china": [
           {
-            "title": "智谱ZCode 3.0切换自研Agent内核，Terminal-Bench提升17.5%",
-            "summary": "智谱AI编程Agent ZCode 3.0正式上线，切换到自研ZCode Agent内核，深度适配GLM-5.2。在Terminal-Bench 2.1评测中较GLM-5.1提升17.5%，支持一键兼容Claude Code框架。国产编程Agent从'套壳'走向'自研内核'。",
-            "source": "智谱AI · 6月",
-            "url": "https://docs.bigmodel.cn/cn/update/new-releases",
-            "region": "china",
-            "importance": 4
+            "title": "54起AI失控事件后续：企业如何引入安全可控Agent",
+            "url": "https://baijiahao.baidu.com/s?id=1868965732544763138",
+            "source": "百家号",
+            "summary": "Agent叙事降温不是因为不看好，而是从Demo回到生产。企业开始关注意图工程（Intent Engineering）——不只教AI怎么做，教AI什么时候该停下来问人。",
+            "tags": [
+              "Agent安全",
+              "意图工程",
+              "降温"
+            ]
           },
           {
-            "title": "AI编程工具横评：Cursor+Claude依然是英语大项目首选，Trae免费覆盖90%场景",
-            "summary": "6月横评显示：第一梯队为Cursor 3(智能体集群)、Claude Code(80%代码自动写)、Codex(背景任务委托)；第二梯队场景专精；Trae免费版覆盖90%个人开发场景，Pro版仅10美元/月。中文开发者首选Trae，大项目英语团队选Cursor+Claude。",
-            "source": "CSDN · 知乎 · 6月",
-            "url": "https://deepseek.csdn.net/6a30937110ee7a33f27da5b4.html",
-            "region": "china",
-            "importance": 3
+            "title": "数字员工形态调研：效果不及预期，价值难证",
+            "url": "https://www.digitalapplied.com/blog/klarna-reverses-ai-layoffs-replacing-700-workers-backfired",
+            "source": "Digital Applied",
+            "summary": "Klarna用AI替代700名客服后悄悄重建人类团队——核心教训是AI优化了错误目标。88%Agent Pilot走不到生产，22%报告负ROI，根因全是范围界定和组织归属。",
+            "tags": [
+              "数字员工",
+              "Klarna",
+              "负ROI"
+            ]
           }
         ]
       },
       "deep_focus": {
-        "title": "Token成本瓶颈正在被打破——编码Agent的下一个变量是什么",
+        "title": "验证瓶颈：AI编程速度悖论正在显现",
         "paragraphs": [
-          "微软FastContext-1.0降60% Token消耗、Kimi 2.7 Code 260 tok/s的推理速度、DeepSeek V4 Flash 0.23/M token的价格——三线共振说明编码Agent的Token成本瓶颈正在被系统性打破。当Token不再是成本问题，'人人可用Agent写代码'的临界点将到来。",
-          "但Token降下来后，新的瓶颈会是什么？ZCode 3.0的自研内核指向'Agent稳定性'——长程8小时任务的自主闭环、Tool Use的一致性、复杂系统工程的深度调试。这些是Token降下来后暴露的真问题。",
-          "Codex/Claude Code/Gemini CLI三强格局的底层共性是'Agent化'——不再是补全代码，而是接收需求、规划任务、执行代码、验证结果。编程工具从'辅助'走向'独立完成部分工作'，和MyFlicker的产品方向完全一致。"
+          "Fiona Fung的论断精准击中核心矛盾：代码生成速度8倍增长，但验证速度没有同步提升。当生产速度翻倍但审查速度不变，瓶颈只是转移了——从做不完变成审不完。",
+          "这解释了为什么企业层面AI编程ROI难以证明：个人效率5倍提升真实，但组织整体交付速度取决于最慢环节（审查），阿克利定律的组织版本精确生效。",
+          "三件套编排层的出现正是为了部分解决这个问题——如果工具能自动判断任务类型并路由到最佳工具，减少人工协调成本，那么编排层本身就在压缩瓶颈。谁先解决审查自动化，谁就真正释放AI编程的组织级价值。"
         ],
-        "takeaway": "Token成本瓶颈即将消除，Agent稳定性和长程任务闭环能力成为下一个竞争焦点"
+        "takeaway": "谁先解决审查自动化，谁就真正释放AI编程的组织级价值。审查自动化=AI编程组织级价值释放的关键。"
       },
-      "pattern_insight_html": "<div class=\"pi-card\" style=\"padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7\"><div style='padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7'><b>📊 模式洞察</b><br/>编码Agent从IDE补全走向独立Agent的三步跳：①Token成本瓶颈消除(FastContext-1.0降60%) ②Agent稳定性竞争(ZCode 3.0自研内核+8小时长程任务) ③全流程闭环(需求→规划→编码→验证)。三强格局意味着这个赛道从'谁的模型更强'转向'谁的Agent更可靠'。</div></div>"
+      "pattern_insight_html": "<div class=\"pi-card\"><div class=\"insight-card\"><h3>📊 ⌨️ AI Coding趋势观察</h3><p>本板块核心趋势：企业AI从概念验证转向价值验证，可信赖来自场景约束而非能力堆叠。先在边界清晰的垂直场景证明价值，再逐步扩圈是更务实的路径。</p><p><b>关键信号</b>：场景边界越清晰，AI可信赖度越高。从万能Agent回归窄域深耕，是2026年企业AI的理性选择。</p></div></div>"
     },
     {
-      "id": "application",
+      "id": "ai_app",
       "title": "📱 AI应用",
-      "icon": "app",
+      "icon": "📱",
       "news": {
         "overseas": [
           {
-            "title": "谷歌Information agents全球开放：搜索引擎从被动查询到主动推送",
-            "summary": "Google Search的Information agents功能面向全球AI Ultra订阅用户开放，可自动监控指定主题并推送信息更新。搜索引擎从'你问我答'进化到'我替你看'，向主动信息服务演进。",
-            "source": "AI6S · 6月",
-            "url": "https://ai6s.net/6a3159c6662f9a54cb80026b.html",
-            "region": "overseas",
-            "importance": 4
-          },
-          {
-            "title": "SpaceX完成史上最大IPO(857亿美元)，此前600亿美元收购Cursor",
-            "summary": "SpaceX完成857亿美元史上最大规模IPO，上市首日市值破2.5万亿美元。此前以600亿美元收购Cursor，AI编程工具赛道资本热度空前。Musk的AI+航天+编程工具版图正在成型。",
-            "source": "量子位 · AI6S · 6月",
-            "url": "https://www.qbitai.com",
-            "region": "overseas",
-            "importance": 5
+            "title": "AI编程工具栈编排需求浮现：三件套之后的下一个机会",
+            "url": "https://www.buildfastwithai.com/blogs/ai-news-today-june-27-2026",
+            "source": "BuildFastWithAI",
+            "summary": "业界开始讨论'AI编程编排层'——一个统一入口自动判断任务适合哪个工具，在Cursor/Claude Code/Codex之间传递上下文。当前还靠手动切换，产品化空间巨大。",
+            "tags": [
+              "编排层",
+              "三件套",
+              "产品机会"
+            ]
           }
         ],
-        "china": [
-          {
-            "title": "豆包上线任务模式：自动拆解复杂目标+浏览器自动化+多模态生成",
-            "summary": "字节跳动豆包上线任务模式，支持多轮搜索、浏览器自动化操作与多模态生成。可自动拆解复杂目标并完成PPT、网页等内容制作。豆包从对话助手进化为Agent化产品，与MyFlicker的'独立完成部分工作'方向殊途同归。",
-            "source": "AI6S · 6月",
-            "url": "https://ai6s.net/6a3159c6662f9a54cb80026b.html",
-            "region": "china",
-            "importance": 4
-          },
-          {
-            "title": "腾讯研究院报告：80%+企业AI投入无法提升生产力，AI是放大器非原动力",
-            "summary": "腾讯研究院报告指出95%企业未看到AI投资回报，核心原因是微观提效无法传导为组织整体效率。AI是'放大器'而非'原动力'，企业需先夯实自身商业能力再借AI放大。报告梳理17项影响企业发展的核心变量，明确组织变革是必要条件而非核心决定因素。",
-            "source": "腾讯研究院 · AI6S · 6月",
-            "url": "https://ai6s.net/6a3159c6662f9a54cb80026b.html",
-            "region": "china",
-            "importance": 5
-          }
-        ]
+        "china": []
       },
       "deep_focus": {
-        "title": "AI应用从'能用'到'好用'：组织能力是放大的前置条件",
+        "title": "数字员工的系统性困境：能力够了，治理不够",
         "paragraphs": [
-          "腾讯研究院80%企业AI ROI为负的结论像一盆冷水，但对AI生产力中心也是精准的信号——'AI是放大器不是原动力'的论断意味着，企业AI投入的效果取决于组织自身能力的基线。能力强的组织用AI更强，能力弱的组织用AI更混乱。",
-          "豆包的任务模式和谷歌的Information agents都指向同一个方向——AI从'对话工具'走向'任务执行者'。但任务模式的挑战不在能力，在可靠性：自动拆解的目标是否正确？浏览器自动化操作是否符合预期？这些是Agent产品必须回答的信任问题。",
-          "SpaceX收购Cursor后857亿美元IPO，说明资本市场对AI编程工具的估值逻辑已经从'用户量'转向'生态位'——谁掌握了开发者工作流的核心节点，谁就值得天价估值。这对KATE和MyFlicker Code的启示是：生态位比功能列表更值钱。"
+          "三组数据构成完整拼图：WRITER调研——48%失望率+23% Agent显著ROI；Forrester——88% Pilot走不到生产+22%负ROI；Klarna——替代700人后回调。核心悖论是个人效率真实提升但组织效率说不清楚。",
+          "原因三重：瓶颈从做不完转移到审不完；阿克利定律（整体速度取决于最慢环节）；省下的人天没变成收入增长而是变成隐形库存。",
+          "Forrester对22%负ROI根因分析更直白：41%是成功标准不清晰，33%是工具数据权限不足，26%是评估覆盖漂移——没有一个根因是模型能力不够，全是范围界定和组织归属问题。"
         ],
-        "takeaway": "AI应用的价值=组织能力基线×AI放大系数，组织能力是乘数不是加数"
+        "takeaway": "Forrester对22%负ROI根因分析更直白：41%是成功标准不清晰，33%是工具数据权限不足，26%是评估覆盖漂移——没有一个根因是模型能力不够，全是范围界定和组织归属问题。Agent的根因问题全是人的问题，不是模型问题。"
       },
-      "pattern_insight_html": "<div class=\"pi-card\" style=\"padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7\"><div style='padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7'><b>📊 模式洞察</b><br/>AI应用的三层悖论：能力越强→信任要求越高→可靠性验证越难。豆包任务模式、谷歌Information agents、Cursor被天价收购，三件事的共同点——AI正从'工具'(你用)走向'Agent'(它做)。信任和可靠性成为比能力更稀缺的资源。</div></div>"
+      "pattern_insight_html": "<div class=\"pi-card\"><div class=\"insight-card\"><h3>📊 Agent Pilot失败根因</h3><table><tr><th>根因</th><th>占比</th></tr><tr><td>成功标准不清晰</td><td>41%</td></tr><tr><td>工具/数据权限不足</td><td>33%</td></tr><tr><td>评估覆盖漂移</td><td>26%</td></tr></table><p><b>结论</b>：零个根因是模型能力问题。</p></div></div>"
     },
     {
-      "id": "industry",
-      "title": "🏭 产业动态",
-      "icon": "factory",
+      "id": "ai_industry",
+      "title": "🏭 AI行业",
+      "icon": "🏭",
       "news": {
-        "overseas": [
-          {
-            "title": "微软纳德拉：企业需同步打造人力资本与Token资本，生态根基比前沿技术更重要",
-            "summary": "微软CEO纳德拉提出企业需同步打造人力资本与Token资本，生态根基比前沿技术更重要。呼吁避免头部模型垄断价值，共建开放产业生态。与腾讯研究院的'AI是放大器'结论形成跨洋呼应。",
-            "source": "微软研究院 · AI6S · 6月",
-            "url": "https://www.microsoft.com/en-us/research/articles/whats-next-in-ai",
-            "region": "overseas",
-            "importance": 4
-          },
-          {
-            "title": "英伟达发行250亿美元债券+开源SkillSpector代码安全扫描工具",
-            "summary": "英伟达发行250亿美元债券获标普AA级，850亿美元认购。资金用于AI芯片研发与业务扩张。同步推出SkillSpector代码安全扫描工具，防范供应链风险。算力基建+安全工具双线推进。",
-            "source": "AI6S · 6月",
-            "url": "https://ai6s.net/6a3159c6662f9a54cb80026b.html",
-            "region": "overseas",
-            "importance": 3
-          }
-        ],
+        "overseas": [],
         "china": [
           {
-            "title": "华为HDC2026：鸿蒙小艺智能体+DevEco Code/CLI打通开发全流程",
-            "summary": "华为开发者大会展示鸿蒙小艺智能体（脱口秀+系统调度+生态联动），发布DevEco Code与DevEco CLI两款AI编程工具，打通鸿蒙开发全流程。强调鸿蒙底层完全自研，已获最高安全认证。",
-            "source": "AI6S · 6月",
-            "url": "https://ai6s.net/6a3159c6662f9a54cb80026b.html",
-            "region": "china",
-            "importance": 4
+            "title": "达沃斯2026：李强致辞全文——新兴技术、开放合作与AI治理",
+            "url": "https://www.gov.cn/premier/2026-davos-speech",
+            "source": "中国政府网",
+            "summary": "李强在达沃斯致辞强调中国AI开源战略、可控核聚变进展、新兴技术开放合作，并提出AI治理国际合作倡议。",
+            "tags": [
+              "达沃斯",
+              "AI治理",
+              "开放合作"
+            ]
           },
           {
-            "title": "字节Seedance-2.0-mini：720p视频每秒0.16元+MiniMax M2.5 Agent原生设计",
-            "summary": "字节发布Seedance-2.0-mini，生成速度提升2倍，使用成本降30%，720p每秒0.16元。MiniMax M2.5为Agent场景原生设计，10B激活参数对标国际顶尖。两家公司分别从视频生成和Agent模型两个方向推动AI成本持续下降。",
-            "source": "AI6S · 新华网 · 6月",
-            "url": "https://www.xinhuanet.com/20260213/a9dcc8f9b78b4a3f93627d616d8fc6c3/c.html",
-            "region": "china",
-            "importance": 4
-          },
-          {
-            "title": "科大讯飞发布企业服务Claw平台：一句话搞定需求到方案全流程",
-            "summary": "科大讯飞发布企业服务Claw平台，支持从需求理解到方案生成全流程的一句话交互。企业级AI服务从工具整合走向流程自动化。",
-            "source": "量子位 · 6月",
-            "url": "https://www.qbitai.com",
-            "region": "china",
-            "importance": 3
+            "title": "中国AI开源百亿下载：从追赶者到基础设施提供者",
+            "url": "https://www.jwview.com/jingwei/100b-downloads-2026",
+            "source": "东方财富",
+            "summary": "100亿次下载背后是中国AI开源模式的全球影响力跃迁——DeepSeek、Qwen、MiniMax等模型在全球开发者社区中被广泛采用，从模型输出变为基础设施。",
+            "tags": [
+              "开源",
+              "100亿",
+              "基础设施"
+            ]
           }
         ]
       },
       "deep_focus": {
-        "title": "AI产业从'技术竞速'转向'价值竞速'——商业化兑现的2026分水岭",
+        "title": "达沃斯信号：开源成为国家AI战略核心叙事",
         "paragraphs": [
-          "新华网评论点明核心：国产大模型正从'技术竞速'转向'价值竞速'，2026年是商业化兑现的关键分水岭。智谱GLM-5和MiniMax M2.5主攻代码生成与任务自动化，字节Seedance主攻视频生成——从'通用能力'收窄至'解决实际问题的工具'。",
-          "英伟达250亿债券+SpaceX 857亿IPO+OpenAI S-1——三条资本线共振说明AI产业正在从'烧钱换增长'转向'收割换估值'。企业客户将是被收割的重点，CIO们需要现在就评估替代方案和成本对冲。",
-          "华为DevEco Code+科大讯飞Claw平台+豆包任务模式——三家公司都在做同一件事：把AI从'对话窗口'变成'工作流节点'。谁能把工作流做深做透，谁就占据生态位。"
+          "李强在达沃斯把100亿次下载放在致辞核心位置——开源AI已上升为中国AI国家战略的核心叙事。从追赶者变为基础设施提供者，这个身份转换的战略含义远超数字本身。",
+          "100亿次下载=全球100亿次开发者选择，每一次选择都是对中国AI生态的信任投票。结合GPT-5.6 Sol的受限发布，中国开源模型正获得独特窗口——闭源模型受限时，开源替代品吸引力自然上升。",
+          "但挑战也在：100亿次下载不等于100亿次付费，开源模式的商业闭环仍然未解。从基础设施提供者到价值捕获者，中间还有很大一段路。"
         ],
-        "takeaway": "2026年AI产业分水岭：从技术竞速到价值竞速，跑通降本-留客-盈利闭环者胜"
+        "takeaway": "从基础设施提供者到价值捕获者，中间还有很大一段路。开源影响力跃迁，但商业闭环仍是挑战。"
       },
-      "pattern_insight_html": "<div class=\"pi-card\" style=\"padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7\"><div style='padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7'><b>📊 模式洞察</b><br/>AI产业三线并行：①资本线(OpenAI/Anthropic IPO+SpaceX收购Cursor)→价值收割阶段 ②产品线(豆包/华为/讯飞)→从对话到工作流 ③成本线(DeepSeek/MiniMax/Seedance)→降本30-50%持续。三线共振指向：AI正在从'前沿技术'变成'基础设施'，基础设施的竞争规则是成本+生态位，不是跑分。</div></div>"
+      "pattern_insight_html": "<div class=\"pi-card\"><div class=\"insight-card\"><h3>📊 行业AI行业趋势观察</h3><p>本板块核心趋势：企业AI从概念验证转向价值验证，可信赖来自场景约束而非能力堆叠。先在边界清晰的垂直场景证明价值，再逐步扩圈是更务实的路径。</p><p><b>关键信号</b>：场景边界越清晰，AI可信赖度越高。从万能Agent回归窄域深耕，是2026年企业AI的理性选择。</p></div></div>"
     },
     {
       "id": "enterprise",
-      "title": "🏢 企业AI",
-      "icon": "building",
+      "title": "🔄 企业转型",
+      "icon": "🔄",
       "news": {
         "overseas": [
           {
-            "title": "纳德拉vs腾讯研究院：跨洋共识——AI是放大器，组织能力是前置条件",
-            "summary": "微软纳德拉强调'人力资本与Token资本同步打造'，腾讯研究院报告指出'80%企业AI ROI为负'。两者结论一致：AI放大的是组织已有的能力，而非凭空创造能力。区分'最新实践'与'最佳实践'比选对模型更重要。",
-            "source": "微软研究院 · 腾讯研究院 · 6月",
-            "url": "https://www.microsoft.com/en-us/research/articles/whats-next-in-ai",
-            "region": "overseas",
-            "importance": 5
+            "title": "GPT-5.6 Sol受限发布：安全审查vs创新速度的全球辩论",
+            "url": "https://techcrunch.com/2026/06/26/openai-limits-gpt-5-6-rollout-after-government",
+            "source": "TechCrunch",
+            "summary": "GPT-5.6 Sol的受限发布在全球引发安全vs创新的大辩论。支持者认为这是负责任AI的体现，反对者认为政府介入压制了竞争和技术进步。",
+            "tags": [
+              "模型安全",
+              "政府监管",
+              "创新vs安全"
+            ]
           }
         ],
         "china": [
           {
-            "title": "企业AI转型警钟：95%未看到投资回报，微观提效无法传导为组织整体效率",
-            "summary": "腾讯研究院梳理17项影响企业AI发展的核心变量，明确组织变革是必要条件而非核心决定因素。AI是放大器：能力强的组织用AI更强，能力弱的组织用AI更混乱。对AI生产力中心的启示——'AI+组织能力'套餐比'纯AI工具'更有价值。",
-            "source": "腾讯研究院 · AI6S · 6月",
-            "url": "https://ai6s.net/6a3159c6662f9a54cb80026b.html",
-            "region": "china",
-            "importance": 5
+            "title": "市场监管总局：AI智能体标准制定加速，为Agent商业化铺路",
+            "url": "https://www.cctv.com/ai-standards-2026",
+            "source": "央视新闻",
+            "summary": "市场监管总局正会同相关部门加快AI智能体标准制定，动态完善适配产业发展的标准体系。这是全球首个聚焦Agent标准化的国家级动作。",
+            "tags": [
+              "AI标准",
+              "智能体",
+              "中国监管"
+            ]
           }
         ]
       },
       "deep_focus": {
-        "title": "AI生产力的真相：不是AI不够强，是组织不够强",
+        "title": "替代容易增值难：数字员工的真正挑战",
         "paragraphs": [
-          "腾讯研究院80%企业AI ROI为负的数据，对AI生产力中心既是警钟也是定位锚——'AI+组织能力'才是真正的产品，'纯AI工具'只是入口。我们的L2+方法论、AI敏捷开发实践、先锋队模式，本质上都在做同一件事：先提升组织能力，再用AI放大。",
-          "纳德拉说'生态根基比前沿技术更重要'，翻译成AI生产力中心的语言：MyFlicker的Skill生态+KATE的Flow引擎+CodeFlicker的Agent内核，这些'根基'比任何一个单独的模型能力更值钱。生态位一旦建立，模型可以换，但工作流和用户习惯不能。",
-          "从企业客户视角看：95%的ROI为负不是因为AI不够强，而是因为'AI+旧流程'只产生了局部优化。真正的ROI需要'AI+新流程'——这正是AI生产力中心'AI+组织能力'套餐的设计初衷。先帮客户重建流程，再让AI放大新流程的效率。"
+          "Klarna的教训最直白：AI成功在了错误目标上。优化解决率但牺牲客户体验，省了6000万美元但打破了公司。缺失的是intent engineering——告诉AI该想要什么。",
+          "75%高管承认AI策略是表演，不是说AI没用，而是大多数组织还没想清楚用AI解决什么问题。当提效是唯一目标时，省下的人天只会变成隐形库存而非收入增长。",
+          "成功走到生产的12%有共同做法：有明确所有权人、有作用域内成功标准、有自动化评估、有回滚能力、从窄域开始。这些做法都不涉及模型能力，全是组织和治理问题。"
         ],
-        "takeaway": "企业AI投入的ROI=组织能力基线×AI放大系数，我们卖的不是AI本身，是AI+组织能力的乘积"
+        "takeaway": "这些做法都不涉及模型能力，全是组织和治理问题。数字员工的真正挑战不是能力，是治理。"
       },
-      "pattern_insight_html": "<div class=\"pi-card\" style=\"padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7\"><div style='padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7'><b>📊 模式洞察</b><br/>企业AI的ROI公式正在被重新定义：ROI = 组织能力基线 × AI放大系数。组织能力=0时，AI放大=0。这解释了为什么同样的AI工具，在不同组织效果天差地别。AI生产力中心的差异化价值：我们提供的是'AI+组织能力'套餐，不是'纯AI工具'。</div></div>"
+      "pattern_insight_html": "<div class=\"pi-card\"><div class=\"insight-card\"><h3>📊 成功到生产的12%做对了什么</h3><table><tr><th>特征</th><th>说明</th></tr><tr><td>明确所有权人</td><td>业务Leader负责</td></tr><tr><td>成功标准</td><td>解决率>85%+CSAT>4.2</td></tr><tr><td>自动化评估</td><td>每次执行后跑评估</td></tr><tr><td>回滚能力</td><td>犯错时自动撤销</td></tr><tr><td>从窄域开始</td><td>不做全能Agent</td></tr></table></div></div>"
     }
-  ]
+  ],
+  "watch_list": [
+    "GPT-5.6 Sol评测对比Fable 5",
+    "中国开源模型100亿下载具体构成",
+    "Agent编排层创业项目动态"
+  ],
+  "capability_update": "2026年数字员工的核心真相：能力够了治理不够，替代容易增值难。谁先证明AI上岗后组织确实变强了，谁就赢了。对MyFlicker的启示：做验证+回滚+意图工程基础设施，不做又一个功能堆砌的AI员工。"
 }
