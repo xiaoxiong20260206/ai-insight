@@ -1,12 +1,169 @@
-# 首页开发规范 (v1.0)
+# 首页开发规范 (v2.0)
 
-> **版本**: v1.0
-> **创建**: 2026-05-11
-> **背景**: 内外版首页多次被改坏（脱敏绕过/CSS损坏/破图残留/内部链接泄露），需系统性防退化
+> **版本**: v2.0  
+> **更新**: 2026-06-29  
+> **背景**: 2026-06-29 W26周报修复中暴露7类问题，本次全面修订，沉淀为执行标准
 
 ---
 
 ## 一、架构总览
+
+```
+┌─────────────────────────────────────────────────────────┐
+│ 首页双版本架构（SSoT = sl-ai-insight/index.html）         │
+├──────────────┬──────────────────────────────────────────┤
+│ 内部版        │ 外部版                                    │
+│ (保留林克身份) │ (零敏感词+零内部链接)                      │
+├──────────────┼──────────────────────────────────────────┤
+│ index.html    │ ai-insight-public/index.html             │
+│ → public/     │ （sanitize_html脱敏后写入）                │
+│ → frontend-   │ → GitHub Pages部署                        │
+│   cloud部署   │                                           │
+└──────────────┴──────────────────────────────────────────┘
+```
+
+**唯一可信来源**：`sl-ai-insight/index.html`  
+**外部版生成路径**：`sync_to_public.sanitize_html()` → `ai-insight-public/index.html`  
+**禁止**：手动编辑 `ai-insight-public/index.html`（只能由脚本生成，否则脱敏不一致）
+
+---
+
+## 二、部署链路（标准流程）
+
+```
+修改 index.html
+  → update_homepage.py 自动同步到 public/index.html
+  → update_homepage.py 自动调用 sanitize_html() 同步到 ai-insight-public/index.html
+  → git add -A && git commit && git push（内部仓库）
+  → public/ 目录 frontend-cloud deploy（内部版）
+  → ai-insight-public/ git push（外部版）
+```
+
+**禁止绕过脚本手动同步**：手动cp/编辑会跳过脱敏流程，必定导致外部版敏感词泄露。
+
+---
+
+## 三、日历映射规范（v2.0 新增）
+
+### 日报日历
+- `reportDates['YYYY-MM']` = `[1,2,3,...,DD]` 数组
+- 每次日报部署后自动追加当日日期
+
+### 周报日历
+- `weeklyReportsData['YYYY-MM']` = `{周一日: 'weekly-YYYY-WXX', 下周一日: 'weekly-YYYY-WXX'}`
+- **key必须是周一日期**（不是周日，不是任意日）
+- **必须同时写入下周周一**：`update_calendar_weekly()` 已自动处理（v2.0起）
+- 原因：周报在周日产出，下周一用户在日历上看到的是新的一周，但W+1还没出，应关联上周最新周报
+
+### 日历正确示例
+```javascript
+weeklyReportsData = {
+    '2026-06': {
+        1: 'weekly-2026-W23',   // 6/1是周一
+        8: 'weekly-2026-W24',   // 6/8是周一
+        15: 'weekly-2026-W25',  // 6/15是周一
+        22: 'weekly-2026-W26',  // 6/22是周一（W26）
+        29: 'weekly-2026-W26',  // 6/29是周一（W27未出，关联W26最新）
+    },
+    '2026-07': {
+        6: 'weekly-2026-W27',   // 7/6是周一（W27出了之后更新）
+        ...
+    }
+}
+```
+
+### ⛔ 日历禁止操作
+- ❌ 用任意日（如周日28日、当天29日）作为key：`28: 'weekly-2026-W26'` → 错误
+- ❌ 用不存在的文件名：`23: 'weekly-2026-06-29'` → 错误（文件不存在）
+- ❌ 同一周号写两遍：`22: 'weekly-W26', 28: 'weekly-W26'` → 冗余
+
+### update_homepage.py 周报调用规范
+```bash
+# --week-day 必须传本周周一的日（脚本自动+7写入下周周一）
+uv run scripts/update_homepage.py 2026-WXX --type weekly \
+  --week-title "第XX周（MM/DD - MM/DD）" \
+  --week-desc "覆盖N条资讯 · 事件1 · 事件2" \
+  --week-month 2026-MM --week-day MONDAY_DAY_NUMBER
+```
+
+---
+
+## 四、周报大卡片链接规范
+
+首页顶部"最新周报"大卡片的 href 必须指向真实存在的文件：
+```html
+<!-- ✅ 正确 -->
+<a href="01-daily-reports/2026-06/weekly-2026-W26.html" class="weekly-report-card">
+
+<!-- ❌ 错误（文件不存在） -->
+<a href="01-daily-reports/2026-06/weekly-2026-06-29.html" class="weekly-report-card">
+```
+
+`update_weekly_card()` 函数会自动写入正确格式的 `weekly-YYYY-WXX.html`，禁止手动改为日期格式。
+
+---
+
+## 五、订阅按钮URL规范
+
+```html
+<!-- ✅ 正确：绝对内网URL -->
+<a href="https://aidailyinsight-subscribe.frontend-cloud.corp.kuaishou.com">📧 订阅</a>
+
+<!-- ❌ 错误：相对路径（frontend-cloud 302重定向导致SSO失败） -->
+<a href="./subscribe/">📧 订阅</a>
+```
+
+---
+
+## 六、内外版身份差异（v2.0 明确）
+
+| 元素 | 内部版 | 外部版 |
+|------|--------|--------|
+| 页面标题 | 林克的AI洞察 | AI洞察 · 持续追踪AI行业动态 |
+| 头像图片 | `link-avatar-small.webp` | 无（脚本自动删除） |
+| CSS class | `link-avatar` | `ai-insight-logo` |
+| Header badge | "林克的AI洞察" | "AI行业洞察" |
+| Header title | "我是林克，这是沈浪让我负责的AI洞察项目" | "AI洞察 · 持续追踪AI行业动态" |
+| 沈浪/林克文字 | 保留 | 全部替换/删除（REPLACEMENTS规则） |
+| 订阅按钮 | 显示，指向内网URL | 隐藏（内网服务，外部无法访问） |
+| 知识库Tab | 显示 | 隐藏（外部无该目录） |
+| 追踪体系Tab | 显示 | 隐藏 |
+| 内网链接 | 保留 | 替换为外网URL或删除 |
+
+**关键原则**：外部版由 `sync_to_public.sanitize_html()` 自动处理，不要手动编辑 `ai-insight-public/index.html`。
+
+---
+
+## 七、每次日报/周报完成后的标准交付检查清单
+
+```
+□ 内部版日报/周报HTML文件大小 ≥ 50KB
+□ public/ 目录已同步（文件大小与源文件一致）
+□ ai-insight-public/ 外部版已同步（sanitize_html生成，非手动）
+□ 日历包含本日/本周日期（verify_homepage通过）
+□ 周报大卡片链接指向正确文件名（weekly-YYYY-WXX.html）
+□ 内部版 git push 成功
+□ 外部版 git push 成功
+□ 内部版 frontend-cloud deploy 成功
+□ 验证内部版首页：https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/
+□ 验证外部版首页：https://xiaoxiong20260206.github.io/ai-insight-public/
+```
+
+---
+
+## 八、2026-06-29 复盘：7类问题和根因
+
+| # | 问题 | 根因 | 修复 |
+|---|------|------|------|
+| 1 | W26周报内容是W25的 | 周报cron没跑 | 手动重跑+检查cron |
+| 2 | 周报大卡片链接=`weekly-2026-06-29.html` | cron agent用日期拼了错误文件名 | `update_weekly_card()`函数约束 |
+| 3 | 日历`23:'weekly-2026-06-29'` | cron agent误写了不存在的周报 | 脚本验证文件存在性 |
+| 4 | 日历`28:'weekly-2026-W26'` | 手动调用`--week-day 28`传了周日而非周一 | 文档明确`--week-day`=周一 |
+| 5 | 外部版林克头像/class残留 | 手动操作绕过`sanitize_html()` | 禁止手动编辑外部版首页 |
+| 6 | 内部版林克身份丢失 | `sync_all_homepages()`把脱敏版覆盖了内部版 | 已修复同步逻辑 |
+| 7 | 订阅按钮`./subscribe/`失效 | 旧版相对路径bug | 硬编码绝对内网URL |
+
+**共同根因**：周报手动操作绕过脚本 + `--week-day`参数语义不清晰。
 
 ```
 ┌─────────────────────────────────────────────────────┐
