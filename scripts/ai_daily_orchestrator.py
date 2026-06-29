@@ -807,7 +807,7 @@ def _show_4_positions_summary(date: str) -> None:
 def run_quality_gate(date: str, fix: bool = False) -> bool:
     """运行质量门检查（v12.0: hard/soft分级 — hard失败阻断, soft失败不阻断）"""
     try:
-        cmd = ["python3", str(SCRIPT_DIR / "daily_quality_gate.py"), date]
+        cmd = ["uv", "run", str(SCRIPT_DIR / "daily_quality_gate.py"), date]
         if fix:
             cmd.append("--fix")
         result = subprocess.run(
@@ -833,7 +833,7 @@ def run_html_gen(date: str) -> bool:
     """生成HTML页面"""
     try:
         result = subprocess.run(
-            ["python3", str(SCRIPT_DIR / "gen_daily_html.py"), date],
+            ["uv", "run", str(SCRIPT_DIR / "gen_daily_html.py"), date],
             capture_output=True, text=True, timeout=60, cwd=str(PROJECT_DIR)
         )
         if result.returncode == 0:
@@ -880,7 +880,7 @@ def run_external_sync() -> bool:
     print("\n  📤 Step 4.5: 外部版同步...")
     try:
         result = subprocess.run(
-            ["python3", str(SCRIPT_DIR / "sync_to_external.py"), "--full", "--verify"],
+            ["uv", "run", str(SCRIPT_DIR / "sync_to_external.py"), "--full", "--verify"],
             capture_output=True, text=True, timeout=120, cwd=str(PROJECT_DIR)
         )
         if result.returncode == 0:
@@ -904,7 +904,7 @@ def run_homepage_update(date: str) -> bool:
     print("\n  🏠 首页更新: index.html + 索引页 + public/")
     try:
         result = subprocess.run(
-            ["python3", str(SCRIPT_DIR / "update_homepage.py"), date],
+            ["uv", "run", str(SCRIPT_DIR / "update_homepage.py"), date],
             capture_output=True, text=True, timeout=60, cwd=str(PROJECT_DIR)
         )
         if result.returncode == 0:
@@ -925,7 +925,7 @@ def cmd_push(date: str, preview_only: bool = True) -> bool:
     """
     # 生成 mixCard JSON 文件
     card_path = PROJECT_DIR / "data" / f"card-{date}.json"
-    args = ["python3", str(SCRIPT_DIR / "build_insight_mixcard.py"), "daily",
+    args = ["uv", "run", str(SCRIPT_DIR / "build_insight_mixcard.py"), "daily",
             "--date", date, "--output", str(card_path), "--with-summary"]
 
     print(f"\n📤 生成 mixCard JSON: {date}")
