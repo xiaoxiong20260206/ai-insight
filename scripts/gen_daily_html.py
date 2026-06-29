@@ -167,7 +167,7 @@ def render_section(section) -> str:
         overseas = [item for item in section if item.get("region") != "china"]
         china = [item for item in section if item.get("region") == "china"]
         if overseas:
-            parts.append('                <div class="sub-header">{SVG_ICONS["globe"]} 海外</div>')
+            parts.append(f'                <div class="sub-header">{SVG_ICONS["globe"]} 海外</div>')
             for item in overseas:
                 parts.append(render_news_item(item))
         if china:
@@ -176,7 +176,7 @@ def render_section(section) -> str:
                 parts.append(render_news_item(item))
     elif isinstance(section, dict):
         if section.get("overseas"):
-            parts.append('                <div class="sub-header">{SVG_ICONS["globe"]} 海外</div>')
+            parts.append(f'                <div class="sub-header">{SVG_ICONS["globe"]} 海外</div>')
             for item in section["overseas"]:
                 parts.append(render_news_item(item))
         if section.get("china"):
@@ -327,8 +327,10 @@ def render_capability_update(text: str) -> str:
 # ============ 数据速览表格 ============
 
 def render_data_table(data: list) -> str:
+    if not data:
+        return ''  # 空数据不渲染
     rows = "\n".join(
-        f'                    <tr><td>{d["metric"]}</td><td><strong>{d["value"]}</strong></td><td>{d.get("note", d.get("context", ""))}</td></tr>'
+        f'                    <tr><td>{d["metric"]}</td><td><strong>{d["value"]}</strong></td><td>{d.get("change", d.get("note", d.get("context", "")))}</td></tr>'
         for d in data
     )
     return f'''
@@ -573,7 +575,7 @@ def generate_html(data: dict) -> str:
             </article>''')
 
     # 数据速览 & 预览 & 深度洞察
-    data_table_html = render_data_table(data.get("data_snapshot", []))
+    data_table_html = render_data_table(data.get("data_table", data.get("data_snapshot", [])))
     preview_html = render_preview(data.get('preview_events') or data.get('watch_list', []))
     capability_html = render_capability_update(data.get("capability_update", ""))
 
