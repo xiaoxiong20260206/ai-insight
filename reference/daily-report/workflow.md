@@ -110,6 +110,24 @@ finalize内部自动执行：
 
 ---
 
+## ⛔ P0红线：首页修改唯一入口（2026-06-29 沉淀）
+
+**`index.html` 的所有修改必须通过 `update_homepage.py`，禁止手动编辑。**
+
+根因：2026-06-29 W26周报修复中，cron agent手动编辑index.html导致7类问题（日历映射错误、卡片链接错误、外部版脱敏绕过、内部版身份覆盖等）。手动操作绕过脚本=绕过脱敏流程=绕过验证。
+
+| 操作 | ✅ 正确做法 | ❌ 禁止做法 |
+|------|-----------|-----------|
+| 更新日历 | `update_homepage.py YYYY-MM-DD` 或 `--type weekly` | 手动编辑weeklyReportsData |
+| 更新日报卡片 | `update_homepage.py` 自动处理 | 手动改href/text |
+| 更新周报卡片 | `update_homepage.py --type weekly --week-day 周一` | 手动改weekly-report-card |
+| 同步外部版 | `update_homepage.py`内自动调用`sanitize_html()` | 手动cp或编辑ai-insight-public/index.html |
+| 修复首页问题 | 先修脚本/数据，再重跑`update_homepage.py` | 直接编辑index.html |
+
+**如果`update_homepage.py`执行失败**：报错退出，不尝试手动修复。修复脚本的bug后重跑。
+
+---
+
 ## Step 5: KIM推送
 
 ```bash

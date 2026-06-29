@@ -34,6 +34,22 @@ ls user-skills/sl-ai-insight/.git/HEAD && ssh -o ConnectTimeout=5 -T git@github.
 
 ---
 
+## ⛔ P0红线：首页修改唯一入口（2026-06-29 沉淀）
+
+**`index.html` 的所有修改必须通过 `update_homepage.py`，禁止手动编辑。**
+
+根因：2026-06-29 W26周报修复中，手动编辑index.html导致日历映射错误、卡片链接错误、外部版脱敏绕过、内部版身份覆盖等7类问题。
+
+| 操作 | ✅ 正确做法 | ❌ 禁止做法 |
+|------|-----------|-----------|
+| 更新日历 | `update_homepage.py --type weekly --week-day 周一` | 手动编辑weeklyReportsData |
+| 更新周报卡片 | `update_homepage.py` 自动处理 | 手动改weekly-report-card的href |
+| 同步外部版 | `update_homepage.py`内自动调用`sanitize_html()` | 手动cp或编辑ai-insight-public/index.html |
+
+**如果脚本失败**：修脚本bug后重跑，不手动修复。
+
+---
+
 ## 流程总览
 
 ```

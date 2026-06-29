@@ -1238,3 +1238,26 @@ W24周报上线后用户反馈3个问题：
   }]
 }
 ```
+
+---
+
+## #129 首页手动编辑导致7类问题（2026-06-29）
+
+**问题**：W26周报cron没跑，手动修复时绕过脚本直接编辑index.html，导致：
+1. 周报大卡片链接写成`weekly-2026-06-29.html`（文件不存在→404）
+2. 日历映射`23:'weekly-2026-06-29'`（不存在文件→日历错乱）
+3. 日历映射`28:'weekly-2026-W26'`（--week-day传了周日而非周一）
+4. 外部版手动操作绕过sanitize_html()→林克头像/class/身份残留
+5. 内部版被脱敏版覆盖→林克身份丢失
+6. 订阅按钮`./subscribe/`相对路径（frontend-cloud 302→SSO失败）
+7. 外部版HTML没push到GitHub→GitHub Pages 404
+
+**根因**：首页是"人人可写"的共享状态，没有唯一写入入口约束。cron agent遇到问题时倾向于手动修复而非重跑脚本。
+
+**修复**：
+- update_homepage.py：自动写入下周周一（day+7）到日历，不再需手动补
+- daily-report/workflow.md + weekly-report.md：加入P0红线——首页修改唯一入口
+- homepage-spec.md v2.0：完整规范+7类问题复盘
+- 禁止手动编辑ai-insight-public/index.html（只能由sanitize_html()生成）
+
+**验证规则**：任何首页修改后必须跑`update_homepage.py`，由脚本自动完成内部版→public→外部版的完整同步链。
