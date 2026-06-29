@@ -241,6 +241,10 @@
 ❌ 搜狗跳转链接 (weixin.sogou.com/link?url=...) — 数小时过期
 ❌ 编造看似真实的出版物URL (domain真+path假, 如nytimes.com/2026/.../fake-slug.html)
    → 高级伪造：通过格式检查，只有fetch_web才能发现404 (经验36 v2)
+❌ 锚点占位符URL (如 https://xxx.com/page#coding / #industry / #enterprise)
+   → 根因：Step1搜索未拿到真实URL，Step2用板块名拼凑了一个锚点URL
+   → 质量门 v12.0 已自动检测：URL末尾#fragment在黑名单{coding,industry,enterprise,...}内 → 硬阻断
+❌ 空URL超过30%总条目 → 质量门 v12.0 硬阻断，必须重跑Step1
 ```
 
 ### 链接优先级 (仅路径A适用)

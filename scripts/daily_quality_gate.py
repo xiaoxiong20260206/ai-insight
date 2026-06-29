@@ -240,12 +240,30 @@ def check_link_validity(date_str: str) -> CheckResult:
                     elif url == '#' or not url.startswith('http'):
                         invalid_count += 1
                         if len(invalid_examples) < 3:
-                            invalid_examples.append(f"{title_short}→")
+                            invalid_examples.append(f"{title_short}→空锚点")
                     else:
-                        all_urls.append((url, title_short))
+                        # v12.0: 检测锚点占位符 URL — 如 https://xxx.com/page#coding / #industry 等
+                        # 特征：URL末尾的 # 片段是纯单词（无数字、无连字符数字），且与板块名/功能名吻合
+                        import re as _re
+                        _fragment = _re.search(r'#([a-zA-Z_-]+)$', url)
+                        _FAKE_FRAGMENTS = {'coding', 'industry', 'enterprise', 'enterprise-china',
+                                           'enterprise-overseas', 'app', 'llm', 'model', 'ai'}
+                        if _fragment and _fragment.group(1).lower() in _FAKE_FRAGMENTS:
+                            invalid_count += 1
+                            if len(invalid_examples) < 3:
+                                invalid_examples.append(f"{title_short}→锚点占位符#{_fragment.group(1)}")
+                        else:
+                            all_urls.append((url, title_short))
         # 非微信来源的空URL累加到invalid
         invalid_count += empty_url_count
         invalid_examples.extend(empty_url_examples)
+        
+        # v12.0: 空URL超过30%总条目 → 硬性阻断（说明Step1搜索未抓到真实链接，Step2在编造）
+        total_items = invalid_count + empty_url_count + len(all_urls)
+        if total_items > 0 and empty_url_count / total_items > 0.30:
+            return CheckResult("链接有效", False,
+                f"❌ 空URL比例过高({empty_url_count}/{total_items}={empty_url_count*100//total_items}%)，"
+                f"Step1搜索可能未抓到真实链接，请重跑Step1 (硬阻断)", fixable=False)
         
         # v9.8: 优先复用 orchestrator 的缓存，避免重复 HTTP 请求
         unreachable = []
