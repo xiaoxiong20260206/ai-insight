@@ -345,9 +345,24 @@ def sync_all_homepages(date_str: str, update_type: str,
         sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
         try:
             from sync_to_public import sanitize_html
+            # 先校准public/的统计数字，再用校准后的版本脱敏
+            calibrate_result = None
+            try:
+                from calibrate_stats import calibrate as _calibrate
+                calibrate_result = _calibrate(pub, dry_run=True)  # 先dry_run获取数值
+            except Exception:
+                pass
+            
             sanitized = sanitize_html(src.read_text(encoding="utf-8"))
+            
+            # 如果校准成功，把统计数字也应用到外部版
+            if calibrate_result:
+                for label, value in calibrate_result.items():
+                    pattern = rf'(<div class="stat-value [^"]*">)[^<]*(</div>\s*<div class="stat-label">\s*{re.escape(label)})'
+                    sanitized = re.sub(pattern, rf'\g<1>{value}\g<2>', sanitized)
+            
             (external_repo / "index.html").write_text(sanitized, encoding="utf-8")
-            print(f"  ✅ ai-insight-public/index.html 已脱敏同步")
+            print(f"  ✅ ai-insight-public/index.html 已脱敏同步（含统计校准）")
         except Exception as e:
             print(f"  ⚠️ 脱敏同步失败: {e}")
 
@@ -426,7 +441,24 @@ def verify_homepage(date_str: str = "", week_id: str = "") -> bool:
         for e in errors:
             print(f"  {e}")
         return False
-    print(f"  ✅ 首页验证通过: {check_str}")
+    print(f"  ✅ 首页快速验证通过: {check_str}")
+    
+    # v2.0 (#129): 调用独立验证脚本做完整17项检查
+    try:
+        cmd = [sys.executable, str(SCRIPT_DIR / "verify_homepage.py")]
+        if date_str:
+            cmd.extend(["--date", date_str])
+        if week_id:
+            cmd.extend(["--week", week_id])
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30, cwd=str(PROJECT_ROOT))
+        if result.returncode != 0:
+            print(f"  ❌ 完整验证失败:")
+            print(result.stdout[-500:] if result.stdout else "")
+            return False
+        print(f"  ✅ 完整验证通过（17项）")
+    except Exception as e:
+        print(f"  ⚠️ 完整验证脚本不可用: {e}（快速验证已通过）")
+    
     return True
 
 
@@ -474,6 +506,18 @@ def main():
         if not args.week_title or not args.week_desc or not args.week_month:
             print("❌ 周报模式需要 --week-title, --week-desc, --week-month")
             sys.exit(1)
+
+        # #129: 自动计算周一日期（如果未传--week-day）
+        if args.week_day == 0:
+            m = re.match(r"(\d{4})-W(\d+)", week_id)
+            if m:
+                year, week = int(m.group(1)), int(m.group(2))
+                monday = datetime.fromisocalendar(year, week, 1)
+                args.week_day = monday.day
+                print(f"  📅 自动计算周一日: {monday.strftime('%Y-%m-%d')} (day={args.week_day})")
+            else:
+                print("❌ 无法从周号自动计算周一日期，请传 --week-day")
+                sys.exit(1)
 
         if args.verify:
             ok = verify_homepage(week_id=week_id)

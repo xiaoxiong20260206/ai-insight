@@ -104,6 +104,33 @@ def check_external_sanitized() -> list[Check]:
     return results
 
 
+def check_external_daily_html_sensitive(date_str: str) -> list[Check]:
+    """3.5 外部版日报HTML零敏感词"""
+    results = []
+    if not date_str:
+        return results
+    
+    date_obj = datetime.strptime(date_str, "%Y-%m-%d")
+    month_str = date_obj.strftime("%Y-%m")
+    
+    external_html = EXTERNAL_DIR / "01-daily-reports" / month_str / f"{date_str}.html"
+    if not external_html.exists():
+        return results
+    
+    content = read_file(external_html)
+    found = []
+    for word in EXTERNAL_SENSITIVE:
+        if word in content:
+            count = content.count(word)
+            found.append(f"{word}×{count}")
+    
+    if found:
+        results.append(Check("外部版日报HTML敏感词", "HARD", False, f"外部版日报{date_str}含: {', '.join(found)}"))
+    else:
+        results.append(Check("外部版日报HTML敏感词", "HARD", True, f"外部版日报{date_str}零敏感词 ✅"))
+    return results
+
+
 def check_calendar_daily(date_str: str) -> list[Check]:
     """4. 日历日报数据"""
     results = []
@@ -369,6 +396,7 @@ def run_checks(date_str: str = "", week_id: str = "", full: bool = False) -> lis
     # 4. 日历日报
     if date_str or full:
         checks.extend(check_calendar_daily(date_str or datetime.now().strftime("%Y-%m-%d")))
+        checks.extend(check_external_daily_html_sensitive(date_str or datetime.now().strftime("%Y-%m-%d")))
     
     # 5. 日历周报
     if week_id or full:
