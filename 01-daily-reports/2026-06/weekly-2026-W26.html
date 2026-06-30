@@ -1697,7 +1697,7 @@ body.mobile-preview-mode .global-controls {
 
 
 /* ===== 日报组件层 ===== */
-/* ===== CSS VARIABLES (清爽调研风格 v5.0 × 日报) ===== */
+/* ===== CSS VARIABLES (清爽调研风格 v5.0 × 日报 × Tab导航升级) ===== */
         :root {
             --color-success: #059669; --color-success-light: #10B981; --color-success-dark: #047857;
             --color-success-50: #ECFDF5; --color-success-100: #D1FAE5;
@@ -1710,6 +1710,24 @@ body.mobile-preview-mode .global-controls {
             --color-border: #E7E5E4; --color-border-light: #F5F5F4;
             --color-bg: #F8FAFB; --color-bg-card: #FFFFFF; --color-bg-table-header: #FAFAF9;
             --color-bg-hover: rgba(0,0,0,0.025);
+
+            /* ===== 板块主题色映射（v4.0 Tab导航升级）===== */
+            --board-llm: #059669;       /* Emerald */
+            --board-llm-light: #10B981;
+            --board-llm-50: #ECFDF5;
+            --board-coding: #2563EB;    /* Blue */
+            --board-coding-light: #3B82F6;
+            --board-coding-50: #EFF6FF;
+            --board-app: #7C3AED;      /* Violet */
+            --board-app-light: #8B5CF6;
+            --board-app-50: #F5F3FF;
+            --board-industry: #D97706;  /* Amber */
+            --board-industry-light: #F59E0B;
+            --board-industry-50: #FFFBEB;
+            --board-enterprise: #E11D48; /* Rose */
+            --board-enterprise-light: #F43F5E;
+            --board-enterprise-50: #FFF1F2;
+
             --gradient-hero: linear-gradient(135deg, #059669 0%, #2563EB 50%, #7C3AED 100%);
             --gradient-success: linear-gradient(135deg, #059669 0%, #10B981 100%);
             --gradient-orange: linear-gradient(135deg, #EA580C 0%, #F97316 100%);
@@ -1899,11 +1917,11 @@ body.mobile-preview-mode .global-controls {
         .heat-header-title { font-size: 17px; font-weight: 800; margin-top: 4px; }
         .heat-body { padding: 16px 20px; }
         .heat-body p { font-size: 14px; color: var(--color-text-secondary); line-height: 1.7; margin-top: 12px; font-family: var(--font-family-cn); }
-        .heat-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-        .heat-table th { padding: 8px 10px; text-align: left; background: #FEF2F2; font-weight: 700; color: #991B1B; border-bottom: 2px solid #FECACA; font-size: 12px; }
-        .heat-table td { padding: 10px; border-bottom: 1px solid var(--color-border-light); vertical-align: top; }
+        .heat-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 14px; }
+        .heat-table th { padding: 12px 16px; text-align: left; background: #FEF2F2; font-weight: 700; color: #991B1B; border-bottom: 2px solid #FECACA; font-size: 12px; letter-spacing: .03em; }
+        .heat-table td { padding: 12px 16px; border-bottom: 1px solid var(--color-border-light); vertical-align: middle; line-height: 1.5; }
         .heat-table tr:last-child td { border-bottom: none; }
-        .heat-table tr:hover { background: rgba(234,88,12,.02); }
+        .heat-table tr:hover { background: rgba(234,88,12,.03); }
         .heat-bar { display: flex; gap: 2px; align-items: center; }
         .heat-bar-fill { width: 10px; height: 14px; border-radius: 2px; background: linear-gradient(135deg, #EA580C, #DC2626); }
         .heat-bar-empty { width: 10px; height: 14px; border-radius: 2px; background: #F5F5F4; }
@@ -1913,18 +1931,125 @@ body.mobile-preview-mode .global-controls {
         .heat-trend-tag.down { background: #FEF2F2; color: #DC2626; }
         .heat-trend-tag.burst { background: #FEF2F2; color: #DC2626; }
 
-        /* ===== SECTION CARDS (for boards) ===== */
-        .board-section { background: var(--color-bg-card); border: 1px solid var(--color-border-light); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 16px; box-shadow: var(--shadow-card); }
-        .board-header { font-size: 17px; font-weight: 700; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--color-border-light); display: flex; align-items: center; gap: 8px; color: var(--color-text-primary); }
-        .board-badge { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background: var(--gradient-success); color: #fff; font-size: 12px; font-weight: 700; }
-        .board-badge.orange { background: var(--gradient-orange); }
+        /* ===== TAB NAVIGATION (v4.0 毛玻璃Tab栏) ===== */
+        .tab-nav {
+            display: flex;
+            gap: 4px;
+            padding: 8px 12px;
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: blur(20px) saturate(1.8);
+            -webkit-backdrop-filter: blur(20px) saturate(1.8);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(0,0,0,0.06);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            position: sticky;
+            top: 12px;
+            z-index: 100;
+            margin-bottom: 24px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .tab-nav::-webkit-scrollbar { display: none; }
+        .tab-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-muted);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+            position: relative;
+        }
+        .tab-btn:hover {
+            background: rgba(0,0,0,0.04);
+            color: var(--color-text-primary);
+        }
+        .tab-btn:focus-visible {
+            outline: 2px solid var(--color-success);
+            outline-offset: -2px;
+        }
+        .tab-btn.active {
+            color: var(--color-text-primary);
+            background: var(--color-success-50);
+        }
+        .tab-btn[data-tab="llm"].active { background: var(--board-llm-50); color: var(--board-llm); }
+        .tab-btn[data-tab="coding"].active { background: var(--board-coding-50); color: var(--board-coding); }
+        .tab-btn[data-tab="app"].active { background: var(--board-app-50); color: var(--board-app); }
+        .tab-btn[data-tab="industry"].active { background: var(--board-industry-50); color: var(--board-industry); }
+        .tab-btn[data-tab="enterprise"].active { background: var(--board-enterprise-50); color: var(--board-enterprise); }
+        .tab-btn .tab-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            border-radius: 6px;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+        .tab-btn .tab-label { line-height: 1; }
+
+        /* Tab Panel */
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+        /* Fallback: 如果JS未加载，显示第一个panel（noscript友好） */
+        .tab-panel:first-of-type { display: block; }
+        .tab-panel.active ~ .tab-panel:first-of-type { display: none; }
+        .tab-panel.active { display: block !important; }
+
+        /* ===== BOARD SECTION WITH THEME COLOR (v4.0) ===== */
+        .board-section {
+            background: var(--color-bg-card); border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-lg); padding: 24px; margin-bottom: 16px;
+            box-shadow: var(--shadow-card);
+            border-top: 3px solid var(--board-accent, var(--color-success));
+        }
+        .board-section[data-board="llm"] { --board-accent: var(--board-llm); }
+        .board-section[data-board="coding"] { --board-accent: var(--board-coding); }
+        .board-section[data-board="app"] { --board-accent: var(--board-app); }
+        .board-section[data-board="industry"] { --board-accent: var(--board-industry); }
+        .board-section[data-board="enterprise"] { --board-accent: var(--board-enterprise); }
+        .board-badge {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 26px; height: 26px; border-radius: 50%;
+            background: var(--board-accent, var(--gradient-success)); color: #fff;
+            font-size: 12px; font-weight: 700;
+        }
         .sub-header { font-size: 13px; font-weight: 700; color: var(--color-text-muted); margin: 14px 0 10px; padding-left: 4px; letter-spacing: .5px; }
         .sub-header:first-child { margin-top: 0; }
 
-        /* ===== NEWS ITEMS ===== */
-        .news-item { padding: 8px 0; border-bottom: 1px solid var(--color-border-light); transition: background .15s; margin: 0 -8px; padding-left: 8px; padding-right: 8px; border-radius: var(--radius-sm); }
-        .news-item:hover { background: rgba(5,150,105,0.02); }
-        .news-item:last-child { border-bottom: none; }
+        /* ===== NEWS ITEMS (v4.0 — 卡片化+板块主题色左边框+hover上浮) ===== */
+        .news-item {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border-light);
+            border-left: 3px solid var(--board-accent, var(--color-success));
+            border-radius: var(--radius-md);
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .news-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px color-mix(in srgb, var(--board-accent, var(--color-success)) 12%, transparent);
+        }
+        /* 板块级新闻项继承主题色 */
+        .tab-panel[data-tab="llm"] .news-item { border-left-color: var(--board-llm); }
+        .tab-panel[data-tab="llm"] .news-item:hover { box-shadow: 0 6px 16px rgba(5,150,105,0.12); }
+        .tab-panel[data-tab="coding"] .news-item { border-left-color: var(--board-coding); }
+        .tab-panel[data-tab="coding"] .news-item:hover { box-shadow: 0 6px 16px rgba(37,99,235,0.12); }
+        .tab-panel[data-tab="app"] .news-item { border-left-color: var(--board-app); }
+        .tab-panel[data-tab="app"] .news-item:hover { box-shadow: 0 6px 16px rgba(124,58,237,0.12); }
+        .tab-panel[data-tab="industry"] .news-item { border-left-color: var(--board-industry); }
+        .tab-panel[data-tab="industry"] .news-item:hover { box-shadow: 0 6px 16px rgba(217,119,6,0.12); }
+        .tab-panel[data-tab="enterprise"] .news-item { border-left-color: var(--board-enterprise); }
+        .tab-panel[data-tab="enterprise"] .news-item:hover { box-shadow: 0 6px 16px rgba(225,29,72,0.12); }
         .news-tag { display: inline-block; padding: 1px 6px; border-radius: var(--radius-full); font-size: 10px; font-weight: 700; vertical-align: middle; }
         .tag-hot { background: #FEF2F2; color: var(--color-danger); }
         .tag-new { background: #EFFDF5; color: var(--color-success); }
@@ -1932,8 +2057,8 @@ body.mobile-preview-mode .global-controls {
         .tag-policy { background: #FFF7ED; color: var(--color-orange); }
         .tag-practice { background: #ECFDF5; color: #059669; }
         .tag-cn { background: #FEF2F2; color: #DC2626; }
-        /* v5.1: 标题行 — tag + 标题 + 来源 inline 合并 */
-        .news-title-row { font-size: 14px; font-weight: 600; line-height: 1.5; display: flex; align-items: baseline; flex-wrap: wrap; gap: 5px; margin-bottom: 3px; }
+        /* v5.1→v4.0: 标题行 — tag + 标题(16px/600) + 来源(12px) inline 合并 */
+        .news-title-row { font-size: 16px; font-weight: 600; line-height: 1.5; display: flex; align-items: baseline; flex-wrap: wrap; gap: 5px; margin-bottom: 4px; }
         .news-title-row a { color: var(--color-text-primary); text-decoration: none; }
         .news-title-row a:hover { color: var(--color-success); }
         .news-source-inline { font-size: 11px; color: var(--color-text-muted); font-weight: 400; flex-shrink: 0; white-space: nowrap; }
@@ -1956,8 +2081,19 @@ body.mobile-preview-mode .global-controls {
         .news-data-chip.china { background: #FEF2F2; border-color: #FECACA; color: #991B1B; }
         .news-summary-compact { font-size: 13px; color: var(--color-text-muted); margin-top: 2px; line-height: 1.55; font-family: var(--font-family-cn); }
 
-        /* ===== DEEP FOCUS ===== */
-        .deep-focus-card { background: var(--color-bg-card); border: 1px solid var(--color-border-light); border-radius: var(--radius-lg); padding: 0; margin-bottom: 16px; box-shadow: var(--shadow-card); overflow: hidden; }
+        /* ===== DEEP FOCUS (v4.0 — 板块主题色) ===== */
+        .deep-focus-card { background: var(--color-bg-card); border: 1px solid var(--color-border-light); border-radius: var(--radius-lg); padding: 0; margin-bottom: 16px; box-shadow: var(--shadow-card); overflow: hidden; border-top: 3px solid var(--board-accent, var(--color-purple)); }
+        /* 板块主题色 header */
+        .tab-panel[data-tab="llm"] .deep-focus-card { border-top-color: var(--board-llm); }
+        .tab-panel[data-tab="llm"] .deep-focus-header { background: linear-gradient(135deg, #059669 0%, #047857 100%); }
+        .tab-panel[data-tab="coding"] .deep-focus-card { border-top-color: var(--board-coding); }
+        .tab-panel[data-tab="coding"] .deep-focus-header { background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%); }
+        .tab-panel[data-tab="app"] .deep-focus-card { border-top-color: var(--board-app); }
+        .tab-panel[data-tab="app"] .deep-focus-header { background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%); }
+        .tab-panel[data-tab="industry"] .deep-focus-card { border-top-color: var(--board-industry); }
+        .tab-panel[data-tab="industry"] .deep-focus-header { background: linear-gradient(135deg, #D97706 0%, #B45309 100%); }
+        .tab-panel[data-tab="enterprise"] .deep-focus-card { border-top-color: var(--board-enterprise); }
+        .tab-panel[data-tab="enterprise"] .deep-focus-header { background: linear-gradient(135deg, #E11D48 0%, #BE123C 100%); }
         .deep-focus-header { background: var(--gradient-purple); color: #fff; padding: 18px 24px; display: flex; align-items: center; gap: 10px; }
         .deep-focus-header.orange-theme { background: linear-gradient(135deg, #EA580C 0%, #DC2626 100%); }
         .deep-focus-header.china-theme { background: linear-gradient(135deg, #DC2626 0%, #B91C1C 50%, #991B1B 100%); }
@@ -2019,12 +2155,18 @@ body.mobile-preview-mode .global-controls {
 
         /* ===== DATA TABLE ===== */
         .data-table-wrap { overflow-x: auto; margin: 16px 0; border-radius: var(--radius-md); border: 1px solid var(--color-border); }
-        .data-table { width: 100%; border-collapse: collapse; font-size: 14px; }
-        .data-table th, .data-table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--color-border-light); }
+        .data-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 14px; }
+        .data-table th, .data-table td { padding: 12px 18px; text-align: left; border-bottom: 1px solid var(--color-border-light); }
         .data-table th { background: var(--color-bg-table-header); font-weight: 600; color: var(--color-text-secondary); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
-        .data-table td { color: var(--color-text-primary); }
+        .data-table td { color: var(--color-text-primary); line-height: 1.5; }
         .data-table tr:last-child td { border-bottom: none; }
         .data-table tbody tr:hover { background: var(--color-bg-hover); }
+        /* pi-card 内嵌 table 样式升级 */
+        .pi-card table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 14px; margin: 8px 0; }
+        .pi-card th { padding: 10px 16px; background: rgba(124,58,237,0.06); font-weight: 600; font-size: 12px; color: var(--color-text-secondary); border-bottom: 1px solid rgba(124,58,237,0.12); text-align: left; }
+        .pi-card td { padding: 10px 16px; border-bottom: 1px solid var(--color-border-light); line-height: 1.5; color: var(--color-text-primary); }
+        .pi-card tr:last-child td { border-bottom: none; }
+        .pi-card table + p { font-size: 13px; color: var(--color-text-muted); margin-top: 8px; }
         .section-card { background: var(--color-bg-card); border: 1px solid var(--color-border-light); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 16px; box-shadow: var(--shadow-card); }
         .section-header { font-size: 16px; font-weight: 700; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--color-border-light); display: flex; align-items: center; gap: 8px; color: var(--color-text-primary); }
         .section-header .num { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: var(--gradient-success); color: #fff; font-size: 12px; font-weight: 700; }
@@ -2078,25 +2220,23 @@ body.mobile-preview-mode .global-controls {
         @media (max-width: 768px) {
             .layout-wrapper { flex-direction: column; }
             .sidebar-nav {
-                width: 100%; position: sticky; top: 0; height: auto;
-                overflow-y: visible; border-right: none; border-bottom: 1px solid var(--color-border);
-                display: flex; flex-direction: row; overflow-x: auto; padding: 4px 0;
-                -webkit-overflow-scrolling: touch;
+                display: none;
             }
-            .sidebar-doc-title, .toc-group-label, .reading-progress-wrap { display: none; }
-            .toc-link {
-                flex: 0 0 auto; border-left: none; border-bottom: 2px solid transparent;
-                white-space: nowrap; padding: 8px 14px; font-size: 12px;
-            }
-            .toc-link.toc-active { border-left-color: transparent; border-bottom-color: var(--color-success); }
-            .toc-link.toc-sub { display: none; }
             .sidebar-collapse-btn { display: none; }
-            .content-inner { padding: 24px 16px 80px; }
+            .content-inner { padding: 16px 12px 80px; width: 100%; }
+            /* Tab: 移动端图标模式 */
+            .tab-nav { top: 0; padding: 6px 8px; gap: 2px; border-radius: 0; }
+            .tab-btn { padding: 8px 10px; font-size: 12px; min-width: 44px; min-height: 44px; touch-action: manipulation; }
+            .tab-btn .tab-label { display: none; }
+            .tab-btn .tab-icon { width: 22px; height: 22px; font-size: 14px; }
             .overview-grid.five-cols { grid-template-columns: 1fr 1fr; }
             .watch-grid { grid-template-columns: 1fr; }
-            .header-title { font-size: 24px; }
-            .heat-table { font-size: 12px; }
-            .heat-table th, .heat-table td { padding: 6px 4px; }
+            .header-title { font-size: 22px; }
+            .heat-table { font-size: 13px; }
+            .heat-table th, .heat-table td { padding: 8px 10px; }
+            .data-table th, .data-table td { padding: 8px 12px; }
+            .pi-card th { padding: 8px 12px; }
+            .pi-card td { padding: 8px 12px; }
             .coverage-bar { flex-direction: column; gap: 8px; }
             .pi-evo { flex-direction: column; align-items: flex-start; }
             .pi-evo-arrow { display: none; }
@@ -2104,13 +2244,25 @@ body.mobile-preview-mode .global-controls {
             .pi-t-row { grid-template-columns: 1fr; gap: 2px; padding: 6px 10px; border-left: 3px solid var(--color-border-light); margin-bottom: 4px; }
             .pi-t-row.projected { border-left-color: rgba(124,58,237,.3); }
             .pi-t-analogy { border-left: none; padding-left: 0; font-size: 12px; }
+            .news-item { padding: 12px 14px; border-left-width: 3px; }
+            .news-title-row { font-size: 16px; flex-wrap: wrap; }
+            .news-summary-compact { font-size: 13px; }
+            .deep-focus-card { margin: 16px 0; }
+            .header { padding: 20px 0 16px; }
+            .header-meta { flex-wrap: wrap; }
+        }
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .tab-btn .tab-label { display: inline; }
         }
         @media (max-width: 960px) {
             .overview-grid.five-cols { grid-template-columns: 1fr 1fr; }
         }
+        @media (min-width: 1025px) {
+            .tab-btn .tab-label { display: inline; }
+        }
 
 /* ===== AI洞察定制层 ===== */
-/* ===== AI洞察定制层样式（仅日报/首页特有的组件样式） ===== */
+/* ===== AI洞察定制层样式（v4.0 — Tab导航升级，板块主题色）===== */
 /* 
  * ⚠️ 本文件只包含AI洞察项目特有的组件样式和扩展变量。
  * CSS变量定义和基础样式从 qingshuang-research-style 动态引用。
@@ -2124,7 +2276,7 @@ body.mobile-preview-mode .global-controls {
  * - 新增组件样式在本文件添加
  */
 
-/* ===== AI洞察扩展CSS变量（公共层未覆盖的） ===== */
+/* ===== AI洞察扩展CSS变量（公共层未覆盖的）===== */
 :root {
     --color-orange: #EA580C;
     --color-success-dark: #047857;
@@ -2141,7 +2293,7 @@ body.mobile-preview-mode .global-controls {
     --color-bg-hover: rgba(0,0,0,0.025);
 }
 
-/* ===== 周报Header副标题覆盖（公共层max-width:580px太窄） ===== */
+/* ===== 周报Header副标题覆盖（公共层max-width:580px太窄）===== */
 .header-subtitle, .subtitle {
     max-width: 100% !important;
     color: var(--color-text-muted) !important;
@@ -2149,7 +2301,7 @@ body.mobile-preview-mode .global-controls {
     margin-top: 14px !important;
 }
 
-/* ===== 周报insight-card段落样式（统一用CSS而非内联style） ===== */
+/* ===== 周报insight-card段落样式（统一用CSS而非内联style）===== */
 .insight-card > p {
     line-height: 1.75;
     font-size: 13px;
@@ -2208,7 +2360,7 @@ body.mobile-preview-mode .global-controls {
 
 /* ===== 首页特有组件 ===== */
 
-/* Tab导航 */
+/* Tab导航（首页）*/
 .tab-nav {
     background: rgba(255,255,255,0.85);
     backdrop-filter: blur(20px) saturate(1.8);
@@ -2299,21 +2451,15 @@ body.mobile-preview-mode .global-controls {
         grid-template-columns: repeat(3, 1fr);
     }
 }
+
 /* ===== 周报Top5/洞察卡片样式（v2.0格式升级，从W22提取）===== */
-/* 
- * 来源：W22手动升级版HTML (2026-06-01)
- * 缺失根因：W23改脚本化生成后，CSS模板(daily-report-v3.css)不含这些定义
- * 修复：补入 ai-insight-custom.css，脚本合并时自动注入
- */
 
-/* 卡片强调色变量（按板块区分）*/
-.llm .news-card { --card-accent: var(--color-purple); }
-.coding .news-card { --card-accent: var(--color-orange); }
-.app .news-card { --card-accent: var(--color-info); }
-.industry .news-card { --card-accent: var(--color-warning); }
-.enterprise .news-card { --card-accent: var(--color-success); }
-
-
+/* 卡片强调色变量（按板块区分）— 继承日报组件层的 --board-accent 变量 */
+.llm .news-card { --card-accent: var(--board-llm, var(--color-success)); }
+.coding .news-card { --card-accent: var(--board-coding, var(--color-info)); }
+.app .news-card { --card-accent: var(--board-app, var(--color-purple)); }
+.industry .news-card { --card-accent: var(--board-industry, var(--color-warning)); }
+.enterprise .news-card { --card-accent: var(--board-enterprise, var(--color-danger)); }
 
 .insight-content {
     margin-top: var(--spacing-md);
@@ -2336,6 +2482,7 @@ body.mobile-preview-mode .global-controls {
     line-height: 1.7;
 }
 
+/* 周报 news-card 样式 — 与日报新闻项共享 board-accent 主题色 */
 .news-card {
     background: var(--color-bg-card);
     border: 1px solid var(--color-border-light);
@@ -2344,7 +2491,12 @@ body.mobile-preview-mode .global-controls {
     padding: var(--spacing-lg);
     margin-bottom: var(--spacing-xl);
     box-shadow: var(--shadow-card);
-    transition: box-shadow 0.2s;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
 }
 
 .news-card-rank {
@@ -2380,11 +2532,7 @@ body.mobile-preview-mode .global-controls {
 }
 
 .meta-item { display: inline-flex; align-items: center; gap: 4px; }
-
-
-
 .meta-divider { color: var(--color-border); font-size: 10px; margin: 0 2px; }
-
 .meta-link {
     color: var(--color-info);
     text-decoration: none;
@@ -2455,17 +2603,67 @@ body.mobile-preview-mode .global-controls {
     flex-wrap: wrap;
 }
 
-
-
-
-
-
-
-
 .meta-icon {
     opacity: 0.6;
 }
 
+/* ===== 周报板块表格升级 v2.0 (2026-06-30) ===== */
+/* 对齐日报标准：更大 padding、顶部边框用板块色 */
+.board-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 14px;
+}
+.board-table thead th {
+    padding: 12px 16px;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    background: color-mix(in srgb, var(--board-color, #2563EB) 8%, white);
+    color: var(--board-color, #2563EB);
+    border-bottom: 2px solid var(--board-color, #2563EB);
+    text-align: left;
+}
+.board-table tbody td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--color-border-light);
+    vertical-align: top;
+    line-height: 1.6;
+}
+.board-table tbody tr:last-child td { border-bottom: none; }
+.board-table tbody tr:hover { background: color-mix(in srgb, var(--board-color, #2563EB) 3%, white); }
+
+/* stat-card 升级：增加 top border 板块色 */
+.stat-card {
+    border-top: 3px solid transparent;
+    transition: box-shadow .2s, transform .2s;
+}
+.stat-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+.stat-card.stat-success { border-top-color: #059669; }
+.stat-card.stat-info    { border-top-color: #2563EB; }
+.stat-card.stat-purple  { border-top-color: #7C3AED; }
+.stat-card.stat-warning { border-top-color: #D97706; }
+.stat-card.stat-danger  { border-top-color: #E11D48; }
+
+/* 周报各板块标题颜色 */
+section#llm     .doc-chapter-label { color: #059669; }
+section#coding  .doc-chapter-label { color: #2563EB; }
+section#app     .doc-chapter-label { color: #7C3AED; }
+section#industry .doc-chapter-label { color: #D97706; }
+section#enterprise .doc-chapter-label { color: #E11D48; }
+
+/* 移动端：sidebar 隐藏，避免和内容重叠 */
+@media (max-width: 768px) {
+    .sidebar-nav { display: none !important; }
+    .content-inner { padding: 16px 12px 60px; }
+    .stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .board-table thead th, .board-table tbody td { padding: 8px 10px; font-size: 13px; }
+    .stat-card { padding: 12px; }
+    .news-card { padding: 14px; }
+    .header-title { font-size: 22px; }
+}
 
 
 
@@ -2600,22 +2798,22 @@ body.mobile-preview-mode .global-controls {
 <div class="callout callout-warning animate-on-scroll" style="margin-top:16px;"><strong>对从业者的三条启示：</strong><br>1. 技术栈必须拥抱开源+闭源双轨——纯闭源依赖是系统性风险，纯开源盈利模式未验证，混合策略是当前最优解<br>2. AI编程从选工具变编排栈——建立Cursor+Claude Code+Codex三件套的编排能力，比单点深度更重要<br>3. Agent安全从可选变必选——54起失控事件+政府介入发布=安全不再是上线后补的feature，而是上线前必须的gate</div>
 
 </section>
-<section id="llm">
-<div class="doc-chapter-label animate-on-scroll">大模型</div>
-<h2 class="animate-on-scroll"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.5V22h6v-4.5c2.9-1.2 5-4.1 5-7.5a8 8 0 0 0-8-8z"/><line x1="12" y2="12" x2="12" y2="18"/></svg> 大模型本周动态</h2>
-<div class="callout callout-info animate-on-scroll">GPT-5.6 Sol因政府介入限量发布，MiniMax M2.7实现自进化突破，开源模型追平闭源前沿——模型竞争从能力赛道转向安全+成本+可用性三维赛道。</div>
+<section id="llm" style="--section-color:#059669;">
+<div class="doc-chapter-label animate-on-scroll" style="color:#059669;">大模型</div>
+<h2 class="animate-on-scroll" style="color:#059669;"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.5V22h6v-4.5c2.9-1.2 5-4.1 5-7.5a8 8 0 0 0-8-8z"/><line x1="12" y2="12" x2="12" y2="18"/></svg> 大模型本周动态</h2>
+<div class="callout callout-info animate-on-scroll" style="border-left-color:#059669;">GPT-5.6 Sol因政府介入限量发布，MiniMax M2.7实现自进化突破，开源模型追平闭源前沿——模型竞争从能力赛道转向安全+成本+可用性三维赛道。</div>
 <div class="table-wrap animate-on-scroll">
-<table><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
-<tbody><tr><td>GPT-5.6系列有望下周登场，生成能力测试优于Claude Mythos</td><td>IT之家</td><td><a href="https://www.ithome.com/0/841/987.htm" target="_blank">链接</a></td></tr>
-<tr><td>Anthropic将在未来几天重新开放Mythos及Fable 5模型</td><td>IT之家/Anthropic</td><td><a href="https://www.ithome.com/0/841/985.htm" target="_blank">链接</a></td></tr>
-<tr><td>美国商务部下令Anthropic全球断供Fable 5与Mythos 5</td><td>Bloomberg/DW</td><td><a href="https://www.dw.com/zh/anthropic-ai-model-global-shutdown/a-77543796" target="_blank">链接</a></td></tr>
-<tr><td>智谱GLM-5.2趁势完全开源：前沿智能属于每一个人</td><td>B站AI早报</td><td><a href="https://www.bilibili.com/video/BV1oMJ76bE73" target="_blank">链接</a></td></tr>
-<tr><td>MiniMax M2.7发布：开源模型追平闭源前沿，成本仅1/3</td><td>Latent Space/LangChain</td><td><a href="https://www.latent.space/p/ainews-minimax-27-glm-5-at-13-cost" target="_blank">链接</a></td></tr>
-<tr><td>智谱GLM-5.2全量开放：1M上下文，盘中暴涨48%</td><td>财新网</td><td><a href="https://go-to-agency.com/en/blog/glm-5-2-open-weights-llm" target="_blank">链接</a></td></tr>
-<tr><td>豆包大模型2.1 Pro正式发布：多项Benchmark接近GPT-5.5</td><td>搜狐科技/36氪</td><td><a href="https://m.sohu.com/a/1040730677_313745" target="_blank">链接</a></td></tr>
-<tr><td>经济学人：头部AI实验室大规模雇佣哲学家，对齐与意识问题走向前台</td><td>economist.com</td><td><a href="https://www.economist.com" target="_blank">链接</a></td></tr>
-<tr><td>OpenAI发布GPT-5.5：GDPval达84.9%，1M上下文窗口真正可用</td><td>OpenAI官方</td><td><a href="https://openai.com/index/introducing-gpt-5-5" target="_blank">链接</a></td></tr>
-<tr><td>OpenAI公布限量预览版GPT-5.6 Sol系列模型</td><td>TechCrunch</td><td><a href="https://techcrunch.com/2026/06/26/openai-limits-gpt-5-6-rollout-after-government" target="_blank">链接</a></td></tr>
+<table class="board-table" style="--board-color:#059669;"><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
+<tbody><tr><td>GPT-5.6系列有望下周登场，生成能力测试优于Claude Mythos</td><td>IT之家</td><td><a href="https://www.ithome.com/0/841/987.htm" target="_blank" style="color:#059669;">链接</a></td></tr>
+<tr><td>Anthropic将在未来几天重新开放Mythos及Fable 5模型</td><td>IT之家/Anthropic</td><td><a href="https://www.ithome.com/0/841/985.htm" target="_blank" style="color:#059669;">链接</a></td></tr>
+<tr><td>美国商务部下令Anthropic全球断供Fable 5与Mythos 5</td><td>Bloomberg/DW</td><td><a href="https://www.dw.com/zh/anthropic-ai-model-global-shutdown/a-77543796" target="_blank" style="color:#059669;">链接</a></td></tr>
+<tr><td>智谱GLM-5.2趁势完全开源：前沿智能属于每一个人</td><td>B站AI早报</td><td><a href="https://www.bilibili.com/video/BV1oMJ76bE73" target="_blank" style="color:#059669;">链接</a></td></tr>
+<tr><td>MiniMax M2.7发布：开源模型追平闭源前沿，成本仅1/3</td><td>Latent Space/LangChain</td><td><a href="https://www.latent.space/p/ainews-minimax-27-glm-5-at-13-cost" target="_blank" style="color:#059669;">链接</a></td></tr>
+<tr><td>智谱GLM-5.2全量开放：1M上下文，盘中暴涨48%</td><td>财新网</td><td><a href="https://go-to-agency.com/en/blog/glm-5-2-open-weights-llm" target="_blank" style="color:#059669;">链接</a></td></tr>
+<tr><td>豆包大模型2.1 Pro正式发布：多项Benchmark接近GPT-5.5</td><td>搜狐科技/36氪</td><td><a href="https://m.sohu.com/a/1040730677_313745" target="_blank" style="color:#059669;">链接</a></td></tr>
+<tr><td>经济学人：头部AI实验室大规模雇佣哲学家，对齐与意识问题走向前台</td><td>economist.com</td><td><a href="https://www.economist.com" target="_blank" style="color:#059669;">链接</a></td></tr>
+<tr><td>OpenAI发布GPT-5.5：GDPval达84.9%，1M上下文窗口真正可用</td><td>OpenAI官方</td><td><a href="https://openai.com/index/introducing-gpt-5-5" target="_blank" style="color:#059669;">链接</a></td></tr>
+<tr><td>OpenAI公布限量预览版GPT-5.6 Sol系列模型</td><td>TechCrunch</td><td><a href="https://techcrunch.com/2026/06/26/openai-limits-gpt-5-6-rollout-after-government" target="_blank" style="color:#059669;">链接</a></td></tr>
 </tbody></table></div>
 <div class="stats-grid animate-on-scroll">
   <div class="stat-card stat-success"><div class="stat-value">1/3</div><div class="stat-label">MiniMax M2.7 vs闭源成本比</div></div>
@@ -2624,22 +2822,22 @@ body.mobile-preview-mode .global-controls {
   <div class="stat-card stat-warning"><div class="stat-value">56.22%</div><div class="stat-label">M2.7 SWE-Pro（匹敌GLM-5）</div></div>
 </div>
 </section>
-<section id="coding">
-<div class="doc-chapter-label animate-on-scroll">AI Coding</div>
-<h2 class="animate-on-scroll"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> AI Coding本周动态</h2>
-<div class="callout callout-danger animate-on-scroll">Codex CLI登顶Terminal-Bench 2.1达83.4%，Cursor+Claude Code+Codex三工具合流为统一编程栈，54起AI失控事件敲响Agent安全警钟。</div>
+<section id="coding" style="--section-color:#2563EB;">
+<div class="doc-chapter-label animate-on-scroll" style="color:#2563EB;">AI Coding</div>
+<h2 class="animate-on-scroll" style="color:#2563EB;"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> AI Coding本周动态</h2>
+<div class="callout callout-danger animate-on-scroll" style="border-left-color:#2563EB;">Codex CLI登顶Terminal-Bench 2.1达83.4%，Cursor+Claude Code+Codex三工具合流为统一编程栈，54起AI失控事件敲响Agent安全警钟。</div>
 <div class="table-wrap animate-on-scroll">
-<table><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
-<tbody><tr><td>AI Coding工具6月定价大检：Cursor/Copilot/Claude Code三强格局确立</td><td>DevelopersDigest</td><td><a href="https://www.developersdigest.tech/blog/ai-coding-tools-pricing-june-2026" target="_blank">链接</a></td></tr>
-<tr><td>Codex CLI登顶Terminal-Bench 2.1，AI Coding Agent格局分化</td><td>MorphLLM</td><td><a href="https://www.morphllm.com/ai-coding-agent" target="_blank">链接</a></td></tr>
-<tr><td>Cursor、Claude Code、Codex正在合流为一个AI编程技术栈</td><td>TheNewStack</td><td><a href="https://thenewstack.io/ai-coding-tool-stack" target="_blank">链接</a></td></tr>
-<tr><td>Kimi K2.7 Code高速版上线：2倍价格、最快6倍速度</td><td>AI早报</td><td><a href="https://m.163.com/dy/article/L03L95A90514R9OJ.html" target="_blank">链接</a></td></tr>
-<tr><td>SpaceX 600亿美元全股收购Cursor，创AI工具最大并购纪录</td><td>9to5Mac</td><td><a href="https://9to5mac.com/2026/06/17/spacex-cursor-acquisition/" target="_blank">链接</a></td></tr>
-<tr><td>Cursor、Claude Code、Codex三工具融合成统一AI编程栈</td><td>thenewstack.io</td><td><a href="https://thenewstack.io/ai-coding-tool-stack" target="_blank">链接</a></td></tr>
-<tr><td>Fable 5重塑AI编程格局：Claude Code+Cursor+Copilot全面接入</td><td>developersdigest.tech</td><td><a href="https://www.developersdigest.tech/blog/best-ai-coding-tools-june-2026-post-fable5" target="_blank">链接</a></td></tr>
-<tr><td>AI Coding Agent三足鼎立：Codex CLI 83.4%领先Terminal-Bench</td><td>MorphLLM</td><td><a href="https://www.morphllm.com/ai-coding-agent" target="_blank">链接</a></td></tr>
-<tr><td>54起AI失控事件：Agent是超级员工还是危险盲盒</td><td>今日头条</td><td><a href="https://m.toutiao.com/article/7654074198046720546/" target="_blank">链接</a></td></tr>
-<tr><td>54起AI失控事件后续：企业如何引入安全可控Agent</td><td>百家号</td><td><a href="https://baijiahao.baidu.com/s?id=1868965732544763138" target="_blank">链接</a></td></tr>
+<table class="board-table" style="--board-color:#2563EB;"><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
+<tbody><tr><td>AI Coding工具6月定价大检：Cursor/Copilot/Claude Code三强格局确立</td><td>DevelopersDigest</td><td><a href="https://www.developersdigest.tech/blog/ai-coding-tools-pricing-june-2026" target="_blank" style="color:#2563EB;">链接</a></td></tr>
+<tr><td>Codex CLI登顶Terminal-Bench 2.1，AI Coding Agent格局分化</td><td>MorphLLM</td><td><a href="https://www.morphllm.com/ai-coding-agent" target="_blank" style="color:#2563EB;">链接</a></td></tr>
+<tr><td>Cursor、Claude Code、Codex正在合流为一个AI编程技术栈</td><td>TheNewStack</td><td><a href="https://thenewstack.io/ai-coding-tool-stack" target="_blank" style="color:#2563EB;">链接</a></td></tr>
+<tr><td>Kimi K2.7 Code高速版上线：2倍价格、最快6倍速度</td><td>AI早报</td><td><a href="https://m.163.com/dy/article/L03L95A90514R9OJ.html" target="_blank" style="color:#2563EB;">链接</a></td></tr>
+<tr><td>SpaceX 600亿美元全股收购Cursor，创AI工具最大并购纪录</td><td>9to5Mac</td><td><a href="https://9to5mac.com/2026/06/17/spacex-cursor-acquisition/" target="_blank" style="color:#2563EB;">链接</a></td></tr>
+<tr><td>Cursor、Claude Code、Codex三工具融合成统一AI编程栈</td><td>thenewstack.io</td><td><a href="https://thenewstack.io/ai-coding-tool-stack" target="_blank" style="color:#2563EB;">链接</a></td></tr>
+<tr><td>Fable 5重塑AI编程格局：Claude Code+Cursor+Copilot全面接入</td><td>developersdigest.tech</td><td><a href="https://www.developersdigest.tech/blog/best-ai-coding-tools-june-2026-post-fable5" target="_blank" style="color:#2563EB;">链接</a></td></tr>
+<tr><td>AI Coding Agent三足鼎立：Codex CLI 83.4%领先Terminal-Bench</td><td>MorphLLM</td><td><a href="https://www.morphllm.com/ai-coding-agent" target="_blank" style="color:#2563EB;">链接</a></td></tr>
+<tr><td>54起AI失控事件：Agent是超级员工还是危险盲盒</td><td>今日头条</td><td><a href="https://m.toutiao.com/article/7654074198046720546/" target="_blank" style="color:#2563EB;">链接</a></td></tr>
+<tr><td>54起AI失控事件后续：企业如何引入安全可控Agent</td><td>百家号</td><td><a href="https://baijiahao.baidu.com/s?id=1868965732544763138" target="_blank" style="color:#2563EB;">链接</a></td></tr>
 </tbody></table></div>
 <div class="stats-grid animate-on-scroll">
   <div class="stat-card stat-purple"><div class="stat-value">83.4%</div><div class="stat-label">Codex CLI Terminal-Bench得分</div></div>
@@ -2648,22 +2846,22 @@ body.mobile-preview-mode .global-controls {
   <div class="stat-card stat-warning"><div class="stat-value">600亿$</div><div class="stat-label">SpaceX收购Cursor金额</div></div>
 </div>
 </section>
-<section id="app">
-<div class="doc-chapter-label animate-on-scroll">AI应用</div>
-<h2 class="animate-on-scroll"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg> AI应用本周动态</h2>
-<div class="callout callout-warning animate-on-scroll">豆包专业版付费订阅正式上线，GLM Coding Plan ARR破1亿，Kimi K2.5开源1.04T参数，AI应用从免费获客走向付费验证。</div>
+<section id="app" style="--section-color:#7C3AED;">
+<div class="doc-chapter-label animate-on-scroll" style="color:#7C3AED;">AI应用</div>
+<h2 class="animate-on-scroll" style="color:#7C3AED;"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg> AI应用本周动态</h2>
+<div class="callout callout-warning animate-on-scroll" style="border-left-color:#7C3AED;">豆包专业版付费订阅正式上线，GLM Coding Plan ARR破1亿，Kimi K2.5开源1.04T参数，AI应用从免费获客走向付费验证。</div>
 <div class="table-wrap animate-on-scroll">
-<table><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
-<tbody><tr><td>SpaceX AI为微软Office套件推Grok扩展，AI提升办公生产力</td><td>IT之家</td><td><a href="https://www.ithome.com/0/841/984.htm" target="_blank">链接</a></td></tr>
-<tr><td>银河通用发布AstraBrain-WBC 0.5：全球首个人形机器人通用小脑GPT模型</td><td>IT之家</td><td><a href="https://www.ithome.com/0/841/981.htm" target="_blank">链接</a></td></tr>
-<tr><td>2026智源大会发布全球首个通用世界基座模型悟界·Physis</td><td>QQ新闻</td><td><a href="https://news.qq.com/rain/a/20260612A09GNF00" target="_blank">链接</a></td></tr>
-<tr><td>MiniMax M3正式开源：原生多模态、百万上下文</td><td>晨间信号</td><td><a href="https://podcasts.apple.com/us/podcast/" target="_blank">链接</a></td></tr>
-<tr><td>OpenAI公布新路线图：人人都将拥有自己的AGI助手</td><td>环球网/新浪</td><td><a href="https://k.sina.com.cn/article_7857201856" target="_blank">链接</a></td></tr>
-<tr><td>智谱GLM Coding Plan上线2个月ARR破1亿，MaaS同比增900%</td><td>36氪</td><td><a href="https://m.36kr.com/p/3630818637186052" target="_blank">链接</a></td></tr>
-<tr><td>MiniMax M2.7自进化突破：模型深度参与自身进化流程</td><td>Latent Space</td><td><a href="https://www.latent.space/p/ainews-minimax-27-glm-5-at-13-cost" target="_blank">链接</a></td></tr>
-<tr><td>豆包专业版订阅正式上线：三级付费+免费不缩水</td><td>东方财富网</td><td><a href="http://fund.eastmoney.com/a/202606253781859461.html" target="_blank">链接</a></td></tr>
-<tr><td>Meta推出299美元智能眼镜新系列，AI+AR消费级产品价格战打响</td><td>sohu.com/AI早报</td><td><a href="https://m.sohu.com/a/1040730677_313745" target="_blank">链接</a></td></tr>
-<tr><td>Kimi K2.5深度评测：1.04T参数Agent Swarm架构开源最重量级模型</td><td>Maxime Labonne Substack</td><td><a href="https://maximelabonne.substack.com/p/kimi-k25-still-worth-it-after-two" target="_blank">链接</a></td></tr>
+<table class="board-table" style="--board-color:#7C3AED;"><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
+<tbody><tr><td>SpaceX AI为微软Office套件推Grok扩展，AI提升办公生产力</td><td>IT之家</td><td><a href="https://www.ithome.com/0/841/984.htm" target="_blank" style="color:#7C3AED;">链接</a></td></tr>
+<tr><td>银河通用发布AstraBrain-WBC 0.5：全球首个人形机器人通用小脑GPT模型</td><td>IT之家</td><td><a href="https://www.ithome.com/0/841/981.htm" target="_blank" style="color:#7C3AED;">链接</a></td></tr>
+<tr><td>2026智源大会发布全球首个通用世界基座模型悟界·Physis</td><td>QQ新闻</td><td><a href="https://news.qq.com/rain/a/20260612A09GNF00" target="_blank" style="color:#7C3AED;">链接</a></td></tr>
+<tr><td>MiniMax M3正式开源：原生多模态、百万上下文</td><td>晨间信号</td><td><a href="https://podcasts.apple.com/us/podcast/" target="_blank" style="color:#7C3AED;">链接</a></td></tr>
+<tr><td>OpenAI公布新路线图：人人都将拥有自己的AGI助手</td><td>环球网/新浪</td><td><a href="https://k.sina.com.cn/article_7857201856" target="_blank" style="color:#7C3AED;">链接</a></td></tr>
+<tr><td>智谱GLM Coding Plan上线2个月ARR破1亿，MaaS同比增900%</td><td>36氪</td><td><a href="https://m.36kr.com/p/3630818637186052" target="_blank" style="color:#7C3AED;">链接</a></td></tr>
+<tr><td>MiniMax M2.7自进化突破：模型深度参与自身进化流程</td><td>Latent Space</td><td><a href="https://www.latent.space/p/ainews-minimax-27-glm-5-at-13-cost" target="_blank" style="color:#7C3AED;">链接</a></td></tr>
+<tr><td>豆包专业版订阅正式上线：三级付费+免费不缩水</td><td>东方财富网</td><td><a href="http://fund.eastmoney.com/a/202606253781859461.html" target="_blank" style="color:#7C3AED;">链接</a></td></tr>
+<tr><td>Meta推出299美元智能眼镜新系列，AI+AR消费级产品价格战打响</td><td>sohu.com/AI早报</td><td><a href="https://m.sohu.com/a/1040730677_313745" target="_blank" style="color:#7C3AED;">链接</a></td></tr>
+<tr><td>Kimi K2.5深度评测：1.04T参数Agent Swarm架构开源最重量级模型</td><td>Maxime Labonne Substack</td><td><a href="https://maximelabonne.substack.com/p/kimi-k25-still-worth-it-after-two" target="_blank" style="color:#7C3AED;">链接</a></td></tr>
 </tbody></table></div>
 <div class="stats-grid animate-on-scroll">
   <div class="stat-card stat-purple"><div class="stat-value">1亿+</div><div class="stat-label">GLM Coding Plan ARR(元)</div></div>
@@ -2672,22 +2870,22 @@ body.mobile-preview-mode .global-controls {
   <div class="stat-card stat-warning"><div class="stat-value">299$</div><div class="stat-label">Meta智能眼镜售价</div></div>
 </div>
 </section>
-<section id="industry">
-<div class="doc-chapter-label animate-on-scroll">AI行业</div>
-<h2 class="animate-on-scroll"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20V8l-6 4V4l-6 4V2L2 10v10z"/></svg> AI行业本周动态</h2>
-<div class="callout callout-success animate-on-scroll">中国AI独角兽融资潮：DeepSeek 500亿+Kimi 376亿同周落地；达沃斯中国AI开源百亿下载；开源模型追平闭源重塑行业格局。</div>
+<section id="industry" style="--section-color:#D97706;">
+<div class="doc-chapter-label animate-on-scroll" style="color:#D97706;">AI行业</div>
+<h2 class="animate-on-scroll" style="color:#D97706;"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20V8l-6 4V4l-6 4V2L2 10v10z"/></svg> AI行业本周动态</h2>
+<div class="callout callout-success animate-on-scroll" style="border-left-color:#D97706;">中国AI独角兽融资潮：DeepSeek 500亿+Kimi 376亿同周落地；达沃斯中国AI开源百亿下载；开源模型追平闭源重塑行业格局。</div>
 <div class="table-wrap animate-on-scroll">
-<table><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
-<tbody><tr><td>DeepSeek完成首轮融资逾67亿美元估值超500亿美元成中国最高</td><td>华尔街日报/中央社</td><td><a href="https://tw.stock.yahoo.com/news/deepseek-67b-valuation" target="_blank">链接</a></td></tr>
-<tr><td>2026年6月中国AI进入独角兽定局时代：估值大洗牌、商业大兑现</td><td>ZAKER</td><td><a href="https://app.myzaker.com/news/article.php?pk=6a2b70ba8e9f096cb2581cf6" target="_blank">链接</a></td></tr>
-<tr><td>亚马逊向Anthropic追加50亿美元投资，总额达250亿美元</td><td>Bloomberg/DW</td><td><a href="https://www.cnbc.com/2026/04/20/amazon-invest-up-to-25-billion-in-anthropic-part-of-ai-infrastructure.html" target="_blank">链接</a></td></tr>
-<tr><td>Kimi累计融资376亿元创中国大模型之最，月之暗面进入200亿美元俱乐部</td><td>AI早报</td><td><a href="https://techcrunch.com/2026/05/07/chinas-moonshot-ai-raises-2b-at-20b-valuation-as-demand-for-open-source-ai-skyrockets" target="_blank">链接</a></td></tr>
-<tr><td>阿里发布首个具身智能大模型Qwen-Robot系列：三模型协同</td><td>TechNode/新浪财经</td><td><a href="https://technode.com/2026/06/17/alibaba-unveils-qwen-robot-series" target="_blank">链接</a></td></tr>
-<tr><td>LangChain验证：开源模型在Agent核心任务上已匹配闭源前沿</td><td>LangChain Blog</td><td><a href="https://www.langchain.com/blog/open-models-have-crossed-a-threshold" target="_blank">链接</a></td></tr>
-<tr><td>Bezos-backed AI初创Project Prometheus估值达410亿美元</td><td>marketspeaker.com</td><td><a href="https://marketspeaker.com/project-prometheus-41-billion-valuation" target="_blank">链接</a></td></tr>
-<tr><td>Q1 2026全球AI融资超3300亿美元，80%流向AI基础设施</td><td>TechCrunch</td><td><a href="https://news.crunchbase.com/venture/record-breaking-funding-ai-global-q1-2026" target="_blank">链接</a></td></tr>
-<tr><td>夏季达沃斯：中国AI开源大模型全球下载量突破100亿次</td><td>中新经纬</td><td><a href="https://www.jwview.com/jingwei/100b-downloads-2026" target="_blank">链接</a></td></tr>
-<tr><td>达沃斯2026：李强致辞强调新兴技术、开放合作与AI治理</td><td>中国政府网</td><td><a href="https://www.gov.cn/premier/2026-davos-speech" target="_blank">链接</a></td></tr>
+<table class="board-table" style="--board-color:#D97706;"><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
+<tbody><tr><td>DeepSeek完成首轮融资逾67亿美元估值超500亿美元成中国最高</td><td>华尔街日报/中央社</td><td><a href="https://tw.stock.yahoo.com/news/deepseek-67b-valuation" target="_blank" style="color:#D97706;">链接</a></td></tr>
+<tr><td>2026年6月中国AI进入独角兽定局时代：估值大洗牌、商业大兑现</td><td>ZAKER</td><td><a href="https://app.myzaker.com/news/article.php?pk=6a2b70ba8e9f096cb2581cf6" target="_blank" style="color:#D97706;">链接</a></td></tr>
+<tr><td>亚马逊向Anthropic追加50亿美元投资，总额达250亿美元</td><td>Bloomberg/DW</td><td><a href="https://www.cnbc.com/2026/04/20/amazon-invest-up-to-25-billion-in-anthropic-part-of-ai-infrastructure.html" target="_blank" style="color:#D97706;">链接</a></td></tr>
+<tr><td>Kimi累计融资376亿元创中国大模型之最，月之暗面进入200亿美元俱乐部</td><td>AI早报</td><td><a href="https://techcrunch.com/2026/05/07/chinas-moonshot-ai-raises-2b-at-20b-valuation-as-demand-for-open-source-ai-skyrockets" target="_blank" style="color:#D97706;">链接</a></td></tr>
+<tr><td>阿里发布首个具身智能大模型Qwen-Robot系列：三模型协同</td><td>TechNode/新浪财经</td><td><a href="https://technode.com/2026/06/17/alibaba-unveils-qwen-robot-series" target="_blank" style="color:#D97706;">链接</a></td></tr>
+<tr><td>LangChain验证：开源模型在Agent核心任务上已匹配闭源前沿</td><td>LangChain Blog</td><td><a href="https://www.langchain.com/blog/open-models-have-crossed-a-threshold" target="_blank" style="color:#D97706;">链接</a></td></tr>
+<tr><td>Bezos-backed AI初创Project Prometheus估值达410亿美元</td><td>marketspeaker.com</td><td><a href="https://marketspeaker.com/project-prometheus-41-billion-valuation" target="_blank" style="color:#D97706;">链接</a></td></tr>
+<tr><td>Q1 2026全球AI融资超3300亿美元，80%流向AI基础设施</td><td>TechCrunch</td><td><a href="https://news.crunchbase.com/venture/record-breaking-funding-ai-global-q1-2026" target="_blank" style="color:#D97706;">链接</a></td></tr>
+<tr><td>夏季达沃斯：中国AI开源大模型全球下载量突破100亿次</td><td>中新经纬</td><td><a href="https://www.jwview.com/jingwei/100b-downloads-2026" target="_blank" style="color:#D97706;">链接</a></td></tr>
+<tr><td>达沃斯2026：李强致辞强调新兴技术、开放合作与AI治理</td><td>中国政府网</td><td><a href="https://www.gov.cn/premier/2026-davos-speech" target="_blank" style="color:#D97706;">链接</a></td></tr>
 </tbody></table></div>
 <div class="stats-grid animate-on-scroll">
   <div class="stat-card stat-purple"><div class="stat-value">500亿</div><div class="stat-label">DeepSeek首轮融资(元)</div></div>
@@ -2696,22 +2894,22 @@ body.mobile-preview-mode .global-controls {
   <div class="stat-card stat-warning"><div class="stat-value">410亿$</div><div class="stat-label">Project Prometheus估值</div></div>
 </div>
 </section>
-<section id="enterprise">
-<div class="doc-chapter-label animate-on-scroll">企业转型</div>
-<h2 class="animate-on-scroll"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/></svg> 企业AI转型本周动态</h2>
-<div class="callout callout-warning animate-on-scroll">豆包Agent自主18小时写1303行代码验证独立交付，安全成为AI采购新硬指标，48%企业称AI令人失望——Agent从辅助到独立的跳跃远比预期艰难。</div>
+<section id="enterprise" style="--section-color:#E11D48;">
+<div class="doc-chapter-label animate-on-scroll" style="color:#E11D48;">企业转型</div>
+<h2 class="animate-on-scroll" style="color:#E11D48;"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/></svg> 企业AI转型本周动态</h2>
+<div class="callout callout-warning animate-on-scroll" style="border-left-color:#E11D48;">豆包Agent自主18小时写1303行代码验证独立交付，安全成为AI采购新硬指标，48%企业称AI令人失望——Agent从辅助到独立的跳跃远比预期艰难。</div>
 <div class="table-wrap animate-on-scroll">
-<table><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
-<tbody><tr><td>88%企业明确2026年将增加对AI的资金投入</td><td>中国经营报</td><td><a href="http://www.cb.com.cn/index/show/zj/cv/cv135370831263" target="_blank">链接</a></td></tr>
-<tr><td>谷歌推出Gemini Enterprise Agent Platform，Agent记忆+模拟能力上线</td><td>凤凰科技</td><td><a href="https://siliconangle.com/2026/04/22/google-brings-agentic-development-optimization-governance-one-roof-gemini-enterprise-agent-platform" target="_blank">链接</a></td></tr>
-<tr><td>黄仁勋要求英伟达全员使用Codex：1万员工AI编程成队友</td><td>凤凰科技</td><td><a href="https://www.benzinga.com/markets/tech/26/04/52022856/nvidia-deploys-openais-codex-across-10000-employees-as-jensen-huang-hails-age-of-ai-sam-altman-says-it-was-awesome" target="_blank">链接</a></td></tr>
-<tr><td>华为云码道代码智能体日活18倍增长，上线Skill市场+自定义Agent</td><td>凤凰科技</td><td><a href="https://www.huawei.com/en/news/2026/6/inspire-agenticera-agenticinfra" target="_blank">链接</a></td></tr>
-<tr><td>全球AI Agent生态爆火：GitHub顶级Agent项目25万星，中国模型占Token消耗61%</td><td>Crunchbase/多源</td><td><a href="https://news.crunchbase.com/ai/global-ai-agent-ecosystem-2026" target="_blank">链接</a></td></tr>
-<tr><td>豆包2.1 Agent自主运行18小时写1303行代码：企业AI从辅助走向独立交付</td><td>36氪</td><td><a href="http://m.36kr.com/p/3867066152713092" target="_blank">链接</a></td></tr>
-<tr><td>头部AI实验室招聘哲学家做对齐：企业AI安全从合规走向哲学</td><td>economist.com</td><td><a href="https://www.economist.com" target="_blank">链接</a></td></tr>
-<tr><td>GPT-5.5扩展Trusted Access for Cyber：安全能力成为企业AI采购新硬指标</td><td>OpenAI官方</td><td><a href="https://openai.com/index/scaling-trusted-access-for-cyber-defense/" target="_blank">链接</a></td></tr>
-<tr><td>企业AI采用调研：79%面临挑战，48%称令人失望</td><td>Writer</td><td><a href="https://writer.com/blog/enterprise-ai-adoption-2026" target="_blank">链接</a></td></tr>
-<tr><td>市场监管总局：AI智能体标准制定加速，为Agent商业化铺路</td><td>央视新闻</td><td><a href="https://www.cctv.com/ai-standards-2026" target="_blank">链接</a></td></tr>
+<table class="board-table" style="--board-color:#E11D48;"><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
+<tbody><tr><td>88%企业明确2026年将增加对AI的资金投入</td><td>中国经营报</td><td><a href="http://www.cb.com.cn/index/show/zj/cv/cv135370831263" target="_blank" style="color:#E11D48;">链接</a></td></tr>
+<tr><td>谷歌推出Gemini Enterprise Agent Platform，Agent记忆+模拟能力上线</td><td>凤凰科技</td><td><a href="https://siliconangle.com/2026/04/22/google-brings-agentic-development-optimization-governance-one-roof-gemini-enterprise-agent-platform" target="_blank" style="color:#E11D48;">链接</a></td></tr>
+<tr><td>黄仁勋要求英伟达全员使用Codex：1万员工AI编程成队友</td><td>凤凰科技</td><td><a href="https://www.benzinga.com/markets/tech/26/04/52022856/nvidia-deploys-openais-codex-across-10000-employees-as-jensen-huang-hails-age-of-ai-sam-altman-says-it-was-awesome" target="_blank" style="color:#E11D48;">链接</a></td></tr>
+<tr><td>华为云码道代码智能体日活18倍增长，上线Skill市场+自定义Agent</td><td>凤凰科技</td><td><a href="https://www.huawei.com/en/news/2026/6/inspire-agenticera-agenticinfra" target="_blank" style="color:#E11D48;">链接</a></td></tr>
+<tr><td>全球AI Agent生态爆火：GitHub顶级Agent项目25万星，中国模型占Token消耗61%</td><td>Crunchbase/多源</td><td><a href="https://news.crunchbase.com/ai/global-ai-agent-ecosystem-2026" target="_blank" style="color:#E11D48;">链接</a></td></tr>
+<tr><td>豆包2.1 Agent自主运行18小时写1303行代码：企业AI从辅助走向独立交付</td><td>36氪</td><td><a href="http://m.36kr.com/p/3867066152713092" target="_blank" style="color:#E11D48;">链接</a></td></tr>
+<tr><td>头部AI实验室招聘哲学家做对齐：企业AI安全从合规走向哲学</td><td>economist.com</td><td><a href="https://www.economist.com" target="_blank" style="color:#E11D48;">链接</a></td></tr>
+<tr><td>GPT-5.5扩展Trusted Access for Cyber：安全能力成为企业AI采购新硬指标</td><td>OpenAI官方</td><td><a href="https://openai.com/index/scaling-trusted-access-for-cyber-defense/" target="_blank" style="color:#E11D48;">链接</a></td></tr>
+<tr><td>企业AI采用调研：79%面临挑战，48%称令人失望</td><td>Writer</td><td><a href="https://writer.com/blog/enterprise-ai-adoption-2026" target="_blank" style="color:#E11D48;">链接</a></td></tr>
+<tr><td>市场监管总局：AI智能体标准制定加速，为Agent商业化铺路</td><td>央视新闻</td><td><a href="https://www.cctv.com/ai-standards-2026" target="_blank" style="color:#E11D48;">链接</a></td></tr>
 </tbody></table></div>
 <div class="stats-grid animate-on-scroll">
   <div class="stat-card stat-purple"><div class="stat-value">18h</div><div class="stat-label">豆包Agent自主运行时长</div></div>
@@ -2790,13 +2988,84 @@ body.mobile-preview-mode .global-controls {
   <p style="font-size:14px;color:#57534E;line-height:1.7;margin:0 0 12px 0">AI洞察是系统化追踪AI行业动态的项目，覆盖大模型、AI Coding、AI应用、AI行业投融资、企业AI转型五大领域。</p>
   <a href="https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/" target="_blank" style="display:inline-flex;padding:8px 16px;background:linear-gradient(135deg,#059669,#10B981);color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10l9-7 9 7v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg> 访问AI洞察首页</a>
 </div></div>
-<div class="doc-footer"><p><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.5V22h6v-4.5c2.9-1.2 5-4.1 5-7.5a8 8 0 0 0-8-8z"/><line x1="12" y2="12" x2="12" y2="18"/></svg> 林克（沈浪的AI分身） · AI洞察 · 周报 · 2026-W26</p><p style="margin-top:4px;">数据来源：AI洞察日报 06/22-06/28 · 5板块</p></div>
+<div class="doc-footer"><p><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/></svg> AI洞察 · 周报 · 2026-W26</p><p style="margin-top:4px;">数据来源：AI洞察日报 06/22-06/28 · 5板块</p><p style="margin-top:8px;"><a href="https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/" target="_blank"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10l9-7 9 7v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg> 访问AI洞察首页，获取更多深度分析</a></p></div>
 </div>
 </main>
 </div>
 <div class="scroll-to-top" id="scrollToTop">↑</div>
 <script>
     (function() {
+        // ===== TAB NAVIGATION (v4.0) =====
+        const tabNav = document.querySelector('.tab-nav');
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabPanels = document.querySelectorAll('.tab-panel');
+
+        function switchTab(tabId) {
+            // Update buttons
+            tabBtns.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.tab === tabId);
+            });
+            // Update panels
+            tabPanels.forEach(panel => {
+                panel.classList.toggle('active', panel.dataset.tab === tabId);
+            });
+            // Update sidebar TOC active state
+            const tocLinks = document.querySelectorAll('.toc-link');
+            tocLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href === '#' + tabId) {
+                    link.classList.add('toc-active');
+                } else if (tabId && !href.startsWith('#' + tabId)) {
+                    // Only remove active from board-section TOC links, not overview/heat/data/watch
+                    const boardIds = ['llm', 'coding', 'app', 'industry', 'enterprise'];
+                    if (boardIds.some(id => href === '#' + id)) {
+                        link.classList.remove('toc-active');
+                    }
+                }
+            });
+            // Scroll to top of content area
+            const contentInner = document.querySelector('.content-inner');
+            if (contentInner) {
+                window.scrollTo({ top: contentInner.offsetTop - 60, behavior: 'smooth' });
+            }
+        }
+
+        if (tabBtns.length && tabPanels.length) {
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    switchTab(btn.dataset.tab);
+                });
+                // Keyboard support
+                btn.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        switchTab(btn.dataset.tab);
+                    }
+                    // Arrow key navigation
+                    const btns = Array.from(tabBtns);
+                    const idx = btns.indexOf(btn);
+                    if (e.key === 'ArrowRight' && idx < btns.length - 1) {
+                        e.preventDefault();
+                        btns[idx + 1].focus();
+                        switchTab(btns[idx + 1].dataset.tab);
+                    }
+                    if (e.key === 'ArrowLeft' && idx > 0) {
+                        e.preventDefault();
+                        btns[idx - 1].focus();
+                        switchTab(btns[idx - 1].dataset.tab);
+                    }
+                });
+            });
+
+            // Show first tab by default if none active
+            const hasActive = document.querySelector('.tab-panel.active');
+            if (!hasActive && tabPanels.length > 0) {
+                tabPanels[0].classList.add('active');
+                if (tabBtns[0]) tabBtns[0].classList.add('active');
+            }
+        }
+
         // ===== TOC SCROLL SPY =====
         const tocLinks = document.querySelectorAll('.toc-link[href^="#"]');
         const sections = Array.from(tocLinks)
@@ -2804,15 +3073,31 @@ body.mobile-preview-mode .global-controls {
             .filter(Boolean);
 
         function updateToc() {
+            // Skip scroll spy for tab-managed sections (they're hidden/shown by tab)
+            const boardIds = ['llm', 'coding', 'app', 'industry', 'enterprise'];
+            const activeTabId = document.querySelector('.tab-btn.active')?.dataset.tab || '';
+            
             let active = null;
             const scrollY = window.scrollY + 120;
             for (const sec of sections) {
+                if (!sec) continue;
+                const secId = sec.id;
+                // For board sections, only mark active if it's the current tab
+                if (boardIds.includes(secId)) {
+                    if (secId === activeTabId) {
+                        active = sec;
+                    }
+                    continue;
+                }
                 if (sec.getBoundingClientRect().top + window.scrollY <= scrollY) {
                     active = sec;
                 }
             }
             tocLinks.forEach(l => {
                 const target = document.querySelector(l.getAttribute('href'));
+                const targetId = target?.id;
+                // Don't change active for tab-managed sections (that's Tab's job)
+                if (boardIds.includes(targetId)) return;
                 l.classList.toggle('toc-active', target === active);
             });
         }
@@ -2856,6 +3141,26 @@ body.mobile-preview-mode .global-controls {
             });
         }
 
+        // ===== SIDEBAR TOC LINKS → TAB SWITCH =====
+        // When clicking a board TOC link, switch to that tab
+        const boardTocLinks = document.querySelectorAll('.toc-link[href^="#"]');
+        boardTocLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                const targetId = href.replace('#', '');
+                const boardIds = ['llm', 'coding', 'app', 'industry', 'enterprise'];
+                if (boardIds.includes(targetId)) {
+                    e.preventDefault();
+                    switchTab(targetId);
+                    // Scroll to tab nav area
+                    const tabNavEl = document.querySelector('.tab-nav');
+                    if (tabNavEl) {
+                        window.scrollTo({ top: tabNavEl.offsetTop - 20, behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+
         // ===== ANIMATE ON SCROLL =====
         const animEls = document.querySelectorAll('.animate-on-scroll');
         if (animEls.length) {
@@ -2863,6 +3168,13 @@ body.mobile-preview-mode .global-controls {
                 entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
             }, { rootMargin: '0px 0px -40px 0px', threshold: 0.08 });
             animEls.forEach(el => observer.observe(el));
+        }
+
+        // ===== PREFERS-REDUCED-MOTION =====
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                el.classList.add('visible');
+            });
         }
     })();
 </script>

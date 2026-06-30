@@ -342,3 +342,61 @@
 .meta-icon {
     opacity: 0.6;
 }
+
+/* ===== 周报板块表格升级 v2.0 (2026-06-30) ===== */
+/* 对齐日报标准：更大 padding、顶部边框用板块色 */
+.board-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 14px;
+}
+.board-table thead th {
+    padding: 12px 16px;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    background: color-mix(in srgb, var(--board-color, #2563EB) 8%, white);
+    color: var(--board-color, #2563EB);
+    border-bottom: 2px solid var(--board-color, #2563EB);
+    text-align: left;
+}
+.board-table tbody td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--color-border-light);
+    vertical-align: top;
+    line-height: 1.6;
+}
+.board-table tbody tr:last-child td { border-bottom: none; }
+.board-table tbody tr:hover { background: color-mix(in srgb, var(--board-color, #2563EB) 3%, white); }
+
+/* stat-card 升级：增加 top border 板块色 */
+.stat-card {
+    border-top: 3px solid transparent;
+    transition: box-shadow .2s, transform .2s;
+}
+.stat-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+.stat-card.stat-success { border-top-color: #059669; }
+.stat-card.stat-info    { border-top-color: #2563EB; }
+.stat-card.stat-purple  { border-top-color: #7C3AED; }
+.stat-card.stat-warning { border-top-color: #D97706; }
+.stat-card.stat-danger  { border-top-color: #E11D48; }
+
+/* 周报各板块标题颜色 */
+section#llm     .doc-chapter-label { color: #059669; }
+section#coding  .doc-chapter-label { color: #2563EB; }
+section#app     .doc-chapter-label { color: #7C3AED; }
+section#industry .doc-chapter-label { color: #D97706; }
+section#enterprise .doc-chapter-label { color: #E11D48; }
+
+/* 移动端：sidebar 隐藏，避免和内容重叠 */
+@media (max-width: 768px) {
+    .sidebar-nav { display: none !important; }
+    .content-inner { padding: 16px 12px 60px; }
+    .stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .board-table thead th, .board-table tbody td { padding: 8px 10px; font-size: 13px; }
+    .stat-card { padding: 12px; }
+    .news-card { padding: 14px; }
+    .header-title { font-size: 22px; }
+}
