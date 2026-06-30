@@ -400,3 +400,285 @@ section#enterprise .doc-chapter-label { color: #E11D48; }
     .news-card { padding: 14px; }
     .header-title { font-size: 22px; }
 }
+
+/* ============================================================
+   AI周报视觉升级 v3.0 (2026-06-30)
+   目标：对齐日报视觉标准
+   ============================================================ */
+
+/* 1. Header：深色渐变背景 + 白色文字 + 更大内边距 */
+.doc-header {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #1e1b4b 100%);
+    border-radius: var(--radius-md);
+    padding: 48px 40px 40px !important;
+    margin-bottom: 40px !important;
+    position: relative;
+    overflow: hidden;
+}
+.doc-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(37,99,235,.25) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(124,58,237,.2) 0%, transparent 55%),
+                radial-gradient(ellipse at 60% 90%, rgba(5,150,105,.15) 0%, transparent 50%);
+    pointer-events: none;
+}
+.doc-header .header-badge {
+    color: rgba(255,255,255,.65);
+    font-size: 11px;
+    letter-spacing: .12em;
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+.doc-header .header-title {
+    font-size: 36px !important;
+    font-weight: 800;
+    background: linear-gradient(90deg, #fff 0%, rgba(255,255,255,.85) 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    letter-spacing: -.02em;
+    line-height: 1.25 !important;
+    margin-bottom: 16px !important;
+}
+.doc-header p.header-meta {
+    color: rgba(255,255,255,.6);
+    font-size: 13px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 0;
+}
+.doc-header p.header-meta span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+/* subtitle (weekly report) */
+.doc-header div[style*="color:var(--color-text-muted)"] {
+    color: rgba(255,255,255,.7) !important;
+    font-size: 14px !important;
+    line-height: 1.7 !important;
+}
+/* header 底部渐变线改白色半透明 */
+.doc-header::after {
+    background: linear-gradient(90deg, rgba(255,255,255,.3), rgba(255,255,255,.1)) !important;
+    height: 1px !important;
+}
+/* header 内 SVG icon 颜色 */
+.doc-header .meta-icon {
+    stroke: rgba(255,255,255,.7);
+}
+
+/* 2. 整体页面背景：已有 #F8FAFB，补 layout wrapper */
+.layout-wrapper {
+    background: var(--color-bg, #F8FAFB);
+    min-height: 100vh;
+}
+.content-inner {
+    padding-top: 32px !important;
+    padding-bottom: 120px !important;
+}
+
+/* 3. section 间距加大，让呼吸感更强 */
+section {
+    margin-bottom: 0 !important;
+    padding-bottom: 8px;
+}
+
+/* 4. stat-card 尺寸升级：数字更大，标签更小更淡 */
+.stat-card {
+    padding: 20px 16px !important;
+    text-align: center;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    background: #fff;
+}
+.stat-value {
+    font-size: 28px !important;
+    font-weight: 800 !important;
+    letter-spacing: -.02em;
+    line-height: 1.1;
+    margin-bottom: 6px;
+    display: block;
+}
+.stat-label {
+    font-size: 11px !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--color-text-muted) !important;
+    display: block;
+    line-height: 1.4;
+}
+.stat-card.stat-success .stat-value { color: #059669; }
+.stat-card.stat-info    .stat-value { color: #2563EB; }
+.stat-card.stat-purple  .stat-value { color: #7C3AED; }
+.stat-card.stat-warning .stat-value { color: #D97706; }
+.stat-card.stat-danger  .stat-value { color: #E11D48; }
+/* 5. stats-grid 最小列宽 */
+.stats-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)) !important;
+    gap: 12px !important;
+    margin-top: 16px;
+}
+
+/* 6. h2 字号/间距层次 */
+section h2 {
+    font-size: 22px !important;
+    font-weight: 700;
+    letter-spacing: -.01em;
+    margin-bottom: 20px !important;
+    margin-top: 6px !important;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+section h2 .meta-icon {
+    width: 20px !important;
+    height: 20px !important;
+    flex-shrink: 0;
+}
+
+/* 7. doc-chapter-label pill 样式强化 */
+.doc-chapter-label {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: .1em !important;
+    padding: 3px 12px !important;
+    border-radius: 999px !important;
+    display: inline-block !important;
+    margin-bottom: 8px !important;
+}
+/* overview/insight/top5 使用默认蓝色 */
+#overview .doc-chapter-label,
+#top5    .doc-chapter-label,
+#insight .doc-chapter-label,
+#linkinsight .doc-chapter-label,
+#dailyindex .doc-chapter-label,
+#vocab .doc-chapter-label,
+#narrative .doc-chapter-label {
+    background: rgba(37,99,235,.08);
+    color: #2563EB;
+}
+
+/* 8. 正文/描述文字 15px */
+.news-card-desc,
+.news-card-why,
+.insight-card p,
+p {
+    font-size: 15px !important;
+    line-height: 1.8 !important;
+}
+
+/* 9. callout 升级：更大内边距，左边条更粗 */
+.callout {
+    border-left-width: 4px !important;
+    padding: 16px 20px !important;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0 !important;
+    margin: 16px 0 !important;
+    font-size: 14px !important;
+    line-height: 1.75 !important;
+}
+
+/* 10. 日报索引卡片升级 */
+.daily-item {
+    background: #fff;
+    border-radius: var(--radius-md);
+    padding: 14px 18px !important;
+    margin-bottom: 10px !important;
+    box-shadow: var(--shadow-card);
+    border-left: 3px solid #2563EB;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+.daily-item-date {
+    font-size: 11px !important;
+    font-weight: 700;
+    color: #2563EB;
+    white-space: nowrap;
+    padding-top: 2px;
+    min-width: 60px;
+}
+.daily-item-link {
+    font-size: 14px !important;
+    font-weight: 600;
+    color: var(--color-text-primary) !important;
+    text-decoration: none;
+    line-height: 1.4;
+    flex: 1;
+}
+.daily-item-link:hover { color: #2563EB !important; }
+.daily-item-kw {
+    font-size: 11px !important;
+    color: var(--color-text-muted);
+    margin-top: 4px;
+    grid-column: 2;
+}
+.daily-index {
+    display: block !important;
+}
+
+/* 11. 词汇表升级 */
+.board-table, table {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+.table-wrap {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--color-border-light);
+    margin: 16px 0;
+}
+
+/* 12. 移动端全面优化 */
+@media (max-width: 768px) {
+    .doc-header { padding: 28px 20px 24px !important; border-radius: 0; }
+    .doc-header .header-title { font-size: 24px !important; }
+    .stat-value { font-size: 22px !important; }
+    section h2 { font-size: 18px !important; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    .daily-item { flex-direction: column; gap: 6px; }
+    .daily-item-date { min-width: unset; }
+    p { font-size: 14px !important; }
+}
+
+/* 13. 侧边栏 TOC 字体更小，不抢戏 */
+.sidebar-nav .toc-link {
+    font-size: 12px !important;
+    padding: 5px 10px !important;
+}
+
+/* 14. 了解更多模块 */
+.learn-more-section {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--color-border-light);
+}
+
+
+/* stat-value 颜色兜底（最高优先级，放在文件末尾） */
+.stats-grid .stat-card.stat-success .stat-value,
+.stat-card.stat-success .stat-value { color: #059669 !important; }
+.stats-grid .stat-card.stat-info    .stat-value,
+.stat-card.stat-info    .stat-value { color: #2563EB !important; }
+.stats-grid .stat-card.stat-purple  .stat-value,
+.stat-card.stat-purple  .stat-value { color: #7C3AED !important; }
+.stats-grid .stat-card.stat-warning .stat-value,
+.stat-card.stat-warning .stat-value { color: #D97706 !important; }
+.stats-grid .stat-card.stat-danger  .stat-value,
+.stat-card.stat-danger  .stat-value { color: #E11D48 !important; }
+
+/* board-table 行高紧凑版 */
+.board-table tbody td {
+    padding: 10px 14px !important;
+    font-size: 13px !important;
+    line-height: 1.55 !important;
+}
+.board-table thead th {
+    padding: 10px 14px !important;
+}
