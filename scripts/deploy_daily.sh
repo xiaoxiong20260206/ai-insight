@@ -132,6 +132,40 @@ if echo "$GATE_RESULT" | grep -q "❌ 质量门未通过"; then
 fi
 echo "  ✅ 质量门通过"
 
+# ===== 0c. JSON Schema 验证（v14.0新增） =====
+echo ""
+echo "🔍 Step 0c: JSON Schema 验证"
+if [ -f "data/daily-content-$DATE.json" ]; then
+    if uv run scripts/validate_daily_json.py "$DATE" 2>&1; then
+        echo "  ✅ JSON Schema 验证通过"
+    else
+        echo "  🚫 JSON Schema 验证失败，部署已阻断"
+        if [ "${SKIP_GATE:-0}" != "1" ]; then
+            exit 1
+        fi
+        echo "  ⚠️ SKIP_GATE=1 已设置，跳过继续部署..."
+    fi
+else
+    echo "  ⏭️ JSON文件不存在，跳过Schema验证"
+fi
+
+# ===== 0d. HTML 展示验证（v14.0新增） =====
+echo ""
+echo "🔍 Step 0d: HTML 展示完整性验证"
+if [ -f "01-daily-reports/$MONTH/$DATE-v3.html" ]; then
+    if uv run scripts/validate_daily_html.py "$DATE" --external 2>&1; then
+        echo "  ✅ HTML 展示验证通过"
+    else
+        echo "  🚫 HTML 展示验证失败，部署已阻断"
+        if [ "${SKIP_GATE:-0}" != "1" ]; then
+            exit 1
+        fi
+        echo "  ⚠️ SKIP_GATE=1 已设置，跳过继续部署..."
+    fi
+else
+    echo "  ⏭️ HTML文件不存在，跳过展示验证"
+fi
+
 # ===== 1. 检查文件存在 =====
 echo ""
 echo "📋 Step 1: 检查必要文件"
