@@ -272,7 +272,7 @@ def render_daily_index(d):
     cards = "".join(f'''<div class="daily-item">
   <div class="daily-item-date">{i["date"]}<br/><span style="font-weight:400;font-size:10px;opacity:.8;">{i["weekday"]}</span></div>
   <div style="flex:1;min-width:0;">
-    <a href="{i["url"]}" target="_blank" class="daily-item-link">{i["title"]}</a>
+    <a href="{i["url"]}" target="_blank" class="daily-item-link">{i.get("keywords","").split(",")[0] or i["title"]}</a>
     <div class="daily-item-kw">{i.get("keywords","")}</div>
   </div>
 </div>
@@ -282,22 +282,38 @@ def render_daily_index(d):
 def render_vocab(d):
     items = d.get("vocab",[])
     if not items: return ""
-    rows = "".join(f'<tr><td style="font-weight:600;min-width:80px;">{i["term"]}</td><td style="color:var(--color-text-secondary);">{i["definition"]}</td><td style="color:var(--color-text-muted);font-size:12px;">{i.get("source","")}</td></tr>\n' for i in items)
-    return f'<section id="vocab">\n<div class="doc-chapter-label animate-on-scroll">技术词汇</div>\n<h2 class="animate-on-scroll">{SVG_ICONS["vocab"]} 技术词汇表</h2>\n<div class="table-wrap animate-on-scroll">\n<table class="board-table" style="--board-color:#7C3AED;"><thead><tr><th>术语</th><th>定义</th><th>出处</th></tr></thead>\n<tbody>{rows}</tbody></table></div>\n</section>'
+    # 检测出处列是否有任何数据，无数据则隐藏该列
+    has_source = any(i.get("source","").strip() for i in items)
+    if has_source:
+        header = '<thead><tr><th>术语</th><th>定义</th><th>出处</th></tr></thead>'
+        rows = "".join(f'<tr><td style="font-weight:700;color:#1C1917;min-width:120px;">{i["term"]}</td><td style="color:#57534E;">{i["definition"]}</td><td style="color:#78716C;font-size:12px;">{i.get("source","")}</td></tr>\n' for i in items)
+    else:
+        header = '<thead><tr><th>术语</th><th>定义</th></tr></thead>'
+        rows = "".join(f'<tr><td style="font-weight:700;color:#1C1917;min-width:120px;">{i["term"]}</td><td style="color:#57534E;">{i["definition"]}</td></tr>\n' for i in items)
+    return f'<section id="vocab">\n<div class="doc-chapter-label animate-on-scroll">技术词汇</div>\n<h2 class="animate-on-scroll">{SVG_ICONS["vocab"]} 技术词汇表</h2>\n<div class="table-wrap animate-on-scroll">\n<table class="board-table" style="--board-color:#7C3AED;">{header}\n<tbody>{rows}</tbody></table></div>\n</section>'
 
 def render_narrative(d):
     n = d.get("narrative",{})
     if not n: return ""
     intro_inner = _strip_double_strong(n.get("intro_callout",""))
-    # If entire intro is wrapped in <strong>, unwrap it (we add our own wrapper)
     if intro_inner.startswith("<strong>") and intro_inner.endswith("</strong>"):
         intro_inner = intro_inner[len("<strong>"):-len("</strong>")]
     intro = f'<div class="callout callout-purple animate-on-scroll"><strong>{intro_inner}</strong></div>'
-    blocks = "".join(f'<div class="callout {b.get("class","callout-info")} animate-on-scroll" style="margin-top:16px;">{_strip_double_strong(b.get("content",""))}</div>\n' for b in n.get("main_blocks",[]))
+    # main_blocks：每个 block 加序号标题锚点
+    BLOCK_COLORS = ["#2563EB", "#059669", "#D97706", "#7C3AED", "#E11D48"]
+    blocks_html = ""
+    for idx, b in enumerate(n.get("main_blocks",[])):
+        color = BLOCK_COLORS[idx % len(BLOCK_COLORS)]
+        cls = b.get("class","callout-info")
+        content = _strip_double_strong(b.get("content",""))
+        # 如果 block 有 title，加视觉小标题
+        title = b.get("title","")
+        title_html = f'<div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:{color};margin-bottom:6px;">{'0' + str(idx+1) if idx < 9 else str(idx+1)}</div>' if not title else f'<div style="font-size:13px;font-weight:700;color:{color};margin-bottom:8px;">{title}</div>'
+        blocks_html += f'<div class="callout {cls} animate-on-scroll" style="margin-top:16px;border-left-color:{color};">{title_html}{content}</div>\n'
     conc = ""
     if n.get("conclusion_callout"):
         conc = f'<hr style="border:none;border-top:2px solid var(--color-success);margin:32px 0;">\n<div class="callout callout-success animate-on-scroll">{_strip_double_strong(n["conclusion_callout"])}</div>'
-    return f'<section id="narrative">\n<div class="doc-chapter-label animate-on-scroll">宏观叙事</div>\n<h2 class="animate-on-scroll">{SVG_ICONS["narrative"]} 宏观叙事：{n.get("title","")}</h2>\n{intro}\n{blocks}\n{conc}\n</section>'
+    return f'<section id="narrative">\n<div class="doc-chapter-label animate-on-scroll">宏观叙事</div>\n<h2 class="animate-on-scroll">{SVG_ICONS["narrative"]} 宏观叙事：{n.get("title","")}</h2>\n{intro}\n{blocks_html}\n{conc}\n</section>'
 
 LEARN_MORE_TEMPLATE = '''<div style="max-width:100%;margin:0 auto;padding:0 0 48px;">
 <div style="background:linear-gradient(135deg,#F8FAFB 0%,#EEF2F6 100%);border:1px solid #E7E5E4;border-radius:14px;padding:24px 28px;box-shadow:0 2px 8px rgba(31,35,40,.06)">

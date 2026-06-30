@@ -736,3 +736,59 @@ section > * {
     max-width: 100%;
     box-sizing: border-box;
 }
+
+/* ============================================================
+   内容细节修复 (2026-06-30 round-5)
+   ============================================================ */
+
+/* 1. callout 内 strong：更明显的加粗 + 颜色 */
+.callout strong {
+    font-weight: 800 !important;
+    color: #1C1917 !important;
+    letter-spacing: -.01em;
+}
+.callout-purple strong { color: #5B21B6 !important; }
+.callout-info    strong { color: #1D4ED8 !important; }
+.callout-success strong { color: #047857 !important; }
+.callout-warning strong { color: #B45309 !important; }
+.callout-danger  strong { color: #BE123C !important; }
+
+/* 2. 深度洞察 块：turning_point/paradox/takeaway 左边条 + 序号标题 */
+#linkinsight .callout {
+    font-size: 14px !important;
+    line-height: 1.8 !important;
+}
+
+/* 3. 词汇表：术语列加粗更醒目，出处列更精致 */
+.board-table tbody td:first-child {
+    font-weight: 700 !important;
+    color: #1C1917 !important;
+}
+.board-table tbody td:last-child {
+    color: #78716C;
+    font-size: 12px !important;
+}
+
+/* 4. 来源列文字不截断 */
+.board-table tbody td:nth-child(2) {
+    color: #57534E;
+    font-size: 13px !important;
+    line-height: 1.6;
+}
+
+/* 5. 宏观叙事：block 间有足够间距 */
+#narrative .callout + .callout {
+    margin-top: 14px !important;
+}
+
+/* 6. 日报索引链接标题：更像标题 */
+.daily-item-link {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #1C1917 !important;
+    line-height: 1.45;
+    display: block;
+    margin-bottom: 3px;
+    transition: color 150ms ease;
+}
+.daily-item-link:hover { color: #2563EB !important; text-decoration: none; }
