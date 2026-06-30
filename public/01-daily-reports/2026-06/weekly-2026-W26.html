@@ -2868,6 +2868,91 @@ a:focus-visible, button:focus-visible {
     .stats-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)) !important; }
 }
 
+/* ============================================================
+   宽度对齐系统 (2026-06-30)
+   目标：所有章节内容在同一个 960px 宽度容器内对齐
+   ============================================================ */
+
+/* 统一内容区最大宽度 */
+:root {
+    --content-max: 960px;
+    --sidebar-width: 200px;
+}
+
+/* content-inner：统一容器（覆盖之前零散定义） */
+.content-inner {
+    width: 100% !important;
+    max-width: var(--content-max) !important;
+    padding: 32px 44px 120px !important;
+    box-sizing: border-box;
+}
+
+/* doc-header：背景全宽，内容对齐 960px */
+/* 移除 header 的 border-radius，让它可以全宽铺展 */
+/* 内容通过 padding 约束在 content-inner 的宽度内 */
+.doc-header {
+    /* 让 header 和 section 等宽，都在 content-inner 内 */
+    width: 100%;
+    box-sizing: border-box;
+}
+/* subtitle max-width 对齐（去掉硬编码 700px） */
+.doc-header > div[style*="color:var(--color-text-muted)"] {
+    max-width: 100% !important;
+}
+
+/* 所有 section 统一宽度 */
+section {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* table-wrap、stats-grid、daily-index 统一全宽 */
+.table-wrap,
+.stats-grid,
+.daily-index,
+.weekly-news-card,
+.insight-card {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* 内容行宽：正文段落 65ch，但容器本身全宽 */
+/* 这样卡片/表格撑满，只有纯文字段落控制行宽 */
+section > p,
+.narrative-text {
+    max-width: 65ch;
+}
+/* 清除之前错误地给 callout 加了 65ch 的 max-width */
+.callout,
+.news-card-desc,
+.news-card-why,
+.weekly-news-card p,
+.insight-card p {
+    max-width: none !important;
+}
+
+/* 桌面：内容区 padding 44px 两侧 */
+@media (min-width: 1024px) {
+    .content-inner {
+        padding: 32px 44px 120px !important;
+    }
+}
+/* 平板 768-1023px */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .content-inner {
+        padding: 24px 32px 100px !important;
+    }
+}
+/* 移动端 */
+@media (max-width: 767px) {
+    .content-inner {
+        padding: 16px 16px 80px !important;
+    }
+    .doc-header {
+        border-radius: 0 !important;
+    }
+}
+
 
 
 /* ===== 68ch行宽限制（容器100%，文字68ch）===== */
