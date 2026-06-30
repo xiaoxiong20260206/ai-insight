@@ -688,3 +688,51 @@ section > p,
         border-radius: 0 !important;
     }
 }
+
+/* ============================================================
+   表格溢出修复 (2026-06-30 #fix-overflow)
+   根因：.table-wrap { overflow: hidden } 覆盖了 overflow-x: auto
+   ============================================================ */
+
+/* 恢复 table-wrap 横向滚动，避免内容截断 */
+.table-wrap {
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* overview 表格：禁用 table-layout:fixed，改用 auto 让浏览器自动分配列宽 */
+/* 维度列 whitespace:nowrap 自然取最小宽，信号列获得剩余所有空间 */
+.board-table {
+    table-layout: auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+}
+.board-table thead th,
+.board-table tbody td {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+/* 维度列不换行（短文字），信号列自由换行 */
+.board-table thead th:first-child,
+.board-table tbody td:first-child {
+    white-space: nowrap;
+    width: 1%;  /* 收缩到内容最小宽度 */
+}
+.board-table thead th:not(:first-child),
+.board-table tbody td:not(:first-child):not(:last-child) {
+    white-space: normal;
+    word-break: break-word;
+}
+
+/* content-inner：用 box-sizing + overflow-x hidden 防止整体溢出 */
+.content-inner {
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+}
+
+/* section 内所有元素约束在容器内 */
+section > * {
+    max-width: 100%;
+    box-sizing: border-box;
+}
