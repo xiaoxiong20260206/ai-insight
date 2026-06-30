@@ -442,3 +442,42 @@ Step 6: 知识沉淀(Harvest) → 检查复用价值 → 写入knowledge包（P0
 
 完整踩坑经验见 `reference/daily-report/lessons-learned.md`，但**执行时不主动加载**。
 关键教训已内置到脚本校验逻辑中。
+---
+
+## 周报视觉规范（P0 — 2026-06-30 W26重构后锁定）
+
+> 以下标准已内置到 `gen_weekly_html.py`，不可手动修改绕过。执行周报前确认脚本是最新版。
+
+### P0 新增红线（#30~#34）
+
+**#30 周报必须用 gen_weekly_html.py 生成，禁止手动拼 HTML**
+- 所有样式/结构均在脚本中固化，手动拼出的 HTML 会绕过 CSS class 规范，样式全失效
+
+**#31 CSS 补丁不得超过 3 轮零散追加，必须合并为整洁 CSS 系统**
+- 多次追加会导致选择器优先级混乱，效果不可预测。应整合为一个版本块（如 v4.0），关键属性加 `!important`
+
+**#32 board-table 必须用 `table-layout: auto`，维度列用 `white-space: nowrap; width: 1%`**
+- 禁止用固定百分比列宽（如 `width: 20%`），会在多层容器嵌套中计算失准导致信号列截断
+
+**#33 .table-wrap 必须保持 `overflow-x: auto`**
+- 禁止 `overflow: hidden`，会截断宽表格内容
+
+**#34 stat-card（stats-grid）已废弃，不得在周报中生成**
+- 用户确认无阅读价值（2026-06-30），脚本已删除渲染逻辑
+
+### 周报视觉标准速查表
+
+| 组件 | 规范 |
+|------|------|
+| Header | 深色渐变 #0f172a→#1e1b4b，白色渐变标题 36px/800 |
+| 板块 label | pill 10px/700/uppercase，各板块主题色 |
+| 板块 h2 | 22px/700，大模型=绿/Coding=蓝/应用=紫/行业=橙/企业=红 |
+| 板块分隔 | margin-top:48px + border-top:2px 板块色15%淡 |
+| Top5 卡片 | 白底+4px左色条+hover上浮，关键判断独立背景区 |
+| 事件表格 | table-layout:auto, overflow-x:auto, 维度列nowrap |
+| callout strong | 800字重 + 各类型对应深色 |
+| 日报索引 | flex布局，标题取 keywords.split(",")[0] |
+| narrative | 每块有序号小标题（01/02/03）+ 彩色border-left |
+| 正文 | 15px/#57534E/1.75行高，行宽 65ch 仅限纯文字段落 |
+
+_更新于 2026-06-30 · v3.7 · W26视觉标准锁定 + 周报P0红线#30-#34_
