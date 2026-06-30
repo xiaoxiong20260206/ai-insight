@@ -1,0 +1,163 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AI洞察日报数据 Schema",
+  "version": "1.0.0",
+  "updated": "2026-06-30",
+  "description": "daily-content-YYYY-MM-DD.json 的结构定义。gen_daily_html.py 和 cron agent 都必须遵守此契约。",
+
+  "type": "object",
+  "required": ["date", "tabs", "overview", "heat_trend", "coverage", "capability_update"],
+  "properties": {
+    "date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "description": "日报日期，格式 YYYY-MM-DD"
+    },
+    "tabs": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "description": "5个板块，顺序：大模型/AI Coding/AI应用/AI行业/企业转型",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "icon", "news", "deep_focus", "pattern_insight_html"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": ["models", "coding", "apps", "industry", "enterprise"],
+            "description": "板块ID，5选1"
+          },
+          "title": { "type": "string", "minLength": 2 },
+          "icon": { "type": "string" },
+          "news": {
+            "type": "object",
+            "required": ["overseas", "china"],
+            "properties": {
+              "overseas": {
+                "type": "array",
+                "description": "海外新闻",
+                "items": {
+                  "type": "object",
+                  "required": ["title", "url", "source", "summary", "region"],
+                  "properties": {
+                    "title": { "type": "string", "minLength": 5 },
+                    "url": { "type": "string", "pattern": "^https?://", "description": "必须是http/https链接，禁止空字符串和#锚点" },
+                    "source": { "type": "string", "minLength": 2 },
+                    "summary": { "type": "string", "minLength": 10 },
+                    "region": { "type": "string", "enum": ["overseas", "china"] }
+                  }
+                }
+              },
+              "china": {
+                "type": "array",
+                "description": "国内新闻",
+                "items": {
+                  "type": "object",
+                  "required": ["title", "url", "source", "summary", "region"],
+                  "properties": {
+                    "title": { "type": "string", "minLength": 5 },
+                    "url": { "type": "string", "pattern": "^https?://|^$", "description": "微信源允许空字符串(合规),其他源必须http/https" },
+                    "source": { "type": "string", "minLength": 2 },
+                    "summary": { "type": "string", "minLength": 10 },
+                    "region": { "type": "string", "enum": ["overseas", "china"] }
+                  }
+                }
+              }
+            }
+          },
+          "deep_focus": {
+            "type": "object",
+            "required": ["title", "paragraphs", "takeaway"],
+            "properties": {
+              "title": { "type": "string", "minLength": 5 },
+              "paragraphs": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+              "takeaway": { "type": "string", "minLength": 10 }
+            }
+          },
+          "pattern_insight_html": {
+            "type": "string",
+            "minLength": 50,
+            "description": "规律洞察HTML片段，不能为空"
+          }
+        }
+      }
+    },
+    "overview": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "description": "5个概览卡片，对应5个板块",
+      "items": {
+        "type": "object",
+        "required": ["icon", "label"],
+        "properties": {
+          "icon": { "type": "string" },
+          "label": { "type": "string", "minLength": 2 },
+          "headline": { "type": "string", "minLength": 5, "description": "概览摘要（gen_daily_html.py 的 text 兜底源）" },
+          "text": { "type": "string", "description": "可选，优先级高于 headline" }
+        }
+      }
+    },
+    "heat_trend": {
+      "type": "object",
+      "required": ["topics"],
+      "description": "热度趋势，topics 数组必须有数据",
+      "properties": {
+        "icon": { "type": "string" },
+        "label": { "type": "string" },
+        "text": { "type": "string" },
+        "title": { "type": "string", "minLength": 2, "description": "热度卡片标题" },
+        "topics": {
+          "type": "array",
+          "minItems": 3,
+          "description": "热度话题列表，至少3条",
+          "items": {
+            "type": "object",
+            "required": ["name", "score", "days", "trend_class", "trend_label", "signal"],
+            "properties": {
+              "name": { "type": "string", "minLength": 2 },
+              "score": { "type": "integer", "minimum": 1, "maximum": 10 },
+              "days": { "type": "integer", "minimum": 1 },
+              "trend_class": { "type": "string", "enum": ["up", "stable", "down"] },
+              "trend_label": { "type": "string" },
+              "signal": { "type": "string", "minLength": 2 }
+            }
+          }
+        }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "required": ["overseas", "china"],
+      "properties": {
+        "overseas": { "type": "integer", "minimum": 0 },
+        "china": { "type": "integer", "minimum": 0 },
+        "wechat": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "data_table": {
+      "type": "array",
+      "minItems": 3,
+      "description": "数据速览指标，至少3条（空则不渲染模块）",
+      "items": {
+        "type": "object",
+        "required": ["metric", "value"],
+        "properties": {
+          "metric": { "type": "string", "minLength": 2 },
+          "value": { "type": "string", "minLength": 1 },
+          "change": { "type": "string", "description": "变化/说明（可选，脚本读取优先级: change > note > context）" }
+        }
+      }
+    },
+    "watch_list": {
+      "type": "array",
+      "description": "明日关注",
+      "items": { "type": "string" }
+    },
+    "capability_update": {
+      "type": "string",
+      "minLength": 50,
+      "description": "林克自述/深度洞察，不能为空"
+    }
+  }
+}
