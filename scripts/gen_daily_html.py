@@ -778,6 +778,12 @@ def main():
         placeholders = _re.findall(r'\{\{[^}]+\}\}', html)
         for p in placeholders:
             hard_errors.append(f"❌ [致命] HTML中发现模板占位符 '{p}'，禁止在渲染输出中使用")
+    
+    # 0.2 未替换Python模板变量扫描 — v14.0新增（6/29教训：非f-string导致SVG_ICONS乱码）
+    template_leaks = _re.findall(r'\{[A-Z_][A-Z_0-9]*(?:\[.*?\])?\}', html)
+    if template_leaks:
+        unique = sorted(set(template_leaks))[:5]
+        hard_errors.append(f"❌ [致命] HTML中发现{len(template_leaks)}处未替换Python变量: {', '.join(unique)} — 检查parts.append是否用了f-string")
 
     # 1. 验证"明日/下周值得关注"板块是否渲染（有内容）
     if "明日/下周值得关注" not in html:
