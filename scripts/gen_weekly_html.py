@@ -276,14 +276,21 @@ def render_section(key, sec):
 
 def render_daily_index(d):
     items = d.get("daily_index",[])
-    cards = "".join(f'<div class="daily-item">\n  <div class="daily-item-date">{i["date"]} {i["weekday"]}</div>\n  <a href="{i["url"]}" target="_blank" class="daily-item-link">{i["title"]}</a>\n  <div class="daily-item-kw">{i.get("keywords","")}</div>\n</div>\n' for i in items)
+    cards = "".join(f'''<div class="daily-item">
+  <div class="daily-item-date">{i["date"]}<br/><span style="font-weight:400;font-size:10px;opacity:.8;">{i["weekday"]}</span></div>
+  <div style="flex:1;min-width:0;">
+    <a href="{i["url"]}" target="_blank" class="daily-item-link">{i["title"]}</a>
+    <div class="daily-item-kw">{i.get("keywords","")}</div>
+  </div>
+</div>
+''' for i in items)
     return f'<section id="dailyindex">\n<div class="doc-chapter-label animate-on-scroll">日报索引</div>\n<h2 class="animate-on-scroll">{SVG_ICONS["dailyindex"]} 本周日报索引</h2>\n<div class="daily-index animate-on-scroll">\n{cards}\n</div>\n</section>'
 
 def render_vocab(d):
     items = d.get("vocab",[])
     if not items: return ""
-    rows = "".join(f'<tr><td style="font-weight:600;">{i["term"]}</td><td>{i["definition"]}</td><td>{i.get("source","")}</td></tr>\n' for i in items)
-    return f'<section id="vocab">\n<div class="doc-chapter-label animate-on-scroll">技术词汇</div>\n<h2 class="animate-on-scroll">{SVG_ICONS["vocab"]} 技术词汇表</h2>\n<div class="table-wrap animate-on-scroll">\n<table><thead><tr><th>术语</th><th>定义</th><th>出处</th></tr></thead>\n<tbody>{rows}</tbody></table></div>\n</section>'
+    rows = "".join(f'<tr><td style="font-weight:600;min-width:80px;">{i["term"]}</td><td style="color:var(--color-text-secondary);">{i["definition"]}</td><td style="color:var(--color-text-muted);font-size:12px;">{i.get("source","")}</td></tr>\n' for i in items)
+    return f'<section id="vocab">\n<div class="doc-chapter-label animate-on-scroll">技术词汇</div>\n<h2 class="animate-on-scroll">{SVG_ICONS["vocab"]} 技术词汇表</h2>\n<div class="table-wrap animate-on-scroll">\n<table class="board-table" style="--board-color:#7C3AED;"><thead><tr><th>术语</th><th>定义</th><th>出处</th></tr></thead>\n<tbody>{rows}</tbody></table></div>\n</section>'
 
 def render_narrative(d):
     n = d.get("narrative",{})
