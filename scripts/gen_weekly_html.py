@@ -59,11 +59,11 @@ SVG_ICONS = {
 }
 
 SECTION_META = {
-    "llm":        {"icon": SVG_ICONS["llm"], "label": "大模型",    "h2_suffix": "大模型本周动态"},
-    "coding":     {"icon": SVG_ICONS["coding"], "label": "AI Coding", "h2_suffix": "AI Coding本周动态"},
-    "app":        {"icon": SVG_ICONS["app"], "label": "AI应用",    "h2_suffix": "AI应用本周动态"},
-    "industry":   {"icon": SVG_ICONS["industry"], "label": "AI行业",    "h2_suffix": "AI行业本周动态"},
-    "enterprise": {"icon": SVG_ICONS["enterprise"], "label": "企业转型",   "h2_suffix": "企业AI转型本周动态"},
+    "llm":        {"icon": SVG_ICONS["llm"], "label": "大模型",    "h2_suffix": "大模型本周动态", "color": "#059669"},
+    "coding":     {"icon": SVG_ICONS["coding"], "label": "AI Coding", "h2_suffix": "AI Coding本周动态", "color": "#2563EB"},
+    "app":        {"icon": SVG_ICONS["app"], "label": "AI应用",    "h2_suffix": "AI应用本周动态", "color": "#7C3AED"},
+    "industry":   {"icon": SVG_ICONS["industry"], "label": "AI行业",    "h2_suffix": "AI行业本周动态", "color": "#D97706"},
+    "enterprise": {"icon": SVG_ICONS["enterprise"], "label": "企业转型",   "h2_suffix": "企业AI转型本周动态", "color": "#E11D48"},
 }
 
 # Emoji-to-section key mapping for overview table dimension cleanup (#124)
@@ -208,39 +208,36 @@ def md_link_to_html(text):
 
 def render_section(key, sec):
     """渲染五大板块，key是llm/coding/app/industry/enterprise"""
-    meta = SECTION_META.get(key, {"icon": "📌", "label": key, "h2_suffix": key})
+    meta = SECTION_META.get(key, {"icon": "📌", "label": key, "h2_suffix": key, "color": "#2563EB"})
     id_ = key
     icon = meta["icon"]
     title = meta["h2_suffix"]
+    board_color = meta.get("color", "#2563EB")
     co = sec.get("callout","")
     cocl = sec.get("callout_class","callout-info")
-    co_html = f'<div class="callout {cocl} animate-on-scroll">{co}</div>' if co else ""
+    co_html = f'<div class="callout {cocl} animate-on-scroll" style="border-left-color:{board_color};">{co}</div>' if co else ""
     tbl = sec.get("table",[])
     tbl_html = ""
     if tbl:
         rows = ""
         for r in tbl:
-            # Defensive: auto-clean markdown links in event/source fields (#124)
             event_raw = r.get("event","")
             source_raw = r.get("source","")
             extracted_url = r.get("url","")
             event_html, event_urls = md_link_to_html(event_raw)
             source_html, source_urls = md_link_to_html(source_raw)
-            # If url field missing but markdown link has url, use extracted
             if not extracted_url and event_urls:
                 extracted_url = event_urls[0]
-            # Build link cell — only show if we have a real url
-            link_cell = f'<a href="{extracted_url}" target="_blank">链接</a>' if extracted_url else ""
+            link_cell = f'<a href="{extracted_url}" target="_blank" style="color:{board_color};">链接</a>' if extracted_url else ""
             rows += f'<tr><td>{event_html}</td><td>{source_html}</td>{f"<td>{link_cell}</td>" if link_cell else ""}</tr>\n'
-        # Header: include 链接 column only if any row has a link
         has_any_link = any(r.get("url","") or md_link_to_html(r.get("event",""))[1] for r in tbl)
         header_extra = "<th>链接</th>" if has_any_link else ""
-        tbl_html = f'<div class="table-wrap animate-on-scroll">\n<table><thead><tr><th>事件</th><th>来源</th>{header_extra}</tr></thead>\n<tbody>{rows}</tbody></table></div>'
+        tbl_html = f'<div class="table-wrap animate-on-scroll">\n<table class="board-table" style="--board-color:{board_color};"><thead><tr><th>事件</th><th>来源</th>{header_extra}</tr></thead>\n<tbody>{rows}</tbody></table></div>'
     stats = sec.get("stats",[])
     stats_html = ""
     if stats:
         stats_html = '<div class="stats-grid animate-on-scroll">\n' + "".join(f'  <div class="stat-card {s.get("class","stat-info")}"><div class="stat-value">{s["value"]}</div><div class="stat-label">{s["label"]}</div></div>\n' for s in stats) + '</div>'
-    return f'<section id="{id_}">\n<div class="doc-chapter-label animate-on-scroll">{meta["label"]}</div>\n<h2 class="animate-on-scroll">{icon} {title}</h2>\n{co_html}\n{tbl_html}\n{stats_html}\n</section>'
+    return f'<section id="{id_}" style="--section-color:{board_color};">\n<div class="doc-chapter-label animate-on-scroll" style="color:{board_color};">{meta["label"]}</div>\n<h2 class="animate-on-scroll" style="color:{board_color};">{icon} {title}</h2>\n{co_html}\n{tbl_html}\n{stats_html}\n</section>'
 
 def render_daily_index(d):
     items = d.get("daily_index",[])
@@ -318,7 +315,7 @@ def generate_html(d):
     learn_more = LEARN_MORE_TEMPLATE.replace("__SVG_INSIGHT__", SVG_ICONS["insight"]).replace("__HOMEPAGE_URL__", INTERNAL_BASE).replace("__SVG_HOME__", SVG_ICONS["home"])
     body_secs.append(learn_more)
     
-    footer = f'<div class="doc-footer"><p>{SVG_ICONS["llm"]} 林克（沈浪的AI分身） · AI洞察 · 周报 · {wid}</p><p style="margin-top:4px;">数据来源：AI洞察日报 {d.get("date_range","")} · 5板块</p></div>'
+    footer = f'<div class="doc-footer"><p>{SVG_ICONS["newspaper"]} AI洞察 · 周报 · {wid}</p><p style="margin-top:4px;">数据来源：AI洞察日报 {d.get("date_range","")} · 5板块</p><p style="margin-top:8px;"><a href="{INTERNAL_BASE}/" target="_blank">{SVG_ICONS["home"]} 访问AI洞察首页，获取更多深度分析</a></p></div>'
     sidebar = render_sidebar(d)
     
     fav = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232563EB'/%3E%3Ctext x='6' y='23' font-size='18' fill='white'%3E⚡%3C/text%3E%3C/svg%3E"
