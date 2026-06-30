@@ -2953,6 +2953,54 @@ section > p,
     }
 }
 
+/* ============================================================
+   表格溢出修复 (2026-06-30 #fix-overflow)
+   根因：.table-wrap { overflow: hidden } 覆盖了 overflow-x: auto
+   ============================================================ */
+
+/* 恢复 table-wrap 横向滚动，避免内容截断 */
+.table-wrap {
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* overview 表格：禁用 table-layout:fixed，改用 auto 让浏览器自动分配列宽 */
+/* 维度列 whitespace:nowrap 自然取最小宽，信号列获得剩余所有空间 */
+.board-table {
+    table-layout: auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+}
+.board-table thead th,
+.board-table tbody td {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+/* 维度列不换行（短文字），信号列自由换行 */
+.board-table thead th:first-child,
+.board-table tbody td:first-child {
+    white-space: nowrap;
+    width: 1%;  /* 收缩到内容最小宽度 */
+}
+.board-table thead th:not(:first-child),
+.board-table tbody td:not(:first-child):not(:last-child) {
+    white-space: normal;
+    word-break: break-word;
+}
+
+/* content-inner：用 box-sizing + overflow-x hidden 防止整体溢出 */
+.content-inner {
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+}
+
+/* section 内所有元素约束在容器内 */
+section > * {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
 
 
 /* ===== 68ch行宽限制（容器100%，文字68ch）===== */
@@ -3005,20 +3053,13 @@ section > p,
 <div class="table-wrap animate-on-scroll">
 <table class="board-table" style="--board-color:#059669;">
 <thead><tr><th>维度</th><th>周度信号</th></tr></thead>
-<tbody><tr><td style="font-weight:600;min-width:80px;"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.5V22h6v-4.5c2.9-1.2 5-4.1 5-7.5a8 8 0 0 0-8-8z"/><line x1="12" y2="12" x2="12" y2="18"/></svg> 大模型</td><td>GPT-5.6 Sol因政府介入限量发布，模型部署首次与国安审批挂钩；MiniMax M2.7实现自进化突破；开源模型追平闭源前沿</td></tr>
-<tr><td style="font-weight:600;min-width:80px;"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> AI Coding</td><td>Codex CLI登顶Terminal-Bench 2.1；Cursor+Claude Code+Codex三工具合流为统一编程栈；54起AI失控事件敲响安全警钟</td></tr>
-<tr><td style="font-weight:600;min-width:80px;"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg> AI 应用</td><td>豆包专业版付费订阅正式上线；GLM Coding Plan ARR破1亿；Kimi K2.5开源1.04T参数；Meta智能眼镜打响AI+AR价格战</td></tr>
-<tr><td style="font-weight:600;min-width:80px;"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20V8l-6 4V4l-6 4V2L2 10v10z"/></svg> AI 行业</td><td>中国AI独角兽融资潮：DeepSeek 500亿+Kimi 376亿；达沃斯中国AI开源百亿下载；Project Prometheus估值410亿</td></tr>
-<tr><td style="font-weight:600;min-width:80px;"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/></svg> 企业AI转型</td><td>Agent从辅助走向独立交付：豆包Agent自主18小时写1303行代码；安全成采购硬指标；48%企业AI令人失望</td></tr>
+<tbody><tr><td style="font-weight:600;white-space:nowrap;"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.5V22h6v-4.5c2.9-1.2 5-4.1 5-7.5a8 8 0 0 0-8-8z"/><line x1="12" y2="12" x2="12" y2="18"/></svg> 大模型</td><td>GPT-5.6 Sol因政府介入限量发布，模型部署首次与国安审批挂钩；MiniMax M2.7实现自进化突破；开源模型追平闭源前沿</td></tr>
+<tr><td style="font-weight:600;white-space:nowrap;"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> AI Coding</td><td>Codex CLI登顶Terminal-Bench 2.1；Cursor+Claude Code+Codex三工具合流为统一编程栈；54起AI失控事件敲响安全警钟</td></tr>
+<tr><td style="font-weight:600;white-space:nowrap;"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg> AI 应用</td><td>豆包专业版付费订阅正式上线；GLM Coding Plan ARR破1亿；Kimi K2.5开源1.04T参数；Meta智能眼镜打响AI+AR价格战</td></tr>
+<tr><td style="font-weight:600;white-space:nowrap;"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20V8l-6 4V4l-6 4V2L2 10v10z"/></svg> AI 行业</td><td>中国AI独角兽融资潮：DeepSeek 500亿+Kimi 376亿；达沃斯中国AI开源百亿下载；Project Prometheus估值410亿</td></tr>
+<tr><td style="font-weight:600;white-space:nowrap;"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/></svg> 企业AI转型</td><td>Agent从辅助走向独立交付：豆包Agent自主18小时写1303行代码；安全成采购硬指标；48%企业AI令人失望</td></tr>
 </tbody>
 </table></div>
-<div class="stats-grid animate-on-scroll">
-  <div class="stat-card stat-danger"><div class="stat-value">54</div><div class="stat-label">AI失控事件数</div></div>
-  <div class="stat-card stat-success"><div class="stat-value">1/20</div><div class="stat-label">DeepSeek V4 vs GPT-5成本比</div></div>
-  <div class="stat-card stat-purple"><div class="stat-value">1亿+</div><div class="stat-label">GLM Coding Plan ARR(元)</div></div>
-  <div class="stat-card stat-info"><div class="stat-value">100亿</div><div class="stat-label">中国AI开源全球下载(次)</div></div>
-  <div class="stat-card stat-warning"><div class="stat-value">48%</div><div class="stat-label">企业AI令人失望比例</div></div>
-</div>
 </section>
 <section id="top5">
 <div class="doc-chapter-label animate-on-scroll">Top 5</div>
@@ -3137,12 +3178,7 @@ section > p,
 <tr><td>OpenAI发布GPT-5.5：GDPval达84.9%，1M上下文窗口真正可用</td><td>OpenAI官方</td><td><a href="https://openai.com/index/introducing-gpt-5-5" target="_blank" style="color:#059669;">链接</a></td></tr>
 <tr><td>OpenAI公布限量预览版GPT-5.6 Sol系列模型</td><td>TechCrunch</td><td><a href="https://techcrunch.com/2026/06/26/openai-limits-gpt-5-6-rollout-after-government" target="_blank" style="color:#059669;">链接</a></td></tr>
 </tbody></table></div>
-<div class="stats-grid animate-on-scroll">
-  <div class="stat-card stat-success"><div class="stat-value">1/3</div><div class="stat-label">MiniMax M2.7 vs闭源成本比</div></div>
-  <div class="stat-card stat-purple"><div class="stat-value">1/20</div><div class="stat-label">DeepSeek V4 vs GPT-5成本比</div></div>
-  <div class="stat-card stat-info"><div class="stat-value">84.9%</div><div class="stat-label">GPT-5.5 GDPval得分</div></div>
-  <div class="stat-card stat-warning"><div class="stat-value">56.22%</div><div class="stat-label">M2.7 SWE-Pro（匹敌GLM-5）</div></div>
-</div>
+
 </section>
 <section id="coding" style="--section-color:#2563EB;margin-top:40px;padding-top:32px;border-top:2px solid color-mix(in srgb,#2563EB 15%,var(--color-border-light));">
 <div class="doc-chapter-label animate-on-scroll" style="color:#2563EB;background:color-mix(in srgb,#2563EB 8%,white);display:inline-block;padding:2px 10px;border-radius:var(--radius-full);font-size:11px;">AI Coding</div>
@@ -3161,12 +3197,7 @@ section > p,
 <tr><td>54起AI失控事件：Agent是超级员工还是危险盲盒</td><td>今日头条</td><td><a href="https://m.toutiao.com/article/7654074198046720546/" target="_blank" style="color:#2563EB;">链接</a></td></tr>
 <tr><td>54起AI失控事件后续：企业如何引入安全可控Agent</td><td>百家号</td><td><a href="https://baijiahao.baidu.com/s?id=1868965732544763138" target="_blank" style="color:#2563EB;">链接</a></td></tr>
 </tbody></table></div>
-<div class="stats-grid animate-on-scroll">
-  <div class="stat-card stat-purple"><div class="stat-value">83.4%</div><div class="stat-label">Codex CLI Terminal-Bench得分</div></div>
-  <div class="stat-card stat-success"><div class="stat-value">78.9%</div><div class="stat-label">Claude Code Terminal-Bench得分</div></div>
-  <div class="stat-card stat-danger"><div class="stat-value">54</div><div class="stat-label">AI失控事件数</div></div>
-  <div class="stat-card stat-warning"><div class="stat-value">600亿$</div><div class="stat-label">SpaceX收购Cursor金额</div></div>
-</div>
+
 </section>
 <section id="app" style="--section-color:#7C3AED;margin-top:40px;padding-top:32px;border-top:2px solid color-mix(in srgb,#7C3AED 15%,var(--color-border-light));">
 <div class="doc-chapter-label animate-on-scroll" style="color:#7C3AED;background:color-mix(in srgb,#7C3AED 8%,white);display:inline-block;padding:2px 10px;border-radius:var(--radius-full);font-size:11px;">AI应用</div>
@@ -3185,12 +3216,7 @@ section > p,
 <tr><td>Meta推出299美元智能眼镜新系列，AI+AR消费级产品价格战打响</td><td>sohu.com/AI早报</td><td><a href="https://m.sohu.com/a/1040730677_313745" target="_blank" style="color:#7C3AED;">链接</a></td></tr>
 <tr><td>Kimi K2.5深度评测：1.04T参数Agent Swarm架构开源最重量级模型</td><td>Maxime Labonne Substack</td><td><a href="https://maximelabonne.substack.com/p/kimi-k25-still-worth-it-after-two" target="_blank" style="color:#7C3AED;">链接</a></td></tr>
 </tbody></table></div>
-<div class="stats-grid animate-on-scroll">
-  <div class="stat-card stat-purple"><div class="stat-value">1亿+</div><div class="stat-label">GLM Coding Plan ARR(元)</div></div>
-  <div class="stat-card stat-success"><div class="stat-value">900%</div><div class="stat-label">智谱MaaS同比增长</div></div>
-  <div class="stat-card stat-info"><div class="stat-value">1.04T</div><div class="stat-label">Kimi K2.5参数量</div></div>
-  <div class="stat-card stat-warning"><div class="stat-value">299$</div><div class="stat-label">Meta智能眼镜售价</div></div>
-</div>
+
 </section>
 <section id="industry" style="--section-color:#D97706;margin-top:40px;padding-top:32px;border-top:2px solid color-mix(in srgb,#D97706 15%,var(--color-border-light));">
 <div class="doc-chapter-label animate-on-scroll" style="color:#D97706;background:color-mix(in srgb,#D97706 8%,white);display:inline-block;padding:2px 10px;border-radius:var(--radius-full);font-size:11px;">AI行业</div>
@@ -3209,12 +3235,7 @@ section > p,
 <tr><td>夏季达沃斯：中国AI开源大模型全球下载量突破100亿次</td><td>中新经纬</td><td><a href="https://www.jwview.com/jingwei/100b-downloads-2026" target="_blank" style="color:#D97706;">链接</a></td></tr>
 <tr><td>达沃斯2026：李强致辞强调新兴技术、开放合作与AI治理</td><td>中国政府网</td><td><a href="https://www.gov.cn/premier/2026-davos-speech" target="_blank" style="color:#D97706;">链接</a></td></tr>
 </tbody></table></div>
-<div class="stats-grid animate-on-scroll">
-  <div class="stat-card stat-purple"><div class="stat-value">500亿</div><div class="stat-label">DeepSeek首轮融资(元)</div></div>
-  <div class="stat-card stat-success"><div class="stat-value">376亿</div><div class="stat-label">Kimi累计融资(元)</div></div>
-  <div class="stat-card stat-info"><div class="stat-value">100亿</div><div class="stat-label">中国AI开源全球下载(次)</div></div>
-  <div class="stat-card stat-warning"><div class="stat-value">410亿$</div><div class="stat-label">Project Prometheus估值</div></div>
-</div>
+
 </section>
 <section id="enterprise" style="--section-color:#E11D48;margin-top:40px;padding-top:32px;border-top:2px solid color-mix(in srgb,#E11D48 15%,var(--color-border-light));">
 <div class="doc-chapter-label animate-on-scroll" style="color:#E11D48;background:color-mix(in srgb,#E11D48 8%,white);display:inline-block;padding:2px 10px;border-radius:var(--radius-full);font-size:11px;">企业转型</div>
@@ -3233,12 +3254,7 @@ section > p,
 <tr><td>企业AI采用调研：79%面临挑战，48%称令人失望</td><td>Writer</td><td><a href="https://writer.com/blog/enterprise-ai-adoption-2026" target="_blank" style="color:#E11D48;">链接</a></td></tr>
 <tr><td>市场监管总局：AI智能体标准制定加速，为Agent商业化铺路</td><td>央视新闻</td><td><a href="https://www.cctv.com/ai-standards-2026" target="_blank" style="color:#E11D48;">链接</a></td></tr>
 </tbody></table></div>
-<div class="stats-grid animate-on-scroll">
-  <div class="stat-card stat-purple"><div class="stat-value">18h</div><div class="stat-label">豆包Agent自主运行时长</div></div>
-  <div class="stat-card stat-success"><div class="stat-value">1303</div><div class="stat-label">豆包Agent自主代码行数</div></div>
-  <div class="stat-card stat-danger"><div class="stat-value">48%</div><div class="stat-label">企业AI令人失望比例</div></div>
-  <div class="stat-card stat-info"><div class="stat-value">25万</div><div class="stat-label">OpenClaw GitHub星数</div></div>
-</div>
+
 </section>
 <section id="dailyindex">
 <div class="doc-chapter-label animate-on-scroll">日报索引</div>

@@ -94,7 +94,7 @@ LINE_WIDTH_CSS = """
 }
 """
 
-REQUIRED_CLASSES = ["news-card","stat-card","insight-card","callout",
+REQUIRED_CLASSES = ["news-card","insight-card","callout",
                     "doc-header","daily-index","table-wrap","doc-chapter-label"]
 
 def compute_week_dates(week_id):
@@ -115,26 +115,20 @@ def esc(s):
 def render_overview(d):
     ov = d.get("overview",{})
     rows = ov.get("table_rows",[])
-    stats = ov.get("stats",[])
-    # 概览表格：升级为 board-table 样式
+    # stat-card 网格已删除（用户确认无展示价值 2026-06-30）
     tbl = ""
     if rows:
         tbl_rows = ""
         for r in rows:
             dim = _clean_dimension_emoji(r["dimension"])
             sig = r["signal"]
-            tbl_rows += f'<tr><td style="font-weight:600;min-width:80px;">{dim}</td><td>{sig}</td></tr>\n'
+            tbl_rows += f'<tr><td style="font-weight:600;white-space:nowrap;">{dim}</td><td>{sig}</td></tr>\n'
         tbl = f'''<div class="table-wrap animate-on-scroll">
 <table class="board-table" style="--board-color:#059669;">
 <thead><tr><th>维度</th><th>周度信号</th></tr></thead>
 <tbody>{tbl_rows}</tbody>
 </table></div>'''
-    # stat-card 网格
-    st = '<div class="stats-grid animate-on-scroll">\n'
-    for s in stats:
-        st += f'  <div class="stat-card {s.get("class","stat-info")}"><div class="stat-value">{s["value"]}</div><div class="stat-label">{s["label"]}</div></div>\n'
-    st += '</div>'
-    return f'<section id="overview">\n<div class="doc-chapter-label animate-on-scroll">概览</div>\n<h2 class="animate-on-scroll">{SVG_ICONS["overview"]} 本周概览</h2>\n{tbl}\n{st}\n</section>'
+    return f'<section id="overview">\n<div class="doc-chapter-label animate-on-scroll">概览</div>\n<h2 class="animate-on-scroll">{SVG_ICONS["overview"]} 本周概览</h2>\n{tbl}\n</section>'
 
 def render_top5(d):
     svg_calendar = '<svg class="meta-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y2="4" x2="16" y2="1"/><line x1="8" y2="4" x2="8" y2="1"/><line x1="3" y1="10" x2="21" y2="10"/></svg>'
@@ -264,9 +258,7 @@ def render_section(key, sec):
         col_extra = "<col>" if has_any_link else ""
         tbl_html = f'<div class="table-wrap animate-on-scroll">\n<table class="board-table" style="--board-color:{board_color};"><colgroup><col style="width:55%;"><col style="width:30%;">{col_extra}</colgroup><thead><tr><th>事件</th><th>来源</th>{header_extra}</tr></thead>\n<tbody>{rows}</tbody></table></div>'
     stats = sec.get("stats",[])
-    stats_html = ""
-    if stats:
-        stats_html = '<div class="stats-grid animate-on-scroll">\n' + "".join(f'  <div class="stat-card {s.get("class","stat-info")}"><div class="stat-value">{s["value"]}</div><div class="stat-label">{s["label"]}</div></div>\n' for s in stats) + '</div>'
+    stats_html = ""  # stat-card 已删除（用户确认无展示价值 2026-06-30）
     return f'''<section id="{id_}" style="--section-color:{board_color};margin-top:40px;padding-top:32px;border-top:2px solid color-mix(in srgb,{board_color} 15%,var(--color-border-light));">
 <div class="doc-chapter-label animate-on-scroll" style="color:{board_color};background:color-mix(in srgb,{board_color} 8%,white);display:inline-block;padding:2px 10px;border-radius:var(--radius-full);font-size:11px;">{meta["label"]}</div>
 <h2 class="animate-on-scroll" style="color:{board_color};margin-top:10px;">{icon} {title}</h2>
