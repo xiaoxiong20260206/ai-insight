@@ -56,7 +56,7 @@ def validate_json(date_str: str, strict: bool = False) -> tuple:
     if len(tabs) != 5:
         errors.append(f"tabs 数量={len(tabs)}, 要求=5")
     
-    required_tab_ids = {"models", "coding", "apps", "industry", "enterprise"}
+    required_tab_ids = {"tab_llm", "tab_coding", "tab_app", "tab_industry", "tab_enterprise"}
     actual_tab_ids = {t.get("id", "") for t in tabs}
     missing_ids = required_tab_ids - actual_tab_ids
     if missing_ids:
