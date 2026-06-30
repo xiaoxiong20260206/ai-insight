@@ -32,7 +32,8 @@ echo "✅ JSON文件存在: $JSON_FILE ($(wc -c < "$JSON_FILE") bytes)"
 echo ""
 echo "🔍 Step 0b: JSON Schema 验证"
 uv run scripts/validate_weekly_json.py "$WEEK" 2>&1 || {
-    echo "⚠️ JSON schema验证有警告，继续执行（非阻断）"
+    echo "❌ JSON Schema验证失败 — 阻断部署"
+    exit 1
 }
 
 # ===== Step 1: 生成HTML =====
@@ -57,7 +58,8 @@ fi
 echo ""
 echo "🔍 Step 2: HTML 展示完整性验证"
 uv run scripts/validate_weekly_html.py "$WEEK" 2>&1 || {
-    echo "⚠️ HTML展示验证有警告，继续执行（非阻断）"
+    echo "❌ HTML展示验证失败 — 阻断部署"
+    exit 1
 }
 
 # ===== Step 3: 首页更新 =====
