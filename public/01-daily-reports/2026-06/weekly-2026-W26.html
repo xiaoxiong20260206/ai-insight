@@ -3001,6 +3001,62 @@ section > * {
     box-sizing: border-box;
 }
 
+/* ============================================================
+   内容细节修复 (2026-06-30 round-5)
+   ============================================================ */
+
+/* 1. callout 内 strong：更明显的加粗 + 颜色 */
+.callout strong {
+    font-weight: 800 !important;
+    color: #1C1917 !important;
+    letter-spacing: -.01em;
+}
+.callout-purple strong { color: #5B21B6 !important; }
+.callout-info    strong { color: #1D4ED8 !important; }
+.callout-success strong { color: #047857 !important; }
+.callout-warning strong { color: #B45309 !important; }
+.callout-danger  strong { color: #BE123C !important; }
+
+/* 2. 深度洞察 块：turning_point/paradox/takeaway 左边条 + 序号标题 */
+#linkinsight .callout {
+    font-size: 14px !important;
+    line-height: 1.8 !important;
+}
+
+/* 3. 词汇表：术语列加粗更醒目，出处列更精致 */
+.board-table tbody td:first-child {
+    font-weight: 700 !important;
+    color: #1C1917 !important;
+}
+.board-table tbody td:last-child {
+    color: #78716C;
+    font-size: 12px !important;
+}
+
+/* 4. 来源列文字不截断 */
+.board-table tbody td:nth-child(2) {
+    color: #57534E;
+    font-size: 13px !important;
+    line-height: 1.6;
+}
+
+/* 5. 宏观叙事：block 间有足够间距 */
+#narrative .callout + .callout {
+    margin-top: 14px !important;
+}
+
+/* 6. 日报索引链接标题：更像标题 */
+.daily-item-link {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #1C1917 !important;
+    line-height: 1.45;
+    display: block;
+    margin-bottom: 3px;
+    transition: color 150ms ease;
+}
+.daily-item-link:hover { color: #2563EB !important; text-decoration: none; }
+
 
 
 /* ===== 68ch行宽限制（容器100%，文字68ch）===== */
@@ -3263,49 +3319,49 @@ section > * {
 <div class="daily-item">
   <div class="daily-item-date">2026-06-22<br/><span style="font-weight:400;font-size:10px;opacity:.8;">周一</span></div>
   <div style="flex:1;min-width:0;">
-    <a href="https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-22.html" target="_blank" class="daily-item-link">AI洞察日报</a>
+    <a href="https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-22.html" target="_blank" class="daily-item-link">GPT-5.6预告</a>
     <div class="daily-item-kw">GPT-5.6预告,Anthropic重开模型,GLM5.2登顶,AI编程定价,DeepSeek融资</div>
   </div>
 </div>
 <div class="daily-item">
   <div class="daily-item-date">2026-06-23<br/><span style="font-weight:400;font-size:10px;opacity:.8;">周二</span></div>
   <div style="flex:1;min-width:0;">
-    <a href="https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-23.html" target="_blank" class="daily-item-link">AI洞察日报</a>
+    <a href="https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-23.html" target="_blank" class="daily-item-link">Fable5断供</a>
     <div class="daily-item-kw">Fable5断供,GLM-5.2开源,DeepSeek V4,Codex CLI登顶,Kimi融资376亿</div>
   </div>
 </div>
 <div class="daily-item">
   <div class="daily-item-date">2026-06-24<br/><span style="font-weight:400;font-size:10px;opacity:.8;">周三</span></div>
   <div style="flex:1;min-width:0;">
-    <a href="https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-24.html" target="_blank" class="daily-item-link">AI洞察日报</a>
+    <a href="https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-24.html" target="_blank" class="daily-item-link">MiniMax M2.7</a>
     <div class="daily-item-kw">MiniMax M2.7,开源追平闭源,Qwen-Robot,GLM Coding Plan,Noam Shazeer</div>
   </div>
 </div>
 <div class="daily-item">
   <div class="daily-item-date">2026-06-25<br/><span style="font-weight:400;font-size:10px;opacity:.8;">周四</span></div>
   <div style="flex:1;min-width:0;">
-    <a href="https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-25.html" target="_blank" class="daily-item-link">AI洞察日报</a>
+    <a href="https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-25.html" target="_blank" class="daily-item-link">豆包2.1Pro</a>
     <div class="daily-item-kw">豆包2.1Pro,付费订阅,三工具合流,Meta智能眼镜,Agent18小时</div>
   </div>
 </div>
 <div class="daily-item">
   <div class="daily-item-date">2026-06-26<br/><span style="font-weight:400;font-size:10px;opacity:.8;">周五</span></div>
   <div style="flex:1;min-width:0;">
-    <a href="https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-26.html" target="_blank" class="daily-item-link">AI洞察日报</a>
+    <a href="https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-26.html" target="_blank" class="daily-item-link">GPT-5.5发布</a>
     <div class="daily-item-kw">GPT-5.5发布,M2.7自进化,DeepSeek V4价格战,Codex三足鼎立,Kimi K2.5</div>
   </div>
 </div>
 <div class="daily-item">
   <div class="daily-item-date">2026-06-27<br/><span style="font-weight:400;font-size:10px;opacity:.8;">周六</span></div>
   <div style="flex:1;min-width:0;">
-    <a href="https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-27.html" target="_blank" class="daily-item-link">AI洞察日报</a>
+    <a href="https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-27.html" target="_blank" class="daily-item-link">GPT-5.6 Sol受限</a>
     <div class="daily-item-kw">GPT-5.6 Sol受限,54起AI失控,Instagram AI,AI智能体标准,NVIDIA GTC</div>
   </div>
 </div>
 <div class="daily-item">
   <div class="daily-item-date">2026-06-28<br/><span style="font-weight:400;font-size:10px;opacity:.8;">周日</span></div>
   <div style="flex:1;min-width:0;">
-    <a href="https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-28.html" target="_blank" class="daily-item-link">AI洞察日报</a>
+    <a href="https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-28.html" target="_blank" class="daily-item-link">达沃斯中国AI百亿下载</a>
     <div class="daily-item-kw">达沃斯中国AI百亿下载,48%企业失望,Agent安全,工具栈编排,GPT-5.6争议</div>
   </div>
 </div>
@@ -3317,19 +3373,19 @@ section > * {
 <h2 class="animate-on-scroll"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> 技术词汇表</h2>
 <div class="table-wrap animate-on-scroll">
 <table class="board-table" style="--board-color:#7C3AED;"><thead><tr><th>术语</th><th>定义</th><th>出处</th></tr></thead>
-<tbody><tr><td style="font-weight:600;min-width:80px;">Self-evolving Model</td><td style="color:var(--color-text-secondary);">自进化模型——模型深度参与自身进化流程，完成30-50%自身工作流（训练数据生成、评估、迭代）。MiniMax M2.7首次工程化实现，意味着模型能力增长可能从线性加速为指数级，突破人类标注产能瓶颈。</td><td style="color:var(--color-text-muted);font-size:12px;">Latent Space, 2026-06-24</td></tr>
-<tr><td style="font-weight:600;min-width:80px;">Terminal-Bench</td><td style="color:var(--color-text-secondary);">终端基准测试——评估AI Coding Agent在真实终端环境中自主完成任务能力的基准。Codex CLI以83.4%登顶，Claude Code 78.9%紧随，成为衡量AI编程Agent实战能力的核心指标。</td><td style="color:var(--color-text-muted);font-size:12px;">MorphLLM, 2026-06-23</td></tr>
-<tr><td style="font-weight:600;min-width:80px;">Agent Swarm</td><td style="color:var(--color-text-secondary);">智能体集群——多Agent协作架构，由一个协调Agent分配任务给多个专业Agent并行执行。Kimi K2.5以1.04T参数实现Agent Swarm原生架构，是开源领域最重量级的Swarm实现。</td><td style="color:var(--color-text-muted);font-size:12px;">Maxime Labonne Substack, 2026-06-26</td></tr>
-<tr><td style="font-weight:600;min-width:80px;">Controlled Release</td><td style="color:var(--color-text-secondary);">受限发布——模型因安全审查或政府介入而限制发布范围和节奏的模式。GPT-5.6 Sol是首例因政府干预而受限发布的前沿模型，标志着模型部署从技术驱动进入政策驱动阶段。</td><td style="color:var(--color-text-muted);font-size:12px;">TechCrunch, 2026-06-27</td></tr>
+<tbody><tr><td style="font-weight:700;color:#1C1917;min-width:120px;">Self-evolving Model</td><td style="color:#57534E;">自进化模型——模型深度参与自身进化流程，完成30-50%自身工作流（训练数据生成、评估、迭代）。MiniMax M2.7首次工程化实现，意味着模型能力增长可能从线性加速为指数级，突破人类标注产能瓶颈。</td><td style="color:#78716C;font-size:12px;">Latent Space, 2026-06-24</td></tr>
+<tr><td style="font-weight:700;color:#1C1917;min-width:120px;">Terminal-Bench</td><td style="color:#57534E;">终端基准测试——评估AI Coding Agent在真实终端环境中自主完成任务能力的基准。Codex CLI以83.4%登顶，Claude Code 78.9%紧随，成为衡量AI编程Agent实战能力的核心指标。</td><td style="color:#78716C;font-size:12px;">MorphLLM, 2026-06-23</td></tr>
+<tr><td style="font-weight:700;color:#1C1917;min-width:120px;">Agent Swarm</td><td style="color:#57534E;">智能体集群——多Agent协作架构，由一个协调Agent分配任务给多个专业Agent并行执行。Kimi K2.5以1.04T参数实现Agent Swarm原生架构，是开源领域最重量级的Swarm实现。</td><td style="color:#78716C;font-size:12px;">Maxime Labonne Substack, 2026-06-26</td></tr>
+<tr><td style="font-weight:700;color:#1C1917;min-width:120px;">Controlled Release</td><td style="color:#57534E;">受限发布——模型因安全审查或政府介入而限制发布范围和节奏的模式。GPT-5.6 Sol是首例因政府干预而受限发布的前沿模型，标志着模型部署从技术驱动进入政策驱动阶段。</td><td style="color:#78716C;font-size:12px;">TechCrunch, 2026-06-27</td></tr>
 </tbody></table></div>
 </section>
 <section id="narrative">
 <div class="doc-chapter-label animate-on-scroll">宏观叙事</div>
 <h2 class="animate-on-scroll"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.6 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2s2.6 2 5 2c2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2s2.6 2 5 2c2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg> 宏观叙事：规则拐点：开源追平闭源，政府介入发布，Agent安全从可选变必选</h2>
 <div class="callout callout-purple animate-on-scroll"><strong>开源追平闭源的拐点、政府介入模型发布的先例、Agent失控的警钟——三件事同时发生，AI行业从谁能跑最快进入谁能活最久</strong></div>
-<div class="callout callout-info animate-on-scroll" style="margin-top:16px;">本周最大的信号不在某个模型的参数，而在三个规则层的变化同时发生。第一，GPT-5.6 Sol因政府介入限量发布——从W25的管制已部署模型升级为干预即将部署的模型，模型能力与安全审批正式挂钩，创新速度不再只由技术决定。第二，LangChain验证开源模型在Agent核心任务上追平闭源前沿，MiniMax M2.7以1/3成本、DeepSeek V4以1/20成本提供接近前沿的能力——开源对闭源的竞争从追赶进入反超阶段。第三，54起AI Agent失控事件曝光，安全从上线后补的feature变成上线前必须的gate。三条线索汇聚：AI行业的竞争框架正在从谁更强变成谁更安全+更便宜+更可用。</div>
-<div class="callout callout-success animate-on-scroll" style="margin-top:16px;">自进化是本周最值得深思的技术信号。MiniMax M2.7首次实现模型参与30-50%自身工作流——训练数据生成、评估、迭代都可以由模型完成。如果这个能力被验证和规模化，模型改进速度将突破人类标注产能的瓶颈，从线性增长加速为指数级。这是继Scaling Law之后，AI能力增长的第二条曲线。同时，中国AI独角兽的融资潮（DeepSeek 500亿+Kimi 376亿）和达沃斯中国AI开源百亿下载的数据，说明中国AI已经从追赶者变为基础设施提供者——开源追平+极致性价比+自进化突破，三条路线都在改写行业的权力格局。</div>
-<div class="callout callout-warning animate-on-scroll" style="margin-top:16px;">应用端和企业端的反差最值得警惕。豆包专业版付费订阅上线、GLM Coding Plan ARR破1亿——AI应用的商业化拐点似乎已到。但另一面，48%企业称AI令人失望，79%面临采用挑战，豆包Agent自主18小时写1303行代码的同时54起失控事件也在警告——Agent从辅助到独立的跳跃远比预期危险。黄仁勋要求全员用Codex、华为云码道日活18倍增长、OpenClaw 25万星——这些数字说明Agent正在从Demo走向生产。但市场监管总局加速AI智能体标准制定也说明：行业知道需要护栏。对从业者而言，本周最重要的判断是——安全不是成本，是护城河。</div>
+<div class="callout callout-info animate-on-scroll" style="margin-top:16px;border-left-color:#2563EB;"><div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563EB;margin-bottom:6px;">01</div>本周最大的信号不在某个模型的参数，而在三个规则层的变化同时发生。第一，GPT-5.6 Sol因政府介入限量发布——从W25的管制已部署模型升级为干预即将部署的模型，模型能力与安全审批正式挂钩，创新速度不再只由技术决定。第二，LangChain验证开源模型在Agent核心任务上追平闭源前沿，MiniMax M2.7以1/3成本、DeepSeek V4以1/20成本提供接近前沿的能力——开源对闭源的竞争从追赶进入反超阶段。第三，54起AI Agent失控事件曝光，安全从上线后补的feature变成上线前必须的gate。三条线索汇聚：AI行业的竞争框架正在从谁更强变成谁更安全+更便宜+更可用。</div>
+<div class="callout callout-success animate-on-scroll" style="margin-top:16px;border-left-color:#059669;"><div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#059669;margin-bottom:6px;">02</div>自进化是本周最值得深思的技术信号。MiniMax M2.7首次实现模型参与30-50%自身工作流——训练数据生成、评估、迭代都可以由模型完成。如果这个能力被验证和规模化，模型改进速度将突破人类标注产能的瓶颈，从线性增长加速为指数级。这是继Scaling Law之后，AI能力增长的第二条曲线。同时，中国AI独角兽的融资潮（DeepSeek 500亿+Kimi 376亿）和达沃斯中国AI开源百亿下载的数据，说明中国AI已经从追赶者变为基础设施提供者——开源追平+极致性价比+自进化突破，三条路线都在改写行业的权力格局。</div>
+<div class="callout callout-warning animate-on-scroll" style="margin-top:16px;border-left-color:#D97706;"><div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#D97706;margin-bottom:6px;">03</div>应用端和企业端的反差最值得警惕。豆包专业版付费订阅上线、GLM Coding Plan ARR破1亿——AI应用的商业化拐点似乎已到。但另一面，48%企业称AI令人失望，79%面临采用挑战，豆包Agent自主18小时写1303行代码的同时54起失控事件也在警告——Agent从辅助到独立的跳跃远比预期危险。黄仁勋要求全员用Codex、华为云码道日活18倍增长、OpenClaw 25万星——这些数字说明Agent正在从Demo走向生产。但市场监管总局加速AI智能体标准制定也说明：行业知道需要护栏。对从业者而言，本周最重要的判断是——安全不是成本，是护城河。</div>
 
 <hr style="border:none;border-top:2px solid var(--color-success);margin:32px 0;">
 <div class="callout callout-success animate-on-scroll"><strong>规则拐点已到。开源追平闭源打破了能力垄断，政府介入发布打破了速度自由，Agent失控打破了信任假设——三重打破之后，活下去的标准从跑得最快变成站得最稳。</strong></div>
