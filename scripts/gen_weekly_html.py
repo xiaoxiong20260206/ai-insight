@@ -261,7 +261,8 @@ def render_section(key, sec):
             rows += f'<tr><td>{event_html}</td><td>{source_html}</td>{f"<td>{link_cell}</td>" if link_cell else ""}</tr>\n'
         has_any_link = any(r.get("url","") or md_link_to_html(r.get("event",""))[1] for r in tbl)
         header_extra = "<th>链接</th>" if has_any_link else ""
-        tbl_html = f'<div class="table-wrap animate-on-scroll">\n<table class="board-table" style="--board-color:{board_color};"><thead><tr><th>事件</th><th>来源</th>{header_extra}</tr></thead>\n<tbody>{rows}</tbody></table></div>'
+        col_extra = "<col>" if has_any_link else ""
+        tbl_html = f'<div class="table-wrap animate-on-scroll">\n<table class="board-table" style="--board-color:{board_color};"><colgroup><col style="width:55%;"><col style="width:30%;">{col_extra}</colgroup><thead><tr><th>事件</th><th>来源</th>{header_extra}</tr></thead>\n<tbody>{rows}</tbody></table></div>'
     stats = sec.get("stats",[])
     stats_html = ""
     if stats:
@@ -318,7 +319,7 @@ def render_sidebar(d):
     links = [f'<a href="#overview" class="toc-link">{SVG_ICONS.get("overview","")} 本周概览</a>',
              f'<a href="#top5" class="toc-link">{SVG_ICONS.get("top5","")} Top 5 事件</a>',
              f'<a href="#insight" class="toc-link">{SVG_ICONS.get("insight","")} 周度洞察</a>',
-             f'<a href="#linkinsight" class="toc-link">{SVG_ICONS.get("linkinsight","")} 林克的洞察</a>']
+             f'<a href="#linkinsight" class="toc-link">{SVG_ICONS.get("linkinsight","")} 深度洞察</a>']
     for k,s in secs.items():
         icon_svg = SVG_ICONS.get(k, s.get("icon",""))
         links.append(f'<a href="#{k}" class="toc-link">{icon_svg} {s.get("title",k)}</a>')

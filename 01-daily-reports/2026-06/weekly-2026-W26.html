@@ -2452,229 +2452,42 @@ body.mobile-preview-mode .global-controls {
     }
 }
 
-/* ===== 周报Top5/洞察卡片样式（v2.0格式升级，从W22提取）===== */
 
-/* 卡片强调色变量（按板块区分）— 继承日报组件层的 --board-accent 变量 */
-.llm .news-card { --card-accent: var(--board-llm, var(--color-success)); }
-.coding .news-card { --card-accent: var(--board-coding, var(--color-info)); }
-.app .news-card { --card-accent: var(--board-app, var(--color-purple)); }
+/* ============================================================
+   AI周报视觉系统 v4.0 (2026-06-30)
+   对齐 qingshuang-research-style v3.2 规范
+   完全重写，替代之前零散补丁
+   ============================================================ */
+
+/* ── 1. Top5 卡片：legacy 变量保留 ── */
+.llm .news-card      { --card-accent: var(--board-llm,      var(--color-success)); }
+.coding .news-card   { --card-accent: var(--board-coding,   var(--color-info)); }
+.app .news-card      { --card-accent: var(--board-app,      var(--color-purple)); }
 .industry .news-card { --card-accent: var(--board-industry, var(--color-warning)); }
 .enterprise .news-card { --card-accent: var(--board-enterprise, var(--color-danger)); }
 
-.insight-content {
-    margin-top: var(--spacing-md);
-    padding: var(--spacing-md);
-    background: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-}
-
-.insight-content-title {
-    font-size: var(--heading-3);
-    color: var(--color-warning);
-    font-weight: 600;
-    margin-bottom: var(--spacing-sm);
-}
-
-.insight-content-text {
-    color: var(--color-text-secondary);
-    font-size: var(--body-text);
-    line-height: 1.7;
-}
-
-/* 周报 news-card 样式 — 与日报新闻项共享 board-accent 主题色 */
+/* news-card 左边框 + hover 上浮（Material Design cubic-bezier） */
 .news-card {
-    background: var(--color-bg-card);
-    border: 1px solid var(--color-border-light);
     border-left: 4px solid var(--card-accent, var(--color-success));
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-lg);
-    margin-bottom: var(--spacing-xl);
+    border-radius: var(--radius-md);
+    padding: 20px 24px;
+    margin-bottom: 14px;
     box-shadow: var(--shadow-card);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: #fff;
+    transition: box-shadow 200ms cubic-bezier(0.4,0,0.2,1),
+                transform   200ms cubic-bezier(0.4,0,0.2,1);
 }
-
 .news-card:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.06);
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
 }
 
-.news-card-rank {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--card-accent, var(--color-success));
-    background: color-mix(in srgb, var(--card-accent, var(--color-success)) 10%, white);
-    padding: 4px 12px;
-    border-radius: var(--radius-full);
-    margin-bottom: 12px;
-}
-
-.news-card-title {
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--color-text-primary);
-    line-height: 1.4;
-    margin-bottom: 8px;
-    text-wrap: balance;
-}
-
-.news-card-meta {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 13px;
-    color: var(--color-text-muted);
-    margin-bottom: 16px;
-    flex-wrap: wrap;
-}
-
-.meta-item { display: inline-flex; align-items: center; gap: 4px; }
-.meta-divider { color: var(--color-border); font-size: 10px; margin: 0 2px; }
-.meta-link {
-    color: var(--color-info);
-    text-decoration: none;
-    transition: color 0.15s;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-}
-
-.news-card-desc {
-    font-size: 14px;
-    color: var(--color-text-secondary);
-    line-height: 1.65;
-    max-width: 68ch;
-    margin-bottom: 16px;
-}
-
-.news-card-why {
-    border-left: 3px solid var(--card-accent, var(--color-success));
-    background: color-mix(in srgb, var(--card-accent, var(--color-success)) 5%, white);
-    padding: 12px 16px;
-    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-}
-
-.judgment-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--card-accent, var(--color-success));
-    margin-bottom: 6px;
-}
-
-.judgment-text {
-    font-size: 13px;
-    color: var(--color-text-primary);
-    line-height: 1.6;
-}
-
-.insight-tag {
-    display: inline-block;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--color-purple);
-    background: color-mix(in srgb, var(--color-purple) 10%, white);
-    padding: 3px 10px;
-    border-radius: var(--radius-full);
-    margin-bottom: 8px;
-}
-
-.insight-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--color-text-primary);
-    line-height: 1.4;
-    margin-bottom: 12px;
-}
-
-.insight-trend {
-    font-size: 13px;
-    color: var(--color-text-muted);
-    padding-top: 8px;
-    border-top: 1px solid var(--color-border-light);
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    flex-wrap: wrap;
-}
-
-.meta-icon {
-    opacity: 0.6;
-}
-
-/* ===== 周报板块表格升级 v2.0 (2026-06-30) ===== */
-/* 对齐日报标准：更大 padding、顶部边框用板块色 */
-.board-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    font-size: 14px;
-}
-.board-table thead th {
-    padding: 12px 16px;
-    font-weight: 700;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: .04em;
-    background: color-mix(in srgb, var(--board-color, #2563EB) 8%, white);
-    color: var(--board-color, #2563EB);
-    border-bottom: 2px solid var(--board-color, #2563EB);
-    text-align: left;
-}
-.board-table tbody td {
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--color-border-light);
-    vertical-align: top;
-    line-height: 1.6;
-}
-.board-table tbody tr:last-child td { border-bottom: none; }
-.board-table tbody tr:hover { background: color-mix(in srgb, var(--board-color, #2563EB) 3%, white); }
-
-/* stat-card 升级：增加 top border 板块色 */
-.stat-card {
-    border-top: 3px solid transparent;
-    transition: box-shadow .2s, transform .2s;
-}
-.stat-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
-.stat-card.stat-success { border-top-color: #059669; }
-.stat-card.stat-info    { border-top-color: #2563EB; }
-.stat-card.stat-purple  { border-top-color: #7C3AED; }
-.stat-card.stat-warning { border-top-color: #D97706; }
-.stat-card.stat-danger  { border-top-color: #E11D48; }
-
-/* 周报各板块标题颜色 */
-section#llm     .doc-chapter-label { color: #059669; }
-section#coding  .doc-chapter-label { color: #2563EB; }
-section#app     .doc-chapter-label { color: #7C3AED; }
-section#industry .doc-chapter-label { color: #D97706; }
-section#enterprise .doc-chapter-label { color: #E11D48; }
-
-/* 移动端：sidebar 隐藏，避免和内容重叠 */
-@media (max-width: 768px) {
-    .sidebar-nav { display: none !important; }
-    .content-inner { padding: 16px 12px 60px; }
-    .stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-    .board-table thead th, .board-table tbody td { padding: 8px 10px; font-size: 13px; }
-    .stat-card { padding: 12px; }
-    .news-card { padding: 14px; }
-    .header-title { font-size: 22px; }
-}
-
-/* ============================================================
-   AI周报视觉升级 v3.0 (2026-06-30)
-   目标：对齐日报视觉标准
-   ============================================================ */
-
-/* 1. Header：深色渐变背景 + 白色文字 + 更大内边距 */
+/* ── 2. Header：深色渐变 + 毛玻璃 badge ── */
+/* qingshuang-research-style: 报告标题 30-34px / 800 / 渐变色 */
 .doc-header {
     background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #1e1b4b 100%);
     border-radius: var(--radius-md);
-    padding: 48px 40px 40px !important;
+    padding: 52px 44px 44px !important;
     margin-bottom: 40px !important;
     position: relative;
     overflow: hidden;
@@ -2683,214 +2496,223 @@ section#enterprise .doc-chapter-label { color: #E11D48; }
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at 20% 50%, rgba(37,99,235,.25) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 20%, rgba(124,58,237,.2) 0%, transparent 55%),
-                radial-gradient(ellipse at 60% 90%, rgba(5,150,105,.15) 0%, transparent 50%);
+    background:
+        radial-gradient(ellipse at 15% 50%, rgba(37,99,235,.28) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 15%, rgba(124,58,237,.22) 0%, transparent 50%),
+        radial-gradient(ellipse at 55% 95%, rgba(5,150,105,.18) 0%, transparent 45%);
     pointer-events: none;
 }
 .doc-header .header-badge {
-    color: rgba(255,255,255,.65);
-    font-size: 11px;
-    letter-spacing: .12em;
+    display: inline-block;
+    background: rgba(255,255,255,.12);
+    backdrop-filter: blur(8px);
+    color: rgba(255,255,255,.8);
+    font-size: 10px;
     font-weight: 700;
-    margin-bottom: 14px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+    border: 1px solid rgba(255,255,255,.15);
 }
 .doc-header .header-title {
     font-size: 36px !important;
-    font-weight: 800;
-    background: linear-gradient(90deg, #fff 0%, rgba(255,255,255,.85) 100%) !important;
+    font-weight: 800 !important;
+    background: linear-gradient(90deg, #fff 0%, rgba(255,255,255,.82) 100%) !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
     background-clip: text !important;
-    letter-spacing: -.02em;
-    line-height: 1.25 !important;
-    margin-bottom: 16px !important;
+    letter-spacing: -.025em;
+    line-height: 1.2 !important;
+    margin-bottom: 18px !important;
+    text-wrap: balance;
 }
 .doc-header p.header-meta {
-    color: rgba(255,255,255,.6);
+    color: rgba(255,255,255,.55);
     font-size: 13px;
     display: flex;
-    gap: 16px;
+    gap: 20px;
     flex-wrap: wrap;
     margin: 0;
-}
-.doc-header p.header-meta span {
-    display: flex;
     align-items: center;
-    gap: 4px;
 }
-/* subtitle (weekly report) */
-.doc-header div[style*="color:var(--color-text-muted)"] {
-    color: rgba(255,255,255,.7) !important;
+.doc-header p.header-meta .meta-icon { stroke: rgba(255,255,255,.6); }
+/* subtitle 行 */
+.doc-header > div[style*="color:var(--color-text-muted)"] {
+    color: rgba(255,255,255,.65) !important;
     font-size: 14px !important;
-    line-height: 1.7 !important;
+    line-height: 1.75 !important;
+    max-width: 700px;
 }
-/* header 底部渐变线改白色半透明 */
+/* 底部渐变线 */
 .doc-header::after {
-    background: linear-gradient(90deg, rgba(255,255,255,.3), rgba(255,255,255,.1)) !important;
+    background: linear-gradient(90deg, rgba(255,255,255,.25), rgba(255,255,255,.08), transparent) !important;
     height: 1px !important;
 }
-/* header 内 SVG icon 颜色 */
-.doc-header .meta-icon {
-    stroke: rgba(255,255,255,.7);
+
+/* ── 3. 页面整体背景 ── */
+/* qingshuang: body bg + mesh gradient */
+body {
+    background: #F8FAFB !important;
+    background-image:
+        radial-gradient(at 20% 20%, rgba(5,150,105,.05) 0%, transparent 50%),
+        radial-gradient(at 80% 80%, rgba(37,99,235,.04) 0%, transparent 50%) !important;
 }
 
-/* 2. 整体页面背景：已有 #F8FAFB，补 layout wrapper */
-.layout-wrapper {
-    background: var(--color-bg, #F8FAFB);
-    min-height: 100vh;
+/* ── 4. 排版层级（qingshuang 规范：至少差 200 字重） ── */
+/* 章节标题：22px / 700 */
+section > h2 {
+    font-size: 22px !important;
+    font-weight: 700 !important;
+    line-height: 1.3 !important;
+    color: #1C1917;
+    letter-spacing: -.01em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px !important;
+    margin-bottom: 22px !important;
 }
-.content-inner {
-    padding-top: 32px !important;
-    padding-bottom: 120px !important;
+section > h2 .meta-icon { width: 20px !important; height: 20px !important; flex-shrink: 0; }
+/* 正文：15px / 400 / 1.65 行高 / #57534E */
+p, .news-card-desc, .insight-card p, .callout {
+    font-size: 15px !important;
+    line-height: 1.75 !important;
+    color: #57534E !important;
+}
+/* 辅助文字 */
+.news-card-meta, .meta-item, .daily-item-kw,
+.insight-tag, .doc-footer p {
+    font-size: 12px !important;
+    color: #78716C !important;
 }
 
-/* 3. section 间距加大，让呼吸感更强 */
-section {
-    margin-bottom: 0 !important;
-    padding-bottom: 8px;
+/* ── 5. doc-chapter-label：pill 胶囊标签 ── */
+.doc-chapter-label {
+    display: inline-block !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: .1em !important;
+    padding: 3px 12px !important;
+    border-radius: 999px !important;
+    margin-bottom: 6px !important;
+    background: rgba(37,99,235,.08);
+    color: #2563EB;
 }
+/* 各板块用板块色 */
+section#llm      > .doc-chapter-label { background: rgba(5,150,105,.10); color: #059669; }
+section#coding   > .doc-chapter-label { background: rgba(37,99,235,.10); color: #2563EB; }
+section#app      > .doc-chapter-label { background: rgba(124,58,237,.10); color: #7C3AED; }
+section#industry > .doc-chapter-label { background: rgba(217,119,6,.10); color: #D97706; }
+section#enterprise > .doc-chapter-label { background: rgba(225,29,72,.10); color: #E11D48; }
 
-/* 4. stat-card 尺寸升级：数字更大，标签更小更淡 */
+/* ── 6. 板块区分：分隔线 + 间距 ── */
+section#llm, section#coding, section#app, section#industry, section#enterprise {
+    margin-top: 48px !important;
+    padding-top: 36px !important;
+    border-top: 2px solid var(--color-border-light);
+    position: relative;
+}
+/* 板块 h2 颜色 */
+section#llm      > h2 { color: #059669 !important; }
+section#coding   > h2 { color: #2563EB !important; }
+section#app      > h2 { color: #7C3AED !important; }
+section#industry > h2 { color: #D97706 !important; }
+section#enterprise > h2 { color: #E11D48 !important; }
+
+/* ── 7. stat-card：qingshuang 统计数值规范 ── */
+/* 数值 20-28px / 700 / 语义色；标签 12px / 500 / muted */
 .stat-card {
     padding: 20px 16px !important;
     text-align: center;
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-card);
     background: #fff;
+    border: 1px solid var(--color-border-light);
+    border-top: 3px solid transparent;
+    transition: box-shadow 200ms cubic-bezier(0.4,0,0.2,1),
+                transform   200ms cubic-bezier(0.4,0,0.2,1);
+    font-variant-numeric: tabular-nums;
 }
+.stat-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,.09); transform: translateY(-2px); }
+
 .stat-value {
-    font-size: 28px !important;
-    font-weight: 800 !important;
+    font-size: 26px !important;
+    font-weight: 700 !important;
+    line-height: 1.1 !important;
     letter-spacing: -.02em;
-    line-height: 1.1;
-    margin-bottom: 6px;
     display: block;
+    margin-bottom: 6px;
 }
 .stat-label {
     font-size: 11px !important;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: .06em;
-    color: var(--color-text-muted) !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: .07em !important;
+    color: #78716C !important;
     display: block;
     line-height: 1.4;
 }
-.stat-card.stat-success .stat-value { color: #059669; }
-.stat-card.stat-info    .stat-value { color: #2563EB; }
-.stat-card.stat-purple  .stat-value { color: #7C3AED; }
-.stat-card.stat-warning .stat-value { color: #D97706; }
-.stat-card.stat-danger  .stat-value { color: #E11D48; }
-/* 5. stats-grid 最小列宽 */
+
+/* 语义色（最高优先级） */
+.stat-card.stat-success { border-top-color: #059669; }
+.stat-card.stat-info    { border-top-color: #2563EB; }
+.stat-card.stat-purple  { border-top-color: #7C3AED; }
+.stat-card.stat-warning { border-top-color: #D97706; }
+.stat-card.stat-danger  { border-top-color: #E11D48; }
+
+.stat-card.stat-success .stat-value { color: #059669 !important; }
+.stat-card.stat-info    .stat-value { color: #2563EB !important; }
+.stat-card.stat-purple  .stat-value { color: #7C3AED !important; }
+.stat-card.stat-warning .stat-value { color: #D97706 !important; }
+.stat-card.stat-danger  .stat-value { color: #E11D48 !important; }
+
+/* stats-grid */
 .stats-grid {
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)) !important;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)) !important;
     gap: 12px !important;
-    margin-top: 16px;
+    margin-top: 18px;
 }
 
-/* 6. h2 字号/间距层次 */
-section h2 {
-    font-size: 22px !important;
+/* ── 8. board-table：精致表格 ── */
+/* qingshuang：表格表头要有语义色 + 事件列优先展示 */
+.board-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 13px;
+    table-layout: fixed;
+}
+.board-table colgroup col:first-child { width: 55%; }
+.board-table colgroup col:nth-child(2) { width: 30%; }
+.board-table colgroup col:last-child  { width: 15%; }
+.board-table thead th {
+    padding: 10px 14px;
+    font-size: 11px;
     font-weight: 700;
-    letter-spacing: -.01em;
-    margin-bottom: 20px !important;
-    margin-top: 6px !important;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-section h2 .meta-icon {
-    width: 20px !important;
-    height: 20px !important;
-    flex-shrink: 0;
-}
-
-/* 7. doc-chapter-label pill 样式强化 */
-.doc-chapter-label {
-    font-size: 11px !important;
-    font-weight: 700 !important;
-    text-transform: uppercase !important;
-    letter-spacing: .1em !important;
-    padding: 3px 12px !important;
-    border-radius: 999px !important;
-    display: inline-block !important;
-    margin-bottom: 8px !important;
-}
-/* overview/insight/top5 使用默认蓝色 */
-#overview .doc-chapter-label,
-#top5    .doc-chapter-label,
-#insight .doc-chapter-label,
-#linkinsight .doc-chapter-label,
-#dailyindex .doc-chapter-label,
-#vocab .doc-chapter-label,
-#narrative .doc-chapter-label {
-    background: rgba(37,99,235,.08);
-    color: #2563EB;
-}
-
-/* 8. 正文/描述文字 15px */
-.news-card-desc,
-.news-card-why,
-.insight-card p,
-p {
-    font-size: 15px !important;
-    line-height: 1.8 !important;
-}
-
-/* 9. callout 升级：更大内边距，左边条更粗 */
-.callout {
-    border-left-width: 4px !important;
-    padding: 16px 20px !important;
-    border-radius: 0 var(--radius-md) var(--radius-md) 0 !important;
-    margin: 16px 0 !important;
-    font-size: 14px !important;
-    line-height: 1.75 !important;
-}
-
-/* 10. 日报索引卡片升级 */
-.daily-item {
-    background: #fff;
-    border-radius: var(--radius-md);
-    padding: 14px 18px !important;
-    margin-bottom: 10px !important;
-    box-shadow: var(--shadow-card);
-    border-left: 3px solid #2563EB;
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-}
-.daily-item-date {
-    font-size: 11px !important;
-    font-weight: 700;
-    color: #2563EB;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    background: color-mix(in srgb, var(--board-color, #2563EB) 7%, white);
+    color: var(--board-color, #2563EB);
+    border-bottom: 2px solid var(--board-color, #2563EB);
+    text-align: left;
     white-space: nowrap;
-    padding-top: 2px;
-    min-width: 60px;
 }
-.daily-item-link {
-    font-size: 14px !important;
-    font-weight: 600;
-    color: var(--color-text-primary) !important;
-    text-decoration: none;
-    line-height: 1.4;
-    flex: 1;
+.board-table tbody td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--color-border-light);
+    vertical-align: top;
+    line-height: 1.6;
+    font-size: 13px !important;
+    word-break: break-word;
 }
-.daily-item-link:hover { color: #2563EB !important; }
-.daily-item-kw {
-    font-size: 11px !important;
-    color: var(--color-text-muted);
-    margin-top: 4px;
-    grid-column: 2;
-}
-.daily-index {
-    display: block !important;
-}
+.board-table tbody tr:last-child td { border-bottom: none; }
+.board-table tbody tr:hover { background: color-mix(in srgb, var(--board-color, #2563EB) 3%, white); }
+.board-table tbody td:last-child { white-space: nowrap; font-size: 12px; text-align: center; }
 
-/* 11. 词汇表升级 */
-.board-table, table {
-    border-radius: var(--radius-md);
-    overflow: hidden;
-}
+/* table-wrap 卡片化 */
 .table-wrap {
     border-radius: var(--radius-md);
     overflow: hidden;
@@ -2899,52 +2721,151 @@ p {
     margin: 16px 0;
 }
 
-/* 12. 移动端全面优化 */
-@media (max-width: 768px) {
-    .doc-header { padding: 28px 20px 24px !important; border-radius: 0; }
-    .doc-header .header-title { font-size: 24px !important; }
-    .stat-value { font-size: 22px !important; }
-    section h2 { font-size: 18px !important; }
-    .stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
-    .daily-item { flex-direction: column; gap: 6px; }
-    .daily-item-date { min-width: unset; }
-    p { font-size: 14px !important; }
+/* ── 9. callout 升级 ── */
+.callout {
+    border-left-width: 4px !important;
+    padding: 14px 20px !important;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0 !important;
+    margin: 20px 0 !important;
+    font-size: 14px !important;
+    line-height: 1.75 !important;
+    background: #FAFAFA;
+}
+.callout strong { color: #1C1917; font-weight: 700; }
+.callout-purple  { background: rgba(124,58,237,.04)  !important; border-color: #7C3AED !important; }
+.callout-info    { background: rgba(37,99,235,.04)   !important; border-color: #2563EB !important; }
+.callout-success { background: rgba(5,150,105,.04)   !important; border-color: #059669 !important; }
+.callout-warning { background: rgba(217,119,6,.04)   !important; border-color: #D97706 !important; }
+.callout-danger  { background: rgba(225,29,72,.04)   !important; border-color: #E11D48 !important; }
+
+/* ── 10. 日报索引卡片 ── */
+.daily-item {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+    background: #fff;
+    border-radius: var(--radius-md);
+    padding: 14px 18px !important;
+    margin-bottom: 10px !important;
+    box-shadow: var(--shadow-card);
+    border-left: 3px solid #2563EB;
+    transition: box-shadow 200ms cubic-bezier(0.4,0,0.2,1);
+}
+.daily-item:hover { box-shadow: 0 4px 16px rgba(0,0,0,.09); }
+.daily-item-date {
+    flex-shrink: 0;
+    min-width: 72px !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    color: #2563EB !important;
+    line-height: 1.5;
+}
+.daily-item-link {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #1C1917 !important;
+    text-decoration: none !important;
+    line-height: 1.4;
+}
+.daily-item-link:hover { color: #2563EB !important; }
+.daily-item-kw {
+    font-size: 11px !important;
+    color: #78716C !important;
+    margin-top: 3px;
+    line-height: 1.5;
 }
 
-/* 13. 侧边栏 TOC 字体更小，不抢戏 */
+/* ── 11. 宏观叙事区：callout 包装 ── */
+section#narrative p {
+    font-size: 15px !important;
+    line-height: 1.8 !important;
+    color: #57534E !important;
+    max-width: 65ch;
+}
+section#narrative .callout { margin-bottom: 16px !important; }
+
+/* ── 12. 了解更多区域增强 ── */
+.learn-more-section,
+div[class*="learn-more"] {
+    margin-top: 56px;
+    padding: 32px 36px;
+    background: linear-gradient(135deg, rgba(37,99,235,.04) 0%, rgba(124,58,237,.04) 100%);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(37,99,235,.12);
+    text-align: center;
+}
+
+/* ── 13. footer ── */
+.doc-footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-border-light);
+    color: #78716C;
+    font-size: 12px;
+    line-height: 1.8;
+}
+.doc-footer a { color: #2563EB; text-decoration: none; }
+.doc-footer a:hover { text-decoration: underline; }
+
+/* ── 14. 内容区宽度优化（sidebar 228px → 减小到 200px） ── */
+:root { --sidebar-width: 200px; }
 .sidebar-nav .toc-link {
     font-size: 12px !important;
     padding: 5px 10px !important;
+    line-height: 1.45;
+    color: #78716C;
+}
+.sidebar-nav .toc-link:hover,
+.sidebar-nav .toc-link.active { color: #2563EB; background: rgba(37,99,235,.06); }
+.content-inner {
+    padding: 32px 48px 120px !important;
 }
 
-/* 14. 了解更多模块 */
-.learn-more-section {
-    margin-top: 48px;
-    padding-top: 32px;
-    border-top: 1px solid var(--color-border-light);
+/* ── 15. 无障碍：焦点环（qingshuang 规范）── */
+a:focus-visible, button:focus-visible {
+    outline: 2px solid #059669;
+    outline-offset: 3px;
+    box-shadow: 0 0 0 5px rgba(5,150,105,.12);
+}
+:focus:not(:focus-visible) { outline: none; }
+
+/* ── 16. 行宽限制（qingshuang: 65ch，防阅读疲劳）── */
+.news-card-desc, .news-card-why, p:not(.header-meta), .callout,
+.insight-card p {
+    max-width: 65ch;
 }
 
-
-/* stat-value 颜色兜底（最高优先级，放在文件末尾） */
-.stats-grid .stat-card.stat-success .stat-value,
-.stat-card.stat-success .stat-value { color: #059669 !important; }
-.stats-grid .stat-card.stat-info    .stat-value,
-.stat-card.stat-info    .stat-value { color: #2563EB !important; }
-.stats-grid .stat-card.stat-purple  .stat-value,
-.stat-card.stat-purple  .stat-value { color: #7C3AED !important; }
-.stats-grid .stat-card.stat-warning .stat-value,
-.stat-card.stat-warning .stat-value { color: #D97706 !important; }
-.stats-grid .stat-card.stat-danger  .stat-value,
-.stat-card.stat-danger  .stat-value { color: #E11D48 !important; }
-
-/* board-table 行高紧凑版 */
-.board-table tbody td {
-    padding: 10px 14px !important;
-    font-size: 13px !important;
-    line-height: 1.55 !important;
+/* ── 17. 微交互 prefers-reduced-motion ── */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
 }
-.board-table thead th {
-    padding: 10px 14px !important;
+
+/* ── 18. 响应式（移动优先，qingshuang 断点规范）── */
+/* < 768px */
+@media (max-width: 767px) {
+    .sidebar-nav { display: none !important; }
+    .doc-header { padding: 28px 20px 24px !important; border-radius: 0; }
+    .doc-header .header-title { font-size: 24px !important; }
+    .content-inner { padding: 16px 16px 80px !important; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    section > h2 { font-size: 18px !important; }
+    .stat-value { font-size: 20px !important; }
+    .daily-item { flex-direction: column; gap: 6px; }
+    .board-table { font-size: 12px; }
+    .board-table thead th, .board-table tbody td { padding: 8px 10px; }
+    p, .news-card-desc { font-size: 14px !important; max-width: 100%; }
+}
+/* 768-1023px 平板：3列 stat */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .stats-grid { grid-template-columns: repeat(3, 1fr) !important; }
+    .content-inner { padding: 24px 32px 100px !important; }
+}
+/* > 1024px 桌面：4列 stat */
+@media (min-width: 1024px) {
+    .stats-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)) !important; }
 }
 
 
@@ -2972,7 +2893,7 @@ p {
 <a href="#overview" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg> 本周概览</a>
 <a href="#top5" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.83-1 .83s-1-.28-1-.83v-2.34"/><path d="M14 14.66V17c0 .55.47.83 1 .83s1-.28 1-.83v-2.34"/><line x1="12" y1="3" x2="12" y2="14"/><path d="M6 4v5a6 6 0 0 0 12 0V4"/></svg> Top 5 事件</a>
 <a href="#insight" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg> 周度洞察</a>
-<a href="#linkinsight" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.5V22h6v-4.5c2.9-1.2 5-4.1 5-7.5a8 8 0 0 0-8-8z"/><line x1="12" y2="12" x2="12" y2="18"/></svg> 林克的洞察</a>
+<a href="#linkinsight" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.5V22h6v-4.5c2.9-1.2 5-4.1 5-7.5a8 8 0 0 0-8-8z"/><line x1="12" y2="12" x2="12" y2="18"/></svg> 深度洞察</a>
 <a href="#llm" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.5V22h6v-4.5c2.9-1.2 5-4.1 5-7.5a8 8 0 0 0-8-8z"/><line x1="12" y2="12" x2="12" y2="18"/></svg> 大模型本周动态</a>
 <a href="#coding" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> AI Coding本周动态</a>
 <a href="#app" class="toc-link"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg> AI应用本周动态</a>
@@ -3119,7 +3040,7 @@ p {
 <h2 class="animate-on-scroll" style="color:#059669;margin-top:10px;"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.5V22h6v-4.5c2.9-1.2 5-4.1 5-7.5a8 8 0 0 0-8-8z"/><line x1="12" y2="12" x2="12" y2="18"/></svg> 大模型本周动态</h2>
 <div class="callout callout-info animate-on-scroll" style="border-left-color:#059669;">GPT-5.6 Sol因政府介入限量发布，MiniMax M2.7实现自进化突破，开源模型追平闭源前沿——模型竞争从能力赛道转向安全+成本+可用性三维赛道。</div>
 <div class="table-wrap animate-on-scroll">
-<table class="board-table" style="--board-color:#059669;"><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
+<table class="board-table" style="--board-color:#059669;"><colgroup><col style="width:55%;"><col style="width:30%;"><col></colgroup><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
 <tbody><tr><td>GPT-5.6系列有望下周登场，生成能力测试优于Claude Mythos</td><td>IT之家</td><td><a href="https://www.ithome.com/0/841/987.htm" target="_blank" style="color:#059669;">链接</a></td></tr>
 <tr><td>Anthropic将在未来几天重新开放Mythos及Fable 5模型</td><td>IT之家/Anthropic</td><td><a href="https://www.ithome.com/0/841/985.htm" target="_blank" style="color:#059669;">链接</a></td></tr>
 <tr><td>美国商务部下令Anthropic全球断供Fable 5与Mythos 5</td><td>Bloomberg/DW</td><td><a href="https://www.dw.com/zh/anthropic-ai-model-global-shutdown/a-77543796" target="_blank" style="color:#059669;">链接</a></td></tr>
@@ -3143,7 +3064,7 @@ p {
 <h2 class="animate-on-scroll" style="color:#2563EB;margin-top:10px;"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> AI Coding本周动态</h2>
 <div class="callout callout-danger animate-on-scroll" style="border-left-color:#2563EB;">Codex CLI登顶Terminal-Bench 2.1达83.4%，Cursor+Claude Code+Codex三工具合流为统一编程栈，54起AI失控事件敲响Agent安全警钟。</div>
 <div class="table-wrap animate-on-scroll">
-<table class="board-table" style="--board-color:#2563EB;"><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
+<table class="board-table" style="--board-color:#2563EB;"><colgroup><col style="width:55%;"><col style="width:30%;"><col></colgroup><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
 <tbody><tr><td>AI Coding工具6月定价大检：Cursor/Copilot/Claude Code三强格局确立</td><td>DevelopersDigest</td><td><a href="https://www.developersdigest.tech/blog/ai-coding-tools-pricing-june-2026" target="_blank" style="color:#2563EB;">链接</a></td></tr>
 <tr><td>Codex CLI登顶Terminal-Bench 2.1，AI Coding Agent格局分化</td><td>MorphLLM</td><td><a href="https://www.morphllm.com/ai-coding-agent" target="_blank" style="color:#2563EB;">链接</a></td></tr>
 <tr><td>Cursor、Claude Code、Codex正在合流为一个AI编程技术栈</td><td>TheNewStack</td><td><a href="https://thenewstack.io/ai-coding-tool-stack" target="_blank" style="color:#2563EB;">链接</a></td></tr>
@@ -3167,7 +3088,7 @@ p {
 <h2 class="animate-on-scroll" style="color:#7C3AED;margin-top:10px;"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg> AI应用本周动态</h2>
 <div class="callout callout-warning animate-on-scroll" style="border-left-color:#7C3AED;">豆包专业版付费订阅正式上线，GLM Coding Plan ARR破1亿，Kimi K2.5开源1.04T参数，AI应用从免费获客走向付费验证。</div>
 <div class="table-wrap animate-on-scroll">
-<table class="board-table" style="--board-color:#7C3AED;"><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
+<table class="board-table" style="--board-color:#7C3AED;"><colgroup><col style="width:55%;"><col style="width:30%;"><col></colgroup><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
 <tbody><tr><td>SpaceX AI为微软Office套件推Grok扩展，AI提升办公生产力</td><td>IT之家</td><td><a href="https://www.ithome.com/0/841/984.htm" target="_blank" style="color:#7C3AED;">链接</a></td></tr>
 <tr><td>银河通用发布AstraBrain-WBC 0.5：全球首个人形机器人通用小脑GPT模型</td><td>IT之家</td><td><a href="https://www.ithome.com/0/841/981.htm" target="_blank" style="color:#7C3AED;">链接</a></td></tr>
 <tr><td>2026智源大会发布全球首个通用世界基座模型悟界·Physis</td><td>QQ新闻</td><td><a href="https://news.qq.com/rain/a/20260612A09GNF00" target="_blank" style="color:#7C3AED;">链接</a></td></tr>
@@ -3191,7 +3112,7 @@ p {
 <h2 class="animate-on-scroll" style="color:#D97706;margin-top:10px;"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20V8l-6 4V4l-6 4V2L2 10v10z"/></svg> AI行业本周动态</h2>
 <div class="callout callout-success animate-on-scroll" style="border-left-color:#D97706;">中国AI独角兽融资潮：DeepSeek 500亿+Kimi 376亿同周落地；达沃斯中国AI开源百亿下载；开源模型追平闭源重塑行业格局。</div>
 <div class="table-wrap animate-on-scroll">
-<table class="board-table" style="--board-color:#D97706;"><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
+<table class="board-table" style="--board-color:#D97706;"><colgroup><col style="width:55%;"><col style="width:30%;"><col></colgroup><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
 <tbody><tr><td>DeepSeek完成首轮融资逾67亿美元估值超500亿美元成中国最高</td><td>华尔街日报/中央社</td><td><a href="https://tw.stock.yahoo.com/news/deepseek-67b-valuation" target="_blank" style="color:#D97706;">链接</a></td></tr>
 <tr><td>2026年6月中国AI进入独角兽定局时代：估值大洗牌、商业大兑现</td><td>ZAKER</td><td><a href="https://app.myzaker.com/news/article.php?pk=6a2b70ba8e9f096cb2581cf6" target="_blank" style="color:#D97706;">链接</a></td></tr>
 <tr><td>亚马逊向Anthropic追加50亿美元投资，总额达250亿美元</td><td>Bloomberg/DW</td><td><a href="https://www.cnbc.com/2026/04/20/amazon-invest-up-to-25-billion-in-anthropic-part-of-ai-infrastructure.html" target="_blank" style="color:#D97706;">链接</a></td></tr>
@@ -3215,7 +3136,7 @@ p {
 <h2 class="animate-on-scroll" style="color:#E11D48;margin-top:10px;"><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/></svg> 企业AI转型本周动态</h2>
 <div class="callout callout-warning animate-on-scroll" style="border-left-color:#E11D48;">豆包Agent自主18小时写1303行代码验证独立交付，安全成为AI采购新硬指标，48%企业称AI令人失望——Agent从辅助到独立的跳跃远比预期艰难。</div>
 <div class="table-wrap animate-on-scroll">
-<table class="board-table" style="--board-color:#E11D48;"><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
+<table class="board-table" style="--board-color:#E11D48;"><colgroup><col style="width:55%;"><col style="width:30%;"><col></colgroup><thead><tr><th>事件</th><th>来源</th><th>链接</th></tr></thead>
 <tbody><tr><td>88%企业明确2026年将增加对AI的资金投入</td><td>中国经营报</td><td><a href="http://www.cb.com.cn/index/show/zj/cv/cv135370831263" target="_blank" style="color:#E11D48;">链接</a></td></tr>
 <tr><td>谷歌推出Gemini Enterprise Agent Platform，Agent记忆+模拟能力上线</td><td>凤凰科技</td><td><a href="https://siliconangle.com/2026/04/22/google-brings-agentic-development-optimization-governance-one-roof-gemini-enterprise-agent-platform" target="_blank" style="color:#E11D48;">链接</a></td></tr>
 <tr><td>黄仁勋要求英伟达全员使用Codex：1万员工AI编程成队友</td><td>凤凰科技</td><td><a href="https://www.benzinga.com/markets/tech/26/04/52022856/nvidia-deploys-openais-codex-across-10000-employees-as-jensen-huang-hails-age-of-ai-sam-altman-says-it-was-awesome" target="_blank" style="color:#E11D48;">链接</a></td></tr>
