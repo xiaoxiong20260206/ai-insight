@@ -157,6 +157,18 @@ def fetch_from_sohu(target_date: str) -> dict:
     text = re.sub(r'<[^>]+>', ' ', html)
     text = re.sub(r'\s+', ' ', text).strip()
     
+    # ⚠️ 日期验证（#132防复发）：确认抓到的文章包含目标日期，避免Tavily返回错误文章
+    date_str = target_date.replace("-", "")  # 2026-07-01 → 20260701
+    # 允许目标日期或前一天（避免时区差异）
+    prev_date = (datetime.strptime(target_date, "%Y-%m-%d") - timedelta(days=1)).strftime("%Y%m%d")
+    if date_str not in text[:3000] and prev_date not in text[:3000]:
+        # Check article title/header region
+        header_region = text[:500]
+        if date_str not in header_region and prev_date not in header_region:
+            print(f"  ❌ 日期验证失败: 抓到的文章不含目标日期 {date_str}（可能是Tavily返回了错误文章）", file=sys.stderr)
+            print(f"  文章开头: {text[:200]}", file=sys.stderr)
+            return {"error": f"Date mismatch: article does not contain {date_str}", "url": sohu_url}
+    
     # Find the article body
     idx = text.find('AI速递')
     if idx < 0:
@@ -224,12 +236,18 @@ def parse_article(text: str, date: str, source_url: str) -> dict:
 
 def main():
     parser = argparse.ArgumentParser(description="Fetch Tencent Research AI Daily Digest")
-    parser.add_argument("--date", required=True, help="Target date (YYYY-MM-DD)")
+    parser.add_argument("--date", help="Target date (YYYY-MM-DD). Defaults to yesterday (recommended: 腾讯研究院发布通常晚于当天8点，用前一天数据更准确)")
     parser.add_argument("--raw", action="store_true", help="Output raw text instead of structured JSON")
     parser.add_argument("--skip-ima", action="store_true", help="Skip IMA existence check")
     args = parser.parse_args()
     
-    target_date = args.date
+    # Default to yesterday (腾讯研究院AI速递通常当天上午发布，cron跑8点时当天数据可能未就绪)
+    # Using yesterday's data ensures reliable, verified content
+    if args.date:
+        target_date = args.date
+    else:
+        target_date = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
+        print(f"ℹ️  未指定日期，默认使用前一天: {target_date}（推荐做法，避免抓到错误文章）", file=sys.stderr)
     
     # Step 1: Check IMA for existence (optional but useful for validation)
     if not args.skip_ima:
