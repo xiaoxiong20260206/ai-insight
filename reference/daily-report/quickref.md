@@ -1,9 +1,9 @@
-# AI日报速查卡（v1.0 — 2026-06-22）
+# AI日报速查卡（v1.1 — 2026-07-01）
 
 > cron agent用这个文件替代完整SKILL.md+workflow.md+output-format-spec.md三件套。
 > 从46KB→5KB，节省~40K input tokens/次。
 
-## P0红线速查（8条致命项）
+## P0红线速查（12条致命项）
 
 | # | 红线 | 一句话 |
 |---|------|--------|
@@ -15,6 +15,10 @@
 | 6 | quality gate | 硬性失败=重做，软性=不阻断 |
 | 7 | target必带 | 任何message send都必须带target=username:XXX |
 | 8 | 禁止write覆盖token | 必须用`append_token_record.py`追加 |
+| 9 | 首页唯一入口 | update_homepage.py，禁止手动编辑index.html（#131） |
+| 10 | 腾讯研究院用前一天 | fetch_tencent_research.py 不传--date（#132） |
+| 11 | Tab禁止first-of-type | CSS里`:first-of-type{display:block}`和JS切换冲突，改用`<noscript><style>` |
+| 12 | verify必通过 | verify_homepage.py HARD全绿（含日报卡片去重） |
 
 ## 6步流程
 

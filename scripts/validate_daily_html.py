@@ -80,8 +80,11 @@ def validate_html(html: str, label: str = "") -> tuple:
     if not has_active_panel:
         warnings.append(f"{prefix}无active tab/panel — 可能首屏空白")
     
-    # CSS fallback (v5.2: first-of-type fallback removed — it caused bug where llm panel always showed)
-    # No longer checking for first-of-type; JS controls tab visibility
+    # 🔴 #132 防复发：检测 first-of-type + display:block 的Tab CSS（2026-07-01）
+    # :first-of-type 是结构性伪类，不受class约束，和JS切换永久冲突
+    first_of_type_block = re.findall(r'\.tab-panel:first-of-type\s*\{[^}]*display\s*:\s*block', html)
+    if first_of_type_block:
+        errors.append(f"{prefix}🔴 Tab CSS禁止 first-of-type + display:block（和JS切换冲突，用<noscript><style>做fallback）")
     
     # ====== 4. 新闻条目 ======
     news_items = len(re.findall(r'class="news-item"', html))

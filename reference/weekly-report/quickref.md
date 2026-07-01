@@ -1,9 +1,9 @@
-# AI周报速查卡（v1.0 — 2026-06-22）
+# AI周报速查卡（v1.1 — 2026-07-01）
 
 > cron agent用这个文件替代完整SKILL.md+output-format-spec.md+weekly-report.md三件套。
 > 从~60KB→5KB，节省~55K input tokens/次。
 
-## P0红线速查（9条致命项）
+## P0红线速查（12条致命项）
 
 | # | 红线 | 一句话 |
 |---|------|--------|
@@ -16,6 +16,9 @@
 | 7 | 搜索≤8次 | 同日报#18d |
 | 8 | target必带 | message send带target={{OWNER_KIM_USERNAME}} |
 | 9 | 三步部署 | git push + sync_to_external + frontend-cloud |
+| 10 | 首页唯一入口 | update_homepage.py，禁止手动编辑index.html（#131） |
+| 11 | 腾讯研究院用前一天 | fetch_tencent_research.py 不传--date（#132） |
+| 12 | verify必通过 | verify_homepage.py HARD全绿才准出 |
 
 ## 6步流程
 

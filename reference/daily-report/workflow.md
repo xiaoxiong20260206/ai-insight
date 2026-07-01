@@ -256,4 +256,38 @@ uv run scripts/verify_homepage.py --date YYYY-MM-DD
 
 ---
 
-_更新于 2026-05-11 · v7.0 · 精简版，529行→核心流程_
+## ⚠️ 数据源特殊规则（永久）
+
+### 腾讯研究院（#132 — 2026-07-01）
+```bash
+# ✅ 正确：不传 --date，默认取前一天
+uv run scripts/fetch_tencent_research.py
+
+# ❌ 错误：传当天日期，8点前文章未必被索引，Tavily会返回旧文章
+uv run scripts/fetch_tencent_research.py --date 2026-07-01
+```
+**原因**：腾讯研究院AI速递每天上午发布，8点cron跑时当天文章可能还未被搜索引擎索引。永远用前一天数据。
+
+---
+
+## ⚠️ 首页部署检查（#131 — 2026-07-01）
+
+Step 3 finalize 后，`verify_homepage.py` 必须通过以下检查：
+- `check_daily_card_no_duplicates()` — 最近日报4条无重复日期
+- 17项HARD全绿才算部署成功
+
+**禁止**：在 deploy_*.sh 里写 inline Python 操作首页，统一调 `update_homepage.py`。
+
+---
+
+## ⚠️ HTML模板生成规则（Tab CSS — 2026-07-01）
+
+`gen_daily_html.py` 生成的CSS**禁止**出现：
+```css
+.tab-panel:first-of-type { display: block; }  /* ❌ 和JS切换永久冲突 */
+```
+Tab的初始状态由JS控制，CSS只做 `display:none`，active状态由 `.active` class切换。
+
+---
+
+_更新于 2026-07-01 · v7.1 · 新增三条永久规则：腾讯研究院日期/首页滚动窗口/Tab CSS_

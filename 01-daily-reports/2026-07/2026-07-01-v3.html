@@ -3551,11 +3551,11 @@ section > * {
                     }
                 }
             });
-            // Scroll to tab-nav so user can see the switched tab content
+            // Scroll to tab navigation area so user sees the new tab content
+            // (scrolling to contentInner.offsetTop jumps to page top, making it look like nothing changed — #132 fix 2026-07-01)
             const tabNavEl = document.querySelector('.tab-nav');
             if (tabNavEl) {
-                const navTop = tabNavEl.getBoundingClientRect().top + window.scrollY - 80;
-                window.scrollTo({ top: navTop, behavior: 'smooth' });
+                window.scrollTo({ top: tabNavEl.offsetTop - 20, behavior: 'smooth' });
             }
         }
 
