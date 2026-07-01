@@ -39,7 +39,7 @@
             
             /* 渐变色 */
             --gradient-success: linear-gradient(135deg, #059669 0%, #10B981 100%);
-            --gradient-hero: linear-gradient(135deg, #059669 0%, #10B981 50%, #34D399 100%);
+            --gradient-hero: linear-gradient(135deg, #059669 0%, #2563EB 50%, #7C3AED 100%);
             --gradient-badge: linear-gradient(135deg, #ECFDF5 0%, #EFF6FF 100%);
             --gradient-highlight: linear-gradient(135deg, rgba(5,150,105,0.08) 0%, rgba(5,150,105,0.03) 100%);
             --gradient-mesh: 
@@ -96,11 +96,11 @@
         }
         
         body {
-            font-family: "IBM Plex Sans", "Noto Sans SC", system-ui, sans-serif;
+            font-family: var(--font-family);
             font-size: 15px;
             line-height: 1.65;
-            color: #57534E;
-            background: #F9FAFB;
+            color: var(--color-text-secondary);
+            background: var(--color-bg);
             background-image: var(--gradient-mesh);
             /* background-attachment: fixed 已移除 — 移动端每帧触发repaint */
             -webkit-font-smoothing: antialiased;
@@ -120,22 +120,22 @@
         }
         
         ::-webkit-scrollbar-thumb {
-            background: #D1D5DB;
+            background: var(--color-border);
             border-radius: 3px;
         }
         
         ::-webkit-scrollbar-thumb:hover {
-            background: #78716C;
+            background: var(--color-text-muted);
         }
         
         a {
-            color: #10B981;
+            color: var(--color-info);
             text-decoration: none;
-            transition: color 0.15s ease;
+            transition: color var(--transition-fast);
         }
         
         a:hover {
-            color: #10B981;
+            color: var(--color-success);
         }
         
         .container {
@@ -149,12 +149,12 @@
             text-align: center;
             padding: var(--spacing-3xl) var(--spacing-lg);
             margin-bottom: var(--spacing-xl);
-            border-radius: 10px;
+            border-radius: var(--radius-2xl);
             position: relative;
             overflow: hidden;
-            background: white;
-            border: 1px solid #E5E7EB;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border-light);
+            box-shadow: var(--shadow-lg);
         }
         
         /* 背景微渐变 */
@@ -162,7 +162,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, #059669 0%, #10B981 50%, #34D399 100%);
+            background: var(--gradient-hero);
             opacity: 0.04;
             pointer-events: none;
         }
@@ -175,7 +175,7 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(135deg, #059669 0%, #10B981 50%, #34D399 100%);
+            background: var(--gradient-hero);
             pointer-events: none;
         }
         
@@ -184,15 +184,15 @@
             align-items: center;
             gap: var(--spacing-sm);
             padding: var(--spacing-xs) 14px;
-            background: linear-gradient(135deg, #ECFDF5 0%, #F0FDF4 100%);
-            color: #10B981;
-            border-radius: 2px;
+            background: var(--gradient-badge);
+            color: var(--color-info);
+            border-radius: var(--radius-full);
             font-size: 12px;
             font-weight: 500;
             letter-spacing: 0.02em;
             margin-bottom: 20px;
             border: 1px solid rgba(37, 99, 235, 0.12);
-            box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+            box-shadow: var(--shadow-xs);
             position: relative;
         }
         
@@ -203,7 +203,7 @@
             line-height: 1.3;
             margin-bottom: 12px;
             letter-spacing: -0.02em;
-            background: linear-gradient(135deg, #059669 0%, #10B981 50%, #34D399 100%);
+            background: var(--gradient-hero);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -212,7 +212,7 @@
         
         .header-subtitle {
             font-size: 15px;
-            color: #57534E;
+            color: var(--color-text-secondary);
             max-width: 580px;
             margin: 0 auto;
             line-height: 1.6;
@@ -240,13 +240,13 @@
         }
         
         .stat-card {
-            background: white;
-            border-radius: 4px;
-            border: 1px solid #E5E7EB;
+            background: var(--color-bg-card);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--color-border-light);
             padding: var(--spacing-lg);
             text-align: center;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-            transition: all 0.2s ease;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-normal);
             position: relative;
             overflow: hidden;
         }
@@ -258,20 +258,20 @@
             left: 0;
             right: 0;
             height: 3px;
-            border-radius: 4px 4px 0 0;
-            transition: all 0.2s ease;
+            border-radius: var(--radius-md) var(--radius-md) 0 0;
+            transition: var(--transition-normal);
             pointer-events: none;
         }
-        .stat-card:nth-child(1)::before { background: #10B981; opacity: 0.7; }
-        .stat-card:nth-child(2)::before { background: #10B981; opacity: 0.55; }
-        .stat-card:nth-child(3)::before { background: #10B981; opacity: 0.4; }
-        .stat-card:nth-child(4)::before { background: #10B981; opacity: 0.3; }
-        .stat-card:nth-child(5)::before { background: #10B981; opacity: 0.55; }
+        .stat-card:nth-child(1)::before { background: var(--gradient-success); opacity: 0.7; }
+        .stat-card:nth-child(2)::before { background: linear-gradient(135deg, #2563EB, #3B82F6); opacity: 0.7; }
+        .stat-card:nth-child(3)::before { background: linear-gradient(135deg, #7C3AED, #8B5CF6); opacity: 0.7; }
+        .stat-card:nth-child(4)::before { background: linear-gradient(135deg, #D97706, #F59E0B); opacity: 0.7; }
+        .stat-card:nth-child(5)::before { background: var(--gradient-success); opacity: 0.7; }
         
         .stat-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-            border-color: #10B981;
+            box-shadow: var(--shadow-hover);
+            border-color: var(--color-success);
         }
         
         .stat-card:hover::before {
@@ -286,14 +286,14 @@
             letter-spacing: -0.02em;
         }
         
-        .stat-value.green { color: #10B981; }
-        .stat-value.blue { color: #10B981; }
-        .stat-value.purple { color: #059669; }
-        .stat-value.orange { color: #6B7280; }
+        .stat-value.green { color: var(--color-success); }
+        .stat-value.blue { color: var(--color-info); }
+        .stat-value.purple { color: var(--color-purple); }
+        .stat-value.orange { color: var(--color-warning); }
         
         .stat-label {
             font-size: 12px;
-            color: #78716C;
+            color: var(--color-text-muted);
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -309,10 +309,10 @@
             -webkit-backdrop-filter: blur(10px) saturate(1.4);
             will-change: backdrop-filter;
             border: 1px solid rgba(255,255,255,0.7);
-            border-radius: 6px;
+            border-radius: var(--radius-lg);
             padding: 5px;
             margin-bottom: var(--spacing-lg);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.03);
+            box-shadow: var(--shadow-lg), 0 0 0 1px rgba(0,0,0,0.03);
             position: sticky;
             top: 12px;
             z-index: 100;
@@ -329,27 +329,27 @@
             padding: 12px 16px;
             background: transparent;
             border: none;
-            border-radius: 4px;
+            border-radius: var(--radius-md);
             cursor: pointer;
             font-family: inherit;
             font-size: 14px;
             font-weight: 500;
-            color: #78716C;
-            transition: all 0.15s ease;
+            color: var(--color-text-muted);
+            transition: all var(--transition-fast);
             white-space: nowrap;
             touch-action: manipulation;
             min-height: 44px;
         }
         
         .tab-btn:hover {
-            background: #F9FAFB;
-            color: #57534E;
+            background: var(--color-bg-table-header);
+            color: var(--color-text-secondary);
         }
         
         .tab-btn:focus-visible {
-            outline: 2px solid #10B981;
+            outline: 2px solid var(--color-success);
             outline-offset: 3px;
-            box-shadow: 0 0 0 5px rgba(16,185,129,0.12);
+            box-shadow: 0 0 0 5px rgba(5, 150, 105, 0.12);
         }
 
         :focus:not(:focus-visible) {
@@ -357,9 +357,9 @@
         }
 
         .tab-btn.active {
-            background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+            background: var(--gradient-success);
             color: #fff;
-            box-shadow: 0 4px 14px rgba(16,185,129,0.15);
+            box-shadow: var(--shadow-glow-success);
             font-weight: 600;
         }
         
@@ -407,12 +407,12 @@
         
         /* ============ Section Card ============ */
         .section {
-            background: white;
-            border: 1px solid #E5E7EB;
-            border-radius: 6px;
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-lg);
             padding: var(--spacing-lg);
             margin-bottom: var(--spacing-lg);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            box-shadow: var(--shadow-card);
             overflow: visible;
         }
         
@@ -422,15 +422,15 @@
             gap: 12px;
             margin-bottom: var(--spacing-lg);
             padding-bottom: var(--spacing-md);
-            border-bottom: 1px solid #E5E7EB;
+            border-bottom: 1px solid var(--color-border-light);
         }
         
         .section-icon {
             width: 40px;
             height: 40px;
-            background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+            background: var(--gradient-success);
             color: #fff;
-            border-radius: 4px;
+            border-radius: var(--radius-md);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -442,13 +442,13 @@
         .section-title {
             font-size: 20px;
             font-weight: 700;
-            color: #111827;
+            color: var(--color-text-primary);
             letter-spacing: -0.01em;
         }
         
         .section-desc {
             font-size: 14px;
-            color: #57534E;
+            color: var(--color-text-secondary);
             margin-top: 4px;
         }
         
@@ -472,20 +472,20 @@
         }
         
         .content-card {
-            background: #F9FAFB;
-            border: 1px solid #E5E7EB;
-            border-radius: 4px;
+            background: var(--color-bg-table-header);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-md);
             padding: var(--spacing-md);
-            transition: all 0.2s ease;
+            transition: all var(--transition-normal);
             display: block;
             position: relative;
         }
         
         .content-card:hover {
-            border-color: #10B981;
-            background: rgba(16,185,129,0.03);
+            border-color: var(--color-success);
+            background: rgba(5, 150, 105, 0.03);
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+            box-shadow: var(--shadow-md);
         }
         
         .content-card-header {
@@ -502,43 +502,43 @@
         .content-card-title {
             font-size: 15px;
             font-weight: 600;
-            color: #111827;
+            color: var(--color-text-primary);
             flex: 1;
         }
         
         .content-card-tag {
             display: inline-flex;
             padding: 2px 8px;
-            border-radius: 2px;
+            border-radius: var(--radius-full);
             font-size: 11px;
             font-weight: 500;
         }
         
         .content-card-tag.green {
-            background: rgba(16,185,129,0.12);
-            color: #10B981;
+            background: rgba(5, 150, 105, 0.12);
+            color: var(--color-success);
         }
         
         .content-card-tag.blue {
             background: rgba(37, 99, 235, 0.12);
-            color: #10B981;
+            color: var(--color-info);
         }
         
         .content-card-tag.orange {
             background: rgba(217, 119, 6, 0.12);
-            color: #6B7280;
+            color: var(--color-warning);
         }
         
         .content-card-desc {
             font-size: 13px;
-            color: #57534E;
+            color: var(--color-text-secondary);
             line-height: 1.6;
         }
         
         .content-card-meta {
             margin-top: var(--spacing-sm);
             font-size: 12px;
-            color: #78716C;
+            color: var(--color-text-muted);
             display: flex;
             align-items: center;
             gap: var(--spacing-sm);
@@ -556,15 +556,15 @@
             align-items: center;
             gap: var(--spacing-md);
             padding: var(--spacing-md);
-            background: #F9FAFB;
-            border: 1px solid #E5E7EB;
-            border-radius: 4px;
-            transition: all 0.15s ease;
+            background: var(--color-bg-table-header);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-md);
+            transition: all var(--transition-fast);
         }
         
         .list-item:hover {
-            border-color: #10B981;
-            background: rgba(16,185,129,0.03);
+            border-color: var(--color-success);
+            background: rgba(5, 150, 105, 0.03);
         }
         
         .list-item-icon {
@@ -579,20 +579,20 @@
         .list-item-title {
             font-size: 14px;
             font-weight: 600;
-            color: #111827;
+            color: var(--color-text-primary);
             margin-bottom: 2px;
         }
         
         .list-item-desc {
             font-size: 13px;
-            color: #57534E;
+            color: var(--color-text-secondary);
         }
         
         .list-item-arrow {
-            color: #10B981;
+            color: var(--color-success);
             font-size: 18px;
             opacity: 0;
-            transition: opacity 0.15s ease;
+            transition: opacity var(--transition-fast);
         }
         
         .list-item:hover .list-item-arrow {
@@ -607,7 +607,7 @@
         .category-title {
             font-size: 16px;
             font-weight: 600;
-            color: #111827;
+            color: var(--color-text-primary);
             margin-bottom: var(--spacing-md);
             display: flex;
             align-items: center;
@@ -618,7 +618,7 @@
             content: '';
             width: 4px;
             height: 18px;
-            background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+            background: var(--gradient-success);
             border-radius: 2px;
         }
         
@@ -632,7 +632,7 @@
             gap: var(--spacing-md);
             margin-bottom: var(--spacing-xl);
             padding-bottom: var(--spacing-lg);
-            border-bottom: 1px solid #E5E7EB;
+            border-bottom: 1px solid var(--color-border-light);
         }
         
         .research-stats {
@@ -646,12 +646,12 @@
             align-items: center;
             gap: 5px;
             padding: 5px 12px;
-            background: white;
-            border: 1px solid #D1D5DB;
-            border-radius: 2px;
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-full);
             font-size: 12px;
             font-weight: 500;
-            color: #57534E;
+            color: var(--color-text-secondary);
         }
 
         /* 类别图例 */
@@ -667,18 +667,18 @@
             align-items: center;
             gap: 6px;
             font-size: 12px;
-            color: #57534E;
+            color: var(--color-text-secondary);
             cursor: pointer;
             padding: 4px 10px;
-            border-radius: 2px;
+            border-radius: var(--radius-full);
             border: 1px solid transparent;
-            transition: all 0.15s ease;
+            transition: all var(--transition-fast);
         }
         
         .cat-legend-item:hover,
         .cat-legend-item.active {
-            background: white;
-            border-color: #D1D5DB;
+            background: var(--color-bg-card);
+            border-color: var(--color-border);
         }
         
         .cat-legend-item.active {
@@ -706,7 +706,7 @@
             top: 28px;
             bottom: 40px;
             width: 2px;
-            background: linear-gradient(to bottom, #10B981, rgba(5,150,105,0.1));
+            background: linear-gradient(to bottom, var(--color-success), rgba(5,150,105,0.1));
             border-radius: 2px;
         }
         
@@ -729,7 +729,7 @@
             text-align: center;
             font-size: 11px;
             font-weight: 700;
-            color: #047857;
+            color: var(--color-success-dark);
             text-transform: uppercase;
             letter-spacing: 0.5px;
             line-height: 1.3;
@@ -748,8 +748,8 @@
             width: 14px;
             height: 14px;
             border-radius: 50%;
-            background: white;
-            border: 2px solid #10B981;
+            background: var(--color-bg-card);
+            border: 2px solid var(--color-success);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -759,7 +759,7 @@
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background: #10B981;
+            background: var(--color-success);
         }
         
         /* 月份描述文字 */
@@ -774,15 +774,15 @@
         .timeline-month-title {
             font-size: 15px;
             font-weight: 700;
-            color: #111827;
+            color: var(--color-text-primary);
         }
         
         .timeline-month-count {
             font-size: 11px;
             padding: 2px 8px;
             background: var(--color-success-50);
-            color: #047857;
-            border-radius: 2px;
+            color: var(--color-success-dark);
+            border-radius: var(--radius-full);
             font-weight: 600;
         }
         
@@ -813,11 +813,11 @@
         /* 时间轴卡片样式 */
         .timeline-card {
             display: block;
-            background: white;
-            border: 1px solid #E5E7EB;
-            border-radius: 4px;
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-md);
             padding: 12px 14px;
-            transition: all 0.2s ease;
+            transition: all var(--transition-normal);
             border-left-width: 3px;
             text-decoration: none;
             position: relative;
@@ -825,43 +825,43 @@
         
         .timeline-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+            box-shadow: var(--shadow-md);
         }
         
         /* 按类别的左边框颜色 */
         .timeline-card.cat-trend {
-            border-left-color: #10B981;
+            border-left-color: var(--color-info);
         }
         .timeline-card.cat-trend:hover {
-            border-color: #10B981;
-            border-left-color: #10B981;
+            border-color: var(--color-info);
+            border-left-color: var(--color-info);
             background: rgba(37,99,235,0.02);
         }
         
         .timeline-card.cat-company {
-            border-left-color: #6B7280;
+            border-left-color: var(--color-warning);
         }
         .timeline-card.cat-company:hover {
-            border-color: #6B7280;
-            border-left-color: #6B7280;
+            border-color: var(--color-warning);
+            border-left-color: var(--color-warning);
             background: rgba(217,119,6,0.02);
         }
         
         .timeline-card.cat-topic {
-            border-left-color: #10B981;
+            border-left-color: var(--color-success);
         }
         .timeline-card.cat-topic:hover {
-            border-color: #10B981;
-            border-left-color: #10B981;
+            border-color: var(--color-success);
+            border-left-color: var(--color-success);
             background: rgba(5,150,105,0.02);
         }
         
         .timeline-card.cat-people {
-            border-left-color: #059669;
+            border-left-color: var(--color-purple);
         }
         .timeline-card.cat-people:hover {
-            border-color: #059669;
-            border-left-color: #059669;
+            border-color: var(--color-purple);
+            border-left-color: var(--color-purple);
             background: rgba(124,58,237,0.02);
         }
         
@@ -882,7 +882,7 @@
         .tc-title {
             font-size: 13px;
             font-weight: 600;
-            color: #111827;
+            color: var(--color-text-primary);
             line-height: 1.4;
             flex: 1;
         }
@@ -890,20 +890,20 @@
         .tc-tag {
             display: inline-flex;
             padding: 1px 6px;
-            border-radius: 2px;
+            border-radius: var(--radius-full);
             font-size: 10px;
             font-weight: 500;
             flex-shrink: 0;
         }
         
-        .tc-tag.trend { background: rgba(37,99,235,0.12); color: #10B981; }
-        .tc-tag.company { background: rgba(217,119,6,0.12); color: #6B7280; }
-        .tc-tag.topic { background: rgba(5,150,105,0.12); color: #047857; }
-        .tc-tag.people { background: rgba(124,58,237,0.12); color: #059669; }
+        .tc-tag.trend { background: rgba(37,99,235,0.12); color: var(--color-info); }
+        .tc-tag.company { background: rgba(217,119,6,0.12); color: var(--color-warning); }
+        .tc-tag.topic { background: rgba(5,150,105,0.12); color: var(--color-success-dark); }
+        .tc-tag.people { background: rgba(124,58,237,0.12); color: var(--color-purple); }
         
         .tc-desc {
             font-size: 12px;
-            color: #57534E;
+            color: var(--color-text-secondary);
             line-height: 1.5;
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -914,7 +914,7 @@
         .tc-meta {
             margin-top: 6px;
             font-size: 11px;
-            color: #78716C;
+            color: var(--color-text-muted);
         }
         
         /* 隐藏状态（筛选用）*/
@@ -937,43 +937,43 @@
         .tracking-table td {
             padding: 12px 16px;
             text-align: left;
-            border-bottom: 1px solid #E5E7EB;
+            border-bottom: 1px solid var(--color-border-light);
         }
         
         .tracking-table th {
-            background: #F9FAFB;
+            background: var(--color-bg-table-header);
             font-weight: 600;
-            color: #57534E;
+            color: var(--color-text-secondary);
             font-size: 12px;
             letter-spacing: 0.02em;
             text-transform: uppercase;
         }
         
         .tracking-table tbody tr:hover td {
-            background: rgba(16,185,129,0.03);
+            background: rgba(5, 150, 105, 0.03);
         }
         
         .tracking-table .tier-badge {
             display: inline-flex;
             padding: 2px 8px;
-            border-radius: 2px;
+            border-radius: var(--radius-full);
             font-size: 11px;
             font-weight: 600;
         }
         
         .tier-badge.l1 {
-            background: rgba(16,185,129,0.12);
-            color: #10B981;
+            background: rgba(5, 150, 105, 0.12);
+            color: var(--color-success);
         }
         
         .tier-badge.l2 {
             background: rgba(37, 99, 235, 0.12);
-            color: #10B981;
+            color: var(--color-info);
         }
         
         .tier-badge.l3 {
             background: rgba(217, 119, 6, 0.12);
-            color: #6B7280;
+            color: var(--color-warning);
         }
         
         /* ============ Collapsible Sections ============ */
@@ -982,23 +982,23 @@
             align-items: center;
             justify-content: space-between;
             padding: var(--spacing-md);
-            background: #F9FAFB;
-            border: 1px solid #E5E7EB;
-            border-radius: 4px;
+            background: var(--color-bg-table-header);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-md);
             cursor: pointer;
-            transition: all 0.15s ease;
+            transition: all var(--transition-fast);
             user-select: none;
         }
         
         .collapsible-header:hover {
-            background: rgba(16,185,129,0.05);
-            border-color: #10B981;
+            background: rgba(5, 150, 105, 0.05);
+            border-color: var(--color-success);
         }
         
         .collapsible-header.active {
-            border-radius: 6px 6px 0 0;
+            border-radius: var(--radius-md) var(--radius-md) 0 0;
             border-bottom: none;
-            background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+            background: var(--gradient-success);
             color: white;
         }
         
@@ -1029,29 +1029,29 @@
         .collapsible-title {
             font-size: 15px;
             font-weight: 600;
-            color: #111827;
+            color: var(--color-text-primary);
         }
         
         .collapsible-count {
             font-size: 12px;
             padding: 2px 8px;
             background: rgba(5, 150, 105, 0.1);
-            color: #10B981;
-            border-radius: 2px;
+            color: var(--color-success);
+            border-radius: var(--radius-full);
             font-weight: 600;
         }
         
         .collapsible-icon {
             font-size: 16px;
-            color: #78716C;
-            transition: transform 0.2s ease;
+            color: var(--color-text-muted);
+            transition: transform var(--transition-normal);
         }
         
         .collapsible-content {
             display: none;
-            border: 1px solid #E5E7EB;
+            border: 1px solid var(--color-border-light);
             border-top: none;
-            border-radius: 0 0 6px 6px;
+            border-radius: 0 0 var(--radius-md) var(--radius-md);
             overflow: hidden;
             animation: slideDown 0.3s ease-out;
         }
@@ -1079,29 +1079,29 @@
             margin-top: var(--spacing-xl);
             margin-bottom: var(--spacing-md);
             padding-bottom: var(--spacing-sm);
-            border-bottom: 1px solid #E5E7EB;
+            border-bottom: 1px solid var(--color-border-light);
         }
         
         .calendar-section-title {
             font-size: 16px;
             font-weight: 600;
-            color: #111827;
+            color: var(--color-text-primary);
         }
         
         .calendar-section-hint {
             font-size: 12px;
-            color: #78716C;
+            color: var(--color-text-muted);
             margin-left: auto;
         }
         
         .calendar-container {
             margin-top: var(--spacing-sm);
             max-width: 520px;
-            background: white;
-            border: 1px solid #E5E7EB;
-            border-radius: 6px;
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-lg);
             padding: var(--spacing-lg);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            box-shadow: var(--shadow-card);
             overflow: visible;
         }
         
@@ -1115,7 +1115,7 @@
         .calendar-month {
             font-size: 16px;
             font-weight: 700;
-            color: #111827;
+            color: var(--color-text-primary);
             letter-spacing: -0.01em;
         }
         
@@ -1127,22 +1127,22 @@
         .calendar-nav-btn {
             width: 30px;
             height: 30px;
-            border: 1px solid #D1D5DB;
-            background: white;
-            border-radius: 3px;
+            border: 1px solid var(--color-border);
+            background: var(--color-bg-card);
+            border-radius: var(--radius-sm);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 13px;
-            color: #78716C;
-            transition: all 0.15s ease;
+            color: var(--color-text-muted);
+            transition: all var(--transition-fast);
         }
         
         .calendar-nav-btn:hover {
-            border-color: #10B981;
-            color: #10B981;
-            background: rgba(16,185,129,0.05);
+            border-color: var(--color-success);
+            color: var(--color-success);
+            background: rgba(5, 150, 105, 0.05);
         }
         
         .calendar-grid {
@@ -1155,7 +1155,7 @@
             text-align: center;
             font-size: 12px;
             font-weight: 600;
-            color: #78716C;
+            color: var(--color-text-muted);
             padding: 4px 0;
         }
         
@@ -1167,11 +1167,11 @@
             justify-content: center;
             font-size: 14px;
             font-weight: 500;
-            color: #57534E;
-            border-radius: 3px;
-            background: #F9FAFB;
+            color: var(--color-text-secondary);
+            border-radius: var(--radius-sm);
+            background: var(--color-bg-table-header);
             border: 1px solid transparent;
-            transition: all 0.15s ease;
+            transition: all var(--transition-fast);
             position: relative;
         }
         
@@ -1181,26 +1181,26 @@
         }
         
         .calendar-day.has-report {
-            background: rgba(16,185,129,0.15);
-            color: #10B981;
+            background: rgba(5, 150, 105, 0.15);
+            color: var(--color-success);
             font-weight: 600;
             cursor: pointer;
             border-color: rgba(5, 150, 105, 0.3);
         }
         
         .calendar-day.has-report:hover {
-            background: #10B981;
+            background: var(--color-success);
             color: white;
             transform: scale(1.05);
         }
         
         .calendar-day.today {
-            border: 2px solid #10B981;
+            border: 2px solid var(--color-info);
             font-weight: 700;
         }
         
         .calendar-day.today.has-report {
-            border-color: #10B981;
+            border-color: var(--color-success);
         }
         
         /* 周报标识 */
@@ -1217,7 +1217,7 @@
             width: 16px;
             height: 3px;
             border-radius: 2px;
-            background: linear-gradient(90deg, #10B981, #059669);
+            background: linear-gradient(90deg, var(--color-info), var(--color-purple));
             pointer-events: none;
         }
         
@@ -1228,10 +1228,10 @@
             bottom: calc(100% + 8px);
             left: 50%;
             transform: translateX(-50%);
-            background: white;
-            border: 1px solid #D1D5DB;
-            border-radius: 4px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
             padding: 6px;
             z-index: 200;
             min-width: 150px;
@@ -1250,7 +1250,7 @@
             left: 50%;
             transform: translateX(-50%);
             border: 6px solid transparent;
-            border-top-color: #D1D5DB;
+            border-top-color: var(--color-border);
         }
         
         .calendar-day-menu-item {
@@ -1258,26 +1258,26 @@
             align-items: center;
             gap: 8px;
             padding: 8px 12px;
-            border-radius: 3px;
+            border-radius: var(--radius-sm);
             text-decoration: none;
-            color: #111827;
+            color: var(--color-text-primary);
             font-size: 13px;
             font-weight: 500;
-            transition: all 0.15s ease;
+            transition: all var(--transition-fast);
             cursor: pointer;
         }
         
         .calendar-day-menu-item:hover {
-            background: rgba(16,185,129,0.08);
-            color: #10B981;
+            background: rgba(5, 150, 105, 0.08);
+            color: var(--color-success);
         }
         
         .calendar-day-menu-item.daily {
-            color: #10B981;
+            color: var(--color-success);
         }
         
         .calendar-day-menu-item.weekly {
-            color: #10B981;
+            color: var(--color-info);
         }
         
         .calendar-day-menu-icon {
@@ -1289,29 +1289,29 @@
         .calendar-day-menu-label {
             font-size: 11px;
             padding: 1px 5px;
-            border-radius: 2px;
+            border-radius: var(--radius-full);
             font-weight: 600;
             margin-left: auto;
         }
         
         .calendar-day-menu-label.daily {
-            background: rgba(16,185,129,0.12);
-            color: #10B981;
+            background: rgba(5, 150, 105, 0.12);
+            color: var(--color-success);
         }
         
         .calendar-day-menu-label.weekly {
             background: rgba(37, 99, 235, 0.12);
-            color: #10B981;
+            color: var(--color-info);
         }
         
         /* 同时有日报+周报的日期样式增强 */
         .calendar-day.has-report.has-weekly {
-            background: linear-gradient(135deg, rgba(16,185,129,0.15) 0%, rgba(37, 99, 235, 0.10) 100%);
+            background: linear-gradient(135deg, rgba(5, 150, 105, 0.15) 0%, rgba(37, 99, 235, 0.10) 100%);
             cursor: pointer;
         }
         
         .calendar-day.has-report.has-weekly:hover {
-            background: linear-gradient(135deg, #10B981 0%, #10B981 100%);
+            background: linear-gradient(135deg, var(--color-success) 0%, var(--color-info) 100%);
             color: white;
         }
         
@@ -1327,24 +1327,24 @@
             padding: var(--spacing-md) var(--spacing-lg);
             background: linear-gradient(135deg, #EFF6FF 0%, #F5F3FF 100%);
             border: 1px solid rgba(37, 99, 235, 0.2);
-            border-radius: 4px;
-            transition: all 0.2s ease;
+            border-radius: var(--radius-md);
+            transition: all var(--transition-normal);
             margin-bottom: var(--spacing-md);
             text-decoration: none;
             color: inherit;
         }
         
         .weekly-report-card:hover {
-            border-color: #10B981;
+            border-color: var(--color-info);
             transform: translateY(-2px);
-            box-shadow: 0 4px 14px rgba(16,185,129,0.12);
+            box-shadow: var(--shadow-glow-info);
         }
         
         .weekly-report-card .wrc-icon {
             width: 44px;
             height: 44px;
-            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
-            border-radius: 4px;
+            background: linear-gradient(135deg, var(--color-info) 0%, var(--color-purple) 100%);
+            border-radius: var(--radius-md);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1361,22 +1361,22 @@
         .weekly-report-card .wrc-title {
             font-size: 15px;
             font-weight: 700;
-            color: #111827;
+            color: var(--color-text-primary);
             margin-bottom: 2px;
         }
         
         .weekly-report-card .wrc-desc {
             font-size: 13px;
-            color: #57534E;
+            color: var(--color-text-secondary);
             line-height: 1.5;
         }
         
         .weekly-report-card .wrc-badge {
             display: inline-flex;
             padding: 3px 10px;
-            background: linear-gradient(135deg, #10B981, #059669);
+            background: linear-gradient(135deg, var(--color-info), var(--color-purple));
             color: #fff;
-            border-radius: 2px;
+            border-radius: var(--radius-full);
             font-size: 11px;
             font-weight: 600;
             margin-left: 8px;
@@ -1384,9 +1384,9 @@
         
         .weekly-report-card .wrc-arrow {
             font-size: 20px;
-            color: #10B981;
+            color: var(--color-info);
             opacity: 0;
-            transition: opacity 0.15s ease;
+            transition: opacity var(--transition-fast);
         }
         
         .weekly-report-card:hover .wrc-arrow {
@@ -1398,9 +1398,9 @@
             gap: 14px;
             margin-top: 12px;
             padding-top: 10px;
-            border-top: 1px solid #E5E7EB;
+            border-top: 1px solid var(--color-border-light);
             font-size: 12px;
-            color: #78716C;
+            color: var(--color-text-muted);
         }
         
         .calendar-legend-item {
@@ -1417,38 +1417,38 @@
         
         .calendar-legend-dot.has-report {
             background: rgba(5, 150, 105, 0.25);
-            border: 1px solid #10B981;
+            border: 1px solid var(--color-success);
         }
         
         .calendar-legend-dot.today {
             background: transparent;
-            border: 1.5px solid #10B981;
+            border: 1.5px solid var(--color-info);
         }
         
         .calendar-report-count {
             font-size: 12px;
-            color: #10B981;
+            color: var(--color-success);
             font-weight: 600;
             margin-left: auto;
         }
         
         /* ============ Footer ============ */
         .footer {
-            text-align: left;
-            padding: 48px 0 32px;
-            margin-top: 64px;
-            border-top: 1px solid #E5E7EB;
-            color: #6B7280;
+            text-align: center;
+            padding: var(--spacing-3xl) 0 var(--spacing-xl);
+            margin-top: var(--spacing-3xl);
+            border-top: 1px solid var(--color-border-light);
+            color: var(--color-text-muted);
             font-size: 13px;
         }
         
         .footer a {
-            color: #10B981;
+            color: var(--color-success);
             font-weight: 500;
         }
         
         .footer a:hover {
-            color: #047857;
+            color: var(--color-success-dark);
         }
         
         .footer-brand {
@@ -1456,21 +1456,21 @@
             align-items: center;
             gap: 6px;
             padding: 4px 12px;
-            background: #F9FAFB;
-            border-radius: 2px;
+            background: var(--gradient-badge);
+            border-radius: var(--radius-full);
             font-size: 12px;
             margin-bottom: 8px;
-            border: 1px solid #E5E7EB;
+            border: 1px solid rgba(5, 150, 105, 0.1);
         }
         
         /* ============ Knowledge Tree Styles ============ */
         /* ============ 知识库架构样式 ============ */
         .kb-architecture {
             padding: var(--spacing-md) var(--spacing-lg);
-            background: #F9FAFB;
-            border-radius: 4px;
-            border: 1px solid #E5E7EB;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+            background: linear-gradient(180deg, #FAFAF9 0%, #F5F5F4 100%);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--color-border-light);
+            box-shadow: var(--shadow-card);
             overflow: visible;
         }
         
@@ -1481,11 +1481,11 @@
         
         .label-text {
             font-weight: 600;
-            color: #111827;
+            color: var(--color-text-primary);
         }
         
         .label-desc {
-            color: #78716C;
+            color: var(--color-text-muted);
         }
         
         /* 分层容器 */
@@ -1499,12 +1499,12 @@
             gap: 8px;
             margin-bottom: var(--spacing-sm);
             padding: 6px 14px;
-            background: white;
-            border-radius: 2px;
+            background: var(--color-bg-card);
+            border-radius: var(--radius-full);
             font-size: 13px;
             font-weight: 600;
-            color: #57534E;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            color: var(--color-text-secondary);
+            box-shadow: var(--shadow-sm);
         }
         
         .layer-icon {
@@ -1514,10 +1514,10 @@
         .layer-stats {
             font-size: 11px;
             font-weight: 400;
-            color: #78716C;
+            color: var(--color-text-muted);
             margin-left: 8px;
             padding-left: 8px;
-            border-left: 1px solid #D1D5DB;
+            border-left: 1px solid var(--color-border);
         }
         
         /* 四大维度网格 */
@@ -1535,20 +1535,20 @@
         
         /* 维度卡片 */
         .kb-dimension {
-            background: white;
-            border-radius: 6px;
-            border: 1px solid #E5E7EB;
+            background: var(--color-bg-card);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border-light);
             overflow: hidden;
-            transition: all 0.2s ease;
+            transition: all var(--transition-normal);
         }
         
         .kb-dimension:hover {
             border-color: rgba(5, 150, 105, 0.3);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            box-shadow: var(--shadow-sm);
         }
         
         .kb-dimension.core {
-            border-color: #10B981;
+            border-color: var(--color-info);
         }
         
         .dim-header {
@@ -1557,11 +1557,11 @@
             gap: 10px;
             padding: 12px 14px;
             cursor: pointer;
-            transition: all 0.15s ease;
+            transition: all var(--transition-fast);
         }
         
         .dim-header:hover {
-            background: rgba(16,185,129,0.03);
+            background: rgba(5, 150, 105, 0.03);
         }
         
         .dim-icon {
@@ -1576,9 +1576,9 @@
         }
         
         .dim-models .dim-icon { background: linear-gradient(135deg, #059669, #10B981); }
-        .dim-agent .dim-icon { background: linear-gradient(135deg, #059669, #10B981); }
-        .dim-companies .dim-icon { background: linear-gradient(135deg, #059669, #10B981); }
-        .dim-enterprise .dim-icon { background: linear-gradient(135deg, #059669, #10B981); }
+        .dim-agent .dim-icon { background: linear-gradient(135deg, #2563EB, #1D4ED8); }
+        .dim-companies .dim-icon { background: linear-gradient(135deg, #7C3AED, #6D28D9); }
+        .dim-enterprise .dim-icon { background: linear-gradient(135deg, #D97706, #B45309); }
         
         .dim-info {
             flex: 1;
@@ -1589,43 +1589,43 @@
         .dim-name {
             font-size: 15px;
             font-weight: 600;
-            color: #111827;
+            color: var(--color-text-primary);
         }
         
         .dim-count {
             font-size: 11px;
-            color: #78716C;
+            color: var(--color-text-muted);
             margin-top: 1px;
         }
         
         .dim-count.core {
-            color: #10B981;
+            color: var(--color-info);
             font-weight: 600;
         }
         
         .dim-toggle {
             font-size: 10px;
-            color: #78716C;
-            transition: transform 0.2s ease;
+            color: var(--color-text-muted);
+            transition: transform var(--transition-normal);
             width: 20px;
             height: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #F9FAFB;
+            background: var(--color-bg);
             border-radius: 50%;
         }
         
         .kb-dimension[data-expanded="true"] .dim-toggle {
             transform: rotate(90deg);
-            background: #10B981;
+            background: var(--color-success);
             color: white;
         }
         
         .dim-content {
             display: none;
             padding: var(--spacing-sm) var(--spacing-md);
-            border-top: 1px solid #E5E7EB;
+            border-top: 1px solid var(--color-border-light);
             background: linear-gradient(180deg, rgba(246,248,250,0.5) 0%, transparent 100%);
         }
         
@@ -1636,7 +1636,7 @@
         
         .dim-desc {
             font-size: 12px;
-            color: #78716C;
+            color: var(--color-text-muted);
             margin-bottom: var(--spacing-xs);
         }
         
@@ -1645,13 +1645,13 @@
             gap: var(--spacing-xs);
             margin-bottom: var(--spacing-xs);
             font-size: 11px;
-            color: #57534E;
+            color: var(--color-text-secondary);
         }
         
         .dim-stats span {
             padding: 2px 8px;
-            background: #F9FAFB;
-            border-radius: 2px;
+            background: var(--color-bg);
+            border-radius: var(--radius-full);
         }
         
         .dim-items {
@@ -1665,16 +1665,16 @@
             align-items: center;
             gap: 8px;
             padding: 8px 12px;
-            background: white;
+            background: var(--color-bg-card);
             border: 1px solid transparent;
-            border-radius: 3px;
+            border-radius: var(--radius-sm);
             text-decoration: none;
-            transition: all 0.15s ease;
+            transition: all var(--transition-fast);
         }
         
         .kb-item:hover {
-            background: linear-gradient(135deg, rgba(16,185,129,0.06) 0%, rgba(37, 99, 235, 0.04) 100%);
-            border-color: #10B981;
+            background: linear-gradient(135deg, rgba(5, 150, 105, 0.06) 0%, rgba(37, 99, 235, 0.04) 100%);
+            border-color: var(--color-success);
             transform: translateX(3px);
         }
         
@@ -1685,19 +1685,19 @@
         .item-text {
             font-size: 13px;
             font-weight: 500;
-            color: #111827;
+            color: var(--color-text-primary);
             flex: 1;
         }
         
         .item-tag {
             font-size: 9px;
             padding: 2px 6px;
-            border-radius: 2px;
+            border-radius: var(--radius-full);
             font-weight: 500;
         }
         
         .item-tag.new {
-            background: #10B981;
+            background: linear-gradient(135deg, #E11D48, #F43F5E);
             color: white;
             animation: pulse 2s ease-in-out infinite;
         }
@@ -1722,21 +1722,21 @@
         }
         
         .kb-foundation {
-            background: white;
-            border-radius: 4px;
+            background: var(--color-bg-card);
+            border-radius: var(--radius-md);
             padding: var(--spacing-sm);
-            border: 1px solid #E5E7EB;
-            transition: all 0.2s ease;
+            border: 1px solid var(--color-border-light);
+            transition: all var(--transition-normal);
         }
         
         .kb-foundation:hover {
-            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            box-shadow: var(--shadow-sm);
         }
         
-        .foundation-entities { border-left: 3px solid rgba(16,185,129,1.0); }
-        .foundation-concepts { border-left: 3px solid rgba(16,185,129,0.7); }
+        .foundation-entities { border-left: 3px solid #7C3AED; }
+        .foundation-concepts { border-left: 3px solid #2563EB; }
         .foundation-practices { border-left: 3px solid #10B981; }
-        .foundation-insights { border-left: 3px solid rgba(16,185,129,0.45); }
+        .foundation-insights { border-left: 3px solid #D97706; }
         
         .foundation-header {
             display: flex;
@@ -1752,7 +1752,7 @@
         .foundation-title {
             font-size: 13px;
             font-weight: 600;
-            color: #111827;
+            color: var(--color-text-primary);
         }
         
         .foundation-stats {
@@ -1760,11 +1760,11 @@
             gap: var(--spacing-xs);
             margin-bottom: var(--spacing-xs);
             font-size: 11px;
-            color: #78716C;
+            color: var(--color-text-muted);
         }
         
         .stat-item strong {
-            color: #10B981;
+            color: var(--color-success);
         }
         
         .foundation-items {
@@ -1780,9 +1780,9 @@
             align-items: center;
             gap: 6px;
             padding: 5px 8px;
-            border-radius: 3px;
+            border-radius: var(--radius-sm);
             text-decoration: none;
-            transition: all 0.15s ease;
+            transition: all var(--transition-fast);
         }
         
         .foundation-link:hover {
@@ -1795,9 +1795,9 @@
             align-items: center;
             gap: 6px;
             padding: 5px 8px;
-            border-radius: 3px;
+            border-radius: var(--radius-sm);
             text-decoration: none;
-            transition: all 0.15s ease;
+            transition: all var(--transition-fast);
         }
         
         .insight-link:hover {
@@ -1811,7 +1811,7 @@
         .insight-text {
             font-size: 12px;
             font-weight: 500;
-            color: #111827;
+            color: var(--color-text-primary);
         }
         
         /* Tree Action Buttons */
@@ -1820,32 +1820,32 @@
             align-items: center;
             gap: 5px;
             padding: 8px 14px;
-            border: 1px solid #D1D5DB;
-            background: white;
-            color: #57534E;
-            border-radius: 2px;
+            border: 1px solid var(--color-border);
+            background: var(--color-bg-card);
+            color: var(--color-text-secondary);
+            border-radius: var(--radius-full);
             font-size: 12px;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.15s ease;
+            transition: all var(--transition-fast);
             text-decoration: none;
         }
         
         .tree-action-btn:hover {
-            border-color: #10B981;
-            color: #10B981;
-            background: rgba(16,185,129,0.05);
+            border-color: var(--color-success);
+            color: var(--color-success);
+            background: rgba(5, 150, 105, 0.05);
         }
         
         .tree-action-btn.primary {
-            background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+            background: var(--gradient-success);
             border: none;
             color: white;
         }
         
         .tree-action-btn.primary:hover {
             transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+            box-shadow: var(--shadow-hover);
         }
         
         /* 本质洞察CTA按钮 */
@@ -1854,19 +1854,19 @@
             align-items: center;
             gap: 8px;
             padding: 10px 18px;
-            background: #1F2937;
+            background: linear-gradient(135deg, #7C3AED 0%, #059669 100%);
             color: white;
-            border-radius: 4px;
+            border-radius: var(--radius-md);
             font-size: 14px;
             font-weight: 600;
             text-decoration: none;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            box-shadow: 0 2px 8px rgba(124, 58, 237, 0.3);
             transition: transform 0.2s, box-shadow 0.2s;
         }
         
         .insight-cta-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.16);
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
         }
         
         /* slideDown keyframes 已统一定义于上方，此处移除重复 */
@@ -1882,7 +1882,7 @@
         }
 
         .about-toggle-wrap {
-            text-align: left;
+            text-align: center;
             margin-bottom: var(--spacing-xl);
         }
 
@@ -1891,28 +1891,27 @@
             align-items: center;
             gap: 8px;
             padding: 10px 24px;
-            background: white;
-            border: 1px solid #E5E7EB;
-            border-radius: 3px;
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-full);
             cursor: pointer;
             font-family: inherit;
-            font-size: 13px;
-            font-weight: 500;
-            letter-spacing: -0.01em;
-            color: #374151;
-            transition: all 0.2s ease;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            transition: all var(--transition-normal);
+            box-shadow: var(--shadow-sm);
         }
 
         .about-toggle-btn:hover {
-            border-color: #10B981;
-            color: #10B981;
-            box-shadow: 0 4px 14px rgba(16,185,129,0.12);
+            border-color: var(--color-info);
+            color: var(--color-info);
+            box-shadow: var(--shadow-glow-info);
             transform: translateY(-1px);
         }
 
         .about-toggle-btn .about-toggle-arrow {
-            transition: transform 0.2s ease;
+            transition: transform var(--transition-normal);
             font-size: 12px;
         }
 
@@ -1938,9 +1937,9 @@
         }
 
         .pain-point-card {
-            background: #F9FAFB;
-            border: 1px solid #E5E7EB;
-            border-radius: 4px;
+            background: var(--color-bg-table-header);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-md);
             padding: var(--spacing-lg);
             text-align: center;
             position: relative;
@@ -1965,13 +1964,13 @@
         .pain-point-title {
             font-size: 15px;
             font-weight: 700;
-            color: #111827;
+            color: var(--color-text-primary);
             margin-bottom: var(--spacing-xs);
         }
 
         .pain-point-desc {
             font-size: 13px;
-            color: #57534E;
+            color: var(--color-text-secondary);
             line-height: 1.6;
         }
 
@@ -1981,9 +1980,9 @@
             align-items: flex-start;
             margin-bottom: var(--spacing-2xl);
             padding: var(--spacing-lg);
-            background: linear-gradient(135deg, rgba(16,185,129,0.08) 0%, rgba(16,185,129,0.03) 100%);
-            border-radius: 6px;
-            border: 1px solid #E5E7EB;
+            background: var(--gradient-highlight);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border-light);
         }
 
         .flow-step {
@@ -1996,7 +1995,7 @@
             width: 48px;
             height: 48px;
             margin: 0 auto var(--spacing-sm);
-            border-radius: 4px;
+            border-radius: var(--radius-md);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -2007,7 +2006,7 @@
         .flow-step-num {
             font-size: 11px;
             font-weight: 600;
-            color: #78716C;
+            color: var(--color-text-muted);
             letter-spacing: 0.5px;
             margin-bottom: 2px;
         }
@@ -2015,13 +2014,13 @@
         .flow-step-title {
             font-size: 14px;
             font-weight: 700;
-            color: #111827;
+            color: var(--color-text-primary);
             margin-bottom: 4px;
         }
 
         .flow-step-desc {
             font-size: 12px;
-            color: #57534E;
+            color: var(--color-text-secondary);
             line-height: 1.5;
         }
 
@@ -2031,7 +2030,7 @@
             align-items: center;
             padding-top: 18px;
             font-size: 20px;
-            color: #10B981;
+            color: var(--color-success);
             font-weight: 700;
         }
 
@@ -2043,17 +2042,17 @@
         }
 
         .highlight-card {
-            background: white;
-            border: 1px solid #E5E7EB;
-            border-radius: 4px;
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-md);
             padding: var(--spacing-lg);
-            transition: all 0.2s ease;
+            transition: all var(--transition-normal);
         }
 
         .highlight-card:hover {
-            border-color: #10B981;
+            border-color: var(--color-success);
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+            box-shadow: var(--shadow-md);
         }
 
         .highlight-icon {
@@ -2064,13 +2063,13 @@
         .highlight-title {
             font-size: 15px;
             font-weight: 700;
-            color: #111827;
+            color: var(--color-text-primary);
             margin-bottom: var(--spacing-xs);
         }
 
         .highlight-desc {
             font-size: 13px;
-            color: #57534E;
+            color: var(--color-text-secondary);
             line-height: 1.6;
         }
 
@@ -2078,9 +2077,9 @@
         .about-arch-img {
             display: block;
             max-width: 100%;
-            border-radius: 6px;
-            border: 1px solid #E5E7EB;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border-light);
+            box-shadow: var(--shadow-card);
             overflow: visible;
             margin: 0 auto var(--spacing-lg);
         }
@@ -2088,7 +2087,7 @@
         .about-sub-title {
             font-size: 16px;
             font-weight: 600;
-            color: #111827;
+            color: var(--color-text-primary);
             margin-bottom: var(--spacing-md);
             display: flex;
             align-items: center;
@@ -2099,7 +2098,7 @@
             content: '';
             width: 4px;
             height: 18px;
-            background: linear-gradient(135deg, #059669 0%, #10B981 50%, #34D399 100%);
+            background: var(--gradient-hero);
             border-radius: 2px;
         }
 
@@ -2157,39 +2156,9 @@
     
         /* 知识库条目链接化hover */
         .kb-item-link:hover .item-text {
-            color: #10B981;
+            color: var(--color-success);
             text-decoration: underline;
             text-underline-offset: 3px;
-        }
-    </style>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        /* 精密网格背景装饰 */
-        .container { position: relative; }
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: 
-                linear-gradient(rgba(16,185,129,0.025) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(16,185,129,0.025) 1px, transparent 1px);
-            background-size: 48px 48px;
-            pointer-events: none;
-            z-index: 0;
-        }
-        .container > * { position: relative; z-index: 1; }
-        
-        /* Hero区域微妙光晕 */
-        .header::after {
-            content: '';
-            position: absolute;
-            top: -40px; right: -40px;
-            width: 300px; height: 300px;
-            background: radial-gradient(circle, rgba(16,185,129,0.08) 0%, transparent 70%);
-            pointer-events: none;
         }
     </style>
 </head>
@@ -2212,7 +2181,7 @@
                 <a href="https://aidailyinsight-subscribe.frontend-cloud.corp.kuaishou.com"
                    style="display: inline-flex; align-items: center; gap: 8px;
                           background: linear-gradient(135deg, #059669 0%, #10B981 100%);
-                          color: white; padding: 12px 28px; border-radius: 6px;
+                          color: white; padding: 12px 28px; border-radius: 12px;
                           text-decoration: none; font-weight: 600; font-size: 15px;
                           box-shadow: 0 4px 14px rgba(5,150,105,0.25);
                           transition: all 0.2s ease;">
@@ -2224,7 +2193,7 @@
                    style="display: inline-flex; align-items: center; gap: 8px;
                           background: #fff; color: #57534E;
                           border: 1.5px solid #E7E5E4;
-                          padding: 12px 28px; border-radius: 6px;
+                          padding: 12px 28px; border-radius: 12px;
                           text-decoration: none; font-weight: 600; font-size: 15px;
                           transition: all 0.2s ease;">
                     <span style="font-size: 18px;">🌐</span>
@@ -2299,21 +2268,21 @@
                     </div>
                     <div class="flow-arrow">→</div>
                     <div class="flow-step">
-                        <div class="flow-step-icon" style="background: linear-gradient(135deg, #059669, #10B981);">📰</div>
+                        <div class="flow-step-icon" style="background: linear-gradient(135deg, #2563EB, #3B82F6);">📰</div>
                         <div class="flow-step-num">STEP 2</div>
                         <div class="flow-step-title">每日生成AI日报</div>
                         <div class="flow-step-desc">五大板块系统调研：大模型、AI Coding、AI应用、AI行业、企业AI</div>
                     </div>
                     <div class="flow-arrow">→</div>
                     <div class="flow-step">
-                        <div class="flow-step-icon" style="background: linear-gradient(135deg, #059669, #10B981);">🔬</div>
+                        <div class="flow-step-icon" style="background: linear-gradient(135deg, #7C3AED, #8B5CF6);">🔬</div>
                         <div class="flow-step-num">STEP 3</div>
                         <div class="flow-step-title">深度调研</div>
                         <div class="flow-step-desc">从新闻到洞察——不只收集信息，更提炼规律，有论据支撑</div>
                     </div>
                     <div class="flow-arrow">→</div>
                     <div class="flow-step">
-                        <div class="flow-step-icon" style="background: linear-gradient(135deg, #059669, #10B981);">📚</div>
+                        <div class="flow-step-icon" style="background: linear-gradient(135deg, #D97706, #F59E0B);">📚</div>
                         <div class="flow-step-num">STEP 4</div>
                         <div class="flow-step-title">知识沉淀</div>
                         <div class="flow-step-desc">按维度沉淀到知识库——模型、Agent、企业、人物等多维体系化积累</div>
@@ -2387,25 +2356,25 @@
                 
                 <!-- 往期周报快速入口 -->
                 <div style="margin-bottom: var(--spacing-md);">
-                    <div style="font-size: 13px; font-weight: 600; color: #57534E; margin-bottom: 8px;">📊 往期周报</div>
+                    <div style="font-size: 13px; font-weight: 600; color: var(--color-text-secondary); margin-bottom: 8px;">📊 往期周报</div>
                     <div style="display: flex; flex-wrap: wrap; gap: 6px;">
-                        <a href="01-daily-reports/2026-06/weekly-2026-W26.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 2px; font-size: 12px; color: #10B981; text-decoration: none; transition: all 0.15s;">W26<span style="font-size: 10px; color: #78716C;">06/22-06/28</span></a>
-                        <a href="01-daily-reports/2026-06/weekly-2026-W25.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 2px; font-size: 12px; color: #10B981; text-decoration: none; transition: all 0.15s;">W25<span style="font-size: 10px; color: #78716C;">06/15-06/21</span></a>
-                        <a href="01-daily-reports/2026-06/weekly-2026-W24.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 2px; font-size: 12px; color: #10B981; text-decoration: none; transition: all 0.15s;">W24<span style="font-size: 10px; color: #78716C;">06/08-06/14</span></a>
-                        <a href="01-daily-reports/2026-06/weekly-2026-W23.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 2px; font-size: 12px; color: #10B981; text-decoration: none; transition: all 0.15s;">W23<span style="font-size: 10px; color: #78716C;">06/01-06/07</span></a>
-                        <a href="01-daily-reports/2026-05/weekly-2026-W22.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 2px; font-size: 12px; color: #10B981; text-decoration: none; transition: all 0.15s;">W22<span style="font-size: 10px; color: #78716C;">05/25-05/31</span></a>
-                        <a href="01-daily-reports/2026-05/weekly-2026-W21.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 2px; font-size: 12px; color: #10B981; text-decoration: none; transition: all 0.15s;">W21<span style="font-size: 10px; color: #78716C;">05/18-05/24</span></a>
-                        <a href="01-daily-reports/2026-05/weekly-2026-W20.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 2px; font-size: 12px; color: #10B981; text-decoration: none; transition: all 0.15s;">W20<span style="font-size: 10px; color: #78716C;">05/11-05/17</span></a>
-                        <a href="01-daily-reports/2026-05/weekly-2026-W19.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 2px; font-size: 12px; color: #10B981; text-decoration: none; transition: all 0.15s;">W19<span style="font-size: 10px; color: #78716C;">05/04-05/10</span></a>
-                        <a href="01-daily-reports/2026-05/weekly-2026-W18.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 2px; font-size: 12px; color: #10B981; text-decoration: none; transition: all 0.15s;">W18<span style="font-size: 10px; color: #78716C;">04/27-05/03</span></a>
-                        <a href="01-daily-reports/2026-04/weekly-2026-W17.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 2px; font-size: 12px; color: #10B981; text-decoration: none; transition: all 0.15s;">W17<span style="font-size: 10px; color: #78716C;">04/20-04/26</span></a>
-                        <a href="01-daily-reports/2026-04/weekly-2026-W16.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 2px; font-size: 12px; color: #10B981; text-decoration: none; transition: all 0.15s;">W16<span style="font-size: 10px; color: #78716C;">04/13-04/19</span></a>
-                        <a href="01-daily-reports/2026-04/weekly-2026-W15.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 2px; font-size: 12px; color: #10B981; text-decoration: none; transition: all 0.15s;">W15<span style="font-size: 10px; color: #78716C;">04/06-04/12</span></a>
-                        <a href="01-daily-reports/2026-04/weekly-2026-W14.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 2px; font-size: 12px; color: #10B981; text-decoration: none; transition: all 0.15s;">W14<span style="font-size: 10px; color: #78716C;">03/30-04/05</span></a>
-                        <a href="01-daily-reports/2026-03/weekly-2026-W13.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 2px; font-size: 12px; color: #10B981; text-decoration: none; transition: all 0.15s;">W13<span style="font-size: 10px; color: #78716C;">03/23-03/29</span></a>
-                        <a href="01-daily-reports/2026-03/weekly-2026-W12.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 2px; font-size: 12px; color: #10B981; text-decoration: none; transition: all 0.15s;">W12<span style="font-size: 10px; color: #78716C;">03/16-03/22</span></a>
-                        <a href="01-daily-reports/2026-03/weekly-2026-W11.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 2px; font-size: 12px; color: #10B981; text-decoration: none; transition: all 0.15s;">W11<span style="font-size: 10px; color: #78716C;">03/09-03/15</span></a>
-                        <a href="01-daily-reports/2026-03/weekly-2026-W10.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 2px; font-size: 12px; color: #10B981; text-decoration: none; transition: all 0.15s;">W10<span style="font-size: 10px; color: #78716C;">03/02-03/08</span></a>
+                        <a href="01-daily-reports/2026-06/weekly-2026-W26.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--color-bg-table-header); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); font-size: 12px; color: var(--color-info); text-decoration: none; transition: all 0.15s;">W26<span style="font-size: 10px; color: var(--color-text-muted);">06/22-06/28</span></a>
+                        <a href="01-daily-reports/2026-06/weekly-2026-W25.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--color-bg-table-header); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); font-size: 12px; color: var(--color-info); text-decoration: none; transition: all 0.15s;">W25<span style="font-size: 10px; color: var(--color-text-muted);">06/15-06/21</span></a>
+                        <a href="01-daily-reports/2026-06/weekly-2026-W24.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--color-bg-table-header); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); font-size: 12px; color: var(--color-info); text-decoration: none; transition: all 0.15s;">W24<span style="font-size: 10px; color: var(--color-text-muted);">06/08-06/14</span></a>
+                        <a href="01-daily-reports/2026-06/weekly-2026-W23.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--color-bg-table-header); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); font-size: 12px; color: var(--color-info); text-decoration: none; transition: all 0.15s;">W23<span style="font-size: 10px; color: var(--color-text-muted);">06/01-06/07</span></a>
+                        <a href="01-daily-reports/2026-05/weekly-2026-W22.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--color-bg-table-header); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); font-size: 12px; color: var(--color-info); text-decoration: none; transition: all 0.15s;">W22<span style="font-size: 10px; color: var(--color-text-muted);">05/25-05/31</span></a>
+                        <a href="01-daily-reports/2026-05/weekly-2026-W21.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--color-bg-table-header); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); font-size: 12px; color: var(--color-info); text-decoration: none; transition: all 0.15s;">W21<span style="font-size: 10px; color: var(--color-text-muted);">05/18-05/24</span></a>
+                        <a href="01-daily-reports/2026-05/weekly-2026-W20.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--color-bg-table-header); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); font-size: 12px; color: var(--color-info); text-decoration: none; transition: all 0.15s;">W20<span style="font-size: 10px; color: var(--color-text-muted);">05/11-05/17</span></a>
+                        <a href="01-daily-reports/2026-05/weekly-2026-W19.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--color-bg-table-header); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); font-size: 12px; color: var(--color-info); text-decoration: none; transition: all 0.15s;">W19<span style="font-size: 10px; color: var(--color-text-muted);">05/04-05/10</span></a>
+                        <a href="01-daily-reports/2026-05/weekly-2026-W18.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--color-bg-table-header); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); font-size: 12px; color: var(--color-info); text-decoration: none; transition: all 0.15s;">W18<span style="font-size: 10px; color: var(--color-text-muted);">04/27-05/03</span></a>
+                        <a href="01-daily-reports/2026-04/weekly-2026-W17.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--color-bg-table-header); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); font-size: 12px; color: var(--color-info); text-decoration: none; transition: all 0.15s;">W17<span style="font-size: 10px; color: var(--color-text-muted);">04/20-04/26</span></a>
+                        <a href="01-daily-reports/2026-04/weekly-2026-W16.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--color-bg-table-header); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); font-size: 12px; color: var(--color-info); text-decoration: none; transition: all 0.15s;">W16<span style="font-size: 10px; color: var(--color-text-muted);">04/13-04/19</span></a>
+                        <a href="01-daily-reports/2026-04/weekly-2026-W15.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--color-bg-table-header); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); font-size: 12px; color: var(--color-info); text-decoration: none; transition: all 0.15s;">W15<span style="font-size: 10px; color: var(--color-text-muted);">04/06-04/12</span></a>
+                        <a href="01-daily-reports/2026-04/weekly-2026-W14.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--color-bg-table-header); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); font-size: 12px; color: var(--color-info); text-decoration: none; transition: all 0.15s;">W14<span style="font-size: 10px; color: var(--color-text-muted);">03/30-04/05</span></a>
+                        <a href="01-daily-reports/2026-03/weekly-2026-W13.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--color-bg-table-header); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); font-size: 12px; color: var(--color-info); text-decoration: none; transition: all 0.15s;">W13<span style="font-size: 10px; color: var(--color-text-muted);">03/23-03/29</span></a>
+                        <a href="01-daily-reports/2026-03/weekly-2026-W12.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--color-bg-table-header); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); font-size: 12px; color: var(--color-info); text-decoration: none; transition: all 0.15s;">W12<span style="font-size: 10px; color: var(--color-text-muted);">03/16-03/22</span></a>
+                        <a href="01-daily-reports/2026-03/weekly-2026-W11.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--color-bg-table-header); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); font-size: 12px; color: var(--color-info); text-decoration: none; transition: all 0.15s;">W11<span style="font-size: 10px; color: var(--color-text-muted);">03/09-03/15</span></a>
+                        <a href="01-daily-reports/2026-03/weekly-2026-W10.html" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--color-bg-table-header); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); font-size: 12px; color: var(--color-info); text-decoration: none; transition: all 0.15s;">W10<span style="font-size: 10px; color: var(--color-text-muted);">03/02-03/08</span></a>
                     </div>
                 </div>
                 
@@ -2414,7 +2383,7 @@
                     <a href="01-daily-reports/2026-07/2026-07-01.html" target="_blank" class="list-item">
                         <span class="list-item-icon">📅</span>
                         <div class="list-item-content">
-                            <div class="list-item-title">2026年7月1日 AI日报 <span style="background:#ECFDF5;color:#065F46;font-size:11px;padding:2px 6px;border-radius:2px;margin-left:6px;">最新</span></div>
+                            <div class="list-item-title">2026年7月1日 AI日报 <span style="background:#FEF2F2;color:#E11D48;font-size:11px;padding:2px 6px;border-radius:999px;margin-left:6px;">最新</span></div>
                             <div class="list-item-desc">DeepSeek V4正式版7月中旬上线 · Codex 6月全面升级GPT-5.5/ · Agnes AI模型API永久免费+Pa · 上半年15家百亿独角兽具身智能融资火热+</div>
                         </div>
                         <span class="list-item-arrow">→</span>
@@ -2480,11 +2449,11 @@
                             <span>日报</span>
                         </div>
                         <div class="calendar-legend-item">
-                            <div style="width:8px;height:8px;border-radius:2px;background:linear-gradient(135deg,rgba(5,150,105,0.25),rgba(37,99,235,0.18));border:1px solid #10B981;position:relative;"><div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:6px;height:2px;border-radius:1px;background:linear-gradient(90deg,#10B981,#059669);"></div></div>
+                            <div style="width:8px;height:8px;border-radius:2px;background:linear-gradient(135deg,rgba(5,150,105,0.25),rgba(37,99,235,0.18));border:1px solid var(--color-success);position:relative;"><div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:6px;height:2px;border-radius:1px;background:linear-gradient(90deg,var(--color-info),var(--color-purple));"></div></div>
                             <span>日报+周报</span>
                         </div>
                         <div class="calendar-legend-item">
-                            <div style="width:8px;height:8px;border-radius:2px;background:transparent;border:1px solid #D1D5DB;position:relative;"><div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:6px;height:2px;border-radius:1px;background:linear-gradient(90deg,#10B981,#059669);"></div></div>
+                            <div style="width:8px;height:8px;border-radius:2px;background:transparent;border:1px solid var(--color-border);position:relative;"><div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:6px;height:2px;border-radius:1px;background:linear-gradient(90deg,var(--color-info),var(--color-purple));"></div></div>
                             <span>仅周报</span>
                         </div>
                         <div class="calendar-legend-item">
@@ -2520,16 +2489,16 @@
                             <span class="cat-legend-dot" style="background:#94a3b8"></span>全部
                         </span>
                         <span class="cat-legend-item" data-cat="trend">
-                            <span class="cat-legend-dot" style="background:#10B981"></span>趋势洞察
+                            <span class="cat-legend-dot" style="background:var(--color-info)"></span>趋势洞察
                         </span>
                         <span class="cat-legend-item" data-cat="company">
-                            <span class="cat-legend-dot" style="background:#6B7280"></span>公司调研
+                            <span class="cat-legend-dot" style="background:var(--color-warning)"></span>公司调研
                         </span>
                         <span class="cat-legend-item" data-cat="topic">
-                            <span class="cat-legend-dot" style="background:#10B981"></span>专题调研
+                            <span class="cat-legend-dot" style="background:var(--color-success)"></span>专题调研
                         </span>
                         <span class="cat-legend-item" data-cat="people">
-                            <span class="cat-legend-dot" style="background:#059669"></span>人物追踪
+                            <span class="cat-legend-dot" style="background:var(--color-purple)"></span>人物追踪
                         </span>
                     </div>
                 </div>
@@ -2582,7 +2551,7 @@
                                     <span class="tc-icon">⚔️</span>
                                     <span class="tc-title">从 AI Coding 到 AI Work</span>
                                     <span class="tc-tag topic">专题</span>
-                                    <span class="tc-tag" style="background:#ECFDF5;color:#065F46;">最新</span>
+                                    <span class="tc-tag" style="background:#FEF2F2;color:#E11D48;">最新</span>
                                 </div>
                                 <div class="tc-desc">腾讯与阿里双案例深度分析，以及快手的定位——从 AI Coding 工具到 AI Work 平台的范式跃迁</div>
                                 <div class="tc-meta">📅 2026-05-21 · AI Coding · 平台演进</div>
@@ -2592,7 +2561,7 @@
                                     <span class="tc-icon">🎯</span>
                                     <span class="tc-title">英雄退场，浪潮上场</span>
                                     <span class="tc-tag trend">趋势</span>
-                                    <span class="tc-tag" style="background:#ECFDF5;color:#065F46;">最新</span>
+                                    <span class="tc-tag" style="background:#FEF2F2;color:#E11D48;">最新</span>
                                 </div>
                                 <div class="tc-desc">姚顺宇×苏煜两篇访谈揭示的AI深层规律——英雄退场的背后是系统性浪潮的来临</div>
                                 <div class="tc-meta">📅 2026-05-21 · 人物访谈 · 趋势研判</div>
@@ -2636,7 +2605,7 @@
                                     <span class="tc-icon">🎯</span>
                                     <span class="tc-title">AI范式巨变：罗福莉深度访谈解读</span>
                                     <span class="tc-tag trend">趋势</span>
-                                    <span class="tc-tag" style="background:#ECFDF5;color:#065F46;">最新</span>
+                                    <span class="tc-tag" style="background:#FEF2F2;color:#E11D48;">最新</span>
                                 </div>
                                 <div class="tc-desc">从3.5小时播客访谈深度解读：Pre-train→Post-train竞争重心迁移、Chat→Agent范式跃迁、GPU配比从3:5:1到1:1、顶尖模型厂商"悄无声息的伏击"背后的战略逻辑</div>
                                 <div class="tc-meta">📅 2026-04-25 · AI范式 · 趋势研判</div>
@@ -2718,7 +2687,7 @@
                                     <span class="tc-icon">🤖</span>
                                     <span class="tc-title">Coze 2.5：Agent 的身份革命</span>
                                     <span class="tc-tag company">公司</span>
-                                    <span class="tc-tag" style="background:#ECFDF5;color:#065F46;">最新</span>
+                                    <span class="tc-tag" style="background:#FEF2F2;color:#E11D48;">最新</span>
                                 </div>
                                 <div class="tc-desc">字节跳动发布 Coze 2.5：为每个 Agent 建立独立身份（@coze.email）、云设备与 Agent World 网络，从工具平台跨越至 Agent 基础设施</div>
                                 <div class="tc-meta">📅 2026-04-08 · 字节跳动 · AI Agent</div>
@@ -2875,12 +2844,12 @@
                 <!-- 搜索过滤 -->
                 <div class="tracking-search" style="margin: var(--spacing-md) 0 var(--spacing-lg); position: relative;">
                     <input type="text" id="trackingSearch" placeholder="🔍 搜索人物、公司、关键词…" 
-                        style="width: 100%; padding: 12px 16px 12px 44px; font-size: 15px; border: 2px solid #D1D5DB; border-radius: 6px; background: #F9FAFB; color: #111827; outline: none; transition: border-color 0.2s, box-shadow 0.2s;"
-                        onfocus="this.style.borderColor='#10B981'; this.style.boxShadow='0 0 0 3px rgba(5,150,105,0.1)'"
-                        onblur="this.style.borderColor='#D1D5DB'; this.style.boxShadow='none'"
+                        style="width: 100%; padding: 12px 16px 12px 44px; font-size: 15px; border: 2px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-bg); color: var(--color-text-primary); outline: none; transition: border-color 0.2s, box-shadow 0.2s;"
+                        onfocus="this.style.borderColor='var(--color-success)'; this.style.boxShadow='0 0 0 3px rgba(5,150,105,0.1)'"
+                        onblur="this.style.borderColor='var(--color-border)'; this.style.boxShadow='none'"
                         oninput="filterTracking(this.value)">
-                    <svg style="position: absolute; left: 14px; top: 13px; width: 20px; height: 20px; color: #78716C;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="5"/><path d="M21 21l-4.35-4.35"/></svg>
-                    <div id="trackingSearchInfo" style="font-size: 12px; color: #78716C; margin-top: 6px;"></div>
+                    <svg style="position: absolute; left: 14px; top: 13px; width: 20px; height: 20px; color: var(--color-text-muted);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="5"/><path d="M21 21l-4.35-4.35"/></svg>
+                    <div id="trackingSearchInfo" style="font-size: 12px; color: var(--color-text-muted); margin-top: 6px;"></div>
                 </div>
 
                 <!-- 人物追踪 -->
@@ -2895,7 +2864,7 @@
                     </div>
                     <div class="collapsible-content">
                         <div style="padding: var(--spacing-md);">
-<h4 style="font-size: 14px; color: #57534E; margin-bottom: var(--spacing-md);">L1 实践者/构建者 — AI实验室核心</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin-bottom: var(--spacing-md);">L1 实践者/构建者 — AI实验室核心</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>人物</th><th>公司/角色</th><th>主要渠道</th><th>追踪重点</th></tr></thead>
@@ -2914,7 +2883,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: #57534E; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">L1 实践者 — AI Coding 产品 & 实践者</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">L1 实践者 — AI Coding 产品 & 实践者</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>人物</th><th>公司/角色</th><th>主要渠道</th><th>追踪重点</th></tr></thead>
@@ -2931,7 +2900,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: #57534E; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">L1 实践者 — 大模型核心研究者 & 具身智能</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">L1 实践者 — 大模型核心研究者 & 具身智能</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>人物</th><th>公司/角色</th><th>主要渠道</th><th>追踪重点</th></tr></thead>
@@ -2951,7 +2920,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: #57534E; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">L1 实践者 — 企业AI/Agent & 学术界</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">L1 实践者 — 企业AI/Agent & 学术界</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>人物</th><th>公司/角色</th><th>主要渠道</th><th>追踪重点</th></tr></thead>
@@ -2965,7 +2934,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: #57534E; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">L1 实践者 — 中国AI核心人物</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">L1 实践者 — 中国AI核心人物</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>人物</th><th>公司/角色</th><th>主要渠道</th><th>追踪重点</th></tr></thead>
@@ -2983,7 +2952,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: #10B981; font-weight: 600; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">🆕 L1 实践者 — 中国AI Coding & 新晋力量</h4>
+<h4 style="font-size: 14px; color: #DC2626; font-weight: 700; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">🆕 L1 实践者 — 中国AI Coding & 新晋力量</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>人物</th><th>公司/角色</th><th>主要渠道</th><th>追踪重点</th></tr></thead>
@@ -2998,7 +2967,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: #57534E; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">L1 实践者 — AI安全/对齐核心人物</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">L1 实践者 — AI安全/对齐核心人物</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>人物</th><th>公司/角色</th><th>主要渠道</th><th>追踪重点</th></tr></thead>
@@ -3010,7 +2979,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 11px; color: #6B7280; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid rgba(16,185,129,0.6); padding-left: 10px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;">L2 深度观察者 — Newsletter/博客 & AI工程</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #2563EB; padding-left: 10px;">L2 深度观察者 — Newsletter/博客 & AI工程</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>人物/媒体</th><th>平台</th><th>检查频率</th><th>价值定位</th></tr></thead>
@@ -3028,7 +2997,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 11px; color: #6B7280; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid rgba(16,185,129,0.6); padding-left: 10px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;">L2 深度观察者 — 中文圈 & YouTube/播客</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #2563EB; padding-left: 10px;">L2 深度观察者 — 中文圈 & YouTube/播客</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>人物/媒体</th><th>平台</th><th>检查频率</th><th>价值定位</th></tr></thead>
@@ -3045,7 +3014,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: #57534E; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #9CA3AF; padding-left: 10px;">L3 战略决策者</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #9CA3AF; padding-left: 10px;">L3 战略决策者</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>人物</th><th>公司/角色</th><th>主要渠道</th><th>信号权重</th></tr></thead>
@@ -3079,7 +3048,7 @@
                     </div>
                     <div class="collapsible-content">
                         <div style="padding: var(--spacing-md);">
-<h4 style="font-size: 14px; color: #57534E; margin-bottom: var(--spacing-md);">模型实验室 — 海外头部</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin-bottom: var(--spacing-md);">模型实验室 — 海外头部</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>公司</th><th>核心产品</th><th>检查频率</th><th>追踪重点</th></tr></thead>
@@ -3095,7 +3064,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: #57534E; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">模型实验室 — 中国</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">模型实验室 — 中国</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>公司</th><th>核心产品</th><th>检查频率</th><th>追踪重点</th></tr></thead>
@@ -3118,7 +3087,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: #57534E; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">AI Coding 工具 — 海外</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">AI Coding 工具 — 海外</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>公司</th><th>产品</th><th>检查频率</th><th>追踪重点</th></tr></thead>
@@ -3137,7 +3106,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: #10B981; font-weight: 600; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">🆕 AI Coding 工具 — 国内</h4>
+<h4 style="font-size: 14px; color: #DC2626; font-weight: 700; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">🆕 AI Coding 工具 — 国内</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>公司</th><th>产品</th><th>检查频率</th><th>追踪重点</th></tr></thead>
@@ -3152,7 +3121,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: #57534E; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">企业AI创业公司</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">企业AI创业公司</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>公司</th><th>产品</th><th>领域</th><th>追踪重点</th></tr></thead>
@@ -3170,7 +3139,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: #57534E; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">AI 应用产品</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">AI 应用产品</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>公司</th><th>产品</th><th>领域</th><th>追踪重点</th></tr></thead>
@@ -3186,7 +3155,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: #57534E; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">机器人/具身智能</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">机器人/具身智能</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>公司</th><th>产品</th><th>追踪重点</th></tr></thead>
@@ -3201,7 +3170,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: #57534E; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">互联网头部AI转型</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">互联网头部AI转型</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>公司</th><th>AI核心产品</th><th>追踪重点</th></tr></thead>
@@ -3220,7 +3189,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: #57534E; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">AI基础设施 & 芯片</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">AI基础设施 & 芯片</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>公司</th><th>产品</th><th>追踪重点</th></tr></thead>
@@ -3253,7 +3222,7 @@
                     </div>
                     <div class="collapsible-content">
                         <div style="padding: var(--spacing-md);">
-<h4 style="font-size: 14px; color: #57534E; margin-bottom: var(--spacing-md);">官方博客 & 研究页</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin-bottom: var(--spacing-md);">官方博客 & 研究页</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>公司</th><th>URL</th><th>检查频率</th><th>内容类型</th></tr></thead>
@@ -3270,7 +3239,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: #57534E; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">Newsletter & 博客</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">Newsletter & 博客</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>名称</th><th>作者</th><th>价值定位</th></tr></thead>
@@ -3288,9 +3257,9 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: #10B981; font-weight: 600; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">🆕 微信公众号（50+）— 中文AI信息核心渠道</h4>
-<p style="font-size: 12px; color: #57534E; margin-bottom: var(--spacing-md); padding: 8px 12px; background: #FEF3C7; border-radius: 8px;">通过搜狗微信搜索 + MCP工具自动化追踪，覆盖技术媒体、深度分析、学术解读、创投视角等维度</p>
-<h5 style="font-size: 13px; color: #57534E; margin: var(--spacing-md) 0 8px;">AI综合媒体</h5>
+<h4 style="font-size: 14px; color: #DC2626; font-weight: 700; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">🆕 微信公众号（50+）— 中文AI信息核心渠道</h4>
+<p style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: var(--spacing-md); padding: 8px 12px; background: #FEF3C7; border-radius: 8px;">通过搜狗微信搜索 + MCP工具自动化追踪，覆盖技术媒体、深度分析、学术解读、创投视角等维度</p>
+<h5 style="font-size: 13px; color: var(--color-text-secondary); margin: var(--spacing-md) 0 8px;">AI综合媒体</h5>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>公众号</th><th>定位</th><th>频率</th><th>价值</th></tr></thead>
@@ -3305,7 +3274,7 @@
 </tbody>
 </table>
 </div>
-<h5 style="font-size: 13px; color: #57534E; margin: var(--spacing-md) 0 8px;">深度洞察/商业分析</h5>
+<h5 style="font-size: 13px; color: var(--color-text-secondary); margin: var(--spacing-md) 0 8px;">深度洞察/商业分析</h5>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>公众号</th><th>作者/机构</th><th>频率</th><th>价值</th></tr></thead>
@@ -3320,7 +3289,7 @@
 </tbody>
 </table>
 </div>
-<h5 style="font-size: 13px; color: #57534E; margin: var(--spacing-md) 0 8px;">行业垂直 & 技术解读</h5>
+<h5 style="font-size: 13px; color: var(--color-text-secondary); margin: var(--spacing-md) 0 8px;">行业垂直 & 技术解读</h5>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>公众号</th><th>定位</th><th>频率</th><th>价值</th></tr></thead>
@@ -3334,7 +3303,7 @@
 </tbody>
 </table>
 </div>
-<h5 style="font-size: 13px; color: #57534E; margin: var(--spacing-md) 0 8px;">大模型/AGI专项</h5>
+<h5 style="font-size: 13px; color: var(--color-text-secondary); margin: var(--spacing-md) 0 8px;">大模型/AGI专项</h5>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>公众号</th><th>定位</th><th>频率</th><th>价值</th></tr></thead>
@@ -3346,7 +3315,7 @@
 </tbody>
 </table>
 </div>
-<h5 style="font-size: 13px; color: #57534E; margin: var(--spacing-md) 0 8px;">AI产品/应用 & 创投</h5>
+<h5 style="font-size: 13px; color: var(--color-text-secondary); margin: var(--spacing-md) 0 8px;">AI产品/应用 & 创投</h5>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>公众号</th><th>定位</th><th>频率</th><th>价值</th></tr></thead>
@@ -3359,7 +3328,7 @@
 </tbody>
 </table>
 </div>
-<h5 style="font-size: 13px; color: #57534E; margin: var(--spacing-md) 0 8px;">公司/实验室官方号</h5>
+<h5 style="font-size: 13px; color: var(--color-text-secondary); margin: var(--spacing-md) 0 8px;">公司/实验室官方号</h5>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>公众号</th><th>所属公司</th><th>频率</th><th>价值</th></tr></thead>
@@ -3375,7 +3344,7 @@
 </tbody>
 </table>
 </div>
-<h5 style="font-size: 13px; color: #57534E; margin: var(--spacing-md) 0 8px;">研究院/智库</h5>
+<h5 style="font-size: 13px; color: var(--color-text-secondary); margin: var(--spacing-md) 0 8px;">研究院/智库</h5>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>公众号</th><th>所属机构</th><th>频率</th><th>价值</th></tr></thead>
@@ -3385,7 +3354,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: #57534E; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">🆕 Discord社区</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">🆕 Discord社区</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>社区</th><th>频率</th><th>价值定位</th></tr></thead>
@@ -3401,7 +3370,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: #57534E; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">🆕 X/Twitter 关键账号</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">🆕 X/Twitter 关键账号</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>账号</th><th>身份</th><th>频率</th><th>价值定位</th></tr></thead>
@@ -3420,7 +3389,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: #57534E; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">播客</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">播客</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>播客名</th><th>主持人</th><th>平台</th><th>价值定位</th></tr></thead>
@@ -3436,7 +3405,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: #57534E; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">YouTube / B站</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">YouTube / B站</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>频道</th><th>平台</th><th>频率</th><th>价值定位</th></tr></thead>
@@ -3451,7 +3420,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: #57534E; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">学术 & 社区</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">学术 & 社区</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>平台</th><th>URL</th><th>频率</th><th>价值定位</th></tr></thead>
@@ -3467,7 +3436,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: #57534E; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">🆕 AI安全/对齐研究机构</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">🆕 AI安全/对齐研究机构</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>机构</th><th>URL</th><th>追踪重点</th></tr></thead>
@@ -3501,12 +3470,12 @@
                 <!-- 知识搜索 -->
                 <div class="kb-search" style="margin: var(--spacing-md) 0 var(--spacing-lg); position: relative;">
                     <input type="text" id="kbSearch" placeholder="🔍 搜索知识条目…" 
-                        style="width: 100%; padding: 12px 16px 12px 44px; font-size: 15px; border: 2px solid #D1D5DB; border-radius: 6px; background: #F9FAFB; color: #111827; outline: none; transition: border-color 0.2s, box-shadow 0.2s;"
-                        onfocus="this.style.borderColor='#10B981'; this.style.boxShadow='0 0 0 3px rgba(16,185,129,0.1)'"
-                        onblur="this.style.borderColor='#D1D5DB'; this.style.boxShadow='none'"
+                        style="width: 100%; padding: 12px 16px 12px 44px; font-size: 15px; border: 2px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-bg); color: var(--color-text-primary); outline: none; transition: border-color 0.2s, box-shadow 0.2s;"
+                        onfocus="this.style.borderColor='#7C3AED'; this.style.boxShadow='0 0 0 3px rgba(124,58,237,0.1)'"
+                        onblur="this.style.borderColor='var(--color-border)'; this.style.boxShadow='none'"
                         oninput="filterKnowledge(this.value)">
-                    <svg style="position: absolute; left: 14px; top: 13px; width: 20px; height: 20px; color: #78716C;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="5"/><path d="M21 21l-4.35-4.35"/></svg>
-                    <div id="kbSearchInfo" style="font-size: 12px; color: #78716C; margin-top: 6px;"></div>
+                    <svg style="position: absolute; left: 14px; top: 13px; width: 20px; height: 20px; color: var(--color-text-muted);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="5"/><path d="M21 21l-4.35-4.35"/></svg>
+                    <div id="kbSearchInfo" style="font-size: 12px; color: var(--color-text-muted); margin-top: 6px;"></div>
                 </div>
 
                 <!-- 知识库架构可视化 - 精简版 -->
@@ -3784,23 +3753,23 @@
                         
                     </div>
 <!-- AI洞察的本质洞察 - 独立展示 -->
-                <div style="margin-top: var(--spacing-xl); padding: var(--spacing-lg); background: linear-gradient(135deg, rgba(124, 58, 237, 0.06) 0%, rgba(16,185,129,0.06) 100%); border-radius: 6px; border: 1px solid rgba(124, 58, 237, 0.15);">
+                <div style="margin-top: var(--spacing-xl); padding: var(--spacing-lg); background: linear-gradient(135deg, rgba(124, 58, 237, 0.06) 0%, rgba(5, 150, 105, 0.06) 100%); border-radius: var(--radius-lg); border: 1px solid rgba(124, 58, 237, 0.15);">
                     <div style="display: flex; align-items: center; gap: 12px; margin-bottom: var(--spacing-md);">
-                        <div style="width: 44px; height: 44px; background: #1F2937; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 22px; box-shadow: 0 3px 8px rgba(124, 58, 237, 0.25);">🔮</div>
+                        <div style="width: 44px; height: 44px; background: linear-gradient(135deg, #7C3AED 0%, #059669 100%); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 22px; box-shadow: 0 3px 8px rgba(124, 58, 237, 0.25);">🔮</div>
                         <div>
-                            <div style="font-size: 17px; font-weight: 700; color: #111827; letter-spacing: -0.01em;">AI洞察的本质洞察</div>
-                            <div style="font-size: 12px; color: #78716C;">Meta-Insight v2.0 · 对AI本身的理解 · 持续迭代</div>
+                            <div style="font-size: 17px; font-weight: 700; color: var(--color-text-primary); letter-spacing: -0.01em;">AI洞察的本质洞察</div>
+                            <div style="font-size: 12px; color: var(--color-text-muted);">Meta-Insight v2.0 · 对AI本身的理解 · 持续迭代</div>
                         </div>
-                        <span style="margin-left: auto; font-size: 11px; padding: 3px 10px; background: #1F2937; color: white; border-radius: 2px; font-weight: 600;">元认知</span>
+                        <span style="margin-left: auto; font-size: 11px; padding: 3px 10px; background: linear-gradient(135deg, #7C3AED, #059669); color: white; border-radius: var(--radius-full); font-weight: 600;">元认知</span>
                     </div>
-                    <p style="font-size: 14px; color: #57534E; line-height: 1.7; margin-bottom: var(--spacing-md);">
-                        AI的本质是<strong style="color: #10B981;">"可编程的认知"</strong>，正在从独立目的地进化为<strong style="color: #059669;">"隐形基础设施"</strong>——跨13个维度均显示同一规律：人驱动AI → AI自主 → AI隐形化。
-                        报告覆盖13个洞察对象，每个都输出：<span style="color: #10B981;">表象 → 本质 → 验证 → 演变 → 预测</span>。
+                    <p style="font-size: 14px; color: var(--color-text-secondary); line-height: 1.7; margin-bottom: var(--spacing-md);">
+                        AI的本质是<strong style="color: #7C3AED;">"可编程的认知"</strong>，正在从独立目的地进化为<strong style="color: #059669;">"隐形基础设施"</strong>——跨13个维度均显示同一规律：人驱动AI → AI自主 → AI隐形化。
+                        报告覆盖13个洞察对象，每个都输出：<span style="color: var(--color-success);">表象 → 本质 → 验证 → 演变 → 预测</span>。
                     </p>
                     <a href="02-deep-research/topics/ai-essence-insight/index.html" target="_blank" class="insight-cta-btn">
                         <span>📖</span> 查看 AI领域本质洞察报告 v4.1 · 五层闭环框架
                     </a>
-                    <div style="margin-top: var(--spacing-md); font-size: 12px; color: #78716C; font-style: italic;">
+                    <div style="margin-top: var(--spacing-md); font-size: 12px; color: var(--color-text-muted); font-style: italic;">
                         🌱 随着对AI领域的持续追踪和学习，我的洞察会越来越深入。本报告已根据最新知识迭代更新。
                     </div>
                 </div>
@@ -4130,29 +4099,6 @@
                 const d = new Date(added + '-15');
                 if(now - d > thirtyDays) { tag.style.display='none'; item.classList.remove('new'); }
             });
-        })();
-
-    
-        // ============ 精密入场动效 (Architectural Precision) ============
-        (function initScrollReveal() {
-            var targets = document.querySelectorAll('.kb-dimension, .kb-foundation, .stat-card, .content-card, .collapsible-header, .tracking-table tbody tr, .list-item, .kb-item, .concept-tag, .practice-item, .section-header');
-            if (!targets.length) return;
-            targets.forEach(function(el, i) {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(10px)';
-                el.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
-                el.style.transitionDelay = (i % 12) * 50 + 'ms';
-            });
-            var observer = new IntersectionObserver(function(entries) {
-                entries.forEach(function(entry) {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
-            targets.forEach(function(el) { observer.observe(el); });
         })();
 
     </script>
