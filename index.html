@@ -284,8 +284,12 @@
             line-height: 1.2;
             margin-bottom: var(--spacing-xs);
             letter-spacing: -0.02em;
-            color: #10B981;
         }
+        
+        .stat-value.green { color: var(--color-success); }
+        .stat-value.blue { color: var(--color-info); }
+        .stat-value.purple { color: var(--color-purple); }
+        .stat-value.orange { color: var(--color-warning); }
         
         .stat-label {
             font-size: 12px;
@@ -325,24 +329,21 @@
             padding: 12px 16px;
             background: transparent;
             border: none;
-            border-bottom: 2px solid transparent;
-            border-radius: 0;
+            border-radius: var(--radius-md);
             cursor: pointer;
             font-family: inherit;
             font-size: 14px;
             font-weight: 500;
             color: var(--color-text-muted);
-            transition: all 0.2s ease;
+            transition: all var(--transition-fast);
             white-space: nowrap;
             touch-action: manipulation;
             min-height: 44px;
-            letter-spacing: -0.01em;
         }
         
         .tab-btn:hover {
-            background: transparent;
-            color: var(--color-text-primary);
-            border-bottom: 2px solid #D1FAE5;
+            background: var(--color-bg-table-header);
+            color: var(--color-text-secondary);
         }
         
         .tab-btn:focus-visible {
@@ -356,11 +357,10 @@
         }
 
         .tab-btn.active {
-            background: transparent;
-            color: #111827;
-            border-bottom: 2px solid #10B981;
+            background: var(--gradient-success);
+            color: #fff;
+            box-shadow: var(--shadow-glow-success);
             font-weight: 600;
-            box-shadow: none;
         }
         
         .tab-icon {
@@ -509,24 +509,24 @@
         .content-card-tag {
             display: inline-flex;
             padding: 2px 8px;
-            border-radius: 2px;
+            border-radius: var(--radius-full);
             font-size: 11px;
             font-weight: 500;
         }
         
         .content-card-tag.green {
-            background: rgba(16, 185, 129, 0.12);
-            color: #065F46;
+            background: rgba(5, 150, 105, 0.12);
+            color: var(--color-success);
         }
         
         .content-card-tag.blue {
-            background: rgba(16, 185, 129, 0.08);
-            color: #059669;
+            background: rgba(37, 99, 235, 0.12);
+            color: var(--color-info);
         }
         
         .content-card-tag.orange {
-            background: rgba(16, 185, 129, 0.04);
-            color: #6B7280;
+            background: rgba(217, 119, 6, 0.12);
+            color: var(--color-warning);
         }
         
         .content-card-desc {
@@ -890,16 +890,16 @@
         .tc-tag {
             display: inline-flex;
             padding: 1px 6px;
-            border-radius: 2px;
+            border-radius: var(--radius-full);
             font-size: 10px;
             font-weight: 500;
             flex-shrink: 0;
         }
         
-        .tc-tag.trend { background: rgba(16,185,129,0.12); color: #065F46; }
-        .tc-tag.company { background: rgba(16,185,129,0.08); color: #059669; }
-        .tc-tag.topic { background: rgba(16,185,129,0.12); color: #065F46; }
-        .tc-tag.people { background: rgba(16,185,129,0.04); color: #6B7280; }
+        .tc-tag.trend { background: rgba(37,99,235,0.12); color: var(--color-info); }
+        .tc-tag.company { background: rgba(217,119,6,0.12); color: var(--color-warning); }
+        .tc-tag.topic { background: rgba(5,150,105,0.12); color: var(--color-success-dark); }
+        .tc-tag.people { background: rgba(124,58,237,0.12); color: var(--color-purple); }
         
         .tc-desc {
             font-size: 12px;
@@ -949,41 +949,31 @@
             text-transform: uppercase;
         }
         
-        .tracking-table tbody tr {
-            border-left: 2px solid transparent;
-            transition: all 0.15s ease;
-        }
-        
-        .tracking-table tbody tr:hover {
-            background: #F9FAFB;
-            border-left: 2px solid #10B981;
-        }
-        
         .tracking-table tbody tr:hover td {
-            background: transparent;
+            background: rgba(5, 150, 105, 0.03);
         }
         
         .tracking-table .tier-badge {
             display: inline-flex;
             padding: 2px 8px;
-            border-radius: 2px;
+            border-radius: var(--radius-full);
             font-size: 11px;
             font-weight: 600;
         }
         
         .tier-badge.l1 {
-            background: rgba(16, 185, 129, 0.12);
-            color: #065F46;
+            background: rgba(5, 150, 105, 0.12);
+            color: var(--color-success);
         }
         
         .tier-badge.l2 {
-            background: rgba(16, 185, 129, 0.08);
-            color: #059669;
+            background: rgba(37, 99, 235, 0.12);
+            color: var(--color-info);
         }
         
         .tier-badge.l3 {
-            background: rgba(16, 185, 129, 0.04);
-            color: #6B7280;
+            background: rgba(217, 119, 6, 0.12);
+            color: var(--color-warning);
         }
         
         /* ============ Collapsible Sections ============ */
@@ -991,25 +981,24 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px 16px;
-            background: #1F2937;
-            border: 1px solid #1F2937;
-            border-radius: 4px;
+            padding: var(--spacing-md);
+            background: var(--color-bg-table-header);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-md);
             cursor: pointer;
-            transition: all 0.15s ease;
+            transition: all var(--transition-fast);
             user-select: none;
-            color: white;
         }
         
         .collapsible-header:hover {
-            background: #374151;
-            border-color: #374151;
+            background: rgba(5, 150, 105, 0.05);
+            border-color: var(--color-success);
         }
         
         .collapsible-header.active {
-            border-radius: 4px 4px 0 0;
+            border-radius: var(--radius-md) var(--radius-md) 0 0;
             border-bottom: none;
-            background: #1F2937;
+            background: var(--gradient-success);
             color: white;
         }
         
@@ -1023,7 +1012,7 @@
         }
         
         .collapsible-header.active .collapsible-count {
-            background: rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.2);
             color: white;
         }
         
@@ -1038,19 +1027,17 @@
         }
         
         .collapsible-title {
-            font-size: 12px;
+            font-size: 15px;
             font-weight: 600;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: white;
+            color: var(--color-text-primary);
         }
         
         .collapsible-count {
-            font-size: 11px;
+            font-size: 12px;
             padding: 2px 8px;
-            background: rgba(255,255,255,0.15);
-            color: rgba(255,255,255,0.8);
-            border-radius: 2px;
+            background: rgba(5, 150, 105, 0.1);
+            color: var(--color-success);
+            border-radius: var(--radius-full);
             font-weight: 600;
         }
         
@@ -1549,20 +1536,19 @@
         /* 维度卡片 */
         .kb-dimension {
             background: var(--color-bg-card);
-            border-radius: 4px;
-            border: 1px solid #E5E7EB;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border-light);
             overflow: hidden;
-            transition: all 0.2s ease;
+            transition: all var(--transition-normal);
         }
         
         .kb-dimension:hover {
-            border-color: #10B981;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-            transform: translateY(-2px);
+            border-color: rgba(5, 150, 105, 0.3);
+            box-shadow: var(--shadow-sm);
         }
         
         .kb-dimension.core {
-            border-color: #10B981;
+            border-color: var(--color-info);
         }
         
         .dim-header {
@@ -1590,9 +1576,9 @@
         }
         
         .dim-models .dim-icon { background: linear-gradient(135deg, #059669, #10B981); }
-        .dim-agent .dim-icon { background: linear-gradient(135deg, #059669, #10B981); }
-        .dim-companies .dim-icon { background: linear-gradient(135deg, #059669, #10B981); }
-        .dim-enterprise .dim-icon { background: linear-gradient(135deg, #059669, #10B981); }
+        .dim-agent .dim-icon { background: linear-gradient(135deg, #2563EB, #1D4ED8); }
+        .dim-companies .dim-icon { background: linear-gradient(135deg, #7C3AED, #6D28D9); }
+        .dim-enterprise .dim-icon { background: linear-gradient(135deg, #D97706, #B45309); }
         
         .dim-info {
             flex: 1;
@@ -1613,7 +1599,7 @@
         }
         
         .dim-count.core {
-            color: #10B981;
+            color: var(--color-info);
             font-weight: 600;
         }
         
@@ -1679,16 +1665,16 @@
             align-items: center;
             gap: 8px;
             padding: 8px 12px;
-            background: #F9FAFB;
-            border: 1px solid #E5E7EB;
-            border-radius: 3px;
+            background: var(--color-bg-card);
+            border: 1px solid transparent;
+            border-radius: var(--radius-sm);
             text-decoration: none;
-            transition: all 0.15s ease;
+            transition: all var(--transition-fast);
         }
         
         .kb-item:hover {
-            background: white;
-            border-color: #10B981;
+            background: linear-gradient(135deg, rgba(5, 150, 105, 0.06) 0%, rgba(37, 99, 235, 0.04) 100%);
+            border-color: var(--color-success);
             transform: translateX(3px);
         }
         
@@ -1711,7 +1697,7 @@
         }
         
         .item-tag.new {
-            background: #10B981;
+            background: linear-gradient(135deg, #E11D48, #F43F5E);
             color: white;
             animation: pulse 2s ease-in-out infinite;
         }
@@ -1719,7 +1705,7 @@
         /* 底层基础设施 */
         .kb-foundations {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: var(--spacing-sm);
         }
         
@@ -1736,22 +1722,21 @@
         }
         
         .kb-foundation {
-            background: #F9FAFB;
-            border-radius: 4px;
+            background: var(--color-bg-card);
+            border-radius: var(--radius-md);
             padding: var(--spacing-sm);
-            border: 1px solid #E5E7EB;
-            transition: all 0.2s ease;
+            border: 1px solid var(--color-border-light);
+            transition: all var(--transition-normal);
         }
         
         .kb-foundation:hover {
-            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
         }
         
-        .foundation-entities { border-left: 3px solid rgba(16,185,129,1.0); }
-        .foundation-concepts { border-left: 3px solid rgba(16,185,129,0.7); }
-        .foundation-practices { border-left: 3px solid rgba(16,185,129,0.45); }
-        .foundation-insights { border-left: 3px solid rgba(16,185,129,0.45); }
+        .foundation-entities { border-left: 3px solid #7C3AED; }
+        .foundation-concepts { border-left: 3px solid #2563EB; }
+        .foundation-practices { border-left: 3px solid #10B981; }
+        .foundation-insights { border-left: 3px solid #D97706; }
         
         .foundation-header {
             display: flex;
@@ -1801,7 +1786,7 @@
         }
         
         .foundation-link:hover {
-            background: rgba(16, 185, 129, 0.06);
+            background: rgba(124, 58, 237, 0.06);
         }
         
         /* 洞察链接 */
@@ -1816,7 +1801,7 @@
         }
         
         .insight-link:hover {
-            background: rgba(16, 185, 129, 0.06);
+            background: rgba(217, 119, 6, 0.08);
         }
         
         .insight-icon {
@@ -1863,63 +1848,25 @@
             box-shadow: var(--shadow-hover);
         }
         
-        /* 概念库标签 */
-        .concept-tag {
-            display: inline-block;
-            padding: 5px 10px;
-            font-size: 12px;
-            font-weight: 500;
-            border-radius: 2px;
-            text-decoration: none;
-            transition: all 0.15s ease;
-            background: #ECFDF5;
-            color: #065F46;
-            border: 1px solid #D1FAE5;
-            cursor: pointer;
-        }
-        
-        .concept-tag:hover {
-            border-color: #10B981;
-        }
-        
-        /* 最佳实践标签 */
-        .practice-item {
-            display: inline-block;
-            padding: 5px 10px;
-            font-size: 12px;
-            font-weight: 500;
-            border-radius: 2px;
-            background: #F3F4F6;
-            color: #374151;
-            border: 1px dashed #D1D5DB;
-            cursor: pointer;
-        }
-        
-        .practice-item:hover {
-            border-color: #10B981;
-            color: #065F46;
-        }
-        
         /* 本质洞察CTA按钮 */
         .insight-cta-btn {
             display: inline-flex;
             align-items: center;
             gap: 8px;
             padding: 10px 18px;
-            background: #1F2937;
+            background: linear-gradient(135deg, #7C3AED 0%, #059669 100%);
             color: white;
-            border-radius: 4px;
+            border-radius: var(--radius-md);
             font-size: 14px;
             font-weight: 600;
             text-decoration: none;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(124, 58, 237, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
         
         .insight-cta-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.16);
-            background: #111827;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
         }
         
         /* slideDown keyframes 已统一定义于上方，此处移除重复 */
@@ -2234,7 +2181,7 @@
                 <a href="https://aidailyinsight-subscribe.frontend-cloud.corp.kuaishou.com"
                    style="display: inline-flex; align-items: center; gap: 8px;
                           background: linear-gradient(135deg, #059669 0%, #10B981 100%);
-                          color: white; padding: 12px 28px; border-radius: 6px;
+                          color: white; padding: 12px 28px; border-radius: 12px;
                           text-decoration: none; font-weight: 600; font-size: 15px;
                           box-shadow: 0 4px 14px rgba(5,150,105,0.25);
                           transition: all 0.2s ease;">
@@ -2246,7 +2193,7 @@
                    style="display: inline-flex; align-items: center; gap: 8px;
                           background: #fff; color: #57534E;
                           border: 1.5px solid #E7E5E4;
-                          padding: 12px 28px; border-radius: 6px;
+                          padding: 12px 28px; border-radius: 12px;
                           text-decoration: none; font-weight: 600; font-size: 15px;
                           transition: all 0.2s ease;">
                     <span style="font-size: 18px;">🌐</span>
@@ -2258,23 +2205,23 @@
         <!-- Stats -->
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-value" style="color: #10B981;">88+</div>
+                <div class="stat-value green">88+</div>
                 <div class="stat-label">追踪人物</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value" style="color: #10B981;">192+</div>
+                <div class="stat-value blue">192+</div>
                 <div class="stat-label">追踪公司</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value" style="color: #10B981;">280+</div>
+                <div class="stat-value purple">280+</div>
                 <div class="stat-label">信息源</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value" style="color: #10B981;">30</div>
+                <div class="stat-value orange">30</div>
                 <div class="stat-label">深度调研</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value" style="color: #10B981;">232+</div>
+                <div class="stat-value green">232+</div>
                 <div class="stat-label">日报 / 周报</div>
             </div>
         </div>
@@ -3813,7 +3760,7 @@
                             <div style="font-size: 17px; font-weight: 700; color: var(--color-text-primary); letter-spacing: -0.01em;">AI洞察的本质洞察</div>
                             <div style="font-size: 12px; color: var(--color-text-muted);">Meta-Insight v2.0 · 对AI本身的理解 · 持续迭代</div>
                         </div>
-                        <span style="margin-left: auto; font-size: 11px; padding: 3px 10px; background: #1F2937; color: white; border-radius: 2px; font-weight: 600;">元认知</span>
+                        <span style="margin-left: auto; font-size: 11px; padding: 3px 10px; background: linear-gradient(135deg, #7C3AED, #059669); color: white; border-radius: var(--radius-full); font-weight: 600;">元认知</span>
                     </div>
                     <p style="font-size: 14px; color: var(--color-text-secondary); line-height: 1.7; margin-bottom: var(--spacing-md);">
                         AI的本质是<strong style="color: #7C3AED;">"可编程的认知"</strong>，正在从独立目的地进化为<strong style="color: #059669;">"隐形基础设施"</strong>——跨13个维度均显示同一规律：人驱动AI → AI自主 → AI隐形化。
