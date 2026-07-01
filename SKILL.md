@@ -109,6 +109,7 @@ AI洞察是一个**AI驱动的行业研究平台**，核心做四件事：
 | 首页规范 | 修改首页**必读** | `reference/homepage-spec.md` ← **防改坏规范** |
 | 双版本同步 | 同步公开版 | `reference/dual-version-sync.md` |
 | 国内信源 | 微信/小红书搜AI | `reference/domestic-sources.md` |
+| 腾讯研究院AI速递 | 补充校准源 | `scripts/fetch_tencent_research.py`（IMA存在性检查+搜狐镜像抓取） |
 | 学术论文监控 | arXiv/学术动态 | `reference/arxiv-monitor.md` |
 | 知识沉淀 | 沉淀AI知识 | `reference/knowledge-accumulation.md` |
 | 调研范围管理 | 添加/管理AI追踪 | `reference/scope-management.md` |
