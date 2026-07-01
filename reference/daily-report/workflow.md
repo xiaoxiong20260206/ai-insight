@@ -59,6 +59,21 @@ Step 6: 知识沉淀(Harvest) → 检查复用价值 → 写入knowledge包（P0
 
 微信公众号搜索：先账号搜索（机器之心/量子位/新智元/宝玉），再话题搜索。
 
+**补充数据源：腾讯研究院AI速递**（2026-07-01 新增）：
+
+在 Step 1 搜索完成后、Step 2 内容生成前，**额外拉取**腾讯研究院前一天的AI速递作为校准源：
+
+```bash
+# 拉取前一天腾讯研究院AI速递（N日日报拉取N-1日速递）
+uv run scripts/fetch_tencent_research.py --date YYYY-MM-DD --skip-ima
+```
+
+- 该脚本自动：IMA API 存在性检查 → Tavily 搜索搜狐镜像 → curl 抓取全文 → 结构化解析
+- 输出 8 条新闻（含标题+3个要点），JSON 格式，可直接用于 Step 2 的内容校准
+- **用途**：与 Step 1 搜索结果交叉比对——腾讯研究院已覆盖的条目确认真实性和时效性，未覆盖的条目可作为补充候选
+- **不计入搜索配额**（此为数据拉取而非搜索，脚本内部调用 Tavily 1 次 + curl 1 次）
+- **限制**：仅校准/补充，不可替代 Step 1 的自主搜索；腾讯研究院未覆盖的领域（如国内AI Coding）仍需 Step 1 自行搜索
+
 完成标记:
 ```bash
 uv run scripts/ai_daily_orchestrator.py complete --step 1 --context "搜索N个源; 热点: ...; 选定N条(海外N/国内N)"
