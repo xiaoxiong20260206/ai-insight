@@ -381,6 +381,41 @@ def check_no_wrong_format_weekly_keys() -> list[Check]:
     return results
 
 
+def check_daily_card_no_duplicates() -> list[Check]:
+    """12. 最近日报区块不能有重复日期（防#131：update_daily_card全覆写bug）"""
+    results = []
+    content = read_file(INTERNAL_INDEX)
+    if not content:
+        return results
+    
+    # 提取"最近日报"区块内所有日期
+    marker = '<!-- 最近日报（展示最近4期） -->'
+    if marker not in content:
+        results.append(Check("日报卡片·去重", "HARD", True, "无最近日报标记，跳过"))
+        return results
+    
+    marker_pos = content.find(marker)
+    # 取标记后5000字符，足够覆盖4个list-item
+    section = content[marker_pos:marker_pos + 5000]
+    
+    # 提取所有 list-item-title 中的日期
+    dates = re.findall(r'(\d{4}年\d{1,2}月\d{1,2}日)\s*AI日报', section)
+    
+    if len(dates) < 2:
+        results.append(Check("日报卡片·去重", "HARD", True, f"仅{len(dates)}条，无需去重检查"))
+        return results
+    
+    unique_dates = set(dates)
+    if len(unique_dates) < len(dates):
+        duplicates = [d for d in set(dates) if dates.count(d) > 1]
+        results.append(Check("日报卡片·去重", "HARD", False, 
+            f"最近日报有重复: {duplicates}（应为4期不同日报）"))
+    else:
+        results.append(Check("日报卡片·去重", "HARD", True, f"最近{len(dates)}期日报无重复"))
+    
+    return results
+
+
 # ========== 主流程 ==========
 
 def run_checks(date_str: str = "", week_id: str = "", full: bool = False) -> list[Check]:
@@ -409,6 +444,7 @@ def run_checks(date_str: str = "", week_id: str = "", full: bool = False) -> lis
     checks.extend(check_internal_external_consistency())
     checks.extend(check_no_duplicate_weekly_calendar())
     checks.extend(check_no_wrong_format_weekly_keys())
+    checks.extend(check_daily_card_no_duplicates())
     
     return checks
 
