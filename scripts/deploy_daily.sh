@@ -295,88 +295,18 @@ else
 fi
 
 # 4b. 更新最新日报的 list-item 链接+标题+描述
-# 从JSON提取描述（取heat_trend.summary前100字，或overview[0].headline的前N个用·拼接）
-DESC=$(python3 - << PYEOF
-import json, re
-try:
-    with open('data/daily-content-$DATE.json', 'r', encoding='utf-8') as f:
-        data = json.load(f)
-    ht = data.get('heat_trend', {})
-    
-    # 兼容多种heat_trend格式提取描述
-    # 格式1: ht.summary (旧版)
-    # 格式2: ht.top_items[].title (05-11格式)
-    # 格式3: ht.trend_summary + ht.top_keywords (05-15格式)
-    # 格式4: ht.topics[].name (cron早期格式)
-    
-    summary = ht.get('summary', '') or ht.get('trend_summary', '')
-    top_items = ht.get('top_items', []) or ht.get('topics', [])
-    
-    # 截取前100字，去除HTML标签
-    summary = re.sub(r'<[^>]+>', '', summary)
-    
-    # 从overviews提取headline
-    overviews = data.get('overview', [])
-    parts = []
-    for ov in overviews[:4]:
-        hl = ov.get('headline', '')
-        if hl:
-            clean = re.sub(r'<[^>]+>', '', hl)[:20]
-            parts.append(clean)
-    
-    # 如果overviews没内容，从top_items提取
-    if not parts and top_items:
-        for item in top_items[:4]:
-            name = item.get('name', '') or item.get('title', '')
-            if name:
-                clean = re.sub(r'<[^>]+>', '', name)[:20]
-                parts.append(clean)
-    desc = ' · '.join(parts) if parts else summary[:80]
-    print(desc)
-except Exception as e:
-    print('今日AI行业动态汇总')
-PYEOF
-)
+# ⚠️ #131修复(2026-07-01): 使用 update_homepage.py（滚动窗口逻辑），禁止直接regex替换
+# 旧的inline Python会把4个list-item全部替换成当天，导致重复
+echo "  ℹ️ 调用 update_homepage.py 更新首页（滚动窗口4期）..."
+if uv run scripts/update_homepage.py "$DATE" --type daily 2>&1; then
+    echo "  ✅ 首页已通过 update_homepage.py 更新"
+else
+    echo "  ⚠️ update_homepage.py 失败，跳过首页更新（不阻断部署）"
+fi
 
-AI_DATE="$DATE" AI_MONTH="$MONTH" AI_DESC="$DESC" python3 - << 'PYEOF'
-import re, os
-date_str = os.environ['AI_DATE']
-month_str = os.environ['AI_MONTH']
-desc = os.environ['AI_DESC']
-
-with open('index.html', 'r', encoding='utf-8') as f:
-    content = f.read()
-
-# 更新 list-item href
-content = re.sub(
-    r'href="01-daily-reports/\d{4}-\d{2}/\d{4}-\d{2}-\d{2}\.html"(\s+target="_blank"\s+class="list-item")',
-    f'href="01-daily-reports/{month_str}/{date_str}.html"\\1',
-    content
-)
-# 更新 list-item-title 日期（从DATE变量解析中文格式）
-from datetime import datetime
-d = datetime.strptime(date_str, '%Y-%m-%d')
-date_cn = f'{d.year}年{d.month}月{d.day}日'
-content = re.sub(
-    r'\d{4}年\d{1,2}月\d{1,2}日( AI日报)',
-    date_cn + r'\1',
-    content
-)
-# 更新 list-item-desc
-content = re.sub(
-    r'(<div class="list-item-desc">)[^<]*(</div>)',
-    lambda m: m.group(1) + desc + m.group(2),
-    content
-)
-with open('index.html', 'w', encoding='utf-8') as f:
-    f.write(content)
-print('  ✅ 首页最新日报卡片已更新')
-PYEOF
-
-# 4c. 验证首页关键字段
-echo "  📋 验证首页："
-grep -o "list-item-desc\">.[^<]*" index.html | head -1 | cut -c1-80
-grep -o "'$MONTH': \[[^\]]*\]" index.html | head -1 || true
+# 4c. 验证首页（使用 verify_homepage.py 做完整17项检查）
+echo "  📋 验证首页（17项完整检查）："
+uv run scripts/verify_homepage.py --date "$DATE" 2>&1 | tail -5
 
 # ===== 5. 先同步public版（因为public/index.html需要被commit进去） =====
 echo ""
