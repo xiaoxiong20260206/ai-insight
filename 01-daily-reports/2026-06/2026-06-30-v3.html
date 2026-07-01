@@ -1995,9 +1995,7 @@ body.mobile-preview-mode .global-controls {
         /* Tab Panel */
         .tab-panel { display: none; }
         .tab-panel.active { display: block; }
-        /* Fallback: 如果JS未加载，显示第一个panel（noscript友好） */
-        .tab-panel:first-of-type { display: block; }
-        .tab-panel.active ~ .tab-panel:first-of-type { display: none; }
+        /* tab-panel visibility controlled by JS only via .active class */
         .tab-panel.active { display: block !important; }
 
         /* ===== BOARD SECTION WITH THEME COLOR (v4.0) ===== */
@@ -3118,23 +3116,23 @@ section > * {
                     <div class="overview-grid five-cols">
                 <div class="overview-item animate-on-scroll">
                     <div class="overview-item-header"><span class="overview-item-icon">🧠</span><span class="overview-item-label">大模型</span></div>
-                    <div class="overview-item-text"></div>
+                    <div class="overview-item-text">GPT-5.6三连发（Sol/Terra/Luna）登顶Terminal-Bench 2.1+MiniMax M3开源三维领先+DeepSeek V4-Pro BenchLM中国榜首87分</div>
                 </div>
                 <div class="overview-item animate-on-scroll">
                     <div class="overview-item-header"><span class="overview-item-icon">⌨️</span><span class="overview-item-label">AI Coding</span></div>
-                    <div class="overview-item-text"></div>
+                    <div class="overview-item-text">Claude Opus 4.8断网成绩雪崩63%靠检索+GPT-5.6 Sol超越Mythos 5+AI编程工具六强格局定型</div>
                 </div>
                 <div class="overview-item animate-on-scroll">
                     <div class="overview-item-header"><span class="overview-item-icon">📱</span><span class="overview-item-label">AI应用</span></div>
-                    <div class="overview-item-text"></div>
+                    <div class="overview-item-text">全模态流式Agent实时解说世界杯+GPT-5.5 Instant隐形升级数亿用户+MiniMax面临商业化拷问</div>
                 </div>
                 <div class="overview-item animate-on-scroll">
                     <div class="overview-item-header"><span class="overview-item-icon">🏭</span><span class="overview-item-label">产业动态</span></div>
-                    <div class="overview-item-text"></div>
+                    <div class="overview-item-text">Cursor套壳Kimi K2.5被扒出+中美AI人才经验门槛差3.4倍+Coding占Token使用量从11%飙至50%</div>
                 </div>
                 <div class="overview-item animate-on-scroll">
                     <div class="overview-item-header"><span class="overview-item-icon">🏢</span><span class="overview-item-label">企业AI</span></div>
-                    <div class="overview-item-text"></div>
+                    <div class="overview-item-text">61%企业正在构建Agentic系统+中国独立大模型四强2026市值格局+Qwen发现末层推理累赘</div>
                 </div>
                     </div>
                 </div>
@@ -3479,10 +3477,11 @@ section > * {
                     }
                 }
             });
-            // Scroll to top of content area
-            const contentInner = document.querySelector('.content-inner');
-            if (contentInner) {
-                window.scrollTo({ top: contentInner.offsetTop - 60, behavior: 'smooth' });
+            // Scroll to tab navigation area so user sees the new tab content
+            // (scrolling to contentInner.offsetTop jumps to page top, making it look like nothing changed — #132 fix 2026-07-01)
+            const tabNavEl = document.querySelector('.tab-nav');
+            if (tabNavEl) {
+                window.scrollTo({ top: tabNavEl.offsetTop - 20, behavior: 'smooth' });
             }
         }
 

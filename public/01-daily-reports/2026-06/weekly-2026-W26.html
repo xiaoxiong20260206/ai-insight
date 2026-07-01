@@ -1999,9 +1999,7 @@ body.mobile-preview-mode .global-controls {
         /* Tab Panel */
         .tab-panel { display: none; }
         .tab-panel.active { display: block; }
-        /* Fallback: 如果JS未加载，显示第一个panel（noscript友好） */
-        .tab-panel:first-of-type { display: block; }
-        .tab-panel.active ~ .tab-panel:first-of-type { display: none; }
+        /* tab-panel visibility controlled by JS only via .active class */
         .tab-panel.active { display: block !important; }
 
         /* ===== BOARD SECTION WITH THEME COLOR (v4.0) ===== */
@@ -3431,10 +3429,11 @@ section > * {
                     }
                 }
             });
-            // Scroll to top of content area
-            const contentInner = document.querySelector('.content-inner');
-            if (contentInner) {
-                window.scrollTo({ top: contentInner.offsetTop - 60, behavior: 'smooth' });
+            // Scroll to tab navigation area so user sees the new tab content
+            // (scrolling to contentInner.offsetTop jumps to page top, making it look like nothing changed — #132 fix 2026-07-01)
+            const tabNavEl = document.querySelector('.tab-nav');
+            if (tabNavEl) {
+                window.scrollTo({ top: tabNavEl.offsetTop - 20, behavior: 'smooth' });
             }
         }
 
