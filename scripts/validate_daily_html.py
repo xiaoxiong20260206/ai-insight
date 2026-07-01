@@ -80,10 +80,8 @@ def validate_html(html: str, label: str = "") -> tuple:
     if not has_active_panel:
         warnings.append(f"{prefix}无active tab/panel — 可能首屏空白")
     
-    # CSS fallback
-    has_fallback = '.tab-panel:first-of-type' in html
-    if not has_fallback:
-        warnings.append(f"{prefix}缺少tab-panel:first-of-type fallback — JS未加载时可能空白")
+    # CSS fallback (v5.2: first-of-type fallback removed — it caused bug where llm panel always showed)
+    # No longer checking for first-of-type; JS controls tab visibility
     
     # ====== 4. 新闻条目 ======
     news_items = len(re.findall(r'class="news-item"', html))
