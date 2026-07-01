@@ -17,11 +17,13 @@ update_homepage.py — 首页自动更新统一脚本（v2.0 合并版）
 import argparse
 import json
 import re
+import subprocess
 import sys
 from datetime import datetime, timedelta
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
+SCRIPT_DIR = Path(__file__).resolve().parent
 
 # 从 config.py SSoT 读取 URL
 sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
@@ -69,29 +71,90 @@ def update_calendar_daily(index_path: Path, date_str: str) -> bool:
 
 
 def update_daily_card(index_path: Path, date_str: str) -> bool:
-    """更新首页最新日报卡片"""
+    """更新首页最新日报卡片——滚动窗口，最近4期不同日报
+    
+    逻辑：
+    1. 扫描 01-daily-reports/ 下所有 *-v3.html，按日期倒序取最近4个
+    2. 用这4个日报重建"最近日报"区块的 list-item 列表
+    3. 最新一条加"最新"标签，其余不加
+    4. 每条的描述从对应 JSON 数据提取
+    """
     month_str = date_str[:7]
     content = index_path.read_text(encoding="utf-8")
 
-    content = re.sub(
-        r'href="01-daily-reports/\d{4}-\d{2}/\d{4}-\d{2}-\d{2}\.html"(\s+target="_blank"\s+class="list-item")',
-        f'href="01-daily-reports/{month_str}/{date_str}.html"\\1', content)
+    # 收集所有日报日期（从 *-v3.html 文件名提取）
+    reports_dir = PROJECT_ROOT / "01-daily-reports"
+    all_dates = []
+    for month_dir in sorted(reports_dir.iterdir()):
+        if month_dir.is_dir() and re.match(r'\d{4}-\d{2}', month_dir.name):
+            for html_file in month_dir.glob("*-v3.html"):
+                m = re.match(r'(\d{4}-\d{2}-\d{2})-v3\.html', html_file.name)
+                if m:
+                    all_dates.append(m.group(1))
+    all_dates.sort(reverse=True)
+    recent_4 = all_dates[:4]
 
-    d = datetime.strptime(date_str, "%Y-%m-%d")
-    date_cn = f'{d.year}年{d.month}月{d.day}日'
-    content = re.sub(r'\d{4}年\d{1,2}月\d{1,2}日( AI日报)', date_cn + r'\1', content)
+    if not recent_4:
+        print(f"  ⚠️ 未找到任何日报HTML文件，跳过卡片更新")
+        return True
 
-    desc = _extract_daily_desc(date_str)
-    content = re.sub(r'(<div class="list-item-desc">)[^<]*(</div>)',
-                     lambda m: m.group(1) + desc + m.group(2), content)
+    # 构建新的 list-item HTML
+    items_html = ""
+    for i, d in enumerate(recent_4):
+        d_month = d[:7]
+        dt = datetime.strptime(d, "%Y-%m-%d")
+        date_cn = f'{dt.year}年{dt.month}月{dt.day}日'
+        desc = _extract_daily_desc(d)
+        latest_badge = ' <span style="background:#FEF2F2;color:#E11D48;font-size:11px;padding:2px 6px;border-radius:999px;margin-left:6px;">最新</span>' if i == 0 else ""
+        items_html += f'''                    <a href="01-daily-reports/{d_month}/{d}.html" target="_blank" class="list-item">
+                        <span class="list-item-icon">📅</span>
+                        <div class="list-item-content">
+                            <div class="list-item-title">{date_cn} AI日报{latest_badge}</div>
+                            <div class="list-item-desc">{desc}</div>
+                        </div>
+                        <span class="list-item-arrow">→</span>
+                    </a>
+'''
 
-    index_path.write_text(content, encoding="utf-8")
-    print(f"  ✅ 日报卡片已更新: {date_cn}")
+    # 替换"最近日报"区块内的所有 list-item
+    # 匹配: <!-- 最近日报 --> ... </div> (content-list 的结束标签)
+    marker_start = '<!-- 最近日报（展示最近4期） -->'
+    marker_pattern = re.compile(
+        rf'({re.escape(marker_start)}\s*<div class="content-list">)(.*?)(\s*</div>\s*(?=\s*<!--|$))',
+        re.DOTALL
+    )
+    m = marker_pattern.search(content)
+    if not m:
+        # fallback: 找 content-list 区块后替换所有 list-item
+        print(f"  ⚠️ 未找到'最近日报'标记，尝试fallback替换")
+        # fallback: 整体替换 content-list 内内容
+        cl_pattern = re.compile(
+            r'(<div class="content-list">\s*)(.*?)(\s*</div>\s*(?=\s*</div>))',
+            re.DOTALL
+        )
+        m = cl_pattern.search(content)
+        if not m:
+            print(f"  ❌ 无法定位日报列表区块")
+            return False
+
+    new_content = content[:m.start()] + m.group(1) + '\n' + items_html + m.group(3) + content[m.end():]
+    index_path.write_text(new_content, encoding="utf-8")
+    print(f"  ✅ 日报卡片已更新（滚动窗口）: {', '.join(recent_4)}")
     return True
 
 
 def _extract_daily_desc(date_str: str) -> str:
+    """从JSON数据提取日报描述，支持flat和subdir两种路径"""
+    # 路径1: data/daily-content-YYYY-MM-DD.json (flat, 旧格式)
     json_path = PROJECT_ROOT / "data" / f"daily-content-{date_str}.json"
+    # 路径2: data/daily/YYYY-MM/daily-content-YYYY-MM-DD.json (subdir, 新格式)
+    if not json_path.exists():
+        month_str = date_str[:7]
+        json_path = PROJECT_ROOT / "data" / "daily" / month_str / f"daily-content-{date_str}.json"
+    # 路径3: data/daily-reports/YYYY-MM/daily-content-YYYY-MM-DD.json (cron产出)
+    if not json_path.exists():
+        month_str = date_str[:7]
+        json_path = PROJECT_ROOT / "data" / "daily-reports" / month_str / f"daily-content-{date_str}.json"
     if not json_path.exists():
         return "今日AI行业动态汇总"
     try:
