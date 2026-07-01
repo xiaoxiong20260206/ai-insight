@@ -1789,70 +1789,6 @@
             background: rgba(124, 58, 237, 0.06);
         }
         
-        .link-avatar {
-            font-size: 12px;
-        }
-        
-        .link-name {
-            font-size: 12px;
-            font-weight: 500;
-            color: var(--color-text-primary);
-            flex: 1;
-        }
-        
-        .link-org {
-            font-size: 9px;
-            padding: 1px 5px;
-            background: var(--color-bg);
-            border-radius: var(--radius-sm);
-            color: var(--color-text-muted);
-        }
-        
-        /* 概念标签 */
-        .foundation-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-        }
-        
-        .concept-tag, .practice-tag {
-            display: inline-block;
-            padding: 4px 8px;
-            font-size: 11px;
-            font-weight: 500;
-            border-radius: var(--radius-full);
-            text-decoration: none;
-            transition: all var(--transition-fast);
-        }
-        
-        .concept-tag {
-            background: rgba(37, 99, 235, 0.08);
-            color: var(--color-info);
-            border: 1px solid rgba(37, 99, 235, 0.15);
-        }
-        
-        .concept-tag:hover {
-            background: rgba(37, 99, 235, 0.15);
-            border-color: var(--color-info);
-        }
-        
-        .concept-tag.new {
-            background: linear-gradient(135deg, #E11D48, #F43F5E);
-            color: white;
-            border: none;
-        }
-        
-        .practice-tag {
-            background: rgba(16, 185, 129, 0.08);
-            color: var(--color-success);
-            border: 1px solid rgba(16, 185, 129, 0.15);
-        }
-        
-        .practice-tag:hover {
-            background: rgba(16, 185, 129, 0.15);
-            border-color: var(--color-success);
-        }
-        
         /* 洞察链接 */
         .insight-link {
             display: flex;
@@ -2216,6 +2152,13 @@
             .tracking-table td {
                 padding: 8px 10px;
             }
+        }
+    
+        /* 知识库条目链接化hover */
+        .kb-item-link:hover .item-text {
+            color: var(--color-success);
+            text-decoration: underline;
+            text-underline-offset: 3px;
         }
     </style>
 </head>
@@ -2897,7 +2840,18 @@
                         <p class="section-desc">AI行业人物、公司、信息源的系统化追踪清单（点击展开查看详情）</p>
                     </div>
                 </div>
-                
+
+                <!-- 搜索过滤 -->
+                <div class="tracking-search" style="margin: var(--spacing-md) 0 var(--spacing-lg); position: relative;">
+                    <input type="text" id="trackingSearch" placeholder="🔍 搜索人物、公司、关键词…" 
+                        style="width: 100%; padding: 12px 16px 12px 44px; font-size: 15px; border: 2px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-bg); color: var(--color-text-primary); outline: none; transition: border-color 0.2s, box-shadow 0.2s;"
+                        onfocus="this.style.borderColor='var(--color-success)'; this.style.boxShadow='0 0 0 3px rgba(5,150,105,0.1)'"
+                        onblur="this.style.borderColor='var(--color-border)'; this.style.boxShadow='none'"
+                        oninput="filterTracking(this.value)">
+                    <svg style="position: absolute; left: 14px; top: 13px; width: 20px; height: 20px; color: var(--color-text-muted);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="5"/><path d="M21 21l-4.35-4.35"/></svg>
+                    <div id="trackingSearchInfo" style="font-size: 12px; color: var(--color-text-muted); margin-top: 6px;"></div>
+                </div>
+
                 <!-- 人物追踪 -->
                 <div class="category-section">
                     <div class="collapsible-header" onclick="toggleCollapsible(this)">
@@ -2929,7 +2883,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">L1 实践者 — AI Coding 产品 & 实践者</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">L1 实践者 — AI Coding 产品 & 实践者</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>人物</th><th>公司/角色</th><th>主要渠道</th><th>追踪重点</th></tr></thead>
@@ -2946,7 +2900,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">L1 实践者 — 大模型核心研究者 & 具身智能</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">L1 实践者 — 大模型核心研究者 & 具身智能</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>人物</th><th>公司/角色</th><th>主要渠道</th><th>追踪重点</th></tr></thead>
@@ -2966,7 +2920,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">L1 实践者 — 企业AI/Agent & 学术界</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">L1 实践者 — 企业AI/Agent & 学术界</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>人物</th><th>公司/角色</th><th>主要渠道</th><th>追踪重点</th></tr></thead>
@@ -2980,7 +2934,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">L1 实践者 — 中国AI核心人物</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">L1 实践者 — 中国AI核心人物</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>人物</th><th>公司/角色</th><th>主要渠道</th><th>追踪重点</th></tr></thead>
@@ -2998,7 +2952,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: #DC2626; font-weight: 700; margin: var(--spacing-lg) 0 var(--spacing-md);">🆕 L1 实践者 — 中国AI Coding & 新晋力量</h4>
+<h4 style="font-size: 14px; color: #DC2626; font-weight: 700; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">🆕 L1 实践者 — 中国AI Coding & 新晋力量</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>人物</th><th>公司/角色</th><th>主要渠道</th><th>追踪重点</th></tr></thead>
@@ -3013,7 +2967,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">L1 实践者 — AI安全/对齐核心人物</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">L1 实践者 — AI安全/对齐核心人物</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>人物</th><th>公司/角色</th><th>主要渠道</th><th>追踪重点</th></tr></thead>
@@ -3025,7 +2979,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">L2 深度观察者 — Newsletter/博客 & AI工程</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #2563EB; padding-left: 10px;">L2 深度观察者 — Newsletter/博客 & AI工程</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>人物/媒体</th><th>平台</th><th>检查频率</th><th>价值定位</th></tr></thead>
@@ -3043,7 +2997,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">L2 深度观察者 — 中文圈 & YouTube/播客</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #2563EB; padding-left: 10px;">L2 深度观察者 — 中文圈 & YouTube/播客</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>人物/媒体</th><th>平台</th><th>检查频率</th><th>价值定位</th></tr></thead>
@@ -3060,7 +3014,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">L3 战略决策者</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #9CA3AF; padding-left: 10px;">L3 战略决策者</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>人物</th><th>公司/角色</th><th>主要渠道</th><th>信号权重</th></tr></thead>
@@ -3110,7 +3064,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">模型实验室 — 中国</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">模型实验室 — 中国</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>公司</th><th>核心产品</th><th>检查频率</th><th>追踪重点</th></tr></thead>
@@ -3133,7 +3087,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">AI Coding 工具 — 海外</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">AI Coding 工具 — 海外</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>公司</th><th>产品</th><th>检查频率</th><th>追踪重点</th></tr></thead>
@@ -3152,7 +3106,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: #DC2626; font-weight: 700; margin: var(--spacing-lg) 0 var(--spacing-md);">🆕 AI Coding 工具 — 国内</h4>
+<h4 style="font-size: 14px; color: #DC2626; font-weight: 700; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">🆕 AI Coding 工具 — 国内</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>公司</th><th>产品</th><th>检查频率</th><th>追踪重点</th></tr></thead>
@@ -3167,7 +3121,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">企业AI创业公司</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">企业AI创业公司</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>公司</th><th>产品</th><th>领域</th><th>追踪重点</th></tr></thead>
@@ -3185,7 +3139,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">AI 应用产品</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">AI 应用产品</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>公司</th><th>产品</th><th>领域</th><th>追踪重点</th></tr></thead>
@@ -3201,7 +3155,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">机器人/具身智能</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">机器人/具身智能</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>公司</th><th>产品</th><th>追踪重点</th></tr></thead>
@@ -3216,7 +3170,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">互联网头部AI转型</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">互联网头部AI转型</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>公司</th><th>AI核心产品</th><th>追踪重点</th></tr></thead>
@@ -3235,7 +3189,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">AI基础设施 & 芯片</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">AI基础设施 & 芯片</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>公司</th><th>产品</th><th>追踪重点</th></tr></thead>
@@ -3285,7 +3239,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">Newsletter & 博客</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">Newsletter & 博客</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>名称</th><th>作者</th><th>价值定位</th></tr></thead>
@@ -3303,7 +3257,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: #DC2626; font-weight: 700; margin: var(--spacing-lg) 0 var(--spacing-md);">🆕 微信公众号（50+）— 中文AI信息核心渠道</h4>
+<h4 style="font-size: 14px; color: #DC2626; font-weight: 700; margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">🆕 微信公众号（50+）— 中文AI信息核心渠道</h4>
 <p style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: var(--spacing-md); padding: 8px 12px; background: #FEF3C7; border-radius: 8px;">通过搜狗微信搜索 + MCP工具自动化追踪，覆盖技术媒体、深度分析、学术解读、创投视角等维度</p>
 <h5 style="font-size: 13px; color: var(--color-text-secondary); margin: var(--spacing-md) 0 8px;">AI综合媒体</h5>
 <div class="table-wrap" style="overflow-x: auto;">
@@ -3400,7 +3354,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">🆕 Discord社区</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">🆕 Discord社区</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>社区</th><th>频率</th><th>价值定位</th></tr></thead>
@@ -3416,7 +3370,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">🆕 X/Twitter 关键账号</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">🆕 X/Twitter 关键账号</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>账号</th><th>身份</th><th>频率</th><th>价值定位</th></tr></thead>
@@ -3435,7 +3389,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">播客</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">播客</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>播客名</th><th>主持人</th><th>平台</th><th>价值定位</th></tr></thead>
@@ -3451,7 +3405,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">YouTube / B站</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">YouTube / B站</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>频道</th><th>平台</th><th>频率</th><th>价值定位</th></tr></thead>
@@ -3466,7 +3420,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">学术 & 社区</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">学术 & 社区</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>平台</th><th>URL</th><th>频率</th><th>价值定位</th></tr></thead>
@@ -3482,7 +3436,7 @@
 </tbody>
 </table>
 </div>
-<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md);">🆕 AI安全/对齐研究机构</h4>
+<h4 style="font-size: 14px; color: var(--color-text-secondary); margin: var(--spacing-lg) 0 var(--spacing-md); border-left: 3px solid #059669; padding-left: 10px;">🆕 AI安全/对齐研究机构</h4>
 <div class="table-wrap" style="overflow-x: auto;">
 <table class="tracking-table">
 <thead><tr><th>机构</th><th>URL</th><th>追踪重点</th></tr></thead>
@@ -3505,6 +3459,25 @@
         <!-- 4. 知识库 -->
         <article id="knowledge" class="tab-panel">
             <section class="section">
+                <div class="section-header">
+                    <div class="section-icon">📚</div>
+                    <div>
+                        <h2 class="section-title">知识库</h2>
+                        <p class="section-desc">按维度体系化沉淀的AI行业知识（点击条目查看深度调研）</p>
+                    </div>
+                </div>
+
+                <!-- 知识搜索 -->
+                <div class="kb-search" style="margin: var(--spacing-md) 0 var(--spacing-lg); position: relative;">
+                    <input type="text" id="kbSearch" placeholder="🔍 搜索知识条目…" 
+                        style="width: 100%; padding: 12px 16px 12px 44px; font-size: 15px; border: 2px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-bg); color: var(--color-text-primary); outline: none; transition: border-color 0.2s, box-shadow 0.2s;"
+                        onfocus="this.style.borderColor='#7C3AED'; this.style.boxShadow='0 0 0 3px rgba(124,58,237,0.1)'"
+                        onblur="this.style.borderColor='var(--color-border)'; this.style.boxShadow='none'"
+                        oninput="filterKnowledge(this.value)">
+                    <svg style="position: absolute; left: 14px; top: 13px; width: 20px; height: 20px; color: var(--color-text-muted);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="5"/><path d="M21 21l-4.35-4.35"/></svg>
+                    <div id="kbSearchInfo" style="font-size: 12px; color: var(--color-text-muted); margin-top: 6px;"></div>
+                </div>
+
                 <!-- 知识库架构可视化 - 精简版 -->
                 <div class="kb-architecture">
                     
@@ -3532,25 +3505,25 @@
                                     <div class="dim-items">
                                         <div   class="kb-item">
                                             <span class="item-icon">📄</span>
-                                            <span class="item-text">AI发展史与能力矩阵</span>
+                                            <a href="02-deep-research/topics/ai-history-capability-matrix/index.html" target="_blank" class="kb-item-link" style="color: inherit; text-decoration: none; display: inline;"><span class="item-text">AI发展史与能力矩阵</span></a>
                                         </div>
                                         <div   class="kb-item">
                                             <span class="item-icon">📄</span>
-                                            <span class="item-text">AI下半场理论</span>
+                                            <a href="02-deep-research/topics/ai-second-half/index.html" target="_blank" class="kb-item-link" style="color: inherit; text-decoration: none; display: inline;"><span class="item-text">AI下半场理论</span></a>
                                         </div>
                                         <div   class="kb-item">
                                             <span class="item-icon">📄</span>
-                                            <span class="item-text">推理模型专题</span>
+                                            <a href="02-deep-research/topics/reasoning-models/index.html" target="_blank" class="kb-item-link" style="color: inherit; text-decoration: none; display: inline;"><span class="item-text">推理模型专题</span></a>
                                         </div>
-                                        <div   class="kb-item new">
+                                        <div class="kb-item new" data-added="2026-06">
                                             <span class="item-icon">📄</span>
-                                            <span class="item-text">Gemini 3系列</span>
-                                            <span class="item-tag new">NEW</span>
+                                            <a href="02-deep-research/topics/gemini-3/index.html" target="_blank" class="kb-item-link" style="color: inherit; text-decoration: none; display: inline;"><span class="item-text">Gemini 3系列</span></a>
+                                            <span class="item-tag new" data-type="auto">NEW</span>
                                         </div>
-                                        <div   class="kb-item new">
+                                        <div class="kb-item new" data-added="2026-06">
                                             <span class="item-icon">📄</span>
-                                            <span class="item-text">GPT-5系列演进</span>
-                                            <span class="item-tag new">NEW</span>
+                                            <a href="02-deep-research/topics/gpt-5/index.html" target="_blank" class="kb-item-link" style="color: inherit; text-decoration: none; display: inline;"><span class="item-text">GPT-5系列演进</span></a>
+                                            <span class="item-tag new" data-type="auto">NEW</span>
                                         </div>
                                     </div>
                                 </div>
@@ -3574,23 +3547,23 @@
                                         <span>🛠️ 5实践</span>
                                     </div>
                                     <div class="dim-items">
-                                        <div   class="kb-item new">
+                                        <div class="kb-item new" data-added="2026-06">
                                             <span class="item-icon">🔌</span>
-                                            <span class="item-text">MCP协议全解</span>
-                                            <span class="item-tag new">NEW</span>
+                                            <a href="02-deep-research/topics/mcp-protocol/index.html" target="_blank" class="kb-item-link" style="color: inherit; text-decoration: none; display: inline;"><span class="item-text">MCP协议全解</span></a>
+                                            <span class="item-tag new" data-type="auto">NEW</span>
                                         </div>
-                                        <div   class="kb-item new">
+                                        <div class="kb-item new" data-added="2026-06">
                                             <span class="item-icon">💻</span>
-                                            <span class="item-text">AI Coding工具演进</span>
-                                            <span class="item-tag new">NEW</span>
+                                            <a href="02-deep-research/topics/ai-coding-tools/index.html" target="_blank" class="kb-item-link" style="color: inherit; text-decoration: none; display: inline;"><span class="item-text">AI Coding工具演进</span></a>
+                                            <span class="item-tag new" data-type="auto">NEW</span>
                                         </div>
                                         <div   class="kb-item">
                                             <span class="item-icon">🏗️</span>
-                                            <span class="item-text">Agent架构</span>
+                                            <a href="02-deep-research/topics/agent-architecture/index.html" target="_blank" class="kb-item-link" style="color: inherit; text-decoration: none; display: inline;"><span class="item-text">Agent架构</span></a>
                                         </div>
                                         <div   class="kb-item">
                                             <span class="item-icon">🌐</span>
-                                            <span class="item-text">Ambient Agents</span>
+                                            <a href="02-deep-research/topics/ambient-agents/index.html" target="_blank" class="kb-item-link" style="color: inherit; text-decoration: none; display: inline;"><span class="item-text">Ambient Agents</span></a>
                                         </div>
                                     </div>
                                 </div>
@@ -3609,20 +3582,20 @@
                                 <div class="dim-content">
                                     <div class="dim-desc">AI原生企业画像、商业模式、竞争格局</div>
                                     <div class="dim-items">
-                                        <div   class="kb-item new">
+                                        <div class="kb-item new" data-added="2026-06">
                                             <span class="item-icon">🏢</span>
                                             <span class="item-text">OpenAI · $8400亿估值</span>
-                                            <span class="item-tag new">NEW</span>
+                                            <span class="item-tag new" data-type="auto">NEW</span>
                                         </div>
-                                        <div   class="kb-item new">
+                                        <div class="kb-item new" data-added="2026-06">
                                             <span class="item-icon">🏢</span>
                                             <span class="item-text">Anthropic · MCP创建者</span>
-                                            <span class="item-tag new">NEW</span>
+                                            <span class="item-tag new" data-type="auto">NEW</span>
                                         </div>
-                                        <div   class="kb-item new">
+                                        <div class="kb-item new" data-added="2026-06">
                                             <span class="item-icon">💰</span>
                                             <span class="item-text">2026年AI投融资动态</span>
-                                            <span class="item-tag new">NEW</span>
+                                            <span class="item-tag new" data-type="auto">NEW</span>
                                         </div>
                                         <div   class="kb-item">
                                             <span class="item-icon">🏢</span>
@@ -3647,15 +3620,15 @@
                                     <div class="dim-items">
                                         <div   class="kb-item">
                                             <span class="item-icon">📋</span>
-                                            <span class="item-text">AI转型方法论</span>
+                                            <a href="02-deep-research/topics/ai-transformation-methodology/index.html" target="_blank" class="kb-item-link" style="color: inherit; text-decoration: none; display: inline;"><span class="item-text">AI转型方法论</span></a>
                                         </div>
                                         <div   class="kb-item">
                                             <span class="item-icon">⚙️</span>
-                                            <span class="item-text">软件工程3.0</span>
+                                            <a href="02-deep-research/topics/software-engineering-3/index.html" target="_blank" class="kb-item-link" style="color: inherit; text-decoration: none; display: inline;"><span class="item-text">软件工程3.0</span></a>
                                         </div>
                                         <div   class="kb-item">
                                             <span class="item-icon">🎨</span>
-                                            <span class="item-text">AI Studio产品方案</span>
+                                            <a href="02-deep-research/topics/ai-studio/index.html" target="_blank" class="kb-item-link" style="color: inherit; text-decoration: none; display: inline;"><span class="item-text">AI Studio产品方案</span></a>
                                         </div>
                                     </div>
                                 </div>
@@ -3669,101 +3642,117 @@
                             <span class="layer-icon">🔧</span>
                             <span>底层资产</span>
                         </div>
-                        <div class="kb-foundations">
-                            
-                            <!-- 底层1: 实体画像 -->
-                            <div class="kb-foundation foundation-entities">
-                                <div class="foundation-header">
-                                    <span class="foundation-icon">👤</span>
-                                    <span class="foundation-title">实体画像</span>
-                                </div>
-                                <div class="foundation-stats">
-                                    <span class="stat-item"><strong>7</strong>位人物</span>
-                                    <span class="stat-item"><strong>4</strong>家企业</span>
-                                </div>
-                                <div class="foundation-items">
-                                    <span>
-                                        <span class="link-avatar">👤</span>
-                                        <span class="link-name">Barry Zhang</span>
-                                        <span class="link-org">Anthropic</span>
-                                    </span>
-                                    <span>
-                                        <span class="link-avatar">👤</span>
-                                        <span class="link-name">姚顺雨</span>
-                                        <span class="link-org">OpenAI</span>
-                                    </span>
-                                    <span>
-                                        <span class="link-avatar">👤</span>
-                                        <span class="link-name">Harrison Chase</span>
-                                        <span class="link-org">LangChain</span>
-                                    </span>
-                                    <span>
-                                        <span class="link-avatar">👤</span>
-                                        <span class="link-name">Jim Fan</span>
-                                        <span class="link-org">NVIDIA</span>
-                                    </span>
-                                    <span>
-                                        <span class="link-avatar">👤</span>
-                                        <span class="link-name">Andrej Karpathy</span>
-                                        <span class="link-org">前OpenAI</span>
-                                    </span>
-                                    <span>
-                                        <span class="link-avatar">👤</span>
-                                        <span class="link-name">Simon Willison</span>
-                                        <span class="link-org">Django</span>
-                                    </span>
-                                    <span>
-                                        <span class="link-avatar">👤</span>
-                                        <span class="link-name">Addy Osmani</span>
-                                        <span class="link-org">Google</span>
-                                    </span>
+                                            <!-- 底层资产 -->
+                    <div class="kb-foundations">
+                        
+                        <!-- 实体画像 -->
+                        <div class="kb-foundation foundation-entities">
+                            <div class="foundation-header">
+                                <span class="foundation-icon">👤</span>
+                                <span class="foundation-title">实体画像</span>
+                                <span class="foundation-count">7位人物 · 4家企业</span>
+                            </div>
+                            <div class="foundation-body">
+                                <div class="entity-group">
+                                    <div class="entity-group-label">核心人物</div>
+                                    <div class="entity-list">
+                                        <a href="#" class="entity-chip">
+                                            <span class="entity-avatar">👤</span>
+                                            <span class="entity-name">Barry Zhang</span>
+                                            <span class="entity-org">Anthropic</span>
+                                        </a>
+                                        <a href="#" class="entity-chip">
+                                            <span class="entity-avatar">👤</span>
+                                            <span class="entity-name">姚顺雨</span>
+                                            <span class="entity-org">OpenAI</span>
+                                        </a>
+                                        <a href="#" class="entity-chip">
+                                            <span class="entity-avatar">👤</span>
+                                            <span class="entity-name">Harrison Chase</span>
+                                            <span class="entity-org">LangChain</span>
+                                        </a>
+                                        <a href="#" class="entity-chip">
+                                            <span class="entity-avatar">👤</span>
+                                            <span class="entity-name">Jim Fan</span>
+                                            <span class="entity-org">NVIDIA</span>
+                                        </a>
+                                        <a href="#" class="entity-chip">
+                                            <span class="entity-avatar">👤</span>
+                                            <span class="entity-name">Andrej Karpathy</span>
+                                            <span class="entity-org">前OpenAI</span>
+                                        </a>
+                                        <a href="#" class="entity-chip">
+                                            <span class="entity-avatar">👤</span>
+                                            <span class="entity-name">Simon Willison</span>
+                                            <span class="entity-org">Django</span>
+                                        </a>
+                                        <a href="#" class="entity-chip">
+                                            <span class="entity-avatar">👤</span>
+                                            <span class="entity-name">Addy Osmani</span>
+                                            <span class="entity-org">Google</span>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                            
-                            <!-- 底层2: 概念库 -->
-                            <div class="kb-foundation foundation-concepts">
-                                <div class="foundation-header">
-                                    <span class="foundation-icon">📖</span>
-                                    <span class="foundation-title">概念库</span>
-                                </div>
-                                <div class="foundation-stats">
-                                    <span class="stat-item"><strong>8</strong>个概念</span>
-                                </div>
-                                <div class="foundation-tags">
-                                    <span class="concept-tag">Agent架构</span>
-                                    <span class="concept-tag">Agent矩阵</span>
-                                    <span class="concept-tag">Ambient Agent</span>
-                                    <span class="concept-tag">Physical AI</span>
-                                    <span>MCP协议</span>
-                                    <span class="concept-tag">软件3.0</span>
-                                    <span class="concept-tag">AI编程</span>
-                                </div>
-                            </div>
-                            
-                            <!-- 底层3: 最佳实践 -->
-                            <div class="kb-foundation foundation-practices">
-                                <div class="foundation-header">
-                                    <span class="foundation-icon">🛠️</span>
-                                    <span class="foundation-title">最佳实践</span>
-                                </div>
-                                <div class="foundation-stats">
-                                    <span class="stat-item"><strong>6</strong>个方案</span>
-                                </div>
-                                <div class="foundation-tags">
-                                    <span>AI编程工作流</span>
-                                    <span>金融Agent</span>
-                                    <span>团队落地</span>
-                                    <span>AI Studio</span>
-                                    <span>数字员工</span>
-                                    <span>Agent调优</span>
-                                </div>
-                            </div>
-                            
                         </div>
+                        
+                        <!-- 概念库 -->
+                        <div class="kb-foundation foundation-concepts">
+                            <div class="foundation-header">
+                                <span class="foundation-icon">📖</span>
+                                <span class="foundation-title">概念库</span>
+                                <span class="foundation-count">8个概念</span>
+                            </div>
+                            <div class="foundation-body">
+                                <div class="concept-group">
+                                    <div class="concept-group-label">Agent体系</div>
+                                    <div class="concept-tags">
+                                        <span class="concept-tag">Agent架构</span>
+                                        <span class="concept-tag">Agent矩阵</span>
+                                        <span class="concept-tag">Ambient Agent</span>
+                                    </div>
+                                </div>
+                                <div class="concept-group">
+                                    <div class="concept-group-label">技术范式</div>
+                                    <div class="concept-tags">
+                                        <span class="concept-tag">Physical AI</span>
+                                        <span class="concept-tag">MCP协议</span>
+                                        <span class="concept-tag">软件3.0</span>
+                                        <span class="concept-tag">AI编程</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 最佳实践 -->
+                        <div class="kb-foundation foundation-practices">
+                            <div class="foundation-header">
+                                <span class="foundation-icon">🛠️</span>
+                                <span class="foundation-title">最佳实践</span>
+                                <span class="foundation-count">6个方案</span>
+                            </div>
+                            <div class="foundation-body">
+                                <div class="practice-group">
+                                    <div class="practice-group-label">工程实践</div>
+                                    <div class="practice-list">
+                                        <span class="practice-item">AI编程工作流</span>
+                                        <span class="practice-item">金融Agent</span>
+                                        <span class="practice-item">Agent调优</span>
+                                    </div>
+                                </div>
+                                <div class="practice-group">
+                                    <div class="practice-group-label">落地方案</div>
+                                    <div class="practice-list">
+                                        <span class="practice-item">团队落地</span>
+                                        <span class="practice-item">AI Studio</span>
+                                        <span class="practice-item">数字员工</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
-                </div>
-                
-                <!-- AI洞察的本质洞察 - 独立展示 -->
+<!-- AI洞察的本质洞察 - 独立展示 -->
                 <div style="margin-top: var(--spacing-xl); padding: var(--spacing-lg); background: linear-gradient(135deg, rgba(124, 58, 237, 0.06) 0%, rgba(5, 150, 105, 0.06) 100%); border-radius: var(--radius-lg); border: 1px solid rgba(124, 58, 237, 0.15);">
                     <div style="display: flex; align-items: center; gap: 12px; margin-bottom: var(--spacing-md);">
                         <div style="width: 44px; height: 44px; background: linear-gradient(135deg, #7C3AED 0%, #059669 100%); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 22px; box-shadow: 0 3px 8px rgba(124, 58, 237, 0.25);">🔮</div>
@@ -3783,19 +3772,6 @@
                     <div style="margin-top: var(--spacing-md); font-size: 12px; color: var(--color-text-muted); font-style: italic;">
                         🌱 随着对AI领域的持续追踪和学习，我的洞察会越来越深入。本报告已根据最新知识迭代更新。
                     </div>
-                </div>
-                
-                <!-- 底部操作 -->
-                <div style="margin-top: var(--spacing-md); display: flex; justify-content: center; gap: var(--spacing-md);">
-                    <button onclick="expandAllKB()" class="tree-action-btn">
-                        <span>📂</span> 全部展开
-                    </button>
-                    <button onclick="collapseAllKB()" class="tree-action-btn">
-                        <span>📁</span> 全部折叠
-                    </button>
-                    <span>
-                        <span>📖</span> 查看完整索引
-                    </span>
                 </div>
             </section>
         </article>
@@ -4020,20 +3996,6 @@
             dimension.setAttribute('data-expanded', !isExpanded);
         }
         
-        // 全部展开
-        function expandAllKB() {
-            document.querySelectorAll('.kb-dimension').forEach(dim => {
-                dim.setAttribute('data-expanded', 'true');
-            });
-        }
-        
-        // 全部折叠
-        function collapseAllKB() {
-            document.querySelectorAll('.kb-dimension').forEach(dim => {
-                dim.setAttribute('data-expanded', 'false');
-            });
-        }
-        
         // ============ 深度调研时间轴筛选 ============
         (function initTimelineFilter() {
             const legend = document.getElementById('catLegend');
@@ -4074,6 +4036,71 @@
                 });
             });
         })();
+    
+        
+        // ============ 追踪体系搜索过滤 ============
+        function filterTracking(query) {
+            const q = query.toLowerCase().trim();
+            const ta = document.getElementById('tracking');
+            if (!ta) return;
+            const rows = ta.querySelectorAll('.tracking-table tbody tr');
+            let vis = 0;
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                if (!q || text.includes(q)) { row.style.display = ''; vis++; }
+                else { row.style.display = 'none'; }
+            });
+            ta.querySelectorAll('.tracking-table').forEach(table => {
+                const tbody = table.querySelectorAll('tbody tr');
+                const visRows = Array.from(tbody).filter(r => r.style.display !== 'none');
+                const wrap = table.closest('.table-wrap');
+                const h4 = wrap ? wrap.previousElementSibling : null;
+                if (visRows.length === 0) { if(h4) h4.style.display='none'; if(wrap) wrap.style.display='none'; }
+                else { if(h4) h4.style.display=''; if(wrap) wrap.style.display=''; }
+            });
+            const info = document.getElementById('trackingSearchInfo');
+            if (q) info.textContent = '找到 ' + vis + '/' + rows.length + ' 条匹配';
+            else info.textContent = '';
+        }
+        
+        // ============ 知识库搜索过滤 ============
+        function filterKnowledge(query) {
+            const q = query.toLowerCase().trim();
+            const ka = document.getElementById('knowledge');
+            if (!ka) return;
+            const items = ka.querySelectorAll('.kb-item');
+            let vis = 0;
+            items.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if (!q || text.includes(q)) { item.style.display = ''; vis++; }
+                else { item.style.display = 'none'; }
+            });
+            if (q) ka.querySelectorAll('.kb-dimension').forEach(d => d.setAttribute('data-expanded','true'));
+            ka.querySelectorAll('.kb-foundation').forEach(f => {
+                const tags = f.querySelectorAll('.foundation-tags span, .foundation-items span');
+                let has = false;
+                tags.forEach(t => { if(!q||t.textContent.toLowerCase().includes(q)){t.style.display='';has=true;}else{t.style.display='none';} });
+                f.style.display = has || !q ? '' : 'none';
+            });
+            const info = document.getElementById('kbSearchInfo');
+            if (q) info.textContent = '找到 ' + vis + '/' + items.length + ' 条匹配';
+            else { info.textContent = ''; ka.querySelectorAll('.kb-dimension').forEach(d => d.setAttribute('data-expanded','false')); }
+        }
+        
+        // ============ NEW标签自动化(30天过期) ============
+        (function autoExpireNEW() {
+            const now = new Date();
+            const thirtyDays = 30*24*60*60*1000;
+            document.querySelectorAll('.item-tag.new[data-type="auto"]').forEach(tag => {
+                const item = tag.closest('.kb-item');
+                if(!item) return;
+                const added = item.getAttribute('data-added');
+                if(!added) return;
+                const d = new Date(added + '-15');
+                if(now - d > thirtyDays) { tag.style.display='none'; item.classList.remove('new'); }
+            });
+        })();
+
     </script>
 </body>
 </html>
