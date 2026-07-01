@@ -3551,10 +3551,11 @@ section > * {
                     }
                 }
             });
-            // Scroll to top of content area
-            const contentInner = document.querySelector('.content-inner');
-            if (contentInner) {
-                window.scrollTo({ top: contentInner.offsetTop - 60, behavior: 'smooth' });
+            // Scroll to tab-nav so user can see the switched tab content
+            const tabNavEl = document.querySelector('.tab-nav');
+            if (tabNavEl) {
+                const navTop = tabNavEl.getBoundingClientRect().top + window.scrollY - 80;
+                window.scrollTo({ top: navTop, behavior: 'smooth' });
             }
         }
 
