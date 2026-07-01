@@ -271,11 +271,10 @@ def sanitize_html(content: str) -> str:
         return f'<span class="kb-item-text">{combined}</span>'
     result = re.sub(r'<a\s+href="04-knowledge-base/[^"]*"[^>]*>.*?</a>', _replace_kb_link, result, flags=re.DOTALL)
 
-    # ===== 首页区块级删除（外部版不应包含内部特有区块）=====
-    # 删除追踪体系Tab（<span class="tab-label">追踪体系</span> 及其对应 tab-panel）
-    result = _remove_tab(result, "追踪体系")
-    # 删除知识库Tab
-    result = _remove_tab(result, "知识库")
+    # ===== 首页区块级处理（v13.0: 追踪体系+知识库保留，仅脱敏内容）=====
+    # 2026-07-01: 追踪体系和知识库内容均为公开信息，外部版保留完整Tab
+    # 仅需脱敏Hero区域的内部版专属内容（已在REPLACEMENTS中处理）
+    # 不再删除追踪体系和知识库Tab
     # 删除人物追踪分类按钮（在深度调研Tab里）
     result = re.sub(r'<button[^>]*class="cat-legend-item[^"]*"[^>]*onclick[^>]*>人物追踪</button>', '', result, flags=re.DOTALL)
     # 删除深度调研cat-legend中的人物追踪条目（多种格式）
