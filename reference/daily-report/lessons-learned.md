@@ -196,3 +196,67 @@ AI洞察 · 系统化追踪AI行业动态 · 五大板块每日更新
 ---
 
 _更新于 2026-06-30 | v1.2 | 14条经验（新增7条6/29修复）_
+---
+
+## 2026-07-01: #131 首页"最近日报"4条全变当天（滚动窗口覆盖bug）
+
+**问题**: 首页"最近日报"区块显示4条完全相同的7/1日报，应为最近4期不同日期。
+
+**根因**: `update_homepage.py` 的 `update_daily_card()` 用正则把所有list-item的href和title**全量替换**为当天日期，没保留历史3期。`deploy_daily.sh` Step 4b 还有一段独立的 inline Python 做同样事，两处互相覆盖，每次跑都把4个槽全写成当天。
+
+**修复**:
+1. `update_homepage.py` — 重写 `update_daily_card()` 为滚动窗口逻辑：扫描 `01-daily-reports/` 所有 `*-v3.html`，取最近4个不同日期重建列表
+2. `deploy_daily.sh` — 删除 Step 4b 的 inline Python，统一调 `update_homepage.py`
+3. `verify_homepage.py` — 新增 `check_daily_card_no_duplicates()` 检查项
+
+**举一反三**:
+- 首页任何"滚动窗口"区块，逻辑必须只在一处（`update_homepage.py`），禁止多脚本各写一份
+- `verify_homepage.py` 是部署的最后一道门，必须覆盖去重检查
+- 凡是 deploy_*.sh 里有 inline Python 操作首页的，都应该迁移到 `update_homepage.py`
+
+---
+
+## 2026-07-01: #132 腾讯研究院数据源返回旧文章（8点cron时当天未索引）
+
+**问题**: `fetch_tencent_research.py` 搜7/1文章，Tavily返回2025-08-01和2026-03-09的历史文章，混入日报导致旧闻。
+
+**根因**: 腾讯研究院AI速递每天上午发布，8点cron跑时当天文章可能还未被搜索引擎索引，Tavily返回最近历史文章，脚本没有验证日期就使用。
+
+**修复**:
+1. `fetch_tencent_research.py` — 抓到文章后验证标题/正文含目标日期，不符则拒绝
+2. `fetch_tencent_research.py` — `--date` 改为非必填，**默认取前一天**（前一天已稳定被索引）
+3. cron payload — 腾讯研究院调用改为不传 `--date`（自动用昨天）
+
+**永久规则**: **腾讯研究院永远用前一天的数据**，不要尝试当天的（当天8点前未必已索引）。这条规则是数据源特性决定的，不是临时策略。
+
+---
+
+## 2026-07-01: Tab切换只显示第一个板块（:first-of-type CSS fallback污染JS切换）
+
+**问题**: 日报页面切换Tab，其他4个板块内容空白，只有大模型板块始终可见。
+
+**根因**: `daily-report-v3.css` 中有 `.tab-panel:first-of-type { display: block; }` 作为noscript fallback。`:first-of-type` 是**结构性伪类**，不受class约束，始终选中DOM里第一个同类型元素——无论JS如何切换 `.active` class，第一个panel永远是 `display:block`，叠加在其他panel之上，切换视觉上无效。
+
+**修复**:
+1. `templates/daily-report-v3.css` — 删除 `.tab-panel:first-of-type { display: block; }` 规则
+2. `gen_daily_html.py` — 同步删除注入的该规则
+3. `validate_daily_html.py` — 新增检查：HTML中不得出现 `first-of-type` 配合 `display:block` 的Tab panel规则
+4. 已生成的当日3份HTML直接修复 + frontend-cloud重新部署
+
+**正确的noscript fallback写法**:
+```css
+/* ✅ 正确：包在noscript标签里，JS禁用时才生效 */
+/* <noscript><style>.tab-panel { display: block; }</style></noscript> */
+
+/* ❌ 错误：放在常规CSS里，永远生效，和JS切换冲突 */
+.tab-panel:first-of-type { display: block; }
+```
+
+**举一反三**:
+- `:first-of-type` / `:first-child` 禁止用于Tab/Accordion的默认显示fallback
+- JS切换组件的CSS规则中，`display` 状态必须完全由JS控制（`.active` class），CSS只做初始值 `display:none`
+- switchTab的 `scrollTo` 应滚到tab导航栏位置而非内容顶部，否则切tab后页面跳顶部，用户误以为内容没变
+
+---
+
+_更新于 2026-07-01 | v1.3 | 17条经验（新增3条：#131滚动窗口 / #132腾讯研究院 / Tab CSS冲突）_

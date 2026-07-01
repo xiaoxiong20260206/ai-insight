@@ -28,10 +28,11 @@
                     }
                 }
             });
-            // Scroll to top of content area
-            const contentInner = document.querySelector('.content-inner');
-            if (contentInner) {
-                window.scrollTo({ top: contentInner.offsetTop - 60, behavior: 'smooth' });
+            // Scroll to tab navigation area so user sees the new tab content
+            // (scrolling to contentInner.offsetTop jumps to page top, making it look like nothing changed — #132 fix 2026-07-01)
+            const tabNavEl = document.querySelector('.tab-nav');
+            if (tabNavEl) {
+                window.scrollTo({ top: tabNavEl.offsetTop - 20, behavior: 'smooth' });
             }
         }
 

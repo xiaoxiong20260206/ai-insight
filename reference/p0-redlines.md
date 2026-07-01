@@ -48,6 +48,33 @@ ls ~/.git-credentials || echo "CREDENTIALS_MISSING"
 找不到文件时报错退出，禁止静默降级为空内容兜底卡片。
 空卡片比报错更危险——用户看到空卡片会以为内容真没了，报错反而能触发修复。
 
+## 🔴 红线7：首页修改唯一入口（#131 — 2026-07-01）
+
+index.html 的所有修改必须通过 `update_homepage.py`，禁止手动编辑或 deploy 脚本中的 inline Python。
+
+**根因**：多处脚本各写一份首页更新逻辑 → `deploy_daily.sh` Step 4b 用 inline Python 全量替换4个日报槽位为当天 → 首页4条日报全变同一天。
+
+如果 `update_homepage.py` 失败 = 修脚本 bug 后重跑，不手动修复。
+
+## 🔴 红线8：腾讯研究院永远用前一天（#132 — 2026-07-01）
+
+`fetch_tencent_research.py` 不传 `--date`（默认取前一天）。
+
+**根因**：腾讯研究院AI速递每天上午发布，8点cron跑时当天文章**未必已被搜索引擎索引**，Tavily会返回数月前的历史文章。
+
+- ✅ `uv run scripts/fetch_tencent_research.py`（默认前一天）
+- ❌ `uv run scripts/fetch_tencent_research.py --date 2026-07-01`（搜当天=返回旧闻）
+
+## 🔴 红线9：Tab CSS 禁止 first-of-type fallback（2026-07-01）
+
+日报 HTML 的 CSS/JS 中禁止出现 `.tab-panel:first-of-type { display: block }`。
+
+**根因**：`:first-of-type` 是结构性伪类，不受 class 影响，始终选中DOM第一个同类型元素 → 和 JS `.active` 切换永久冲突 → 只显示第一个 tab。
+
+正确写法：JS 控制 `.active` class，CSS 只做 `display:none`。noscript fallback 用 `<noscript><style>` 包裹。
+
+switchTab 的 `scrollTo` 应滚到 tab 导航栏位置（`tabNavEl.offsetTop`），不应滚到内容区顶部（`contentInner.offsetTop`）——后者让用户切 tab 后页面跳回顶部，误以为内容没变。
+
 ---
 
 ## 📋 已转移到脚本自动校验的规则（Agent不需要检查）
@@ -77,4 +104,4 @@ KIM群聊必须用 `space:<groupId>` 格式，禁止裸传 groupId。
 
 ---
 
-_更新于 2026-05-11 · v12.0 · 从19条精简到6条核心红线_
+_更新于 2026-07-01 · v13.0 · 从6条扩到9条核心红线（新增#7首页唯一入口/#8腾讯研究院/#9 Tab CSS）_
