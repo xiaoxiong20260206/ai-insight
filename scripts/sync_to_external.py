@@ -195,6 +195,27 @@ def fix_footer_urls() -> int:
             (r'Powered by MyFlicker ❤️🔥', 'Powered by ❤️🔥'),
             # 文件名/头像
             (r'link-avatar', 'ai-insight-logo'),
+            # #133: 补全公司/平台名脱敏（与sync_to_public.py REPLACEMENTS保持一致）
+            (r'快手AI生产力战役', 'AI生产力实践'),
+            (r'快手', '某公司'),
+            (r'Kuaishou', 'Company'),
+            (r'KATE平台', 'Agent平台'),
+            (r'KATE', 'Agent平台'),
+            (r'天策平台', '数据平台'),
+            (r'天策', '数据平台'),
+            (r'天玑平台', '数据分析平台'),
+            (r'天玑', '数据分析平台'),
+            (r'KwaiBI', 'BI平台'),
+            (r'CodeFlicker', 'AI IDE'),
+            (r'Titi', '数据Agent'),
+            (r'SKILL\.md体系', '技能体系'),
+            (r'SKILL\.md', '技能定义文件'),
+            (r'小无相功', '自进化体系'),
+            (r'KIM Doc', '内部文档'),
+            (r'docs\.corp\.kuaishou\.com[^"]*', '#internal-link'),
+            (r'corp\.kuaishou\.com', 'corp.ks-inner.com'),
+            (r'shenlang03', ''),
+            (r'shenlang', ''),
         ]
         for pattern, replacement in _SANITIZE_RULES:
             new_content = _re_for_sanitize.sub(pattern, replacement, new_content)
@@ -545,7 +566,10 @@ def main():
 def _run_main_logic(args) -> None:
     """主逻辑（从 main 拆出，确保 finally 中解锁时逻辑干净）"""
     if args.full:
-        if not run_sync_to_public(args.verify):
+        # #133: 修复时序bug — 先sync再verify
+        # 旧逻辑：run_sync_to_public(verify=True) → verify在sync_all之前检查外部版 → 外部版还是旧文件 → 必然失败
+        # 新逻辑：先sync（含脱敏+copy），后verify
+        if not run_sync_to_public(verify=False):
             sys.exit(1)
         print("🔄 步骤 2/2: 推送到外部仓库...")
         print("-" * 40)
@@ -564,7 +588,26 @@ def _run_main_logic(args) -> None:
         sys.exit(1)
     
     # 步骤 3.5: URL替换+脱敏（P0 #126：全量替换+敏感词+零残留验证）
-    fix_footer_urls()
+    fix_result = fix_footer_urls()
+    if fix_result < 0:
+        print("❌ [ABORT] fix_footer_urls 脱敏验证失败，外部版仍有敏感词残留")
+        sys.exit(1)
+    
+    # #133: 步骤 3.6 外部版敏感词终检（在git push之前）
+    if args.verify:
+        from sync_to_public import verify_sanitization
+        print()
+        print("🔍 [后置] 外部版敏感词终检...")
+        print("-" * 40)
+        is_clean, violations = verify_sanitization()
+        if not is_clean:
+            print(f"❌ 发现 {len(violations)} 处敏感词残留:")
+            for v in violations[:10]:
+                print(f"   📄 {v['file']}: {v['word']}")
+            print("⛔ 中止git push，请修复脱敏规则后重跑")
+            sys.exit(1)
+        else:
+            print("✅ 外部版零敏感词，准出通过")
     
     # 步骤 4: Git 推送
     if not args.no_push:
