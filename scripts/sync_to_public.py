@@ -591,11 +591,24 @@ def verify_sanitization() -> tuple:
     verify_dir = external_repo
     text_extensions = {'.html', '.css', '.js', '.json', '.md', '.txt'}
     
+    # #133: 排除 subscribe-app/dist/ — 编译后JS含"快手 SSO登录"等OAuth provider名
+    # 这是前端编译产物，不属于需要脱敏的内容文件
+    VERIFY_EXCLUDE_DIRS = {"subscribe-app/dist", "subscribe-app/node_modules"}
+    
     # v2.2: -v3.html 链接残留检测模式
     v3_link_pattern = re.compile(r'\d{4}-\d{2}-\d{2}-v3\.html')
     
     for f in verify_dir.rglob("*"):
         if not f.is_file():
+            continue
+        
+        # #133: 排除编译产物目录
+        try:
+            rel_parts = f.relative_to(verify_dir).parts
+        except ValueError:
+            continue
+        rel_str = str(f.relative_to(verify_dir))
+        if any(rel_str.startswith(d) or f"/{d}/" in f"/{rel_str}" for d in VERIFY_EXCLUDE_DIRS):
             continue
         if f.suffix.lower() not in text_extensions:
             continue
@@ -742,6 +755,18 @@ def main():
     if args.full:
         print("📋 [全量模式] 同步所有公开内容...")
         print()
+        
+        # #133: 前置清理 — 删除 public/ 下残留的 -v3.html 文件
+        # 根因：cron agent有时直接cp v3文件到public/（绕过脱敏），导致未脱敏的v3文件混入
+        # public/ 是内部版Pages部署源，v3文件仅供外部版sync读取，不应留存在public/中
+        v3_cleanup_count = 0
+        for v3_file in PUBLIC_DIR.rglob("*-v3.html"):
+            rel = v3_file.relative_to(PUBLIC_DIR)
+            print(f"  🧹 清理残留v3文件: {rel}")
+            v3_file.unlink()
+            v3_cleanup_count += 1
+        if v3_cleanup_count > 0:
+            print(f"  ✅ 已清理 {v3_cleanup_count} 个残留v3文件")
         
         # 1. 日报+周报
         print("── 01-daily-reports/ ──")
