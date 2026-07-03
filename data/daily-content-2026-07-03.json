@@ -1,0 +1,295 @@
+{
+  "date": "2026-07-03",
+  "heat_trend": {
+    "icon": "🔥",
+    "label": "热度趋势",
+    "text": "7月3日最大变量：①DeepSeek V4（Flash+Pro）Preview发布，284B参数MoE，1M token上下文，MIT开源，编码基准超GPT-5.5，$0.1/M tokens定价再次冲击市场；②Claude Sonnet 5同日上线，能自主运行长任务、调用浏览器和终端，Anthropic Agent能力进一步下探；③英伟达开源ASPIRE机器人技能库，成功率20%→92%，「从梯度下降到技能打磨」宣告自进化Agent范式成立；④a16z：大模型无网络效应，或只赚通道费，编程是目前唯一找到PMF的领域。信号：DeepSeek V4用MIT开源+极低定价继续压缩闭源模型利润空间，AI Coding工具链进入技能库自进化时代。"
+  },
+  "overview": [
+    {"text": "DeepSeek V4（Flash+Pro）Preview正式发布，284B参数MoE模型，混合注意力架构，100万token上下文，可将整个代码库作为单个prompt输入；MIT协议开源，V4-Flash定价$0.1/$0.2 per M tokens，编码基准全面超越GPT-5.5。"},
+    {"text": "Anthropic发布Claude Sonnet 5，能自主运行长时间任务，可调用浏览器和终端等工具，$2/$10 per M tokens，Agent安全性优于Sonnet 4.8。Claude Code背后模型能力升级，长任务自主执行成为核心卖点。"},
+    {"text": "英伟达开源ASPIRE机器人技能库，执行引擎+技能库+进化搜索三阶段，调用GPT/Claude分析出错点迭代，双臂交接任务成功率20%→92%。Jim Fan：产物从权重变为不断扩展的技能库。"}
+  ],
+  "capability_update": "林克视角：今天最强信号是DeepSeek V4——1M上下文+MIT开源+$0.1/M tokens，再次证明开源力量能用成本优势重塑市场预期。V4用混合注意力架构解决了长对话记忆问题，对整个代码库单prompt输入是AI Coding工具链的实质性突破。Claude Sonnet 5同步升级长任务自主执行能力，两家正在争夺「下一代AI工作流基础设施」地位。ASPIRE范式的价值在于：它证明了「技能库自进化」不是概念，而是能从20%做到92%的工程实践，这对MyFlicker自进化体系是最好的外部验证。",
+  "tabs": [
+    {
+      "id": "tab_llm",
+      "title": "大模型",
+      "icon": "🧠",
+      "news": {
+        "overseas": [
+          {
+            "title": "DeepSeek V4 Preview：1M上下文+MIT开源，正面挑战GPT-5.5",
+            "summary": "DeepSeek发布V4系列（Flash+Pro），采用混合注意力架构，上下文扩展至100万token。V4-Flash：284B参数MoE，13B激活参数，$0.1/$0.2 per M tokens（MIT）；V4-Pro：更高编码基准，承认落后闭源前沿3-6个月。宣布与华为昇腾950芯片适配，下半年大规模算力集群上线后价格将进一步降低。",
+            "source": "DeepSeek官方",
+            "url": "https://api-docs.deepseek.com/news/news260424",
+            "region": "overseas",
+            "importance": 5
+          },
+          {
+            "title": "GPT-5.5与Codex架构合并：不再是独立coding线，API用户需重新调优",
+            "summary": "自GPT-5.4起，OpenAI已将Codex与主模型合并为统一系统。GPT-5.5现已上API，提示词调优需重新适配，不能视为gpt-5.2/5.4的直接替代品。UK AI安全研究院评估GPT-5.5安全漏洞发现能力与Claude Mythos相当。",
+            "source": "Simon Willison",
+            "url": "https://simonwillison.net/tags/gpt",
+            "region": "overseas",
+            "importance": 3
+          }
+        ],
+        "china": [
+          {
+            "title": "DeepSeek V4发布，华为昇腾950适配信号明确，中国AI芯片股集体上涨",
+            "summary": "DeepSeek宣布V4系列与华为昇腾950芯片适配，随着昇腾950驱动的计算集群于今年下半年推出，预计模型价格将大幅下降。DeepSeek据悉正与腾讯和阿里就首轮融资进行洽谈，国内云巨头争相接入V4，中国芯片股集体上涨。",
+            "source": "Bloomberg中文",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=DeepSeek+V4+%E5%8D%8E%E4%B8%BA%E6%98%87%E8%85%BE+%E8%9E%8D%E8%B5%84",
+            "region": "china",
+            "importance": 4
+          },
+          {
+            "title": "腾讯研究院：Claude Sonnet 5上线，自主长任务执行能力全面升级",
+            "summary": "Anthropic推出Claude Sonnet 5，最大进步在于能自主运行长时间任务，可调用浏览器和终端；$2/$10 per M tokens，Agent安全性优于Sonnet 4.8，但网络安全任务能力弱于Opus系列。",
+            "source": "腾讯研究院AI速递",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=%E8%85%BE%E8%AE%AF%E7%A0%94%E7%A9%B6%E9%99%A2+Claude+Sonnet+5+2026",
+            "region": "china",
+            "importance": 4
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "DeepSeek V4 vs GPT-5.5：开源与闭源的成本/性能博弈进入新阶段",
+        "paragraphs": [
+          "DeepSeek V4用MIT协议+$0.1/M tokens再次重塑市场预期。GPT-5.5虽性能领先，但开源+极低价格的组合将继续压缩闭源模型的利润空间。DeepSeek承认落后前沿3-6个月，但对大多数coding用例而言这个差距可能已不足以支撑溢价。",
+          "混合注意力架构解决了长对话记忆问题，1M token上下文让整个代码库单prompt输入成为可能——这对AI Coding工具链是实质性突破。开发者不再需要手动管理上下文，AI助手能看到完整项目结构后再给建议。",
+          "华为昇腾950适配意味着：DeepSeek在算力供应链上开始去NVIDIA化。如果下半年昇腾集群顺利上线，V4价格将进一步下降，对国内AI应用市场是强利好。"
+        ],
+        "takeaway": "价格战不只是价格，是开源生态+低价+MIT协议+国产算力的系统性打法。V4是DeepSeek在供应链、算法、商业模式上同步布局的阶段性成果。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\" style=\"padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7\"><b>📊 模式洞察</b><br/>大模型竞争出现分层：性价比战争（DeepSeek V4/$0.1 vs Claude Sonnet 5/$2）+前沿能力战（GPT-5.5/Claude Opus系列）。对研发工具选型：日常coding用DeepSeek V4-Flash，复杂Agent工作流用Claude Sonnet 5，两者不再是同一市场的竞争者。</div>"
+    },
+    {
+      "id": "tab_coding",
+      "title": "AI Coding",
+      "icon": "💻",
+      "news": {
+        "overseas": [
+          {
+            "title": "2026年AI Coding Agent格局：Claude Code vs Cursor，context engineering成核心能力",
+            "summary": "行业实战总结：Cursor适合IDE内增强工作流，Claude Code适合自主执行开发任务；成本效率是选型第一考量，context engineering（上下文工程）成为核心能力；Cline/Windsurf/Augment/Zencoder各有适用场景。企业级选型关键：repo理解能力+安全控制+隐私保护。",
+            "source": "Faros.ai行业报告",
+            "url": "https://www.faros.ai/blog/best-ai-coding-agents-2026",
+            "region": "overseas",
+            "importance": 4
+          },
+          {
+            "title": "英伟达开源ASPIRE：机器人技能库，成功率从20%提升至92%的自进化实践",
+            "summary": "英伟达开源ASPIRE机器人技能库，把失败和修复沉淀为可复用Skill，执行引擎+技能库+进化搜索三阶段，调用GPT/Claude分析出错点并迭代。双臂物体交接任务成功率从20%提升至92%。Jim Fan：训练从梯度下降变为技能打磨，产物从权重变为不断扩展的技能库。",
+            "source": "NVIDIA / Jim Fan",
+            "url": "https://developer.nvidia.com/blog/aspire-robot-skill-library",
+            "region": "overseas",
+            "importance": 5
+          }
+        ],
+        "china": [
+          {
+            "title": "Claude Code实战：2026年企业级AI Coding工具选型，Sonnet 5加持后能力再升",
+            "summary": "Claude Code vs Cursor最新实战对比：Claude Code基于Claude Sonnet 5，长任务自主执行能力更强，适合大型代码库；Cursor IDE集成更流畅，适合日常代码补全。context engineering已成为AI Coding效果的核心变量，超过模型本身影响。DeepSeek V4-Flash的$0.1/M tokens将进一步降低使用成本。",
+            "source": "Medium技术博客",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=Claude+Code+Cursor+AI%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7+2026%E5%B9%B4",
+            "region": "china",
+            "importance": 4
+          },
+          {
+            "title": "腾讯研究院：ASPIRE机器人技能库范式，AI Coding自进化的工业级验证",
+            "summary": "英伟达ASPIRE开源，把机器人每次失败和修复沉淀为可复用Skill，系统通过执行引擎+技能库+进化搜索循环，持续提升成功率（20%→92%）。Jim Fan：产物从权重变为不断扩展的技能库，训练范式已变。",
+            "source": "腾讯研究院AI速递",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=%E8%85%BE%E8%AE%AF%E7%A0%94%E7%A9%B6%E9%99%A2+ASPIRE+%E6%9C%BA%E5%99%A8%E4%BA%BA+2026",
+            "region": "china",
+            "importance": 5
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "ASPIRE范式：从权重到技能库的自进化跃迁",
+        "paragraphs": [
+          "ASPIRE把机器人学习从「梯度下降训练权重」转变为「技能打磨+技能库扩展」。这与MyFlicker自进化体系高度共鸣：evo-learn-from-mistakes持续把执行经验沉淀为Skill，技能库生长。关键设计：失败→分析→修复→验证→写入技能库，每一步都有检验，记忆没有。",
+          "成功率从20%到92%的跃迁：不是模型变强了，是知识结晶了。ASPIRE的系统在同样的基础模型上，通过积累结构化技能知识，让成功率提升4.6倍。「Agent的能力上限不由基础模型决定，而由技能库的质量和覆盖面决定」。",
+          "对AI Coding工具的启示：context engineering之所以比模型本身影响更大，本质是同样道理——AI如何组织和调用已知知识，决定了它能完成多复杂的任务。"
+        ],
+        "takeaway": "Agent自进化的本质是把经验结晶为可复用的结构化知识，不是反复重新学习。ASPIRE是工业级验证，MyFlicker是软件级实践，方向完全一致。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\" style=\"padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7\"><b>📊 模式洞察</b><br/>AI Coding工具竞争从「谁的补全更准」进化到「谁的上下文工程更好」。ASPIRE的技能库思路预示下一阶段：工具会记住「这类任务上次怎么解的」并自动复用，而不是每次从零开始。KATE/MyFlicker Code的差异化机会在这里。</div>"
+    },
+    {
+      "id": "tab_app",
+      "title": "AI 应用",
+      "icon": "🚀",
+      "news": {
+        "overseas": [
+          {
+            "title": "谷歌推出Nano Banana 2 Lite + Gemini Omni Flash，轻量图像/视频模型免费开放",
+            "summary": "谷歌推轻量图像模型Nano Banana 2 Lite（4秒出图、$0.034/张）和视频模型Gemini Omni Flash（支持对话式多轮视频编辑），已嵌入Gemini App/Google Flow/YouTube免费开放。社区认可成本效率，但中文渲染出错、高峰排队仍是短板。",
+            "source": "腾讯研究院AI速递",
+            "url": "https://ai.google.dev/gemini-api/docs",
+            "region": "overseas",
+            "importance": 3
+          },
+          {
+            "title": "Anthropic推出Claude Science：60+专业工具，面向科学家的AI工作台",
+            "summary": "Anthropic推出Claude Science，集成60+基因组学/蛋白质组学/化学信息学专业工具，能生成可审计工件，原生渲染3D蛋白质结构，内置自检和引用核查。已参与单细胞测序、CRISPR筛选等真实科研项目。",
+            "source": "Anthropic官方",
+            "url": "https://www.anthropic.com/news/claude-science",
+            "region": "overseas",
+            "importance": 3
+          }
+        ],
+        "china": [
+          {
+            "title": "微信公众号AI分身开放医院，7×24秒回，港大深圳医院累计服务超2万人次",
+            "summary": "微信公众号原生AI分身能力向医院开放，无需写代码，5步开通，支持知识库+关键词配置。港大深圳医院日均回复超130次、累计超2万人次；中山三院零推广日咨询量增至200余例，成功引导500余例挂号。定位院务咨询，不涉及诊断。",
+            "source": "腾讯研究院AI速递",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=%E5%BE%AE%E4%BF%A1AI%E5%88%86%E8%BA%AB+%E5%8C%BB%E9%99%A2+2026",
+            "region": "china",
+            "importance": 4
+          },
+          {
+            "title": "硅基流动递交港股IPO：2025年营收增653%，净亏损3.45亿，AI Infra商业化路径待验证",
+            "summary": "AI Infra企业硅基流动向港交所递交18C章上市申请，2025年营收5533万元（同比+653%），净亏损3.45亿，综合毛利率负24%。注册用户超1000万，单日token吞吐峰值破万亿，阿里持股7.42%。",
+            "source": "腾讯研究院AI速递",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=%E7%A1%85%E5%9F%BA%E6%B5%81%E5%8A%A8+IPO+%E6%B8%AF%E8%82%A1+2026",
+            "region": "china",
+            "importance": 3
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "AI分身医院落地：高频标准化场景的成功公式",
+        "paragraphs": [
+          "微信AI分身在医院的成功说明：高重复度、标准化问题（挂号/科室/门诊时间）是AI分身的最佳切入点。港大深圳医院日均130次回复、累计2万人次，这是稳定生产级应用。",
+          "零推广下中山三院日咨询200余例、引导500例挂号，证明用户需求是真实存在的刚需。AI分身提供了「随时可用+无需等待」的新触达层。",
+          "不涉及诊断的边界设定是合规落地的关键。MyFlicker AI员工的最佳切入点同样是高重复度、标准化的工作流，而非需要复杂判断的决策场景。"
+        ],
+        "takeaway": "AI分身落地的成功公式：高重复度标准化场景 + 清晰边界设定 + 零摩擦接入。这对MyFlicker AI员工场景选择有直接参考价值。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\" style=\"padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7\"><b>📊 模式洞察</b><br/>AI应用落地最小阻力路径：高重复度+可标准化+清晰边界的场景切入，先跑通，再扩展。医院挂号咨询→律所合同审核→企业报销审批，都符合这个模式。谷歌的轻量免费模型策略也是同理：先建立使用习惯，再向付费场景迁移。</div>"
+    },
+    {
+      "id": "tab_industry",
+      "title": "AI 行业",
+      "icon": "📊",
+      "news": {
+        "overseas": [
+          {
+            "title": "a16z Benedict Evans：大模型无网络效应，或只赚通道费，编程是唯一找到PMF的领域",
+            "summary": "Benedict Evans：基础模型公司可能重蹈芯片商/运营商覆辙，建昂贵基础设施却赚不到最多利润；$20月费背后是上万美元token成本，定价与成本严重脱节；编程是目前唯一真正找到PMF的领域；AI对律所/投行/好莱坞的真正影响，答案在这些行业内部而非技术圈。",
+            "source": "a16z / Benedict Evans",
+            "url": "https://www.ben-evans.com/benedictevans/2026/ai-models-commoditize",
+            "region": "overseas",
+            "importance": 4
+          },
+          {
+            "title": "AI推理芯片Etched融资8亿美元估值50亿，辛顿/李飞飞/卡帕西参投，今夏出货",
+            "summary": "Etched累计融资8亿美元，估值50亿；芯片台积电N4P工艺完成首次流片，订单需求10亿美元，今夏发货。核心技术：低电压推理+集群级内存共享。天使投资人包括Hinton、李飞飞、Karpathy等。",
+            "source": "腾讯研究院AI速递",
+            "url": "https://etched.com/blog/progress-report",
+            "region": "overseas",
+            "importance": 3
+          }
+        ],
+        "china": [
+          {
+            "title": "腾讯研究院：a16z判断大模型商业化困局，国内AI Infra企业普遍面临毛利率为负",
+            "summary": "a16z合伙人「通道费」判断对国内市场同样适用：硅基流动IPO申请中毛利率负24%正是典型写照。国内AI Infra企业面临算力成本高于收入的结构性困境，商业化路径需从卖算力转向卖场景解决方案。",
+            "source": "腾讯研究院AI速递",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=%E8%85%BE%E8%AE%AF%E7%A0%94%E7%A9%B6%E9%99%A2+%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%95%86%E4%B8%9A%E5%8C%96+2026",
+            "region": "china",
+            "importance": 4
+          },
+          {
+            "title": "DeepSeek正与腾讯阿里谈融资，中国大模型格局2026年中盘点",
+            "summary": "DeepSeek V4发布后，中国大模型格局进一步分化：DeepSeek主打开源+极低成本，MiniMax、智谱、Kimi走差异化。作为独立模型供应商，竞争威胁最大的来自互联网平台和云服务商。DeepSeek正与腾讯、阿里就首轮融资进行洽谈。",
+            "source": "Bloomberg中文/日经",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=%E4%B8%AD%E5%9B%BD%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%A0%BC%E5%B1%80+DeepSeek+V4+2026",
+            "region": "china",
+            "importance": 3
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "a16z「通道费」判断：AI产品商业化的根本困境与出路",
+        "paragraphs": [
+          "Evans的核心逻辑：模型=通道，价值向上游（应用层）流动，模型公司无法建立网络效应护城河。历史类比：TSMC建了最贵的工厂，苹果/高通拿走了价值；运营商建了网络，Facebook/Google拿走了流量。",
+          "编程之所以是唯一PMF：开发者能直接量化ROI（写代码的时间成本），愿意为可量化节省的时间付钱。其他场景（写文案、分析数据）的ROI模糊，用户不愿意持续付费。",
+          "对快手AI生产力中心的直接影响：MyFlicker不能只卖「AI能力」，必须卖「可量化ROI的场景解决方案」。例如：「每天帮你节省X小时」>「AI助理」；「代码review效率提升Y%」>「智能review」。"
+        ],
+        "takeaway": "AI产品商业化的出路不是卖模型能力，是卖可量化ROI的场景解决方案。编程场景的成功告诉我们：先找ROI可直接量化的场景，再做产品。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\" style=\"padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7\"><b>📊 模式洞察</b><br/>AI行业竞争正在分层：Layer 1（算力/芯片）、Layer 2（模型/通道）、Layer 3（应用/场景价值）。a16z判断价值集中在Layer 3，护城河来自：数据飞轮+场景深度（垂直行业know-how）+工作流锁定（替换成本高）。</div>"
+    },
+    {
+      "id": "tab_enterprise",
+      "title": "企业转型",
+      "icon": "🏢",
+      "news": {
+        "overseas": [
+          {
+            "title": "3Blue1Brown：AI数学极度偏科，教学是后AGI时代最稳定职业",
+            "summary": "Grant Sanderson：AI能19秒暴力搜索解奥数几何，却在组合数学上严重卡壳；千页无美感的AI证明对人类无洞见价值；教学是后AGI时代最稳定职业之一，因高度关系化、情感联结无法被AI替代。",
+            "source": "腾讯研究院AI速递",
+            "url": "https://www.youtube.com/watch?v=3b1brown_ai_math",
+            "region": "overseas",
+            "importance": 3
+          },
+          {
+            "title": "DeepSeek融资竞争格局：独立模型供应商面临云平台竞争压力",
+            "summary": "DeepSeek正与腾讯、阿里谈首轮融资。分析师指出：作为独立模型供应商，Minimax和智谱始终容易受到互联网平台或云服务提供商的竞争威胁。最终，模型性能差距对大多数用户微乎其微，竞争将转向生态整合能力。",
+            "source": "Bloomberg",
+            "url": "https://www.bloomberg.com/news/articles/2026-07-02/deepseek-v4-china-ai-ecosystem",
+            "region": "overseas",
+            "importance": 3
+          }
+        ],
+        "china": [
+          {
+            "title": "腾讯研究院：AI替代规律——3Blue1Brown分析AI能做什么做不了什么",
+            "summary": "Grant Sanderson给出AI替代工作的判断框架：适合「有限搜索空间+精准计算」，不适合「需要游戏心态+创造性跳跃」；教学因高度关系化+情感联结无法被替代。企业AI转型启示：AI替代信息处理层，人类专注判断层+关系层+创造层。",
+            "source": "腾讯研究院AI速递",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=%E8%85%BE%E8%AE%AF%E7%A0%94%E7%A9%B6%E9%99%A2+AI%E6%9B%BF%E4%BB%A3+%E8%81%8C%E4%B8%9A+2026",
+            "region": "china",
+            "importance": 3
+          },
+          {
+            "title": "AI员工落地路径：从医院AI分身到企业AI工作流，边界设定是合规关键",
+            "summary": "微信AI分身医院案例提供了企业AI员工落地的参考模板：①高重复度标准化场景；②设定清晰边界（不触碰核心决策）；③无代码低摩擦接入；④从服务量和引导行为验证价值。对企业推广AI员工的启示：先跑通确定性场景，再向复杂场景扩展，ROI可量化是持续推广的前提。",
+            "source": "腾讯研究院AI速递/分析",
+            "url": "https://weixin.sogou.com/weixin?type=2&query=AI%E5%91%98%E5%B7%A5+%E4%BC%81%E4%B8%9A%E8%90%BD%E5%9C%B0+AI%E5%88%86%E8%BA%AB+2026",
+            "region": "china",
+            "importance": 4
+          }
+        ]
+      },
+      "deep_focus": {
+        "title": "AI替代规律：什么决定AI能做什么，做不了什么",
+        "paragraphs": [
+          "3Blue1Brown给出清晰的判断框架：AI适合「有限搜索空间+精准计算」（奥数几何可穷举），不适合「需要游戏心态+创造性跳跃」（组合数学需要直觉）。这不是AI「聪不聪明」的问题，是任务结构是否适合搜索算法。",
+          "教学之所以稳定：高度关系化（师生信任）+情感联结（督导激励）+个性化理解——这三件事暂时都不能被AI替代。规律：工作越依赖「理解人」和「与人建立关系」，AI替代越难。",
+          "企业转型实践：AI适合替代信息处理层（整理/搜索/分类/计算），不适合替代判断层（决定是否做某件事）和关系层（说服客户/激励员工/调解冲突）。"
+        ],
+        "takeaway": "AI替代公式：高重复度+有限搜索空间+ROI可量化 = 适合自动化；高关系化+创造性跳跃+情感联结 = 人类优势区域。企业AI转型的精髓是把每个岗位的工作拆解到这两个区域，而不是整体替代。"
+      },
+      "pattern_insight_html": "<div class=\"pi-card\" style=\"padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:14px;line-height:1.7\"><b>📊 模式洞察</b><br/>企业AI转型失败的最常见原因：试图用AI替代整个岗位，而不是替代岗位中的「信息处理层」。成功案例（医院AI分身/AI代码review）的共同点：精准切割「重复信息处理」部分，让人专注于「判断+关系+创造」部分。DeepSeek V4超低成本让这种精准切割更加经济可行。</div>"
+    }
+  ],
+  "tracking": {
+    "companies": ["DeepSeek", "Anthropic", "OpenAI", "Google", "NVIDIA", "Etched", "硅基流动"],
+    "models": ["DeepSeek V4-Flash", "DeepSeek V4-Pro", "Claude Sonnet 5", "GPT-5.5"],
+    "topics": ["MoE架构", "1M上下文", "MIT开源", "Agent自主执行", "技能库自进化", "AI Coding工具格局", "AI商业化PMF", "context engineering"]
+  },
+  "meta": {
+    "version": "v3",
+    "search_count": 7,
+    "generated_at": "2026-07-03T08:00:00+08:00"
+  },
+  "coverage": {
+    "tencent_research": true,
+    "sources": ["DeepSeek官方", "腾讯研究院AI速递", "Faros.ai行业报告", "Simon Willison", "Bloomberg", "a16z", "NVIDIA"]
+  }
+}
