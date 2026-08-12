@@ -24,7 +24,7 @@ AI洞察是一个**AI驱动的行业研究平台**，核心做四件事：
 
 | 版本 | URL | 说明 |
 |------|-----|------|
-| 内部版 | `https://ai-insight-internal.frontend-cloud.corp.kuaishou.com` | 快手内网（SSO登录），林克品牌+订阅按钮+内部链接 |
+| 内部版 | `https://xiaoxiong20260206.github.io/ai-insight` | 快手内网（SSO登录），林克品牌+订阅按钮+内部链接 |
 | 外部版 | `https://xiaoxiong20260206.github.io/ai-insight-public/` | GitHub Pages（公开访问），通用品牌，零敏感词 |
 
 > ⚠️ **链接体系锁定，不再变更**：内部版=frontend-cloud，外部版=GitHub Pages。所有脚本从 `config.py` SSoT 派生，禁止硬编码。
@@ -93,7 +93,7 @@ AI洞察是一个**AI驱动的行业研究平台**，核心做四件事：
 
 ## 项目信息
 
-- **内部版**: https://ai-insight-internal.frontend-cloud.corp.kuaishou.com
+- **内部版**: https://xiaoxiong20260206.github.io/ai-insight
 - **外部版**: https://xiaoxiong20260206.github.io/ai-insight-public/
 - **项目路径**: `user-skills/sl-ai-insight/`
 
@@ -238,7 +238,7 @@ ls user-skills/sl-ai-insight/.git/HEAD && ssh -o ConnectTimeout=5 -T git@github.
 ### #19. MixCard按钮URL统一用内部版 — --target仅控制footer文本
 
 ### #16. 首页按钮必须使用绝对URL — 禁止相对路径
-- **订阅按钮**：`https://aidailyinsight-subscribe.frontend-cloud.corp.kuaishou.com`（禁止 `./subscribe/`，frontend-cloud会拦截触发SSO 302）
+- **订阅按钮**：`https://xiaoxiong20260206.github.io/ai-insight/public/subscribe-app/`（禁止 `./subscribe/`，frontend-cloud会拦截触发SSO 302）
 - **外部版入口**：`https://xiaoxiong20260206.github.io/ai-insight-public/`
 - **根因**：frontend-cloud对 `/subscribe/` 路径做SSO认证拦截，点击→302→登录页而非订阅页
 
@@ -276,7 +276,7 @@ rank pill(12px) → 标题(18px/600) → meta行(13px/SVG icon) → 正文(14px/
 
 | 脚本 | 校验项 | 失败时行为 |
 |------|--------|-----------|
-| `build_insight_mixcard.py` | 6锚点+kimMd格式+{{message}}扫描+URL格式 | ❌硬性报错退出 |
+| `build_insight_mixcard.py` | 6锚点+richText格式+{{message}}扫描+URL格式 | ❌硬性报错退出 |
 | `gen_daily_html.py` | ≥50KB+5板块+{{message}}扫描+overview/深度聚焦+footer URL=INTERNAL_PAGES_BASE | ❌硬性报错退出 |
 | `update_homepage.py` | 内部版+public+索引页包含当天日期 + 周报模式额外检查：日历数据含周号+外部版HTML存在+外部首页含周号+badge链接与文本匹配 | ❌报错退出 |
 | `sync_to_external.py` | footer URL替换(内部→外部)+敏感词零残留+index.html跳过 | ❌硬性报错退出 |
@@ -329,14 +329,14 @@ rank pill(12px) → 标题(18px/600) → meta行(13px/SVG icon) → 正文(14px/
 Step 1: 搜索调研 → orchestrator complete --step 1
 Step 2: 内容生成 → orchestrator complete --step 2
 Step 3+4: finalize → orchestrator finalize（自动:质量门→HTML→首页更新→部署→外部同步）
-Step 5: KIM推送 → sync_subscribers.py → build_insight_mixcard.py → message(kimMixCard, message="")
+Step 5: KIM推送 → sync_subscribers.py → build_insight_mixcard.py → message(mixCard, message="")
 Step 5.5: 交付链接 → 输出四个链接（内部版日报+首页 + 外部版日报+首页），方便自检
 Step 6: 知识沉淀(Harvest) → 检查复用价值 → 写入knowledge包（P0#22强制）
 
 **⚠️ MixCard发送格式（P0红线）**：
-- `kimMixCard`参数必须传**inner card格式**（`{config, updateMulti, blocks}`直接在顶层）
+- `mixCard`参数必须传**inner card格式**（`{config, updateMulti, blocks}`直接在顶层）
 - ❌禁止传双层格式`{card: {...}, summary: "..."}` — KIM找不到blocks字段会渲染为空消息
-- `message`参数必须传空字符串`""`，禁止同时传message和kimMixCard（会导致{{message}}模板注入泄露）
+- `message`参数必须传空字符串`""`，禁止同时传message和mixCard（会导致{{message}}模板注入泄露）
 - 脚本输出已改为inner card格式，读取JSON后直接传给message工具即可
 ```
 
@@ -344,13 +344,13 @@ Step 6: 知识沉淀(Harvest) → 检查复用价值 → 写入knowledge包（P0
 
 ## 订阅系统
 
-- **Web 订阅页面**：https://aidailyinsight-subscribe.frontend-cloud.corp.kuaishou.com （快手 SSO 登录 → 一键订阅/取消）
+- **Web 订阅页面**：https://xiaoxiong20260206.github.io/ai-insight/public/subscribe-app/ （快手 SSO 登录 → 一键订阅/取消）
 - **内部首页入口**：`public/subscribe/index.html` 重定向到 Web 订阅页面
 - **数据存储**：Appwrite TablesDB（`subscribers` 库 → `daily_subscribers` 表，行级安全）
 - **同步脚本**：`scripts/sync_subscribers.py`（Appwrite → `data/subscribers.json`，cron 执行前调用）
 - **订阅者推送**：日报 Step 5 读取 `data/subscribers.json`，遍历 `is_active=true` 的用户逐一私发
 - **owner 保留**：{{OWNER_KIM_USERNAME}} 始终在订阅列表中（source=owner），不可取消
-- **⚠️ 订阅按钮路径**：内部首页的订阅按钮**必须直接指向** `https://aidailyinsight-subscribe.frontend-cloud.corp.kuaishou.com`，**禁止使用** `./subscribe/` 相对路径——frontend-cloud会拦截 `/subscribe/` 路径触发SSO 302重定向，导致用户看到登录页而非订阅页（2026-06-03教训）
+- **⚠️ 订阅按钮路径**：内部首页的订阅按钮**必须直接指向** `https://xiaoxiong20260206.github.io/ai-insight/public/subscribe-app/`，**禁止使用** `./subscribe/` 相对路径——frontend-cloud会拦截 `/subscribe/` 路径触发SSO 302重定向，导致用户看到登录页而非订阅页（2026-06-03教训）
 
 ## 首页规则（P0红线 #19-#26 的补充说明）
 

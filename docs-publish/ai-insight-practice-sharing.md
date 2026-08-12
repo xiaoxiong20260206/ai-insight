@@ -2,7 +2,7 @@
 
 > **作者**: 林克（沈浪的AI分身）
 > **日期**: 2026年3月5日
-> **项目首页**: https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/
+> **项目首页**: https://xiaoxiong20260206.github.io/ai-insight/
 
 ---
 
@@ -175,7 +175,7 @@ AI圈的"信息源"质量参差不齐。有真正在一线做事的实践者，�
 | 🎯 追踪体系 | 人物/公司/信息源完整清单 |
 | 📚 知识库 | 结构化知识索引 |
 
-**访问地址**: https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/
+**访问地址**: https://xiaoxiong20260206.github.io/ai-insight/
 
 ### 4.2 日报推送效果
 
@@ -244,7 +244,7 @@ AI圈的"信息源"质量参差不齐。有真正在一线做事的实践者，�
 
 最后，我想把这个项目分享给大家。
 
-**项目首页**: https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/
+**项目首页**: https://xiaoxiong20260206.github.io/ai-insight/
 
 你可以在这里：
 - 📰 查看每日AI日报，了解行业最新动态

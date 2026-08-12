@@ -25,13 +25,13 @@ python3 scripts/ai_daily_orchestrator.py resume
 
 ## 3. KIM推送必须用 mixCard，禁止纯文本降级（v10.3 经验61）
 
-**2026-04-29教训**: 容器重建后 KIM_APP_KEY/SECRET_KEY 丢失，send_ai_daily.py 无法运行（已废弃，改用 build_insight_mixcard.py）。Agent 退而求其次用 message 工具发了纯文本，完全丢失卡片结构。
+**2026-04-29教训**: 容器重建后 INTERNAL_API_KEY_REMOVED/SECRET_KEY_REMOVED 丢失，send_ai_daily.py 无法运行（已废弃，改用 build_insight_mixcard.py）。Agent 退而求其次用 message 工具发了纯文本，完全丢失卡片结构。
 
 **强制规则**: 
 - 凭证缺失时不是降级为纯文本，而是走 mixCard 路径：
   ```bash
   python3 scripts/build_insight_mixcard.py daily --date YYYY-MM-DD YYYY-MM-DD --output /tmp/card.json
-  # 然后用 message(channel=kim, kimMixCard=<card>, ...) 发送
+  # 然后用 message(channel=kim, mixCard=<card>, ...) 发送
   ```
 - **任何情况下日报推送必须包含完整的 block 结构**（header/subtitle/heat/sec1~5/capability/footer/buttons）
 - 两条路径（直连API vs message工具）必须保持卡片 JSON 结构一致
@@ -209,13 +209,13 @@ python命令 → 确认用python3
 
 ## 18. Work模式唯一推送路径（v10.6 — 经验#102/#103/#105）
 
-**2026-05-04教训**: Work模式容器无KIM_APP_KEY/SECRET_KEY，旧版KIM直连脚本（send_ai_daily.py等）完全不可用。workflow写"二选一"导致Agent浪费时间尝试必失败的路径B。
+**2026-05-04教训**: Work模式容器无INTERNAL_API_KEY_REMOVED/SECRET_KEY_REMOVED，旧版KIM直连脚本（send_ai_daily.py等）完全不可用。workflow写"二选一"导致Agent浪费时间尝试必失败的路径B。
 
 **强制规则**：
 ```bash
 # Work模式唯一推送路径（禁止"二选一"误导）
 python3 scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/card.json --with-summary
-# 然后读取 card.json，用 message(channel=kim, kimMixCard=<card>) 发送
+# 然后读取 card.json，用 message(channel=kim, mixCard=<card>) 发送
 
 # ❌ 禁止尝试 send_ai_daily.py（无凭证=必失败）
 # ❌ 禁止纯文本降级（丢失卡片结构）

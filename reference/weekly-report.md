@@ -221,8 +221,8 @@ cd public && npx -y --registry https://npm.corp.kuaishou.com @codeflicker/fronte
 
 ```
 内部版：
-1. 📄 本周周报：https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html
-2. 🏠 AI洞察首页：https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/
+1. 📄 本周周报：https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html
+2. 🏠 AI洞察首页：https://xiaoxiong20260206.github.io/ai-insight/
 
 外部版：
 3. 📄 本周周报：https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html
@@ -286,9 +286,9 @@ uv run scripts/build_insight_mixcard.py weekly --date YYYY-WXX --output /tmp/car
 
 ```
 📊 周报四链接自检：
-🔒 内部版：https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html
+🔒 内部版：https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html
 🌐 外部版：https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html
-🏠 内部首页：https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/
+🏠 内部首页：https://xiaoxiong20260206.github.io/ai-insight/
 🌐 外部首页：https://xiaoxiong20260206.github.io/ai-insight-public/
 ```
 

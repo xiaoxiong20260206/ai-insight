@@ -2,7 +2,7 @@
 """
 AI洞察 mixCard JSON 统一生成器
 =============================
-为所有 AI洞察 KIM 推送场景生成 mixCard JSON，供 MyFlicker message 工具 + kimMixCard 参数使用。
+为所有 AI洞察 KIM 推送场景生成 mixCard JSON，供 MyFlicker message 工具 + mixCard 参数使用。
 
 覆盖场景:
 1. AI日报 (daily)     — 统一入口（旧版 build_daily_mixcard.py 已归档废弃）
@@ -20,7 +20,7 @@ AI洞察 mixCard JSON 统一生成器
 - 所有卡片共享统一格式：config/forwardType=3/wideSelfAdaptive/updateMulti=1
 - 所有卡片双按钮统一：按钮1=当期内容(绿) + 按钮2=了解AI洞察项目(蓝)
 - 所有卡片页脚统一：*林克（沈浪的AI分身）· AI洞察*
-- 输出不含 appKey（由 message 工具的 kimMixCard 机制处理，不走 KIM API）
+- 输出不含 appKey（由 message 工具的 mixCard 机制处理，不走 KIM API）
 
 作者: 林克 (沈浪的AI分身)
 版本: 1.0.0 (2026-04-29: 统一日报/周报/深度调研/产品本质)
@@ -50,7 +50,7 @@ def _divider(block_id: str) -> dict:
 
 def _content(block_id: str, text: str) -> dict:
     return {"blockId": block_id, "type": "content",
-            "text": {"type": "kimMd", "content": text}}
+            "text": {"type": "richText", "content": text}}
 
 
 def _footer(tag: str = "") -> dict:

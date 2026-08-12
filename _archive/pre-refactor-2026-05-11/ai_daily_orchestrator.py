@@ -562,7 +562,7 @@ def _agent_instruction(key: str, date: str, is_retry: bool) -> str:
             f"{prefix}KIM推送 ({date})。"
             "先预览: python3 scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/card.json --with-summary\n"
             "预览: python3 scripts/build_insight_mixcard.py daily --date <DATE> --output /tmp/card.json --with-summary\n"
-            "然后读取 card.json，用 message(channel=kim, kimMixCard=<card>, ...) 发送\n"
+            "然后读取 card.json，用 message(channel=kim, mixCard=<card>, ...) 发送\n"
             "完成后执行: python3 scripts/ai_daily_orchestrator.py complete --step 5"
         )
     return ""
@@ -941,8 +941,8 @@ def run_link_homepage_sync() -> bool:
 # ── 命令: push (Step 5) ──────────────────────────────────
 def cmd_push(date: str, preview_only: bool = True) -> bool:
     """KIM推送（Work模式：生成 mixCard JSON，由 Agent 通过 message 工具发送）
-    旧版 send_ai_daily.py 需要 KIM_APP_KEY/SECRET_KEY，Work模式不可用。
-    新版流程：生成 mixCard JSON → Agent 读取并调用 message(kimMixCard=...) 发送。
+    旧版 send_ai_daily.py 需要 INTERNAL_API_KEY_REMOVED/SECRET_KEY_REMOVED，Work模式不可用。
+    新版流程：生成 mixCard JSON → Agent 读取并调用 message(mixCard=...) 发送。
     """
     # 生成 mixCard JSON 文件
     card_path = PROJECT_DIR / "data" / f"card-{date}.json"
@@ -956,7 +956,7 @@ def cmd_push(date: str, preview_only: bool = True) -> bool:
         )
         if result.returncode == 0:
             print(result.stdout[-300:] if len(result.stdout) > 300 else result.stdout)
-            print(f"\n  ⚠️ 下一步：读取 {card_path}，用 message(channel=kim, kimMixCard=<card>, ...) 发送")
+            print(f"\n  ⚠️ 下一步：读取 {card_path}，用 message(channel=kim, mixCard=<card>, ...) 发送")
             mark_step(date, "push", "completed")
             return True
             mark_step(date, "push", "completed")
