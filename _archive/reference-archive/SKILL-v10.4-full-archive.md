@@ -167,7 +167,7 @@ python3 scripts/ai_daily_orchestrator.py finalize --date 2026-03-15
 > **注意**: 卡片包含热度趋势+动态+深度聚焦，规律洞察仅在网页版呈现。
 
 ### ⛔ P0红线: KIM推送必须用 mixCard，禁止纯文本降级（v10.3 经验61）
-> **2026-04-29教训**: 容器重建后 KIM_APP_KEY/SECRET_KEY 丢失，
+> **2026-04-29教训**: 容器重建后 INTERNAL_API_KEY_REMOVED/SECRET_KEY_REMOVED 丢失，
 > send_ai_daily.py 无法运行（⚠️此脚本已归档废弃，Work模式用 build_insight_mixcard.py）。Agent 退而求其次用 message 工具发了纯文本，
 > 完全丢失卡片结构（热度趋势/5板块/深度聚焦/林克自述/双按钮）。
 >
@@ -175,7 +175,7 @@ python3 scripts/ai_daily_orchestrator.py finalize --date 2026-03-15
 > - 凭证缺失时不是降级为纯文本，而是走 mixCard 路径：
 >   ```bash
 >   python3 scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/card.json
->   # 然后用 message(channel=kim, kimMixCard=<card>, ...) 发送
+>   # 然后用 message(channel=kim, mixCard=<card>, ...) 发送
 >   ```
 > - **任何情况下日报推送必须包含完整的 block 结构**（header/subtitle/heat/sec1~5/capability/footer/buttons）
 > - 两条路径（直连API vs message工具）必须保持卡片 JSON 结构一致
@@ -277,11 +277,11 @@ python3 scripts/ai_daily_orchestrator.py finalize --date 2026-03-15
 ```bash
 # 路径A（推荐）：mixCard 通过 message 工具
 python3 scripts/build_insight_mixcard.py weekly --date YYYY-Www --output /tmp/card.json
-# 然后用 message(channel=kim, kimMixCard=<card>, ...) 发送
+# 然后用 message(channel=kim, mixCard=<card>, ...) 发送
 
 # 路径B（旧版）：直连 KIM API（需要凭证）
 python3 scripts/build_insight_mixcard.py weekly --date YYYY-Www --output /tmp/card.json --with-summary # 先预览
-message(channel=kim, kimMixCard=<card>, ...)  # 确认后发群
+message(channel=kim, mixCard=<card>, ...)  # 确认后发群
 ```
 
 ### P0规则
@@ -317,7 +317,7 @@ message(channel=kim, kimMixCard=<card>, ...)  # 确认后发群
 ```bash
 # 路径A（推荐）：mixCard 通过 message 工具
 python3 scripts/build_insight_mixcard.py research --slug <slug> --output /tmp/card.json
-# 然后用 message(channel=kim, kimMixCard=<card>, ...) 发送
+# 然后用 message(channel=kim, mixCard=<card>, ...) 发送
 
 # 路径B（旧版）：直连 KIM API
 python3 scripts/send_deep_research_card.py
@@ -622,7 +622,7 @@ python3 scripts/fetch_arxiv.py --days 1 --json --output data/arxiv-daily.json
 | **58** | **⭐深度调研只推外部版漏推内部版(2026-04-25)** | **sync_to_external.py 只把文件推送到 `ai-insight-public` 仓库，但 `AI-Insight` 主仓库（`ai-insight.git`）的 HTML 文件和 index.html 卡片变更没有 `git add+commit+push`，导致内部版 GitHub Pages（`ai-insight/`）404。两个仓库都需要提交：① `git push` 内部版主仓库；② `sync_to_external.py` 推外部版，缺一不可。记忆口诀：sync推外部，push推内部。另外 sync_to_public.py 不支持 `--deep-research` 等参数（会报 unrecognized arguments），深度调研文件需手动 cp 到 public/ 再运行无参数版** |
 | **59** | **⭐三版首页卡片各自独立，无一自动同步(2026-04-25)** | **Step 6 在 AI-Insight/index.html 新增卡片后，public/index.html 和 ai-insight-public/index.html 均不会自动更新。根因：sync_to_public.py 有 preserve_block 机制保留公开版深度调研区块（新卡片不传播），ai-insight-public 是独立仓库也不会自动跟随。修复：Step 5.5 新增四端首页卡片门控检查——用 grep 验证三份 index.html 均包含新报告 slug，缺一不可** |
 | **60** | **⭐微信搜狗占位符链接不可达(2026-04-27)** | **Subagent在微信搜索API返回空时，生成了`weixin.sogou.com/weixin?type=2&query=...`格式的搜索链接作为占位符。但这些是搜索页面链接，不是文章链接，预检判定为不可达。根因：Subagent未正确处理微信API空结果。修复：将搜狗搜索链接替换为空URL（source标注微信即可）。与#34不同：#34是搜索策略问题，本次是占位符格式问题** |
-| **61** | **⭐KIM日报推送退化为纯文本(2026-04-29)** | **容器重建后 KIM_APP_KEY/SECRET_KEY 丢失，send_ai_daily.py 无法直连 KIM API。Agent 退而求其次用 message 工具发了纯文本消息，但纯文本丢失了卡片结构（热度趋势/5板块/深度聚焦/林克自述/双按钮）。根因：没有 mixCard 降级路径，缺少"必须用卡片"的硬约束。修复：统一入口改为 `scripts/build_insight_mixcard.py`（日报/周报/调研/产品），Work模式唯一路径A: message+kimMixCard，路径B(KIM直连)已废弃；新增 P0 红线禁止纯文本推送** |
+| **61** | **⭐KIM日报推送退化为纯文本(2026-04-29)** | **容器重建后 INTERNAL_API_KEY_REMOVED/SECRET_KEY_REMOVED 丢失，send_ai_daily.py 无法直连 KIM API。Agent 退而求其次用 message 工具发了纯文本消息，但纯文本丢失了卡片结构（热度趋势/5板块/深度聚焦/林克自述/双按钮）。根因：没有 mixCard 降级路径，缺少"必须用卡片"的硬约束。修复：统一入口改为 `scripts/build_insight_mixcard.py`（日报/周报/调研/产品），Work模式唯一路径A: message+mixCard，路径B(KIM直连)已废弃；新增 P0 红线禁止纯文本推送** |
 
 | **97** | **⭐Work模式路径迁移：rebase覆盖修复(2026-05-04)** | **从Code模式切到Work模式后，13文件旧路径引用修复。git rebase解决冲突时选了origin/main版本，3个文件（SKILL.md/deep-research.md/orchestrator.py）修复被回退。修复：rebase后必须二次验证全部修改未被覆盖；技能目录升级为完整git仓库；旧仓库删除** |
 | **98** | **⭐周报mixCard缺footer/subtitle→卡片不完整(2026-05-04)** | **build_insight_mixcard.py build_weekly()遗漏footer和subtitle block。日报有完整结构但周报只有header+top5+insight+buttons。修复：所有卡片必须包含header→subtitle→content→footer→buttons完整结构，缺一=阻断** |

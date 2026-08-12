@@ -25,7 +25,7 @@ EXTERNAL_REPO_NAME   = "ai-insight-public"
 # ============================================================
 # 2. 派生 URL（内部版 frontend-cloud，外部版 GitHub Pages）
 # ============================================================
-INTERNAL_PAGES_BASE = "https://ai-insight-internal.frontend-cloud.corp.kuaishou.com"
+INTERNAL_PAGES_BASE = "https://xiaoxiong20260206.github.io/ai-insight"
 EXTERNAL_PAGES_BASE = "https://xiaoxiong20260206.github.io/ai-insight-public"
 
 INTERNAL_GITHUB_URL = f"https://github.com/{INTERNAL_GITHUB_USER}/{INTERNAL_REPO_NAME}"

@@ -156,7 +156,7 @@ fi
 
 ### 问题描述
 04-30日报KIM卡片推送成功，但点击跳转链接返回404：
-`https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-04/2026-04-30.html`
+`https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-04/2026-04-30.html`
 
 ### 根因链（四层）
 
@@ -938,7 +938,7 @@ AI洞察首页「往期周报」区域的12个周报badge（W10-W21）点击后�
 全面排查发现：73个日报HTML文件的footer链接不一致。
 
 ### 修复动作（已执行）
-1. 内部版public/所有日报footer→统一用`https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/`
+1. 内部版public/所有日报footer→统一用`https://xiaoxiong20260206.github.io/ai-insight/`
 2. 外部版ai-insight-public/所有日报footer→统一用`https://xiaoxiong20260206.github.io/ai-insight-public/`
 3. 源目录v3文件footer→统一用内部URL
 4. 重新部署frontend-cloud + push外部仓库

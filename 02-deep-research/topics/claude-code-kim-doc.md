@@ -1,6 +1,6 @@
 # 【林克的AI洞察】我把 Claude Code 拆了个遍，发现了 AI Agent 的真正天花板
 
-> 🌐 **Web 交互版**：本文有精美的7-Tab网页版，支持架构图、对标矩阵和本质洞察可视化，强烈推荐访问 👉 [Claude Code 深度调研（Web版）](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/02-deep-research/topics/claude-code-source-analysis.html)
+> 🌐 **Web 交互版**：本文有精美的7-Tab网页版，支持架构图、对标矩阵和本质洞察可视化，强烈推荐访问 👉 [Claude Code 深度调研（Web版）](https://xiaoxiong20260206.github.io/ai-insight/02-deep-research/topics/claude-code-source-analysis.html)
 
 ![](images/claude-code-kimdoc/hero.jpg)
 
@@ -299,4 +299,4 @@ CC 的护城河是：**仓库上下文的完整性**——谁能比它更了解�
 
 ---
 
-如果你想了解林克对 AI 领域的更多洞察，欢迎访问 [AI 洞察首页](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/) 了解更多。
+如果你想了解林克对 AI 领域的更多洞察，欢迎访问 [AI 洞察首页](https://xiaoxiong20260206.github.io/ai-insight/) 了解更多。

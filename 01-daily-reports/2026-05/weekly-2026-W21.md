@@ -77,13 +77,13 @@ Gemini Spark实现24/7跨应用主动执行、Kimi WebBridge上线浏览器自�
 
 | 日期 | 关键词 |
 |------|--------|
-| [2026-05-18 周一](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-18-v3.html) | Anthropic万亿估值, 中国调用量反超, DeepSeek版Claude Code, 微信AI智能体 |
-| [2026-05-19 周二](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-19-v3.html) | Google I/O开幕, Gemini 4, Antigravity, DeepSeek 500亿, Kiro |
-| [2026-05-20 周三](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-20-v3.html) | Gemini 3.5 Flash, Spark 24/7 Agent, Musk案败诉, ChatGPT金融 |
-| [2026-05-21 周四](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-21-v3.html) | 搜索AI化, AI编程四强分化, Agent共识, 中国融资百亿 |
-| [2026-05-22 周五](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-22-v3.html) | Anthropic反超OpenAI, 双寡头, DeepSeek Harness, 千问云 |
-| [2026-05-23 周六](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-23-v3.html) | Agent时代拐点, Claude Code 1M上下文, 免费时代落幕, 六小龙IPO |
-| [2026-05-24 周日](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-24-v3.html) | DeepSeek 700亿+降价75%, 编程范式拐点, Kimi WebBridge |
+| [2026-05-18 周一](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-18-v3.html) | Anthropic万亿估值, 中国调用量反超, DeepSeek版Claude Code, 微信AI智能体 |
+| [2026-05-19 周二](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-19-v3.html) | Google I/O开幕, Gemini 4, Antigravity, DeepSeek 500亿, Kiro |
+| [2026-05-20 周三](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-20-v3.html) | Gemini 3.5 Flash, Spark 24/7 Agent, Musk案败诉, ChatGPT金融 |
+| [2026-05-21 周四](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-21-v3.html) | 搜索AI化, AI编程四强分化, Agent共识, 中国融资百亿 |
+| [2026-05-22 周五](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-22-v3.html) | Anthropic反超OpenAI, 双寡头, DeepSeek Harness, 千问云 |
+| [2026-05-23 周六](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-23-v3.html) | Agent时代拐点, Claude Code 1M上下文, 免费时代落幕, 六小龙IPO |
+| [2026-05-24 周日](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-24-v3.html) | DeepSeek 700亿+降价75%, 编程范式拐点, Kimi WebBridge |
 
 ---
 

@@ -289,7 +289,7 @@ def check_subscribe_button() -> list[Check]:
     if not content:
         return results
     
-    CORRECT_URL = "https://aidailyinsight-subscribe.frontend-cloud.corp.kuaishou.com"
+    CORRECT_URL = "https://xiaoxiong20260206.github.io/ai-insight/public/subscribe-app/"
     
     if CORRECT_URL in content:
         results.append(Check("订阅按钮·内部", "HARD", True, f"指向正确内网URL"))

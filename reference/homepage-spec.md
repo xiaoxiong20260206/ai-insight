@@ -107,7 +107,7 @@ uv run scripts/update_homepage.py 2026-WXX --type weekly \
 
 ```html
 <!-- ✅ 正确：绝对内网URL -->
-<a href="https://aidailyinsight-subscribe.frontend-cloud.corp.kuaishou.com">📧 订阅</a>
+<a href="https://xiaoxiong20260206.github.io/ai-insight/public/subscribe-app/">📧 订阅</a>
 
 <!-- ❌ 错误：相对路径（frontend-cloud 302重定向导致SSO失败） -->
 <a href="./subscribe/">📧 订阅</a>
@@ -145,7 +145,7 @@ uv run scripts/update_homepage.py 2026-WXX --type weekly \
 □ 内部版 git push 成功
 □ 外部版 git push 成功
 □ 内部版 frontend-cloud deploy 成功
-□ 验证内部版首页：https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/
+□ 验证内部版首页：https://xiaoxiong20260206.github.io/ai-insight/
 □ 验证外部版首页：https://xiaoxiong20260206.github.io/ai-insight-public/
 ```
 
@@ -207,7 +207,7 @@ uv run scripts/update_homepage.py 2026-WXX --type weekly \
         系统化追踪AI行业动态，每日/每周输出调研洞察，帮助你保持对AI行业的全局视野
     </p>
     <div style="margin-top: 24px; text-align: center; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-        <a href="https://aidailyinsight-subscribe.frontend-cloud.corp.kuaishou.com" style="...">📧 订阅AI日报（每天08:00推送）</a>
+        <a href="https://xiaoxiong20260206.github.io/ai-insight/public/subscribe-app/" style="...">📧 订阅AI日报（每天08:00推送）</a>
         <a href="https://xiaoxiong20260206.github.io/ai-insight-public/" style="...">🌐 外部版入口</a>
     </div>
 </header>
@@ -354,7 +354,7 @@ uv run scripts/update_homepage.py 2026-WXX --type weekly \
 | 身份描述 | AI分身、让我负责、AI数字分身 | 暗示个人身份 |
 | 内部体系 | 小无相功、SKILL.md、KIM Doc | 内部方法论 |
 | 内网地址 | docs.corp.kuaishou.com | 内网地址 |
-| 订阅按钮 | `https://aidailyinsight-subscribe.frontend-cloud.corp.kuaishou.com` | 内部KIM订阅（⚠️禁止用`./subscribe/`相对路径，会触发SSO 302拦截） |
+| 订阅按钮 | `https://xiaoxiong20260206.github.io/ai-insight/public/subscribe-app/` | 内部KIM订阅（⚠️禁止用`./subscribe/`相对路径，会触发SSO 302拦截） |
 
 ---
 

@@ -56,8 +56,8 @@ message(action=send, channel=kim, target={{OWNER_KIM_USERNAME}}, kimMixCard=<car
 
 ```
 内部版：
-1. 📄 https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html
-2. 🏠 https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/
+1. 📄 https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html
+2. 🏠 https://xiaoxiong20260206.github.io/ai-insight/
 外部版：
 3. 📄 https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/YYYY-MM/weekly-YYYY-WXX.html
 4. 🏠 https://xiaoxiong20260206.github.io/ai-insight-public/
