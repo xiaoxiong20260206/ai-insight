@@ -22,7 +22,7 @@ Ramp数据显示Anthropic企业付费采用率首次超越OpenAI。Claude Code�
 
 Kimi K2.6、MiniMax M2.7、Z.ai GLM-5.1、DeepSeek V4四款开源编码模型12天内集中发布，SWE-Bench Pro 56-59分区间，推理价格不到Claude Opus 4.7的1/3。Air Street Press明确指出：'中国落后6-9月'叙事在agentic coding领域不再成立。
 
-来源：[AI洞察日报](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-15-v3.html)
+来源：[AI洞察日报](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-15-v3.html)
 
 ### 4. AI编程安全危机：45%漏洞率+删库事故，能力膨胀与治理缺位
 
@@ -73,12 +73,12 @@ AI行业2026年的核心矛盾不再是技术差距，而是商业利益分配�
 
 | 日期 | 链接 |
 |------|------|
-| 2026-05-12（周一） | [AI洞察日报](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-12-v3.html) |
-| 2026-05-13（周二） | [AI洞察日报](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-13-v3.html) |
-| 2026-05-14（周三） | [AI洞察日报](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-14-v3.html) |
-| 2026-05-15（周四） | [AI洞察日报](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-15-v3.html) |
-| 2026-05-16（周五） | [AI洞察日报](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-16-v3.html) |
-| 2026-05-17（周六） | [AI洞察日报](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-17-v3.html) |
+| 2026-05-12（周一） | [AI洞察日报](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-12-v3.html) |
+| 2026-05-13（周二） | [AI洞察日报](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-13-v3.html) |
+| 2026-05-14（周三） | [AI洞察日报](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-14-v3.html) |
+| 2026-05-15（周四） | [AI洞察日报](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-15-v3.html) |
+| 2026-05-16（周五） | [AI洞察日报](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-16-v3.html) |
+| 2026-05-17（周六） | [AI洞察日报](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-17-v3.html) |
 
 ---
 
@@ -93,15 +93,15 @@ AI行业2026年的核心矛盾不再是技术差距，而是商业利益分配�
 | OpenAI成立40亿DeployCo，收购Tomoro加速企业落地 | TechAfricaNews | [链接](https://techafricanews.com/2026/05/12/openai-unveils-new-deployment-company-backed-by-4-billion-investment/) |
 | OpenAI GPT-5.5 Instant降低幻觉50%+实时语音三模型GA | OpenAI | [链接](https://openai.com/index/gpt-5-5-with-trusted-access-for-cyber/) |
 | ChatGPT广告平台上线美国测试 | OpenAI | [链接](https://openai.com/index/gpt-5-5-with-trusted-access-for-cyber/) |
-| OpenAI×苹果合作破裂：隐私冲突+战略重叠 | Bloomberg | [链接](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-16-v3.html) |
-| Anthropic首超OpenAI企业采用率 | Ramp | [链接](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-17-v3.html) |
+| OpenAI×苹果合作破裂：隐私冲突+战略重叠 | Bloomberg | [链接](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-16-v3.html) |
+| Anthropic首超OpenAI企业采用率 | Ramp | [链接](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-17-v3.html) |
 | DeepSeek 500亿融资：梁文锋自投200亿 | 东方财富 | [链接](https://caifuhao.eastmoney.com/news/20260509161242154360330) |
-| DeepSeek V4开源：推理价格不到Claude Opus 1/3 | Air Street Press | [链接](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-15-v3.html) |
-| Kimi K2.6登顶综合基准 | AI洞察日报 | [链接](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-17-v3.html) |
-| 文心5.1：6%预训练成本做到全球第四 | 百度 | [链接](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-17-v3.html) |
-| 中国开源编码模型12天齐发 | Air Street Press | [链接](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-15-v3.html) |
+| DeepSeek V4开源：推理价格不到Claude Opus 1/3 | Air Street Press | [链接](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-15-v3.html) |
+| Kimi K2.6登顶综合基准 | AI洞察日报 | [链接](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-17-v3.html) |
+| 文心5.1：6%预训练成本做到全球第四 | 百度 | [链接](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-17-v3.html) |
+| 中国开源编码模型12天齐发 | Air Street Press | [链接](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-15-v3.html) |
 | Meta弃Llama推闭源Muse Spark | TheNewStack | [链接](https://thenewstack.io/meta-abandons-llama-spark/) |
-| Cerebras 55亿IPO暴涨81% | Cerebras | [链接](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-16-v3.html) |
+| Cerebras 55亿IPO暴涨81% | Cerebras | [链接](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-16-v3.html) |
 
 ---
 
@@ -109,15 +109,15 @@ AI行业2026年的核心矛盾不再是技术差距，而是商业利益分配�
 
 | 事件 | 来源 | 链接 |
 |------|------|------|
-| Cursor云Agent开发环境发布：舰队模式 | Cursor | [链接](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-14-v3.html) |
-| Cursor高危CVE-2026-26268：恶意Git仓库触发任意代码执行 | CVE | [链接](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-16-v3.html) |
+| Cursor云Agent开发环境发布：舰队模式 | Cursor | [链接](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-14-v3.html) |
+| Cursor高危CVE-2026-26268：恶意Git仓库触发任意代码执行 | CVE | [链接](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-16-v3.html) |
 | Cursor $1B ARR创纪录 | CNBC | [链接](https://www.cnbc.com/2026/04/19/cursor-ai-2-billion-funding-round.html) |
 | Trae SOLO模式开放：AI主导全流程交付 | 字节 | [链接](https://blog.csdn.net/aibridge/article/details/160722148) |
-| AI编程工具三足鼎立：Cursor日常+Claude Code重写+Trae免费 | AI洞察日报 | [链接](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-13-v3.html) |
-| AI代码45%含安全漏洞 | Gartner | [链接](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-15-v3.html) |
-| PocketOS生产数据库被AI Agent 10秒删除 | AI洞察日报 | [链接](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-16-v3.html) |
+| AI编程工具三足鼎立：Cursor日常+Claude Code重写+Trae免费 | AI洞察日报 | [链接](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-13-v3.html) |
+| AI代码45%含安全漏洞 | Gartner | [链接](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-15-v3.html) |
+| PocketOS生产数据库被AI Agent 10秒删除 | AI洞察日报 | [链接](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-16-v3.html) |
 | Opsera×Cursor：DevSecOps Agent嵌入IDE | SDTimes | [链接](https://sdtimes.com/ai/may-8-2026-ai-updates-from-the-past-week-coder-agents-launch-snyk-claude-partnership-opsera-cursor-partnership-and-more/) |
-| GitHub Copilot 6月1日用量计费生效 | GitHub | [链接](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-13-v3.html) |
+| GitHub Copilot 6月1日用量计费生效 | GitHub | [链接](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-13-v3.html) |
 | Claude Code崛起为架构师级工具 | Anthropic | [链接](https://www.anthropic.com/news/claude-opus-4-7) |
 
 ---
@@ -126,15 +126,15 @@ AI行业2026年的核心矛盾不再是技术差距，而是商业利益分配�
 
 | 事件 | 来源 | 链接 |
 |------|------|------|
-| iOS 27开放第三方AI：Apple从壁垒走向超市 | Apple | [链接](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-17-v3.html) |
+| iOS 27开放第三方AI：Apple从壁垒走向超市 | Apple | [链接](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-17-v3.html) |
 | ChatGPT被Z世代当'操作系统'使用 | Fortune | [链接](https://fortune.com/article/sam-altman-chatgpt-gen-z-millennials-life-advisor-operating-system/) |
 | Meta WhatsApp隐身AI对话：隐私优先 | Meta | [链接](https://about.fb.com/news/2026/05/incognito-chat-whatsapp-meta-ai/) |
 | Kimi K2.6 Agent Swarm并行化29%性能跃升 | Kimi | [链接](https://ai.zol.com.cn/1176/11768009.html) |
 | 豆包3.45亿月活商业化口碑反转 | 百家号 | [链接](https://baijiahao.baidu.com/s?id=1864701624037474631) |
 | xAI Grok深度伪造引发监管风暴 | CA AG | [链接](https://oag.ca.gov/news/press-releases/attorney-general-bonta-sends-cease-and-desist-letter-xai-demands-it-halt-illegal) |
-| 三部委智能体新规+AI终端L1-L4国标 | AI洞察日报 | [链接](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-12-v3.html) |
+| 三部委智能体新规+AI终端L1-L4国标 | AI洞察日报 | [链接](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-12-v3.html) |
 | DeepSeek开放识图：跨入多模态时代 | 头条 | [链接](https://m.toutiao.com/article/7636960892638511650/) |
-| AIGC版权首案确立'人类智力投入'标准 | AI洞察日报 | [链接](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-12-v3.html) |
+| AIGC版权首案确立'人类智力投入'标准 | AI洞察日报 | [链接](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-12-v3.html) |
 
 ---
 
@@ -147,11 +147,11 @@ AI行业2026年的核心矛盾不再是技术差距，而是商业利益分配�
 | 阶跃星辰25亿美元估值100亿 | 头条 | [链接](https://m.toutiao.com/a1864767065946240/) |
 | 字节AI基础设施支出增至2000亿 | 雪球 | [链接](https://xueqiu.com/9822158948/387981883) |
 | 中国AI四小龙估值破万亿 | 新浪 | [链接](https://k.sina.cn/article_7857201856_1d45362c001905a1pa.html) |
-| Cerebras 55亿IPO暴涨81% | AI洞察日报 | [链接](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-16-v3.html) |
-| Sierra $15.8B估值 | AI洞察日报 | [链接](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-15-v3.html) |
-| Ineffable $1.1B seed创欧洲纪录 | AI洞察日报 | [链接](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-15-v3.html) |
-| Anthropic 2000亿云协议 | AI洞察日报 | [链接](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-17-v3.html) |
-| Nvidia 400亿股权投资 | AI洞察日报 | [链接](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-12-v3.html) |
+| Cerebras 55亿IPO暴涨81% | AI洞察日报 | [链接](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-16-v3.html) |
+| Sierra $15.8B估值 | AI洞察日报 | [链接](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-15-v3.html) |
+| Ineffable $1.1B seed创欧洲纪录 | AI洞察日报 | [链接](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-15-v3.html) |
+| Anthropic 2000亿云协议 | AI洞察日报 | [链接](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-17-v3.html) |
+| Nvidia 400亿股权投资 | AI洞察日报 | [链接](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-12-v3.html) |
 
 ---
 
@@ -162,13 +162,13 @@ AI行业2026年的核心矛盾不再是技术差距，而是商业利益分配�
 | Deloitte：66%企业获效率提升，投产6月翻倍 | Deloitte | [链接](https://www.deloitte.com/us/en/what-we-do/capabilities/applied-artificial-intelligence/content/state-of-ai-in-the-enterprise.html) |
 | WRITER：75%高管承认AI策略'为秀不为用' | WRITER | [链接](https://www.linkedin.com/posts/diegolomanto_writers-2026-ai-adoption-in-the-enterprise-activity-7447288936793772033-7HgF) |
 | PwC：仅34%企业AI产生可衡量财务影响 | RTS Labs | [链接](https://rtslabs.com/enterprise-ai-roadmap/) |
-| 46%企业AI项目未达预期：运营而非技术是根因 | Coastal/Oxford | [链接](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-15-v3.html) |
+| 46%企业AI项目未达预期：运营而非技术是根因 | Coastal/Oxford | [链接](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-15-v3.html) |
 | OpenAI DeployCo+FDE驻场模式 | OpenAI | [链接](https://techafricanews.com/2026/05/12/openai-unveils-new-deployment-company-backed-by-4-billion-investment/) |
-| Anthropic入局企业驻场服务 | Anthropic | [链接](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-16-v3.html) |
-| 88%试点无法投产 | Gartner | [链接](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-15-v3.html) |
-| AI付费率仅0.3%：聊天变现天花板已现 | Ramp | [链接](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-16-v3.html) |
-| 中国Token周调用7.9万亿反超美国 | 工信部 | [链接](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-17-v3.html) |
-| 文心5.1降本94%：成本革命消除落地门槛 | 百度 | [链接](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-05/2026-05-17-v3.html) |
+| Anthropic入局企业驻场服务 | Anthropic | [链接](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-16-v3.html) |
+| 88%试点无法投产 | Gartner | [链接](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-15-v3.html) |
+| AI付费率仅0.3%：聊天变现天花板已现 | Ramp | [链接](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-16-v3.html) |
+| 中国Token周调用7.9万亿反超美国 | 工信部 | [链接](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-17-v3.html) |
+| 文心5.1降本94%：成本革命消除落地门槛 | 百度 | [链接](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-05/2026-05-17-v3.html) |
 
 ---
 

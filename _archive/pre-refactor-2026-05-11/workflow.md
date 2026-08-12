@@ -391,7 +391,7 @@ git push origin main
 
 ### 推送路径（Work模式唯一路径）
 
-> ⚠️ **Work模式说明**: 运行环境无 KIM_APP_KEY/SECRET_KEY 环境变量，旧版直连 KIM API（路径B）**不可用**。必须使用路径 A。
+> ⚠️ **Work模式说明**: 运行环境无 INTERNAL_API_KEY_REMOVED/SECRET_KEY_REMOVED 环境变量，旧版直连 KIM API（路径B）**不可用**。必须使用路径 A。
 
 #### 路径 A（唯一可用）: mixCard 通过 message 工具发送
 
@@ -404,7 +404,7 @@ python3 scripts/build_insight_mixcard.py daily --date YYYY-MM-DD --output /tmp/c
 #    message(
 #        channel="kim",
 #        target="username:shenlang03",
-#        kimMixCard=<card.json 中 card 字段的 JSON 对象>,
+#        mixCard=<card.json 中 card 字段的 JSON 对象>,
 #        message=<card.json 中 summary 字段>
 #    )
 ```
@@ -453,13 +453,13 @@ for s in active:
     print(f'{s[\"username\"]}|{s.get(\"kwaiUserId\", \"\")}')
 "
 # 2. 对每个订阅者，使用 message 工具发送同一份 MixCard（复用 Step 5 生成的 card.json）
-#    message(channel="kim", target="username:XXX", kimMixCard=<card>, message=<summary>)
+#    message(channel="kim", target="username:XXX", mixCard=<card>, message=<summary>)
 # 3. 记录推送结果
 ```
 
 ### ✅ Step 5 Checklist
 - [ ] 使用路径 A（统一生成器 build_insight_mixcard.py）
-- [ ] 生成 mixCard JSON → 通过 message + kimMixCard 发送
+- [ ] 生成 mixCard JSON → 通过 message + mixCard 发送
 - [ ] 在 KIM 中确认收到卡片，**验证包含热度趋势+5板块+深度聚焦+林克自述+双按钮**
 - [ ] 标记完成：`python3 scripts/ai_daily_orchestrator.py complete --step 5`
 

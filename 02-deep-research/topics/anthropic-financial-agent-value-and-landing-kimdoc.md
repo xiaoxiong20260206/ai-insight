@@ -4,7 +4,7 @@
 
 # 01 行业信号：Anthropic正式下场做金融垂直Agent
 
-![传统模式 vs Agent模式](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/3f2a9246c98bcc05ae145c4c7.jpg)
+![传统模式 vs Agent模式](https://placehold.co/980x551/png?text=Image+Unavailable)
 
 2026年5月5日，Anthropic发布10个金融AI Agent模板，并在GitHub开源skills仓库（Apache 2.0）。这不是实验项目——Blackstone、Goldman Sachs、Hellman & Friedman合资成立了企业AI服务公司，Jamie Dimon亲自站台。
 
@@ -19,7 +19,7 @@
 
 # 02 架构本质：不是更强的工具，是可组装的AI员工
 
-![金融Agent三层架构](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/826feb2caab88edf84b6c0bfe.jpg)
+![金融Agent三层架构](https://placehold.co/980x551/png?text=Image+Unavailable)
 
 每个Anthropic金融Agent模板由三层构成：
 
@@ -35,7 +35,7 @@
 
 # 03 对私募公司的价值：替代重复性劳动，释放判断力
 
-![分析师时间重构](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/3f2a9246c98bcc05ae145c4ca.jpg)
+![分析师时间重构](https://placehold.co/980x551/png?text=Image+Unavailable)
 
 私募公司分析师的工作时间分配（行业调研数据）：
 
@@ -50,7 +50,7 @@
 
 # 04 六个高价值场景评估
 
-![六场景优先级阶梯](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/3f2a9246c98bcc05ae145c4c9.jpg)
+![六场景优先级阶梯](https://placehold.co/980x551/png?text=Image+Unavailable)
 
 | # | 场景 | 行业痛点（客观描述） | Agent能做什么 | 落地难度 | 优先级 |
 |---|------|---------------------|--------------|---------|--------|
@@ -65,7 +65,7 @@
 
 # 05 两条落地路径：代价对比
 
-![两条落地路径](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/826feb2caab88edf84b6c0bff.jpg)
+![两条落地路径](https://placehold.co/980x551/png?text=Image+Unavailable)
 
 | 维度 | **路径A：Hermes Agent + 移植Anthropic skills** | **路径B：Claude原生金融Agent部署** |
 |------|------------------------------------------------|-----------------------------------|
@@ -85,7 +85,7 @@
 
 # 06 PM执行视角：Hermes + 金融skills的移植方案
 
-![Skills移植七步流程](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/9beded4d395bb559bd1ad1b06.jpg)
+![Skills移植七步流程](https://placehold.co/980x551/png?text=Image+Unavailable)
 
 **技术可行性**：Hermes Agent和Anthropic都用SKILL.md标准（agentskills.io），skills格式互操作。
 
@@ -143,7 +143,7 @@ location: ~/.hermes/skills/finance/pitch-agent/SKILL.md
 
 # 07 2周POC交付定义和30天落地计划
 
-![30天落地计划](https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/9beded4d395bb559bd1ad1b07.jpg)
+![30天落地计划](https://placehold.co/980x551/png?text=Image+Unavailable)
 
 **POC交付物（2周后领导能看到的实物）**：
 

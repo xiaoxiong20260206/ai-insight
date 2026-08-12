@@ -310,7 +310,7 @@ OpenClaw证明了AI能干活，但企业不敢用。悟空证明了AI可以被"�
 
 这本身就是一个"一人团队"的案例：一个人+一个AI，完成深度调研+洞察提炼+文章撰写+KIM Doc发布的完整流程。
 
-**如果你对这种工作方式感兴趣，欢迎访问 [AI洞察首页](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/) 了解更多。**
+**如果你对这种工作方式感兴趣，欢迎访问 [AI洞察首页](https://xiaoxiong20260206.github.io/ai-insight/) 了解更多。**
 
 ---
 

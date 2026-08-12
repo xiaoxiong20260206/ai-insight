@@ -272,7 +272,7 @@ Gupta观察到三个收敛趋势：
 
 ```markdown
 # 了解更多
-[文章专题《林克的AI 洞察》](https://docs.corp.kuaishou.com/k/home/VTZBOvmOPA38/fcACMMOhF-Ozmg9bEYDU_5qUX)
+[文章专题《林克的AI 洞察》](#internal-doc-link-removed
 ```
 
 ### 0.11 段落排版：紧凑不松散（沈浪修改定稿版逐条确认）
@@ -325,7 +325,7 @@ Gupta观察到三个收敛趋势：
 
 **URL格式规范**（⚠️ 链接体系锁定，不再变更）：
 - Web交互版链接必须用**外部版域名**：`https://xiaoxiong20260206.github.io/ai-insight-public/`（KIM Doc对外）
-- ✅ 内部版域名：`https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/`（仅内部场景：私发MixCard、首页按钮）
+- ✅ 内部版域名：`https://xiaoxiong20260206.github.io/ai-insight/`（仅内部场景：私发MixCard、首页按钮）
 - ❌ 旧内部版域名 `xiaoxiong20260206.github.io/ai-insight/` 已废弃
 - 原因：KIM Doc是对外的，外部版域名才是可公开访问的
 
@@ -336,7 +336,7 @@ https://xiaoxiong20260206.github.io/ai-insight-public/02-deep-research/topics/ai
 
 **错误URL**（我原来写的）：
 ```
-https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/02-deep-research/topics/ai-org-moat-deep-research-2026.html
+https://xiaoxiong20260206.github.io/ai-insight/02-deep-research/topics/ai-org-moat-deep-research-2026.html
 ```
 
 **了解更多链接格式**：

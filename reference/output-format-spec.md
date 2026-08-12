@@ -198,7 +198,7 @@ rank pill (12px/背景色) → 标题 (18px/600) → meta行 (13px/SVG icon) →
 ### 2.5 按钮URL规范
 
 > **⚠️ 链接体系锁定，不再变更**：
-> - 内部版：`https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/`（快手内网，SSO）
+> - 内部版：`https://xiaoxiong20260206.github.io/ai-insight/`（快手内网，SSO）
 > - 外部版：`https://xiaoxiong20260206.github.io/ai-insight-public/`（GitHub Pages，公开）
 > - ❌ 旧内部版 `xiaoxiong20260206.github.io/ai-insight/` 已废弃
 > - 所有脚本URL从 `config.py` SSoT 派生，禁止硬编码

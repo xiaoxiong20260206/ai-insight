@@ -66,8 +66,8 @@ uv run scripts/append_token_record.py --date YYYY-MM-DD --task "AI洞察日报(c
 
 ```
 内部版：
-1. 📄 https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/YYYY-MM/YYYY-MM-DD.html
-2. 🏠 https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/
+1. 📄 https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/YYYY-MM/YYYY-MM-DD.html
+2. 🏠 https://xiaoxiong20260206.github.io/ai-insight/
 外部版：
 3. 📄 https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/YYYY-MM/YYYY-MM-DD.html
 4. 🏠 https://xiaoxiong20260206.github.io/ai-insight-public/

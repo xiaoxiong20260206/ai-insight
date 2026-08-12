@@ -63,13 +63,13 @@ ViBe基准的出现标志着AI Coding赛道评价标准的升级。SWE-bench测�
 
 | 日期 | 关键词 |
 |------|--------|
-| [6月8日(周日)](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-08-v3.html) | OpenAI锁定模式, MCP生态, AI编程信任 |
-| [6月9日(周一)](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-09-v3.html) | WWDC26, Siri AI, MiniMax M3, AI中转站风险 |
-| [6月10日(周二)](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-10-v3.html) | Siri Campo, GPT-4.5退役, 豆包付费, Claude 80%代码 |
-| [6月11日(周三)](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-11-v3.html) | DeepSeek 500亿融资, DeepSeek转型基建, 钉钉ONE复盘 |
-| [6月12日(周四)](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-12-v3.html) | Fable 5, Mythos 5, 智源大会, ViBe基准 |
-| [6月13日(周五)](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-13-v3.html) | AI监管套利, Stripe Ruby迁移, AI付费墙 |
-| [6月14日(周六)](https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/2026-06/2026-06-14-v3.html) | OpenAI IPO, iris-alpha, AI基建竞赛, GEO 942亿 |
+| [6月8日(周日)](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-06/2026-06-08-v3.html) | OpenAI锁定模式, MCP生态, AI编程信任 |
+| [6月9日(周一)](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-06/2026-06-09-v3.html) | WWDC26, Siri AI, MiniMax M3, AI中转站风险 |
+| [6月10日(周二)](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-06/2026-06-10-v3.html) | Siri Campo, GPT-4.5退役, 豆包付费, Claude 80%代码 |
+| [6月11日(周三)](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-06/2026-06-11-v3.html) | DeepSeek 500亿融资, DeepSeek转型基建, 钉钉ONE复盘 |
+| [6月12日(周四)](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-06/2026-06-12-v3.html) | Fable 5, Mythos 5, 智源大会, ViBe基准 |
+| [6月13日(周五)](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-06/2026-06-13-v3.html) | AI监管套利, Stripe Ruby迁移, AI付费墙 |
+| [6月14日(周六)](https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/2026-06/2026-06-14-v3.html) | OpenAI IPO, iris-alpha, AI基建竞赛, GEO 942亿 |
 
 ---
 

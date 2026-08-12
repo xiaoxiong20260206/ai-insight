@@ -1,15 +1,10 @@
-import { Client, Account, Databases, OAuthProvider, Permission, Role, ID, Query } from '@codeflicker/appwrite';
-import { handleOAuth2Token } from '@codeflicker/appwrite';
+// Appwrite configuration has been removed for security.
+// This project previously used an internal Appwrite instance.
+// To deploy your own, configure the following:
+// const DATABASE_ID = '<your-database-id>';
+// const TABLE_ID = '<your-table-id>';
+// const PROJECT_ID = '<your-project-id>';
 
-const DATABASE_ID = 'subscribers';
-const TABLE_ID = 'daily_subscribers';
-const PROJECT_ID = 'aidailyinsight';
-
-export const client = new Client()
-  .setEndpoint(location.origin + '/v1')
-  .setProject(PROJECT_ID);
-
-export const account = new Account(client);
-export const databases = new Databases(client);
-
-export { DATABASE_ID, TABLE_ID, Permission, Role, ID, Query, OAuthProvider, handleOAuth2Token };
+export const DATABASE_ID = '';
+export const TABLE_ID = '';
+export { Permission, Role, ID, Query };

@@ -177,8 +177,8 @@ uv run scripts/ai_daily_orchestrator.py complete --step 5
 
 ```
 内部版：
-1. 📄 当日日报：https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/01-daily-reports/YYYY-MM/YYYY-MM-DD.html
-2. 🏠 AI洞察首页：https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/
+1. 📄 当日日报：https://xiaoxiong20260206.github.io/ai-insight/01-daily-reports/YYYY-MM/YYYY-MM-DD.html
+2. 🏠 AI洞察首页：https://xiaoxiong20260206.github.io/ai-insight/
 
 外部版：
 3. 📄 当日日报：https://xiaoxiong20260206.github.io/ai-insight-public/01-daily-reports/YYYY-MM/YYYY-MM-DD.html

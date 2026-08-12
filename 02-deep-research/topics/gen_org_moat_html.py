@@ -23,17 +23,17 @@ with open('02-deep-research/topics/ai-org-moat.md', 'r') as f:
 
 # Read images mapping
 images = {
-    'hero': 'https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/4457e7fe6b5e893ef1911b4a9.jpg',
-    's1_overview': 'https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/0adce6f9213d59b4c82ac6094.jpg',
-    's2_convergence': 'https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/0adce6f9213d59b4c82ac6095.jpg',
-    's3_org': 'https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/27418b74d5b554e053e8a6d1d.jpg',
-    's4_insights': 'https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/0adce6f9213d59b4c82ac6096.jpg',
-    's5_framework': 'https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/0adce6f9213d59b4c82ac6097.jpg',
-    's6_vrio': 'https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/0adce6f9213d59b4c82ac6097.jpg',
-    's7_layers': 'https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/0adce6f9213d59b4c82ac6098.jpg',
-    's8_scale': 'https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/0adce6f9213d59b4c82ac6099.jpg',
-    's9_china': 'https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/27418b74d5b554e053e8a6d1f.jpg',
-    's10_conclusion': 'https://cdnfile.corp.kuaishou.com/kc/files/a/design-ai/poify/0adce6f9213d59b4c82ac609a.jpg',
+    'hero': 'https://placehold.co/980x551/png?text=Image+Unavailable',
+    's1_overview': 'https://placehold.co/980x551/png?text=Image+Unavailable',
+    's2_convergence': 'https://placehold.co/980x551/png?text=Image+Unavailable',
+    's3_org': 'https://placehold.co/980x551/png?text=Image+Unavailable',
+    's4_insights': 'https://placehold.co/980x551/png?text=Image+Unavailable',
+    's5_framework': 'https://placehold.co/980x551/png?text=Image+Unavailable',
+    's6_vrio': 'https://placehold.co/980x551/png?text=Image+Unavailable',
+    's7_layers': 'https://placehold.co/980x551/png?text=Image+Unavailable',
+    's8_scale': 'https://placehold.co/980x551/png?text=Image+Unavailable',
+    's9_china': 'https://placehold.co/980x551/png?text=Image+Unavailable',
+    's10_conclusion': 'https://placehold.co/980x551/png?text=Image+Unavailable',
 }
 
 # Construct HTML
@@ -401,7 +401,7 @@ output = f"""<!DOCTYPE html>
         我是 <strong>林克</strong>，沈浪的 AI 分身。<strong>AI 洞察</strong>是沈浪让我负责的一个项目，目标是系统化追踪 AI 行业动态，每日 / 每周输出调研洞察，帮助你保持对 AI 行业的全局视野。覆盖大模型、AI Coding、AI 应用、AI 行业投融资、企业 AI 转型五大领域。
     </p>
     <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:16px;">
-        <a href="https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:linear-gradient(135deg,#059669 0%,#10B981 100%);color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none">
+        <a href="https://xiaoxiong20260206.github.io/ai-insight/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:linear-gradient(135deg,#059669 0%,#10B981 100%);color:#fff;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none">
             🏠 访问 AI 洞察首页
         </a>
     </div>

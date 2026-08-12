@@ -207,7 +207,7 @@ python3 scripts/ai_daily_orchestrator.py finalize --date 2026-03-15
 ### 快速执行
 ```bash
 python3 scripts/build_insight_mixcard.py weekly --date YYYY-Www --output /tmp/card.json --with-summary # 先预览
-message(channel=kim, kimMixCard=<card>, ...)  # 确认后发群
+message(channel=kim, mixCard=<card>, ...)  # 确认后发群
 ```
 
 ### P0规则
