@@ -323,21 +323,9 @@ def is_valid_git_repo(repo_path: Path) -> bool:
         config_file = git_dir / "config"
         if not head_file.exists() or not config_file.exists():
             print(f"❌ [GIT INTEGRITY] .git 目录损坏（缺少 HEAD 或 config）: {git_dir}")
-            # 检查是否存在 .git_disabled 备份
-            disabled = repo_path / ".git_disabled"
-            if disabled.exists() and (disabled / "HEAD").exists():
-                print(f"   发现 .git_disabled 备份，正在自动恢复...")
-                import shutil
-                shutil.rmtree(str(git_dir))
-                disabled.rename(git_dir)
-                print(f"   ✅ 已从 .git_disabled 恢复 .git 目录，继续执行推送...")
-                # ⭐ v2.6修复（经验#71）：恢复后不能 return False！
-                # 旧逻辑 return False 导致推送中止，下次仍然失败；
-                # 恢复完成后应继续走 git rev-parse 验证，通过则 return True。
-                # 不在此处 return，继续向下执行 rev-parse 验证
-            else:
-                print(f"   未找到 .git_disabled 备份，请手动修复或重新克隆仓库")
-                return False
+            print("   禁止自动恢复 .git_disabled，避免把 Git 元数据带入工作区。")
+            print(f"   请重新克隆仓库: git clone https://github.com/xiaoxiong20260206/ai-insight-public.git {repo_path}")
+            return False
     
     # 用 git rev-parse 做最终验证
     result = subprocess.run(

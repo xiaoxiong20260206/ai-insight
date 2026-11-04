@@ -291,7 +291,7 @@ function App() {
           {/* Footer */}
           <div className="text-center">
             <a
-              href="https://ai-insight-internal.frontend-cloud.corp.kuaishou.com/"
+              href="https://xiaoxiong20260206.github.io/ai-insight/"
               className="text-xs underline transition-colors duration-200"
               style={{ color: 'var(--forest)' }}
             >
