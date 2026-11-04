@@ -390,17 +390,10 @@ else
     # 检查 .git 是否完整（HEAD 文件必须存在，否则是空壳）
     if [ ! -f "$EXTERNAL_REPO_DIR/.git/HEAD" ] || [ ! -f "$EXTERNAL_REPO_DIR/.git/config" ]; then
         echo "  ❌ [ABORT] 外部仓库 .git 目录损坏（缺少 HEAD 或 config）"
-        # 自动检查是否有 .git_disabled 备份
-        if [ -f "$EXTERNAL_REPO_DIR/.git_disabled/HEAD" ]; then
-            echo "  🔧 发现 .git_disabled 备份，正在自动恢复..."
-            rm -rf "$EXTERNAL_REPO_DIR/.git"
-            mv "$EXTERNAL_REPO_DIR/.git_disabled" "$EXTERNAL_REPO_DIR/.git"
-            echo "  ✅ .git 已从 .git_disabled 恢复，继续同步..."
-        else
-            echo "     未找到 .git_disabled 备份，请手动修复或重新克隆："
-            echo "     git clone https://github.com/xiaoxiong20260206/$EXTERNAL_REPO_NAME.git $EXTERNAL_REPO_DIR"
-            exit 1
-        fi
+        echo "     禁止自动恢复 .git_disabled，避免把 Git 元数据带入工作区。"
+        echo "     请重新克隆外部仓库："
+        echo "     git clone https://github.com/xiaoxiong20260206/$EXTERNAL_REPO_NAME.git $EXTERNAL_REPO_DIR"
+        exit 1
     fi
     # 用 git rev-parse 做终态验证
     if ! git -C "$EXTERNAL_REPO_DIR" rev-parse --git-dir > /dev/null 2>&1; then
