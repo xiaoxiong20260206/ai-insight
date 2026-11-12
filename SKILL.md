@@ -303,14 +303,13 @@ rank pill(12px) → 标题(18px/600) → meta行(13px/SVG icon) → 正文(14px/
 | `gen_md_from_json.py` | MD生成（按需） |
 | `inject_weekly_links.py` | 周报超链接注入（按需） |
 | `update_tracking.py` | 追踪体系更新（低频） |
-| `update_weekly_index.py` | 周报首页联动（已归档→update_homepage.py --type weekly） |
 | `fetch_arxiv.py` | arXiv论文监控 |
 | `daily_env_init.sh` | 环境初始化 |
 | `validate_daily_schema.py` | JSON schema校验（按需） |
 | `sync_subscribers.py` | 订阅者同步（Appwrite → subscribers.json） |
 | `config.py` | 全局配置SSoT |
 
-> 已归档的脚本：fix_0508_json/fix_deep_research_footers/fix_json_quotes/fix_weixin_links/verify_4positions/daily_agent_runner/update_homepage_weekly → `_archive/`
+> KIM OpenAPI 直连脚本、旧版订阅推送脚本及历史归档副本均已删除。周报首页联动统一使用 `update_homepage.py --type weekly`。
 
 ---
 

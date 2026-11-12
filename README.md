@@ -150,7 +150,6 @@ AI-Insight/
 | 项目 | 关系 |
 |------|------|
 | `link-homepage` | 日报同步展示 |
-| `kim-ai-bot` | 日报群推送 |
 | `Knowledge/` | 知识输出同步（保持兼容） |
 
 ---

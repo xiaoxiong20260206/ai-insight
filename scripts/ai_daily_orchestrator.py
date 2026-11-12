@@ -920,7 +920,7 @@ def run_homepage_update(date: str) -> bool:
 # ── 命令: push (Step 5) ──────────────────────────────────
 def cmd_push(date: str, preview_only: bool = True) -> bool:
     """KIM推送（Work模式：生成 mixCard JSON，由 Agent 通过 message 工具发送）
-    旧版 send_ai_daily.py 需要 KIM_APP_KEY/SECRET_KEY，Work模式不可用。
+    KIM OpenAPI 直连方式已废弃并删除，不再读取 APP_KEY/SECRET_KEY。
     新版流程：生成 mixCard JSON → Agent 读取并调用 message(kimMixCard=...) 发送。
     """
     # 生成 mixCard JSON 文件

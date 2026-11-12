@@ -7,7 +7,6 @@
 | `ai_daily_orchestrator.py` | **日报编排(状态+finalize+push) v1.1** | `uv run scripts/ai_daily_orchestrator.py status` |
 | `build_insight_mixcard.py` | 统一mixCard生成(日报/周报/调研/产品) | `uv run scripts/build_insight_mixcard.py daily --date YYYY-MM-DD` |
 | `build_insight_mixcard.py weekly` | 周报mixCard生成 | `uv run scripts/build_insight_mixcard.py weekly --date YYYY-Www` |
-| `send_deep_research_card.py` | 深度调研KIM推送 | `uv run scripts/send_deep_research_card.py` |
 | `daily_quality_gate.py` | **日报质量门(19项检查) v10.0** | `uv run scripts/daily_quality_gate.py` |
 | `gen_daily_json.py` | 生成JSON数据 | `uv run scripts/gen_daily_json.py` |
 | `gen_daily_html.py` | 生成日报HTML页面 | `uv run scripts/gen_daily_html.py` |
@@ -91,7 +90,7 @@
 | `reference/daily-report/quality-rules.md` | 筛选和验证规则 |
 | `reference/weekly-report.md` | 周报完整流程 |
 | `reference/deep-research.md` | 深度研究方法论 |
-| `reference/homepage-update.md` | 首页更新检查 |
+| `reference/homepage-spec.md` | 首页更新检查 |
 | `reference/knowledge-accumulation.md` | 知识沉淀规则 |
 | `reference/scope-management.md` | 追踪体系管理 |
 | `reference/source-registry.md` | 信息源注册表（人物/公司/平台） |

@@ -69,6 +69,25 @@ def run_sync_to_public(verify: bool = False) -> bool:
     return True
 
 
+def run_public_secret_scan() -> bool:
+    """Run the credential/Git-metadata scan against the external repository."""
+    scanner = PROJECT_ROOT / "scripts" / "verify_public_secrets.py"
+    if not scanner.exists():
+        print(f"❌ [ABORT] 缺少公开版凭据扫描脚本: {scanner}")
+        return False
+
+    print("🔐 [后置] 外部版凭据/Git元数据终检...")
+    result = subprocess.run(
+        [sys.executable, str(scanner), "--target", str(EXTERNAL_REPO)],
+        cwd=str(PROJECT_ROOT),
+    )
+    if result.returncode != 0:
+        print("❌ [ABORT] 外部版凭据/Git元数据扫描失败，禁止推送")
+        return False
+
+    return True
+
+
 def sync_all() -> bool:
     """同步 public/ 目录的所有内容到外部仓库"""
     if not PUBLIC_DIR.exists():
@@ -597,6 +616,10 @@ def _run_main_logic(args) -> None:
         else:
             print("✅ 外部版零敏感词，准出通过")
     
+    # 步骤 3.7: 凭据/Git元数据终检（在git push之前）
+    if not run_public_secret_scan():
+        sys.exit(1)
+
     # 步骤 4: Git 推送
     if not args.no_push:
         git_push()

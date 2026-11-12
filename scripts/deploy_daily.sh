@@ -330,6 +330,14 @@ else
     echo "  ⚠️ 外部版仓库目录不存在($EXTERNAL_REPO_DIR)，跳过敏感词检查"
 fi
 
+echo "  🔐 外部版凭据/Git元数据终检..."
+if [ -d "$EXTERNAL_REPO_DIR" ] && ! python3 scripts/verify_public_secrets.py --target "$EXTERNAL_REPO_DIR"; then
+    echo "  ❌ [ABORT] 外部版凭据/Git元数据终检失败，禁止推送"
+    exit 1
+else
+    echo "  ✅ 外部版凭据/Git元数据验证通过"
+fi
+
 # ===== 6. Git提交+推送（包含public/index.html） =====
 echo ""
 echo "📋 Step 5: Git提交推送（含public目录）"
