@@ -433,6 +433,9 @@ def git_push() -> bool:
             if pop_result.returncode != 0:
                 print(f"  ⚠️  stash pop 失败（可能已有同名文件），继续执行: {pop_result.stderr[:100]}")
         
+        if not run_public_secret_scan():
+            return False
+
         # git add
         subprocess.run(["git", "add", "-A"], check=True, capture_output=True)
         
