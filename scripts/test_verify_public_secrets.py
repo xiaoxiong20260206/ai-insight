@@ -32,6 +32,17 @@ class PublicSecretScanTests(unittest.TestCase):
             (target / "example.py").write_text('api_key="YOUR_DEEPSEEK_API_KEY"')
             self.assertEqual(find_violations(target), [])
 
+    def test_uppercase_key_and_private_key_are_blocked(self):
+        for content in [
+            'API_KEY = "' + "a" * 24 + '"',
+            '{"SECRET_KEY": "' + "b" * 24 + '"}',
+            "-----BEGIN " + "OPENSSH " + "PRIVATE KEY-----",
+        ]:
+            with self.subTest(content=content), tempfile.TemporaryDirectory() as directory:
+                target = Path(directory)
+                (target / "credentials.txt").write_text(content)
+                self.assertTrue(find_violations(target))
+
     def test_archive_and_oversized_file_are_blocked(self):
         for filename, size in [("backup.zip", 0), ("large.txt", 10 * 1024 * 1024 + 1)]:
             with self.subTest(filename=filename), tempfile.TemporaryDirectory() as directory:

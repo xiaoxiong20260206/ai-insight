@@ -10,14 +10,17 @@ from verify_public_secrets import FORBIDDEN_PATTERNS
 
 def main():
     result = subprocess.run(
-        ["git", "diff", "--cached", "--name-only", "--diff-filter=ACM", "-z"],
+        ["git", "diff", "--cached", "--name-only", "--diff-filter=ACMRT", "-z"],
         capture_output=True, check=True,
     )
     failed = False
     for filename in result.stdout.decode().split("\0"):
         if not filename:
             continue
-        if any(part in {".git", ".git_disabled", ".env"} for part in filename.split("/")):
+        if any(
+            part in {".git", ".git_disabled", ".env"} or part.startswith(".env.")
+            for part in filename.split("/")
+        ):
             print(f"Blocked sensitive path: {filename}")
             failed = True
             continue

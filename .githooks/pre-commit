@@ -2,3 +2,4 @@
 set -eu
 HOOK_ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 python3 "$HOOK_ROOT/scripts/verify_staged_secrets.py"
+gitleaks git --pre-commit --staged --redact --no-banner --log-level error

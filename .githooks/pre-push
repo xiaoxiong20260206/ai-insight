@@ -1,0 +1,3 @@
+#!/bin/sh
+set -eu
+gitleaks git --log-opts=--all --redact --no-banner --log-level error

@@ -15,7 +15,8 @@ FORBIDDEN_PATTERNS = [
     for pattern in [
         r"openApp[0-9A-Za-z]{16,}",
         r"\b[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}\b",
-        r"\b(?:secret|api)[_-]?key\b\s*[:=]\s*[\"']?(?!(?i:your[_-]))[0-9A-Za-z_\-]{16,}",
+        r"(?i)\b(?:secret|api)[_-]?key\b[\"']?\s*[:=]\s*[\"']?(?!your[_-])[0-9A-Za-z_\-]{16,}",
+        r"-----BEGIN (?:RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----",
         r"(?i)\bpassword\b\s*[:=]\s*[\"']?\S{8,}",
         r"\bghp_[0-9A-Za-z]{20,}\b",
         r"\bgithub_pat_[0-9A-Za-z_]{20,}\b",

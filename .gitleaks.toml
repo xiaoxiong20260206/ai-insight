@@ -1,0 +1,11 @@
+title = "AI Insight credential scanning"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Public Sogou article redirect query tokens, not application credentials"
+condition = "AND"
+paths = ['''^data/daily-content-2026-04-17\.json$''']
+regexTarget = "line"
+regexes = ['''"url": "https://weixin\.sogou\.com/link\?url=''']
