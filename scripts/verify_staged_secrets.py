@@ -18,7 +18,8 @@ def main():
         if not filename:
             continue
         if any(
-            part in {".git", ".git_disabled", ".env"} or part.startswith(".env.")
+            part in {".git", ".git_disabled", ".env"}
+            or (part.startswith(".env.") and part not in {".env.example", ".env.sample"})
             for part in filename.split("/")
         ):
             print(f"Blocked sensitive path: {filename}")
